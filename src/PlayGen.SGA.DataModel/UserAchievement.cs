@@ -12,6 +12,8 @@ namespace PlayGen.SGA.DataModel
 
         public int GameId { get; set; }
 
+        public virtual Game Game { get; set; }
+
         public string Name { get; set; }
 
         public string CompletionCondition { get; set; }
