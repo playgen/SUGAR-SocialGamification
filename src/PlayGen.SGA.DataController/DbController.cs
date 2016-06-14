@@ -27,7 +27,7 @@ namespace PlayGen.SGA.DataController
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
-
+                context.Database.CreateIfNotExists();
                 // TODO: enforce user with same name doesn't already exist
 
                 var user = new User(name);

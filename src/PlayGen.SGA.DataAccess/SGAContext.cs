@@ -5,12 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using PlayGen.SGA.DataModel;
 using PlayGen.SGA.DataModel.Interfaces;
+using MySql.Data.Entity;
 
 namespace PlayGen.SGA.DataAccess
 {
-    [DbConfigurationType((typeof(CodeConfig)))]
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class SGAContext : DbContext
     {
+        public SGAContext(string nameOrConnectionString) : base(nameOrConnectionString)
+        {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<SGAContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SGAContext>());
+        }
+
         public DbSet<Game> Games { get; set; }
 
         public DbSet<Group> Groups { get; set; }
@@ -24,12 +31,7 @@ namespace PlayGen.SGA.DataAccess
         public DbSet<UserToUserRelationship> UserToUserRelationships { get; set; }
         public DbSet<UserToGroupRelationshipRequest> UserToGroupRelationshipRequests { get; set; }
         public DbSet<UserToGroupRelationship> UserToGroupRelationship { get; set; }
-
-        public SGAContext(string nameOrConnectionString) : base(nameOrConnectionString)
-        {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<SGAContext>());
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SGAContext>());
-        }
+        
         /*
         public override int SaveChanges()
         {
