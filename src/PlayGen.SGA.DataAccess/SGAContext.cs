@@ -31,7 +31,15 @@ namespace PlayGen.SGA.DataAccess
         public DbSet<UserToUserRelationship> UserToUserRelationships { get; set; }
         public DbSet<UserToGroupRelationshipRequest> UserToGroupRelationshipRequests { get; set; }
         public DbSet<UserToGroupRelationship> UserToGroupRelationship { get; set; }
-        
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Requestor).WithMany(u => u.Requestors).HasForeignKey(u => u.RequestorId);
+            modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Acceptor).WithMany(u => u.Acceptors).HasForeignKey(u => u.AcceptorId);
+            modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Requestor).WithMany(u => u.RequestRequestors).HasForeignKey(u => u.RequestorId);
+            modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Acceptor).WithMany(u => u.RequestAcceptors).HasForeignKey(u => u.AcceptorId);
+        }
+
         /*
         public override int SaveChanges()
         {

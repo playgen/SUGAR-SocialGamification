@@ -10,7 +10,11 @@ namespace PlayGen.SGA.DataModel
 
         public int UserId { get; set; }
 
+        public virtual User User { get; set; }
+
         public int GameId { get; set; }
+
+        public virtual Game Game { get; set; }
 
         public string Key { get; set; }
 

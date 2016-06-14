@@ -8,11 +8,14 @@ namespace PlayGen.SGA.DataModel
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public int Name { get; set; }
 
-        public Game(string name)
-        {
-            Name = name;
-        }
+        public virtual List<GroupAchievement> GroupAchievements { get; set; }
+
+        public virtual List<GroupData> GroupDatas { get; set; }
+
+        public virtual List<UserAchievement> UserAchievements { get; set; }
+
+        public virtual List<UserData> UserDatas { get; set; }
     }
 }
