@@ -3,16 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PlayGen.SGA.DataController;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private DbController _dbController;
+
+        public ValuesController(DbController dbController)
+        {
+            _dbController = dbController;
+        }
+
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            _dbController.CreateUser("Frank");
+            
+
             return new string[] { "value1", "value2" };
         }
 

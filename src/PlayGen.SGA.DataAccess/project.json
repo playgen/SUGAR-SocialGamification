@@ -9,6 +9,9 @@
     },
 
     "frameworks": {
-        "net461": { }
+        "net46": {
+            "frameworkAssemblies": {
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ using PlayGen.SGA.DataModel.Interfaces;
 
 namespace PlayGen.SGA.DataAccess
 {
+    [DbConfigurationType((typeof(CodeConfig)))]
     public class SGAContext : DbContext
     {
         public DbSet<Game> Games { get; set; }
@@ -23,6 +24,12 @@ namespace PlayGen.SGA.DataAccess
         public DbSet<UserToUserRelationship> UserToUserRelationships { get; set; }
         public DbSet<UserToGroupRelationshipRequest> UserToGroupRelationshipRequests { get; set; }
         public DbSet<UserToGroupRelationship> UserToGroupRelationship { get; set; }
+
+        public SGAContext(string nameOrConnectionString) : base(nameOrConnectionString)
+        {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<SGAContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SGAContext>());
+        }
         /*
         public override int SaveChanges()
         {

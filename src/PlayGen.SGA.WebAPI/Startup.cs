@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PlayGen.SGA.DataAccess;
+using PlayGen.SGA.DataController;
 
 namespace PlayGen.SGA.WebAPI
 {
@@ -27,6 +29,9 @@ namespace PlayGen.SGA.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Set EntityFramework's DBContext's connection string
+            services.AddScoped(((_) => new DbController(Configuration.GetConnectionString("DefaultConnection"))));
+
             // Add framework services.
             services.AddMvc();
         }
