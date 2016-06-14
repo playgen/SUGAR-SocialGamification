@@ -1,6 +1,6 @@
 ﻿namespace PlayGen.SGA.Contracts
 {
-    public class Data
+    public class SaveData
     {
         public int Id { get; set; }
 

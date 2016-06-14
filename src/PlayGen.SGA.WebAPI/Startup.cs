@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PlayGen.SGA.DataAccess;
 using PlayGen.SGA.DataController;
 
 namespace PlayGen.SGA.WebAPI
@@ -30,7 +29,8 @@ namespace PlayGen.SGA.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             // Set EntityFramework's DBContext's connection string
-            services.AddScoped(((_) => new DbController(Configuration.GetConnectionString("DefaultConnection"))));
+            string connectioString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddScoped(((_) => new GameDbController(connectioString)));
 
             // Add framework services.
             services.AddMvc();

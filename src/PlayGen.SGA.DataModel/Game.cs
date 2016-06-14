@@ -8,6 +8,11 @@ namespace PlayGen.SGA.DataModel
     {
         public int Id { get; set; }
 
-        public int Name { get; set; }
+        public string Name { get; set; }
+
+        public Game(string name)
+        {
+            Name = name;
+        }
     }
 }

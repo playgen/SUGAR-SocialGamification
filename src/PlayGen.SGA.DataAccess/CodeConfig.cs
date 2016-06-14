@@ -10,7 +10,7 @@ namespace PlayGen.SGA.DataAccess
     {
         public CodeConfig()
         {
-            SetProviderServices("System.Data.SqlClient", 
+            SetProviderServices("System.SaveData.SqlClient", 
                 System.Data.Entity.SqlServer.SqlProviderServices.Instance);
         }
     }

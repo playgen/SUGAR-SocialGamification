@@ -12,6 +12,6 @@ namespace PlayGen.SGA.DataModel
 
         public string Name { get; set; }
 
-        public string CompletionCondition { get; set; }
+        public string CompletionCriteria { get; set; }
     }
 }
