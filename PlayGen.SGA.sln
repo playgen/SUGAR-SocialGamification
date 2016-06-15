@@ -22,6 +22,10 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SGA.DataController"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SGA.ClientAPI", "src\PlayGen.SGA.ClientAPI\PlayGen.SGA.ClientAPI.xproj", "{6474CD30-C68A-41DD-A637-8B7833E30259}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SGA.DataController.UnitTests", "src\PlayGen.SGA.DataController.UnitTests\PlayGen.SGA.DataController.UnitTests.xproj", "{FC676EAD-0743-4EC7-816A-E79CD4718F08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{DFBF7B57-799D-4349-89A2-BB9ABE02746F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +56,10 @@ Global
 		{6474CD30-C68A-41DD-A637-8B7833E30259}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6474CD30-C68A-41DD-A637-8B7833E30259}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6474CD30-C68A-41DD-A637-8B7833E30259}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC676EAD-0743-4EC7-816A-E79CD4718F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC676EAD-0743-4EC7-816A-E79CD4718F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC676EAD-0743-4EC7-816A-E79CD4718F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC676EAD-0743-4EC7-816A-E79CD4718F08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,5 +70,6 @@ Global
 		{A5712464-72CA-4290-AD99-5E430D446AB9} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
 		{A53A6990-9A17-47A5-B13C-00D6391DFAAD} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
 		{6474CD30-C68A-41DD-A637-8B7833E30259} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
+		{FC676EAD-0743-4EC7-816A-E79CD4718F08} = {DFBF7B57-799D-4349-89A2-BB9ABE02746F}
 	EndGlobalSection
 EndGlobal
