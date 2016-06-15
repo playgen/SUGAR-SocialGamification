@@ -25,10 +25,5 @@ namespace PlayGen.SGA.DataModel
         public virtual List<UserToUserRelationship> Acceptors { get; set; }
 
         public virtual List<UserToUserRelationshipRequest> RequestAcceptors { get; set; }
-
-        public User(string name)
-        {
-            Name = name;
-        }
     }
 }

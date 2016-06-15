@@ -26,11 +26,11 @@ namespace PlayGen.SGA.DataAccess
 
         public DbSet<User> Users { get; set; }
         public DbSet<UserAchievement> UserAchievements { get; set; }
-        public DbSet<UserData> UserData { get; set; }
+        public DbSet<UserData> UserDatas { get; set; }
         public DbSet<UserToUserRelationshipRequest> UserToUserRelationshipRequests { get; set; }
         public DbSet<UserToUserRelationship> UserToUserRelationships { get; set; }
         public DbSet<UserToGroupRelationshipRequest> UserToGroupRelationshipRequests { get; set; }
-        public DbSet<UserToGroupRelationship> UserToGroupRelationship { get; set; }
+        public DbSet<UserToGroupRelationship> UserToGroupRelationships { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

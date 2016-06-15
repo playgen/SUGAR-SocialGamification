@@ -31,6 +31,10 @@ namespace PlayGen.SGA.WebAPI
             // Set EntityFramework's DBContext's connection string
             string connectioString = Configuration.GetConnectionString("DefaultConnection");
             services.AddScoped(((_) => new GameDbController(connectioString)));
+            services.AddScoped(((_) => new GroupDbController(connectioString)));
+            services.AddScoped(((_) => new UserDbController(connectioString)));
+            services.AddScoped(((_) => new GroupSaveDataDbController(connectioString)));
+            services.AddScoped(((_) => new UserSaveDataDbController(connectioString)));
 
             // Add framework services.
             services.AddMvc();
