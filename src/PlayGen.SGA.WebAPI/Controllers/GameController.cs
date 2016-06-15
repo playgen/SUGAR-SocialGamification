@@ -2,14 +2,15 @@
 using System;
 using System.Collections.Generic;
 using PlayGen.SGA.DataController;
+using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class GameController : Controller
+    public class GameController : Controller, IGameController
     {
-        private GameDbController _gameDbController;
+        private readonly GameDbController _gameDbController;
         
         public GameController(GameDbController gameDbController)
         {
