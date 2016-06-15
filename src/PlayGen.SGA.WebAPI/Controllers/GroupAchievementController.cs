@@ -35,8 +35,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         // GET api/groupachievement/id
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public void Delete(int[] id)
         {
             _groupAchievementDbController.Delete(id);
         }

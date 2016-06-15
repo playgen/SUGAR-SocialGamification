@@ -35,8 +35,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         // DELETE api/group/1
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public void Delete(int[] id)
         {
             _groupDbController.Delete(id);
         }
