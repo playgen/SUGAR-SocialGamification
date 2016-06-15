@@ -1,10 +1,12 @@
-﻿namespace PlayGen.SGA.WebAPI.ExtensionMethods
+﻿using PlayGen.SGA.Contracts;
+
+namespace PlayGen.SGA.WebAPI.ExtensionMethods
 {
     public static class ModelToContractExtensions
     {
-        public static Contracts.Game ToContract(this DataModel.Game gameModel)
+        public static Game ToContract(this DataModel.Game gameModel)
         {
-            var gameContract = new Contracts.Game();
+            var gameContract = new Game();
             gameContract.Id = gameModel.Id;
             gameContract.Name = gameModel.Name;
 

@@ -9,39 +9,37 @@ namespace PlayGen.SGA.WebAPI.Controllers
     [Route("api/[controller]")]
     public class UserFriendController : Controller
     {
-        // POST api/groupmember/1/request/2
-        [HttpPost("{groupId}/request/{userId}")]
-        public void CreateMemberRequest(int groupId, int userId)
+        // POST api/userfriend/1/request/2
+        [HttpPost("{requestorId}/request/{acceptorId}")]
+        public void CreateFriendRequest(int requestorId, int acceptorId)
         {
             throw new NotImplementedException();
         }
 
-        // GET api/groupmember/1/requests
-        [HttpGet("{groupId}/requests")]
-        public IEnumerable<Actor> GetMemberRequests(int groupId)
+        // GET api/userfriend/1/requests
+        [HttpGet("{userId}/requests")]
+        public IEnumerable<Actor> GetFriendRequests(int userId)
         {
             throw new NotImplementedException();
         }
 
-        // GET api/groupmember/1/updatemember/2/true
-        [HttpPost("{groupId}/request/{userId}/{accepted}")]
-        public void UpdateMemberRequest(int groupId, int userId, bool accepted)
-        {
-            // TODO: remove request
-            // If accepted, create membership
-            throw new NotImplementedException();
-        }
-
-        // GET api/groupmember/1/member/2/accepted
-        [HttpGet("{groupId}/members")]
-        public IEnumerable<Actor> GetMembers(int groupId)
+        // PUT api/userfriend/1/request
+        [HttpPut("{acceptorId}/request")]
+        public void UpdateFriendRequest(int acceptorId, [FromBody] Relationship relationship)
         {
             throw new NotImplementedException();
         }
 
-        // PUT api/groupmember/1/member/2/accepted
-        [HttpPatch("{groupId}/member/{userId}/{status}")]
-        public void UpdateMember(int groupId, int userId)
+        // GET api/userfriend/1/friends
+        [HttpGet("{userId}/friends")]
+        public IEnumerable<Actor> GetFriends(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        // PUT api/userfriend/1
+        [HttpPut("{userId}")]
+        public void UpdateFriend(int userId, [FromBody] Relationship relationship)
         {
             throw new NotImplementedException();
         }

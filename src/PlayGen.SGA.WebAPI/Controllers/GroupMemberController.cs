@@ -10,8 +10,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
     public class GroupMemberController : Controller
     {
         // POST api/groupmember/1/request/2
-        [HttpPost("{groupId}/request/{userId}")]
-        public void CreateMemberRequest(int groupId, int userId)
+        [HttpPost("{userId}/request/{groupId}")]
+        public void CreateMemberRequest(int userId, int groupId)
         {
             throw new NotImplementedException();
         }
@@ -23,25 +23,23 @@ namespace PlayGen.SGA.WebAPI.Controllers
             throw new NotImplementedException();
         }
 
-        // GET api/groupmember/1/updatemember/2/true
-        [HttpPost("{groupId}/request/{userId}/{accepted}")]
-        public void UpdateMemberRequest(int groupId, int userId, bool accepted)
+        // PUT api/groupmember/1/request
+        [HttpPut("{userId}/request/")]
+        public void UpdateMemberRequest(int userId, [FromBody] Relationship relationship)
         {
-            // TODO: remove request
-            // If accepted, create membership
             throw new NotImplementedException();
         }
 
-        // GET api/groupmember/1/member/2/accepted
+        // GET api/groupmember/1/members
         [HttpGet("{groupId}/members")]
         public IEnumerable<Actor> GetMembers(int groupId)
         {
             throw new NotImplementedException();
         }
 
-        // PUT api/groupmember/1/member/2/accepted
-        [HttpPatch("{groupId}/member/{userId}/{status}")]
-        public void UpdateMember(int groupId, int userId)
+        // PUT api/groupmember/1/member
+        [HttpPut("{groupId}/member")]
+        public void UpdateMember(int userId, Relationship relationship)
         {
             throw new NotImplementedException();
         }
