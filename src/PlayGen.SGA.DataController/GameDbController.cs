@@ -15,23 +15,20 @@ namespace PlayGen.SGA.DataController
         {
         }
         
-        public Game Create(string name)
+        public Game Create(Game newGame)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                var hasConflicts = context.Games.Any(g => g.Name == name);
+                var hasConflicts = context.Games.Any(g => g.Name == newGame.Name);
 
                 if (hasConflicts)
                 {
-                    throw new DuplicateRecordException(string.Format("A game with the name {0} already exists.", name));
+                    throw new DuplicateRecordException(string.Format("A game with the name {0} already exists.", newGame.Name));
                 }
 
-                var game = new Game
-                {
-                    Name = name,
-                };
+                var game = newGame;
                 context.Games.Add(game);
                 context.SaveChanges();
 
@@ -39,15 +36,15 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public Game Get(string name)
+        public IEnumerable<Game> Get(string[] names)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                var game = context.Games.Single(g => g.Name == name);
+                var games = context.Games.Where(g => names.Contains(g.Name));
 
-                return game;
+                return games;
             }
         }
 
