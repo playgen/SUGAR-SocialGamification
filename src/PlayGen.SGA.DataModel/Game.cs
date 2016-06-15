@@ -17,10 +17,5 @@ namespace PlayGen.SGA.DataModel
         public virtual List<UserAchievement> UserAchievements { get; set; }
 
         public virtual List<UserData> UserDatas { get; set; }
-
-        public Game(string name)
-        {
-            Name = name;
-        }
     }
 }

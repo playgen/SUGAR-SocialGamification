@@ -8,37 +8,37 @@ namespace PlayGen.SGA.WebAPI.Controllers
     [Route("api/[controller]")]
     public class UserAchievementController : Controller
     {
-        // POST api/groupachievement/sharing/1/...
-        [HttpPost("{name}/{gameId}/{completionCriteria}")]
-        public void Create(int gameId, string name, string completionCriteria)
+        // POST api/userachievement/
+        [HttpPost]
+        public void Create([FromBody] Achievement achievement)
         {
             throw new NotImplementedException();
         }
 
-        // GET api/groupachievement/gameId/name
+        // GET api/userachievement/name/gameId
         [HttpGet("{name}/{gameId}")]
         public IEnumerable<Achievement> Get(string name, int gameId)
         {
             throw new NotImplementedException();
         }
 
-        // GET api/groupachievement/achievementId
+        // GET api/userchievement/achievementId
         [HttpDelete("{achievmentId}")]
         public void Delete(int achievementId)
         {
             throw new NotImplementedException();
         }
 
-        // GET api/groupachievement/2/3
+        // GET api/userachievement/2/3
         [HttpGet("{actorId}/progress/{gameId}")]
-        public IEnumerable<AchievementProgress> GetProgress(int actorId, int gameId)
+        public IEnumerable<AchievementProgress> GetProgress(int userId, int gameId)
         {
             throw new NotImplementedException();
         }
 
-        // GET api/groupachievement/{2, 4, 7}/3
-        [HttpGet("{actorIds}/progress/{achievemetnId}")]
-        public IEnumerable<AchievementProgress> GetProgress(List<int> actorIds, int achievementId)
+        // GET api/userachievement/3
+        [HttpGet("{achievemetnId}/progress")]
+        public IEnumerable<AchievementProgress> GetProgress(int achievementId, [FromBody] List<int> actorIds)
         {
             throw new NotImplementedException();
         }

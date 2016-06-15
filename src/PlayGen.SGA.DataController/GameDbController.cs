@@ -28,7 +28,10 @@ namespace PlayGen.SGA.DataController
                     throw new DuplicateRecordException(string.Format("A game with the name {0} already exists.", name));
                 }
 
-                var game = new Game(name);
+                var game = new Game
+                {
+                    Name = name,
+                };
                 context.Games.Add(game);
                 context.SaveChanges();
 
