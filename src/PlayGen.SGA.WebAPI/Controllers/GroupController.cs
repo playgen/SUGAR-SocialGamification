@@ -19,8 +19,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         // POST api/group/groupname
-        [HttpPost("{name}")]
-        public int Create(Actor actor)
+        [HttpPost]
+        public int Create([FromBody]Actor actor)
         {
             var group = _groupDbController.Create(actor.ToGroupModel());
             return group.Id;
@@ -28,9 +28,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/group/groupname
         [HttpGet]
-        public IEnumerable<Actor> Get(string[] names)
+        public IEnumerable<Actor> Get(string[] name)
         {
-            var group = _groupDbController.Get(names);
+            var group = _groupDbController.Get(name);
             return group.ToContract();
         }
 

@@ -67,5 +67,51 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
 
             return actorContracts;
         }
+
+        public static Achievement ToContract(this GroupAchievement groupModel)
+        {
+            var achievementContract = new Achievement();
+            achievementContract.Id = groupModel.Id;
+            achievementContract.Name = groupModel.Name;
+            achievementContract.GameId = groupModel.GameId;
+            achievementContract.CompletionCriteria = groupModel.CompletionCriteria;
+
+            return achievementContract;
+        }
+
+        public static IEnumerable<Achievement> ToContract(this IEnumerable<GroupAchievement> groupModels)
+        {
+            IList<Achievement> achievementContracts = new List<Achievement>();
+            foreach (GroupAchievement groupModel in groupModels)
+            {
+                var achievementContract = ToContract(groupModel);
+                achievementContracts.Add(achievementContract);
+            }
+
+            return achievementContracts;
+        }
+
+        public static Achievement ToContract(this UserAchievement userModel)
+        {
+            var achievementContract = new Achievement();
+            achievementContract.Id = userModel.Id;
+            achievementContract.Name = userModel.Name;
+            achievementContract.GameId = userModel.GameId;
+            achievementContract.CompletionCriteria = userModel.CompletionCriteria;
+
+            return achievementContract;
+        }
+
+        public static IEnumerable<Achievement> ToContract(this IEnumerable<UserAchievement> userModels)
+        {
+            IList<Achievement> achievementContracts = new List<Achievement>();
+            foreach (UserAchievement userModel in userModels)
+            {
+                var achievementContract = ToContract(userModel);
+                achievementContracts.Add(achievementContract);
+            }
+
+            return achievementContracts;
+        }
     }
 }

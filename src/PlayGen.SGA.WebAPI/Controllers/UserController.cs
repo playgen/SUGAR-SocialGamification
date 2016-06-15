@@ -19,8 +19,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         // POST api/user/username
-        [HttpPost("{name}")]
-        public int Create(Actor actor)
+        [HttpPost]
+        public int Create([FromBody]Actor actor)
         {
             var user = _userDbController.Create(actor.ToUserModel());
             return user.Id;
@@ -28,9 +28,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/user/username
         [HttpGet]
-        public IEnumerable<Actor> Get(string[] names)
+        public IEnumerable<Actor> Get(string[] name)
         {
-            var users = _userDbController.Get(names);
+            var users = _userDbController.Get(name);
             return users.ToContract();
         }
 

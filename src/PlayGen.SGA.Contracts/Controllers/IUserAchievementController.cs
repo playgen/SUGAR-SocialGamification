@@ -4,7 +4,7 @@ namespace PlayGen.SGA.Contracts.Controllers
 {
     public interface IUserAchievementController
     {
-        void Create(Achievement achievement);
+        int Create(Achievement achievement);
 
         IEnumerable<Achievement> Get(int[] gameId);
 

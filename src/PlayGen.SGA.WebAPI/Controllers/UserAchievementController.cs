@@ -20,18 +20,18 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // POST api/userachievement/
         [HttpPost]
-        public void Create([FromBody] Achievement newAchievement)
+        public int Create([FromBody] Achievement newAchievement)
         {
-            _userAchievementDbController.Create(newAchievement.ToUserModel());
+            var achievement = _userAchievementDbController.Create(newAchievement.ToUserModel());
+            return achievement.Id;
         }
 
         // GET api/userachievement/gameId/name
         [HttpGet]
-        public IEnumerable<Achievement> Get(int[] gameIds)
+        public IEnumerable<Achievement> Get(int[] gameId)
         {
-            //var achievement = _userAchievementDbController.Get(name, gameId);
-            //return achievement.ToContract();
-            return null;
+            var achievement = _userAchievementDbController.Get(gameId);
+            return achievement.ToContract();
         }
 
         // GET api/userchievement/id
@@ -50,7 +50,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/userachievement/3
         [HttpGet("{achievemetnId}/progress")]
-        public IEnumerable<AchievementProgress> GetProgress(int achievementId, [FromBody] List<int> actorIds)
+        public IEnumerable<AchievementProgress> GetProgress(int achievementId, [FromBody] List<int> userIds)
         {
             throw new NotImplementedException();
         }

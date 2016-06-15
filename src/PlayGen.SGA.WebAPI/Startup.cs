@@ -35,6 +35,10 @@ namespace PlayGen.SGA.WebAPI
             services.AddScoped(((_) => new UserDbController(connectioString)));
             services.AddScoped(((_) => new GroupSaveDataDbController(connectioString)));
             services.AddScoped(((_) => new UserSaveDataDbController(connectioString)));
+            services.AddScoped(((_) => new GroupAchievementDbController(connectioString)));
+            services.AddScoped(((_) => new UserAchievementDbController(connectioString)));
+            //services.AddScoped(((_) => new GroupMemberDbController(connectioString)));
+            //services.AddScoped(((_) => new UserFriendDbController(connectioString)));
 
             // Add framework services.
             services.AddMvc();

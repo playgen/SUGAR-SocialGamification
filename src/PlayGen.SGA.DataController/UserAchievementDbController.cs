@@ -28,12 +28,7 @@ namespace PlayGen.SGA.DataController
                     throw new DuplicateRecordException(string.Format("An achievement with the name {0} for this game already exists.", newAchievement.Name));
                 }
 
-                var achievement = new UserAchievement
-                {
-                    Name = newAchievement.Name,
-                    GameId = newAchievement.GameId,
-                    CompletionCriteria = newAchievement.CompletionCriteria
-                };
+                var achievement = newAchievement;
                 context.UserAchievements.Add(achievement);
                 context.SaveChanges();
 
@@ -41,15 +36,15 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public Game Get(string name)
+        public IEnumerable<UserAchievement> Get(int[] gameIds)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                var game = context.Games.Single(g => g.Name == name);
+                var achievements = context.UserAchievements.Where(a => gameIds.Contains(a.GameId)).ToList();
 
-                return game;
+                return achievements;
             }
         }
 
@@ -59,9 +54,9 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                var game = context.Games.Single(g => g.Id == id);
+                var achievement = context.UserAchievements.Single(a => a.Id == id);
 
-                context.Games.Remove(game);
+                context.UserAchievements.Remove(achievement);
                 context.SaveChanges();
             }
         }

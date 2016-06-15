@@ -19,8 +19,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         // POST api/game/battleminions
-        [HttpPost("{name}")]
-        public int Create(Game newGame)
+        [HttpPost]
+        public int Create([FromBody]Game newGame)
         {
             var game = _gameDbController.Create(newGame.ToModel());
             return game.Id;
@@ -28,9 +28,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/game/battleminions
         [HttpGet]
-        public IEnumerable<Game> Get(string[] names)
+        public IEnumerable<Game> Get(string[] name)
         {
-            var game = _gameDbController.Get(names);
+            var game = _gameDbController.Get(name);
             return game.ToContract();
         }
 

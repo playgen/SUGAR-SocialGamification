@@ -1,33 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.Contracts.Controllers;
+using PlayGen.SGA.WebAPI.ExtensionMethods;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     public class GroupAchievementController : Controller, IGroupAchievementController
     {
+        private readonly GroupAchievementDbController _groupAchievementDbController;
+
+        public GroupAchievementController(GroupAchievementDbController groupAchievementDbController)
+        {
+            _groupAchievementDbController = groupAchievementDbController;
+        }
+
         // POST api/groupachievement/
         [HttpPost]
-        public void Create([FromBody] Achievement achievement)
+        public int Create([FromBody] Achievement newAchievement)
         {
-            throw new NotImplementedException();
+            var achievement = _groupAchievementDbController.Create(newAchievement.ToGroupModel());
+            return achievement.Id;
         }
 
-        // GET api/groupachievement/name/gameId
+        // GET api/groupachievement/gameId/name
         [HttpGet]
-        public IEnumerable<Achievement> Get(int[] gameIds)
+        public IEnumerable<Achievement> Get(int[] gameId)
         {
-            throw new NotImplementedException();
+            var achievement = _groupAchievementDbController.Get(gameId);
+            return achievement.ToContract();
         }
 
-        // GET api/groupchievement/achievementId
-        [HttpDelete("{achievmentId}")]
-        public void Delete(int achievementId)
+        // GET api/groupachievement/id
+        [HttpDelete("{id}")]
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _groupAchievementDbController.Delete(id);
         }
 
         // GET api/groupachievement/2/3
@@ -38,8 +49,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         // GET api/groupachievement/3
-        [HttpGet("{achievementId}/progress")]
-        public IEnumerable<AchievementProgress> GetProgress(int achievementId, [FromBody] List<int> actorIds)
+        [HttpGet("{achievemetnId}/progress")]
+        public IEnumerable<AchievementProgress> GetProgress(int achievementId, [FromBody] List<int> groupIds)
         {
             throw new NotImplementedException();
         }
