@@ -1,33 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.Contracts.Controllers;
+using PlayGen.SGA.WebAPI.ExtensionMethods;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     public class UserAchievementController : Controller, IUserAchievementController
     {
+        private readonly UserAchievementDbController _userAchievementDbController;
+
+        public UserAchievementController(UserAchievementDbController userAchievementDbController)
+        {
+            _userAchievementDbController = userAchievementDbController;
+        }
+
         // POST api/userachievement/
         [HttpPost]
-        public void Create([FromBody] Achievement achievement)
+        public int Create([FromBody] Achievement newAchievement)
         {
-            throw new NotImplementedException();
+            var achievement = _userAchievementDbController.Create(newAchievement.ToUserModel());
+            return achievement.Id;
         }
 
-        // GET api/userachievement/name/gameId
-        [HttpGet("{name}/{gameId}")]
-        public IEnumerable<Achievement> Get(string name, int gameId)
+        // GET api/userachievement/gameId/name
+        [HttpGet]
+        public IEnumerable<Achievement> Get(int[] gameId)
         {
-            throw new NotImplementedException();
+            var achievement = _userAchievementDbController.Get(gameId);
+            return achievement.ToContract();
         }
 
-        // GET api/userchievement/achievementId
-        [HttpDelete("{achievmentId}")]
-        public void Delete(int achievementId)
+        // GET api/userchievement/id
+        [HttpDelete("{id}")]
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _userAchievementDbController.Delete(id);
         }
 
         // GET api/userachievement/2/3
@@ -39,7 +50,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/userachievement/3
         [HttpGet("{achievemetnId}/progress")]
-        public IEnumerable<AchievementProgress> GetProgress(int achievementId, [FromBody] List<int> actorIds)
+        public IEnumerable<AchievementProgress> GetProgress(int achievementId, [FromBody] List<int> userIds)
         {
             throw new NotImplementedException();
         }

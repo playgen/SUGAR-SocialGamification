@@ -13,27 +13,22 @@
     "PlayGen.SGA.Contracts": "1.0.0-*",
     "PlayGen.SGA.DataController": "1.0.0-*"
   },
-
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
       "version": "1.0.0-preview1-final",
       "imports": "portable-net45+win8+dnxcore50"
     }
   },
-
     "frameworks": {
         "net46": { }
     },
-
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
   },
-
   "runtimeOptions": {
     "gcServer": true
   },
-
   "publishOptions": {
     "include": [
       "wwwroot",
@@ -42,8 +37,10 @@
       "web.config"
     ]
   },
-
   "scripts": {
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+  },
+  "configurations": {
+    "UnitTest": { }
   }
 }

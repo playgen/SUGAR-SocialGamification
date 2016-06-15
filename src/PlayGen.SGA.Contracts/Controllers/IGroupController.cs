@@ -1,10 +1,12 @@
-﻿namespace PlayGen.SGA.Contracts.Controllers
+﻿using System.Collections.Generic;
+
+namespace PlayGen.SGA.Contracts.Controllers
 {
     public interface IGroupController
     {
-        int Create(string name);
+        int Create(Actor actor);
 
-        Actor Get(string name);
+        IEnumerable<Actor> Get(string[] name);
 
         void Delete(int id);
     }

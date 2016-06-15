@@ -17,7 +17,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _userSaveDataDbController = userSaveDataDbController;
         }
 
-        public void Add(int id, Contracts.SaveData data)
+        public void Add(int id, [FromBody]Contracts.SaveData data)
         {
             _userSaveDataDbController.Create(id, data);
         }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
+using PlayGen.SGA.Contracts;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
@@ -18,16 +19,16 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         // POST api/game/battleminions
-        [HttpPost("{name}")]
-        public int Create(string name)
+        [HttpPost]
+        public int Create([FromBody]Game newGame)
         {
-            var game = _gameDbController.Create(name);
+            var game = _gameDbController.Create(newGame.ToModel());
             return game.Id;
         }
 
         // GET api/game/battleminions
-        [HttpGet("{name}")]
-        public Contracts.Game Get(string name)
+        [HttpGet]
+        public IEnumerable<Game> Get(string[] name)
         {
             var game = _gameDbController.Get(name);
             return game.ToContract();

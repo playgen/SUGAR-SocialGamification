@@ -15,22 +15,20 @@ namespace PlayGen.SGA.DataController
         {
         }
 
-        public Group Create(string name)
+        public Group Create(Group newGroup)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                var hasConflicts = context.Groups.Any(g => g.Name == name);
+                var hasConflicts = context.Groups.Any(g => g.Name == newGroup.Name);
 
                 if (hasConflicts)
                 {
-                    throw new DuplicateRecordException(string.Format("A group with the name {0} already exists.", name));
+                    throw new DuplicateRecordException(string.Format("A group with the name {0} already exists.", newGroup.Name));
                 }
 
-                var group = new Group {
-                    Name = name
-                };
+                var group = newGroup;
                 context.Groups.Add(group);
                 context.SaveChanges();
 
@@ -38,15 +36,15 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public Group Get(string name)
+        public IEnumerable<Group> Get(string[] names)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                var group = context.Groups.Single(g => g.Name == name);
+                var groups = context.Groups.Where(g => names.Contains(g.Name)).ToList();
 
-                return group;
+                return groups;
             }
         }
 

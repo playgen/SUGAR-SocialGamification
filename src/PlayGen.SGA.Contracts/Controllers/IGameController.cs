@@ -1,10 +1,12 @@
-﻿namespace PlayGen.SGA.Contracts.Controllers
+﻿using System.Collections.Generic;
+
+namespace PlayGen.SGA.Contracts.Controllers
 {
     public interface IGameController
     {
-        int Create(string name);
+        int Create(Game game);
 
-        Game Get(string name);
+        IEnumerable<Game> Get(string[] name);
 
         void Delete(int id);
     }
