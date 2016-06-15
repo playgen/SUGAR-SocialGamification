@@ -20,7 +20,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpPost("{name}")]
         public int Create(string name)
         {
-            DataModel.Game game = _gameDbController.Create(name);
+            var game = _gameDbController.Create(name);
             return game.Id;
         }
 
@@ -28,7 +28,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpGet("{name}")]
         public Contracts.Game Get(string name)
         {
-            DataModel.Game game = _gameDbController.Get(name);
+            var game = _gameDbController.Get(name);
             return game.ToContract();
         }
 

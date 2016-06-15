@@ -8,5 +8,6 @@ namespace PlayGen.SGA.WebAPI.Controllers
     [Route("api/[controller]")]
     public class GroupAchievementController : AchievementController
     {
+
     }
 }
