@@ -28,9 +28,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/game/battleminions
         [HttpGet]
-        public IEnumerable<Game> Get(string[] name)
+        public IEnumerable<Game> Get(string[] names)
         {
-            var game = _gameDbController.Get(name);
+            var game = _gameDbController.Get(names);
             return game.ToContract();
         }
 

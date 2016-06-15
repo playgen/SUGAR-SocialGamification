@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
+using PlayGen.SGA.Contracts;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
@@ -19,17 +20,17 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // POST api/group/groupname
         [HttpPost("{name}")]
-        public int Create(string name)
+        public int Create(Actor actor)
         {
-            var group = _groupDbController.Create(name);
+            var group = _groupDbController.Create(actor.ToGroupModel());
             return group.Id;
         }
 
         // GET api/group/groupname
-        [HttpGet("{name}")]
-        public Contracts.Actor Get(string name)
+        [HttpGet]
+        public IEnumerable<Actor> Get(string[] names)
         {
-            var group = _groupDbController.Get(name);
+            var group = _groupDbController.Get(names);
             return group.ToContract();
         }
 

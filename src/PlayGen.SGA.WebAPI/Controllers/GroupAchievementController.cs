@@ -17,8 +17,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         // GET api/groupachievement/name/gameId
-        [HttpGet("{name}/{gameId}")]
-        public IEnumerable<Achievement> Get(string name, int gameId)
+        [HttpGet]
+        public IEnumerable<Achievement> Get(int[] gameIds)
         {
             throw new NotImplementedException();
         }

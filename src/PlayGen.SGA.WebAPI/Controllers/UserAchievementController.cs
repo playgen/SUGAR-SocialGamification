@@ -1,33 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.Contracts.Controllers;
+using PlayGen.SGA.WebAPI.ExtensionMethods;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     public class UserAchievementController : Controller, IUserAchievementController
     {
+        private readonly UserAchievementDbController _userAchievementDbController;
+
+        public UserAchievementController(UserAchievementDbController userAchievementDbController)
+        {
+            _userAchievementDbController = userAchievementDbController;
+        }
+
         // POST api/userachievement/
         [HttpPost]
-        public void Create([FromBody] Achievement achievement)
+        public void Create([FromBody] Achievement newAchievement)
         {
-            throw new NotImplementedException();
+            _userAchievementDbController.Create(newAchievement.ToUserModel());
         }
 
-        // GET api/userachievement/name/gameId
-        [HttpGet("{name}/{gameId}")]
-        public IEnumerable<Achievement> Get(string name, int gameId)
+        // GET api/userachievement/gameId/name
+        [HttpGet]
+        public IEnumerable<Achievement> Get(int[] gameIds)
         {
-            throw new NotImplementedException();
+            //var achievement = _userAchievementDbController.Get(name, gameId);
+            //return achievement.ToContract();
+            return null;
         }
 
-        // GET api/userchievement/achievementId
-        [HttpDelete("{achievmentId}")]
-        public void Delete(int achievementId)
+        // GET api/userchievement/id
+        [HttpDelete("{id}")]
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _userAchievementDbController.Delete(id);
         }
 
         // GET api/userachievement/2/3

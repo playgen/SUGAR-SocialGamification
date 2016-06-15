@@ -17,9 +17,10 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
 
         public static IEnumerable<Contracts.Game> ToContract(this IEnumerable<DataModel.Game> gameModels)
         {
-            IList<Contracts.Game> gameContracts = null;
+            IList<Contracts.Game> gameContracts = new List<Contracts.Game>();
             foreach (DataModel.Game gameModel in gameModels) {
-                gameContracts.Add(ToContract(gameModel));
+                var gameContract = ToContract(gameModel);
+                gameContracts.Add(gameContract);
             }
 
             return gameContracts;
@@ -34,6 +35,18 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return actorContract;
         }
 
+        public static IEnumerable<Actor> ToContract(this IEnumerable<Group> groupModels)
+        {
+            IList<Actor> actorContracts = new List<Actor>();
+            foreach (Group groupModel in groupModels)
+            {
+                var actorContract = ToContract(groupModel);
+                actorContracts.Add(actorContract);
+            }
+
+            return actorContracts;
+        }
+
         public static Actor ToContract(this User userModel)
         {
             var actorContract = new Actor();
@@ -41,6 +54,18 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             actorContract.Name = userModel.Name;
 
             return actorContract;
+        }
+
+        public static IEnumerable<Actor> ToContract(this IEnumerable<User> userModels)
+        {
+            IList<Actor> actorContracts = new List<Actor>();
+            foreach (User userModel in userModels)
+            {
+                var actorContract = ToContract(userModel);
+                actorContracts.Add(actorContract);
+            }
+
+            return actorContracts;
         }
     }
 }

@@ -9,42 +9,47 @@ using PlayGen.SGA.DataModel;
 
 namespace PlayGen.SGA.DataController
 {
-    public class GameDbController : DbController
+    public class UserAchievementDbController : DbController
     {
-        public GameDbController(string nameOrConnectionString) : base(nameOrConnectionString)
+        public UserAchievementDbController(string nameOrConnectionString) : base(nameOrConnectionString)
         {
         }
-        
-        public Game Create(Game newGame)
+
+        public UserAchievement Create(UserAchievement newAchievement)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                var hasConflicts = context.Games.Any(g => g.Name == newGame.Name);
+                var hasConflicts = context.UserAchievements.Any(a => a.Name == newAchievement.Name && a.GameId == newAchievement.GameId);
 
                 if (hasConflicts)
                 {
-                    throw new DuplicateRecordException(string.Format("A game with the name {0} already exists.", newGame.Name));
+                    throw new DuplicateRecordException(string.Format("An achievement with the name {0} for this game already exists.", newAchievement.Name));
                 }
 
-                var game = newGame;
-                context.Games.Add(game);
+                var achievement = new UserAchievement
+                {
+                    Name = newAchievement.Name,
+                    GameId = newAchievement.GameId,
+                    CompletionCriteria = newAchievement.CompletionCriteria
+                };
+                context.UserAchievements.Add(achievement);
                 context.SaveChanges();
 
-                return game;
+                return achievement;
             }
         }
 
-        public IEnumerable<Game> Get(string[] names)
+        public Game Get(string name)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                var games = context.Games.Where(g => names.Contains(g.Name)).ToList();
+                var game = context.Games.Single(g => g.Name == name);
 
-                return games;
+                return game;
             }
         }
 

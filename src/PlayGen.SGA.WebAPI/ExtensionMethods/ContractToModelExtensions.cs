@@ -13,6 +13,24 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return gameModel;
         }
 
+        public static User ToUserModel(this Contracts.Actor actorContract)
+        {
+            var actorModel = new User();
+            actorModel.Id = actorContract.Id;
+            actorModel.Name = actorContract.Name;
+
+            return actorModel;
+        }
+
+        public static Group ToGroupModel(this Contracts.Actor actorContract)
+        {
+            var actorModel = new Group();
+            actorModel.Id = actorContract.Id;
+            actorModel.Name = actorContract.Name;
+
+            return actorModel;
+        }
+
         public static UserAchievement ToUserModel(this Contracts.Achievement achieveContract)
         {
             var achieveModel = new UserAchievement();
