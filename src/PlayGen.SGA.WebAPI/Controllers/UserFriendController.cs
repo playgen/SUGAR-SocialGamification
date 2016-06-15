@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Mapping;
 using PlayGen.SGA.Contracts;
+using PlayGen.SGA.Contracts.Controllers;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class UserFriendController : Controller
+    public class UserFriendController : Controller, IUserFriendController
     {
         // POST api/userfriend/1/request/2
         [HttpPost("{requestorId}/request/{acceptorId}")]

@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Mapping;
 using PlayGen.SGA.Contracts;
+using PlayGen.SGA.Contracts.Controllers;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class GroupMemberController : Controller
+    public class GroupMemberController : Controller, IGroupMemberController
     {
         // POST api/groupmember/1/request/2
         [HttpPost("{userId}/request/{groupId}")]

@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using PlayGen.SGA.Contracts;
+using PlayGen.SGA.Contracts.Controllers;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class UserAchievementController : Controller
+    public class UserAchievementController : Controller, IUserAchievementController
     {
         // POST api/userachievement/
         [HttpPost]
