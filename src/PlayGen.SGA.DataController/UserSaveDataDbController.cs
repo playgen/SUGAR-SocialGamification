@@ -15,22 +15,42 @@ namespace PlayGen.SGA.DataController
         {
         }
 
-        public void Create(int id, Contracts.SaveData newData)
+        public void Create(UserData newData, bool amend)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                UserData data = new UserData
+                var actorExists = context.Users.Any(u => u.Id == newData.UserId);
+                var gameExists = context.Games.Any(g => g.Id == newData.GameId);
+
+                if (!actorExists)
                 {
-                    Id = id,
-                    GameId = newData.GameId,
-                    Key = newData.Key,
-                    Value = newData.Value
-                };
-                
+                    throw new DuplicateRecordException(string.Format("The provided user does not exist."));
+                }
+
+                if (!gameExists)
+                {
+                    throw new DuplicateRecordException(string.Format("The provided game does not exist."));
+                }
+
+                UserData data = newData;
+                data.DateCreated = DateTime.Now;
+                data.DateModified = DateTime.Now;
                 context.UserDatas.Add(data);
                 context.SaveChanges();
+            }
+        }
+
+        public IEnumerable<UserData> Get(int gameId, int userId, string[] keys)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var data = context.UserDatas.Where(d => d.UserId == userId && d.GameId == gameId && keys.Contains(d.Key)).ToList();
+
+                return data;
             }
         }
     }

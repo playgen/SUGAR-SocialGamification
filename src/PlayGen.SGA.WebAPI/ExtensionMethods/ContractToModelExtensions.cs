@@ -1,40 +1,37 @@
-﻿using PlayGen.SGA.DataModel;
+﻿using PlayGen.SGA.Contracts;
+using PlayGen.SGA.DataModel;
 
 namespace PlayGen.SGA.WebAPI.ExtensionMethods
 {
     public static class ContractToModelExtensions
     {
-        public static Game ToModel(this Contracts.Game gameContract)
+        public static DataModel.Game ToModel(this Contracts.Game gameContract)
         {
-            var gameModel = new Game();
-            gameModel.Id = gameContract.Id;
+            var gameModel = new DataModel.Game();
             gameModel.Name = gameContract.Name;
 
             return gameModel;
         }
 
-        public static User ToUserModel(this Contracts.Actor actorContract)
+        public static User ToUserModel(this Actor actorContract)
         {
             var actorModel = new User();
-            actorModel.Id = actorContract.Id;
             actorModel.Name = actorContract.Name;
 
             return actorModel;
         }
 
-        public static Group ToGroupModel(this Contracts.Actor actorContract)
+        public static Group ToGroupModel(this Actor actorContract)
         {
             var actorModel = new Group();
-            actorModel.Id = actorContract.Id;
             actorModel.Name = actorContract.Name;
 
             return actorModel;
         }
 
-        public static UserAchievement ToUserModel(this Contracts.Achievement achieveContract)
+        public static UserAchievement ToUserModel(this Achievement achieveContract)
         {
             var achieveModel = new UserAchievement();
-            achieveModel.Id = achieveContract.Id;
             achieveModel.Name = achieveContract.Name;
             achieveModel.GameId = achieveContract.GameId;
             achieveModel.CompletionCriteria = achieveContract.CompletionCriteria;
@@ -42,10 +39,9 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return achieveModel;
         }
 
-        public static GroupAchievement ToGroupModel(this Contracts.Achievement achieveContract)
+        public static GroupAchievement ToGroupModel(this Achievement achieveContract)
         {
             var achieveModel = new GroupAchievement();
-            achieveModel.Id = achieveContract.Id;
             achieveModel.Name = achieveContract.Name;
             achieveModel.GameId = achieveContract.GameId;
             achieveModel.CompletionCriteria = achieveContract.CompletionCriteria;
@@ -53,7 +49,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return achieveModel;
         }
 
-        public static UserToUserRelationship ToUserModel(this Contracts.Relationship relationContract)
+        public static UserToUserRelationship ToUserModel(this Relationship relationContract)
         {
             var relationModel = new UserToUserRelationship();
             relationModel.RequestorId = relationContract.RequestorId;
@@ -62,13 +58,35 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return relationModel;
         }
 
-        public static UserToGroupRelationship ToGroupModel(this Contracts.Relationship relationContract)
+        public static UserToGroupRelationship ToGroupModel(this Relationship relationContract)
         {
             var relationModel = new UserToGroupRelationship();
             relationModel.RequestorId = relationContract.RequestorId;
             relationModel.AcceptorId = relationContract.AcceptorId;
 
             return relationModel;
+        }
+
+        public static UserData ToUserModel(this SaveData dataContract)
+        {
+            var dataModel = new UserData();
+            dataModel.UserId = dataContract.ActorId;
+            dataModel.GameId = dataContract.GameId;
+            dataModel.Key = dataContract.Key;
+            dataModel.Value = dataContract.Value;
+
+            return dataModel;
+        }
+
+        public static GroupData ToGroupModel(this SaveData dataContract)
+        {
+            var dataModel = new GroupData();
+            dataModel.GroupId = dataContract.ActorId;
+            dataModel.GameId = dataContract.GameId;
+            dataModel.Key = dataContract.Key;
+            dataModel.Value = dataContract.Value;
+
+            return dataModel;
         }
     }
 }
