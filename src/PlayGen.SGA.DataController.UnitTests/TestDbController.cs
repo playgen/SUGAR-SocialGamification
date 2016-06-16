@@ -9,6 +9,7 @@ namespace PlayGen.SGA.DataController.UnitTests
     public abstract class TestDbController
     {
         protected readonly string _nameOrConnectionString;
+        public static bool hasTestRun = false;
         public const string DbName = "sgadatacontrollerunittests";
 
         public TestDbController()
@@ -23,9 +24,10 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             using (var context = new SGAContext(_nameOrConnectionString))
             {
-                if (context.Database.Connection.Database == DbName)
+                if (context.Database.Connection.Database == DbName && !hasTestRun)
                 {
                     context.Database.Delete();
+                    hasTestRun = true;
                 }
             }
         }
