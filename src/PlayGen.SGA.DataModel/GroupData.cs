@@ -20,6 +20,8 @@ namespace PlayGen.SGA.DataModel
 
         public string Value { get; set; }
 
+        public DataType DataType { get; set; }
+
         public DateTime DateCreated { get; set; }
 
         public DateTime DateModified { get; set; }

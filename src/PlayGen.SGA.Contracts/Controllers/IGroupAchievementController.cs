@@ -8,7 +8,7 @@ namespace PlayGen.SGA.Contracts.Controllers
 
         IEnumerable<Achievement> Get(int[] gameId);
 
-        void Delete(int achievementId);
+        void Delete(int[] achievementId);
 
         IEnumerable<AchievementProgress> GetProgress(int userId, int gameId);
 

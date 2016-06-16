@@ -26,7 +26,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return achievement.Id;
         }
 
-        // GET api/groupachievement/gameId/name
+        // GET api/groupachievement?gameId=1&gameId=2
         [HttpGet]
         public IEnumerable<Achievement> Get(int[] gameId)
         {
@@ -34,9 +34,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return achievement.ToContract();
         }
 
-        // GET api/groupachievement/id
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // GET api/groupachievement?id=1&id=2
+        [HttpDelete]
+        public void Delete(int[] id)
         {
             _groupAchievementDbController.Delete(id);
         }

@@ -18,7 +18,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _userDbController = userDbController;
         }
 
-        // POST api/user/username
+        // POST api/user
         [HttpPost]
         public int Create([FromBody]Actor actor)
         {
@@ -26,7 +26,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return user.Id;
         }
 
-        // GET api/user/username
+        // GET api/user?name=user1&name=user2
         [HttpGet]
         public IEnumerable<Actor> Get(string[] name)
         {
@@ -34,9 +34,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return users.ToContract();
         }
 
-        // DELETE api/user/1
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE api/user?id=1&id=2
+        [HttpDelete]
+        public void Delete(int[] id)
         {
             _userDbController.Delete(id);
         }
