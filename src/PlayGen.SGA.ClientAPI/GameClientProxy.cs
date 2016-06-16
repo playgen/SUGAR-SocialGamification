@@ -33,10 +33,5 @@ namespace PlayGen.SGA.ClientAPI
         {
             base.Delete("api/game/" + id);
         }
-
-        public new void Delete(int[] id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
