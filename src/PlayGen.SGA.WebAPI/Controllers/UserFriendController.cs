@@ -1,48 +1,58 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Mapping;
-using PlayGen.SGA.Contracts;
+using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts.Controllers;
+using PlayGen.SGA.WebAPI.ExtensionMethods;
+using PlayGen.SGA.Contracts;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     public class UserFriendController : Controller, IUserFriendController
     {
-        // POST api/userfriend/1/request/2
-        [HttpPost("{requestorId}/request/{acceptorId}")]
-        public void CreateFriendRequest(int requestorId, int acceptorId)
+        private readonly UserFriendDbController _userFriendDbController;
+
+        public UserFriendController(UserFriendDbController userFriendDbController)
         {
-            throw new NotImplementedException();
+            _userFriendDbController = userFriendDbController;
         }
 
-        // GET api/userfriend/1/requests
-        [HttpGet("{userId}/requests")]
+        // POST api/userfriend
+        [HttpPost]
+        public void CreateFriendRequest([FromBody]Relationship relationship)
+        {
+            _userFriendDbController.Create(relationship.ToUserModel());
+        }
+
+        // GET api/userfriend/requests?userId=1
+        [HttpGet("requests")]
         public IEnumerable<Actor> GetFriendRequests(int userId)
         {
-            throw new NotImplementedException();
+            var actor = _userFriendDbController.GetRequests(userId);
+            return actor.ToContract();
         }
 
-        // PUT api/userfriend/1/request
-        [HttpPut("{acceptorId}/request")]
-        public void UpdateFriendRequest(int acceptorId, [FromBody] Relationship relationship)
+        // PUT api/userfriend/request
+        [HttpPut("request")]
+        public void UpdateFriendRequest([FromBody] Relationship relationship)
         {
-            throw new NotImplementedException();
+            _userFriendDbController.UpdateRequest(relationship.ToUserModel(), relationship.Accepted);
         }
 
-        // GET api/userfriend/1/friends
-        [HttpGet("{userId}/friends")]
+        // GET api/userfriend/friends?userId=1
+        [HttpGet("friends")]
         public IEnumerable<Actor> GetFriends(int userId)
         {
-            throw new NotImplementedException();
+            var actor = _userFriendDbController.GetFriends(userId);
+            return actor.ToContract();
         }
 
-        // PUT api/userfriend/1
-        [HttpPut("{userId}")]
-        public void UpdateFriend(int userId, [FromBody] Relationship relationship)
+        // PUT api/userfriend/
+        [HttpPut]
+        public void UpdateFriend([FromBody] Relationship relationship)
         {
-            throw new NotImplementedException();
+            _userFriendDbController.Update(relationship.ToUserModel());
         }
     }
 }

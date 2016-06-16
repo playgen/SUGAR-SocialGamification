@@ -52,5 +52,23 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
 
             return achieveModel;
         }
+
+        public static UserToUserRelationship ToUserModel(this Contracts.Relationship relationContract)
+        {
+            var relationModel = new UserToUserRelationship();
+            relationModel.RequestorId = relationContract.RequestorId;
+            relationModel.AcceptorId = relationContract.AcceptorId;
+
+            return relationModel;
+        }
+
+        public static UserToGroupRelationship ToGroupModel(this Contracts.Relationship relationContract)
+        {
+            var relationModel = new UserToGroupRelationship();
+            relationModel.RequestorId = relationContract.RequestorId;
+            relationModel.AcceptorId = relationContract.AcceptorId;
+
+            return relationModel;
+        }
     }
 }

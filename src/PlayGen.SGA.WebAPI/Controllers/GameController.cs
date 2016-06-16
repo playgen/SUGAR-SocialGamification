@@ -18,7 +18,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _gameDbController = gameDbController;
         }
 
-        // POST api/game/battleminions
+        // POST api/game
         [HttpPost]
         public int Create([FromBody]Game newGame)
         {
@@ -26,7 +26,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return game.Id;
         }
 
-        // GET api/game/battleminions
+        // GET api/game?name=game1&name=game2
         [HttpGet]
         public IEnumerable<Game> Get(string[] name)
         {
@@ -34,7 +34,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return game.ToContract();
         }
 
-        // DELETE api/game/1
+        // DELETE api/game?id=1&id=2
         [HttpDelete]
         public void Delete(int[] id)
         {

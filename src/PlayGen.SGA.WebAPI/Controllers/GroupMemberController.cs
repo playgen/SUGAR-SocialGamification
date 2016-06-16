@@ -1,48 +1,58 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Mapping;
-using PlayGen.SGA.Contracts;
+using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts.Controllers;
+using PlayGen.SGA.WebAPI.ExtensionMethods;
+using PlayGen.SGA.Contracts;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     public class GroupMemberController : Controller, IGroupMemberController
     {
-        // POST api/groupmember/1/request/2
-        [HttpPost("{userId}/request/{groupId}")]
-        public void CreateMemberRequest(int userId, int groupId)
+        private readonly GroupMemberDbController _groupMemberDbController;
+
+        public GroupMemberController(GroupMemberDbController groupMemberDbController)
         {
-            throw new NotImplementedException();
+            _groupMemberDbController = groupMemberDbController;
         }
 
-        // GET api/groupmember/1/requests
-        [HttpGet("{groupId}/requests")]
+        // POST api/groupmember
+        [HttpPost]
+        public void CreateMemberRequest([FromBody]Relationship relationship)
+        {
+            _groupMemberDbController.Create(relationship.ToGroupModel());
+        }
+
+        // GET api/groupmember/requests?groupId=1
+        [HttpGet("requests")]
         public IEnumerable<Actor> GetMemberRequests(int groupId)
         {
-            throw new NotImplementedException();
+            var actor = _groupMemberDbController.GetRequests(groupId);
+            return actor.ToContract();
         }
 
-        // PUT api/groupmember/1/request
-        [HttpPut("{userId}/request/")]
-        public void UpdateMemberRequest(int userId, [FromBody] Relationship relationship)
+        // PUT api/groupmember/request
+        [HttpPut("request")]
+        public void UpdateMemberRequest([FromBody] Relationship relationship)
         {
-            throw new NotImplementedException();
+            _groupMemberDbController.UpdateRequest(relationship.ToGroupModel(), relationship.Accepted);
         }
 
-        // GET api/groupmember/1/members
-        [HttpGet("{groupId}/members")]
+        // GET api/groupmember/members?groupId=1
+        [HttpGet("members")]
         public IEnumerable<Actor> GetMembers(int groupId)
         {
-            throw new NotImplementedException();
+            var actor = _groupMemberDbController.GetMembers(groupId);
+            return actor.ToContract();
         }
 
-        // PUT api/groupmember/1/member
-        [HttpPut("{groupId}/member")]
-        public void UpdateMember(int userId, Relationship relationship)
+        // PUT api/groupmember/
+        [HttpPut]
+        public void UpdateMember([FromBody] Relationship relationship)
         {
-            throw new NotImplementedException();
+            _groupMemberDbController.Update(relationship.ToGroupModel());
         }
     }
 }
