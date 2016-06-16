@@ -42,13 +42,24 @@ namespace PlayGen.SGA.DataAccess
             modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
         }
 
-        /*
         public override int SaveChanges()
         {
-            foreach(var history in this.ChangeTracker.Entries()
+            var histories = this.ChangeTracker.Entries()
                 .Where(e => e.Entity is IModificationHistory && (e.State == EntityState.Added ||
-                    e.State == EntityState.Modified))
-                .Select())
-        }*/
+                                                                 e.State == EntityState.Modified))
+                .Select(e => e.Entity as IModificationHistory);
+
+            foreach (var history in histories)
+            {
+                history.DateModified = DateTime.Now;
+
+                if (history.DateCreated == default(DateTime))
+                {
+                    history.DateCreated = DateTime.Now;;
+                }
+            }
+
+            return base.SaveChanges();
+        }
     }
 }

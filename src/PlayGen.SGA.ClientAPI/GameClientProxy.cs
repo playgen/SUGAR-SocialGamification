@@ -18,23 +18,20 @@ namespace PlayGen.SGA.ClientAPI
         {
             var builder = new StringBuilder();
             builder.Append("api/game?");
-
-            foreach (var nm in name)
+            if (name.Length > 0)
             {
-                builder.AppendFormat("name={0}&", nm);
+                foreach (var nm in name)
+                {
+                    builder.AppendFormat("name={0}&", nm);
+                }
+                builder.Remove(builder.Length - 1, 1);
             }
-            builder.Remove(builder.Length - 1, 1);
             return base.Get<IEnumerable<Game>>(builder.ToString());
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public new void Delete(int[] id)
-        {
-            throw new NotImplementedException();
+            base.Delete("api/game/" + id);
         }
     }
 }
