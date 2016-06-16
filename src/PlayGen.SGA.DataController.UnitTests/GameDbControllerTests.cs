@@ -32,7 +32,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             int matches = games.Count(g => g.Name == gameName);
 
-            Assert.Equal(matches, 1);
+            Assert.Equal(1, matches);
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var matchingGames = games.Select(g => gameNames.Contains(g.Name));
             
-            Assert.Equal(matchingGames.Count(), gameNames.Length);
+            Assert.Equal(gameNames.Length, matchingGames.Count());
         }
 
         [Fact]
