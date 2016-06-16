@@ -35,8 +35,6 @@ namespace PlayGen.SGA.DataController
                 }
 
                 UserData data = newData;
-                data.DateCreated = DateTime.Now;
-                data.DateModified = DateTime.Now;
                 context.UserDatas.Add(data);
                 context.SaveChanges();
             }
