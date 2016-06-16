@@ -11,11 +11,11 @@ namespace PlayGen.SGA.DataController.UnitTests
     public class GroupAchievementDbControllerTests : TestDbController
     {
         #region Configuration
-        private readonly GroupAchievementDbController _gameAchievementDbController;
+        private readonly GroupAchievementDbController _groupAchievementDbController;
 
         public GroupAchievementDbControllerTests()
         {
-            _gameAchievementDbController = new GroupAchievementDbController(_nameOrConnectionString);
+            _groupAchievementDbController = new GroupAchievementDbController(_nameOrConnectionString);
         }
         #endregion
 
@@ -28,7 +28,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newAchievement = CreateGroupAchievement(gameAchievementName);
 
-            var gameAchievements = _gameAchievementDbController.Get(new int[] { newAchievement.GameId });
+            var gameAchievements = _groupAchievementDbController.Get(new int[] { newAchievement.GameId });
 
             int matches = gameAchievements.Count(g => g.Name == gameAchievementName && g.GameId == newAchievement.GameId);
 
@@ -75,7 +75,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             CreateGroupAchievement("GetMultipleGroupAchievements_DontGetThis");
 
-            var gameAchievements = _gameAchievementDbController.Get(gameIds.ToArray());
+            var gameAchievements = _groupAchievementDbController.Get(gameIds.ToArray());
 
             var matchingGroupAchievements = gameAchievements.Select(g => gameAchievementNames.Contains(g.Name));
 
@@ -85,7 +85,7 @@ namespace PlayGen.SGA.DataController.UnitTests
         [Fact]
         public void GetNonExistingGroupAchievements()
         {
-            var gameAchievements = _gameAchievementDbController.Get(new int[] { -1 });
+            var gameAchievements = _groupAchievementDbController.Get(new int[] { -1 });
 
             Assert.Empty(gameAchievements);
         }
@@ -98,12 +98,12 @@ namespace PlayGen.SGA.DataController.UnitTests
             var gameAchievement = CreateGroupAchievement(gameAchievementName);
             var gameId = gameAchievement.GameId;
 
-            var gameAchievements = _gameAchievementDbController.Get(new int[] { gameId });
+            var gameAchievements = _groupAchievementDbController.Get(new int[] { gameId });
             Assert.Equal(gameAchievements.Count(), 1);
             Assert.Equal(gameAchievements.ElementAt(0).Name, gameAchievementName);
 
-            _gameAchievementDbController.Delete(new[] { gameAchievement.Id });
-            gameAchievements = _gameAchievementDbController.Get(new int[] { gameId });
+            _groupAchievementDbController.Delete(new[] { gameAchievement.Id });
+            gameAchievements = _groupAchievementDbController.Get(new int[] { gameId });
 
             Assert.Empty(gameAchievements);
         }
@@ -115,7 +115,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             try
             {
-                _gameAchievementDbController.Delete(new int[] { -1 });
+                _groupAchievementDbController.Delete(new int[] { -1 });
             }
             catch (Exception)
             {
@@ -145,7 +145,7 @@ namespace PlayGen.SGA.DataController.UnitTests
                 CompletionCriteria = name
             };
 
-            return _gameAchievementDbController.Create(newGroupAchievement);
+            return _groupAchievementDbController.Create(newGroupAchievement);
         }
         #endregion
     }
