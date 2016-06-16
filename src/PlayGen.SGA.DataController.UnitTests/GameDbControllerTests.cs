@@ -10,14 +10,17 @@ namespace PlayGen.SGA.DataController.UnitTests
 {
     public class GameDbControllerTests : TestDbController
     {
+        #region Configuration
         private readonly GameDbController _gameDbController;
 
         public GameDbControllerTests()
         {
             _gameDbController = new GameDbController(_nameOrConnectionString);
         }
+        #endregion
 
-#region Tests
+
+        #region Tests
         [Fact]
         public void CreateAndGetGame()
         {
@@ -97,7 +100,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             Assert.Equal(games.Count(), 1);
             Assert.Equal(games.ElementAt(0).Name, gameName);
 
-            _gameDbController.Delete(game.Id);
+            _gameDbController.Delete(new []{game.Id});
             games = _gameDbController.Get(new string[] { gameName });
 
             Assert.Empty(games);
@@ -106,22 +109,22 @@ namespace PlayGen.SGA.DataController.UnitTests
         [Fact]
         public void DeleteNonExistingGame()
         {
-            bool hadOperationException = false;
+            bool hadExeption = false;
 
             try
             {
-                _gameDbController.Delete(-1);
+                _gameDbController.Delete(new int[] {-1});
             }
-            catch (InvalidOperationException)
+            catch (Exception)
             {
-                hadOperationException = true;
+                hadExeption = true;
             }
 
-            Assert.True(hadOperationException);
+            Assert.False(hadExeption);
         }
         #endregion
 
-#region Helpers
+        #region Helpers
         private Game CreateGame(string name)
         {
             var newGame = new Game
@@ -131,6 +134,6 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             return _gameDbController.Create(newGame);
         }
-#endregion
+        #endregion
     }
 }

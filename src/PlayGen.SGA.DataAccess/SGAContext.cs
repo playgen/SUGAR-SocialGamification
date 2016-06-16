@@ -5,11 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using PlayGen.SGA.DataModel;
 using PlayGen.SGA.DataModel.Interfaces;
-//using MySql.Data.Entity;
+using MySql.Data.Entity;
 
 namespace PlayGen.SGA.DataAccess
 {
-    [DbConfigurationType(typeof(DbConfiguration))]
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class SGAContext : DbContext
     {
         public SGAContext(string nameOrConnectionString) : base(nameOrConnectionString)

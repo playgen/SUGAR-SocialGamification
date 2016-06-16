@@ -31,5 +31,10 @@ namespace PlayGen.SGA.ClientAPI
         {
             throw new NotImplementedException();
         }
+
+        public new void Delete(int[] id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
