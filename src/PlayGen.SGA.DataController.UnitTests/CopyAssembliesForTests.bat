@@ -4,10 +4,6 @@
 SET ProjectDir=%1
 SET BinDir="%ProjectDir%\Bin"
 
-::CD %BinDir%
-
-%BinDir%
-
 FOR /R %BinDir% %%F IN (*) DO (
   COPY /Y "%%F" %BinDir%
 )
