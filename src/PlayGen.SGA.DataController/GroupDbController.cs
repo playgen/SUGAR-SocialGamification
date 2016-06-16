@@ -48,15 +48,15 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int[] id)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                var group = context.Groups.Single(g => g.Id == id);
+                var groups = context.Groups.Where(g => id.Contains(g.Id)).ToList();
 
-                context.Groups.Remove(group);
+                context.Groups.RemoveRange(groups);
                 context.SaveChanges();
             }
         }

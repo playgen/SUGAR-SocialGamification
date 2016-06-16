@@ -18,7 +18,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _groupDbController = groupDbController;
         }
 
-        // POST api/group/groupname
+        // POST api/group
         [HttpPost]
         public int Create([FromBody]Actor actor)
         {
@@ -26,7 +26,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return group.Id;
         }
 
-        // GET api/group/groupname
+        // GET api/group?name=group1&name=group2
         [HttpGet]
         public IEnumerable<Actor> Get(string[] name)
         {
@@ -34,9 +34,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return group.ToContract();
         }
 
-        // DELETE api/group/1
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE api/group?id=1&id=2
+        [HttpDelete]
+        public void Delete(int[] id)
         {
             _groupDbController.Delete(id);
         }
