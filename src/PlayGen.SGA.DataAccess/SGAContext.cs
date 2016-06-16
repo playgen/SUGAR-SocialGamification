@@ -5,15 +5,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using PlayGen.SGA.DataModel;
 using PlayGen.SGA.DataModel.Interfaces;
-using MySql.Data.Entity;
+//using MySql.Data.Entity;
 
 namespace PlayGen.SGA.DataAccess
 {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    [DbConfigurationType(typeof(DbConfiguration))]
     public class SGAContext : DbContext
     {
         public SGAContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
+            Database.SetInitializer(new DropCreateDatabaseAlways<SGAContext>());
             Database.SetInitializer(new CreateDatabaseIfNotExists<SGAContext>());
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SGAContext>());
         }
@@ -34,10 +35,10 @@ namespace PlayGen.SGA.DataAccess
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Requestor).WithMany(u => u.Requestors).HasForeignKey(u => u.RequestorId);
-            modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Acceptor).WithMany(u => u.Acceptors).HasForeignKey(u => u.AcceptorId);
-            modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Requestor).WithMany(u => u.RequestRequestors).HasForeignKey(u => u.RequestorId);
-            modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Acceptor).WithMany(u => u.RequestAcceptors).HasForeignKey(u => u.AcceptorId);
+            modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Requestor).WithMany(u => u.Requestors).HasForeignKey(u => u.RequestorId).WillCascadeOnDelete(false);
+            modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Acceptor).WithMany(u => u.Acceptors).HasForeignKey(u => u.AcceptorId).WillCascadeOnDelete(false);
+            modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Requestor).WithMany(u => u.RequestRequestors).HasForeignKey(u => u.RequestorId).WillCascadeOnDelete(false);
+            modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Acceptor).WithMany(u => u.RequestAcceptors).HasForeignKey(u => u.AcceptorId).WillCascadeOnDelete(false);
         }
 
         /*

@@ -7,6 +7,8 @@ namespace PlayGen.SGA.DataController.UnitTests
 {
     public abstract class DbController
     {
-        protected readonly string _nameOrConnectionString = "Server=localhost;Port=3306;Database=SGA;Uid=root;Pwd=;Convert Zero Datetime=true;Allow Zero Datetime=true";
+        protected readonly string _nameOrConnectionString =
+            "Server=(localdb)\\mssqllocaldb;Database=DataControllerUnitTests";
+
     }
 }
