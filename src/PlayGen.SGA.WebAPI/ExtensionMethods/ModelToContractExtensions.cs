@@ -113,5 +113,55 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
 
             return achievementContracts;
         }
+
+        public static SaveData ToContract(this GroupData groupModel)
+        {
+            var dataContract = new SaveData();
+            dataContract.Id = groupModel.Id;
+            dataContract.ActorId = groupModel.GroupId;
+            dataContract.GameId = groupModel.GameId;
+            dataContract.Key = groupModel.Key;
+            dataContract.Value = groupModel.Value;
+            dataContract.DataType = (Contracts.DataType)groupModel.DataType;
+
+            return dataContract;
+        }
+
+        public static IEnumerable<SaveData> ToContract(this IEnumerable<GroupData> groupModels)
+        {
+            IList<SaveData> dataContracts = new List<SaveData>();
+            foreach (GroupData groupModel in groupModels)
+            {
+                var dataContract = ToContract(groupModel);
+                dataContracts.Add(dataContract);
+            }
+
+            return dataContracts;
+        }
+
+        public static SaveData ToContract(this UserData groupModel)
+        {
+            var dataContract = new SaveData();
+            dataContract.Id = groupModel.Id;
+            dataContract.ActorId = groupModel.UserId;
+            dataContract.GameId = groupModel.GameId;
+            dataContract.Key = groupModel.Key;
+            dataContract.Value = groupModel.Value;
+            dataContract.DataType = (Contracts.DataType)groupModel.DataType;
+
+            return dataContract;
+        }
+
+        public static IEnumerable<SaveData> ToContract(this IEnumerable<UserData> groupModels)
+        {
+            IList<SaveData> dataContracts = new List<SaveData>();
+            foreach (UserData groupModel in groupModels)
+            {
+                var dataContract = ToContract(groupModel);
+                dataContracts.Add(dataContract);
+            }
+
+            return dataContracts;
+        }
     }
 }

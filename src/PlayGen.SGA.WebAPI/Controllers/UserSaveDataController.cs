@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using PlayGen.SGA.DataController;
-using PlayGen.SGA.DataModel;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
+using PlayGen.SGA.Contracts;
+
 namespace PlayGen.SGA.WebAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -17,14 +18,19 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _userSaveDataDbController = userSaveDataDbController;
         }
 
-        public void Add(int id, [FromBody]Contracts.SaveData data)
+        // POST api/usersavedata/
+        [HttpPost]
+        public void Add([FromBody]SaveData data)
         {
-            _userSaveDataDbController.Create(id, data);
+            _userSaveDataDbController.Create(data.ToUserModel());
         }
 
-        public IEnumerable<Contracts.SaveData> Get(int actorId, int gameId, IEnumerable<string> keys)
+        // GET api/usersavedata/
+        [HttpGet]
+        public IEnumerable<SaveData> Get(int actorId, int gameId, string[] key)
         {
-            throw new NotImplementedException();
+            var data = _userSaveDataDbController.Get(actorId, gameId, key);
+            return data.ToContract();
         }
     }
 }

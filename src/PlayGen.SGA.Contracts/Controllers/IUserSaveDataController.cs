@@ -4,8 +4,8 @@ namespace PlayGen.SGA.Contracts.Controllers
 {
     public interface IUserSaveDataController
     {
-        void Add(int id, SaveData data);
+        void Add(SaveData data);
 
-        IEnumerable<SaveData> Get(int actorId, int gameId, IEnumerable<string> keys);
+        IEnumerable<SaveData> Get(int actorId, int gameId, string[] keys);
     }
 }
