@@ -35,19 +35,30 @@ namespace PlayGen.SGA.DataAccess
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Requestor).WithMany(u => u.Requestors).HasForeignKey(u => u.RequestorId).WillCascadeOnDelete(false);
-            modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Acceptor).WithMany(u => u.Acceptors).HasForeignKey(u => u.AcceptorId).WillCascadeOnDelete(false);
-            modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Requestor).WithMany(u => u.RequestRequestors).HasForeignKey(u => u.RequestorId).WillCascadeOnDelete(false);
-            modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Acceptor).WithMany(u => u.RequestAcceptors).HasForeignKey(u => u.AcceptorId).WillCascadeOnDelete(false);
+            modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Requestor).WithMany(u => u.Requestors).HasForeignKey(u => u.RequestorId);
+            modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Acceptor).WithMany(u => u.Acceptors).HasForeignKey(u => u.AcceptorId);
+            modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Requestor).WithMany(u => u.RequestRequestors).HasForeignKey(u => u.RequestorId);
+            modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Acceptor).WithMany(u => u.RequestAcceptors).HasForeignKey(u => u.AcceptorId);
         }
 
-        /*
         public override int SaveChanges()
         {
-            foreach(var history in this.ChangeTracker.Entries()
+            var histories = this.ChangeTracker.Entries()
                 .Where(e => e.Entity is IModificationHistory && (e.State == EntityState.Added ||
-                    e.State == EntityState.Modified))
-                .Select())
-        }*/
+                                                                 e.State == EntityState.Modified))
+                .Select(e => e.Entity as IModificationHistory);
+
+            foreach (var history in histories)
+            {
+                history.DateModified = DateTime.Now;
+
+                if (history.DateCreated == default(DateTime))
+                {
+                    history.DateCreated = DateTime.Now;;
+                }
+            }
+
+            return base.SaveChanges();
+        }
     }
 }
