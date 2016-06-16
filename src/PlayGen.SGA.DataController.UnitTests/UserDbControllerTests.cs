@@ -109,7 +109,7 @@ namespace PlayGen.SGA.DataController.UnitTests
         [Fact]
         public void DeleteNonExistingUser()
         {
-            bool hadExeption = false;
+            bool hadException = false;
 
             try
             {
@@ -117,10 +117,10 @@ namespace PlayGen.SGA.DataController.UnitTests
             }
             catch (Exception)
             {
-                hadExeption = true;
+                hadException = true;
             }
 
-            Assert.False(hadExeption);
+            Assert.False(hadException);
         }
         #endregion
 

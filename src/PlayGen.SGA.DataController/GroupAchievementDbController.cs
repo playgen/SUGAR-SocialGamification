@@ -28,6 +28,13 @@ namespace PlayGen.SGA.DataController
                     throw new DuplicateRecordException(string.Format("An achievement with the name {0} for this game already exists.", newAchievement.Name));
                 }
 
+                var gameExists = context.Games.Any(g => g.Id == newAchievement.GameId);
+
+                if (!gameExists)
+                {
+                    throw new DuplicateRecordException(string.Format("The provided game does not exist."));
+                }
+
                 var achievement = newAchievement;
                 context.GroupAchievements.Add(achievement);
                 context.SaveChanges();

@@ -24,29 +24,48 @@ namespace PlayGen.SGA.DataController.UnitTests
         [Fact]
         public void CreateAndGetGroupAchievement()
         {
-            string gameAchievementName = "CreateGroupAchievement";
+            string groupAchievementName = "CreateGroupAchievement";
 
-            var newAchievement = CreateGroupAchievement(gameAchievementName);
+            var newAchievement = CreateGroupAchievement(groupAchievementName);
 
-            var gameAchievements = _groupAchievementDbController.Get(new int[] { newAchievement.GameId });
+            var groupAchievements = _groupAchievementDbController.Get(new int[] { newAchievement.GameId });
 
-            int matches = gameAchievements.Count(g => g.Name == gameAchievementName && g.GameId == newAchievement.GameId);
+            int matches = groupAchievements.Count(g => g.Name == groupAchievementName && g.GameId == newAchievement.GameId);
 
             Assert.Equal(matches, 1);
         }
 
         [Fact]
+        public void CreateGroupAchievementWithNonExistingGame()
+        {
+            string groupAchievementName = "CreateGroupAchievementWithNonExistingGame";
+
+            bool hadException = false;
+
+            try
+            {
+                CreateGroupAchievement(groupAchievementName, -1);
+            }
+            catch (DuplicateRecordException)
+            {
+                hadException = true;
+            }
+
+            Assert.True(hadException);
+        }
+
+        [Fact]
         public void CreateDuplicateGroupAchievement()
         {
-            string gameAchievementName = "CreateDuplicateGroupAchievement";
+            string groupAchievementName = "CreateDuplicateGroupAchievement";
 
-            var firstachievement = CreateGroupAchievement(gameAchievementName);
+            var firstachievement = CreateGroupAchievement(groupAchievementName);
 
             bool hadDuplicateException = false;
 
             try
             {
-                CreateGroupAchievement(gameAchievementName, firstachievement.GameId);
+                CreateGroupAchievement(groupAchievementName, firstachievement.GameId);
             }
             catch (DuplicateRecordException)
             {
@@ -59,7 +78,7 @@ namespace PlayGen.SGA.DataController.UnitTests
         [Fact]
         public void GetMultipleGroupAchievements()
         {
-            string[] gameAchievementNames = new[]
+            string[] groupAchievementNames = new[]
             {
                 "GetMultipleGroupAchievements1",
                 "GetMultipleGroupAchievements2",
@@ -68,50 +87,50 @@ namespace PlayGen.SGA.DataController.UnitTests
             };
 
             IList<int> gameIds = new List<int>();
-            foreach (var gameAchievementName in gameAchievementNames)
+            foreach (var groupAchievementName in groupAchievementNames)
             {
-                gameIds.Add(CreateGroupAchievement(gameAchievementName).GameId);
+                gameIds.Add(CreateGroupAchievement(groupAchievementName).GameId);
             }
 
             CreateGroupAchievement("GetMultipleGroupAchievements_DontGetThis");
 
-            var gameAchievements = _groupAchievementDbController.Get(gameIds.ToArray());
+            var groupAchievements = _groupAchievementDbController.Get(gameIds.ToArray());
 
-            var matchingGroupAchievements = gameAchievements.Select(g => gameAchievementNames.Contains(g.Name));
+            var matchingGroupAchievements = groupAchievements.Select(g => groupAchievementNames.Contains(g.Name));
 
-            Assert.Equal(matchingGroupAchievements.Count(), gameAchievementNames.Length);
+            Assert.Equal(matchingGroupAchievements.Count(), groupAchievementNames.Length);
         }
 
         [Fact]
         public void GetNonExistingGroupAchievements()
         {
-            var gameAchievements = _groupAchievementDbController.Get(new int[] { -1 });
+            var groupAchievements = _groupAchievementDbController.Get(new int[] { -1 });
 
-            Assert.Empty(gameAchievements);
+            Assert.Empty(groupAchievements);
         }
 
         [Fact]
         public void DeleteExistingGroupAchievement()
         {
-            string gameAchievementName = "DeleteExistingGroupAchievement";
+            string groupAchievementName = "DeleteExistingGroupAchievement";
 
-            var gameAchievement = CreateGroupAchievement(gameAchievementName);
-            var gameId = gameAchievement.GameId;
+            var groupAchievement = CreateGroupAchievement(groupAchievementName);
+            var groupId = groupAchievement.GameId;
 
-            var gameAchievements = _groupAchievementDbController.Get(new int[] { gameId });
-            Assert.Equal(gameAchievements.Count(), 1);
-            Assert.Equal(gameAchievements.ElementAt(0).Name, gameAchievementName);
+            var groupAchievements = _groupAchievementDbController.Get(new int[] { groupId });
+            Assert.Equal(groupAchievements.Count(), 1);
+            Assert.Equal(groupAchievements.ElementAt(0).Name, groupAchievementName);
 
-            _groupAchievementDbController.Delete(new[] { gameAchievement.Id });
-            gameAchievements = _groupAchievementDbController.Get(new int[] { gameId });
+            _groupAchievementDbController.Delete(new[] { groupAchievement.Id });
+            groupAchievements = _groupAchievementDbController.Get(new int[] { groupId });
 
-            Assert.Empty(gameAchievements);
+            Assert.Empty(groupAchievements);
         }
 
         [Fact]
         public void DeleteNonExistingGroupAchievement()
         {
-            bool hadExeption = false;
+            bool hadException = false;
 
             try
             {
@@ -119,10 +138,10 @@ namespace PlayGen.SGA.DataController.UnitTests
             }
             catch (Exception)
             {
-                hadExeption = true;
+                hadException = true;
             }
 
-            Assert.False(hadExeption);
+            Assert.False(hadException);
         }
         #endregion
 

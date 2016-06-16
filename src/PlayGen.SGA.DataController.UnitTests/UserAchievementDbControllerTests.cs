@@ -36,6 +36,25 @@ namespace PlayGen.SGA.DataController.UnitTests
         }
 
         [Fact]
+        public void CreateUserAchievementWithNonExistingGame()
+        {
+            string userAchievementName = "CreateUserAchievementWithNonExistingGame";
+
+            bool hadException = false;
+
+            try
+            {
+                CreateUserAchievement(userAchievementName, -1);
+            }
+            catch (DuplicateRecordException)
+            {
+                hadException = true;
+            }
+
+            Assert.True(hadException);
+        }
+
+        [Fact]
         public void CreateDuplicateUserAchievement()
         {
             string userAchievementName = "CreateDuplicateUserAchievement";
@@ -67,15 +86,15 @@ namespace PlayGen.SGA.DataController.UnitTests
                 "GetMultipleUserAchievements4",
             };
 
-            IList<int> userIds = new List<int>();
+            IList<int> gameIds = new List<int>();
             foreach (var userAchievementName in userAchievementNames)
             {
-                userIds.Add(CreateUserAchievement(userAchievementName).GameId);
+                gameIds.Add(CreateUserAchievement(userAchievementName).GameId);
             }
 
             CreateUserAchievement("GetMultipleUserAchievements_DontGetThis");
 
-            var userAchievements = _userAchievementDbController.Get(userIds.ToArray());
+            var userAchievements = _userAchievementDbController.Get(gameIds.ToArray());
 
             var matchingUserAchievements = userAchievements.Select(g => userAchievementNames.Contains(g.Name));
 
@@ -111,7 +130,7 @@ namespace PlayGen.SGA.DataController.UnitTests
         [Fact]
         public void DeleteNonExistingUserAchievement()
         {
-            bool hadExeption = false;
+            bool hadException = false;
 
             try
             {
@@ -119,30 +138,30 @@ namespace PlayGen.SGA.DataController.UnitTests
             }
             catch (Exception)
             {
-                hadExeption = true;
+                hadException = true;
             }
 
-            Assert.False(hadExeption);
+            Assert.False(hadException);
         }
         #endregion
 
         #region Helpers
-        private UserAchievement CreateUserAchievement(string name, int userId = 0)
+        private UserAchievement CreateUserAchievement(string name, int gameId = 0)
         {
             GameDbController gameAchievementDbController = new GameDbController(_nameOrConnectionString);
-            if (userId == 0)
+            if (gameId == 0)
             {
-                Game newuser = new Game
+                Game newgame = new Game
                 {
                     Name = name
                 };
-                userId = gameAchievementDbController.Create(newuser).Id;
+                gameId = gameAchievementDbController.Create(newgame).Id;
             }
 
             var newUserAchievement = new UserAchievement
             {
                 Name = name,
-                GameId = userId,
+                GameId = gameId,
                 CompletionCriteria = name
             };
 
