@@ -74,6 +74,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             dataModel.GameId = dataContract.GameId;
             dataModel.Key = dataContract.Key;
             dataModel.Value = dataContract.Value;
+            dataModel.DataType = (DataModel.DataType)dataContract.DataType;
 
             return dataModel;
         }
@@ -85,6 +86,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             dataModel.GameId = dataContract.GameId;
             dataModel.Key = dataContract.Key;
             dataModel.Value = dataContract.Value;
+            dataModel.DataType = (DataModel.DataType)dataContract.DataType;
 
             return dataModel;
         }

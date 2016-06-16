@@ -15,7 +15,7 @@ namespace PlayGen.SGA.DataController
         {
         }
 
-        public void Create(UserData newData, bool amend)
+        public void Create(UserData newData)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {

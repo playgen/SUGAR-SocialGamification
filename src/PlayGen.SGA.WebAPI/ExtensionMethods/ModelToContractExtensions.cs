@@ -122,6 +122,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             dataContract.GameId = groupModel.GameId;
             dataContract.Key = groupModel.Key;
             dataContract.Value = groupModel.Value;
+            dataContract.DataType = (Contracts.DataType)groupModel.DataType;
 
             return dataContract;
         }
@@ -145,7 +146,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             dataContract.ActorId = groupModel.UserId;
             dataContract.GameId = groupModel.GameId;
             dataContract.Key = groupModel.Key;
-            dataContract.Value = groupModel.Value;
+            dataContract.DataType = (Contracts.DataType)groupModel.DataType;
 
             return dataContract;
         }

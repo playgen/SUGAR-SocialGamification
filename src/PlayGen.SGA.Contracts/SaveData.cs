@@ -12,6 +12,6 @@
 
         public string Value { get; set; }
 
-        public bool Amend { get; set; }
+        public DataType DataType { get; set; }
     }
 }
