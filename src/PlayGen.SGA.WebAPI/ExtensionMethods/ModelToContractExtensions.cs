@@ -6,30 +6,27 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
 {
     public static class ModelToContractExtensions
     {
-        public static Contracts.Account ToContract(this DataModel.Account accountModel)
+        public static AccountResponse ToContract(this Account accountModel)
         {
-            return new Contracts.Account
+            return new AccountResponse
             {
-                Id = accountModel.Id,
-                Name = accountModel.Name,
-                Password = accountModel.Password,
-                Permission = (Contracts.Account.Permissions)accountModel.Permission,
+                User = accountModel.User.ToContract()
             };
         }
 
-        public static Contracts.Game ToContract(this DataModel.Game gameModel)
+        public static GameResponse ToContract(this Game gameModel)
         {
-            var gameContract = new Contracts.Game();
+            var gameContract = new GameResponse();
             gameContract.Id = gameModel.Id;
             gameContract.Name = gameModel.Name;
 
             return gameContract;
         }
 
-        public static IEnumerable<Contracts.Game> ToContract(this IEnumerable<DataModel.Game> gameModels)
+        public static IEnumerable<GameResponse> ToContract(this IEnumerable<Game> gameModels)
         {
-            IList<Contracts.Game> gameContracts = new List<Contracts.Game>();
-            foreach (DataModel.Game gameModel in gameModels) {
+            IList<GameResponse> gameContracts = new List<GameResponse>();
+            foreach (Game gameModel in gameModels) {
                 var gameContract = ToContract(gameModel);
                 gameContracts.Add(gameContract);
             }
@@ -37,18 +34,18 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return gameContracts;
         }
 
-        public static Actor ToContract(this Group groupModel)
+        public static ActorResponse ToContract(this Group groupModel)
         {
-            var actorContract = new Actor();
+            var actorContract = new ActorResponse();
             actorContract.Id = groupModel.Id;
             actorContract.Name = groupModel.Name;
 
             return actorContract;
         }
 
-        public static IEnumerable<Actor> ToContract(this IEnumerable<Group> groupModels)
+        public static IEnumerable<ActorResponse> ToContract(this IEnumerable<Group> groupModels)
         {
-            IList<Actor> actorContracts = new List<Actor>();
+            IList<ActorResponse> actorContracts = new List<ActorResponse>();
             foreach (Group groupModel in groupModels)
             {
                 var actorContract = ToContract(groupModel);
@@ -58,18 +55,18 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return actorContracts;
         }
 
-        public static Actor ToContract(this User userModel)
+        public static ActorResponse ToContract(this User userModel)
         {
-            var actorContract = new Actor();
+            var actorContract = new ActorResponse();
             actorContract.Id = userModel.Id;
             actorContract.Name = userModel.Name;
 
             return actorContract;
         }
 
-        public static IEnumerable<Actor> ToContract(this IEnumerable<User> userModels)
+        public static IEnumerable<ActorResponse> ToContract(this IEnumerable<User> userModels)
         {
-            IList<Actor> actorContracts = new List<Actor>();
+            IList<ActorResponse> actorContracts = new List<ActorResponse>();
             foreach (User userModel in userModels)
             {
                 var actorContract = ToContract(userModel);
@@ -79,20 +76,19 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return actorContracts;
         }
 
-        public static Achievement ToContract(this GroupAchievement groupModel)
+        public static AchievementResponse ToContract(this GroupAchievement groupModel)
         {
-            var achievementContract = new Achievement();
+            var achievementContract = new AchievementResponse();
             achievementContract.Id = groupModel.Id;
             achievementContract.Name = groupModel.Name;
             achievementContract.GameId = groupModel.GameId;
-            achievementContract.CompletionCriteria = groupModel.CompletionCriteria;
 
             return achievementContract;
         }
 
-        public static IEnumerable<Achievement> ToContract(this IEnumerable<GroupAchievement> groupModels)
+        public static IEnumerable<AchievementResponse> ToContract(this IEnumerable<GroupAchievement> groupModels)
         {
-            IList<Achievement> achievementContracts = new List<Achievement>();
+            IList<AchievementResponse> achievementContracts = new List<AchievementResponse>();
             foreach (GroupAchievement groupModel in groupModels)
             {
                 var achievementContract = ToContract(groupModel);
@@ -102,20 +98,19 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return achievementContracts;
         }
 
-        public static Achievement ToContract(this UserAchievement userModel)
+        public static AchievementResponse ToContract(this UserAchievement userModel)
         {
-            var achievementContract = new Achievement();
+            var achievementContract = new AchievementResponse();
             achievementContract.Id = userModel.Id;
             achievementContract.Name = userModel.Name;
             achievementContract.GameId = userModel.GameId;
-            achievementContract.CompletionCriteria = userModel.CompletionCriteria;
 
             return achievementContract;
         }
 
-        public static IEnumerable<Achievement> ToContract(this IEnumerable<UserAchievement> userModels)
+        public static IEnumerable<AchievementResponse> ToContract(this IEnumerable<UserAchievement> userModels)
         {
-            IList<Achievement> achievementContracts = new List<Achievement>();
+            IList<AchievementResponse> achievementContracts = new List<AchievementResponse>();
             foreach (UserAchievement userModel in userModels)
             {
                 var achievementContract = ToContract(userModel);
@@ -125,10 +120,9 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return achievementContracts;
         }
 
-        public static SaveData ToContract(this GroupData groupModel)
+        public static SaveDataResponse ToContract(this GroupData groupModel)
         {
-            var dataContract = new SaveData();
-            dataContract.Id = groupModel.Id;
+            var dataContract = new SaveDataResponse();
             dataContract.ActorId = groupModel.GroupId;
             dataContract.GameId = groupModel.GameId;
             dataContract.Key = groupModel.Key;
@@ -138,9 +132,9 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return dataContract;
         }
 
-        public static IEnumerable<SaveData> ToContract(this IEnumerable<GroupData> groupModels)
+        public static IEnumerable<SaveDataResponse> ToContract(this IEnumerable<GroupData> groupModels)
         {
-            IList<SaveData> dataContracts = new List<SaveData>();
+            IList<SaveDataResponse> dataContracts = new List<SaveDataResponse>();
             foreach (GroupData groupModel in groupModels)
             {
                 var dataContract = ToContract(groupModel);
@@ -150,10 +144,9 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return dataContracts;
         }
 
-        public static SaveData ToContract(this UserData groupModel)
+        public static SaveDataResponse ToContract(this UserData groupModel)
         {
-            var dataContract = new SaveData();
-            dataContract.Id = groupModel.Id;
+            var dataContract = new SaveDataResponse();
             dataContract.ActorId = groupModel.UserId;
             dataContract.GameId = groupModel.GameId;
             dataContract.Key = groupModel.Key;
@@ -163,9 +156,9 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return dataContract;
         }
 
-        public static IEnumerable<SaveData> ToContract(this IEnumerable<UserData> groupModels)
+        public static IEnumerable<SaveDataResponse> ToContract(this IEnumerable<UserData> groupModels)
         {
-            IList<SaveData> dataContracts = new List<SaveData>();
+            IList<SaveDataResponse> dataContracts = new List<SaveDataResponse>();
             foreach (UserData groupModel in groupModels)
             {
                 var dataContract = ToContract(groupModel);
@@ -173,6 +166,24 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             }
 
             return dataContracts;
+        }
+
+        public static RelationshipResponse ToContract(this UserToGroupRelationshipRequest relationshipModel)
+        {
+            var relationshipContract = new RelationshipResponse();
+            relationshipContract.RequestorId = relationshipModel.RequestorId;
+            relationshipContract.AcceptorId = relationshipModel.AcceptorId;
+
+            return relationshipContract;
+        }
+
+        public static RelationshipResponse ToContract(this UserToUserRelationshipRequest relationshipModel)
+        {
+            var relationshipContract = new RelationshipResponse();
+            relationshipContract.RequestorId = relationshipModel.RequestorId;
+            relationshipContract.AcceptorId = relationshipModel.AcceptorId;
+
+            return relationshipContract;
         }
     }
 }

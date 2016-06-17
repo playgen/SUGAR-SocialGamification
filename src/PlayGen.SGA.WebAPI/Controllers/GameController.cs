@@ -20,15 +20,15 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // POST api/game
         [HttpPost]
-        public int Create([FromBody]Game newGame)
+        public GameResponse Create([FromBody]GameRequest newGame)
         {
             var game = _gameDbController.Create(newGame.ToModel());
-            return game.Id;
+            return game.ToContract();
         }
 
         // GET api/game/all
         [HttpGet("all")]
-        public IEnumerable<Game> Get()
+        public IEnumerable<GameResponse> Get()
         {
             var game = _gameDbController.Get();
             return game.ToContract();
@@ -36,7 +36,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/game?name=game1&name=game2
         [HttpGet]
-        public IEnumerable<Game> Get(string[] name)
+        public IEnumerable<GameResponse> Get(string[] name)
         {
             var game = _gameDbController.Get(name);
             return game.ToContract();

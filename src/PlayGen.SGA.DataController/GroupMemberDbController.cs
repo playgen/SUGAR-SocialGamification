@@ -21,10 +21,10 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                var hasConflicts = context.UserToGroupRelationships.Any(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId);
+                var hasConflicts = context.UserToGroupRelationships.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) || (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
                 if (!hasConflicts)
                 {
-                    hasConflicts = context.UserToGroupRelationshipRequests.Any(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId);
+                    hasConflicts = context.UserToGroupRelationshipRequests.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) || (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
                 }
 
                 if (hasConflicts)
@@ -106,7 +106,7 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                var relation = context.UserToGroupRelationships.Single(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId);
+                var relation = context.UserToGroupRelationships.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) || (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
 
                 context.UserToGroupRelationships.Remove(relation);
                 context.SaveChanges();

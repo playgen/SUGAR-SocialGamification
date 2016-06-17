@@ -20,15 +20,15 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // POST api/group
         [HttpPost]
-        public int Create([FromBody]Actor actor)
+        public ActorResponse Create([FromBody]ActorRequest actor)
         {
             var group = _groupDbController.Create(actor.ToGroupModel());
-            return group.Id;
+            return group.ToContract();
         }
 
         // GET api/group/all
         [HttpGet("all")]
-        public IEnumerable<Actor> Get()
+        public IEnumerable<ActorResponse> Get()
         {
             var group = _groupDbController.Get();
             return group.ToContract();
@@ -36,7 +36,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/group?name=group1&name=group2
         [HttpGet]
-        public IEnumerable<Actor> Get(string[] name)
+        public IEnumerable<ActorResponse> Get(string[] name)
         {
             var group = _groupDbController.Get(name);
             return group.ToContract();

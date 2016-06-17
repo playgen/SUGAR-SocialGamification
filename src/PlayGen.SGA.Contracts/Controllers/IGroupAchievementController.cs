@@ -4,14 +4,14 @@ namespace PlayGen.SGA.Contracts.Controllers
 {
     public interface IGroupAchievementController
     {
-        int Create(Achievement achievement);
+        AchievementResponse Create(AchievementRequest achievement);
 
-        IEnumerable<Achievement> Get(int[] gameId);
+        IEnumerable<AchievementResponse> Get(int[] gameId);
 
         void Delete(int[] achievementId);
 
-        IEnumerable<AchievementProgress> GetProgress(int userId, int gameId);
+        IEnumerable<AchievementProgressResponse> GetProgress(int userId, int gameId);
 
-        IEnumerable<AchievementProgress> GetProgress(int achievementId, List<int> actorIds);
+        IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, List<int> actorIds);
     }
 }

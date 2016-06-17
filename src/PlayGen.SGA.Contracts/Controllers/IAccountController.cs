@@ -2,9 +2,9 @@
 {
     public interface IAccountController
     {
-        int Register(Account newAccount);
+        AccountResponse Register(AccountRequest newAccount);
 
-        string Login(string name, string password);
+        AccountResponse Login(AccountRequest account);
 
         void Delete(int[] id);
     }

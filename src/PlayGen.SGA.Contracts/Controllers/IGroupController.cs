@@ -4,11 +4,11 @@ namespace PlayGen.SGA.Contracts.Controllers
 {
     public interface IGroupController
     {
-        int Create(Actor actor);
+        ActorResponse Create(ActorRequest actor);
 
-        IEnumerable<Actor> Get(string[] name);
+        IEnumerable<ActorResponse> Get(string[] name);
 
-        IEnumerable<Actor> Get();
+        IEnumerable<ActorResponse> Get();
 
         void Delete(int[] id);
     }

@@ -20,20 +20,21 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // POST api/groupmember
         [HttpPost]
-        public void CreateMemberRequest([FromBody]Relationship relationship)
+        public RelationshipResponse CreateMemberRequest([FromBody]RelationshipRequest relationship)
         {
             var request = _groupMemberDbController.Create(relationship.ToGroupModel());
-            Relationship relation = new Relationship
+            RelationshipRequest relation = new RelationshipRequest
             {
                 RequestorId = request.RequestorId,
                 AcceptorId = request.AcceptorId
             };
             _groupMemberDbController.UpdateRequest(relation.ToGroupModel(), true);
+            return request.ToContract();
         }
 
         // GET api/groupmember/requests?groupId=1
         [HttpGet("requests")]
-        public IEnumerable<Actor> GetMemberRequests(int groupId)
+        public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
         {
             var actor = _groupMemberDbController.GetRequests(groupId);
             return actor.ToContract();
@@ -41,14 +42,18 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // PUT api/groupmember/request
         [HttpPut("request")]
-        public void UpdateMemberRequest([FromBody] Relationship relationship)
+        public void UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
         {
-            _groupMemberDbController.UpdateRequest(relationship.ToGroupModel(), relationship.Accepted);
+            var relation = new RelationshipRequest {
+                RequestorId = relationship.RequestorId,
+                AcceptorId = relationship.AcceptorId
+            };
+            _groupMemberDbController.UpdateRequest(relation.ToGroupModel(), relationship.Accepted);
         }
 
         // GET api/groupmember/members?groupId=1
         [HttpGet("members")]
-        public IEnumerable<Actor> GetMembers(int groupId)
+        public IEnumerable<ActorResponse> GetMembers(int groupId)
         {
             var actor = _groupMemberDbController.GetMembers(groupId);
             return actor.ToContract();
@@ -56,9 +61,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // PUT api/groupmember/
         [HttpPut]
-        public void UpdateMember([FromBody] Relationship relationship)
+        public void UpdateMember([FromBody] RelationshipStatusUpdate relationship)
         {
-            _groupMemberDbController.Update(relationship.ToGroupModel());
+            var relation = new RelationshipRequest
+            {
+                RequestorId = relationship.RequestorId,
+                AcceptorId = relationship.AcceptorId
+            };
+            _groupMemberDbController.Update(relation.ToGroupModel());
         }
     }
 }

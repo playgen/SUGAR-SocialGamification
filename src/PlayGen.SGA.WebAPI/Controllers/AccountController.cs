@@ -32,10 +32,10 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <param name="newAccount"></param>
         /// <returns></returns>
         [HttpPost]
-        public int Register([FromBody]Account newAccount)
+        public AccountResponse Register([FromBody]AccountRequest newAccount)
         {
             var account = _accountDbController.Create(newAccount.ToModel());
-            return account.Id;
+            return account.ToContract();
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpGet]
-        public string Login(string name, string password)
+        public AccountResponse Login(AccountRequest account)
         {
 
             //if(_accountDbController.Get())

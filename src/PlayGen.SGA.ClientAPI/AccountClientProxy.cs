@@ -9,18 +9,29 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class AccountClientProxy : ClientProxy, IAccountController
     {
-        public void Register(string name, string password)
+        public AccountResponse Register(AccountRequest newAccount)
         {
-            var query = GetUriBuilder("api/account").ToString();
-            return Post<Game, int>(query, game);
+            //var query = GetUriBuilder("api/account").ToString();
+            //return Post<Game, int>(query, game);
+            throw new NotImplementedException();
         }
 
-        public string Login(string name, string password)
+        public AccountResponse Login(AccountRequest account)
         {
             throw new NotImplementedException();
         }
 
         public void Delete(string[] id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Register(AccountResponse newAccount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public new void Delete(int[] id)
         {
             throw new NotImplementedException();
         }

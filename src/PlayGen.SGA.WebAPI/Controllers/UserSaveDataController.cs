@@ -20,14 +20,15 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // POST api/usersavedata/
         [HttpPost]
-        public void Add([FromBody]SaveData data)
+        public SaveDataResponse Add([FromBody]SaveDataRequest newData)
         {
-            _userSaveDataDbController.Create(data.ToUserModel());
+            var data = _userSaveDataDbController.Create(newData.ToUserModel());
+            return data.ToContract();
         }
 
         // GET api/usersavedata/
         [HttpGet]
-        public IEnumerable<SaveData> Get(int actorId, int gameId, string[] key)
+        public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] key)
         {
             var data = _userSaveDataDbController.Get(actorId, gameId, key);
             return data.ToContract();

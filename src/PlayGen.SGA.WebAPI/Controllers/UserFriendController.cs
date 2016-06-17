@@ -20,14 +20,15 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // POST api/userfriend
         [HttpPost]
-        public void CreateFriendRequest([FromBody]Relationship relationship)
+        public RelationshipResponse CreateFriendRequest([FromBody]RelationshipRequest relationship)
         {
-            _userFriendDbController.Create(relationship.ToUserModel());
+            var relation = _userFriendDbController.Create(relationship.ToUserModel());
+            return relation.ToContract();
         }
 
         // GET api/userfriend/requests?userId=1
         [HttpGet("requests")]
-        public IEnumerable<Actor> GetFriendRequests(int userId)
+        public IEnumerable<ActorResponse> GetFriendRequests(int userId)
         {
             var actor = _userFriendDbController.GetRequests(userId);
             return actor.ToContract();
@@ -35,14 +36,19 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // PUT api/userfriend/request
         [HttpPut("request")]
-        public void UpdateFriendRequest([FromBody] Relationship relationship)
+        public void UpdateFriendRequest([FromBody] RelationshipStatusUpdate relationship)
         {
-            _userFriendDbController.UpdateRequest(relationship.ToUserModel(), relationship.Accepted);
+            var relation = new RelationshipRequest
+            {
+                RequestorId = relationship.RequestorId,
+                AcceptorId = relationship.AcceptorId
+            };
+            _userFriendDbController.UpdateRequest(relation.ToUserModel(), relationship.Accepted);
         }
 
         // GET api/userfriend/friends?userId=1
         [HttpGet("friends")]
-        public IEnumerable<Actor> GetFriends(int userId)
+        public IEnumerable<ActorResponse> GetFriends(int userId)
         {
             var actor = _userFriendDbController.GetFriends(userId);
             return actor.ToContract();
@@ -50,9 +56,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // PUT api/userfriend/
         [HttpPut]
-        public void UpdateFriend([FromBody] Relationship relationship)
+        public void UpdateFriend([FromBody] RelationshipStatusUpdate relationship)
         {
-            _userFriendDbController.Update(relationship.ToUserModel());
+            var relation = new RelationshipRequest
+            {
+                RequestorId = relationship.RequestorId,
+                AcceptorId = relationship.AcceptorId
+            };
+            _userFriendDbController.Update(relation.ToUserModel());
         }
     }
 }

@@ -20,15 +20,15 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // POST api/user
         [HttpPost]
-        public int Create([FromBody]Actor actor)
+        public ActorResponse Create([FromBody]ActorRequest actor)
         {
             var user = _userDbController.Create(actor.ToUserModel());
-            return user.Id;
+            return user.ToContract();
         }
 
         // GET api/user/all
         [HttpGet("all")]
-        public IEnumerable<Actor> Get()
+        public IEnumerable<ActorResponse> Get()
         {
             var user = _userDbController.Get();
             return user.ToContract();
@@ -36,7 +36,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/user?name=user1&name=user2
         [HttpGet]
-        public IEnumerable<Actor> Get(string[] name)
+        public IEnumerable<ActorResponse> Get(string[] name)
         {
             var users = _userDbController.Get(name);
             return users.ToContract();
