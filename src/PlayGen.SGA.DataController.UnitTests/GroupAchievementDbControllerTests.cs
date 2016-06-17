@@ -148,13 +148,13 @@ namespace PlayGen.SGA.DataController.UnitTests
         #region Helpers
         private GroupAchievement CreateGroupAchievement(string name, int gameId = 0)
         {
-            GameDbController gameAchievementDbController = new GameDbController(_nameOrConnectionString);
+            GameDbController gameDbController = new GameDbController(_nameOrConnectionString);
             if (gameId == 0) {
                 Game newgame = new Game
                 {
                     Name = name
                 };
-                gameId = gameAchievementDbController.Create(newgame).Id;
+                gameId = gameDbController.Create(newgame).Id;
             }
 
             var newGroupAchievement = new GroupAchievement

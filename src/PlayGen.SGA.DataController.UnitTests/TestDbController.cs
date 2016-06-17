@@ -22,12 +22,15 @@ namespace PlayGen.SGA.DataController.UnitTests
                                       "Convert Zero Datetime=true;" +
                                       "Allow Zero Datetime=true";
 
-            using (var context = new SGAContext(_nameOrConnectionString))
+            if (!hasTestRun)
             {
-                if (context.Database.Connection.Database == DbName && !hasTestRun)
+                using (var context = new SGAContext(_nameOrConnectionString))
                 {
-                    context.Database.Delete();
-                    hasTestRun = true;
+                    if (context.Database.Connection.Database == DbName)
+                    {
+                        context.Database.Delete();
+                        hasTestRun = true;
+                    }
                 }
             }
         }
