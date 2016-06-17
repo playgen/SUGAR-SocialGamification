@@ -30,15 +30,16 @@ namespace PlayGen.SGA.WebAPI
         {
             // Set EntityFramework's DBContext's connection string
             string connectioString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddScoped(((_) => new GameDbController(connectioString)));
-            services.AddScoped(((_) => new GroupDbController(connectioString)));
-            services.AddScoped(((_) => new UserDbController(connectioString)));
-            services.AddScoped(((_) => new GroupSaveDataDbController(connectioString)));
-            services.AddScoped(((_) => new UserSaveDataDbController(connectioString)));
-            services.AddScoped(((_) => new GroupAchievementDbController(connectioString)));
-            services.AddScoped(((_) => new UserAchievementDbController(connectioString)));
-            services.AddScoped(((_) => new GroupMemberDbController(connectioString)));
-            services.AddScoped(((_) => new UserFriendDbController(connectioString)));
+            services.AddScoped((_) => new AccountDbController(connectioString));
+            services.AddScoped((_) => new GameDbController(connectioString));
+            services.AddScoped((_) => new GroupDbController(connectioString));
+            services.AddScoped((_) => new UserDbController(connectioString));
+            services.AddScoped((_) => new GroupSaveDataDbController(connectioString));
+            services.AddScoped((_) => new UserSaveDataDbController(connectioString));
+            services.AddScoped((_) => new GroupAchievementDbController(connectioString));
+            services.AddScoped((_) => new UserAchievementDbController(connectioString));
+            services.AddScoped((_) => new GroupMemberDbController(connectioString));
+            services.AddScoped((_) => new UserFriendDbController(connectioString));
 
             // Add framework services.
             services.AddMvc();

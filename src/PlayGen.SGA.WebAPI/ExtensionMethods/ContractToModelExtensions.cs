@@ -5,6 +5,17 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
 {
     public static class ContractToModelExtensions
     {
+        public static DataModel.Account ToModel(this Contracts.Account accountContract)
+        {
+            return new DataModel.Account
+            {
+                Id = accountContract.Id,
+                Name = accountContract.Name,
+                Password = accountContract.Password,
+                Permission = (DataModel.Account.Permissions)accountContract.Permission,
+            };
+        }
+
         public static DataModel.Game ToModel(this Contracts.Game gameContract)
         {
             var gameModel = new DataModel.Game();

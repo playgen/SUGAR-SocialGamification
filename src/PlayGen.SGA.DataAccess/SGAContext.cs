@@ -9,6 +9,9 @@ using MySql.Data.Entity;
 
 namespace PlayGen.SGA.DataAccess
 {
+    /// <summary>
+    /// Entity Framework Database Configuration
+    /// </summary>
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class SGAContext : DbContext
     {
@@ -36,15 +39,19 @@ namespace PlayGen.SGA.DataAccess
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Setup foreign key relationships in the database tables
             modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Requestor).WithMany(u => u.Requestors).HasForeignKey(u => u.RequestorId);
             modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Acceptor).WithMany(u => u.Acceptors).HasForeignKey(u => u.AcceptorId);
             modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Requestor).WithMany(u => u.RequestRequestors).HasForeignKey(u => u.RequestorId);
             modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Acceptor).WithMany(u => u.RequestAcceptors).HasForeignKey(u => u.AcceptorId);
+            // Change all string fields to have a max length of 64 chars
             modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
         }
 
         public override int SaveChanges()
         {
+            // User reflection to detect classes that implement the IModificationHistory interface
+            // and set their DateCreated and DateModified DateTime fields accordingly.
             var histories = this.ChangeTracker.Entries()
                 .Where(e => e.Entity is IModificationHistory && (e.State == EntityState.Added ||
                                                                  e.State == EntityState.Modified))

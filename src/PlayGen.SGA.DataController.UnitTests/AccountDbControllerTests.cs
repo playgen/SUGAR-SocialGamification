@@ -61,14 +61,14 @@ namespace PlayGen.SGA.DataController.UnitTests
         }
 
         [Fact]
-        public void GetMultipleAccounts()
+        public void GetMultipleAccountsByName()
         {
             string[] names = new[]
             {
-                "GetMultipleAccounts1",
-                "GetMultipleAccounts2",
-                "GetMultipleAccounts3",
-                "GetMultipleAccounts4",
+                "GetMultipleAccountsByName1",
+                "GetMultipleAccountsByName2",
+                "GetMultipleAccountsByName3",
+                "GetMultipleAccountsByName4",
             };
 
             foreach (var name in names)
@@ -76,7 +76,7 @@ namespace PlayGen.SGA.DataController.UnitTests
                 CreateAccount(name, $"{name}Password", Account.Permissions.Default);
             }
 
-            CreateAccount("GetMultipleAccounts_DontGetThis", "GetMultipleAccounts_DontGetThisPassword", Account.Permissions.Default);
+            CreateAccount("GetMultipleAccountsByName_DontGetThis", "GetMultipleAccountsByName_DontGetThisPassword", Account.Permissions.Default);
 
             var accounts = _accountDbController.Get(names);
 
