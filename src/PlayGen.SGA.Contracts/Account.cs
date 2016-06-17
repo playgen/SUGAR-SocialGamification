@@ -10,6 +10,8 @@
 
         public Permissions Permission { get; set; }
 
+        public Actor User { get; set; }
+
         public enum Permissions
         {
             Default,

@@ -313,7 +313,7 @@ namespace PlayGen.SGA.DataController.UnitTests
                 hadException = true;
             }
 
-            Assert.False(hadException);
+            Assert.True(hadException);
         }
         #endregion
 

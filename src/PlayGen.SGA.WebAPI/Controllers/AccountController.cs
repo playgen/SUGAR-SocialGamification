@@ -27,15 +27,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// Register a new account.
         /// Requires the name to be unique.
         /// 
-        /// Example Usage: POST api/account
+        /// Example Usage: POST api/account/register
         /// </summary>
         /// <param name="newAccount"></param>
         /// <returns></returns>
-        [HttpPost]
-        public int Register([FromBody]Account newAccount)
+        [HttpPost("REGISTER")]
+        public void Register([FromBody]Account newAccount)
         {
-            var account = _accountDbController.Create(newAccount.ToModel());
-            return account.Id;
+            _accountDbController.Create(newAccount.ToModel());
         }
 
         /// <summary>
@@ -44,19 +43,16 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// 
         /// Example Usage: GET api/account?name=account1&password=account2
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public string Login(string name, string password)
+        [HttpPost]
+        public void Login([FromBody]Account account)
         {
-
-            //if(_accountDbController.Get())
-
-            // TODO: Implement
-            // 1. Verify username and password exist in the database
-            // 2. Create JWT - with user id
-
+            // TODO
+            // check account account exists in the database
+            // get authentication to compare passwords
+            // if authenticated:
+            //  create jwt with claims - id specifically
+            //   return the jwt
+            
             throw new NotImplementedException();
         }
 
