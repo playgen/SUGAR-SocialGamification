@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.DataController;
+using PlayGen.SGA.WebAPI.Exceptions;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
 
 namespace PlayGen.SGA.WebAPI.Controllers
@@ -31,7 +32,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// </summary>
         /// <param name="newAccount"></param>
         /// <returns></returns>
-        [HttpPost("REGISTER")]
+        [HttpPost("register")]
         public void Register([FromBody]Account newAccount)
         {
             _accountDbController.Create(newAccount.ToModel());
@@ -41,18 +42,25 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// Logs in an account based on the name and password combination.
         /// Returns a JWT used for authorization in any further calls to the API.
         /// 
-        /// Example Usage: GET api/account?name=account1&password=account2
+        /// Example Usage: POST api/account
         /// </summary>
         [HttpPost]
-        public void Login([FromBody]Account account)
+        public void Login([FromBody]Account accountDetails)
         {
+            var account = _accountDbController.Get(new string[] {accountDetails.Name});
+
+            if (account == null)
+            {
+                throw new InvalidLoginDetailsException("Invalid Login Details.");
+            }
+
+            
             // TODO
-            // check account account exists in the database
             // get authentication to compare passwords
             // if authenticated:
             //  create jwt with claims - id specifically
             //   return the jwt
-            
+
             throw new NotImplementedException();
         }
 
