@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.DataController;
+using PlayGen.SGA.ServerAuthentication.Providers;
 using PlayGen.SGA.WebAPI.Exceptions;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
 
@@ -47,14 +48,19 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpPost]
         public void Login([FromBody]Account accountDetails)
         {
-            var account = _accountDbController.Get(new string[] {accountDetails.Name});
+            var accounts = _accountDbController.Get(new string[] {accountDetails.Name});
 
-            if (account == null)
+            if (!accounts.Any()) 
             {
                 throw new InvalidLoginDetailsException("Invalid Login Details.");
             }
 
-            
+            var account = accounts.ElementAt(0);
+            PasswordValidation validation = new PasswordValidation(accountDetails.Password, account.Password);
+
+            if (!validation.IsValid) throw new InvalidLoginDetailsException("Invalid Login Details.");
+
+
             // TODO
             // get authentication to compare passwords
             // if authenticated:
