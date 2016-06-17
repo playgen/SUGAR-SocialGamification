@@ -26,7 +26,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return data.ToContract();
         }
 
-        // GET api/groupsavedata/
+        // GET api/groupsavedata?actorId=1&gameId=1&key=key1&key=key2...
         [HttpGet]
         public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] key)
         {

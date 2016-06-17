@@ -31,7 +31,6 @@ namespace PlayGen.SGA.ClientAPI
             return Get<IEnumerable<GameResponse>>(query);
         }
 
-
         public void Delete(int id)
         {
             var query = GetUriBuilder("api/game/" + id).ToString();

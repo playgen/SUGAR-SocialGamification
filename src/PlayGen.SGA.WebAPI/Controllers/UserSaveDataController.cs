@@ -18,7 +18,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _userSaveDataDbController = userSaveDataDbController;
         }
 
-        // POST api/usersavedata/
+        // POST api/usersavedata
         [HttpPost]
         public SaveDataResponse Add([FromBody]SaveDataRequest newData)
         {
@@ -26,7 +26,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return data.ToContract();
         }
 
-        // GET api/usersavedata/
+        // GET api/usersavedata?actorId=1&gameId=1&key=key1&key=key2...
         [HttpGet]
         public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] key)
         {
