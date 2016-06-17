@@ -18,6 +18,22 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _userFriendDbController = userFriendDbController;
         }
 
+        // GET api/userfriend/requests?userId=1
+        [HttpGet("requests")]
+        public IEnumerable<ActorResponse> GetFriendRequests(int userId)
+        {
+            var actor = _userFriendDbController.GetRequests(userId);
+            return actor.ToContract();
+        }
+
+        // GET api/userfriend/friends?userId=1
+        [HttpGet("friends")]
+        public IEnumerable<ActorResponse> GetFriends(int userId)
+        {
+            var actor = _userFriendDbController.GetFriends(userId);
+            return actor.ToContract();
+        }
+
         // POST api/userfriend
         [HttpPost]
         public RelationshipResponse CreateFriendRequest([FromBody]RelationshipRequest relationship)
@@ -26,13 +42,6 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return relation.ToContract();
         }
 
-        // GET api/userfriend/requests?userId=1
-        [HttpGet("requests")]
-        public IEnumerable<ActorResponse> GetFriendRequests(int userId)
-        {
-            var actor = _userFriendDbController.GetRequests(userId);
-            return actor.ToContract();
-        }
 
         // PUT api/userfriend/request
         [HttpPut("request")]
@@ -44,14 +53,6 @@ namespace PlayGen.SGA.WebAPI.Controllers
                 AcceptorId = relationship.AcceptorId
             };
             _userFriendDbController.UpdateRequest(relation.ToUserModel(), relationship.Accepted);
-        }
-
-        // GET api/userfriend/friends?userId=1
-        [HttpGet("friends")]
-        public IEnumerable<ActorResponse> GetFriends(int userId)
-        {
-            var actor = _userFriendDbController.GetFriends(userId);
-            return actor.ToContract();
         }
 
         // PUT api/userfriend/

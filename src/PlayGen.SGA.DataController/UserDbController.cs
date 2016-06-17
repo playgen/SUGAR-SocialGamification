@@ -15,27 +15,6 @@ namespace PlayGen.SGA.DataController
         {
         }
 
-        public User Create(User newUser)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var hasConflicts = context.Users.Any(u => u.Name == newUser.Name);
-
-                if (hasConflicts)
-                {
-                    throw new DuplicateRecordException(string.Format("A user with the name {0} already exists.", newUser.Name));
-                }
-
-                var user = newUser;
-                context.Users.Add(user);
-                context.SaveChanges();
-
-                return user;
-            }
-        }
-
         public IEnumerable<User> Get()
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -57,6 +36,27 @@ namespace PlayGen.SGA.DataController
                 var users = context.Users.Where(g => names.Contains(g.Name)).ToList();
 
                 return users;
+            }
+        }
+
+        public User Create(User newUser)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var hasConflicts = context.Users.Any(u => u.Name == newUser.Name);
+
+                if (hasConflicts)
+                {
+                    throw new DuplicateRecordException(string.Format("A user with the name {0} already exists.", newUser.Name));
+                }
+
+                var user = newUser;
+                context.Users.Add(user);
+                context.SaveChanges();
+
+                return user;
             }
         }
 

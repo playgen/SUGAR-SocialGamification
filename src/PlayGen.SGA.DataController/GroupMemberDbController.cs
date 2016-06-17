@@ -15,6 +15,30 @@ namespace PlayGen.SGA.DataController
         {
         }
 
+        public IEnumerable<User> GetRequests(int id)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var requestors = context.UserToGroupRelationshipRequests.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
+
+                return requestors;
+            }
+        }
+
+        public IEnumerable<User> GetMembers(int id)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var requestors = context.UserToGroupRelationships.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
+
+                return requestors;
+            }
+        }
+
         public UserToGroupRelationshipRequest Create(UserToGroupRelationship newRelation)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -54,18 +78,6 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public IEnumerable<User> GetRequests(int id)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var requestors = context.UserToGroupRelationshipRequests.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
-
-                return requestors;
-            }
-        }
-
         public void UpdateRequest(UserToGroupRelationship newRelation, bool accepted)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -85,18 +97,6 @@ namespace PlayGen.SGA.DataController
                 }
                 context.UserToGroupRelationshipRequests.Remove(relation);
                 context.SaveChanges();
-            }
-        }
-
-        public IEnumerable<User> GetMembers(int id)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var requestors = context.UserToGroupRelationships.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
-
-                return requestors;
             }
         }
 

@@ -18,6 +18,22 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _groupMemberDbController = groupMemberDbController;
         }
 
+        // GET api/groupmember/requests?groupId=1
+        [HttpGet("requests")]
+        public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
+        {
+            var actor = _groupMemberDbController.GetRequests(groupId);
+            return actor.ToContract();
+        }
+
+        // GET api/groupmember/members?groupId=1
+        [HttpGet("members")]
+        public IEnumerable<ActorResponse> GetMembers(int groupId)
+        {
+            var actor = _groupMemberDbController.GetMembers(groupId);
+            return actor.ToContract();
+        }
+
         // POST api/groupmember
         [HttpPost]
         public RelationshipResponse CreateMemberRequest([FromBody]RelationshipRequest relationship)
@@ -32,14 +48,6 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return request.ToContract();
         }
 
-        // GET api/groupmember/requests?groupId=1
-        [HttpGet("requests")]
-        public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
-        {
-            var actor = _groupMemberDbController.GetRequests(groupId);
-            return actor.ToContract();
-        }
-
         // PUT api/groupmember/request
         [HttpPut("request")]
         public void UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
@@ -49,14 +57,6 @@ namespace PlayGen.SGA.WebAPI.Controllers
                 AcceptorId = relationship.AcceptorId
             };
             _groupMemberDbController.UpdateRequest(relation.ToGroupModel(), relationship.Accepted);
-        }
-
-        // GET api/groupmember/members?groupId=1
-        [HttpGet("members")]
-        public IEnumerable<ActorResponse> GetMembers(int groupId)
-        {
-            var actor = _groupMemberDbController.GetMembers(groupId);
-            return actor.ToContract();
         }
 
         // PUT api/groupmember/

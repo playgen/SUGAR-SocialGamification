@@ -18,19 +18,19 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _groupSaveDataDbController = groupSaveDataDbController;
         }
 
-        // POST api/groupsavedata
-        [HttpPost]
-        public SaveDataResponse Add([FromBody]SaveDataRequest newData)
-        {
-            var data = _groupSaveDataDbController.Create(newData.ToGroupModel());
-            return data.ToContract();
-        }
-
         // GET api/groupsavedata?actorId=1&gameId=1&key=key1&key=key2...
         [HttpGet]
         public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] key)
         {
             var data = _groupSaveDataDbController.Get(actorId, gameId, key);
+            return data.ToContract();
+        }
+
+        // POST api/groupsavedata
+        [HttpPost]
+        public SaveDataResponse Add([FromBody]SaveDataRequest newData)
+        {
+            var data = _groupSaveDataDbController.Create(newData.ToGroupModel());
             return data.ToContract();
         }
     }

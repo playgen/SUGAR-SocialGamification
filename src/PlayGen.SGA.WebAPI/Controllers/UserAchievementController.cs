@@ -18,14 +18,6 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _userAchievementDbController = userAchievementDbController;
         }
 
-        // POST api/userachievement
-        [HttpPost]
-        public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
-        {
-            var achievement = _userAchievementDbController.Create(newAchievement.ToUserModel());
-            return achievement.ToContract();
-        }
-
         // GET api/userachievement?gameId=1&gameId=2
         [HttpGet]
         public IEnumerable<AchievementResponse> Get(int[] gameId)
@@ -34,7 +26,15 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return achievement.ToContract();
         }
 
-        // GET api/userchievement?id=1&id=2
+        // POST api/userachievement
+        [HttpPost]
+        public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
+        {
+            var achievement = _userAchievementDbController.Create(newAchievement.ToUserModel());
+            return achievement.ToContract();
+        }
+
+        // DELETE api/userchievement?id=1&id=2
         [HttpDelete]
         public void Delete(int[] id)
         {

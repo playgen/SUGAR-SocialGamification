@@ -18,14 +18,6 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _groupAchievementDbController = groupAchievementDbController;
         }
 
-        // POST api/groupachievement/
-        [HttpPost]
-        public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
-        {
-            var achievement = _groupAchievementDbController.Create(newAchievement.ToGroupModel());
-            return achievement.ToContract();
-        }
-
         // GET api/groupachievement?gameId=1&gameId=2
         [HttpGet]
         public IEnumerable<AchievementResponse> Get(int[] gameId)
@@ -34,7 +26,15 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return achievement.ToContract();
         }
 
-        // GET api/groupachievement?id=1&id=2
+        // POST api/groupachievement/
+        [HttpPost]
+        public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
+        {
+            var achievement = _groupAchievementDbController.Create(newAchievement.ToGroupModel());
+            return achievement.ToContract();
+        }
+
+        // DELETE api/groupachievement?id=1&id=2
         [HttpDelete]
         public void Delete(int[] id)
         {
