@@ -15,7 +15,7 @@ namespace PlayGen.SGA.DataController
         {
         }
 
-        public void Create(GroupData newData)
+        public GroupData Create(GroupData newData)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
@@ -37,6 +37,7 @@ namespace PlayGen.SGA.DataController
                 GroupData data = newData;
                 context.GroupDatas.Add(data);
                 context.SaveChanges();
+                return data;
             }
         }
 

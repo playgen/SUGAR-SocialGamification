@@ -15,6 +15,11 @@ namespace PlayGen.SGA.DataController
         {
         }
         
+        /// <summary>
+        /// Create a new game record in the database.
+        /// </summary>
+        /// <param name="newGame"></param>
+        /// <returns></returns>
         public Game Create(Game newGame)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -36,6 +41,11 @@ namespace PlayGen.SGA.DataController
             }
         }
 
+        /// <summary>
+        /// Retrieve game multiple records by name from the database
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
         public IEnumerable<Game> Get()
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -60,6 +70,10 @@ namespace PlayGen.SGA.DataController
             }
         }
 
+        /// <summary>
+        /// Delete a game record from the database.
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(int[] id)
         {
             using (var context = new SGAContext(_nameOrConnectionString))

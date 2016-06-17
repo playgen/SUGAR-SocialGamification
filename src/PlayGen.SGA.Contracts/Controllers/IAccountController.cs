@@ -2,10 +2,10 @@
 {
     public interface IAccountController
     {
-        void Register(string name, string password);
+        int Register(Account newAccount);
 
         string Login(string name, string password);
 
-        void Delete(string[] id);
+        void Delete(int[] id);
     }
 }

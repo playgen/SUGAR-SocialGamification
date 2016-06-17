@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Mapping;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.DataModel;
 using PlayGen.SGA.DataAccess;
 using PlayGen.SGA.DataController.Exceptions;
@@ -41,9 +43,22 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                var accounts = context.Accounts.Where(a => names.Contains(a.Name)).ToList();
+                var accounts = context.Accounts.Where(a => names.Contains(a.Name));
 
-                return accounts;
+                return accounts.ToList();
+            }
+        }
+
+        public void Delete(int[] id)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var accounts = context.Accounts.Where(g => id.Contains(g.Id));
+
+                context.Accounts.RemoveRange(accounts);
+                context.SaveChanges();
             }
         }
     }

@@ -31,10 +31,9 @@ namespace PlayGen.SGA.DataController.UnitTests
                     if (context.Database.Connection.Database == DbName)
                     {
                         context.Database.Delete();
+                        _deletedDatabase = true;
                     }
                 }
-
-                _deletedDatabase = true;
             }
         }
     }

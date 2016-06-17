@@ -44,5 +44,10 @@ namespace PlayGen.SGA.ClientAPI
                 .ToString();
             Delete(query);
         }
+
+        public new IEnumerable<Game> Get()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
