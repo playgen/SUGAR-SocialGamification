@@ -1,6 +1,6 @@
 ﻿namespace PlayGen.SGA.Contracts
 {
-    public class Achievement
+    public class AchievementAdminResponse
     {
         public int Id { get; set; }
 

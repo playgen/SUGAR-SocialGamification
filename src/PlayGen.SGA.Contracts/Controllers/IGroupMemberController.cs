@@ -4,14 +4,14 @@ namespace PlayGen.SGA.Contracts.Controllers
 {
     public interface IGroupMemberController
     {
-        void CreateMemberRequest(Relationship relationship);
+        IEnumerable<ActorResponse> GetMemberRequests(int groupId);
 
-        IEnumerable<Actor> GetMemberRequests(int groupId);
+        IEnumerable<ActorResponse> GetMembers(int groupId);
 
-        void UpdateMemberRequest(Relationship relationship);
+        RelationshipResponse CreateMemberRequest(RelationshipRequest relationship);
 
-        IEnumerable<Actor> GetMembers(int groupId);
+        void UpdateMemberRequest(RelationshipStatusUpdate relationship);
 
-        void UpdateMember(Relationship relationship);
+        void UpdateMember(RelationshipStatusUpdate relationship);
     }
 }

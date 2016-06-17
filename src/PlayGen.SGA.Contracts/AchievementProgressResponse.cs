@@ -1,8 +1,8 @@
 ﻿namespace PlayGen.SGA.Contracts
 {
-    public class AchievementProgress
+    public class AchievementProgressResponse
     {
-        public Actor Actor { get; set; }
+        public ActorResponse Actor { get; set; }
 
         public string Name { get; set; }
 

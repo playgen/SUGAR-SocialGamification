@@ -1,9 +1,7 @@
 ﻿namespace PlayGen.SGA.Contracts
 {
-    public class SaveData
+    public class SaveDataRequest
     {
-        public int Id { get; set; }
-
         public int ActorId { get; set; }
 
         public int GameId { get; set; }

@@ -15,16 +15,40 @@ namespace PlayGen.SGA.DataController
         {
         }
 
+        public IEnumerable<User> GetRequests(int id)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var requestors = context.UserToGroupRelationshipRequests.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
+
+                return requestors;
+            }
+        }
+
+        public IEnumerable<User> GetMembers(int id)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var requestors = context.UserToGroupRelationships.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
+
+                return requestors;
+            }
+        }
+
         public UserToGroupRelationshipRequest Create(UserToGroupRelationship newRelation)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                var hasConflicts = context.UserToGroupRelationships.Any(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId);
+                var hasConflicts = context.UserToGroupRelationships.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) || (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
                 if (!hasConflicts)
                 {
-                    hasConflicts = context.UserToGroupRelationshipRequests.Any(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId);
+                    hasConflicts = context.UserToGroupRelationshipRequests.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) || (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
                 }
 
                 if (hasConflicts)
@@ -54,18 +78,6 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public IEnumerable<User> GetRequests(int id)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var requestors = context.UserToGroupRelationshipRequests.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
-
-                return requestors;
-            }
-        }
-
         public void UpdateRequest(UserToGroupRelationship newRelation, bool accepted)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -88,25 +100,13 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public IEnumerable<User> GetMembers(int id)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var requestors = context.UserToGroupRelationships.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
-
-                return requestors;
-            }
-        }
-
         public void Update(UserToGroupRelationship newRelation)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
                 SetLog(context);
 
-                var relation = context.UserToGroupRelationships.Single(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId);
+                var relation = context.UserToGroupRelationships.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) || (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
 
                 context.UserToGroupRelationships.Remove(relation);
                 context.SaveChanges();

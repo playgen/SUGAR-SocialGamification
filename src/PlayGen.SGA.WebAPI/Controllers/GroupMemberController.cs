@@ -18,47 +18,57 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _groupMemberDbController = groupMemberDbController;
         }
 
-        // POST api/groupmember
-        [HttpPost]
-        public void CreateMemberRequest([FromBody]Relationship relationship)
-        {
-            var request = _groupMemberDbController.Create(relationship.ToGroupModel());
-            Relationship relation = new Relationship
-            {
-                RequestorId = request.RequestorId,
-                AcceptorId = request.AcceptorId
-            };
-            _groupMemberDbController.UpdateRequest(relation.ToGroupModel(), true);
-        }
-
         // GET api/groupmember/requests?groupId=1
         [HttpGet("requests")]
-        public IEnumerable<Actor> GetMemberRequests(int groupId)
+        public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
         {
             var actor = _groupMemberDbController.GetRequests(groupId);
             return actor.ToContract();
         }
 
-        // PUT api/groupmember/request
-        [HttpPut("request")]
-        public void UpdateMemberRequest([FromBody] Relationship relationship)
-        {
-            _groupMemberDbController.UpdateRequest(relationship.ToGroupModel(), relationship.Accepted);
-        }
-
         // GET api/groupmember/members?groupId=1
         [HttpGet("members")]
-        public IEnumerable<Actor> GetMembers(int groupId)
+        public IEnumerable<ActorResponse> GetMembers(int groupId)
         {
             var actor = _groupMemberDbController.GetMembers(groupId);
             return actor.ToContract();
         }
 
+        // POST api/groupmember
+        [HttpPost]
+        public RelationshipResponse CreateMemberRequest([FromBody]RelationshipRequest relationship)
+        {
+            var request = _groupMemberDbController.Create(relationship.ToGroupModel());
+            RelationshipRequest relation = new RelationshipRequest
+            {
+                RequestorId = request.RequestorId,
+                AcceptorId = request.AcceptorId
+            };
+            _groupMemberDbController.UpdateRequest(relation.ToGroupModel(), true);
+            return request.ToContract();
+        }
+
+        // PUT api/groupmember/request
+        [HttpPut("request")]
+        public void UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
+        {
+            var relation = new RelationshipRequest {
+                RequestorId = relationship.RequestorId,
+                AcceptorId = relationship.AcceptorId
+            };
+            _groupMemberDbController.UpdateRequest(relation.ToGroupModel(), relationship.Accepted);
+        }
+
         // PUT api/groupmember/
         [HttpPut]
-        public void UpdateMember([FromBody] Relationship relationship)
+        public void UpdateMember([FromBody] RelationshipStatusUpdate relationship)
         {
-            _groupMemberDbController.Update(relationship.ToGroupModel());
+            var relation = new RelationshipRequest
+            {
+                RequestorId = relationship.RequestorId,
+                AcceptorId = relationship.AcceptorId
+            };
+            _groupMemberDbController.Update(relation.ToGroupModel());
         }
     }
 }

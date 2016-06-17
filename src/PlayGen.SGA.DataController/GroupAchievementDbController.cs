@@ -15,6 +15,18 @@ namespace PlayGen.SGA.DataController
         {
         }
 
+        public IEnumerable<GroupAchievement> Get(int[] gameIds)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var achievements = context.GroupAchievements.Where(a => gameIds.Contains(a.GameId)).ToList();
+
+                return achievements;
+            }
+        }
+
         public GroupAchievement Create(GroupAchievement newAchievement)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -40,18 +52,6 @@ namespace PlayGen.SGA.DataController
                 context.SaveChanges();
 
                 return achievement;
-            }
-        }
-
-        public IEnumerable<GroupAchievement> Get(int[] gameIds)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var achievements = context.GroupAchievements.Where(a => gameIds.Contains(a.GameId)).ToList();
-
-                return achievements;
             }
         }
 

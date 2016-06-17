@@ -4,8 +4,8 @@ namespace PlayGen.SGA.Contracts.Controllers
 {
     public interface IGroupSaveDataController
     {
-        void Add(SaveData data);
+        IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] keys);
 
-        IEnumerable<SaveData> Get(int actorId, int gameId, string[] keys);
+        SaveDataResponse Add(SaveDataRequest data);
     }
 }

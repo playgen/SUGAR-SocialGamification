@@ -15,6 +15,32 @@ namespace PlayGen.SGA.DataController
         {
         }
 
+        public IEnumerable<User> GetRequests(int id)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var requestors = context.UserToUserRelationshipRequests.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
+
+                return requestors;
+            }
+        }
+
+        public IEnumerable<User> GetFriends(int id)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var requestors = context.UserToUserRelationships.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
+                var acceptors = context.UserToUserRelationships.Where(r => r.RequestorId == id).Select(u => u.Acceptor).ToList();
+                requestors.AddRange(acceptors);
+
+                return requestors;
+            }
+        }
+
         public UserToUserRelationshipRequest Create(UserToUserRelationship newRelation)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -55,18 +81,6 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public IEnumerable<User> GetRequests(int id)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var requestors = context.UserToUserRelationshipRequests.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
-
-                return requestors;
-            }
-        }
-
         public void UpdateRequest(UserToUserRelationship newRelation, bool accepted)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -85,20 +99,6 @@ namespace PlayGen.SGA.DataController
                 }
                 context.UserToUserRelationshipRequests.Remove(relation);
                 context.SaveChanges();
-            }
-        }
-
-        public IEnumerable<User> GetFriends(int id)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var requestors = context.UserToUserRelationships.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
-                var acceptors = context.UserToUserRelationships.Where(r => r.RequestorId == id).Select(u => u.Acceptor).ToList();
-                requestors.AddRange(acceptors);
-
-                return requestors;
             }
         }
 

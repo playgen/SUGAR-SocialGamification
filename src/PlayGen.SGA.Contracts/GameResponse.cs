@@ -1,6 +1,6 @@
 ﻿namespace PlayGen.SGA.Contracts
 {
-    public class Game
+    public class GameResponse
     {
         public int Id { get; set; }
 

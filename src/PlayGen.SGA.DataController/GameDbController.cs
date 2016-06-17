@@ -14,32 +14,6 @@ namespace PlayGen.SGA.DataController
         public GameDbController(string nameOrConnectionString) : base(nameOrConnectionString)
         {
         }
-        
-        /// <summary>
-        /// Create a new game record in the database.
-        /// </summary>
-        /// <param name="newGame"></param>
-        /// <returns></returns>
-        public Game Create(Game newGame)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var hasConflicts = context.Games.Any(g => g.Name == newGame.Name);
-
-                if (hasConflicts)
-                {
-                    throw new DuplicateRecordException(string.Format("A game with the name {0} already exists.", newGame.Name));
-                }
-
-                var game = newGame;
-                context.Games.Add(game);
-                context.SaveChanges();
-
-                return game;
-            }
-        }
 
         /// <summary>
         /// Retrieve game multiple records by name from the database
@@ -67,6 +41,32 @@ namespace PlayGen.SGA.DataController
                 var games = context.Games.Where(g => names.Contains(g.Name)).ToList();
 
                 return games;
+            }
+        }
+
+        /// <summary>
+        /// Create a new game record in the database.
+        /// </summary>
+        /// <param name="newGame"></param>
+        /// <returns></returns>
+        public Game Create(Game newGame)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var hasConflicts = context.Games.Any(g => g.Name == newGame.Name);
+
+                if (hasConflicts)
+                {
+                    throw new DuplicateRecordException(string.Format("A game with the name {0} already exists.", newGame.Name));
+                }
+
+                var game = newGame;
+                context.Games.Add(game);
+                context.SaveChanges();
+
+                return game;
             }
         }
 

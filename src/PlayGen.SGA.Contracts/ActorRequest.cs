@@ -1,9 +1,7 @@
 ﻿namespace PlayGen.SGA.Contracts
 {
-    public class Actor
+    public class ActorRequest
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
     }
 }

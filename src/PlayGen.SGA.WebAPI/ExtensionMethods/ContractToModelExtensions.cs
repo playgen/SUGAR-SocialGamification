@@ -5,26 +5,24 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
 {
     public static class ContractToModelExtensions
     {
-        public static DataModel.Account ToModel(this Contracts.Account accountContract)
+        public static Account ToModel(this AccountRequest accountContract)
         {
-            return new DataModel.Account
+            return new Account
             {
-                Id = accountContract.Id,
                 Name = accountContract.Name,
-                Password = accountContract.Password,
-                Permission = (DataModel.Account.Permissions)accountContract.Permission,
+                Password = accountContract.Password
             };
         }
 
-        public static DataModel.Game ToModel(this Contracts.Game gameContract)
+        public static Game ToModel(this GameRequest gameContract)
         {
-            var gameModel = new DataModel.Game();
+            var gameModel = new Game();
             gameModel.Name = gameContract.Name;
 
             return gameModel;
         }
 
-        public static User ToUserModel(this Actor actorContract)
+        public static User ToUserModel(this ActorRequest actorContract)
         {
             var actorModel = new User();
             actorModel.Name = actorContract.Name;
@@ -32,7 +30,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return actorModel;
         }
 
-        public static Group ToGroupModel(this Actor actorContract)
+        public static Group ToGroupModel(this ActorRequest actorContract)
         {
             var actorModel = new Group();
             actorModel.Name = actorContract.Name;
@@ -40,7 +38,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return actorModel;
         }
 
-        public static UserAchievement ToUserModel(this Achievement achieveContract)
+        public static UserAchievement ToUserModel(this AchievementRequest achieveContract)
         {
             var achieveModel = new UserAchievement();
             achieveModel.Name = achieveContract.Name;
@@ -50,7 +48,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return achieveModel;
         }
 
-        public static GroupAchievement ToGroupModel(this Achievement achieveContract)
+        public static GroupAchievement ToGroupModel(this AchievementRequest achieveContract)
         {
             var achieveModel = new GroupAchievement();
             achieveModel.Name = achieveContract.Name;
@@ -60,7 +58,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return achieveModel;
         }
 
-        public static UserToUserRelationship ToUserModel(this Relationship relationContract)
+        public static UserToUserRelationship ToUserModel(this RelationshipRequest relationContract)
         {
             var relationModel = new UserToUserRelationship();
             relationModel.RequestorId = relationContract.RequestorId;
@@ -69,7 +67,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return relationModel;
         }
 
-        public static UserToGroupRelationship ToGroupModel(this Relationship relationContract)
+        public static UserToGroupRelationship ToGroupModel(this RelationshipRequest relationContract)
         {
             var relationModel = new UserToGroupRelationship();
             relationModel.RequestorId = relationContract.RequestorId;
@@ -78,7 +76,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return relationModel;
         }
 
-        public static UserData ToUserModel(this SaveData dataContract)
+        public static UserData ToUserModel(this SaveDataRequest dataContract)
         {
             var dataModel = new UserData();
             dataModel.UserId = dataContract.ActorId;
@@ -90,7 +88,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return dataModel;
         }
 
-        public static GroupData ToGroupModel(this SaveData dataContract)
+        public static GroupData ToGroupModel(this SaveDataRequest dataContract)
         {
             var dataModel = new GroupData();
             dataModel.GroupId = dataContract.ActorId;

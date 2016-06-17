@@ -18,23 +18,23 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _groupAchievementDbController = groupAchievementDbController;
         }
 
-        // POST api/groupachievement/
-        [HttpPost]
-        public int Create([FromBody] Achievement newAchievement)
-        {
-            var achievement = _groupAchievementDbController.Create(newAchievement.ToGroupModel());
-            return achievement.Id;
-        }
-
         // GET api/groupachievement?gameId=1&gameId=2
         [HttpGet]
-        public IEnumerable<Achievement> Get(int[] gameId)
+        public IEnumerable<AchievementResponse> Get(int[] gameId)
         {
             var achievement = _groupAchievementDbController.Get(gameId);
             return achievement.ToContract();
         }
 
-        // GET api/groupachievement?id=1&id=2
+        // POST api/groupachievement/
+        [HttpPost]
+        public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
+        {
+            var achievement = _groupAchievementDbController.Create(newAchievement.ToGroupModel());
+            return achievement.ToContract();
+        }
+
+        // DELETE api/groupachievement?id=1&id=2
         [HttpDelete]
         public void Delete(int[] id)
         {
@@ -43,14 +43,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/groupachievement/2/3
         [HttpGet("{actorId}/progress/{gameId}")]
-        public IEnumerable<AchievementProgress> GetProgress(int groupId, int gameId)
+        public IEnumerable<AchievementProgressResponse> GetProgress(int groupId, int gameId)
         {
             throw new NotImplementedException();
         }
 
         // GET api/groupachievement/3
         [HttpGet("{achievemetnId}/progress")]
-        public IEnumerable<AchievementProgress> GetProgress(int achievementId, [FromBody] List<int> groupIds)
+        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, [FromBody] List<int> groupIds)
         {
             throw new NotImplementedException();
         }

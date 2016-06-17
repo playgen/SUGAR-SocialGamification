@@ -33,10 +33,11 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// </summary>
         /// <param name="newAccount"></param>
         /// <returns></returns>
-        [HttpPost("register")]
-        public void Register([FromBody]Account newAccount)
+        [HttpPost]
+        public AccountResponse Register([FromBody]AccountRequest newAccount)
         {
-            _accountDbController.Create(newAccount.ToModel());
+            var account = _accountDbController.Create(newAccount.ToModel());
+            return account.ToContract();
         }
 
         /// <summary>
@@ -45,8 +46,11 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// 
         /// Example Usage: POST api/account
         /// </summary>
-        [HttpPost]
-        public void Login([FromBody]Account accountDetails)
+        /// <param name="name"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public AccountResponse Login(AccountRequest account)
         {
             var accounts = _accountDbController.Get(new string[] {accountDetails.Name});
 

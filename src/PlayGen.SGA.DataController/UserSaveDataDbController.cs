@@ -15,6 +15,18 @@ namespace PlayGen.SGA.DataController
         {
         }
 
+        public IEnumerable<UserData> Get(int gameId, int userId, string[] keys)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var data = context.UserDatas.Where(d => d.UserId == userId && d.GameId == gameId && keys.Contains(d.Key)).ToList();
+
+                return data;
+            }
+        }
+
         public UserData Create(UserData newData)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -37,18 +49,6 @@ namespace PlayGen.SGA.DataController
                 UserData data = newData;
                 context.UserDatas.Add(data);
                 context.SaveChanges();
-                return data;
-            }
-        }
-
-        public IEnumerable<UserData> Get(int gameId, int userId, string[] keys)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var data = context.UserDatas.Where(d => d.UserId == userId && d.GameId == gameId && keys.Contains(d.Key)).ToList();
-
                 return data;
             }
         }

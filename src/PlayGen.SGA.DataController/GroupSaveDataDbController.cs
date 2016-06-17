@@ -15,6 +15,18 @@ namespace PlayGen.SGA.DataController
         {
         }
 
+        public IEnumerable<GroupData> Get(int gameId, int groupId, string[] keys)
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var data = context.GroupDatas.Where(d => d.GroupId == groupId && d.GameId == gameId && keys.Contains(d.Key)).ToList();
+
+                return data;
+            }
+        }
+
         public GroupData Create(GroupData newData)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -37,18 +49,6 @@ namespace PlayGen.SGA.DataController
                 GroupData data = newData;
                 context.GroupDatas.Add(data);
                 context.SaveChanges();
-                return data;
-            }
-        }
-
-        public IEnumerable<GroupData> Get(int gameId, int groupId, string[] keys)
-        {
-            using (var context = new SGAContext(_nameOrConnectionString))
-            {
-                SetLog(context);
-
-                var data = context.GroupDatas.Where(d => d.GroupId == groupId && d.GameId == gameId && keys.Contains(d.Key)).ToList();
-
                 return data;
             }
         }
