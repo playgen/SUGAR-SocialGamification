@@ -8,28 +8,30 @@ namespace PlayGen.SGA.DataController.UnitTests
 {
     public abstract class TestDbController
     {
-        protected readonly string _nameOrConnectionString;
-        public static bool hasTestRun = false;
         public const string DbName = "sgadatacontrollerunittests";
+
+        protected readonly string _nameOrConnectionString;
+
+        private static bool _deletedDatabase = false;
 
         public TestDbController()
         {
             _nameOrConnectionString = "Server=localhost;" +
                                       "Port=3306;" +
-                                      "Database=" + DbName + ";" +
+                                      $"Database={DbName};" +
                                       "Uid=root;" +
                                       "Pwd=;" +
                                       "Convert Zero Datetime=true;" +
                                       "Allow Zero Datetime=true";
 
-            if (!hasTestRun)
+            if (!_deletedDatabase)
             {
                 using (var context = new SGAContext(_nameOrConnectionString))
                 {
                     if (context.Database.Connection.Database == DbName)
                     {
                         context.Database.Delete();
-                        hasTestRun = true;
+                        _deletedDatabase = true;
                     }
                 }
             }

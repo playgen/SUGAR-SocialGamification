@@ -26,6 +26,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return group.Id;
         }
 
+        // GET api/group/all
+        [HttpGet("all")]
+        public IEnumerable<Actor> Get()
+        {
+            var group = _groupDbController.Get();
+            return group.ToContract();
+        }
+
         // GET api/group?name=group1&name=group2
         [HttpGet]
         public IEnumerable<Actor> Get(string[] name)

@@ -14,10 +14,11 @@ namespace PlayGen.SGA.DataAccess
     {
         public SGAContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<SGAContext>());
             Database.SetInitializer(new CreateDatabaseIfNotExists<SGAContext>());
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SGAContext>());
         }
+
+        public DbSet<Account> Accounts { get; set; }
 
         public DbSet<Game> Games { get; set; }
 
