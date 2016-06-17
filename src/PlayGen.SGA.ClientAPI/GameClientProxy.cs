@@ -21,7 +21,6 @@ namespace PlayGen.SGA.ClientAPI
             var query = GetUriBuilder("api/game")
                 .AppendQueryParameters(name, "name={0}")
                 .ToString();
-            
             return Get<IEnumerable<Game>>(query);
         }
 
