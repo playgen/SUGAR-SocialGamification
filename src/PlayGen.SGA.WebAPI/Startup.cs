@@ -40,8 +40,11 @@ namespace PlayGen.SGA.WebAPI
             services.AddScoped(((_) => new GroupMemberDbController(connectioString)));
             services.AddScoped(((_) => new UserFriendDbController(connectioString)));
 
+            ConfigureRouting(services);
+            
             // Add framework services.
             services.AddMvc();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,8 +52,19 @@ namespace PlayGen.SGA.WebAPI
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            ConfigureCors(app);
             app.UseMvc();
+        }
+
+        private static void ConfigureRouting(IServiceCollection services)
+        {
+            services.AddCors(
+                options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+        }
+
+        private static void ConfigureCors(IApplicationBuilder application)
+        {
+            application.UseCors("AllowAll");
         }
     }
 }
