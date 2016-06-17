@@ -15,7 +15,7 @@ namespace PlayGen.SGA.DataController
         {
         }
 
-        public void Create(UserToUserRelationship newRelation)
+        public UserToUserRelationshipRequest Create(UserToUserRelationship newRelation)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
             {
@@ -51,6 +51,7 @@ namespace PlayGen.SGA.DataController
                 };
                 context.UserToUserRelationshipRequests.Add(relation);
                 context.SaveChanges();
+                return relation;
             }
         }
 
