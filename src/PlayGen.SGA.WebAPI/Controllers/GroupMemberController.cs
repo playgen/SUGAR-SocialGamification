@@ -22,7 +22,13 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpPost]
         public void CreateMemberRequest([FromBody]Relationship relationship)
         {
-            _groupMemberDbController.Create(relationship.ToGroupModel());
+            var request = _groupMemberDbController.Create(relationship.ToGroupModel());
+            Relationship relation = new Relationship
+            {
+                RequestorId = request.RequestorId,
+                AcceptorId = request.AcceptorId
+            };
+            _groupMemberDbController.UpdateRequest(relation.ToGroupModel(), true);
         }
 
         // GET api/groupmember/requests?groupId=1
