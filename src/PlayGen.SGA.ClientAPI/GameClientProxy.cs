@@ -16,6 +16,12 @@ namespace PlayGen.SGA.ClientAPI
             return Post<Game, int>(query, game);
         }
 
+        public IEnumerable<Game> Get()
+        {
+            var query = GetUriBuilder("api/game/all").ToString();
+            return Get<IEnumerable<Game>>(query);
+        }
+
         public IEnumerable<Game> Get(string[] name)
         {
             var query = GetUriBuilder("api/game")
@@ -23,13 +29,6 @@ namespace PlayGen.SGA.ClientAPI
                 .ToString();
             return Get<IEnumerable<Game>>(query);
         }
-
-        public IEnumerable<Game> Get()
-        {
-            var query = GetUriBuilder("api/game/all").ToString();
-            return Get<IEnumerable<Game>>(query);
-        }
-
 
         public void Delete(int id)
         {
@@ -43,11 +42,6 @@ namespace PlayGen.SGA.ClientAPI
                 .AppendQueryParameters(id, "id={0}")
                 .ToString();
             Delete(query);
-        }
-
-        public new IEnumerable<Game> Get()
-        {
-            throw new NotImplementedException();
         }
     }
 }

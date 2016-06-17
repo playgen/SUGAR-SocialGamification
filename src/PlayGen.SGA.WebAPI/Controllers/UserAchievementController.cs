@@ -18,7 +18,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _userAchievementDbController = userAchievementDbController;
         }
 
-        // POST api/userachievement/
+        // POST api/userachievement
         [HttpPost]
         public int Create([FromBody] Achievement newAchievement)
         {

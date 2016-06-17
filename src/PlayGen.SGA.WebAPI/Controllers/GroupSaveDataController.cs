@@ -25,7 +25,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _groupSaveDataDbController.Create(data.ToGroupModel());
         }
 
-        // GET api/groupsavedata/
+        // GET api/groupsavedata?actorId=1&gameId=1&key=key1&key=key2...
         [HttpGet]
         public IEnumerable<SaveData> Get(int actorId, int gameId, string[] key)
         {
