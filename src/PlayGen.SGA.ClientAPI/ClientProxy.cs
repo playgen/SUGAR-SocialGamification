@@ -8,13 +8,28 @@ using Newtonsoft.Json;
 
 namespace PlayGen.SGA.ClientAPI
 {
-    public class ClientProxy
+    public abstract class ClientProxy
     {
-        private string _baseAddress = "https://sga.playgen.com";
+        private readonly string _baseAddress;
 
-        private WebRequest CreateRequest(string urlSuffix, string method)
+        protected ClientProxy(string baseAddress = "https://sga.playgen.com")
         {
-            var request = WebRequest.Create(_baseAddress + urlSuffix);
+            _baseAddress = baseAddress;
+        }
+
+        protected UriBuilder GetUriBuilder(string apiSuffix)
+        {
+            var separator = "";
+            if (!(_baseAddress.EndsWith("/") || apiSuffix.StartsWith("/")))
+            {
+                separator = "/";
+            }
+            return new UriBuilder(_baseAddress + separator + apiSuffix);
+        }
+
+        private WebRequest CreateRequest(string uri, string method)
+        {
+            var request = WebRequest.Create(uri);
             request.Method = method;
             return request;
         }
@@ -47,61 +62,61 @@ namespace PlayGen.SGA.ClientAPI
             }
         }
 
-        public TResponse Get<TResponse>(string urlSuffix)
+        protected TResponse Get<TResponse>(string uri)
         {
-            var request = CreateRequest(urlSuffix, "GET");
+            var request = CreateRequest(uri, "GET");
             var response = (HttpWebResponse)request.GetResponse();
             TestStatus(response);
             return GetResponse<TResponse>(response);
         }
 
-        public TResponse Post<TRequest, TResponse>(string urlSuffix, TRequest payload)
+        protected TResponse Post<TRequest, TResponse>(string url, TRequest payload)
         {
-            var response = PostPut(urlSuffix, payload, "POST");
+            var response = PostPut(url, payload, "POST");
             return GetResponse<TResponse>(response);
         }
 
-        public void Post<TRequest>(string urlSuffix, TRequest payload)
+        protected void Post<TRequest>(string url, TRequest payload)
         {
-            PostPut(urlSuffix, payload, "POST");
+            PostPut(url, payload, "POST");
         }
 
-        public TResponse Put<TRequest, TResponse>(string urlSuffix, TRequest payload)
+        protected TResponse Put<TRequest, TResponse>(string url, TRequest payload)
         {
-            var response = PostPut(urlSuffix, payload, "PUT");
+            var response = PostPut(url, payload, "PUT");
             return GetResponse<TResponse>(response);
         }
 
-        public void Put<TRequest>(string urlSuffix, TRequest payload)
+        protected void Put<TRequest>(string url, TRequest payload)
         {
-            PostPut(urlSuffix, payload, "PUT");
+            PostPut(url, payload, "PUT");
         }
 
-        private HttpWebResponse PostPut<TRequest>(string urlSuffix, TRequest payload, string method)
+        private HttpWebResponse PostPut<TRequest>(string url, TRequest payload, string method)
         {
             var payloadString = JsonConvert.SerializeObject(payload);
             var payloadBytes = Encoding.UTF8.GetBytes(payloadString);
-            var request = CreateRequest(urlSuffix, method);
+            var request = CreateRequest(url, method);
             SendData(request, payloadBytes);
             var response = (HttpWebResponse)request.GetResponse();
             TestStatus(response);
             return response;
         }
 
-        public TResponse Delete<TResponse>(string urlSuffix)
+        protected TResponse Delete<TResponse>(string url)
         {
-            var response = DeleteRequest(urlSuffix);
+            var response = DeleteRequest(url);
             return GetResponse<TResponse>(response);
         }
 
-        public void Delete(string urlSuffix)
+        protected void Delete(string url)
         {
-            DeleteRequest(urlSuffix);
+            DeleteRequest(url);
         }
 
-        private HttpWebResponse DeleteRequest(string urlSuffix)
+        private HttpWebResponse DeleteRequest(string url)
         {
-            var request = CreateRequest(urlSuffix, "DELETE");
+            var request = CreateRequest(url, "DELETE");
             var response = (HttpWebResponse)request.GetResponse();
             TestStatus(response);
             return response;

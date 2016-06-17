@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using PlayGen.SGA.ClientAPI.Extensions;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.Contracts.Controllers;
 
@@ -11,32 +12,37 @@ namespace PlayGen.SGA.ClientAPI
     {
         public int Create(Game game)
         {
-            return base.Post<Game, int>("api/game", game);
+            var query = GetUriBuilder("api/game").ToString();
+            return Post<Game, int>(query, game);
         }
 
         public IEnumerable<Game> Get(string[] name)
         {
-            var builder = new StringBuilder();
-            builder.Append("api/game?");
-            if (name.Length > 0)
-            {
-                foreach (var nm in name)
-                {
-                    builder.AppendFormat("name={0}&", nm);
-                }
-                builder.Remove(builder.Length - 1, 1);
-            }
-            return base.Get<IEnumerable<Game>>(builder.ToString());
+            var query = GetUriBuilder("api/game")
+                .AppendQueryParameters(name, "name={0}")
+                .ToString();
+            return Get<IEnumerable<Game>>(query);
         }
+
+        public IEnumerable<Game> Get()
+        {
+            var query = GetUriBuilder("api/game/all").ToString();
+            return Get<IEnumerable<Game>>(query);
+        }
+
 
         public void Delete(int id)
         {
-            base.Delete("api/game/" + id);
+            var query = GetUriBuilder("api/game/" + id).ToString();
+            Delete(query);
         }
 
-        public new void Delete(int[] id)
+        public void Delete(int[] id)
         {
-            throw new NotImplementedException();
+            var query = GetUriBuilder("api/game")
+                .AppendQueryParameters(id, "id={0}")
+                .ToString();
+            Delete(query);
         }
 
         public new IEnumerable<Game> Get()
