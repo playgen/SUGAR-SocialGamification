@@ -38,5 +38,10 @@ namespace PlayGen.SGA.ClientAPI
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerable<Game> Get()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

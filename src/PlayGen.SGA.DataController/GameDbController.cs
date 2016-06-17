@@ -46,6 +46,18 @@ namespace PlayGen.SGA.DataController
         /// </summary>
         /// <param name="names"></param>
         /// <returns></returns>
+        public IEnumerable<Game> Get()
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var games = context.Games.ToList();
+
+                return games;
+            }
+        }
+
         public IEnumerable<Game> Get(string[] names)
         {
             using (var context = new SGAContext(_nameOrConnectionString))

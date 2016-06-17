@@ -8,6 +8,8 @@ namespace PlayGen.SGA.Contracts.Controllers
 
         IEnumerable<Actor> Get(string[] name);
 
+        IEnumerable<Actor> Get();
+
         void Delete(int[] id);
     }
 }

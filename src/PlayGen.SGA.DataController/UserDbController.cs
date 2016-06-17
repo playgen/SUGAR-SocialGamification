@@ -36,6 +36,18 @@ namespace PlayGen.SGA.DataController
             }
         }
 
+        public IEnumerable<User> Get()
+        {
+            using (var context = new SGAContext(_nameOrConnectionString))
+            {
+                SetLog(context);
+
+                var users = context.Users.ToList();
+
+                return users;
+            }
+        }
+
         public IEnumerable<User> Get(string[] names)
         {
             using (var context = new SGAContext(_nameOrConnectionString))
