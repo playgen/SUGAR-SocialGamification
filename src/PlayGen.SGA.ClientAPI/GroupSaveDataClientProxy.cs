@@ -10,12 +10,6 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class GroupSaveDataClientProxy : ClientProxy, IGroupSaveDataController
     {
-        public SaveDataResponse Add(SaveDataRequest data)
-        {
-            var query = GetUriBuilder("api/groupsavedata").ToString();
-            return Post<SaveDataRequest, SaveDataResponse>(query, data);
-        }
-
         public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] keys)
         {
             var query = GetUriBuilder("api/game/groupsavedata")
@@ -24,6 +18,12 @@ namespace PlayGen.SGA.ClientAPI
                 .AppendQueryParameters(keys, "key={0}")
                 .ToString();
             return Get<IEnumerable<SaveDataResponse>>(query);
+        }
+
+        public SaveDataResponse Add(SaveDataRequest data)
+        {
+            var query = GetUriBuilder("api/groupsavedata").ToString();
+            return Post<SaveDataRequest, SaveDataResponse>(query, data);
         }
     }
 }

@@ -10,11 +10,10 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class GameClientProxy : ClientProxy, IGameController
     {
-        public GameResponse Create(GameRequest game)
+        public IEnumerable<GameResponse> Get()
         {
-            var query = GetUriBuilder("api/game").ToString();
-            throw new NotImplementedException();
-            //return Post<GameResponse, int>(query, game);
+            var query = GetUriBuilder("api/game/all").ToString();
+            return Get<IEnumerable<GameResponse>>(query);
         }
 
         public IEnumerable<GameResponse> Get(string[] name)
@@ -25,16 +24,11 @@ namespace PlayGen.SGA.ClientAPI
             return Get<IEnumerable<GameResponse>>(query);
         }
 
-        public IEnumerable<GameResponse> Get()
+        public GameResponse Create(GameRequest game)
         {
-            var query = GetUriBuilder("api/game/all").ToString();
-            return Get<IEnumerable<GameResponse>>(query);
-        }
-
-        public void Delete(int id)
-        {
-            var query = GetUriBuilder("api/game/" + id).ToString();
-            Delete(query);
+            var query = GetUriBuilder("api/game").ToString();
+            throw new NotImplementedException();
+            //return Post<GameResponse, int>(query, game);
         }
 
         public void Delete(int[] id)

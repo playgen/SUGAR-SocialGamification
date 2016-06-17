@@ -9,12 +9,6 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class UserClientProxy : ClientProxy, IUserController
     {
-        public ActorResponse Create(ActorRequest actor)
-        {
-            var query = GetUriBuilder("api/user").ToString();
-            return Post<ActorRequest, ActorResponse>(query, actor);
-        } 
-
         public IEnumerable<ActorResponse> Get()
         {
             var query = GetUriBuilder("api/game/user").ToString();
@@ -28,6 +22,12 @@ namespace PlayGen.SGA.ClientAPI
                 .ToString();
             return Get<IEnumerable<ActorResponse>>(query);
         }
+
+        public ActorResponse Create(ActorRequest actor)
+        {
+            var query = GetUriBuilder("api/user").ToString();
+            return Post<ActorRequest, ActorResponse>(query, actor);
+        } 
 
         public void Delete(int[] id)
         {

@@ -4,13 +4,13 @@ namespace PlayGen.SGA.Contracts.Controllers
 {
     public interface IUserFriendController
     {
-        RelationshipResponse CreateFriendRequest(RelationshipRequest relationship);
-
         IEnumerable<ActorResponse> GetFriendRequests(int userId);
 
-        void UpdateFriendRequest(RelationshipStatusUpdate relationship);
-
         IEnumerable<ActorResponse> GetFriends(int userId);
+
+        RelationshipResponse CreateFriendRequest(RelationshipRequest relationship);
+
+        void UpdateFriendRequest(RelationshipStatusUpdate relationship);
 
         void UpdateFriend(RelationshipStatusUpdate relationship);
     }

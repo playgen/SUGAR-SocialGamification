@@ -4,11 +4,11 @@ namespace PlayGen.SGA.Contracts.Controllers
 {
     public interface IGameController
     {
-        GameResponse Create(GameRequest game);
+        IEnumerable<GameResponse> Get();
 
         IEnumerable<GameResponse> Get(string[] name);
 
-        IEnumerable<GameResponse> Get();
+        GameResponse Create(GameRequest game);
 
         void Delete(int[] id);
     }

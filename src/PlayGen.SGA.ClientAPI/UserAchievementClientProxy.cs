@@ -9,18 +9,18 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class UserAchievementClientProxy : ClientProxy, IUserAchievementController
     {
-        public AchievementResponse Create(AchievementRequest achievement)
-        {
-            var query = GetUriBuilder("api/userachievement").ToString();
-            return Post<AchievementRequest, AchievementResponse>(query, achievement);
-        }
-
         public IEnumerable<AchievementResponse> Get(int[] gameId)
         {
             var query = GetUriBuilder("api/userachievement")
                 .AppendQueryParameters(gameId, "gameId={0}")
                 .ToString();
             return Get<IEnumerable<AchievementResponse>>(query);
+        }
+
+        public AchievementResponse Create(AchievementRequest achievement)
+        {
+            var query = GetUriBuilder("api/userachievement").ToString();
+            return Post<AchievementRequest, AchievementResponse>(query, achievement);
         }
 
         public void Delete(int[] achievementId)

@@ -9,13 +9,6 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class GroupClientProxy : ClientProxy, IGroupController
     {
-        public ActorResponse Create(ActorRequest actor)
-        {
-            var query = GetUriBuilder("api/group").ToString();
-            throw new NotImplementedException();
-            //return Post<ActorResponse, int>(query, actor);
-        }
-
         public IEnumerable<ActorResponse> Get()
         {
             var query = GetUriBuilder("api/group/all").ToString();
@@ -29,7 +22,13 @@ namespace PlayGen.SGA.ClientAPI
                 .ToString();
             return Get<IEnumerable<ActorResponse>>(query);
         }
-
+        
+        public ActorResponse Create(ActorRequest actor)
+        {
+            var query = GetUriBuilder("api/group").ToString();
+            throw new NotImplementedException();
+            //return Post<ActorResponse, int>(query, actor);
+        }
 
         public void Delete(int[] id)
         {
