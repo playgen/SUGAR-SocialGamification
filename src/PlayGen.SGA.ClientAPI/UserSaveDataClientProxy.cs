@@ -9,20 +9,20 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class UserSaveDataClientProxy : ClientProxy, IUserSaveDataController
     {
-        public void Add(SaveData data)
+        public SaveDataResponse Add(SaveDataRequest data)
         {
             var query = GetUriBuilder("api/userfriend").ToString();
-            Post<SaveData, int>(query, data);
+            return Post<SaveDataRequest, SaveDataResponse>(query, data);
         }
 
-        public IEnumerable<SaveData> Get(int actorId, int gameId, string[] keys)
+        public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] keys)
         {
             var query = GetUriBuilder("api/game/usersavedata")
                 .AppendQueryParameters(new int[] { actorId }, "actorId={0}")
                 .AppendQueryParameters(new int[] { gameId }, "gameId={0}")
                 .AppendQueryParameters(keys, "key={0}")
                 .ToString();
-            return Get<IEnumerable<SaveData>>(query);
+            return Get<IEnumerable<SaveDataResponse>>(query);
         }
     }
 }

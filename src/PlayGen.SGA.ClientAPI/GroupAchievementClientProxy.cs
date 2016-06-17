@@ -9,18 +9,18 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class GroupAchievementClientProxy : ClientProxy, IGroupAchievementController
     {
-        public int Create(Achievement achievement)
+        public AchievementResponse Create(AchievementRequest achievement)
         {
             var query = GetUriBuilder("api/groupachievement").ToString();
-            return Post<Achievement, int>(query, achievement);
+            return Post<AchievementRequest, AchievementResponse>(query, AchievementRequest);
         }
 
-        public IEnumerable<Achievement> Get(int[] gameId)
+        public IEnumerable<AchievementResponse> Get(int[] gameId)
         {
             var query = GetUriBuilder("api/groupachievement")
                 .AppendQueryParameters(gameId, "gameId={0}")
                 .ToString();
-            return Get<IEnumerable<Achievement>>(query);
+            return Get<IEnumerable<AchievementResponse>>(query);
         }
 
         public void Delete(int[] achievementId)
@@ -33,12 +33,12 @@ namespace PlayGen.SGA.ClientAPI
 
 
         // TODO: Do we need this stuff?
-        public IEnumerable<AchievementProgress> GetProgress(int userId, int gameId)
+        public IEnumerable<AchievementProgressResponse> GetProgress(int userId, int gameId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<AchievementProgress> GetProgress(int achievementId, List<int> actorIds)
+        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, List<int> actorIds)
         {
             throw new NotImplementedException();
         }

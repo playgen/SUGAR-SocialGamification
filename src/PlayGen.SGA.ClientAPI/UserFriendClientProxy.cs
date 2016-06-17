@@ -9,38 +9,38 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class UserFriendClientProxy : ClientProxy, IUserFriendController
     {
-        public void CreateFriendRequest(Relationship relationship)
+        public RelationshipResponse CreateFriendRequest(RelationshipRequest relationship)
         {
             var query = GetUriBuilder("api/userfriend").ToString();
-            Post<Relationship, int>(query, relationship);
+            return Post<RelationshipRequest, RelationshipResponse>(query, relationship);
         }
 
-        public IEnumerable<Actor> GetFriendRequests(int userId)
+        public IEnumerable<ActorResponse> GetFriendRequests(int userId)
         {
             var query = GetUriBuilder("api/userfriend/requests")
                 .AppendQueryParameters(new int[] { userId }, "userId={0}")
                 .ToString();
-            return Get<IEnumerable<Actor>>(query);
+            return Get<IEnumerable<ActorResponse>>(query);
         }
 
-        public void UpdateFriendRequest(Relationship relationship)
+        public void UpdateFriendRequest(RelationshipStatusUpdate relationship)
         {
             var query = GetUriBuilder("api/userfriend/request").ToString();
-            Put<Relationship, int>(query, relationship);
+            Put(query, relationship);
         }
 
-        public IEnumerable<Actor> GetFriends(int userId)
+        public IEnumerable<ActorResponse> GetFriends(int userId)
         {
             var query = GetUriBuilder("api/userfriend/friends")
                 .AppendQueryParameters(new int[] { userId }, "userId={0}")
                 .ToString();
-            return Get<IEnumerable<Actor>>(query);
+            return Get<IEnumerable<ActorResponse>>(query);
         }
 
-        public void UpdateFriend(Relationship relationship)
+        public void UpdateFriend(RelationshipStatusUpdate relationship)
         {
             var query = GetUriBuilder("api/userfriend/").ToString();
-            Put<Relationship, int>(query, relationship);
+            Put(query, relationship);
         }
     }
 }

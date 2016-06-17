@@ -9,38 +9,38 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class GroupMemberClientProxy : ClientProxy, IGroupMemberController
     {
-        public void CreateMemberRequest(Relationship relationship)
+        public RelationshipResponse CreateMemberRequest(RelationshipRequest relationship)
         {
             var query = GetUriBuilder("api/groupmember").ToString();
-            Post<Relationship, int>(query, relationship);
+            return Post<RelationshipRequest, RelationshipResponse>(query, relationship);
         }
 
-        public IEnumerable<Actor> GetMemberRequests(int groupId)
+        public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
         {
             var query = GetUriBuilder("api/groupmember/requests")
                 .AppendQueryParameters(new int[] {groupId}, "groupId={0}")
                 .ToString();
-            return Get<IEnumerable<Actor>>(query);
+            return Get<IEnumerable<ActorResponse>>(query);
         }
 
-        public void UpdateMemberRequest(Relationship relationship)
+        public void UpdateMemberRequest(RelationshipStatusUpdate relationship)
         {
             var query = GetUriBuilder("api/groupmember/request").ToString();
-            Put<Relationship, int>(query, relationship);
+            Put(query, relationship);
         }
 
-        public IEnumerable<Actor> GetMembers(int groupId)
+        public IEnumerable<ActorResponse> GetMembers(int groupId)
         {
             var query = GetUriBuilder("api/groupmember/members")
                 .AppendQueryParameters(new int[] { groupId }, "groupId={0}")
                 .ToString();
-            return Get<IEnumerable<Actor>>(query);
+            return Get<IEnumerable<ActorResponse>>(query);
         }
 
-        public void UpdateMember(Relationship relationship)
+        public void UpdateMember(RelationshipStatusUpdate relationship)
         {
             var query = GetUriBuilder("api/groupmember").ToString();
-            Put<Relationship, int>(query, relationship);
+            Put(query, relationship);
         }
     }
 }
