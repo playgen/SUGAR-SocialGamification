@@ -26,6 +26,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return user.Id;
         }
 
+        // GET api/user/all
+        [HttpGet("all")]
+        public IEnumerable<Actor> Get()
+        {
+            var user = _userDbController.Get();
+            return user.ToContract();
+        }
+
         // GET api/user?name=user1&name=user2
         [HttpGet]
         public IEnumerable<Actor> Get(string[] name)

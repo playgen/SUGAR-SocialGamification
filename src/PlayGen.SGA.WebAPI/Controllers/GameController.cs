@@ -26,6 +26,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return game.Id;
         }
 
+        // GET api/game/all
+        [HttpGet("all")]
+        public IEnumerable<Game> Get()
+        {
+            var game = _gameDbController.Get();
+            return game.ToContract();
+        }
+
         // GET api/game?name=game1&name=game2
         [HttpGet]
         public IEnumerable<Game> Get(string[] name)
