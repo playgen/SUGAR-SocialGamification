@@ -50,7 +50,7 @@ namespace PlayGen.SGA.ClientAPI
         private TResponse GetResponse<TResponse>(HttpWebResponse response)
         {
             var dataStream = response.GetResponseStream();
-            if (dataStream == null || dataStream.Length == 0)
+            if (dataStream == null || response.ContentLength == 0)
             {
                 throw new Exception("Response was empty :(");
             } 
