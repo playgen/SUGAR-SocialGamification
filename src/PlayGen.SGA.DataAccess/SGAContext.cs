@@ -46,6 +46,10 @@ namespace PlayGen.SGA.DataAccess
             modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Acceptor).WithMany(u => u.RequestAcceptors).HasForeignKey(u => u.AcceptorId);
             // Change all string fields to have a max length of 64 chars
             modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
+            modelBuilder.Entity<UserAchievement>().Property(a => a.CompletionCriteria).HasMaxLength(1024);
+            modelBuilder.Entity<UserAchievement>().Property(a => a.CompiledCriteria).HasMaxLength(1024);
+            modelBuilder.Entity<GroupAchievement>().Property(a => a.CompletionCriteria).HasMaxLength(1024);
+            modelBuilder.Entity<GroupAchievement>().Property(a => a.CompiledCriteria).HasMaxLength(1024);
         }
 
         public override int SaveChanges()

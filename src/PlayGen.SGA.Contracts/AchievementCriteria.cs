@@ -4,7 +4,7 @@
     {
         public string Key { get; set; }
 
-        public DataType DateType { get; set; }
+        public DataType DataType { get; set; }
 
         public ComparisonType ComparisonType { get; set; }
 

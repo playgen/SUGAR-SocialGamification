@@ -1,4 +1,6 @@
-﻿namespace PlayGen.SGA.Contracts
+﻿using System.Collections.Generic;
+
+namespace PlayGen.SGA.Contracts
 {
     public class AchievementRequest
     {
@@ -6,6 +8,6 @@
 
         public string Name { get; set; }
 
-        public string CompletionCriteria { get; set; }
+        public List<AchievementCriteria> CompletionCriteria { get; set; }
     }
 }

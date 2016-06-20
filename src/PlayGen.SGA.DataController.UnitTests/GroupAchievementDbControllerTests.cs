@@ -160,8 +160,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             var newGroupAchievement = new GroupAchievement
             {
                 Name = name,
-                GameId = gameId,
-                //CompletionCriteria = name
+                GameId = gameId
             };
 
             return _groupAchievementDbController.Create(newGroupAchievement);
