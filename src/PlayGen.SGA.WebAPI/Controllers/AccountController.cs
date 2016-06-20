@@ -23,8 +23,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         private readonly JsonWebTokenUtility _jsonWebTokenUtility;
 
         public AccountController(AccountDbController accountDbController,
-            UserDbController userDbController, 
-            PasswordEncryption passwordEncryption, 
+            UserDbController userDbController,
+            PasswordEncryption passwordEncryption,
             JsonWebTokenUtility jsonWebTokenUtility)
         {
             _accountDbController = accountDbController;
@@ -41,9 +41,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <param name="accountRequest"></param>
         /// <returns></returns>
         [HttpPost]
-        public AccountResponse Register([FromBody]AccountRequest accountRequest)
+        public AccountResponse Register([FromBody] AccountRequest accountRequest)
         {
-            if(string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
+            if (string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
             {
                 throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
             }
@@ -55,7 +55,10 @@ namespace PlayGen.SGA.WebAPI.Controllers
             user = _userDbController.Create(user);
 
             var account = CreateAccount(accountRequest, user);
-            return account.ToContract();
+
+            var response = account.ToContract();
+            response.Token = CreateToken(account);
+            return response;
         }
 
         /// <summary>
@@ -68,14 +71,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <param name="accountRequest"></param>
         /// <returns></returns>
         [HttpPost("userId")]
-        public AccountResponse Register(int userId, [FromBody]AccountRequest accountRequest)
+        public AccountResponse Register(int userId, [FromBody] AccountRequest accountRequest)
         {
             if (string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
             {
                 throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
             }
 
-            var users = _userDbController.Get(new []{userId});
+            var users = _userDbController.Get(new[] {userId});
 
             if (!users.Any())
             {
@@ -85,7 +88,10 @@ namespace PlayGen.SGA.WebAPI.Controllers
             var user = users.ElementAt(0);
 
             var account = CreateAccount(accountRequest, user);
-            return account.ToContract();
+
+            var response = account.ToContract();
+            response.Token = CreateToken(account);
+            return response;
         }
 
         /// <summary>
@@ -99,9 +105,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpGet]
         public AccountResponse Login(AccountRequest accountRequest)
         {
-            var accounts = _accountDbController.Get(new string[] { accountRequest.Name});
+            var accounts = _accountDbController.Get(new string[] {accountRequest.Name});
 
-            if (!accounts.Any()) 
+            if (!accounts.Any())
             {
                 throw new InvalidAccountDetailsException("Invalid Login Details.");
             }
@@ -112,16 +118,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
             {
                 throw new InvalidAccountDetailsException("Invalid Login Details.");
             }
-            
+
             string token = _jsonWebTokenUtility.CreateToken(new Dictionary<string, object>
             {
-                {"user", account.UserId },
+                {"user", account.UserId},
             });
 
-            var response = new AccountResponse();
-            response.User = account.User.ToContract();
-            response.Token = token;
-
+            var response = account.ToContract();
+            response.Token = CreateToken(account);
             return response;
         }
 
@@ -138,6 +142,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         #region Helpers
+
         private Account CreateAccount(AccountRequest accountRequest, User user)
         {
             var newAccount = accountRequest.ToModel();
@@ -147,6 +152,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
             newAccount.User = user;
 
             return _accountDbController.Create(newAccount);
+        }
+
+        public string CreateToken(Account account)
+        {
+            return _jsonWebTokenUtility.CreateToken(new Dictionary<string, object>
+            {
+                { "userid", account.UserId}
+            });
         }
         #endregion
     }

@@ -26,9 +26,9 @@ namespace PlayGen.SGA.ServerAuthentication
 
             var payload = new Dictionary<string, object>(claims)
             {
-                {"nbf", notBefore},
-                {"iat", issuedAt},
-                {"exp", expiry},
+                {"notbefore", notBefore},
+                {"issuedat", issuedAt},
+                {"expiry", expiry},
             };
 
             return JsonWebToken.Encode(payload, _secretKey, _hashAlgorithm);

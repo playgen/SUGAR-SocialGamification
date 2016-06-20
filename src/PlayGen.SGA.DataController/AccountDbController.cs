@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core.Mapping;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -43,7 +44,9 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                var accounts = context.Accounts.Where(a => names.Contains(a.Name));
+                var accounts = context.Accounts
+                    .Where(a => names.Contains(a.Name))
+                    .Include(a => a.User);
 
                 return accounts.ToList();
             }

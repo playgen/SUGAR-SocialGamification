@@ -33,7 +33,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             }
         }
 
-        public TestDbController()
+        public static void DeleteDatabase()
         {
             if (!_deletedDatabase)
             {
@@ -46,6 +46,11 @@ namespace PlayGen.SGA.DataController.UnitTests
                     }
                 }
             }
+        }
+
+        public TestDbController()
+        {
+            DeleteDatabase();
         }
     }
 }
