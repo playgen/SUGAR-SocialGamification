@@ -15,11 +15,6 @@ namespace PlayGen.SGA.DataController
         {
         }
 
-        /// <summary>
-        /// Retrieve game multiple records by name from the database
-        /// </summary>
-        /// <param name="names"></param>
-        /// <returns></returns>
         public IEnumerable<Game> Get()
         {
             using (var context = new SGAContext(NameOrConnectionString))
@@ -32,6 +27,11 @@ namespace PlayGen.SGA.DataController
             }
         }
 
+        /// <summary>
+        /// Retrieve game multiple records by name from the database
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
         public IEnumerable<Game> Get(string[] names)
         {
             using (var context = new SGAContext(NameOrConnectionString))
@@ -49,19 +49,19 @@ namespace PlayGen.SGA.DataController
         /// </summary>
         /// <param name="newGame"></param>
         /// <returns></returns>
-        public Game Create(Game newGame)
+        public Game Create(Game game)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
-                /*
+                var hasConflicts = context.Games.Any(g => g.Name == game.Name);
+
                 if (hasConflicts)
                 {
-                    throw new DuplicateRecordException(string.Format("A game with the name {0} already exists.", newGame.Name));
-                }*/
+                    throw new DuplicateRecordException(string.Format("A game with the name {0} already exists.", game.Name));
+                }
 
-                var game = newGame;
                 context.Games.Add(game);
                 context.SaveChanges();
 

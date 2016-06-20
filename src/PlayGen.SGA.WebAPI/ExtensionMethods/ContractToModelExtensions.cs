@@ -43,7 +43,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             var achieveModel = new UserAchievement();
             achieveModel.Name = achieveContract.Name;
             achieveModel.GameId = achieveContract.GameId;
-            achieveModel.CompletionCriteria = achieveContract.CompletionCriteria;
+            //achieveModel.CompletionCriteria = achieveContract.CompletionCriteria;
 
             return achieveModel;
         }
@@ -53,7 +53,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             var achieveModel = new GroupAchievement();
             achieveModel.Name = achieveContract.Name;
             achieveModel.GameId = achieveContract.GameId;
-            achieveModel.CompletionCriteria = achieveContract.CompletionCriteria;
+            //achieveModel.CompletionCriteria = achieveContract.CompletionCriteria;
 
             return achieveModel;
         }

@@ -27,27 +27,26 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public UserAchievement Create(UserAchievement newAchievement)
+        public UserAchievement Create(UserAchievement achievement)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
-                var hasConflicts = context.UserAchievements.Any(a => a.Name == newAchievement.Name && a.GameId == newAchievement.GameId);
+                var hasConflicts = context.UserAchievements.Any(a => a.Name == achievement.Name && a.GameId == achievement.GameId);
 
                 if (hasConflicts)
                 {
-                    throw new DuplicateRecordException(string.Format("An achievement with the name {0} for this game already exists.", newAchievement.Name));
+                    throw new DuplicateRecordException(string.Format("An achievement with the name {0} for this game already exists.", achievement.Name));
                 }
 
-                var gameExists = context.Games.Any(g => g.Id == newAchievement.GameId);
+                var gameExists = context.Games.Any(g => g.Id == achievement.GameId);
 
                 if (!gameExists)
                 {
                     throw new DuplicateRecordException(string.Format("The provided game does not exist."));
                 }
 
-                var achievement = newAchievement;
                 context.UserAchievements.Add(achievement);
                 context.SaveChanges();
 

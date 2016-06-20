@@ -8,6 +8,9 @@ using PlayGen.SGA.Contracts;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
+    /// <summary>
+    /// Web Controller that facilitates User to Group relationship specific operations.
+    /// </summary>
     [Route("api/[controller]")]
     public class GroupMemberController : Controller, IGroupMemberController
     {
@@ -18,7 +21,13 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _groupMemberDbController = groupMemberDbController;
         }
 
-        // GET api/groupmember/requests?groupId=1
+        /// <summary>
+        /// Get a list of all Users that have relationship requests for this <param name="groupId"/>.
+        /// 
+        /// Example Usage: GET api/groupmember/requests?groupId=1
+        /// </summary>
+        /// <param name="groupId">ID of the group.</param>
+        /// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
         [HttpGet("requests")]
         public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
         {
@@ -26,7 +35,13 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return actor.ToContract();
         }
 
-        // GET api/groupmember/members?groupId=1
+        /// <summary>
+        /// Get a list of all Users that have relationships with this <param name="groupId"/>.
+        /// 
+        /// Example Usage: GET api/groupmember/members?groupId=1
+        /// </summary>
+        /// <param name="groupId">ID of the group.</param>
+        /// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
         [HttpGet("members")]
         public IEnumerable<ActorResponse> GetMembers(int groupId)
         {
@@ -34,7 +49,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return actor.ToContract();
         }
 
-        // POST api/groupmember
+        /// <summary>
+        /// Create a new relationship request between the User and Group.
+        /// Requires a relationship between the User and Group to not already exist.
+        /// 
+        /// Example Usage: POST api/groupmember
+        /// </summary>
+        /// <param name="relationship"><see cref="RelationshipRequest"/> object that holds the details of the new relationship request.</param>
+        /// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
         [HttpPost]
         public RelationshipResponse CreateMemberRequest([FromBody]RelationshipRequest relationship)
         {
@@ -48,7 +70,13 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return request.ToContract();
         }
 
-        // PUT api/groupmember/request
+        /// <summary>
+        /// Update an existing relationship request between <param name="relationship.UserId"/> and <param name="relationship.GroupId"/>.
+        /// Requires the relationship request to already exist between the User and Group.
+        /// 
+        /// Example Usage: PUT api/groupmember/request
+        /// </summary>
+        /// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
         [HttpPut("request")]
         public void UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
         {
@@ -59,7 +87,13 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _groupMemberDbController.UpdateRequest(relation.ToGroupModel(), relationship.Accepted);
         }
 
-        // PUT api/groupmember/
+        /// <summary>
+        /// Update an existing relationship between <param name="relationship.UserId"/> and <param name="relationship.GroupId"/>.
+        /// Requires the relationship to already exist between the User and Group.
+        /// 
+        /// Example Usage: PUT api/groupmember
+        /// </summary>
+        /// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
         [HttpPut]
         public void UpdateMember([FromBody] RelationshipStatusUpdate relationship)
         {
