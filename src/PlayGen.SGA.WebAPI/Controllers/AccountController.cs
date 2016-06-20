@@ -36,6 +36,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Register a new account and creates an associated user.
         /// Requires the name to be unique.
+        /// Returns a JsonWebToken used for authorization in any further calls to the API.
         /// 
         /// Example Usage: POST api/account/register
         /// <param name="accountRequest"></param>
@@ -64,6 +65,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Register a new account for an existing user.
         /// Requires the name to be unique.
+        /// Returns a JsonWebToken used for authorization in any further calls to the API.
         /// 
         /// Example Usage: POST api/account/register
         /// </summary>
@@ -96,7 +98,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         /// <summary>
         /// Logs in an account based on the name and password combination.
-        /// Returns a JWT used for authorization in any further calls to the API.
+        /// Returns a JsonWebToken used for authorization in any further calls to the API.
         /// 
         /// Example Usage: POST api/account
         /// </summary>
