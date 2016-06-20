@@ -10,6 +10,10 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class AccountClientProxy : ClientProxy, IAccountController
     {
+        public AccountClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         public AccountResponse Register(AccountRequest newAccount)
         {
             var query = GetUriBuilder("api/account").ToString();
@@ -28,6 +32,11 @@ namespace PlayGen.SGA.ClientAPI
                 .AppendQueryParameters(id, "id={0}")
                 .ToString();
             Delete(query);
+        }
+
+        public AccountResponse Register(int userId, AccountRequest newAccount)
+        {
+            throw new NotImplementedException();
         }
     }
 }

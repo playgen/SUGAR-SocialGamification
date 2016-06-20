@@ -12,8 +12,12 @@ namespace PlayGen.SGA.ClientAPI
     {
         private readonly string _baseAddress;
 
-        protected ClientProxy(string baseAddress = "https://sga.playgen.com")
+        protected ClientProxy(string baseAddress)
         {
+            if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
+            {
+                throw new Exception("Base address is not an absolute or valid URI");
+            }
             _baseAddress = baseAddress;
         }
 
@@ -46,7 +50,7 @@ namespace PlayGen.SGA.ClientAPI
         private TResponse GetResponse<TResponse>(HttpWebResponse response)
         {
             var dataStream = response.GetResponseStream();
-            if (dataStream == null || dataStream.Length == 0)
+            if (dataStream == null || response.ContentLength == 0)
             {
                 throw new Exception("Response was empty :(");
             } 

@@ -17,7 +17,7 @@ namespace PlayGen.SGA.DataController
 
         public IEnumerable<User> GetRequests(int id)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -29,7 +29,7 @@ namespace PlayGen.SGA.DataController
 
         public IEnumerable<User> GetFriends(int id)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -43,7 +43,7 @@ namespace PlayGen.SGA.DataController
 
         public UserToUserRelationshipRequest Create(UserToUserRelationship newRelation)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -83,7 +83,7 @@ namespace PlayGen.SGA.DataController
 
         public void UpdateRequest(UserToUserRelationship newRelation, bool accepted)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -104,7 +104,7 @@ namespace PlayGen.SGA.DataController
 
         public void Update(UserToUserRelationship newRelation)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 

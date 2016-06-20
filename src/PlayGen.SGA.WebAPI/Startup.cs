@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PlayGen.SGA.DataAccess;
 using PlayGen.SGA.DataController;
+using PlayGen.SGA.ServerAuthentication;
 
 namespace PlayGen.SGA.WebAPI
 {
@@ -30,6 +32,10 @@ namespace PlayGen.SGA.WebAPI
         {
             // Set EntityFramework's DBContext's connection string
             string connectioString = Configuration.GetConnectionString("DefaultConnection");
+            using (var db = new SGAContext(connectioString))
+            {
+                db.Database.Initialize(true);
+            }
             services.AddScoped((_) => new AccountDbController(connectioString));
             services.AddScoped((_) => new GameDbController(connectioString));
             services.AddScoped((_) => new GroupDbController(connectioString));
@@ -40,6 +46,11 @@ namespace PlayGen.SGA.WebAPI
             services.AddScoped((_) => new UserAchievementDbController(connectioString));
             services.AddScoped((_) => new GroupMemberDbController(connectioString));
             services.AddScoped((_) => new UserFriendDbController(connectioString));
+
+            services.AddScoped((_) => new PasswordEncryption());
+
+            string apiKey = Configuration["APIKey"];
+            services.AddScoped((_) => new JsonWebTokenUtility(apiKey));
 
             ConfigureRouting(services);
             

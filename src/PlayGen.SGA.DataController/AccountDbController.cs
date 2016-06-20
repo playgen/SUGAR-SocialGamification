@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core.Mapping;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -19,7 +20,7 @@ namespace PlayGen.SGA.DataController
 
         public Account Create(Account account)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -39,11 +40,13 @@ namespace PlayGen.SGA.DataController
 
         public IEnumerable<Account> Get(string[] names)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
-                var accounts = context.Accounts.Where(a => names.Contains(a.Name));
+                var accounts = context.Accounts
+                    .Where(a => names.Contains(a.Name))
+                    .Include(a => a.User);
 
                 return accounts.ToList();
             }
@@ -51,7 +54,7 @@ namespace PlayGen.SGA.DataController
 
         public void Delete(int[] id)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 

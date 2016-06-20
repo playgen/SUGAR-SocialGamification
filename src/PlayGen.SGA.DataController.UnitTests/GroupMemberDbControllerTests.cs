@@ -15,7 +15,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
         public GroupMemberDbControllerTests()
         {
-            _groupMemberDbController = new GroupMemberDbController(_nameOrConnectionString);
+            _groupMemberDbController = new GroupMemberDbController(NameOrConnectionString);
         }
         #endregion
 
@@ -320,7 +320,7 @@ namespace PlayGen.SGA.DataController.UnitTests
         #region Helpers
         private User CreateUser(string name)
         {
-            UserDbController userDbController = new UserDbController(_nameOrConnectionString);
+            UserDbController userDbController = new UserDbController(NameOrConnectionString);
             var newUser = new User
             {
                 Name = name,
@@ -331,7 +331,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
         private Group CreateGroup(string name)
         {
-            GroupDbController groupDbController = new GroupDbController(_nameOrConnectionString);
+            GroupDbController groupDbController = new GroupDbController(NameOrConnectionString);
             var newGroup = new Group
             {
                 Name = name,

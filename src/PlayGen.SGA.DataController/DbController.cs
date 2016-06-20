@@ -8,11 +8,11 @@ namespace PlayGen.SGA.DataController
 {
     public abstract class DbController
     {
-        protected readonly string _nameOrConnectionString;
+        protected readonly string NameOrConnectionString;
 
         protected DbController(string nameOrConnectionString)
         {
-            _nameOrConnectionString = nameOrConnectionString;
+            NameOrConnectionString = nameOrConnectionString;
         }
         
         protected void SetLog(DbContext context)

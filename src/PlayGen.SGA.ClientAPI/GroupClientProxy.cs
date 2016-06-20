@@ -12,6 +12,10 @@ namespace PlayGen.SGA.ClientAPI
     /// </summary>
     public class GroupClientProxy : ClientProxy, IGroupController
     {
+        public GroupClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         /// <summary>
         /// Get a list of all Groups.
         /// </summary>

@@ -13,6 +13,10 @@ namespace PlayGen.SGA.ClientAPI
     /// </summary>
     public class GroupSaveDataClientProxy : ClientProxy, IGroupSaveDataController
     {
+        public GroupSaveDataClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         /// <summary>
         /// Get a list of all GroupData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="keys"/> provided.
         /// </summary>

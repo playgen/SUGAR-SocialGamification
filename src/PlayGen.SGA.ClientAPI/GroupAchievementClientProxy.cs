@@ -12,6 +12,10 @@ namespace PlayGen.SGA.ClientAPI
     /// </summary>
     public class GroupAchievementClientProxy : ClientProxy, IGroupAchievementController
     {
+        public GroupAchievementClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         /// <summary>
         /// Get a list of GroupAchievements that match <param name="gameId"/>.
         /// </summary>

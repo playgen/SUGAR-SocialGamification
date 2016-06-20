@@ -13,6 +13,10 @@ namespace PlayGen.SGA.ClientAPI
     /// </summary>
     public class GameClientProxy : ClientProxy, IGameController
     {
+        public GameClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         /// <summary>
         /// Get a list of all Games.
         /// </summary>

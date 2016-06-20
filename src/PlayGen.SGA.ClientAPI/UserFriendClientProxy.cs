@@ -12,6 +12,10 @@ namespace PlayGen.SGA.ClientAPI
     /// </summary>
     public class UserFriendClientProxy : ClientProxy, IUserFriendController
     {
+        public UserFriendClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         /// <summary>
         /// Get a list of all Users that have relationship requests for this <param name="userId"/>.
         /// </summary>

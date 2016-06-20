@@ -12,6 +12,10 @@ namespace PlayGen.SGA.ClientAPI
     /// </summary>
     public class GroupMemberClientProxy : ClientProxy, IGroupMemberController
     {
+        public GroupMemberClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         /// <summary>
         /// Get a list of all Users that have relationship requests for this <param name="groupId"/>.
         /// </summary>

@@ -12,6 +12,10 @@ namespace PlayGen.SGA.ClientAPI
     /// </summary>
     public class UserSaveDataClientProxy : ClientProxy, IUserSaveDataController
     {
+        public UserSaveDataClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         /// <summary>
         /// Get a list of all UserData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="keys"/> provided.
         /// </summary>

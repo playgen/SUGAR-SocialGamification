@@ -17,7 +17,7 @@ namespace PlayGen.SGA.DataController
 
         public IEnumerable<Game> Get()
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -34,7 +34,7 @@ namespace PlayGen.SGA.DataController
         /// <returns></returns>
         public IEnumerable<Game> Get(string[] names)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -51,7 +51,7 @@ namespace PlayGen.SGA.DataController
         /// <returns></returns>
         public Game Create(Game newGame)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -76,7 +76,7 @@ namespace PlayGen.SGA.DataController
         /// <param name="id"></param>
         public void Delete(int[] id)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 

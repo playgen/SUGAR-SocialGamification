@@ -12,6 +12,10 @@ namespace PlayGen.SGA.ClientAPI
     /// </summary>
     public class UserAchievementClientProxy : ClientProxy, IUserAchievementController
     {
+        public UserAchievementClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         /// <summary>
         /// Get a list of UserAchievements that match <param name="gameId"/>.
         /// </summary>
