@@ -10,6 +10,10 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class GameClientProxy : ClientProxy, IGameController
     {
+        public GameClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         public IEnumerable<GameResponse> Get()
         {
             var query = GetUriBuilder("api/game/all").ToString();

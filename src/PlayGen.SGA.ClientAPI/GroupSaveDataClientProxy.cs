@@ -10,6 +10,10 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class GroupSaveDataClientProxy : ClientProxy, IGroupSaveDataController
     {
+        public GroupSaveDataClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] keys)
         {
             var query = GetUriBuilder("api/game/groupsavedata")

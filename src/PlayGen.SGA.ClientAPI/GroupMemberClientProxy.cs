@@ -9,6 +9,9 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class GroupMemberClientProxy : ClientProxy, IGroupMemberController
     {
+        public GroupMemberClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
 
         public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
         {

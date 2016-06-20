@@ -9,6 +9,10 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class UserClientProxy : ClientProxy, IUserController
     {
+        public UserClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         public IEnumerable<ActorResponse> Get()
         {
             var query = GetUriBuilder("api/game/user").ToString();

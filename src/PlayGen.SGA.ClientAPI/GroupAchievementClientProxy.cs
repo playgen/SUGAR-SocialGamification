@@ -9,6 +9,10 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class GroupAchievementClientProxy : ClientProxy, IGroupAchievementController
     {
+        public GroupAchievementClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         public IEnumerable<AchievementResponse> Get(int[] gameId)
         {
             var query = GetUriBuilder("api/groupachievement")

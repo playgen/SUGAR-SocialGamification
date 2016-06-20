@@ -10,6 +10,10 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class AccountClientProxy : ClientProxy, IAccountController
     {
+        public AccountClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         public AccountResponse Register(AccountRequest newAccount)
         {
             var query = GetUriBuilder("api/account").ToString();
