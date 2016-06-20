@@ -48,8 +48,7 @@ namespace PlayGen.SGA.DataController
                 }
 
                 context.GroupAchievements.Add(achievement);
-                context.SaveChanges();
-
+                SaveChanges(context);
                 return achievement;
             }
         }
@@ -63,7 +62,7 @@ namespace PlayGen.SGA.DataController
                 var achievement = context.GroupAchievements.Where(g => id.Contains(g.Id)).ToList();
 
                 context.GroupAchievements.RemoveRange(achievement);
-                context.SaveChanges();
+                SaveChanges(context);
             }
         }
     }

@@ -160,6 +160,8 @@ namespace PlayGen.SGA.DataController.UnitTests
             };
 
             _userDbController.Create(user);
+
+            return user;
         }
         #endregion
     }

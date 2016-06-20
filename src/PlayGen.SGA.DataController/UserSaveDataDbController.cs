@@ -47,7 +47,7 @@ namespace PlayGen.SGA.DataController
                 }
 
                 context.UserDatas.Add(data);
-                context.SaveChanges();
+                SaveChanges(context);
                 return data;
             }
         }

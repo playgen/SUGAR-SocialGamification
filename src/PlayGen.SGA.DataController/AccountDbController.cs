@@ -24,14 +24,8 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                /*
-                if (hasConflicts)
-                {
-                    throw new DuplicateRecordException($"An account with the name {account.Name} already exists.");
-                }*/
-                
                 context.Accounts.Add(account);
-                context.SaveChanges();
+                SaveChanges(context);
 
                 return account;
             }
@@ -58,9 +52,8 @@ namespace PlayGen.SGA.DataController
                 SetLog(context);
 
                 var accounts = context.Accounts.Where(g => id.Contains(g.Id));
-
                 context.Accounts.RemoveRange(accounts);
-                context.SaveChanges();
+                SaveChanges(context);
             }
         }
     }

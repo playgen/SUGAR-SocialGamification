@@ -327,6 +327,8 @@ namespace PlayGen.SGA.DataController.UnitTests
             };
 
             userDbController.Create(user);
+
+            return user;
         }
 
         private Group CreateGroup(string name)

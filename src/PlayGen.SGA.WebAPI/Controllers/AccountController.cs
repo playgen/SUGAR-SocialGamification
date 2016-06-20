@@ -88,7 +88,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             {
                 Name = accountRequest.Name,
             };
-            user = _userDbController.Create(user);
+            _userDbController.Create(user);
 
             var account = CreateAccount(accountRequest, user);
 
