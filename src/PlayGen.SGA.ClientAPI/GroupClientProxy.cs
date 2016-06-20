@@ -9,6 +9,10 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class GroupClientProxy : ClientProxy, IGroupController
     {
+        public GroupClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         public IEnumerable<ActorResponse> Get()
         {
             var query = GetUriBuilder("api/group/all").ToString();

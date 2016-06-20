@@ -9,6 +9,10 @@ namespace PlayGen.SGA.ClientAPI
 {
     public class UserFriendClientProxy : ClientProxy, IUserFriendController
     {
+        public UserFriendClientProxy(string baseAddress) : base(baseAddress)
+        {
+        }
+
         public IEnumerable<ActorResponse> GetFriendRequests(int userId)
         {
             var query = GetUriBuilder("api/userfriend/requests")
