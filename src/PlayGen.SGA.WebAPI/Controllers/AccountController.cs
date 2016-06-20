@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.DataController;
+using PlayGen.SGA.DataModel;
 using PlayGen.SGA.ServerAuthentication;
 using PlayGen.SGA.WebAPI.Exceptions;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
@@ -17,23 +18,28 @@ namespace PlayGen.SGA.WebAPI.Controllers
     public class AccountController : Controller, IAccountController
     {
         private readonly AccountDbController _accountDbController;
+        private readonly UserDbController _userDbController;
         private readonly PasswordEncryption _passwordEncryption;
         private readonly JsonWebTokenUtility _jsonWebTokenUtility;
 
-        public AccountController(AccountDbController accountDbController, PasswordEncryption passwordEncryption, JsonWebTokenUtility jsonWebTokenUtility)
+        public AccountController(AccountDbController accountDbController,
+            UserDbController userDbController, 
+            PasswordEncryption passwordEncryption, 
+            JsonWebTokenUtility jsonWebTokenUtility)
         {
             _accountDbController = accountDbController;
             _passwordEncryption = passwordEncryption;
+            _userDbController = userDbController;
             _jsonWebTokenUtility = jsonWebTokenUtility;
         }
 
         /// <summary>
-        /// Register a new account.
+        /// Register a new account and creates an associated user.
         /// Requires the name to be unique.
         /// 
         /// Example Usage: POST api/account/register
         /// <param name="accountRequest"></param>
-        /// <returns>AccountResponse</returns>
+        /// <returns></returns>
         [HttpPost]
         public AccountResponse Register([FromBody]AccountRequest accountRequest)
         {
@@ -42,11 +48,43 @@ namespace PlayGen.SGA.WebAPI.Controllers
                 throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
             }
 
-            var newAccount = accountRequest.ToModel();
-            newAccount.Salt = _passwordEncryption.CreateSalt();
-            newAccount.PasswordHash = _passwordEncryption.Encrypt(accountRequest.Password, newAccount.Salt);
-            
-            var account = _accountDbController.Create(newAccount);
+            User user = new User
+            {
+                Name = accountRequest.Name,
+            };
+            user = _userDbController.Create(user);
+
+            var account = CreateAccount(accountRequest, user);
+            return account.ToContract();
+        }
+
+        /// <summary>
+        /// Register a new account for an existing user.
+        /// Requires the name to be unique.
+        /// 
+        /// Example Usage: POST api/account/register
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="accountRequest"></param>
+        /// <returns></returns>
+        [HttpPost("userId")]
+        public AccountResponse Register(int userId, [FromBody]AccountRequest accountRequest)
+        {
+            if (string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
+            {
+                throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
+            }
+
+            var users = _userDbController.Get(new []{userId});
+
+            if (!users.Any())
+            {
+                throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
+            }
+
+            var user = users.ElementAt(0);
+
+            var account = CreateAccount(accountRequest, user);
             return account.ToContract();
         }
 
@@ -57,7 +95,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// Example Usage: POST api/account
         /// </summary>
         /// <param name="accountRequest"></param>
-        /// <returns>AccountResponse</returns>
+        /// <returns></returns>
         [HttpGet]
         public AccountResponse Login(AccountRequest accountRequest)
         {
@@ -98,5 +136,18 @@ namespace PlayGen.SGA.WebAPI.Controllers
         {
             _accountDbController.Delete(id);
         }
+
+        #region Helpers
+        private Account CreateAccount(AccountRequest accountRequest, User user)
+        {
+            var newAccount = accountRequest.ToModel();
+            newAccount.Salt = _passwordEncryption.CreateSalt();
+            newAccount.PasswordHash = _passwordEncryption.Encrypt(accountRequest.Password, newAccount.Salt);
+            newAccount.UserId = user.Id;
+            newAccount.User = user;
+
+            return _accountDbController.Create(newAccount);
+        }
+        #endregion
     }
 }
