@@ -27,14 +27,14 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public GroupData Create(GroupData newData)
+        public GroupData Create(GroupData data)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
-                var actorExists = context.Groups.Any(u => u.Id == newData.GroupId);
-                var gameExists = context.Games.Any(g => g.Id == newData.GameId);
+                var actorExists = context.Groups.Any(u => u.Id == data.GroupId);
+                var gameExists = context.Games.Any(g => g.Id == data.GameId);
 
                 if (!actorExists)
                 {
@@ -46,7 +46,6 @@ namespace PlayGen.SGA.DataController
                     throw new DuplicateRecordException(string.Format("The provided game does not exist."));
                 }
 
-                GroupData data = newData;
                 context.GroupDatas.Add(data);
                 context.SaveChanges();
                 return data;

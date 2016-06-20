@@ -39,20 +39,19 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public Group Create(Group newGroup)
+        public Group Create(Group group)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
-                var hasConflicts = context.Groups.Any(g => g.Name == newGroup.Name);
+                var hasConflicts = context.Groups.Any(g => g.Name == group.Name);
 
                 if (hasConflicts)
                 {
-                    throw new DuplicateRecordException(string.Format("A group with the name {0} already exists.", newGroup.Name));
+                    throw new DuplicateRecordException(string.Format("A group with the name {0} already exists.", group.Name));
                 }
 
-                var group = newGroup;
                 context.Groups.Add(group);
                 context.SaveChanges();
 
