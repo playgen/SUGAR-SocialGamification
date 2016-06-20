@@ -15,7 +15,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
         public GroupSaveDataDbControllerTests()
         {
-            _groupDataDbController = new GroupSaveDataDbController(_nameOrConnectionString);
+            _groupDataDbController = new GroupSaveDataDbController(NameOrConnectionString);
         }
         #endregion
 
@@ -140,7 +140,7 @@ namespace PlayGen.SGA.DataController.UnitTests
         #region Helpers
         private GroupData CreateGroupData(string key, int gameId = 0, int groupId = 0)
         {
-            GameDbController gameDbController = new GameDbController(_nameOrConnectionString);
+            GameDbController gameDbController = new GameDbController(NameOrConnectionString);
             if (gameId == 0)
             {
                 Game newgame = new Game
@@ -150,7 +150,7 @@ namespace PlayGen.SGA.DataController.UnitTests
                 gameId = gameDbController.Create(newgame).Id;
             }
 
-            GroupDbController groupDbController = new GroupDbController(_nameOrConnectionString);
+            GroupDbController groupDbController = new GroupDbController(NameOrConnectionString);
             if (groupId == 0)
             {
                 Group newgroup = new Group

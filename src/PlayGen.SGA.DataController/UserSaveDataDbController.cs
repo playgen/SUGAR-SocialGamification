@@ -17,7 +17,7 @@ namespace PlayGen.SGA.DataController
 
         public IEnumerable<UserData> Get(int gameId, int userId, string[] keys)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -29,7 +29,7 @@ namespace PlayGen.SGA.DataController
 
         public UserData Create(UserData newData)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 

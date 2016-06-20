@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PlayGen.SGA.DataController;
+using PlayGen.SGA.ServerAuthentication;
 
 namespace PlayGen.SGA.WebAPI
 {
@@ -40,6 +41,11 @@ namespace PlayGen.SGA.WebAPI
             services.AddScoped((_) => new UserAchievementDbController(connectioString));
             services.AddScoped((_) => new GroupMemberDbController(connectioString));
             services.AddScoped((_) => new UserFriendDbController(connectioString));
+
+            services.AddScoped((_) => new PasswordEncryption());
+
+            string apiKey = Configuration["APIKey"];
+            services.AddScoped((_) => new JsonWebTokenUtility(apiKey));
 
             ConfigureRouting(services);
             

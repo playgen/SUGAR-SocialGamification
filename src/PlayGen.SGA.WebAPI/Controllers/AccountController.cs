@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.DataController;
-using PlayGen.SGA.ServerAuthentication.Providers;
+using PlayGen.SGA.ServerAuthentication;
 using PlayGen.SGA.WebAPI.Exceptions;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
 
@@ -19,10 +17,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
     public class AccountController : Controller, IAccountController
     {
         private readonly AccountDbController _accountDbController;
+        private readonly PasswordEncryption _passwordEncryption;
+        private readonly JsonWebTokenUtility _jsonWebTokenUtility;
 
-        public AccountController(AccountDbController accountDbController)
+        public AccountController(AccountDbController accountDbController, PasswordEncryption passwordEncryption, JsonWebTokenUtility jsonWebTokenUtility)
         {
             _accountDbController = accountDbController;
+            _passwordEncryption = passwordEncryption;
+            _jsonWebTokenUtility = jsonWebTokenUtility;
         }
 
         /// <summary>
@@ -30,13 +32,21 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// Requires the name to be unique.
         /// 
         /// Example Usage: POST api/account/register
-        /// </summary>
-        /// <param name="newAccount"></param>
-        /// <returns></returns>
+        /// <param name="accountRequest"></param>
+        /// <returns>AccountResponse</returns>
         [HttpPost]
-        public AccountResponse Register([FromBody]AccountRequest newAccount)
+        public AccountResponse Register([FromBody]AccountRequest accountRequest)
         {
-            var account = _accountDbController.Create(newAccount.ToModel());
+            if(string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
+            {
+                throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
+            }
+
+            var newAccount = accountRequest.ToModel();
+            newAccount.Salt = _passwordEncryption.CreateSalt();
+            newAccount.PasswordHash = _passwordEncryption.Encrypt(accountRequest.Password, newAccount.Salt);
+            
+            var account = _accountDbController.Create(newAccount);
             return account.ToContract();
         }
 
@@ -46,32 +56,35 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// 
         /// Example Usage: POST api/account
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
+        /// <param name="accountRequest"></param>
+        /// <returns>AccountResponse</returns>
         [HttpGet]
-        public AccountResponse Login(AccountRequest account)
+        public AccountResponse Login(AccountRequest accountRequest)
         {
-            var accounts = _accountDbController.Get(new string[] {accountDetails.Name});
+            var accounts = _accountDbController.Get(new string[] { accountRequest.Name});
 
             if (!accounts.Any()) 
             {
-                throw new InvalidLoginDetailsException("Invalid Login Details.");
+                throw new InvalidAccountDetailsException("Invalid Login Details.");
             }
 
             var account = accounts.ElementAt(0);
-            PasswordValidation validation = new PasswordValidation(accountDetails.Password, account.Password);
 
-            if (!validation.IsValid) throw new InvalidLoginDetailsException("Invalid Login Details.");
+            if (account.PasswordHash != _passwordEncryption.Encrypt(accountRequest.Password, account.Salt))
+            {
+                throw new InvalidAccountDetailsException("Invalid Login Details.");
+            }
+            
+            string token = _jsonWebTokenUtility.CreateToken(new Dictionary<string, object>
+            {
+                {"user", account.UserId },
+            });
 
+            var response = new AccountResponse();
+            response.User = account.User.ToContract();
+            response.Token = token;
 
-            // TODO
-            // get authentication to compare passwords
-            // if authenticated:
-            //  create jwt with claims - id specifically
-            //   return the jwt
-
-            throw new NotImplementedException();
+            return response;
         }
 
         /// <summary>

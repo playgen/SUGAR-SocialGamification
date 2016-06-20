@@ -10,7 +10,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return new Account
             {
                 Name = accountContract.Name,
-                Password = accountContract.Password
+                PasswordHash = accountContract.Password
             };
         }
 

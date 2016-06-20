@@ -15,7 +15,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
         public GameDbControllerTests()
         {
-            _gameDbController = new GameDbController(_nameOrConnectionString);
+            _gameDbController = new GameDbController(NameOrConnectionString);
         }
         #endregion
 

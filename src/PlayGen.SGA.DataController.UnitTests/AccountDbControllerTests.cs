@@ -12,13 +12,14 @@ namespace PlayGen.SGA.DataController.UnitTests
     {
         #region Configuration
         private readonly AccountDbController _accountDbController;
+        private readonly UserDbController _userDbController; 
 
         public AccountDbControllerTests()
         {
-            _accountDbController = new AccountDbController(_nameOrConnectionString);
+            _accountDbController = new AccountDbController(NameOrConnectionString);
+            _userDbController = new UserDbController(NameOrConnectionString);
         }
         #endregion
-
 
         #region Tests
         [Fact]
@@ -133,14 +134,28 @@ namespace PlayGen.SGA.DataController.UnitTests
         #region Helpers
         private Account CreateAccount(string name, string password, Account.Permissions permission)
         {
+            var user = CreateUser(name);
+
             var account = new Account
             {
                 Name = name,
-                Password = password,
+                PasswordHash = password,
+                UserId = user.Id,
+                User = user,
                 Permission = permission,
             };
-
+            
             return _accountDbController.Create(account);
+        }
+
+        private User CreateUser(string name)
+        {
+            User user = new User()
+            {
+                Name = name,
+            };
+            
+            return _userDbController.Create(user);
         }
         #endregion
     }
