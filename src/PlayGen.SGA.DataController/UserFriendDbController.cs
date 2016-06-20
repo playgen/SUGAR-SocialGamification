@@ -62,12 +62,12 @@ namespace PlayGen.SGA.DataController
 
                 if (!requestorExists)
                 {
-                    throw new DuplicateRecordException(string.Format("The requesting user does not exist."));
+                    throw new MissingRecordException(string.Format("The requesting user does not exist."));
                 }
 
                 if (!acceptorExists)
                 {
-                    throw new DuplicateRecordException(string.Format("The targeted user does not exist."));
+                    throw new MissingRecordException(string.Format("The targeted user does not exist."));
                 }
 
                 var relation = new UserToUserRelationshipRequest

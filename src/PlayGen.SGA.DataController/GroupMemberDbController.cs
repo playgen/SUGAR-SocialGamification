@@ -60,11 +60,11 @@ namespace PlayGen.SGA.DataController
                 var acceptorExists = context.Groups.Any(g => g.Id == newRelation.AcceptorId);
 
                 if (!requestorExists) {
-                    throw new DuplicateRecordException(string.Format("The requesting user does not exist."));
+                    throw new MissingRecordException(string.Format("The requesting user does not exist."));
                 }
 
                 if (!acceptorExists) {
-                    throw new DuplicateRecordException(string.Format("The targeted group does not exist."));
+                    throw new MissingRecordException(string.Format("The targeted group does not exist."));
                 }
 
                 var relation = new UserToGroupRelationshipRequest
