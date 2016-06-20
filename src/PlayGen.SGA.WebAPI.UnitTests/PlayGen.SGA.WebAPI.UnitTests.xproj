@@ -7,7 +7,7 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>337a5167-ed59-4866-b916-35c09626044e</ProjectGuid>
+    <ProjectGuid>b8caa947-18b8-40dd-9b64-33d6b95b0965</ProjectGuid>
     <RootNamespace>PlayGen.SGA.WebAPI.UnitTests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
