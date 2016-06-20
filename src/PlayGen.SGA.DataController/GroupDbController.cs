@@ -45,13 +45,12 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                var hasConflicts = context.Groups.Any(g => g.Name == newGroup.Name);
-
+                /*
                 if (hasConflicts)
                 {
                     throw new DuplicateRecordException(string.Format("A group with the name {0} already exists.", newGroup.Name));
                 }
-
+                */
                 var group = newGroup;
                 context.Groups.Add(group);
                 context.SaveChanges();

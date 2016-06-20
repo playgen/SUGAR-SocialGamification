@@ -24,12 +24,11 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                var hasConflicts = context.Accounts.Any(a => a.Name == account.Name);
-
+                /*
                 if (hasConflicts)
                 {
                     throw new DuplicateRecordException($"An account with the name {account.Name} already exists.");
-                }
+                }*/
                 
                 context.Accounts.Add(account);
                 context.SaveChanges();

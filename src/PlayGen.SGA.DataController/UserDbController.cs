@@ -51,24 +51,20 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public User Create(User newUser)
+        public void Create(User user)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
-                var hasConflicts = context.Users.Any(u => u.Name == newUser.Name);
-
+                /*
                 if (hasConflicts)
                 {
-                    throw new DuplicateRecordException(string.Format("A user with the name {0} already exists.", newUser.Name));
-                }
+                    throw new DuplicateRecordException(string.Format("A user with the name {0} already exists.", user.Name));
+                }*/
 
-                var user = newUser;
                 context.Users.Add(user);
                 context.SaveChanges();
-
-                return user;
             }
         }
 

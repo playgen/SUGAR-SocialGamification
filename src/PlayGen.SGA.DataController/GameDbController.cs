@@ -55,12 +55,11 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                var hasConflicts = context.Games.Any(g => g.Name == newGame.Name);
-
+                /*
                 if (hasConflicts)
                 {
                     throw new DuplicateRecordException(string.Format("A game with the name {0} already exists.", newGame.Name));
-                }
+                }*/
 
                 var game = newGame;
                 context.Games.Add(game);

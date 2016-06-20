@@ -34,6 +34,41 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
+        /// Logs in an account based on the name and password combination.
+        /// Returns a JsonWebToken used for authorization in any further calls to the API.
+        /// 
+        /// Example Usage: POST api/account
+        /// </summary>
+        /// <param name="accountRequest"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public AccountResponse Login(AccountRequest accountRequest)
+        {
+            var accounts = _accountDbController.Get(new string[] { accountRequest.Name });
+
+            if (!accounts.Any())
+            {
+                throw new InvalidAccountDetailsException("Invalid Login Details.");
+            }
+
+            var account = accounts.ElementAt(0);
+
+            if (account.PasswordHash != _passwordEncryption.Encrypt(accountRequest.Password, account.Salt))
+            {
+                throw new InvalidAccountDetailsException("Invalid Login Details.");
+            }
+
+            string token = _jsonWebTokenUtility.CreateToken(new Dictionary<string, object>
+            {
+                {"user", account.UserId},
+            });
+
+            var response = account.ToContract();
+            response.Token = CreateToken(account);
+            return response;
+        }
+
+        /// <summary>
         /// Register a new account and creates an associated user.
         /// Requires the name to be unique.
         /// Returns a JsonWebToken used for authorization in any further calls to the API.
@@ -75,18 +110,15 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpPost("userId")]
         public AccountResponse Register(int userId, [FromBody] AccountRequest accountRequest)
         {
-            if (string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
+            var users = _userDbController.Get(new[] { userId });
+
+            if (string.IsNullOrWhiteSpace(accountRequest.Name) 
+                || string.IsNullOrWhiteSpace(accountRequest.Password)
+                || !users.Any())
             {
                 throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
             }
-
-            var users = _userDbController.Get(new[] {userId});
-
-            if (!users.Any())
-            {
-                throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
-            }
-
+            
             var user = users.ElementAt(0);
 
             var account = CreateAccount(accountRequest, user);
@@ -95,42 +127,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
             response.Token = CreateToken(account);
             return response;
         }
-
-        /// <summary>
-        /// Logs in an account based on the name and password combination.
-        /// Returns a JsonWebToken used for authorization in any further calls to the API.
-        /// 
-        /// Example Usage: POST api/account
-        /// </summary>
-        /// <param name="accountRequest"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public AccountResponse Login(AccountRequest accountRequest)
-        {
-            var accounts = _accountDbController.Get(new string[] {accountRequest.Name});
-
-            if (!accounts.Any())
-            {
-                throw new InvalidAccountDetailsException("Invalid Login Details.");
-            }
-
-            var account = accounts.ElementAt(0);
-
-            if (account.PasswordHash != _passwordEncryption.Encrypt(accountRequest.Password, account.Salt))
-            {
-                throw new InvalidAccountDetailsException("Invalid Login Details.");
-            }
-
-            string token = _jsonWebTokenUtility.CreateToken(new Dictionary<string, object>
-            {
-                {"user", account.UserId},
-            });
-
-            var response = account.ToContract();
-            response.Token = CreateToken(account);
-            return response;
-        }
-
+        
         /// <summary>
         /// Delete accounts based on their IDs.
         /// 
