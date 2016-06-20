@@ -8,6 +8,9 @@ using PlayGen.SGA.WebAPI.ExtensionMethods;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
+    /// <summary>
+    /// Web Controller that facilitates GroupAchievement specific operations.
+    /// </summary>
     [Route("api/[controller]")]
     public class GroupAchievementController : Controller, IGroupAchievementController
     {
@@ -18,7 +21,13 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _groupAchievementDbController = groupAchievementDbController;
         }
 
-        // GET api/groupachievement?gameId=1&gameId=2
+        /// <summary>
+        /// Get a list of GroupAchievements that match <param name="gameId"/>.
+        /// 
+        /// Example Usage: GET api/groupachievement?gameId=1&gameId=2
+        /// </summary>
+        /// <param name="gameId">Array of game IDs</param>
+        /// <returns>Returns multiple <see cref="GameResponse"/> that hold GroupAchievement details</returns>
         [HttpGet]
         public IEnumerable<AchievementResponse> Get(int[] gameId)
         {
@@ -26,7 +35,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return achievement.ToContract();
         }
 
-        // POST api/groupachievement/
+        /// <summary>
+        /// Create a new GroupAchievement.
+        /// Requires <see cref="newAchievement.Name"/> to be unique to that <see cref="newAchievement.GameId"/>.
+        /// 
+        /// Example Usage: POST api/groupachievement/
+        /// </summary>
+        /// <param name="newAchievement"><see cref="AchievementRequest"/> object that holds the details of the new GroupAchievement.</param>
+        /// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created GroupAchievement.</returns>
         [HttpPost]
         public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
         {
@@ -34,7 +50,12 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return achievement.ToContract();
         }
 
-        // DELETE api/groupachievement?id=1&id=2
+        /// <summary>
+        /// Delete GroupAchievements with the <param name="id"/> provided.
+        /// 
+        /// Example Usage: DELETE api/groupachievement?id=1&id=2
+        /// </summary>
+        /// <param name="id">Array of GroupAchievement IDs</param>
         [HttpDelete]
         public void Delete(int[] id)
         {

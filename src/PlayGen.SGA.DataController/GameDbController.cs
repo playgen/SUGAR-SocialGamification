@@ -15,11 +15,6 @@ namespace PlayGen.SGA.DataController
         {
         }
 
-        /// <summary>
-        /// Retrieve game multiple records by name from the database
-        /// </summary>
-        /// <param name="names"></param>
-        /// <returns></returns>
         public IEnumerable<Game> Get()
         {
             using (var context = new SGAContext(_nameOrConnectionString))
@@ -32,6 +27,11 @@ namespace PlayGen.SGA.DataController
             }
         }
 
+        /// <summary>
+        /// Retrieve game multiple records by name from the database
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
         public IEnumerable<Game> Get(string[] names)
         {
             using (var context = new SGAContext(_nameOrConnectionString))

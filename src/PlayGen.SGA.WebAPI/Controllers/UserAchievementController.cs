@@ -8,6 +8,9 @@ using PlayGen.SGA.WebAPI.ExtensionMethods;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
+    /// <summary>
+    /// Web Controller that facilitates UserAchievement specific operations.
+    /// </summary>
     [Route("api/[controller]")]
     public class UserAchievementController : Controller, IUserAchievementController
     {
@@ -18,7 +21,13 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _userAchievementDbController = userAchievementDbController;
         }
 
-        // GET api/userachievement?gameId=1&gameId=2
+        /// <summary>
+        /// Get a list of UserAchievements that match <param name="gameId"/>.
+        /// 
+        /// Example Usage: GET api/userachievement?gameId=1&gameId=2
+        /// </summary>
+        /// <param name="gameId">Array of game IDs</param>
+        /// <returns>Returns multiple <see cref="GameResponse"/> that hold UserAchievement details</returns>
         [HttpGet]
         public IEnumerable<AchievementResponse> Get(int[] gameId)
         {
@@ -26,7 +35,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return achievement.ToContract();
         }
 
-        // POST api/userachievement
+        /// <summary>
+        /// Create a new UserAchievement.
+        /// Requires <see cref="newAchievement.Name"/> to be unique to that <see cref="newAchievement.GameId"/>.
+        /// 
+        /// Example Usage: POST api/userachievement/
+        /// </summary>
+        /// <param name="newAchievement"><see cref="AchievementRequest"/> object that holds the details of the new UserAchievement.</param>
+        /// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created UserAchievement.</returns>
         [HttpPost]
         public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
         {
@@ -34,7 +50,12 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return achievement.ToContract();
         }
 
-        // DELETE api/userchievement?id=1&id=2
+        /// <summary>
+        /// Delete UserAchievements with the <param name="id"/> provided.
+        /// 
+        /// Example Usage: DELETE api/userachievement?id=1&id=2
+        /// </summary>
+        /// <param name="id">Array of UserAchievement IDs</param>
         [HttpDelete]
         public void Delete(int[] id)
         {

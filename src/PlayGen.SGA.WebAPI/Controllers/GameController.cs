@@ -8,6 +8,9 @@ using PlayGen.SGA.Contracts;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
+    /// <summary>
+    /// Web Controller that facilitates Game specific operations.
+    /// </summary>
     [Route("api/[controller]")]
     public class GameController : Controller, IGameController
     {
@@ -18,7 +21,12 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _gameDbController = gameDbController;
         }
 
-        // GET api/game/all
+        /// <summary>
+        /// Get a list of all Games.
+        /// 
+        /// Example Usage: GET api/game/all
+        /// </summary>
+        /// <returns>A list of <see cref="GameResponse"/> that hold Game details.</returns>
         [HttpGet("all")]
         public IEnumerable<GameResponse> Get()
         {
@@ -26,7 +34,13 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return game.ToContract();
         }
 
-        // GET api/game?name=game1&name=game2
+        /// <summary>
+        /// Get a list of Games that match <param name="name"/> provided.
+        /// 
+        /// Example Usage: GET api/game?name=game1&name=game2
+        /// </summary>
+        /// <param name="name">Array of Game names</param>
+        /// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
         [HttpGet]
         public IEnumerable<GameResponse> Get(string[] name)
         {
@@ -34,7 +48,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return game.ToContract();
         }
 
-        // POST api/game
+        /// <summary>
+        /// Create a new Game.
+        /// Requires the <see cref="GameRequest.Name"/> to be unique.
+        /// 
+        /// Example Usage: POST api/game
+        /// </summary>
+        /// <param name="newGame"><see cref="GameRequest"/> object that contains the details of the new Game.</param>
+        /// <returns>A <see cref="GameResponse"/> containing the new Game details.</returns>
         [HttpPost]
         public GameResponse Create([FromBody]GameRequest newGame)
         {
@@ -42,7 +63,12 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return game.ToContract();
         }
 
-        // DELETE api/game?id=1&id=2
+        /// <summary>
+        /// Delete Games with the IDs provided.
+        /// 
+        /// Example Usage: DELETE api/game?id=1&id=2
+        /// </summary>
+        /// <param name="id">Array of Game IDs.</param>
         [HttpDelete]
         public void Delete(int[] id)
         {
