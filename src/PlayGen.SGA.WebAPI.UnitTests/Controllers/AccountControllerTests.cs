@@ -127,7 +127,7 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
             {
                 Name = accountRequest.Name,
             };
-            user = _userDbController.Create(user);
+            _userDbController.Create(user);
 
             var response = _accountController.Register(user.Id, accountRequest);
 
