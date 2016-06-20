@@ -29,5 +29,10 @@ namespace PlayGen.SGA.ClientAPI
                 .ToString();
             Delete(query);
         }
+
+        public AccountResponse Register(int userId, AccountRequest newAccount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

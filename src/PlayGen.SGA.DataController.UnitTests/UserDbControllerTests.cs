@@ -19,7 +19,6 @@ namespace PlayGen.SGA.DataController.UnitTests
         }
         #endregion
 
-
         #region Tests
         [Fact]
         public void CreateAndGetUser()
@@ -57,14 +56,14 @@ namespace PlayGen.SGA.DataController.UnitTests
         }
 
         [Fact]
-        public void GetMultipleUsers()
+        public void GetMultipleUsersByName()
         {
             string[] userNames = new[]
             {
-                "GetMultipleUsers1",
-                "GetMultipleUsers2",
-                "GetMultipleUsers3",
-                "GetMultipleUsers4",
+                "GetMultipleUsersByName1",
+                "GetMultipleUsersByName2",
+                "GetMultipleUsersByName3",
+                "GetMultipleUsersByName4",
             };
 
             foreach (var userName in userNames)
@@ -72,13 +71,41 @@ namespace PlayGen.SGA.DataController.UnitTests
                 CreateUser(userName);
             }
 
-            CreateUser("GetMultipleUsers_DontGetThis");
+            CreateUser("GetMultipleUsersByName_DontGetThis");
 
             var users = _userDbController.Get(userNames);
 
             var matchingUsers = users.Select(g => userNames.Contains(g.Name));
 
             Assert.Equal(matchingUsers.Count(), userNames.Length);
+        }
+
+        [Fact]
+        public void GetMultipleUsersById()
+        {
+            string[] userNames = new[]
+            {
+                "GetMultipleUsersById1",
+                "GetMultipleUsersById2",
+                "GetMultipleUsersById3",
+                "GetMultipleUsersById4",
+            };
+
+            List<int> userIds = new List<int>();
+
+            foreach (var userName in userNames)
+            {
+                var user = CreateUser(userName);
+                userIds.Add(user.Id);
+            }
+
+            CreateUser("GetMultipleUsersById_DontGetThis");
+
+            var users = _userDbController.Get(userIds.ToArray());
+
+            var matchingUsers = users.Select(u => userIds.Contains(u.Id));
+
+            Assert.Equal(matchingUsers.Count(), userIds.Count);
         }
 
         [Fact]
