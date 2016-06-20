@@ -15,7 +15,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
         public GroupAchievementDbControllerTests()
         {
-            _groupAchievementDbController = new GroupAchievementDbController(_nameOrConnectionString);
+            _groupAchievementDbController = new GroupAchievementDbController(NameOrConnectionString);
         }
         #endregion
 
@@ -148,7 +148,7 @@ namespace PlayGen.SGA.DataController.UnitTests
         #region Helpers
         private GroupAchievement CreateGroupAchievement(string name, int gameId = 0)
         {
-            GameDbController gameDbController = new GameDbController(_nameOrConnectionString);
+            GameDbController gameDbController = new GameDbController(NameOrConnectionString);
             if (gameId == 0) {
                 Game newgame = new Game
                 {

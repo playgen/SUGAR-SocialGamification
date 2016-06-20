@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace PlayGen.SGA.WebAPI.Exceptions
 {
-    public class InvalidLoginDetailsException : Exception
+    public class InvalidAccountDetailsException : Exception
     {
-        public InvalidLoginDetailsException()
+        public InvalidAccountDetailsException()
         {
         }
 
-        public InvalidLoginDetailsException(string message) 
+        public InvalidAccountDetailsException(string message) 
             : base(message)
         {
         }
 
-        public InvalidLoginDetailsException(string message, Exception inner) 
+        public InvalidAccountDetailsException(string message, Exception inner) 
             : base(message, inner)
         {   
         }

@@ -19,7 +19,7 @@ namespace PlayGen.SGA.DataController
 
         public Account Create(Account account)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -39,7 +39,7 @@ namespace PlayGen.SGA.DataController
 
         public IEnumerable<Account> Get(string[] names)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
@@ -51,7 +51,7 @@ namespace PlayGen.SGA.DataController
 
         public void Delete(int[] id)
         {
-            using (var context = new SGAContext(_nameOrConnectionString))
+            using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 

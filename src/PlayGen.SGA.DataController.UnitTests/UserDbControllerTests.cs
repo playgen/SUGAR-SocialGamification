@@ -15,7 +15,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
         public UserDbControllerTests()
         {
-            _userDbController = new UserDbController(_nameOrConnectionString);
+            _userDbController = new UserDbController(NameOrConnectionString);
         }
         #endregion
 

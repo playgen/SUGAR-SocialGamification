@@ -15,7 +15,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
     public GroupDbControllerTests()
     {
-            _groupDbController = new GroupDbController(_nameOrConnectionString);
+            _groupDbController = new GroupDbController(NameOrConnectionString);
     }
     #endregion
 

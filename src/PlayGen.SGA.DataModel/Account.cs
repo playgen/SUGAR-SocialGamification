@@ -11,7 +11,9 @@ namespace PlayGen.SGA.DataModel
 
         public string Name { get; set; }
 
-        public string Password { get; set; }
+        public string Salt { get; set; }
+
+        public string PasswordHash { get; set; }
 
         public int UserId { get; set; }
 

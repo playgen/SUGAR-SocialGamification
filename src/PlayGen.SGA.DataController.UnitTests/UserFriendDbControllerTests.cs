@@ -15,7 +15,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
         public UserFriendDbControllerTests()
         {
-            _userFriendDbController = new UserFriendDbController(_nameOrConnectionString);
+            _userFriendDbController = new UserFriendDbController(NameOrConnectionString);
         }
         #endregion
 
@@ -320,7 +320,7 @@ namespace PlayGen.SGA.DataController.UnitTests
         #region Helpers
         private User CreateUser(string name)
         {
-            UserDbController userDbController = new UserDbController(_nameOrConnectionString);
+            UserDbController userDbController = new UserDbController(NameOrConnectionString);
             var newUser = new User
             {
                 Name = name,
