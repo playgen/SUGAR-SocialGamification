@@ -7,7 +7,7 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
         [Fact]
         public void Test()
         {
-          Assert.True(true);  
+            Assert.True(true);  
         }
     }
 }

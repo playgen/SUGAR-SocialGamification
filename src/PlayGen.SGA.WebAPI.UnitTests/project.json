@@ -3,7 +3,9 @@
 
   "dependencies": {
     "NETStandard.Library": "1.5.0-rc2-24027",
+    "PlayGen.SGA.DataController": "1.0.0-*",
     "PlayGen.SGA.DataController.UnitTests": "1.0.0-*",
+    "PlayGen.SGA.ServerAuthentication": "1.0.0-*",
     "PlayGen.SGA.WebAPI": "1.0.0-*",
     "xunit": "2.1.0",
     "xunit.runner.console": "2.1.0",
