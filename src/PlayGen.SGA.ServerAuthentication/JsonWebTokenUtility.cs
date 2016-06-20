@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using JWT;
+using PlayGen.SGA.ServerAuthentication.Helpers;
 
 namespace PlayGen.SGA.ServerAuthentication
 {
@@ -13,6 +12,7 @@ namespace PlayGen.SGA.ServerAuthentication
 
         public JsonWebTokenUtility(string secretKey, JwtHashAlgorithm hashAlgorithm = JwtHashAlgorithm.HS256)
         {
+            JsonWebToken.JsonSerializer = new JWTSerializationAdapter();
             _secretKey = secretKey;
             _hashAlgorithm = hashAlgorithm;
         }
