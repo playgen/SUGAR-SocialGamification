@@ -38,12 +38,12 @@ namespace PlayGen.SGA.DataController
 
                 if (!actorExists)
                 {
-                    throw new DuplicateRecordException(string.Format("The provided group does not exist."));
+                    throw new MissingRecordException(string.Format("The provided group does not exist."));
                 }
 
                 if (!gameExists)
                 {
-                    throw new DuplicateRecordException(string.Format("The provided game does not exist."));
+                    throw new MissingRecordException(string.Format("The provided game does not exist."));
                 }
 
                 context.GroupDatas.Add(data);

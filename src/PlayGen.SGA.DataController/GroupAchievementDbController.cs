@@ -44,7 +44,7 @@ namespace PlayGen.SGA.DataController
 
                 if (!gameExists)
                 {
-                    throw new DuplicateRecordException(string.Format("The provided game does not exist."));
+                    throw new MissingRecordException(string.Format("The provided game does not exist."));
                 }
 
                 context.GroupAchievements.Add(achievement);
