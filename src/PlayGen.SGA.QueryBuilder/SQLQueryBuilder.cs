@@ -3,9 +3,11 @@ using PlayGen.SGA.Contracts;
 
 namespace PlayGen.SGA.QueryBuilder
 {
-    public class SQLQueryBuilder
+    public class SQLSaveDataQueryBuilder
     {
-        public SQLQueryBuilder(string table, List<DatabaseQueryParams> dbQueryParams)
+        private readonly string _table = "SaveData";
+
+        public SQLSaveDataQueryBuilder(int gameId, int userId, List<DatabaseQueryParams> dbQueryParams)
         {
 
         }

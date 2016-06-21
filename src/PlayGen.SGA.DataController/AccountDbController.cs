@@ -24,7 +24,11 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                context.Users.Attach(account.User);
+                if (context.Entry(account.User).State == EntityState.Detached)
+                {
+                    context.Users.Attach(account.User);
+                }
+
                 context.Accounts.Add(account);
                 SaveChanges(context);
 

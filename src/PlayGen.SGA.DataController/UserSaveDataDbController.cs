@@ -46,6 +46,16 @@ namespace PlayGen.SGA.DataController
                     throw new MissingRecordException(string.Format("The provided game does not exist."));
                 }
 
+                if (context.Entry(data.User).State == EntityState.Detached)
+                {
+                    context.Users.Attach(data.User);
+                }
+
+                if (context.Entry(data.Game).State == EntityState.Detached)
+                {
+                    context.Games.Attach(data.Game);
+                }
+
                 context.UserDatas.Add(data);
                 SaveChanges(context);
                 return data;
