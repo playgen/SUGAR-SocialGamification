@@ -11,7 +11,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates GroupData specific operations.
     /// </summary>
-    public class GroupSaveDataClientProxy : ClientProxy, IGroupSaveDataController
+    public class GroupSaveDataClientProxy : ClientProxyBase, IGroupSaveDataController
     {
         public GroupSaveDataClientProxy(string baseAddress) : base(baseAddress)
         {
@@ -26,7 +26,7 @@ namespace PlayGen.SGA.ClientAPI
         /// <returns>A list of <see cref="SaveDataResponse"/> which match the search criteria.</returns>
         public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] keys)
         {
-            var query = GetUriBuilder("api/game/groupsavedata")
+            var query = GetUriBuilder("api/groupsavedata")
                 .AppendQueryParameters(new int[] { actorId }, "actorId={0}")
                 .AppendQueryParameters(new int[] { gameId }, "gameId={0}")
                 .AppendQueryParameters(keys, "key={0}")

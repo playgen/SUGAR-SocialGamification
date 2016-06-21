@@ -8,7 +8,7 @@ using PlayGen.SGA.Contracts.Controllers;
 
 namespace PlayGen.SGA.ClientAPI
 {
-    public class AccountClientProxy : ClientProxy, IAccountController
+    public class AccountClientProxy : ClientProxyBase, IAccountController
     {
         public AccountClientProxy(string baseAddress) : base(baseAddress)
         {

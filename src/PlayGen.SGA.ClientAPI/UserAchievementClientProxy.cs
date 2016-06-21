@@ -10,7 +10,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates UserAchievement specific operations.
     /// </summary>
-    public class UserAchievementClientProxy : ClientProxy, IUserAchievementController
+    public class UserAchievementClientProxy : ClientProxyBase, IUserAchievementController
     {
         public UserAchievementClientProxy(string baseAddress) : base(baseAddress)
         {
