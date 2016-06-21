@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PlayGen.SGA.DataModel;
 using PlayGen.SGA.DataModel.Interfaces;
 using MySql.Data.Entity;
+using PlayGen.SGA.DataAccess.ExtensionMethods;
 
 namespace PlayGen.SGA.DataAccess
 {
@@ -44,8 +45,21 @@ namespace PlayGen.SGA.DataAccess
             modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Acceptor).WithMany(u => u.Acceptors).HasForeignKey(u => u.AcceptorId);
             modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Requestor).WithMany(u => u.RequestRequestors).HasForeignKey(u => u.RequestorId);
             modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Acceptor).WithMany(u => u.RequestAcceptors).HasForeignKey(u => u.AcceptorId);
+            
             // Change all string fields to have a max length of 64 chars
             modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
+
+            modelBuilder.Entity<UserAchievement>().Property(a => a.CompletionCriteria).HasMaxLength(1024);
+            modelBuilder.Entity<UserAchievement>().Property(a => a.CompiledCriteria).HasMaxLength(1024);
+            modelBuilder.Entity<GroupAchievement>().Property(a => a.CompletionCriteria).HasMaxLength(1024);
+            modelBuilder.Entity<GroupAchievement>().Property(a => a.CompiledCriteria).HasMaxLength(1024);
+
+            // Setup unique fields
+            modelBuilder.Entity<Game>().Property(g => g.Name).IsUnique();
+            modelBuilder.Entity<User>().Property(u => u.Name).IsUnique();
+            modelBuilder.Entity<Group>().Property(g => g.Name).IsUnique();
+            modelBuilder.Entity<Account>().Property(a => a.Name).IsUnique();
+
         }
 
         public override int SaveChanges()

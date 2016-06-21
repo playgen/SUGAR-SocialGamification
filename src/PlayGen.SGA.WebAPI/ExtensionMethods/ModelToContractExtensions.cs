@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.DataModel;
+using Newtonsoft.Json;
 
 namespace PlayGen.SGA.WebAPI.ExtensionMethods
 {
@@ -82,6 +83,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             achievementContract.Id = groupModel.Id;
             achievementContract.Name = groupModel.Name;
             achievementContract.GameId = groupModel.GameId;
+            achievementContract.CompletionCriteria = JsonConvert.DeserializeObject<List<AchievementCriteria>>(groupModel.CompletionCriteria);
 
             return achievementContract;
         }
@@ -104,6 +106,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             achievementContract.Id = userModel.Id;
             achievementContract.Name = userModel.Name;
             achievementContract.GameId = userModel.GameId;
+            achievementContract.CompletionCriteria = JsonConvert.DeserializeObject<List<AchievementCriteria>>(userModel.CompletionCriteria);
 
             return achievementContract;
         }

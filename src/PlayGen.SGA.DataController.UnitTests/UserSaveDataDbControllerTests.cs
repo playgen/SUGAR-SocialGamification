@@ -153,11 +153,12 @@ namespace PlayGen.SGA.DataController.UnitTests
             UserDbController userDbController = new UserDbController(NameOrConnectionString);
             if (userId == 0)
             {
-                User newuser = new User
+                var user = new User
                 {
                     Name = key
                 };
-                userId = userDbController.Create(newuser).Id;
+                userDbController.Create(user);
+                userId = user.Id;
             }
 
             var newUserData = new UserData

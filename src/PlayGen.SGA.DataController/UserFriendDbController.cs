@@ -62,12 +62,12 @@ namespace PlayGen.SGA.DataController
 
                 if (!requestorExists)
                 {
-                    throw new DuplicateRecordException(string.Format("The requesting user does not exist."));
+                    throw new MissingRecordException(string.Format("The requesting user does not exist."));
                 }
 
                 if (!acceptorExists)
                 {
-                    throw new DuplicateRecordException(string.Format("The targeted user does not exist."));
+                    throw new MissingRecordException(string.Format("The targeted user does not exist."));
                 }
 
                 var relation = new UserToUserRelationshipRequest
@@ -76,7 +76,7 @@ namespace PlayGen.SGA.DataController
                     AcceptorId = newRelation.AcceptorId
                 };
                 context.UserToUserRelationshipRequests.Add(relation);
-                context.SaveChanges();
+                SaveChanges(context);
                 return relation;
             }
         }
@@ -98,7 +98,7 @@ namespace PlayGen.SGA.DataController
                     context.UserToUserRelationships.Add(acceptedRelation);
                 }
                 context.UserToUserRelationshipRequests.Remove(relation);
-                context.SaveChanges();
+                SaveChanges(context);
             }
         }
 
@@ -111,7 +111,7 @@ namespace PlayGen.SGA.DataController
                 var relation = context.UserToUserRelationships.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) || (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
 
                 context.UserToUserRelationships.Remove(relation);
-                context.SaveChanges();
+                SaveChanges(context);
             }
         }
     }

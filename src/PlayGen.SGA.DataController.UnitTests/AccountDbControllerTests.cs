@@ -29,7 +29,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             string password = $"{name}Password";
             Account.Permissions permissions = Account.Permissions.Default;
 
-            var account = CreateAccount(name, password, permissions);
+            CreateAccount(name, password, permissions);
 
             var accounts = _accountDbController.Get(new string[] { name });
 
@@ -154,8 +154,10 @@ namespace PlayGen.SGA.DataController.UnitTests
             {
                 Name = name,
             };
-            
-            return _userDbController.Create(user);
+
+            _userDbController.Create(user);
+
+            return user;
         }
         #endregion
     }

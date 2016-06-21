@@ -44,12 +44,11 @@ namespace PlayGen.SGA.DataController
 
                 if (!gameExists)
                 {
-                    throw new DuplicateRecordException(string.Format("The provided game does not exist."));
+                    throw new MissingRecordException(string.Format("The provided game does not exist."));
                 }
 
                 context.UserAchievements.Add(achievement);
-                context.SaveChanges();
-
+                SaveChanges(context);
                 return achievement;
             }
         }
@@ -63,7 +62,7 @@ namespace PlayGen.SGA.DataController
                 var achievement = context.UserAchievements.Where(u => id.Contains(u.Id)).ToList();
 
                 context.UserAchievements.RemoveRange(achievement);
-                context.SaveChanges();
+                SaveChanges(context);
             }
         }
     }

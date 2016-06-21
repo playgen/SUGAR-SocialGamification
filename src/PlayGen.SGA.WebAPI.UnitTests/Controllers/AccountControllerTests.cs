@@ -38,11 +38,11 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
 
         #region Tests
         [Fact]
-        public void InvalidRegisterName()
+        public void RegisterInvalidAccountName()
         {
             var accountRequest = new AccountRequest
             {
-                Password = "InvalidRegisterNamePassword",
+                Password = "RegisterInvalidAccountNamePassword",
             };
 
             bool hadException = false;
@@ -60,11 +60,11 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void InvalidRegisterPassword()
+        public void RegisterInvalidAccountPassword()
         {
             var accountRequest = new AccountRequest
             {
-                Name = "InvalidRegisterPassword",
+                Name = "RegisterInvalidAccountPassword",
             };
 
             bool hadException = false;
@@ -82,16 +82,35 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void RegisterAndLogin()
+        public void RegisterNewUser()
         {
-            var accountRequest = CreatAccountRequest("RegisterAndLogin", "RegisterAndLoginPassword");
+            var accountRequest = CreatAccountRequest("RegisterNewUser", "RegisterNewUserPassword");
+
+            var response = _accountController.Register(accountRequest);
+
+            Assert.NotEqual(null, response.User);
+            Assert.Equal(null, response.Token);
+        }
+
+        [Fact]
+        public void RegisterNewUserAndLogin()
+        {
+            var accountRequest = CreatAccountRequest("RegisterNewUserAndLogin", "RegisterNewUserAndLoginPassword");
+            accountRequest.AutoLogin = true;
 
             var response = _accountController.Register(accountRequest);
 
             Assert.NotEqual(null, response.User);
             Assert.NotEqual(null, response.Token);
+        }
 
-            response = _accountController.Login(accountRequest);
+        [Fact]
+        public void LoginUser()
+        {
+            var accountRequest = CreatAccountRequest("LoginUser", "LoginUserPassword");
+
+            _accountController.Register(accountRequest);
+            var response = _accountController.Login(accountRequest);
 
             Assert.NotEqual(null, response.User);
             Assert.NotEqual(null, response.Token);
@@ -119,20 +138,20 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void RegisterUser()
+        public void RegisterExistingUserAndLogin()
         {
-            var accountRequest = CreatAccountRequest("RegisterInvalidUser", "RegisterInvalidUserPassword");
+            var accountRequest = CreatAccountRequest("RegisterExistingUserAndLogin", "RegisterExistingUserAndLoginPassword");
 
             var user = new User
             {
                 Name = accountRequest.Name,
             };
-            user = _userDbController.Create(user);
+            _userDbController.Create(user);
 
             var response = _accountController.Register(user.Id, accountRequest);
 
             Assert.NotEqual(null, response.User);
-            Assert.NotEqual(null, response.Token);
+            Assert.Equal(null, response.Token);
 
             response = _accountController.Login(accountRequest);
 
@@ -141,15 +160,19 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void InvalidLoginName()
+        public void LoginInvalidAccountName()
         {
-            var accountRequest = CreatAccountRequest("InvalidLoginName", "InvalidLoginName" );
+            var accountRequest = CreatAccountRequest("LoginInvalidAccountName", "LoginInvalidAccountNamePassword");
+
+            _accountController.Register(accountRequest);
+
+            accountRequest.Name = "ThisAccountNameShouldFail";
 
             bool hadException = false;
 
             try
             {
-                var response = _accountController.Login(accountRequest);
+                _accountController.Login(accountRequest);
             }
             catch (InvalidAccountDetailsException)
             {
@@ -160,11 +183,11 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
-        public void InvalidLoginPassword()
+        public void LoginInvalidAccountPassword()
         {
-            var accountRequest = CreatAccountRequest("InvalidLoginPassword", "InvalidLoginPasswordPassword");
+            var accountRequest = CreatAccountRequest("LoginInvalidAccountPassword", "LoginInvalidAccountPasswordPassword");
 
-            var response = _accountController.Register(accountRequest);
+            _accountController.Register(accountRequest);
 
             accountRequest.Password = "ThisPasswordShouldFail";
 
@@ -172,7 +195,7 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
 
             try
             {
-                response = _accountController.Login(accountRequest);
+                _accountController.Login(accountRequest);
             }
             catch (InvalidAccountDetailsException)
             {
@@ -190,6 +213,7 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
             {
                 Name = name,
                 Password = password,
+                AutoLogin = false,
             };
         }
         #endregion

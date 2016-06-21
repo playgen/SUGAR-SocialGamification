@@ -60,11 +60,11 @@ namespace PlayGen.SGA.DataController
                 var acceptorExists = context.Groups.Any(g => g.Id == newRelation.AcceptorId);
 
                 if (!requestorExists) {
-                    throw new DuplicateRecordException(string.Format("The requesting user does not exist."));
+                    throw new MissingRecordException(string.Format("The requesting user does not exist."));
                 }
 
                 if (!acceptorExists) {
-                    throw new DuplicateRecordException(string.Format("The targeted group does not exist."));
+                    throw new MissingRecordException(string.Format("The targeted group does not exist."));
                 }
 
                 var relation = new UserToGroupRelationshipRequest
@@ -73,7 +73,7 @@ namespace PlayGen.SGA.DataController
                     AcceptorId = newRelation.AcceptorId
                 };
                 context.UserToGroupRelationshipRequests.Add(relation);
-                context.SaveChanges();
+                SaveChanges(context);
                 return relation;
             }
         }
@@ -96,7 +96,7 @@ namespace PlayGen.SGA.DataController
                     context.UserToGroupRelationships.Add(acceptedRelation);
                 }
                 context.UserToGroupRelationshipRequests.Remove(relation);
-                context.SaveChanges();
+                SaveChanges(context);
             }
         }
 
@@ -109,7 +109,7 @@ namespace PlayGen.SGA.DataController
                 var relation = context.UserToGroupRelationships.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) || (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
 
                 context.UserToGroupRelationships.Remove(relation);
-                context.SaveChanges();
+                SaveChanges(context);
             }
         }
     }

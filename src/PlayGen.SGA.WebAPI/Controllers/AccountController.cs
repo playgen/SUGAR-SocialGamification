@@ -34,69 +34,6 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Register a new account and creates an associated user.
-        /// Requires the name to be unique.
-        /// Returns a JsonWebToken used for authorization in any further calls to the API.
-        /// 
-        /// Example Usage: POST api/account/register
-        /// <param name="accountRequest"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public AccountResponse Register([FromBody] AccountRequest accountRequest)
-        {
-            if (string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
-            {
-                throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
-            }
-
-            User user = new User
-            {
-                Name = accountRequest.Name,
-            };
-            user = _userDbController.Create(user);
-
-            var account = CreateAccount(accountRequest, user);
-
-            var response = account.ToContract();
-            response.Token = CreateToken(account);
-            return response;
-        }
-
-        /// <summary>
-        /// Register a new account for an existing user.
-        /// Requires the name to be unique.
-        /// Returns a JsonWebToken used for authorization in any further calls to the API.
-        /// 
-        /// Example Usage: POST api/account/register
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="accountRequest"></param>
-        /// <returns></returns>
-        [HttpPost("userId")]
-        public AccountResponse Register(int userId, [FromBody] AccountRequest accountRequest)
-        {
-            if (string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
-            {
-                throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
-            }
-
-            var users = _userDbController.Get(new[] {userId});
-
-            if (!users.Any())
-            {
-                throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
-            }
-
-            var user = users.ElementAt(0);
-
-            var account = CreateAccount(accountRequest, user);
-
-            var response = account.ToContract();
-            response.Token = CreateToken(account);
-            return response;
-        }
-
-        /// <summary>
         /// Logs in an account based on the name and password combination.
         /// Returns a JsonWebToken used for authorization in any further calls to the API.
         /// 
@@ -107,7 +44,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpGet]
         public AccountResponse Login(AccountRequest accountRequest)
         {
-            var accounts = _accountDbController.Get(new string[] {accountRequest.Name});
+            var accounts = _accountDbController.Get(new string[] { accountRequest.Name });
 
             if (!accounts.Any())
             {
@@ -131,6 +68,72 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return response;
         }
 
+        /// <summary>
+        /// Register a new account and creates an associated user.
+        /// Requires the name to be unique.
+        /// Returns a JsonWebToken used for authorization in any further calls to the API.
+        /// 
+        /// Example Usage: POST api/account/register
+        /// <param name="accountRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public AccountResponse Register([FromBody] AccountRequest accountRequest)
+        {
+            if (string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
+            {
+                throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
+            }
+
+            User user = new User
+            {
+                Name = accountRequest.Name,
+            };
+            _userDbController.Create(user);
+
+            var account = CreateAccount(accountRequest, user);
+
+            var response = account.ToContract();
+            if (accountRequest.AutoLogin)
+            {
+                response.Token = CreateToken(account);
+            }
+            return response;
+        }
+
+        /// <summary>
+        /// Register a new account for an existing user.
+        /// Requires the name to be unique.
+        /// Returns a JsonWebToken used for authorization in any further calls to the API.
+        /// 
+        /// Example Usage: POST api/account/register
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="accountRequest"></param>
+        /// <returns></returns>
+        [HttpPost("userId")]
+        public AccountResponse Register(int userId, [FromBody] AccountRequest accountRequest)
+        {
+            var users = _userDbController.Get(new[] { userId });
+
+            if (string.IsNullOrWhiteSpace(accountRequest.Name) 
+                || string.IsNullOrWhiteSpace(accountRequest.Password)
+                || !users.Any())
+            {
+                throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
+            }
+            
+            var user = users.ElementAt(0);
+
+            var account = CreateAccount(accountRequest, user);
+
+            var response = account.ToContract();
+            if (accountRequest.AutoLogin)
+            {
+                response.Token = CreateToken(account);
+            }
+            return response;
+        }
+        
         /// <summary>
         /// Delete accounts based on their IDs.
         /// 

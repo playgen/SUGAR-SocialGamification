@@ -54,17 +54,9 @@ namespace PlayGen.SGA.DataController
             using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
-
-                var hasConflicts = context.Games.Any(g => g.Name == game.Name);
-
-                if (hasConflicts)
-                {
-                    throw new DuplicateRecordException(string.Format("A game with the name {0} already exists.", game.Name));
-                }
-
+                
                 context.Games.Add(game);
-                context.SaveChanges();
-
+                SaveChanges(context);
                 return game;
             }
         }
@@ -82,7 +74,7 @@ namespace PlayGen.SGA.DataController
                 var games = context.Games.Where(g => id.Contains(g.Id)).ToList();
 
                 context.Games.RemoveRange(games);
-                context.SaveChanges();
+                SaveChanges(context);
             }
         }
     }

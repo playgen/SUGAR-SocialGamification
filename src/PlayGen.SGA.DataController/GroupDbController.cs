@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Threading.Tasks;
 using PlayGen.SGA.DataAccess;
 using PlayGen.SGA.DataController.Exceptions;
 using PlayGen.SGA.DataModel;
@@ -45,16 +44,8 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                var hasConflicts = context.Groups.Any(g => g.Name == group.Name);
-
-                if (hasConflicts)
-                {
-                    throw new DuplicateRecordException(string.Format("A group with the name {0} already exists.", group.Name));
-                }
-
                 context.Groups.Add(group);
-                context.SaveChanges();
-
+                SaveChanges(context);
                 return group;
             }
         }
@@ -68,7 +59,7 @@ namespace PlayGen.SGA.DataController
                 var groups = context.Groups.Where(g => id.Contains(g.Id)).ToList();
 
                 context.Groups.RemoveRange(groups);
-                context.SaveChanges();
+                SaveChanges(context);
             }
         }
     }

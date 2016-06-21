@@ -161,8 +161,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             var newUserAchievement = new UserAchievement
             {
                 Name = name,
-                GameId = gameId,
-                CompletionCriteria = name
+                GameId = gameId
             };
 
             return _userAchievementDbController.Create(newUserAchievement);

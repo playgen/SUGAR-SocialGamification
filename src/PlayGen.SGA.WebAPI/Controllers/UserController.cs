@@ -59,7 +59,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpPost]
         public ActorResponse Create([FromBody]ActorRequest actor)
         {
-            var user = _userDbController.Create(actor.ToUserModel());
+            var user = actor.ToUserModel();
+            _userDbController.Create(user);
             return user.ToContract();
         }
 

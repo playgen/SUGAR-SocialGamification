@@ -321,12 +321,14 @@ namespace PlayGen.SGA.DataController.UnitTests
         private User CreateUser(string name)
         {
             UserDbController userDbController = new UserDbController(NameOrConnectionString);
-            var newUser = new User
+            var user = new User
             {
                 Name = name,
             };
 
-            return userDbController.Create(newUser);
+            userDbController.Create(user);
+
+            return user;
         }
 
         private Group CreateGroup(string name)

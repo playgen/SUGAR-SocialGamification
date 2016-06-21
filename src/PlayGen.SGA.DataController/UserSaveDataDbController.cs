@@ -38,16 +38,16 @@ namespace PlayGen.SGA.DataController
 
                 if (!actorExists)
                 {
-                    throw new DuplicateRecordException(string.Format("The provided user does not exist."));
+                    throw new MissingRecordException(string.Format("The provided user does not exist."));
                 }
 
                 if (!gameExists)
                 {
-                    throw new DuplicateRecordException(string.Format("The provided game does not exist."));
+                    throw new MissingRecordException(string.Format("The provided game does not exist."));
                 }
 
                 context.UserDatas.Add(data);
-                context.SaveChanges();
+                SaveChanges(context);
                 return data;
             }
         }

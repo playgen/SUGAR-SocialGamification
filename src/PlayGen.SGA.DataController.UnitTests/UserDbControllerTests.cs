@@ -154,12 +154,14 @@ namespace PlayGen.SGA.DataController.UnitTests
         #region Helpers
         private User CreateUser(string name)
         {
-            var newUser = new User
+            var user = new User
             {
                 Name = name,
             };
 
-            return _userDbController.Create(newUser);
+            _userDbController.Create(user);
+
+            return user;
         }
         #endregion
     }
