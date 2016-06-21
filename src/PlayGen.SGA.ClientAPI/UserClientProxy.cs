@@ -8,7 +8,7 @@ using PlayGen.SGA.Contracts.Controllers;
 namespace PlayGen.SGA.ClientAPI
 {
     /// <summary>
-    /// Controller that facilitates Group specific operations.
+    /// Controller that facilitates User specific operations.
     /// </summary>
     public class UserClientProxy : ClientProxy, IUserController
     {
@@ -17,9 +17,9 @@ namespace PlayGen.SGA.ClientAPI
         }
 
         /// <summary>
-        /// Get a list of all Groups.
+        /// Get a list of all Users.
         /// </summary>
-        /// <returns>A list of <see cref="ActorResponse"/> that hold Group details.</returns>
+        /// <returns>A list of <see cref="ActorResponse"/> that hold User details.</returns>
         public IEnumerable<ActorResponse> Get()
         {
             var query = GetUriBuilder("api/game/user").ToString();
@@ -27,9 +27,9 @@ namespace PlayGen.SGA.ClientAPI
         }
 
         /// <summary>
-        /// Get a list of Groups that match <param name="name"/> provided.
+        /// Get a list of Users that match <param name="name"/> provided.
         /// </summary>
-        /// <param name="name">Array of group names.</param>
+        /// <param name="name">Array of User names.</param>
         /// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
         public IEnumerable<ActorResponse> Get(string[] name)
         {
@@ -40,11 +40,11 @@ namespace PlayGen.SGA.ClientAPI
         }
 
         /// <summary>
-        /// Create a new Group.
-        /// Requires the <see cref="ActorRequest.Name"/> to be unique for Groups.
+        /// Create a new User.
+        /// Requires the <see cref="ActorRequest.Name"/> to be unique for Users.
         /// </summary>
-        /// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new Group.</param>
-        /// <returns>A <see cref="ActorResponse"/> containing the new Group details.</returns>
+        /// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new User.</param>
+        /// <returns>A <see cref="ActorResponse"/> containing the new User details.</returns>
         public ActorResponse Create(ActorRequest actor)
         {
             var query = GetUriBuilder("api/user").ToString();
@@ -52,9 +52,9 @@ namespace PlayGen.SGA.ClientAPI
         }
 
         /// <summary>
-        /// Delete groups with the <param name="id"/> provided.
+        /// Delete Users with the <param name="id"/> provided.
         /// </summary>
-        /// <param name="id">Array of Group IDs.</param>
+        /// <param name="id">Array of User IDs.</param>
         public void Delete(int[] id)
         {
             var query = GetUriBuilder("api/user")

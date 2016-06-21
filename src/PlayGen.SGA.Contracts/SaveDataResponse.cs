@@ -1,5 +1,8 @@
 ﻿namespace PlayGen.SGA.Contracts
 {
+    /// <summary>
+    /// Encapsulates savedata details from the server.
+    /// </summary>
     public class SaveDataResponse
     {
         public int ActorId { get; set; }

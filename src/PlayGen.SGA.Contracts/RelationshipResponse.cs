@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace PlayGen.SGA.Contracts
+﻿namespace PlayGen.SGA.Contracts
 {
+    /// <summary>
+    /// Encapsulates relationship details from the server.
+    /// </summary>
     public class RelationshipResponse
     {
         public int RequestorId { get; set; }

@@ -2,6 +2,9 @@
 
 namespace PlayGen.SGA.Contracts
 {
+    /// <summary>
+    /// Encapsulates achievement details returned from the server.
+    /// </summary>
     public class AchievementResponse
     {
         public int Id { get; set; }

@@ -2,6 +2,9 @@
 
 namespace PlayGen.SGA.Contracts
 {
+    /// <summary>
+    /// Encapsulates achievement details.
+    /// </summary>
     public class AchievementRequest
     {
         public int GameId { get; set; }

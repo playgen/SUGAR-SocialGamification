@@ -1,5 +1,8 @@
 ﻿namespace PlayGen.SGA.Contracts
 {
+    /// <summary>
+    /// Encapsulates requirements for completing an achievement.
+    /// </summary>
     public class AchievementCriteria
     {
         public string Key { get; set; }

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace PlayGen.SGA.Contracts
+﻿namespace PlayGen.SGA.Contracts
 {
+    /// <summary>
+    /// Encapsulates relationship details, including updated status of the relationship.
+    /// </summary>
     public class RelationshipStatusUpdate
     {
         public int RequestorId { get; set; }
