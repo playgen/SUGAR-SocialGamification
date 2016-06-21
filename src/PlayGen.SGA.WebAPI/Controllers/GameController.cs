@@ -22,7 +22,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of all Games.
+        /// GetByGame a list of all Games.
         /// 
         /// Example Usage: GET api/game/all
         /// </summary>
@@ -35,7 +35,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of Games that match <param name="name"/> provided.
+        /// GetByGame a list of Games that match <param name="name"/> provided.
         /// 
         /// Example Usage: GET api/game?name=game1&name=game2
         /// </summary>

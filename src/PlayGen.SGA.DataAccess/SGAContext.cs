@@ -49,8 +49,6 @@ namespace PlayGen.SGA.DataAccess
             // Change all string fields to have a max length of 64 chars
             modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
 
-            modelBuilder.Entity<UserAchievement>().Property(a => a.CompletionCriteria).HasMaxLength(1024);
-            modelBuilder.Entity<UserAchievement>().Property(a => a.CompiledCriteria).HasMaxLength(1024);
             modelBuilder.Entity<GroupAchievement>().Property(a => a.CompletionCriteria).HasMaxLength(1024);
             modelBuilder.Entity<GroupAchievement>().Property(a => a.CompiledCriteria).HasMaxLength(1024);
 
@@ -60,6 +58,10 @@ namespace PlayGen.SGA.DataAccess
             modelBuilder.Entity<Group>().Property(g => g.Name).IsUnique();
             modelBuilder.Entity<Account>().Property(a => a.Name).IsUnique();
 
+            // Serialize specific objects as Json objects instead of creating a new table
+            modelBuilder.ComplexType<CompletionCriteriaCollection>()
+                .Property(p => p.Serialised)
+                .HasColumnName("CompletionCriteriasJson");
         }
 
         public override int SaveChanges()

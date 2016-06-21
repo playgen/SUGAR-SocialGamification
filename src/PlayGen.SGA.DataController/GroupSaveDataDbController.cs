@@ -5,11 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using PlayGen.SGA.DataAccess;
 using PlayGen.SGA.DataController.Exceptions;
+using PlayGen.SGA.DataController.Interfaces;
 using PlayGen.SGA.DataModel;
 
 namespace PlayGen.SGA.DataController
 {
-    public class GroupSaveDataDbController : DbController
+    public class GroupSaveDataDbController : DbController, ISaveDataDbController
     {
         public GroupSaveDataDbController(string nameOrConnectionString) : base(nameOrConnectionString)
         {
@@ -50,6 +51,30 @@ namespace PlayGen.SGA.DataController
                 SaveChanges(context);
                 return data;
             }
+        }
+
+        // TODO implement based on the code in UserSaveDataController
+        public float SumFloats(int gameId, int actorId, string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        // TODO implement based on the code in UserSaveDataController
+        public long SumLongs(int gameId, int actorId, string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        // TODO implement based on the code in UserSaveDataController
+        public bool TryGetLatestBool(int gameId, int actorId, string key, out bool latestBool)
+        {
+            throw new NotImplementedException();
+        }
+
+        // TODO implement based on the code in UserSaveDataController
+        public bool TryGetLatestString(int gameId, int actorId, string key, out string latestString)
+        {
+            throw new NotImplementedException();
         }
     }
 }

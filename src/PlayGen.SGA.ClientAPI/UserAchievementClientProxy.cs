@@ -60,7 +60,7 @@ namespace PlayGen.SGA.ClientAPI
             throw new NotImplementedException();
         }
 
-        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, List<int> actorIds)
+        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] actorIds)
         {
             throw new NotImplementedException();
         }

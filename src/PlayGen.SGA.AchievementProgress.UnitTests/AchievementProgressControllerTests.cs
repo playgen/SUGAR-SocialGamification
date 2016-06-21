@@ -12,10 +12,11 @@ using PlayGen.SGA.DataModel;
 using Xunit;
 using DataType = PlayGen.SGA.DataModel.DataType;
 
-namespace PlayGen.SGA.QueryBuilder.UnitTests
+namespace PlayGen.SGA.AchievementProgress.UnitTests
 {
-    public class SQLSaveDataQueryBuilderTests
+    public class AchievementProgressControllerTests
     {
+        /*
         #region Configuration
         private readonly UserDbController _userDbController;
         private readonly GameDbController _gameDbController;
@@ -129,35 +130,6 @@ namespace PlayGen.SGA.QueryBuilder.UnitTests
             bool gotResult = _userSaveDataDbController.TryGetLatestBool(1, 1, "LatestMissingBools", out dbResult);
 
             Assert.False(gotResult);
-        }
-
-        [Fact]
-        public void SingleStringQuery()
-        {
-            // TODO 
-            // sql select
-            // sql with params for table
-            // sql value filter type
-            // sql sum 
-            // sql latest
-            // sql from databaseQueryParams
-
-            User user;
-            Game game;
-            PopulateData("SingleStringQuery", out game, out user);
-            //string query = "SELECT value FROM userdatas WHERE id = 1";
-
-            // Bool
-            //string query = "SELECT value FROM userdatas WHERE id = 1";
-
-            // String
-            // string query = "SELECT value FROM userdatas WHERE id = 1";
-
-            // Float
-            // string query = "SELECT value FROM userdatas WHERE id = 1";
-
-            // Long
-            // string query = "SELECT SUM(CONVERT(@key), BIGINT) WHERE userid = @userid AND gameid = @gameid";
         }
         #endregion
 
@@ -289,6 +261,6 @@ namespace PlayGen.SGA.QueryBuilder.UnitTests
 
             public DataType DataType;
         }
-        #endregion
+        #endregion*/
     }
 }

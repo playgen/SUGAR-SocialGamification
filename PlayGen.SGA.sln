@@ -30,9 +30,9 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SGA.ServerAuthentic
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SGA.WebAPI.UnitTests", "src\PlayGen.SGA.WebAPI.UnitTests\PlayGen.SGA.WebAPI.UnitTests.xproj", "{B8CAA947-18B8-40DD-9B64-33D6B95B0965}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SGA.QueryBuilder", "src\PlayGen.SGA.QueryBuilder\PlayGen.SGA.QueryBuilder.xproj", "{0B4E1081-D98E-445C-BCF0-45CB611315B0}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SGA.AchievementProgress", "src\PlayGen.SGA.AchievementProgress\PlayGen.SGA.AchievementProgress.xproj", "{0B4E1081-D98E-445C-BCF0-45CB611315B0}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SGA.QueryBuilder.UnitTests", "src\PlayGen.SGA.QueryBuilder.UnitTests\PlayGen.SGA.QueryBuilder.UnitTests.xproj", "{68FEF561-CC91-4C49-95F8-6A153A383DB4}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SGA.AchievementProgress.UnitTests", "src\PlayGen.SGA.AchievementProgress.UnitTests\PlayGen.SGA.AchievementProgress.UnitTests.xproj", "{68FEF561-CC91-4C49-95F8-6A153A383DB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

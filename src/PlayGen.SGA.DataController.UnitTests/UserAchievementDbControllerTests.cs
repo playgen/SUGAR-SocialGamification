@@ -28,7 +28,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newAchievement = CreateUserAchievement(userAchievementName);
 
-            var userAchievements = _userAchievementDbController.Get(new int[] { newAchievement.GameId });
+            var userAchievements = _userAchievementDbController.GetByGame(new int[] { newAchievement.GameId });
 
             int matches = userAchievements.Count(g => g.Name == userAchievementName && g.GameId == newAchievement.GameId);
 
@@ -94,7 +94,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             CreateUserAchievement("GetMultipleUserAchievements_DontGetThis");
 
-            var userAchievements = _userAchievementDbController.Get(gameIds.ToArray());
+            var userAchievements = _userAchievementDbController.GetByGame(gameIds.ToArray());
 
             var matchingUserAchievements = userAchievements.Select(g => userAchievementNames.Contains(g.Name));
 
@@ -104,7 +104,7 @@ namespace PlayGen.SGA.DataController.UnitTests
         [Fact]
         public void GetNonExistingUserAchievements()
         {
-            var userAchievements = _userAchievementDbController.Get(new int[] { -1 });
+            var userAchievements = _userAchievementDbController.GetByGame(new int[] { -1 });
 
             Assert.Empty(userAchievements);
         }
@@ -117,12 +117,12 @@ namespace PlayGen.SGA.DataController.UnitTests
             var userAchievement = CreateUserAchievement(userAchievementName);
             var userId = userAchievement.GameId;
 
-            var userAchievements = _userAchievementDbController.Get(new int[] { userId });
+            var userAchievements = _userAchievementDbController.GetByGame(new int[] { userId });
             Assert.Equal(userAchievements.Count(), 1);
             Assert.Equal(userAchievements.ElementAt(0).Name, userAchievementName);
 
             _userAchievementDbController.Delete(new[] { userAchievement.Id });
-            userAchievements = _userAchievementDbController.Get(new int[] { userId });
+            userAchievements = _userAchievementDbController.GetByGame(new int[] { userId });
 
             Assert.Empty(userAchievements);
         }

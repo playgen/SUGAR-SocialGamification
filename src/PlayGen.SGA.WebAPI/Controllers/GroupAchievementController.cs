@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using PlayGen.SGA.AchievementProgress;
 using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.Contracts.Controllers;
@@ -15,14 +16,20 @@ namespace PlayGen.SGA.WebAPI.Controllers
     public class GroupAchievementController : Controller, IGroupAchievementController
     {
         private readonly GroupAchievementDbController _groupAchievementDbController;
+        private readonly GroupDbController _groupDbController;
+        private readonly AchievementProgressController _achievementProgressController;
 
-        public GroupAchievementController(GroupAchievementDbController groupAchievementDbController)
+        public GroupAchievementController(GroupAchievementDbController groupAchievementDbController,
+            GroupDbController groupDbController,
+            GroupSaveDataDbController groupSaveDataDbController)
         {
             _groupAchievementDbController = groupAchievementDbController;
+            _groupDbController = groupDbController;
+            _achievementProgressController = new AchievementProgressController(groupSaveDataDbController);
         }
 
         /// <summary>
-        /// Get a list of GroupAchievements that match <param name="gameId"/>.
+        /// GetByGame a list of GroupAchievements that match <param name="gameId"/>.
         /// 
         /// Example Usage: GET api/groupachievement?gameId=1&gameId=2
         /// </summary>
@@ -66,6 +73,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpGet("{actorId}/progress/{gameId}")]
         public IEnumerable<AchievementProgressResponse> GetProgress(int groupId, int gameId)
         {
+            // TODO take a look at the implementation in UserAchievementController
             throw new NotImplementedException();
         }
 
@@ -73,6 +81,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpGet("{achievemetnId}/progress")]
         public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, [FromBody] List<int> groupIds)
         {
+            // TODO take a look at the implementation in UserAchievementController
             throw new NotImplementedException();
         }
     }

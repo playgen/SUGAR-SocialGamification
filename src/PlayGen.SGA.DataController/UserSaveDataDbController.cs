@@ -7,11 +7,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using PlayGen.SGA.DataAccess;
 using PlayGen.SGA.DataController.Exceptions;
+using PlayGen.SGA.DataController.Interfaces;
 using PlayGen.SGA.DataModel;
 
 namespace PlayGen.SGA.DataController
 {
-    public class UserSaveDataDbController : DbController
+    public class UserSaveDataDbController : DbController, ISaveDataDbController
     {
         public UserSaveDataDbController(string nameOrConnectionString) : base(nameOrConnectionString)
         {

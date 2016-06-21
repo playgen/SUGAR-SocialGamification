@@ -15,13 +15,25 @@ namespace PlayGen.SGA.DataController
         {
         }
 
-        public IEnumerable<UserAchievement> Get(int[] gameIds)
+        public IEnumerable<UserAchievement> GetByGame(int[] gameIds)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
                 SetLog(context);
 
                 var achievements = context.UserAchievements.Where(a => gameIds.Contains(a.GameId)).ToList();
+
+                return achievements;
+            }
+        }
+
+        public IEnumerable<UserAchievement> Get(int[] achievementIds)
+        {
+            using (var context = new SGAContext(NameOrConnectionString))
+            {
+                SetLog(context);
+
+                var achievements = context.UserAchievements.Where(a => achievementIds.Contains(a.Id)).ToList();
 
                 return achievements;
             }

@@ -5,7 +5,7 @@
     "PlayGen.SGA.DataController": "1.0.0-*",
     "PlayGen.SGA.DataController.UnitTests": "1.0.0-*",
     "PlayGen.SGA.DataModel": "1.0.0-*",
-    "PlayGen.SGA.QueryBuilder": "1.0.0-*",
+    "PlayGen.SGA.AchievementProgress": "1.0.0-*",
     "xunit": "2.1.0",
     "xunit.runner.console": "2.1.0",
     "xunit.runner.visualstudio": "2.1.0"
