@@ -10,7 +10,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates User to Group relationship specific operations.
     /// </summary>
-    public class GroupMemberClientProxy : ClientProxy, IGroupMemberController
+    public class GroupMemberClientProxy : ClientProxyBase, IGroupMemberController
     {
         public GroupMemberClientProxy(string baseAddress) : base(baseAddress)
         {

@@ -10,7 +10,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates GroupAchievement specific operations.
     /// </summary>
-    public class GroupAchievementClientProxy : ClientProxy, IGroupAchievementController
+    public class GroupAchievementClientProxy : ClientProxyBase, IGroupAchievementController
     {
         public GroupAchievementClientProxy(string baseAddress) : base(baseAddress)
         {

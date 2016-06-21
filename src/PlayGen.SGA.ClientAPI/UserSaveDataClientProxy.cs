@@ -10,7 +10,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates UserData specific operations.
     /// </summary>
-    public class UserSaveDataClientProxy : ClientProxy, IUserSaveDataController
+    public class UserSaveDataClientProxy : ClientProxyBase, IUserSaveDataController
     {
         public UserSaveDataClientProxy(string baseAddress) : base(baseAddress)
         {

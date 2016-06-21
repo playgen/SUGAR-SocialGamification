@@ -11,7 +11,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates GroupData specific operations.
     /// </summary>
-    public class GroupSaveDataClientProxy : ClientProxy, IGroupSaveDataController
+    public class GroupSaveDataClientProxy : ClientProxyBase, IGroupSaveDataController
     {
         public GroupSaveDataClientProxy(string baseAddress) : base(baseAddress)
         {

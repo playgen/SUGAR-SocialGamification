@@ -10,7 +10,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates User to User relationship specific operations.
     /// </summary>
-    public class UserFriendClientProxy : ClientProxy, IUserFriendController
+    public class UserFriendClientProxy : ClientProxyBase, IUserFriendController
     {
         public UserFriendClientProxy(string baseAddress) : base(baseAddress)
         {
