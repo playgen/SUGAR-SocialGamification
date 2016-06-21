@@ -72,7 +72,7 @@ namespace PlayGen.SGA.ClientAPI
         /// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
         public void UpdateFriend(RelationshipStatusUpdate relationship)
         {
-            var query = GetUriBuilder("api/userfriend/").ToString();
+            var query = GetUriBuilder("api/userfriend").ToString();
             Put(query, relationship);
         }
     }

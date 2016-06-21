@@ -57,7 +57,7 @@ namespace PlayGen.SGA.ClientAPI
         /// <param name="id">Array of Group IDs.</param>
         public void Delete(int[] id)
         {
-            var query = GetUriBuilder("api/game")
+            var query = GetUriBuilder("api/group")
                 .AppendQueryParameters(id, "id={0}")
                 .ToString();
             Delete(query);

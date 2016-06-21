@@ -22,7 +22,7 @@ namespace PlayGen.SGA.ClientAPI
         /// <returns>A list of <see cref="ActorResponse"/> that hold Group details.</returns>
         public IEnumerable<ActorResponse> Get()
         {
-            var query = GetUriBuilder("api/game/user").ToString();
+            var query = GetUriBuilder("api/user").ToString();
             return Get<IEnumerable<ActorResponse>>(query);
         }
 

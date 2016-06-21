@@ -26,7 +26,7 @@ namespace PlayGen.SGA.ClientAPI
         /// <returns>A list of <see cref="SaveDataResponse"/> which match the search criteria.</returns>
         public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] keys)
         {
-            var query = GetUriBuilder("api/game/groupsavedata")
+            var query = GetUriBuilder("api/groupsavedata")
                 .AppendQueryParameters(new int[] { actorId }, "actorId={0}")
                 .AppendQueryParameters(new int[] { gameId }, "gameId={0}")
                 .AppendQueryParameters(keys, "key={0}")
