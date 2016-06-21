@@ -1,6 +1,6 @@
 ﻿namespace PlayGen.SGA.Contracts
 {
-    public class DatabaseQueryParams
+    public class AchievementCriteria
     {
         public string Key { get; set; }
 

@@ -7,7 +7,7 @@ namespace PlayGen.SGA.QueryBuilder
     {
         private readonly string _table = "SaveData";
 
-        public SQLSaveDataQueryBuilder(int gameId, int userId, List<DatabaseQueryParams> dbQueryParams)
+        public SQLSaveDataQueryBuilder(int gameId, int userId, List<AchievementCriteria> dbQueryParams)
         {
 
         }

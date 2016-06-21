@@ -8,6 +8,6 @@ namespace PlayGen.SGA.Contracts
 
         public string Name { get; set; }
 
-        public List<DatabaseQueryParams> CompletionCriteria { get; set; }
+        public List<AchievementCriteria> CompletionCriteria { get; set; }
     }
 }
