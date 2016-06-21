@@ -5,6 +5,7 @@ using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
 using PlayGen.SGA.Contracts;
+using PlayGen.SGA.WebAPI.Exceptions;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
@@ -31,7 +32,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         public IEnumerable<ActorResponse> Get()
         {
             var user = _userDbController.Get();
-            return user.ToContract();
+            var actorContract = user.ToContract();
+            return actorContract;
         }
 
         /// <summary>
@@ -44,8 +46,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<ActorResponse> Get(string[] name)
         {
-            var users = _userDbController.Get(name);
-            return users.ToContract();
+            var user = _userDbController.Get(name);
+            var actorContract = user.ToContract();
+            return actorContract;
         }
 
         /// <summary>
@@ -59,9 +62,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpPost]
         public ActorResponse Create([FromBody]ActorRequest actor)
         {
+            if (actor == null)
+            {
+                throw new NullObjectException("Invalid object passed");
+            }
             var user = actor.ToUserModel();
             _userDbController.Create(user);
-            return user.ToContract();
+            var actorContract = user.ToContract();
+            return actorContract;
         }
 
         /// <summary>

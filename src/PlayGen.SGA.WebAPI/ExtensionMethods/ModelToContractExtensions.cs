@@ -171,7 +171,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return dataContracts;
         }
 
-        public static RelationshipResponse ToContract(this UserToGroupRelationshipRequest relationshipModel)
+        public static RelationshipResponse ToContract(this UserToGroupRelationship relationshipModel)
         {
             var relationshipContract = new RelationshipResponse();
             relationshipContract.RequestorId = relationshipModel.RequestorId;
@@ -180,7 +180,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return relationshipContract;
         }
 
-        public static RelationshipResponse ToContract(this UserToUserRelationshipRequest relationshipModel)
+        public static RelationshipResponse ToContract(this UserToUserRelationship relationshipModel)
         {
             var relationshipContract = new RelationshipResponse();
             relationshipContract.RequestorId = relationshipModel.RequestorId;

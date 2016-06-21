@@ -142,7 +142,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
 
-            _userFriendDbController.UpdateRequest(ConvertRequest(newFriend), true);
+            _userFriendDbController.UpdateRequest(newFriend, true);
 
             var userRequests = _userFriendDbController.GetRequests(newFriend.AcceptorId);
 
@@ -167,7 +167,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
 
-            _userFriendDbController.UpdateRequest(ConvertRequest(newFriend), false);
+            _userFriendDbController.UpdateRequest(newFriend, false);
 
             var userRequests = _userFriendDbController.GetRequests(newFriend.AcceptorId);
 
@@ -228,7 +228,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
 
-            _userFriendDbController.UpdateRequest(ConvertRequest(newFriend), true);
+            _userFriendDbController.UpdateRequest(newFriend, true);
 
             bool hadDuplicateException = false;
 
@@ -254,7 +254,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
 
-            _userFriendDbController.UpdateRequest(ConvertRequest(newFriend), true);
+            _userFriendDbController.UpdateRequest(newFriend, true);
 
             bool hadDuplicateException = false;
 
@@ -280,9 +280,9 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
 
-            _userFriendDbController.UpdateRequest(ConvertRequest(newFriend), true);
+            _userFriendDbController.UpdateRequest(newFriend, true);
 
-            _userFriendDbController.Update(ConvertRequest(newFriend));
+            _userFriendDbController.Update(newFriend);
             var friends = _userFriendDbController.GetFriends(acceptor.Id);
 
             Assert.Empty(friends);
@@ -331,26 +331,16 @@ namespace PlayGen.SGA.DataController.UnitTests
             return user;
         }
 
-        private UserToUserRelationshipRequest CreateUserFriend(int requestor, int acceptor)
+        private UserToUserRelationship CreateUserFriend(int requestor, int acceptor)
         {
-            var newUserFriend = new UserToUserRelationship
+            var userFriend = new UserToUserRelationship
             {
                 RequestorId = requestor,
                 AcceptorId = acceptor
             };
+            _userFriendDbController.Create(userFriend);
 
-            return _userFriendDbController.Create(newUserFriend);
-        }
-
-        private UserToUserRelationship ConvertRequest(UserToUserRelationshipRequest request)
-        {
-            var newUserFriend = new UserToUserRelationship
-            {
-                RequestorId = request.RequestorId,
-                AcceptorId = request.AcceptorId
-            };
-
-            return newUserFriend;
+            return userFriend;
         }
         #endregion
     }

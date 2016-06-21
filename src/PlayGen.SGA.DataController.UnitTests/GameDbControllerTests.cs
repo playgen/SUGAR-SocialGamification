@@ -127,12 +127,14 @@ namespace PlayGen.SGA.DataController.UnitTests
         #region Helpers
         private Game CreateGame(string name)
         {
-            var newGame = new Game
+            var game = new Game
             {
                 Name = name,
             };
 
-            return _gameDbController.Create(newGame);
+            _gameDbController.Create(game);
+
+            return game;
         }
         #endregion
     }

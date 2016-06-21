@@ -5,6 +5,7 @@ using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
 using PlayGen.SGA.Contracts;
+using PlayGen.SGA.WebAPI.Exceptions;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
@@ -34,7 +35,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] key)
         {
             var data = _groupSaveDataDbController.Get(actorId, gameId, key);
-            return data.ToContract();
+            var dataContract = data.ToContract();
+            return dataContract;
         }
 
         /// <summary>
@@ -47,8 +49,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpPost]
         public SaveDataResponse Add([FromBody]SaveDataRequest newData)
         {
-            var data = _groupSaveDataDbController.Create(newData.ToGroupModel());
-            return data.ToContract();
+            if (newData == null)
+            {
+                throw new NullObjectException("Invalid object passed");
+            }
+            var data = newData.ToGroupModel();
+            _groupSaveDataDbController.Create(data);
+            var dataContract = data.ToContract();
+            return dataContract;
         }
     }
 }

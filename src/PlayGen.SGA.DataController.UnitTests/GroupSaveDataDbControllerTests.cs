@@ -143,24 +143,26 @@ namespace PlayGen.SGA.DataController.UnitTests
             GameDbController gameDbController = new GameDbController(NameOrConnectionString);
             if (gameId == 0)
             {
-                Game newgame = new Game
+                Game game = new Game
                 {
                     Name = key
                 };
-                gameId = gameDbController.Create(newgame).Id;
+                gameDbController.Create(game);
+                gameId = game.Id;
             }
 
             GroupDbController groupDbController = new GroupDbController(NameOrConnectionString);
             if (groupId == 0)
             {
-                Group newgroup = new Group
+                Group group = new Group
                 {
                     Name = key
                 };
-                groupId = groupDbController.Create(newgroup).Id;
+                groupDbController.Create(group);
+                groupId = group.Id;
             }
 
-            var newGroupData = new GroupData
+            var groupData = new GroupData
             {
                 Key = key,
                 GameId = gameId,
@@ -168,8 +170,9 @@ namespace PlayGen.SGA.DataController.UnitTests
                 Value = key + " value",
                 DataType = 0
             };
+            _groupDataDbController.Create(groupData);
 
-            return _groupDataDbController.Create(newGroupData);
+            return groupData;
         }
         #endregion
     }

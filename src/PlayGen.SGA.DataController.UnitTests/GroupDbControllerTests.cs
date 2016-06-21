@@ -127,12 +127,13 @@ namespace PlayGen.SGA.DataController.UnitTests
     #region Helpers
     private Group CreateGroup(string name)
     {
-        var newGroup = new Group
+        var group = new Group
         {
             Name = name,
         };
+        _groupDbController.Create(group);
 
-        return _groupDbController.Create(newGroup);
+        return group;
     }
     #endregion
 }

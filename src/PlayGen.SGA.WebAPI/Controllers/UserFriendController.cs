@@ -5,6 +5,7 @@ using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
 using PlayGen.SGA.Contracts;
+using PlayGen.SGA.WebAPI.Exceptions;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
@@ -32,7 +33,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         public IEnumerable<ActorResponse> GetFriendRequests(int userId)
         {
             var actor = _userFriendDbController.GetRequests(userId);
-            return actor.ToContract();
+            var actorContract = actor.ToContract();
+            return actorContract;
         }
 
         /// <summary>
@@ -46,7 +48,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         public IEnumerable<ActorResponse> GetFriends(int userId)
         {
             var actor = _userFriendDbController.GetFriends(userId);
-            return actor.ToContract();
+            var actorContract = actor.ToContract();
+            return actorContract;
         }
 
         /// <summary>
@@ -60,8 +63,21 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpPost]
         public RelationshipResponse CreateFriendRequest([FromBody]RelationshipRequest relationship)
         {
-            var relation = _userFriendDbController.Create(relationship.ToUserModel());
-            return relation.ToContract();
+            if (relationship == null)
+            {
+                throw new NullObjectException("Invalid object passed");
+            }
+            var request = relationship.ToGroupModel();
+            if (relationship.AutoAccept)
+            {
+                _userFriendDbController.Create(relationship.ToUserModel());
+            }
+            else
+            {
+                _userFriendDbController.Create(relationship.ToUserModel());
+            }
+            var relationshipContract = request.ToContract();
+            return relationshipContract;
         }
 
         /// <summary>

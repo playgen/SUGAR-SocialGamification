@@ -27,7 +27,7 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public GroupAchievement Create(GroupAchievement achievement)
+        public void Create(GroupAchievement achievement)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
@@ -49,7 +49,6 @@ namespace PlayGen.SGA.DataController
 
                 context.GroupAchievements.Add(achievement);
                 SaveChanges(context);
-                return achievement;
             }
         }
 

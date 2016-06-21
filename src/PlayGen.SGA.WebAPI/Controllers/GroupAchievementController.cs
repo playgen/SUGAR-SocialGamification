@@ -5,6 +5,7 @@ using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
+using PlayGen.SGA.WebAPI.Exceptions;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
@@ -32,7 +33,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         public IEnumerable<AchievementResponse> Get(int[] gameId)
         {
             var achievement = _groupAchievementDbController.Get(gameId);
-            return achievement.ToContract();
+            var achievementContract = achievement.ToContract();
+            return achievementContract;
         }
 
         /// <summary>
@@ -46,8 +48,14 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpPost]
         public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
         {
-            var achievement = _groupAchievementDbController.Create(newAchievement.ToGroupModel());
-            return achievement.ToContract();
+            if (newAchievement == null)
+            {
+                throw new NullObjectException("Invalid object passed");
+            }
+            var achievement = newAchievement.ToGroupModel();
+            _groupAchievementDbController.Create(achievement);
+            var achievementContract = achievement.ToContract();
+            return achievementContract;
         }
 
         /// <summary>

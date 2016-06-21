@@ -27,7 +27,7 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public UserAchievement Create(UserAchievement achievement)
+        public void Create(UserAchievement achievement)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
@@ -49,7 +49,6 @@ namespace PlayGen.SGA.DataController
 
                 context.UserAchievements.Add(achievement);
                 SaveChanges(context);
-                return achievement;
             }
         }
 

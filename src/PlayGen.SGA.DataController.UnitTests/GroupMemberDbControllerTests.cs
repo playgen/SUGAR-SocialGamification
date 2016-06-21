@@ -142,7 +142,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
 
-            _groupMemberDbController.UpdateRequest(ConvertRequest(newMember), true);
+            _groupMemberDbController.UpdateRequest(newMember, true);
 
             var groupRequests = _groupMemberDbController.GetRequests(newMember.AcceptorId);
 
@@ -167,7 +167,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
 
-            _groupMemberDbController.UpdateRequest(ConvertRequest(newMember), false);
+            _groupMemberDbController.UpdateRequest(newMember, false);
 
             var groupRequests = _groupMemberDbController.GetRequests(newMember.AcceptorId);
 
@@ -228,7 +228,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
 
-            _groupMemberDbController.UpdateRequest(ConvertRequest(newMember), true);
+            _groupMemberDbController.UpdateRequest(newMember, true);
 
             bool hadDuplicateException = false;
 
@@ -254,7 +254,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
 
-            _groupMemberDbController.UpdateRequest(ConvertRequest(newMember), true);
+            _groupMemberDbController.UpdateRequest(newMember, true);
 
             bool hadDuplicateException = false;
 
@@ -280,9 +280,9 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
 
-            _groupMemberDbController.UpdateRequest(ConvertRequest(newMember), true);
+            _groupMemberDbController.UpdateRequest(newMember, true);
 
-            _groupMemberDbController.Update(ConvertRequest(newMember));
+            _groupMemberDbController.Update(newMember);
             var members = _groupMemberDbController.GetMembers(acceptor.Id);
 
             Assert.Empty(members);
@@ -334,34 +334,25 @@ namespace PlayGen.SGA.DataController.UnitTests
         private Group CreateGroup(string name)
         {
             GroupDbController groupDbController = new GroupDbController(NameOrConnectionString);
-            var newGroup = new Group
+            var group = new Group
             {
                 Name = name,
             };
+            groupDbController.Create(group);
 
-            return groupDbController.Create(newGroup);
+            return group;
         }
 
-        private UserToGroupRelationshipRequest CreateGroupMember(int requestor, int acceptor)
+        private UserToGroupRelationship CreateGroupMember(int requestor, int acceptor)
         {
-            var newGroupMember = new UserToGroupRelationship
+            var groupMember = new UserToGroupRelationship
             {
                 RequestorId = requestor,
                 AcceptorId = acceptor
             };
+            _groupMemberDbController.Create(groupMember);
 
-            return _groupMemberDbController.Create(newGroupMember);
-        }
-
-        private UserToGroupRelationship ConvertRequest(UserToGroupRelationshipRequest request)
-        {
-            var newGroupMember = new UserToGroupRelationship
-            {
-                RequestorId = request.RequestorId,
-                AcceptorId = request.AcceptorId
-            };
-
-            return newGroupMember;
+            return groupMember;
         }
         #endregion
     }

@@ -24,7 +24,7 @@ namespace PlayGen.SGA.DataController.UnitTests
                                               "Port=3306;" +
                                               $"Database={DbName};" +
                                               "Uid=root;" +
-                                              "Pwd=;" +
+                                              "Pwd=t0pSECr3t;" +
                                               "Convert Zero Datetime=true;" +
                                               "Allow Zero Datetime=true";
                 }

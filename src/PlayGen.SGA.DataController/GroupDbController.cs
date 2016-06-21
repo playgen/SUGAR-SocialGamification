@@ -38,7 +38,7 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public Group Create(Group group)
+        public void Create(Group group)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
@@ -46,7 +46,6 @@ namespace PlayGen.SGA.DataController
 
                 context.Groups.Add(group);
                 SaveChanges(context);
-                return group;
             }
         }
 

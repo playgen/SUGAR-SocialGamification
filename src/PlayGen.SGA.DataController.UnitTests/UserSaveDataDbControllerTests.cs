@@ -143,11 +143,12 @@ namespace PlayGen.SGA.DataController.UnitTests
             GameDbController gameDbController = new GameDbController(NameOrConnectionString);
             if (gameId == 0)
             {
-                Game newgame = new Game
+                Game game = new Game
                 {
                     Name = key
                 };
-                gameId = gameDbController.Create(newgame).Id;
+                gameDbController.Create(game);
+                gameId = game.Id;
             }
 
             UserDbController userDbController = new UserDbController(NameOrConnectionString);
@@ -161,7 +162,7 @@ namespace PlayGen.SGA.DataController.UnitTests
                 userId = user.Id;
             }
 
-            var newUserData = new UserData
+            var userData = new UserData
             {
                 Key = key,
                 GameId = gameId,
@@ -169,8 +170,8 @@ namespace PlayGen.SGA.DataController.UnitTests
                 Value = key + " value",
                 DataType = 0
             };
-
-            return _userDataDbController.Create(newUserData);
+            _userDataDbController.Create(userData);
+            return userData;
         }
         #endregion
     }

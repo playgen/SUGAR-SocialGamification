@@ -150,20 +150,22 @@ namespace PlayGen.SGA.DataController.UnitTests
         {
             GameDbController gameDbController = new GameDbController(NameOrConnectionString);
             if (gameId == 0) {
-                Game newgame = new Game
+                Game game = new Game
                 {
                     Name = name
                 };
-                gameId = gameDbController.Create(newgame).Id;
+                gameDbController.Create(game);
+                gameId = game.Id;
             }
 
-            var newGroupAchievement = new GroupAchievement
+            var groupAchievement = new GroupAchievement
             {
                 Name = name,
                 GameId = gameId
             };
+            _groupAchievementDbController.Create(groupAchievement);
 
-            return _groupAchievementDbController.Create(newGroupAchievement);
+            return groupAchievement;
         }
         #endregion
     }

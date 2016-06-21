@@ -49,7 +49,7 @@ namespace PlayGen.SGA.DataController
         /// </summary>
         /// <param name="newGame"></param>
         /// <returns></returns>
-        public Game Create(Game game)
+        public void Create(Game game)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
@@ -57,7 +57,6 @@ namespace PlayGen.SGA.DataController
                 
                 context.Games.Add(game);
                 SaveChanges(context);
-                return game;
             }
         }
 

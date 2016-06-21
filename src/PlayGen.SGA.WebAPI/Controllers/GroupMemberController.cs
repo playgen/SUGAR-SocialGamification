@@ -5,6 +5,7 @@ using PlayGen.SGA.DataController;
 using PlayGen.SGA.Contracts.Controllers;
 using PlayGen.SGA.WebAPI.ExtensionMethods;
 using PlayGen.SGA.Contracts;
+using PlayGen.SGA.WebAPI.Exceptions;
 
 namespace PlayGen.SGA.WebAPI.Controllers
 {
@@ -32,7 +33,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
         {
             var actor = _groupMemberDbController.GetRequests(groupId);
-            return actor.ToContract();
+            var actorContract = actor.ToContract();
+            return actorContract;
         }
 
         /// <summary>
@@ -46,7 +48,8 @@ namespace PlayGen.SGA.WebAPI.Controllers
         public IEnumerable<ActorResponse> GetMembers(int groupId)
         {
             var actor = _groupMemberDbController.GetMembers(groupId);
-            return actor.ToContract();
+            var actorContract = actor.ToContract();
+            return actorContract;
         }
 
         /// <summary>
@@ -60,14 +63,18 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpPost]
         public RelationshipResponse CreateMemberRequest([FromBody]RelationshipRequest relationship)
         {
-            var request = _groupMemberDbController.Create(relationship.ToGroupModel());
-            RelationshipRequest relation = new RelationshipRequest
+            if (relationship == null)
             {
-                RequestorId = request.RequestorId,
-                AcceptorId = request.AcceptorId
-            };
-            _groupMemberDbController.UpdateRequest(relation.ToGroupModel(), true);
-            return request.ToContract();
+                throw new NullObjectException("Invalid object passed");
+            }
+            var request = relationship.ToGroupModel();
+            if (relationship.AutoAccept) {
+                _groupMemberDbController.Create(relationship.ToGroupModel());
+            } else {
+                _groupMemberDbController.Create(relationship.ToGroupModel());
+            }
+            var relationshipContract = request.ToContract();
+            return relationshipContract;
         }
 
         /// <summary>
