@@ -25,7 +25,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Get a list of UserAchievements that match <param name="gameId"/>.
         /// 
-        /// Example Usage: GET api/userachievement?gameId=1&gameId=2
+        /// Example Usage: GET api/userachievement?gameId=1amp;gameId=2
         /// </summary>
         /// <param name="gameId">Array of game IDs</param>
         /// <returns>Returns multiple <see cref="GameResponse"/> that hold UserAchievement details</returns>
@@ -39,7 +39,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         /// <summary>
         /// Create a new UserAchievement.
-        /// Requires <see cref="newAchievement.Name"/> to be unique to that <see cref="newAchievement.GameId"/>.
+        /// Requires <see cref="AchievementRequest.Name"/> to be unique to that <see cref="AchievementRequest.GameId"/>.
         /// 
         /// Example Usage: POST api/userachievement/
         /// </summary>
@@ -61,7 +61,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Delete UserAchievements with the <param name="id"/> provided.
         /// 
-        /// Example Usage: DELETE api/userachievement?id=1&id=2
+        /// Example Usage: DELETE api/userachievement?id=1amp;id=2
         /// </summary>
         /// <param name="id">Array of UserAchievement IDs</param>
         [HttpDelete]

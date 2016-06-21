@@ -74,6 +74,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// Returns a JsonWebToken used for authorization in any further calls to the API.
         /// 
         /// Example Usage: POST api/account/register
+        /// </summary>
         /// <param name="accountRequest"></param>
         /// <returns></returns>
         [HttpPost]
@@ -127,11 +128,11 @@ namespace PlayGen.SGA.WebAPI.Controllers
             response.Token = CreateToken(account);
             return response;
         }
-        
+
         /// <summary>
         /// Delete accounts based on their IDs.
         /// 
-        /// Example Usage: DELETE api/account?id=1&id=2
+        /// Example Usage: DELETE api/account?id=1amp;id=2
         /// </summary>
         /// <param name="id"></param>
         [HttpDelete]
