@@ -37,7 +37,17 @@ namespace PlayGen.SGA.QueryBuilder.UnitTests
         [Fact]
         public void SingleStringQuery()
         {
+            // TODO 
+            // sql select
+            // sql with params for table
+            // sql value filter type
+            // sql sum 
+            // sql latest
+            // sql from databaseQueryParams
             PopulateData();
+            string query = "SELECT value FROM userdatas WHERE id = 1";
+            string result = _userSaveDataDbController.Query(query);
+            Console.WriteLine(result);
         }
         #endregion
 

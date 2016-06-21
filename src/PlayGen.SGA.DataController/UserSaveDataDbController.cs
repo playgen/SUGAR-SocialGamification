@@ -27,6 +27,18 @@ namespace PlayGen.SGA.DataController
             }
         }
 
+        public string Query(string query)
+        {
+            using (var context = new SGAContext(NameOrConnectionString))
+            {
+                SetLog(context);
+
+                var result = context.Database.SqlQuery<string>(query).Single();
+
+                return result;
+            }
+        }
+
         public UserData Create(UserData data)
         {
             using (var context = new SGAContext(NameOrConnectionString))
