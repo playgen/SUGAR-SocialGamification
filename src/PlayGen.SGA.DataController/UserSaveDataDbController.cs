@@ -125,25 +125,33 @@ namespace PlayGen.SGA.DataController
             {
                 SetLog(context);
 
-                var actorExists = context.Users.Any(u => u.Id == data.UserId);
-                var gameExists = context.Games.Any(g => g.Id == data.GameId);
+                var actor = context.Users.SingleOrDefault(u => u.Id == data.UserId);
+                var game = context.Games.SingleOrDefault(g => g.Id == data.GameId);
 
-                if (!actorExists)
+                if (actor == null)
                 {
                     throw new MissingRecordException(string.Format("The provided user does not exist."));
                 }
 
-                if (!gameExists)
+                if (game == null)
                 {
                     throw new MissingRecordException(string.Format("The provided game does not exist."));
                 }
 
-                if (context.Entry(data.User).State == EntityState.Detached)
+                if (data.User == null)
+                {
+                    data.User = actor;
+                }
+                else if (context.Entry(data.User).State == EntityState.Detached)
                 {
                     context.Users.Attach(data.User);
                 }
 
-                if (context.Entry(data.Game).State == EntityState.Detached)
+                if (data.Game == null)
+                {
+                    data.Game = game;
+                }               
+                else if (context.Entry(data.Game).State == EntityState.Detached)
                 {
                     context.Games.Attach(data.Game);
                 }

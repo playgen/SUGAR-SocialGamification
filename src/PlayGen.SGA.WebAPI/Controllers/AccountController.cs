@@ -42,7 +42,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
         /// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
         [HttpPut]
-        public AccountResponse Login(AccountRequest accountRequest)
+        public AccountResponse Login([FromBody]AccountRequest accountRequest)
         {
             var accounts = _accountDbController.Get(new string[] { accountRequest.Name });
 
