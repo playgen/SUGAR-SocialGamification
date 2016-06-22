@@ -83,7 +83,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             achievementContract.Id = groupModel.Id;
             achievementContract.Name = groupModel.Name;
             achievementContract.GameId = groupModel.GameId;
-            achievementContract.CompletionCriteria = JsonConvert.DeserializeObject<List<AchievementCriteria>>(groupModel.CompletionCriteria);
+            achievementContract.CompletionCriteria = groupModel.CompletionCriteriaCollection.ToContract();
 
             return achievementContract;
         }

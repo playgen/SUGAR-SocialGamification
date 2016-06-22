@@ -84,7 +84,7 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             var achieveModel = new GroupAchievement();
             achieveModel.Name = achieveContract.Name;
             achieveModel.GameId = achieveContract.GameId;
-            achieveModel.CompletionCriterias = achieveContract.CompletionCriteria.ToModel();
+            achieveModel.CompletionCriteriaCollection = achieveContract.CompletionCriteria.ToModel();
 
             return achieveModel;
         }

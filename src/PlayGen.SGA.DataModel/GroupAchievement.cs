@@ -14,10 +14,6 @@ namespace PlayGen.SGA.DataModel
 
         public string Name { get; set; }
 
-        public string CompletionCriteria { get; set; }
-
-        public string CompiledCriteria { get; set; }
-
-        public virtual CompletionCriteriaCollection CompletionCriterias { get; set; }
+        public virtual CompletionCriteriaCollection CompletionCriteriaCollection { get; set; }
     }
 }

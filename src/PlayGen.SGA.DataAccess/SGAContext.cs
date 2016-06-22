@@ -33,6 +33,7 @@ namespace PlayGen.SGA.DataAccess
         public DbSet<User> Users { get; set; }
         public DbSet<UserAchievement> UserAchievements { get; set; }
         public DbSet<UserData> UserDatas { get; set; }
+
         public DbSet<UserToUserRelationshipRequest> UserToUserRelationshipRequests { get; set; }
         public DbSet<UserToUserRelationship> UserToUserRelationships { get; set; }
         public DbSet<UserToGroupRelationshipRequest> UserToGroupRelationshipRequests { get; set; }
@@ -45,12 +46,6 @@ namespace PlayGen.SGA.DataAccess
             modelBuilder.Entity<UserToUserRelationship>().HasRequired(u => u.Acceptor).WithMany(u => u.Acceptors).HasForeignKey(u => u.AcceptorId);
             modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Requestor).WithMany(u => u.RequestRequestors).HasForeignKey(u => u.RequestorId);
             modelBuilder.Entity<UserToUserRelationshipRequest>().HasRequired(u => u.Acceptor).WithMany(u => u.RequestAcceptors).HasForeignKey(u => u.AcceptorId);
-            
-            // Change all string fields to have a max length of 64 chars
-            modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
-
-            modelBuilder.Entity<GroupAchievement>().Property(a => a.CompletionCriteria).HasMaxLength(1024);
-            modelBuilder.Entity<GroupAchievement>().Property(a => a.CompiledCriteria).HasMaxLength(1024);
 
             // Setup unique fields
             modelBuilder.Entity<Game>().Property(g => g.Name).IsUnique();
@@ -61,7 +56,11 @@ namespace PlayGen.SGA.DataAccess
             // Serialize specific objects as Json objects instead of creating a new table
             modelBuilder.ComplexType<CompletionCriteriaCollection>()
                 .Property(p => p.Serialised)
-                .HasColumnName("CompletionCriteriasJson");
+                .HasColumnName("CompletionCriteria");
+            modelBuilder.ComplexType<CompletionCriteriaCollection>().Property(a => a.Serialised).HasMaxLength(1024);
+
+            // Change all string fields to have a max length of 64 chars
+            modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
         }
 
         public override int SaveChanges()
