@@ -23,7 +23,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// GetByGame a list of all Users that have relationship requests for this <param name="userId"/>.
+        /// Get a list of all Users that have relationship requests for this <param name="userId"/>.
         /// 
         /// Example Usage: GET api/userfriend/requests?userId=1
         /// </summary>
@@ -38,7 +38,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// GetByGame a list of all Users that have relationships with this <param name="userId"/>.
+        /// Get a list of all Users that have relationships with this <param name="userId"/>.
         /// 
         /// Example Usage: GET api/userfriend/friends?userId=1
         /// </summary>
@@ -68,14 +68,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
                 throw new NullObjectException("Invalid object passed");
             }
             var request = relationship.ToGroupModel();
-            if (relationship.AutoAccept)
-            {
-                _userFriendDbController.Create(relationship.ToUserModel());
-            }
-            else
-            {
-                _userFriendDbController.Create(relationship.ToUserModel());
-            }
+            _userFriendDbController.Create(relationship.ToUserModel(), relationship.AutoAccept);
             var relationshipContract = request.ToContract();
             return relationshipContract;
         }

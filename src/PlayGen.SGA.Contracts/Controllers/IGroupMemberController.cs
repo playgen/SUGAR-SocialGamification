@@ -8,6 +8,8 @@ namespace PlayGen.SGA.Contracts.Controllers
 
         IEnumerable<ActorResponse> GetMembers(int groupId);
 
+        IEnumerable<ActorResponse> GetUserGroups(int userId);
+
         RelationshipResponse CreateMemberRequest(RelationshipRequest relationship);
 
         void UpdateMemberRequest(RelationshipStatusUpdate relationship);

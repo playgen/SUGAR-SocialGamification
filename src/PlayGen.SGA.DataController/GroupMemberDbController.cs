@@ -39,7 +39,19 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public void Create(UserToGroupRelationship newRelation)
+        public IEnumerable<Group> GetUserGroups(int id)
+        {
+            using (var context = new SGAContext(NameOrConnectionString))
+            {
+                SetLog(context);
+
+                var acceptors = context.UserToGroupRelationships.Where(r => r.RequestorId == id).Select(u => u.Acceptor).ToList();
+
+                return acceptors;
+            }
+        }
+
+        public void Create(UserToGroupRelationship newRelation, bool autoAccept)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
@@ -67,12 +79,21 @@ namespace PlayGen.SGA.DataController
                     throw new MissingRecordException(string.Format("The targeted group does not exist."));
                 }
 
-                var relation = new UserToGroupRelationshipRequest
-                {
-                    RequestorId = newRelation.RequestorId,
-                    AcceptorId = newRelation.AcceptorId
-                };
-                context.UserToGroupRelationshipRequests.Add(relation);
+                if (autoAccept) {
+                    var relation = new UserToGroupRelationship
+                    {
+                        RequestorId = newRelation.RequestorId,
+                        AcceptorId = newRelation.AcceptorId
+                    };
+                    context.UserToGroupRelationships.Add(relation);
+                } else {
+                    var relation = new UserToGroupRelationshipRequest
+                    {
+                        RequestorId = newRelation.RequestorId,
+                        AcceptorId = newRelation.AcceptorId
+                    };
+                    context.UserToGroupRelationshipRequests.Add(relation);
+                }
                 SaveChanges(context);
             }
         }

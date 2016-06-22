@@ -23,7 +23,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// GetByGame a list of all Users that have relationship requests for this <param name="groupId"/>.
+        /// Get a list of all Users that have relationship requests for this <param name="groupId"/>.
         /// 
         /// Example Usage: GET api/groupmember/requests?groupId=1
         /// </summary>
@@ -38,7 +38,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// GetByGame a list of all Users that have relationships with this <param name="groupId"/>.
+        /// Get a list of all Users that have relationships with this <param name="groupId"/>.
         /// 
         /// Example Usage: GET api/groupmember/members?groupId=1
         /// </summary>
@@ -48,6 +48,21 @@ namespace PlayGen.SGA.WebAPI.Controllers
         public IEnumerable<ActorResponse> GetMembers(int groupId)
         {
             var actor = _groupMemberDbController.GetMembers(groupId);
+            var actorContract = actor.ToContract();
+            return actorContract;
+        }
+
+        /// <summary>
+        /// Get a list of all Groups that have relationships with this <param name="userId"/>.
+        /// 
+        /// Example Usage: GET api/groupmember/usergroups?userId=1
+        /// </summary>
+        /// <param name="userId">ID of the User.</param>
+        /// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+        [HttpGet("usergroups")]
+        public IEnumerable<ActorResponse> GetUserGroups(int userId)
+        {
+            var actor = _groupMemberDbController.GetUserGroups(userId);
             var actorContract = actor.ToContract();
             return actorContract;
         }
@@ -68,11 +83,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
                 throw new NullObjectException("Invalid object passed");
             }
             var request = relationship.ToGroupModel();
-            if (relationship.AutoAccept) {
-                _groupMemberDbController.Create(relationship.ToGroupModel());
-            } else {
-                _groupMemberDbController.Create(relationship.ToGroupModel());
-            }
+            _groupMemberDbController.Create(relationship.ToGroupModel(), relationship.AutoAccept);
             var relationshipContract = request.ToContract();
             return relationshipContract;
         }

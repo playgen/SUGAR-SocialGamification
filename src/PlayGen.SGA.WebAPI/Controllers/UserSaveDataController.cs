@@ -23,7 +23,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// GetByGame a list of all UserData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+        /// Get a list of all UserData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
         /// 
         /// Example Usage: GET api/usersavedata?actorId=1amp;gameId=1amp;key=key1amp;key=key2
         /// </summary>

@@ -41,7 +41,7 @@ namespace PlayGen.SGA.DataController
             }
         }
 
-        public void Create(UserToUserRelationship newRelation)
+        public void Create(UserToUserRelationship newRelation, bool autoAccept)
         {
             using (var context = new SGAContext(NameOrConnectionString))
             {
@@ -69,13 +69,21 @@ namespace PlayGen.SGA.DataController
                 {
                     throw new MissingRecordException(string.Format("The targeted user does not exist."));
                 }
-
-                var relation = new UserToUserRelationshipRequest
-                {
-                    RequestorId = newRelation.RequestorId,
-                    AcceptorId = newRelation.AcceptorId
-                };
-                context.UserToUserRelationshipRequests.Add(relation);
+                if (autoAccept) {
+                    var relation = new UserToUserRelationship
+                    {
+                        RequestorId = newRelation.RequestorId,
+                        AcceptorId = newRelation.AcceptorId
+                    };
+                    context.UserToUserRelationships.Add(relation);
+                } else {
+                    var relation = new UserToUserRelationshipRequest
+                    {
+                        RequestorId = newRelation.RequestorId,
+                        AcceptorId = newRelation.AcceptorId
+                    };
+                    context.UserToUserRelationshipRequests.Add(relation);
+                }
                 SaveChanges(context);
             }
         }

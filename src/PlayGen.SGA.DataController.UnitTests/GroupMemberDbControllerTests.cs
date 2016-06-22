@@ -350,7 +350,7 @@ namespace PlayGen.SGA.DataController.UnitTests
                 RequestorId = requestor,
                 AcceptorId = acceptor
             };
-            _groupMemberDbController.Create(groupMember);
+            _groupMemberDbController.Create(groupMember, false);
 
             return groupMember;
         }

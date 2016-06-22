@@ -338,7 +338,7 @@ namespace PlayGen.SGA.DataController.UnitTests
                 RequestorId = requestor,
                 AcceptorId = acceptor
             };
-            _userFriendDbController.Create(userFriend);
+            _userFriendDbController.Create(userFriend, false);
 
             return userFriend;
         }

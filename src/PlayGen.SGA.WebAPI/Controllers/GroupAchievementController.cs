@@ -30,7 +30,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// GetByGame a list of GroupAchievements that match <param name="gameId"/>.
+        /// Get a list of GroupAchievements that match <param name="gameId"/>.
         /// 
         /// Example Usage: GET api/groupachievement?gameId=1amp;gameId=2
         /// </summary>

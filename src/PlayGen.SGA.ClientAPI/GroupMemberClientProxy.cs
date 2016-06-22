@@ -43,6 +43,19 @@ namespace PlayGen.SGA.ClientAPI
         }
 
         /// <summary>
+        /// Get a list of all Groups that have relationships with this <param name="userId"/>.
+        /// </summary>
+        /// <param name="userId">ID of the User.</param>
+        /// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+        public IEnumerable<ActorResponse> GetUserGroups(int userId)
+        {
+            var query = GetUriBuilder("api/groupmember/usergroups")
+                .AppendQueryParameters(new int[] { userId }, "userId={0}")
+                .ToString();
+            return Get<IEnumerable<ActorResponse>>(query);
+        }
+
+        /// <summary>
         /// Create a new relationship request between the User and Group.
         /// Requires a relationship between the User and Group to not already exist.
         /// </summary>
