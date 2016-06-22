@@ -31,7 +31,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// GetByGame a list of UserAchievements that match <param name="gameId"/>.
+        /// Get a list of UserAchievements that match <param name="gameId"/>.
         /// 
         /// Example Usage: GET api/userachievement?gameId=1amp;gameId=2
         /// </summary>
@@ -78,8 +78,15 @@ namespace PlayGen.SGA.WebAPI.Controllers
             _userAchievementDbController.Delete(id);
         }
 
-        // GET api/userachievement/2/3
-        [HttpGet("{actorId}/progress/{gameId}")]
+        /// <summary>
+        /// Get the current progress for all achievements for a <param name="gameId"/> for <param name="userId"/>.
+        /// 
+        /// Example Usage: GET api/userachievement/gameprogress?gameId=1amp;userId=1
+        /// </summary>
+        /// <param name="userId">ID of User</param>
+        /// <param name="gameId">ID of Game</param>
+        /// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current user progress toward achievement.</returns>
+        [HttpGet("gameprogress")]
         public IEnumerable<AchievementProgressResponse> GetProgress(int userId, int gameId)
         {
             var achievementResponses = new List<AchievementProgressResponse>();
@@ -103,9 +110,16 @@ namespace PlayGen.SGA.WebAPI.Controllers
             return achievementResponses;
         }
 
-        // GET api/userachievement/3
-        [HttpGet("{achievemetnId}/progress")]
-        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, [FromBody] int[] userIds)
+        /// <summary>
+        /// Get the current progress for an <param name="achievementId"/> for <param name="userId"/>.
+        /// 
+        /// Example Usage: GET api/userachievement/progress?achievementId=1amp;userId=1amp;userId=2
+        /// </summary>
+        /// <param name="achievementId">ID of Achievement</param>
+        /// <param name="userIds">Array of User IDs</param>
+        /// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current user progress toward achievement.</returns>
+        [HttpGet("progress")]
+        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] userId)
         {
             var achievementResponses = new List<AchievementProgressResponse>();
             var achievements = _userAchievementDbController.Get(new int[] {achievementId});
@@ -116,7 +130,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
                 throw new ArgumentOutOfRangeException();
             }
 
-            var users = _userDbController.Get(userIds);
+            var users = _userDbController.Get(userId);
 
             if (!users.Any())
             {
@@ -136,7 +150,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
                 {
                     Name = achievement.Name,
                     Progress = completed ? 1 : 0,
-                    Actor = user.ToContract(),
+                    Actor = user.ToContract()
                 };
 
                 achievementResponses.Add(achievementProgress);
