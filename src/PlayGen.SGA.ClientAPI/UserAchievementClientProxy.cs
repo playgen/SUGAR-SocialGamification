@@ -10,7 +10,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates UserAchievement specific operations.
     /// </summary>
-    public class UserAchievementClientProxy : ClientProxy, IUserAchievementController
+    public class UserAchievementClientProxy : ClientProxyBase, IUserAchievementController
     {
         public UserAchievementClientProxy(string baseAddress) : base(baseAddress)
         {
@@ -60,7 +60,7 @@ namespace PlayGen.SGA.ClientAPI
             throw new NotImplementedException();
         }
 
-        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, List<int> actorIds)
+        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] actorIds)
         {
             throw new NotImplementedException();
         }

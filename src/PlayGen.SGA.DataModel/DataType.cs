@@ -5,6 +5,6 @@
         String = 0,
         Long,
         Float,
-        DateTime
+        Boolean
     }
 }

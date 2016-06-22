@@ -11,7 +11,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates Account specific operations.
     /// </summary>
-    public class AccountClientProxy : ClientProxy, IAccountController
+    public class AccountClientProxy : ClientProxyBase, IAccountController
     {
         public AccountClientProxy(string baseAddress) : base(baseAddress)
         {

@@ -23,7 +23,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of all Users.
+        /// GetByGame a list of all Users.
         /// 
         /// Example Usage: GET api/user/all
         /// </summary>
@@ -37,7 +37,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of Users that match <param name="name"/> provided.
+        /// GetByGame a list of Users that match <param name="name"/> provided.
         /// 
         /// Example Usage: GET api/user?name=user1amp;name=user2
         /// </summary>

@@ -82,16 +82,35 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
         }
 
         [Fact]
+        public void RegisterNewUser()
+        {
+            var accountRequest = CreatAccountRequest("RegisterNewUser", "RegisterNewUserPassword");
+
+            var response = _accountController.Register(accountRequest);
+
+            Assert.NotEqual(null, response.User);
+            Assert.Equal(null, response.Token);
+        }
+
+        [Fact]
         public void RegisterNewUserAndLogin()
         {
             var accountRequest = CreatAccountRequest("RegisterNewUserAndLogin", "RegisterNewUserAndLoginPassword");
+            accountRequest.AutoLogin = true;
 
             var response = _accountController.Register(accountRequest);
 
             Assert.NotEqual(null, response.User);
             Assert.NotEqual(null, response.Token);
+        }
 
-            response = _accountController.Login(accountRequest);
+        [Fact]
+        public void LoginUser()
+        {
+            var accountRequest = CreatAccountRequest("LoginUser", "LoginUserPassword");
+
+            _accountController.Register(accountRequest);
+            var response = _accountController.Login(accountRequest);
 
             Assert.NotEqual(null, response.User);
             Assert.NotEqual(null, response.Token);
@@ -132,7 +151,7 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
             var response = _accountController.Register(user.Id, accountRequest);
 
             Assert.NotEqual(null, response.User);
-            Assert.NotEqual(null, response.Token);
+            Assert.Equal(null, response.Token);
 
             response = _accountController.Login(accountRequest);
 
@@ -194,6 +213,7 @@ namespace PlayGen.SGA.WebAPI.UnitTests.Controllers
             {
                 Name = name,
                 Password = password,
+                AutoLogin = false,
             };
         }
         #endregion

@@ -94,7 +94,10 @@ namespace PlayGen.SGA.WebAPI.Controllers
             var account = CreateAccount(accountRequest, user);
 
             var response = account.ToContract();
-            response.Token = CreateToken(account);
+            if (accountRequest.AutoLogin)
+            {
+                response.Token = CreateToken(account);
+            }
             return response;
         }
 
@@ -125,7 +128,10 @@ namespace PlayGen.SGA.WebAPI.Controllers
             var account = CreateAccount(accountRequest, user);
 
             var response = account.ToContract();
-            response.Token = CreateToken(account);
+            if (accountRequest.AutoLogin)
+            {
+                response.Token = CreateToken(account);
+            }
             return response;
         }
 

@@ -11,7 +11,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates Game specific operations.
     /// </summary>
-    public class GameClientProxy : ClientProxy, IGameController
+    public class GameClientProxy : ClientProxyBase, IGameController
     {
         public GameClientProxy(string baseAddress) : base(baseAddress)
         {

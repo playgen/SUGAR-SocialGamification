@@ -17,5 +17,7 @@ namespace PlayGen.SGA.DataModel
         public string CompletionCriteria { get; set; }
 
         public string CompiledCriteria { get; set; }
+
+        public virtual CompletionCriteriaCollection CompletionCriterias { get; set; }
     }
 }

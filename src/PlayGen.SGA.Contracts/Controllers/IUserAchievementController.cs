@@ -12,6 +12,6 @@ namespace PlayGen.SGA.Contracts.Controllers
 
         IEnumerable<AchievementProgressResponse> GetProgress(int userId, int gameId);
 
-        IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, List<int> actorIds);
+        IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] userIds);
     }
 }

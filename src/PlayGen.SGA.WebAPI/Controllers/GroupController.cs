@@ -23,7 +23,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of all Groups.
+        /// GetByGame a list of all Groups.
         /// 
         /// Example Usage: GET api/group/all
         /// </summary>
@@ -37,7 +37,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of Groups that match <param name="name"/> provided.
+        /// GetByGame a list of Groups that match <param name="name"/> provided.
         /// 
         /// Example Usage: GET api/group?name=group1amp;name=group2
         /// </summary>

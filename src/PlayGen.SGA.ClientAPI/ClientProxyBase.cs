@@ -8,11 +8,11 @@ using Newtonsoft.Json;
 
 namespace PlayGen.SGA.ClientAPI
 {
-    public abstract class ClientProxy
+    public abstract class ClientProxyBase
     {
         private readonly string _baseAddress;
 
-        protected ClientProxy(string baseAddress)
+        protected ClientProxyBase(string baseAddress)
         {
             if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
             {

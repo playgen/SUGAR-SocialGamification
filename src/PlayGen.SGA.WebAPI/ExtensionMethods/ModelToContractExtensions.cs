@@ -106,9 +106,33 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             achievementContract.Id = userModel.Id;
             achievementContract.Name = userModel.Name;
             achievementContract.GameId = userModel.GameId;
-            achievementContract.CompletionCriteria = JsonConvert.DeserializeObject<List<AchievementCriteria>>(userModel.CompletionCriteria);
+            achievementContract.CompletionCriteria = userModel.CompletionCriteriaCollection.ToContract();
 
             return achievementContract;
+        }
+
+        // TODO test - again can probably do with linq
+        public static List<AchievementCriteria> ToContract(this CompletionCriteriaCollection completionCriteriaCollection)
+        {
+            var achievementCriterias = new List<AchievementCriteria>();
+            foreach (var completionCriteria in completionCriteriaCollection)
+            {
+                achievementCriterias.Add(completionCriteria.ToContract());
+            }
+
+            return achievementCriterias;
+        }
+
+        // TODO test
+        public static AchievementCriteria ToContract(this CompletionCriteria completionCriteria)
+        {
+            return new AchievementCriteria
+            {
+                Key = completionCriteria.Key,
+                DataType = (Contracts.DataType) completionCriteria.DataType,
+                ComparisonType = (Contracts.ComparisonType) completionCriteria.ComparisonType,
+                Value = completionCriteria.Value,
+            };
         }
 
         public static IEnumerable<AchievementResponse> ToContract(this IEnumerable<UserAchievement> userModels)

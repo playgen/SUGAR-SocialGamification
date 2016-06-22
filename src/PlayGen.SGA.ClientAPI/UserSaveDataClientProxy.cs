@@ -10,7 +10,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates UserData specific operations.
     /// </summary>
-    public class UserSaveDataClientProxy : ClientProxy, IUserSaveDataController
+    public class UserSaveDataClientProxy : ClientProxyBase, IUserSaveDataController
     {
         public UserSaveDataClientProxy(string baseAddress) : base(baseAddress)
         {
@@ -25,7 +25,7 @@ namespace PlayGen.SGA.ClientAPI
         /// <returns>A list of <see cref="SaveDataResponse"/> which match the search criteria.</returns>
         public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] keys)
         {
-            var query = GetUriBuilder("api/game/usersavedata")
+            var query = GetUriBuilder("api/usersavedata")
                 .AppendQueryParameters(new int[] { actorId }, "actorId={0}")
                 .AppendQueryParameters(new int[] { gameId }, "gameId={0}")
                 .AppendQueryParameters(keys, "key={0}")
@@ -40,7 +40,7 @@ namespace PlayGen.SGA.ClientAPI
         /// <returns>A <see cref="SaveDataResponse"/> containing the new UserData details.</returns>
         public SaveDataResponse Add(SaveDataRequest data)
         {
-            var query = GetUriBuilder("api/userfriend").ToString();
+            var query = GetUriBuilder("api/usersavedata").ToString();
             return Post<SaveDataRequest, SaveDataResponse>(query, data);
         }
     }

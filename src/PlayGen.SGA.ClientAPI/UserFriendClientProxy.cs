@@ -10,7 +10,7 @@ namespace PlayGen.SGA.ClientAPI
     /// <summary>
     /// Controller that facilitates User to User relationship specific operations.
     /// </summary>
-    public class UserFriendClientProxy : ClientProxy, IUserFriendController
+    public class UserFriendClientProxy : ClientProxyBase, IUserFriendController
     {
         public UserFriendClientProxy(string baseAddress) : base(baseAddress)
         {
@@ -72,7 +72,7 @@ namespace PlayGen.SGA.ClientAPI
         /// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
         public void UpdateFriend(RelationshipStatusUpdate relationship)
         {
-            var query = GetUriBuilder("api/userfriend/").ToString();
+            var query = GetUriBuilder("api/userfriend").ToString();
             Put(query, relationship);
         }
     }

@@ -23,7 +23,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of all Users that have relationship requests for this <param name="userId"/>.
+        /// GetByGame a list of all Users that have relationship requests for this <param name="userId"/>.
         /// 
         /// Example Usage: GET api/userfriend/requests?userId=1
         /// </summary>
@@ -38,7 +38,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of all Users that have relationships with this <param name="userId"/>.
+        /// GetByGame a list of all Users that have relationships with this <param name="userId"/>.
         /// 
         /// Example Usage: GET api/userfriend/friends?userId=1
         /// </summary>

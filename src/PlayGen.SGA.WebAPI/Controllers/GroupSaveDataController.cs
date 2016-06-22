@@ -13,9 +13,9 @@ namespace PlayGen.SGA.WebAPI.Controllers
     /// Web Controller that facilitates GroupData specific operations.
     /// </summary>
     [Route("api/[controller]")]
-    public class GroupSaveDataController : Controller, IGroupSaveDataController
+    public class GroupSaveDataController : Controller
     {
-        private GroupSaveDataDbController _groupSaveDataDbController;
+        private readonly GroupSaveDataDbController _groupSaveDataDbController;
 
         public GroupSaveDataController(GroupSaveDataDbController groupSaveDataDbController)
         {
@@ -23,7 +23,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Get a list of all GroupData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+        /// GetByGame a list of all GroupData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
         /// 
         /// Example Usage: GET api/groupsavedata?actorId=1amp;gameId=1amp;key=key1amp;key=key2
         /// </summary>
