@@ -37,11 +37,11 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// Logs in an account based on the name and password combination.
         /// Returns a JsonWebToken used for authorization in any further calls to the API.
         /// 
-        /// Example Usage: POST api/account
+        /// Example Usage: PUT api/account
         /// </summary>
-        /// <param name="accountRequest"></param>
-        /// <returns></returns>
-        [HttpGet]
+        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
+        /// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
+        [HttpPut]
         public AccountResponse Login(AccountRequest accountRequest)
         {
             var accounts = _accountDbController.Get(new string[] { accountRequest.Name });
@@ -73,10 +73,10 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// Requires the name to be unique.
         /// Returns a JsonWebToken used for authorization in any further calls to the API.
         /// 
-        /// Example Usage: POST api/account/register
+        /// Example Usage: POST api/account
         /// </summary>
-        /// <param name="accountRequest"></param>
-        /// <returns></returns>
+        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
+        /// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
         [HttpPost]
         public AccountResponse Register([FromBody] AccountRequest accountRequest)
         {
@@ -103,11 +103,11 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// Requires the name to be unique.
         /// Returns a JsonWebToken used for authorization in any further calls to the API.
         /// 
-        /// Example Usage: POST api/account/register
+        /// Example Usage: POST api/account/userId?userId=1
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="accountRequest"></param>
-        /// <returns></returns>
+        // <param name="userId">ID of the existing User.</param>
+        /// <param name="newAccount"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
+        /// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
         [HttpPost("userId")]
         public AccountResponse Register(int userId, [FromBody] AccountRequest accountRequest)
         {
@@ -130,11 +130,11 @@ namespace PlayGen.SGA.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Delete accounts based on their IDs.
+        /// Delete Accounts with the IDs provided.
         /// 
         /// Example Usage: DELETE api/account?id=1amp;id=2
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Array of Account IDs.</param>
         [HttpDelete]
         public void Delete(int[] id)
         {

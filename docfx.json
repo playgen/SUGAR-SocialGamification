@@ -8,7 +8,7 @@
           "cwd": ""
         },
         {
-          "files": [ "**/*.csproj", "**/project.json" ],
+          "files": [ "**/*.csproj", "PlayGen.SGA.Contracts/project.json", "PlayGen.SGA.ClientAPI/project.json", "PlayGen.SGA.WebAPI/project.json" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "cwd": "src"
         }
