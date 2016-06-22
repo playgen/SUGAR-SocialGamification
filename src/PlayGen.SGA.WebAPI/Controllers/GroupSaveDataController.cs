@@ -25,7 +25,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Get a list of all GroupData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
         /// 
-        /// Example Usage: GET api/groupsavedata?actorId=1amp;gameId=1amp;key=key1amp;key=key2
+        /// Example Usage: GET api/groupsavedata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
         /// </summary>
         /// <param name="actorId">ID of a Group.</param>
         /// <param name="gameId">ID of a Game.</param>

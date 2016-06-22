@@ -39,7 +39,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Get a list of Groups that match <param name="name"/> provided.
         /// 
-        /// Example Usage: GET api/group?name=group1amp;name=group2
+        /// Example Usage: GET api/group?name=group1&amp;name=group2
         /// </summary>
         /// <param name="name">Array of group names.</param>
         /// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
@@ -75,7 +75,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Delete groups with the <param name="id"/> provided.
         /// 
-        /// Example Usage: DELETE api/group?id=1amp;id=2
+        /// Example Usage: DELETE api/group?id=1&amp;id=2
         /// </summary>
         /// <param name="id">Array of Group IDs.</param>
         [HttpDelete]

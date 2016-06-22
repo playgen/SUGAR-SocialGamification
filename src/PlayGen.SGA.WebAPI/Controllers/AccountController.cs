@@ -138,7 +138,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Delete Accounts with the IDs provided.
         /// 
-        /// Example Usage: DELETE api/account?id=1amp;id=2
+        /// Example Usage: DELETE api/account?id=1&amp;id=2
         /// </summary>
         /// <param name="id">Array of Account IDs.</param>
         [HttpDelete]

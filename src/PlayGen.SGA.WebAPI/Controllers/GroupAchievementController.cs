@@ -32,7 +32,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Get a list of GroupAchievements that match <param name="gameId"/>.
         /// 
-        /// Example Usage: GET api/groupachievement?gameId=1amp;gameId=2
+        /// Example Usage: GET api/groupachievement?gameId=1&amp;gameId=2
         /// </summary>
         /// <param name="gameId">Array of game IDs</param>
         /// <returns>Returns multiple <see cref="GameResponse"/> that hold GroupAchievement details</returns>
@@ -68,7 +68,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Delete GroupAchievements with the <param name="id"/> provided.
         /// 
-        /// Example Usage: DELETE api/groupachievement?id=1amp;id=2
+        /// Example Usage: DELETE api/groupachievement?id=1&amp;id=2
         /// </summary>
         /// <param name="id">Array of GroupAchievement IDs</param>
         [HttpDelete]

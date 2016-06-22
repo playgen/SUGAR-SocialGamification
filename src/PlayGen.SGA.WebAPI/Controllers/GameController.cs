@@ -39,7 +39,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Get a list of Games that match <param name="name"/> provided.
         /// 
-        /// Example Usage: GET api/game?name=game1amp;name=game2
+        /// Example Usage: GET api/game?name=game1&amp;name=game2
         /// </summary>
         /// <param name="name">Array of Game names</param>
         /// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
@@ -74,7 +74,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Delete Games with the IDs provided.
         /// 
-        /// Example Usage: DELETE api/game?id=1amp;id=2
+        /// Example Usage: DELETE api/game?id=1&amp;id=2
         /// </summary>
         /// <param name="id">Array of Game IDs.</param>
         [HttpDelete]

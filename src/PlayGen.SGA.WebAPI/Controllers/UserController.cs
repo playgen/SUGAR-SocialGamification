@@ -39,7 +39,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Get a list of Users that match <param name="name"/> provided.
         /// 
-        /// Example Usage: GET api/user?name=user1amp;name=user2
+        /// Example Usage: GET api/user?name=user1&amp;name=user2
         /// </summary>
         /// <param name="name">Array of user names.</param>
         /// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
@@ -75,7 +75,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Delete users with the <param name="id"/> provided.
         /// 
-        /// Example Usage: DELETE api/user?id=1amp;id=2
+        /// Example Usage: DELETE api/user?id=1&amp;id=2
         /// </summary>
         /// <param name="id">Array of User IDs.</param>
         [HttpDelete]

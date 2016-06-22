@@ -72,7 +72,7 @@ namespace PlayGen.SGA.AchievementProgress
 
         private bool EvaluateFloat(int gameId, int userId, CompletionCriteria completionCriteria)
         {
-            float sum = _saveDataDbController.SumLongs(gameId, userId, completionCriteria.Key);
+            float sum = _saveDataDbController.SumFloats(gameId, userId, completionCriteria.Key);
 
             return CompareValues<float>(sum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType);
         }
@@ -93,7 +93,7 @@ namespace PlayGen.SGA.AchievementProgress
             bool latest;
             if (!_saveDataDbController.TryGetLatestBool(gameId, userId, completionCriteria.Key, out latest))
             {
-                return false;
+                latest = false;
             }
 
             return CompareValues<bool>(latest, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType);

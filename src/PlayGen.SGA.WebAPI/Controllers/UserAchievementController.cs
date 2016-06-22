@@ -33,7 +33,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Get a list of UserAchievements that match <param name="gameId"/>.
         /// 
-        /// Example Usage: GET api/userachievement?gameId=1amp;gameId=2
+        /// Example Usage: GET api/userachievement?gameId=1&amp;gameId=2
         /// </summary>
         /// <param name="gameId">Array of game IDs</param>
         /// <returns>Returns multiple <see cref="GameResponse"/> that hold UserAchievement details</returns>
@@ -69,7 +69,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Delete UserAchievements with the <param name="id"/> provided.
         /// 
-        /// Example Usage: DELETE api/userachievement?id=1amp;id=2
+        /// Example Usage: DELETE api/userachievement?id=1&amp;id=2
         /// </summary>
         /// <param name="id">Array of UserAchievement IDs</param>
         [HttpDelete]
@@ -81,7 +81,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Get the current progress for all achievements for a <param name="gameId"/> for <param name="userId"/>.
         /// 
-        /// Example Usage: GET api/userachievement/gameprogress?gameId=1amp;userId=1
+        /// Example Usage: GET api/userachievement/gameprogress?gameId=1&amp;userId=1
         /// </summary>
         /// <param name="userId">ID of User</param>
         /// <param name="gameId">ID of Game</param>
@@ -113,10 +113,10 @@ namespace PlayGen.SGA.WebAPI.Controllers
         /// <summary>
         /// Get the current progress for an <param name="achievementId"/> for <param name="userId"/>.
         /// 
-        /// Example Usage: GET api/userachievement/progress?achievementId=1amp;userId=1amp;userId=2
+        /// Example Usage: GET api/userachievement/progress?achievementId=1&amp;userId=1&amp;userId=2
         /// </summary>
         /// <param name="achievementId">ID of Achievement</param>
-        /// <param name="userIds">Array of User IDs</param>
+        /// <param name="userId">Array of User IDs</param>
         /// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current user progress toward achievement.</returns>
         [HttpGet("progress")]
         public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] userId)
