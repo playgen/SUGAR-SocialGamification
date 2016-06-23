@@ -54,10 +54,10 @@ namespace PlayGen.SGA.DataAccess
             modelBuilder.Entity<Account>().Property(a => a.Name).IsUnique();
 
             // Serialize specific objects as Json objects instead of creating a new table
-            modelBuilder.ComplexType<CompletionCriteriaCollection>()
+            modelBuilder.ComplexType<AchievementCriteriaCollection>()
                 .Property(p => p.Serialised)
                 .HasColumnName("CompletionCriteria");
-            modelBuilder.ComplexType<CompletionCriteriaCollection>().Property(a => a.Serialised).HasMaxLength(1024);
+            modelBuilder.ComplexType<AchievementCriteriaCollection>().Property(a => a.Serialised).HasMaxLength(1024);
 
             // Change all string fields to have a max length of 64 chars
             modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));

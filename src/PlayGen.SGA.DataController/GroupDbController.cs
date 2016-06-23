@@ -38,6 +38,18 @@ namespace PlayGen.SGA.DataController
             }
         }
 
+        public IEnumerable<Group> Get(int[] id)
+        {
+            using (var context = new SGAContext(NameOrConnectionString))
+            {
+                SetLog(context);
+
+                var groups = context.Groups.Where(g => id.Contains(g.Id)).ToList();
+
+                return groups;
+            }
+        }
+
         public void Create(Group group)
         {
             using (var context = new SGAContext(NameOrConnectionString))

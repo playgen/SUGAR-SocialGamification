@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PlayGen.SGA.DataModel
 {
-    public class CompletionCriteria
+    public class AchievementCriteria
     {
         public string Key { get; set; }
 

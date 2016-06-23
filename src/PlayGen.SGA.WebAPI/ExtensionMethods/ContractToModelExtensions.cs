@@ -41,7 +41,6 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return actorModel;
         }
 
-        // TODO test
         public static UserAchievement ToUserModel(this AchievementRequest achieveContract)
         {
             var achieveModel = new UserAchievement();
@@ -52,33 +51,6 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             return achieveModel;
         }
 
-        // TODO test
-        // TODO also set the completioncriteriacollection to convert to a contract and hook it up so it can be sent in a reponse if need be.
-        public static CompletionCriteriaCollection ToModel(this List<AchievementCriteria> achievementContracts)
-        {
-            var achievementCollection = new CompletionCriteriaCollection();
-            // Todo can probably do this with linq
-            foreach (var achievementContract in achievementContracts)
-            {
-                achievementCollection.Add(achievementContract.ToModel());
-            }
-
-            return achievementCollection;
-        }
-
-        // TODO test - should also probably make the naming consistent - go with AchievemetnCriteria OR CompletionCriteria
-        public static CompletionCriteria ToModel(this AchievementCriteria achievementContract)
-        {
-            return new CompletionCriteria
-            {
-                Key = achievementContract.Key,
-                ComparisonType = (DataModel.ComparisonType) achievementContract.ComparisonType,
-                DataType = (DataModel.DataType) achievementContract.DataType,
-                Value = achievementContract.Value,
-            };
-        }
-
-        // TODO test
         public static GroupAchievement ToGroupModel(this AchievementRequest achieveContract)
         {
             var achieveModel = new GroupAchievement();
@@ -87,6 +59,28 @@ namespace PlayGen.SGA.WebAPI.ExtensionMethods
             achieveModel.CompletionCriteriaCollection = achieveContract.CompletionCriteria.ToModel();
 
             return achieveModel;
+        }
+
+        public static AchievementCriteriaCollection ToModel(this List<Contracts.AchievementCriteria> achievementContracts)
+        {
+            var achievementCollection = new AchievementCriteriaCollection();
+            foreach (var achievementContract in achievementContracts)
+            {
+                achievementCollection.Add(achievementContract.ToModel());
+            }
+
+            return achievementCollection;
+        }
+
+        public static DataModel.AchievementCriteria ToModel(this Contracts.AchievementCriteria achievementContract)
+        {
+            return new DataModel.AchievementCriteria
+            {
+                Key = achievementContract.Key,
+                ComparisonType = (DataModel.ComparisonType) achievementContract.ComparisonType,
+                DataType = (DataModel.DataType) achievementContract.DataType,
+                Value = achievementContract.Value,
+            };
         }
 
         public static UserToUserRelationship ToUserModel(this RelationshipRequest relationContract)

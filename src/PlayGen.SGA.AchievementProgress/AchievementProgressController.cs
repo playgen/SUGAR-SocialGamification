@@ -18,10 +18,8 @@ namespace PlayGen.SGA.AchievementProgress
         // TODO: currently this is binary but should eveltually return a progress value
         // The method of returning calculating the progress (for multiple criteria conditions) and 
         // how the progress is going to be represented (0f to 1f ?) need to be determined first.
-        public bool GetProgress(int gameId, int userId, CompletionCriteriaCollection completionCriterias)
+        public bool GetProgress(int gameId, int userId, AchievementCriteriaCollection completionCriterias)
         {
-            // Todo using switch cases for now
-
             bool passedAll = true;
 
             foreach (var completionCriteria in completionCriterias)
@@ -49,7 +47,7 @@ namespace PlayGen.SGA.AchievementProgress
             return CompareValues<bool>(check, true, ComparisonType.Equals);
         }
 
-        private bool Evaluate(int gameId, int userId, CompletionCriteria completionCriteria)
+        private bool Evaluate(int gameId, int userId, AchievementCriteria completionCriteria)
         {
             bool passed = false;
 
@@ -75,21 +73,21 @@ namespace PlayGen.SGA.AchievementProgress
             return passed;
         }
 
-        private bool EvaluateLong(int gameId, int userId, CompletionCriteria completionCriteria)
+        private bool EvaluateLong(int gameId, int userId, AchievementCriteria completionCriteria)
         {
             long sum = _saveDataDbController.SumLongs(gameId, userId, completionCriteria.Key);
 
             return CompareValues<long>(sum, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType);
         }
 
-        private bool EvaluateFloat(int gameId, int userId, CompletionCriteria completionCriteria)
+        private bool EvaluateFloat(int gameId, int userId, AchievementCriteria completionCriteria)
         {
             float sum = _saveDataDbController.SumFloats(gameId, userId, completionCriteria.Key);
 
             return CompareValues<float>(sum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType);
         }
 
-        private bool EvaluateString(int gameId, int userId, CompletionCriteria completionCriteria)
+        private bool EvaluateString(int gameId, int userId, AchievementCriteria completionCriteria)
         {
             string latest;
             if (!_saveDataDbController.TryGetLatestString(gameId, userId, completionCriteria.Key, out latest))
@@ -100,7 +98,7 @@ namespace PlayGen.SGA.AchievementProgress
             return CompareValues<string>(latest, completionCriteria.Value, completionCriteria.ComparisonType);
         }
 
-        private bool EvaluateBool(int gameId, int userId, CompletionCriteria completionCriteria)
+        private bool EvaluateBool(int gameId, int userId, AchievementCriteria completionCriteria)
         {
             bool latest;
             if (!_saveDataDbController.TryGetLatestBool(gameId, userId, completionCriteria.Key, out latest))

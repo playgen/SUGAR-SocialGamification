@@ -9,18 +9,16 @@ namespace PlayGen.SGA.DataModel
 {
     /// <summary>
     /// Class that gets stored as a string in a single column in the database:
-    /// 
     /// See for ref: http://www.reddnet.net/entity-framework-json-column/
     /// </summary>
     
-    // TODO make sure this works correctly, didn't have time to test. sorry :(
-    public class CompletionCriteriaCollection : Collection<CompletionCriteria>
+    public class AchievementCriteriaCollection : Collection<AchievementCriteria>
     {
-        public void Add(ICollection<CompletionCriteria> completionCriterias)
+        public void Add(ICollection<AchievementCriteria> completionCriterias)
         {
             foreach (var completionCriteria in completionCriterias)
             {
-                this.Add(completionCriteria);
+                Add(completionCriteria);
             }
         }
 
@@ -35,9 +33,9 @@ namespace PlayGen.SGA.DataModel
                     return;
                 }
 
-                var jsonData = JsonConvert.DeserializeObject<List<CompletionCriteria>>(value);
-                this.Items.Clear();
-                this.Add(jsonData);
+                var jsonData = JsonConvert.DeserializeObject<List<AchievementCriteria>>(value);
+                Items.Clear();
+                Add(jsonData);
             }
         }
     }
