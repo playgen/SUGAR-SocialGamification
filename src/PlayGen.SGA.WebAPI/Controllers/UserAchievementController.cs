@@ -19,6 +19,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
     {
         private readonly UserAchievementDbController _userAchievementDbController;
         private readonly UserDbController _userDbController;
+        private readonly UserSaveDataDbController _userSaveDataDbController;
         private readonly AchievementProgressController _achievementProgressController;
 
         public UserAchievementController(UserAchievementDbController userAchievementDbController, 
@@ -27,6 +28,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         {
             _userAchievementDbController = userAchievementDbController;
             _userDbController = userDbController;
+            _userSaveDataDbController = userSaveDataDbController;
             _achievementProgressController = new AchievementProgressController(userSaveDataDbController);
         }
 
@@ -94,9 +96,28 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
             foreach (var achievement in achievements)
             {
-                var completed = _achievementProgressController.GetProgress(gameId, 
-                    userId, 
-                    achievement.CompletionCriteriaCollection);
+                var completed = _achievementProgressController.CheckAchievement(gameId,
+                achievement.Id,
+                userId);
+                if (!completed)
+                {
+                    completed = _achievementProgressController.GetProgress(gameId,
+                        userId,
+                        achievement.CompletionCriteriaCollection);
+                    if (completed)
+                    {
+                        var saveAchievement = new SaveDataRequest
+                        {
+                            Key = $"GameId{gameId}AchievementId{achievement.Id}",
+                            GameId = gameId,
+                            ActorId = userId,
+                            DataType = DataType.Boolean,
+                            Value = "true"
+                        };
+                        var saveAchievementModel = saveAchievement.ToUserModel();
+                        _userSaveDataDbController.Create(saveAchievementModel);
+                    }
+                }
 
                 var achievementProgress = new AchievementProgressResponse
                 {
@@ -142,10 +163,28 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
             foreach (var user in users)
             {
-                var completed = _achievementProgressController.GetProgress(achievement.GameId, 
-                    user.Id, 
-                    achievement.CompletionCriteriaCollection);
-
+                var completed = _achievementProgressController.CheckAchievement(achievement.GameId,
+                    achievement.Id,
+                    user.Id);
+                if (!completed)
+                {
+                    completed = _achievementProgressController.GetProgress(achievement.GameId,
+                        user.Id,
+                        achievement.CompletionCriteriaCollection);
+                    if (completed)
+                    {
+                        var saveAchievement = new SaveDataRequest
+                        {
+                            Key = $"GameId{achievement.GameId}AchievementId{achievement.Id}",
+                            GameId = achievement.GameId,
+                            ActorId = user.Id,
+                            DataType = DataType.Boolean,
+                            Value = "true"
+                        };
+                        var saveAchievementModel = saveAchievement.ToUserModel();
+                        _userSaveDataDbController.Create(saveAchievementModel);
+                    }
+                }
                 var achievementProgress = new AchievementProgressResponse
                 {
                     Name = achievement.Name,

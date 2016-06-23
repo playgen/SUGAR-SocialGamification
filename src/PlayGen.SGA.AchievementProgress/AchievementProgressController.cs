@@ -33,8 +33,20 @@ namespace PlayGen.SGA.AchievementProgress
                     break;
                 }
             }
-            
+
             return passedAll;
+        }
+
+        public bool CheckAchievement(int gameId, int achievementId, int userId)
+        {
+            string key = $"GameId{gameId}AchievementId{achievementId}";
+            bool check;
+            if (!_saveDataDbController.TryGetLatestBool(gameId, userId, key, out check))
+            {
+                return false;
+            }
+
+            return CompareValues<bool>(check, true, ComparisonType.Equals);
         }
 
         private bool Evaluate(int gameId, int userId, CompletionCriteria completionCriteria)
