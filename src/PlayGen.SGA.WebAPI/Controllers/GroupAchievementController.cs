@@ -87,7 +87,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
 
         // GET api/groupachievement/3
         [HttpGet("{achievemetnId}/progress")]
-        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, [FromBody] List<int> groupIds)
+        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] groupIds)
         {
             // TODO take a look at the implementation in UserAchievementController
             throw new NotImplementedException();

@@ -29,6 +29,24 @@ namespace PlayGen.SGA.ClientAPI
             return Get<IEnumerable<AchievementResponse>>(query);
         }
 
+        public IEnumerable<AchievementProgressResponse> GetProgress(int groupId, int gameId)
+        {
+            var query = GetUriBuilder("api/groupachievement/gameprogress")
+                .AppendQueryParameters(new int[] { groupId }, "groupId={0}")
+                .AppendQueryParameters(new int[] { gameId }, "gameId={0}")
+                .ToString();
+            return Get<IEnumerable<AchievementProgressResponse>>(query);
+        }
+
+        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] groupId)
+        {
+            var query = GetUriBuilder("api/groupachievement/gameprogress")
+                .AppendQueryParameters(new int[] { achievementId }, "achievementId={0}")
+                .AppendQueryParameters(groupId, "groupId={0}")
+                .ToString();
+            return Get<IEnumerable<AchievementProgressResponse>>(query);
+        }
+
         /// <summary>
         /// Create a new GroupAchievement.
         /// Requires <see cref="newAchievement.Name"/> to be unique to that <see cref="newAchievement.GameId"/>.
@@ -51,18 +69,6 @@ namespace PlayGen.SGA.ClientAPI
                 .AppendQueryParameters(achievementId, "id={0}")
                 .ToString();
             Delete(query);
-        }
-
-
-        // TODO: Do we need this stuff?
-        public IEnumerable<AchievementProgressResponse> GetProgress(int userId, int gameId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, List<int> actorIds)
-        {
-            throw new NotImplementedException();
         }
     }
 }
