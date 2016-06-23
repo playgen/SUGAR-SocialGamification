@@ -46,7 +46,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             {
                 CreateUserAchievement(userAchievementName, -1);
             }
-            catch (DuplicateRecordException)
+            catch (MissingRecordException)
             {
                 hadException = true;
             }
@@ -86,15 +86,15 @@ namespace PlayGen.SGA.DataController.UnitTests
                 "GetMultipleUserAchievements4",
             };
 
-            IList<int> gameIds = new List<int>();
+            IList<int> ids = new List<int>();
             foreach (var userAchievementName in userAchievementNames)
             {
-                gameIds.Add(CreateUserAchievement(userAchievementName).GameId);
+                ids.Add(CreateUserAchievement(userAchievementName).Id);
             }
 
             CreateUserAchievement("GetMultipleUserAchievements_DontGetThis");
 
-            var userAchievements = _userAchievementDbController.GetByGame(gameIds.ToArray());
+            var userAchievements = _userAchievementDbController.Get(ids.ToArray());
 
             var matchingUserAchievements = userAchievements.Select(g => userAchievementNames.Contains(g.Name));
 
@@ -115,14 +115,14 @@ namespace PlayGen.SGA.DataController.UnitTests
             string userAchievementName = "DeleteExistingUserAchievement";
 
             var userAchievement = CreateUserAchievement(userAchievementName);
-            var userId = userAchievement.GameId;
+            var userId = userAchievement.Id;
 
-            var userAchievements = _userAchievementDbController.GetByGame(new int[] { userId });
+            var userAchievements = _userAchievementDbController.Get(new int[] { userId });
             Assert.Equal(userAchievements.Count(), 1);
             Assert.Equal(userAchievements.ElementAt(0).Name, userAchievementName);
 
             _userAchievementDbController.Delete(new[] { userAchievement.Id });
-            userAchievements = _userAchievementDbController.GetByGame(new int[] { userId });
+            userAchievements = _userAchievementDbController.Get(new int[] { userId });
 
             Assert.Empty(userAchievements);
         }
@@ -162,7 +162,8 @@ namespace PlayGen.SGA.DataController.UnitTests
             var userAchievement = new UserAchievement
             {
                 Name = name,
-                GameId = gameId
+                GameId = gameId,
+                CompletionCriteriaCollection = new AchievementCriteriaCollection()
             };
             _userAchievementDbController.Create(userAchievement);
 

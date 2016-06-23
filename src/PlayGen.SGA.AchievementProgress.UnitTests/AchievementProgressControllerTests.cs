@@ -261,6 +261,7 @@ namespace PlayGen.SGA.AchievementProgress.UnitTests
 
             public DataType DataType;
         }
-        #endregion*/
+        #endregion
+        */
     }
 }

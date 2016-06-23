@@ -49,7 +49,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             {
                 CreateUserFriend(-1, acceptor.Id);
             }
-            catch (DuplicateRecordException)
+            catch (MissingRecordException)
             {
                 hadException = true;
             }
@@ -68,7 +68,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             {
                 CreateUserFriend(requestor.Id, -1);
             }
-            catch (DuplicateRecordException)
+            catch (MissingRecordException)
             {
                 hadException = true;
             }

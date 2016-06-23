@@ -59,7 +59,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             {
                 CreateUserData(userDataName, -1);
             }
-            catch (DuplicateRecordException)
+            catch (MissingRecordException)
             {
                 hadException = true;
             }
@@ -78,7 +78,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             {
                 CreateUserData(userDataName, 0, -1);
             }
-            catch (DuplicateRecordException)
+            catch (MissingRecordException)
             {
                 hadException = true;
             }
@@ -149,7 +149,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             Assert.Empty(userDatas);
         }
         
-        [Fact]
+        /*[Fact]
         public void SumLongs()
         {
             User user;
@@ -241,7 +241,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             bool gotResult = _userDataDbController.TryGetLatestBool(1, 1, "LatestMissingBools", out dbResult);
 
             Assert.False(gotResult);
-        }
+        }*/
         #endregion
 
         #region Helpers

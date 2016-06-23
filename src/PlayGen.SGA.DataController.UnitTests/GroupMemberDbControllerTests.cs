@@ -49,7 +49,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             {
                 CreateGroupMember(-1, acceptor.Id);
             }
-            catch (DuplicateRecordException)
+            catch (MissingRecordException)
             {
                 hadException = true;
             }
@@ -68,7 +68,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             {
                 CreateGroupMember(requestor.Id, -1);
             }
-            catch (DuplicateRecordException)
+            catch (MissingRecordException)
             {
                 hadException = true;
             }

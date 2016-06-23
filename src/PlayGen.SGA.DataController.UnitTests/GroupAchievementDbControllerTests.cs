@@ -28,7 +28,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             var newAchievement = CreateGroupAchievement(groupAchievementName);
 
-            var groupAchievements = _groupAchievementDbController.Get(new int[] { newAchievement.GameId });
+            var groupAchievements = _groupAchievementDbController.Get(new int[] { newAchievement.Id });
 
             int matches = groupAchievements.Count(g => g.Name == groupAchievementName && g.GameId == newAchievement.GameId);
 
@@ -46,7 +46,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             {
                 CreateGroupAchievement(groupAchievementName, -1);
             }
-            catch (DuplicateRecordException)
+            catch (MissingRecordException)
             {
                 hadException = true;
             }
@@ -94,7 +94,7 @@ namespace PlayGen.SGA.DataController.UnitTests
 
             CreateGroupAchievement("GetMultipleGroupAchievements_DontGetThis");
 
-            var groupAchievements = _groupAchievementDbController.Get(gameIds.ToArray());
+            var groupAchievements = _groupAchievementDbController.GetByGame(gameIds.ToArray());
 
             var matchingGroupAchievements = groupAchievements.Select(g => groupAchievementNames.Contains(g.Name));
 
@@ -115,7 +115,7 @@ namespace PlayGen.SGA.DataController.UnitTests
             string groupAchievementName = "DeleteExistingGroupAchievement";
 
             var groupAchievement = CreateGroupAchievement(groupAchievementName);
-            var groupId = groupAchievement.GameId;
+            var groupId = groupAchievement.Id;
 
             var groupAchievements = _groupAchievementDbController.Get(new int[] { groupId });
             Assert.Equal(groupAchievements.Count(), 1);
@@ -161,7 +161,8 @@ namespace PlayGen.SGA.DataController.UnitTests
             var groupAchievement = new GroupAchievement
             {
                 Name = name,
-                GameId = gameId
+                GameId = gameId,
+                CompletionCriteriaCollection = new AchievementCriteriaCollection()
             };
             _groupAchievementDbController.Create(groupAchievement);
 
