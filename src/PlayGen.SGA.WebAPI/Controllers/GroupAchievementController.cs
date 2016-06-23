@@ -42,7 +42,7 @@ namespace PlayGen.SGA.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<AchievementResponse> Get(int[] gameId)
         {
-            var achievement = _groupAchievementDbController.Get(gameId);
+            var achievement = _groupAchievementDbController.GetByGame(gameId);
             var achievementContract = achievement.ToContract();
             return achievementContract;
         }
