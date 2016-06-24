@@ -41,7 +41,7 @@ namespace PlayGen.SGA.ClientAPI
 
         public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] actorIds)
         {
-            var query = GetUriBuilder("api/userachievement/gameprogress")
+            var query = GetUriBuilder("api/userachievement/progress")
                 .AppendQueryParameters(new int[] { achievementId }, "achievementId={0}")
                 .AppendQueryParameters(actorIds, "userId={0}")
                 .ToString();
