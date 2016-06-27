@@ -1,7 +1,8 @@
 ﻿- name: Home
   href: index.md
+  homepage: index.md
 - name: Articles
   href: articles/
-  homepage: index.md
 - name: API Documentation
   href: obj/api/
+  

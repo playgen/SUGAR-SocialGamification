@@ -26,6 +26,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
+		public IEnumerable<Group> GetSentRequests(int id)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var acceptors = context.UserToGroupRelationshipRequests
+					.Where(r => r.RequestorId == id)
+					.Select(u => u.Acceptor).ToList();
+
+				return acceptors;
+			}
+		}
+
 		public IEnumerable<User> GetMembers(int id)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))

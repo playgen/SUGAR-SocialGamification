@@ -11,14 +11,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-		public IEnumerable<UserAchievement> GetByGame(IEnumerable<int> gameIds)
+		public IEnumerable<UserAchievement> GetByGame(int gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
-				var gameIdsUnique = new HashSet<int>(gameIds);
-				var achievements = context.UserAchievements.Where(a => gameIdsUnique.Contains(a.GameId)).ToList();
 
+				var achievements = context.UserAchievements.Where(a => a.GameId == gameId).ToList();
 				return achievements;
 			}
 		}

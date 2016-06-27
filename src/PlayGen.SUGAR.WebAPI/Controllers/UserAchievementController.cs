@@ -35,12 +35,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of UserAchievements that match <param name="gameId"/>.
 		/// 
-		/// Example Usage: GET api/userachievement?gameId=1&amp;gameId=2
+		/// Example Usage: GET api/userachievement?gameId=1
 		/// </summary>
 		/// <param name="gameId">Array of game IDs</param>
 		/// <returns>Returns multiple <see cref="GameResponse"/> that hold UserAchievement details</returns>
 		[HttpGet]
-		public IEnumerable<AchievementResponse> Get(int[] gameId)
+		public IEnumerable<AchievementResponse> Get(int gameId)
 		{
 			var achievement = _userAchievementController.GetByGame(gameId);
 			var achievementContract = achievement.ToContract();
@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IEnumerable<AchievementProgressResponse> GetProgress(int userId, int gameId)
 		{
 			var achievementResponses = new List<AchievementProgressResponse>();
-			var achievements = _userAchievementController.GetByGame(new int[] {gameId});
+			var achievements = _userAchievementController.GetByGame(gameId);
 
 			foreach (var achievement in achievements)
 			{

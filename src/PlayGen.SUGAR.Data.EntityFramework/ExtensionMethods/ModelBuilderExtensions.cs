@@ -20,9 +20,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.ExtensionMethods
 			return configuration.HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute()));
 		}
 
-		public static PrimitivePropertyConfiguration IsIndexed(this PrimitivePropertyConfiguration configuration, string namedIndex)
+		public static PrimitivePropertyConfiguration IsIndexed(this PrimitivePropertyConfiguration configuration, string namedIndex, int colNumber)
 		{
-			return configuration.HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute(namedIndex)));
+			return configuration.HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute(namedIndex, colNumber)));
 		}
 
 	}

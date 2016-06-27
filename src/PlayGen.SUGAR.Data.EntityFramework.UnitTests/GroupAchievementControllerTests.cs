@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newAchievement = CreateGroupAchievement(groupAchievementName);
 
-			var groupAchievements = _groupAchievementDbController.Get(new int[] { newAchievement.GameId });
+			var groupAchievements = _groupAchievementDbController.Get(new int[] { newAchievement.Id });
 
 			int matches = groupAchievements.Count(g => g.Name == groupAchievementName && g.GameId == newAchievement.GameId);
 
@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			{
 				CreateGroupAchievement(groupAchievementName, -1);
 			}
-			catch (DuplicateRecordException)
+			catch (MissingRecordException)
 			{
 				hadException = true;
 			}
@@ -77,32 +77,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
-		public void GetMultipleGroupAchievements()
-		{
-			string[] groupAchievementNames = new[]
-			{
-				"GetMultipleGroupAchievements1",
-				"GetMultipleGroupAchievements2",
-				"GetMultipleGroupAchievements3",
-				"GetMultipleGroupAchievements4",
-			};
-
-			IList<int> gameIds = new List<int>();
-			foreach (var groupAchievementName in groupAchievementNames)
-			{
-				gameIds.Add(CreateGroupAchievement(groupAchievementName).GameId);
-			}
-
-			CreateGroupAchievement("GetMultipleGroupAchievements_DontGetThis");
-
-			var groupAchievements = _groupAchievementDbController.Get(gameIds.ToArray());
-
-			var matchingGroupAchievements = groupAchievements.Select(g => groupAchievementNames.Contains(g.Name));
-
-			Assert.Equal(matchingGroupAchievements.Count(), groupAchievementNames.Length);
-		}
-
-		[Fact]
 		public void GetNonExistingGroupAchievements()
 		{
 			var groupAchievements = _groupAchievementDbController.Get(new int[] { -1 });
@@ -116,7 +90,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			string groupAchievementName = "DeleteExistingGroupAchievement";
 
 			var groupAchievement = CreateGroupAchievement(groupAchievementName);
-			var groupId = groupAchievement.GameId;
+			var groupId = groupAchievement.Id;
 
 			var groupAchievements = _groupAchievementDbController.Get(new int[] { groupId });
 			Assert.Equal(groupAchievements.Count(), 1);
@@ -162,7 +136,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var groupAchievement = new GroupAchievement
 			{
 				Name = name,
-				GameId = gameId
+				GameId = gameId,
+				CompletionCriteriaCollection = new AchievementCriteriaCollection()
 			};
 			_groupAchievementDbController.Create(groupAchievement);
 

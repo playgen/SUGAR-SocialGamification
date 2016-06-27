@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			{
 				CreateGroupData(groupDataName, -1);
 			}
-			catch (DuplicateRecordException)
+			catch (MissingRecordException)
 			{
 				hadException = true;
 			}
@@ -65,7 +65,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			{
 				CreateGroupData(groupDataName, 0, -1);
 			}
-			catch (DuplicateRecordException)
+			catch (MissingRecordException)
 			{
 				hadException = true;
 			}

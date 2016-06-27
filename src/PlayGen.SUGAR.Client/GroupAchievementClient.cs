@@ -19,10 +19,10 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">Array of game IDs</param>
 		/// <returns>Returns multiple <see cref="GameResponse"/> that hold GroupAchievement details</returns>
-		public IEnumerable<AchievementResponse> Get(int[] gameId)
+		public IEnumerable<AchievementResponse> Get(int gameId)
 		{
 			var query = GetUriBuilder("api/groupachievement")
-				.AppendQueryParameters(gameId, "gameId={0}")
+				.AppendQueryParameters(new int[] { gameId }, "gameId={0}")
 				.ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
 		}
@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Client
 
 		public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] groupId)
 		{
-			var query = GetUriBuilder("api/groupachievement/gameprogress")
+			var query = GetUriBuilder("api/groupachievement/progress")
 				.AppendQueryParameter(achievementId, "achievementId={0}")
 				.AppendQueryParameters(groupId, "groupId={0}")
 				.ToString();

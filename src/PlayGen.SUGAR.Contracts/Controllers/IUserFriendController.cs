@@ -6,6 +6,8 @@ namespace PlayGen.SUGAR.Contracts.Controllers
 	{
 		IEnumerable<ActorResponse> GetFriendRequests(int userId);
 
+		IEnumerable<ActorResponse> GetSentRequests(int userId);
+
 		IEnumerable<ActorResponse> GetFriends(int userId);
 
 		RelationshipResponse CreateFriendRequest(RelationshipRequest relationship);

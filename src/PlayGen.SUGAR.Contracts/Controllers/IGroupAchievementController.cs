@@ -4,7 +4,7 @@ namespace PlayGen.SUGAR.Contracts.Controllers
 {
 	public interface IGroupAchievementController
 	{
-		IEnumerable<AchievementResponse> Get(int[] gameId);
+		IEnumerable<AchievementResponse> Get(int gameId);
 
 		AchievementResponse Create(AchievementRequest achievement);
 

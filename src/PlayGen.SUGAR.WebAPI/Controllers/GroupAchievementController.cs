@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates GroupAchievement specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class GroupAchievementController : Controller, IGroupAchievementController
+	public class GroupAchievementController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GroupAchievementController _groupAchievementController;
 		private readonly Data.EntityFramework.Controllers.GroupController _groupController;
@@ -36,14 +36,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of GroupAchievements that match <param name="gameId"/>.
 		/// 
-		/// Example Usage: GET api/groupachievement?gameId=1&amp;gameId=2
+		/// Example Usage: GET api/groupachievement?gameId=1
 		/// </summary>
 		/// <param name="gameId">Array of game IDs</param>
 		/// <returns>Returns multiple <see cref="GameResponse"/> that hold GroupAchievement details</returns>
 		[HttpGet]
-		public IEnumerable<AchievementResponse> Get(int[] gameId)
+		public IEnumerable<AchievementResponse> Get(int gameId)
 		{
-			var achievement = _groupAchievementController.Get(gameId);
+			var achievement = _groupAchievementController.GetByGame(gameId);
 			var achievementContract = achievement.ToContract();
 			return achievementContract;
 		}

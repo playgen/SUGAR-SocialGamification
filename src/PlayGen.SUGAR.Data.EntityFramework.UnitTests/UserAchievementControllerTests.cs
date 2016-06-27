@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newAchievement = CreateUserAchievement(userAchievementName);
 
-			var userAchievements = _userAchievementDbController.GetByGame(new int[] { newAchievement.GameId });
+			var userAchievements = _userAchievementDbController.Get(new int[] { newAchievement.Id });
 
 			int matches = userAchievements.Count(g => g.Name == userAchievementName && g.GameId == newAchievement.GameId);
 
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			{
 				CreateUserAchievement(userAchievementName, -1);
 			}
-			catch (DuplicateRecordException)
+			catch (MissingRecordException)
 			{
 				hadException = true;
 			}
@@ -76,35 +76,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
-		public void GetMultipleUserAchievements()
-		{
-			string[] userAchievementNames = new[]
-			{
-				"GetMultipleUserAchievements1",
-				"GetMultipleUserAchievements2",
-				"GetMultipleUserAchievements3",
-				"GetMultipleUserAchievements4",
-			};
-
-			IList<int> gameIds = new List<int>();
-			foreach (var userAchievementName in userAchievementNames)
-			{
-				gameIds.Add(CreateUserAchievement(userAchievementName).GameId);
-			}
-
-			CreateUserAchievement("GetMultipleUserAchievements_DontGetThis");
-
-			var userAchievements = _userAchievementDbController.GetByGame(gameIds.ToArray());
-
-			var matchingUserAchievements = userAchievements.Select(g => userAchievementNames.Contains(g.Name));
-
-			Assert.Equal(matchingUserAchievements.Count(), userAchievementNames.Length);
-		}
-
-		[Fact]
 		public void GetNonExistingUserAchievements()
 		{
-			var userAchievements = _userAchievementDbController.GetByGame(new int[] { -1 });
+			var userAchievements = _userAchievementDbController.Get(new int[] { -1 });
 
 			Assert.Empty(userAchievements);
 		}
@@ -115,14 +89,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			string userAchievementName = "DeleteExistingUserAchievement";
 
 			var userAchievement = CreateUserAchievement(userAchievementName);
-			var userId = userAchievement.GameId;
+			var userId = userAchievement.Id;
 
-			var userAchievements = _userAchievementDbController.GetByGame(new int[] { userId });
+			var userAchievements = _userAchievementDbController.Get(new int[] { userId });
 			Assert.Equal(userAchievements.Count(), 1);
 			Assert.Equal(userAchievements.ElementAt(0).Name, userAchievementName);
 
 			_userAchievementDbController.Delete(new[] { userAchievement.Id });
-			userAchievements = _userAchievementDbController.GetByGame(new int[] { userId });
+			userAchievements = _userAchievementDbController.Get(new int[] { userId });
 
 			Assert.Empty(userAchievements);
 		}
@@ -162,7 +136,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var userAchievement = new UserAchievement
 			{
 				Name = name,
-				GameId = gameId
+				GameId = gameId,
+				CompletionCriteriaCollection = new AchievementCriteriaCollection()
 			};
 			_userAchievementDbController.Create(userAchievement);
 

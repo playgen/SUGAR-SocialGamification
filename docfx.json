@@ -8,7 +8,7 @@
           "cwd": ""
         },
         {
-          "files": [ "**/*.csproj", "PlayGen.SGA.Contracts/project.json", "PlayGen.SGA.ClientAPI/project.json", "PlayGen.SGA.WebAPI/project.json" ],
+          "files": [ "**/*.csproj", "PlayGen.SUGAR.Client/project.json", "PlayGen.SUGAR.Client/project.json", "PlayGen.SUGAR.WebAPI/project.json" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "cwd": "src"
         }
@@ -24,7 +24,7 @@
         "dest": "api"
       },
       {
-        "files": [ "articles/**/*.md", "*.md", "toc.yml" ]
+        "files": [ "articles/**/*.md", "articles/**/toc.yml", "*.md", "toc.yml" ]
       }
     ],
     "resource": [

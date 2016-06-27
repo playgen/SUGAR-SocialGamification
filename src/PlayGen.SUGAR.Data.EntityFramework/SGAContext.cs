@@ -91,49 +91,49 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.GameId)
-				.IsIndexed("IX_GroupData_Game_Group_Key");
+				.IsIndexed("IX_GroupData_Game_Group_Key", 0);
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.GroupId)
-				.IsIndexed("IX_GroupData_Game_Group_Key");
+				.IsIndexed("IX_GroupData_Game_Group_Key", 1);
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.Key)
-				.IsIndexed("IX_GroupData_Game_Group_Key");
+				.IsIndexed("IX_GroupData_Game_Group_Key", 2);
 
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.GameId)
-				.IsIndexed("IX_GroupData_Game_Group_Key_Type");
+				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 0);
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.GroupId)
-				.IsIndexed("IX_GroupData_Game_Group_Key_Type");
+				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 1);
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.Key)
-				.IsIndexed("IX_GroupData_Game_Group_Key_Type");
+				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 2);
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.DataType)
-				.IsIndexed("IX_GroupData_Game_Group_Key_Type");
+				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 3);
 
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.GameId)
-				.IsIndexed("IX_UserData_Game_User_Key");
+				.IsIndexed("IX_UserData_Game_User_Key", 0);
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.UserId)
-				.IsIndexed("IX_UserData_Game_User_Key");
+				.IsIndexed("IX_UserData_Game_User_Key", 1);
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.Key)
-				.IsIndexed("IX_UserData_Game_User_Key");
+				.IsIndexed("IX_UserData_Game_User_Key", 2);
 
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.GameId)
-				.IsIndexed("IX_UserData_Game_User_Key_Type");
+				.IsIndexed("IX_UserData_Game_User_Key_Type", 0);
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.UserId)
-				.IsIndexed("IX_UserData_Game_User_Key_Type");
+				.IsIndexed("IX_UserData_Game_User_Key_Type", 1);
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.Key)
-				.IsIndexed("IX_UserData_Game_User_Key_Type");
+				.IsIndexed("IX_UserData_Game_User_Key_Type", 2);
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.DataType)
-				.IsIndexed("IX_UserData_Game_User_Key_Type");
+				.IsIndexed("IX_UserData_Game_User_Key_Type", 3);
 
 			// Serialize specific objects as Json objects instead of creating a new table
 			modelBuilder.ComplexType<AchievementCriteriaCollection>()

@@ -6,6 +6,8 @@ namespace PlayGen.SUGAR.Contracts.Controllers
 	{
 		IEnumerable<ActorResponse> GetMemberRequests(int groupId);
 
+		IEnumerable<ActorResponse> GetSentRequests(int userId);
+
 		IEnumerable<ActorResponse> GetMembers(int groupId);
 
 		IEnumerable<ActorResponse> GetUserGroups(int userId);

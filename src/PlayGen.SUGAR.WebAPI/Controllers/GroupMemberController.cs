@@ -38,6 +38,21 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Get a list of all Groups that have been sent relationship requests for this <param name="userId"/>.
+		/// 
+		/// Example Usage: GET api/groupmember/sentrequests?userId=1
+		/// </summary>
+		/// <param name="userId">ID of the user.</param>
+		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		[HttpGet("sentrequests")]
+		public IEnumerable<ActorResponse> GetSentRequests(int userId)
+		{
+			var actor = _groupRelationshipController.GetSentRequests(userId);
+			var actorContract = actor.ToContract();
+			return actorContract;
+		}
+
+		/// <summary>
 		/// Get a list of all Users that have relationships with this <param name="groupId"/>.
 		/// 
 		/// Example Usage: GET api/groupmember/members?groupId=1

@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			{
 				CreateUserData(userDataName, -1);
 			}
-			catch (DuplicateRecordException)
+			catch (MissingRecordException)
 			{
 				hadException = true;
 			}
@@ -79,7 +79,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			{
 				CreateUserData(userDataName, 0, -1);
 			}
-			catch (DuplicateRecordException)
+			catch (MissingRecordException)
 			{
 				hadException = true;
 			}

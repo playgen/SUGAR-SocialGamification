@@ -28,6 +28,19 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Get a list of all Users that have been sent relationship requests for this <param name="userId"/>.
+		/// </summary>
+		/// <param name="userId">ID of the user.</param>
+		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		public IEnumerable<ActorResponse> GetSentRequests(int userId)
+		{
+			var query = GetUriBuilder("api/userfriend/sentrequests")
+				.AppendQueryParameters(new int[] { userId }, "userId={0}")
+				.ToString();
+			return Get<IEnumerable<ActorResponse>>(query);
+		}
+
+		/// <summary>
 		/// Get a list of all Users that have relationships with this <param name="userId"/>.
 		/// </summary>
 		/// <param name="userId">ID of the group.</param>
