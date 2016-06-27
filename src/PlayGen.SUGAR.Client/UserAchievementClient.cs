@@ -27,7 +27,6 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<AchievementResponse>>(query);
 		}
 
-
 		public IEnumerable<AchievementProgressResponse> GetProgress(int userId, int gameId)
 		{
 			var query = GetUriBuilder("api/userachievement/gameprogress")

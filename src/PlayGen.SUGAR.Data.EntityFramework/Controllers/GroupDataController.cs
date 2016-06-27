@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
+using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
@@ -14,19 +14,40 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
+		public void GiveReward(int gameId, int actorId, RewardCollection rewards)
+		{
+			rewards.All(r => Create(gameId, actorId, r));
+		}
+
+		public bool Create(int gameId, int actorId, Reward reward)
+		{
+			var data = new GroupData
+			{
+				GameId = gameId,
+				GroupId = actorId,
+				Key = reward.Key,
+				Value = reward.Value,
+				DataType = reward.DataType
+			};
+			Create(data);
+			return data == null ? false : true;
+		}
+
 		public GroupData Create(GroupData data)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var group = context.Groups.SingleOrDefault(g => g.Id == data.GroupId);
+				var group = context.Groups
+					.SingleOrDefault(g => g.Id == data.GroupId);
 				if (group == null)
 				{
 					throw new MissingRecordException("The specified group does not exist.");
 				}
 
-				var game = context.Games.SingleOrDefault(g => g.Id == data.GameId);
+				var game = context.Games
+					.SingleOrDefault(g => g.Id == data.GameId);
 				if (game == null)
 				{
 					throw new MissingRecordException("The specified game does not exist.");

@@ -139,7 +139,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 			modelBuilder.ComplexType<AchievementCriteriaCollection>()
 				.Property(p => p.Serialised)
 				.HasColumnName("CompletionCriteria");
-			modelBuilder.ComplexType<AchievementCriteriaCollection>().Property(a => a.Serialised).HasMaxLength(1024);
+			modelBuilder.ComplexType<AchievementCriteriaCollection>()
+				.Property(a => a.Serialised)
+				.HasMaxLength(1024);
+			modelBuilder.ComplexType<RewardCollection>()
+				.Property(p => p.Serialised)
+				.HasColumnName("CompletionReward");
+			modelBuilder.ComplexType<RewardCollection>()
+				.Property(a => a.Serialised)
+				.HasMaxLength(1024);
 
 			// Change all string fields to have a max length of 64 chars
 			modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));

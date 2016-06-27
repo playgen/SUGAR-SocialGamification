@@ -116,6 +116,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 							Value = "true"
 						};
 						_groupDataController.Create(groupData);
+						_groupDataController.GiveReward(gameId,
+						groupId,
+						achievement.RewardCollection);
 					}
 				}
 

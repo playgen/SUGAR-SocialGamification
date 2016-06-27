@@ -13,11 +13,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates GroupData specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class GroupSaveDataController : Controller
+	public class GroupDataController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GroupDataController _groupDataController;
 
-		public GroupSaveDataController(Data.EntityFramework.Controllers.GroupDataController groupDataController)
+		public GroupDataController(Data.EntityFramework.Controllers.GroupDataController groupDataController)
 		{
 			_groupDataController = groupDataController;
 		}

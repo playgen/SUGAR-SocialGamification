@@ -114,16 +114,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost("userId")]
 		public AccountResponse Register(int userId, [FromBody] AccountRequest accountRequest)
 		{
-			var users = _userDbController.Get(new[] { userId });
+			var user = _userDbController.Search(userId);
 
 			if (string.IsNullOrWhiteSpace(accountRequest.Name) 
 				|| string.IsNullOrWhiteSpace(accountRequest.Password)
-				|| !users.Any())
+				|| user != null)
 			{
 				throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
 			}
-			
-			var user = users.ElementAt(0);
 
 			var account = CreateAccount(accountRequest, user);
 

@@ -137,7 +137,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			{
 				Name = name,
 				GameId = gameId,
-				CompletionCriteriaCollection = new AchievementCriteriaCollection()
+				CompletionCriteriaCollection = new AchievementCriteriaCollection(),
+				RewardCollection = new RewardCollection()
 			};
 			_groupAchievementDbController.Create(groupAchievement);
 
