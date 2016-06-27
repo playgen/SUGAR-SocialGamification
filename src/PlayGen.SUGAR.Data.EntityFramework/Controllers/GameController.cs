@@ -27,14 +27,32 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		/// </summary>
 		/// <param name="names"></param>
 		/// <returns></returns>
-		public IEnumerable<Game> Get(string[] names)
+		public IEnumerable<Game> Search(string name)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var games = context.Games.Where(g => names.Contains(g.Name)).ToList();
+				var games = context.Games
+					.Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
 				return games;
+			}
+		}
+
+		/// <summary>
+		/// Retrieve game record by id from the database
+		/// </summary>
+		/// <param name="ids"></param>
+		/// <returns></returns>
+		public Game Search(int id)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var game = context.Games
+					.SingleOrDefault(g => id == g.Id);
+				return game;
 			}
 		}
 
@@ -64,7 +82,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var games = context.Games.Where(g => id.Contains(g.Id)).ToList();
+				var games = context.Games
+					.Where(g => id.Contains(g.Id)).ToList();
 
 				context.Games.RemoveRange(games);
 				SaveChanges(context);

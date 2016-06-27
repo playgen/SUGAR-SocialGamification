@@ -8,7 +8,7 @@ namespace PlayGen.SUGAR.Client
 	/// <summary>
 	/// Controller that facilitates User specific operations.
 	/// </summary>
-	public class UserClient : ClientBase, IUserController
+	public class UserClient : ClientBase
 	{
 		public UserClient(string baseAddress) : base(baseAddress)
 		{
@@ -29,10 +29,23 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="name">Array of User names.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> Get(string[] name)
+		public IEnumerable<ActorResponse> Get(string name)
 		{
-			var query = GetUriBuilder("api/user")
-				.AppendQueryParameters(name, "name={0}")
+			var query = GetUriBuilder("api/user/find")
+				.AppendQueryParameter(name, "{0}")
+				.ToString();
+			return Get<IEnumerable<ActorResponse>>(query);
+		}
+
+		/// <summary>
+		/// Get User that matches <param name="id"/> provided.
+		/// </summary>
+		/// <param name="id">User id.</param>
+		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
+		public IEnumerable<ActorResponse> Get(int id)
+		{
+			var query = GetUriBuilder("api/user/findbyid")
+				.AppendQueryParameter(id, "{0}")
 				.ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}

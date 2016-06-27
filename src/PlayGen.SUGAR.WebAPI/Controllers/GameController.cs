@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Game specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class GameController : Controller, IGameController
+	public class GameController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
 		
@@ -39,14 +39,29 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of Games that match <param name="name"/> provided.
 		/// 
-		/// Example Usage: GET api/game?name=game1&amp;name=game2
+		/// Example Usage: GET api/game/find/game1
 		/// </summary>
-		/// <param name="name">Array of Game names</param>
+		/// <param name="name">Game name</param>
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
-		[HttpGet]
-		public IEnumerable<GameResponse> Get(string[] name)
+		[HttpGet("find/{name}")]
+		public IEnumerable<GameResponse> Get([FromRoute]string name)
 		{
-			var game = _gameDbController.Get(name);
+			var game = _gameDbController.Search(name);
+			var gameContract = game.ToContract();
+			return gameContract;
+		}
+
+		/// <summary>
+		/// Get Game that matches <param name="id"/> provided.
+		/// 
+		/// Example Usage: GET api/game/findbyid/1
+		/// </summary>
+		/// <param name="id">Game id</param>
+		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
+		[HttpGet("findbyid/{id:int}")]
+		public GameResponse Get([FromRoute]int id)
+		{
+			var game = _gameDbController.Search(id);
 			var gameContract = game.ToContract();
 			return gameContract;
 		}

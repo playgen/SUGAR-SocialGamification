@@ -8,7 +8,7 @@ namespace PlayGen.SUGAR.Client
 	/// <summary>
 	/// Controller that facilitates Game specific operations.
 	/// </summary>
-	public class GameClient : ClientBase, IGameController
+	public class GameClient : ClientBase
 	{
 		public GameClient(string baseAddress) : base(baseAddress)
 		{
@@ -27,14 +27,27 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Get a list of Games that match <param name="name"/> provided.
 		/// </summary>
-		/// <param name="name">Array of Game names</param>
+		/// <param name="name">Game name</param>
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
-		public IEnumerable<GameResponse> Get(string[] name)
+		public IEnumerable<GameResponse> Get(string name)
 		{
-			var query = GetUriBuilder("api/game")
-				.AppendQueryParameters(name, "name={0}")
+			var query = GetUriBuilder("api/game/find")
+				.AppendQueryParameter(name, "{0}")
 				.ToString();
 			return Get<IEnumerable<GameResponse>>(query);
+		}
+
+		/// <summary>
+		/// Get Game that matches <param name="id"/> provided.
+		/// </summary>
+		/// <param name="id">Game id</param>
+		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
+		public GameResponse Get(int id)
+		{
+			var query = GetUriBuilder("api/game/findbyid")
+				.AppendQueryParameter(id, "{0}")
+				.ToString();
+			return Get<GameResponse>(query);
 		}
 
 		/// <summary>

@@ -17,7 +17,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var achievements = context.GroupAchievements.Where(a => a.GameId == gameId).ToList();
+				var achievements = context.GroupAchievements
+					.Where(a => a.GameId == gameId).ToList();
 				return achievements;
 			}
 		}
@@ -28,7 +29,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var achievements = context.GroupAchievements.Where(a => achievementIds.Contains(a.Id)).ToList();
+				var achievements = context.GroupAchievements
+					.Where(a => achievementIds.Contains(a.Id)).ToList();
 				return achievements;
 			}
 		}
@@ -39,7 +41,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var hasConflicts = context.GroupAchievements.Any(a => a.Name == achievement.Name && a.GameId == achievement.GameId);
+				var hasConflicts = context.GroupAchievements
+					.Any(a => a.Name == achievement.Name 
+					&& a.GameId == achievement.GameId);
 
 				if (hasConflicts)
 				{
@@ -65,7 +69,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var achievement = context.GroupAchievements.Where(g => id.Contains(g.Id)).ToList();
+				var achievement = context.GroupAchievements
+					.Where(g => id.Contains(g.Id)).ToList();
 
 				context.GroupAchievements.RemoveRange(achievement);
 				SaveChanges(context);

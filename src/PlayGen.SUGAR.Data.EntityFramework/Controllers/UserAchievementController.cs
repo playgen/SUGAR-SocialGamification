@@ -17,7 +17,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var achievements = context.UserAchievements.Where(a => a.GameId == gameId).ToList();
+				var achievements = context.UserAchievements
+					.Where(a => a.GameId == gameId).ToList();
 				return achievements;
 			}
 		}
@@ -28,7 +29,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var achievements = context.UserAchievements.Where(a => achievementIds.Contains(a.Id)).ToList();
+				var achievements = context.UserAchievements
+					.Where(a => achievementIds.Contains(a.Id)).ToList();
 
 				return achievements;
 			}
@@ -40,14 +42,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var hasConflicts = context.UserAchievements.Any(a => a.Name == achievement.Name && a.GameId == achievement.GameId);
+				var hasConflicts = context.UserAchievements
+					.Any(a => a.Name == achievement.Name
+					&& a.GameId == achievement.GameId);
 
 				if (hasConflicts)
 				{
 					throw new DuplicateRecordException(string.Format("An achievement with the name {0} for this game already exists.", achievement.Name));
 				}
 
-				var gameExists = context.Games.Any(g => g.Id == achievement.GameId);
+				var gameExists = context.Games
+					.Any(g => g.Id == achievement.GameId);
 
 				if (!gameExists)
 				{
@@ -66,7 +71,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var achievement = context.UserAchievements.Where(u => id.Contains(u.Id)).ToList();
+				var achievement = context.UserAchievements
+					.Where(u => id.Contains(u.Id)).ToList();
 
 				context.UserAchievements.RemoveRange(achievement);
 				SaveChanges(context);

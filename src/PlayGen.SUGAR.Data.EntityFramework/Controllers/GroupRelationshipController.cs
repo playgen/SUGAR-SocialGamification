@@ -74,10 +74,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var hasConflicts = context.UserToGroupRelationships.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) || (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
+				var hasConflicts = context.UserToGroupRelationships
+					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) 
+					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
+
 				if (!hasConflicts)
 				{
-					hasConflicts = context.UserToGroupRelationshipRequests.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) || (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
+					hasConflicts = context.UserToGroupRelationshipRequests
+						.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
+						|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
 				}
 
 				if (hasConflicts)
@@ -121,7 +126,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var relation = context.UserToGroupRelationshipRequests.Single(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId);
+				var relation = context.UserToGroupRelationshipRequests
+					.Single(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId);
 
 				if (accepted)
 				{

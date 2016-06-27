@@ -151,7 +151,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				throw new ArgumentOutOfRangeException();
 			}
 
-			var groups = _groupController.Get(groupId);
+			var groups = groupId.Select(g => _groupController.Search(g));
 
 			if (!groups.Any())
 			{

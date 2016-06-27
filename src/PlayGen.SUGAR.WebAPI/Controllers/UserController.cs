@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates User specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class UserController : Controller, IUserController
+	public class UserController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.UserController _userController;
 
@@ -39,14 +39,29 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of Users that match <param name="name"/> provided.
 		/// 
-		/// Example Usage: GET api/user?name=user1&amp;name=user2
+		/// Example Usage: GET api/user/find/user1
 		/// </summary>
-		/// <param name="name">Array of user names.</param>
+		/// <param name="name">User name.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		[HttpGet]
-		public IEnumerable<ActorResponse> Get(string[] name)
+		[HttpGet("find/{name}")]
+		public IEnumerable<ActorResponse> Get(string name)
 		{
-			var user = _userController.Get(name);
+			var user = _userController.Search(name);
+			var actorContract = user.ToContract();
+			return actorContract;
+		}
+
+		/// <summary>
+		/// Get User that matches <param name="id"/> provided.
+		/// 
+		/// Example Usage: GET api/user/findbyid/1
+		/// </summary>
+		/// <param name="id">User id.</param>
+		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
+		[HttpGet("findbyid/{id:int}")]
+		public ActorResponse Get(int id)
+		{
+			var user = _userController.Search(id);
 			var actorContract = user.ToContract();
 			return actorContract;
 		}

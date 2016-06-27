@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Group specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class GroupController : Controller, IGroupController
+	public class GroupController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GroupController _groupController;
 
@@ -39,14 +39,29 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of Groups that match <param name="name"/> provided.
 		/// 
-		/// Example Usage: GET api/group?name=group1&amp;name=group2
+		/// Example Usage: GET api/group/find/group1
 		/// </summary>
-		/// <param name="name">Array of group names.</param>
+		/// <param name="name">Group name.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		[HttpGet]
-		public IEnumerable<ActorResponse> Get(string[] name)
+		[HttpGet("find/{name}")]
+		public IEnumerable<ActorResponse> Get(string name)
 		{
-			var group = _groupController.Get(name);
+			var group = _groupController.Search(name);
+			var actorContract = group.ToContract();
+			return actorContract;
+		}
+
+		/// <summary>
+		/// Get Group that matches <param name="id"/> provided.
+		/// 
+		/// Example Usage: GET api/group/findbyid/1
+		/// </summary>
+		/// <param name="id">Group id.</param>
+		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
+		[HttpGet("findbyid/{id:int}")]
+		public ActorResponse Get(int id)
+		{
+			var group = _groupController.Search(id);
 			var actorContract = group.ToContract();
 			return actorContract;
 		}

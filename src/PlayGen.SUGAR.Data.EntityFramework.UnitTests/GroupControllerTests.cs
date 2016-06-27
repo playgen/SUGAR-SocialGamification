@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateGroup(groupName);
 
-			var groups = _groupDbController.Get(new string[] { groupName });
+			var groups = _groupDbController.Search(groupName);
 
 			int matches = groups.Count(g => g.Name == groupName);
 
@@ -73,9 +73,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				CreateGroup(groupName);
 			}
 
-			CreateGroup("GetMultipleGroups_DontGetThis");
+			CreateGroup("GetMultiple_Groups_DontGetThis");
 
-			var groups = _groupDbController.Get(groupNames);
+			var groups = _groupDbController.Search("GetMultipleGroups");
 
 			var matchingGroups = groups.Select(g => groupNames.Contains(g.Name));
 
@@ -83,9 +83,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
-		public void GetNonExistingGroups()
+		public void GetNonExistingGroup()
 		{
-			var groups = _groupDbController.Get(new string[] { "GetNonExsitingGroups" });
+			var groups = _groupDbController.Search("GetNonExsitingGroup");
 
 			Assert.Empty(groups);
 		}
@@ -97,12 +97,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var group = CreateGroup(groupName);
 
-			var groups = _groupDbController.Get(new string[] { groupName });
+			var groups = _groupDbController.Search(groupName);
 			Assert.Equal(groups.Count(), 1);
 			Assert.Equal(groups.ElementAt(0).Name, groupName);
 
 			_groupDbController.Delete(new[] { group.Id });
-			groups = _groupDbController.Get(new string[] { groupName });
+			groups = _groupDbController.Search(groupName);
 
 			Assert.Empty(groups);
 		}

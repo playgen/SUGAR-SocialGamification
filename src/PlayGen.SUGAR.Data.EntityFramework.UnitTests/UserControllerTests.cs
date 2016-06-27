@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateUser(userName);
 
-			var users = _userDbController.Get(new string[] { userName });
+			var users = _userDbController.Search(userName);
 
 			int matches = users.Count(g => g.Name == userName);
 
@@ -72,9 +72,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				CreateUser(userName);
 			}
 
-			CreateUser("GetMultipleUsersByName_DontGetThis");
+			CreateUser("GetMultiple_UsersByName_DontGetThis");
 
-			var users = _userDbController.Get(userNames);
+			var users = _userDbController.Search("GetMultipleUsersByName");
 
 			var matchingUsers = users.Select(g => userNames.Contains(g.Name));
 
@@ -82,37 +82,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
-		public void GetMultipleUsersById()
+		public void GetNonExistingUser()
 		{
-			string[] userNames = new[]
-			{
-				"GetMultipleUsersById1",
-				"GetMultipleUsersById2",
-				"GetMultipleUsersById3",
-				"GetMultipleUsersById4",
-			};
-
-			List<int> userIds = new List<int>();
-
-			foreach (var userName in userNames)
-			{
-				var user = CreateUser(userName);
-				userIds.Add(user.Id);
-			}
-
-			CreateUser("GetMultipleUsersById_DontGetThis");
-
-			var users = _userDbController.Get(userIds.ToArray());
-
-			var matchingUsers = users.Select(u => userIds.Contains(u.Id));
-
-			Assert.Equal(matchingUsers.Count(), userIds.Count);
-		}
-
-		[Fact]
-		public void GetNonExistingUsers()
-		{
-			var users = _userDbController.Get(new string[] { "GetNonExsitingUsers" });
+			var users = _userDbController.Search("GetNonExsitingUsers");
 
 			Assert.Empty(users);
 		}
@@ -124,12 +96,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var user = CreateUser(userName);
 
-			var users = _userDbController.Get(new string[] { userName });
+			var users = _userDbController.Search(userName);
 			Assert.Equal(users.Count(), 1);
 			Assert.Equal(users.ElementAt(0).Name, userName);
 
 			_userDbController.Delete(new[] { user.Id });
-			users = _userDbController.Get(new string[] { userName });
+			users = _userDbController.Search(userName);
 
 			Assert.Empty(users);
 		}

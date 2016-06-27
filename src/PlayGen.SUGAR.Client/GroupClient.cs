@@ -8,7 +8,7 @@ namespace PlayGen.SUGAR.Client
 	/// <summary>
 	/// Controller that facilitates Group specific operations.
 	/// </summary>
-	public class GroupClient : ClientBase, IGroupController
+	public class GroupClient : ClientBase
 	{
 		public GroupClient(string baseAddress) : base(baseAddress)
 		{
@@ -27,14 +27,27 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Get a list of Groups that match <param name="name"/> provided.
 		/// </summary>
-		/// <param name="name">Array of group names.</param>
+		/// <param name="name">Group name.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> Get(string[] name)
+		public IEnumerable<ActorResponse> Get(string name)
 		{
-			var query = GetUriBuilder("api/group")
-				.AppendQueryParameters(name, "name={0}")
+			var query = GetUriBuilder("api/group/find")
+				.AppendQueryParameter(name, "{0}")
 				.ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
+		}
+
+		/// <summary>
+		/// Get Group that matches <param name="id"/> provided.
+		/// </summary>
+		/// <param name="id">Group id.</param>
+		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
+		public ActorResponse Get(int id)
+		{
+			var query = GetUriBuilder("api/group/findbyid")
+				.AppendQueryParameter(id, "{0}")
+				.ToString();
+			return Get<ActorResponse>(query);
 		}
 
 		/// <summary>
