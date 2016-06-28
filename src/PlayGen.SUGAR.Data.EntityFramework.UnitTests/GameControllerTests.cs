@@ -12,70 +12,67 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	public class GameControllerTests : TestController
 	{
 		#region Configuration
+
 		private readonly GameController _gameDbController;
 
 		public GameControllerTests()
 		{
 			_gameDbController = new GameController(NameOrConnectionString);
 		}
+
 		#endregion
 
-
 		#region Tests
+
 		[Fact]
 		public void CreateAndGetGame()
 		{
-			string gameName = "CreateGame";
-
+			const string gameName = "CreateGame";
 			CreateGame(gameName);
-			
-			var games = _gameDbController.Find(gameName);
+			var games = _gameDbController.Search(gameName);
 
-			int matches = games.Count(g => g.Name == gameName);
-
+			var matches = games.Count(g => g.Name == gameName);
 			Assert.Equal(1, matches);
 		}
 
 		[Fact]
 		public void CreateDuplicateGame()
 		{
-			string gameName = "CreateDuplicateGame";
-
+			const string gameName = "CreateDuplicateGame";
 			CreateGame(gameName);
 			
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateGame(gameName);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateGame(gameName));
 		}
 		
 		[Fact]
 		public void GetMultipleGames()
 		{
-			var gameName = "FindSingleGame1";
-			CreateGame(gameName);
+			string[] gameNames = new[]
+			{
+				"GetMultipleGames1",
+				"GetMultipleGames2",
+				"GetMultipleGames3",
+				"GetMultipleGames4",
+			};
 
-			CreateGame("GetMultipleGames_DontGetThis");
+			foreach (var gameName in gameNames)
+			{
+				CreateGame(gameName);
+			}
 
-			var games = _gameDbController.Find(gameName);
+			CreateGame("GetMultiple_Games_DontGetThis");
 
-			var matchingGames = games.Where(g => g.Name.Equals(gameName));
+			var games = _gameDbController.Search("GetMultipleGames");
+
+			var matchingGames = games.Select(g => gameNames.Contains(g.Name));
 			
-			Assert.Equal(1, matchingGames.Count());
+			Assert.Equal(gameNames.Length, matchingGames.Count());
 		}
 
 		[Fact]
-		public void GetNonExistingGames()
+		public void GetNonExistingGame()
 		{
-			var games = _gameDbController.Find("GetNonExsitingGames");
+			var games = _gameDbController.Search("GetNonExsitingGame");
 
 			Assert.Empty(games);
 		}
@@ -83,16 +80,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteExistingGame()
 		{
-			string gameName = "DeleteExistingGame";
+			const string gameName = "DeleteExistingGame";
 
 			var game = CreateGame(gameName);
 
-			var games = _gameDbController.Find(gameName);
+			var games = _gameDbController.Search(gameName);
+			Assert.NotNull(games);
 			Assert.Equal(games.Count(), 1);
 			Assert.Equal(games.ElementAt(0).Name, gameName);
 
-			_gameDbController.Delete(new []{game.Id});
-			games = _gameDbController.Find(gameName);
+			_gameDbController.Delete(game.Id);
+			games = _gameDbController.Search(gameName);
 
 			Assert.Empty(games);
 		}
@@ -100,18 +98,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingGame()
 		{
-			bool hadException = false;
-
-			try
-			{
-				_gameDbController.Delete(new int[] {-1});
-			}
-			catch (Exception)
-			{
-				hadException = true;
-			}
-
-			Assert.False(hadException);
+			//TODO: make exception type specific
+			Assert.Throws<Exception>(() => _gameDbController.Delete(-1));
 		}
 		#endregion
 

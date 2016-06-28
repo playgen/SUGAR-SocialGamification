@@ -12,55 +12,41 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	public class GroupControllerTests : TestController
 	{
 		#region Configuration
+
 		private readonly GroupController _groupDbController;
 
 		public GroupControllerTests()
 		{
 				_groupDbController = new GroupController(NameOrConnectionString);
 		}
-		#endregion
 
+		#endregion
 
 		#region Tests
 		[Fact]
 		public void CreateAndGetGroup()
 		{
-			string groupName = "CreateGroup";
-
+			const string groupName = "CreateGroup";
 			CreateGroup(groupName);
+			var groups = _groupDbController.Search(groupName);
 
-			var groups = _groupDbController.Get(new string[] { groupName });
-
-			int matches = groups.Count(g => g.Name == groupName);
-
+			var matches = groups.Count(g => g.Name == groupName);
 			Assert.Equal(matches, 1);
 		}
 
 		[Fact]
 		public void CreateDuplicateGroup()
 		{
-			string groupName = "CreateDuplicateGroup";
-
+			const string groupName = "CreateDuplicateGroup";
 			CreateGroup(groupName);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateGroup(groupName);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateGroup(groupName));
 		}
 
 		[Fact]
 		public void GetMultipleGroups()
 		{
-			string[] groupNames = new[]
+			var groupNames = new[]
 			{
 					"GetMultipleGroups1",
 					"GetMultipleGroups2",
@@ -73,19 +59,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				CreateGroup(groupName);
 			}
 
-			CreateGroup("GetMultipleGroups_DontGetThis");
-
-			var groups = _groupDbController.Get(groupNames);
+			CreateGroup("GetMultiple_Groups_DontGetThis");
+			var groups = _groupDbController.Search("GetMultipleGroups");
 
 			var matchingGroups = groups.Select(g => groupNames.Contains(g.Name));
-
 			Assert.Equal(matchingGroups.Count(), groupNames.Length);
 		}
 
 		[Fact]
-		public void GetNonExistingGroups()
+		public void GetNonExistingGroup()
 		{
-			var groups = _groupDbController.Get(new string[] { "GetNonExsitingGroups" });
+			var groups = _groupDbController.Search("GetNonExsitingGroup");
 
 			Assert.Empty(groups);
 		}
@@ -97,12 +81,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var group = CreateGroup(groupName);
 
-			var groups = _groupDbController.Get(new string[] { groupName });
+			var groups = _groupDbController.Search(groupName);
+			Assert.NotNull(groups);
 			Assert.Equal(groups.Count(), 1);
 			Assert.Equal(groups.ElementAt(0).Name, groupName);
 
-			_groupDbController.Delete(new[] { group.Id });
-			groups = _groupDbController.Get(new string[] { groupName });
+			_groupDbController.Delete(group.Id);
+			groups = _groupDbController.Search(groupName);
 
 			Assert.Empty(groups);
 		}
@@ -110,18 +95,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingGroup()
 		{
-			bool hadException = false;
-
-			try
-			{
-				_groupDbController.Delete(new int[] { -1 });
-			}
-			catch (Exception)
-			{
-				hadException = true;
-			}
-
-			Assert.False(hadException);
+			//TODO: make exception type specific
+			Assert.Throws<Exception>(() => _groupDbController.Delete(-1));
 		}
 		#endregion
 

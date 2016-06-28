@@ -12,5 +12,7 @@ namespace PlayGen.SUGAR.Contracts
 		public string Name { get; set; }
 
 		public List<AchievementCriteria> CompletionCriteria { get; set; }
+
+		public List<Reward> Reward { get; set; }
 	}
 }

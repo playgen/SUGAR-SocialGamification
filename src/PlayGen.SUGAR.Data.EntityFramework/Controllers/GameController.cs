@@ -25,23 +25,41 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		/// <summary>
 		/// Retrieve game multiple records by name from the database
 		/// </summary>
-		/// <param name="partialName"></param>
+		/// <param name="names"></param>
 		/// <returns></returns>
-		public IEnumerable<Game> Find(string partialName)
+		public IEnumerable<Game> Search(string name)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var games = context.Games.Where(g => g.Name.ToLower().Contains(partialName.ToLower())).ToList();
+				var games = context.Games
+					.Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
 				return games;
+			}
+		}
+
+		/// <summary>
+		/// Retrieve game record by id from the database
+		/// </summary>
+		/// <param name="ids"></param>
+		/// <returns></returns>
+		public Game Search(int id)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var game = context.Games
+					.SingleOrDefault(g => id == g.Id);
+				return game;
 			}
 		}
 
 		/// <summary>
 		/// Create a new game record in the database.
 		/// </summary>
-		/// <param name="game"></param>
+		/// <param name="newGame"></param>
 		/// <returns></returns>
 		public void Create(Game game)
 		{
@@ -58,15 +76,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		/// Delete a game record from the database.
 		/// </summary>
 		/// <param name="id"></param>
-		public void Delete(int[] id)
+		public void Delete(int id)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var games = context.Games.Where(g => id.Contains(g.Id)).ToList();
+				var game = context.Games
+					.Where(g => id == g.Id);
 
-				context.Games.RemoveRange(games);
+				context.Games.RemoveRange(game);
 				SaveChanges(context);
 			}
 		}

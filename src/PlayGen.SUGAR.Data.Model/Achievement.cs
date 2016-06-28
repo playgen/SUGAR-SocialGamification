@@ -18,5 +18,7 @@ namespace PlayGen.SUGAR.Data.Model
 		public string Token { get; set; }
 
 		public virtual AchievementCriteriaCollection CompletionCriteriaCollection { get; set; }
+
+		public virtual RewardCollection RewardCollection { get; set; }
 	}
 }

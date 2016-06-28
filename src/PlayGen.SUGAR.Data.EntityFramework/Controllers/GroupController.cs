@@ -4,6 +4,9 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
+	/// <summary>
+	/// Performs DB operations on the Group entity
+	/// </summary>
 	public class GroupController : DbController
 	{
 		public GroupController(string nameOrConnectionString) 
@@ -23,27 +26,29 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Group> Get(string[] names)
+		public IEnumerable<Group> Search(string name)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var groups = context.Groups.Where(g => names.Contains(g.Name)).ToList();
+				var groups = context.Groups
+					.Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
 
 				return groups;
 			}
 		}
 
-		public IEnumerable<Group> Get(int[] id)
+		public Group Search(int id)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var groups = context.Groups.Where(g => id.Contains(g.Id)).ToList();
+				var group = context.Groups
+					.SingleOrDefault(g => id == g.Id);
 
-				return groups;
+				return group;
 			}
 		}
 
@@ -58,15 +63,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Delete(int[] id)
+		public void Delete(int id)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var groups = context.Groups.Where(g => id.Contains(g.Id)).ToList();
+				var group = context.Groups
+					.Where(g => id == g.Id);
 
-				context.Groups.RemoveRange(groups);
+				context.Groups.RemoveRange(group);
 				SaveChanges(context);
 			}
 		}

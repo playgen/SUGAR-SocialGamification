@@ -8,9 +8,9 @@ namespace PlayGen.SUGAR.Client
 	/// <summary>
 	/// Controller that facilitates GroupData specific operations.
 	/// </summary>
-	public class GroupSaveDataClient : ClientBase, IGroupSaveDataController
+	public class GroupDataClient : ClientBase, IGroupSaveDataController
 	{
-		public GroupSaveDataClient(string baseAddress) : base(baseAddress)
+		public GroupDataClient(string baseAddress) : base(baseAddress)
 		{
 		}
 

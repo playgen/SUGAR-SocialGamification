@@ -12,6 +12,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	public class AccountControllerTests : TestController
 	{
 		#region Configuration
+
 		private readonly AccountController _accountDbController;
 		private readonly UserController _userDbController; 
 
@@ -20,50 +21,37 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			_accountDbController = new AccountController(NameOrConnectionString);
 			_userDbController = new UserController(NameOrConnectionString);
 		}
+
 		#endregion
 
 		#region Tests
+
 		[Fact]
 		public void CreateAndGetAccount()
 		{
-			string name = "CreateAndGetAccount";
-			string password = $"{name}Password";
-
+			const string name = "CreateAndGetAccount";
+			var password = $"{name}Password";
 			CreateAccount(name, password);
-
 			var accounts = _accountDbController.Get(new string[] { name });
 
-			int matches = accounts.Count(a => a.Name == name);
-
+			var matches = accounts.Count(a => a.Name == name);
 			Assert.Equal(1, matches);
 		}
 
 		[Fact]
 		public void CreateDuplicateAccount()
 		{
-			string name = "CreateDuplicateAccount";
-			string password = $"{name}Password";
-
+			const string name = "CreateDuplicateAccount";
+			var password = $"{name}Password";
 			CreateAccount(name, password);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateAccount(name, password);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateAccount(name, password));
 		}
 
 		[Fact]
 		public void GetMultipleAccountsByName()
 		{
-			string[] names = new[]
+			var names = new[]
 			{
 				"GetMultipleAccountsByName1",
 				"GetMultipleAccountsByName2",
@@ -96,16 +84,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteExistingAccount()
 		{
-			string name = "DeleteExistingAccount";
-			string password = $"{name}Password";
+			const string name = "DeleteExistingAccount";
+			var password = $"{name}Password";
 
 			var account = CreateAccount(name, password);
 
 			var accounts = _accountDbController.Get(new string[] { name });
+			Assert.NotNull(accounts);
 			Assert.Equal(accounts.Count(), 1);
 			Assert.Equal(accounts.ElementAt(0).Name, name);
 
-			_accountDbController.Delete(new[] { account.Id });
+			_accountDbController.Delete(account.Id);
 			accounts = _accountDbController.Get(new string[] { name });
 
 			Assert.Empty(accounts);
@@ -114,18 +103,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingAccount()
 		{
-			bool hadExeption = false;
-
-			try
-			{
-				_accountDbController.Delete(new int[] { -1 });
-			}
-			catch (Exception)
-			{
-				hadExeption = true;
-			}
-
-			Assert.False(hadExeption);
+			//TODO: make exception type specific
+			Assert.Throws<Exception>(() => _accountDbController.Delete(-1));
 		}
 		#endregion
 
@@ -147,7 +126,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		private User CreateUser(string name)
 		{
-			User user = new User()
+			var user = new User()
 			{
 				Name = name,
 			};

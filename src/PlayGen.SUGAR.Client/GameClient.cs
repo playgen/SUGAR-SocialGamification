@@ -8,7 +8,7 @@ namespace PlayGen.SUGAR.Client
 	/// <summary>
 	/// Controller that facilitates Game specific operations.
 	/// </summary>
-	public class GameClient : ClientBase, IGameController
+	public class GameClient : ClientBase
 	{
 		public GameClient(string baseAddress) : base(baseAddress)
 		{
@@ -20,21 +20,30 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="GameResponse"/> that hold Games details.</returns>
 		public IEnumerable<GameResponse> Get()
 		{
-			var query = GetUriBuilder("api/game/all").ToString();
+			var query = GetUriBuilder("api/game/list").ToString();
 			return Get<IEnumerable<GameResponse>>(query);
 		}
 
 		/// <summary>
 		/// Get a list of Games that match <param name="name"/> provided.
 		/// </summary>
-		/// <param name="name">Array of Game names</param>
+		/// <param name="name">Game name</param>
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
-		public IEnumerable<GameResponse> Get(string[] name)
+		public IEnumerable<GameResponse> Get(string name)
 		{
-			var query = GetUriBuilder("api/game")
-				.AppendQueryParameters(name, "name={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/game/find/{name}").ToString();
 			return Get<IEnumerable<GameResponse>>(query);
+		}
+
+		/// <summary>
+		/// Get Game that matches <param name="id"/> provided.
+		/// </summary>
+		/// <param name="id">Game id</param>
+		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
+		public GameResponse Get(int id)
+		{
+			var query = GetUriBuilder($"api/game/findbyid/{id}").ToString();
+			return Get<GameResponse>(query);
 		}
 
 		/// <summary>
@@ -50,14 +59,12 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Delete Games with the IDs provided.
+		/// Delete Game with the ID provided.
 		/// </summary>
-		/// <param name="id">Array of Game IDs.</param>
-		public void Delete(int[] id)
+		/// <param name="id">Game ID.</param>
+		public void Delete(int id)
 		{
-			var query = GetUriBuilder("api/game")
-				.AppendQueryParameters(id, "id={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/game/{id}").ToString();
 			Delete(query);
 		}
 	}

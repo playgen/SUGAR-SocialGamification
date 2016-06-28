@@ -8,7 +8,7 @@ namespace PlayGen.SUGAR.Client
 	/// <summary>
 	/// Controller that facilitates GroupAchievement specific operations.
 	/// </summary>
-	public class GroupAchievementClient : ClientBase, IGroupAchievementController
+	public class GroupAchievementClient : ClientBase
 	{
 		public GroupAchievementClient(string baseAddress) : base(baseAddress)
 		{
@@ -21,18 +21,13 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns multiple <see cref="GameResponse"/> that hold GroupAchievement details</returns>
 		public IEnumerable<AchievementResponse> Get(int gameId)
 		{
-			var query = GetUriBuilder("api/groupachievement")
-				.AppendQueryParameters(new int[] { gameId }, "gameId={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/groupachievement/{gameId}").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
 		}
 
 		public IEnumerable<AchievementProgressResponse> GetProgress(int groupId, int gameId)
 		{
-			var query = GetUriBuilder("api/groupachievement/gameprogress")
-				.AppendQueryParameter(groupId, "groupId={0}")
-				.AppendQueryParameter(gameId, "gameId={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/groupachievement/gameprogress/{groupId}/{gameId}").ToString();
 			return Get<IEnumerable<AchievementProgressResponse>>(query);
 		}
 
@@ -58,14 +53,12 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Delete GroupAchievements with the <param name="achievementId"/> provided.
+		/// Delete GroupAchievement with the <param name="achievementId"/> provided.
 		/// </summary>
-		/// <param name="achievementId">Array of GroupAchievement IDs</param>
-		public void Delete(int[] achievementId)
+		/// <param name="achievementId">GroupAchievement ID</param>
+		public void Delete(int achievementId)
 		{
-			var query = GetUriBuilder("api/groupachievement")
-				.AppendQueryParameters(achievementId, "id={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/groupachievement/{achievementId}").ToString();
 			Delete(query);
 		}
 	}

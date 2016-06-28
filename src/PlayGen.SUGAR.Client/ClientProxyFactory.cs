@@ -9,7 +9,7 @@
 		public GroupAchievementClient GetGroupAchievementClient => new GroupAchievementClient(_baseAddress);
 		public GroupClient GetGroupClient => new GroupClient(_baseAddress);
 		public GroupMemberClient GetGroupMemberClient => new GroupMemberClient(_baseAddress);
-		public GroupSaveDataClient GetGroupSaveDataClient => new GroupSaveDataClient(_baseAddress);
+		public GroupDataClient GetGroupSaveDataClient => new GroupDataClient(_baseAddress);
 		public UserAchievementClient GetUserAchievementClient => new UserAchievementClient(_baseAddress);
 		public UserClient GetUserClient => new UserClient(_baseAddress);
 		public UserFriendClient GetUserFriendClient => new UserFriendClient(_baseAddress);

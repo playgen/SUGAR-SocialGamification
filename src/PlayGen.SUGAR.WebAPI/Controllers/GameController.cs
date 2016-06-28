@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
+using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Exceptions;
-using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -23,32 +24,50 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all Games.
+		/// Get a list of all Games.
 		/// 
-		/// Example Usage: GET api/game/all
+		/// Example Usage: GET api/game/list
 		/// </summary>
 		/// <returns>A list of <see cref="GameResponse"/> that hold Game details.</returns>
 		[HttpGet("list")]
-		public IEnumerable<GameResponse> Get()
+		[ResponseType(typeof(IEnumerable<GameResponse>))]
+		public IActionResult Get()
 		{
-			var game = _gameDbController.Get();
-			var gameContract = game.ToContractList();
-			return gameContract;
+			var games = _gameDbController.Get();
+			var gameContract = games.ToContractList();
+			return Ok(gameContract);
 		}
 
 		/// <summary>
-		/// Find a list of Games that match <param name="name"/> provided.
+		/// Get a list of Games that match <param name="name"/> provided.
 		/// 
-		/// Example Usage: GET api/game?name=game1&amp;name=game2
+		/// Example Usage: GET api/game/find/game1
 		/// </summary>
-		/// <param name="name">Array of Game names</param>
+		/// <param name="name">Game name</param>
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
-		public IEnumerable<GameResponse> Find([FromRoute]string name)
+		[ResponseType(typeof(IEnumerable<GameResponse>))]
+		public IActionResult Get([FromRoute]string name)
 		{
-			var game = _gameDbController.Find(name);
-			var gameContract = game.ToContractList();
-			return gameContract;
+			var games = _gameDbController.Search(name);
+			var gameContract = games.ToContractList();
+			return Ok(gameContract);
+		}
+
+		/// <summary>
+		/// Get Game that matches <param name="id"/> provided.
+		/// 
+		/// Example Usage: GET api/game/findbyid/1
+		/// </summary>
+		/// <param name="id">Game id</param>
+		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
+		[HttpGet("findbyid/{id:int}")]
+		[ResponseType(typeof(GameResponse))]
+		public IActionResult Get([FromRoute]int id)
+		{
+			var game = _gameDbController.Search(id);
+			var gameContract = game.ToContract();
+			return Ok(gameContract);
 		}
 
 		/// <summary>
@@ -59,8 +78,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="newGame"><see cref="GameRequest"/> object that contains the details of the new Game.</param>
 		/// <returns>A <see cref="GameResponse"/> containing the new Game details.</returns>
-		[HttpPost("create")]
-		public GameResponse Create([FromBody]GameRequest newGame)
+		[HttpPost]
+		[ResponseType(typeof(GameResponse))]
+		public IActionResult Create([FromBody]GameRequest newGame)
 		{
 			if (newGame == null) {
 				throw new NullObjectException("Invalid object passed");
@@ -68,19 +88,20 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var game = newGame.ToModel();
 			_gameDbController.Create(game);
 			var gameContract = game.ToContract();
-			return gameContract;
+			return Ok(gameContract);
 		}
 
 		/// <summary>
-		/// Delete Games with the IDs provided.
+		/// Delete Game with the ID provided.
 		/// 
-		/// Example Usage: DELETE api/game?id=1&amp;id=2
+		/// Example Usage: DELETE api/game/1
 		/// </summary>
-		/// <param name="id">Array of Game IDs.</param>
+		/// <param name="id">Game ID.</param>
 		[HttpDelete("{id:int}")]
-		public void Delete([FromRoute]int id)
+		public IActionResult Delete([FromRoute]int id)
 		{
-			_gameDbController.Delete(new [] {id});
+			_gameDbController.Delete(id);
+			return Ok();
 		}
 	}
 }

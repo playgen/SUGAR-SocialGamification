@@ -44,14 +44,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Delete(int[] id)
+		public void Delete(int id)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var accounts = context.Accounts.Where(g => id.Contains(g.Id));
-				context.Accounts.RemoveRange(accounts);
+				var account = context.Accounts.Where(g => id == g.Id);
+				context.Accounts.RemoveRange(account);
 				SaveChanges(context);
 			}
 		}

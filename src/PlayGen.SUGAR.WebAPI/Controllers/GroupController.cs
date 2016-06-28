@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
+using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Exceptions;
-using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -13,7 +14,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Group specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class GroupController : Controller, IGroupController
+	public class GroupController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GroupController _groupController;
 
@@ -23,32 +24,50 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all Groups.
+		/// Get a list of all Groups.
 		/// 
 		/// Example Usage: GET api/group/all
 		/// </summary>
 		/// <returns>A list of <see cref="ActorResponse"/> that hold Group details.</returns>
-		[HttpGet("all")]
-		public IEnumerable<ActorResponse> Get()
+		[HttpGet("list")]
+		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		public IActionResult Get()
 		{
-			var group = _groupController.Get();
-			var actorContract = group.ToContractList();
-			return actorContract;
+			var groups = _groupController.Get();
+			var actorContract = groups.ToContractList();
+			return Ok(actorContract);
 		}
 
 		/// <summary>
-		/// Find a list of Groups that match <param name="name"/> provided.
+		/// Get a list of Groups that match <param name="name"/> provided.
 		/// 
-		/// Example Usage: GET api/group?name=group1&amp;name=group2
+		/// Example Usage: GET api/group/find/group1
 		/// </summary>
-		/// <param name="name">Array of group names.</param>
+		/// <param name="name">Group name.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		[HttpGet]
-		public IEnumerable<ActorResponse> Get(string[] name)
+		[HttpGet("find/{name}")]
+		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		public IActionResult Get([FromRoute]string name)
 		{
-			var group = _groupController.Get(name);
-			var actorContract = group.ToContractList();
-			return actorContract;
+			var groups = _groupController.Search(name);
+			var actorContract = groups.ToContractList();
+			return Ok(actorContract);
+		}
+
+		/// <summary>
+		/// Get Group that matches <param name="id"/> provided.
+		/// 
+		/// Example Usage: GET api/group/findbyid/1
+		/// </summary>
+		/// <param name="id">Group id.</param>
+		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
+		[HttpGet("findbyid/{id:int}")]
+		[ResponseType(typeof(ActorResponse))]
+		public IActionResult Get([FromRoute]int id)
+		{
+			var group = _groupController.Search(id);
+			var actorContract = group.ToContract();
+			return Ok(actorContract);
 		}
 
 		/// <summary>
@@ -60,7 +79,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new Group.</param>
 		/// <returns>A <see cref="ActorResponse"/> containing the new Group details.</returns>
 		[HttpPost]
-		public ActorResponse Create([FromBody]ActorRequest actor)
+		[ResponseType(typeof(ActorResponse))]
+		public IActionResult Create([FromBody]ActorRequest actor)
 		{
 			if (actor == null)
 			{
@@ -69,19 +89,20 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var group = actor.ToGroupModel();
 			_groupController.Create(group);
 			var actorContract = group.ToContract();
-			return actorContract;
+			return Ok(actorContract);
 		}
 
 		/// <summary>
-		/// Delete groups with the <param name="id"/> provided.
+		/// Delete group with the <param name="id"/> provided.
 		/// 
-		/// Example Usage: DELETE api/group?id=1&amp;id=2
+		/// Example Usage: DELETE api/group/1
 		/// </summary>
-		/// <param name="id">Array of Group IDs.</param>
-		[HttpDelete]
-		public void Delete(int[] id)
+		/// <param name="id">Group ID.</param>
+		[HttpDelete("{id:int}")]
+		public IActionResult Delete([FromRoute]int id)
 		{
 			_groupController.Delete(id);
+			return Ok();
 		}
 	}
 }

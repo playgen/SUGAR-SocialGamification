@@ -12,19 +12,21 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	public class UserFriendControllerTests : TestController
 	{
 		#region Configuration
+
 		private readonly UserRelationshipController _userRelationshipDbController;
 
 		public UserFriendControllerTests()
 		{
 			_userRelationshipDbController = new UserRelationshipController(NameOrConnectionString);
 		}
+
 		#endregion
 
 		#region Tests
 		[Fact]
 		public void CreateAndGetUserFriendRequest()
 		{
-			string userFriendName = "CreateUserFriendRequest";
+			const string userFriendName = "CreateUserFriendRequest";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -33,95 +35,52 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var userRequests = _userRelationshipDbController.GetRequests(newFriend.AcceptorId);
 
-			int matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
-
+			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 			Assert.Equal(matches, 1);
 		}
 
 		[Fact]
 		public void CreateUserFriendWithNonExistingRequestor()
 		{
-			string userFriendName = "CreateUserFriendWithNonExistingRequestor";
+			const string userFriendName = "CreateUserFriendWithNonExistingRequestor";
 			var acceptor = CreateUser(userFriendName);
-			bool hadException = false;
 
-			try
-			{
-				CreateUserFriend(-1, acceptor.Id);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateUserFriend(-1, acceptor.Id));
 		}
 
 		[Fact]
 		public void CreateUserFriendWithNonExistingAcceptor()
 		{
-			string userFriendName = "CreateUserFriendWithNonExistingAcceptor";
+			const string userFriendName = "CreateUserFriendWithNonExistingAcceptor";
 			var requestor = CreateUser(userFriendName);
-			bool hadException = false;
 
-			try
-			{
-				CreateUserFriend(requestor.Id, -1);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateUserFriend(requestor.Id, -1));
 		}
 
 		[Fact]
 		public void CreateDuplicateUserFriend()
 		{
-			string userFriendName = "CreateDuplicateUserFriend";
+			const string userFriendName = "CreateDuplicateUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
 			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateUserFriend(requestor.Id, acceptor.Id);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(requestor.Id, acceptor.Id));
 		}
 
 		[Fact]
 		public void CreateDuplicateReversedUserFriend()
 		{
-			string userFriendName = "CreateDuplicateReversedUserFriend";
+			const string userFriendName = "CreateDuplicateReversedUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
 			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateUserFriend(acceptor.Id, requestor.Id);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(acceptor.Id, requestor.Id));
 		}
 
 		[Fact]
@@ -135,7 +94,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void AcceptUserFriendRequest()
 		{
-			string userFriendName = "AcceptUserFriendRequest";
+			const string userFriendName = "AcceptUserFriendRequest";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -146,7 +105,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var userRequests = _userRelationshipDbController.GetRequests(newFriend.AcceptorId);
 
-			int matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
+			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 
 			Assert.Equal(matches, 0);
 
@@ -160,32 +119,26 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void RejectUserFriendRequest()
 		{
-			string userFriendName = "RejectUserFriendRequest";
+			const string userFriendName = "RejectUserFriendRequest";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
-
 			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
-
 			_userRelationshipDbController.UpdateRequest(newFriend, false);
-
 			var userRequests = _userRelationshipDbController.GetRequests(newFriend.AcceptorId);
 
-			int matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
-
+			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 			Assert.Equal(matches, 0);
 
 			var userFriends = _userRelationshipDbController.GetFriends(newFriend.RequestorId);
-
 			matches = userFriends.Count(g => g.Name == userFriendName + " Acceptor");
-
 			Assert.Equal(matches, 0);
 		}
 
 		[Fact]
 		public void UpdateNonExistingUserFriendRequest()
 		{
-			string userFriendName = "UpdateNonExistingUserFriendRequest";
+			const string userFriendName = "UpdateNonExistingUserFriendRequest";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -196,18 +149,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				AcceptorId = acceptor.Id
 			};
 
-			bool hadException = false;
-
-			try
-			{
-				_userRelationshipDbController.UpdateRequest(newFriend, true);
-			}
-			catch (Exception)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			//TODO: make exception type specific
+			Assert.Throws<Exception>(() => _userRelationshipDbController.UpdateRequest(newFriend, true));
 		}
 
 		[Fact]
@@ -221,7 +164,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void CreateDuplicateAcceptedUserFriend()
 		{
-			string userFriendName = "CreateDuplicateAcceptedUserFriend";
+			const string userFriendName = "CreateDuplicateAcceptedUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -230,24 +173,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			_userRelationshipDbController.UpdateRequest(newFriend, true);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateUserFriend(requestor.Id, acceptor.Id);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(requestor.Id, acceptor.Id));
 		}
 
 		[Fact]
 		public void CreateDuplicateReversedAcceptedUserFriend()
 		{
-			string userFriendName = "CreateDuplicateReversedAcceptedUserFriend";
+			const string userFriendName = "CreateDuplicateReversedAcceptedUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -256,24 +188,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			_userRelationshipDbController.UpdateRequest(newFriend, true);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateUserFriend(acceptor.Id, requestor.Id);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(acceptor.Id, requestor.Id));
 		}
 
 		[Fact]
 		public void UpdateUserFriend()
 		{
-			string userFriendName = "UpdateUserFriend";
+			const string userFriendName = "UpdateUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -291,7 +212,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void UpdateNonExistingUserFriend()
 		{
-			string userFriendName = "UpdateNonExistingUserFriend";
+			const string userFriendName = "UpdateNonExistingUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -302,25 +223,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				AcceptorId = acceptor.Id
 			};
 
-			bool hadException = false;
-
-			try
-			{
-				_userRelationshipDbController.Update(newFriend);
-			}
-			catch (Exception)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			//TODO: make exception type specific
+			Assert.Throws<Exception>(() => _userRelationshipDbController.Update(newFriend));
 		}
 		#endregion
 
 		#region Helpers
 		private User CreateUser(string name)
 		{
-			UserController userDbController = new UserController(NameOrConnectionString);
+			var userDbController = new UserController(NameOrConnectionString);
 			var user = new User
 			{
 				Name = name,

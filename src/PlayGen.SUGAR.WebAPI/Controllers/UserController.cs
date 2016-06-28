@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
+using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Exceptions;
-using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -13,7 +14,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates User specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class UserController : Controller, IUserController
+	public class UserController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.UserController _userController;
 
@@ -23,32 +24,50 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all Users.
+		/// Get a list of all Users.
 		/// 
-		/// Example Usage: GET api/user/all
+		/// Example Usage: GET api/user/list
 		/// </summary>
 		/// <returns>A list of <see cref="ActorResponse"/> that hold User details.</returns>
-		[HttpGet("all")]
-		public IEnumerable<ActorResponse> Get()
+		[HttpGet("list")]
+		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		public IActionResult Get()
 		{
-			var user = _userController.Get();
-			var actorContract = user.ToContractList();
-			return actorContract;
+			var users = _userController.Get();
+			var actorContract = users.ToContractList();
+			return Ok(actorContract);
 		}
 
 		/// <summary>
-		/// Find a list of Users that match <param name="name"/> provided.
+		/// Get a list of Users that match <param name="name"/> provided.
 		/// 
-		/// Example Usage: GET api/user?name=user1&amp;name=user2
+		/// Example Usage: GET api/user/find/user1
 		/// </summary>
-		/// <param name="name">Array of user names.</param>
+		/// <param name="name">User name.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		[HttpGet]
-		public IEnumerable<ActorResponse> Get(string[] name)
+		[HttpGet("find/{name}")]
+		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		public IActionResult Get([FromRoute]string name)
 		{
-			var user = _userController.Get(name);
-			var actorContract = user.ToContractList();
-			return actorContract;
+			var users = _userController.Search(name);
+			var actorContract = users.ToContractList();
+			return Ok(actorContract);
+		}
+
+		/// <summary>
+		/// Get User that matches <param name="id"/> provided.
+		/// 
+		/// Example Usage: GET api/user/findbyid/1
+		/// </summary>
+		/// <param name="id">User id.</param>
+		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
+		[HttpGet("findbyid/{id:int}")]
+		[ResponseType(typeof(ActorResponse))]
+		public IActionResult Get([FromRoute]int id)
+		{
+			var user = _userController.Search(id);
+			var actorContract = user.ToContract();
+			return Ok(actorContract);
 		}
 
 		/// <summary>
@@ -60,7 +79,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new User.</param>
 		/// <returns>A <see cref="ActorResponse"/> containing the new User details.</returns>
 		[HttpPost]
-		public ActorResponse Create([FromBody]ActorRequest actor)
+		[ResponseType(typeof(ActorResponse))]
+		public IActionResult Create([FromBody]ActorRequest actor)
 		{
 			if (actor == null)
 			{
@@ -69,19 +89,20 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var user = actor.ToUserModel();
 			_userController.Create(user);
 			var actorContract = user.ToContract();
-			return actorContract;
+			return Ok(actorContract);
 		}
 
 		/// <summary>
-		/// Delete users with the <param name="id"/> provided.
+		/// Delete user with the <param name="id"/> provided.
 		/// 
-		/// Example Usage: DELETE api/user?id=1&amp;id=2
+		/// Example Usage: DELETE api/user/1
 		/// </summary>
-		/// <param name="id">Array of User IDs.</param>
-		[HttpDelete]
-		public void Delete(int[] id)
+		/// <param name="id">User ID.</param>
+		[HttpDelete("{id:int}")]
+		public IActionResult Delete([FromRoute]int id)
 		{
 			_userController.Delete(id);
+			return Ok();
 		}
 	}
 }
