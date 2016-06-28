@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Threading.Tasks;
 using MySql.Data.Entity;
@@ -57,6 +58,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
+			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
 			// Setup foreign key relationships in the database tables
 			modelBuilder.Entity<UserToUserRelationship>()
 				.HasRequired(u => u.Requestor)
@@ -89,24 +92,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 				.Property(a => a.Name)
 				.IsUnique();
 
+			// multiple indexes for a single property must be added in the same fluent call
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.GameId)
-				.IsIndexed("IX_GroupData_Game_Group_Key", 0);
-			modelBuilder.Entity<GroupData>()
-				.Property(gd => gd.GroupId)
-				.IsIndexed("IX_GroupData_Game_Group_Key", 1);
-			modelBuilder.Entity<GroupData>()
-				.Property(gd => gd.Key)
-				.IsIndexed("IX_GroupData_Game_Group_Key", 2);
-
-			modelBuilder.Entity<GroupData>()
-				.Property(gd => gd.GameId)
+				.IsIndexed("IX_GroupData_Game_Group_Key", 0)
 				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 0);
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.GroupId)
+				.IsIndexed("IX_GroupData_Game_Group_Key", 1)
 				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 1);
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.Key)
+				.IsIndexed("IX_GroupData_Game_Group_Key", 2)
 				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 2);
 			modelBuilder.Entity<GroupData>()
 				.Property(gd => gd.DataType)
@@ -114,22 +111,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.GameId)
-				.IsIndexed("IX_UserData_Game_User_Key", 0);
-			modelBuilder.Entity<UserData>()
-				.Property(gd => gd.UserId)
-				.IsIndexed("IX_UserData_Game_User_Key", 1);
-			modelBuilder.Entity<UserData>()
-				.Property(gd => gd.Key)
-				.IsIndexed("IX_UserData_Game_User_Key", 2);
-
-			modelBuilder.Entity<UserData>()
-				.Property(gd => gd.GameId)
+				.IsIndexed("IX_UserData_Game_User_Key", 0)
 				.IsIndexed("IX_UserData_Game_User_Key_Type", 0);
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.UserId)
+				.IsIndexed("IX_UserData_Game_User_Key", 1)
 				.IsIndexed("IX_UserData_Game_User_Key_Type", 1);
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.Key)
+				.IsIndexed("IX_UserData_Game_User_Key", 2)
 				.IsIndexed("IX_UserData_Game_User_Key_Type", 2);
 			modelBuilder.Entity<UserData>()
 				.Property(gd => gd.DataType)
@@ -139,7 +129,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 			modelBuilder.ComplexType<AchievementCriteriaCollection>()
 				.Property(p => p.Serialised)
 				.HasColumnName("CompletionCriteria");
-			modelBuilder.ComplexType<AchievementCriteriaCollection>().Property(a => a.Serialised).HasMaxLength(1024);
+			modelBuilder.ComplexType<AchievementCriteriaCollection>()
+				.Property(a => a.Serialised)
+				.HasMaxLength(1024);
 
 			// Change all string fields to have a max length of 64 chars
 			modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
