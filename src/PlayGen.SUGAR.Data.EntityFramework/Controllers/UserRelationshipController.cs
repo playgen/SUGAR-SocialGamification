@@ -63,6 +63,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
+				if (newRelation.AcceptorId == newRelation.RequestorId) {
+					throw new DuplicateRecordException(string.Format("Two different users are needed to create a relationship."));
+				}
+
 				var hasConflicts = context.UserToUserRelationships
 					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
 					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));

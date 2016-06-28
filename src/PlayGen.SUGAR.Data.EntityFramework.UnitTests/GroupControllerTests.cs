@@ -101,7 +101,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Equal(groups.Count(), 1);
 			Assert.Equal(groups.ElementAt(0).Name, groupName);
 
-			_groupDbController.Delete(new[] { group.Id });
+			_groupDbController.Delete(group.Id);
 			groups = _groupDbController.Search(groupName);
 
 			Assert.Empty(groups);
@@ -114,7 +114,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			try
 			{
-				_groupDbController.Delete(new int[] { -1 });
+				_groupDbController.Delete(-1);
 			}
 			catch (Exception)
 			{

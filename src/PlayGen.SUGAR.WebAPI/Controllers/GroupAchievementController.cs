@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Controllers;
@@ -36,61 +37,30 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of GroupAchievements that match <param name="gameId"/>.
 		/// 
-		/// Example Usage: GET api/groupachievement?gameId=1
+		/// Example Usage: GET api/groupachievement/1
 		/// </summary>
-		/// <param name="gameId">Array of game IDs</param>
+		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="GameResponse"/> that hold GroupAchievement details</returns>
-		[HttpGet]
-		public IEnumerable<AchievementResponse> Get(int gameId)
+		[HttpGet("{gameId:int}")]
+		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
+		public IActionResult Get([FromRoute]int gameId)
 		{
 			var achievement = _groupAchievementController.GetByGame(gameId);
 			var achievementContract = achievement.ToContract();
-			return achievementContract;
-		}
-
-		/// <summary>
-		/// Create a new GroupAchievement.
-		/// Requires <see cref="AchievementRequest.Name"/> to be unique to that <see cref="AchievementRequest.GameId"/>.
-		/// 
-		/// Example Usage: POST api/groupachievement/
-		/// </summary>
-		/// <param name="newAchievement"><see cref="AchievementRequest"/> object that holds the details of the new GroupAchievement.</param>
-		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created GroupAchievement.</returns>
-		[HttpPost]
-		public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
-		{
-			if (newAchievement == null)
-			{
-				throw new NullObjectException("Invalid object passed");
-			}
-			var achievement = newAchievement.ToGroupModel();
-			_groupAchievementController.Create(achievement);
-			var achievementContract = achievement.ToContract();
-			return achievementContract;
-		}
-
-		/// <summary>
-		/// Delete GroupAchievements with the <param name="id"/> provided.
-		/// 
-		/// Example Usage: DELETE api/groupachievement?id=1&amp;id=2
-		/// </summary>
-		/// <param name="id">Array of GroupAchievement IDs</param>
-		[HttpDelete]
-		public void Delete(int[] id)
-		{
-			_groupAchievementController.Delete(id);
+			return Ok(achievementContract);
 		}
 
 		/// <summary>
 		/// Get the current progress for all achievements for a <param name="gameId"/> for <param name="groupId"/>.
 		/// 
-		/// Example Usage: GET api/groupachievement/gameprogress?gameId=1&amp;groupId=1
+		/// Example Usage: GET api/groupachievement/gameprogress/1/1
 		/// </summary>
 		/// <param name="groupId">ID of Group</param>
 		/// <param name="gameId">ID of Game</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
-		[HttpGet("gameprogress")]
-		public IEnumerable<AchievementProgressResponse> GetProgress(int groupId, int gameId)
+		[HttpGet("gameprogress/{groupId:int}/{gameId:int}")]
+		[ResponseType(typeof(IEnumerable<AchievementProgressResponse>))]
+		public IActionResult GetProgress([FromRoute]int groupId, [FromRoute]int gameId)
 		{
 			var achievementResponses = new List<AchievementProgressResponse>();
 			var achievements = _groupAchievementController.GetByGame(gameId);
@@ -131,7 +101,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				achievementResponses.Add(achievementProgress);
 			}
 
-			return achievementResponses;
+			return Ok(achievementResponses);
 		}
 
 		/// <summary>
@@ -143,7 +113,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="groupId">Array of Group IDs</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
 		[HttpGet("progress")]
-		public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] groupId)
+		[ResponseType(typeof(IEnumerable<AchievementProgressResponse>))]
+		public IActionResult GetProgress(int achievementId, int[] groupId)
 		{
 			var achievementResponses = new List<AchievementProgressResponse>();
 			var achievements = _groupAchievementController.Get(new int[] { achievementId });
@@ -198,7 +169,42 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				achievementResponses.Add(achievementProgress);
 			}
 
-			return achievementResponses;
+			return Ok(achievementResponses);
+		}
+
+		/// <summary>
+		/// Create a new GroupAchievement.
+		/// Requires <see cref="AchievementRequest.Name"/> to be unique to that <see cref="AchievementRequest.GameId"/>.
+		/// 
+		/// Example Usage: POST api/groupachievement/
+		/// </summary>
+		/// <param name="newAchievement"><see cref="AchievementRequest"/> object that holds the details of the new GroupAchievement.</param>
+		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created GroupAchievement.</returns>
+		[HttpPost]
+		[ResponseType(typeof(AchievementResponse))]
+		public IActionResult Create([FromBody] AchievementRequest newAchievement)
+		{
+			if (newAchievement == null)
+			{
+				throw new NullObjectException("Invalid object passed");
+			}
+			var achievement = newAchievement.ToGroupModel();
+			_groupAchievementController.Create(achievement);
+			var achievementContract = achievement.ToContract();
+			return Ok(achievementContract);
+		}
+
+		/// <summary>
+		/// Delete GroupAchievement with the <param name="id"/> provided.
+		/// 
+		/// Example Usage: DELETE api/groupachievement/1
+		/// </summary>
+		/// <param name="id">GroupAchievement ID</param>
+		[HttpDelete("{id:int}")]
+		public IActionResult Delete([FromRoute]int id)
+		{
+			_groupAchievementController.Delete(id);
+			return Ok();
 		}
 	}
 }

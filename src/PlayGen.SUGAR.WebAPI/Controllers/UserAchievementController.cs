@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Controllers;
@@ -35,61 +36,30 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of UserAchievements that match <param name="gameId"/>.
 		/// 
-		/// Example Usage: GET api/userachievement?gameId=1
+		/// Example Usage: GET api/userachievement/1
 		/// </summary>
 		/// <param name="gameId">Array of game IDs</param>
 		/// <returns>Returns multiple <see cref="GameResponse"/> that hold UserAchievement details</returns>
-		[HttpGet]
-		public IEnumerable<AchievementResponse> Get(int gameId)
+		[HttpGet("{gameId:int}")]
+		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
+		public IActionResult Get([FromRoute]int gameId)
 		{
 			var achievement = _userAchievementController.GetByGame(gameId);
 			var achievementContract = achievement.ToContract();
-			return achievementContract;
-		}
-
-		/// <summary>
-		/// Create a new UserAchievement.
-		/// Requires <see cref="AchievementRequest.Name"/> to be unique to that <see cref="AchievementRequest.GameId"/>.
-		/// 
-		/// Example Usage: POST api/userachievement/
-		/// </summary>
-		/// <param name="newAchievement"><see cref="AchievementRequest"/> object that holds the details of the new UserAchievement.</param>
-		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created UserAchievement.</returns>
-		[HttpPost]
-		public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
-		{
-			if (newAchievement == null)
-			{
-				throw new NullObjectException("Invalid object passed");
-			}
-			var achievement = newAchievement.ToUserModel();
-			_userAchievementController.Create(achievement);
-			var achievementContract = achievement.ToContract();
-			return achievementContract;
-		}
-
-		/// <summary>
-		/// Delete UserAchievements with the <param name="id"/> provided.
-		/// 
-		/// Example Usage: DELETE api/userachievement?id=1&amp;id=2
-		/// </summary>
-		/// <param name="id">Array of UserAchievement IDs</param>
-		[HttpDelete]
-		public void Delete(int[] id)
-		{
-			_userAchievementController.Delete(id);
+			return Ok(achievementContract);
 		}
 
 		/// <summary>
 		/// Get the current progress for all achievements for a <param name="gameId"/> for <param name="userId"/>.
 		/// 
-		/// Example Usage: GET api/userachievement/gameprogress?gameId=1&amp;userId=1
+		/// Example Usage: GET api/userachievement/gameprogress/1/1
 		/// </summary>
 		/// <param name="userId">ID of User</param>
 		/// <param name="gameId">ID of Game</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current user progress toward achievement.</returns>
-		[HttpGet("gameprogress")]
-		public IEnumerable<AchievementProgressResponse> GetProgress(int userId, int gameId)
+		[HttpGet("gameprogress/{groupId:int}/{gameId:int}")]
+		[ResponseType(typeof(AchievementProgressResponse))]
+		public IActionResult GetProgress([FromRoute]int userId, [FromRoute]int gameId)
 		{
 			var achievementResponses = new List<AchievementProgressResponse>();
 			var achievements = _userAchievementController.GetByGame(gameId);
@@ -128,7 +98,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				achievementResponses.Add(achievementProgress);
 			}
 
-			return achievementResponses;
+			return Ok(achievementResponses);
 		}
 
 		/// <summary>
@@ -140,10 +110,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="userId">Array of User IDs</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current user progress toward achievement.</returns>
 		[HttpGet("progress")]
-		public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] userId)
+		[ResponseType(typeof(AchievementProgressResponse))]
+		public IActionResult GetProgress(int achievementId, int[] userId)
 		{
 			var achievementResponses = new List<AchievementProgressResponse>();
-			var achievements = _userAchievementController.Get(new int[] {achievementId});
+			var achievements = _userAchievementController.Get(new int[] { achievementId });
 
 			if (!achievements.Any())
 			{
@@ -195,7 +166,42 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				achievementResponses.Add(achievementProgress);
 			}
 
-			return achievementResponses;
+			return Ok(achievementResponses);
+		}
+
+		/// <summary>
+		/// Create a new UserAchievement.
+		/// Requires <see cref="AchievementRequest.Name"/> to be unique to that <see cref="AchievementRequest.GameId"/>.
+		/// 
+		/// Example Usage: POST api/userachievement/
+		/// </summary>
+		/// <param name="newAchievement"><see cref="AchievementRequest"/> object that holds the details of the new UserAchievement.</param>
+		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created UserAchievement.</returns>
+		[HttpPost]
+		[ResponseType(typeof(AchievementResponse))]
+		public IActionResult Create([FromBody] AchievementRequest newAchievement)
+		{
+			if (newAchievement == null)
+			{
+				throw new NullObjectException("Invalid object passed");
+			}
+			var achievement = newAchievement.ToUserModel();
+			_userAchievementController.Create(achievement);
+			var achievementContract = achievement.ToContract();
+			return Ok(achievementContract);
+		}
+
+		/// <summary>
+		/// Delete UserAchievement with the <param name="id"/> provided.
+		/// 
+		/// Example Usage: DELETE api/userachievement/1
+		/// </summary>
+		/// <param name="id">Array of UserAchievement IDs</param>
+		[HttpDelete("{id:int}")]
+		public IActionResult Delete([FromRoute]int id)
+		{
+			_userAchievementController.Delete(id);
+			return Ok();
 		}
 	}
 }

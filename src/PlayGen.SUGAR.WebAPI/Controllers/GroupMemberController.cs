@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.WebAPI.ExtensionMethods;
@@ -13,7 +14,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates User to Group relationship specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class GroupMemberController : Controller, IGroupMemberController
+	public class GroupMemberController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GroupRelationshipController _groupRelationshipController;
 
@@ -25,61 +26,65 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of all Users that have relationship requests for this <param name="groupId"/>.
 		/// 
-		/// Example Usage: GET api/groupmember/requests?groupId=1
+		/// Example Usage: GET api/groupmember/requests/1
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		[HttpGet("requests")]
-		public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
+		[HttpGet("requests/{groupId:int}")]
+		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		public IActionResult GetMemberRequests([FromRoute]int groupId)
 		{
 			var actor = _groupRelationshipController.GetRequests(groupId);
 			var actorContract = actor.ToContract();
-			return actorContract;
+			return Ok(actorContract);
 		}
 
 		/// <summary>
 		/// Get a list of all Groups that have been sent relationship requests for this <param name="userId"/>.
 		/// 
-		/// Example Usage: GET api/groupmember/sentrequests?userId=1
+		/// Example Usage: GET api/groupmember/sentrequests/1
 		/// </summary>
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		[HttpGet("sentrequests")]
-		public IEnumerable<ActorResponse> GetSentRequests(int userId)
+		[HttpGet("sentrequests/{userId:int}")]
+		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		public IActionResult GetSentRequests([FromRoute]int userId)
 		{
 			var actor = _groupRelationshipController.GetSentRequests(userId);
 			var actorContract = actor.ToContract();
-			return actorContract;
+			return Ok(actorContract);
 		}
 
 		/// <summary>
 		/// Get a list of all Users that have relationships with this <param name="groupId"/>.
 		/// 
-		/// Example Usage: GET api/groupmember/members?groupId=1
+		/// Example Usage: GET api/groupmember/members/1
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		[HttpGet("members")]
-		public IEnumerable<ActorResponse> GetMembers(int groupId)
+		[HttpGet("members/{groupId:int}")]
+		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		public IActionResult GetMembers([FromRoute]int groupId)
 		{
 			var actor = _groupRelationshipController.GetMembers(groupId);
 			var actorContract = actor.ToContract();
-			return actorContract;
+			return Ok(actorContract);
 		}
 
 		/// <summary>
 		/// Get a list of all Groups that have relationships with this <param name="userId"/>.
 		/// 
-		/// Example Usage: GET api/groupmember/usergroups?userId=1
+		/// Example Usage: GET api/groupmember/usergroups/1
 		/// </summary>
 		/// <param name="userId">ID of the User.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		[HttpGet("usergroups")]
-		public IEnumerable<ActorResponse> GetUserGroups(int userId)
+		[HttpGet("usergroups/{userId:int}")]
+		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		public IActionResult GetUserGroups([FromRoute]int userId)
 		{
 			var actor = _groupRelationshipController.GetUserGroups(userId);
 			var actorContract = actor.ToContract();
-			return actorContract;
+			return Ok(actorContract);
 		}
 
 		/// <summary>
@@ -91,7 +96,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipRequest"/> object that holds the details of the new relationship request.</param>
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
 		[HttpPost]
-		public RelationshipResponse CreateMemberRequest([FromBody]RelationshipRequest relationship)
+		[ResponseType(typeof(RelationshipResponse))]
+		public IActionResult CreateMemberRequest([FromBody]RelationshipRequest relationship)
 		{
 			if (relationship == null)
 			{
@@ -100,7 +106,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var request = relationship.ToGroupModel();
 			_groupRelationshipController.Create(relationship.ToGroupModel(), relationship.AutoAccept);
 			var relationshipContract = request.ToContract();
-			return relationshipContract;
+			return Ok(relationshipContract);
 		}
 
 		/// <summary>
@@ -111,13 +117,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut("request")]
-		public void UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
+		public IActionResult UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
 			var relation = new RelationshipRequest {
 				RequestorId = relationship.RequestorId,
 				AcceptorId = relationship.AcceptorId
 			};
 			_groupRelationshipController.UpdateRequest(relation.ToGroupModel(), relationship.Accepted);
+			return Ok();
 		}
 
 		/// <summary>
@@ -128,7 +135,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut]
-		public void UpdateMember([FromBody] RelationshipStatusUpdate relationship)
+		public IActionResult UpdateMember([FromBody] RelationshipStatusUpdate relationship)
 		{
 			var relation = new RelationshipRequest
 			{
@@ -136,6 +143,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				AcceptorId = relationship.AcceptorId
 			};
 			_groupRelationshipController.Update(relation.ToGroupModel());
+			return Ok();
 		}
 	}
 }

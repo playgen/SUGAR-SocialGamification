@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Client
 	/// <summary>
 	/// Controller that facilitates Account specific operations.
 	/// </summary>
-	public class AccountClient : ClientBase, IAccountController
+	public class AccountClient : ClientBase
 	{
 		public AccountClient(string baseAddress) : base(baseAddress)
 		{
@@ -20,8 +20,8 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		public AccountResponse Login(AccountRequest account)
 		{
-			var query = GetUriBuilder("api/account").ToString();
-			return Put<AccountRequest, AccountResponse>(query, account);
+			var query = GetUriBuilder("api/account/login").ToString();
+			return Post<AccountRequest, AccountResponse>(query, account);
 		}
 
 		/// <summary>
@@ -33,7 +33,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
 		public AccountResponse Register(AccountRequest newAccount)
 		{
-			var query = GetUriBuilder("api/account").ToString();
+			var query = GetUriBuilder("api/account/register").ToString();
 			return Post<AccountRequest, AccountResponse>(query, newAccount);
 		}
 
@@ -48,21 +48,17 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
 		public AccountResponse Register(int userId, AccountRequest newAccount)
 		{
-			var query = GetUriBuilder("api/account/userId")
-				.AppendQueryParameter(userId, "userId={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/account/registerwithid/{userId}").ToString();
 			return Post<AccountRequest, AccountResponse>(query, newAccount);
 		}
 
 		/// <summary>
-		/// Delete Accounts with the IDs provided.
+		/// Delete Accounts with the ID provided.
 		/// </summary>
-		/// <param name="id">Array of Account IDs.</param>
-		public void Delete(int[] id)
+		/// <param name="id">Account ID.</param>
+		public void Delete(int id)
 		{
-			var query = GetUriBuilder("api/account")
-				.AppendQueryParameters(id, "id={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/account/{id}").ToString();
 			Delete(query);
 		}
 	}

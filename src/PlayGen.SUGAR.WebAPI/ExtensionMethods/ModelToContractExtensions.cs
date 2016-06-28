@@ -70,7 +70,8 @@ namespace PlayGen.SUGAR.WebAPI.ExtensionMethods
 				Id = groupModel.Id,
 				Name = groupModel.Name,
 				GameId = groupModel.GameId,
-				CompletionCriteria = groupModel.CompletionCriteriaCollection.ToContract()
+				CompletionCriteria = groupModel.CompletionCriteriaCollection.ToContract(),
+				Reward = groupModel.RewardCollection.ToContract()
 			};
 
 			return achievementContract;
@@ -88,7 +89,8 @@ namespace PlayGen.SUGAR.WebAPI.ExtensionMethods
 				Id = userModel.Id,
 				Name = userModel.Name,
 				GameId = userModel.GameId,
-				CompletionCriteria = userModel.CompletionCriteriaCollection.ToContract()
+				CompletionCriteria = userModel.CompletionCriteriaCollection.ToContract(),
+				Reward = userModel.RewardCollection.ToContract()
 			};
 
 			return achievementContract;
@@ -106,13 +108,28 @@ namespace PlayGen.SUGAR.WebAPI.ExtensionMethods
 				Key = completionCriteria.Key,
 				DataType = completionCriteria.DataType,
 				ComparisonType = completionCriteria.ComparisonType,
-				Value = completionCriteria.Value,
+				Value = completionCriteria.Value
 			};
 		}
 
-		public static List<Contracts.AchievementCriteria> ToContract(this AchievementCriteriaCollection completionCriteriaCollection)
+		public static List<AchievementCriteria> ToContract(this AchievementCriteriaCollection completionCriteriaCollection)
 		{
 			return completionCriteriaCollection.Select(completionCriteria => completionCriteria.ToContract()).ToList();
+		}
+
+		public static Reward ToContract(this Reward reward)
+		{
+			return new Reward
+			{
+				Key = reward.Key,
+				DataType = reward.DataType,
+				Value = reward.Value
+			};
+		}
+
+		public static List<Reward> ToContract(this RewardCollection rewardCollection)
+		{
+			return rewardCollection.Select(completionCriteria => completionCriteria.ToContract()).ToList();
 		}
 
 		public static SaveDataResponse ToContract(this GroupData groupModel)

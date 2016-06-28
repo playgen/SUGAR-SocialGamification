@@ -47,7 +47,8 @@ namespace PlayGen.SUGAR.WebAPI.ExtensionMethods
 			{
 				Name = achieveContract.Name,
 				GameId = achieveContract.GameId,
-				CompletionCriteriaCollection = achieveContract.CompletionCriteria.ToModel()
+				CompletionCriteriaCollection = achieveContract.CompletionCriteria.ToModel(),
+				RewardCollection = achieveContract.Reward.ToModel()
 			};
 
 			return achieveModel;
@@ -59,13 +60,14 @@ namespace PlayGen.SUGAR.WebAPI.ExtensionMethods
 			{
 				Name = achieveContract.Name,
 				GameId = achieveContract.GameId,
-				CompletionCriteriaCollection = achieveContract.CompletionCriteria.ToModel()
+				CompletionCriteriaCollection = achieveContract.CompletionCriteria.ToModel(),
+				RewardCollection = achieveContract.Reward.ToModel()
 			};
 
 			return achieveModel;
 		}
 
-		public static AchievementCriteriaCollection ToModel(this List<Contracts.AchievementCriteria> achievementContracts)
+		public static AchievementCriteriaCollection ToModel(this List<AchievementCriteria> achievementContracts)
 		{
 			var achievementCollection = new AchievementCriteriaCollection();
 			foreach (var achievementContract in achievementContracts)
@@ -76,7 +78,7 @@ namespace PlayGen.SUGAR.WebAPI.ExtensionMethods
 			return achievementCollection;
 		}
 
-		public static AchievementCriteria ToModel(this Contracts.AchievementCriteria achievementContract)
+		public static AchievementCriteria ToModel(this AchievementCriteria achievementContract)
 		{
 			return new AchievementCriteria
 			{
@@ -84,6 +86,27 @@ namespace PlayGen.SUGAR.WebAPI.ExtensionMethods
 				ComparisonType = (ComparisonType) achievementContract.ComparisonType,
 				DataType = (GameDataValueType) achievementContract.DataType,
 				Value = achievementContract.Value,
+			};
+		}
+
+		public static RewardCollection ToModel(this List<Reward> rewardContracts)
+		{
+			var rewardCollection = new RewardCollection();
+			foreach (var rewardContract in rewardContracts)
+			{
+				rewardCollection.Add(rewardContract.ToModel());
+			}
+
+			return rewardCollection;
+		}
+
+		public static Reward ToModel(this Reward rewardContract)
+		{
+			return new Reward
+			{
+				Key = rewardContract.Key,
+				DataType = (GameDataValueType)rewardContract.DataType,
+				Value = rewardContract.Value,
 			};
 		}
 

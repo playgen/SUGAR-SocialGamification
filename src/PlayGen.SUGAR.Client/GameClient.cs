@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="GameResponse"/> that hold Games details.</returns>
 		public IEnumerable<GameResponse> Get()
 		{
-			var query = GetUriBuilder("api/game/all").ToString();
+			var query = GetUriBuilder("api/game/list").ToString();
 			return Get<IEnumerable<GameResponse>>(query);
 		}
 
@@ -31,9 +31,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
 		public IEnumerable<GameResponse> Get(string name)
 		{
-			var query = GetUriBuilder("api/game/find")
-				.AppendQueryParameter(name, "{0}")
-				.ToString();
+			var query = GetUriBuilder($"api/game/find/{name}").ToString();
 			return Get<IEnumerable<GameResponse>>(query);
 		}
 
@@ -44,9 +42,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
 		public GameResponse Get(int id)
 		{
-			var query = GetUriBuilder("api/game/findbyid")
-				.AppendQueryParameter(id, "{0}")
-				.ToString();
+			var query = GetUriBuilder($"api/game/findbyid/{id}").ToString();
 			return Get<GameResponse>(query);
 		}
 
@@ -63,14 +59,12 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Delete Games with the IDs provided.
+		/// Delete Game with the ID provided.
 		/// </summary>
-		/// <param name="id">Array of Game IDs.</param>
-		public void Delete(int[] id)
+		/// <param name="id">Game ID.</param>
+		public void Delete(int id)
 		{
-			var query = GetUriBuilder("api/game")
-				.AppendQueryParameters(id, "id={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/game/{id}").ToString();
 			Delete(query);
 		}
 	}

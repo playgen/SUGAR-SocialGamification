@@ -1,22 +1,23 @@
 {
-	"dependencies": {
-		"docfx.msbuild": "2.0.1",
-		"Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
-		"Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
-		"Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Logging": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
-		"NETStandard.Library": "1.5.0-rc2-24027",
-		"Newtonsoft.Json": "8.0.3",
-		"PlayGen.SUGAR.Contracts": "1.0.0-*",
-		"PlayGen.SUGAR.Data.EntityFramework": "1.0.0-*",
-		"PlayGen.SUGAR.GameData": "1.0.0-*",
-		"PlayGen.SUGAR.ServerAuthentication": "1.0.0-*"
-	},
+    "dependencies": {
+        "docfx.msbuild": "2.0.1",
+        "Microsoft.AspNet.WebApi.Core": "5.2.3",
+        "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
+        "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
+        "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
+        "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
+        "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-rc2-final",
+        "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
+        "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
+        "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
+        "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
+        "NETStandard.Library": "1.5.0-rc2-24027",
+        "Newtonsoft.Json": "8.0.3",
+        "PlayGen.SUGAR.Contracts": "1.0.0-*",
+        "PlayGen.SUGAR.Data.EntityFramework": "1.0.0-*",
+        "PlayGen.SUGAR.GameData": "1.0.0-*",
+        "PlayGen.SUGAR.ServerAuthentication": "1.0.0-*"
+    },
   "tools": {
 	"Microsoft.AspNetCore.Server.IISIntegration.Tools": {
 	  "version": "1.0.0-preview1-final",

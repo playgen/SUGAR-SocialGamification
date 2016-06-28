@@ -96,7 +96,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Equal(groupAchievements.Count(), 1);
 			Assert.Equal(groupAchievements.ElementAt(0).Name, groupAchievementName);
 
-			_groupAchievementDbController.Delete(new[] { groupAchievement.Id });
+			_groupAchievementDbController.Delete(groupAchievement.Id);
 			groupAchievements = _groupAchievementDbController.Get(new int[] { groupId });
 
 			Assert.Empty(groupAchievements);
@@ -109,7 +109,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			try
 			{
-				_groupAchievementDbController.Delete(new int[] { -1 });
+				_groupAchievementDbController.Delete(-1);
 			}
 			catch (Exception)
 			{

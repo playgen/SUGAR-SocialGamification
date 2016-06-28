@@ -21,9 +21,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetFriendRequests(int userId)
 		{
-			var query = GetUriBuilder("api/userfriend/requests")
-				.AppendQueryParameter(userId, "userId={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/userfriend/requests/{userId}").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -34,9 +32,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetSentRequests(int userId)
 		{
-			var query = GetUriBuilder("api/userfriend/sentrequests")
-				.AppendQueryParameters(new int[] { userId }, "userId={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/userfriend/sentrequests/{userId}").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -47,9 +43,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetFriends(int userId)
 		{
-			var query = GetUriBuilder("api/userfriend/friends")
-				.AppendQueryParameter(userId, "userId={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/userfriend/friends/{userId}").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 

@@ -63,14 +63,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Delete(int[] id)
+		public void Delete(int id)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
 				var achievement = context.GroupAchievements
-					.Where(g => id.Contains(g.Id)).ToList();
+					.Where(g => id == g.Id);
 
 				context.GroupAchievements.RemoveRange(achievement);
 				SaveChanges(context);

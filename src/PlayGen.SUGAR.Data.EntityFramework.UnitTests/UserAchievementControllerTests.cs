@@ -95,7 +95,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Equal(userAchievements.Count(), 1);
 			Assert.Equal(userAchievements.ElementAt(0).Name, userAchievementName);
 
-			_userAchievementDbController.Delete(new[] { userAchievement.Id });
+			_userAchievementDbController.Delete(userAchievement.Id);
 			userAchievements = _userAchievementDbController.Get(new int[] { userId });
 
 			Assert.Empty(userAchievements);
@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			try
 			{
-				_userAchievementDbController.Delete(new int[] { -1 });
+				_userAchievementDbController.Delete(-1);
 			}
 			catch (Exception)
 			{

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.WebAPI.ExtensionMethods;
@@ -32,11 +33,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="key">Array of Key names.</param>
 		/// <returns>A list of <see cref="SaveDataResponse"/> which match the search criteria.</returns>
 		[HttpGet]
-		public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] key)
+		[ResponseType(typeof(IEnumerable<SaveDataResponse>))]
+		public IActionResult Get(int actorId, int gameId, string[] key)
 		{
 			var data = _groupDataController.Get(actorId, gameId, key);
 			var dataContract = data.ToContract();
-			return dataContract;
+			return Ok(dataContract);
 		}
 
 		/// <summary>
@@ -47,7 +49,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="newData"><see cref="SaveDataRequest"/> object that holds the details of the new GroupData.</param>
 		/// <returns>A <see cref="SaveDataResponse"/> containing the new GroupData details.</returns>
 		[HttpPost]
-		public SaveDataResponse Add([FromBody]SaveDataRequest newData)
+		[ResponseType(typeof(SaveDataResponse))]
+		public IActionResult Add([FromBody]SaveDataRequest newData)
 		{
 			if (newData == null)
 			{
@@ -56,7 +59,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var data = newData.ToGroupModel();
 			_groupDataController.Create(data);
 			var dataContract = data.ToContract();
-			return dataContract;
+			return Ok(dataContract);
 		}
 	}
 }

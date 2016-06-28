@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Get a UriBuilder object with the origin and wep api path
+		/// Get a UriBuilder object with the origin and web api path
 		/// </summary>
 		/// <param name="apiSuffix">WebAPI path relative to web origin, eg. /api</param>
 		/// <returns></returns>

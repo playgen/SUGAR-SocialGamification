@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.WebAPI.ExtensionMethods;
@@ -25,15 +26,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of all Users.
 		/// 
-		/// Example Usage: GET api/user/all
+		/// Example Usage: GET api/user/list
 		/// </summary>
 		/// <returns>A list of <see cref="ActorResponse"/> that hold User details.</returns>
-		[HttpGet("all")]
-		public IEnumerable<ActorResponse> Get()
+		[HttpGet("list")]
+		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		public IActionResult Get()
 		{
 			var user = _userController.Get();
 			var actorContract = user.ToContract();
-			return actorContract;
+			return Ok(actorContract);
 		}
 
 		/// <summary>
@@ -44,11 +46,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="name">User name.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
-		public IEnumerable<ActorResponse> Get(string name)
+		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		public IActionResult Get([FromRoute]string name)
 		{
 			var user = _userController.Search(name);
 			var actorContract = user.ToContract();
-			return actorContract;
+			return Ok(actorContract);
 		}
 
 		/// <summary>
@@ -59,11 +62,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="id">User id.</param>
 		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
 		[HttpGet("findbyid/{id:int}")]
-		public ActorResponse Get(int id)
+		[ResponseType(typeof(ActorResponse))]
+		public IActionResult Get([FromRoute]int id)
 		{
 			var user = _userController.Search(id);
 			var actorContract = user.ToContract();
-			return actorContract;
+			return Ok(actorContract);
 		}
 
 		/// <summary>
@@ -75,7 +79,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new User.</param>
 		/// <returns>A <see cref="ActorResponse"/> containing the new User details.</returns>
 		[HttpPost]
-		public ActorResponse Create([FromBody]ActorRequest actor)
+		[ResponseType(typeof(ActorResponse))]
+		public IActionResult Create([FromBody]ActorRequest actor)
 		{
 			if (actor == null)
 			{
@@ -84,19 +89,20 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var user = actor.ToUserModel();
 			_userController.Create(user);
 			var actorContract = user.ToContract();
-			return actorContract;
+			return Ok(actorContract);
 		}
 
 		/// <summary>
-		/// Delete users with the <param name="id"/> provided.
+		/// Delete user with the <param name="id"/> provided.
 		/// 
-		/// Example Usage: DELETE api/user?id=1&amp;id=2
+		/// Example Usage: DELETE api/user/1
 		/// </summary>
-		/// <param name="id">Array of User IDs.</param>
-		[HttpDelete]
-		public void Delete(int[] id)
+		/// <param name="id">User ID.</param>
+		[HttpDelete("{id:int}")]
+		public IActionResult Delete([FromRoute]int id)
 		{
 			_userController.Delete(id);
+			return Ok();
 		}
 	}
 }

@@ -31,9 +31,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> Get(string name)
 		{
-			var query = GetUriBuilder("api/user/find")
-				.AppendQueryParameter(name, "{0}")
-				.ToString();
+			var query = GetUriBuilder($"api/user/find/{name}").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -44,9 +42,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
 		public IEnumerable<ActorResponse> Get(int id)
 		{
-			var query = GetUriBuilder("api/user/findbyid")
-				.AppendQueryParameter(id, "{0}")
-				.ToString();
+			var query = GetUriBuilder($"api/user/findbyid/{id}").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -63,14 +59,12 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Delete Users with the <param name="id"/> provided.
+		/// Delete User with the <param name="id"/> provided.
 		/// </summary>
-		/// <param name="id">Array of User IDs.</param>
-		public void Delete(int[] id)
+		/// <param name="id">User ID.</param>
+		public void Delete(int id)
 		{
-			var query = GetUriBuilder("api/user")
-				.AppendQueryParameters(id, "id={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/user/{id}").ToString();
 			Delete(query);
 		}
 	}

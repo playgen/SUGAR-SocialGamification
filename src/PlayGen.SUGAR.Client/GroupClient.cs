@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> that hold Group details.</returns>
 		public IEnumerable<ActorResponse> Get()
 		{
-			var query = GetUriBuilder("api/group/all").ToString();
+			var query = GetUriBuilder("api/group/list").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -31,9 +31,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> Get(string name)
 		{
-			var query = GetUriBuilder("api/group/find")
-				.AppendQueryParameter(name, "{0}")
-				.ToString();
+			var query = GetUriBuilder($"api/group/find/{name}").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -44,9 +42,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
 		public ActorResponse Get(int id)
 		{
-			var query = GetUriBuilder("api/group/findbyid")
-				.AppendQueryParameter(id, "{0}")
-				.ToString();
+			var query = GetUriBuilder($"api/group/findbyid/{id}").ToString();
 			return Get<ActorResponse>(query);
 		}
 
@@ -63,14 +59,12 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Delete groups with the <param name="id"/> provided.
+		/// Delete group with the <param name="id"/> provided.
 		/// </summary>
-		/// <param name="id">Array of Group IDs.</param>
-		public void Delete(int[] id)
+		/// <param name="id">Group ID.</param>
+		public void Delete(int id)
 		{
-			var query = GetUriBuilder("api/group")
-				.AppendQueryParameters(id, "id={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/group/{id}").ToString();
 			Delete(query);
 		}
 	}

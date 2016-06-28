@@ -76,16 +76,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		/// Delete a game record from the database.
 		/// </summary>
 		/// <param name="id"></param>
-		public void Delete(int[] id)
+		public void Delete(int id)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var games = context.Games
-					.Where(g => id.Contains(g.Id)).ToList();
+				var game = context.Games
+					.Where(g => id == g.Id);
 
-				context.Games.RemoveRange(games);
+				context.Games.RemoveRange(game);
 				SaveChanges(context);
 			}
 		}
