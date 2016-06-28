@@ -1,9 +1,9 @@
 ﻿namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
-	/// Enum for selecting the valueType of data being stored or looked for.
+	/// Enum for selecting the type of data being stored or looked for.
 	/// </summary>
-	public enum GameDataValueType
+	public enum GameDataType
 	{
 		String = 0,
 		Long,

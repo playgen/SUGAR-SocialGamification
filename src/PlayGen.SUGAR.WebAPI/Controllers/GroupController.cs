@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
-using PlayGen.SUGAR.WebAPI.ExtensionMethods;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Exceptions;
+using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Groups.
+		/// Find a list of all Groups.
 		/// 
 		/// Example Usage: GET api/group/all
 		/// </summary>
@@ -32,12 +32,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IEnumerable<ActorResponse> Get()
 		{
 			var group = _groupController.Get();
-			var actorContract = group.ToContract();
+			var actorContract = group.ToContractList();
 			return actorContract;
 		}
 
 		/// <summary>
-		/// Get a list of Groups that match <param name="name"/> provided.
+		/// Find a list of Groups that match <param name="name"/> provided.
 		/// 
 		/// Example Usage: GET api/group?name=group1&amp;name=group2
 		/// </summary>
@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IEnumerable<ActorResponse> Get(string[] name)
 		{
 			var group = _groupController.Get(name);
-			var actorContract = group.ToContract();
+			var actorContract = group.ToContractList();
 			return actorContract;
 		}
 

@@ -9,12 +9,12 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class GroupDataControllerTests : TestController
+	public class GameDataControllerTests : TestController
 	{
 		#region Configuration
 		private readonly GroupDataController _groupDataDbController;
 
-		public GroupDataControllerTests()
+		public GameDataControllerTests()
 		{
 			_groupDataDbController = new GroupDataController(NameOrConnectionString);
 		}

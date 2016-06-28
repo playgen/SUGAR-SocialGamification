@@ -25,15 +25,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		/// <summary>
 		/// Retrieve game multiple records by name from the database
 		/// </summary>
-		/// <param name="names"></param>
+		/// <param name="partialName"></param>
 		/// <returns></returns>
-		public IEnumerable<Game> Get(string[] names)
+		public IEnumerable<Game> Find(string partialName)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var games = context.Games.Where(g => names.Contains(g.Name)).ToList();
+				var games = context.Games.Where(g => g.Name.ToLower().Contains(partialName.ToLower())).ToList();
 				return games;
 			}
 		}
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		/// <summary>
 		/// Create a new game record in the database.
 		/// </summary>
-		/// <param name="newGame"></param>
+		/// <param name="game"></param>
 		/// <returns></returns>
 		public void Create(Game game)
 		{

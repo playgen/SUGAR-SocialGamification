@@ -20,26 +20,26 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="actorId">ID of a Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="keys">Array of Key names.</param>
-		/// <returns>A list of <see cref="SaveDataResponse"/> which match the search criteria.</returns>
-		public IEnumerable<SaveDataResponse> Get(int actorId, int gameId, string[] keys)
+		/// <returns>A list of <see cref="GameDataResponse"/> which match the search criteria.</returns>
+		public IEnumerable<GameDataResponse> Get(int actorId, int gameId, string[] keys)
 		{
 			var query = GetUriBuilder("api/groupsavedata")
 				.AppendQueryParameter(actorId, "actorId={0}")
 				.AppendQueryParameter(gameId, "gameId={0}")
 				.AppendQueryParameters(keys, "key={0}")
 				.ToString();
-			return Get<IEnumerable<SaveDataResponse>>(query);
+			return Get<IEnumerable<GameDataResponse>>(query);
 		}
 
 		/// <summary>
 		/// Create a new GroupData record.
 		/// </summary>
 		/// <param name="data"><see cref="SaveDataRequest"/> object that holds the details of the new GroupData.</param>
-		/// <returns>A <see cref="SaveDataResponse"/> containing the new GroupData details.</returns>
-		public SaveDataResponse Add(SaveDataRequest data)
+		/// <returns>A <see cref="GameDataResponse"/> containing the new GroupData details.</returns>
+		public GameDataResponse Add(SaveDataRequest data)
 		{
 			var query = GetUriBuilder("api/groupsavedata").ToString();
-			return Post<SaveDataRequest, SaveDataResponse>(query, data);
+			return Post<SaveDataRequest, GameDataResponse>(query, data);
 		}
 	}
 }

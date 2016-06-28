@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
-using PlayGen.SUGAR.WebAPI.ExtensionMethods;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Exceptions;
+using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have relationship requests for this <param name="userId"/>.
+		/// Find a list of all Users that have relationship requests for this <param name="userId"/>.
 		/// 
 		/// Example Usage: GET api/userfriend/requests?userId=1
 		/// </summary>
@@ -33,12 +33,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IEnumerable<ActorResponse> GetFriendRequests(int userId)
 		{
 			var actor = _userRelationshipController.GetRequests(userId);
-			var actorContract = actor.ToContract();
+			var actorContract = actor.ToContractList();
 			return actorContract;
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have been sent relationship requests for this <param name="userId"/>.
+		/// Find a list of all Users that have been sent relationship requests for this <param name="userId"/>.
 		/// 
 		/// Example Usage: GET api/userfriend/sentrequests?userId=1
 		/// </summary>
@@ -48,12 +48,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IEnumerable<ActorResponse> GetSentRequests(int userId)
 		{
 			var actor = _userRelationshipController.GetSentRequests(userId);
-			var actorContract = actor.ToContract();
+			var actorContract = actor.ToContractList();
 			return actorContract;
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have relationships with this <param name="userId"/>.
+		/// Find a list of all Users that have relationships with this <param name="userId"/>.
 		/// 
 		/// Example Usage: GET api/userfriend/friends?userId=1
 		/// </summary>
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IEnumerable<ActorResponse> GetFriends(int userId)
 		{
 			var actor = _userRelationshipController.GetFriends(userId);
-			var actorContract = actor.ToContract();
+			var actorContract = actor.ToContractList();
 			return actorContract;
 		}
 

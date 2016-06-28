@@ -27,38 +27,36 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 		public DbSet<Game> Games { get; set; }
 
-		public DbSet<Group> Groups { get; set; }
-		public DbSet<GroupAchievement> GroupAchievements { get; set; }
-		public DbSet<GroupData> GroupData { get; set; }
+		public DbSet<Achievement> Achievements { get; set; }
+
+
+		public DbSet<Actor> Actors { get; set; }
 
 		public DbSet<User> Users { get; set; }
-		public DbSet<UserAchievement> UserAchievements { get; set; }
-		public DbSet<UserData> UserData { get; set; }
+		public DbSet<Group> Groups { get; set; }
+
+
+		public DbSet<GameData> GameData { get; set; }
 
 		public DbSet<UserToUserRelationshipRequest> UserToUserRelationshipRequests { get; set; }
 		public DbSet<UserToUserRelationship> UserToUserRelationships { get; set; }
 		public DbSet<UserToGroupRelationshipRequest> UserToGroupRelationshipRequests { get; set; }
 		public DbSet<UserToGroupRelationship> UserToGroupRelationships { get; set; }
 
-		public IQueryable<GameData> GetGameData<TData>()
-			where TData : GameData
-		{
-			var dataType = typeof(TData);
-
-			if (dataType == typeof(UserData))
-			{
-				return UserData.Cast<GameData>();
-			}
-			else if (dataType == typeof(GroupData))
-			{
-				return GroupData.Cast<GameData>();
-			}
-			throw new NotImplementedException($"Type {typeof(TData)} not supported.");
-		}
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+			modelBuilder.Entity<User>().ToTable("Users");
+			modelBuilder.Entity<Group>().ToTable("Groups");
+
+			//modelBuilder.Entity<Actor>()
+			//	.Map<User>(m => m.Requires("ActorType").HasValue("U"))
+			//	.Map<Group>(m => m.Requires("ActorType").HasValue("G"));
+
+			modelBuilder.Entity<GameData>()
+				.ToTable("GameData");
+
+			//modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
 			// Setup foreign key relationships in the database tables
 			modelBuilder.Entity<UserToUserRelationship>()
@@ -93,37 +91,22 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 				.IsUnique();
 
 			// multiple indexes for a single property must be added in the same fluent call
-			modelBuilder.Entity<GroupData>()
+			modelBuilder.Entity<GameData>()
 				.Property(gd => gd.GameId)
-				.IsIndexed("IX_GroupData_Game_Group_Key", 0)
-				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 0);
-			modelBuilder.Entity<GroupData>()
-				.Property(gd => gd.GroupId)
-				.IsIndexed("IX_GroupData_Game_Group_Key", 1)
-				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 1);
-			modelBuilder.Entity<GroupData>()
+				.IsIndexed("IX_GameData_Game_Actor_Key", 0)
+				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 0);
+			modelBuilder.Entity<GameData>()
+				.Property(gd => gd.ActorId)
+				.IsIndexed("IX_GameData_Game_Actor_Key", 1)
+				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 1);
+			modelBuilder.Entity<GameData>()
 				.Property(gd => gd.Key)
-				.IsIndexed("IX_GroupData_Game_Group_Key", 2)
-				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 2);
-			modelBuilder.Entity<GroupData>()
+				.IsIndexed("IX_GameData_Game_Actor_Key", 2)
+				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 2);
+			modelBuilder.Entity<GameData>()
 				.Property(gd => gd.DataType)
-				.IsIndexed("IX_GroupData_Game_Group_Key_Type", 3);
+				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 3);
 
-			modelBuilder.Entity<UserData>()
-				.Property(gd => gd.GameId)
-				.IsIndexed("IX_UserData_Game_User_Key", 0)
-				.IsIndexed("IX_UserData_Game_User_Key_Type", 0);
-			modelBuilder.Entity<UserData>()
-				.Property(gd => gd.UserId)
-				.IsIndexed("IX_UserData_Game_User_Key", 1)
-				.IsIndexed("IX_UserData_Game_User_Key_Type", 1);
-			modelBuilder.Entity<UserData>()
-				.Property(gd => gd.Key)
-				.IsIndexed("IX_UserData_Game_User_Key", 2)
-				.IsIndexed("IX_UserData_Game_User_Key_Type", 2);
-			modelBuilder.Entity<UserData>()
-				.Property(gd => gd.DataType)
-				.IsIndexed("IX_UserData_Game_User_Key_Type", 3);
 
 			// Serialize specific objects as Json objects instead of creating a new table
 			modelBuilder.ComplexType<AchievementCriteriaCollection>()
@@ -142,8 +125,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 			// User reflection to detect classes that implement the IModificationHistory interface
 			// and set their DateCreated and DateModified DateTime fields accordingly.
 			var histories = this.ChangeTracker.Entries()
-				.Where(e => e.Entity is IModificationHistory && (e.State == EntityState.Added ||
-																 e.State == EntityState.Modified))
+				.Where(e => e.Entity is IModificationHistory && (e.State == EntityState.Added || e.State == EntityState.Modified))
 				.Select(e => e.Entity as IModificationHistory);
 
 			foreach (var history in histories)

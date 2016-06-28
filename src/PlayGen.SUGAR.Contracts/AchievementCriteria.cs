@@ -9,10 +9,15 @@ namespace PlayGen.SUGAR.Contracts
 	public class AchievementCriteria
 	{
 		public string Key { get; set; }
+
 		[JsonConverter(typeof(StringEnumConverter))]
-		public GameDataValueType DataType { get; set; }
+		public GameDataType DataType { get; set; }
+
 		[JsonConverter(typeof(StringEnumConverter))]
 		public ComparisonType ComparisonType { get; set; }
+
+		[JsonConverter(typeof(StringEnumConverter))]
+		public CriteriaScope Scope { get; set; }
 
 		public string Value { get; set; }
 	}

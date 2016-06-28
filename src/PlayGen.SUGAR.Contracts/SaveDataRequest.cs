@@ -8,14 +8,15 @@ namespace PlayGen.SUGAR.Contracts
 	/// </summary>
 	public class SaveDataRequest
 	{
-		public int ActorId { get; set; }
+		public int? ActorId { get; set; }
 
-		public int GameId { get; set; }
+		public int? GameId { get; set; }
 
 		public string Key { get; set; }
 
 		public string Value { get; set; }
+
 		[JsonConverter(typeof(StringEnumConverter))]
-		public GameDataValueType GameDataValueType { get; set; }
+		public GameDataType GameDataType { get; set; }
 	}
 }

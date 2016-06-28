@@ -13,13 +13,5 @@
 		public int UserId { get; set; }
 
 		public virtual User User { get; set; }
-
-		public Permissions Permission { get; set; }
-
-		public enum Permissions
-		{
-			Default,
-			Admin
-		}
 	}
 }

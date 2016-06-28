@@ -12,11 +12,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	public class GroupAchievementControllerTests : TestController
 	{
 		#region Configuration
-		private readonly GroupAchievementController _groupAchievementDbController;
+		private readonly AchievementController _achievementDbController;
 
 		public GroupAchievementControllerTests()
 		{
-			_groupAchievementDbController = new GroupAchievementController(NameOrConnectionString);
+			_achievementDbController = new AchievementController(NameOrConnectionString);
 		}
 		#endregion
 
@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newAchievement = CreateGroupAchievement(groupAchievementName);
 
-			var groupAchievements = _groupAchievementDbController.Get(new int[] { newAchievement.Id });
+			var groupAchievements = _achievementDbController.Get(new int[] { newAchievement.Id });
 
 			int matches = groupAchievements.Count(g => g.Name == groupAchievementName && g.GameId == newAchievement.GameId);
 
@@ -79,7 +79,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingGroupAchievements()
 		{
-			var groupAchievements = _groupAchievementDbController.Get(new int[] { -1 });
+			var groupAchievements = _achievementDbController.Get(new int[] { -1 });
 
 			Assert.Empty(groupAchievements);
 		}
@@ -92,12 +92,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var groupAchievement = CreateGroupAchievement(groupAchievementName);
 			var groupId = groupAchievement.Id;
 
-			var groupAchievements = _groupAchievementDbController.Get(new int[] { groupId });
+			var groupAchievements = _achievementDbController.Get(new int[] { groupId });
 			Assert.Equal(groupAchievements.Count(), 1);
 			Assert.Equal(groupAchievements.ElementAt(0).Name, groupAchievementName);
 
-			_groupAchievementDbController.Delete(new[] { groupAchievement.Id });
-			groupAchievements = _groupAchievementDbController.Get(new int[] { groupId });
+			_achievementDbController.Delete(new[] { groupAchievement.Id });
+			groupAchievements = _achievementDbController.Get(new int[] { groupId });
 
 			Assert.Empty(groupAchievements);
 		}
@@ -109,7 +109,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			try
 			{
-				_groupAchievementDbController.Delete(new int[] { -1 });
+				_achievementDbController.Delete(new int[] { -1 });
 			}
 			catch (Exception)
 			{
@@ -121,7 +121,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Helpers
-		private GroupAchievement CreateGroupAchievement(string name, int gameId = 0)
+		private Achievement CreateGroupAchievement(string name, int gameId = 0)
 		{
 			GameController gameDbController = new GameController(NameOrConnectionString);
 			if (gameId == 0) {
@@ -133,13 +133,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				gameId = game.Id;
 			}
 
-			var groupAchievement = new GroupAchievement
+			var groupAchievement = new Achievement
 			{
 				Name = name,
 				GameId = gameId,
 				CompletionCriteriaCollection = new AchievementCriteriaCollection()
 			};
-			_groupAchievementDbController.Create(groupAchievement);
+			_achievementDbController.Create(groupAchievement);
 
 			return groupAchievement;
 		}

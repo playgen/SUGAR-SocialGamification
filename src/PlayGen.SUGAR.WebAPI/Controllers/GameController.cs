@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
-using PlayGen.SUGAR.WebAPI.ExtensionMethods;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Exceptions;
+using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Game specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class GameController : Controller, IGameController
+	public class GameController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
 		
@@ -23,31 +23,31 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Games.
+		/// Find a list of all Games.
 		/// 
 		/// Example Usage: GET api/game/all
 		/// </summary>
 		/// <returns>A list of <see cref="GameResponse"/> that hold Game details.</returns>
-		[HttpGet("all")]
+		[HttpGet("list")]
 		public IEnumerable<GameResponse> Get()
 		{
 			var game = _gameDbController.Get();
-			var gameContract = game.ToContract();
+			var gameContract = game.ToContractList();
 			return gameContract;
 		}
 
 		/// <summary>
-		/// Get a list of Games that match <param name="name"/> provided.
+		/// Find a list of Games that match <param name="name"/> provided.
 		/// 
 		/// Example Usage: GET api/game?name=game1&amp;name=game2
 		/// </summary>
 		/// <param name="name">Array of Game names</param>
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
-		[HttpGet]
-		public IEnumerable<GameResponse> Get(string[] name)
+		[HttpGet("find/{name}")]
+		public IEnumerable<GameResponse> Find([FromRoute]string name)
 		{
-			var game = _gameDbController.Get(name);
-			var gameContract = game.ToContract();
+			var game = _gameDbController.Find(name);
+			var gameContract = game.ToContractList();
 			return gameContract;
 		}
 
@@ -59,7 +59,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="newGame"><see cref="GameRequest"/> object that contains the details of the new Game.</param>
 		/// <returns>A <see cref="GameResponse"/> containing the new Game details.</returns>
-		[HttpPost]
+		[HttpPost("create")]
 		public GameResponse Create([FromBody]GameRequest newGame)
 		{
 			if (newGame == null) {
@@ -77,10 +77,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: DELETE api/game?id=1&amp;id=2
 		/// </summary>
 		/// <param name="id">Array of Game IDs.</param>
-		[HttpDelete]
-		public void Delete(int[] id)
+		[HttpDelete("{id:int}")]
+		public void Delete([FromRoute]int id)
 		{
-			_gameDbController.Delete(id);
+			_gameDbController.Delete(new [] {id});
 		}
 	}
 }

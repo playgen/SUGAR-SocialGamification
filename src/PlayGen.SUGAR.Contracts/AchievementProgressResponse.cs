@@ -9,6 +9,9 @@
 
 		public string Name { get; set; }
 
+		/// <summary>
+		/// Progress of current achievement [0 to 1]
+		/// </summary>
 		public float Progress { get; set; }
 	}
 }

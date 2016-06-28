@@ -7,7 +7,7 @@ using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Exceptions;
-using PlayGen.SUGAR.WebAPI.ExtensionMethods;
+using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {

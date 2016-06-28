@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
-using PlayGen.SUGAR.WebAPI.ExtensionMethods;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Exceptions;
+using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have relationship requests for this <param name="groupId"/>.
+		/// Find a list of all Users that have relationship requests for this <param name="groupId"/>.
 		/// 
 		/// Example Usage: GET api/groupmember/requests?groupId=1
 		/// </summary>
@@ -33,12 +33,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
 		{
 			var actor = _groupRelationshipController.GetRequests(groupId);
-			var actorContract = actor.ToContract();
+			var actorContract = actor.ToContractList();
 			return actorContract;
 		}
 
 		/// <summary>
-		/// Get a list of all Groups that have been sent relationship requests for this <param name="userId"/>.
+		/// Find a list of all Groups that have been sent relationship requests for this <param name="userId"/>.
 		/// 
 		/// Example Usage: GET api/groupmember/sentrequests?userId=1
 		/// </summary>
@@ -48,12 +48,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IEnumerable<ActorResponse> GetSentRequests(int userId)
 		{
 			var actor = _groupRelationshipController.GetSentRequests(userId);
-			var actorContract = actor.ToContract();
+			var actorContract = actor.ToContractList();
 			return actorContract;
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have relationships with this <param name="groupId"/>.
+		/// Find a list of all Users that have relationships with this <param name="groupId"/>.
 		/// 
 		/// Example Usage: GET api/groupmember/members?groupId=1
 		/// </summary>
@@ -63,12 +63,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IEnumerable<ActorResponse> GetMembers(int groupId)
 		{
 			var actor = _groupRelationshipController.GetMembers(groupId);
-			var actorContract = actor.ToContract();
+			var actorContract = actor.ToContractList();
 			return actorContract;
 		}
 
 		/// <summary>
-		/// Get a list of all Groups that have relationships with this <param name="userId"/>.
+		/// Find a list of all Groups that have relationships with this <param name="userId"/>.
 		/// 
 		/// Example Usage: GET api/groupmember/usergroups?userId=1
 		/// </summary>
@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IEnumerable<ActorResponse> GetUserGroups(int userId)
 		{
 			var actor = _groupRelationshipController.GetUserGroups(userId);
-			var actorContract = actor.ToContract();
+			var actorContract = actor.ToContractList();
 			return actorContract;
 		}
 

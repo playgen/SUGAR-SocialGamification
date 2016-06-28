@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateGame(gameName);
 			
-			var games = _gameDbController.Get(new string[] {gameName});
+			var games = _gameDbController.Find(gameName);
 
 			int matches = games.Count(g => g.Name == gameName);
 
@@ -60,32 +60,22 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetMultipleGames()
 		{
-			string[] gameNames = new[]
-			{
-				"GetMultipleGames1",
-				"GetMultipleGames2",
-				"GetMultipleGames3",
-				"GetMultipleGames4",
-			};
-
-			foreach (var gameName in gameNames)
-			{
-				CreateGame(gameName);
-			}
+			var gameName = "FindSingleGame1";
+			CreateGame(gameName);
 
 			CreateGame("GetMultipleGames_DontGetThis");
 
-			var games = _gameDbController.Get(gameNames);
+			var games = _gameDbController.Find(gameName);
 
-			var matchingGames = games.Select(g => gameNames.Contains(g.Name));
+			var matchingGames = games.Where(g => g.Name.Equals(gameName));
 			
-			Assert.Equal(gameNames.Length, matchingGames.Count());
+			Assert.Equal(1, matchingGames.Count());
 		}
 
 		[Fact]
 		public void GetNonExistingGames()
 		{
-			var games = _gameDbController.Get(new string[] {"GetNonExsitingGames"});
+			var games = _gameDbController.Find("GetNonExsitingGames");
 
 			Assert.Empty(games);
 		}
@@ -97,12 +87,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var game = CreateGame(gameName);
 
-			var games = _gameDbController.Get(new string[] { gameName });
+			var games = _gameDbController.Find(gameName);
 			Assert.Equal(games.Count(), 1);
 			Assert.Equal(games.ElementAt(0).Name, gameName);
 
 			_gameDbController.Delete(new []{game.Id});
-			games = _gameDbController.Get(new string[] { gameName });
+			games = _gameDbController.Find(gameName);
 
 			Assert.Empty(games);
 		}

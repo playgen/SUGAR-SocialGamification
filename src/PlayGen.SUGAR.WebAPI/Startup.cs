@@ -32,21 +32,22 @@ namespace PlayGen.SUGAR.WebAPI
 		public void ConfigureServices(IServiceCollection services)
 		{
 			// Set EntityFramework's DBContext's connection string
-			string connectioString = Configuration.GetConnectionString("DefaultConnection");
-			using (var db = new SGAContext(connectioString))
+			string connectionString = Configuration.GetConnectionString("DefaultConnection");
+			using (var db = new SGAContext(connectionString))
 			{
 				db.Database.Initialize(true);
 			}
-			services.AddScoped((_) => new AccountController(connectioString));
-			services.AddScoped((_) => new GameController(connectioString));
-			services.AddScoped((_) => new GroupController(connectioString));
-			services.AddScoped((_) => new UserController(connectioString));
-			services.AddScoped((_) => new GroupDataController(connectioString));
-			services.AddScoped((_) => new UserDataController(connectioString));
-			services.AddScoped((_) => new GroupAchievementController(connectioString));
-			services.AddScoped((_) => new UserAchievementController(connectioString));
-			services.AddScoped((_) => new GroupRelationshipController(connectioString));
-			services.AddScoped((_) => new UserRelationshipController(connectioString));
+			services.AddScoped((_) => new AccountController(connectionString));
+			services.AddScoped((_) => new GameController(connectionString));
+			services.AddScoped((_) => new GroupController(connectionString));
+			services.AddScoped((_) => new UserController(connectionString));
+			services.AddScoped((_) => new GameDataController(connectionString));
+			//services.AddScoped((_) => new GroupDataController(connectionString));
+			//services.AddScoped((_) => new UserDataController(connectionString));
+			services.AddScoped((_) => new AchievementController(connectionString));
+			//services.AddScoped((_) => new UserAchievementController(connectionString));
+			services.AddScoped((_) => new GroupRelationshipController(connectionString));
+			services.AddScoped((_) => new UserRelationshipController(connectionString));
 
 			services.AddScoped((_) => new PasswordEncryption());
 

@@ -2,7 +2,7 @@
 
 namespace PlayGen.SUGAR.Data.Model
 {
-	public class UserToUserRelationship : IRecord, IRelationship
+	public class UserToUserRelationship : IRelationship
 	{
 		public int Id { get; set; }
 

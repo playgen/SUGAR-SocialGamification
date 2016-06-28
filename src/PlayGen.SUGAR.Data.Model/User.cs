@@ -3,13 +3,9 @@ using PlayGen.SUGAR.Data.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Data.Model
 {
-	public class User : IRecord
+	public class User : Actor
 	{
-		public int Id { get; set; }
-
 		public string Name { get; set; }
-
-		public virtual List<UserData> UserDatas { get; set; }
 
 		public virtual List<UserToGroupRelationship> UserToGroupRelationships { get; set; }
 
@@ -22,5 +18,8 @@ namespace PlayGen.SUGAR.Data.Model
 		public virtual List<UserToUserRelationship> Acceptors { get; set; }
 
 		public virtual List<UserToUserRelationshipRequest> RequestAcceptors { get; set; }
+
+
+		public override ActorType ActorType => ActorType.User;
 	}
 }
