@@ -37,17 +37,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Achievement Get(int achievementId)
 		{
-			return Get(new [] { achievementId }).SingleOrDefault();
-		}
-
-		public IEnumerable<Achievement> Get(int[] achievementIds)
-		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var achievements = context.Achievements.Where(a => achievementIds.Contains(a.Id)).ToList();
-				return achievements;
+				var achievement = context.Achievements.Find(achievementId);
+				return achievement;
 			}
 		}
 

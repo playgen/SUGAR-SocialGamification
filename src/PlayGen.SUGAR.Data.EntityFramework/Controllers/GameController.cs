@@ -50,8 +50,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var game = context.Games
-					.SingleOrDefault(g => id == g.Id);
+				var game = context.Games.Find(id);
 				return game;
 			}
 		}

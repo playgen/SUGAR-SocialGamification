@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="GameDataResponse"/> which match the search criteria.</returns>
 		public IEnumerable<GameDataResponse> Get(int actorId, int gameId, string[] keys)
 		{
-			var query = GetUriBuilder("api/groupsavedata")
+			var query = GetUriBuilder("api/groupdata")
 				.AppendQueryParameter(actorId, "actorId={0}")
 				.AppendQueryParameter(gameId, "gameId={0}")
 				.AppendQueryParameters(keys, "key={0}")
@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="GameDataResponse"/> containing the new GroupData details.</returns>
 		public GameDataResponse Add(SaveDataRequest data)
 		{
-			var query = GetUriBuilder("api/groupsavedata").ToString();
+			var query = GetUriBuilder("api/groupdata").ToString();
 			return Post<SaveDataRequest, GameDataResponse>(query, data);
 		}
 	}

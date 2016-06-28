@@ -37,16 +37,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get all global achievements, ie. achievements that are not associated with a specific game
 		/// 
-		/// Example Usage: GET api/achievements/game/1
+		/// Example Usage: GET api/achievements/list
 		/// </summary>
-		/// <param name="gameId">Array of game IDs</param>
 		/// <returns>Returns multiple <see cref="GameResponse"/> that hold Achievement details</returns>
 		[HttpGet("list")]
-		public IEnumerable<AchievementResponse> Get()
+		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
+		public IActionResult Get()
 		{
 			var achievement = _achievementController.GetGlobal();
 			var achievementContract = achievement.ToContractList();
-			return achievementContract;
+			return new ObjectResult(achievementContract);
 		}
 
 		/// <summary>
@@ -57,11 +57,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="gameId">Array of game IDs</param>
 		/// <returns>Returns multiple <see cref="GameResponse"/> that hold Achievement details</returns>
 		[HttpGet("game/{gameId:int}/list")]
-		public IEnumerable<AchievementResponse> Get([FromRoute]int gameId)
+		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
+		public IActionResult Get([FromRoute]int gameId)
 		{
 			var achievement = _achievementController.GetByGame(gameId);
 			var achievementContract = achievement.ToContractList();
-			return achievementContract;
+			return new ObjectResult(achievementContract);
 		}
 
 		/// <summary>
@@ -73,7 +74,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="newAchievement"><see cref="AchievementRequest"/> object that holds the details of the new Achievement.</param>
 		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created Achievement.</returns>
 		[HttpPost("create")]
-		public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
+		[ResponseType(typeof(AchievementResponse))]
+		public IActionResult Create([FromBody] AchievementRequest newAchievement)
 		{
 			if (newAchievement == null)
 			{
@@ -82,7 +84,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var achievement = newAchievement.ToModel();
 			_achievementController.Create(achievement);
 			var achievementContract = achievement.ToContract();
-			return achievementContract;
+			return new ObjectResult(achievementContract);
 		}
 
 		/// <summary>
@@ -92,10 +94,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Array of Achievement IDs</param>
 		[HttpDelete("{id:int}")]
-		public IActionResult Delete([FromRoute]int id)
+		public void Delete([FromRoute]int id)
 		{
 			_achievementController.Delete(id);
-			return Ok();
 		}
 
 		/// <summary>
@@ -140,7 +141,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var achievement = _achievementController.Get(achievementId);
 			var completed = _achievementEvaluationController.IsAchievementCompleted(achievement, actorId);
-			return Ok(new AchievementProgressResponse
+			return new ObjectResult(new AchievementProgressResponse
 			{
 				Name = achievement.Name,
 				Progress = completed ? 1 : 0,

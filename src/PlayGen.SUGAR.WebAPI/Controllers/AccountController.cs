@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Logs in an account based on the name and password combination.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
 		/// 
-		/// Example Usage: PUT api/account
+		/// Example Usage: POST api/account/login
 		/// </summary>
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 
 			var response = account.ToContract();
 			response.Token = CreateToken(account);
-			return Ok(response);
+			return new ObjectResult(response);
 		}
 
 		/// <summary>
@@ -76,7 +76,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Requires the name to be unique.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
 		/// 
-		/// Example Usage: POST api/account
+		/// Example Usage: POST api/account/register
 		/// </summary>
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
@@ -102,7 +102,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			{
 				response.Token = CreateToken(account);
 			}
-			return Ok(response);
+			return new ObjectResult(response);
 		}
 
 		//Todo: Review if register with id is needed
@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Requires the name to be unique.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
 		/// 
-		/// Example Usage: POST api/account/userId/1
+		/// Example Usage: POST api/account/registerwithid/1
 		/// </summary>
 		// <param name="userId">ID of the existing User.</param>
 		/// <param name="newAccount"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
@@ -136,7 +136,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			{
 				response.Token = CreateToken(account);
 			}
-			return Ok(response);
+			return new ObjectResult(response);
 		}*/
 
 		/// <summary>
@@ -146,10 +146,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Account ID.</param>
 		[HttpDelete("{id:int}")]
-		public IActionResult Delete([FromRoute]int id)
+		public void Delete([FromRoute]int id)
 		{
 			_accountDbController.Delete(id);
-			return Ok();
 		}
 
 		#region Helpers

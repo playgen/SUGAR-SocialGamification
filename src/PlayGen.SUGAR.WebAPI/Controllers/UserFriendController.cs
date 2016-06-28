@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var actor = _userRelationshipController.GetRequests(userId);
 			var actorContract = actor.ToContractList();
-			return Ok(actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var actor = _userRelationshipController.GetSentRequests(userId);
 			var actorContract = actor.ToContractList();
-			return Ok(actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// 
 		/// Example Usage: GET api/userfriend/friends/1
 		/// </summary>
-		/// <param name="userId">ID of the group.</param>
+		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("friends/{userId:int}")]
 		[ResponseType(typeof(IEnumerable<ActorResponse>))]
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var actor = _userRelationshipController.GetFriends(userId);
 			var actorContract = actor.ToContractList();
-			return Ok(actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var request = relationship.ToGroupModel();
 			_userRelationshipController.Create(relationship.ToUserModel(), relationship.AutoAccept);
 			var relationshipContract = request.ToContract();
-			return Ok(relationshipContract);
+			return new ObjectResult(relationshipContract);
 		}
 
 		/// <summary>
@@ -109,7 +109,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				AcceptorId = relationship.AcceptorId
 			};
 			_userRelationshipController.UpdateRequest(relation.ToUserModel(), relationship.Accepted);
-			return Ok();
+			return new NoContentResult();
 		}
 
 		/// <summary>
@@ -128,7 +128,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				AcceptorId = relationship.AcceptorId
 			};
 			_userRelationshipController.Update(relation.ToUserModel());
-			return Ok();
+			return new NoContentResult();
 		}
 	}
 }

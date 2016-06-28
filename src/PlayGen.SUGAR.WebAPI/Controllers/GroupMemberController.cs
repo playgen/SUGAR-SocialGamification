@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var users = _groupRelationshipController.GetRequests(groupId);
 			var actorContract = users.ToContractList();
-			return Ok(actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var requests = _groupRelationshipController.GetSentRequests(userId);
 			var actorContract = requests.ToContractList();
-			return Ok(actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var members = _groupRelationshipController.GetMembers(groupId);
 			var actorContract = members.ToContractList();
-			return Ok(actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var groups = _groupRelationshipController.GetUserGroups(userId);
 			var actorContract = groups.ToContractList();
-			return Ok(actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -106,7 +106,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var request = relationship.ToGroupModel();
 			_groupRelationshipController.Create(relationship.ToGroupModel(), relationship.AutoAccept);
 			var relationshipContract = request.ToContract();
-			return Ok(relationshipContract);
+			return new ObjectResult(relationshipContract);
 		}
 
 		/// <summary>
@@ -124,7 +124,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				AcceptorId = relationship.AcceptorId
 			};
 			_groupRelationshipController.UpdateRequest(relation.ToGroupModel(), relationship.Accepted);
-			return Ok();
+			return new NoContentResult();
 		}
 
 		/// <summary>
@@ -143,7 +143,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				AcceptorId = relationship.AcceptorId
 			};
 			_groupRelationshipController.Update(relation.ToGroupModel());
-			return Ok();
+			return new NoContentResult();
 		}
 	}
 }
