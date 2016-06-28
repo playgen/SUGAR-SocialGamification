@@ -111,9 +111,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 			// Serialize specific objects as Json objects instead of creating a new table
 			modelBuilder.ComplexType<AchievementCriteriaCollection>()
 				.Property(p => p.Serialised)
-				.HasColumnName("CompletionCriteria");
-			modelBuilder.ComplexType<AchievementCriteriaCollection>()
-				.Property(a => a.Serialised)
+				.HasColumnName("CompletionCriteria")
+				.HasMaxLength(1024);
+			modelBuilder.ComplexType<RewardCollection>()
+				.Property(p => p.Serialised)
+				.HasColumnName("RewardCollection")
 				.HasMaxLength(1024);
 
 			// Change all string fields to have a max length of 64 chars
