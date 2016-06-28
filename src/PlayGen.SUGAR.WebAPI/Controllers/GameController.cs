@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var games = _gameDbController.Get();
 			var gameContract = games.ToContractList();
-			return Ok(gameContract);
+			return new ObjectResult(gameContract);
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var games = _gameDbController.Search(name);
 			var gameContract = games.ToContractList();
-			return Ok(gameContract);
+			return new ObjectResult(gameContract);
 		}
 
 		/// <summary>
@@ -61,13 +61,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Game id</param>
 		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
-		[HttpGet("findbyid/{id:int}")]
+		[HttpGet("findbyid/{id:int}", Name = "GetByGameId")]
 		[ResponseType(typeof(GameResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
 			var game = _gameDbController.Search(id);
 			var gameContract = game.ToContract();
-			return Ok(gameContract);
+			return new ObjectResult(gameContract);
 		}
 
 		/// <summary>
@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var game = newGame.ToModel();
 			_gameDbController.Create(game);
 			var gameContract = game.ToContract();
-			return Ok(gameContract);
+			return CreatedAtRoute("GetByGameId", new { controller = "Game", id = gameContract.Id }, gameContract);
 		}
 
 		/// <summary>
@@ -98,10 +98,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Game ID.</param>
 		[HttpDelete("{id:int}")]
-		public IActionResult Delete([FromRoute]int id)
+		public void Delete([FromRoute]int id)
 		{
 			_gameDbController.Delete(id);
-			return Ok();
 		}
 	}
 }
