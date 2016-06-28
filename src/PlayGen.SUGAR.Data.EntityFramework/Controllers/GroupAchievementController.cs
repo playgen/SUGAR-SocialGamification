@@ -41,6 +41,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
+				if (achievement.CompletionCriteriaCollection.Count == 0) 
+				{
+					throw new MissingRecordException("No achievement criteria have been provided.");
+				}
+
 				var hasConflicts = context.GroupAchievements
 					.Any(a => a.Name == achievement.Name 
 					&& a.GameId == achievement.GameId);

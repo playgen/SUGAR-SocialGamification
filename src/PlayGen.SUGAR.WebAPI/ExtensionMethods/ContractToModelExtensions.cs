@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using PlayGen.SUGAR.Contracts;
 using Newtonsoft.Json;
 using PlayGen.SUGAR.Data.Model;
+using System.Linq;
 
 namespace PlayGen.SUGAR.WebAPI.ExtensionMethods
 {
@@ -70,11 +71,10 @@ namespace PlayGen.SUGAR.WebAPI.ExtensionMethods
 		public static AchievementCriteriaCollection ToModel(this List<AchievementCriteria> achievementContracts)
 		{
 			var achievementCollection = new AchievementCriteriaCollection();
-			foreach (var achievementContract in achievementContracts)
+			if (achievementContracts != null)
 			{
-				achievementCollection.Add(achievementContract.ToModel());
+				achievementCollection.Add(achievementContracts.Select(ToModel).ToList());
 			}
-
 			return achievementCollection;
 		}
 
@@ -92,11 +92,10 @@ namespace PlayGen.SUGAR.WebAPI.ExtensionMethods
 		public static RewardCollection ToModel(this List<Reward> rewardContracts)
 		{
 			var rewardCollection = new RewardCollection();
-			foreach (var rewardContract in rewardContracts)
+			if (rewardContracts != null)
 			{
-				rewardCollection.Add(rewardContract.ToModel());
+				rewardCollection.Add(rewardContracts.Select(ToModel).ToList());
 			}
-
 			return rewardCollection;
 		}
 
