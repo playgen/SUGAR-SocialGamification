@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
@@ -40,18 +37,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string groupDataName = "CreateGroupDataWithNonExistingGame";
 
-			bool hadException = false;
-
-			try
-			{
-				CreateGroupData(groupDataName, -1);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateGroupData(groupDataName, -1));
 		}
 
 		[Fact]

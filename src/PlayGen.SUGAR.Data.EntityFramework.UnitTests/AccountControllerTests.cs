@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
@@ -48,18 +45,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateAccount(name, password, permissions);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateAccount(name, password, permissions);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateAccount(name, password, permissions));
 		}
 
 		[Fact]
@@ -117,18 +103,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingAccount()
 		{
-			bool hadExeption = false;
-
-			try
-			{
-				_accountDbController.Delete(-1);
-			}
-			catch (Exception)
-			{
-				hadExeption = true;
-			}
-
-			Assert.False(hadExeption);
+			_accountDbController.Delete(-1);
 		}
 		#endregion
 

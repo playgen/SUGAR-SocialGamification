@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
@@ -39,19 +36,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		public void CreateUserAchievementWithNonExistingGame()
 		{
 			string userAchievementName = "CreateUserAchievementWithNonExistingGame";
-
-			bool hadException = false;
-
-			try
-			{
-				CreateUserAchievement(userAchievementName, -1);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateUserAchievement(userAchievementName, -1));
 		}
 
 		[Fact]
@@ -61,18 +46,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var firstachievement = CreateUserAchievement(userAchievementName);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateUserAchievement(userAchievementName, firstachievement.GameId);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateUserAchievement(userAchievementName, firstachievement.GameId));			
 		}
 
 		[Fact]
@@ -104,18 +78,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingUserAchievement()
 		{
-			bool hadException = false;
-
-			try
-			{
-				_userAchievementDbController.Delete(-1);
-			}
-			catch (Exception)
-			{
-				hadException = true;
-			}
-
-			Assert.False(hadException);
+			_userAchievementDbController.Delete(-1);
 		}
 		#endregion
 

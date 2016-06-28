@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using PlayGen.SUGAR.Data.EntityFramework;
-
-namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
+﻿namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
 	public abstract class TestController
 	{

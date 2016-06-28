@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
@@ -45,18 +43,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string groupMemberName = "CreateGroupMemberWithNonExistingRequestor";
 			var acceptor = CreateGroup(groupMemberName);
-			bool hadException = false;
-
-			try
-			{
-				CreateGroupMember(-1, acceptor.Id);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateGroupMember(-1, acceptor.Id));
 		}
 
 		[Fact]
@@ -64,18 +51,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string groupMemberName = "CreateGroupMemberWithNonExistingAcceptor";
 			var requestor = CreateUser(groupMemberName);
-			bool hadException = false;
-
-			try
-			{
-				CreateGroupMember(requestor.Id, -1);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateGroupMember(requestor.Id, -1));
 		}
 
 		[Fact]

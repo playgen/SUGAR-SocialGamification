@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.Model;
 using Xunit;
+using System.Linq;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
@@ -43,18 +41,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string userFriendName = "CreateUserFriendWithNonExistingRequestor";
 			var acceptor = CreateUser(userFriendName);
-			bool hadException = false;
-
-			try
-			{
-				CreateUserFriend(-1, acceptor.Id);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateUserFriend(-1, acceptor.Id));
 		}
 
 		[Fact]
@@ -62,18 +49,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string userFriendName = "CreateUserFriendWithNonExistingAcceptor";
 			var requestor = CreateUser(userFriendName);
-			bool hadException = false;
-
-			try
-			{
-				CreateUserFriend(requestor.Id, -1);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateUserFriend(requestor.Id, -1));
 		}
 
 		[Fact]
@@ -84,20 +60,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
+			CreateUserFriend(requestor.Id, acceptor.Id);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateUserFriend(requestor.Id, acceptor.Id);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(requestor.Id, acceptor.Id));
 		}
 
 		[Fact]
@@ -108,20 +73,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
+			CreateUserFriend(requestor.Id, acceptor.Id);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateUserFriend(acceptor.Id, requestor.Id);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(acceptor.Id, requestor.Id));
 		}
 
 		[Fact]
@@ -230,18 +184,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			_userRelationshipDbController.UpdateRequest(newFriend, true);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateUserFriend(requestor.Id, acceptor.Id);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(requestor.Id, acceptor.Id));
 		}
 
 		[Fact]
@@ -256,18 +199,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			_userRelationshipDbController.UpdateRequest(newFriend, true);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateUserFriend(acceptor.Id, requestor.Id);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(acceptor.Id, requestor.Id));
 		}
 
 		[Fact]
@@ -302,18 +234,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				AcceptorId = acceptor.Id
 			};
 
-			bool hadException = false;
-
-			try
-			{
-				_userRelationshipDbController.Update(newFriend);
-			}
-			catch (Exception)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<InvalidOperationException>(() => _userRelationshipDbController.Update(newFriend));
 		}
 		#endregion
 

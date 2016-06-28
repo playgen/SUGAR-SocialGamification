@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
@@ -40,19 +37,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		public void CreateGroupAchievementWithNonExistingGame()
 		{
 			string groupAchievementName = "CreateGroupAchievementWithNonExistingGame";
-
-			bool hadException = false;
-
-			try
-			{
-				CreateGroupAchievement(groupAchievementName, -1);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateGroupAchievement(groupAchievementName, -1));
 		}
 
 		[Fact]
@@ -62,18 +47,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var firstachievement = CreateGroupAchievement(groupAchievementName);
 
-			bool hadDuplicateException = false;
-
-			try
-			{
-				CreateGroupAchievement(groupAchievementName, firstachievement.GameId);
-			}
-			catch (DuplicateRecordException)
-			{
-				hadDuplicateException = true;
-			}
-
-			Assert.True(hadDuplicateException);
+			Assert.Throws<DuplicateRecordException>(() => CreateGroupAchievement(groupAchievementName, firstachievement.GameId));
 		}
 
 		[Fact]
@@ -105,18 +79,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingGroupAchievement()
 		{
-			bool hadException = false;
-
-			try
-			{
-				_groupAchievementDbController.Delete(-1);
-			}
-			catch (Exception)
-			{
-				hadException = true;
-			}
-
-			Assert.False(hadException);
+			_groupAchievementDbController.Delete(-1);
 		}
 		#endregion
 

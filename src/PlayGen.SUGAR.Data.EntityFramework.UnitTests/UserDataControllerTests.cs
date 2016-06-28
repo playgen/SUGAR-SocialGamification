@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using PlayGen.SUGAR.Contracts;
+﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
@@ -54,18 +48,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string userDataName = "CreateUserDataWithNonExistingGame";
 
-			bool hadException = false;
-
-			try
-			{
-				CreateUserData(userDataName, -1);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateUserData(userDataName, -1));
 		}
 
 		[Fact]
@@ -73,18 +56,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string userDataName = "CreateUserDataWithNonExistingUser";
 
-			bool hadException = false;
-
-			try
-			{
-				CreateUserData(userDataName, 0, -1);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<MissingRecordException>(() => CreateUserData(userDataName, 0, -1));
 		}
 
 		[Fact]
