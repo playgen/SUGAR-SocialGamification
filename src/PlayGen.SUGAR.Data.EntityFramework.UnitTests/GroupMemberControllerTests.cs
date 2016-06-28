@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
@@ -13,70 +11,95 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	{
 
 		#region Configuration
-
 		private readonly GroupRelationshipController _groupMemberDbController;
 
 		public GroupMemberControllerTests()
 		{
 			_groupMemberDbController = new GroupRelationshipController(NameOrConnectionString);
 		}
-
 		#endregion
+
 
 		#region Tests
 		[Fact]
 		public void CreateAndGetGroupMemberRequest()
 		{
-			const string groupMemberName = "CreateGroupMemberRequest";
+			string groupMemberName = "CreateGroupMemberRequest";
+
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
+
 			var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
+
 			var groupRequests = _groupMemberDbController.GetRequests(newMember.AcceptorId);
 
-			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
+			int matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
+
 			Assert.Equal(matches, 1);
 		}
 
 		[Fact]
 		public void CreateGroupMemberWithNonExistingRequestor()
 		{
-			const string groupMemberName = "CreateGroupMemberWithNonExistingRequestor";
+			string groupMemberName = "CreateGroupMemberWithNonExistingRequestor";
 			var acceptor = CreateGroup(groupMemberName);
-
 			Assert.Throws<MissingRecordException>(() => CreateGroupMember(-1, acceptor.Id));
 		}
 
 		[Fact]
 		public void CreateGroupMemberWithNonExistingAcceptor()
 		{
-			const string groupMemberName = "CreateGroupMemberWithNonExistingAcceptor";
+			string groupMemberName = "CreateGroupMemberWithNonExistingAcceptor";
 			var requestor = CreateUser(groupMemberName);
-
 			Assert.Throws<MissingRecordException>(() => CreateGroupMember(requestor.Id, -1));
 		}
 
 		[Fact]
 		public void CreateDuplicateGroupMember()
 		{
-			const string groupMemberName = "CreateDuplicateGroupMember";
+			string groupMemberName = "CreateDuplicateGroupMember";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
+
 			var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateGroupMember(requestor.Id, acceptor.Id));
+			bool hadDuplicateException = false;
+
+			try
+			{
+				CreateGroupMember(requestor.Id, acceptor.Id);
+			}
+			catch (DuplicateRecordException)
+			{
+				hadDuplicateException = true;
+			}
+
+			Assert.True(hadDuplicateException);
 		}
 
 		[Fact]
 		public void CreateDuplicateReversedGroupMember()
 		{
-			const string groupMemberName = "CreateDuplicateReversedGroupMember";
+			string groupMemberName = "CreateDuplicateReversedGroupMember";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
+
 			var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateGroupMember(acceptor.Id, requestor.Id));
+			bool hadDuplicateException = false;
+
+			try
+			{
+				CreateGroupMember(acceptor.Id, requestor.Id);
+			}
+			catch (DuplicateRecordException)
+			{
+				hadDuplicateException = true;
+			}
+
+			Assert.True(hadDuplicateException);
 		}
 
 		[Fact]
@@ -90,46 +113,57 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void AcceptGroupMemberRequest()
 		{
-			const string groupMemberName = "AcceptGroupMemberRequest";
+			string groupMemberName = "AcceptGroupMemberRequest";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
+
 			var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
+
 			_groupMemberDbController.UpdateRequest(newMember, true);
+
 			var groupRequests = _groupMemberDbController.GetRequests(newMember.AcceptorId);
 
-			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
+			int matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
+
 			Assert.Equal(matches, 0);
 
 			var groupMembers = _groupMemberDbController.GetMembers(newMember.AcceptorId);
 
 			matches = groupMembers.Count(g => g.Name == groupMemberName + " Requestor");
+
 			Assert.Equal(matches, 1);
 		}
 
 		[Fact]
 		public void RejectGroupMemberRequest()
 		{
-			const string groupMemberName = "RejectGroupMemberRequest";
+			string groupMemberName = "RejectGroupMemberRequest";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
+
 			var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
+
 			_groupMemberDbController.UpdateRequest(newMember, false);
+
 			var groupRequests = _groupMemberDbController.GetRequests(newMember.AcceptorId);
 
-			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
+			int matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
+
 			Assert.Equal(matches, 0);
 
 			var groupMembers = _groupMemberDbController.GetMembers(newMember.RequestorId);
+
 			matches = groupMembers.Count(g => g.Name == groupMemberName + " Acceptor");
+
 			Assert.Equal(matches, 0);
 		}
 
 		[Fact]
 		public void UpdateNonExistingGroupMemberRequest()
 		{
-			const string groupMemberName = "UpdateNonExistingGroupMemberRequest";
+			string groupMemberName = "UpdateNonExistingGroupMemberRequest";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -140,8 +174,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				AcceptorId = acceptor.Id
 			};
 
-			//TODO: make exception type specific
-			Assert.Throws<Exception>(() => _groupMemberDbController.UpdateRequest(newMember, true));
+			bool hadException = false;
+
+			try
+			{
+				_groupMemberDbController.UpdateRequest(newMember, true);
+			}
+			catch (Exception)
+			{
+				hadException = true;
+			}
+
+			Assert.True(hadException);
 		}
 
 		[Fact]
@@ -155,7 +199,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void CreateDuplicateAcceptedGroupMember()
 		{
-			const string groupMemberName = "CreateDuplicateAcceptedGroupMember";
+			string groupMemberName = "CreateDuplicateAcceptedGroupMember";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -164,31 +208,58 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			_groupMemberDbController.UpdateRequest(newMember, true);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateGroupMember(requestor.Id, acceptor.Id));
+			bool hadDuplicateException = false;
+
+			try
+			{
+				CreateGroupMember(requestor.Id, acceptor.Id);
+			}
+			catch (DuplicateRecordException)
+			{
+				hadDuplicateException = true;
+			}
+
+			Assert.True(hadDuplicateException);
 		}
 
 		[Fact]
 		public void CreateDuplicateReversedAcceptedGroupMember()
 		{
-			const string groupMemberName = "CreateDuplicateReversedAcceptedGroupMember";
+			string groupMemberName = "CreateDuplicateReversedAcceptedGroupMember";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
+
 			var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
+
 			_groupMemberDbController.UpdateRequest(newMember, true);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateGroupMember(acceptor.Id, requestor.Id));
+			bool hadDuplicateException = false;
+
+			try
+			{
+				CreateGroupMember(acceptor.Id, requestor.Id);
+			}
+			catch (DuplicateRecordException)
+			{
+				hadDuplicateException = true;
+			}
+
+			Assert.True(hadDuplicateException);
 		}
 
 		[Fact]
 		public void UpdateGroupMember()
 		{
-			const string groupMemberName = "UpdateGroupMember";
+			string groupMemberName = "UpdateGroupMember";
 
 			var requestor = CreateGroup(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
+
 			var newMember = CreateGroupMember(requestor.Id, acceptor.Id);
+
 			_groupMemberDbController.UpdateRequest(newMember, true);
+
 			_groupMemberDbController.Update(newMember);
 			var members = _groupMemberDbController.GetMembers(acceptor.Id);
 
@@ -209,17 +280,25 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				AcceptorId = acceptor.Id
 			};
 
-			//TODO: make exception type specific
-			Assert.Throws<Exception>(() => _groupMemberDbController.Update(newMember));
-		}
+			bool hadException = false;
 
+			try
+			{
+				_groupMemberDbController.Update(newMember);
+			}
+			catch (Exception)
+			{
+				hadException = true;
+			}
+
+			Assert.True(hadException);
+		}
 		#endregion
 
 		#region Helpers
-
 		private User CreateUser(string name)
 		{
-			var userDbController = new UserController(NameOrConnectionString);
+			UserController userDbController = new UserController(NameOrConnectionString);
 			var user = new User
 			{
 				Name = name,
@@ -232,7 +311,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		private Group CreateGroup(string name)
 		{
-			var groupDbController = new GroupController(NameOrConnectionString);
+			GroupController groupDbController = new GroupController(NameOrConnectionString);
 			var group = new Group
 			{
 				Name = name,

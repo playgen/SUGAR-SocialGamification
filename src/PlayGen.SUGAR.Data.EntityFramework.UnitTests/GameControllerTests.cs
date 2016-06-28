@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
@@ -12,33 +9,35 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	public class GameControllerTests : TestController
 	{
 		#region Configuration
-
 		private readonly GameController _gameDbController;
 
 		public GameControllerTests()
 		{
 			_gameDbController = new GameController(NameOrConnectionString);
 		}
-
 		#endregion
 
-		#region Tests
 
+		#region Tests
 		[Fact]
 		public void CreateAndGetGame()
 		{
-			const string gameName = "CreateGame";
+			string gameName = "CreateGame";
+
 			CreateGame(gameName);
+			
 			var games = _gameDbController.Search(gameName);
 
-			var matches = games.Count(g => g.Name == gameName);
+			int matches = games.Count(g => g.Name == gameName);
+
 			Assert.Equal(1, matches);
 		}
 
 		[Fact]
 		public void CreateDuplicateGame()
 		{
-			const string gameName = "CreateDuplicateGame";
+			string gameName = "CreateDuplicateGame";
+
 			CreateGame(gameName);
 			
 			Assert.Throws<DuplicateRecordException>(() => CreateGame(gameName));
@@ -80,12 +79,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteExistingGame()
 		{
-			const string gameName = "DeleteExistingGame";
+			string gameName = "DeleteExistingGame";
 
 			var game = CreateGame(gameName);
 
 			var games = _gameDbController.Search(gameName);
-			Assert.NotNull(games);
 			Assert.Equal(games.Count(), 1);
 			Assert.Equal(games.ElementAt(0).Name, gameName);
 
@@ -98,8 +96,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingGame()
 		{
-			//TODO: make exception type specific
-			Assert.Throws<Exception>(() => _gameDbController.Delete(-1));
+			_gameDbController.Delete(-1);
 		}
 		#endregion
 

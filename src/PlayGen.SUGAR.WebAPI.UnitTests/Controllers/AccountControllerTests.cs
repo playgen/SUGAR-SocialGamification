@@ -44,18 +44,7 @@ namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers
 				Password = "RegisterInvalidAccountNamePassword",
 			};
 
-			bool hadException = false;
-
-			try
-			{
-				var response = _accountController.Register(accountRequest);
-			}
-			catch (InvalidAccountDetailsException)
-			{
-				hadException = true;
-			}
-			
-			Assert.True(hadException);
+			Assert.Throws<InvalidAccountDetailsException>(() => _accountController.Register(accountRequest));
 		}
 
 		[Fact]
@@ -66,98 +55,70 @@ namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers
 				Name = "RegisterInvalidAccountPassword",
 			};
 
-			bool hadException = false;
-
-			try
-			{
-				var response = _accountController.Register(accountRequest);
-			}
-			catch (InvalidAccountDetailsException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<InvalidAccountDetailsException>(() => _accountController.Register(accountRequest));
 		}
 
-		//TODO: either test via the client nd real http channel, or work out best way to extract and deserialize data from action result
-		//[Fact]
-		//public void RegisterNewUser()
-		//{
-		//	var accountRequest = CreatAccountRequest("RegisterNewUser", "RegisterNewUserPassword");
+		[Fact]
+		public void RegisterNewUser()
+		{
+			var accountRequest = CreatAccountRequest("RegisterNewUser", "RegisterNewUserPassword");
 
-		//	var response = _accountController.Register(accountRequest);
+			var response = _accountController.Register(accountRequest);
 
-		//	Assert.NotEqual(null, response. .User);
-		//	Assert.Equal(null, response.Token);
-		//}
+			// Todo modify to evaluate new type returned by _accountController
+		}
 
-		//[Fact]
-		//public void RegisterNewUserAndLogin()
-		//{
-		//	var accountRequest = CreatAccountRequest("RegisterNewUserAndLogin", "RegisterNewUserAndLoginPassword");
-		//	accountRequest.AutoLogin = true;
+		[Fact]
+		public void RegisterNewUserAndLogin()
+		{
+			var accountRequest = CreatAccountRequest("RegisterNewUserAndLogin", "RegisterNewUserAndLoginPassword");
+			accountRequest.AutoLogin = true;
 
-		//	var response = _accountController.Register(accountRequest);
+			var response = _accountController.Register(accountRequest);
 
-		//	Assert.NotEqual(null, response.User);
-		//	Assert.NotEqual(null, response.Token);
-		//}
+			// Todo modify to evaluate new type returned by _accountController
+		}
 
-		//[Fact]
-		//public void LoginUser()
-		//{
-		//	var accountRequest = CreatAccountRequest("LoginUser", "LoginUserPassword");
+		[Fact]
+		public void LoginUser()
+		{
+			var accountRequest = CreatAccountRequest("LoginUser", "LoginUserPassword");
 
-		//	_accountController.Register(accountRequest);
-		//	var response = _accountController.Login(accountRequest);
+			_accountController.Register(accountRequest);
+			var response = _accountController.Login(accountRequest);
 
-		//	Assert.NotEqual(null, response.User);
-		//	Assert.NotEqual(null, response.Token);
-		//}
+			// Todo modify to evaluate new type returned by _accountController
+		}
 
-		//[Fact]
-		//public void RegisterInvalidUser()
-		//{
-		//	int userId = -1;
+		[Fact]
+		public void RegisterInvalidUser()
+		{
+			int userId = -1;
 
-		//	var accountRequest = CreatAccountRequest("RegisterInvalidUser", "RegisterInvalidUser");
+			var accountRequest = CreatAccountRequest("RegisterInvalidUser", "RegisterInvalidUser");
 
-		//	bool hadException = false;
+			Assert.Throws<InvalidAccountDetailsException>(() => _accountController.Register(accountRequest));
+		}
 
-		//	try
-		//	{
-		//		var response = _accountController.Register(userId, accountRequest);
-		//	}
-		//	catch (InvalidAccountDetailsException)
-		//	{
-		//		hadException = true;
-		//	}
-			
-		//	Assert.True(hadException);
-		//}
+		[Fact]
+		public void RegisterExistingUserAndLogin()
+		{
+			var accountRequest = CreatAccountRequest("RegisterExistingUserAndLogin", "RegisterExistingUserAndLoginPassword");
 
-		//[Fact]
-		//public void RegisterExistingUserAndLogin()
-		//{
-		//	var accountRequest = CreatAccountRequest("RegisterExistingUserAndLogin", "RegisterExistingUserAndLoginPassword");
+			var user = new User
+			{
+				Name = accountRequest.Name,
+			};
+			_userDbController.Create(user);
 
-		//	var user = new User
-		//	{
-		//		Name = accountRequest.Name,
-		//	};
-		//	_userDbController.Create(user);
+			var response = _accountController.Register(accountRequest);
 
-		//	var response = _accountController.Register(user.Id, accountRequest);
+			// Todo modify to evaluate new type returned by _accountController
 
-		//	Assert.NotEqual(null, response.User);
-		//	Assert.Equal(null, response.Token);
+			response = _accountController.Login(accountRequest);
 
-		//	response = _accountController.Login(accountRequest);
-
-		//	Assert.NotEqual(null, response.User);
-		//	Assert.NotEqual(null, response.Token);
-		//}
+			// Todo modify to evaluate new type returned by _accountController
+		}
 
 		[Fact]
 		public void LoginInvalidAccountName()
@@ -168,18 +129,7 @@ namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers
 
 			accountRequest.Name = "ThisAccountNameShouldFail";
 
-			bool hadException = false;
-
-			try
-			{
-				_accountController.Login(accountRequest);
-			}
-			catch (InvalidAccountDetailsException)
-			{
-				hadException = true;
-			}
-			
-			Assert.True(hadException);
+			Assert.Throws<InvalidAccountDetailsException>(() => _accountController.Login(accountRequest));
 		}
 
 		[Fact]
@@ -191,18 +141,7 @@ namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers
 
 			accountRequest.Password = "ThisPasswordShouldFail";
 
-			bool hadException = false;
-
-			try
-			{
-				_accountController.Login(accountRequest);
-			}
-			catch (InvalidAccountDetailsException)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<InvalidAccountDetailsException>(() => _accountController.Login(accountRequest));
 		}
 		#endregion
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
@@ -12,32 +9,33 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	public class UserControllerTests : TestController
 	{
 		#region Configuration
-
 		private readonly UserController _userDbController;
 
 		public UserControllerTests()
 		{
 			_userDbController = new UserController(NameOrConnectionString);
 		}
-
 		#endregion
 
 		#region Tests
 		[Fact]
 		public void CreateAndGetUser()
 		{
-			const string userName = "CreateUser";
+			string userName = "CreateUser";
+
 			CreateUser(userName);
+
 			var users = _userDbController.Search(userName);
 
-			var matches = users.Count(g => g.Name == userName);
+			int matches = users.Count(g => g.Name == userName);
+
 			Assert.Equal(matches, 1);
 		}
 
 		[Fact]
 		public void CreateDuplicateUser()
 		{
-			const string userName = "CreateDuplicateUser";
+			string userName = "CreateDuplicateUser";
 
 			CreateUser(userName);
 
@@ -47,7 +45,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetMultipleUsersByName()
 		{
-			var userNames = new[]
+			string[] userNames = new[]
 			{
 				"GetMultipleUsersByName1",
 				"GetMultipleUsersByName2",
@@ -61,7 +59,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			}
 
 			CreateUser("GetMultiple_UsersByName_DontGetThis");
+
 			var users = _userDbController.Search("GetMultipleUsersByName");
+
 			var matchingUsers = users.Select(g => userNames.Contains(g.Name));
 
 			Assert.Equal(matchingUsers.Count(), userNames.Length);
@@ -78,12 +78,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteExistingUser()
 		{
-			const string userName = "DeleteExistingUser";
+			string userName = "DeleteExistingUser";
 
 			var user = CreateUser(userName);
 
 			var users = _userDbController.Search(userName);
-			Assert.NotNull(users);
 			Assert.Equal(users.Count(), 1);
 			Assert.Equal(users.ElementAt(0).Name, userName);
 
@@ -96,8 +95,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingUser()
 		{
-			//TODO: make exception type specific
-			Assert.Throws<Exception>(() => _userDbController.Delete(-1));
+			_userDbController.Delete(-1);
 		}
 		#endregion
 

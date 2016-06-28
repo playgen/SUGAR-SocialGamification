@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
@@ -9,14 +6,14 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class AchievementControllerTests : TestController
+	public class GroupAchievementControllerTests : TestController
 	{
 		#region Configuration
-		private readonly AchievementController _groupAchievementDbController;
+		private readonly GroupAchievementController _groupAchievementDbController;
 
-		public AchievementControllerTests()
+		public GroupAchievementControllerTests()
 		{
-			_groupAchievementDbController = new AchievementController(NameOrConnectionString);
+			_groupAchievementDbController = new GroupAchievementController(NameOrConnectionString);
 		}
 		#endregion
 
@@ -25,28 +22,31 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void CreateAndGetGroupAchievement()
 		{
-			const string groupAchievementName = "CreateGroupAchievement";
+			string groupAchievementName = "CreateGroupAchievement";
+
 			var newAchievement = CreateGroupAchievement(groupAchievementName);
+
 			var groupAchievements = _groupAchievementDbController.Get(new int[] { newAchievement.Id });
 
-			var matches = groupAchievements.Count(g => g.Name == groupAchievementName && g.GameId == newAchievement.GameId);
+			int matches = groupAchievements.Count(g => g.Name == groupAchievementName && g.GameId == newAchievement.GameId);
+
 			Assert.Equal(matches, 1);
 		}
 
 		[Fact]
 		public void CreateGroupAchievementWithNonExistingGame()
 		{
-			const string groupAchievementName = "CreateGroupAchievementWithNonExistingGame";
-
+			string groupAchievementName = "CreateGroupAchievementWithNonExistingGame";
 			Assert.Throws<MissingRecordException>(() => CreateGroupAchievement(groupAchievementName, -1));
 		}
 
 		[Fact]
 		public void CreateDuplicateGroupAchievement()
 		{
-			const string groupAchievementName = "CreateDuplicateGroupAchievement";
+			string groupAchievementName = "CreateDuplicateGroupAchievement";
 
 			var firstachievement = CreateGroupAchievement(groupAchievementName);
+
 			Assert.Throws<DuplicateRecordException>(() => CreateGroupAchievement(groupAchievementName, firstachievement.GameId));
 		}
 
@@ -61,13 +61,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteExistingGroupAchievement()
 		{
-			const string groupAchievementName = "DeleteExistingGroupAchievement";
+			string groupAchievementName = "DeleteExistingGroupAchievement";
 
 			var groupAchievement = CreateGroupAchievement(groupAchievementName);
 			var groupId = groupAchievement.Id;
 
 			var groupAchievements = _groupAchievementDbController.Get(new int[] { groupId });
-			Assert.NotNull(groupAchievements);
 			Assert.Equal(groupAchievements.Count(), 1);
 			Assert.Equal(groupAchievements.ElementAt(0).Name, groupAchievementName);
 
@@ -80,15 +79,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingGroupAchievement()
 		{
-			//TODO: make exception type specific
-			Assert.Throws<Exception>(() => _groupAchievementDbController.Delete(-1));
+			_groupAchievementDbController.Delete(-1);
 		}
 		#endregion
 
 		#region Helpers
-		private Achievement CreateGroupAchievement(string name, int? gameId = 0)
+		private GroupAchievement CreateGroupAchievement(string name, int gameId = 0)
 		{
-			var gameDbController = new GameController(NameOrConnectionString);
+			GameController gameDbController = new GameController(NameOrConnectionString);
 			if (gameId == 0) {
 				Game game = new Game
 				{
@@ -98,7 +96,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				gameId = game.Id;
 			}
 
-			var groupAchievement = new Achievement
+			var groupAchievement = new GroupAchievement
 			{
 				Name = name,
 				GameId = gameId,
