@@ -13,6 +13,8 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public string Name { get; set; }
 
+		public string Description { get; set; }
+
 		public ActorType ActorType { get; set; }
 
 		public string Token { get; set; }

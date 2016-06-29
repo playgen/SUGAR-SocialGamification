@@ -13,6 +13,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Id = model.Id,
 				Name = model.Name,
+				Description = model.Description,
 				GameId = model.GameId,
 				ActorType = model.ActorType,
 				Token = model.Token,
@@ -65,6 +66,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			var achieveModel = new Achievement
 			{
 				Name = achieveContract.Name,
+				Description = achieveContract.Description,
 				GameId = achieveContract.GameId,
 				ActorType = achieveContract.ActorType,
 				Token = achieveContract.Token,

@@ -14,6 +14,9 @@ namespace PlayGen.SUGAR.Contracts
 		[StringLength(64)]
 		public string Name { get; set; }
 
+		[StringLength(256)]
+		public string Description { get; set; }
+
 		[Required]
 		public ActorType ActorType { get; set; }
 
