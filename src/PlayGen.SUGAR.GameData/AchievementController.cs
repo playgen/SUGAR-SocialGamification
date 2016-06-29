@@ -1,4 +1,5 @@
-﻿using PlayGen.SUGAR.Contracts;
+﻿using System.Linq;
+using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
@@ -7,9 +8,12 @@ namespace PlayGen.SUGAR.GameData
 {
 	public class AchievementController : DataEvaluationController
 	{
+		protected readonly RewardController RewardController;
+
 		public AchievementController(IGameDataController gameDataController)
 			: base(gameDataController)
 		{
+			RewardController = new RewardController(gameDataController);
 		}
 
 		/// <summary>
@@ -50,6 +54,7 @@ namespace PlayGen.SUGAR.GameData
 				Value = null
 			};
 			GameDataController.Create(gameData);
+			achievement.RewardCollection.All(reward => RewardController.AddReward(actorId, achievement.GameId, reward));
 		}
 
 		public void EvaluateAchievement(Achievement achievement, int? actorId)

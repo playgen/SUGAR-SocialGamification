@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Collections.Generic;
 
 namespace PlayGen.SUGAR.Contracts
 {
@@ -15,6 +17,7 @@ namespace PlayGen.SUGAR.Contracts
 
 		public string Description { get; set; }
 
+		[JsonConverter(typeof(StringEnumConverter))]
 		public ActorType ActorType { get; set; }
 
 		public string Token { get; set; }

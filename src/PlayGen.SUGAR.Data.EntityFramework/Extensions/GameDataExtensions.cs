@@ -14,12 +14,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 
 		public static IQueryable<GameData> FilterByGameId(this IQueryable<GameData> gameDataQueryable, int? gameId)
 		{
-			return gameDataQueryable.Where(gd => gameId.HasValue == false || (gd.GameId.HasValue && gd.GameId.Value == gameId.Value));
+			return gameDataQueryable.Where(gd => gd.GameId == gameId);
 		}
 
 		public static IQueryable<GameData> FilterByActorId(this IQueryable<GameData> gameDataQueryable, int? actorId)
 		{
-			return gameDataQueryable.Where(gd => actorId.HasValue == false || (gd.ActorId.HasValue && gd.ActorId.Value == actorId.Value));
+			return gameDataQueryable.Where(gd => gd.ActorId == actorId);
 		}
 
 		public static IQueryable<GameData> FilterByKey(this IQueryable<GameData> gameDataQueryable, string key)

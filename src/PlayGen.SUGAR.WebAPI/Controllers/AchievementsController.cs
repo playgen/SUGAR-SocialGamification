@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpGet("game/{gameId:int}/evaluate")]
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
 		[ResponseType(typeof(IEnumerable<AchievementProgressResponse>))]
-		public IActionResult GetProgress([FromRoute]int gameId, [FromRoute]int? actorId)
+		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
 			var achievements = _achievementController.GetByGame(gameId);
 			var achievementResponses = achievements.Select(a =>
@@ -135,7 +135,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpGet("{achievementId:int}/evaluate")]
 		[HttpGet("{achievementId:int}/evaluate/{actorId:int}")]
 		[ResponseType(typeof(AchievementProgressResponse))]
-		public IActionResult GetProgress([FromRoute]int achievementId, [FromRoute]int actorId)
+		public IActionResult GetAchievementProgress([FromRoute]int achievementId, [FromRoute]int? actorId)
 		{
 			var achievement = _achievementController.Get(achievementId);
 			var completed = _achievementEvaluationController.IsAchievementCompleted(achievement, actorId);
