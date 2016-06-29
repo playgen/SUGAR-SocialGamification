@@ -7,6 +7,7 @@ using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Exceptions;
+using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -82,7 +83,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ResponseType(typeof(GameResponse))]
 		public IActionResult Create([FromBody]GameRequest newGame)
 		{
-			if (newGame == null) {
+			if (newGame == null)
+			{
 				throw new NullObjectException("Invalid object passed");
 			}
 			var game = newGame.ToModel();

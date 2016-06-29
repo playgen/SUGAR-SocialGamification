@@ -9,11 +9,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	public class UserAchievementControllerTests : TestController
 	{
 		#region Configuration
-		private readonly UserAchievementController _userAchievementDbController;
+		private readonly AchievementController _userAchievementDbController;
 
 		public UserAchievementControllerTests()
 		{
-			_userAchievementDbController = new UserAchievementController(NameOrConnectionString);
+			_userAchievementDbController = new AchievementController(NameOrConnectionString);
 		}
 		#endregion
 
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var firstachievement = CreateUserAchievement(userAchievementName);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateUserAchievement(userAchievementName, firstachievement.GameId));			
+			Assert.Throws<DuplicateRecordException>(() => CreateUserAchievement(userAchievementName, firstachievement.GameId.Value));			
 		}
 
 		[Fact]
@@ -83,7 +83,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Helpers
-		private UserAchievement CreateUserAchievement(string name, int gameId = 0)
+		private Achievement CreateUserAchievement(string name, int gameId = 0)
 		{
 			GameController gameDbController = new GameController(NameOrConnectionString);
 			if (gameId == 0)
@@ -96,7 +96,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				gameId = game.Id;
 			}
 
-			var userAchievement = new UserAchievement
+			var userAchievement = new Achievement
 			{
 				Name = name,
 				GameId = gameId,

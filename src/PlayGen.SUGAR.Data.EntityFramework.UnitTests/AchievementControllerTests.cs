@@ -9,11 +9,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	public class GroupAchievementControllerTests : TestController
 	{
 		#region Configuration
-		private readonly GroupAchievementController _groupAchievementDbController;
+		private readonly AchievementController _groupAchievementDbController;
 
 		public GroupAchievementControllerTests()
 		{
-			_groupAchievementDbController = new GroupAchievementController(NameOrConnectionString);
+			_groupAchievementDbController = new AchievementController(NameOrConnectionString);
 		}
 		#endregion
 
@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var firstachievement = CreateGroupAchievement(groupAchievementName);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateGroupAchievement(groupAchievementName, firstachievement.GameId));
+			Assert.Throws<DuplicateRecordException>(() => CreateGroupAchievement(groupAchievementName, firstachievement.GameId.Value));
 		}
 
 		[Fact]
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Helpers
-		private GroupAchievement CreateGroupAchievement(string name, int gameId = 0)
+		private Achievement CreateGroupAchievement(string name, int gameId = 0)
 		{
 			GameController gameDbController = new GameController(NameOrConnectionString);
 			if (gameId == 0) {
@@ -96,7 +96,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				gameId = game.Id;
 			}
 
-			var groupAchievement = new GroupAchievement
+			var groupAchievement = new Achievement
 			{
 				Name = name,
 				GameId = gameId,

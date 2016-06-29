@@ -25,9 +25,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string name = "CreateAndGetAccount";
 			string password = $"{name}Password";
-			Account.Permissions permissions = Account.Permissions.Default;
 
-			CreateAccount(name, password, permissions);
+			CreateAccount(name, password);
 
 			var accounts = _accountDbController.Get(new string[] { name });
 
@@ -41,11 +40,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string name = "CreateDuplicateAccount";
 			string password = $"{name}Password";
-			Account.Permissions permissions = Account.Permissions.Default;
 
-			CreateAccount(name, password, permissions);
+			CreateAccount(name, password);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateAccount(name, password, permissions));
+			Assert.Throws<DuplicateRecordException>(() => CreateAccount(name, password));
 		}
 
 		[Fact]
@@ -61,10 +59,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			foreach (var name in names)
 			{
-				CreateAccount(name, $"{name}Password", Account.Permissions.Default);
+				CreateAccount(name, $"{name}Password");
 			}
 
-			CreateAccount("GetMultipleAccountsByName_DontGetThis", "GetMultipleAccountsByName_DontGetThisPassword", Account.Permissions.Default);
+			CreateAccount("GetMultipleAccountsByName_DontGetThis", "GetMultipleAccountsByName_DontGetThisPassword");
 
 			var accounts = _accountDbController.Get(names);
 
@@ -86,9 +84,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string name = "DeleteExistingAccount";
 			string password = $"{name}Password";
-			Account.Permissions permissions = Account.Permissions.Default;
 
-			var account = CreateAccount(name, password, permissions);
+			var account = CreateAccount(name, password);
 
 			var accounts = _accountDbController.Get(new string[] { name });
 			Assert.Equal(accounts.Count(), 1);
@@ -108,7 +105,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Helpers
-		private Account CreateAccount(string name, string password, Account.Permissions permission)
+		private Account CreateAccount(string name, string password)
 		{
 			var user = CreateUser(name);
 
@@ -117,8 +114,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = name,
 				PasswordHash = password,
 				UserId = user.Id,
-				User = user,
-				Permission = permission,
+				User = user
 			};
 			
 			return _accountDbController.Create(account);

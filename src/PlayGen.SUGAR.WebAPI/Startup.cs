@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.ServerAuthentication;
+using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -42,10 +43,7 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddScoped((_) => new GroupController(connectionString));
 			services.AddScoped((_) => new UserController(connectionString));
 			services.AddScoped((_) => new GameDataController(connectionString));
-			//services.AddScoped((_) => new GroupDataController(connectionString));
-			//services.AddScoped((_) => new UserDataController(connectionString));
 			services.AddScoped((_) => new AchievementController(connectionString));
-			//services.AddScoped((_) => new UserAchievementController(connectionString));
 			services.AddScoped((_) => new GroupRelationshipController(connectionString));
 			services.AddScoped((_) => new UserRelationshipController(connectionString));
 
@@ -57,8 +55,7 @@ namespace PlayGen.SUGAR.WebAPI
 			ConfigureRouting(services);
 			
 			// Add framework services.
-			services.AddMvc();
-			
+			services.AddMvc(options => options.Filters.Add(new ModelValidationFilter()));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
