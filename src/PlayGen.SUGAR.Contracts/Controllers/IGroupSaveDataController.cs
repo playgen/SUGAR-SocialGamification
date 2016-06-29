@@ -6,6 +6,6 @@ namespace PlayGen.SUGAR.Contracts.Controllers
 	{
 		IEnumerable<GameDataResponse> Get(int actorId, int gameId, string[] keys);
 
-		GameDataResponse Add(SaveDataRequest data);
+		GameDataResponse Add(GameDataRequest data);
 	}
 }

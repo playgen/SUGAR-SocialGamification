@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates savedata details.
 	/// </summary>
-	public class SaveDataRequest
+	public class GameDataRequest
 	{
 		public int? ActorId { get; set; }
 

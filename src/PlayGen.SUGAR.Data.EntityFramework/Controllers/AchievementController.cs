@@ -37,17 +37,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Achievement Get(int achievementId)
 		{
-			return Get(new [] { achievementId }).SingleOrDefault();
-		}
-
-		public IEnumerable<Achievement> Get(int[] achievementIds)
-		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var achievements = context.Achievements.Where(a => achievementIds.Contains(a.Id)).ToList();
-				return achievements;
+				var achievement = context.Achievements.Find(achievementId);
+				return achievement;
 			}
 		}
 
@@ -57,7 +52,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				//TODO: refine duplicate text for actory type and game id
+				//TODO: refine duplicate text for actor type and game id
 				var hasConflicts = context.Achievements.Any(a => a.Name == achievement.Name && a.GameId == achievement.GameId);
 
 				if (hasConflicts)
@@ -65,12 +60,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					throw new DuplicateRecordException($"An achievement with the name {achievement.Name} for this game already exists.");
 				}
 
-				var gameExists = context.Games.Any(g => g.Id == achievement.GameId);
+				/*var gameExists = context.Games.Any(g => g.Id == achievement.GameId);
 
 				if (!gameExists)
 				{
 					throw new MissingRecordException("The provided game does not exist.");
-				}
+				}*/
 
 				context.Achievements.Add(achievement);
 				SaveChanges(context);

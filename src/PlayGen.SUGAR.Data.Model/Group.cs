@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PlayGen.SUGAR.Data.Model.Interfaces;
+using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Data.Model
 {

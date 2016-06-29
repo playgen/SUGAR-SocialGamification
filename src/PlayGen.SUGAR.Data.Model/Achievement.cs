@@ -1,4 +1,5 @@
-﻿using PlayGen.SUGAR.Data.Model.Interfaces;
+﻿using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Data.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Data.Model
 {
@@ -8,8 +9,7 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public int? GameId { get; set; }
 
-		public virtual Game Game { get; set; }
-
+		//public virtual Game Game { get; set; }
 
 		public string Name { get; set; }
 

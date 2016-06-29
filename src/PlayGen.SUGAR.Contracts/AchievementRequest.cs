@@ -9,11 +9,14 @@ namespace PlayGen.SUGAR.Contracts
 	public class AchievementRequest
 	{
 		[Required]
-		public int GameId { get; set; }
+		public int? GameId { get; set; }
 
 		[Required]
 		[StringLength(64)]
 		public string Name { get; set; }
+
+		[Required]
+		public ActorType ActorType { get; set; }
 
 		[Required]
 		public List<AchievementCriteria> CompletionCriteria { get; set; }

@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of all Groups.
 		/// 
-		/// Example Usage: GET api/group/all
+		/// Example Usage: GET api/group/list
 		/// </summary>
 		/// <returns>A list of <see cref="ActorResponse"/> that hold Group details.</returns>
 		[HttpGet("list")]
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var groups = _groupController.Get();
 			var actorContract = groups.ToContractList();
-			return Ok(actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var groups = _groupController.Search(name);
 			var actorContract = groups.ToContractList();
-			return Ok(actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -62,13 +62,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Group id.</param>
 		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
-		[HttpGet("findbyid/{id:int}")]
+		[HttpGet("findbyid/{id:int}", Name = "GetByGroupId")]
 		[ResponseType(typeof(ActorResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
 			var group = _groupController.Search(id);
 			var actorContract = group.ToContract();
-			return Ok(actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -87,7 +87,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var group = actor.ToGroupModel();
 			_groupController.Create(group);
 			var actorContract = group.ToContract();
-			return Ok(actorContract);
+			return CreatedAtRoute("GetByGroupId", new { controller = "Group", id = actorContract.Id }, actorContract);
 		}
 
 		/// <summary>
@@ -97,10 +97,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Group ID.</param>
 		[HttpDelete("{id:int}")]
-		public IActionResult Delete([FromRoute]int id)
+		public void Delete([FromRoute]int id)
 		{
 			_groupController.Delete(id);
-			return Ok();
 		}
 	}
 }

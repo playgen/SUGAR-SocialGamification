@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.Contracts;
@@ -24,37 +25,39 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all UserData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+		/// Find a list of all GameData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
 		/// 
-		/// Example Usage: GET api/usersavedata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
+		/// Example Usage: GET api/gamedata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
 		/// </summary>
-		/// <param name="actorId">ID of a User.</param>
+		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="key">Array of Key names.</param>
 		/// <returns>A list of <see cref="GameDataResponse"/> which match the search criteria.</returns>
 		[HttpGet]
-		public IEnumerable<GameDataResponse> Get(int actorId, int gameId, string[] key)
+		[ResponseType(typeof(IEnumerable<GameDataResponse>))]
+		public IActionResult Get(int actorId, int gameId, string[] key)
 		{
 			var data = _gameDataController.Get(actorId, gameId, key);
 			var dataContract = data.ToContractList();
-			return dataContract;
+			return new ObjectResult(dataContract);
 		}
 
 		/// <summary>
-		/// Create a new UserData record.
+		/// Create a new GameData record.
 		/// 
-		/// Example Usage: POST api/usersavedata
+		/// Example Usage: POST api/gamedata
 		/// </summary>
-		/// <param name="newData"><see cref="SaveDataRequest"/> object that holds the details of the new UserData.</param>
-		/// <returns>A <see cref="GameDataResponse"/> containing the new UserData details.</returns>
+		/// <param name="newData"><see cref="GameDataRequest"/> object that holds the details of the new GameData.</param>
+		/// <returns>A <see cref="GameDataResponse"/> containing the new GameData details.</returns>
 		[HttpPost]
+		[ResponseType(typeof(GameDataResponse))]
 		[ArgumentsNotNull]
-		public GameDataResponse Add([FromBody]SaveDataRequest newData)
+		public IActionResult Add([FromBody]GameDataRequest newData)
 		{
 			var data = newData.ToUserModel();
 			_gameDataController.Create(data);
 			var dataContract = data.ToContract();
-			return dataContract;
+			return new ObjectResult(dataContract);
 		}
 	}
 }

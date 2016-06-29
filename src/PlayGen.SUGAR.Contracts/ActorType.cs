@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Data.Model
+﻿namespace PlayGen.SUGAR.Contracts
 {
 	public enum ActorType
 	{

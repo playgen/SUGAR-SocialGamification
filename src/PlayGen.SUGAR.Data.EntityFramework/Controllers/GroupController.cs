@@ -45,8 +45,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var group = context.Groups
-					.SingleOrDefault(g => id == g.Id);
+				var group = context.Groups.Find(id);
 
 				return group;
 			}
