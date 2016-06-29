@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.WebAPI.Filters;
+using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -56,6 +56,7 @@ namespace PlayGen.SUGAR.WebAPI
 			
 			// Add framework services.
 			services.AddMvc(options => options.Filters.Add(new ModelValidationFilter()));
+			services.AddScoped<ArgumentsNotNullAttribute>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

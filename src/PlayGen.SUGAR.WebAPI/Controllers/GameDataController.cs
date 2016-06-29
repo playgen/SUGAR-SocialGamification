@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
 
@@ -47,12 +48,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="newData"><see cref="SaveDataRequest"/> object that holds the details of the new UserData.</param>
 		/// <returns>A <see cref="GameDataResponse"/> containing the new UserData details.</returns>
 		[HttpPost]
+		[ArgumentsNotNull]
 		public GameDataResponse Add([FromBody]SaveDataRequest newData)
 		{
-			if (newData == null)
-			{
-				throw new NullObjectException("Invalid object passed");
-			}
 			var data = newData.ToUserModel();
 			_gameDataController.Create(data);
 			var dataContract = data.ToContract();

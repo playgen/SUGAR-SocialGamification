@@ -7,6 +7,7 @@ using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.ServerAuthentication;
+using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
 
@@ -45,6 +46,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		[HttpPost("login")]
 		[ResponseType(typeof(AccountResponse))]
+		[ArgumentsNotNull]
 		public IActionResult Login([FromBody]AccountRequest accountRequest)
 		{
 			var accounts = _accountDbController.Get(new string[] { accountRequest.Name });
@@ -82,13 +84,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
 		[HttpPost("register")]
 		[ResponseType(typeof(AccountResponse))]
+		[ArgumentsNotNull]
 		public IActionResult Register([FromBody] AccountRequest accountRequest)
 		{
-			if (string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
-			{
-				throw new InvalidAccountDetailsException("Name and Password cannot be empty.");
-			}
-
 			User user = new User
 			{
 				Name = accountRequest.Name,

@@ -6,6 +6,7 @@ using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
@@ -80,12 +81,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>A <see cref="ActorResponse"/> containing the new User details.</returns>
 		[HttpPost]
 		[ResponseType(typeof(ActorResponse))]
+		[ArgumentsNotNull]
 		public IActionResult Create([FromBody]ActorRequest actor)
 		{
-			if (actor == null)
-			{
-				throw new NullObjectException("Invalid object passed");
-			}
 			var user = actor.ToUserModel();
 			_userController.Create(user);
 			var actorContract = user.ToContract();

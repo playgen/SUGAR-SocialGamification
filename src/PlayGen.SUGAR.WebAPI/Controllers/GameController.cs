@@ -2,12 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Http.Description;
-using PlayGen.SUGAR.Data.EntityFramework;
-using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
-using PlayGen.SUGAR.WebAPI.Exceptions;
-using PlayGen.SUGAR.WebAPI.Filters;
+using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -81,12 +78,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>A <see cref="GameResponse"/> containing the new Game details.</returns>
 		[HttpPost]
 		[ResponseType(typeof(GameResponse))]
+		[ArgumentsNotNull]
 		public IActionResult Create([FromBody]GameRequest newGame)
 		{
-			if (newGame == null)
-			{
-				throw new NullObjectException("Invalid object passed");
-			}
 			var game = newGame.ToModel();
 			_gameDbController.Create(game);
 			var gameContract = game.ToContract();

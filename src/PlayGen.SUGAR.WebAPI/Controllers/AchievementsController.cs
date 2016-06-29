@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.GameData;
+using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
@@ -73,12 +74,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="newAchievement"><see cref="AchievementRequest"/> object that holds the details of the new Achievement.</param>
 		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created Achievement.</returns>
 		[HttpPost("create")]
+		[ArgumentsNotNull]
 		public AchievementResponse Create([FromBody] AchievementRequest newAchievement)
 		{
-			if (newAchievement == null)
-			{
-				throw new NullObjectException("Invalid object passed");
-			}
 			var achievement = newAchievement.ToModel();
 			_achievementController.Create(achievement);
 			var achievementContract = achievement.ToContract();

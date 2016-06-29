@@ -6,6 +6,7 @@ using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
@@ -81,12 +82,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
 		[HttpPost]
 		[ResponseType(typeof(RelationshipResponse))]
+		[ArgumentsNotNull]
 		public IActionResult CreateFriendRequest([FromBody]RelationshipRequest relationship)
 		{
-			if (relationship == null)
-			{
-				throw new NullObjectException("Invalid object passed");
-			}
 			var request = relationship.ToGroupModel();
 			_userRelationshipController.Create(relationship.ToUserModel(), relationship.AutoAccept);
 			var relationshipContract = request.ToContract();
@@ -101,6 +99,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut("request")]
+		[ArgumentsNotNull]
 		public IActionResult UpdateFriendRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
 			var relation = new RelationshipRequest
@@ -120,6 +119,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut]
+		[ArgumentsNotNull]
 		public IActionResult UpdateFriend([FromBody] RelationshipStatusUpdate relationship)
 		{
 			var relation = new RelationshipRequest
