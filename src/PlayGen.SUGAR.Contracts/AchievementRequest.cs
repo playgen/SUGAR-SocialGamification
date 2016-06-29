@@ -8,7 +8,6 @@ namespace PlayGen.SUGAR.Contracts
 	/// </summary>
 	public class AchievementRequest
 	{
-		[Required]
 		public int? GameId { get; set; }
 
 		[Required]
@@ -24,7 +23,6 @@ namespace PlayGen.SUGAR.Contracts
 		[Required]
 		public List<AchievementCriteria> CompletionCriteria { get; set; }
 
-		[Required]
 		public List<Reward> Reward { get; set; }
 	}
 }

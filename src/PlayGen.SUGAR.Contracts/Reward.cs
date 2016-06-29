@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
 
 namespace PlayGen.SUGAR.Contracts
 {
@@ -8,11 +9,14 @@ namespace PlayGen.SUGAR.Contracts
 	/// </summary>
 	public class Reward
 	{
+		[Required]
 		public string Key { get; set; }
 
+		[Required]
 		[JsonConverter(typeof(StringEnumConverter))]
 		public GameDataType DataType { get; set; }
 
+		[Required]
 		public string Value { get; set; }
 	}
 }
