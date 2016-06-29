@@ -1,4 +1,6 @@
-﻿namespace PlayGen.SUGAR.Data.Model
+﻿using PlayGen.SUGAR.Contracts;
+
+namespace PlayGen.SUGAR.Data.Model
 {
 	public abstract class Actor
 	{

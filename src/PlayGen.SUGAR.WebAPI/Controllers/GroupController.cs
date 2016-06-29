@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Get a list of all Groups.
 		/// 
-		/// Example Usage: GET api/group/all
+		/// Example Usage: GET api/group/list
 		/// </summary>
 		/// <returns>A list of <see cref="ActorResponse"/> that hold Group details.</returns>
 		[HttpGet("list")]

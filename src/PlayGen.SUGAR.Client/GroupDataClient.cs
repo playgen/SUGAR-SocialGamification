@@ -34,12 +34,12 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Create a new GroupData record.
 		/// </summary>
-		/// <param name="data"><see cref="SaveDataRequest"/> object that holds the details of the new GroupData.</param>
+		/// <param name="data"><see cref="GameDataRequest"/> object that holds the details of the new GroupData.</param>
 		/// <returns>A <see cref="GameDataResponse"/> containing the new GroupData details.</returns>
-		public GameDataResponse Add(SaveDataRequest data)
+		public GameDataResponse Add(GameDataRequest data)
 		{
 			var query = GetUriBuilder("api/groupdata").ToString();
-			return Post<SaveDataRequest, GameDataResponse>(query, data);
+			return Post<GameDataRequest, GameDataResponse>(query, data);
 		}
 	}
 }

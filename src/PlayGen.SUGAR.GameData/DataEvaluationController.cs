@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.GameData
 			GameDataController = gameDataController;
 		}
 
-		// TODO: currently this is binary but should eveltually return a progress value
+		// TODO: currently this is binary but should eventually return a progress value
 		// The method of returning calculating the progress (for multiple criteria conditions) and 
 		// how the progress is going to be represented (0f to 1f ?) need to be determined first.
 		public bool IsCriteriaSatisified(int? gameId, int? userId, AchievementCriteriaCollection completionCriterias)

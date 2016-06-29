@@ -137,7 +137,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var actor = context.Actors.Find(data.ActorId);
+				/*var actor = context.Actors.Find(data.ActorId);
 				if (actor == null)
 				{
 					throw new MissingRecordException("The specified actor does not exist.");
@@ -147,7 +147,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				if (game == null)
 				{
 					throw new MissingRecordException("The specified game does not exist.");
-				}
+				}*/
 
 				//if (data.Game == null)
 				//{

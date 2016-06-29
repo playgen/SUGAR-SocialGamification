@@ -52,9 +52,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Find a list of Achievements that match <param name="gameId"/>.
 		/// 
-		/// Example Usage: GET api/achievements/game/1
+		/// Example Usage: GET api/achievements/game/1/list
 		/// </summary>
-		/// <param name="gameId">Array of game IDs</param>
+		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="GameResponse"/> that hold Achievement details</returns>
 		[HttpGet("game/{gameId:int}/list")]
 		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
@@ -92,8 +92,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// 
 		/// Example Usage: DELETE api/achievements/1
 		/// </summary>
-		/// <param name="id">Array of Achievement IDs</param>
-		[HttpDelete("{id:int}")]
+		/// <param name="id">Achievement ID</param>
+		[HttpDelete("delete/{id:int}")]
 		public void Delete([FromRoute]int id)
 		{
 			_achievementController.Delete(id);
@@ -102,9 +102,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
 		/// 
-		/// Example Usage: GET api/groupachievement/gameprogress?gameId=1&amp;actorId=1
+		/// Example Usage: GET api/achievements/game/1/evaluate/1
 		/// </summary>
-		/// <param name="actorId">ID of Group</param>
+		/// <param name="actorId">ID of Group/User</param>
 		/// <param name="gameId">ID of Game</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
 		[HttpGet("game/{gameId:int}/evaluate")]
@@ -129,10 +129,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Find the current progress for an <param name="achievementId"/> for <param name="actor"/>.
 		/// 
-		/// Example Usage: GET api/groupachievement/progress?achievementId=1&amp;actorId=1&amp;actorId=2
+		/// Example Usage: GET api/achievements/1/evaluate/1
 		/// </summary>
 		/// <param name="achievementId">ID of Achievement</param>
-		/// <param name="actor">Array of Group IDs</param>
+		/// <param name="actor">ID of Group/User</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
 		[HttpGet("{achievementId:int}/evaluate")]
 		[HttpGet("{achievementId:int}/evaluate/{actorId:int}")]

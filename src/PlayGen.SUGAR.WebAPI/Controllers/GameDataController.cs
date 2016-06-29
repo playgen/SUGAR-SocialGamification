@@ -24,11 +24,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all UserData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+		/// Find a list of all GameData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
 		/// 
-		/// Example Usage: GET api/userdata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
+		/// Example Usage: GET api/gamedata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
 		/// </summary>
-		/// <param name="actorId">ID of a User.</param>
+		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="key">Array of Key names.</param>
 		/// <returns>A list of <see cref="GameDataResponse"/> which match the search criteria.</returns>
@@ -42,15 +42,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Create a new UserData record.
+		/// Create a new GameData record.
 		/// 
-		/// Example Usage: POST api/userdata
+		/// Example Usage: POST api/gamedata
 		/// </summary>
-		/// <param name="newData"><see cref="SaveDataRequest"/> object that holds the details of the new UserData.</param>
-		/// <returns>A <see cref="GameDataResponse"/> containing the new UserData details.</returns>
+		/// <param name="newData"><see cref="GameDataRequest"/> object that holds the details of the new GameData.</param>
+		/// <returns>A <see cref="GameDataResponse"/> containing the new GameData details.</returns>
 		[HttpPost]
 		[ResponseType(typeof(GameDataResponse))]
-		public IActionResult Add([FromBody]SaveDataRequest newData)
+		public IActionResult Add([FromBody]GameDataRequest newData)
 		{
 			if (newData == null)
 			{
