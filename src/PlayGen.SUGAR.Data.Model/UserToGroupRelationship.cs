@@ -4,8 +4,6 @@ namespace PlayGen.SUGAR.Data.Model
 {
 	public class UserToGroupRelationship : IRelationship
 	{
-		public int Id { get; set; }
-
 		public int RequestorId { get; set; }
 
 		public User Requestor { get; set; }

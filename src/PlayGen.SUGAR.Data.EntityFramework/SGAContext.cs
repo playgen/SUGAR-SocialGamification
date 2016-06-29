@@ -120,6 +120,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 			// Change all string fields to have a max length of 64 chars
 			modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
+
+			// Setup composite primary keys
+			modelBuilder.Entity<UserToUserRelationshipRequest>().HasKey(k => new { k.RequestorId, k.AcceptorId });
+			modelBuilder.Entity<UserToUserRelationship>().HasKey(k => new { k.RequestorId, k.AcceptorId });
+			modelBuilder.Entity<UserToGroupRelationshipRequest>().HasKey(k => new { k.RequestorId, k.AcceptorId });
+			modelBuilder.Entity<UserToGroupRelationship>().HasKey(k => new {k.RequestorId, k.AcceptorId});
 		}
 
 		public override int SaveChanges()
