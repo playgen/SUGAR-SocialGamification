@@ -15,6 +15,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				Name = model.Name,
 				GameId = model.GameId,
 				ActorType = model.ActorType,
+				Token = model.Token,
 				CompletionCriteria = model.CompletionCriteriaCollection.ToContractList(),
 				Reward = model.RewardCollection.ToContractList(),
 			};
@@ -66,6 +67,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				Name = achieveContract.Name,
 				GameId = achieveContract.GameId,
 				ActorType = achieveContract.ActorType,
+				Token = achieveContract.Token,
 				CompletionCriteriaCollection = achieveContract.CompletionCriteria.ToModel(),
 				RewardCollection = achieveContract.Reward.ToModel(),
 			};
@@ -76,9 +78,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		public static AchievementCriteriaCollection ToModel(this List<AchievementCriteria> achievementContracts)
 		{
 			var achievementCollection = new AchievementCriteriaCollection();
-			foreach (var achievementContract in achievementContracts)
+			if (achievementContracts != null)
 			{
-				achievementCollection.Add(achievementContract.ToModel());
+				achievementCollection.Add(achievementContracts.Select(ToModel).ToList());
 			}
 
 			return achievementCollection;
@@ -99,9 +101,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		public static RewardCollection ToModel(this List<Reward> achievementContracts)
 		{
 			var rewardCollection = new RewardCollection();
-			foreach (var achievementContract in achievementContracts)
+			if (achievementContracts != null)
 			{
-				rewardCollection.Add(achievementContract.ToModel());
+				rewardCollection.Add(achievementContracts.Select(ToModel).ToList());
 			}
 
 			return rewardCollection;

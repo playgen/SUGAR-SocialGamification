@@ -15,6 +15,8 @@ namespace PlayGen.SUGAR.Contracts
 
 		public ActorType ActorType { get; set; }
 
+		public string Token { get; set; }
+
 		public List<AchievementCriteria> CompletionCriteria { get; set; }
 
 		public List<Reward> Reward { get; set; }

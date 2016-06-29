@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Data.Model
 	
 	public class AchievementCriteriaCollection : Collection<AchievementCriteria>
 	{
-		private void Add(ICollection<AchievementCriteria> completionCriterias)
+		public void Add(ICollection<AchievementCriteria> completionCriterias)
 		{
 			foreach (var completionCriteria in completionCriterias)
 			{

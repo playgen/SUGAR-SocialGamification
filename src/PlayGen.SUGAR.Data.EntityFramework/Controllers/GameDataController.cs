@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<GameData> Get(int? gameId, int? actorId, IEnumerable<string> keys)
+		public IEnumerable<GameData> Get(int? actorId, int? gameId, IEnumerable<string> keys)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
@@ -136,27 +136,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
-
-				/*var actor = context.Actors.Find(data.ActorId);
-				if (actor == null)
-				{
-					throw new MissingRecordException("The specified actor does not exist.");
-				}
-
-				var game = context.Games.Find(data.GameId);
-				if (game == null)
-				{
-					throw new MissingRecordException("The specified game does not exist.");
-				}*/
-
-				//if (data.Game == null)
-				//{
-				//	data.Game = game;
-				//}
-				//else if (context.Entry(data.Game).State == EntityState.Detached)
-				//{
-				//	context.Games.Attach(data.Game);
-				//}
 
 				context.GameData.Add(data);
 				SaveChanges(context);

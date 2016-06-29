@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>A list of <see cref="GameDataResponse"/> which match the search criteria.</returns>
 		[HttpGet]
 		[ResponseType(typeof(IEnumerable<GameDataResponse>))]
-		public IActionResult Get(int actorId, int gameId, string[] key)
+		public IActionResult Get(int? actorId, int? gameId, string[] key)
 		{
 			var data = _gameDataController.Get(actorId, gameId, key);
 			var dataContract = data.ToContractList();

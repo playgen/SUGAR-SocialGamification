@@ -60,13 +60,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					throw new DuplicateRecordException($"An achievement with the name {achievement.Name} for this game already exists.");
 				}
 
-				/*var gameExists = context.Games.Any(g => g.Id == achievement.GameId);
-
-				if (!gameExists)
-				{
-					throw new MissingRecordException("The provided game does not exist.");
-				}*/
-
 				context.Achievements.Add(achievement);
 				SaveChanges(context);
 				return achievement;

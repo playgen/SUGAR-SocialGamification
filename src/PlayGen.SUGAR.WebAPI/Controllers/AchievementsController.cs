@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: DELETE api/achievements/1
 		/// </summary>
 		/// <param name="id">Achievement ID</param>
-		[HttpDelete("delete/{id:int}")]
+		[HttpDelete("{id:int}")]
 		public void Delete([FromRoute]int id)
 		{
 			_achievementController.Delete(id);

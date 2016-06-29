@@ -1,4 +1,5 @@
 ﻿using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
 
@@ -19,8 +20,10 @@ namespace PlayGen.SUGAR.GameData
 		/// <returns></returns>
 		public bool IsAchievementCompleted(Achievement achievement, int? actorId)
 		{
-			
-
+			if (achievement == null)
+			{
+				throw new MissingRecordException("The provided achievement does not exist.");
+			}
 			var key = string.Format(KeyConstants.AchievementCompleteFormat, achievement.Token);
 			var completed =  GameDataController.KeyExists(achievement.GameId, actorId, key);
 
