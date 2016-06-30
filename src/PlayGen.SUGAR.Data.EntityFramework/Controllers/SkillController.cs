@@ -53,11 +53,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				SetLog(context);
 
 				//TODO: refine duplicate text for actor type and game id
-				var hasConflicts = context.Skills.Any(a => a.Name == skill.Name && a.GameId == skill.GameId);
+				var hasConflicts = context.Skills.Any(a => (a.Name == skill.Name && a.GameId == skill.GameId)
+									|| (a.Token == skill.Token && a.GameId == skill.GameId));
 
 				if (hasConflicts)
 				{
-					throw new DuplicateRecordException($"An skill with the name {skill.Name} for this game already exists.");
+					throw new DuplicateRecordException($"An skill with the name {skill.Name} or token {skill.Token} for this game already exists.");
 				}
 
 				context.Skills.Add(skill);

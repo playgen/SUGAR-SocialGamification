@@ -53,11 +53,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				SetLog(context);
 
 				//TODO: refine duplicate text for actor type and game id
-				var hasConflicts = context.Achievements.Any(a => a.Name == achievement.Name && a.GameId == achievement.GameId);
+				var hasConflicts = context.Achievements.Any(a => (a.Name == achievement.Name && a.GameId == achievement.GameId)
+									|| (a.Token == achievement.Token && a.GameId == achievement.GameId));
 
 				if (hasConflicts)
 				{
-					throw new DuplicateRecordException($"An achievement with the name {achievement.Name} for this game already exists.");
+					throw new DuplicateRecordException($"An achievement with the name {achievement.Name} or token {achievement.Token} for this game already exists.");
 				}
 
 				context.Achievements.Add(achievement);
