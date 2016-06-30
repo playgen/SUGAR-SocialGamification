@@ -8,6 +8,7 @@ using MySql.Data.Entity;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.Model.Interfaces;
 using PlayGen.SUGAR.Data.EntityFramework.ExtensionMethods;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PlayGen.SUGAR.Data.EntityFramework
 {
@@ -28,7 +29,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		public DbSet<Game> Games { get; set; }
 
 		public DbSet<Achievement> Achievements { get; set; }
-
+		public DbSet<Skill> Skills { get; set; }
 
 		public DbSet<Actor> Actors { get; set; }
 
@@ -48,6 +49,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		{
 			modelBuilder.Entity<User>().ToTable("Users");
 			modelBuilder.Entity<Group>().ToTable("Groups");
+			modelBuilder.Entity<Skill>().Map(s =>
+			{
+				s.MapInheritedProperties();
+				s.ToTable("Skills");
+			});
 
 			//modelBuilder.Entity<Actor>()
 			//	.Map<User>(m => m.Requires("ActorType").HasValue("U"))
@@ -75,6 +81,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 				.HasRequired(u => u.Acceptor)
 				.WithMany(u => u.RequestAcceptors)
 				.HasForeignKey(u => u.AcceptorId);
+
+			// Set to auto-increment id
+			modelBuilder.Entity<Skill>().Property(s => s.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			modelBuilder.Entity<Achievement>().Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			// Setup unique fields
 			modelBuilder.Entity<Game>()
