@@ -23,15 +23,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Actor> Get(int[] id)
+		public Actor Get(int id)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var actors = context.Actors.Where(a => id.Contains(a.Id)).ToList();
+				var actor = context.Actors.Find(id);
 
-				return actors;
+				return actor;
 			}
 		}
 

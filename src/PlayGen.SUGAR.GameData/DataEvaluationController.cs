@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.GameData
 		// TODO: currently this is binary but should eventually return a progress value
 		// The method of returning calculating the progress (for multiple criteria conditions) and 
 		// how the progress is going to be represented (0f to 1f ?) need to be determined first.
-		public bool IsCriteriaSatisified(int? gameId, int? userId, AchievementCriteriaCollection completionCriterias)
+		public bool IsCriteriaSatisified(int? gameId, int? actorId, AchievementCriteriaCollection completionCriterias)
 		{
-			return completionCriterias.All(cc => Evaluate(gameId, userId, cc));
+			return completionCriterias.All(cc => Evaluate(gameId, actorId, cc));
 		}
 
 
@@ -50,31 +50,31 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected bool EvaluateLong(int? gameId, int? userId, AchievementCriteria completionCriteria)
+		protected bool EvaluateLong(int? gameId, int? actorId, AchievementCriteria completionCriteria)
 		{
-			var sum = GameDataController.SumLongs(gameId, userId, completionCriteria.Key);
+			var sum = GameDataController.SumLongs(gameId, actorId, completionCriteria.Key);
 
 			return CompareValues(sum, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType);
 		}
 
-		protected bool EvaluateFloat(int? gameId, int? userId, AchievementCriteria completionCriteria)
+		protected bool EvaluateFloat(int? gameId, int? actorId, AchievementCriteria completionCriteria)
 		{
-			var sum = GameDataController.SumFloats(gameId, userId, completionCriteria.Key);
+			var sum = GameDataController.SumFloats(gameId, actorId, completionCriteria.Key);
 
 			return CompareValues(sum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType);
 		}
 
-		protected bool EvaluateString(int? gameId, int? userId, AchievementCriteria completionCriteria)
+		protected bool EvaluateString(int? gameId, int? actorId, AchievementCriteria completionCriteria)
 		{
 			string latest;
-			return GameDataController.TryGetLatestString(gameId, userId, completionCriteria.Key, out latest) 
+			return GameDataController.TryGetLatestString(gameId, actorId, completionCriteria.Key, out latest) 
 				&& CompareValues(latest, completionCriteria.Value, completionCriteria.ComparisonType);
 		}
 
-		protected bool EvaluateBool(int? gameId, int? userId, AchievementCriteria completionCriteria)
+		protected bool EvaluateBool(int? gameId, int? actorId, AchievementCriteria completionCriteria)
 		{
 			bool latest;
-			if (!GameDataController.TryGetLatestBool(gameId, userId, completionCriteria.Key, out latest))
+			if (!GameDataController.TryGetLatestBool(gameId, actorId, completionCriteria.Key, out latest))
 			{
 				latest = false;
 			}

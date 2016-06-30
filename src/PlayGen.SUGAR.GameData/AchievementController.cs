@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
@@ -9,11 +10,13 @@ namespace PlayGen.SUGAR.GameData
 	public class AchievementController : DataEvaluationController
 	{
 		protected readonly RewardController RewardController;
+		protected readonly ActorController ActorController;
 
-		public AchievementController(IGameDataController gameDataController)
+		public AchievementController(IGameDataController gameDataController, ActorController actorController)
 			: base(gameDataController)
 		{
 			RewardController = new RewardController(gameDataController);
+			ActorController = actorController;
 		}
 
 		/// <summary>
@@ -27,6 +30,13 @@ namespace PlayGen.SUGAR.GameData
 			if (achievement == null)
 			{
 				throw new MissingRecordException("The provided achievement does not exist.");
+			}
+			if (actorId != null) {
+				var provided = ActorController.Get(actorId.Value);
+				if (achievement.ActorType != ActorType.Undefined && provided.ActorType != achievement.ActorType)
+				{
+					throw new MissingRecordException("The provided ActorId cannot complete this achievement.");
+				}
 			}
 			var key = string.Format(KeyConstants.AchievementCompleteFormat, achievement.Token);
 			var completed =  GameDataController.KeyExists(achievement.GameId, actorId, key);
