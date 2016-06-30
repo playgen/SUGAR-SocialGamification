@@ -35,6 +35,84 @@ namespace PlayGen.SUGAR.Client
 			}
 			return new UriBuilder(_baseAddress + separator + apiSuffix);
 		}
+		
+		protected TResponse Get<TResponse>(string uri)
+		{
+			var request = CreateRequest(uri, "GET");
+			var response = (HttpWebResponse)request.GetResponse();
+			ProcessResponse(response, HttpStatusCode.OK);
+			return GetResponse<TResponse>(response);
+		}
+
+		protected TResponse Post<TRequest, TResponse>(string url, TRequest payload)
+		{
+			var response = PostPut(url, payload, "POST");
+			ProcessResponse(response, HttpStatusCode.OK);
+			return GetResponse<TResponse>(response);
+		}
+
+		protected void Post<TRequest>(string url, TRequest payload)
+		{
+			var response = PostPut(url, payload, "POST");
+			ProcessResponse(response, HttpStatusCode.OK);
+		}
+
+		protected TResponse Put<TRequest, TResponse>(string url, TRequest payload)
+		{
+			var response = PostPut(url, payload, "PUT");
+			ProcessResponse(response, HttpStatusCode.NoContent);
+			return GetResponse<TResponse>(response);
+		}
+
+		protected void Put<TRequest>(string url, TRequest payload)
+		{
+			var response = PostPut(url, payload, "PUT");
+			ProcessResponse(response, HttpStatusCode.NoContent);
+		}
+
+		protected TResponse Delete<TResponse>(string url)
+		{
+			var response = DeleteRequest(url);
+			ProcessResponse(response, HttpStatusCode.NoContent);
+			return GetResponse<TResponse>(response);
+		}
+
+		protected void Delete(string url)
+		{
+			var response = DeleteRequest(url);
+			ProcessResponse(response, HttpStatusCode.NoContent);
+		}
+
+		/// <summary>
+		/// Set the content stream and related properties of the specified WebRequest object with the byte array
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="payload"></param>
+		private static void SendData(WebRequest request, byte[] payload)
+		{
+			request.ContentLength = payload.Length;
+			request.ContentType = "application/json";
+			var dataStream = request.GetRequestStream();
+			dataStream.Write(payload, 0, payload.Length);
+			dataStream.Close();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TResponse"></typeparam>
+		/// <param name="response"></param>
+		/// <returns></returns>
+		private static TResponse GetResponse<TResponse>(WebResponse response)
+		{
+			var dataStream = response.GetResponseStream();
+			if (dataStream == null || response.ContentLength == 0)
+			{
+				throw new Exception("Response was empty :(");
+			}
+			var reader = new StreamReader(dataStream);
+			return JsonConvert.DeserializeObject<TResponse>(reader.ReadToEnd());
+		}
 
 		/// <summary>
 		/// Create a WebRequest for the specified uri and HTTP verb
@@ -51,79 +129,18 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Set the content stream and related properties of the specified WebRequest object with the byte array
-		/// </summary>
-		/// <param name="request"></param>
-		/// <param name="payload"></param>
-		private static void SendData(WebRequest request, byte[] payload)
-		{
-			request.ContentLength = payload.Length;
-			request.ContentType = "application/json";
-			var dataStream = request.GetRequestStream();
-			dataStream.Write(payload, 0, payload.Length);
-			dataStream.Close();
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <typeparam name="TResponse"></typeparam>
-		/// <param name="response"></param>
-		/// <returns></returns>
-		private static TResponse GetResponse<TResponse>(WebResponse response)
-		{
-			var dataStream = response.GetResponseStream();
-			if (dataStream == null || response.ContentLength == 0)
-			{
-				throw new Exception("Response was empty :(");
-			} 
-			var reader = new StreamReader(dataStream);
-			return JsonConvert.DeserializeObject<TResponse>(reader.ReadToEnd());
-		}
-
-		/// <summary>
 		/// Inspect the web response status code, returns on success or throw.
 		/// </summary>
 		/// <param name="response"></param>
 		/// <exception cref="Exception">HTTP Status Code not equal to 200 (OK)</exception>
-		private void ProcessResponse(HttpWebResponse response)
+		private void ProcessResponse(HttpWebResponse response, HttpStatusCode expectedStatusCode)
 		{
-			if (response.StatusCode != HttpStatusCode.OK)
+			if (response.StatusCode != expectedStatusCode)
 			{
 				throw new Exception("API ERROR, Status Code: " + response.StatusCode + ". Message: " + response.StatusDescription);
 			}
 
 			_credentials.Token = response.Headers["Bearer"];
-		}
-
-		protected TResponse Get<TResponse>(string uri)
-		{
-			var request = CreateRequest(uri, "GET");
-			var response = (HttpWebResponse)request.GetResponse();
-			ProcessResponse(response);
-			return GetResponse<TResponse>(response);
-		}
-
-		protected TResponse Post<TRequest, TResponse>(string url, TRequest payload)
-		{
-			var response = PostPut(url, payload, "POST");
-			return GetResponse<TResponse>(response);
-		}
-
-		protected void Post<TRequest>(string url, TRequest payload)
-		{
-			PostPut(url, payload, "POST");
-		}
-
-		protected TResponse Put<TRequest, TResponse>(string url, TRequest payload)
-		{
-			var response = PostPut(url, payload, "PUT");
-			return GetResponse<TResponse>(response);
-		}
-
-		protected void Put<TRequest>(string url, TRequest payload)
-		{
-			PostPut(url, payload, "PUT");
 		}
 
 		private HttpWebResponse PostPut<TRequest>(string url, TRequest payload, string method)
@@ -133,26 +150,13 @@ namespace PlayGen.SUGAR.Client
 			var request = CreateRequest(url, method);
 			SendData(request, payloadBytes);
 			var response = (HttpWebResponse)request.GetResponse();
-			ProcessResponse(response);
 			return response;
-		}
-
-		protected TResponse Delete<TResponse>(string url)
-		{
-			var response = DeleteRequest(url);
-			return GetResponse<TResponse>(response);
-		}
-
-		protected void Delete(string url)
-		{
-			DeleteRequest(url);
 		}
 
 		private HttpWebResponse DeleteRequest(string url)
 		{
 			var request = CreateRequest(url, "DELETE");
 			var response = (HttpWebResponse)request.GetResponse();
-			ProcessResponse(response);
 			return response;
 		}
 	}

@@ -87,7 +87,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var group = actor.ToGroupModel();
 			_groupController.Create(group);
 			var actorContract = group.ToContract();
-			return CreatedAtRoute("GetByGroupId", new { controller = "Group", id = actorContract.Id }, actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>

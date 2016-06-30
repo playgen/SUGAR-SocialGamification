@@ -87,7 +87,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var user = actor.ToUserModel();
 			_userController.Create(user);
 			var actorContract = user.ToContract();
-			return CreatedAtRoute("GetByUserId", new { controller = "User", id = actorContract.Id }, actorContract);
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>

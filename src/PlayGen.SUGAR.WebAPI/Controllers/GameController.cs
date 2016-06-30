@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var game = newGame.ToModel();
 			_gameDbController.Create(game);
 			var gameContract = game.ToContract();
-			return CreatedAtRoute("GetByGameId", new { controller = "Game", id = gameContract.Id }, gameContract);
+			return new ObjectResult(gameContract);
 		}
 
 		/// <summary>

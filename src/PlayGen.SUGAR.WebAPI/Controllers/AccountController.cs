@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http.Description;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Contracts;
@@ -63,13 +64,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				throw new InvalidAccountDetailsException("Invalid Login Details.");
 			}
 
-			string token = _jsonWebTokenUtility.CreateToken(new Dictionary<string, object>
-			{
-				{"user", account.UserId},
-			});
+			HttpContext.Response.Headers["Bearer"] = CreateToken(account);
 
 			var response = account.ToContract();
-			response.Token = CreateToken(account);
 			return new ObjectResult(response);
 		}
 
@@ -98,7 +95,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var response = account.ToContract();
 			if (accountRequest.AutoLogin)
 			{
-				response.Token = CreateToken(account);
+				HttpContext.Response.Headers["Bearer"] = CreateToken(account);
 			}
 			return new ObjectResult(response);
 		}
