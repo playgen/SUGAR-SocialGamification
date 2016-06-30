@@ -9,16 +9,18 @@ namespace PlayGen.SUGAR.Client
 	public abstract class ClientBase
 	{
 		private readonly string _baseAddress;
-
-		protected ClientBase(string baseAddress)
+		private readonly Credentials _credentials;
+		
+		protected ClientBase(string baseAddress, Credentials credentials)
 		{
 			if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
 			{
 				throw new Exception("Base address is not an absolute or valid URI");
 			}
 			_baseAddress = baseAddress;
+			_credentials = credentials;
 		}
-
+		
 		/// <summary>
 		/// Get a UriBuilder object with the origin and web api path
 		/// </summary>
@@ -40,10 +42,11 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="uri"></param>
 		/// <param name="method">HTTP verb (GET or DELETE)</param>
 		/// <returns></returns>
-		private static WebRequest CreateRequest(string uri, string method)
+		private WebRequest CreateRequest(string uri, string method)
 		{
 			var request = WebRequest.Create(uri);
 			request.Method = method;
+			request.Headers.Add("Bearer", _credentials.Token);
 			return request;
 		}
 
@@ -83,19 +86,21 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="response"></param>
 		/// <exception cref="Exception">HTTP Status Code not equal to 200 (OK)</exception>
-		private static void TestStatus(HttpWebResponse response)
+		private void ProcessResponse(HttpWebResponse response)
 		{
 			if (response.StatusCode != HttpStatusCode.OK)
 			{
 				throw new Exception("API ERROR, Status Code: " + response.StatusCode + ". Message: " + response.StatusDescription);
 			}
+
+			_credentials.Token = response.Headers["Bearer"];
 		}
 
 		protected TResponse Get<TResponse>(string uri)
 		{
 			var request = CreateRequest(uri, "GET");
 			var response = (HttpWebResponse)request.GetResponse();
-			TestStatus(response);
+			ProcessResponse(response);
 			return GetResponse<TResponse>(response);
 		}
 
@@ -128,7 +133,7 @@ namespace PlayGen.SUGAR.Client
 			var request = CreateRequest(url, method);
 			SendData(request, payloadBytes);
 			var response = (HttpWebResponse)request.GetResponse();
-			TestStatus(response);
+			ProcessResponse(response);
 			return response;
 		}
 
@@ -147,7 +152,7 @@ namespace PlayGen.SUGAR.Client
 		{
 			var request = CreateRequest(url, "DELETE");
 			var response = (HttpWebResponse)request.GetResponse();
-			TestStatus(response);
+			ProcessResponse(response);
 			return response;
 		}
 	}
