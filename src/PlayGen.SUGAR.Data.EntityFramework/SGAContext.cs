@@ -31,6 +31,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		public DbSet<Achievement> Achievements { get; set; }
 		public DbSet<Skill> Skills { get; set; }
 
+		public DbSet<Leaderboard> Leaderboards { get; set; }
+
 		public DbSet<Actor> Actors { get; set; }
 
 		public DbSet<User> Users { get; set; }
