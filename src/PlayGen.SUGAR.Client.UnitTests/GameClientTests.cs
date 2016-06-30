@@ -1,7 +1,8 @@
-﻿using PlayGen.SUGAR.Contracts;
+﻿using System.Net;
+using PlayGen.SUGAR.Contracts;
 using Xunit;
 
-namespace PlayGen.SUGAR.Client.UnitTests
+namespace PlayGen.SUGAR.Client.IntegrationTests
 {
 	public class GameClientTests
     {
@@ -40,9 +41,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			_gameClient.Create(gameRequest);
 
-			var response = _gameClient.Create(gameRequest);
-
-			// TODO make sure the second create game failed in order for this test to pass
+			Assert.Throws<WebException>(() => _gameClient.Create(gameRequest));
 		}
 		#endregion
 	}

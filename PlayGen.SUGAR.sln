@@ -30,7 +30,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.GameData", "s
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.GameData.UnitTests", "src\PlayGen.SUGAR.GameData.UnitTests\PlayGen.SUGAR.GameData.UnitTests.xproj", "{68FEF561-CC91-4C49-95F8-6A153A383DB4}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.Client.UnitTests", "src\PlayGen.SUGAR.Client.UnitTests\PlayGen.SUGAR.Client.UnitTests.xproj", "{DC79A706-CCE9-4766-AB99-C900544905DC}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.Client.IntegrationTests", "src\PlayGen.SUGAR.Client.UnitTests\PlayGen.SUGAR.Client.IntegrationTests.xproj", "{DC79A706-CCE9-4766-AB99-C900544905DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

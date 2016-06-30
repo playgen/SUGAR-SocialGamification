@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Client.UnitTests
+﻿namespace PlayGen.SUGAR.Client.IntegrationTests
 {
     public class TestSUGARClient : SUGARClient
     {
