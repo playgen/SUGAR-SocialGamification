@@ -21,5 +21,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			Assert.False(true);
 		}
+
+		[Fact]
+		public void Test3()
+		{
+			Assert.True(true);
+		}
 	}
 }
