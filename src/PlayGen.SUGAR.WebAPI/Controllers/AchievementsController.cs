@@ -23,11 +23,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		private readonly AchievementController _achievementEvaluationController;
 
 		public AchievementsController(Data.EntityFramework.Controllers.AchievementController achievementController,
-			Data.EntityFramework.Controllers.ActorController actorController,
-			Data.EntityFramework.Controllers.GameDataController gameDataController)
+			AchievementController achievementEvaluationController)
 		{
 			_achievementController = achievementController;
-			_achievementEvaluationController = new AchievementController(gameDataController, actorController);
+			_achievementEvaluationController = achievementEvaluationController;
 		}
 
 

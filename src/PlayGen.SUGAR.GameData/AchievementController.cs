@@ -12,10 +12,13 @@ namespace PlayGen.SUGAR.GameData
 		protected readonly RewardController RewardController;
 		protected readonly ActorController ActorController;
 
-		public AchievementController(IGameDataController gameDataController, ActorController actorController)
-			: base(gameDataController)
+		public AchievementController(IGameDataController gameDataController, 
+			GroupRelationshipController groupRelationshipController,
+			ActorController actorController, 
+			RewardController rewardController)
+			: base(gameDataController, groupRelationshipController)
 		{
-			RewardController = new RewardController(gameDataController);
+			RewardController = rewardController;
 			ActorController = actorController;
 		}
 
@@ -43,7 +46,7 @@ namespace PlayGen.SUGAR.GameData
 
 			if (!completed)
 			{
-				completed = IsCriteriaSatisified(achievement.GameId, actorId, achievement.CompletionCriteriaCollection);
+				completed = IsCriteriaSatisified(achievement.GameId, actorId, achievement.CompletionCriteriaCollection, achievement.ActorType);
 				if (completed)
 				{
 					ProcessAchievementRewards(achievement, actorId);
