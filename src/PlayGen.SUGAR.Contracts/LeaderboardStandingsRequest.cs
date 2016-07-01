@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Contracts
 	public class LeaderboardStandingsRequest
 	{
 		[Required]
-		public int Id { get; set; }
+		public int LeaderboardId { get; set; }
 
 		public int? ActorId { get; set; }
 
@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Contracts
 		public LeaderboardFilterType LeaderboardFilterType { get; set; }
 
 		[Required]
-		public int MaxAmount { get; set; }
+		public int Limit { get; set; }
 
 		[Required]
 		public int Offset { get; set; }

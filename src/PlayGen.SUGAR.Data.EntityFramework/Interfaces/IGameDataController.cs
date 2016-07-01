@@ -1,4 +1,5 @@
-﻿using PlayGen.SUGAR.Data.Model;
+﻿using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Interfaces
 {
@@ -13,6 +14,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Interfaces
 		bool TryGetLatestBool(int? gameId, int? actorId, string key, out bool latestBool);
 
 		bool TryGetLatestString(int? gameId, int? actorId, string key, out string latestString);
+
+		int CountKeys(int? gameId, int? actorId, string key, GameDataType gameDataType);
 
 		void Create(GameData data);
 	}

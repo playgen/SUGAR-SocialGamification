@@ -12,6 +12,8 @@ namespace PlayGen.SUGAR.Contracts
 	{
 		public int ActorId { get; set; }
 
+		public string ActorName { get; set; }
+
 		public string Value { get; set; }
 
 		public int Ranking { get; set; }

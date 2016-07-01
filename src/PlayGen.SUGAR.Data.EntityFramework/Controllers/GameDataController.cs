@@ -131,6 +131,23 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
+		public int CountKeys(int? gameId, int? actorId, string key, GameDataType gameDataType)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetData()
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(gameDataType)
+					.Count();
+
+				return data;
+			}
+		}
+
 		public void Create(GameData data)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))

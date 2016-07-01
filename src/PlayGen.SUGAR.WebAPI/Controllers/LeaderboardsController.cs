@@ -90,5 +90,21 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			_leaderboardController.Delete(id);
 		}
+
+		/// <summary>
+		/// Get the standings for a Leaderboard using a <see cref="LeaderboardStandingRequest"/>.
+		/// 
+		/// Example Usage: POST api/leaderboards/standings
+		/// </summary>
+		/// <param name="leaderboardDetails"><see cref="LeaderboardStandingsRequest"/> object that holds the details that are wanted from the Leaderboard.</param>
+		/// <returns>Returns multiple <see cref="LeaderboardStandingsResponse"/> that hold actor positions in the leaderboard.</returns>
+		[HttpPost("standings")]
+		[ResponseType(typeof(IEnumerable<LeaderboardStandingsResponse>))]
+		public IActionResult GetLeaderboardStandings([FromBody]LeaderboardStandingsRequest leaderboardDetails)
+		{
+			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardId);
+			var standings = _leaderboardEvaluationController.GetStandings(leaderboard, leaderboardDetails);
+			return new ObjectResult(standings);
+		}
 	}
 }

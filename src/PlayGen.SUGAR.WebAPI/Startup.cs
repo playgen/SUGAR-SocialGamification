@@ -57,7 +57,8 @@ namespace PlayGen.SUGAR.WebAPI
 										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString))));
 			services.AddScoped((_) => new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString)));
 
-			services.AddScoped((_) => new GameData.LeaderboardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new ActorController(connectionString)));
+			services.AddScoped((_) => new GameData.LeaderboardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString),
+										new ActorController(connectionString), new GroupController(connectionString), new UserController(connectionString)));
 
 			services.AddScoped((_) => new PasswordEncryption());
 
