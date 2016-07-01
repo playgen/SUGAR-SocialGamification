@@ -51,11 +51,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		{
 			modelBuilder.Entity<User>().ToTable("Users");
 			modelBuilder.Entity<Group>().ToTable("Groups");
-			modelBuilder.Entity<Skill>().Map(s =>
-			{
-				s.MapInheritedProperties();
-				s.ToTable("Skills");
-			});
 
 			//modelBuilder.Entity<Actor>()
 			//	.Map<User>(m => m.Requires("ActorType").HasValue("U"))
@@ -83,10 +78,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 				.HasRequired(u => u.Acceptor)
 				.WithMany(u => u.RequestAcceptors)
 				.HasForeignKey(u => u.AcceptorId);
-
-			// Set to auto-increment id
-			modelBuilder.Entity<Skill>().Property(s => s.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-			modelBuilder.Entity<Achievement>().Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			// Setup unique fields
 			modelBuilder.Entity<Game>()
