@@ -135,7 +135,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.GetHighestLongs(gameId, r.Id, key).ToString()
+						Value = GameDataController.GetHighestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -144,7 +144,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.GetHighestFloats(gameId, r.Id, key).ToString()
+						Value = GameDataController.GetHighestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -166,7 +166,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.GetLowestLongs(gameId, r.Id, key).ToString()
+						Value = GameDataController.GetLowestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -175,7 +175,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.GetLowestFloats(gameId, r.Id, key).ToString()
+						Value = GameDataController.GetLowestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -197,7 +197,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.SumLongs(gameId, r.Id, key).ToString()
+						Value = GameDataController.SumLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -206,7 +206,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.SumFloats(gameId, r.Id, key).ToString()
+						Value = GameDataController.SumFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -228,7 +228,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.CountKeys(gameId, r.Id, key, gameDataType).ToString()
+						Value = GameDataController.CountKeys(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -237,7 +237,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.CountKeys(gameId, r.Id, key, gameDataType).ToString()
+						Value = GameDataController.CountKeys(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -260,7 +260,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.TryGetEarliestKey(gameId, r.Id, key, gameDataType).ToString()
+						Value = GameDataController.TryGetEarliestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -269,7 +269,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.TryGetEarliestKey(gameId, r.Id, key, gameDataType).ToString()
+						Value = GameDataController.TryGetEarliestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -292,7 +292,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.TryGetLatestKey(gameId, r.Id, key, gameDataType).ToString()
+						Value = GameDataController.TryGetLatestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -301,7 +301,7 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.TryGetLatestKey(gameId, r.Id, key, gameDataType).ToString()
+						Value = GameDataController.TryGetLatestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
