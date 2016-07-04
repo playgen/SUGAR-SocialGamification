@@ -81,7 +81,79 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				return sum;
 			}
 		}
-		
+
+		public float GetHighestFloats(int? gameId, int? actorId, string key)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetData()
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(GameDataType.Float)
+					.ToList();
+
+				var sum = data.Max(s => float.Parse(s.Value));
+				return sum;
+			}
+		}
+
+		public long GetHighestLongs(int? gameId, int? actorId, string key)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetData()
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(GameDataType.Long)
+					.ToList();
+
+				var sum = data.Max(s => long.Parse(s.Value));
+				return sum;
+			}
+		}
+
+		public float GetLowestFloats(int? gameId, int? actorId, string key)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetData()
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(GameDataType.Float)
+					.ToList();
+
+				var sum = data.Min(s => float.Parse(s.Value));
+				return sum;
+			}
+		}
+
+		public long GetLowestLongs(int? gameId, int? actorId, string key)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetData()
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(GameDataType.Long)
+					.ToList();
+
+				var sum = data.Min(s => long.Parse(s.Value));
+				return sum;
+			}
+		}
+
 		public bool TryGetLatestBool(int? gameId, int? actorId, string key, out bool latestBool)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
@@ -106,7 +178,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		// TODO expose via WebAPI
 		public bool TryGetLatestString(int? gameId, int? actorId, string key, out string latestString)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
@@ -145,6 +216,60 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.Count();
 
 				return data;
+			}
+		}
+
+		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, GameDataType gameDataType)
+		{
+			DateTime dataDateTime;
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetData()
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(gameDataType)
+					.FirstOrDefault();
+
+				if (data == null)
+				{
+					dataDateTime = default(DateTime);
+				}
+				else
+				{
+					dataDateTime = data.DateCreated;
+				}
+				
+				return dataDateTime;
+			}
+		}
+
+		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, GameDataType gameDataType)
+		{
+			DateTime dataDateTime;
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetData()
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(gameDataType)
+					.LatestOrDefault();
+
+				if (data == null)
+				{
+					dataDateTime = default(DateTime);
+				}
+				else
+				{
+					dataDateTime = data.DateModified;
+				}
+
+				return dataDateTime;
 			}
 		}
 

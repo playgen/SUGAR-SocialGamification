@@ -65,23 +65,49 @@ namespace PlayGen.SUGAR.GameData
 						Name = a.Name });
 					break;
 			}
-			switch (leaderboard.GameDataType)
+
+			IEnumerable<LeaderboardStandingsResponse> typeResults = Enumerable.Empty<LeaderboardStandingsResponse>();
+
+			switch (leaderboard.LeaderboardType)
 			{
-				case GameDataType.Boolean:
-					return EvaluateBool(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+				case LeaderboardType.Highest:
+					typeResults = EvaluateHighest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					break;
 
-				case GameDataType.String:
-					return EvaluateString(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+				case LeaderboardType.Lowest:
+					typeResults = EvaluateLowest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					break;
 
-				case GameDataType.Float:
-					return EvaluateFloat(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+				case LeaderboardType.Cumulative:
+					typeResults = EvaluateCumulative(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					break;
 
-				case GameDataType.Long:
-					return EvaluateLong(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+				case LeaderboardType.Count:
+					typeResults = EvaluateCount(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					break;
+
+				case LeaderboardType.Earliest:
+					typeResults = EvaluateEarliest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					break;
+
+				case LeaderboardType.Latest:
+					typeResults = EvaluateLatest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					break;
 
 				default:
 					return null;
 			}
+
+			typeResults = typeResults.Skip(request.Offset * request.Limit).Take(request.Limit);
+			int position = (request.Offset * request.Limit);
+			var results = typeResults.Select(s => new LeaderboardStandingsResponse
+			{
+				ActorId = s.ActorId,
+				ActorName = s.ActorName,
+				Value = s.Value,
+				Ranking = ++position
+			});
+			return results;
 		}
 
 		protected string GetName (int id, ActorType actorType)
@@ -99,65 +125,193 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLong(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateHighest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
 		{
-			var sums = actors.Select(r => new {
-				Actor = r,
-				Value = GameDataController.SumLongs(gameId, r.Id, key)
-			}).OrderByDescending(r => r.Value)
-			.Skip(request.Offset * request.Limit).Take(request.Limit);
-			int position = (request.Offset * request.Limit);
-			var results = sums.Select(s => ToStandingsResponse(s.Actor, s.Value.ToString(), ++position));
-			return results;
-		}
-
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateFloat(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
-		{
-			var sums = actors.Select(r => new {
-				Actor = r,
-				Value = GameDataController.SumFloats(gameId, r.Id, key)
-			}).OrderByDescending(r => r.Value)
-			.Skip(request.Offset * request.Limit).Take(request.Limit);
-			int position = (request.Offset * request.Limit);
-			var results = sums.Select(s => ToStandingsResponse(s.Actor, s.Value.ToString(), ++position));
-			return results;
-		}
-
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateString(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
-		{
-			var sums = actors.Select(r => new {
-				Actor = r,
-				Value = GameDataController.CountKeys(gameId, r.Id, key, gameDataType)
-			}).OrderByDescending(r => r.Value)
-			.Where(a => a.Value > 0)
-			.Skip(request.Offset * request.Limit).Take(request.Limit);
-			int position = (request.Offset * request.Limit);
-			var results = sums.Select(s => ToStandingsResponse(s.Actor, s.Value.ToString(), ++position));
-			return results;
-		}
-
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateBool(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
-		{
-			var sums = actors.Select(r => new {
-				Actor = r,
-				Value = GameDataController.CountKeys(gameId, r.Id, key, gameDataType)
-			}).OrderByDescending(r => r.Value)
-			.Where(a => a.Value > 0)
-			.Skip(request.Offset * request.Limit).Take(request.Limit);
-			int position = (request.Offset * request.Limit);
-			var results = sums.Select(s => ToStandingsResponse(s.Actor, s.Value.ToString(), ++position));
-			return results;
-		}
-
-		protected LeaderboardStandingsResponse ToStandingsResponse (ActorResponse actor, string value, int position)
-		{
-			return new LeaderboardStandingsResponse
+			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			switch (gameDataType)
 			{
-				ActorId = actor.Id,
-				ActorName = actor.Name,
-				Value = value,
-				Ranking = position
-			};
+				case GameDataType.Long:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.GetHighestLongs(gameId, r.Id, key).ToString()
+					});
+					break;
+
+				case GameDataType.Float:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.GetHighestFloats(gameId, r.Id, key).ToString()
+					});
+					break;
+
+				default:
+					return null;
+			}
+
+			results = results.OrderByDescending(r => r.Value);
+			return results;
+		}
+
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLowest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		{
+			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			switch (gameDataType)
+			{
+				case GameDataType.Long:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.GetLowestLongs(gameId, r.Id, key).ToString()
+					});
+					break;
+
+				case GameDataType.Float:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.GetLowestFloats(gameId, r.Id, key).ToString()
+					});
+					break;
+
+				default:
+					return null;
+			}
+
+			results = results.OrderBy(r => r.Value);
+			return results;
+		}
+
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateCumulative(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		{
+			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			switch (gameDataType)
+			{
+				case GameDataType.Long:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.SumLongs(gameId, r.Id, key).ToString()
+					});
+					break;
+
+				case GameDataType.Float:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.SumFloats(gameId, r.Id, key).ToString()
+					});
+					break;
+
+				default:
+					return null;
+			}
+
+			results = results.OrderByDescending(r => r.Value);
+			return results;
+		}
+
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateCount(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		{
+			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			switch (gameDataType)
+			{
+				case GameDataType.String:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.CountKeys(gameId, r.Id, key, gameDataType).ToString()
+					});
+					break;
+
+				case GameDataType.Boolean:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.CountKeys(gameId, r.Id, key, gameDataType).ToString()
+					});
+					break;
+
+				default:
+					return null;
+			}
+
+			results = results.OrderByDescending(r => r.Value)
+						.Where(r => float.Parse(r.Value) > 0);
+			return results;
+		}
+
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateEarliest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		{
+			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			switch (gameDataType)
+			{
+				case GameDataType.String:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.TryGetEarliestKey(gameId, r.Id, key, gameDataType).ToString()
+					});
+					break;
+
+				case GameDataType.Boolean:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.TryGetEarliestKey(gameId, r.Id, key, gameDataType).ToString()
+					});
+					break;
+
+				default:
+					return null;
+			}
+
+			results = results.OrderBy(r => r.Value)
+						.Where(r => DateTime.Parse(r.Value) != default(DateTime));
+			return results;
+		}
+
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLatest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		{
+			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			switch (gameDataType)
+			{
+				case GameDataType.String:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.TryGetLatestKey(gameId, r.Id, key, gameDataType).ToString()
+					});
+					break;
+
+				case GameDataType.Boolean:
+					results = actors.Select(r => new LeaderboardStandingsResponse
+					{
+						ActorId = r.Id,
+						ActorName = r.Name,
+						Value = GameDataController.TryGetLatestKey(gameId, r.Id, key, gameDataType).ToString()
+					});
+					break;
+
+				default:
+					return null;
+			}
+
+			results = results.OrderBy(r => r.Value)
+						.Where(r => DateTime.Parse(r.Value) != default(DateTime));
+			return results;
 		}
 	}
 }
