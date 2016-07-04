@@ -17,9 +17,9 @@
 		}
 	},
 
-  "scripts": {
-	"postcompile": "CopyAssembliesForTests.bat %project:Directory%"
-  },
+	"scripts": {
+		"postcompile": "CopyAssembliesForTests.bat %project:Directory%"
+	},
 
 	"testRunner": "xunit"
 }
