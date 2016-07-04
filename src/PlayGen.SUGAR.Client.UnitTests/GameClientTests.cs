@@ -20,12 +20,21 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 		private void RegisterAndLogin(AccountClient client)
 		{
-			client.Register(new AccountRequest
+			var accountRequest = new AccountRequest
 			{
 				Name = "GameClientTests",
 				Password = "GameClientTestsPassword",
 				AutoLogin = true,
-			});
+			};
+
+			try
+			{
+				client.Login(accountRequest);
+			}
+			catch
+			{
+				client.Register(accountRequest);
+			}
 		}
 		#endregion
 
