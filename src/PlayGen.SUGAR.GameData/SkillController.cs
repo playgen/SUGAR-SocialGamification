@@ -14,9 +14,10 @@ namespace PlayGen.SUGAR.GameData
 
 		public SkillController(IGameDataController gameDataController,
 			GroupRelationshipController groupRelationshipController,
+			UserRelationshipController userRelationshipController,
 			ActorController actorController,
 			RewardController rewardController)
-			: base(gameDataController, groupRelationshipController)
+			: base(gameDataController, groupRelationshipController, userRelationshipController)
 		{
 			RewardController = rewardController;
 			ActorController = actorController;

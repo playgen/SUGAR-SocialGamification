@@ -18,25 +18,22 @@ namespace PlayGen.SUGAR.GameData
 
 		public LeaderboardController(IGameDataController gameDataController,
 			GroupRelationshipController groupRelationshipController,
+			UserRelationshipController userRelationshipController,
 			ActorController actorController,
 			GroupController groupController,
 			UserController userController)
-			: base(gameDataController, groupRelationshipController)
+			: base(gameDataController, groupRelationshipController, userRelationshipController)
 		{
 			ActorController = actorController;
 			GroupController = groupController;
 			UserController = userController;
 		}
 
-		public IEnumerable<LeaderboardStandingsResponse> GetStandings (Leaderboard leaderboard, LeaderboardStandingsRequest request)
+		public IEnumerable<LeaderboardStandingsResponse> GetStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
 		{
 			if (leaderboard == null)
 			{
 				throw new MissingRecordException("The provided leaderboard does not exist.");
-			}
-			if (request.ActorId != null)
-			{
-				throw new NotImplementedException("Getting relative standings is not yet implemented");
 			}
 			var standings = GatherStandings(leaderboard, request);
 			return standings;
@@ -44,27 +41,7 @@ namespace PlayGen.SUGAR.GameData
 
 		protected IEnumerable<LeaderboardStandingsResponse> GatherStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<ActorResponse> actors = null;
-			switch (leaderboard.ActorType)
-			{
-				case ActorType.Undefined:
-					actors = ActorController.Get().Select(a => new ActorResponse {
-						Id = a.Id,
-						Name = GetName(a.Id, a.ActorType) });
-					break;
-
-				case ActorType.User:
-					actors = UserController.Get().Select(a => new ActorResponse {
-						Id = a.Id,
-						Name = a.Name });
-					break;
-
-				case ActorType.Group:
-					actors = GroupController.Get().Select(a => new ActorResponse {
-						Id = a.Id,
-						Name = a.Name });
-					break;
-			}
+			IEnumerable<ActorResponse> actors = GetActors(request.LeaderboardFilterType, leaderboard.ActorType, request.ActorId);
 
 			IEnumerable<LeaderboardStandingsResponse> typeResults = Enumerable.Empty<LeaderboardStandingsResponse>();
 
@@ -98,16 +75,88 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			typeResults = typeResults.Skip(request.Offset * request.Limit).Take(request.Limit);
-			int position = (request.Offset * request.Limit);
-			var results = typeResults.Select(s => new LeaderboardStandingsResponse
-			{
-				ActorId = s.ActorId,
-				ActorName = s.ActorName,
-				Value = s.Value,
-				Ranking = ++position
-			});
+			var results = FilterResults(typeResults, request.Limit, request.Offset, request.LeaderboardFilterType, request.ActorId);
 			return results;
+		}
+
+		protected IEnumerable<ActorResponse> GetActors(LeaderboardFilterType filter, ActorType actorType, int? actorId)
+		{
+			IEnumerable<ActorResponse> actors = Enumerable.Empty<ActorResponse>();
+			switch (filter)
+			{
+				case LeaderboardFilterType.Top:
+					break;
+				case LeaderboardFilterType.Near:
+					if (!actorId.HasValue)
+					{
+						throw new MissingRecordException("An ActorId has to be passed in order to gather those ranked near them");
+					}
+					var provided = ActorController.Get(actorId.Value);
+					if (actorType != ActorType.Undefined && provided.ActorType != actorType)
+					{
+						throw new MissingRecordException("The provided ActorId cannot compete on this leaderboard.");
+					}
+					break;
+				case LeaderboardFilterType.Friends:
+					if (!actorId.HasValue)
+					{
+						throw new MissingRecordException("An ActorId has to be passed in order to gather rankings among friends");
+					}
+					if (actorType == ActorType.Group)
+					{
+						throw new MissingRecordException("This leaderboard cannot filter by friends");
+					}
+					var user = ActorController.Get(actorId.Value);
+					if (user.ActorType != ActorType.User)
+					{
+						throw new MissingRecordException("The provided ActorId is not an user.");
+					}
+					break;
+				case LeaderboardFilterType.GroupMembers:
+					if (!actorId.HasValue)
+					{
+						throw new MissingRecordException("An ActorId has to be passed in order to gather rankings among group members");
+					}
+					if (actorType == ActorType.Group)
+					{
+						throw new MissingRecordException("This leaderboard cannot filter by group members");
+					}
+					var group = ActorController.Get(actorId.Value);
+					if (group.ActorType != ActorType.Group)
+					{
+						throw new MissingRecordException("The provided ActorId is not a group.");
+					}
+					break;
+			}
+
+			switch (actorType)
+			{
+				case ActorType.Undefined:
+					actors = ActorController.Get().Select(a => new ActorResponse
+					{
+						Id = a.Id,
+						Name = GetName(a.Id, a.ActorType)
+					});
+					break;
+
+				case ActorType.User:
+					actors = UserController.Get().Select(a => new ActorResponse
+					{
+						Id = a.Id,
+						Name = a.Name
+					});
+					break;
+
+				case ActorType.Group:
+					actors = GroupController.Get().Select(a => new ActorResponse
+					{
+						Id = a.Id,
+						Name = a.Name
+					});
+					break;
+			}
+
+			return actors;
 		}
 
 		protected string GetName (int id, ActorType actorType)
@@ -312,6 +361,67 @@ namespace PlayGen.SUGAR.GameData
 			results = results.OrderBy(r => r.Value)
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime));
 			return results;
+		}
+
+		protected IEnumerable<LeaderboardStandingsResponse> FilterResults(IEnumerable<LeaderboardStandingsResponse> typeResults, int limit, int offset, LeaderboardFilterType filter, int? actorId)
+		{
+			int position = 0;
+			switch (filter)
+			{
+				case LeaderboardFilterType.Top:
+					typeResults = typeResults.Skip(offset * limit).Take(limit);
+					position = (offset * limit);
+					return typeResults.Select(s => new LeaderboardStandingsResponse
+					{
+						ActorId = s.ActorId,
+						ActorName = s.ActorName,
+						Value = s.Value,
+						Ranking = ++position
+					});
+				case LeaderboardFilterType.Near:
+					bool actorCheck = typeResults.Any(r => r.ActorId == actorId.Value);
+					if (actorCheck)
+					{
+						int actorPosition = typeResults.TakeWhile(r => r.ActorId != actorId.Value).Count();
+						offset += actorPosition / limit;
+					}
+					typeResults = typeResults.Skip(offset * limit).Take(limit);
+					position = (offset * limit);
+					return typeResults.Select(s => new LeaderboardStandingsResponse
+					{
+						ActorId = s.ActorId,
+						ActorName = s.ActorName,
+						Value = s.Value,
+						Ranking = ++position
+					});
+				case LeaderboardFilterType.Friends:
+					List<int> friends = UserRelationshipController.GetFriends(actorId.Value).Select(r => r.Id).ToList();
+					friends.Add(actorId.Value);
+					typeResults = typeResults.Where(r => friends.Contains(r.ActorId));
+					typeResults = typeResults.Skip(offset * limit).Take(limit);
+					position = (offset * limit);
+					return typeResults.Select(s => new LeaderboardStandingsResponse
+					{
+						ActorId = s.ActorId,
+						ActorName = s.ActorName,
+						Value = s.Value,
+						Ranking = ++position
+					});
+				case LeaderboardFilterType.GroupMembers:
+					IEnumerable<int> members = GroupRelationshipController.GetMembers(actorId.Value).Select(r => r.Id);
+					typeResults = typeResults.Where(r => members.Contains(r.ActorId));
+					typeResults = typeResults.Skip(offset * limit).Take(limit);
+					position = (offset * limit);
+					return typeResults.Select(s => new LeaderboardStandingsResponse
+					{
+						ActorId = s.ActorId,
+						ActorName = s.ActorName,
+						Value = s.Value,
+						Ranking = ++position
+					});
+				default:
+					return null;
+			}
 		}
 	}
 }
