@@ -40,15 +40,19 @@ namespace PlayGen.SUGAR.ServerAuthentication
 			return GetTokenValidity(token) == TokenValidity.Valid;
 		}
 
-		public TokenValidity GetTokenValidity(string token)
+		public TokenValidity GetTokenValidity(string serializedToken)
 		{
-			var payloadJson = JsonWebToken.Decode(token, _secretKey);
-			var payloadData = JsonConvert.DeserializeObject<Dictionary<string, object>>(payloadJson);
+			Dictionary<string, object> payload;		
 
-			object expiry;
-			if (payloadData == null || payloadData.TryGetValue("expiry", out expiry))
+			if (!TryGetPayload(serializedToken, out payload))
 			{
 				return TokenValidity.Invalid;
+			}
+
+			object expiry;
+			if (!payload.TryGetValue("expiry", out expiry))
+			{
+				return TokenValidity.Invalid;	
 			}
 
 			long expiryTicks;
@@ -56,11 +60,29 @@ namespace PlayGen.SUGAR.ServerAuthentication
 			{
 				return TokenValidity.Invalid;
 			}
-
+			
 			var validUntil = _unixEpoch.AddSeconds(expiryTicks);
-			return DateTime.Compare(validUntil, DateTime.UtcNow) <= 0 
-				? TokenValidity.Expired
-				: TokenValidity.Valid;
+			return DateTime.Compare(validUntil, DateTime.UtcNow) <= 0
+					? TokenValidity.Expired
+					: TokenValidity.Valid;
+		}
+
+		private bool TryGetPayload(string serializedToken, out Dictionary<string, object> payload)
+		{
+			bool success = true;
+			payload = null;
+
+			try
+			{
+				var payloadJson = JsonWebToken.Decode(serializedToken, _secretKey);
+				payload = JsonConvert.DeserializeObject<Dictionary<string, object>>(payloadJson);
+			}
+			catch
+			{
+				success = false;
+			}
+
+			return success;
 		}
 	}
 }

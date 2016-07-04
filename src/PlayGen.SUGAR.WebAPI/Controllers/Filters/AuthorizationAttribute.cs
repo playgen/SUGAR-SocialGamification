@@ -8,47 +8,52 @@ using PlayGen.SUGAR.ServerAuthentication;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 {
-	public class AuthorizationAttribute : AuthorizeAttribute, IAuthorizationFilter
+	public class AuthorizationAttribute : TypeFilterAttribute
 	{
-		private readonly JsonWebTokenUtility _jsonWebTokenUtility;
-		
-		/*
-		public AuthorizationAttribute(JsonWebTokenUtility jsonWebTokenUtility)
+		public AuthorizationAttribute() : base(typeof(AuthorizationAttributeImpl))
 		{
-			_jsonWebTokenUtility = jsonWebTokenUtility;
-		} 
-		*/
+		}
 
-		// See account controller for token header info
-		public void OnAuthorization(AuthorizationFilterContext context)
+		private class AuthorizationAttributeImpl : AuthorizeAttribute, IAuthorizationFilter
 		{
-			string token = null;
-			var authorized = false;
-			
-			if (context.HttpContext.Request.Headers.ContainsKey("Bearer"))
+			private readonly JsonWebTokenUtility _jsonWebTokenUtility;
+
+			public AuthorizationAttributeImpl(JsonWebTokenUtility jsonWebTokenUtility)
 			{
-				token = context.HttpContext.Request.Headers["Bearer"];
+				_jsonWebTokenUtility = jsonWebTokenUtility;
 			}
 
-			if (token != null)
+			// See account controller for token header info
+			public void OnAuthorization(AuthorizationFilterContext context)
 			{
-				var validity = _jsonWebTokenUtility.GetTokenValidity(token);
+				string token = null;
+				var authorized = false;
 
-				switch (validity)
+				if (context.HttpContext.Request.Headers.ContainsKey("Bearer"))
 				{
-					case TokenValidity.Valid:
-						authorized = true;
-						break;
-
-					case TokenValidity.Expired:
-						// TODO this is the point to re-issue token if expired
-						break;
+					token = context.HttpContext.Request.Headers["Bearer"];
 				}
-			}
 
-			if (!authorized)
-			{
-				context.Result = new StatusCodeResult((int) HttpStatusCode.Unauthorized);
+				if (token != null)
+				{
+					var validity = _jsonWebTokenUtility.GetTokenValidity(token);
+
+					switch (validity)
+					{
+						case TokenValidity.Valid:
+							authorized = true;
+							break;
+
+						case TokenValidity.Expired:
+							// TODO this is the point to re-issue token if expired
+							break;
+					}
+				}
+
+				if (!authorized)
+				{
+					context.Result = new StatusCodeResult((int) HttpStatusCode.Unauthorized);
+				}
 			}
 		}
 	}
