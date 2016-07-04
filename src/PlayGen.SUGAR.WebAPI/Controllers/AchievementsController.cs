@@ -17,6 +17,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Achievement specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
+	[Authorization]
 	public class AchievementsController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.AchievementController _achievementController;

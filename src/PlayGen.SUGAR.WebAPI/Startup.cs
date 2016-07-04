@@ -61,8 +61,13 @@ namespace PlayGen.SUGAR.WebAPI
 			ConfigureRouting(services);
 			
 			// Add framework services.
-			services.AddMvc(options => options.Filters.Add(new ModelValidationFilter()));
-			services.AddScoped<ArgumentsNotNullAttribute>();
+			services.AddMvc(options =>
+			{
+				options.Filters.Add(new ModelValidationFilter());
+				options.Filters.Add(typeof(TokenHeaderFilter));
+			});
+
+			services.AddScoped<AuthorizationAttribute>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

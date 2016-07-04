@@ -141,6 +141,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Account ID.</param>
 		[HttpDelete("{id:int}")]
+		[Authorization]
 		public void Delete([FromRoute]int id)
 		{
 			_accountDbController.Delete(id);

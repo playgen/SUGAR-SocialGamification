@@ -15,6 +15,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Group specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
+	[Authorization]
 	public class GroupController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GroupController _groupController;
