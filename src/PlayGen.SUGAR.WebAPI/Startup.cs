@@ -11,6 +11,7 @@ using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
+using PlayGen.SUGAR.GameData;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -44,9 +45,20 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddScoped((_) => new UserController(connectionString));
 			services.AddScoped((_) => new ActorController(connectionString));
 			services.AddScoped((_) => new GameDataController(connectionString));
-			services.AddScoped((_) => new AchievementController(connectionString));
+			services.AddScoped((_) => new Data.EntityFramework.Controllers.AchievementController(connectionString));
+			services.AddScoped((_) => new Data.EntityFramework.Controllers.SkillController(connectionString));
+			services.AddScoped((_) => new Data.EntityFramework.Controllers.LeaderboardController(connectionString));
 			services.AddScoped((_) => new GroupRelationshipController(connectionString));
 			services.AddScoped((_) => new UserRelationshipController(connectionString));
+
+			services.AddScoped((_) => new GameData.AchievementController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new ActorController(connectionString),
+										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString))));
+			services.AddScoped((_) => new GameData.SkillController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new ActorController(connectionString),
+										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString))));
+			services.AddScoped((_) => new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString)));
+
+			services.AddScoped((_) => new GameData.LeaderboardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString),
+										new ActorController(connectionString), new GroupController(connectionString), new UserController(connectionString)));
 
 			services.AddScoped((_) => new PasswordEncryption());
 
@@ -56,8 +68,13 @@ namespace PlayGen.SUGAR.WebAPI
 			ConfigureRouting(services);
 			
 			// Add framework services.
-			services.AddMvc(options => options.Filters.Add(new ModelValidationFilter()));
-			services.AddScoped<ArgumentsNotNullAttribute>();
+			services.AddMvc(options =>
+			{
+				options.Filters.Add(new ModelValidationFilter());
+				options.Filters.Add(typeof(TokenHeaderFilter));
+			});
+
+			services.AddScoped<AuthorizationAttribute>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

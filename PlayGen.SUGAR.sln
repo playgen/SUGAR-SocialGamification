@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{34A667C4-FE02-42C8-AF61-5D9D54525F3E}"
 EndProject
@@ -30,7 +30,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.GameData", "s
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.GameData.UnitTests", "src\PlayGen.SUGAR.GameData.UnitTests\PlayGen.SUGAR.GameData.UnitTests.xproj", "{68FEF561-CC91-4C49-95F8-6A153A383DB4}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.Client.IntegrationTests", "src\PlayGen.SUGAR.Client.IntegrationTests\PlayGen.SUGAR.Client.IntegrationTests.xproj", "{9E0D0216-CD77-4663-81EC-D4FCAF4899BB}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.Client.IntegrationTests", "src\PlayGen.SUGAR.Client.UnitTests\PlayGen.SUGAR.Client.IntegrationTests.xproj", "{DC79A706-CCE9-4766-AB99-C900544905DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,12 +99,12 @@ Global
 		{68FEF561-CC91-4C49-95F8-6A153A383DB4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{68FEF561-CC91-4C49-95F8-6A153A383DB4}.UnitTest|Any CPU.ActiveCfg = Debug|Any CPU
 		{68FEF561-CC91-4C49-95F8-6A153A383DB4}.UnitTest|Any CPU.Build.0 = Debug|Any CPU
-		{9E0D0216-CD77-4663-81EC-D4FCAF4899BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E0D0216-CD77-4663-81EC-D4FCAF4899BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E0D0216-CD77-4663-81EC-D4FCAF4899BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E0D0216-CD77-4663-81EC-D4FCAF4899BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9E0D0216-CD77-4663-81EC-D4FCAF4899BB}.UnitTest|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E0D0216-CD77-4663-81EC-D4FCAF4899BB}.UnitTest|Any CPU.Build.0 = Debug|Any CPU
+		{DC79A706-CCE9-4766-AB99-C900544905DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC79A706-CCE9-4766-AB99-C900544905DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC79A706-CCE9-4766-AB99-C900544905DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC79A706-CCE9-4766-AB99-C900544905DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC79A706-CCE9-4766-AB99-C900544905DC}.UnitTest|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC79A706-CCE9-4766-AB99-C900544905DC}.UnitTest|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -120,6 +120,6 @@ Global
 		{B8CAA947-18B8-40DD-9B64-33D6B95B0965} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
 		{0B4E1081-D98E-445C-BCF0-45CB611315B0} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
 		{68FEF561-CC91-4C49-95F8-6A153A383DB4} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
-		{9E0D0216-CD77-4663-81EC-D4FCAF4899BB} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
+		{DC79A706-CCE9-4766-AB99-C900544905DC} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
 	EndGlobalSection
 EndGlobal

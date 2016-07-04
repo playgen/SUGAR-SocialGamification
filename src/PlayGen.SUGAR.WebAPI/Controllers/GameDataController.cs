@@ -15,6 +15,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates UserData specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
+	[Authorization]
 	public class GameDataController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GameDataController _gameDataController;

@@ -3,13 +3,14 @@ using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 
 namespace PlayGen.SUGAR.GameData
 {
 	public class RewardController : DataEvaluationController
 	{
-		public RewardController(IGameDataController gameDataController)
-			: base(gameDataController)
+		public RewardController(IGameDataController gameDataController, GroupRelationshipController groupRelationshipController)
+			: base(gameDataController, groupRelationshipController)
 		{
 		}
 

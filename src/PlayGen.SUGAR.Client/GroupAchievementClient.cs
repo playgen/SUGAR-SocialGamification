@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class GroupAchievementClient : ClientBase
 	{
-		public GroupAchievementClient(string baseAddress) : base(baseAddress)
+		public GroupAchievementClient(string baseAddress, Credentials credentials) : base(baseAddress, credentials)
 		{
 		}
 
