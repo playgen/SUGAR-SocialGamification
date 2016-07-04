@@ -395,30 +395,32 @@ namespace PlayGen.SUGAR.GameData
 						Ranking = ++position
 					});
 				case LeaderboardFilterType.Friends:
+					position = (offset * limit);
+					var overall = typeResults.Select(s => new LeaderboardStandingsResponse
+					{
+						ActorId = s.ActorId,
+						ActorName = s.ActorName,
+						Value = s.Value,
+						Ranking = ++position
+					});
 					List<int> friends = UserRelationshipController.GetFriends(actorId.Value).Select(r => r.Id).ToList();
 					friends.Add(actorId.Value);
-					typeResults = typeResults.Where(r => friends.Contains(r.ActorId));
-					typeResults = typeResults.Skip(offset * limit).Take(limit);
-					position = (offset * limit);
-					return typeResults.Select(s => new LeaderboardStandingsResponse
-					{
-						ActorId = s.ActorId,
-						ActorName = s.ActorName,
-						Value = s.Value,
-						Ranking = ++position
-					});
+					var friendsOnly = overall.Where(r => friends.Contains(r.ActorId));
+					friendsOnly = friendsOnly.Skip(offset * limit).Take(limit);
+					return friendsOnly;
 				case LeaderboardFilterType.GroupMembers:
-					IEnumerable<int> members = GroupRelationshipController.GetMembers(actorId.Value).Select(r => r.Id);
-					typeResults = typeResults.Where(r => members.Contains(r.ActorId));
-					typeResults = typeResults.Skip(offset * limit).Take(limit);
 					position = (offset * limit);
-					return typeResults.Select(s => new LeaderboardStandingsResponse
+					var all = typeResults.Select(s => new LeaderboardStandingsResponse
 					{
 						ActorId = s.ActorId,
 						ActorName = s.ActorName,
 						Value = s.Value,
 						Ranking = ++position
 					});
+					IEnumerable<int> members = GroupRelationshipController.GetMembers(actorId.Value).Select(r => r.Id);
+					var membersOnly = all.Where(r => members.Contains(r.ActorId));
+					membersOnly = membersOnly.Skip(offset * limit).Take(limit);
+					return membersOnly;
 				default:
 					return null;
 			}
