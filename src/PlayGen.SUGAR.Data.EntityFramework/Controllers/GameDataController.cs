@@ -11,11 +11,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class GameDataController : DbController, IGameDataController
 	{
-		protected readonly GameDataCategory Category = GameDataCategory.GameData;
+		private readonly GameDataCategory _category = GameDataCategory.GameData;
 
-		public GameDataController(string nameOrConnectionString) 
+		public GameDataController(string nameOrConnectionString)
 			: base(nameOrConnectionString)
 		{
+		}
+
+		public GameDataController(string nameOrConnectionString, GameDataCategory category) 
+			: base(nameOrConnectionString)
+		{
+			_category = category;
 		}
 
 		public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
@@ -25,7 +31,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				return context.GetCategoryData(Category)
+				return context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -40,7 +46,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKeys(keys)
@@ -56,7 +62,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -76,7 +82,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -96,7 +102,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -121,7 +127,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -146,7 +152,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -171,7 +177,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -196,7 +202,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -222,7 +228,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -248,7 +254,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -268,7 +274,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -297,7 +303,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetCategoryData(Category)
+				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
