@@ -1,21 +1,20 @@
-﻿- name: Achievements
-  href: Achievements.md
-- name: Games
-  href: Games.md
-  homepage: Games.md
-- name: Groups
-  href: Groups.md
-- name: Leaderboards
-  href: Leaderboards.md
-- name: Matches
-  href: Matches.md
-- name: Relationships
-  href: Relationships.md
-- name: SaveData
-  href: SaveData.md
-- name: Skills
-  href: Skills.md
-- name: Tournaments
-  href: Tournaments.md
-- name: Users
-  href: Users.md
+﻿- name: Features
+  items:
+    - name: Achievements
+      href: Achievements.md
+    - name: Games
+      href: Games.md
+    - name: Groups
+      href: Groups.md
+    - name: Leaderboards
+      href: Leaderboards.md
+    - name: Relationships
+      href: Relationships.md
+    - name: GameData
+      href: GameData.md
+    - name: Resources
+      href: Resources.md
+    - name: Users
+      href: Users.md
+- name: Roadmap
+  href: Roadmap.md

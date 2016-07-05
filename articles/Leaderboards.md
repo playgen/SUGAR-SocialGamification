@@ -1,10 +1,17 @@
 # Leaderboards
-Generating and filtering leaderboards based on [GameData](/articles/GameData), is handled within SUGAR's API. 
+A leaderboard is a comparison tool used to visualise the difference in a particular measurement of a group of players. Generating and filtering leaderboards based on [GameData](/articles/GameData), is handled within SUGAR's API. 
 
 ## Features
-* Generate by game, key or actorType.
-* Aggregation of values by frequency, summation, earliest/latest occurance or highest/lowest overall occurance. 
-* Filter results by threshold values (e.g. top 20 or around current player's rank), [Relationships](/articles/Relationships),   
+* Generate a leaderboard by:
+	* Game
+	* ActorType (Group, Player)
+	* Key (from GameData)
+* Aggregation of values by:
+	* Frequency
+	* Summation
+	* Earliest/Latest occurance 
+	* Highest/Lowest overall occurance 
+* Filter results by threshold values (e.g. top 20 or around current player's rank) or [Relationships](/articles/Relationships)
 
 ## API
 * ClientAPI

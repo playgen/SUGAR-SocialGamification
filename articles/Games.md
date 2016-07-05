@@ -1,13 +1,14 @@
 # Games
-A single instance of SUGAR may have multiple games associated with it. This allows for multiple users to take part in a multitude of games using the same login. 
+A game is an individual application defined by a designer. 
+A single instance of SUGAR has the capacity to service multiple games. This allows for users to take part in multiple of games under the same login. 
 
 
 ## Features
 * Get all games
 * Get all games that match a given name
 * Get a game that matches a given id
-* Creation
-* Deletion
+* Create a new game
+* Delete a game 
 
 
 ## API
