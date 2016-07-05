@@ -1,8 +1,10 @@
-﻿namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
+﻿using PlayGen.SUGAR.Data.EntityFramework;
+
+namespace PlayGen.SUGAR.GameData.UnitTests
 {
 	public abstract class TestController
 	{
-		public const string DbName = "sugarunittests";
+		public const string DbName = "sugardatatest";
 
 		private static string _nameOrConnectionString = null;
 
@@ -25,26 +27,6 @@
 
 				return _nameOrConnectionString;
 			}
-		}
-
-		public static void DeleteDatabase()
-		{
-			if (!_deletedDatabase)
-			{
-				using (var context = new SGAContext(NameOrConnectionString))
-				{
-					if (context.Database.Connection.Database == DbName)
-					{
-						context.Database.Delete();
-						_deletedDatabase = true;
-					}
-				}
-			}
-		}
-
-		protected TestController()
-		{
-			DeleteDatabase();
 		}
 	}
 }

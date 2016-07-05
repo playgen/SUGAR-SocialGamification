@@ -201,7 +201,8 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			results = results.OrderByDescending(r => r.Value);
+			results = results.OrderByDescending(r => r.Value)
+						.Where(r => float.Parse(r.Value) > 0);
 			return results;
 		}
 
