@@ -6,16 +6,20 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class GroupDataControllerTests : IClassFixture<TestController>
+	public class GameDataControllerTests : IClassFixture<TestController>
 	{
 		private TestController _testController;
 
 		#region Configuration
-		private readonly GameDataController _groupDataDbController;
+		private readonly GameDataController _gameDataController;
+		private readonly GameController _gameController;
+		private readonly UserController _userController;
 
-		public GroupDataControllerTests(TestController testController)
+		public GameDataControllerTests(TestController testController)
 		{
-			_testController = testController;
+			_gameDataController = testController.GameDataController;
+			_gameController = testController.GameController;
+			_userController = testController.UserController;			
 		}
 		#endregion
 
@@ -27,7 +31,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newSaveData = CreateGroupData(groupDataName);
 
-			var groupDatas = _groupDataDbController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
+			var groupDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
 
 			int matches = groupDatas.Count(g => g.Key == groupDataName && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
 
@@ -81,7 +85,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				CreateGroupData(groupDataName, gameId.Value, groupId.Value);
 			}
 
-			var groupDatas = _groupDataDbController.Get(gameId, groupId, groupDataNames);
+			var groupDatas = _gameDataController.Get(gameId, groupId, groupDataNames);
 
 			var matchingGroupSaveDatas = groupDatas.Select(g => groupDataNames.Contains(g.Key));
 
@@ -95,7 +99,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newSaveData = CreateGroupData(groupDataName);
 
-			var groupDatas = _groupDataDbController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { "null key" });
+			var groupDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { "null key" });
 
 			Assert.Empty(groupDatas);
 		}
@@ -107,7 +111,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newSaveData = CreateGroupData(groupDataName);
 
-			var groupDatas = _groupDataDbController.Get(-1, newSaveData.ActorId, new string[] { groupDataName });
+			var groupDatas = _gameDataController.Get(-1, newSaveData.ActorId, new string[] { groupDataName });
 
 			Assert.Empty(groupDatas);
 		}
@@ -119,7 +123,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newSaveData = CreateGroupData(groupDataName);
 
-			var groupDatas = _groupDataDbController.Get(newSaveData.GameId, -1, new string[] { groupDataName });
+			var groupDatas = _gameDataController.Get(newSaveData.GameId, -1, new string[] { groupDataName });
 
 			Assert.Empty(groupDatas);
 		}
@@ -128,25 +132,23 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#region Helpers
 		private GameData CreateGroupData(string key, int gameId = 0, int groupId = 0)
 		{
-			GameController gameDbController = new GameController(NameOrConnectionString);
 			if (gameId == 0)
 			{
 				Game game = new Game
 				{
 					Name = key
 				};
-				gameDbController.Create(game);
+				_gameController.Create(game);
 				gameId = game.Id;
 			}
 
-			GroupController groupDbController = new GroupController(NameOrConnectionString);
 			if (groupId == 0)
 			{
 				Group group = new Group
 				{
 					Name = key
 				};
-				groupDbController.Create(group);
+				_groupDbController.Create(group);
 				groupId = group.Id;
 			}
 
@@ -158,7 +160,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Value = key + " value",
 				DataType = 0
 			};
-			_groupDataDbController.Create(groupData);
+			_gameDataController.Create(groupData);
 
 			return groupData;
 		}
