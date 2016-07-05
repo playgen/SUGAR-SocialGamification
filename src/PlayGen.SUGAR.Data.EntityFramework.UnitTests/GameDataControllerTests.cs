@@ -6,14 +6,16 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class GroupDataControllerTests : TestController
+	public class GroupDataControllerTests : IClassFixture<TestController>
 	{
+		private TestController _testController;
+
 		#region Configuration
 		private readonly GameDataController _groupDataDbController;
 
-		public GroupDataControllerTests()
+		public GroupDataControllerTests(TestController testController)
 		{
-			_groupDataDbController = new GameDataController(NameOrConnectionString);
+			_testController = testController;
 		}
 		#endregion
 

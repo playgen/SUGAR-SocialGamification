@@ -3,7 +3,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using Xunit;
-
+/*
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
 	public class GroupAchievementControllerTests : TestController
@@ -110,3 +110,4 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 	}
 }
+*/

@@ -1,62 +1,70 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using Xunit;
+using System.IO;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class UserDataControllerTests : TestController
+	public class GameDataControllerTests : TestController
 	{
 		#region Configuration
 		private readonly UserController _userDbController;
 		private readonly GameController _gameDbController;
-		private readonly GameDataController _userDataDbController;
+		private readonly GameDataController _gameDataDbController;
 
-		public UserDataControllerTests()
+		public GameDataControllerTests()
 		{
-			InitializeEnvironment();
-
 			_userDbController = new UserController(TestController.NameOrConnectionString);
 			_gameDbController = new GameController(TestController.NameOrConnectionString);
-			_userDataDbController = new GameDataController(NameOrConnectionString);
-		}
+			_gameDataDbController = new GameDataController(NameOrConnectionString);
 
-		private void InitializeEnvironment()
-		{
-			TestController.DeleteDatabase();
+			File.Create(@"C:\Users\Jared\Documents\" + DateTime.UtcNow.Ticks.ToString()).Dispose();
 		}
 		#endregion
 
 		#region Tests
 		[Fact]
-		public void CreateAndGetUserSaveData()
+		public void CreateAndGetUserGameSaveData()
 		{
-			string userDataName = "CreateUserData";
+			string userDataName = "CreateAndGetUserGameSaveData";
 
-			var newSaveData = CreateUserData(userDataName);
+			var newSaveData = CreateGameData(userDataName, createNewGame: true, createNewUser: true);
 
-			var userDatas = _userDataDbController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
+			var userDatas = _gameDataDbController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
 
 			int matches = userDatas.Count(g => g.Key == userDataName && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
 
-			Assert.Equal(matches, 1);
+			Assert.Equal(1, matches);
 		}
 
 		[Fact]
-		public void CreateUserDataWithNonExistingGame()
+		public void CreateAndGetUserGlobalSaveData()
 		{
-			string userDataName = "CreateUserDataWithNonExistingGame";
+			string userDataName = "CreateAndGetUserGlobalSaveData";
 
-			Assert.Throws<MissingRecordException>(() => CreateUserData(userDataName, -1));
+			var newSaveData = CreateGameData(userDataName, createNewUser: true);
+
+			var userDatas = _gameDataDbController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
+
+			int matches = userDatas.Count(g => g.Key == userDataName && g.GameId == null && g.ActorId == newSaveData.ActorId);
+
+			Assert.Equal(1, matches);
 		}
 
 		[Fact]
-		public void CreateUserDataWithNonExistingUser()
+		public void CreateAndGetGameGlobalSaveData()
 		{
-			string userDataName = "CreateUserDataWithNonExistingUser";
+			string userDataName = "CreateAndGetGameGlobalSaveData";
 
-			Assert.Throws<MissingRecordException>(() => CreateUserData(userDataName, 0, -1));
+			var newSaveData = CreateGameData(userDataName, createNewGame: true);
+
+			var userDatas = _gameDataDbController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
+
+			int matches = userDatas.Count(g => g.Key == newSaveData.Key && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
+
+			Assert.Equal(1, matches);
 		}
 
 		[Fact]
@@ -70,16 +78,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				"GetMultipleUserSaveDatas4",
 			};
 
-			var doNotFind = CreateUserData("GetMultipleUserSaveDatas_DontGetThis");
+			var doNotFind = CreateGameData("GetMultipleUserSaveDatas_DontGetThis");
 			var gameId = doNotFind.GameId;
 			var userId = doNotFind.ActorId;
 
 			foreach (var userDataName in userDataNames)
 			{
-				CreateUserData(userDataName, gameId.Value, userId.Value);
+				CreateGameData(userDataName, gameId, userId);
 			}
 
-			var userDatas = _userDataDbController.Get(gameId, userId, userDataNames);
+			var userDatas = _gameDataDbController.Get(gameId, userId, userDataNames);
 
 			var matchingUserSaveDatas = userDatas.Select(g => userDataNames.Contains(g.Key));
 
@@ -91,9 +99,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string userDataName = "GetUserSaveDatasWithNonExistingKey";
 
-			var newSaveData = CreateUserData(userDataName);
+			var newSaveData = CreateGameData(userDataName);
 
-			var userDatas = _userDataDbController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { "null key" });
+			var userDatas = _gameDataDbController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { "null key" });
 
 			Assert.Empty(userDatas);
 		}
@@ -103,9 +111,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string userDataName = "GetUserSaveDatasWithNonExistingGame";
 
-			var newSaveData = CreateUserData(userDataName);
+			var newSaveData = CreateGameData(userDataName);
 
-			var userDatas = _userDataDbController.Get(-1, newSaveData.ActorId, new string[] { userDataName });
+			var userDatas = _gameDataDbController.Get(-1, newSaveData.ActorId, new string[] { userDataName });
 
 			Assert.Empty(userDatas);
 		}
@@ -115,20 +123,21 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			string userDataName = "GetUserSaveDatasWithNonExistingUser";
 
-			var newSaveData = CreateUserData(userDataName);
+			var newSaveData = CreateGameData(userDataName);
 
-			var userDatas = _userDataDbController.Get(newSaveData.GameId, -1, new string[] { userDataName });
+			var userDatas = _gameDataDbController.Get(newSaveData.GameId, -1, new string[] { userDataName });
 
 			Assert.Empty(userDatas);
 		}
 		#endregion
 
 		#region Helpers
-		private GameData CreateUserData(string key, int gameId = 0, int userId = 0)
+		private GameData CreateGameData(string key, int? gameId = null, int? userId = null, 
+			bool createNewGame = false, bool createNewUser = false)
 		{
-			GameController gameDbController = new GameController(NameOrConnectionString);
-			if (gameId == 0)
+			if (createNewGame)
 			{
+				GameController gameDbController = new GameController(NameOrConnectionString);
 				Game game = new Game
 				{
 					Name = key
@@ -137,9 +146,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				gameId = game.Id;
 			}
 
-			UserController userDbController = new UserController(NameOrConnectionString);
-			if (userId == 0)
+			if (createNewUser)
 			{
+				UserController userDbController = new UserController(NameOrConnectionString);				
 				var user = new User
 				{
 					Name = key
@@ -156,7 +165,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Value = key + " value",
 				DataType = 0
 			};
-			_userDataDbController.Create(userData);
+			_gameDataDbController.Create(userData);
 			return userData;
 		}
 		#endregion

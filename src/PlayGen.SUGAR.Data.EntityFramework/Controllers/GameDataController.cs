@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
+using System.Data.Entity;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class GameDataController : DbController, IGameDataController
 	{
+		protected readonly GameDataCategory Category = GameDataCategory.GameData;
+
 		public GameDataController(string nameOrConnectionString) 
 			: base(nameOrConnectionString)
 		{
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				return context.GetData()
+				return context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -31,13 +31,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<GameData> Get(int? actorId, int? gameId, IEnumerable<string> keys)
+		public IEnumerable<GameData> Get(int? gameId, int? actorId, IEnumerable<string> keys)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKeys(keys)
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -113,7 +113,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -136,6 +136,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
+
+				context.HandleDetatchedGame(data.GameId);
+				context.HandleDetatchedActor(data.ActorId);
 
 				context.GameData.Add(data);
 				SaveChanges(context);

@@ -7,9 +7,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
 	public static class GameDataExtensions
 	{
-		public static IQueryable<GameData> GetData(this SGAContext context)
+		public static IQueryable<GameData> GetCategoryData(this SGAContext context, GameDataCategory category)
 		{
-			return context.GameData;
+			return context.GameData.Where(gd => gd.Category == category);
 		}
 
 		public static IQueryable<GameData> FilterByGameId(this IQueryable<GameData> gameDataQueryable, int? gameId)

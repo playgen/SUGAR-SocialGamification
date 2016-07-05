@@ -49,14 +49,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 			modelBuilder.Entity<User>().ToTable("Users");
 			modelBuilder.Entity<Group>().ToTable("Groups");
 
-			//modelBuilder.Entity<Actor>()
-			//	.Map<User>(m => m.Requires("ActorType").HasValue("U"))
-			//	.Map<Group>(m => m.Requires("ActorType").HasValue("G"));
-
 			modelBuilder.Entity<GameData>()
 				.ToTable("GameData");
-
-			//modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
 			// Setup foreign key relationships in the database tables
 			modelBuilder.Entity<UserToUserRelationship>()
@@ -92,21 +86,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 			// multiple indexes for a single property must be added in the same fluent call
 			modelBuilder.Entity<GameData>()
-				.Property(gd => gd.GameId)
+				.Property(gd => gd.Key)
 				.IsIndexed("IX_GameData_Game_Actor_Key", 0)
 				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 0);
 			modelBuilder.Entity<GameData>()
-				.Property(gd => gd.ActorId)
+				.Property(gd => gd.GameId)
 				.IsIndexed("IX_GameData_Game_Actor_Key", 1)
 				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 1);
 			modelBuilder.Entity<GameData>()
-				.Property(gd => gd.Key)
+				.Property(gd => gd.ActorId)
 				.IsIndexed("IX_GameData_Game_Actor_Key", 2)
 				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 2);
 			modelBuilder.Entity<GameData>()
 				.Property(gd => gd.DataType)
-				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 3);
-
+				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 4);
 
 			// Serialize specific objects as Json objects instead of creating a new table
 			modelBuilder.ComplexType<AchievementCriteriaCollection>()

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
@@ -18,10 +19,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				if (context.Entry(account.User).State == EntityState.Detached)
-				{
-					context.Users.Attach(account.User);
-				}
+				context.HandleDetatchedActor(account.User);
 
 				context.Accounts.Add(account);
 				SaveChanges(context);

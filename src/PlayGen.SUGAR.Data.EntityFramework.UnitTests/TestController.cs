@@ -1,48 +1,52 @@
-﻿namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
+﻿using PlayGen.SUGAR.Data.EntityFramework.Controllers;
+using System;
+using Xunit;
+
+namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public abstract class TestController
+	public class TestController : IDisposable
 	{
-		public const string DbName = "sgaunittests";
+		private readonly string _dbName;
+		private readonly string _connectionString;
 
-		private static string _nameOrConnectionString = null;
+		private GameDataController _gameDataController;
+		public GameDataController GameDataController => _gameDataController ?? _gameDataController = new GameDataController(_connectionString);;
 
-		private static bool _deletedDatabase = false;
-
-		public static string NameOrConnectionString
+		public TestController(string dbName = "sgaunittests")
 		{
-			get
-			{
-				if (_nameOrConnectionString == null)
-				{
-					_nameOrConnectionString = "Server=localhost;" +
-											  "Port=3306;" +
-											  $"Database={DbName};" +
-											  "Uid=root;" +
-											  "Pwd=t0pSECr3t;" +
-											  "Convert Zero Datetime=true;" +
-											  "Allow Zero Datetime=true";
-				}
+			_dbName = dbName;
+			_connectionString = GetNameOrConnectionString(_dbName);
 
-				return _nameOrConnectionString;
-			}
+			DeleteDatabase();
 		}
 
-		public static void DeleteDatabase()
+		private string GetNameOrConnectionString(string dbName)
 		{
-			if (!_deletedDatabase)
+			return "Server=localhost;" +
+					"Port=3306;" +
+					$"Database={DbName};" +
+					"Uid=root;" +
+					"Pwd=t0pSECr3t;" +
+					"Convert Zero Datetime=true;" +
+					"Allow Zero Datetime=true";
+		}
+
+		private void DeleteDatabase()
+		{
+			using (var context = new SGAContext(_connectionString))
 			{
-				using (var context = new SGAContext(NameOrConnectionString))
+				if (context.Database.Connection.Database == _dbName)
 				{
-					if (context.Database.Connection.Database == DbName)
-					{
-						context.Database.Delete();
-						_deletedDatabase = true;
-					}
+					context.Database.Delete();
+				}
+				else
+				{
+					throw new Exception($"Database with name: {_dbName} doesn't exist.");
 				}
 			}
 		}
-
-		protected TestController()
+		
+		public void Dispose()
 		{
 			DeleteDatabase();
 		}
