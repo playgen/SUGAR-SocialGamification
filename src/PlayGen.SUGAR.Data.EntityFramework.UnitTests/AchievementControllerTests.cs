@@ -6,18 +6,18 @@ using Xunit;
 /*
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class GroupAchievementControllerTests : TestController
+	public class GroupAchievementControllerTests : IClassFixture<TestEnvironment>
 	{
 		#region Configuration
 		private readonly AchievementController _groupAchievementDbController;
 
-		public GroupAchievementControllerTests()
+		public GroupAchievementControllerTests(TestEnvironment testEnvironment)
 		{
-			_groupAchievementDbController = new AchievementController(NameOrConnectionString);
+			_groupAchievementDbController = testEnvironment.AchievementController;
 		}
 		#endregion
 
-
+		
 		#region Tests
 		[Fact]
 		public void CreateAndGetGroupAchievement()

@@ -7,15 +7,19 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class GroupMemberControllerTests : TestController
+	public class GroupMemberControllerTests : IClassFixture<TestEnvironment>
 	{
 
 		#region Configuration
 		private readonly GroupRelationshipController _groupMemberDbController;
+		private readonly GroupController _groupController;
+		private readonly UserController _userController;
 
-		public GroupMemberControllerTests()
+		public GroupMemberControllerTests(TestEnvironment testEnvironment)
 		{
-			_groupMemberDbController = new GroupRelationshipController(NameOrConnectionString);
+			_groupMemberDbController = testEnvironment.GroupRelationshipController;
+			_userController = testEnvironment.UserController;
+			_groupController = testEnvironment.GroupController;
 		}
 		#endregion
 
@@ -298,25 +302,23 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#region Helpers
 		private User CreateUser(string name)
 		{
-			UserController userDbController = new UserController(NameOrConnectionString);
 			var user = new User
 			{
 				Name = name,
 			};
 
-			userDbController.Create(user);
+			_userController.Create(user);
 
 			return user;
 		}
 
 		private Group CreateGroup(string name)
 		{
-			GroupController groupDbController = new GroupController(NameOrConnectionString);
 			var group = new Group
 			{
 				Name = name,
 			};
-			groupDbController.Create(group);
+			_groupController.Create(group);
 
 			return group;
 		}

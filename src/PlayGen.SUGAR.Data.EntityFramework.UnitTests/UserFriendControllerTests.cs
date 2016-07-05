@@ -7,14 +7,16 @@ using System.Linq;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class UserFriendControllerTests : TestController
+	public class UserFriendControllerTests : IClassFixture<TestEnvironment>
 	{
 		#region Configuration
 		private readonly UserRelationshipController _userRelationshipDbController;
+		private readonly UserController _userDbController;
 
-		public UserFriendControllerTests()
+		public UserFriendControllerTests(TestEnvironment testEnvironment)
 		{
-			_userRelationshipDbController = new UserRelationshipController(NameOrConnectionString);
+			_userRelationshipDbController = testEnvironment.UserRelationshipController;
+			_userDbController = testEnvironment.UserController;
 		}
 		#endregion
 
@@ -241,13 +243,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#region Helpers
 		private User CreateUser(string name)
 		{
-			UserController userDbController = new UserController(NameOrConnectionString);
 			var user = new User
 			{
 				Name = name,
 			};
 
-			userDbController.Create(user);
+			_userDbController.Create(user);
 
 			return user;
 		}

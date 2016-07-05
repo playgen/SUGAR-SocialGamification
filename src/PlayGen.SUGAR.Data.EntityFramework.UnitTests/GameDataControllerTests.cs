@@ -1,138 +1,139 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using Xunit;
+using System.IO;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class GameDataControllerTests : IClassFixture<TestController>
+	public class GameDataControllerTests : IClassFixture<TestEnvironment>
 	{
-		private TestController _testController;
-
 		#region Configuration
 		private readonly GameDataController _gameDataController;
 		private readonly GameController _gameController;
 		private readonly UserController _userController;
 
-		public GameDataControllerTests(TestController testController)
+		public GameDataControllerTests(TestEnvironment testEnvironment)
 		{
-			_gameDataController = testController.GameDataController;
-			_gameController = testController.GameController;
-			_userController = testController.UserController;			
+			_gameDataController = testEnvironment.GameDataController;
+			_gameController = testEnvironment.GameController;
+			_userController = testEnvironment.UserController;
 		}
 		#endregion
-
+		
 		#region Tests
 		[Fact]
-		public void CreateAndGetGroupSaveData()
+		public void CreateAndGetUserGameSaveData()
 		{
-			string groupDataName = "CreateGroupData";
+			string userDataName = "CreateAndGetUserGameSaveData";
 
-			var newSaveData = CreateGroupData(groupDataName);
+			var newSaveData = CreateGameData(userDataName, createNewGame: true, createNewUser: true);
 
-			var groupDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
+			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
 
-			int matches = groupDatas.Count(g => g.Key == groupDataName && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
+			int matches = userDatas.Count(g => g.Key == userDataName && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
 
-			Assert.Equal(matches, 1);
+			Assert.Equal(1, matches);
 		}
 
 		[Fact]
-		public void CreateGroupDataWithNonExistingGame()
+		public void CreateAndGetUserGlobalSaveData()
 		{
-			string groupDataName = "CreateGroupDataWithNonExistingGame";
+			string userDataName = "CreateAndGetUserGlobalSaveData";
 
-			Assert.Throws<MissingRecordException>(() => CreateGroupData(groupDataName, -1));
+			var newSaveData = CreateGameData(userDataName, createNewUser: true);
+
+			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
+
+			int matches = userDatas.Count(g => g.Key == userDataName && g.GameId == null && g.ActorId == newSaveData.ActorId);
+
+			Assert.Equal(1, matches);
 		}
 
 		[Fact]
-		public void CreateGroupDataWithNonExistingGroup()
+		public void CreateAndGetGameGlobalSaveData()
 		{
-			string groupDataName = "CreateGroupDataWithNonExistingGroup";
+			string userDataName = "CreateAndGetGameGlobalSaveData";
 
-			bool hadException = false;
+			var newSaveData = CreateGameData(userDataName, createNewGame: true);
 
-			try
-			{
-				CreateGroupData(groupDataName, 0, -1);
-			}
-			catch (MissingRecordException)
-			{
-				hadException = true;
-			}
+			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
 
-			Assert.True(hadException);
+			int matches = userDatas.Count(g => g.Key == newSaveData.Key && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
+
+			Assert.Equal(1, matches);
 		}
 
 		[Fact]
-		public void GetMultipleGroupSaveDatas()
+		public void GetMultipleUserSaveDatas()
 		{
-			string[] groupDataNames = new[]
+			string[] userDataNames = new[]
 			{
-				"GetMultipleGroupSaveDatas1",
-				"GetMultipleGroupSaveDatas2",
-				"GetMultipleGroupSaveDatas3",
-				"GetMultipleGroupSaveDatas4",
+				"GetMultipleUserSaveDatas1",
+				"GetMultipleUserSaveDatas2",
+				"GetMultipleUserSaveDatas3",
+				"GetMultipleUserSaveDatas4",
 			};
 
-			var doNotFind = CreateGroupData("GetMultipleGroupSaveDatas_DontGetThis");
+			var doNotFind = CreateGameData("GetMultipleUserSaveDatas_DontGetThis");
 			var gameId = doNotFind.GameId;
-			var groupId = doNotFind.ActorId;
+			var userId = doNotFind.ActorId;
 
-			foreach (var groupDataName in groupDataNames)
+			foreach (var userDataName in userDataNames)
 			{
-				CreateGroupData(groupDataName, gameId.Value, groupId.Value);
+				CreateGameData(userDataName, gameId, userId);
 			}
 
-			var groupDatas = _gameDataController.Get(gameId, groupId, groupDataNames);
+			var userDatas = _gameDataController.Get(gameId, userId, userDataNames);
 
-			var matchingGroupSaveDatas = groupDatas.Select(g => groupDataNames.Contains(g.Key));
+			var matchingUserSaveDatas = userDatas.Select(g => userDataNames.Contains(g.Key));
 
-			Assert.Equal(matchingGroupSaveDatas.Count(), groupDataNames.Length);
+			Assert.Equal(matchingUserSaveDatas.Count(), userDataNames.Length);
 		}
 
 		[Fact]
-		public void GetGroupSaveDatasWithNonExistingKey()
+		public void GetUserSaveDatasWithNonExistingKey()
 		{
-			string groupDataName = "GetGroupSaveDatasWithNonExistingKey";
+			string userDataName = "GetUserSaveDatasWithNonExistingKey";
 
-			var newSaveData = CreateGroupData(groupDataName);
+			var newSaveData = CreateGameData(userDataName);
 
-			var groupDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { "null key" });
+			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { "null key" });
 
-			Assert.Empty(groupDatas);
+			Assert.Empty(userDatas);
 		}
 
 		[Fact]
-		public void GetGroupSaveDatasWithNonExistingGame()
+		public void GetUserSaveDatasWithNonExistingGame()
 		{
-			string groupDataName = "GetGroupSaveDatasWithNonExistingGame";
+			string userDataName = "GetUserSaveDatasWithNonExistingGame";
 
-			var newSaveData = CreateGroupData(groupDataName);
+			var newSaveData = CreateGameData(userDataName);
 
-			var groupDatas = _gameDataController.Get(-1, newSaveData.ActorId, new string[] { groupDataName });
+			var userDatas = _gameDataController.Get(-1, newSaveData.ActorId, new string[] { userDataName });
 
-			Assert.Empty(groupDatas);
+			Assert.Empty(userDatas);
 		}
 
 		[Fact]
-		public void GetGroupSaveDatasWithNonExistingGroup()
+		public void GetUserSaveDatasWithNonExistingUser()
 		{
-			string groupDataName = "GetGroupSaveDatasWithNonExistingGroup";
+			string userDataName = "GetUserSaveDatasWithNonExistingUser";
 
-			var newSaveData = CreateGroupData(groupDataName);
+			var newSaveData = CreateGameData(userDataName);
 
-			var groupDatas = _gameDataController.Get(newSaveData.GameId, -1, new string[] { groupDataName });
+			var userDatas = _gameDataController.Get(newSaveData.GameId, -1, new string[] { userDataName });
 
-			Assert.Empty(groupDatas);
+			Assert.Empty(userDatas);
 		}
 		#endregion
 
 		#region Helpers
-		private GameData CreateGroupData(string key, int gameId = 0, int groupId = 0)
+		private GameData CreateGameData(string key, int? gameId = null, int? userId = null, 
+			bool createNewGame = false, bool createNewUser = false)
 		{
-			if (gameId == 0)
+			if (createNewGame)
 			{
 				Game game = new Game
 				{
@@ -142,27 +143,26 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				gameId = game.Id;
 			}
 
-			if (groupId == 0)
+			if (createNewUser)
 			{
-				Group group = new Group
+				var user = new User
 				{
 					Name = key
 				};
-				_groupDbController.Create(group);
-				groupId = group.Id;
+				_userController.Create(user);
+				userId = user.Id;
 			}
 
-			var groupData = new GameData
+			var userData = new GameData
 			{
 				Key = key,
 				GameId = gameId,
-				ActorId = groupId,
+				ActorId = userId,
 				Value = key + " value",
 				DataType = 0
 			};
-			_gameDataController.Create(groupData);
-
-			return groupData;
+			_gameDataController.Create(userData);
+			return userData;
 		}
 		#endregion
 	}

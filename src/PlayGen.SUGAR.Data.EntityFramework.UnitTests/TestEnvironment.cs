@@ -4,9 +4,9 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class TestController : IDisposable
+	public class TestEnvironment : IDisposable
 	{
-		private readonly string _dbName;
+		private readonly string _dbName = "sgaunittests";
 		private readonly string _connectionString;
 
 		private AccountController _accountController;
@@ -44,11 +44,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		public UserRelationshipController UserRelationshipController
 			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(_connectionString));
 
-		public TestController(string dbName = "sgaunittests")
+		public TestEnvironment()
 		{
-			_dbName = dbName;
 			_connectionString = GetNameOrConnectionString(_dbName);
-
 			DeleteDatabase();
 		}
 
@@ -56,7 +54,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			return "Server=localhost;" +
 					"Port=3306;" +
-					$"Database={DbName};" +
+					$"Database={dbName};" +
 					"Uid=root;" +
 					"Pwd=t0pSECr3t;" +
 					"Convert Zero Datetime=true;" +
@@ -80,7 +78,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		
 		public void Dispose()
 		{
-			DeleteDatabase();
 		}
 	}
 }

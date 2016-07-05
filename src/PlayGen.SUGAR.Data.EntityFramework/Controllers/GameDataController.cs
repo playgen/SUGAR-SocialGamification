@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
@@ -95,7 +96,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -120,7 +121,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -145,7 +146,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -170,7 +171,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -247,7 +248,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -267,7 +268,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
@@ -296,7 +297,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var data = context.GetData()
+				var data = context.GetCategoryData(Category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
