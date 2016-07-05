@@ -8,6 +8,7 @@ using MySql.Data.Entity;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.Model.Interfaces;
 using PlayGen.SUGAR.Data.EntityFramework.ExtensionMethods;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PlayGen.SUGAR.Data.EntityFramework
 {
@@ -28,7 +29,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		public DbSet<Game> Games { get; set; }
 
 		public DbSet<Achievement> Achievements { get; set; }
+		public DbSet<Skill> Skills { get; set; }
 
+		public DbSet<Leaderboard> Leaderboards { get; set; }
 
 		public DbSet<Actor> Actors { get; set; }
 

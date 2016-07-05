@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class GroupDataClient : ClientBase, IGroupSaveDataController
 	{
-		public GroupDataClient(string baseAddress) : base(baseAddress)
+		public GroupDataClient(string baseAddress, Credentials credentials) : base(baseAddress, credentials)
 		{
 		}
 

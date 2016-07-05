@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Http.Description;
+using Microsoft.AspNetCore.Authorization;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
@@ -12,6 +13,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Game specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
+	[Authorization]
 	public class GameController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
@@ -84,7 +86,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var game = newGame.ToModel();
 			_gameDbController.Create(game);
 			var gameContract = game.ToContract();
-			return CreatedAtRoute("GetByGameId", new { controller = "Game", id = gameContract.Id }, gameContract);
+			return new ObjectResult(gameContract);
 		}
 
 		/// <summary>

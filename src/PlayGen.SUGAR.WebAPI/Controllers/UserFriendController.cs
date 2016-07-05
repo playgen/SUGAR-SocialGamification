@@ -15,6 +15,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates User to User relationship specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
+	[Authorization]
 	public class UserFriendController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.UserRelationshipController _userRelationshipController;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.Model;
@@ -35,6 +36,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 		public static IQueryable<GameData> FilterByDataType(this IQueryable<GameData> gameDataQueryable, GameDataType type)
 		{
 			return gameDataQueryable.Where(gd => gd.DataType == type);
+		}
+
+		public static IQueryable<GameData> FilterByDateTimeRange(this IQueryable<GameData> gameDataQueryable, DateTime start, DateTime end)
+		{
+			return gameDataQueryable.Where(gd => gd.DateModified >= start && gd.DateModified <= end);
 		}
 
 		public static GameData LatestOrDefault(this IQueryable<GameData> gameDataQueryable)

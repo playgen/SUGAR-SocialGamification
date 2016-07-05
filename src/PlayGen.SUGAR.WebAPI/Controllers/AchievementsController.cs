@@ -17,6 +17,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Achievement specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
+	[Authorization]
 	public class AchievementsController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.AchievementController _achievementController;
@@ -35,7 +36,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// 
 		/// Example Usage: GET api/achievements/list
 		/// </summary>
-		/// <returns>Returns multiple <see cref="GameResponse"/> that hold Achievement details</returns>
+		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
 		[HttpGet("list")]
 		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
 		public IActionResult Get()
@@ -51,7 +52,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: GET api/achievements/game/1/list
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
-		/// <returns>Returns multiple <see cref="GameResponse"/> that hold Achievement details</returns>
+		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
 		[HttpGet("game/{gameId:int}/list")]
 		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
 		public IActionResult Get([FromRoute]int gameId)
@@ -74,7 +75,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
 		public IActionResult Create([FromBody] AchievementRequest newAchievement)
 		{
-			var achievement = newAchievement.ToModel();
+			var achievement = newAchievement.ToAchievementModel();
 			_achievementController.Create(achievement);
 			var achievementContract = achievement.ToContract();
 			return new ObjectResult(achievementContract);
