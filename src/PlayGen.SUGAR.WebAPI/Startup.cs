@@ -48,6 +48,7 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.AchievementController(connectionString));
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.SkillController(connectionString));
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.LeaderboardController(connectionString));
+			services.AddScoped((_) => new Data.EntityFramework.Controllers.ResourceController(connectionString));
 			services.AddScoped((_) => new GroupRelationshipController(connectionString));
 			services.AddScoped((_) => new UserRelationshipController(connectionString));
 
