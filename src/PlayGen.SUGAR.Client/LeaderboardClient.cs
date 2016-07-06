@@ -13,8 +13,6 @@ namespace PlayGen.SUGAR.Client
 		
 		/// <summary>
 		/// Get all global leaderboards, ie. leaderboards that are not associated with a specific game
-		/// 
-		/// Example Usage: GET api/leaderboards/list
 		/// </summary>
 		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
 		public IEnumerable<LeaderboardResponse> Get()
@@ -48,8 +46,6 @@ namespace PlayGen.SUGAR.Client
 
 		/// <summary>
 		/// Get the standings for a Leaderboard using a <see cref="LeaderboardStandingRequest"/>.
-		/// 
-		/// Example Usage: POST api/leaderboards/standings
 		/// </summary>
 		/// <param name="leaderboardDetails"><see cref="LeaderboardStandingsRequest"/> object that holds the details that are wanted from the Leaderboard.</param>
 		/// <returns>Returns multiple <see cref="LeaderboardStandingsResponse"/> that hold actor positions in the leaderboard.</returns>
