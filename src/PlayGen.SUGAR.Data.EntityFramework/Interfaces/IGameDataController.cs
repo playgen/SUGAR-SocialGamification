@@ -31,5 +31,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Interfaces
 		DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime));
 
 		void Create(GameData data);
+
+		void Create(GameData[] data);
 	}
 }

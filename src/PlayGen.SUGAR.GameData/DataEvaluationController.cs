@@ -12,11 +12,13 @@ namespace PlayGen.SUGAR.GameData
 	{
 		protected readonly IGameDataController GameDataController;
 		protected readonly GroupRelationshipController GroupRelationshipController;
+		protected readonly UserRelationshipController UserRelationshipController;
 
-		public DataEvaluationController(IGameDataController gameDataController, GroupRelationshipController groupRelationshipController)
+		public DataEvaluationController(IGameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
 		{
 			GameDataController = gameDataController;
 			GroupRelationshipController = groupRelationshipController;
+			UserRelationshipController = userRelationshipController;
 		}
 
 		// TODO: currently this is binary but should eventually return a progress value

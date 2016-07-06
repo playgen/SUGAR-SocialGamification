@@ -9,8 +9,8 @@ namespace PlayGen.SUGAR.GameData
 {
 	public class RewardController : DataEvaluationController
 	{
-		public RewardController(IGameDataController gameDataController, GroupRelationshipController groupRelationshipController)
-			: base(gameDataController, groupRelationshipController)
+		public RewardController(IGameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
+			: base(gameDataController, groupRelationshipController, userRelationshipController)
 		{
 		}
 
