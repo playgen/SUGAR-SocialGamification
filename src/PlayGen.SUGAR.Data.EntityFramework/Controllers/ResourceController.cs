@@ -30,11 +30,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			if (data.Category != GameDataCategory.Resource)
 			{
-				// TODO error
+				throw new ArgumentException($"This object must have the GameDataCategory of: {GameDataCategory.Resource}.");
 			}
-			else if (data.DataType != GameDataType.Long)
+
+			if (data.DataType != GameDataType.Long)
 			{
-				// TODO error
+				throw new ArgumentException($"This object must have the GameDataType of: {GameDataType.Long}.");
 			}
 
 			_gameDataController.Create(data);
