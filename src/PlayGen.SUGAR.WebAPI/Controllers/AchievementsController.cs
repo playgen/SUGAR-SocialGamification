@@ -63,6 +63,55 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
+		/// 
+		/// Example Usage: GET api/achievements/game/1/evaluate/1
+		/// </summary>
+		/// <param name="gameId">ID of Game</param>
+		/// 		/// <param name="actorId">ID of Group/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
+		[HttpGet("game/{gameId:int}/evaluate")]
+		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
+		[ResponseType(typeof(IEnumerable<AchievementProgressResponse>))]
+		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
+		{
+			var achievements = _achievementController.GetByGame(gameId);
+			var achievementResponses = achievements.Select(a =>
+			{
+				var completed = _achievementEvaluationController.IsAchievementCompleted(a, actorId);
+				return new AchievementProgressResponse
+				{
+					Name = a.Name,
+					Progress = completed ? 1 : 0,
+				};
+			});
+
+			return new ObjectResult(achievementResponses);
+		}
+
+		/// <summary>
+		/// Find the current progress for an <param name="achievementId"/> for <param name="actor"/>.
+		/// 
+		/// Example Usage: GET api/achievements/1/evaluate/1
+		/// </summary>
+		/// <param name="achievementId">ID of Achievement</param>
+		/// <param name="actorId">ID of Group/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
+		[HttpGet("{achievementId:int}/evaluate")]
+		[HttpGet("{achievementId:int}/evaluate/{actorId:int}")]
+		[ResponseType(typeof(AchievementProgressResponse))]
+		public IActionResult GetAchievementProgress([FromRoute]int achievementId, [FromRoute]int? actorId)
+		{
+			var achievement = _achievementController.Get(achievementId);
+			var completed = _achievementEvaluationController.IsAchievementCompleted(achievement, actorId);
+			return new ObjectResult(new AchievementProgressResponse
+			{
+				Name = achievement.Name,
+				Progress = completed ? 1 : 0,
+			});
+		}
+
+		/// <summary>
 		/// Create a new Achievement.
 		/// Requires <see cref="AchievementRequest.Name"/> to be unique to that <see cref="AchievementRequest.GameId"/>.
 		/// 
@@ -93,53 +142,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			_achievementController.Delete(id);
 		}
 
-		/// <summary>
-		/// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
-		/// 
-		/// Example Usage: GET api/achievements/game/1/evaluate/1
-		/// </summary>
-		/// <param name="actorId">ID of Group/User</param>
-		/// <param name="gameId">ID of Game</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
-		[HttpGet("game/{gameId:int}/evaluate")]
-		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
-		[ResponseType(typeof(IEnumerable<AchievementProgressResponse>))]
-		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
-		{
-			var achievements = _achievementController.GetByGame(gameId);
-			var achievementResponses = achievements.Select(a =>
-			{
-				var completed = _achievementEvaluationController.IsAchievementCompleted(a, actorId);
-				return new AchievementProgressResponse
-				{
-					Name = a.Name,
-					Progress = completed ? 1 : 0,
-				};
-			});
-
-			return new ObjectResult(achievementResponses);
-		}
-
-		/// <summary>
-		/// Find the current progress for an <param name="achievementId"/> for <param name="actor"/>.
-		/// 
-		/// Example Usage: GET api/achievements/1/evaluate/1
-		/// </summary>
-		/// <param name="achievementId">ID of Achievement</param>
-		/// <param name="actor">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
-		[HttpGet("{achievementId:int}/evaluate")]
-		[HttpGet("{achievementId:int}/evaluate/{actorId:int}")]
-		[ResponseType(typeof(AchievementProgressResponse))]
-		public IActionResult GetAchievementProgress([FromRoute]int achievementId, [FromRoute]int? actorId)
-		{
-			var achievement = _achievementController.Get(achievementId);
-			var completed = _achievementEvaluationController.IsAchievementCompleted(achievement, actorId);
-			return new ObjectResult(new AchievementProgressResponse
-			{
-				Name = achievement.Name,
-				Progress = completed ? 1 : 0,
-			});
-		}
+		
 	}
 }

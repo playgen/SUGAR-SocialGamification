@@ -12,50 +12,69 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Get a list of UserAchievements that match <param name="gameId"/>.
+		/// Get all global achievements, ie. achievements that are not associated with a specific game
 		/// </summary>
-		/// <param name="gameId">Array of game IDs</param>
-		/// <returns>Returns multiple <see cref="GameResponse"/> that hold UserAchievement details</returns>
-		public IEnumerable<AchievementResponse> Get(int gameId)
+		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
+		public IEnumerable<AchievementResponse> Get()
 		{
-			var query = GetUriBuilder($"api/userachievement/{gameId}").ToString();
+			var query = GetUriBuilder($"api/achievements/list").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
 		}
 
-		public IEnumerable<AchievementProgressResponse> GetProgress(int userId, int gameId)
+		/// <summary>
+		/// Find a list of Achievements that match <param name="gameId"/>.
+		/// </summary>
+		/// <param name="gameId">game ID</param>
+		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
+		public IEnumerable<AchievementResponse> Get(int gameId)
 		{
-			var query = GetUriBuilder($"api/userachievement/gameprogress/{userId}/{gameId}").ToString();
-			return Get<IEnumerable<AchievementProgressResponse>>(query);
+			var query = GetUriBuilder($"api/achievements/game/{gameId}/list").ToString();
+			return Get<IEnumerable<AchievementResponse>>(query);
 		}
 
-		public IEnumerable<AchievementProgressResponse> GetProgress(int achievementId, int[] actorIds)
+		/// <summary>
+		/// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
+		/// </summary>
+		/// <param name="gameId">ID of Game</param>
+		/// <param name="actorId">ID of Group/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold Achievement progress details</returns>
+		public IEnumerable<AchievementProgressResponse> GetGameProgress(int gameId, int actorId)
 		{
-			var query = GetUriBuilder("api/userachievement/progress")
-				.AppendQueryParameter(achievementId, "achievementId={0}")
-				.AppendQueryParameters(actorIds, "userId={0}")
-				.ToString();
+			var query = GetUriBuilder($"api/achievements/game/{gameId}/evaluate/{actorId}").ToString();
 			return Get<IEnumerable<AchievementProgressResponse>>(query);
 		}
 
 		/// <summary>
-		/// Create a new UserAchievement.
-		/// Requires <see cref="newAchievement.Name"/> to be unique to that <see cref="newAchievement.GameId"/>.
+		/// Find the current progress for an <param name="achievementId"/> for <param name="actor"/>.
 		/// </summary>
-		/// <param name="achievement"><see cref="AchievementRequest"/> object that holds the details of the new UserAchievement.</param>
-		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created UserAchievement.</returns>
-		public AchievementResponse Create(AchievementRequest achievement)
+		/// <param name="achievementId">ID of Achievement</param>
+		/// <param name="actorId">ID of actor/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
+		public IEnumerable<AchievementProgressResponse> GetAchievementProgress(int achievementId, int actorId)
 		{
-			var query = GetUriBuilder("api/userachievement").ToString();
-			return Post<AchievementRequest, AchievementResponse>(query, achievement);
+			var query = GetUriBuilder($"api/achievements/{achievementId}/evaluate/{actorId}").ToString();
+			return Get<IEnumerable<AchievementProgressResponse>>(query);
 		}
 
 		/// <summary>
-		/// Delete UserAchievement with the <param name="achievementId"/> provided.
+		/// Create a new Achievement.
+		/// Requires <see cref="AchievementRequest.Name"/> to be unique to that <see cref="AchievementRequest.GameId"/>.
 		/// </summary>
-		/// <param name="achievementId">UserAchievement ID</param>
-		public void Delete(int achievementId)
+		/// <param name="newAchievement"><see cref="AchievementRequest"/> object that holds the details of the new Achievement.</param>
+		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created Achievement.</returns>
+		public AchievementResponse Create(AchievementRequest newAchievement)
 		{
-			var query = GetUriBuilder($"api/userachievement/{achievementId}").ToString();
+			var query = GetUriBuilder("api/achievements/create").ToString();
+			return Post<AchievementRequest, AchievementResponse>(query, newAchievement);
+		}
+
+		/// <summary>
+		/// Delete Achievements with the <param name="id"/> provided.
+		/// </summary>
+		/// <param name="id">Achievement ID</param>
+		public void Delete(int id)
+		{
+			var query = GetUriBuilder($"api/achievements/{id}").ToString();
 			Delete(query);
 		}
 	}
