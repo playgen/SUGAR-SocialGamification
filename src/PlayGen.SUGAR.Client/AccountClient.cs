@@ -15,6 +15,7 @@ namespace PlayGen.SUGAR.Client
 
 		/// <summary>
 		/// Logs in an account based on the name and password combination.
+		/// Returns a JsonWebToken used for authorization in any further calls to the API.
 		/// </summary>
 		/// <param name="account"><see cref="AccountRequest"/> object that contains the account details provided.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
@@ -29,12 +30,12 @@ namespace PlayGen.SUGAR.Client
 		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
 		/// </summary>
-		/// <param name="newAccount"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
+		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
-		public AccountResponse Register(AccountRequest newAccount)
+		public AccountResponse Register(AccountRequest accountRequest)
 		{
 			var query = GetUriBuilder("api/account/register").ToString();
-			return Post<AccountRequest, AccountResponse>(query, newAccount);
+			return Post<AccountRequest, AccountResponse>(query, accountRequest);
 		}
 
 		/// <summary>

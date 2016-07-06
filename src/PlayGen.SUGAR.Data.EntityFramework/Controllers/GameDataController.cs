@@ -338,6 +338,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
+		public void Create(GameData[] data)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				foreach (var d in data)
+				{
+					context.GameData.Add(d);
+				}
+				SaveChanges(context);
+			}
+		}
+
 		protected DateTime EndSet (DateTime end)
 		{
 			if (end == default(DateTime))

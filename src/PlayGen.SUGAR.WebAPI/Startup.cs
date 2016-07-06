@@ -52,14 +52,15 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddScoped((_) => new GroupRelationshipController(connectionString));
 			services.AddScoped((_) => new UserRelationshipController(connectionString));
 
-			services.AddScoped((_) => new GameData.AchievementController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new ActorController(connectionString),
-										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString))));
-			services.AddScoped((_) => new GameData.SkillController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new ActorController(connectionString),
-										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString))));
-			services.AddScoped((_) => new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString)));
+			services.AddScoped((_) => new GameData.AchievementController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString), new ActorController(connectionString),
+										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString))));
+			services.AddScoped((_) => new GameData.SkillController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString), new ActorController(connectionString),
+										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString))));
+			services.AddScoped((_) => new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString)));
 
-			services.AddScoped((_) => new GameData.LeaderboardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString),
-										new ActorController(connectionString), new GroupController(connectionString), new UserController(connectionString)));
+			services.AddScoped((_) => new GameData.LeaderboardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), 
+				new UserRelationshipController(connectionString), new ActorController(connectionString), new GroupController(connectionString),
+				new UserController(connectionString)));
 
 			services.AddScoped((_) => new PasswordEncryption());
 

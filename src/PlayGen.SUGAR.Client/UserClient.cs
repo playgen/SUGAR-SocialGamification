@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> that hold User details.</returns>
 		public IEnumerable<ActorResponse> Get()
 		{
-			var query = GetUriBuilder("api/user").ToString();
+			var query = GetUriBuilder("api/user/list").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 

@@ -63,34 +63,25 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Create a new Skill.
-		/// Requires <see cref="AchievementRequest.Name"/> to be unique to that <see cref="AchievementRequest.GameId"/>.
+		/// Find the current progress for an <param name="skillId"/> for <param name="actor"/>.
 		/// 
-		/// Example Usage: POST api/skills/create
+		/// Example Usage: GET api/skills/1/evaluate/1
 		/// </summary>
-		/// <param name="newSkill"><see cref="AchievementRequest"/> object that holds the details of the new Skill.</param>
-		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created Skill.</returns>
-		[HttpPost("create")]
-		[ResponseType(typeof(AchievementResponse))]
-		[ArgumentsNotNull]
-		public IActionResult Create([FromBody] AchievementRequest newSkill)
+		/// <param name="skillId">ID of Skill</param>
+		/// <param name="actorId">ID of Group/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward skill.</returns>
+		[HttpGet("{skillId:int}/evaluate")]
+		[HttpGet("{skillId:int}/evaluate/{actorId:int}")]
+		[ResponseType(typeof(AchievementProgressResponse))]
+		public IActionResult GetAchievementProgress([FromRoute]int skillId, [FromRoute]int? actorId)
 		{
-			var skill = newSkill.ToSkillModel();
-			_skillController.Create(skill);
-			var skillContract = skill.ToContract();
-			return new ObjectResult(skillContract);
-		}
-
-		/// <summary>
-		/// Delete Skills with the <param name="id"/> provided.
-		/// 
-		/// Example Usage: DELETE api/skills/1
-		/// </summary>
-		/// <param name="id">Skill ID</param>
-		[HttpDelete("{id:int}")]
-		public void Delete([FromRoute]int id)
-		{
-			_skillController.Delete(id);
+			var skill = _skillController.Get(skillId);
+			var completed = _skillEvaluationController.IsSkillCompleted(skill, actorId);
+			return new ObjectResult(new AchievementProgressResponse
+			{
+				Name = skill.Name,
+				Progress = completed ? 1 : 0,
+			});
 		}
 
 		/// <summary>
@@ -121,25 +112,34 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find the current progress for an <param name="skillId"/> for <param name="actor"/>.
+		/// Create a new Skill.
+		/// Requires <see cref="AchievementRequest.Name"/> to be unique to that <see cref="AchievementRequest.GameId"/>.
 		/// 
-		/// Example Usage: GET api/skills/1/evaluate/1
+		/// Example Usage: POST api/skills/create
 		/// </summary>
-		/// <param name="skillId">ID of Skill</param>
-		/// <param name="actor">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward skill.</returns>
-		[HttpGet("{skillId:int}/evaluate")]
-		[HttpGet("{skillId:int}/evaluate/{actorId:int}")]
-		[ResponseType(typeof(AchievementProgressResponse))]
-		public IActionResult GetAchievementProgress([FromRoute]int skillId, [FromRoute]int? actorId)
+		/// <param name="newSkill"><see cref="AchievementRequest"/> object that holds the details of the new Skill.</param>
+		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created Skill.</returns>
+		[HttpPost("create")]
+		[ResponseType(typeof(AchievementResponse))]
+		[ArgumentsNotNull]
+		public IActionResult Create([FromBody] AchievementRequest newSkill)
 		{
-			var skill = _skillController.Get(skillId);
-			var completed = _skillEvaluationController.IsSkillCompleted(skill, actorId);
-			return new ObjectResult(new AchievementProgressResponse
-			{
-				Name = skill.Name,
-				Progress = completed ? 1 : 0,
-			});
+			var skill = newSkill.ToSkillModel();
+			_skillController.Create(skill);
+			var skillContract = skill.ToContract();
+			return new ObjectResult(skillContract);
+		}
+
+		/// <summary>
+		/// Delete Skills with the <param name="id"/> provided.
+		/// 
+		/// Example Usage: DELETE api/skills/1
+		/// </summary>
+		/// <param name="id">Skill ID</param>
+		[HttpDelete("{id:int}")]
+		public void Delete([FromRoute]int id)
+		{
+			_skillController.Delete(id);
 		}
 	}
 }

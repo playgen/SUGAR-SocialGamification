@@ -5,8 +5,8 @@ using System.Net;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
-    public class AccountClientTests
-    {
+	public class AccountClientTests
+	{
 		#region Configuration
 		private readonly AccountClient _accountClient;
 
