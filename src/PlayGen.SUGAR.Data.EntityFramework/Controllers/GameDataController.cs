@@ -347,6 +347,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					}
 				}
 			}
+			if (dataList.Count > 0)
+			{
+				using (var context = new SGAContext(NameOrConnectionString))
+				{
+					SetLog(context);
+
+					context.GameData.AddRange(dataList);
+					SaveChanges(context);
+					dataList.Clear();
+				}
+			}
 		}
 
 		protected DateTime EndSet (DateTime end)

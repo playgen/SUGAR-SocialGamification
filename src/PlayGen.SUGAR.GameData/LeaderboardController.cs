@@ -35,6 +35,10 @@ namespace PlayGen.SUGAR.GameData
 			{
 				throw new MissingRecordException("The provided leaderboard does not exist.");
 			}
+			if (request.Limit <= 0)
+			{
+				throw new ArgumentException("You must request at least one ranking from the leaderboard.");
+			}
 			var standings = GatherStandings(leaderboard, request);
 			return standings;
 		}
@@ -89,42 +93,42 @@ namespace PlayGen.SUGAR.GameData
 				case LeaderboardFilterType.Near:
 					if (!actorId.HasValue)
 					{
-						throw new MissingRecordException("An ActorId has to be passed in order to gather those ranked near them");
+						throw new ArgumentException("An ActorId has to be passed in order to gather those ranked near them");
 					}
 					var provided = ActorController.Get(actorId.Value);
-					if (actorType != ActorType.Undefined && provided.ActorType != actorType)
+					if (provided == null || actorType != ActorType.Undefined && provided.ActorType != actorType)
 					{
-						throw new MissingRecordException("The provided ActorId cannot compete on this leaderboard.");
+						throw new ArgumentException("The provided ActorId cannot compete on this leaderboard.");
 					}
 					break;
 				case LeaderboardFilterType.Friends:
 					if (!actorId.HasValue)
 					{
-						throw new MissingRecordException("An ActorId has to be passed in order to gather rankings among friends");
+						throw new ArgumentException("An ActorId has to be passed in order to gather rankings among friends");
 					}
 					if (actorType == ActorType.Group)
 					{
-						throw new MissingRecordException("This leaderboard cannot filter by friends");
+						throw new ArgumentException("This leaderboard cannot filter by friends");
 					}
 					var user = ActorController.Get(actorId.Value);
-					if (user.ActorType != ActorType.User)
+					if (user == null || user.ActorType != ActorType.User)
 					{
-						throw new MissingRecordException("The provided ActorId is not an user.");
+						throw new ArgumentException("The provided ActorId is not an user.");
 					}
 					break;
 				case LeaderboardFilterType.GroupMembers:
 					if (!actorId.HasValue)
 					{
-						throw new MissingRecordException("An ActorId has to be passed in order to gather rankings among group members");
+						throw new ArgumentException("An ActorId has to be passed in order to gather rankings among group members");
 					}
 					if (actorType == ActorType.Group)
 					{
-						throw new MissingRecordException("This leaderboard cannot filter by group members");
+						throw new ArgumentException("This leaderboard cannot filter by group members");
 					}
 					var group = ActorController.Get(actorId.Value);
-					if (group.ActorType != ActorType.Group)
+					if (group == null || group.ActorType != ActorType.Group)
 					{
-						throw new MissingRecordException("The provided ActorId is not a group.");
+						throw new ArgumentException("The provided ActorId is not a group.");
 					}
 					break;
 			}
@@ -201,7 +205,7 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			results = results.OrderByDescending(r => r.Value)
+			results = results.OrderByDescending(r => float.Parse(r.Value))
 						.Where(r => float.Parse(r.Value) > 0);
 			return results;
 		}
@@ -233,7 +237,8 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			results = results.OrderBy(r => r.Value);
+			results = results.OrderBy(r => float.Parse(r.Value))
+						.Where(r => float.Parse(r.Value) > 0);
 			return results;
 		}
 
@@ -264,7 +269,8 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			results = results.OrderByDescending(r => r.Value);
+			results = results.OrderByDescending(r => float.Parse(r.Value))
+						.Where(r => float.Parse(r.Value) > 0);
 			return results;
 		}
 
@@ -295,7 +301,7 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			results = results.OrderByDescending(r => r.Value)
+			results = results.OrderByDescending(r => float.Parse(r.Value))
 						.Where(r => float.Parse(r.Value) > 0);
 			return results;
 		}
@@ -327,7 +333,7 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			results = results.OrderBy(r => r.Value)
+			results = results.OrderBy(r => DateTime.Parse(r.Value))
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime));
 			return results;
 		}
@@ -359,7 +365,7 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			results = results.OrderBy(r => r.Value)
+			results = results.OrderByDescending(r => DateTime.Parse(r.Value))
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime));
 			return results;
 		}
