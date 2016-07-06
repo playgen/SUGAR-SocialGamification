@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			return _gameDataController.KeyExists(gameId, actorId, key, start = default(DateTime), end = default(DateTime))
+			return _gameDataController.KeyExists(gameId, actorId, key, start = default(DateTime), end = default(DateTime));
 		}
 
 		public IEnumerable<GameData> Get(int? gameId, int? actorId, IEnumerable<string> keys)

@@ -6,17 +6,17 @@ using Xunit;
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
 	public class GameClientTests
-    {
+	{
 		#region Configuration
 		private readonly GameClient _gameClient;
 		
 		public GameClientTests()
-	    {
+		{
 			var testSugarClient = new TestSUGARClient();
 			_gameClient = testSugarClient.Game;
 			
 			RegisterAndLogin(testSugarClient.Account);
-	    }
+		}
 
 		private void RegisterAndLogin(AccountClient client)
 		{
@@ -40,8 +40,8 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 		#region Tests
 		[Fact]
-	    public void CanCreateGame()
-	    {
+		public void CanCreateGame()
+		{
 			var gameRequest = new GameRequest
 			{
 				Name = "CanCreateGame",
@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			Assert.Equal(gameRequest.Name, response.Name);
 			Assert.True(response.Id > 0);
-	    }
+		}
 
 		[Fact]
 		public void CannotCreateDuplicateGame()
