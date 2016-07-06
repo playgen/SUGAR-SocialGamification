@@ -12,13 +12,19 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 	public class GameDataFixture : IDisposable
 	{
 		private readonly UserController _userController;
+		private readonly GroupController _groupController;
 		private readonly GameController _gameController;
+		private readonly UserRelationshipController _userRelationshipController;
+		private readonly GroupRelationshipController _groupRelationshipController;
 		private readonly GameDataController _gameDataController;
 
 		public GameDataFixture()
 		{
-			Dispose();
+			DeleteExisting();
 			_userController = new UserController(TestController.NameOrConnectionString);
+			_groupController = new GroupController(TestController.NameOrConnectionString);
+			_userRelationshipController = new UserRelationshipController(TestController.NameOrConnectionString);
+			_groupRelationshipController = new GroupRelationshipController(TestController.NameOrConnectionString);
 			_gameController = new GameController(TestController.NameOrConnectionString);
 			_gameDataController = new GameDataController(TestController.NameOrConnectionString);
 			PopulateData();
@@ -28,6 +34,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			List<Game> games = new List<Game>();
 			List<User> users = new List<User>();
+			List<Group> groups = new List<Group>();
 			var dataValues = GenerateDataValues();
 			for (int i = 0; i < 100; i++)
 			{
@@ -35,19 +42,31 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 				games.Add(CreateGame((i + 1).ToString()));
 			}
 
-			Random random = new Random();
-
-			for (int j = 0; j < 400; j++)
+			for (int i = 0; i < users.Count; i++)
 			{
-				List<Data.Model.GameData> gameDatas = new List<Data.Model.GameData>();
-				for (int k = 0; k < 400; k++)
+				if (i % 10 == 0)
 				{
-					gameDatas.Add(CreateData(games[random.Next(0, games.Count)], users[random.Next(0, users.Count)], dataValues[random.Next(0, dataValues.Count)]));
+					groups.Add(CreateGroup((i + 1).ToString()));
 				}
-				_gameDataController.Create(gameDatas.ToArray());
+				for (int j = 1; j <= 10; j++)
+				{
+					int friendId = i + j;
+					if (i + j >= users.Count)
+					{
+						friendId -= users.Count;
+					}
+					CreateFriendship(users[i].Id, users[friendId].Id);
+				}
+				CreateMembership(users[i].Id, groups[i / 10].Id);
 			}
 
-			
+			Random random = new Random();
+			List<Data.Model.GameData> gameDatas = new List<Data.Model.GameData>();
+			for (int j = 0; j < 100000; j++)
+			{
+				gameDatas.Add(CreateData(games[random.Next(0, games.Count)], users[random.Next(0, users.Count)], dataValues[random.Next(0, dataValues.Count)]));
+			}
+			_gameDataController.Create(gameDatas.ToArray());
 		}
 
 		private Data.Model.GameData CreateData(Game game, User user, DataParam data)
@@ -75,6 +94,17 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			return user;
 		}
 
+		private Group CreateGroup(string name)
+		{
+			var group = new Group
+			{
+				Name = name,
+			};
+			_groupController.Create(group);
+
+			return group;
+		}
+
 		private Game CreateGame(string name)
 		{
 			var game = new Game
@@ -86,12 +116,32 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			return game;
 		}
 
+		private void CreateFriendship(int requestor, int acceptor)
+		{
+			var relationship = new UserToUserRelationship
+			{
+				RequestorId = requestor,
+				AcceptorId = acceptor,
+			};
+			_userRelationshipController.Create(relationship, true);
+		}
+
+		private void CreateMembership(int requestor, int acceptor)
+		{
+			var relationship = new UserToGroupRelationship
+			{
+				RequestorId = requestor,
+				AcceptorId = acceptor,
+			};
+			_groupRelationshipController.Create(relationship, true);
+		}
+
 		private List<DataParam> GenerateDataValues()
 		{
 			Random random = new Random();
 			List<DataParam> dataParams = new List<DataParam>();
 
-			for (int i = 0; i < 500; i++)
+			for (int i = 0; i < 2500; i++)
 			{
 				dataParams.Add(new DataParam
 				{
@@ -126,6 +176,11 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		public void Dispose()
+		{
+			
+		}
+
+		private void DeleteExisting()
 		{
 			using (var context = new SGAContext(TestController.NameOrConnectionString))
 			{

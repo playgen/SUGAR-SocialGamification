@@ -25,13 +25,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 		#region Tests
 		[Fact]
-		public void GetLeaderboardSumLong()
+		public void GetLeaderboardSumLongSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardSumLong",
-				Token = "GetLeaderboardSumLong",
+				Name = "GetLeaderboardSumLongSpeedTest",
+				Token = "GetLeaderboardSumLongSpeedTest",
 				Key = "Long",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -55,13 +55,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardSumFloat()
+		public void GetLeaderboardSumFloatSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardSumFloat",
-				Token = "GetLeaderboardSumFloat",
+				Name = "GetLeaderboardSumFloatSpeedTest",
+				Token = "GetLeaderboardSumFloatSpeedTest",
 				Key = "Float",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -85,13 +85,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardHighLong()
+		public void GetLeaderboardHighLongSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardHighLong",
-				Token = "GetLeaderboardHighLong",
+				Name = "GetLeaderboardHighLongSpeedTest",
+				Token = "GetLeaderboardHighLongSpeedTest",
 				Key = "Long",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -115,13 +115,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardHighFloat()
+		public void GetLeaderboardHighFloatSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardHighFloat",
-				Token = "GetLeaderboardHighFloat",
+				Name = "GetLeaderboardHighFloatSpeedTest",
+				Token = "GetLeaderboardHighFloatSpeedTest",
 				Key = "Float",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -145,13 +145,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardLowLong()
+		public void GetLeaderboardLowLongSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardLowLong",
-				Token = "GetLeaderboardLowLong",
+				Name = "GetLeaderboardLowLongSpeedTest",
+				Token = "GetLeaderboardLowLongSpeedTest",
 				Key = "Long",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -175,13 +175,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardLowFloat()
+		public void GetLeaderboardLowFloatSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardLowFloat",
-				Token = "GetLeaderboardLowFloat",
+				Name = "GetLeaderboardLowFloatSpeedTest",
+				Token = "GetLeaderboardLowFloatSpeedTest",
 				Key = "Float",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -205,13 +205,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardCountString()
+		public void GetLeaderboardCountStringSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardCountString",
-				Token = "GetLeaderboardCountString",
+				Name = "GetLeaderboardCountStringSpeedTest",
+				Token = "GetLeaderboardCountStringSpeedTest",
 				Key = "String",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -235,13 +235,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardCountBool()
+		public void GetLeaderboardCountBoolSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardCountBool",
-				Token = "GetLeaderboardCountBool",
+				Name = "GetLeaderboardCountBoolSpeedTest",
+				Token = "GetLeaderboardCountBoolSpeedTest",
 				Key = "Boolean",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -265,13 +265,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardEarliestString()
+		public void GetLeaderboardEarliestStringSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardEarliestString",
-				Token = "GetLeaderboardEarliestString",
+				Name = "GetLeaderboardEarliestStringSpeedTest",
+				Token = "GetLeaderboardEarliestStringSpeedTest",
 				Key = "String",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -295,13 +295,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardEarliestBool()
+		public void GetLeaderboardEarliestBoolSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardEarliestBool",
-				Token = "GetLeaderboardEarliestBool",
+				Name = "GetLeaderboardEarliestBoolSpeedTest",
+				Token = "GetLeaderboardEarliestBoolSpeedTest",
 				Key = "Boolean",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -325,13 +325,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardLatestString()
+		public void GetLeaderboardLatestStringSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardLatestString",
-				Token = "GetLeaderboardLatestString",
+				Name = "GetLeaderboardLatestStringSpeedTest",
+				Token = "GetLeaderboardLatestStringSpeedTest",
 				Key = "String",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -355,13 +355,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		}
 
 		[Fact]
-		public void GetLeaderboardLatestBool()
+		public void GetLeaderboardLatestBoolSpeedTest()
 		{
 			Random random = new Random();
 			var leaderboard = new Leaderboard
 			{
-				Name = "GetLeaderboardLatestBool",
-				Token = "GetLeaderboardLatestBool",
+				Name = "GetLeaderboardLatestBoolSpeedTest",
+				Token = "GetLeaderboardLatestBoolSpeedTest",
 				Key = "Boolean",
 				GameId = random.Next(0, 100),
 				ActorType = ActorType.User,
@@ -382,6 +382,99 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
+		}
+
+		[Fact]
+		public void GetLeaderboardNearFilterSpeedTest()
+		{
+			Random random = new Random();
+			var leaderboard = new Leaderboard
+			{
+				Name = "GetLeaderboardNearFilterSpeedTest",
+				Token = "GetLeaderboardNearFilterSpeedTest",
+				Key = "Long",
+				GameId = random.Next(0, 100),
+				ActorType = ActorType.User,
+				GameDataType = GameDataType.Long,
+				CriteriaScope = CriteriaScope.Actor,
+				LeaderboardType = LeaderboardType.Cumulative
+			};
+
+			_leaderboardController.Create(leaderboard);
+
+			var filter = new LeaderboardStandingsRequest
+			{
+				LeaderboardId = leaderboard.Id,
+				LeaderboardFilterType = LeaderboardFilterType.Near,
+				ActorId = random.Next(0, 100),
+				Limit = 100,
+				Offset = 0
+			};
+
+			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
+
+		}
+
+		[Fact]
+		public void GetLeaderboardFriendFilterSpeedTest()
+		{
+			Random random = new Random();
+			var leaderboard = new Leaderboard
+			{
+				Name = "GetLeaderboardFriendFilterSpeedTest",
+				Token = "GetLeaderboardFriendFilterSpeedTest",
+				Key = "Long",
+				GameId = random.Next(0, 100),
+				ActorType = ActorType.User,
+				GameDataType = GameDataType.Long,
+				CriteriaScope = CriteriaScope.Actor,
+				LeaderboardType = LeaderboardType.Cumulative
+			};
+
+			_leaderboardController.Create(leaderboard);
+
+			var filter = new LeaderboardStandingsRequest
+			{
+				LeaderboardId = leaderboard.Id,
+				LeaderboardFilterType = LeaderboardFilterType.Friends,
+				ActorId = random.Next(0, 100),
+				Limit = 100,
+				Offset = 0
+			};
+
+			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
+
+		}
+
+		[Fact]
+		public void GetLeaderboardGroupMemberFilterSpeedTest()
+		{
+			Random random = new Random();
+			var leaderboard = new Leaderboard
+			{
+				Name = "GetLeaderboardGroupMemberFilterSpeedTest",
+				Token = "GetLeaderboardGroupMemberFilterSpeedTest",
+				Key = "Long",
+				GameId = random.Next(0, 100),
+				ActorType = ActorType.User,
+				GameDataType = GameDataType.Long,
+				CriteriaScope = CriteriaScope.Actor,
+				LeaderboardType = LeaderboardType.Cumulative
+			};
+
+			_leaderboardController.Create(leaderboard);
+
+			var filter = new LeaderboardStandingsRequest
+			{
+				LeaderboardId = leaderboard.Id,
+				LeaderboardFilterType = LeaderboardFilterType.GroupMembers,
+				ActorId = random.Next(100, 110),
+				Limit = 100,
+				Offset = 0
+			};
+
+			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
+
 		}
 		#endregion
 
