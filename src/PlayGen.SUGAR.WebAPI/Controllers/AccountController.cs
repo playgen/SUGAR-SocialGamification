@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 
 		/// <summary>
 		/// Register a new account and creates an associated user.
-		/// Requires the name to be unique.
+		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
 		/// 
 		/// Example Usage: POST api/account/register
@@ -104,7 +104,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//Todo: Review if register with id is needed
 		/// <summary>
 		/// Register a new account for an existing user.
-		/// Requires the name to be unique.
+		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
 		/// 
 		/// Example Usage: POST api/account/registerwithid/1

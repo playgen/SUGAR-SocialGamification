@@ -9,16 +9,14 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/gamedata";
 
-		public GameDataClient(string baseAddress) : base(baseAddress)
+		public GameDataClient(string baseAddress, Credentials credentials) : base(baseAddress, credentials)
 		{
 		}
 
-
-
 		/// <summary>
-		/// Get a list of all UserData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+		/// Find a list of all GameData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
 		/// </summary>
-		/// <param name="actorId">ID of a User.</param>
+		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="key">Array of Key names.</param>
 		/// <returns>A list of <see cref="GameDataResponse"/> which match the search criteria.</returns>
@@ -33,7 +31,7 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Create a new UserData record.
+		/// Create a new GameData record.
 		/// </summary>
 		/// <param name="data"><see cref="GameDataRequest"/> object that holds the details of the new UserData.</param>
 		/// <returns>A <see cref="GameDataResponse"/> containing the new UserData details.</returns>

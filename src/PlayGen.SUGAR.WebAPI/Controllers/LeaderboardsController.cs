@@ -81,18 +81,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Delete Leaderboards with the <param name="id"/> provided.
-		/// 
-		/// Example Usage: DELETE api/leaderboards/1
-		/// </summary>
-		/// <param name="id">Leaderboard ID</param>
-		[HttpDelete("{id:int}")]
-		public void Delete([FromRoute]int id)
-		{
-			_leaderboardController.Delete(id);
-		}
-
-		/// <summary>
 		/// Get the standings for a Leaderboard using a <see cref="LeaderboardStandingRequest"/>.
 		/// 
 		/// Example Usage: POST api/leaderboards/standings
@@ -106,6 +94,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardId);
 			var standings = _leaderboardEvaluationController.GetStandings(leaderboard, leaderboardDetails);
 			return new ObjectResult(standings);
+		}
+
+		/// <summary>
+		/// Delete Leaderboards with the <param name="id"/> provided.
+		/// 
+		/// Example Usage: DELETE api/leaderboards/1
+		/// </summary>
+		/// <param name="id">Leaderboard ID</param>
+		[HttpDelete("{id:int}")]
+		public void Delete([FromRoute]int id)
+		{
+			_leaderboardController.Delete(id);
 		}
 	}
 }
