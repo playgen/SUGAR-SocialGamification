@@ -91,6 +91,22 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Update an existing User.
+		/// 
+		/// Example Usage: PUT api/user/update/1
+		/// </summary>
+		/// <param name="id">Id of the existing User.</param>
+		/// <param name="user"><see cref="ActorRequest"/> object that holds the details of the User.</param>
+		[HttpPut("update/{id:int}")]
+		[ArgumentsNotNull]
+		public void Update([FromRoute] int id, [FromBody] ActorRequest user)
+		{
+			var userModel = user.ToUserModel();
+			userModel.Id = id;
+			_userController.Update(userModel);
+		}
+
+		/// <summary>
 		/// Delete user with the <param name="id"/> provided.
 		/// 
 		/// Example Usage: DELETE api/user/1

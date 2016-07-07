@@ -88,6 +88,22 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Update an existing Game.
+		/// 
+		/// Example Usage: PUT api/game/update/1
+		/// </summary>
+		/// <param name="id">Id of the existing Game.</param>
+		/// <param name="game"><see cref="GameRequest"/> object that holds the details of the Game.</param>
+		[HttpPut("update/{id:int}")]
+		[ArgumentsNotNull]
+		public void Update([FromRoute] int id, [FromBody] GameRequest game)
+		{
+			var gameModel = game.ToModel();
+			gameModel.Id = id;
+			_gameDbController.Update(gameModel);
+		}
+
+		/// <summary>
 		/// Delete Game with the ID provided.
 		/// 
 		/// Example Usage: DELETE api/game/1

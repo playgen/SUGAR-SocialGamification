@@ -81,6 +81,22 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Update an existing Skill.
+		/// 
+		/// Example Usage: PUT api/skills/update/1
+		/// </summary>
+		/// <param name="id">Id of the existing Skill.</param>
+		/// <param name="skill"><see cref="AchievementRequest"/> object that holds the details of the Skill.</param>
+		[HttpPut("update/{id:int}")]
+		[ArgumentsNotNull]
+		public void Update([FromRoute] int id, [FromBody] AchievementRequest skill)
+		{
+			var skillModel = skill.ToSkillModel();
+			skillModel.Id = id;
+			_skillController.Update(skillModel);
+		}
+
+		/// <summary>
 		/// Delete Skills with the <param name="id"/> provided.
 		/// 
 		/// Example Usage: DELETE api/skills/1

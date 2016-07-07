@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using System.Data.Entity;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -72,6 +73,36 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				context.Leaderboards.Add(leaderboard);
 				SaveChanges(context);
 				return leaderboard;
+			}
+		}
+
+		public void Update(Leaderboard leaderboard)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var existing = context.Leaderboards.Find(leaderboard.Id);
+
+				if (existing != null)
+				{
+					context.Entry(existing).State = EntityState.Modified;
+
+					existing.Name = leaderboard.Name;
+					existing.Key = leaderboard.Key;
+					existing.ActorType = leaderboard.ActorType;
+					existing.CriteriaScope = leaderboard.CriteriaScope;
+					existing.GameDataType = leaderboard.GameDataType;
+					existing.GameId = leaderboard.GameId;
+					existing.LeaderboardType = leaderboard.LeaderboardType;
+					existing.Token = leaderboard.Token;
+
+					SaveChanges(context);
+				}
+				else
+				{
+					throw new MissingRecordException($"The existing leaderboard with ID {leaderboard.Id} could not be found.");
+				}
 			}
 		}
 
