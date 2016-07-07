@@ -40,6 +40,19 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
+		public IEnumerable<GameData> Get(IEnumerable<int> ids)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetCategoryData(_category)
+					.FilterByIds(ids)
+					.ToList();
+				return data;
+			}
+		}
+
 		public IEnumerable<GameData> Get(int? gameId = null, int? actorId = null, IEnumerable<string> keys = null)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))

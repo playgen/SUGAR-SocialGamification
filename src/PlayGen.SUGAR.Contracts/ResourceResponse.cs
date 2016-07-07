@@ -5,6 +5,8 @@
 	/// </summary>
     public class ResourceResponse
     {
+		public int ResourceId { get; set; }
+
 		public int? ActorId { get; set; }
 
 		public int? GameId { get; set; }

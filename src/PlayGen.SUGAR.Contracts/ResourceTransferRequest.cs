@@ -3,19 +3,18 @@
 namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
-	/// Encapsulates Resource Data details.
+	/// Encapsulates Resource Transfer details.
 	/// </summary>
-	public class ResourceRequest
+    public class ResourceTransferRequest
     {
 		[Required]
-		public int? Actorid { get; set; }
+		public int ResourceId { get; set; }
+		
+		[Required]
+		public int? RecipientId { get; set; }
 
 		[Required]
 		public int? GameId { get; set; }
-
-		[Required]
-		[StringLength(64)]
-		public string Key { get; set; }
 
 		[Required]
 		public long Quantity { get; set; }

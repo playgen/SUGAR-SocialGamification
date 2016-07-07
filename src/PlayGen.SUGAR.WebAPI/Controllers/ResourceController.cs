@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http.Description;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Extensions;
+using System;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -34,27 +36,46 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ResponseType(typeof(IEnumerable<ResourceResponse>))]
 		public IActionResult Get(int? actorId, int? gameId, string[] key)
 		{
-			var data = _resourceController.Get(actorId, gameId, key);
-			var dataContract = data.ToResourceContractList();
-			return new ObjectResult(dataContract);
+			var resource = _resourceController.Get(actorId, gameId, key);
+			var resourceContract = resource.ToResourceContractList();
+			return new ObjectResult(resourceContract);
 		}
 
 		/// <summary>
-		/// Create a new GameData record.
+		/// Create a new Resource record.
 		/// 
-		/// Example Usage: POST api/gamedata
+		/// Example Usage: POST api/resource
 		/// </summary>
 		/// <param name="newData"><see cref="ResourceRequest"/> object that holds the details of the new ResourceData.</param>
-		/// <returns>A <see cref="ResourceResponse"/> containing the new GameData details.</returns>
+		/// <returns>A <see cref="ResourceResponse"/> containing the new Resource details.</returns>
 		[HttpPost]
 		[ResponseType(typeof(ResourceResponse))]
 		[ArgumentsNotNull]
-		public IActionResult Add([FromBody]ResourceRequest newData)
+		public IActionResult Add([FromBody]ResourceRequest resourceRequest)
 		{
-			var data = newData.ToModel();
-			_resourceController.Create(data);
-			var dataContract = data.ToResourceContract();
-			return new ObjectResult(dataContract);
+			var resource = resourceRequest.ToModel();
+			_resourceController.Create(resource);
+			var resourceContract = resource.ToResourceContract();
+			return new ObjectResult(resourceContract);
+		}
+
+		[HttpPost]
+		[ResponseType(typeof(ResourceTransferResponse))]
+		[ArgumentsNotNull]
+		public IActionResult Transfer([FromBody] ResourceTransferRequest transferRequest)
+		{
+			Data.Model.GameData fromResource;
+
+			var toResource = _resourceController.Transfer(transferRequest.ResourceId, 
+				transferRequest.GameId, transferRequest.RecipientId, transferRequest.Quantity, out fromResource);
+
+			var resourceTransferRespone = new ResourceTransferResponse
+			{
+				FromResource = fromResource.ToResourceContract(),
+				ToResource = toResource.ToResourceContract(),
+			};
+
+			return new ObjectResult(resourceTransferRespone);
 		}
 	}
 }

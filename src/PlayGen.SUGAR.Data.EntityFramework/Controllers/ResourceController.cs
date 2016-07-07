@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
@@ -25,6 +26,54 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			return _gameDataController.Get(gameId, actorId, keys);
 		}
+
+	    public GameData Transfer(int fromResourceId, int? gameId, int? actorId, long quantity, out GameData fromResource)
+	    {
+		    var foundResources = _gameDataController.Get(new int[] {fromResourceId});
+
+		    if (!foundResources.Any())
+		    {
+			    throw new MissingRecordException("No resource with the specified ID was found.");
+		    }
+
+		    fromResource = foundResources.Single();
+
+		    if (long.Parse(fromResource.Value) < quantity)
+		    {
+			    throw new ArgumentException("The quantity to transfer cannot be greater than the resource's current quantity");
+		    }
+
+		    foundResources = _gameDataController.Get(gameId, actorId, new string[] {fromResource.Key});
+
+			// Deduct from fromResource
+			throw new NotImplementedException();
+
+			// Add to toResource
+
+			GameData toResource;
+
+		    if (foundResources.Any())
+		    {
+			    // Update
+				throw new NotImplementedException();
+		    }
+		    else
+		    {
+			    // Create
+			    toResource = new GameData
+			    {
+				    GameId = gameId,
+				    ActorId = actorId,
+				    Value = quantity.ToString(),
+				    Category = fromResource.Category,
+				    DataType = fromResource.DataType,
+			    };
+
+				Create(toResource);
+		    }
+
+		    return toResource;
+	    }
 
 		public void Create(GameData data)
 		{

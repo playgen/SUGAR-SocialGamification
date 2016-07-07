@@ -26,15 +26,25 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<User> Search(string name)
+		public IEnumerable<User> Search(string name, bool exactMatch = false)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var users = context.Users
-					.Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
+				IEnumerable<User> users;
 
+				if (!exactMatch)
+				{
+					users = context.Users
+					.Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
+				}
+				else
+				{
+					users = context.Users
+						.Where(g => g.Name == name).ToList();
+				}
+				
 				return users;
 			}
 		}
