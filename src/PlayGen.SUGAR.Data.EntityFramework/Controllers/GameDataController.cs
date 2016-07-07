@@ -388,7 +388,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var existing = context.GetData()
+				var existing = context.GetCategoryData(_category)
 					.FilterByGameId(data.GameId)
 					.FilterByActorId(data.ActorId)
 					.FilterByKey(data.Key).LatestOrDefault();

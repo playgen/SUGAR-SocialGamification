@@ -54,111 +54,41 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
-		public void CanTransferResource_FromUserToUser()
+		public void CanTransferCreateResource_FromUserToUser()
 		{
-			var fromUser = GetOrCreateUser();
-			var toUser = GetOrCreateUser();
+			var fromUser = GetOrCreateUser("From");
+			var toUser = GetOrCreateUser("To");
 
 			var fromResource = CreateGameData("CanTransferResource_FromUserToUser", actorId:fromUser.Id);
 
 			long originalQuantity = long.Parse(fromResource.Value);
 			long transferQuantity = originalQuantity/3;
 
-			GameData toResource;
-			_resourceController.Transfer(fromResource.Id, fromResource.GameId, toUser.Id, transferQuantity, out toResource);
+			var toResource = _resourceController.Transfer(fromResource.Id, fromResource.GameId, toUser.Id, transferQuantity, out fromResource);
 
 			Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
 			Assert.Equal(transferQuantity, long.Parse(toResource.Value));
-			Assert.Equal(toUser.Id, toResource.ActorId.Value);
-			Assert.Equal(fromResource.GameId.Value, toResource.GameId.Value);
+			Assert.Equal(toUser.Id, toResource.ActorId);
+			Assert.Equal(fromResource.GameId, toResource.GameId);
 		}
 
 		[Fact]
-		public void CanTransferExistingResource_FromUserToGame()
+		public void CanTransferUpdateResource_FromUserToUser()
 		{
-			throw new NotImplementedException();
-		}
+			var fromUser = GetOrCreateUser("From");
+			var toUser = GetOrCreateUser("To");
 
-		[Fact]
-		public void CanTransferExistingResource_FromUserToSystem()
-		{
-			throw new NotImplementedException();
-		}
-
-		[Fact]
-		public void CanTransferExistingResource_FromGameToGame()
-		{
-			throw new NotImplementedException();
-		}
-
-		[Fact]
-		public void CanTransferExistingResource_FromGameToUser()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void CanTransferExistingResource_FromGameToSystem()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void CanTransferExistingResource_FromSystemToGame()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void CantTransferResource_FromSystemToUser()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void CantTransferResource_FromUserToSameUser()
-		{
-			var user = GetOrCreateUser();
-			var fromResource = CreateGameData("CantTransferResource_FromUserToSameUser", actorId:user.Id);
-			
-			long transferQuantity = long.Parse(fromResource.Value)/3;
-
-			GameData toResource;
-			_resourceController.Transfer(fromResource.Id, fromResource.GameId, user.Id, transferQuantity, out toResource);
-
-			throw new NotImplementedException("assert should throw exception");
-		}
-
-		[Theory]
-		[InlineData(0)]
-		[InlineData(-1)]
-		[InlineData(-2000)]
-		public void CantTransferResource_FromUserToUserWithLessThan1Quantity(long transferQuantity)
-		{
-			var fromUser = GetOrCreateUser();
-			var toUser = GetOrCreateUser();
-
-			var fromResource = CreateGameData("CantTransferResource_FromUserToUserWithInvalidQuantity", actorId: fromUser.Id);
+			var fromResource = CreateGameData("CanTransferResource_FromUserToUser", actorId: fromUser.Id);
+			var existingToResource = CreateGameData(fromResource.Key, actorId: toUser.Id);
 
 			long originalQuantity = long.Parse(fromResource.Value);
+			long transferQuantity = originalQuantity / 3;
 
-			GameData toResource;
-			_resourceController.Transfer(fromResource.Id, fromResource.GameId, toUser.Id, transferQuantity, out toResource);
+			var processedToResource = _resourceController.Transfer(fromResource.Id, fromResource.GameId, toUser.Id, transferQuantity, out fromResource);
 
-			throw new NotImplementedException("assert should throw exception");
-		}
-
-		[Fact]
-		public void CantTransferResource_FromUserToUserWithOutOfRangeQUantity()
-		{
-			var fromUser = GetOrCreateUser();
-			var toUser = GetOrCreateUser();
-
-			var fromResource = CreateGameData("CantTransferResource_FromUserToUserWithInvalidQuantity", actorId: fromUser.Id);
-
-			long originalQuantity = long.Parse(fromResource.Value);
-			long transferQuantity = originalQuantity*2;
-
-			GameData toResource;
-			_resourceController.Transfer(fromResource.Id, fromResource.GameId, toUser.Id, transferQuantity, out toResource);
-
-			throw new NotImplementedException("assert should throw exception");
+			Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
+			Assert.Equal(originalQuantity + transferQuantity, long.Parse(processedToResource.Value));
+			Assert.Equal(existingToResource.Id, processedToResource.Id);
 		}
 		#endregion
 
@@ -210,9 +140,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				&& lhs.Value == rhs.Value;
 		}
 
-		private Actor GetOrCreateUser()
+		private Actor GetOrCreateUser(string suffix = null)
 		{
-			string name = "ResourceControllerTests";
+			string name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
 			var users = _userController.Search(name, true);
 			User user;
 

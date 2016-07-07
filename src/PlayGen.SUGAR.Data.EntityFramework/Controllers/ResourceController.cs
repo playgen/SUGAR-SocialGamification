@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			return _gameDataController.Get(gameId, actorId, keys);
 		}
 
-	    public GameData Transfer(int fromResourceId, int? gameId, int? actorId, long quantity, out GameData fromResource)
+	    public GameData Transfer(int fromResourceId, int? gameId, int? actorId, long transferQuantity, out GameData fromResource)
 	    {
 		    var foundResources = _gameDataController.Get(new int[] {fromResourceId});
 
@@ -37,25 +37,30 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		    }
 
 		    fromResource = foundResources.Single();
+		    var fromQuantity = long.Parse(fromResource.Value);
 
-		    if (long.Parse(fromResource.Value) < quantity)
+
+			if (fromQuantity < transferQuantity)
 		    {
-			    throw new ArgumentException("The quantity to transfer cannot be greater than the resource's current quantity");
+			    throw new ArgumentException("The transferQuantity to transfer cannot be greater than the resource's current transferQuantity");
 		    }
 
 		    foundResources = _gameDataController.Get(gameId, actorId, new string[] {fromResource.Key});
 
 			// Deduct from fromResource
-			throw new NotImplementedException();
+		    fromResource.Value = (fromQuantity - transferQuantity).ToString();
+			_gameDataController.Update(fromResource);
 
 			// Add to toResource
-
 			GameData toResource;
 
 		    if (foundResources.Any())
 		    {
-			    // Update
-				throw new NotImplementedException();
+				// Update
+			    toResource = foundResources.ElementAt(0);
+				var toQuantity = long.Parse(toResource.Value);
+			    toResource.Value = (toQuantity + transferQuantity).ToString();
+				_gameDataController.Update(toResource);
 		    }
 		    else
 		    {
@@ -64,7 +69,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			    {
 				    GameId = gameId,
 				    ActorId = actorId,
-				    Value = quantity.ToString(),
+				    Value = transferQuantity.ToString(),
 				    Category = fromResource.Category,
 				    DataType = fromResource.DataType,
 			    };

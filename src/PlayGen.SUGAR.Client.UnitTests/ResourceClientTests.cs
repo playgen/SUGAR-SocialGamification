@@ -68,6 +68,43 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<WebException>(() => _resourceClient.Add(resourceRequest));
 		}
 
+		/*
+		[Theory]
+		[InlineData(0)]
+		[InlineData(-1)]
+		[InlineData(-2000)]
+		public void CantTransferResource_FromUserToUserWithLessThan1Quantity(long transferQuantity)
+		{
+			var fromUser = GetOrCreateUser("From");
+			var toUser = GetOrCreateUser("To");
+
+			var fromResource = CreateGameData("CantTransferResource_FromUserToUserWithInvalidQuantity", actorId: fromUser.Id);
+
+			long originalQuantity = long.Parse(fromResource.Value);
+
+			GameData toResource;
+			_resourceController.Transfer(fromResource.Id, fromResource.GameId, toUser.Id, transferQuantity, out toResource);
+
+			throw new NotImplementedException("assert should throw exception");
+		}
+
+		[Fact]
+		public void CantTransferResource_FromUserToUserWithOutOfRangeQUantity()
+		{
+			var fromUser = GetOrCreateUser("From");
+			var toUser = GetOrCreateUser("To");
+
+			var fromResource = CreateGameData("CantTransferResource_FromUserToUserWithInvalidQuantity", actorId: fromUser.Id);
+
+			long originalQuantity = long.Parse(fromResource.Value);
+			long transferQuantity = originalQuantity * 2;
+
+			GameData toResource;
+			_resourceController.Transfer(fromResource.Id, fromResource.GameId, toUser.Id, transferQuantity, out toResource);
+
+			throw new NotImplementedException("assert should throw exception");
+		}
+		*/
 		#endregion
 	}
 }
