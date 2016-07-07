@@ -59,7 +59,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(resourceContract);
 		}
 
-		[HttpPost]
+		/// <summary>
+		/// Transfers a quantity of a specific resource.
+		/// 
+		/// Example Usage: Post api/resource/transfer
+		/// </summary>
+		/// <param name="transferRequest"></param>
+		/// <returns>A <see cref="ResourceTransferResponse"/> containing the modified resources.</returns>
+		[HttpPost("transfer")]
 		[ResponseType(typeof(ResourceTransferResponse))]
 		[ArgumentsNotNull]
 		public IActionResult Transfer([FromBody] ResourceTransferRequest transferRequest)

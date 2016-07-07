@@ -29,9 +29,13 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="name">Game name</param>
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
-		public IEnumerable<GameResponse> Get(string name)
+		public IEnumerable<GameResponse> Get(string name, bool exactMatch = false)
 		{
-			var query = GetUriBuilder($"api/game/find/{name}").ToString();
+			var query = GetUriBuilder("api/game/find")
+				.AppendQueryParameter(name, "name={0}")
+				.AppendQueryParameter(exactMatch, "exactMatch={0}")
+				.ToString();
+			
 			return Get<IEnumerable<GameResponse>>(query);
 		}
 

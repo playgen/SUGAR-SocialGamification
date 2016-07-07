@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		{
 			return new Data.Model.GameData
 			{
-				ActorId = resourceContract.Actorid,
+				ActorId = resourceContract.ActorId,
 				GameId = resourceContract.GameId,
 				Key = resourceContract.Key,
 				Value = resourceContract.Quantity.ToString(),

@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="name">Array of User names.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> Get(string name)
+		public IEnumerable<ActorResponse> Get(string name, bool exactMatch = false)
 		{
 			var query = GetUriBuilder($"api/user/find/{name}").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);

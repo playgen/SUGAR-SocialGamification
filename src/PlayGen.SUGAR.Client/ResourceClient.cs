@@ -40,5 +40,16 @@ namespace PlayGen.SUGAR.Client
 			var query = GetUriBuilder(ControllerPrefix).ToString();
 			return Post<ResourceRequest, ResourceResponse>(query, data);
 		}
+
+		/// <summary>
+		/// Transfers a quantity of a specific resource.
+		/// </summary>
+		/// <param name="data"></param>
+		/// <returns>A <see cref="ResourceTransferResponse"/> containing the modified resources.</returns>
+		public ResourceTransferResponse Transfer(ResourceTransferRequest data)
+		{
+			var query = GetUriBuilder(ControllerPrefix + "/transfer").ToString();
+			return Post<ResourceTransferRequest, ResourceTransferResponse>(query, data);
+		}
 	}
 }

@@ -46,12 +46,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: GET api/user/find/user1
 		/// </summary>
 		/// <param name="name">User name.</param>
+		/// <param exactMatch="exactMatch">Match the name exactly.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
 		[ResponseType(typeof(IEnumerable<ActorResponse>))]
-		public IActionResult Get([FromRoute]string name)
+		public IActionResult Get([FromRoute]string name, bool exactMatch)
 		{
-			var users = _userController.Search(name);
+			var users = _userController.Search(name, exactMatch);
 			var actorContract = users.ToContractList();
 			return new ObjectResult(actorContract);
 		}

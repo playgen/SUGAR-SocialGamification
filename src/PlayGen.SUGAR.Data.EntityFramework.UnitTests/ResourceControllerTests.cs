@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	    [Fact]
 	    public void CanGetResourceByKey()
 	    {
-			var newResource = CreateGameData("CanGetExistingResourceByKey");
+			var newResource = CreateResource("CanGetExistingResourceByKey");
 
 			var gotResources = _resourceController.Get(keys: new []{newResource.Key});
 
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void CanGetResourceActorId()
 		{
-			var newResource = CreateGameData("CanGetExistingResourceActorId", createNewUser: true);
+			var newResource = CreateResource("CanGetExistingResourceActorId", createNewUser: true);
 
 			var gotResources = _resourceController.Get(actorId: newResource.ActorId);
 
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void CanGetResourceeGameId()
 		{
-			var newResource = CreateGameData("CanGetExistingResourceGameId", createNewGame: true);
+			var newResource = CreateResource("CanGetExistingResourceGameId", createNewGame: true);
 
 			var gotResources = _resourceController.Get(gameId: newResource.GameId);
 
@@ -54,12 +54,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
-		public void CanTransferCreateResource_FromUserToUser()
+		public void CanTransferCreate_FromUserToUser()
 		{
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
 
-			var fromResource = CreateGameData("CanTransferResource_FromUserToUser", actorId:fromUser.Id);
+			var fromResource = CreateResource("CanTransfer_FromUserToUser", actorId:fromUser.Id);
 
 			long originalQuantity = long.Parse(fromResource.Value);
 			long transferQuantity = originalQuantity/3;
@@ -73,13 +73,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
-		public void CanTransferUpdateResource_FromUserToUser()
+		public void CanTransferUpdate_FromUserToUser()
 		{
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
 
-			var fromResource = CreateGameData("CanTransferResource_FromUserToUser", actorId: fromUser.Id);
-			var existingToResource = CreateGameData(fromResource.Key, actorId: toUser.Id);
+			var fromResource = CreateResource("CanTransfer_FromUserToUser", actorId: fromUser.Id);
+			var existingToResource = CreateResource(fromResource.Key, actorId: toUser.Id);
 
 			long originalQuantity = long.Parse(fromResource.Value);
 			long transferQuantity = originalQuantity / 3;
@@ -93,7 +93,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Helpers
-		private GameData CreateGameData(string key, int? gameId = null, int? actorId = null,
+		private GameData CreateResource(string key, int? gameId = null, int? actorId = null,
               bool createNewGame = false, bool createNewUser = false)
 		{
 			if (createNewGame)
