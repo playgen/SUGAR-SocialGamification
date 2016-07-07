@@ -121,6 +121,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 				.HasColumnName("RewardCollection")
 				.HasMaxLength(1024);
 
+			modelBuilder.Entity<GameData>()
+				.Property(g => g.DateCreated)
+				.HasPrecision(3);
+			modelBuilder.Entity<GameData>()
+				.Property(g => g.DateModified)
+				.HasPrecision(3);
+
 			// Change all string fields to have a max length of 64 chars
 			modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
 
@@ -149,7 +156,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 				if (history.DateCreated == default(DateTime))
 				{
-					history.DateCreated = DateTime.Now;;
+					history.DateCreated = DateTime.Now;
 				}
 			}
 

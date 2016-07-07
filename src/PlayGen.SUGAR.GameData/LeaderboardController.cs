@@ -7,6 +7,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
+using System.Globalization;
 
 namespace PlayGen.SUGAR.GameData
 {
@@ -316,7 +317,8 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.TryGetEarliestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
+						Value = GameDataController.TryGetEarliestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd)
+									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					});
 					break;
 
@@ -325,7 +327,8 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.TryGetEarliestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
+						Value = GameDataController.TryGetEarliestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd)
+									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					});
 					break;
 
@@ -333,7 +336,7 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			results = results.OrderBy(r => DateTime.Parse(r.Value))
+			results = results.OrderBy(r => r.Value)
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime));
 			return results;
 		}
@@ -348,7 +351,8 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.TryGetLatestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
+						Value = GameDataController.TryGetLatestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd)
+									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					});
 					break;
 
@@ -357,7 +361,8 @@ namespace PlayGen.SUGAR.GameData
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataController.TryGetLatestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
+						Value = GameDataController.TryGetLatestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd)
+									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					});
 					break;
 
@@ -365,7 +370,7 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			results = results.OrderByDescending(r => DateTime.Parse(r.Value))
+			results = results.OrderByDescending(r => r.Value)
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime));
 			return results;
 		}

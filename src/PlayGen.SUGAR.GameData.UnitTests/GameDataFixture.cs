@@ -36,19 +36,25 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			List<User> users = new List<User>();
 			List<Group> groups = new List<Group>();
 			var dataValues = GenerateDataValues();
-			for (int i = 0; i < 100; i++)
+			for (int i = 0; i < TestController.UserCount; i++)
 			{
 				users.Add(CreateUser((i + 1).ToString()));
+				
+			}
+
+			for (int i = 0; i < TestController.GameCount; i++)
+			{
 				games.Add(CreateGame((i + 1).ToString()));
+			}
+
+			for (int i = 0; i < TestController.GroupCount; i++)
+			{
+				groups.Add(CreateGroup((i + 1).ToString()));
 			}
 
 			for (int i = 0; i < users.Count; i++)
 			{
-				if (i % 10 == 0)
-				{
-					groups.Add(CreateGroup((i + 1).ToString()));
-				}
-				for (int j = 1; j <= 10; j++)
+				for (int j = 1; j <= TestController.FriendCount; j++)
 				{
 					int friendId = i + j;
 					if (i + j >= users.Count)
@@ -57,12 +63,12 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 					}
 					CreateFriendship(users[i].Id, users[friendId].Id);
 				}
-				CreateMembership(users[i].Id, groups[i / 10].Id);
+				CreateMembership(users[i].Id, groups[i / TestController.GroupCount].Id);
 			}
 
 			Random random = new Random();
 			List<Data.Model.GameData> gameDatas = new List<Data.Model.GameData>();
-			for (int j = 0; j < 100000; j++)
+			for (int j = 0; j < TestController.DataCount; j++)
 			{
 				gameDatas.Add(CreateData(games[random.Next(0, games.Count)], users[random.Next(0, users.Count)], dataValues[random.Next(0, dataValues.Count)]));
 			}

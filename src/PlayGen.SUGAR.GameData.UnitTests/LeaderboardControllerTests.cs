@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 				new GroupRelationshipController(NameOrConnectionString), new UserRelationshipController(NameOrConnectionString),
 				new ActorController(NameOrConnectionString), new GroupController(NameOrConnectionString),
 				new UserController(NameOrConnectionString));
-			_gameDataController = new GameDataController(TestController.NameOrConnectionString);
+			_gameDataController = new GameDataController(NameOrConnectionString);
 		}
 		#endregion
 
@@ -33,10 +33,9 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardSumLongSpeedTest", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
-			
 		}
 
 		[Fact]
@@ -44,7 +43,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardSumFloatSpeedTest", GameDataType.Float, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -55,7 +54,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardHighLongSpeedTest", GameDataType.Long, LeaderboardType.Highest);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -66,7 +65,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardHighFloatSpeedTest", GameDataType.Float, LeaderboardType.Highest);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -77,7 +76,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardLowLongSpeedTest", GameDataType.Long, LeaderboardType.Lowest);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -88,7 +87,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardLowFloatSpeedTest", GameDataType.Float, LeaderboardType.Lowest);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -99,7 +98,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardCountStringSpeedTest", GameDataType.String, LeaderboardType.Count);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -110,7 +109,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardCountBoolSpeedTest", GameDataType.Boolean, LeaderboardType.Count);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -121,7 +120,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardEarliestStringSpeedTest", GameDataType.String, LeaderboardType.Earliest);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -132,7 +131,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardEarliestBoolSpeedTest", GameDataType.Boolean, LeaderboardType.Earliest);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -143,7 +142,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardLatestStringSpeedTest", GameDataType.String, LeaderboardType.Latest);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -154,7 +153,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("GetLeaderboardLatestBoolSpeedTest", GameDataType.Boolean, LeaderboardType.Latest);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 			
@@ -166,7 +165,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			Random random = new Random();
 			var leaderboard = CreateLeaderboard("GetLeaderboardNearFilterSpeedTest", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Near, 100, random.Next(1, 101));
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Near, UserCount, random.Next(1, UserCount + 1));
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 
@@ -178,7 +177,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			Random random = new Random();
 			var leaderboard = CreateLeaderboard("GetLeaderboardFriendFilterSpeedTest", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Friends, 100, random.Next(1, 101));
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Friends, UserCount, random.Next(1, UserCount + 1));
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 		}
@@ -189,7 +188,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			Random random = new Random();
 			var leaderboard = CreateLeaderboard("GetLeaderboardGroupMemberFilterSpeedTest", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.GroupMembers, 100, random.Next(101, 111));
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.GroupMembers, UserCount, random.Next(UserCount + 1, UserCount + GroupCount + 1));
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter);
 
@@ -198,7 +197,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		[Fact]
 		public void CreateLeaderboardStandingRequestWithInvalidLeaderboardId()
 		{
-			var filter = CreateLeaderboardStandingsRequest(-1, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(-1, LeaderboardFilterType.Top, UserCount);
 
 			Assert.Throws<MissingRecordException>(() => _leaderboardEvaulationController.GetStandings(null, filter));
 		}
@@ -219,7 +218,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("CreateNearLeaderboardStandingRequestWithInvalidActorId", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 0, -1);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Near, UserCount, -1);
 
 			Assert.Throws<ArgumentException>(() => _leaderboardEvaulationController.GetStandings(leaderboard, filter));
 
@@ -231,7 +230,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			Random random = new Random();
 			var leaderboard = CreateLeaderboard("CreateNearLeaderboardStandingRequestWithInvalidActorType", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 0, random.Next(101, 111));
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Near, 0, random.Next(UserCount + 1, UserCount + GroupCount + 1));
 
 			Assert.Throws<ArgumentException>(() => _leaderboardEvaulationController.GetStandings(leaderboard, filter));
 
@@ -242,7 +241,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("CreateNearLeaderboardStandingRequestWithNoActorId", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 0);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Near, 0);
 
 			Assert.Throws<ArgumentException>(() => _leaderboardEvaulationController.GetStandings(leaderboard, filter));
 
@@ -253,7 +252,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("CreateFriendsLeaderboardStandingRequestWithInvalidActorId", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 0, -1);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Friends, UserCount, -1);
 
 			Assert.Throws<ArgumentException>(() => _leaderboardEvaulationController.GetStandings(leaderboard, filter));
 
@@ -265,7 +264,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			Random random = new Random();
 			var leaderboard = CreateLeaderboard("CreateFriendsLeaderboardStandingRequestWithInvalidActorType", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 0, random.Next(101, 111));
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Friends, 0, random.Next(UserCount + 1, UserCount + GroupCount + 1));
 
 			Assert.Throws<ArgumentException>(() => _leaderboardEvaulationController.GetStandings(leaderboard, filter));
 
@@ -276,7 +275,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("CreateFriendsLeaderboardStandingRequestWithNoActorId", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 0);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Friends, 0);
 
 			Assert.Throws<ArgumentException>(() => _leaderboardEvaulationController.GetStandings(leaderboard, filter));
 
@@ -287,7 +286,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("CreateMembersLeaderboardStandingRequestWithInvalidActorId", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 0, -1);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.GroupMembers, UserCount, -1);
 
 			Assert.Throws<ArgumentException>(() => _leaderboardEvaulationController.GetStandings(leaderboard, filter));
 
@@ -299,7 +298,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			Random random = new Random();
 			var leaderboard = CreateLeaderboard("CreateMembersLeaderboardStandingRequestWithInvalidActorType", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 0, random.Next(1, 101));
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.GroupMembers, 0, random.Next(1, UserCount + 1));
 
 			Assert.Throws<ArgumentException>(() => _leaderboardEvaulationController.GetStandings(leaderboard, filter));
 
@@ -310,7 +309,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var leaderboard = CreateLeaderboard("CreateMembersLeaderboardStandingRequestWithNoActorId", GameDataType.Long, LeaderboardType.Cumulative);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 0);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.GroupMembers, 0);
 
 			Assert.Throws<ArgumentException>(() => _leaderboardEvaulationController.GetStandings(leaderboard, filter));
 
@@ -322,16 +321,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardSumLongAccuracyTest", GameDataType.Long, leaderboard.GameId.Value);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
 			}
 		}
@@ -343,16 +342,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardSumFloatAccuracyTest", GameDataType.Float, leaderboard.GameId.Value);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
 			}
 		}
@@ -364,16 +363,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardHighLongAccuracyTest", GameDataType.Long, leaderboard.GameId.Value);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
 			}
 		}
@@ -385,16 +384,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardHighFloatAccuracyTest", GameDataType.Float, leaderboard.GameId.Value);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
 			}
 		}
@@ -406,16 +405,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardLowLongAccuracyTest", GameDataType.Long, leaderboard.GameId.Value, true);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[randomId - 1].ActorId);
 			}
 		}
@@ -427,16 +426,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardLowFloatAccuracyTest", GameDataType.Float, leaderboard.GameId.Value, true);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[randomId - 1].ActorId);
 			}
 		}
@@ -448,16 +447,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardCountStringAccuracyTest", GameDataType.String, leaderboard.GameId.Value);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
 			}
 		}
@@ -469,16 +468,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardCountBoolAccuracyTest", GameDataType.Boolean, leaderboard.GameId.Value);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
 			}
 		}
@@ -490,16 +489,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardEarliestStringAccuracyTest", GameDataType.String, leaderboard.GameId.Value);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[randomId - 1].ActorId);
 			}
 		}
@@ -511,16 +510,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardEarliestBoolAccuracyTest", GameDataType.Boolean, leaderboard.GameId.Value);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[randomId - 1].ActorId);
 			}
 		}
@@ -532,16 +531,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardLatestStringAccuracyTest", GameDataType.String, leaderboard.GameId.Value);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
 			}
 		}
@@ -553,16 +552,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			CreateGameData("GetLeaderboardLatestBoolAccuracyTest", GameDataType.Boolean, leaderboard.GameId.Value);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, 100);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Top, UserCount);
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(100, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
-				int randomId = random.Next(1, 101);
+				int randomId = random.Next(1, UserCount + 1);
 				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
 			}
 		}
@@ -573,17 +572,17 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			Random random = new Random();
 			var leaderboard = CreateLeaderboard("GetLeaderboardNearFilterAccuracyTest", GameDataType.Long, LeaderboardType.Lowest, "GetLeaderboardNearFilterAccuracyTest");
 
-			CreateGameData("GetLeaderboardNearFilterAccuracyTest", GameDataType.Long, leaderboard.GameId.Value);
+			CreateGameData("GetLeaderboardNearFilterAccuracyTest", GameDataType.Long, leaderboard.GameId.Value, true);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Near, 10, random.Next(1, 101));
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Near, 10, random.Next(1, UserCount + 1));
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(10, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < filter.Limit; i++)
 			{
-				int offset = (filter.ActorId.Value - 1) / 10;
+				int offset = ((filter.ActorId.Value - 1) / (UserCount/ filter.Limit)) * filter.Limit;
 				Assert.Equal(offset + i + 1, standings[i].ActorId);
 			}
 		}
@@ -594,17 +593,17 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			Random random = new Random();
 			var leaderboard = CreateLeaderboard("GetLeaderboardFriendFilterAccuracyTest", GameDataType.Long, LeaderboardType.Lowest, "GetLeaderboardFriendFilterAccuracyTest");
 
-			CreateGameData("GetLeaderboardFriendFilterAccuracyTest", GameDataType.Long, leaderboard.GameId.Value);
+			CreateGameData("GetLeaderboardFriendFilterAccuracyTest", GameDataType.Long, leaderboard.GameId.Value, true);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Friends, 100, random.Next(1, 91));
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.Friends, UserCount, random.Next(FriendCount + 1, UserCount - FriendCount + 1));
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(21, standings.Length);
+			Assert.Equal((FriendCount * 2) + 1, standings.Length);
 
-			for (int i = 0; i < 21; i++)
+			for (int i = 0; i < (FriendCount * 2) + 1; i++)
 			{
-				Assert.Equal(filter.ActorId.Value - 10 + i, standings[i].ActorId);
+				Assert.Equal((filter.ActorId.Value - FriendCount) + i, standings[i].ActorId);
 			}
 		}
 
@@ -614,17 +613,17 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			Random random = new Random();
 			var leaderboard = CreateLeaderboard("GetLeaderboardGroupMemberFilterAccuracyTest", GameDataType.Long, LeaderboardType.Lowest, "GetLeaderboardGroupMemberFilterAccuracyTest");
 
-			CreateGameData("GetLeaderboardGroupMemberFilterAccuracyTest", GameDataType.Long, leaderboard.GameId.Value);
+			CreateGameData("GetLeaderboardGroupMemberFilterAccuracyTest", GameDataType.Long, leaderboard.GameId.Value, true);
 
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.GroupMembers, 100, random.Next(101, 111));
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Id, LeaderboardFilterType.GroupMembers, UserCount/GroupCount, random.Next(UserCount + 1, UserCount + GroupCount + 1));
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(10, standings.Length);
+			Assert.Equal(filter.Limit, standings.Length);
 
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < filter.Limit; i++)
 			{
-				int offset = (filter.ActorId.Value - 101) * 10;
+				int offset = (filter.ActorId.Value - UserCount - 1) * filter.Limit;
 				Assert.Equal(offset + i + 1, standings[i].ActorId);
 			}
 		}
@@ -639,7 +638,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 				Name = name,
 				Token = name,
 				Key = dataType.ToString(),
-				GameId = random.Next(1, 101),
+				GameId = random.Next(1, GameCount + 1),
 				ActorType = ActorType.User,
 				GameDataType = dataType,
 				CriteriaScope = CriteriaScope.Actor,
@@ -676,9 +675,9 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		private void CreateGameData(string key, GameDataType type, int gameId = 0, bool singular = false)
 		{
 			Random random = new Random();
-			List<Data.Model.GameData> data = new List<Data.Model.GameData>();
-			for (int i = 1; i <= 100; i++)
+			for (int i = 1; i <= UserCount; i++)
 			{
+				List<Data.Model.GameData> data = new List<Data.Model.GameData>();
 				for (int j = i; j > 0; j--)
 				{
 					var gameData = new Data.Model.GameData
@@ -703,8 +702,8 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 						break;
 					}
 				}
+				_gameDataController.Create(data.ToArray());
 			}
-			_gameDataController.Create(data.ToArray());
 		}
 		#endregion
 	}
