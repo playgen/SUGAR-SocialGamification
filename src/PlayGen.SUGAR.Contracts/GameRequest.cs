@@ -5,6 +5,12 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates game details.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// Name : "Game Name"
+	/// }
+	/// </example>
 	public class GameRequest
 	{
 		[Required]

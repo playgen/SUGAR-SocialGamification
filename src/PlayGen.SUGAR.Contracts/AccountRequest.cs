@@ -5,6 +5,14 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates log-in details.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// Name : "Name",
+	/// Password : "Password",
+	/// AutoLogin : true
+	/// }
+	/// </example>
 	public class AccountRequest
 	{
 		[Required]

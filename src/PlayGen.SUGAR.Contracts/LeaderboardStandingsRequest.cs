@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PlayGen.SUGAR.Contracts
@@ -9,6 +8,18 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates leaderboard current standings request.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// LeaderboardId : 1,
+	/// ActorId : 1,
+	/// LeaderboardFilterType : "Near",
+	/// Limit : 10,
+	/// Offset : 0,
+	/// DateStart : "2016-01-01 00:00:00",
+	/// DateEnd : "2016-31-12 23:59:59"
+	/// }
+	/// </example>
 	public class LeaderboardStandingsRequest
 	{
 		[Required]

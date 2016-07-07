@@ -7,6 +7,30 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates achievement details returned from the server.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// Id : 1,
+	/// GameId : 1,
+	/// Name : "Achievement Unlocked",
+	/// Description : "Fulfil the criteria to get the reward",
+	/// ActorType : "User",
+	/// Token : "Achievement_Token",
+	/// CompletionCriteria : [{
+	/// Key : "Criteria Key",
+	/// DataType : "Long",
+	/// ComparisonType : "Equals",
+	/// Scope : "Actor",
+	/// Value : "5"
+	/// }],
+	/// Reward : [{
+	/// Key : "Reward Key",
+	/// DataType : "Float",
+	/// Value : "10.5"
+	/// }]
+	/// }
+	/// }
+	/// </example>
 	public class AchievementResponse
 	{
 		public int Id { get; set; }

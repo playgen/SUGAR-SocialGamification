@@ -5,6 +5,16 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates user and token details at log-in.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// User : [{
+	/// Id : 1,
+	/// Name : "Name"
+	/// }],
+	/// Token : 3xamp1370k3n
+	/// }
+	/// </example>
 	public class AccountResponse
 	{
 		public ActorResponse User { get; set; }
