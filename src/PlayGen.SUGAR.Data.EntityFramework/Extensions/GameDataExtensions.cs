@@ -30,7 +30,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 
 		public static IQueryable<GameData> FilterByKeys(this IQueryable<GameData> gameDataQueryable, IEnumerable<string> keys)
 		{
-			return gameDataQueryable.Where(gd => keys.Contains(gd.Key));
+			if (keys != null)
+			{
+				return gameDataQueryable.Where(gd => keys.Contains(gd.Key));
+			}
+			else
+			{
+				return gameDataQueryable;
+			}
 		}
 
 		public static IQueryable<GameData> FilterByDataType(this IQueryable<GameData> gameDataQueryable, GameDataType type)

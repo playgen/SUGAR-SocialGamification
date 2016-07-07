@@ -17,6 +17,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		private GroupController _groupController;
 		private GroupRelationshipController _groupRelationshipController;
 		private LeaderboardController _leaderboardController;
+		private ResourceController _resourceController;
 		private SkillController _skillController;
 		private UserController _userController;
 		private UserRelationshipController _userRelationshipController;
@@ -37,6 +38,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			=>_groupRelationshipController ?? (_groupRelationshipController = new GroupRelationshipController(_connectionString));
 		public LeaderboardController LeaderboardController
 			=> _leaderboardController ?? (_leaderboardController = new LeaderboardController(_connectionString));
+		public ResourceController ResourceController 
+			=> _resourceController ?? (_resourceController = new ResourceController(_connectionString));
 		public SkillController SkillController
 			=> _skillController ?? (_skillController = new SkillController(_connectionString));
 		public UserController UserController 

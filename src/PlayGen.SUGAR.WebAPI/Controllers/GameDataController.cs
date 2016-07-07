@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
 		public IActionResult Add([FromBody]GameDataRequest newData)
 		{
-			var data = newData.ToUserModel();
+			var data = newData.ToModel();
 			_gameDataController.Create(data);
 			var dataContract = data.ToContract();
 			return new ObjectResult(dataContract);

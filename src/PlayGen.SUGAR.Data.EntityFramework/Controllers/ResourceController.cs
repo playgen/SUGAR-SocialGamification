@@ -21,22 +21,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			return _gameDataController.KeyExists(gameId, actorId, key, start = default(DateTime), end = default(DateTime));
 		}
 
-		public IEnumerable<GameData> Get(int? gameId, int? actorId, IEnumerable<string> keys)
+		public IEnumerable<GameData> Get(int? gameId = null, int? actorId = null, IEnumerable<string> keys = null)
 		{
 			return _gameDataController.Get(gameId, actorId, keys);
 		}
 
 		public void Create(GameData data)
 		{
-			if (data.Category != GameDataCategory.Resource)
-			{
-				// TODO error
-			}
-			else if (data.DataType != GameDataType.Long)
-			{
-				// TODO error
-			}
-
 			_gameDataController.Create(data);
 		}
 	}

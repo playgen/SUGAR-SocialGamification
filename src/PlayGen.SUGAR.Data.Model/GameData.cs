@@ -12,13 +12,13 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public int? GameId { get; set; }
 
-		public GameDataCategory Category { get; set; }
+		public virtual GameDataCategory Category { get; set; }
 
 		public string Key { get; set; }
 
-		public string Value { get; set; }
+		public virtual string Value { get; set; }
 
-		public GameDataType DataType { get; set; }
+		public virtual GameDataType DataType { get; set; }
 
 		public DateTime DateCreated { get; set; }
 
