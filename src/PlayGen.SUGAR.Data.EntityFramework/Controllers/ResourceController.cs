@@ -29,42 +29,19 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 	    public GameData Transfer(int fromResourceId, int? gameId, int? actorId, long transferQuantity, out GameData fromResource)
 	    {
-		    var foundResources = _gameDataController.Get(new int[] {fromResourceId});
+		    fromResource = GetExistingResource(fromResourceId);
+		    UpdateQuantity(fromResource, -transferQuantity);
 
-		    if (!foundResources.Any())
-		    {
-			    throw new MissingRecordException("No resource with the specified ID was found.");
-		    }
-
-		    fromResource = foundResources.Single();
-		    var fromQuantity = long.Parse(fromResource.Value);
-
-
-			if (fromQuantity < transferQuantity)
-		    {
-			    throw new ArgumentException("The transferQuantity to transfer cannot be greater than the resource's current transferQuantity");
-		    }
-
-		    foundResources = _gameDataController.Get(gameId, actorId, new string[] {fromResource.Key});
-
-			// Deduct from fromResource
-		    fromResource.Value = (fromQuantity - transferQuantity).ToString();
-			_gameDataController.Update(fromResource);
-
-			// Add to toResource
 			GameData toResource;
+			var foundResources = _gameDataController.Get(gameId, actorId, new string[] { fromResource.Key });
 
 		    if (foundResources.Any())
 		    {
-				// Update
-			    toResource = foundResources.ElementAt(0);
-				var toQuantity = long.Parse(toResource.Value);
-			    toResource.Value = (toQuantity + transferQuantity).ToString();
-				_gameDataController.Update(toResource);
+				toResource = foundResources.ElementAt(0);
+				UpdateQuantity(toResource, transferQuantity);
 		    }
 		    else
 		    {
-			    // Create
 			    toResource = new GameData
 			    {
 				    GameId = gameId,
@@ -73,7 +50,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				    Category = fromResource.Category,
 				    DataType = fromResource.DataType,
 			    };
-
 				Create(toResource);
 		    }
 
@@ -84,5 +60,25 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			_gameDataController.Create(data);
 		}
-	}
+
+	    private void UpdateQuantity(GameData resource, long modifyAmount)
+	    {
+			long currentValue = long.Parse(resource.Value);
+			resource.Value = (currentValue + modifyAmount).ToString();
+
+			_gameDataController.Update(resource);
+		}
+
+	    private GameData GetExistingResource(int fromResourceId)
+	    {
+		    var foundResources = _gameDataController.Get(new int[] {fromResourceId});
+
+		    if (!foundResources.Any())
+		    {
+			    throw new MissingRecordException("No resource with the specified ID was found.");
+		    }
+
+		    return foundResources.Single();
+	    }
+    }
 }
