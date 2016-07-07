@@ -33,5 +33,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Interfaces
 		void Create(GameData data);
 
 		void Create(GameData[] data);
+
+		void Update(GameData data);
 	}
 }

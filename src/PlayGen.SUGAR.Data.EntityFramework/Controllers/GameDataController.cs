@@ -340,7 +340,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					{
 						SetLog(context);
 
-
 						context.GameData.AddRange(dataList);
 						SaveChanges(context);
 						dataList.Clear();
@@ -357,6 +356,23 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					SaveChanges(context);
 					dataList.Clear();
 				}
+			}
+		}
+
+		public void Update(GameData data)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var existing = context.GetData()
+					.FilterByGameId(data.GameId)
+					.FilterByActorId(data.ActorId)
+					.FilterByKey(data.Key).LatestOrDefault();
+
+				context.Entry(existing).State = EntityState.Modified;
+				existing.Value += data.Value;
+				SaveChanges(context);
 			}
 		}
 
