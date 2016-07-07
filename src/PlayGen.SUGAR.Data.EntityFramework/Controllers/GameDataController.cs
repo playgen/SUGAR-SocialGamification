@@ -388,13 +388,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var existing = context.GetCategoryData(_category)
-					.FilterByGameId(data.GameId)
-					.FilterByActorId(data.ActorId)
-					.FilterByKey(data.Key).LatestOrDefault();
-
-				context.Entry(existing).State = EntityState.Modified;
-				existing.Value += data.Value;
+				context.Entry(data).State = EntityState.Modified;
 				SaveChanges(context);
 			}
 		}

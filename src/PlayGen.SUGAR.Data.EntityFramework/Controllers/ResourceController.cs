@@ -27,6 +27,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			return _gameDataController.Get(gameId, actorId, keys);
 		}
 
+	    public void Update(GameData resource)
+	    {
+		    _gameDataController.Update(resource);
+	    }
+
 	    public GameData Transfer(int fromResourceId, int? gameId, int? actorId, long transferQuantity, out GameData fromResource)
 	    {
 		    fromResource = GetExistingResource(fromResourceId);

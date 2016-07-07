@@ -54,6 +54,23 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
+		public void CanUpdateResource()
+		{
+			var newResource = CreateResource("CanUpdateResource");
+
+			string originalValue = newResource.Value;
+			string newValue = originalValue + "999";
+			newResource.Value = newValue;
+
+			_resourceController.Update(newResource);
+
+			var resources = _resourceController.Get(newResource.GameId, newResource.ActorId, new string[] {newResource.Key});
+			newResource = resources.Single();
+
+			Assert.Equal(newValue, newResource.Value);
+		}
+
+		[Fact]
 		public void CanTransferCreate_FromUserToUser()
 		{
 			var fromUser = GetOrCreateUser("From");
