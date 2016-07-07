@@ -1,13 +1,25 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
 	/// Encapsulates leaderboard details returned from the server.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// Id : 1,
+	/// GameId : 1,
+	/// Name : "Leaderboard Name",
+	/// Token : "Leaderboard_Name",
+	/// Key : "Key",
+	/// ActorType : "User",
+	/// GameDataType : "Long",
+	/// CriteriaScope : "Actor",
+	/// LeaderboardType : "Highest"
+	/// }
+	/// </example>
 	public class LeaderboardResponse
 	{
 		public int Id { get; set; }

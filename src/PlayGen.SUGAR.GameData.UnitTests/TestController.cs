@@ -10,6 +10,16 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 		private static bool _deletedDatabase = false;
 
+		public static int UserCount = 100;
+
+		public static int GameCount = 100;
+
+		public static int GroupCount = 10;
+
+		public static int FriendCount = 10;
+
+		public static int DataCount = 100000;
+
 		public static string NameOrConnectionString
 		{
 			get

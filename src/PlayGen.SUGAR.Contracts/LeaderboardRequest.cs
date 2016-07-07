@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PlayGen.SUGAR.Contracts
@@ -8,6 +7,19 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates leaderboard details.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// GameId : 1,
+	/// Name : "Leaderboard Name",
+	/// Token : "Leaderboard_Name",
+	/// Key : "Key",
+	/// ActorType : "User",
+	/// GameDataType : "Long",
+	/// CriteriaScope : "Actor",
+	/// LeaderboardType : "Highest"
+	/// }
+	/// </example>
 	public class LeaderboardRequest
 	{
 		public int? GameId { get; set; }

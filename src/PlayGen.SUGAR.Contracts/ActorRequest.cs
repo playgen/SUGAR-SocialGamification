@@ -5,6 +5,12 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates user and group details.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// Name : "Name"
+	/// }
+	/// </example>
 	public class ActorRequest
 	{
 		[Required]

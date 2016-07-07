@@ -97,6 +97,22 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Update an existing Leaderboard.
+		/// 
+		/// Example Usage: PUT api/leaderboards/update/1
+		/// </summary>
+		/// <param name="id">Id of the existing Leaderboard.</param>
+		/// <param name="leaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the Leaderboard.</param>
+		[HttpPut("update/{id:int}")]
+		[ArgumentsNotNull]
+		public void Update([FromRoute] int id, [FromBody] LeaderboardRequest leaderboard)
+		{
+			var leaderboardModel = leaderboard.ToModel();
+			leaderboardModel.Id = id;
+			_leaderboardController.Update(leaderboardModel);
+		}
+
+		/// <summary>
 		/// Delete Leaderboards with the <param name="id"/> provided.
 		/// 
 		/// Example Usage: DELETE api/leaderboards/1

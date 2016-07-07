@@ -92,6 +92,22 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Update an existing Group.
+		/// 
+		/// Example Usage: PUT api/group/update/1
+		/// </summary>
+		/// <param name="id">Id of the existing Group.</param>
+		/// <param name="group"><see cref="ActorRequest"/> object that holds the details of the Group.</param>
+		[HttpPut("update/{id:int}")]
+		[ArgumentsNotNull]
+		public void Update([FromRoute] int id, [FromBody] ActorRequest group)
+		{
+			var groupModel = group.ToGroupModel();
+			groupModel.Id = id;
+			_groupController.Update(groupModel);
+		}
+
+		/// <summary>
 		/// Delete group with the <param name="id"/> provided.
 		/// 
 		/// Example Usage: DELETE api/group/1
