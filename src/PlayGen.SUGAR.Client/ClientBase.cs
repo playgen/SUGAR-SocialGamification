@@ -140,7 +140,10 @@ namespace PlayGen.SUGAR.Client
 				throw new Exception("API ERROR, Status Code: " + response.StatusCode + ". Message: " + response.StatusDescription);
 			}
 
-			_credentials.Token = response.Headers["Bearer"];
+			if (response.Headers["Bearer"] != null)
+			{
+				_credentials.Token = response.Headers["Bearer"];
+			}
 		}
 
 		private HttpWebResponse PostPut<TRequest>(string url, TRequest payload, string method)
