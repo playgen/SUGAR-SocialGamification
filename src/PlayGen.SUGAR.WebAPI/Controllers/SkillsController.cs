@@ -122,6 +122,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
 			var skills = _skillController.GetByGame(gameId);
+			skills = _skillEvaluationController.FilterByActorType(skills, actorId);
 			var skillResponses = skills.Select(a =>
 			{
 				var completed = _skillEvaluationController.IsSkillCompleted(a, actorId);

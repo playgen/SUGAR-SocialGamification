@@ -122,6 +122,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
 			var achievements = _achievementController.GetByGame(gameId);
+			achievements = _achievementEvaluationController.FilterByActorType(achievements, actorId);
 			var achievementResponses = achievements.Select(a =>
 			{
 				var completed = _achievementEvaluationController.IsAchievementCompleted(a, actorId);
