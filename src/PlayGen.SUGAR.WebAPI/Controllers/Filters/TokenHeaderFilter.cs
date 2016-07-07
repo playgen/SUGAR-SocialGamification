@@ -11,18 +11,25 @@ namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 	/// Intercepts token attached to the incomming request and re-attatches
 	/// it to the outgoing response.
 	/// </summary>
-	public class TokenHeaderFilter : IResourceFilter
+	public class TokenHeaderFilter : IActionFilter
 	{
 		private string _token;
 
-		public void OnResourceExecuted(ResourceExecutedContext context)
+		public void OnActionExecuted(ActionExecutedContext context)
 		{
-			_token = context.HttpContext.Request.Headers["Bearer"];
+			if (!context.HttpContext.Response.Headers.ContainsKey("Bearer"))
+			{
+				context.HttpContext.Response.Headers["Bearer"] = _token;
+			}
+			else
+			{
+				// Todo re-issue if timed out.
+			}
 		}
 
-		public void OnResourceExecuting(ResourceExecutingContext context)
+		public void OnActionExecuting(ActionExecutingContext context)
 		{
-			context.HttpContext.Response.Headers["Bearer"] = _token;
+			_token = context.HttpContext.Request.Headers["Bearer"];
 		}
 	}
 }

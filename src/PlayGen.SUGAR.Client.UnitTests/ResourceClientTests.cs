@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var transferResponse = _resourceClient.Transfer(new ResourceTransferRequest
 			{
-				ResourceId = fromResource.ResourceId,
+				ResourceId = fromResource.Id,
 				GameId = fromResource.GameId,
 				Quantity = transferQuantity,
 				RecipientId = toUser.Id,

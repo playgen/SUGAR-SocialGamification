@@ -10,10 +10,8 @@ namespace PlayGen.SUGAR.Contracts
 		[Required]
 		public int ResourceId { get; set; }
 		
-		[Required]
 		public int? RecipientId { get; set; }
 
-		[Required]
 		public int? GameId { get; set; }
 
 		[Required]

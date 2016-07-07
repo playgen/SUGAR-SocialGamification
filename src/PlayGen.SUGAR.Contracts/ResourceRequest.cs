@@ -7,10 +7,8 @@ namespace PlayGen.SUGAR.Contracts
 	/// </summary>
 	public class ResourceRequest
     {
-		[Required]
 		public int? ActorId { get; set; }
 
-		[Required]
 		public int? GameId { get; set; }
 
 		[Required]

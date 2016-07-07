@@ -11,6 +11,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		{
 			return new ResourceResponse
 			{
+				Id = gameData.Id,
 				ActorId = gameData.ActorId,
 				GameId = gameData.GameId,
 				Key = gameData.Key,

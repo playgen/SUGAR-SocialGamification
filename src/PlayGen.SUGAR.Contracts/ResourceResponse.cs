@@ -5,7 +5,7 @@
 	/// </summary>
     public class ResourceResponse
     {
-		public int ResourceId { get; set; }
+		public int Id { get; set; }
 
 		public int? ActorId { get; set; }
 
