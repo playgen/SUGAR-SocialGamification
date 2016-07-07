@@ -10,7 +10,7 @@
 	/// Id : 1,
 	/// Name : "Name"
 	/// }],
-	/// Name : "Name",
+	/// Name : "Achievement Unlocked",
 	/// Progress : 0
 	/// }
 	/// </example>

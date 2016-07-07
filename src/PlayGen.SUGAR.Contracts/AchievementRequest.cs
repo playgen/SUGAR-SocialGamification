@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// Description : "Fulfil the criteria to get the reward",
 	/// ActorType : "User",
 	/// Token : "Achievement_Token",
-	/// AchievementCriteria : [{
+	/// CompletionCriteria : [{
 	/// Key : "Criteria Key",
 	/// DataType : "Long",
 	/// ComparisonType : "Equals",

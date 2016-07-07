@@ -29,7 +29,6 @@ namespace PlayGen.SUGAR.Contracts
 	/// Value : "10.5"
 	/// }]
 	/// }
-	/// }
 	/// </example>
 	public class AchievementResponse
 	{

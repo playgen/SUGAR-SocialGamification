@@ -17,7 +17,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// Limit : 10,
 	/// Offset : 0,
 	/// DateStart : "2016-01-01 00:00:00",
-	/// DateEnd : "2016-31-12 23:59:59"
+	/// DateEnd : "2016-12-31 23:59:59"
 	/// }
 	/// </example>
 	public class LeaderboardStandingsRequest

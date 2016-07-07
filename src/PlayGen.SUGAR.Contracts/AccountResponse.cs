@@ -8,11 +8,11 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// User : [{
+	/// User : {
 	/// Id : 1,
 	/// Name : "Name"
-	/// }],
-	/// Token : 3xamp1370k3n
+	/// },
+	/// Token : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOjQsIm5vdGJlZm9jE0Njc5MTM3MzguMH0.We4TPoujGdEFtqLZWCMPqFr9EjYWlmKBJMQ61YAczkYyZSI6MTQ4MzgwNDEzOC4wLCJpc3N1ZWRhdCI6MTQ2NzkwNjUzOC4wLCJleHBpcnkiO"
 	/// }
 	/// </example>
 	public class AccountResponse

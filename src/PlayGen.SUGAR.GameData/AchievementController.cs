@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.GameData
 			}
 			if (actorId != null) {
 				var provided = ActorController.Get(actorId.Value);
-				if (achievement.ActorType != ActorType.Undefined && provided.ActorType != achievement.ActorType)
+				if (provided == null || (achievement.ActorType != ActorType.Undefined && provided.ActorType != achievement.ActorType))
 				{
 					throw new MissingRecordException("The provided ActorId cannot complete this achievement.");
 				}
