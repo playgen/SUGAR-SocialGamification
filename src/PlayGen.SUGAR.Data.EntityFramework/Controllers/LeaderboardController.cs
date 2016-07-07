@@ -58,7 +58,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				if (hasConflicts)
 				{
-					throw new DuplicateRecordException($"An leaderboard with the name {leaderboard.Name} or token {leaderboard.Token} for this game already exists.");
+					throw new DuplicateRecordException($"A leaderboard with the name {leaderboard.Name} or token {leaderboard.Token} for this game already exists.");
+				}
+
+				hasConflicts = ((int)leaderboard.LeaderboardType < 3 && ((int)leaderboard.GameDataType == 1 || (int)leaderboard.GameDataType == 2)) ||
+								((int)leaderboard.LeaderboardType > 2 && ((int)leaderboard.GameDataType == 0 || (int)leaderboard.GameDataType == 3)) ? false : true;
+
+				if (hasConflicts)
+				{
+					throw new System.ArgumentException($"A leaderboard cannot be created with LeaderboardType {leaderboard.LeaderboardType.ToString()} and GameDataType{leaderboard.GameDataType.ToString()} as it would always return zero results.");
 				}
 
 				context.Leaderboards.Add(leaderboard);

@@ -353,14 +353,48 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(GameData[] data)
 		{
+			List<GameData> dataList = new List<GameData>();
+			foreach (var d in data)
+			{
+				dataList.Add(d);
+				if (dataList.Count >= 1000)
+				{
+					using (var context = new SGAContext(NameOrConnectionString))
+					{
+						SetLog(context);
+
+						context.GameData.AddRange(dataList);
+						SaveChanges(context);
+						dataList.Clear();
+					}
+				}
+			}
+			if (dataList.Count > 0)
+			{
+				using (var context = new SGAContext(NameOrConnectionString))
+				{
+					SetLog(context);
+
+					context.GameData.AddRange(dataList);
+					SaveChanges(context);
+					dataList.Clear();
+				}
+			}
+		}
+
+		public void Update(GameData data)
+		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				foreach (var d in data)
-				{
-					context.GameData.Add(d);
-				}
+				var existing = context.GetData()
+					.FilterByGameId(data.GameId)
+					.FilterByActorId(data.ActorId)
+					.FilterByKey(data.Key).LatestOrDefault();
+
+				context.Entry(existing).State = EntityState.Modified;
+				existing.Value += data.Value;
 				SaveChanges(context);
 			}
 		}
