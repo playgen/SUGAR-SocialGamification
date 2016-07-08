@@ -83,7 +83,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				return new AchievementProgressResponse
 				{
 					Name = a.Name,
-					Progress = completed ? 1 : 0,
+					Progress = completed,
 				};
 			});
 
@@ -109,7 +109,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(new AchievementProgressResponse
 			{
 				Name = achievement.Name,
-				Progress = completed ? 1 : 0,
+				Progress = completed,
 			});
 		}
 

@@ -19,9 +19,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class GameDataController : Controller
 	{
-		private readonly IGameDataController _gameDataController;
+		 private readonly Data.EntityFramework.Controllers.GameDataController _gameDataController;
 
-		public GameDataController(IGameDataController gameDataController)
+
+		public GameDataController(Data.EntityFramework.Controllers.GameDataController gameDataController)
 		{
 			_gameDataController = gameDataController;
 		}
