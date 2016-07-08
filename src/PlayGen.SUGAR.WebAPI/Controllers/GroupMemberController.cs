@@ -117,14 +117,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut("request")]
 		[ArgumentsNotNull]
-		public IActionResult UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
+		public void UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
 			var relation = new RelationshipRequest {
 				RequestorId = relationship.RequestorId,
 				AcceptorId = relationship.AcceptorId
 			};
 			_groupRelationshipController.UpdateRequest(relation.ToGroupModel(), relationship.Accepted);
-			return new NoContentResult();
 		}
 
 		/// <summary>
@@ -136,7 +135,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut]
 		[ArgumentsNotNull]
-		public IActionResult UpdateMember([FromBody] RelationshipStatusUpdate relationship)
+		public void UpdateMember([FromBody] RelationshipStatusUpdate relationship)
 		{
 			var relation = new RelationshipRequest
 			{
@@ -144,7 +143,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				AcceptorId = relationship.AcceptorId
 			};
 			_groupRelationshipController.Update(relation.ToGroupModel());
-			return new NoContentResult();
 		}
 	}
 }
