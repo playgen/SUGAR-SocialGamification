@@ -21,9 +21,9 @@ namespace PlayGen.SUGAR.ServerAuthentication
 
 		public string CreateToken(Dictionary<string, object> claims)
 		{
-			var expiry = Math.Round((DateTime.UtcNow.AddHours(2) - _unixEpoch).TotalSeconds);
-			var issuedAt = Math.Round((DateTime.UtcNow - _unixEpoch).TotalSeconds);
-			var notBefore = Math.Round((DateTime.UtcNow.AddMonths(6) - _unixEpoch).TotalSeconds);
+			var expiry = (DateTime.UtcNow.AddHours(2) - _unixEpoch).Ticks;
+			var issuedAt = (DateTime.UtcNow - _unixEpoch).Ticks;
+			var notBefore = (DateTime.UtcNow - _unixEpoch).Ticks;
 
 			var payload = new Dictionary<string, object>(claims)
 			{
@@ -49,19 +49,27 @@ namespace PlayGen.SUGAR.ServerAuthentication
 				return TokenValidity.Invalid;
 			}
 
-			object expiry;
-			if (!payload.TryGetValue("expiry", out expiry))
+			object expiry, notBefore;
+			if (!payload.TryGetValue("expiry", out expiry) || 
+				!payload.TryGetValue("notbefore", out notBefore))
 			{
 				return TokenValidity.Invalid;	
 			}
 
-			long expiryTicks;
-			if (!long.TryParse(expiry.ToString(), out expiryTicks))
+			long expiryTicks, notBeforeTicks;
+			if (!long.TryParse(expiry.ToString(), out expiryTicks) ||
+				!long.TryParse(notBefore.ToString(), out notBeforeTicks))
 			{
 				return TokenValidity.Invalid;
 			}
-			
-			var validUntil = _unixEpoch.AddSeconds(expiryTicks);
+
+			var validFrom = _unixEpoch.AddTicks(notBeforeTicks);
+			if (DateTime.UtcNow < validFrom)
+			{
+				return TokenValidity.Invalid;
+			}
+
+			var validUntil = _unixEpoch.AddTicks(expiryTicks);
 			return DateTime.Compare(validUntil, DateTime.UtcNow) <= 0
 					? TokenValidity.Expired
 					: TokenValidity.Valid;

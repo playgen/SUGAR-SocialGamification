@@ -60,20 +60,20 @@ namespace PlayGen.SUGAR.Client
 		protected TResponse Put<TRequest, TResponse>(string url, TRequest payload)
 		{
 			var response = PostPut(url, payload, "PUT");
-			ProcessResponse(response, HttpStatusCode.NoContent);
+			ProcessResponse(response, HttpStatusCode.OK);
 			return GetResponse<TResponse>(response);
 		}
 
 		protected void Put<TRequest>(string url, TRequest payload)
 		{
 			var response = PostPut(url, payload, "PUT");
-			ProcessResponse(response, HttpStatusCode.NoContent);
+			ProcessResponse(response, HttpStatusCode.OK);
 		}
 
 		protected TResponse Delete<TResponse>(string url)
 		{
 			var response = DeleteRequest(url);
-			ProcessResponse(response, HttpStatusCode.NoContent);
+			ProcessResponse(response, HttpStatusCode.OK);
 			return GetResponse<TResponse>(response);
 		}
 
@@ -124,7 +124,7 @@ namespace PlayGen.SUGAR.Client
 		{
 			var request = WebRequest.Create(uri);
 			request.Method = method;
-			request.Headers.Add("Bearer", _credentials.Token);
+			request.Headers.Add("Authorization", _credentials.Authorization);
 			return request;
 		}
 
@@ -140,7 +140,7 @@ namespace PlayGen.SUGAR.Client
 				throw new Exception("API ERROR, Status Code: " + response.StatusCode + ". Message: " + response.StatusDescription);
 			}
 
-			_credentials.Token = response.Headers["Bearer"];
+			_credentials.Authorization = response.Headers["Authorization"];
 		}
 
 		private HttpWebResponse PostPut<TRequest>(string url, TRequest payload, string method)

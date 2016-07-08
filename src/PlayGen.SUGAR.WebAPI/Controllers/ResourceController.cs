@@ -31,13 +31,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
-		/// <param name="key">Array of Key names.</param>
+		/// <param name="keys">Array of Key names.</param>
 		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
 		[HttpGet]
 		[ResponseType(typeof(IEnumerable<ResourceResponse>))]
-		public IActionResult Get(int? actorId, int? gameId, string[] key)
+		public IActionResult Get(int? actorId, int? gameId, string[] keys)
 		{
-			var resource = _resourceController.Get(actorId, gameId, key);
+			var resource = _resourceController.Get(actorId, gameId, keys);
 			var resourceContract = resource.ToResourceContractList();
 			return new ObjectResult(resourceContract);
 		}
@@ -63,19 +63,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Update an existing Resource record.
 		/// 
-		/// Example Usage: Put api/resource/
+		/// Example Usage: Put api/resource/update?id=7
 		/// </summary>
+		/// <param name="id"></param>
 		/// <param name="resourceRequest"><see cref="ResourceRequest"/> object that holds the details of the updated ResourceData.</param>
-		/// <returns>A <see cref="ResourceResponse"/> containing the modified Resource details.</returns>
-		[HttpPost("update")]
-		[ResponseType(typeof(ResourceResponse))]
+		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
-		public IActionResult Update([FromBody]ResourceRequest resourceRequest)
+		public void Update([FromRoute] int id, [FromBody]ResourceRequest resourceRequest)
 		{
 			var resource = resourceRequest.ToModel();
+			resource.Id = id;
 			_resourceController.Update(resource);
-			var resourceContract = resource.ToResourceContract();
-			return new ObjectResult(resourceContract);
 		}
 
 		/// <summary>

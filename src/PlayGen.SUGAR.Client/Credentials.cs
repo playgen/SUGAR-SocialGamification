@@ -2,6 +2,6 @@
 {
 	public class Credentials
 	{
-		public string Token { get; set; }
+		public string Authorization { get; set; }
 	}
 }
