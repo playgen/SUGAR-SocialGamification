@@ -36,6 +36,13 @@ namespace PlayGen.SUGAR.GameData
 		public Data.Model.GameData Transfer(int fromResourceId, int? gameId, int? actorId, long transferQuantity, out Data.Model.GameData fromResource)
 		{
 			fromResource = GetExistingResource(fromResourceId);
+
+			string message;
+			if (!IsTransferValid(long.Parse(fromResource.Value), transferQuantity, out message))
+			{
+				throw new ArgumentException(message);
+			}	
+
 			UpdateQuantity(fromResource, -transferQuantity);
 
 			Data.Model.GameData toResource;
@@ -64,6 +71,12 @@ namespace PlayGen.SUGAR.GameData
 
 		public void Create(Data.Model.GameData data)
 		{
+			var existingEntries = _gameDataController.Get(data.GameId, data.ActorId, new [] {data.Key});
+			if (existingEntries.Any())
+			{
+				throw new DuplicateRecordException();
+			}
+
 			_gameDataController.Create(data);
 		}
 
@@ -85,6 +98,22 @@ namespace PlayGen.SUGAR.GameData
 			}
 
 			return foundResources.Single();
+		}
+
+		private bool IsTransferValid(long current, long transfer, out string message)
+		{
+			message = string.Empty;
+
+			if (current < transfer)
+			{
+				message = "The quantity to transfer cannot be greater than the quantity available to transfer.";
+			}
+			else if(transfer < 1)
+			{
+				message = "The quantity to transfer cannot be less than one.";
+			}
+
+			return message == string.Empty;
 		}
 	}
 }

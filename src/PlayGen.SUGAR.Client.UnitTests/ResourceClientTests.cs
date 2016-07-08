@@ -148,7 +148,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			{
 				GameId = null,
 				ActorId = fromUser.Id,
-				Key = "CanTransferCreateResource_FromUserToUser",
+				Key = "CanTransferUpdateResource_FromUserToUser",
 				Quantity = 100,
 			});
 
@@ -195,15 +195,45 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[InlineData(0)]
 		[InlineData(-1)]
 		[InlineData(-2000)]
-		public void CantTransfer_FromUserToUserWithLessThan1Quantity(long transferQuantity)
+		public void CantTransfer_WithLessThan1Quantity(long transferQuantity)
 		{
-			throw new NotImplementedException();
+			var fromResource = _resourceClient.Add(new ResourceRequest
+			{
+				GameId = null,
+				ActorId = null,
+				Key = "CantTransfer_WithLessThan1Quantity" + transferQuantity,
+				Quantity = 100,
+			});		
+
+			Assert.Throws<WebException>(() => _resourceClient.Transfer(new ResourceTransferRequest
+			{
+				ResourceId = fromResource.Id,
+				GameId = fromResource.GameId,
+				Quantity = transferQuantity,
+				RecipientId = null,
+			}));
 		}
 
 		[Fact]
-		public void CantTransfer_FromUserToUserWithOutOfRangeQuantity()
+		public void CantTransfer_WithOutOfRangeQuantity()
 		{
-			throw new NotImplementedException();
+			var fromResource = _resourceClient.Add(new ResourceRequest
+			{
+				GameId = null,
+				ActorId = null,
+				Key = "CantTransfer_WithOutOfRangeQuantity",
+				Quantity = 100,
+			});
+
+			long transferQuantity = fromResource.Quantity*2;
+
+			Assert.Throws<WebException>(() => _resourceClient.Transfer(new ResourceTransferRequest
+			{
+				ResourceId = fromResource.Id,
+				GameId = fromResource.GameId,
+				Quantity = transferQuantity,
+				RecipientId = null,
+			}));
 		}
 		#endregion
 
