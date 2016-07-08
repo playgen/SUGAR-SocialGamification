@@ -85,10 +85,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var createdQuantity = createdResource.Quantity;
 			var updatedQuantity = createdQuantity + 9000;
 
-			resourceRequest.Id = createdResource.Id;
 			resourceRequest.Quantity = updatedQuantity;
 
-			var updatedResource = _resourceClient.Update(resourceRequest);
+			_resourceClient.Update(createdResource.Id, resourceRequest);
+
+			var updatedResource = _resourceClient.Get(createdResource.GameId, createdResource.ActorId,
+				new[] {createdResource.Key}).Single();
 
 			Assert.Equal(updatedQuantity, updatedResource.Quantity);
 			Assert.Equal(createdResource.Id, updatedResource.Id);
@@ -103,7 +105,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 100,
 			};
 
-			Assert.Throws<WebException>(() => _resourceClient.Update(resourceRequest));
+			Assert.Throws<WebException>(() => _resourceClient.Update(-1, resourceRequest));
 		}
 
 		[Fact]
@@ -120,8 +122,8 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 100,
 			});
 
-			long originalQuantity = fromResource.Quantity;
-			long transferQuantity = originalQuantity/3;
+			var originalQuantity = fromResource.Quantity;
+			var transferQuantity = originalQuantity/3;
 
 			var transferResponse = _resourceClient.Transfer(new ResourceTransferRequest
 			{
@@ -160,9 +162,9 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 50,
 			});
 
-			long originalFrmoQuantity = fromResource.Quantity;
-			long originalToQuantity = toResource.Quantity;
-			long transferQuantity = originalFrmoQuantity / 3;
+			var originalFrmoQuantity = fromResource.Quantity;
+			var originalToQuantity = toResource.Quantity;
+			var transferQuantity = originalFrmoQuantity / 3;
 
 			var transferResponse = _resourceClient.Transfer(new ResourceTransferRequest
 			{

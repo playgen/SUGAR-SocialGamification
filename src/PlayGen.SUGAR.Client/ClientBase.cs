@@ -60,20 +60,20 @@ namespace PlayGen.SUGAR.Client
 		protected TResponse Put<TRequest, TResponse>(string url, TRequest payload)
 		{
 			var response = PostPut(url, payload, "PUT");
-			ProcessResponse(response, HttpStatusCode.NoContent);
+			ProcessResponse(response, HttpStatusCode.OK);
 			return GetResponse<TResponse>(response);
 		}
 
 		protected void Put<TRequest>(string url, TRequest payload)
 		{
 			var response = PostPut(url, payload, "PUT");
-			ProcessResponse(response, HttpStatusCode.NoContent);
+			ProcessResponse(response, HttpStatusCode.OK);
 		}
 
 		protected TResponse Delete<TResponse>(string url)
 		{
 			var response = DeleteRequest(url);
-			ProcessResponse(response, HttpStatusCode.NoContent);
+			ProcessResponse(response, HttpStatusCode.OK);
 			return GetResponse<TResponse>(response);
 		}
 

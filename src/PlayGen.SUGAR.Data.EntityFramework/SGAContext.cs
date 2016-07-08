@@ -18,8 +18,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 	[DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public class SGAContext : DbContext
 	{
-		public SGAContext(string nameOrConnectionString) : base(nameOrConnectionString)
+		private readonly bool _isSaveDisabled;
+
+		public SGAContext(string nameOrConnectionString, bool disableSave = false) : base(nameOrConnectionString)
 		{
+			_isSaveDisabled = disableSave;
 			Database.SetInitializer(new CreateDatabaseIfNotExists<SGAContext>());
 			Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SGAContext>());
 		}
@@ -153,7 +156,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 				}
 			}
 
-			return base.SaveChanges();
+			if (_isSaveDisabled)
+			{
+				return 0; 
+			}
+			else
+			{
+				return base.SaveChanges();
+			}
 		}
 	}
 }

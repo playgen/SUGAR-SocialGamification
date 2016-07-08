@@ -17,18 +17,18 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Find a list of all Resources that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+		/// Find a list of all Resources that match the <param name="gameId"/>, <param name="actorId"/> and <param name="keys"/> provided.
 		/// </summary>
-		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
+		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="key">Array of Key names.</param>
 		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ResourceResponse> Get(int actorId, int gameId, string[] key)
+		public IEnumerable<ResourceResponse> Get(int? gameId, int? actorId, string[] keys)
 		{
 			var query = GetUriBuilder(ControllerPrefix)
 				.AppendQueryParameter(actorId, "actorId={0}")
 				.AppendQueryParameter(gameId, "gameId={0}")
-				.AppendQueryParameters(key, "key={0}")
+				.AppendQueryParameters(keys, "keys={0}")
 				.ToString();
 			return Get<IEnumerable<ResourceResponse>>(query);
 		}
@@ -47,12 +47,12 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Create a an updated Resource record.
 		/// </summary>
+		/// <param name="id"></param>
 		/// <param name="data"><see cref="ResourceRequest"/> object that holds the details of the updated Resource.</param>
-		/// <returns>A <see cref="ResourceResponse"/> containing the updated Resource details.</returns>
-		public ResourceResponse Update(ResourceRequest data)
+		public void Update(int id, ResourceRequest data)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/update").ToString();
-			return Post<ResourceRequest, ResourceResponse>(query, data);
+			var query = GetUriBuilder($"{ControllerPrefix}/update/{id}").ToString();
+			Put(query, data);
 		}
 
 		/// <summary>

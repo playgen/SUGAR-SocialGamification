@@ -131,6 +131,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(achievementContract);
 		}
 
+		[HttpPost("test")]
+		[ResponseType(typeof(AchievementTestResponse))]
+		[ArgumentsNotNull]
+		public IActionResult Test([FromBody] AchievementTestRequest achievementTestRequest)
+		{
+			throw new NotImplementedException();
+		}
+
 		/// <summary>
 		/// Update an existing Achievement.
 		/// 
@@ -146,7 +154,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			achievementModel.Id = id;
 			_achievementController.Update(achievementModel);
 		}
-
 
 		/// <summary>
 		/// Delete Achievements with the <param name="id"/> provided.
