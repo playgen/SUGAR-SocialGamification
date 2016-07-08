@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Filters;
-using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.ServerAuthentication.Helpers;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using PlayGen.SUGAR.ServerAuthentication.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 {
@@ -20,9 +13,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 
 		public void OnActionExecuted(ActionExecutedContext context)
 		{
-			if (!AuthorizationHeader.HasAuthorization(context.HttpContext.Response.Headers))
+			if (!context.HttpContext.Response.HasAuthorization())
 			{
-				AuthorizationHeader.SetAuthorization(context.HttpContext.Response.Headers, _authorization);
+				context.HttpContext.Response.SetAuthorization(_authorization);
 			}
 			else
 			{
@@ -32,7 +25,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 
 		public void OnActionExecuting(ActionExecutingContext context)
 		{
-			_authorization = AuthorizationHeader.GetAuthorization(context.HttpContext.Request.Headers);
+			_authorization = context.HttpContext.Request.GetAuthorization();
 		}
 	}
 }

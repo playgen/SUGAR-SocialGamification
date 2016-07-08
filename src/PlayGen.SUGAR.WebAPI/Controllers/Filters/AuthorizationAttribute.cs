@@ -1,11 +1,9 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Configuration;
 using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.ServerAuthentication.Helpers;
+using PlayGen.SUGAR.ServerAuthentication.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 {
@@ -30,7 +28,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 				string token = null;
 				var authorized = false;
 
-				token = AuthorizationHeader.GetAuthorizationToken(context.HttpContext.Request.Headers);
+				token = context.HttpContext.Request.GetAuthorizationToken();
 
 				if (token != null)
 				{

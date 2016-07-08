@@ -13,6 +13,7 @@ using PlayGen.SUGAR.ServerAuthentication.Helpers;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.ServerAuthentication.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -67,7 +68,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			}
 
 			var token = CreateToken(account);
-			AuthorizationHeader.SetAuthorizationToken(HttpContext.Response.Headers, token);
+			HttpContext.Response.SetAuthorizationToken(token);
 
 			var response = account.ToContract();
 			return new ObjectResult(response);
@@ -99,7 +100,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			if (accountRequest.AutoLogin)
 			{
 				var token = CreateToken(account);
-				AuthorizationHeader.SetAuthorizationToken(HttpContext.Response.Headers, token);
+				HttpContext.Response.SetAuthorizationToken(token);
 			}
 			return new ObjectResult(response);
 		}
