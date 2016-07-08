@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: GET api/achievements/game/1/evaluate/1
 		/// </summary>
 		/// <param name="gameId">ID of Game</param>
-		/// 		/// <param name="actorId">ID of Group/User</param>
+		/// <param name="actorId">ID of Group/User</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
 		[HttpGet("game/{gameId:int}/evaluate")]
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find the current progress for an <param name="achievementId"/> for <param name="actor"/>.
+		/// Find the current progress for an <param name="achievementId"/> for <param name="actorId"/>.
 		/// 
 		/// Example Usage: GET api/achievements/1/evaluate/1
 		/// </summary>

@@ -5,6 +5,9 @@ using PlayGen.SUGAR.Contracts.Controllers;
 
 namespace PlayGen.SUGAR.Client
 {
+	/// <summary>
+	/// Controller that facilitates GameData specific operations.
+	/// </summary>
 	public class GameDataClient : ClientBase
 	{
 		private const string ControllerPrefix = "api/gamedata";
@@ -33,8 +36,8 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Create a new GameData record.
 		/// </summary>
-		/// <param name="data"><see cref="GameDataRequest"/> object that holds the details of the new UserData.</param>
-		/// <returns>A <see cref="GameDataResponse"/> containing the new UserData details.</returns>
+		/// <param name="data"><see cref="GameDataRequest"/> object that holds the details of the new GameData.</param>
+		/// <returns>A <see cref="GameDataResponse"/> containing the new GameData details.</returns>
 		public GameDataResponse Add(GameDataRequest data)
 		{
 			var query = GetUriBuilder(ControllerPrefix).ToString();

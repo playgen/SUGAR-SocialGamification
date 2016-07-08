@@ -59,6 +59,17 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Update an existing Game.
+		/// </summary>
+		/// <param name="id">Id of the existing Game.</param>
+		/// <param name="game"><see cref="GameRequest"/> object that holds the details of the Game.</param>
+		public void Update(int id, GameRequest game)
+		{
+			var query = GetUriBuilder($"api/game/update/{id}").ToString();
+			Put(query, game);
+		}
+
+		/// <summary>
 		/// Delete Game with the ID provided.
 		/// </summary>
 		/// <param name="id">Game ID.</param>

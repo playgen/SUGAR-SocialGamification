@@ -3,9 +3,11 @@ using PlayGen.SUGAR.Client.Extensions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Controllers;
 
-
 namespace PlayGen.SUGAR.Client
 {
+	/// <summary>
+	/// Controller that facilitates Skill specific operations.
+	/// </summary>
 	public class SkillClient : ClientBase
 	{
 		public SkillClient(string baseAddress, Credentials credentials) : base(baseAddress, credentials)
@@ -72,6 +74,17 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder("api/skills/create").ToString();
 			return Post<AchievementRequest, AchievementResponse>(query, newSkill);
+		}
+
+		/// <summary>
+		/// Update an existing Skill.
+		/// </summary>
+		/// <param name="id">Id of the existing Skill.</param>
+		/// <param name="skill"><see cref="AchievementRequest"/> object that holds the details of the Skill.</param>
+		public void Update(int id, ActorRequest group)
+		{
+			var query = GetUriBuilder($"api/skills/update/{id}").ToString();
+			Put(query, group);
 		}
 
 		/// <summary>
