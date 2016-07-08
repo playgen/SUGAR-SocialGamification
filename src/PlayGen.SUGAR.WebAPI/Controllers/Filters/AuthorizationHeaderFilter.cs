@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
+using PlayGen.SUGAR.ServerAuthentication;
+using PlayGen.SUGAR.ServerAuthentication.Helpers;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 {
@@ -11,15 +14,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 	/// Intercepts token attached to the incomming request and re-attatches
 	/// it to the outgoing response.
 	/// </summary>
-	public class TokenHeaderFilter : IActionFilter
+	public class AuthorizationHeaderFilter : IActionFilter
 	{
-		private string _token;
+		private string _authorization;
 
 		public void OnActionExecuted(ActionExecutedContext context)
 		{
-			if (!context.HttpContext.Response.Headers.ContainsKey("Bearer"))
+			if (!AuthorizationHeader.HasAuthorization(context.HttpContext.Response.Headers))
 			{
-				context.HttpContext.Response.Headers["Bearer"] = _token;
+				AuthorizationHeader.SetAuthorization(context.HttpContext.Response.Headers, _authorization);
 			}
 			else
 			{
@@ -29,7 +32,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 
 		public void OnActionExecuting(ActionExecutingContext context)
 		{
-			_token = context.HttpContext.Request.Headers["Bearer"];
+			_authorization = AuthorizationHeader.GetAuthorization(context.HttpContext.Request.Headers);
 		}
 	}
 }

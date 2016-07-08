@@ -74,7 +74,7 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddMvc(options =>
 			{
 				options.Filters.Add(new ModelValidationFilter());
-				options.Filters.Add(typeof(TokenHeaderFilter));
+				options.Filters.Add(typeof(AuthorizationHeaderFilter));
 			});
 
 			services.AddScoped<AuthorizationAttribute>();

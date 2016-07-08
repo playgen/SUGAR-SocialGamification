@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using PlayGen.SUGAR.ServerAuthentication;
+using PlayGen.SUGAR.ServerAuthentication.Helpers;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 {
@@ -29,10 +30,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 				string token = null;
 				var authorized = false;
 
-				if (context.HttpContext.Request.Headers.ContainsKey("Bearer"))
-				{
-					token = context.HttpContext.Request.Headers["Bearer"];
-				}
+				token = AuthorizationHeader.GetAuthorizationToken(context.HttpContext.Request.Headers);
 
 				if (token != null)
 				{
