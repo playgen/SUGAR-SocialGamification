@@ -10,13 +10,15 @@ namespace PlayGen.SUGAR.Contracts
 	/// {
 	/// User : {
 	/// Id : 1,
-	/// Name : "Name"
-	/// },
-	/// Token : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOjQsIm5vdGJlZm9jE0Njc5MTM3MzguMH0.We4TPoujGdEFtqLZWCMPqFr9EjYWlmKBJMQ61YAczkYyZSI6MTQ4MzgwNDEzOC4wLCJpc3N1ZWRhdCI6MTQ2NzkwNjUzOC4wLCJleHBpcnkiO"
+	/// Name : "User Name"
+	/// }
 	/// }
 	/// </example>
 	public class AccountResponse
 	{
+		/// <summary>
+		/// ActorResponse object containing the user details.
+		/// </summary>
 		public ActorResponse User { get; set; }
 	}
 }

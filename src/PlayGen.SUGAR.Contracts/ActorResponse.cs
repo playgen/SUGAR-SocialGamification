@@ -7,13 +7,19 @@
 	/// JSON
 	/// {
 	/// Id : 1,
-	/// Name : "Name"
+	/// Name : "Actor Name"
 	/// }
 	/// </example>
 	public class ActorResponse
 	{
+		/// <summary>
+		/// The unqiue identifier for the user/group.
+		/// </summary>
 		public int Id { get; set; }
 
+		/// <summary>
+		/// The display name of the user/group.
+		/// </summary>
 		public string Name { get; set; }
 	}
 }
