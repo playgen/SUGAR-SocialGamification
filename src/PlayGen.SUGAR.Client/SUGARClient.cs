@@ -14,6 +14,8 @@
 		private UserClient _userClient;
 		private UserFriendClient _userFriendClient;
 		private ResourceClient _resourceClient;
+		private LeaderboardClient _leaderboardClient;
+		private SkillClient _skillClient;
 
 		public AccountClient Account					=> _accountClient ?? (_accountClient = new AccountClient(_baseAddress, _credentials));
 		public AchievementClient Achievement			=> _achievementClient ?? (_achievementClient = new AchievementClient(_baseAddress, _credentials));
@@ -24,6 +26,8 @@
 		public UserClient User							=> _userClient ?? (_userClient = new UserClient(_baseAddress, _credentials));
 		public UserFriendClient UserFriend				=> _userFriendClient ?? (_userFriendClient = new UserFriendClient(_baseAddress, _credentials));
 		public ResourceClient Resource					=> _resourceClient ?? (_resourceClient = new ResourceClient(_baseAddress, _credentials));
+		public LeaderboardClient Leaderboard			=> _leaderboardClient ?? (_leaderboardClient = new LeaderboardClient(_baseAddress, _credentials));
+		public SkillClient Skill						=> _skillClient ?? (_skillClient = new SkillClient(_baseAddress, _credentials));
 
 		public SUGARClient(string baseAddress)
 		{
