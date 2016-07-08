@@ -61,11 +61,29 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Update an existing Resource record.
+		/// 
+		/// Example Usage: Put api/resource/
+		/// </summary>
+		/// <param name="resourceRequest"><see cref="ResourceRequest"/> object that holds the details of the updated ResourceData.</param>
+		/// <returns>A <see cref="ResourceResponse"/> containing the modified Resource details.</returns>
+		[HttpPost("update")]
+		[ResponseType(typeof(ResourceResponse))]
+		[ArgumentsNotNull]
+		public IActionResult Update([FromBody]ResourceRequest resourceRequest)
+		{
+			var resource = resourceRequest.ToModel();
+			_resourceController.Update(resource);
+			var resourceContract = resource.ToResourceContract();
+			return new ObjectResult(resourceContract);
+		}
+
+		/// <summary>
 		/// Transfers a quantity of a specific resource.
 		/// 
 		/// Example Usage: Post api/resource/transfer
 		/// </summary>
-		/// <param name="transferRequest"></param>
+		/// <param name="transferRequest"><see cref="ResourceTransferRequest"/> object that holds the details of the resoruce transfer.</param>
 		/// <returns>A <see cref="ResourceTransferResponse"/> containing the modified resources.</returns>
 		[HttpPost("transfer")]
 		[ResponseType(typeof(ResourceTransferResponse))]

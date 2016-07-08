@@ -6,6 +6,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using System.Data.Entity;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -382,13 +383,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Update(GameData data)
+		public void Update(GameData updatedData)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				context.Entry(data).State = EntityState.Modified;
+				var existingData = context.GameData.Find(updatedData.Id);
+				if (existingData == null)
+				{
+					throw new MissingRecordException("Cannot find the object to update.");
+				}
+
+				existingData.Value = updatedData.Value;
+
 				SaveChanges(context);
 			}
 		}

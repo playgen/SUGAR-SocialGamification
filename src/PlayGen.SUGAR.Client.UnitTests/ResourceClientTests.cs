@@ -44,11 +44,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 		#region Tests
 		[Fact]
-		public void CanCreateResource()
+		public void CanCreate()
 		{
 			var resourceRequest = new ResourceRequest
 			{
-				Key = "CanCreateResource",
+				Key = "CanCreate",
 				Quantity = 100,
 			};
 
@@ -59,17 +59,51 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		}
 
 		[Fact]
-		public void CannotCreateDuplicateResource()
+		public void CannotCreateDuplicate()
 		{
 			var resourceRequest = new ResourceRequest
 			{
-				Key = "CannotCreateDuplicateResource",
+				Key = "CannotCreateDuplicate",
 				Quantity = 100,
 			};
 
 			_resourceClient.Add(resourceRequest);
 
 			Assert.Throws<WebException>(() => _resourceClient.Add(resourceRequest));
+		}
+
+		[Fact]
+		public void CanUpdateExisting()
+		{
+			var resourceRequest = new ResourceRequest
+			{
+				Key = "CanUpdateExisting",
+				Quantity = 100,
+			};
+
+			var createdResource = _resourceClient.Add(resourceRequest);
+			var createdQuantity = createdResource.Quantity;
+			var updatedQuantity = createdQuantity + 9000;
+
+			resourceRequest.Id = createdResource.Id;
+			resourceRequest.Quantity = updatedQuantity;
+
+			var updatedResource = _resourceClient.Update(resourceRequest);
+
+			Assert.Equal(updatedQuantity, updatedResource.Quantity);
+			Assert.Equal(createdResource.Id, updatedResource.Id);
+		}
+
+		[Fact]
+		public void CantUpdateNonexisting()
+		{
+			var resourceRequest = new ResourceRequest
+			{
+				Key = "CantUpdateNonexisting",
+				Quantity = 100,
+			};
+
+			Assert.Throws<WebException>(() => _resourceClient.Update(resourceRequest));
 		}
 
 		[Fact]

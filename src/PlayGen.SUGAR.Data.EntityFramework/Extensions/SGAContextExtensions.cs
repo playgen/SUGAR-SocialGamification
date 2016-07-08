@@ -40,5 +40,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 				context.Actors.Attach(actor);
 			}
 		}
+
+		public static void HandleDetatchedGameData(this SGAContext context, GameData gameData)
+		{
+			if (gameData != null && context.Entry(gameData).State == EntityState.Detached)
+			{
+				context.GameData.Attach(gameData);
+			}
+		}
 	}
 }
