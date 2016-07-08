@@ -65,7 +65,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var response = _achievementClient.Create(achievementRequest);
 
 			Assert.Equal(achievementRequest.Token, response.Token);
-			Assert.True(response.Id > 0);
+			Assert.Equal(achievementRequest.ActorType, response.ActorType);
 		}
 
 		//[Fact]

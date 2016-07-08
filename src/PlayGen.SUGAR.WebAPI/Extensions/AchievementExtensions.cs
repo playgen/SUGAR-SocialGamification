@@ -11,7 +11,6 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		{
 			var achievementContract = new AchievementResponse
 			{
-				Id = model.Id,
 				Name = model.Name,
 				Description = model.Description,
 				GameId = model.GameId,

@@ -69,7 +69,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="gameId">ID of Game</param>
 		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward skill.</returns>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward skill.</returns>
 		[HttpGet("game/{gameId:int}/evaluate")]
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
 		[ResponseType(typeof(IEnumerable<AchievementProgressResponse>))]
@@ -91,19 +91,20 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find the current progress for a <param name="skillId"/> for <param name="actor"/>.
+		/// Find the current progress for a Skill for <param name="actorId"/>.
 		/// 
-		/// Example Usage: GET api/skills/1/evaluate/1
+		/// Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1
 		/// </summary>
-		/// <param name="skillId">ID of Skill</param>
+		/// <param name="token">Token of Skill</param>
+		/// <param name="gameId">ID of the Game the Skill is for</param>
 		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward skill.</returns>
-		[HttpGet("{skillId:int}/evaluate")]
-		[HttpGet("{skillId:int}/evaluate/{actorId:int}")]
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward skill.</returns>
+		[HttpGet("{token}/{gameId:int}/evaluate")]
+		[HttpGet("{token}/{gameId:int}/evaluate/{actorId:int}")]
 		[ResponseType(typeof(AchievementProgressResponse))]
-		public IActionResult GetAchievementProgress([FromRoute]int skillId, [FromRoute]int? actorId)
+		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
-			var skill = _skillController.Get(skillId);
+			var skill = _skillController.Get(token, gameId.Value);
 			var completed = _skillEvaluationController.IsSkillCompleted(skill, actorId);
 			return new ObjectResult(new AchievementProgressResponse
 			{
@@ -134,29 +135,28 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Update an existing Skill.
 		/// 
-		/// Example Usage: PUT api/skills/update/1
+		/// Example Usage: PUT api/skills/update
 		/// </summary>
-		/// <param name="id">Id of the existing Skill.</param>
 		/// <param name="skill"><see cref="AchievementRequest"/> object that holds the details of the Skill.</param>
-		[HttpPut("update/{id:int}")]
+		[HttpPut("update")]
 		[ArgumentsNotNull]
-		public void Update([FromRoute] int id, [FromBody] AchievementRequest skill)
+		public void Update([FromBody] AchievementRequest skill)
 		{
 			var skillModel = skill.ToSkillModel();
-			skillModel.Id = id;
 			_skillController.Update(skillModel);
 		}
 
 		/// <summary>
-		/// Delete Skills with the <param name="id"/> provided.
+		/// Delete Skill with the <param name="token"/> and <param name="gameId"/> provided.
 		/// 
-		/// Example Usage: DELETE api/skills/1
+		/// Example Usage: DELETE api/skills/SKILL_TOKEN/1
 		/// </summary>
-		/// <param name="id">Skill ID</param>
-		[HttpDelete("{id:int}")]
-		public void Delete([FromRoute]int id)
+		/// <param name="token">Token of Skill</param>
+		/// <param name="gameId">ID of the Game the Skill is for</param>
+		[HttpDelete("{token}/{gameId:int}")]
+		public void Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			_skillController.Delete(id);
+			_skillController.Delete(token, gameId.Value);
 		}
 	}
 }

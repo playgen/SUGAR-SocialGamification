@@ -11,7 +11,8 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// LeaderboardId : 1,
+	/// LeaderboardToken : "AN_ACHIEVEMENT_TOKEN",
+	/// GameId : 1,
 	/// ActorId : 1,
 	/// LeaderboardFilterType : "Near",
 	/// Limit : 10,
@@ -23,10 +24,16 @@ namespace PlayGen.SUGAR.Contracts
 	public class LeaderboardStandingsRequest
 	{
 		/// <summary>
-		/// The Id of the Leaderboard which the standings are being gathered for.
+		/// The Token of the Leaderboard which the standings are being gathered for.
 		/// </summary>
 		[Required]
-		public int LeaderboardId { get; set; }
+		public string LeaderboardToken { get; set; }
+
+		/// <summary>
+		/// The Id of the Game the leaderboard. Can be left null for system-wide leaderboards.
+		/// </summary>
+		[Required]
+		public int? GameId { get; set; }
 
 		/// <summary>
 		/// The Id of an Actor. Required for getting standings for Near, Friends (user only) and Group Members (group only)

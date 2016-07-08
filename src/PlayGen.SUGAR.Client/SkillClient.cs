@@ -31,22 +31,10 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Skill details</returns>
-		public IEnumerable<AchievementResponse> Get(string gameId)
+		public IEnumerable<AchievementResponse> Get(int gameId)
 		{
 			var query = GetUriBuilder($"api/skills/game/{gameId}/list").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
-		}
-
-		/// <summary>
-		/// Find the current progress for an <param name="skillId"/> for <param name="actorId"/>.
-		/// </summary>
-		/// <param name="skillId">ID of Skill</param>
-		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward skill.</returns>
-		public IEnumerable<AchievementProgressResponse> GetAchievementProgress(string skillId, string actorId)
-		{
-			var query = GetUriBuilder($"api/skills/{skillId}/evaluate/{actorId}").ToString();
-			return Get<IEnumerable<AchievementProgressResponse>>(query);
 		}
 
 		/// <summary>
@@ -56,13 +44,25 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">ID of Game</param>
 		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward skill.</returns>
-		public IEnumerable<AchievementProgressResponse> GetGameProgress(string actorId, string gameId)
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward skill.</returns>
+		public IEnumerable<AchievementProgressResponse> GetGameProgress(int actorId, int gameId)
 		{
 			var query = GetUriBuilder($"api/skills/game/{gameId}/evaluate/{actorId}").ToString();
 			return Get<IEnumerable<AchievementProgressResponse>>(query);
 		}
 
+		/// <summary>
+		/// Find the current progress for a Skill for <param name="actorId"/>.
+		/// </summary>
+		/// <param name="token">Token of Skill</param>
+		/// <param name="gameId">ID of the Game the Skill is for</param>
+		/// <param name="actorId">ID of Group/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward skill.</returns>
+		public IEnumerable<AchievementProgressResponse> GetAchievementProgress(string token, int gameId, int actorId)
+		{
+			var query = GetUriBuilder($"api/skills/{token}/{gameId}/evaluate/{actorId}").ToString();
+			return Get<IEnumerable<AchievementProgressResponse>>(query);
+		}
 
 		/// <summary>
 		/// Create a new Skill.
@@ -79,21 +79,21 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Update an existing Skill.
 		/// </summary>
-		/// <param name="id">Id of the existing Skill.</param>
 		/// <param name="skill"><see cref="AchievementRequest"/> object that holds the details of the Skill.</param>
-		public void Update(int id, ActorRequest group)
+		public void Update(AchievementRequest skill)
 		{
-			var query = GetUriBuilder($"api/skills/update/{id}").ToString();
-			Put(query, group);
+			var query = GetUriBuilder($"api/skills/update").ToString();
+			Put(query, skill);
 		}
 
 		/// <summary>
-		/// Delete Skills with the <param name="id"/> provided.
+		/// Delete Skill with the  <param name="token"/> and <param name="gameId"/> provided.
 		/// </summary>
-		/// <param name="id">Skill ID</param>
-		public void Delete(int id)
+		/// <param name="token">Token of Skill</param>
+		/// <param name="gameId">ID of the Game the Skill is for</param>
+		public void Delete(string token, int gameId)
 		{
-			var query = GetUriBuilder($"api/skills/{id}").ToString();
+			var query = GetUriBuilder($"api/skills/{token}/{gameId}").ToString();
 			Delete(query);
 		}
 

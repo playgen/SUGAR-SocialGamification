@@ -11,11 +11,11 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
+	/// Token : "AN_ACHIEVEMENT_TOKEN",
 	/// GameId : 1,
 	/// Name : "Achievement Unlocked",
 	/// Description : "Fulfil the criteria to get the reward",
 	/// ActorType : "User",
-	/// Token : "AN_ACHIEVEMENT_TOKEN",
 	/// CompletionCriteria : [{
 	/// Key : "Criteria Key",
 	/// DataType : "Long",
@@ -32,6 +32,12 @@ namespace PlayGen.SUGAR.Contracts
 	/// </example>
 	public class AchievementRequest
 	{
+		/// <summary>
+		/// A unique identifier used in development to reference the achievement/skill.
+		/// </summary>
+		[Required]
+		public string Token { get; set; }
+
 		/// <summary>
 		/// The ID of the Game which this achievement/skill should belong to. Can be left null to make the achievement/skill system-wide.
 		/// </summary>
@@ -56,12 +62,6 @@ namespace PlayGen.SUGAR.Contracts
 		[Required]
 		[JsonConverter(typeof(StringEnumConverter))]
 		public ActorType ActorType { get; set; }
-
-		/// <summary>
-		/// A unique identifier used in development to reference the achievement/skill.
-		/// </summary>
-		[Required]
-		public string Token { get; set; }
 
 		/// <summary>
 		/// A list of criteria which will be checked in order to see if an actor has completed the achievement/skill.

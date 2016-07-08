@@ -9,10 +9,9 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Id : 1,
+	/// Token : "THE_LEADERBOARD_TOKEN",
 	/// GameId : 1,
 	/// Name : "Leaderboard Name",
-	/// Token : "THE_LEADERBOARD_TOKEN",
 	/// Key : "Key",
 	/// ActorType : "User",
 	/// GameDataType : "Long",
@@ -22,7 +21,10 @@ namespace PlayGen.SUGAR.Contracts
 	/// </example>
 	public class LeaderboardResponse
 	{
-		public int Id { get; set; }
+		/// <summary>
+		/// The unique identifier used in development to reference the leaderboard.
+		/// </summary>
+		public string Token { get; set; }
 
 		/// <summary>
 		/// The Id of the game which this leaderboard belongs to.
@@ -33,11 +35,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// The display name of the leaderboard.
 		/// </summary>
 		public string Name { get; set; }
-
-		/// <summary>
-		/// The unique identifier used in development to reference the leaderboard.
-		/// </summary>
-		public string Token { get; set; }
 
 		/// <summary>
 		/// The GameData key which is checked against in order to create the leaderboard standings.
