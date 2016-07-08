@@ -5,6 +5,7 @@ using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
@@ -18,9 +19,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class GameDataController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.GameDataController _gameDataController;
+		private readonly IGameDataController _gameDataController;
 
-		public GameDataController(Data.EntityFramework.Controllers.GameDataController gameDataController)
+		public GameDataController(IGameDataController gameDataController)
 		{
 			_gameDataController = gameDataController;
 		}

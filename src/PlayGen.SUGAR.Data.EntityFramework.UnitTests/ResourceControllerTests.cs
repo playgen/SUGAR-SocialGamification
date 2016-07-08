@@ -3,6 +3,7 @@ using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.GameData;
 using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
@@ -110,7 +111,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Helpers
-		private GameData CreateResource(string key, int? gameId = null, int? actorId = null,
+		private Model.GameData CreateResource(string key, int? gameId = null, int? actorId = null,
               bool createNewGame = false, bool createNewUser = false)
 		{
 			if (createNewGame)
@@ -133,7 +134,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				actorId = user.Id;
 			}
 
-			var resource = new GameData
+			var resource = new Model.GameData
 			{
 				GameId = gameId,
 				ActorId = actorId,
@@ -147,7 +148,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			return resource;
 		}
  
-		private bool IsMatch(GameData lhs, GameData rhs)
+		private bool IsMatch(Model.GameData lhs, Model.GameData rhs)
 		{
 			return lhs.ActorId == rhs.ActorId
 				&& lhs.GameId == rhs.GameId

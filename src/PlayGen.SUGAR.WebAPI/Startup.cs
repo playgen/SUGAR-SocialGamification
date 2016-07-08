@@ -48,10 +48,11 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.AchievementController(connectionString));
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.SkillController(connectionString));
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.LeaderboardController(connectionString));
-			services.AddScoped((_) => new Data.EntityFramework.Controllers.ResourceController(connectionString));
+			services.AddScoped((_) => new GameData.ResourceController(connectionString));
 			services.AddScoped((_) => new GroupRelationshipController(connectionString));
 			services.AddScoped((_) => new UserRelationshipController(connectionString));
 
+			// TODO set category types for GameDataControllers used by other controllers
 			services.AddScoped((_) => new GameData.AchievementController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString), new ActorController(connectionString),
 										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString))));
 			services.AddScoped((_) => new GameData.SkillController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString), new ActorController(connectionString),

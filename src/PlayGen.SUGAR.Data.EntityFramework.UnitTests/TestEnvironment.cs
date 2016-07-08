@@ -1,6 +1,10 @@
 ﻿using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using System;
+using PlayGen.SUGAR.GameData;
 using Xunit;
+using AchievementController = PlayGen.SUGAR.Data.EntityFramework.Controllers.AchievementController;
+using LeaderboardController = PlayGen.SUGAR.Data.EntityFramework.Controllers.LeaderboardController;
+using SkillController = PlayGen.SUGAR.Data.EntityFramework.Controllers.SkillController;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {

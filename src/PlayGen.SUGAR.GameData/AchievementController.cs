@@ -74,5 +74,25 @@ namespace PlayGen.SUGAR.GameData
 		public void EvaluateAchievement(Achievement achievement, int? actorId)
 		{
 		}
+		
+		/*
+		// Pattern for evaluating allowing the ability to evaluate an achievement in a way where the context doesn't need to be saved.
+		public void DoSomethingDb(string param, SGAContext db = null)
+		{
+			var dispose = db == null;
+			db = db ?? new SGAContext("asdfas");
+			try
+			{
+				//db stuff
+			}
+			finally
+			{
+				if (dispose)
+				{
+					db?.Dispose();
+				}
+			}
+		}
+		*/
 	}
 }

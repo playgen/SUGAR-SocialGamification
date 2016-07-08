@@ -5,6 +5,7 @@ using System.Web.Http.Description;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.GameData;
 using System;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
@@ -16,9 +17,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class ResourceController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.ResourceController _resourceController;
+		private readonly GameData.ResourceController _resourceController;
 
-		public ResourceController(Data.EntityFramework.Controllers.ResourceController resourceController)
+		public ResourceController(GameData.ResourceController resourceController)
 		{
 			_resourceController = resourceController;
 		}

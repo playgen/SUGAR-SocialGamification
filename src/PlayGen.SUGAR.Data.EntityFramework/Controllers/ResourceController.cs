@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
-
+/*
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
     public class ResourceController
@@ -87,3 +87,4 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 	    }
     }
 }
+*/
