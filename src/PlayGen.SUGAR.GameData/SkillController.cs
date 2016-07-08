@@ -1,9 +1,11 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
+
 
 namespace PlayGen.SUGAR.GameData
 {
@@ -23,6 +25,24 @@ namespace PlayGen.SUGAR.GameData
 			ActorController = actorController;
 		}
 
+		public IEnumerable<Skill> FilterByActorType(IEnumerable<Skill> skills, int? actorId)
+		{
+			if (actorId.HasValue)
+			{
+				var provided = ActorController.Get(actorId.Value);
+				if (provided == null)
+				{
+					skills = skills.Where(a => a.ActorType == ActorType.Undefined);
+				}
+				else
+				{
+					skills = skills.Where(a => a.ActorType == ActorType.Undefined || a.ActorType == provided.ActorType);
+				}
+			}
+
+			return skills;
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -38,7 +58,7 @@ namespace PlayGen.SUGAR.GameData
 			if (actorId != null)
 			{
 				var provided = ActorController.Get(actorId.Value);
-				if (skill.ActorType != ActorType.Undefined && provided.ActorType != skill.ActorType)
+				if (skill.ActorType != ActorType.Undefined && (provided == null || provided.ActorType != skill.ActorType))
 				{
 					throw new MissingRecordException("The provided ActorId cannot complete this skill.");
 				}

@@ -5,6 +5,14 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates relationship details.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// RequestorId : 1,
+	/// AcceptorId : 2,
+	/// AutoAccept : true
+	/// }
+	/// </example>
 	public class RelationshipRequest
 	{
 		[Required]

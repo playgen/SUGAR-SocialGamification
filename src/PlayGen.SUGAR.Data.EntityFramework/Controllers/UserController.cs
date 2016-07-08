@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	/// <summary>
-	/// Performs DB operations on the User entity
-	/// </summary>
 	public class UserController : DbController
 	{
 		public UserController(string nameOrConnectionString) 
@@ -69,6 +68,27 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				context.Users.Add(user);
 				SaveChanges(context);
+			}
+		}
+
+		public void Update(User user)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var existing = context.Users.Find(user.Id);
+
+				if (existing != null)
+				{
+					context.Entry(existing).State = EntityState.Modified;
+					existing.Name = user.Name;
+					SaveChanges(context);
+				}
+				else
+				{
+					throw new MissingRecordException($"The existing user with ID {user.Id} could not be found.");
+				}
 			}
 		}
 

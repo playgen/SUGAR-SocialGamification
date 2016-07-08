@@ -59,6 +59,17 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Update an existing User.
+		/// </summary>
+		/// <param name="id">Id of the existing User.</param>
+		/// <param name="user"><see cref="ActorRequest"/> object that holds the details of the User.</param>
+		public void Update(int id, ActorRequest user)
+		{
+			var query = GetUriBuilder($"api/user/update/{id}").ToString();
+			Put(query, user);
+		}
+
+		/// <summary>
 		/// Delete User with the <param name="id"/> provided.
 		/// </summary>
 		/// <param name="id">User ID.</param>

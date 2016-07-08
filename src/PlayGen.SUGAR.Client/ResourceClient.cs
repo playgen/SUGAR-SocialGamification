@@ -5,6 +5,9 @@ using PlayGen.SUGAR.Contracts.Controllers;
 
 namespace PlayGen.SUGAR.Client
 {
+	/// <summary>
+	/// Controller that facilitates Resource specific operations.
+	/// </summary>
 	public class ResourceClient : ClientBase
 	{
 		private const string ControllerPrefix = "api/resource";

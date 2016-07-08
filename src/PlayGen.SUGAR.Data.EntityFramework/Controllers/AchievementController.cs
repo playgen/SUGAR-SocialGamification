@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 
@@ -64,6 +65,34 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				context.Achievements.Add(achievement);
 				SaveChanges(context);
 				return achievement;
+			}
+		}
+
+		public void Update(Achievement achievement)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var existing = context.Achievements.Find(achievement.Id);
+
+				if (existing != null)
+				{
+					context.Entry(existing).State = EntityState.Modified;
+
+					existing.Name = achievement.Name;
+					existing.CompletionCriteriaCollection = achievement.CompletionCriteriaCollection;
+					existing.RewardCollection = achievement.RewardCollection;
+					existing.Description = achievement.Description;
+					existing.ActorType = achievement.ActorType;
+					existing.GameId = achievement.GameId;
+					existing.Token = achievement.Token;
+
+					SaveChanges(context);
+				} else
+				{
+					throw new MissingRecordException($"The existing achievement with ID {achievement.Id} could not be found.");
+				}
 			}
 		}
 

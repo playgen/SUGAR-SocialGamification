@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -22,11 +24,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Retrieve game multiple records by name from the database
-		/// </summary>
-		/// <param name="names"></param>
-		/// <returns></returns>
 		public IEnumerable<Game> Search(string name)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
@@ -39,11 +36,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Retrieve game record by id from the database
-		/// </summary>
-		/// <param name="ids"></param>
-		/// <returns></returns>
 		public Game Search(int id)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
@@ -55,11 +47,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Create a new game record in the database.
-		/// </summary>
-		/// <param name="newGame"></param>
-		/// <returns></returns>
 		public void Create(Game game)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
@@ -71,10 +58,27 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Delete a game record from the database.
-		/// </summary>
-		/// <param name="id"></param>
+		public void Update(Game game)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var existing = context.Games.Find(game.Id);
+
+				if (existing != null)
+				{
+					context.Entry(existing).State = EntityState.Modified;
+					existing.Name = game.Name;
+					SaveChanges(context);
+				}
+				else
+				{
+					throw new MissingRecordException($"The existing game with ID {game.Id} could not be found.");
+				}
+			}
+		}
+
 		public void Delete(int id)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))

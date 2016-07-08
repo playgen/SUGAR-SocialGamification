@@ -13,7 +13,7 @@ using PlayGen.SUGAR.WebAPI.Extensions;
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
 	/// <summary>
-	/// Web Controller that facilitates UserData specific operations.
+	/// Web Controller that facilitates GameData specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorization]
