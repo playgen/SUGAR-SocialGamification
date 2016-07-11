@@ -1,8 +1,12 @@
 # Games
-The games screen allows the admin to create new games and delete current games
+*For more information on games view the [documentation](/articles/Games.html)*
 
-### Creating new games
+The games screen allows the admin to do the following actions:
+* Create new games
+* Delete current games
+
+### Create new games
 The admin can create new games by selecting the "Create New Game" button which will prompt them to add a game with a name and a description
 
-### Deleting games
-The delete button will simply delete the game after showing a warning message
+### Delete current games
+Delete button will delete the selected game from the table
