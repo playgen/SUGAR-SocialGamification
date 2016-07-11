@@ -5,6 +5,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Exceptions
 	public class DuplicateRecordException : Exception
 	{
 		public DuplicateRecordException()
+			: base("There was a duplicate!")
 		{
 		}
 

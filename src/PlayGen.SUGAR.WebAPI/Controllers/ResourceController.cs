@@ -43,37 +43,33 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Create a new Resource record.
+		/// Creates or updates a Resource record.
 		/// 
 		/// Example Usage: POST api/resource
 		/// </summary>
-		/// <param name="resourceAddRequest"><see cref="ResourceAddRequest"/> object that holds the details of the new ResourceData.</param>
+		/// <param name="resourceRequest"><see cref="ResourceAddRequest"/> object that holds the details of the ResourceData.</param>
 		/// <returns>A <see cref="ResourceResponse"/> containing the new Resource details.</returns>
 		[HttpPost]
 		[ResponseType(typeof(ResourceResponse))]
 		[ArgumentsNotNull]
-		public IActionResult Add([FromBody]ResourceAddRequest resourceAddRequest)
+		public IActionResult AddOrUpdate([FromBody]ResourceAddRequest resourceRequest)
 		{
-			var resource = resourceAddRequest.ToModel();
-			_resourceController.Create(resource);
+			var resource = resourceRequest.ToModel();
+			var resources = _resourceController.Get(resourceRequest.GameId, resourceRequest.ActorId, new[] { resourceRequest.Key });
+			if (resources.Any())
+			{
+				var firstResource = resources.ElementAt(0);
+				_resourceController.UpdateQuantity(firstResource, resourceRequest.Quantity);
+			}
+			else
+			{
+				
+				_resourceController.Create(resource);
+				
+			}
+
 			var resourceContract = resource.ToResourceContract();
 			return new ObjectResult(resourceContract);
-		}
-
-		/// <summary>
-		/// Update an existing Resource record.
-		/// 
-		/// Example Usage: Put api/resource/update?id=7
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="resourceUpdateRequest"><see cref="ResourceUpdateRequest"/> object that holds the details of the updated ResourceData.</param>
-		[HttpPut("update/{id:int}")]
-		[ArgumentsNotNull]
-		public void Update([FromRoute] int id, [FromBody]ResourceUpdateRequest resourceUpdateRequest)
-		{
-			var resource = resourceUpdateRequest.ToModel();
-			resource.Id = id;
-			_resourceController.Update(resource);
 		}
 
 		/// <summary>
@@ -90,8 +86,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			Data.Model.GameData fromResource;
 
-			var toResource = _resourceController.Transfer(transferRequest.ResourceId, 
-				transferRequest.GameId, transferRequest.RecipientId, transferRequest.Quantity, out fromResource);
+			var toResource = _resourceController.Transfer(transferRequest.GameId, transferRequest.SenderActorId, transferRequest.RecipientActorId, transferRequest.Key, transferRequest.Quantity, out fromResource);
 
 			var resourceTransferRespone = new ResourceTransferResponse
 			{

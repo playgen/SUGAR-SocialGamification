@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 100,
 			};
 
-			var response = _resourceClient.Add(resourceRequest);
+			var response = _resourceClient.AddOrUpdate(resourceRequest);
 
 			Assert.Equal(resourceRequest.Key, response.Key);
 			Assert.Equal(resourceRequest.Quantity, response.Quantity);
@@ -67,9 +67,9 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 100,
 			};
 
-			_resourceClient.Add(resourceRequest);
+			_resourceClient.AddOrUpdate(resourceRequest);
 
-			Assert.Throws<WebException>(() => _resourceClient.Add(resourceRequest));
+			Assert.Throws<WebException>(() => _resourceClient.AddOrUpdate(resourceRequest));
 		}
 
 		[Fact]
@@ -81,19 +81,19 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 100,
 			};
 
-			var createdResource = _resourceClient.Add(resourceRequest);
+			var createdResource = _resourceClient.AddOrUpdate(resourceRequest);
 			var createdQuantity = createdResource.Quantity;
 			var updatedQuantity = createdQuantity + 9000;
 
 			//resourceRequest.Quantity = updatedQuantity;
 
-			var resourceUpdateRequest = new ResourceUpdateRequest
+			var resourceRequestUpdated = new ResourceAddRequest
 			{
 				Key = createdResource.Key,
 				Quantity = updatedQuantity
 			};
 
-			_resourceClient.Update(createdResource.Id, resourceUpdateRequest);
+			_resourceClient.AddOrUpdate(resourceRequestUpdated);
 
 			var updatedResource = _resourceClient.Get(createdResource.GameId, createdResource.ActorId,
 				new[] {createdResource.Key}).Single();
@@ -105,13 +105,13 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CantUpdateNonexisting()
 		{
-			var resourceRequest = new ResourceUpdateRequest
+			var resourceRequest = new ResourceAddRequest
 			{
 				Key = "CantUpdateNonexisting",
 				Quantity = 100,
 			};
 
-			Assert.Throws<WebException>(() => _resourceClient.Update(-1, resourceRequest));
+			Assert.Throws<WebException>(() => _resourceClient.AddOrUpdate(resourceRequest));
 		}
 
 		[Fact]
@@ -120,7 +120,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
 
-			var fromResource = _resourceClient.Add(new ResourceAddRequest
+			var fromResource = _resourceClient.AddOrUpdate(new ResourceAddRequest
 			{
 				GameId = null,
 				ActorId = fromUser.Id,
@@ -133,10 +133,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var transferResponse = _resourceClient.Transfer(new ResourceTransferRequest
 			{
-				ResourceId = fromResource.Id,
 				GameId = fromResource.GameId,
-				Quantity = transferQuantity,
-				RecipientId = toUser.Id,
+				SenderActorId = fromUser.Id,
+				RecipientActorId = toUser.Id,
+				Key = fromResource.Key,
+				Quantity = transferQuantity
 			});
 
 			Assert.Equal(originalQuantity - transferQuantity, transferResponse.FromResource.Quantity);
@@ -152,7 +153,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
 
-			var fromResource = _resourceClient.Add(new ResourceAddRequest
+			var fromResource = _resourceClient.AddOrUpdate(new ResourceAddRequest
 			{
 				GameId = null,
 				ActorId = fromUser.Id,
@@ -160,7 +161,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 100,
 			});
 
-			var toResource = _resourceClient.Add(new ResourceAddRequest
+			var toResource = _resourceClient.AddOrUpdate(new ResourceAddRequest
 			{
 				GameId = fromResource.GameId,
 				ActorId = toUser.Id,
@@ -174,10 +175,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var transferResponse = _resourceClient.Transfer(new ResourceTransferRequest
 			{
-				ResourceId = fromResource.Id,
 				GameId = fromResource.GameId,
-				Quantity = transferQuantity,
-				RecipientId = toUser.Id,
+				SenderActorId = fromUser.Id,
+				RecipientActorId = toUser.Id,
+				Key = fromResource.Key,
+				Quantity = transferQuantity
 			});
 
 			Assert.Equal(originalFrmoQuantity - transferQuantity, transferResponse.FromResource.Quantity);
@@ -190,12 +192,17 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CantTransferNonExistingResource()
 		{
+			var fromUser = GetOrCreateUser("From");
+			var toUser = GetOrCreateUser("To");
+
 			Assert.Throws<WebException>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
-				ResourceId = -1,
+
+				SenderActorId = fromUser.Id,
+				RecipientActorId = toUser.Id,
+				Key = new Guid().ToString(),
 				GameId = null,
 				Quantity = 100,
-				RecipientId = null,
 			}));
 		}
 
@@ -205,7 +212,10 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[InlineData(-2000)]
 		public void CantTransfer_WithLessThan1Quantity(long transferQuantity)
 		{
-			var fromResource = _resourceClient.Add(new ResourceAddRequest
+			var fromUser = GetOrCreateUser("From");
+			var toUser = GetOrCreateUser("To");
+
+			var fromResource = _resourceClient.AddOrUpdate(new ResourceAddRequest
 			{
 				GameId = null,
 				ActorId = null,
@@ -215,17 +225,21 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			Assert.Throws<WebException>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
-				ResourceId = fromResource.Id,
+				SenderActorId = fromUser.Id,
+				RecipientActorId = toUser.Id,
+				Key = fromResource.Key,
 				GameId = fromResource.GameId,
-				Quantity = transferQuantity,
-				RecipientId = null,
+				Quantity = transferQuantity
 			}));
 		}
 
 		[Fact]
 		public void CantTransfer_WithOutOfRangeQuantity()
 		{
-			var fromResource = _resourceClient.Add(new ResourceAddRequest
+			var fromUser = GetOrCreateUser("From");
+			var toUser = GetOrCreateUser("To");
+
+			var fromResource = _resourceClient.AddOrUpdate(new ResourceAddRequest
 			{
 				GameId = null,
 				ActorId = null,
@@ -237,10 +251,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			Assert.Throws<WebException>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
-				ResourceId = fromResource.Id,
 				GameId = fromResource.GameId,
+				SenderActorId = fromUser.Id,
+				RecipientActorId = toUser.Id,
+				Key = fromResource.Key,
 				Quantity = transferQuantity,
-				RecipientId = null,
 			}));
 		}
 		#endregion

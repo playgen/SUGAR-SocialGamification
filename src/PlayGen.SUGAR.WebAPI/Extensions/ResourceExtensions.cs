@@ -36,18 +36,5 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				Category = GameDataCategory.Resource
 			};
 		}
-
-		public static Data.Model.GameData ToModel(this ResourceUpdateRequest resourceContract)
-		{
-			return new Data.Model.GameData
-			{
-				ActorId = resourceContract.ActorId,
-				GameId = resourceContract.GameId,
-				Key = resourceContract.Key,
-				Value = resourceContract.Quantity.ToString(),
-				DataType = GameDataType.Long,
-				Category = GameDataCategory.Resource
-			};
-		}
 	}
 }

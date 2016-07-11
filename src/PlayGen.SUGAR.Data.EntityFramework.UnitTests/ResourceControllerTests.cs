@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			long originalQuantity = long.Parse(fromResource.Value);
 			long transferQuantity = originalQuantity/3;
 
-			var toResource = _resourceController.Transfer(fromResource.Id, fromResource.GameId, toUser.Id, transferQuantity, out fromResource);
+			var toResource = _resourceController.Transfer(fromResource.GameId, fromUser.Id, toUser.Id, fromResource.Key, transferQuantity, out fromResource);
 
 			Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
 			Assert.Equal(transferQuantity, long.Parse(toResource.Value));
@@ -102,7 +102,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			long originalQuantity = long.Parse(fromResource.Value);
 			long transferQuantity = originalQuantity / 3;
 
-			var processedToResource = _resourceController.Transfer(fromResource.Id, fromResource.GameId, toUser.Id, transferQuantity, out fromResource);
+			var processedToResource = _resourceController.Transfer(fromResource.GameId, fromUser.Id, toUser.Id, fromResource.Key, transferQuantity, out fromResource);
 
 			Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
 			Assert.Equal(originalQuantity + transferQuantity, long.Parse(processedToResource.Value));

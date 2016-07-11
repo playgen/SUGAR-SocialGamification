@@ -34,25 +34,14 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Create a new Resource record.
+		/// Create or Updates a Resource record.
 		/// </summary>
-		/// <param name="data"><see cref="ResourceAddRequest"/> object that holds the details of the new Resource.</param>
+		/// <param name="data"><see cref="PlayGen.SUGAR.Contracts.ResourceAddRequest"/> object that holds the details of the new Resource.</param>
 		/// <returns>A <see cref="ResourceResponse"/> containing the new Resource details.</returns>
-		public ResourceResponse Add(ResourceAddRequest data)
+		public ResourceResponse AddOrUpdate(ResourceAddRequest data)
 		{
 			var query = GetUriBuilder(ControllerPrefix).ToString();
 			return Post<ResourceAddRequest, ResourceResponse>(query, data);
-		}
-
-		/// <summary>
-		/// Create a an updated Resource record.
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="data"><see cref="ResourceUpdateRequest"/> object that holds the details of the updated Resource.</param>
-		public void Update(int id, ResourceUpdateRequest data)
-		{
-			var query = GetUriBuilder($"{ControllerPrefix}/update/{id}").ToString();
-			Put(query, data);
 		}
 
 		/// <summary>
