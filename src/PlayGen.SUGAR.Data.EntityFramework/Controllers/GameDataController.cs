@@ -347,8 +347,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				context.HandleDetatchedGame(data.GameId);
 				context.HandleDetatchedActor(data.ActorId);
 
-				context.GameData.Add(data);
-				SaveChanges(context);
+				if (ParseCheck(data))
+				{
+					context.GameData.Add(data);
+					SaveChanges(context);
+				}
+				else
+				{
+					throw new ArgumentException($"Invalid Value {data.Value} for GameDataType {data.DataType}");
+				}
 			}
 		}
 
@@ -357,7 +364,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			List<GameData> dataList = new List<GameData>();
 			foreach (var d in data)
 			{
-				dataList.Add(d);
+				if (ParseCheck(d))
+				{
+					dataList.Add(d);
+				}
+				else
+				{
+					throw new ArgumentException($"Invalid Value {d.Value} for GameDataType {d.DataType}");
+				}
 				if (dataList.Count >= 1000)
 				{
 					using (var context = new SGAContext(NameOrConnectionString))
@@ -398,6 +412,46 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				existingData.Value = updatedData.Value;
 
 				SaveChanges(context);
+			}
+		}
+
+		protected bool ParseCheck(GameData data)
+		{
+			switch (data.DataType) {
+				case GameDataType.String:
+					return true;
+				case GameDataType.Long:
+					long tryLong;
+					if (long.TryParse(data.Value, out tryLong))
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				case GameDataType.Float:
+					float tryFloat;
+					if (float.TryParse(data.Value, out tryFloat))
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				case GameDataType.Boolean:
+					bool tryBoolean;
+					if (bool.TryParse(data.Value, out tryBoolean))
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				default:
+					return false;
 			}
 		}
 
