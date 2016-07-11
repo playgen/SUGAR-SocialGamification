@@ -15,10 +15,33 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Find a Global Skill that matches <param name="token"/>.
+		/// </summary>
+		/// <param name="token">Token of Skill</param>
+		/// <returns>Returns <see cref="AchievementResponse"/> that holds Skill details</returns>
+		public AchievementResponse GetGlobalById(string token)
+		{
+			var query = GetUriBuilder($"api/skills/find/{token}/global").ToString();
+			return Get<AchievementResponse>(query);
+		}
+
+		/// <summary>
+		/// Find a Skill that matches <param name="token"/> and <param name="gameId"/>.
+		/// </summary>
+		/// <param name="token">Token of Skill</param>
+		/// <param name="gameId">ID of the Game the Skill is for</param>
+		/// <returns>Returns <see cref="AchievementResponse"/> that holds Skill details</returns>
+		public AchievementResponse GetById(string token, int gameId)
+		{
+			var query = GetUriBuilder($"api/skills/find/{token}/{gameId}").ToString();
+			return Get<AchievementResponse>(query);
+		}
+
+		/// <summary>
 		/// Get all global skills, ie. skills that are not associated with a specific game
 		/// </summary>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Skill details</returns>
-		public IEnumerable<AchievementResponse> GetGlobal()
+		public IEnumerable<AchievementResponse> GetAllGlobal()
 		{
 			var query = GetUriBuilder("api/skills/global/list").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
@@ -31,7 +54,7 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Skill details</returns>
-		public IEnumerable<AchievementResponse> Get(int gameId)
+		public IEnumerable<AchievementResponse> GetByGame(int gameId)
 		{
 			var query = GetUriBuilder($"api/skills/game/{gameId}/list").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);

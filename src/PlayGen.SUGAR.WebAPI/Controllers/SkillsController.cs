@@ -31,6 +31,24 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Find a Skill that matches <param name="token"/> and <param name="gameId"/>.
+		/// 
+		/// Example Usage: GET api/skills/find/SKILL_TOKEN/1
+		/// </summary>
+		/// <param name="token">Token of Skill</param>
+		/// <param name="gameId">ID of the Game the Skill is for</param>
+		/// <returns>Returns <see cref="AchievementResponse"/> that holds Skill details</returns>
+		[HttpGet("find/{token}/{gameId:int}")]
+		[HttpGet("find/{token}/global")]
+		[ResponseType(typeof(AchievementResponse))]
+		public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
+		{
+			var skill = _skillController.Get(token, gameId);
+			var skillContract = skill.ToContract();
+			return new ObjectResult(skillContract);
+		}
+
+		/// <summary>
 		/// Find a list of Skills that match <param name="gameId"/>.
 		/// If global is provided instead of a gameId, get all global skills, ie. skills that are not associated with a specific game.
 		/// 

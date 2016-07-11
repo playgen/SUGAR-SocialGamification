@@ -31,6 +31,24 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Find an Achievement that matches <param name="token"/> and <param name="gameId"/>.
+		/// 
+		/// Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="gameId">ID of the Game the Achievement is for</param>
+		/// <returns>Returns <see cref="AchievementResponse"/> that holds Achievement details</returns>
+		[HttpGet("find/{token}/{gameId:int}")]
+		[HttpGet("find/{token}/global")]
+		[ResponseType(typeof(AchievementResponse))]
+		public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
+		{
+			var achievement = _achievementController.Get(token, gameId);
+			var achievementContract = achievement.ToContract();
+			return new ObjectResult(achievementContract);
+		}
+
+		/// <summary>
 		/// Find a list of Achievements that match <param name="gameId"/>.
 		/// If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.
 		/// 

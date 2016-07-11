@@ -14,10 +14,33 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Find a Global Achievement that matches <param name="token"/>.
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		/// <returns>Returns <see cref="AchievementResponse"/> that holds Achievement details</returns>
+		public AchievementResponse GetGlobalById(string token)
+		{
+			var query = GetUriBuilder($"api/achievements/find/{token}/global").ToString();
+			return Get<AchievementResponse>(query);
+		}
+
+		/// <summary>
+		/// Find a Achievement that matches <param name="token"/> and <param name="gameId"/>.
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="gameId">ID of the Game the Achievement is for</param>
+		/// <returns>Returns <see cref="AchievementResponse"/> that holds Achievement details</returns>
+		public AchievementResponse GetById(string token, int gameId)
+		{
+			var query = GetUriBuilder($"api/achievements/find/{token}/{gameId}").ToString();
+			return Get<AchievementResponse>(query);
+		}
+
+		/// <summary>
 		/// Get all global achievements, ie. achievements that are not associated with a specific game
 		/// </summary>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
-		public IEnumerable<AchievementResponse> GetGlobal()
+		public IEnumerable<AchievementResponse> GetAllGlobal()
 		{
 			var query = GetUriBuilder($"api/achievements/global/list").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
@@ -28,7 +51,7 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">game ID</param>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
-		public IEnumerable<AchievementResponse> Get(int gameId)
+		public IEnumerable<AchievementResponse> GetByGame(int gameId)
 		{
 			var query = GetUriBuilder($"api/achievements/game/{gameId}/list").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
