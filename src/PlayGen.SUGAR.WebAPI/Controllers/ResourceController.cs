@@ -25,19 +25,19 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all Resources that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+		/// Find a list of all Resources filtered by the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
 		/// 
 		/// Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
 		/// </summary>
-		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
-		/// <param name="keys">Array of Key names.</param>
+		/// <param name="actorId">ID of a User/Group.</param>
+		/// <param name="keys">Optional array of Key names to filter results by.</param>
 		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
 		[HttpGet]
 		[ResponseType(typeof(IEnumerable<ResourceResponse>))]
-		public IActionResult Get(int? actorId, int? gameId, string[] keys)
+		public IActionResult Get(int? gameId, int? actorId, string[] keys)
 		{
-			var resource = _resourceController.Get(actorId, gameId, keys);
+			var resource = _resourceController.Get(gameId, actorId, keys.Any() ? keys : null);
 			var resourceContract = resource.ToResourceContractList();
 			return new ObjectResult(resourceContract);
 		}
@@ -47,14 +47,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// 
 		/// Example Usage: POST api/resource
 		/// </summary>
-		/// <param name="newData"><see cref="ResourceRequest"/> object that holds the details of the new ResourceData.</param>
+		/// <param name="resourceAddRequest"><see cref="ResourceAddRequest"/> object that holds the details of the new ResourceData.</param>
 		/// <returns>A <see cref="ResourceResponse"/> containing the new Resource details.</returns>
 		[HttpPost]
 		[ResponseType(typeof(ResourceResponse))]
 		[ArgumentsNotNull]
-		public IActionResult Add([FromBody]ResourceRequest resourceRequest)
+		public IActionResult Add([FromBody]ResourceAddRequest resourceAddRequest)
 		{
-			var resource = resourceRequest.ToModel();
+			var resource = resourceAddRequest.ToModel();
 			_resourceController.Create(resource);
 			var resourceContract = resource.ToResourceContract();
 			return new ObjectResult(resourceContract);
@@ -66,12 +66,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: Put api/resource/update?id=7
 		/// </summary>
 		/// <param name="id"></param>
-		/// <param name="resourceRequest"><see cref="ResourceRequest"/> object that holds the details of the updated ResourceData.</param>
+		/// <param name="resourceUpdateRequest"><see cref="ResourceUpdateRequest"/> object that holds the details of the updated ResourceData.</param>
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
-		public void Update([FromRoute] int id, [FromBody]ResourceRequest resourceRequest)
+		public void Update([FromRoute] int id, [FromBody]ResourceUpdateRequest resourceUpdateRequest)
 		{
-			var resource = resourceRequest.ToModel();
+			var resource = resourceUpdateRequest.ToModel();
 			resource.Id = id;
 			_resourceController.Update(resource);
 		}

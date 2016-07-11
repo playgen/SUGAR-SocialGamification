@@ -3,8 +3,8 @@
 	/// <summary>
 	/// Encapsulates resource details from the server.
 	/// </summary>
-    public class ResourceResponse
-    {
+	public class ResourceResponse
+	{
 		public int Id { get; set; }
 
 		public int? ActorId { get; set; }
@@ -14,5 +14,5 @@
 		public string Key { get; set; }
 
 		public long Quantity { get; set; }
-    }
+	}
 }

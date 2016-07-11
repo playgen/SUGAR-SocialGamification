@@ -6,7 +6,7 @@ using PlayGen.SUGAR.Data.Model;
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public  static class ResourceExtensions
-    {
+	{
 		public static ResourceResponse ToResourceContract(this Data.Model.GameData gameData)
 		{
 			return new ResourceResponse
@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			return gameData.Select(ToResourceContract).ToList();
 		}
 
-		public static Data.Model.GameData ToModel(this ResourceRequest resourceContract)
+		public static Data.Model.GameData ToModel(this ResourceAddRequest resourceContract)
 		{
 			return new Data.Model.GameData
 			{
@@ -36,5 +36,18 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				Category = GameDataCategory.Resource
 			};
 		}
-    }
+
+		public static Data.Model.GameData ToModel(this ResourceUpdateRequest resourceContract)
+		{
+			return new Data.Model.GameData
+			{
+				ActorId = resourceContract.ActorId,
+				GameId = resourceContract.GameId,
+				Key = resourceContract.Key,
+				Value = resourceContract.Quantity.ToString(),
+				DataType = GameDataType.Long,
+				Category = GameDataCategory.Resource
+			};
+		}
+	}
 }

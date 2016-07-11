@@ -5,8 +5,8 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates Resource Data details.
 	/// </summary>
-	public class ResourceRequest
-    {
+	public class ResourceAddRequest
+	{
 		public int? ActorId { get; set; }
 
 		public int? GameId { get; set; }
@@ -17,5 +17,5 @@ namespace PlayGen.SUGAR.Contracts
 
 		[Required]
 		public long Quantity { get; set; }
-    }
+	}
 }

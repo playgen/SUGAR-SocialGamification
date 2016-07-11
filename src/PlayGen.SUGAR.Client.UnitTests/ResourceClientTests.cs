@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanCreate()
 		{
-			var resourceRequest = new ResourceRequest
+			var resourceRequest = new ResourceAddRequest
 			{
 				Key = "CanCreate",
 				Quantity = 100,
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateDuplicate()
 		{
-			var resourceRequest = new ResourceRequest
+			var resourceRequest = new ResourceAddRequest
 			{
 				Key = "CannotCreateDuplicate",
 				Quantity = 100,
@@ -75,7 +75,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanUpdateExisting()
 		{
-			var resourceRequest = new ResourceRequest
+			var resourceRequest = new ResourceAddRequest
 			{
 				Key = "CanUpdateExisting",
 				Quantity = 100,
@@ -85,9 +85,15 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var createdQuantity = createdResource.Quantity;
 			var updatedQuantity = createdQuantity + 9000;
 
-			resourceRequest.Quantity = updatedQuantity;
+			//resourceRequest.Quantity = updatedQuantity;
 
-			_resourceClient.Update(createdResource.Id, resourceRequest);
+			var resourceUpdateRequest = new ResourceUpdateRequest
+			{
+				Key = createdResource.Key,
+				Quantity = updatedQuantity
+			};
+
+			_resourceClient.Update(createdResource.Id, resourceUpdateRequest);
 
 			var updatedResource = _resourceClient.Get(createdResource.GameId, createdResource.ActorId,
 				new[] {createdResource.Key}).Single();
@@ -99,7 +105,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CantUpdateNonexisting()
 		{
-			var resourceRequest = new ResourceRequest
+			var resourceRequest = new ResourceUpdateRequest
 			{
 				Key = "CantUpdateNonexisting",
 				Quantity = 100,
@@ -114,7 +120,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
 
-			var fromResource = _resourceClient.Add(new ResourceRequest
+			var fromResource = _resourceClient.Add(new ResourceAddRequest
 			{
 				GameId = null,
 				ActorId = fromUser.Id,
@@ -146,7 +152,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
 
-			var fromResource = _resourceClient.Add(new ResourceRequest
+			var fromResource = _resourceClient.Add(new ResourceAddRequest
 			{
 				GameId = null,
 				ActorId = fromUser.Id,
@@ -154,7 +160,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 100,
 			});
 
-			var toResource = _resourceClient.Add(new ResourceRequest
+			var toResource = _resourceClient.Add(new ResourceAddRequest
 			{
 				GameId = fromResource.GameId,
 				ActorId = toUser.Id,
@@ -199,7 +205,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[InlineData(-2000)]
 		public void CantTransfer_WithLessThan1Quantity(long transferQuantity)
 		{
-			var fromResource = _resourceClient.Add(new ResourceRequest
+			var fromResource = _resourceClient.Add(new ResourceAddRequest
 			{
 				GameId = null,
 				ActorId = null,
@@ -219,7 +225,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CantTransfer_WithOutOfRangeQuantity()
 		{
-			var fromResource = _resourceClient.Add(new ResourceRequest
+			var fromResource = _resourceClient.Add(new ResourceAddRequest
 			{
 				GameId = null,
 				ActorId = null,
