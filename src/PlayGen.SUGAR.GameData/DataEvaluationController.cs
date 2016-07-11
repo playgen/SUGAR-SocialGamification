@@ -86,6 +86,11 @@ namespace PlayGen.SUGAR.GameData
 				case CriteriaQueryType.Any:
 					var any = GameDataController.AllLongs(gameId, actorId, completionCriteria.Key);
 
+					if (any.Count() == 0)
+					{
+						return CompareValues(0, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+					}
+
 					return any.Max(value => CompareValues(value, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
 				case CriteriaQueryType.Sum:
 					var sum = GameDataController.SumLongs(gameId, actorId, completionCriteria.Key);
@@ -110,6 +115,11 @@ namespace PlayGen.SUGAR.GameData
 			{
 				case CriteriaQueryType.Any:
 					var any = GameDataController.AllFloats(gameId, actorId, completionCriteria.Key);
+
+					if (any.Count() == 0)
+					{
+						return CompareValues(0, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+					}
 
 					return any.Max(value => CompareValues(value, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
 				case CriteriaQueryType.Sum:
@@ -136,6 +146,11 @@ namespace PlayGen.SUGAR.GameData
 				case CriteriaQueryType.Any:
 					var any = GameDataController.AllStrings(gameId, actorId, completionCriteria.Key);
 
+					if (any.Count() == 0)
+					{
+						return CompareValues("", completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.DataType);
+					}
+
 					return any.Max(value => CompareValues(value, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.DataType));
 				case CriteriaQueryType.Sum:
 					return 0;
@@ -158,6 +173,11 @@ namespace PlayGen.SUGAR.GameData
 			{
 				case CriteriaQueryType.Any:
 					var any = GameDataController.AllBools(gameId, actorId, completionCriteria.Key);
+
+					if (any.Count() == 0)
+					{
+						return CompareValues(false, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+					}
 
 					return any.Max(value => CompareValues(value, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
 				case CriteriaQueryType.Sum:

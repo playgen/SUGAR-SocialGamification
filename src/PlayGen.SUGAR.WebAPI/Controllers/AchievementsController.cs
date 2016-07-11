@@ -30,29 +30,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			_achievementEvaluationController = achievementEvaluationController;
 		}
 
-
-		/// <summary>
-		/// Get all global achievements, ie. achievements that are not associated with a specific game
-		/// 
-		/// Example Usage: GET api/achievements/list
-		/// </summary>
-		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
-		[HttpGet("list")]
-		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
-		public IActionResult Get()
-		{
-			var achievement = _achievementController.GetGlobal();
-			var achievementContract = achievement.ToContractList();
-			return new ObjectResult(achievementContract);
-		}
-
 		/// <summary>
 		/// Find a list of Achievements that match <param name="gameId"/>.
+		/// If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.
 		/// 
 		/// Example Usage: GET api/achievements/game/1/list
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
+		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
 		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
 		public IActionResult Get([FromRoute]int gameId)
@@ -71,7 +57,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="actorId">ID of Group/User</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
 		[HttpGet("game/{gameId:int}/evaluate")]
+		[HttpGet("global/evaluate")]
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
+		[HttpGet("global/evaluate/{actorId:int}")]
 		[ResponseType(typeof(IEnumerable<AchievementProgressResponse>))]
 		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
@@ -100,11 +88,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="actorId">ID of Group/User</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
 		[HttpGet("{token}/{gameId:int}/evaluate")]
+		[HttpGet("{token}/global/evaluate")]
 		[HttpGet("{token}/{gameId:int}/evaluate/{actorId:int}")]
+		[HttpGet("{token}/global/evaluate/{actorId:int}")]
 		[ResponseType(typeof(AchievementProgressResponse))]
 		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
-			var achievement = _achievementController.Get(token, gameId.Value);
+			var achievement = _achievementController.Get(token, gameId);
 			var completed = _achievementEvaluationController.IsAchievementCompleted(achievement, actorId);
 			return new ObjectResult(new AchievementProgressResponse
 			{
@@ -146,7 +136,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			_achievementController.Update(achievementModel);
 		}
 
-
 		/// <summary>
 		/// Delete Achievement with the <param name="token"/> and <param name="gameId"/> provided.
 		/// 
@@ -154,10 +143,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="token">Token of Achievement</param>
 		/// <param name="gameId">ID of the Game the Achievement is for</param>
+		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
 		public void Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			_achievementController.Delete(token, gameId.Value);
+			_achievementController.Delete(token, gameId);
 		}
 
 	}

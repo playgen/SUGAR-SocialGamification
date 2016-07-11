@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Name = skillContract.Name,
 				Description = skillContract.Description,
-				GameId = skillContract.GameId,
+				GameId = skillContract.GameId ?? 0,
 				ActorType = skillContract.ActorType,
 				Token = skillContract.Token,
 				CompletionCriteriaCollection = skillContract.CompletionCriteria.ToSkillModel(),

@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client
 		/// Get all global leaderboards, ie. leaderboards that are not associated with a specific game
 		/// </summary>
 		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
-		public IEnumerable<LeaderboardResponse> Get()
+		public IEnumerable<LeaderboardResponse> GetGlobal()
 		{
-			var query = GetUriBuilder("api/leaderboards/list").ToString();
+			var query = GetUriBuilder("api/leaderboards/global/list").ToString();
 			return Get<IEnumerable<LeaderboardResponse>>(query);
 		}
 
@@ -66,6 +66,16 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder($"api/leaderboards/update").ToString();
 			Put(query, leaderboard);
+		}
+
+		/// <summary>
+		/// Delete a global leaderboard, ie. a leaderboard that is not associated with a specific game
+		/// </summary>
+		/// <param name="token">Token of Leaderboard</param>
+		public void DeleteGlobal(string token)
+		{
+			var query = GetUriBuilder($"api/leaderboards/{token}/global").ToString();
+			Delete(query);
 		}
 
 		/// <summary>

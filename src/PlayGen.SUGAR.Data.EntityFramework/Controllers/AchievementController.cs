@@ -13,35 +13,26 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-		public IEnumerable<Achievement> GetGlobal()
+		public IEnumerable<Achievement> GetByGame(int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
-
-				var achievements = context.Achievements.Where(a => a.GameId == null).ToList();
-				return achievements;
-			}
-		}
-
-
-		public IEnumerable<Achievement> GetByGame(int gameId)
-		{
-			using (var context = new SGAContext(NameOrConnectionString))
-			{
-				SetLog(context);
+				gameId = gameId ?? 0;
 
 				var achievements = context.Achievements.Where(a => a.GameId == gameId).ToList();
 				return achievements;
 			}
 		}
 
-		public Achievement Get(string token, int gameId)
+		public Achievement Get(string token, int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
+				gameId = gameId ?? 0;
+				
 				var achievement = context.Achievements.Find(token, gameId);
 				return achievement;
 			}
@@ -95,12 +86,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				}
 			}
 		}
-
-		public void Delete(string token, int gameId)
+		
+		public void Delete(string token, int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
+
+				gameId = gameId ?? 0;
 
 				var achievement = context.Achievements.Find(token, gameId);
 				if (achievement != null)
