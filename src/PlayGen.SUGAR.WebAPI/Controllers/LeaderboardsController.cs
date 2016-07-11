@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ResponseType(typeof(IEnumerable<LeaderboardStandingsResponse>))]
 		public IActionResult GetLeaderboardStandings([FromBody]LeaderboardStandingsRequest leaderboardDetails)
 		{
-			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardId);
+			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardToken, leaderboardDetails.GameId.Value);
 			var standings = _leaderboardEvaluationController.GetStandings(leaderboard, leaderboardDetails);
 			return new ObjectResult(standings);
 		}
@@ -99,29 +99,28 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <summary>
 		/// Update an existing Leaderboard.
 		/// 
-		/// Example Usage: PUT api/leaderboards/update/1
+		/// Example Usage: PUT api/leaderboards/update
 		/// </summary>
-		/// <param name="id">Id of the existing Leaderboard.</param>
 		/// <param name="leaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the Leaderboard.</param>
-		[HttpPut("update/{id:int}")]
+		[HttpPut("update")]
 		[ArgumentsNotNull]
-		public void Update([FromRoute] int id, [FromBody] LeaderboardRequest leaderboard)
+		public void Update([FromBody] LeaderboardRequest leaderboard)
 		{
 			var leaderboardModel = leaderboard.ToModel();
-			leaderboardModel.Id = id;
 			_leaderboardController.Update(leaderboardModel);
 		}
 
 		/// <summary>
-		/// Delete Leaderboards with the <param name="id"/> provided.
+		/// Delete Leaderboard with the <param name="token"/> and <param name="gameId"/> provided.
 		/// 
-		/// Example Usage: DELETE api/leaderboards/1
+		/// Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1
 		/// </summary>
-		/// <param name="id">Leaderboard ID</param>
-		[HttpDelete("{id:int}")]
-		public void Delete([FromRoute]int id)
+		/// <param name="token">Token of Leaderboard</param>
+		/// <param name="gameId">ID of the Game the Leaderboard is for</param>
+		[HttpDelete("{token}/{gameId:int}")]
+		public void Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			_leaderboardController.Delete(id);
+			_leaderboardController.Delete(token, gameId.Value);
 		}
 	}
 }

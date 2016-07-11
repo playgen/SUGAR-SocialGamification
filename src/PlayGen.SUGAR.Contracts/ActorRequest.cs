@@ -8,11 +8,14 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Name : "Name"
+	/// Name : "Actor Name"
 	/// }
 	/// </example>
 	public class ActorRequest
 	{
+		/// <summary>
+		/// The display name of the user/group.
+		/// </summary>
 		[Required]
 		[StringLength(64)]
 		public string Name { get; set; }

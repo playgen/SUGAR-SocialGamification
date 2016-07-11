@@ -47,14 +47,15 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Find the current progress for an <param name="achievementId"/> for <param name="actorId"/>.
+		/// Find the current progress for an Achievement for <param name="actorId"/>.
 		/// </summary>
-		/// <param name="achievementId">ID of Achievement</param>
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="gameId">ID of the Game the Achievement is for</param>
 		/// <param name="actorId">ID of actor/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
-		public IEnumerable<AchievementProgressResponse> GetAchievementProgress(int achievementId, int actorId)
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
+		public IEnumerable<AchievementProgressResponse> GetAchievementProgress(string token, int gameId, int actorId)
 		{
-			var query = GetUriBuilder($"api/achievements/{achievementId}/evaluate/{actorId}").ToString();
+			var query = GetUriBuilder($"api/achievements/{token}/{gameId}/evaluate/{actorId}").ToString();
 			return Get<IEnumerable<AchievementProgressResponse>>(query);
 		}
 
@@ -73,21 +74,21 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Update an existing Achievement.
 		/// </summary>
-		/// <param name="id">Id of the existing Achievement.</param>
 		/// <param name="achievement"><see cref="AchievementRequest"/> object that holds the details of the Achievement.</param>
 		public void Update(int id, AchievementRequest achievement)
 		{
-			var query = GetUriBuilder($"api/achievements/update/{id}").ToString();
+			var query = GetUriBuilder($"api/achievements/update").ToString();
 			Put(query, achievement);
 		}
 
 		/// <summary>
-		/// Delete Achievements with the <param name="id"/> provided.
+		/// Delete Achievement with the <param name="token"/> and <param name="gameId"/> provided.
 		/// </summary>
-		/// <param name="id">Achievement ID</param>
-		public void Delete(int id)
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="gameId">ID of the Game the Achievement is for</param>
+		public void Delete(string token, int gameId)
 		{
-			var query = GetUriBuilder($"api/achievements/{id}").ToString();
+			var query = GetUriBuilder($"api/achievements/{token}/{gameId}").ToString();
 			Delete(query);
 		}
 	}

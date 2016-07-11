@@ -73,6 +73,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 				.WithMany(u => u.RequestAcceptors)
 				.HasForeignKey(u => u.AcceptorId);
 
+			// Setup composite primary keys
+			modelBuilder.Entity<Achievement>()
+				.HasKey(a => new { a.Token, a.GameId });
+			modelBuilder.Entity<Skill>()
+				.HasKey(a => new { a.Token, a.GameId });
+			modelBuilder.Entity<Leaderboard>()
+				.HasKey(a => new { a.Token, a.GameId });
+
 			// Setup unique fields
 			modelBuilder.Entity<Game>()
 				.Property(g => g.Name)

@@ -36,13 +36,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public Achievement Get(int achievementId)
+		public Achievement Get(string token, int gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var achievement = context.Achievements.Find(achievementId);
+				var achievement = context.Achievements.Find(token, gameId);
 				return achievement;
 			}
 		}
@@ -74,7 +74,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var existing = context.Achievements.Find(achievement.Id);
+				var existing = context.Achievements.Find(achievement.Token, achievement.GameId);
 
 				if (existing != null)
 				{
@@ -91,18 +91,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					SaveChanges(context);
 				} else
 				{
-					throw new MissingRecordException($"The existing achievement with ID {achievement.Id} could not be found.");
+					throw new MissingRecordException($"The existing achievement with token {achievement.Token} and game ID {achievement.GameId} could not be found.");
 				}
 			}
 		}
 
-		public void Delete(int id)
+		public void Delete(string token, int gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var achievement = context.Achievements.Find(id);
+				var achievement = context.Achievements.Find(token, gameId);
 				if (achievement != null)
 				{
 					context.Achievements.Remove(achievement);
