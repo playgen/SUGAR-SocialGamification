@@ -158,11 +158,11 @@ namespace PlayGen.SUGAR.GameData
 				case ComparisonType.NotEqual:
 					if (comparisonResult != 0)
 					{
-						return 0;
+						return 1;
 					}
 					else
 					{
-						return 1;
+						return 0;
 					}
 
 				case ComparisonType.Greater:
