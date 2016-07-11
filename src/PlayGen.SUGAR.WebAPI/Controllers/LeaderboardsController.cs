@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
 		[ResponseType(typeof(IEnumerable<LeaderboardResponse>))]
-		public IActionResult Get([FromRoute]int gameId)
+		public IActionResult Get([FromRoute]int? gameId)
 		{
 			var leaderboard = _leaderboardController.GetByGame(gameId);
 			var leaderboardContract = leaderboard.ToContractList();

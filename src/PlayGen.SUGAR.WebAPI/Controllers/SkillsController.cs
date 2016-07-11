@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
 		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
-		public IActionResult Get([FromRoute]int gameId)
+		public IActionResult Get([FromRoute]int? gameId)
 		{
 			var skill = _skillController.GetByGame(gameId);
 			var skillContract = skill.ToContractList();
