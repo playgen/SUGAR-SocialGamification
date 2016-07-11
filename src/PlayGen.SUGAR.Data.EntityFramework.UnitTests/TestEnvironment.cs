@@ -5,6 +5,8 @@ using Xunit;
 using AchievementController = PlayGen.SUGAR.Data.EntityFramework.Controllers.AchievementController;
 using LeaderboardController = PlayGen.SUGAR.Data.EntityFramework.Controllers.LeaderboardController;
 using SkillController = PlayGen.SUGAR.Data.EntityFramework.Controllers.SkillController;
+using PlayGen.SUGAR.Data.Context.Interfaces;
+using PlayGen.SUGAR.Data.Context;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
@@ -25,6 +27,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		private SkillController _skillController;
 		private UserController _userController;
 		private UserRelationshipController _userRelationshipController;
+
+		private IContextScopeFactory _dataContextScopeFactory;
 
 		public AccountController AccountController
 			=> _accountController ?? (_accountController = new AccountController(_connectionString));
@@ -50,6 +54,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			=> _userController ?? (_userController = new UserController(_connectionString));
 		public UserRelationshipController UserRelationshipController
 			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(_connectionString));
+
+		public IContextScopeFactory DataContextScopeFactory =>
+			(_dataContextScopeFactory = new ContextScopeFactory(_connectionString));
 
 		public TestEnvironment()
 		{

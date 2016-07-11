@@ -7,13 +7,13 @@
 		"PlayGen.SUGAR.Contracts": "1.0.0-*",
 		"PlayGen.SUGAR.Data.Model": "1.0.0-*"
 	},
-  "frameworks": {
+	"frameworks": {
 	"net46": {
-	  "frameworkAssemblies": {
-	  }
+		"frameworkAssemblies": {
+		}
 	}
-  },
-  "configurations": {
+	},
+	"configurations": {
 	"UnitTest": { }
-  }
+	}
 }

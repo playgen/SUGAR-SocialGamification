@@ -11,7 +11,8 @@
         "xunit.runner.console": "2.1.0",
         "xunit.runner.visualstudio": "2.1.0",
         "dotnet-test-xunit": "1.0.0-rc2-build10025",
-        "PlayGen.SUGAR.GameData": "1.0.0-*"
+        "PlayGen.SUGAR.GameData": "1.0.0-*",
+        "PlayGen.SUGAR.Context": "1.0.0-*"
     },
 	"frameworks": {
 		"net46": {

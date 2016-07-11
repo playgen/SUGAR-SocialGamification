@@ -10,6 +10,7 @@ using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.GameData;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.Data.Context.Interfaces;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -22,9 +23,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	{
 		private readonly Data.EntityFramework.Controllers.AchievementController _achievementController;
 		private readonly AchievementController _achievementEvaluationController;
+		private readonly IContextScopeFactory _dataContextScopefactory;
 
 		public AchievementsController(Data.EntityFramework.Controllers.AchievementController achievementController,
-			AchievementController achievementEvaluationController)
+			AchievementController achievementEvaluationController, IContextScopeFactory _dataContextScopefactory)
 		{
 			_achievementController = achievementController;
 			_achievementEvaluationController = achievementEvaluationController;
@@ -41,9 +43,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
 		public IActionResult Get()
 		{
-			var achievement = _achievementController.GetGlobal();
-			var achievementContract = achievement.ToContractList();
-			return new ObjectResult(achievementContract);
+			using (var dataContextScope = _dataContextScopefactory.CreateReadOnly())
+			{
+				var achievement = _achievementController.GetGlobal();
+				var achievementContract = achievement.ToContractList();
+				return new ObjectResult(achievementContract);
+			}
 		}
 
 		/// <summary>

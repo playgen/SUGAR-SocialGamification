@@ -9,6 +9,8 @@ using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.GameData;
+using PlayGen.SUGAR.Data.Context.Interfaces;
+using PlayGen.SUGAR.Data.Context;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -36,6 +38,10 @@ namespace PlayGen.SUGAR.WebAPI
 			{
 				db.Database.Initialize(true);
 			}
+
+			services.AddSingleton<IContextScopeFactory>(new ContextScopeFactory(connectionString));
+
+			// TODO migrate all of these to use the ContextScopeFactory so their constructors don't need to take the connection string.
 			services.AddScoped((_) => new AccountController(connectionString));
 			services.AddScoped((_) => new GameController(connectionString));
 			services.AddScoped((_) => new GroupController(connectionString));
