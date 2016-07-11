@@ -1,14 +1,16 @@
 # Games
-A game is an individual application defined by a designer. 
-A single instance of SUGAR has the capacity to service multiple games. This allows for users to take part in multiple of games under the same login. 
+A game is an individual application as defined by the platform. A single instance of the platform has the capacity to service multiple games. This allows for users to take part in multiple of games under the same login and to potentially share resource across games depending on the game design. 
 
 
 ## Features
-* Get all games
-* Get all games that match a given name
-* Get a game that matches a given id
-* Create a new game
-* Delete a game 
+* CRUD Game
+* CRUD Game Metadata
+	* Game Name
+	* Game Description
+	* Game Skills (Skills)	
+* Search Game (ID/Name/Actor)
+
+
 
 
 ## API
