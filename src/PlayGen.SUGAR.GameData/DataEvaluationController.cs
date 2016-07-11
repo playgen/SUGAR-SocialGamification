@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.GameData
 
 		protected float Evaluate(int? gameId, int? actorId, AchievementCriteria completionCriteria, ActorType actorType)
 		{
-			if (completionCriteria.Scope == CriteriaScope.RelatedActors && actorId != null)
+			if ((completionCriteria.Scope == CriteriaScope.RelatedActorsAll || completionCriteria.Scope == CriteriaScope.RelatedActorsAny) && actorId != null)
 			{
 				if (actorType != ActorType.Group)
 				{
