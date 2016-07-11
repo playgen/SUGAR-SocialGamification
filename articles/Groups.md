@@ -8,6 +8,10 @@ Actors can join, leave or add another actor to a group.
 
 ## Features
 * CRUD Groups
+* CRUD Group Metadata
+	* Group Name
+	* Group Description
+	* Group Icon
 * Update Group Membership
 * Search Group (ID/name/Actor)
 
