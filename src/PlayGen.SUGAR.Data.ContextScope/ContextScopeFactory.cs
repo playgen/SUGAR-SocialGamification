@@ -1,7 +1,7 @@
 ﻿using System;
-using PlayGen.SUGAR.Data.Context.Interfaces;
+using PlayGen.SUGAR.Data.ContextScope.Interfaces;
 
-namespace PlayGen.SUGAR.Data.Context
+namespace PlayGen.SUGAR.Data.ContextScope
 {
 	public class ContextScopeFactory : IContextScopeFactory
 	{

@@ -1,7 +1,8 @@
-﻿using PlayGen.SUGAR.Data.EntityFramework;
+﻿using PlayGen.SUGAR.Data.ContextScope.Interfaces;
+using System;
 using System.Data.Entity;
 
-namespace PlayGen.SUGAR.Data.Context.Interfaces
+namespace PlayGen.SUGAR.Data.ContextScope
 {
 	public class ContextFactory : IContextFactory
 	{
@@ -12,9 +13,9 @@ namespace PlayGen.SUGAR.Data.Context.Interfaces
 			_connectionString = connectionString;
 		}
 
-		public DbContext CreateContext()
+		public T CreateContext<T>() where T : DbContext
 		{
-			return new SGAContext(_connectionString);
+			return (T)Activator.CreateInstance(typeof(T), _connectionString);
 		}
 	}
 }

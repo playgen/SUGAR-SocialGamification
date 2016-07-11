@@ -67,21 +67,6 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Equal(achievementRequest.Token, response.Token);
 			Assert.Equal(achievementRequest.ActorType, response.ActorType);
 		}
-
-		//[Fact]
-		//public void CannotCreateDuplicateGame()
-		//{
-		//	var gameRequest = new GameRequest
-		//	{
-		//		Name = "CannotCreateDuplicateGame",
-		//	};
-
-		//	_achievementClient.Create(gameRequest);
-
-		//	Assert.Throws<WebException>(() => _achievementClient.Create(gameRequest));
-		//}
-
-		// TODO test the rest of the game controller fucntionaity
 		#endregion
 	}
 }

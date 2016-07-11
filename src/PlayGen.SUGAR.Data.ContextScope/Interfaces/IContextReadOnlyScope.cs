@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
 
-namespace PlayGen.SUGAR.Data.Context.Interfaces
+namespace PlayGen.SUGAR.Data.ContextScope.Interfaces
 {
     public interface IContextReadOnlyScope : IDisposable
     {
-        DbContext Context { get; }
+        T GetContext<T>() where T : DbContext;
     }
 }

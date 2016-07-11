@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Data.Entity;
 
-namespace PlayGen.SUGAR.Data.Context.Interfaces
+namespace PlayGen.SUGAR.Data.ContextScope.Interfaces
 {
     public interface IContextScope : IDisposable
     {
-        DbContext Context { get; }
+        T GetContext<T>() where T : DbContext;
 
         int SaveChanges();
     }

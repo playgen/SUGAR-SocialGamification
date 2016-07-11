@@ -1,13 +1,26 @@
 ﻿using System;
 using System.Data.Entity;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.ContextScope.Interfaces;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public abstract class DbController
 	{
-		protected readonly string NameOrConnectionString;
+		protected SGAContext context => _ambientContextLocator.Get<SGAContext>();
+
+		private readonly IAmbientContextLocator _ambientContextLocator;
+
+		public DbController(IAmbientContextLocator ambientContextLocator)
+		{
+			_ambientContextLocator = ambientContextLocator;
+		}
+
+		// TODO Remove below
+		#region Remove
 		protected readonly DbExceptionHandler DbExceptionHandler = new DbExceptionHandler();
+
+		protected readonly string NameOrConnectionString;
 
 		protected DbController(string nameOrConnectionString)
 		{
@@ -31,5 +44,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				DbExceptionHandler.Handle(exception);
 			}
 		}
+		#endregion
 	}
 }

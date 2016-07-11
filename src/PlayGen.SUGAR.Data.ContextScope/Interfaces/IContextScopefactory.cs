@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Data.Context.Interfaces
+﻿namespace PlayGen.SUGAR.Data.ContextScope.Interfaces
 {
     /// <summary>
     /// Convenience methods to create a new ambient DbContextScope.

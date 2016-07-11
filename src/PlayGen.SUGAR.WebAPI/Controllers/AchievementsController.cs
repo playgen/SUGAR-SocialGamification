@@ -10,7 +10,7 @@ using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.GameData;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Extensions;
-using PlayGen.SUGAR.Data.Context.Interfaces;
+using PlayGen.SUGAR.Data.ContextScope.Interfaces;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
