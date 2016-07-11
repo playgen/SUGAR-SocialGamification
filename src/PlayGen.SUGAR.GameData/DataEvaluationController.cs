@@ -81,38 +81,98 @@ namespace PlayGen.SUGAR.GameData
 
 		protected float EvaluateLong(int? gameId, int? actorId, AchievementCriteria completionCriteria)
 		{
-			var sum = GameDataController.SumLongs(gameId, actorId, completionCriteria.Key);
+			switch (completionCriteria.CriteriaQueryType)
+			{
+				case CriteriaQueryType.Any:
+					var any = GameDataController.AllLongs(gameId, actorId, completionCriteria.Key);
 
-			return CompareValues(sum, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+					return any.Max(value => CompareValues(value, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
+				case CriteriaQueryType.Sum:
+					var sum = GameDataController.SumLongs(gameId, actorId, completionCriteria.Key);
+
+					return CompareValues(sum, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+				case CriteriaQueryType.Latest:
+					long latest;
+					if (!GameDataController.TryGetLatestLong(gameId, actorId, completionCriteria.Key, out latest))
+					{
+						latest = 0;
+					}
+
+					return CompareValues(latest, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+				default:
+					return 0;
+			}
 		}
 
 		protected float EvaluateFloat(int? gameId, int? actorId, AchievementCriteria completionCriteria)
 		{
-			var sum = GameDataController.SumFloats(gameId, actorId, completionCriteria.Key);
+			switch (completionCriteria.CriteriaQueryType)
+			{
+				case CriteriaQueryType.Any:
+					var any = GameDataController.AllFloats(gameId, actorId, completionCriteria.Key);
 
-			return CompareValues(sum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+					return any.Max(value => CompareValues(value, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
+				case CriteriaQueryType.Sum:
+					var sum = GameDataController.SumFloats(gameId, actorId, completionCriteria.Key);
+
+					return CompareValues(sum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+				case CriteriaQueryType.Latest:
+					float latest;
+					if (!GameDataController.TryGetLatestFloat(gameId, actorId, completionCriteria.Key, out latest))
+					{
+						latest = 0;
+					}
+
+					return CompareValues(latest, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+				default:
+					return 0;
+			}
 		}
 
 		protected float EvaluateString(int? gameId, int? actorId, AchievementCriteria completionCriteria)
 		{
-			string latest;
-			if (!GameDataController.TryGetLatestString(gameId, actorId, completionCriteria.Key, out latest))
+			switch (completionCriteria.CriteriaQueryType)
 			{
-				latest = "";
-			}
+				case CriteriaQueryType.Any:
+					var any = GameDataController.AllStrings(gameId, actorId, completionCriteria.Key);
 
-			return CompareValues(latest, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.DataType);
+					return any.Max(value => CompareValues(value, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.DataType));
+				case CriteriaQueryType.Sum:
+					return 0;
+				case CriteriaQueryType.Latest:
+					string latest;
+					if (!GameDataController.TryGetLatestString(gameId, actorId, completionCriteria.Key, out latest))
+					{
+						latest = "";
+					}
+
+					return CompareValues(latest, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.DataType);
+				default:
+					return 0;
+			}
 		}
 
 		protected float EvaluateBool(int? gameId, int? actorId, AchievementCriteria completionCriteria)
 		{
-			bool latest;
-			if (!GameDataController.TryGetLatestBool(gameId, actorId, completionCriteria.Key, out latest))
+			switch (completionCriteria.CriteriaQueryType)
 			{
-				latest = false;
-			}
+				case CriteriaQueryType.Any:
+					var any = GameDataController.AllBools(gameId, actorId, completionCriteria.Key);
 
-			return CompareValues(latest, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+					return any.Max(value => CompareValues(value, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
+				case CriteriaQueryType.Sum:
+					return 0;
+				case CriteriaQueryType.Latest:
+					bool latest;
+					if (!GameDataController.TryGetLatestBool(gameId, actorId, completionCriteria.Key, out latest))
+					{
+						latest = false;
+					}
+
+					return CompareValues(latest, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+				default:
+					return 0;
+			}
 		}
 
 		protected float EvaluateManyLong(int? gameId, IEnumerable<Actor> actor, AchievementCriteria completionCriteria)

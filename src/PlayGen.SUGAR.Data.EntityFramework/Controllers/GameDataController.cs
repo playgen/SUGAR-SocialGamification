@@ -68,7 +68,87 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				return data;
 			}
 		}
-		
+
+		public IEnumerable<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			end = EndSet(end);
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetCategoryData(_category)
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(GameDataType.Long)
+					.FilterByDateTimeRange(start, end)
+					.ToList();
+
+				var list = data.Select(s => long.Parse(s.Value));
+				return list;
+			}
+		}
+
+		public IEnumerable<float> AllFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			end = EndSet(end);
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetCategoryData(_category)
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(GameDataType.Float)
+					.FilterByDateTimeRange(start, end)
+					.ToList();
+
+				var list = data.Select(s => float.Parse(s.Value));
+				return list;
+			}
+		}
+
+		public IEnumerable<string> AllStrings(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			end = EndSet(end);
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetCategoryData(_category)
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(GameDataType.String)
+					.FilterByDateTimeRange(start, end)
+					.ToList();
+
+				var list = data.Select(s => s.Value);
+				return list;
+			}
+		}
+
+		public IEnumerable<bool> AllBools(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			end = EndSet(end);
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetCategoryData(_category)
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(GameDataType.Boolean)
+					.FilterByDateTimeRange(start, end)
+					.ToList();
+
+				var list = data.Select(s => bool.Parse(s.Value));
+				return list;
+			}
+		}
+
 		public float SumFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
@@ -206,6 +286,58 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				var sum = data.Min(s => long.Parse(s.Value));
 				return sum;
+			}
+		}
+
+		public bool TryGetLatestLong(int? gameId, int? actorId, string key, out long latestLong, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			end = EndSet(end);
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetCategoryData(_category)
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(GameDataType.Long)
+					.FilterByDateTimeRange(start, end)
+					.LatestOrDefault();
+
+				if (data == null)
+				{
+					latestLong = default(long);
+					return false;
+				}
+
+				latestLong = long.Parse(data.Value);
+				return true;
+			}
+		}
+
+		public bool TryGetLatestFloat(int? gameId, int? actorId, string key, out float latestFloat, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			end = EndSet(end);
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetCategoryData(_category)
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(GameDataType.Float)
+					.FilterByDateTimeRange(start, end)
+					.LatestOrDefault();
+
+				if (data == null)
+				{
+					latestFloat = default(float);
+					return false;
+				}
+
+				latestFloat = float.Parse(data.Value);
+				return true;
 			}
 		}
 

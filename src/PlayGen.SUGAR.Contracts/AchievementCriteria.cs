@@ -12,6 +12,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// {
 	/// Key : "GameData Key",
 	/// DataType : "String",
+	/// CriteriaQueryType : "Any",
 	/// ComparisonType : "Equals",
 	/// Scope : "Actor",
 	/// Value : "GameData Key Value"
@@ -31,6 +32,13 @@ namespace PlayGen.SUGAR.Contracts
 		[Required]
 		[JsonConverter(typeof(StringEnumConverter))]
 		public GameDataType DataType { get; set; }
+
+		/// <summary>
+		/// Which stored GameData will be queried.
+		/// </summary>
+		[Required]
+		[JsonConverter(typeof(StringEnumConverter))]
+		public CriteriaQueryType CriteriaQueryType { get; set; }
 
 		/// <summary>
 		/// How the target value and the actual value will be compared.

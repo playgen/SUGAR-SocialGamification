@@ -11,10 +11,16 @@
 		Actor,
 
 		/// <summary>
-		/// Test the criteria against the specified actors relations
+		/// Test the criteria against all the specified actors relations
 		/// ie. a users friends, or a groups members
 		/// </summary>
-		RelatedActors,
+		RelatedActorsAll,
+
+		/// <summary>
+		/// Test the criteria against the specified actors relations to see if any pass
+		/// ie. a users friends, or a groups members
+		/// </summary>
+		RelatedActorsAny,
 
 		//TODO: decide whether there is a valid use case for testing a group relations, eg. alliance
 	}
