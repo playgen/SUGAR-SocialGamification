@@ -61,6 +61,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Key = achievementContract.Key,
 				ComparisonType = (ComparisonType)achievementContract.ComparisonType,
+				CriteriaQueryType = (CriteriaQueryType)achievementContract.CriteriaQueryType,
 				DataType = (GameDataType)achievementContract.DataType,
 				Scope = (CriteriaScope)achievementContract.Scope,
 				Value = achievementContract.Value,

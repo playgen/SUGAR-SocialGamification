@@ -61,6 +61,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Key = skillContract.Key,
 				ComparisonType = (ComparisonType)skillContract.ComparisonType,
+				CriteriaQueryType = (CriteriaQueryType)skillContract.CriteriaQueryType,
 				DataType = (GameDataType)skillContract.DataType,
 				Scope = (CriteriaScope)skillContract.Scope,
 				Value = skillContract.Value,
