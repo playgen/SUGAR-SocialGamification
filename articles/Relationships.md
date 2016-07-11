@@ -1,12 +1,10 @@
-# Relationships
-Relationship is the connection held between two or more entities. 
-If a player belongs to a group or a friendship between two players; each of these are described as a relationship. A new relationship is first stored in a requests table until it is accepted by the receiver of the request. Once moved into the requests table, the relationship is used to check for group membership or friendships. 
+# Relationship
+Relationships are connections between two or more entities. For example a user belonging to a group or a user being friends or following another user. Relationships may follow a step by step process depending on the use case, for example in adding a ‘friend’, the relationship is initially stored as a request from the requester to the receiver until accepted by the receiver. Whereas the receiver may also refuse or block the request. 
 
 ## Features
-* Get all groups or users which have relationship requests for a specified actor
-* Create a new relationship request
-* Update a relationship's status from pending to accepted
-* Delete a relationship
+* CRUD Relationship 
+* CRUD Relationship request
+* Search Relationship (ID/Actor)
 
 ## API
 * ClientAPI

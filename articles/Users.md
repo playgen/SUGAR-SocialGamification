@@ -1,11 +1,12 @@
 # Users
-A User is someone that interacts with the SUGAR platform. Examples of users can be a player of games, an administrator setting up games for the players, or a teacher reviewing aggregated data of their students' progress. 
+Users are individuals interacting with the system. They may fulfil a range of roles including player, game master, game admin, teacher or system admin. 
+Users can have metadata associated with them, such as 'nice name', '
 
 ## Features
-* Get all users
-* Get all users that match a name/id
-* Create a new user
-* Delete a user
+* CRUD users
+* Search users (name/id)
+* CRUD user metadata 
+
 
 ## API
 * ClientAPI
@@ -17,3 +18,11 @@ A User is someone that interacts with the SUGAR platform. Examples of users can 
     * [ActorResponse](/api/PlayGen.SUGAR.Contracts.ActorResponse)
 * WebAPI
     * [UserController](/api/PlayGen.SUGAR.WebAPI.Controllers.UserController)
+
+## Roadmap
+
+* Integration of permission system.
+Providing the ability to set system or game specific permission across the platform functionalities.  
+
+* User id mapping.
+Providing the ability for an individual to have multiple usernames depending on their role, or connect with one or more social media accounts for example for authentication. 
