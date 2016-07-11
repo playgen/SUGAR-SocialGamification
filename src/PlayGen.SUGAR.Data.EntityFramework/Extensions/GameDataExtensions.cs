@@ -20,6 +20,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 
 		public static IQueryable<GameData> FilterByGameId(this IQueryable<GameData> gameDataQueryable, int? gameId)
 		{
+			if (!gameId.HasValue || gameId.Value == 0)
+			{
+				return gameDataQueryable.Where(gd => gd.GameId == null || gd.GameId == 0);
+			}
 			return gameDataQueryable.Where(gd => gd.GameId == gameId);
 		}
 

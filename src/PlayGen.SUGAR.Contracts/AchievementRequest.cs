@@ -19,6 +19,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// CompletionCriteria : [{
 	/// Key : "Criteria Key",
 	/// DataType : "Long",
+	/// CriteriaQueryType : "Any",
 	/// ComparisonType : "Equals",
 	/// Scope : "Actor",
 	/// Value : "5"

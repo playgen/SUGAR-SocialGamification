@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Name = achieveContract.Name,
 				Description = achieveContract.Description,
-				GameId = achieveContract.GameId,
+				GameId = achieveContract.GameId ?? 0,
 				ActorType = achieveContract.ActorType,
 				Token = achieveContract.Token,
 				CompletionCriteriaCollection = achieveContract.CompletionCriteria.ToAchievementModel(),

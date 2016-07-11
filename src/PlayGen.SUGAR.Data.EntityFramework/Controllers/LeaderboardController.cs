@@ -13,34 +13,25 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-		public IEnumerable<Leaderboard> GetGlobal()
+		public IEnumerable<Leaderboard> GetByGame(int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
-
-				var leaderboards = context.Leaderboards.Where(l => l.GameId == null).ToList();
-				return leaderboards;
-			}
-		}
-
-
-		public IEnumerable<Leaderboard> GetByGame(int gameId)
-		{
-			using (var context = new SGAContext(NameOrConnectionString))
-			{
-				SetLog(context);
+				gameId = gameId ?? 0;
 
 				var leaderboards = context.Leaderboards.Where(l => l.GameId == gameId).ToList();
 				return leaderboards;
 			}
 		}
 
-		public Leaderboard Get(string token, int gameId)
+		public Leaderboard Get(string token, int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
+
+				gameId = gameId ?? 0;
 
 				var leaderboard = context.Leaderboards.Find(token, gameId);
 				return leaderboard;
@@ -105,12 +96,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				}
 			}
 		}
-
-		public void Delete(string token, int gameId)
+		
+		public void Delete(string token, int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
+
+				gameId = gameId ?? 0;
 
 				var leaderboard = context.Leaderboards.Find(token, gameId);
 				if (leaderboard != null)

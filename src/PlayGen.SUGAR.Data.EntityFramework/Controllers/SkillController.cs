@@ -13,34 +13,25 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-		public IEnumerable<Skill> GetGlobal()
+		public IEnumerable<Skill> GetByGame(int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
-
-				var skills = context.Skills.Where(a => a.GameId == null).ToList();
-				return skills;
-			}
-		}
-
-
-		public IEnumerable<Skill> GetByGame(int gameId)
-		{
-			using (var context = new SGAContext(NameOrConnectionString))
-			{
-				SetLog(context);
+				gameId = gameId ?? 0;
 
 				var skills = context.Skills.Where(a => a.GameId == gameId).ToList();
 				return skills;
 			}
 		}
 
-		public Skill Get(string token, int gameId)
+		public Skill Get(string token, int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
+
+				gameId = gameId ?? 0;
 
 				var skill = context.Skills.Find(token, gameId);
 				return skill;
@@ -97,11 +88,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Delete(string token, int gameId)
+		public void Delete(string token, int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
+
+				gameId = gameId ?? 0;
 
 				var skill = context.Skills.Find(token, gameId);
 				if (skill != null)

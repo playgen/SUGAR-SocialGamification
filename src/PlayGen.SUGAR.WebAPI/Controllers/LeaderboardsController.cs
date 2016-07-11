@@ -31,30 +31,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get all global leaderboards, ie. leaderboards that are not associated with a specific game
-		/// 
-		/// Example Usage: GET api/leaderboards/list
-		/// </summary>
-		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
-		[HttpGet("list")]
-		[ResponseType(typeof(IEnumerable<LeaderboardResponse>))]
-		public IActionResult Get()
-		{
-			var leaderboard = _leaderboardController.GetGlobal();
-			var leaderboardContract = leaderboard.ToContractList();
-			return new ObjectResult(leaderboardContract);
-		}
-
-		/// <summary>
 		/// Find a list of leaderboards that match <param name="gameId"/>.
+		/// If global is provided instead of a gameId, get all global leaderboards, ie. leaderboards that are not associated with a specific game.
 		/// 
 		/// Example Usage: GET api/leaderboards/game/1/list
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
+		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
 		[ResponseType(typeof(IEnumerable<LeaderboardResponse>))]
-		public IActionResult Get([FromRoute]int gameId)
+		public IActionResult Get([FromRoute]int? gameId)
 		{
 			var leaderboard = _leaderboardController.GetByGame(gameId);
 			var leaderboardContract = leaderboard.ToContractList();
@@ -91,7 +78,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ResponseType(typeof(IEnumerable<LeaderboardStandingsResponse>))]
 		public IActionResult GetLeaderboardStandings([FromBody]LeaderboardStandingsRequest leaderboardDetails)
 		{
-			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardToken, leaderboardDetails.GameId.Value);
+			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardToken, leaderboardDetails.GameId);
 			var standings = _leaderboardEvaluationController.GetStandings(leaderboard, leaderboardDetails);
 			return new ObjectResult(standings);
 		}
@@ -117,10 +104,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="token">Token of Leaderboard</param>
 		/// <param name="gameId">ID of the Game the Leaderboard is for</param>
+		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
 		public void Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			_leaderboardController.Delete(token, gameId.Value);
+			_leaderboardController.Delete(token, gameId);
 		}
 	}
 }

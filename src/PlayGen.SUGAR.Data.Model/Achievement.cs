@@ -5,7 +5,7 @@ namespace PlayGen.SUGAR.Data.Model
 {
 	public class Achievement
 	{
-		public int? GameId { get; set; }
+		public int GameId { get; set; }
 
 		public string Name { get; set; }
 

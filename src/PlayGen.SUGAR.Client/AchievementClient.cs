@@ -17,9 +17,9 @@ namespace PlayGen.SUGAR.Client
 		/// Get all global achievements, ie. achievements that are not associated with a specific game
 		/// </summary>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
-		public IEnumerable<AchievementResponse> Get()
+		public IEnumerable<AchievementResponse> GetGlobal()
 		{
-			var query = GetUriBuilder($"api/achievements/list").ToString();
+			var query = GetUriBuilder($"api/achievements/global/list").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
 		}
 
@@ -35,6 +35,17 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Find the current progress for all global achievements for <param name="actorId"/>.
+		/// </summary>
+		/// <param name="actorId">ID of Group/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold Achievement progress details</returns>
+		public IEnumerable<AchievementProgressResponse> GetGlobalProgress(int actorId)
+		{
+			var query = GetUriBuilder($"api/achievements/global/evaluate/{actorId}").ToString();
+			return Get<IEnumerable<AchievementProgressResponse>>(query);
+		}
+
+		/// <summary>
 		/// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
 		/// </summary>
 		/// <param name="gameId">ID of Game</param>
@@ -43,6 +54,18 @@ namespace PlayGen.SUGAR.Client
 		public IEnumerable<AchievementProgressResponse> GetGameProgress(int gameId, int actorId)
 		{
 			var query = GetUriBuilder($"api/achievements/game/{gameId}/evaluate/{actorId}").ToString();
+			return Get<IEnumerable<AchievementProgressResponse>>(query);
+		}
+
+		/// <summary>
+		/// Find the current progress for an Achievement for <param name="actorId"/>.
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="actorId">ID of actor/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
+		public IEnumerable<AchievementProgressResponse> GetGlobalAchievementProgress(string token, int actorId)
+		{
+			var query = GetUriBuilder($"api/achievements/{token}/global/evaluate/{actorId}").ToString();
 			return Get<IEnumerable<AchievementProgressResponse>>(query);
 		}
 
@@ -79,6 +102,16 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder($"api/achievements/update").ToString();
 			Put(query, achievement);
+		}
+
+		/// <summary>
+		/// Delete a global achievement, ie. an achievement that is not associated with a specific game
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		public void DeleteGlobal(string token)
+		{
+			var query = GetUriBuilder($"api/achievements/{token}/global").ToString();
+			Delete(query);
 		}
 
 		/// <summary>

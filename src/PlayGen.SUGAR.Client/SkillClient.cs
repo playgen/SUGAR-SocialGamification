@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client
 		/// Get all global skills, ie. skills that are not associated with a specific game
 		/// </summary>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Skill details</returns>
-		public IEnumerable<AchievementResponse> Get()
+		public IEnumerable<AchievementResponse> GetGlobal()
 		{
-			var query = GetUriBuilder("api/skills/list").ToString();
+			var query = GetUriBuilder("api/skills/global/list").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
 		}
 
@@ -38,6 +38,17 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Find the current progress for all global skills for <param name="actorId"/>.
+		/// </summary>
+		/// <param name="actorId">ID of Group/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold Skill progress details</returns>
+		public IEnumerable<AchievementProgressResponse> GetGlobalProgress(int actorId)
+		{
+			var query = GetUriBuilder($"api/skills/global/evaluate/{actorId}").ToString();
+			return Get<IEnumerable<AchievementProgressResponse>>(query);
+		}
+
+		/// <summary>
 		/// Find the current progress for all skills for a <param name="gameId"/> for <param name="actorId"/>.
 		/// 
 		/// Example Usage: GET api/skills/game/1/evaluate/1
@@ -48,6 +59,18 @@ namespace PlayGen.SUGAR.Client
 		public IEnumerable<AchievementProgressResponse> GetGameProgress(int actorId, int gameId)
 		{
 			var query = GetUriBuilder($"api/skills/game/{gameId}/evaluate/{actorId}").ToString();
+			return Get<IEnumerable<AchievementProgressResponse>>(query);
+		}
+
+		/// <summary>
+		/// Find the current progress for an Skill for <param name="actorId"/>.
+		/// </summary>
+		/// <param name="token">Token of Skill</param>
+		/// <param name="actorId">ID of actor/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward skill.</returns>
+		public IEnumerable<AchievementProgressResponse> GetGlobalAchievementProgress(string token, int actorId)
+		{
+			var query = GetUriBuilder($"api/skills/{token}/global/evaluate/{actorId}").ToString();
 			return Get<IEnumerable<AchievementProgressResponse>>(query);
 		}
 
@@ -84,6 +107,16 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder($"api/skills/update").ToString();
 			Put(query, skill);
+		}
+
+		/// <summary>
+		/// Delete a global skill, ie. a skill that is not associated with a specific game
+		/// </summary>
+		/// <param name="token">Token of Skill</param>
+		public void DeleteGlobal(string token)
+		{
+			var query = GetUriBuilder($"api/skills/{token}/global").ToString();
+			Delete(query);
 		}
 
 		/// <summary>

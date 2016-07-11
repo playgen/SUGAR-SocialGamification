@@ -9,11 +9,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class AchievementController : DbController
 	{
-		public AchievementController(string nameOrConnectionString)
-			: base(nameOrConnectionString)
-		{
-		}
-
 		public AchievementController(IAmbientContextLocator ambientContextLocator)
 			: base(ambientContextLocator)
 		{
@@ -28,12 +23,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Achievement> GetByGame(int gameId)
 		{
+			gameId = gameId ?? 0;
+
 			var achievements = context.Achievements.Where(a => a.GameId == gameId).ToList();
 			return achievements;
 		}
 
 		public Achievement Get(string token, int? gameId)
-		{	
+		{
+			gameId = gameId ?? 0;
+
 			var achievement = context.Achievements.Find(token, gameId);
 			return achievement;
 		}
@@ -69,22 +68,24 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				existing.ActorType = achievement.ActorType;
 				existing.GameId = achievement.GameId;
 				existing.Token = achievement.Token;
-                // TODO Move SaveChanges(context);
-            }
-            else
+				// TODO Move SaveChanges(context);
+			}
+			else
 			{
 				throw new MissingRecordException($"The existing achievement with token {achievement.Token} and game ID {achievement.GameId} could not be found.");
 			}
 		}
-
-		public void Delete(string token, int gameId)
+		
+		public void Delete(string token, int? gameId)
 		{
+			gameId = gameId ?? 0;
+
 			var achievement = context.Achievements.Find(token, gameId);
 			if (achievement != null)
 			{
 				context.Achievements.Remove(achievement);
-                // TODO Move SaveChanges(context);
-            }
-        }
+				// TODO Move SaveChanges(context);
+			}
+		}
 	}
 }
