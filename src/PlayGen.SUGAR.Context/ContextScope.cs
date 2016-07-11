@@ -35,6 +35,8 @@ namespace PlayGen.SUGAR.Data.Context
 			return _ambientContextScope;
 		}
 
+		// TODO make all ambient related methods thread safe. See: http://mehdi.me/ambient-dbcontext-in-ef6/
+		// TODO Add ability to support nested contexts?
 		private static void SetAmbient(ContextScope contextScope)
 		{
 			if(_ambientContextScope != null)
