@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.GameData
 
 		protected float Evaluate(int? gameId, int? actorId, AchievementCriteria completionCriteria, ActorType actorType)
 		{
-			if ((completionCriteria.Scope == CriteriaScope.RelatedActorsAll || completionCriteria.Scope == CriteriaScope.RelatedActorsAny) && actorId != null)
+			if (completionCriteria.Scope == CriteriaScope.RelatedActors && actorId != null)
 			{
 				if (actorType != ActorType.Group)
 				{
@@ -197,16 +197,36 @@ namespace PlayGen.SUGAR.GameData
 
 		protected float EvaluateManyLong(int? gameId, IEnumerable<Actor> actor, AchievementCriteria completionCriteria)
 		{
-			var sum = actor.Sum(a => GameDataController.SumLongs(gameId, a.Id, completionCriteria.Key));
+			switch (completionCriteria.CriteriaQueryType)
+			{
+				case CriteriaQueryType.Any:
+					return actor.Sum(a => EvaluateLong(gameId, a.Id, completionCriteria)) / actor.Count();
+				case CriteriaQueryType.Sum:
+					var sum = actor.Sum(a => GameDataController.SumLongs(gameId, a.Id, completionCriteria.Key));
 
-			return CompareValues(sum, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+					return CompareValues(sum, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+				case CriteriaQueryType.Latest:
+					return actor.Sum(a => EvaluateLong(gameId, a.Id, completionCriteria)) / actor.Count();
+				default:
+					return 0;
+			}
 		}
 
 		protected float EvaluateManyFloat(int? gameId, IEnumerable<Actor> actor, AchievementCriteria completionCriteria)
 		{
-			var sum = actor.Sum(a => GameDataController.SumFloats(gameId, a.Id, completionCriteria.Key));
+			switch (completionCriteria.CriteriaQueryType)
+			{
+				case CriteriaQueryType.Any:
+					return actor.Sum(a => EvaluateFloat(gameId, a.Id, completionCriteria)) / actor.Count();
+				case CriteriaQueryType.Sum:
+					var sum = actor.Sum(a => GameDataController.SumFloats(gameId, a.Id, completionCriteria.Key));
 
-			return CompareValues(sum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+					return CompareValues(sum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
+				case CriteriaQueryType.Latest:
+					return actor.Sum(a => EvaluateFloat(gameId, a.Id, completionCriteria)) / actor.Count();
+				default:
+					return 0;
+			}
 		}
 
 		protected float EvaluateManyString(int? gameId, IEnumerable<Actor> actor, AchievementCriteria completionCriteria)
