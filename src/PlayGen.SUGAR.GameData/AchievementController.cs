@@ -1,9 +1,11 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
+
 
 namespace PlayGen.SUGAR.GameData
 {
@@ -23,6 +25,25 @@ namespace PlayGen.SUGAR.GameData
 			ActorController = actorController;
 		}
 
+
+		public IEnumerable<Achievement> FilterByActorType(IEnumerable<Achievement> achievements, int? actorId)
+		{
+			if (actorId.HasValue)
+			{
+				var provided = ActorController.Get(actorId.Value);
+				if (provided == null)
+				{
+					achievements = achievements.Where(a => a.ActorType == ActorType.Undefined);
+				}
+				else
+				{
+					achievements = achievements.Where(a => a.ActorType == ActorType.Undefined || a.ActorType == provided.ActorType);
+				}
+			}
+			
+			return achievements;
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -35,9 +56,9 @@ namespace PlayGen.SUGAR.GameData
 			{
 				throw new MissingRecordException("The provided achievement does not exist.");
 			}
-			if (actorId != null) {
+			if (actorId.HasValue) {
 				var provided = ActorController.Get(actorId.Value);
-				if (achievement.ActorType != ActorType.Undefined && provided.ActorType != achievement.ActorType)
+				if (achievement.ActorType != ActorType.Undefined && (provided == null || provided.ActorType != achievement.ActorType))
 				{
 					throw new MissingRecordException("The provided ActorId cannot complete this achievement.");
 				}
@@ -74,5 +95,25 @@ namespace PlayGen.SUGAR.GameData
 		public void EvaluateAchievement(Achievement achievement, int? actorId)
 		{
 		}
+		
+		/*
+		// Pattern for evaluating allowing the ability to evaluate an achievement in a way where the context doesn't need to be saved.
+		public void DoSomethingDb(string param, SGAContext db = null)
+		{
+			var dispose = db == null;
+			db = db ?? new SGAContext("asdfas");
+			try
+			{
+				//db stuff
+			}
+			finally
+			{
+				if (dispose)
+				{
+					db?.Dispose();
+				}
+			}
+		}
+		*/
 	}
 }

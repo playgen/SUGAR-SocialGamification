@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			return gameData.Select(ToContract).ToList();
 		}
 
-		public static Data.Model.GameData ToUserModel(this GameDataRequest dataContract)
+		public static Data.Model.GameData ToModel(this GameDataRequest dataContract)
 		{
 			var dataModel = new Data.Model.GameData
 			{

@@ -31,7 +31,9 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
 		public IEnumerable<GameResponse> Get(string name)
 		{
-			var query = GetUriBuilder($"api/game/find/{name}").ToString();
+			var query = GetUriBuilder(string.Format("api/game/find/{0}", name))
+				.ToString();
+			
 			return Get<IEnumerable<GameResponse>>(query);
 		}
 
@@ -56,6 +58,17 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder("api/game").ToString();
 			return Post<GameRequest, GameResponse>(query, game);
+		}
+
+		/// <summary>
+		/// Update an existing Game.
+		/// </summary>
+		/// <param name="id">Id of the existing Game.</param>
+		/// <param name="game"><see cref="GameRequest"/> object that holds the details of the Game.</param>
+		public void Update(int id, GameRequest game)
+		{
+			var query = GetUriBuilder($"api/game/update/{id}").ToString();
+			Put(query, game);
 		}
 
 		/// <summary>

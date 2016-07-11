@@ -130,7 +130,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Helpers
-		private GameData CreateGameData(string key, int? gameId = null, int? userId = null, 
+		private Model.GameData CreateGameData(string key, int? gameId = null, int? userId = null, 
 			bool createNewGame = false, bool createNewUser = false)
 		{
 			if (createNewGame)
@@ -153,7 +153,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				userId = user.Id;
 			}
 
-			var userData = new GameData
+			var userData = new Model.GameData
 			{
 				Key = key,
 				GameId = gameId,

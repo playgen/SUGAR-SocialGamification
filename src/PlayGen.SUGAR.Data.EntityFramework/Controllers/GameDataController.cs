@@ -6,6 +6,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using System.Data.Entity;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -40,7 +41,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<GameData> Get(int? gameId, int? actorId, IEnumerable<string> keys)
+		public IEnumerable<GameData> Get(IEnumerable<int> ids)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var data = context.GetCategoryData(_category)
+					.FilterByIds(ids)
+					.ToList();
+				return data;
+			}
+		}
+
+		public IEnumerable<GameData> Get(int? gameId = null, int? actorId = null, IEnumerable<string> keys = null)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
@@ -340,14 +354,49 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(GameData[] data)
 		{
+			List<GameData> dataList = new List<GameData>();
+			foreach (var d in data)
+			{
+				dataList.Add(d);
+				if (dataList.Count >= 1000)
+				{
+					using (var context = new SGAContext(NameOrConnectionString))
+					{
+						SetLog(context);
+
+						context.GameData.AddRange(dataList);
+						SaveChanges(context);
+						dataList.Clear();
+					}
+				}
+			}
+			if (dataList.Count > 0)
+			{
+				using (var context = new SGAContext(NameOrConnectionString))
+				{
+					SetLog(context);
+
+					context.GameData.AddRange(dataList);
+					SaveChanges(context);
+					dataList.Clear();
+				}
+			}
+		}
+
+		public void Update(GameData updatedData)
+		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				foreach (var d in data)
+				var existingData = context.GameData.Find(updatedData.Id);
+				if (existingData == null)
 				{
-					context.GameData.Add(d);
+					throw new MissingRecordException("Cannot find the object to update.");
 				}
+
+				existingData.Value = updatedData.Value;
+
 				SaveChanges(context);
 			}
 		}

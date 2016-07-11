@@ -5,6 +5,9 @@ using PlayGen.SUGAR.Contracts.Controllers;
 
 namespace PlayGen.SUGAR.Client
 {
+	/// <summary>
+	/// Controller that facilitates Leaderboard specific operations.
+	/// </summary>
 	public class LeaderboardClient : ClientBase
 	{
 		public LeaderboardClient(string baseAddress, Credentials credentials) : base(baseAddress, credentials)
@@ -53,6 +56,17 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder("api/leaderboards/standings").ToString();
 			return Post<LeaderboardStandingsRequest, IEnumerable<LeaderboardStandingsResponse>>(query, leaderboardDetails);
+		}
+
+		/// <summary>
+		/// Update an existing Leaderboard.
+		/// </summary>
+		/// <param name="id">Id of the existing Leaderboard.</param>
+		/// <param name="leaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the Leaderboard.</param>
+		public void Update(int id, LeaderboardRequest leaderboard)
+		{
+			var query = GetUriBuilder($"api/leaderboards/update/{id}").ToString();
+			Put(query, leaderboard);
 		}
 
 		/// <summary>

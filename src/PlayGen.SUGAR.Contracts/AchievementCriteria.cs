@@ -5,8 +5,18 @@ using System.ComponentModel.DataAnnotations;
 namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
-	/// Encapsulates requirements for completing an achievement.
+	/// Encapsulates requirements for completing an achievement or skill.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// Key : "Key",
+	/// DataType : "String",
+	/// ComparisonType : "Equals",
+	/// Scope : "Actor",
+	/// Value : "Value"
+	/// }
+	/// </example>
 	public class AchievementCriteria
 	{
 		[Required]

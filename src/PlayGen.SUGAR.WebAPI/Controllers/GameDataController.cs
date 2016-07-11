@@ -5,6 +5,7 @@ using System.Web.Http.Description;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
@@ -12,15 +13,15 @@ using PlayGen.SUGAR.WebAPI.Extensions;
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
 	/// <summary>
-	/// Web Controller that facilitates UserData specific operations.
+	/// Web Controller that facilitates GameData specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorization]
 	public class GameDataController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.GameDataController _gameDataController;
+		private readonly IGameDataController _gameDataController;
 
-		public GameDataController(Data.EntityFramework.Controllers.GameDataController gameDataController)
+		public GameDataController(IGameDataController gameDataController)
 		{
 			_gameDataController = gameDataController;
 		}
@@ -55,7 +56,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
 		public IActionResult Add([FromBody]GameDataRequest newData)
 		{
-			var data = newData.ToUserModel();
+			var data = newData.ToModel();
 			_gameDataController.Create(data);
 			var dataContract = data.ToContract();
 			return new ObjectResult(dataContract);

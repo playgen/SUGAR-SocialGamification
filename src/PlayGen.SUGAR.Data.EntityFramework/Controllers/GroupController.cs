@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	/// <summary>
-	/// Performs DB operations on the Group entity
-	/// </summary>
 	public class GroupController : DbController
 	{
 		public GroupController(string nameOrConnectionString) 
@@ -59,6 +58,27 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				context.Groups.Add(group);
 				SaveChanges(context);
+			}
+		}
+
+		public void Update(Group group)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var existing = context.Groups.Find(group.Id);
+
+				if (existing != null)
+				{
+					context.Entry(existing).State = EntityState.Modified;
+					existing.Name = group.Name;
+					SaveChanges(context);
+				}
+				else
+				{
+					throw new MissingRecordException($"The existing group with ID {group.Id} could not be found.");
+				}
 			}
 		}
 

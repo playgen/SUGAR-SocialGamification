@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="name">Array of User names.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> Get(string name)
+		public IEnumerable<ActorResponse> Get(string name, bool exactMatch = false)
 		{
 			var query = GetUriBuilder($"api/user/find/{name}").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
@@ -56,6 +56,17 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder("api/user").ToString();
 			return Post<ActorRequest, ActorResponse>(query, actor);
+		}
+
+		/// <summary>
+		/// Update an existing User.
+		/// </summary>
+		/// <param name="id">Id of the existing User.</param>
+		/// <param name="user"><see cref="ActorRequest"/> object that holds the details of the User.</param>
+		public void Update(int id, ActorRequest user)
+		{
+			var query = GetUriBuilder($"api/user/update/{id}").ToString();
+			Put(query, user);
 		}
 
 		/// <summary>

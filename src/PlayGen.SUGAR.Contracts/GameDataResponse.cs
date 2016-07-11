@@ -4,8 +4,18 @@ using Newtonsoft.Json.Converters;
 namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
-	/// Encapsulates savedata details from the server.
+	/// Encapsulates GameData details from the server.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// ActorId : 1,
+	/// GameId : 1,
+	/// Key : "Data Key",
+	/// Value : "10",
+	/// GameDataType : "Long"
+	/// }
+	/// </example>
 	public class GameDataResponse
 	{
 		public int? ActorId { get; set; }

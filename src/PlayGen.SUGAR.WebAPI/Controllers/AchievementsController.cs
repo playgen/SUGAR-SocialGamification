@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: GET api/achievements/game/1/evaluate/1
 		/// </summary>
 		/// <param name="gameId">ID of Game</param>
-		/// 		/// <param name="actorId">ID of Group/User</param>
+		/// <param name="actorId">ID of Group/User</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
 		[HttpGet("game/{gameId:int}/evaluate")]
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
@@ -76,6 +76,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
 			var achievements = _achievementController.GetByGame(gameId);
+			achievements = _achievementEvaluationController.FilterByActorType(achievements, actorId);
 			var achievementResponses = achievements.Select(a =>
 			{
 				var completed = _achievementEvaluationController.IsAchievementCompleted(a, actorId);
@@ -90,7 +91,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find the current progress for an <param name="achievementId"/> for <param name="actor"/>.
+		/// Find the current progress for an <param name="achievementId"/> for <param name="actorId"/>.
 		/// 
 		/// Example Usage: GET api/achievements/1/evaluate/1
 		/// </summary>
@@ -130,6 +131,30 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(achievementContract);
 		}
 
+		[HttpPost("test")]
+		[ResponseType(typeof(AchievementTestResponse))]
+		[ArgumentsNotNull]
+		public IActionResult Test([FromBody] AchievementTestRequest achievementTestRequest)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Update an existing Achievement.
+		/// 
+		/// Example Usage: PUT api/achievements/update/1
+		/// </summary>
+		/// <param name="id">Id of the existing Achievement.</param>
+		/// <param name="achievement"><see cref="AchievementRequest"/> object that holds the details of the Achievement.</param>
+		[HttpPut("update/{id:int}")]
+		[ArgumentsNotNull]
+		public void Update([FromRoute] int id, [FromBody] AchievementRequest achievement)
+		{
+			var achievementModel = achievement.ToAchievementModel();
+			achievementModel.Id = id;
+			_achievementController.Update(achievementModel);
+		}
+
 		/// <summary>
 		/// Delete Achievements with the <param name="id"/> provided.
 		/// 
@@ -142,6 +167,5 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			_achievementController.Delete(id);
 		}
 
-		
 	}
 }

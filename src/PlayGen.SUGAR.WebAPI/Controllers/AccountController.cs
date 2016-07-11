@@ -9,9 +9,11 @@ using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.ServerAuthentication;
+using PlayGen.SUGAR.ServerAuthentication.Helpers;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.ServerAuthentication.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -65,7 +67,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				throw new InvalidAccountDetailsException("Invalid Login Details.");
 			}
 
-			HttpContext.Response.Headers["Bearer"] = CreateToken(account);
+			var token = CreateToken(account);
+			HttpContext.Response.SetAuthorizationToken(token);
 
 			var response = account.ToContract();
 			return new ObjectResult(response);
@@ -96,7 +99,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var response = account.ToContract();
 			if (accountRequest.AutoLogin)
 			{
-				HttpContext.Response.Headers["Bearer"] = CreateToken(account);
+				var token = CreateToken(account);
+				HttpContext.Response.SetAuthorizationToken(token);
 			}
 			return new ObjectResult(response);
 		}

@@ -1,13 +1,17 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace PlayGen.SUGAR.Contracts
+﻿namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
 	/// Encapsulates leaderboard standings details from the database.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// ActorId : 1,
+	/// ActorName : "Name",
+	/// Value : "10",
+	/// Ranking : 1
+	/// }
+	/// </example>
 	public class LeaderboardStandingsResponse
 	{
 		public int ActorId { get; set; }

@@ -2,9 +2,11 @@
 using PlayGen.SUGAR.Client.Extensions;
 using PlayGen.SUGAR.Contracts;
 
-
 namespace PlayGen.SUGAR.Client
 {
+	/// <summary>
+	/// Controller that facilitates Achievement specific operations.
+	/// </summary>
 	public class AchievementClient : ClientBase
 	{
 		public AchievementClient(string baseAddress, Credentials credentials) : base(baseAddress, credentials)
@@ -45,7 +47,7 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Find the current progress for an <param name="achievementId"/> for <param name="actor"/>.
+		/// Find the current progress for an <param name="achievementId"/> for <param name="actorId"/>.
 		/// </summary>
 		/// <param name="achievementId">ID of Achievement</param>
 		/// <param name="actorId">ID of actor/User</param>
@@ -66,6 +68,17 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder("api/achievements/create").ToString();
 			return Post<AchievementRequest, AchievementResponse>(query, newAchievement);
+		}
+
+		/// <summary>
+		/// Update an existing Achievement.
+		/// </summary>
+		/// <param name="id">Id of the existing Achievement.</param>
+		/// <param name="achievement"><see cref="AchievementRequest"/> object that holds the details of the Achievement.</param>
+		public void Update(int id, AchievementRequest achievement)
+		{
+			var query = GetUriBuilder($"api/achievements/update/{id}").ToString();
+			Put(query, achievement);
 		}
 
 		/// <summary>

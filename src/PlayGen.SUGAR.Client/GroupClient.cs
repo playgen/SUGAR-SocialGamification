@@ -59,6 +59,17 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Update an existing Group.
+		/// </summary>
+		/// <param name="id">Id of the existing Group.</param>
+		/// <param name="group"><see cref="ActorRequest"/> object that holds the details of the Group.</param>
+		public void Update(int id, ActorRequest group)
+		{
+			var query = GetUriBuilder($"api/group/update/{id}").ToString();
+			Put(query, group);
+		}
+
+		/// <summary>
 		/// Delete group with the <param name="id"/> provided.
 		/// </summary>
 		/// <param name="id">Group ID.</param>

@@ -46,12 +46,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: GET api/user/find/user1
 		/// </summary>
 		/// <param name="name">User name.</param>
+		/// <param exactMatch="exactMatch">Match the name exactly.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
 		[ResponseType(typeof(IEnumerable<ActorResponse>))]
-		public IActionResult Get([FromRoute]string name)
+		public IActionResult Get([FromRoute]string name, bool exactMatch)
 		{
-			var users = _userController.Search(name);
+			var users = _userController.Search(name, exactMatch);
 			var actorContract = users.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -89,6 +90,22 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			_userController.Create(user);
 			var actorContract = user.ToContract();
 			return new ObjectResult(actorContract);
+		}
+
+		/// <summary>
+		/// Update an existing User.
+		/// 
+		/// Example Usage: PUT api/user/update/1
+		/// </summary>
+		/// <param name="id">Id of the existing User.</param>
+		/// <param name="user"><see cref="ActorRequest"/> object that holds the details of the User.</param>
+		[HttpPut("update/{id:int}")]
+		[ArgumentsNotNull]
+		public void Update([FromRoute] int id, [FromBody] ActorRequest user)
+		{
+			var userModel = user.ToUserModel();
+			userModel.Id = id;
+			_userController.Update(userModel);
 		}
 
 		/// <summary>

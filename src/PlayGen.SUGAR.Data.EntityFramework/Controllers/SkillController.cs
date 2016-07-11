@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using System.Data.Entity;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -64,6 +65,35 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				context.Skills.Add(skill);
 				SaveChanges(context);
 				return skill;
+			}
+		}
+
+		public void Update(Skill skill)
+		{
+			using (var context = new SGAContext(NameOrConnectionString))
+			{
+				SetLog(context);
+
+				var existing = context.Skills.Find(skill.Id);
+
+				if (existing != null)
+				{
+					context.Entry(existing).State = EntityState.Modified;
+
+					existing.Name = skill.Name;
+					existing.CompletionCriteriaCollection = skill.CompletionCriteriaCollection;
+					existing.RewardCollection = skill.RewardCollection;
+					existing.Description = skill.Description;
+					existing.ActorType = skill.ActorType;
+					existing.GameId = skill.GameId;
+					existing.Token = skill.Token;
+
+					SaveChanges(context);
+				}
+				else
+				{
+					throw new MissingRecordException($"The existing skill with ID {skill.Id} could not be found.");
+				}
 			}
 		}
 

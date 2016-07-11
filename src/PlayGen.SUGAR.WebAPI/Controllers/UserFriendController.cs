@@ -101,7 +101,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut("request")]
 		[ArgumentsNotNull]
-		public IActionResult UpdateFriendRequest([FromBody] RelationshipStatusUpdate relationship)
+		public void UpdateFriendRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
 			var relation = new RelationshipRequest
 			{
@@ -109,7 +109,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				AcceptorId = relationship.AcceptorId
 			};
 			_userRelationshipController.UpdateRequest(relation.ToUserModel(), relationship.Accepted);
-			return new NoContentResult();
 		}
 
 		/// <summary>
@@ -121,7 +120,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut]
 		[ArgumentsNotNull]
-		public IActionResult UpdateFriend([FromBody] RelationshipStatusUpdate relationship)
+		public void UpdateFriend([FromBody] RelationshipStatusUpdate relationship)
 		{
 			var relation = new RelationshipRequest
 			{
@@ -129,7 +128,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				AcceptorId = relationship.AcceptorId
 			};
 			_userRelationshipController.Update(relation.ToUserModel());
-			return new NoContentResult();
 		}
 	}
 }

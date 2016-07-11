@@ -1,5 +1,4 @@
-﻿using System;
-using JWT;
+﻿using JWT;
 using Newtonsoft.Json;
 
 namespace PlayGen.SUGAR.ServerAuthentication.Helpers

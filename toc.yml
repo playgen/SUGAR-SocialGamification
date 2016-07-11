@@ -5,4 +5,5 @@
   href: articles/
 - name: API Documentation
   href: obj/api/
-  
+  name: Demo Documentation
+  href: articles/demo/

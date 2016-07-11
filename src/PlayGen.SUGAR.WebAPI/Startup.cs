@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
+using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.GameData;
@@ -44,13 +41,15 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddScoped((_) => new GroupController(connectionString));
 			services.AddScoped((_) => new UserController(connectionString));
 			services.AddScoped((_) => new ActorController(connectionString));
-			services.AddScoped((_) => new GameDataController(connectionString));
+			services.AddScoped<IGameDataController>((_) => new GameDataController(connectionString));
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.AchievementController(connectionString));
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.SkillController(connectionString));
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.LeaderboardController(connectionString));
+			services.AddScoped((_) => new GameData.ResourceController(connectionString));
 			services.AddScoped((_) => new GroupRelationshipController(connectionString));
 			services.AddScoped((_) => new UserRelationshipController(connectionString));
 
+			// TODO set category types for GameDataControllers used by other controllers
 			services.AddScoped((_) => new GameData.AchievementController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString), new ActorController(connectionString),
 										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString))));
 			services.AddScoped((_) => new GameData.SkillController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString), new ActorController(connectionString),
@@ -72,7 +71,7 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddMvc(options =>
 			{
 				options.Filters.Add(new ModelValidationFilter());
-				options.Filters.Add(typeof(TokenHeaderFilter));
+				options.Filters.Add(typeof(AuthorizationHeaderFilter));
 			});
 
 			services.AddScoped<AuthorizationAttribute>();
