@@ -7,10 +7,10 @@ The leaderboards page prompts the admin to select a platform from the list of ga
 * Delete a leaderboard configuration
 
 ### View a leaderboard
-if the table of leaderboards for the selected platform is not empty, selecting an existing leaderboard in the table will launch the list of actors and their standing
+If the table of leaderboards for the selected platform is not empty, selecting an existing leaderboard in the table will launch the list of actors and their standings
 
 ### Create a new leaderboard
-By selecting the create new leaderboard, the admin is directed to add the required fields for a new leaderboard, including; leaderboard name, a unique token used for accessing the leaderboard outside of the admin panel,the actor type, the type of game data that is being tracked and the order the leaderboard should be shown in
+By selecting the "Create New Leaderboard" button, the admin is directed to add the required fields for a new leaderboard, including; leaderboard name, a unique token used for accessing the leaderboard outside of the admin panel, the actor type, the type of game data that is being tracked and the order the leaderboard should be shown in
 
 ### Delete a leaderboard configuration
 Delete button will delete the selected leaderboard from the table
