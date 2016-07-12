@@ -1,4 +1,4 @@
-# LICENSE
+# LICENCE
 
 ## Copyright 2016 PlayGen Ltd
 
