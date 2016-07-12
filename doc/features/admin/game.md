@@ -1,5 +1,5 @@
 # Games
-*For more information on games view the [documentation](/articles/Games.html)*
+*For more information on games view the <a href="../game.md">documentation</a>*
 
 The games screen allows the admin to do the following actions:
 * Create new games

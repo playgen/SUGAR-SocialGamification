@@ -1,5 +1,5 @@
 # Skills
-*For more information on skills view the [documentation](/articles/Skills.html)*
+*For more information on skills view the <a href="../skill.md">documentation</a>*
 
 The skills page controls the skills for a given game and global skills by selecting from a list of games or the global skills option
 

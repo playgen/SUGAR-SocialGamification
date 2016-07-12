@@ -1,5 +1,5 @@
 # Groups
-*For more information on games view the [documentation](/articles/Games.html)*
+*For more information on games view the <a href="../group.md">documentation</a>*
 
 The groups page allows admins to do the following actions:
 * Create new groups

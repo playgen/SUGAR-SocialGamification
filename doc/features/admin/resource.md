@@ -1,5 +1,5 @@
 # Resources
-*For more information on resources view the [documentation](/articles/Resources.html)*
+*For more information on resources view the [documentation](/features/resource.html)*
 
 The resources page controls the resources for a given game and global resources
 

@@ -1,6 +1,6 @@
 # Achievements
 
-*For more information on achievements view the [documentation](/articles/Achivements.html)*
+*For more information on achievements view the <a href="../achievement.md">documentation</a>*
 
 Achievements provide a flexible and simple way to increase user engagement, tracking their actions within and across multiple games. Achievements may be viewed as goals that individual or multiple actors can acquire through meeting one or more criteria.
  

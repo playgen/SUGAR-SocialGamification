@@ -1,5 +1,5 @@
 # Users
-*For more information on users view the [documentation](/articles/Users.html)*
+*For more information on users view the <a href="../user.md">documentation</a>*
 
 The users page allows admins to do the following actions:
 * Create new users
