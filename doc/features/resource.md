@@ -10,12 +10,12 @@ Resources are game objects which are obtained and exchanged by players. They may
 
 
 ## API
-* ClientAPI
-    * [ResourceClient](/api/PlayGen.SUGAR.ClientAPI.ResourceClient)
+* Client
+    * [ResourceClient](xref:PlayGen.SUGAR.Client.ResourceClient)
 * Contracts
 
 * WebAPI
-    * [ResourceController](/api/PlayGen.SUGAR.WebAPI.Controllers.ResourceController)
+    * [ResourceController](xref:PlayGen.SUGAR.WebAPI.Controllers.ResourceController)
 
 
 ## Roadmap

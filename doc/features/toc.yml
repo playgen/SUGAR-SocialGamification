@@ -1,0 +1,23 @@
+﻿- name: Overview
+  homepage: index.md
+- name: Achievements
+  href: achievement.md
+- name: Games
+  href: game.md
+- name: Groups
+  href: group.md
+- name: Leaderboards
+  href: leaderboard.md
+- name: Relationships
+  href: relationship.md
+- name: GameData
+  href: gameData.md
+- name: Resources
+  href: resource.md
+- name: Users
+  href: user.md
+- name: Roadmap
+  href: roadmap.md
+- name: Admin Interface
+  href: admin/toc.yml
+  homepage: admin/index.md

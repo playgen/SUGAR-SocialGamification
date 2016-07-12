@@ -7,17 +7,17 @@ Relationships are connections between two or more entities. For example a user b
 * Search Relationship (ID/Actor)
 
 ## API
-* ClientAPI
-    * [GroupMemberClient](/api/PlayGen.SUGAR.ClientAPI.GroupMemberClient)
-    * [UserFriendClient](/api/PlayGen.SUGAR.ClientAPI.UserFriendClient)
+* Client
+    * [GroupMemberClient](xref:PlayGen.SUGAR.Client.GroupMemberClient)
+    * [UserFriendClient](xref:PlayGen.SUGAR.Client.UserFriendClient)
 * Contracts
-    * [RelationshipStatusUpdate](/api/PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)
-    * [RelationshipRequest](/api/PlayGen.SUGAR.Contracts.RelationshipRequest)
-    * [RelationshipResponse](/api/PlayGen.SUGAR.Contracts.RelationshipResponse)
-    * [ActorResponse](/api/PlayGen.SUGAR.Contracts.ActorResponse)
+    * [RelationshipStatusUpdate](xref:PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)
+    * [RelationshipRequest](xref:PlayGen.SUGAR.Contracts.RelationshipRequest)
+    * [RelationshipResponse](xref:PlayGen.SUGAR.Contracts.RelationshipResponse)
+    * [ActorResponse](xref:PlayGen.SUGAR.Contracts.ActorResponse)
 * WebAPI
-    * [GroupMemberController](/api/PlayGen.SUGAR.WebAPI.Controllers.GroupMemberController)
-    * [UserFriendController](/api/PlayGen.SUGAR.WebAPI.Controllers.UserFriendController)
+    * [GroupMemberController](xref:PlayGen.SUGAR.WebAPI.Controllers.GroupMemberController)
+    * [UserFriendController](xref:PlayGen.SUGAR.WebAPI.Controllers.UserFriendController)
 
 ## Roadmap
 * Relationship between two groups, creating an [Alliance](/articles/Alliances)

@@ -12,15 +12,15 @@ Users can have metadata associated with them, such as nice name, profile image a
 
 
 ## API
-* ClientAPI
-    * [UserClient](/api/PlayGen.SUGAR.ClientAPI.UserClient)
+* Client
+    * [UserClient](xref:PlayGen.SUGAR.Client.UserClient)
 * Contracts
-    * [AchievementCriteria](/api/PlayGen.SUGAR.Contracts.AchievementCriteria)
-    * [AchievementProgressResponse](/api/PlayGen.SUGAR.Contracts.AchievementProgressResponse)
-    * [ActorRequest](/api/PlayGen.SUGAR.Contracts.ActorRequest)
-    * [ActorResponse](/api/PlayGen.SUGAR.Contracts.ActorResponse)
+    * [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria)
+    * [AchievementProgressResponse](xref:PlayGen.SUGAR.Contracts.AchievementProgressResponse)
+    * [ActorRequest](xref:PlayGen.SUGAR.Contracts.ActorRequest)
+    * [ActorResponse](xref:PlayGen.SUGAR.Contracts.ActorResponse)
 * WebAPI
-    * [UserController](/api/PlayGen.SUGAR.WebAPI.Controllers.UserController)
+    * [UserController](xref:PlayGen.SUGAR.WebAPI.Controllers.UserController)
 
 ## Roadmap
 

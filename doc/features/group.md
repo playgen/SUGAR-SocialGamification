@@ -18,12 +18,12 @@ Actors can join, leave or add another actor to a group.
 
 
 ## API
-* ClientAPI
-    * [GroupClient](/api/PlayGen.SUGAR.ClientAPI.GroupClient)
+* Client
+    * [GroupClient](xref:PlayGen.SUGAR.Client.GroupClient)
 * Contracts
-    * [ActorResponse](/api/PlayGen.SUGAR.Contracts.ActorResponse)
+    * [ActorResponse](xref:PlayGen.SUGAR.Contracts.ActorResponse)
 * WebAPI
-    * [GroupController](/api/PlayGen.SUGAR.WebAPI.Controllers.GroupController)
+    * [GroupController](xref:PlayGen.SUGAR.WebAPI.Controllers.GroupController)
     
 ## Roadmap
 * Groups Alliance. 

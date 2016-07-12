@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Get the standings for a Leaderboard using a <see cref="LeaderboardStandingRequest"/>.
+		/// Get the standings for a Leaderboard using a <see cref="LeaderboardStandingsRequest"/>.
 		/// </summary>
 		/// <param name="leaderboardDetails"><see cref="LeaderboardStandingsRequest"/> object that holds the details that are wanted from the Leaderboard.</param>
 		/// <returns>Returns multiple <see cref="LeaderboardStandingsResponse"/> that hold actor positions in the leaderboard.</returns>
