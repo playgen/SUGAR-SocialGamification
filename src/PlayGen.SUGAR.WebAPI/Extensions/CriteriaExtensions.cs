@@ -13,6 +13,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Key = completionCriteria.Key,
 				DataType = completionCriteria.DataType,
+				CriteriaQueryType = completionCriteria.CriteriaQueryType,
 				ComparisonType = completionCriteria.ComparisonType,
 				Scope = completionCriteria.Scope,
 				Value = completionCriteria.Value,

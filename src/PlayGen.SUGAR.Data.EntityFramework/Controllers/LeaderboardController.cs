@@ -13,36 +13,27 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-		public IEnumerable<Leaderboard> GetGlobal()
+		public IEnumerable<Leaderboard> GetByGame(int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
-
-				var leaderboards = context.Leaderboards.Where(l => l.GameId == null).ToList();
-				return leaderboards;
-			}
-		}
-
-
-		public IEnumerable<Leaderboard> GetByGame(int gameId)
-		{
-			using (var context = new SGAContext(NameOrConnectionString))
-			{
-				SetLog(context);
+				gameId = gameId ?? 0;
 
 				var leaderboards = context.Leaderboards.Where(l => l.GameId == gameId).ToList();
 				return leaderboards;
 			}
 		}
 
-		public Leaderboard Get(int leaderboardId)
+		public Leaderboard Get(string token, int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var leaderboard = context.Leaderboards.Find(leaderboardId);
+				gameId = gameId ?? 0;
+
+				var leaderboard = context.Leaderboards.Find(token, gameId);
 				return leaderboard;
 			}
 		}
@@ -82,7 +73,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var existing = context.Leaderboards.Find(leaderboard.Id);
+				var existing = context.Leaderboards.Find(leaderboard.Token, leaderboard.GameId);
 
 				if (existing != null)
 				{
@@ -101,18 +92,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				}
 				else
 				{
-					throw new MissingRecordException($"The existing leaderboard with ID {leaderboard.Id} could not be found.");
+					throw new MissingRecordException($"The existing leaderboard with token {leaderboard.Token} and game ID {leaderboard.GameId} could not be found.");
 				}
 			}
 		}
-
-		public void Delete(int id)
+		
+		public void Delete(string token, int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var leaderboard = context.Leaderboards.Find(id);
+				gameId = gameId ?? 0;
+
+				var leaderboard = context.Leaderboards.Find(token, gameId);
 				if (leaderboard != null)
 				{
 					context.Leaderboards.Remove(leaderboard);

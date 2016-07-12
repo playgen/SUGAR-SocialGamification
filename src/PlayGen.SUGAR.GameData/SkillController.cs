@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.GameData
 		/// <param name="skill"></param>
 		/// <param name="actorId"></param>
 		/// <returns></returns>
-		public bool IsSkillCompleted(Skill skill, int? actorId)
+		public float IsSkillCompleted(Skill skill, int? actorId)
 		{
 			if (skill == null)
 			{
@@ -65,17 +65,17 @@ namespace PlayGen.SUGAR.GameData
 			}
 			var key = string.Format(KeyConstants.SkillCompleteFormat, skill.Token);
 			var completed = GameDataController.KeyExists(skill.GameId, actorId, key);
-
+			var completedProgress = completed ? 1f : 0f;
 			if (!completed)
 			{
-				completed = IsCriteriaSatisified(skill.GameId, actorId, skill.CompletionCriteriaCollection, skill.ActorType);
-				if (completed)
+				completedProgress = IsCriteriaSatisified(skill.GameId, actorId, skill.CompletionCriteriaCollection, skill.ActorType);
+				if (completedProgress >= 1)
 				{
 					ProcessSkillRewards(skill, actorId);
 				}
 			}
 
-			return completed;
+			return completedProgress;
 		}
 
 		private void ProcessSkillRewards(Skill skill, int? actorId)

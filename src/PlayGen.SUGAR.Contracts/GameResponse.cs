@@ -12,8 +12,14 @@
 	/// </example>
 	public class GameResponse
 	{
+		/// <summary>
+		/// The unqiue identifier for the game.
+		/// </summary>
 		public int Id { get; set; }
 
+		/// <summary>
+		/// The display name of the game.
+		/// </summary>
 		public string Name { get; set; }
 	}
 }

@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client
 		/// Get all global leaderboards, ie. leaderboards that are not associated with a specific game
 		/// </summary>
 		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
-		public IEnumerable<LeaderboardResponse> Get()
+		public IEnumerable<LeaderboardResponse> GetGlobal()
 		{
-			var query = GetUriBuilder("api/leaderboards/list").ToString();
+			var query = GetUriBuilder("api/leaderboards/global/list").ToString();
 			return Get<IEnumerable<LeaderboardResponse>>(query);
 		}
 
@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
-		public IEnumerable<LeaderboardResponse> Get(string gameId)
+		public IEnumerable<LeaderboardResponse> Get(int gameId)
 		{
 			var query = GetUriBuilder($"api/leaderboards/game/{gameId}/list").ToString();
 			return Get<IEnumerable<LeaderboardResponse>>(query);
@@ -61,21 +61,31 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Update an existing Leaderboard.
 		/// </summary>
-		/// <param name="id">Id of the existing Leaderboard.</param>
 		/// <param name="leaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the Leaderboard.</param>
-		public void Update(int id, LeaderboardRequest leaderboard)
+		public void Update(LeaderboardRequest leaderboard)
 		{
-			var query = GetUriBuilder($"api/leaderboards/update/{id}").ToString();
+			var query = GetUriBuilder($"api/leaderboards/update").ToString();
 			Put(query, leaderboard);
+		}
+
+		/// <summary>
+		/// Delete a global leaderboard, ie. a leaderboard that is not associated with a specific game
+		/// </summary>
+		/// <param name="token">Token of Leaderboard</param>
+		public void DeleteGlobal(string token)
+		{
+			var query = GetUriBuilder($"api/leaderboards/{token}/global").ToString();
+			Delete(query);
 		}
 
 		/// <summary>
 		/// Delete Leaderboards with the <param name="id"/> provided.
 		/// </summary>
-		/// <param name="id">Leaderboard ID</param>
-		public void Delete(int id)
+		/// <param name="token">Token of Leaderboard</param>
+		/// <param name="gameId">ID of the Game the Leaderboard is for</param>
+		public void Delete(string token, int gameId)
 		{
-			var query = GetUriBuilder($"api/leaderboards/{id}").ToString();
+			var query = GetUriBuilder($"api/leaderboards/{token}/{gameId}").ToString();
 			Delete(query);
 		}
 	}

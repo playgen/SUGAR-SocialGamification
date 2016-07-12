@@ -11,7 +11,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 	{
 		public static void HandleDetatchedGame(this SGAContext context, int? gameId)
 		{
-			if (gameId != null)
+			if (gameId != null && gameId != 0)
 			{
 				var game = context.Games.First(a => a.Id == gameId.Value);
 				if (game != null && context.Entry(game).State == EntityState.Detached)

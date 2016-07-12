@@ -11,7 +11,6 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		{
 			var leaderboardContract = new LeaderboardResponse
 			{
-				Id = leaderboardModel.Id,
 				GameId = leaderboardModel.GameId,
 				Name = leaderboardModel.Name,
 				Token = leaderboardModel.Token,
@@ -34,7 +33,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		{
 			var leaderboardModel = new Leaderboard
 			{
-				GameId = leaderboardContract.GameId,
+				GameId = leaderboardContract.GameId ?? 0,
 				Name = leaderboardContract.Name,
 				Token = leaderboardContract.Token,
 				Key = leaderboardContract.Key,

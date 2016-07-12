@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.GameData
 		/// <param name="achievement"></param>
 		/// <param name="actorId"></param>
 		/// <returns></returns>
-		public bool IsAchievementCompleted(Achievement achievement, int? actorId)
+		public float IsAchievementCompleted(Achievement achievement, int? actorId)
 		{
 			if (achievement == null)
 			{
@@ -65,17 +65,17 @@ namespace PlayGen.SUGAR.GameData
 			}
 			var key = string.Format(KeyConstants.AchievementCompleteFormat, achievement.Token);
 			var completed =  GameDataController.KeyExists(achievement.GameId, actorId, key);
-
+			var completedProgress = completed ? 1f : 0f;
 			if (!completed)
 			{
-				completed = IsCriteriaSatisified(achievement.GameId, actorId, achievement.CompletionCriteriaCollection, achievement.ActorType);
-				if (completed)
+				completedProgress = IsCriteriaSatisified(achievement.GameId, actorId, achievement.CompletionCriteriaCollection, achievement.ActorType);
+				if (completedProgress >= 1)
 				{
 					ProcessAchievementRewards(achievement, actorId);
 				}
 			}
 
-			return completed;
+			return completedProgress;
 		}
 
 		private void ProcessAchievementRewards(Achievement achievement, int? actorId)

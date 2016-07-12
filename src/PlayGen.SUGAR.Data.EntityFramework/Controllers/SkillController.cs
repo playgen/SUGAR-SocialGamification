@@ -13,36 +13,27 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-		public IEnumerable<Skill> GetGlobal()
+		public IEnumerable<Skill> GetByGame(int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
-
-				var skills = context.Skills.Where(a => a.GameId == null).ToList();
-				return skills;
-			}
-		}
-
-
-		public IEnumerable<Skill> GetByGame(int gameId)
-		{
-			using (var context = new SGAContext(NameOrConnectionString))
-			{
-				SetLog(context);
+				gameId = gameId ?? 0;
 
 				var skills = context.Skills.Where(a => a.GameId == gameId).ToList();
 				return skills;
 			}
 		}
 
-		public Skill Get(int skillId)
+		public Skill Get(string token, int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var skill = context.Skills.Find(skillId);
+				gameId = gameId ?? 0;
+
+				var skill = context.Skills.Find(token, gameId);
 				return skill;
 			}
 		}
@@ -74,7 +65,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var existing = context.Skills.Find(skill.Id);
+				var existing = context.Skills.Find(skill.Token, skill.GameId);
 
 				if (existing != null)
 				{
@@ -92,18 +83,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				}
 				else
 				{
-					throw new MissingRecordException($"The existing skill with ID {skill.Id} could not be found.");
+					throw new MissingRecordException($"The existing skill with token {skill.Token} and game ID {skill.GameId} could not be found.");
 				}
 			}
 		}
 
-		public void Delete(int id)
+		public void Delete(string token, int? gameId)
 		{
 			using (var context = new SGAContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
-				var skill = context.Skills.Find(id);
+				gameId = gameId ?? 0;
+
+				var skill = context.Skills.Find(token, gameId);
 				if (skill != null)
 				{
 					context.Skills.Remove(skill);

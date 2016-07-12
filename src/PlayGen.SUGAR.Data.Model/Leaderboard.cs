@@ -5,9 +5,7 @@ namespace PlayGen.SUGAR.Data.Model
 {
 	public class Leaderboard
 	{
-		public int Id { get; set; }
-
-		public int? GameId { get; set; }
+		public int GameId { get; set; }
 
 		public string Name { get; set; }
 

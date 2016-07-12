@@ -14,12 +14,35 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Find a Global Achievement that matches <param name="token"/>.
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		/// <returns>Returns <see cref="AchievementResponse"/> that holds Achievement details</returns>
+		public AchievementResponse GetGlobalById(string token)
+		{
+			var query = GetUriBuilder($"api/achievements/find/{token}/global").ToString();
+			return Get<AchievementResponse>(query);
+		}
+
+		/// <summary>
+		/// Find a Achievement that matches <param name="token"/> and <param name="gameId"/>.
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="gameId">ID of the Game the Achievement is for</param>
+		/// <returns>Returns <see cref="AchievementResponse"/> that holds Achievement details</returns>
+		public AchievementResponse GetById(string token, int gameId)
+		{
+			var query = GetUriBuilder($"api/achievements/find/{token}/{gameId}").ToString();
+			return Get<AchievementResponse>(query);
+		}
+
+		/// <summary>
 		/// Get all global achievements, ie. achievements that are not associated with a specific game
 		/// </summary>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
-		public IEnumerable<AchievementResponse> Get()
+		public IEnumerable<AchievementResponse> GetAllGlobal()
 		{
-			var query = GetUriBuilder($"api/achievements/list").ToString();
+			var query = GetUriBuilder($"api/achievements/global/list").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
 		}
 
@@ -28,10 +51,21 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">game ID</param>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
-		public IEnumerable<AchievementResponse> Get(int gameId)
+		public IEnumerable<AchievementResponse> GetByGame(int gameId)
 		{
 			var query = GetUriBuilder($"api/achievements/game/{gameId}/list").ToString();
 			return Get<IEnumerable<AchievementResponse>>(query);
+		}
+
+		/// <summary>
+		/// Find the current progress for all global achievements for <param name="actorId"/>.
+		/// </summary>
+		/// <param name="actorId">ID of Group/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold Achievement progress details</returns>
+		public IEnumerable<AchievementProgressResponse> GetGlobalProgress(int actorId)
+		{
+			var query = GetUriBuilder($"api/achievements/global/evaluate/{actorId}").ToString();
+			return Get<IEnumerable<AchievementProgressResponse>>(query);
 		}
 
 		/// <summary>
@@ -47,14 +81,27 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Find the current progress for an <param name="achievementId"/> for <param name="actorId"/>.
+		/// Find the current progress for an Achievement for <param name="actorId"/>.
 		/// </summary>
-		/// <param name="achievementId">ID of Achievement</param>
+		/// <param name="token">Token of Achievement</param>
 		/// <param name="actorId">ID of actor/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current group progress toward achievement.</returns>
-		public IEnumerable<AchievementProgressResponse> GetAchievementProgress(int achievementId, int actorId)
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
+		public IEnumerable<AchievementProgressResponse> GetGlobalAchievementProgress(string token, int actorId)
 		{
-			var query = GetUriBuilder($"api/achievements/{achievementId}/evaluate/{actorId}").ToString();
+			var query = GetUriBuilder($"api/achievements/{token}/global/evaluate/{actorId}").ToString();
+			return Get<IEnumerable<AchievementProgressResponse>>(query);
+		}
+
+		/// <summary>
+		/// Find the current progress for an Achievement for <param name="actorId"/>.
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="gameId">ID of the Game the Achievement is for</param>
+		/// <param name="actorId">ID of actor/User</param>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
+		public IEnumerable<AchievementProgressResponse> GetAchievementProgress(string token, int gameId, int actorId)
+		{
+			var query = GetUriBuilder($"api/achievements/{token}/{gameId}/evaluate/{actorId}").ToString();
 			return Get<IEnumerable<AchievementProgressResponse>>(query);
 		}
 
@@ -73,21 +120,31 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Update an existing Achievement.
 		/// </summary>
-		/// <param name="id">Id of the existing Achievement.</param>
 		/// <param name="achievement"><see cref="AchievementRequest"/> object that holds the details of the Achievement.</param>
 		public void Update(int id, AchievementRequest achievement)
 		{
-			var query = GetUriBuilder($"api/achievements/update/{id}").ToString();
+			var query = GetUriBuilder($"api/achievements/update").ToString();
 			Put(query, achievement);
 		}
 
 		/// <summary>
-		/// Delete Achievements with the <param name="id"/> provided.
+		/// Delete a global achievement, ie. an achievement that is not associated with a specific game
 		/// </summary>
-		/// <param name="id">Achievement ID</param>
-		public void Delete(int id)
+		/// <param name="token">Token of Achievement</param>
+		public void DeleteGlobal(string token)
 		{
-			var query = GetUriBuilder($"api/achievements/{id}").ToString();
+			var query = GetUriBuilder($"api/achievements/{token}/global").ToString();
+			Delete(query);
+		}
+
+		/// <summary>
+		/// Delete Achievement with the <param name="token"/> and <param name="gameId"/> provided.
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="gameId">ID of the Game the Achievement is for</param>
+		public void Delete(string token, int gameId)
+		{
+			var query = GetUriBuilder($"api/achievements/{token}/{gameId}").ToString();
 			Delete(query);
 		}
 	}

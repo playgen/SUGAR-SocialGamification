@@ -11,7 +11,6 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		{
 			var achievementContract = new AchievementResponse
 			{
-				Id = model.Id,
 				Name = model.Name,
 				Description = model.Description,
 				GameId = model.GameId,
@@ -35,7 +34,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Name = achieveContract.Name,
 				Description = achieveContract.Description,
-				GameId = achieveContract.GameId,
+				GameId = achieveContract.GameId ?? 0,
 				ActorType = achieveContract.ActorType,
 				Token = achieveContract.Token,
 				CompletionCriteriaCollection = achieveContract.CompletionCriteria.ToAchievementModel(),
@@ -62,6 +61,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Key = achievementContract.Key,
 				ComparisonType = (ComparisonType)achievementContract.ComparisonType,
+				CriteriaQueryType = (CriteriaQueryType)achievementContract.CriteriaQueryType,
 				DataType = (GameDataType)achievementContract.DataType,
 				Scope = (CriteriaScope)achievementContract.Scope,
 				Value = achievementContract.Value,

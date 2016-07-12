@@ -11,7 +11,6 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		{
 			var skillContract = new AchievementResponse
 			{
-				Id = model.Id,
 				Name = model.Name,
 				Description = model.Description,
 				GameId = model.GameId,
@@ -35,7 +34,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Name = skillContract.Name,
 				Description = skillContract.Description,
-				GameId = skillContract.GameId,
+				GameId = skillContract.GameId ?? 0,
 				ActorType = skillContract.ActorType,
 				Token = skillContract.Token,
 				CompletionCriteriaCollection = skillContract.CompletionCriteria.ToSkillModel(),
@@ -62,6 +61,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Key = skillContract.Key,
 				ComparisonType = (ComparisonType)skillContract.ComparisonType,
+				CriteriaQueryType = (CriteriaQueryType)skillContract.CriteriaQueryType,
 				DataType = (GameDataType)skillContract.DataType,
 				Scope = (CriteriaScope)skillContract.Scope,
 				Value = skillContract.Value,

@@ -11,7 +11,8 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// LeaderboardId : 1,
+	/// LeaderboardToken : "AN_ACHIEVEMENT_TOKEN",
+	/// GameId : 1,
 	/// ActorId : 1,
 	/// LeaderboardFilterType : "Near",
 	/// Limit : 10,
@@ -22,23 +23,53 @@ namespace PlayGen.SUGAR.Contracts
 	/// </example>
 	public class LeaderboardStandingsRequest
 	{
+		/// <summary>
+		/// The Token of the Leaderboard which the standings are being gathered for.
+		/// </summary>
 		[Required]
-		public int LeaderboardId { get; set; }
+		public string LeaderboardToken { get; set; }
 
+		/// <summary>
+		/// The Id of the Game the leaderboard. Can be left null for system-wide leaderboards.
+		/// </summary>
+		[Required]
+		public int? GameId { get; set; }
+
+		/// <summary>
+		/// The Id of an Actor. Required for getting standings for Near, Friends (user only) and Group Members (group only)
+		/// </summary>
 		public int? ActorId { get; set; }
 
+		/// <summary>
+		/// The filter for what standings will be returned.
+		/// </summary>
 		[Required]
 		[JsonConverter(typeof(StringEnumConverter))]
 		public LeaderboardFilterType LeaderboardFilterType { get; set; }
 
+		/// <summary>
+		/// The maximum number of results which will be returned.
+		/// </summary>
 		[Required]
 		public int Limit { get; set; }
 
+		/// <summary>
+		/// The set of results which will be returned based on the limit.
+		/// 0 returns the first set of results for Top, Friends and Group Member and the nearest range for Near.
+		/// </summary>
 		[Required]
 		public int Offset { get; set; }
 
+		/// <summary>
+		/// The earliest point which data should be collected from.
+		/// Can be left null to set no earliest point.
+		/// </summary>
 		public DateTime DateStart { get; set; }
 
+		/// <summary>
+		/// The latest point which data should be collected from.
+		/// Can be left null to gather ll data up to the present time.
+		/// </summary>
 		public DateTime DateEnd { get; set; }
 	}
 }

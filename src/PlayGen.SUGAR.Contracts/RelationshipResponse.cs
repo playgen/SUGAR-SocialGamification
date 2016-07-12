@@ -12,8 +12,14 @@
 	/// </example>
 	public class RelationshipResponse
 	{
+		/// <summary>
+		/// The Id of the requesting actor.
+		/// </summary>
 		public int RequestorId { get; set; }
 
+		/// <summary>
+		/// The Id of the receiving actor.
+		/// </summary>
 		public int AcceptorId { get; set; }
 	}
 }
