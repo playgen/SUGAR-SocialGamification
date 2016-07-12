@@ -11,18 +11,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		private readonly IAmbientContextLocator _ambientContextLocator;
 
-		public DbController(IAmbientContextLocator ambientContextLocator)
+		protected DbController(IAmbientContextLocator ambientContextLocator)
 		{
 			_ambientContextLocator = ambientContextLocator;
 		}
+	}
 
-		// TODO Remove below
-		#region Remove
+	// TODO remove this class eventually
+	public abstract class OLD_DbController
+	{
 		protected readonly DbExceptionHandler DbExceptionHandler = new DbExceptionHandler();
 
 		protected readonly string NameOrConnectionString;
 
-		protected DbController(string nameOrConnectionString)
+		protected OLD_DbController(string nameOrConnectionString)
 		{
 			NameOrConnectionString = nameOrConnectionString;
 		}
@@ -44,6 +46,5 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				DbExceptionHandler.Handle(exception);
 			}
 		}
-		#endregion
 	}
 }

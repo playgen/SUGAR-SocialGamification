@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	public class LeaderboardController : DbController
+	public class LeaderboardController : OLD_DbController
 	{
 		public LeaderboardController(string nameOrConnectionString)
 			: base(nameOrConnectionString)

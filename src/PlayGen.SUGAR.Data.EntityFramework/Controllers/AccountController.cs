@@ -6,7 +6,7 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	public class AccountController : DbController
+	public class AccountController : OLD_DbController
 	{
 		public AccountController(string nameOrConnectionString) 
 			: base(nameOrConnectionString)

@@ -10,7 +10,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	public class GameDataController : DbController, IGameDataController
+	public class GameDataController : OLD_DbController, IGameDataController
 	{
 		private readonly GameDataCategory _category = GameDataCategory.GameData;
 

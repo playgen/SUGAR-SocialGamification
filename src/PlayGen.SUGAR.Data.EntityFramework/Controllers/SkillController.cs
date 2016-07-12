@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	public class SkillController : DbController
+	public class SkillController : OLD_DbController
 	{
 		public SkillController(string nameOrConnectionString)
 			: base(nameOrConnectionString)

@@ -13,15 +13,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			: base(ambientContextLocator)
 		{
 		}
-
-		public IEnumerable<Achievement> GetGlobal()
-		{
-			var achievements = context.Achievements.Where(a => a.GameId == null).ToList();
-			return achievements;
-		}
-
-
-		public IEnumerable<Achievement> GetByGame(int gameId)
+		
+		public IEnumerable<Achievement> GetByGame(int? gameId)
 		{
 			gameId = gameId ?? 0;
 

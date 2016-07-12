@@ -29,9 +29,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		private UserRelationshipController _userRelationshipController;
 
 		private IContextScopeFactory _dataContextScopeFactory;
-        private IAmbientContextLocator _ambientContextLocator;
+		private IAmbientContextLocator _ambientContextLocator;
 
-        public AccountController AccountController
+		public AccountController AccountController
 			=> _accountController ?? (_accountController = new AccountController(_connectionString));
 		public AchievementController AchievementController
 			=> _achievementController ?? (_achievementController = new AchievementController(AmbientContextLocator));
@@ -58,10 +58,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		public IContextScopeFactory DataContextScopeFactory =>
 			(_dataContextScopeFactory = new ContextScopeFactory(_connectionString));
-        public IAmbientContextLocator AmbientContextLocator =>
-            (_ambientContextLocator = new AmbientContextLocator());
+		public IAmbientContextLocator AmbientContextLocator =>
+			(_ambientContextLocator = new AmbientContextLocator());
 
-        public TestEnvironment()
+		public TestEnvironment()
 		{
 			_connectionString = GetNameOrConnectionString(_dbName);
 			DeleteDatabase();

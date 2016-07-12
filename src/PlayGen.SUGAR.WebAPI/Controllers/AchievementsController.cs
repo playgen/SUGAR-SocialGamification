@@ -25,9 +25,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		private readonly AchievementController _achievementEvaluationController;
 		private readonly IContextScopeFactory _dataContextScopefactory;
 
-		public AchievementsController(Data.EntityFramework.Controllers.AchievementController achievementController,
-			AchievementController achievementEvaluationController, IContextScopeFactory _dataContextScopefactory)
+		public AchievementsController(IContextScopeFactory dataContextScopefactory, 
+			Data.EntityFramework.Controllers.AchievementController achievementController,
+			AchievementController achievementEvaluationController)
 		{
+			_dataContextScopefactory = dataContextScopefactory;
+
 			_achievementController = achievementController;
 			_achievementEvaluationController = achievementEvaluationController;
 		}
@@ -119,7 +122,27 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult Create([FromBody] AchievementRequest newAchievement)
 		{
 			var achievement = newAchievement.ToAchievementModel();
-			_achievementController.Create(achievement);
+
+			using (var dataContentScope = _dataContextScopefactory.Create())
+			{				
+				_achievementController.Create(achievement);
+				dataContentScope.SaveChanges();
+			}
+
+			var achievementContract = achievement.ToContract();
+			return new ObjectResult(achievementContract);
+		}
+
+		public IActionResult Create([FromBody] AchievementRequest newAchievement)
+		{
+			var achievement = newAchievement.ToAchievementModel();
+
+			using (var dbContext = _dbContextFactory.Create())
+			{
+				_achievementController.Create(dbContext.Achievements);
+				dbContext.SaveChanges();
+			}
+
 			var achievementContract = achievement.ToContract();
 			return new ObjectResult(achievementContract);
 		}

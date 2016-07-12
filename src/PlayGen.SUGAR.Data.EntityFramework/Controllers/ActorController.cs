@@ -4,7 +4,7 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	public class ActorController : DbController
+	public class ActorController : OLD_DbController
 	{
 		public ActorController(string nameOrConnectionString) 
 			: base(nameOrConnectionString)

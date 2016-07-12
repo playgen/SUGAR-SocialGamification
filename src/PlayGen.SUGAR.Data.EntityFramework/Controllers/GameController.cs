@@ -6,7 +6,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	public class GameController : DbController
+	public class GameController : OLD_DbController
 	{
 		public GameController(string nameOrConnectionString) 
 			: base(nameOrConnectionString)
