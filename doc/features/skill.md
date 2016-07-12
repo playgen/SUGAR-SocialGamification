@@ -15,9 +15,9 @@ Such a skill is globally defined with a game-specific criteria. The criteria che
 
 
 ## API
-* ClientAPI
-    * [SkillClient](/api/PlayGen.SUGAR.ClientAPI.SkillClient)
+* Client
+    * [SkillClient](xref:PlayGen.SUGAR.Client.SkillClient)
 * Contracts
 
 * WebAPI
-    * [SkillController](/api/PlayGen.SUGAR.WebAPI.Controllers.SkillController)
+    * [SkillController](xref:PlayGen.SUGAR.WebAPI.Controllers.SkillsController)

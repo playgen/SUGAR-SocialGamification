@@ -1,0 +1,15 @@
+﻿- name: Home
+  href: index.md
+  homepage: index.md
+- name: Features
+  href: features/
+  homepage: features/index.md
+- name: Demo
+  href: demo/
+  homepage: demo/index.md
+- name: API Reference
+  href: api/
+  homepage: api/PlayGen.SUGAR.Client.yml
+- name: Installation
+  href: installation/
+  homepage: installation/index.md

@@ -3,23 +3,20 @@ Achievements provide a flexible and simple way to increase user engagement, trac
 
 The criteria is flexible and can be written by the game developer or provided by the platform based on any game specific action. Achievements can be binary or incremental, ie. (complete/not complete) or have levels or percentages of progression toward their completion. They can be global, across all games, or associated with a single game. 
 
-
 ## Features
 * CRUD achievements
 * Search achievements (ID/Game/Name/Actor)
 
-
-
 ## API
-* ClientAPI
-    * [AchievementClient](/api/PlayGen.SUGAR.ClientAPI.AchievementClient)
+* Client
+    * [AchievementClient](xref:PlayGen.SUGAR.Client.AchievementClient)
 * Contracts
-    * [AchievementCriteria](/api/PlayGen.SUGAR.Contracts.AchievementCriteria)
-    * [AchievementProgressResponse](/api/PlayGen.SUGAR.Contracts.AchievementProgressResponse)
-    * [AchievementRequest](/api/PlayGen.SUGAR.Contracts.AchievementRequest)
-    * [AchievementResponse](/api/PlayGen.SUGAR.Contracts.AchievementResponse)
+    * [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria)
+    * [AchievementProgressResponse](xref:PlayGen.SUGAR.Contracts.AchievementProgressResponse)
+    * [AchievementRequest](xref:PlayGen.SUGAR.Contracts.AchievementRequest)
+    * [AchievementResponse](xref:PlayGen.SUGAR.Contracts.AchievementResponse)
 * WebAPI
-    * [AchievementController](/api/PlayGen.SUGAR.WebAPI.Controllers.AchievementController)
+    * [AchievementController](xref:PlayGen.SUGAR.WebAPI.Controllers.AchievementsController)
 
 	
 ## Roadmap

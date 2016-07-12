@@ -88,7 +88,13 @@ namespace PlayGen.SUGAR.WebAPI
 
 		private static void ConfigureRouting(IServiceCollection services)
 		{
-			services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+			services.AddCors(options => options.AddPolicy("AllowAll", p => p
+				// TODO: this should be specified in config at each deployment
+				.AllowAnyOrigin()
+				.AllowAnyMethod()
+				.AllowAnyHeader()
+				.AllowCredentials()
+				.WithExposedHeaders(new [] { "Authorization "})));
 		}
 
 		private static void ConfigureCors(IApplicationBuilder application)

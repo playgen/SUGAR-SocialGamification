@@ -11,15 +11,15 @@ Leaderboards provide a visual comparison tool for measurements of resources or o
 	* Summation
 	* Earliest/Latest occurrence 
 	* Highest/Lowest overall occurrence 
-* Filter results by threshold values (e.g. top 20 or around current player's rank) or [Relationships](/articles/Relationships)
+* Filter results by threshold values (e.g. top 20 or around current player's rank) or [Relationships](relationship.md)
 
 ## API
-* ClientAPI
-    * [LeaderboardClient](/api/PlayGen.SUGAR.ClientAPI.LeaderboardClient)
+* Client
+    * [LeaderboardClient](xref:PlayGen.SUGAR.Client.LeaderboardClient)
 * Contracts
-    * [LeaderboardRequest](/api/PlayGen.SUGAR.Contracts.LeaderboardRequest)
-    * [LeaderboardResponse](/api/PlayGen.SUGAR.Contracts.LeaderboardResponse)
-    * [LeaderboardStandingsRequest](/api/PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest)
-    * [LeaderboardStandingsResponse](/api/PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse)
+    * [LeaderboardRequest](xref:PlayGen.SUGAR.Contracts.LeaderboardRequest)
+    * [LeaderboardResponse](xref:PlayGen.SUGAR.Contracts.LeaderboardResponse)
+    * [LeaderboardStandingsRequest](xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest)
+    * [LeaderboardStandingsResponse](xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse)
 * WebAPI
-    * [LeaderboardController](/api/PlayGen.SUGAR.WebAPI.Controllers.LeaderboardController)
+    * [LeaderboardController](xref:PlayGen.SUGAR.WebAPI.Controllers.LeaderboardsController)

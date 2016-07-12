@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get the standings for a Leaderboard using a <see cref="LeaderboardStandingRequest"/>.
+		/// Get the standings for a Leaderboard using a <see cref="LeaderboardStandingsRequest"/>.
 		/// 
 		/// Example Usage: POST api/leaderboards/standings
 		/// </summary>

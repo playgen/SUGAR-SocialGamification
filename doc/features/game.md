@@ -14,10 +14,10 @@ A game is an individual application as defined by the platform. A single instanc
 
 
 ## API
-* ClientAPI
-    * [GameClient](/api/PlayGen.SUGAR.ClientAPI.GameClient)
+* Client
+    * [GameClient](xref:PlayGen.SUGAR.Client.GameClient)
 * Contracts
-    * [GameRequest](/api/PlayGen.SUGAR.Contracts.GameRequest)
-    * [GameResponse](/api/PlayGen.SUGAR.Contracts.GameResponse)
+    * [GameRequest](xref:PlayGen.SUGAR.Contracts.GameRequest)
+    * [GameResponse](xref:PlayGen.SUGAR.Contracts.GameResponse)
 * WebAPI
-    * [GameController](/api/PlayGen.SUGAR.WebAPI.Controllers.GameController)
+    * [GameController](xref:PlayGen.SUGAR.WebAPI.Controllers.GameController)
