@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddScoped((_) => new GroupController(connectionString));
 			services.AddScoped((_) => new UserController(connectionString));
 			services.AddScoped((_) => new ActorController(connectionString));
-			services.AddScoped<IGameDataController>((_) => new GameDataController(connectionString));
+			services.AddScoped((_) => new GameDataController(connectionString));
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.AchievementController(connectionString));
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.SkillController(connectionString));
 			services.AddScoped((_) => new Data.EntityFramework.Controllers.LeaderboardController(connectionString));
