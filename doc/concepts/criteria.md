@@ -1,6 +1,6 @@
 # AchievementCriteria
 
-[AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria) are the goals which [users](/features/user) and [groups](/features/group) are set in order to complete [achievements](/features/achievement) and [skills](/features/skill). At least one must be assigned and only information stored within [GameData](/features/gamedata) can be queried against.
+[AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria) are the goals which [users](/features/user.html) and [groups](/features/group.html) are set in order to complete [achievements](/features/achievement.html) and [skills](/features/skill.html). At least one must be assigned and only information stored within [GameData](/features/gameData.html) can be queried against.
 
 In order to set up an [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria), the following must be passed:
 
@@ -9,7 +9,7 @@ In order to set up an [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.Achieve
 - DataType - The type of data being queried against. As with key, only data that matches this type will be collected.
     - Example - if "String" is given as [GameDataType](xref:PlayGen.SUGAR.Contracts.GameDataType), only data also stored as "String" will be checked against.
 
-- Scope - The range of data collected for this [actor](/features/actor).
+- Scope - The range of data collected for this [actor](/features/actor.html).
     - The "Actor" scope only looks at data stored against the actor directly.
     - "RelatedActors" will collect data that have a relationship with the provided actor.
     - Example - "RelatedActor" could be used with a group to collect data for all members of that group.
@@ -26,19 +26,19 @@ In order to set up an [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.Achieve
 
 ## Examples
 
-Key = "Gold",
-DataType = "Long",
-Scope = "Actor",
-Value = "15",
-ComparisonType = "GreaterOrEqual",
-CriteriaQueryType = "Sum"
+   Key = "Gold",  
+   DataType = "Long",  
+   Scope = "Actor",  
+   Value = "15",  
+   ComparisonType = "GreaterOrEqual",  
+   CriteriaQueryType = "Sum"  
 
-Key = "Level_1_Time",
-DataType = "Float",
-Scope = "Actor",
-Value = "9.25",
-ComparisonType = "Less",
-CriteriaQueryType = "Any"
+   Key = "Level_1_Time",  
+   DataType = "Float",  
+   Scope = "Actor",  
+   Value = "9.25",  
+   ComparisonType = "Less",  
+   CriteriaQueryType = "Any"  
 
 
 
