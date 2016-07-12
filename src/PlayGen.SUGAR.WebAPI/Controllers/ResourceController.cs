@@ -24,20 +24,22 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			_resourceController = resourceController;
 		}
 
-		/// <summary>
-		/// Find a list of all Resources that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
-		/// 
-		/// Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
-		/// </summary>
-		/// <param name="actorId">ID of a User/Group.</param>
-		/// <param name="gameId">ID of a Game.</param>
-		/// <param name="keys">Array of Key names.</param>
-		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
-		[HttpGet]
-		[ResponseType(typeof(IEnumerable<ResourceResponse>))]
-		public IActionResult Get(int? actorId, int? gameId, string[] keys)
+        /// <summary>
+        /// Find a list of all Resources that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+        /// 
+        /// Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
+        /// </summary>
+        /// <param name="actorId">ID of a User/Group.</param>
+        /// <param name="gameId">ID of a Game.</param>
+        /// <param name="keys">Array of Key names.</param>
+        /// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
+        [HttpGet]
+        [ResponseType(typeof(IEnumerable<ResourceResponse>))]
+        public IActionResult Get(int? actorId, int? gameId, string[] keys)
 		{
-			var resource = _resourceController.Get(actorId, gameId, keys);
+            if (keys.Length == 0)
+                keys = null;
+			var resource = _resourceController.Get(gameId, actorId, keys);
 			var resourceContract = resource.ToResourceContractList();
 			return new ObjectResult(resourceContract);
 		}
