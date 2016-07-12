@@ -37,8 +37,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [ResponseType(typeof(IEnumerable<ResourceResponse>))]
         public IActionResult Get(int? actorId, int? gameId, string[] keys)
 		{
-            if (keys.Length == 0)
-                keys = null;
 			var resource = _resourceController.Get(gameId, actorId, keys);
 			var resourceContract = resource.ToResourceContractList();
 			return new ObjectResult(resourceContract);
