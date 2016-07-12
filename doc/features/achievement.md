@@ -21,13 +21,14 @@ The criteria is flexible and can be written by the game developer or provided by
 ## Examples
 * Specifying an chievement
 
-	This example will describe how to implement the 'Score 10 Points!' achievement. An achievement must be specified with an [AchievementRequest](xref:PlayGen.SUGAR.Contracts.AchievementRequest) with a list of [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria) that will be evalutated against to determine progress.
-	All 'PointsScored' keys will be checked in gameData and whether the sum of their values is greater than or equal to 10.
+	This example will describe how to implement the 'Slay 10 Enemies!' achievement. An achievement must be specified with an [AchievementRequest](xref:PlayGen.SUGAR.Contracts.AchievementRequest) with a list of [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria) that will be evalutated against to determine progress.
+	All 'EnemiesSlain' keys will be checked in gameData and whether the sum of their values is greater than or equal to 10.
 
 ```cs
 		public SUGARClient sugarClient = new SUGARClient(BaseUri);
 		private AchievementClient _achievementClient;
 		private int _gameId;
+		private int _userId;
 
 		private void SetUpAchievement()
 		{
@@ -41,7 +42,7 @@ The criteria is flexible and can be written by the game developer or provided by
 				{
 					DataType = GameDataType.Long,
 					Value = "10",
-					Key = "PointsScored",
+					Key = "EnemiesSlain",
 					CriteriaQueryType = CriteriaQueryType.Sum,
 					ComparisonType = ComparisonType.GreaterOrEqual,
 					Scope = CriteriaScope.Actor
@@ -52,9 +53,9 @@ The criteria is flexible and can be written by the game developer or provided by
 			var achievementRequest = new AchievementRequest()
 			{
 				GameId = _gameId,
-				Name = "Score 10 Points!",
+				Name = "Slay 10 Enemies!",
 				ActorType = ActorType.User,
-				Token = "score_10_points",
+				Token = "slay_10_enemies",
 				CompletionCriteria = achievementCriteria
 			};
 
@@ -69,9 +70,9 @@ The criteria is flexible and can be written by the game developer or provided by
 	An achievement uses keys in [GameData](gameData.md) that match its [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria). This data is submitted at points in the game which demonstrate progress towards the achievement (as well as other uses).
 
 ```cs
-		private void ScorePoints(int quantity)
+		private void SlayEnemies(int quantity)
 		{
-			// *Points Scoring Code* //
+			// *Enemy Slaying Code* //
 
 
 			// create instance of GameDataClient
@@ -80,11 +81,11 @@ The criteria is flexible and can be written by the game developer or provided by
 			// create GameDataRequest
 			var gameDataRequest = new GameDataRequest()
 			{
-				GameId = _GameId,
+				GameId = _gameId,
 				ActorId = _userId,
 				GameDataType = GameDataType.Long,
 				Value = quantity,
-				Key = "PointsScored"
+				Key = "EnemiesSlain"
 			};
 
 			// add the GameData
@@ -97,13 +98,18 @@ The criteria is flexible and can be written by the game developer or provided by
 	Using the [AchievementClient](xref:PlayGen.SUGAR.Client.AchievementClient) and specifying the GameId, ActorId and Token, returns an [AchievementProgressResponse](xref:PlayGen.SUGAR.Contracts.AchievementProgressResponse) object for that Actor's progress towards the achievement in that game. 
 
 ```cs
-		private void CheckAchievementProgress()
+		private float CheckAchievementProgress()
 		{
 			// Check the user's progress towards the achievements in the specified game
-			var achievementProgressResponse = _achievementClient.GetAchievementProgress("score_10_points", _gameId, _userId);
+			var achievementProgressResponse = _achievementClient.GetAchievementProgress
+			(
+				"slay_10_enemies", 
+				_gameId,
+				 _userId
+			 );
 
 			// Output the progress
-			Debug.Log(achivementProgressResponse.Progress)
+			return achivementProgressResponse.Progress;
 		}
 ```
 

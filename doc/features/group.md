@@ -22,9 +22,67 @@ Actors can join, leave or add another actor to a group.
     * [GroupClient](xref:PlayGen.SUGAR.Client.GroupClient)
 * Contracts
     * [ActorResponse](xref:PlayGen.SUGAR.Contracts.ActorResponse)
+    * [ActorRequest](xref:PlayGen.SUGAR.Contracts.ActorRequest)
 * WebAPI
     * [GroupController](xref:PlayGen.SUGAR.WebAPI.Controllers.GroupController)
     
+## Examples
+* Create a group
+	This example will show how to create a group called "Wildlings" using the [GroupClient](xref:PlayGen.SUGAR.Client.GroupClient)'s Create function, passing an [ActorRequest](xref:PlayGen.SUGAR.Contracts.ActorRequest) as the parameter and storing the group's id returned inside the [ActorResponse](xref:PlayGen.SUGAR.Contracts.ActorResponse) object.
+
+```cs
+
+		public SUGARClient sugarClient = new SUGARClient(BaseUri);
+		private GroupClient _groupClient;
+		private int _groupId;
+
+		private void CreateGroup() 
+		{
+			// create instance of the game client
+			_groupClient = sugarClient.Group;
+
+			// create an ActorRequest
+			var actorRequest = new ActorRequest 
+			{
+				Name = "Wildlings"
+			};
+
+			// create the group and store the response
+			var actorResponse = _groupClient.Create(actorRequest);
+
+			// store the id of the game for use in other functions
+			_groupId = actorResponse.Id;
+		}
+
+```
+
+* Retreiving a game
+
+	Checking if a Group exists or finding the id of a Group may be desired functionalities. This is done using [GroupClient](xref:PlayGen.SUGAR.Client.GroupClient)'s Get function and passing the name of the group to match.
+
+```cs 
+
+	private bool CheckGroupExists() 
+	{
+		// check for the game and store the responses
+		var actorResponses = _groupClient.Get("Wildlings");
+
+		
+		foreach (response in actorResponses) 
+		{
+			// check if the name matches the desired game exactly
+			if (response.Name == "Wildlings") 
+			{	
+				Console.WriteLine("Sorry, the group name has been taken, try another one");
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+```
+
 ## Roadmap
 * Groups Alliance. 
 Provide the ability for relationship between groups. To form an [Alliance](/article/Alliances)
