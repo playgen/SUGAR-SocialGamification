@@ -7,6 +7,8 @@ After selecting a platform the admin has two options:
 * Manage available resources
 * Manage resources for users and groups
 
+![Groups Page](/images/AdminPanel/ResourcesManage.PNG)
+
 ### Manage available resources
 The managing resources screen shows the resources assosiated with the selected platform, with the ability to add new resources or remove existing resources from the platform.
 ##### Creating Resources
