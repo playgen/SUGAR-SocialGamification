@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ResponseType(typeof(IEnumerable<GameDataResponse>))]
 		public IActionResult Get(int? actorId, int? gameId, string[] key)
 		{
-			var data = _gameDataController.Get(actorId, gameId, key);
+			var data = _gameDataController.Get(gameId, actorId, key);
 			var dataContract = data.ToContractList();
 			return new ObjectResult(dataContract);
 		}
