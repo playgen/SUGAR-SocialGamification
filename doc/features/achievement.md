@@ -18,7 +18,95 @@ The criteria is flexible and can be written by the game developer or provided by
 * WebAPI
     * [AchievementController](xref:PlayGen.SUGAR.WebAPI.Controllers.AchievementsController)
 
+## Examples
+* Specifying an chievement
+
+	This example will describe how to implement the 'Score 10 Points!' achievement. An achievement must be specified with an [AchievementRequest](xref:PlayGen.SUGAR.Contracts.AchievementRequest) with a list of [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria) that will be evalutated against to determine progress.
+	All 'PointsScored' keys will be checked in gameData and whether the sum of their values is greater than or equal to 10.
+
+```cs
+		public SUGARClient sugarClient = new SUGARClient(BaseUri);
+		private AchievementClient _achievementClient;
+		private int _gameId;
+
+		private void SetUpAchievement()
+		{
+			// create instance of the achievement client
+			_achievementClient = sugarClient.Achievement;
+			
+			// create a AchievementCriteria list
+			var achievementCriteria = new List<AchievementCriteria>()
+			{
+				new AchievementCriteria()
+				{
+					DataType = GameDataType.Long,
+					Value = "10",
+					Key = "PointsScored",
+					CriteriaQueryType = CriteriaQueryType.Sum,
+					ComparisonType = ComparisonType.GreaterOrEqual,
+					Scope = CriteriaScope.Actor
+				}
+			};
+			
+			// place the criteria inside an AchievementRequest
+			var achievementRequest = new AchievementRequest()
+			{
+				GameId = _gameId,
+				Name = "Score 10 Points!",
+				ActorType = ActorType.User,
+				Token = "score_10_points",
+				CompletionCriteria = achievementCriteria
+			};
+
+			// create the achievement
+			achivementClient.Create(achievementRequest);
+		}
+
+```
+
+* Submitting data for when somthing which may be used to evaluate progress towards an Achievement  
 	
+	An achievement uses keys in [GameData](gameData.md) that match its [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria). This data is submitted at points in the game which demonstrate progress towards the achievement (as well as other uses).
+
+```cs
+		private void ScorePoints(int quantity)
+		{
+			// *Points Scoring Code* //
+
+
+			// create instance of GameDataClient
+			var gameDataClient = sugarClient.GameData;
+
+			// create GameDataRequest
+			var gameDataRequest = new GameDataRequest()
+			{
+				GameId = _GameId,
+				ActorId = _userId,
+				GameDataType = GameDataType.Long,
+				Value = quantity,
+				Key = "PointsScored"
+			};
+
+			// add the GameData
+			gameDataClient.Add(gameDataRequest);
+		}
+```
+
+* Checking an achiement's progress
+
+	Using the [AchievementClient](xref:PlayGen.SUGAR.Client.AchievementClient) and specifying the GameId, ActorId and Token, returns an [AchievementProgressResponse](xref:PlayGen.SUGAR.Contracts.AchievementProgressResponse) object for that Actor's progress towards the achievement in that game. 
+
+```cs
+		private void CheckAchievementProgress()
+		{
+			// Check the user's progress towards the achievements in the specified game
+			var achievementProgressResponse = _achievementClient.GetAchievementProgress("score_10_points", _gameId, _userId);
+
+			// Output the progress
+			Debug.Log(achivementProgressResponse.Progress)
+		}
+```
+
 ## Roadmap
 
 * Portable achievement system.
