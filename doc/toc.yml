@@ -4,7 +4,7 @@
 - name: Features
   href: features/
   homepage: features/index.md
-- name: Key Concepts
+- name: Core Concepts
   href: concepts/
   homepage: concepts/index.md
 - name: Demo
