@@ -78,6 +78,8 @@
     name: ActorType
   - uid: PlayGen.SUGAR.Contracts.ComparisonType
     name: ComparisonType
+  - uid: PlayGen.SUGAR.Contracts.CriteriaQueryType
+    name: CriteriaQueryType
   - uid: PlayGen.SUGAR.Contracts.CriteriaScope
     name: CriteriaScope
   - uid: PlayGen.SUGAR.Contracts.GameDataRequest
@@ -108,8 +110,8 @@
     name: RelationshipResponse
   - uid: PlayGen.SUGAR.Contracts.RelationshipStatusUpdate
     name: RelationshipStatusUpdate
-  - uid: PlayGen.SUGAR.Contracts.ResourceRequest
-    name: ResourceRequest
+  - uid: PlayGen.SUGAR.Contracts.ResourceAddRequest
+    name: ResourceAddRequest
   - uid: PlayGen.SUGAR.Contracts.ResourceResponse
     name: ResourceResponse
   - uid: PlayGen.SUGAR.Contracts.ResourceTransferRequest
