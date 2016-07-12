@@ -1,9 +1,10 @@
-# Key Concepts
+# Feature Overview
 
-This section describes the fundamental concepts behind SUGAR's features.
+This section provides more detailed descriptions on how elements of the SUGAR system could and should be utilised.  
 
-The key concepts covered are: 
+The following is included within this section:
 	
-- [Entity Model](entityModel.md) : Diagram and description for the entity model of the system.
-- [GameData Categories](gameDataCategories.md) : Detailed descriptions for each possible use of [GameData](features/gameData.md).
-- [Criteria Evaluation](criteriaEvaluation.md) : Explanation of how specified criteral is evaluated against [GameData](features/gameData.md).
+- [Entity Model](entitymodel.md) : Diagram and descriptions of the different parts of the entity model and how they work together.
+- [Criteria](criteria.md) : How [Criteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria) for [achievements](/features/achievements) and [skills](/features/skills) can be utilised within the system.
+- [Rewards](rewards.md) : Details on what can be rewarded for completing [achievements](/features/achievements) and [skills](/features/skills).
+- [Leaderboard Standings](leaderboardstandings.md) : How [LeaderboardStandingsRequests](xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest) should be provided and how this request differs from a normal [LeaderboardRequests](xref:PlayGen.SUGAR.Contracts.LeaderboardRequest).

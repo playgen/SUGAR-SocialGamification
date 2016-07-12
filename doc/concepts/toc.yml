@@ -1,8 +1,10 @@
 ﻿- name: Overview
   homepage: index.md
-- name: Entity Model Diagram
-  href: entityModel.md
-- name: Game Data Categories
-  href: gameDataCategories.md
-- name: Criteria Evaluation
-  href: criteriaEvaluation.md
+- name: Entity Model
+  href: entitymodel.md
+- name: Criteria
+  href: criteria.md
+- name: Rewards
+  href: rewards.md
+- name: Leaderboard Standings
+  href: leaderboardstandings.md

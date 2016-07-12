@@ -8,7 +8,9 @@ The documentation includes :
 
 - [Installation](installation/index.md) : Link to step-by-step process to install SUGAR on your server. 
 
-- [Features](features/index.md) : Detailed description of features supported by the software including the roadmap for up-and-coming features. 
+- [Features](features/index.md) : Detailed description of features supported by the software including the roadmap for up-and-coming features.
+
+- [Key Concepts](concepts/index.md) : Description of key concepts behind features within SUGAR. 
 
 - [Admin Interface](features/admin/index.md) : Description of the platform’s admin panel. 
 
