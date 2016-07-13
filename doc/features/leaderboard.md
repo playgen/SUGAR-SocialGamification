@@ -23,6 +23,10 @@ Leaderboards provide a visual comparison tool for measurements of resources or o
     * [LeaderboardStandingsResponse](xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse)
     * [LeaderboardType](xref:PlayGen.SUGAR.Contracts.LeaderboardType)
     * [LeaderboardFilterType](xref:PlayGen.SUGAR.Contracts.LeaderboardFilterType)
+    * [GameDataType](xref:PlayGen.SUGAR.Contracts.GameDataType)
+    * [CriteriaScope](xref:PlayGen.SUGAR.Contracts.CriteriaScope)
+    * [ActorType](xref:PlayGen.SUGAR.Contracts.ActorType)
+
 * WebAPI
     * [LeaderboardController](xref:PlayGen.SUGAR.WebAPI.Controllers.LeaderboardsController)
 
@@ -67,11 +71,6 @@ Leaderboards provide a visual comparison tool for measurements of resources or o
 
 
 ```cs
-		private LeaderboardClient _leaderboardClient;
-		private int _gameId;
-		private int _userId;
-		private string _leaderboardToken;
-
 		private void GetLeaderboardStadings() 
 		{
 			// create a LeaderboardStandingsRequest

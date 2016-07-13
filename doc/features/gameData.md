@@ -25,6 +25,7 @@ GameData storage is used by [Achievements](/articles/Achievements), [Leaderboard
 * Contracts
     * [GameDataRequest](xref:PlayGen.SUGAR.Contracts.GameDataRequest)
     * [GameDataResponse](xref:PlayGen.SUGAR.Contracts.GameDataResponse)
+    * [GameDataType](xref:PlayGen.SUGAR.Contracts.CriteriaQueryType)
 * WebAPI
     * [GameDataController](xref:PlayGen.SUGAR.WebAPI.Controllers.GameDataController)
 
@@ -64,26 +65,24 @@ GameData storage is used by [Achievements](/articles/Achievements), [Leaderboard
 	GameData is retreived using the [GameDataClient](xref:PlayGen.SUGAR.Client.GameDataClient)'s Get function with the ActorId and GameId you want to query as parameters. The parameters also takes a list of keys you want to find entries for in gameData. This example shows how to retrieve the user's "EggHatched" [GameDataResponse](xref:PlayGen.SUGAR.Contracts.GameDataResponse) objects and count them.
 
 ```cs 
-	
-	private long GetEggsHatched()
-	{
-		// add the GameData
-		var gameDataResponses = gameDataClient.Get
-		(
-			_actorId,
-			_gameId,
-			new string[] { "EggHatched" }
-		);
-
-		long totalClicks = 0;
-
-		// count values from each GameDataResponse
-		foreach (var response in gameDataResponses)
+		private long GetEggsHatched()
 		{
-			totalClicks += long.Parse(response.Value);
+			// add the GameData
+			var gameDataResponses = gameDataClient.Get
+			(
+				_actorId,
+				_gameId,
+				new string[] { "EggHatched" }
+			);
+
+			long totalClicks = 0;
+
+			// count values from each GameDataResponse
+			foreach (var response in gameDataResponses)
+			{
+				totalClicks += long.Parse(response.Value);
+			}
+
+			return totalClicks;
 		}
-
-		return totalClicks;
-	}
-
 ```

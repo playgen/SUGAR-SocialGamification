@@ -15,6 +15,11 @@ The criteria is flexible and can be written by the game developer or provided by
     * [AchievementProgressResponse](xref:PlayGen.SUGAR.Contracts.AchievementProgressResponse)
     * [AchievementRequest](xref:PlayGen.SUGAR.Contracts.AchievementRequest)
     * [AchievementResponse](xref:PlayGen.SUGAR.Contracts.AchievementResponse)
+    * [GameDataType](xref:PlayGen.SUGAR.Contracts.GameDataType)
+    * [CriteriaQueryType](xref:PlayGen.SUGAR.Contracts.CriteriaQueryType)
+    * [ComparisonType](xref:PlayGen.SUGAR.Contracts.ComparisonType)
+    * [ActorType](xref:PlayGen.SUGAR.Contracts.ActorType)
+    * [CriteriaScope](xref:PlayGen.SUGAR.Contracts.CriteriaScope)
 * WebAPI
     * [AchievementController](xref:PlayGen.SUGAR.WebAPI.Controllers.AchievementsController)
 
@@ -35,7 +40,7 @@ The criteria is flexible and can be written by the game developer or provided by
 			// create instance of the achievement client
 			_achievementClient = sugarClient.Achievement;
 			
-			// create a AchievementCriteria list
+			// create an AchievementCriteria list
 			var achievementCriteria = new List<AchievementCriteria>()
 			{
 				new AchievementCriteria()
@@ -60,9 +65,8 @@ The criteria is flexible and can be written by the game developer or provided by
 			};
 
 			// create the achievement
-			achivementClient.Create(achievementRequest);
+			_achievementClient.Create(achievementRequest);
 		}
-
 ```
 
 * Submitting data for when somthing which may be used to evaluate progress towards an Achievement  
