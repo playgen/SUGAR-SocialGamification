@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using System;
 using System.IO;
 
 namespace PlayGen.SUGAR.WebAPI
@@ -18,7 +19,8 @@ namespace PlayGen.SUGAR.WebAPI
 
 			services.ConfigureSwaggerGen(options =>
 			{
-				options.IncludeXmlComments(GetXmlCommentsPath());
+				options.IncludeXmlComments(GetAPIXmlCommentsPath());
+				options.IncludeXmlComments(GetContractsXmlCommentsPath());
 			});
 		}
 
@@ -28,11 +30,17 @@ namespace PlayGen.SUGAR.WebAPI
 			app.UseSwaggerUi();
 		}
 
-		private string GetXmlCommentsPath()
+		private string GetAPIXmlCommentsPath()
 		{
 			var app = PlatformServices.Default.Application;
-			var path = Path.Combine(app.ApplicationBasePath, app.ApplicationName + ".xml");
-			return path;
+			return Path.Combine(app.ApplicationBasePath, app.ApplicationName + ".xml");
+		}
+
+		private string GetContractsXmlCommentsPath()
+		{
+			var app = PlatformServices.Default.Application;
+            var projectRoot = app.ApplicationBasePath.Split(new[] { app.ApplicationName }, StringSplitOptions.None)[0];
+            return Path.Combine(projectRoot, @"PlayGen.SUGAR.Contracts\bin\Debug\net35\PlayGen.SUGAR.Contracts.xml");			
 		}
 	}
 }
