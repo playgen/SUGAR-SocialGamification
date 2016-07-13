@@ -53,6 +53,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var groups = _groupController.Search(name);
 			var actorContract = groups.ToContractList();
+
 			return new ObjectResult(actorContract);
 		}
 
