@@ -12,10 +12,14 @@ using PlayGen.SUGAR.GameData;
 
 namespace PlayGen.SUGAR.WebAPI
 {
-	public class Startup
+	public partial class Startup
 	{
+		private readonly IHostingEnvironment _hostingEnv;
+
 		public Startup(IHostingEnvironment env)
 		{
+			_hostingEnv = env;
+
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
 				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -75,6 +79,8 @@ namespace PlayGen.SUGAR.WebAPI
 			});
 
 			services.AddScoped<AuthorizationAttribute>();
+
+			ConfigureDocumentationGeneratorServices(services);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,6 +90,9 @@ namespace PlayGen.SUGAR.WebAPI
 			loggerFactory.AddDebug();
 			ConfigureCors(app);
 			app.UseMvc();
+
+			ConfigureDocumentationGenerator(app);
+
 		}
 
 		private static void ConfigureRouting(IServiceCollection services)

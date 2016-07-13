@@ -5,8 +5,6 @@ using System.Web.Http.Description;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Extensions;
-using PlayGen.SUGAR.GameData;
-using System;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {

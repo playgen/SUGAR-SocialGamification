@@ -4,12 +4,9 @@ using System.Net;
 using System.Web.Http.Description;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Contracts;
-using PlayGen.SUGAR.Contracts.Controllers;
 
 using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.ServerAuthentication.Helpers;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
@@ -38,7 +35,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			_userDbController = userDbController;
 			_jsonWebTokenUtility = jsonWebTokenUtility;
 		}
-
+		
 		//Todo: Move log-in into a separate controller
 		/// <summary>
 		/// Logs in an account based on the name and password combination.
@@ -73,7 +70,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var response = account.ToContract();
 			return new ObjectResult(response);
 		}
-
+		
 		/// <summary>
 		/// Register a new account and creates an associated user.
 		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
@@ -151,9 +148,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			_accountDbController.Delete(id);
 		}
-
+		
 		#region Helpers
-
 		private Account CreateAccount(AccountRequest accountRequest, User user)
 		{
 			var newAccount = accountRequest.ToModel();
@@ -165,7 +161,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return _accountDbController.Create(newAccount);
 		}
 
-		public string CreateToken(Account account)
+		private string CreateToken(Account account)
 		{
 			return _jsonWebTokenUtility.CreateToken(new Dictionary<string, object>
 			{

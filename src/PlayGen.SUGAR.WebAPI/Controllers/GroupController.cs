@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Web.Http.Description;
-using PlayGen.SUGAR.Data.EntityFramework;
-using PlayGen.SUGAR.Contracts.Controllers;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
-using PlayGen.SUGAR.WebAPI.Exceptions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
