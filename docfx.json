@@ -2,21 +2,13 @@
 	"metadata": [{
 		"src": [
 			{
-				"files": [
-					"*.sln"
-				],
+				"files": [ "*.sln" ],
 				"exclude": [],
 				"cwd": ""
 			}, 
 			{
-				"files": [
-					"**/*.csproj", 
-					"**/project.json"
-				],
-				"exclude": [
-					"**/bin/**", 
-					"**/obj/**"
-				],
+				"files": ["**/*.csproj", "**/project.json"],
+				"exclude": ["**/bin/**", "**/obj/**"],
 				"cwd": "src"
 			}
 		],
@@ -30,21 +22,13 @@
 				"dest": "api"
 			},			
 			{
-				"files": [
-					"**/*.md", 
-					"**/toc.yml", 
-					"**/*.yml",
-					"*.md", 
-					"toc.yml"
-				],
+				"files": ["**/*.md", "**/toc.yml", "**/*.yml","*.md","toc.yml", "restapi/**"],
 				cwd: "doc"
 			}
 		],
 		"resource": [
 			{
-				"files": [
-					"images/**"
-				],
+				"files": ["images/**"	],
 				cwd: "doc"
 			}
 		],

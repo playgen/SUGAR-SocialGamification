@@ -3,16 +3,13 @@
   homepage: index.md
 - name: Features
   href: features/
-  homepage: features/index.md
 - name: Core Concepts
   href: concepts/
-  homepage: concepts/index.md
 - name: Demo
   href: demo/
-  homepage: demo/index.md
-- name: API Reference
+- name: Client API Reference
   href: api/
-  homepage: api/PlayGen.SUGAR.Client.yml
+- name: RESTful API Reference
+  href: restapi/
 - name: Installation
   href: installation/
-  homepage: installation/index.md
