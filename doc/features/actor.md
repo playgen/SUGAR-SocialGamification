@@ -1,2 +1,4 @@
 # Actors
-Actors represents individual (as in [Users](/articles/Users) or collection of users as in [Groups](/articles/Groups). 
+An Actor can represent a [User](/articles/Users) or a [Group](/articles/Groups). 
+
+Where the term Actor is used, one may substitute User or Group.

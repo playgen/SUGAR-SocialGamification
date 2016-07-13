@@ -391,14 +391,15 @@ namespace PlayGen.SUGAR.GameData
 						Ranking = ++position
 					});
 				case LeaderboardFilterType.Near:
+					// TODO check that this works for cases with both an even or odd limit.
 					bool actorCheck = typeResults.Any(r => r.ActorId == actorId.Value);
 					if (actorCheck)
 					{
 						int actorPosition = typeResults.TakeWhile(r => r.ActorId != actorId.Value).Count();
-						offset += actorPosition / limit;
+						offset += actorPosition / limit; // TODO should this not be offset = (actorPosition - (limit/2)) + offset
 					}
 					typeResults = typeResults.Skip(offset * limit).Take(limit);
-					position = (offset * limit);
+					position = (offset * limit); // TODO position = (actorPosition - offset)
 					return typeResults.Select(s => new LeaderboardStandingsResponse
 					{
 						ActorId = s.ActorId,
