@@ -7,12 +7,12 @@ After selecting a platform the admin can:
 * Create new skills 
 * Delete an existing skill
 
-![Skills Page](images/AdminPanel/SkillsList.PNG)
+![Skills Page](../../images/features/admin/SkillsList.png)
 
 ### Create new skills 
 By selecting "Create New Skill" a new page will be opened including all the fields needed for a skill, skills can have multiple criterias added using the "Add Criteria" and "Remove Criteria" buttons at the bottom of the screen to control the number required.
 
-![Create a new Skill](images/AdminPanel/SkillsCreate.PNG)
+![Create a new Skill](../../images/features/admin/SkillsCreate.png)
 
 ### Delete an existing skill
 Delete button will delete the selected skill from the table
