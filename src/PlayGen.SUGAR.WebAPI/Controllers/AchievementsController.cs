@@ -137,14 +137,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(achievementContract);
 		}
 
-		[HttpPost("test")]
-		[ResponseType(typeof(AchievementTestResponse))]
-		[ArgumentsNotNull]
-		public IActionResult Test([FromBody] AchievementTestRequest achievementTestRequest)
-		{
-			throw new NotImplementedException();
-		}
-
 		/// <summary>
 		/// Update an existing Achievement.
 		/// 

@@ -35,13 +35,25 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<LeaderboardResponse>>(query);
 		}
 
-		/// <summary>
-		/// Create a new Leaderboard.
-		/// Requires <see cref="LeaderboardRequest.Name"/> and <see cref="LeaderboardRequest.Token"/> to be unique to that <see cref="LeaderboardRequest.GameId"/>.
-		/// </summary>
-		/// <param name="newLeaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the new Leaderboard.</param>
-		/// <returns>Returns a <see cref="LeaderboardResponse"/> object containing details for the newly created Leaderboard.</returns>
-		public LeaderboardResponse Create(LeaderboardRequest newLeaderboard)
+        /// <summary>
+        /// Find a single leaderboard matching the token and gameId.
+        /// </summary>
+        /// <param name="token">Token </param>
+        /// <param name="gameId"></param>
+        /// <returns>Returns a single <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
+		public LeaderboardResponse Get(string token, int gameId)
+        {
+            var query = GetUriBuilder($"api/leaderboards/{token}/{gameId}").ToString();
+            return Get<LeaderboardResponse>(query);
+        }
+
+        /// <summary>
+        /// Create a new Leaderboard.
+        /// Requires <see cref="LeaderboardRequest.Name"/> and <see cref="LeaderboardRequest.Token"/> to be unique to that <see cref="LeaderboardRequest.GameId"/>.
+        /// </summary>
+        /// <param name="newLeaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the new Leaderboard.</param>
+        /// <returns>Returns a <see cref="LeaderboardResponse"/> object containing details for the newly created Leaderboard.</returns>
+        public LeaderboardResponse Create(LeaderboardRequest newLeaderboard)
 		{
 			var query = GetUriBuilder("api/leaderboards/create").ToString();
 			return Post<LeaderboardRequest, LeaderboardResponse>(query, newLeaderboard);
