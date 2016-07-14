@@ -42,8 +42,7 @@ namespace PlayGen.SUGAR.WebAPI
 			get
 			{
 				var app = PlatformServices.Default.Application;
-				var projectRoot = app.ApplicationBasePath.Split(new[] { app.ApplicationName }, StringSplitOptions.None)[0];
-				return Path.Combine(projectRoot, @"PlayGen.SUGAR.Contracts\bin\Debug\net35\PlayGen.SUGAR.Contracts.xml");
+				return Path.Combine(app.ApplicationBasePath, @"PlayGen.SUGAR.Contracts.xml");
 			}
 		}
 	}
