@@ -2,13 +2,8 @@
 	"metadata": [{
 		"src": [
 			{
-				"files": [ "*.sln" ],
-				"exclude": [],
-				"cwd": ""
-			}, 
-			{
-				"files": ["**/*.csproj", "**/project.json"],
-				"exclude": ["**/bin/**", "**/obj/**"],
+				"files": [ "**/*.csproj", "**/project.json" ],
+				"exclude": [ "**/bin/**", "**/obj/**" ],
 				"cwd": "src"
 			}
 		],
