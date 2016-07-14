@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,8 @@ namespace PlayGen.SUGAR.WebAPI
 
 		public Startup(IHostingEnvironment env)
 		{
+			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
 			_hostingEnv = env;
 
 			var builder = new ConfigurationBuilder()
@@ -27,6 +31,11 @@ namespace PlayGen.SUGAR.WebAPI
 				.AddEnvironmentVariables();
 			Configuration = builder.Build();
 
+		}
+
+		private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+		{
+			Trace.WriteLine(e.ExceptionObject);
 		}
 
 		public IConfigurationRoot Configuration { get; }
