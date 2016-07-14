@@ -13,6 +13,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0-*",
     "NETStandard.Library": "1.5.0-*",
     "Newtonsoft.Json": "9.0.1",
+    "NLog.Extensions.Logging": "1.0.0-rtm-alpha3",
     "PlayGen.SUGAR.Contracts": "1.0.0-*",
     "PlayGen.SUGAR.Data.EntityFramework": "1.0.0-*",
     "PlayGen.SUGAR.GameData": "1.0.0-*",
@@ -30,19 +31,20 @@
 	},
 	"buildOptions": {
 	"emitEntryPoint": true,
-    "preserveCompilationContext": true,
-    "xmlDoc": true
+		"preserveCompilationContext": true,
+		"xmlDoc": true
 	},
 	"runtimeOptions": {
 	"gcServer": true
 	},
 	"publishOptions": {
-	"include": [
-		"wwwroot",
-		"Views",
-		"appsettings.json",
-		"web.config"
-	]
+    "include": [
+      "wwwroot",
+      "Views",
+      "appsettings.json",
+      "web.config",
+      "nlog.config"
+    ]
 	},
 	"scripts": {
 	"postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
