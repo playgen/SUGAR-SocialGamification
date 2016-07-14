@@ -1,4 +1,5 @@
 ﻿- name: Overview
+  href: index.md
   homepage: index.md
 - name: Entity Model
   href: entitymodel.md
