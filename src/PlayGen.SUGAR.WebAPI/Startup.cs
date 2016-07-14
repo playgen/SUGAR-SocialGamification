@@ -5,24 +5,31 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NLog;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.GameData;
+using NLog.Extensions.Logging;
 
 namespace PlayGen.SUGAR.WebAPI
 {
 	public partial class Startup
 	{
-		private readonly IHostingEnvironment _hostingEnv;
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		public Startup(IHostingEnvironment env)
 		{
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-			_hostingEnv = env;
+			#region Logging
+
+			env.ConfigureNLog("NLog.config");
+			Logger.Debug("ContentRootPath: {0}", env.ContentRootPath);
+			Logger.Debug("WebRootPath: {0}", env.WebRootPath);
+
+			#endregion
 
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
@@ -30,12 +37,11 @@ namespace PlayGen.SUGAR.WebAPI
 				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
 				.AddEnvironmentVariables();
 			Configuration = builder.Build();
-
 		}
 
 		private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
 		{
-			Trace.WriteLine(e.ExceptionObject);
+			Logger.Error($"AppDomain UnhandledException: {e.ExceptionObject}");
 		}
 
 		public IConfigurationRoot Configuration { get; }
@@ -79,7 +85,6 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddScoped((_) => new JsonWebTokenUtility(apiKey));
 
 			ConfigureRouting(services);
-			
 			// Add framework services.
 			services.AddMvc(options =>
 			{
@@ -95,6 +100,7 @@ namespace PlayGen.SUGAR.WebAPI
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
+			loggerFactory.AddNLog();
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 			ConfigureCors(app);

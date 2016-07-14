@@ -445,24 +445,6 @@
         "deprecated": false
       }
     },
-    "/api/Achievements/test": {
-      "post": {
-        "tags": [ "Achievements" ],
-        "operationId": "ApiAchievementsTestPost",
-        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
-        "parameters": [
-          {
-            "name": "achievementTestRequest",
-            "in": "body",
-            "required": false,
-            "schema": { "$ref": "#/definitions/AchievementTestRequest" }
-          }
-        ],
-        "responses": { "204": { "description": "No Content" } },
-        "deprecated": false
-      }
-    },
     "/api/Achievements/update": {
       "put": {
         "tags": [ "Achievements" ],
@@ -1021,6 +1003,60 @@
         "deprecated": false
       }
     },
+    "/api/Leaderboards/{token}/{gameId}": {
+      "get": {
+        "tags": [ "Leaderboards" ],
+        "summary": "Find a single leaderboard matching the token and gameId.\r\n            \r\n            Example Usage: GET api/leaderboards/LEADERBOARD_TOKEN/1",
+        "operationId": "ApiLeaderboardsByTokenByGameIdGet",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gameId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [ "Leaderboards" ],
+        "summary": "Delete Leaderboard with the <param name=\"token\" /> and <param name=\"gameId\" /> provided.\r\n            \r\n            Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1",
+        "operationId": "ApiLeaderboardsByTokenByGameIdDelete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "Token of Leaderboard",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gameId",
+            "in": "path",
+            "description": "ID of the Game the Leaderboard is for",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      }
+    },
     "/api/Leaderboards/create": {
       "post": {
         "tags": [ "Leaderboards" ],
@@ -1086,34 +1122,6 @@
         "tags": [ "Leaderboards" ],
         "summary": "Delete Leaderboard with the <param name=\"token\" /> and <param name=\"gameId\" /> provided.\r\n            \r\n            Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1",
         "operationId": "ApiLeaderboardsByTokenGlobalDelete",
-        "consumes": [],
-        "produces": [],
-        "parameters": [
-          {
-            "name": "token",
-            "in": "path",
-            "description": "Token of Leaderboard",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "gameId",
-            "in": "path",
-            "description": "ID of the Game the Leaderboard is for",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": { "204": { "description": "No Content" } },
-        "deprecated": false
-      }
-    },
-    "/api/Leaderboards/{token}/{gameId}": {
-      "delete": {
-        "tags": [ "Leaderboards" ],
-        "summary": "Delete Leaderboard with the <param name=\"token\" /> and <param name=\"gameId\" /> provided.\r\n            \r\n            Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1",
-        "operationId": "ApiLeaderboardsByTokenByGameIdDelete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -2038,14 +2046,16 @@
         }
       }
     },
-    "AchievementTestRequest": {
-      "required": [ "achievement", "gameDatas" ],
+    "GameRequest": {
+      "description": "Encapsulates game details.",
+      "required": [ "name" ],
       "type": "object",
       "properties": {
-        "achievement": { "$ref": "#/definitions/AchievementRequest" },
-        "gameDatas": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/GameDataRequest" }
+        "name": {
+          "description": "The display name for the game.",
+          "maxLength": 64,
+          "minLength": 0,
+          "type": "string"
         }
       }
     },
@@ -2079,19 +2089,6 @@
         "gameDataType": {
           "description": "The type of data which is being stored.",
           "enum": [ "String", "Long", "Float", "Boolean" ],
-          "type": "string"
-        }
-      }
-    },
-    "GameRequest": {
-      "description": "Encapsulates game details.",
-      "required": [ "name" ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The display name for the game.",
-          "maxLength": 64,
-          "minLength": 0,
           "type": "string"
         }
       }

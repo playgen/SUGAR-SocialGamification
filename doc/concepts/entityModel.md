@@ -1,5 +1,5 @@
 #Entity Model
-![Entity Model](../images/diagrams/entitymodel-webapi-userfacing.png)
+![Entity Model](../images/concepts/entitymodel-webapi-userfacing.png)
 
 A [User](/features/user.html) is the person playing the game. 
 
