@@ -47,6 +47,8 @@
     name: GameClientTests
   - uid: PlayGen.SUGAR.Client.IntegrationTests.GameDataClientTests
     name: GameDataClientTests
+  - uid: PlayGen.SUGAR.Client.IntegrationTests.LeaderboardClientTests
+    name: LeaderboardClientTests
   - uid: PlayGen.SUGAR.Client.IntegrationTests.ResourceClientTests
     name: ResourceClientTests
   - uid: PlayGen.SUGAR.Client.IntegrationTests.TestSUGARClient
