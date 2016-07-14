@@ -15,10 +15,12 @@
   href: gameData.md
 - name: Resources
   href: resource.md
+- name: Skills
+  href: skill.md
 - name: Users
   href: user.md
 - name: Roadmap
   href: roadmap.md
-- name: Admin Interface
+- name: Admin Panel
   href: admin/toc.yml
   homepage: admin/index.md

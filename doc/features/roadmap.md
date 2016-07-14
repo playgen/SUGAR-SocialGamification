@@ -1,29 +1,30 @@
 # Roadmap
 This page provides an overview of upcoming features for the platform. 
 
-
 ## Matches
-* Matchmaking
-* Scoring
-* History
-* Integration with [Tournaments](/articles/Roadmap)
+* Matching players based on ability (either similar or orthogonal)
+	* Scoring matching
+	* History matching
+	* Plugin external matching algorithms (to support matching functions from RAGE)
+	* Integration with Tournaments
 
 ## Tournaments
-* Various tournament configuration:
+* Providing a variety of team based game dynamics, tournaments can be configured as:
 	* Round-robin
 	* Knock-out
 	* Combination of both
 
 ## Rewards
-* [Achievements](/articles/Achievements) and [Resources](/articles/Resources) can be awarded for participation in Matches and Tournaments.
+* [Achievements](/features/achievement.md) and [Resources](/features/resource.md) can be awarded for participation in Matches and Tournaments.
 
 ## Achievements/Portable achievement system
-See [Achievements](/articles/Achievements)  
+See [Achievements](/features/achievement.md)  
 
 ## Challenge system
-See [Achievements](/articles/Achievements)
+See [Achievements](/features/achievement.md)
 
-##  Groups/Group Leader
-See
-
-## Groups / 
+##  Groups
+* Group Leader
+* Group Alliance
+* Extended Group Achievements
+See [Groups] (/features/group.md)

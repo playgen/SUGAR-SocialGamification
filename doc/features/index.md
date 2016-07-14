@@ -12,14 +12,9 @@ The high level features of SUGAR in the current version (July 2016) can be group
 - [Leaderboard](leaderboard.md) : Comparison of measurements between actors, resources, skills. 
 - [Relationship](relationship.md) : Connections between two or more actors. 
 - [Resource](resource.md) : Generalised game object storage for any game variable. 
-- [Skill](skill.md) : 
+- [Skill](skill.md) : Represent a players proficiency or ability.
 - [User](user.md) : Individual user of the system. 
 	
 ## Roadmap
 
-The  following features are being implemented and will be available in future release versions of the platform. 
-
-- Ownership Management : ability to set  ownership and usage rights. 
-- Tournaments : Variety of team based game dynamics. 
-- Matches : Matching based on ability (either similar or orthogonal)
-- Challenges : Achievements with temporal and ownership mechanism.
+See [Roadmap](roadmap.md) for new features being implemented for future releases. 
