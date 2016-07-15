@@ -1,9 +1,9 @@
 # GameData
 GameData is a storage system, following a key-value structure. It is used by SUGAR features and provides flexibility in providing custom game-specific storage solutions.
 
-GameData provides storage for [Achievements](/features/Achievements.html), [Skills](/features/Skills.html), [Resources](/features/Resources.html) and custom general data. 
+GameData provides storage for [Achievements](features/achievement.md), [Skills](features/skill.md), [Resources](features/resource.md) and custom general data. 
 
-GameData storage is used by [Achievements](/articles/Achievements), [Leaderboards](/articles/Leaderboards), [Skills](/articles/Skills), [Resources](/articles/Resources) and custom general data. 
+GameData storage is used by [Achievements](features/achievement.md), [Leaderboards](features/leaderboard.md), [Skills](features/skill.md), [Resources](features/resource.md) and custom general data. 
 
 ## Features
 * CRD GameData 

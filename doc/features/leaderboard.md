@@ -1,5 +1,5 @@
 # Leaderboard
-Leaderboards provide a visual comparison tool for measurements of resources or objects associated with actors. A wide variety of leaderboards are supported including those based achievement or resource based on individual, group or single and multiple games. Leaderboards can utilise any [GameData](/articles/GameData), [Actor](/articles/actor),[Skill](/articles/Skills) or [Resource](/articles/Resources). 
+Leaderboards provide a visual comparison tool for measurements of resources or objects associated with actors. A wide variety of leaderboards are supported including those based achievement or resource based on individual, group or single and multiple games. Leaderboards can utilise any [GameData](features/gameData.md), [Actor](features/actor.md),[Skill](features/skill.md) or [Resource](features/resource.md). 
 
 ## Features
 * Generate a leaderboard by:

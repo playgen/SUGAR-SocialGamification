@@ -18,4 +18,17 @@ The documentation includes :
 
 - [RESTful API](restapi/restapi.swagger2.json) : Web API documentation and examples. 
 
-SUGAR is partially funded by the [RAGE project](http://rageproject.eu). Realising an Applied Gaming Eco-system (RAGE) aims to develop, transform and enrich advanced technologies from the leisure games industry into self-contained gaming assets that support game studios at developing applied games easier, faster and more cost-effectively. See 
+The link to the repositories can be found below : 
+
+Repositories: 
+
+- [Server API Repository](https://github.com/playgenhub/SUGAR-SocialGamification/) 
+
+- [Admin Panel Repository](https://github.com/playgenhub/SUGAR-AdminUI)
+
+- [Client Demo Repository](https://github.com/playgenhub/SUGAR-UnityDemo) 
+
+
+SUGAR is partially funded by the [RAGE project](http://rageproject.eu).
+
+Realising an Applied Gaming Eco-system (RAGE) aims to develop, transform and enrich advanced technologies from the leisure games industry into self-contained gaming assets that support game studios at developing applied games easier, faster and more cost-effectively.

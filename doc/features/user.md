@@ -1,6 +1,5 @@
 # Users
-Users are individuals interacting with the system. They may fulfil a range of roles including player, game master, game admin, teacher or system admin. 
-Users can have metadata associated with them, such as nice name, profile image and bio.
+Users are individuals interacting with the system. They may fulfil a range of roles including player, game master, game admin, teacher or system admin. Users can have metadata associated with them, such as nice name, profile image and bio.
 
 ## Features
 * CRUD users

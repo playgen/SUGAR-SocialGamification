@@ -1,7 +1,7 @@
 # Resources
 Resources provide a flexible set of game objects which may be associated with actors. Resources may represent or track such objects as scores, experience points, in-game currency or in-game items. They may be earned, spent, gifted or otherwise associated. Resource provide the ability for inventories to be assigned to individual or group actors. 
 
-Resources are game objects which are obtained and exchanged by players. They may be consumable or permanent. Examples of resources include in-game currency, items, gifts and tools. A resource can be set to exist outside a game instance, allowing exchanges from external social platforms. Modulation of resources is handled by the [GameData](/articles/GameData) system. Resources can belong to a group, where it becomes shared by all members of that group. 
+Resources are game objects which are obtained and exchanged by players. They may be consumable or permanent. Examples of resources include in-game currency, items, gifts and tools. A resource can be set to exist outside a game instance, allowing exchanges from external social platforms. Modulation of resources is handled by the [GameData](features/gameData.md) system. Resources can belong to a group, where it becomes shared by all members of that group. 
 
 ## Features
 * CRUD Resources
