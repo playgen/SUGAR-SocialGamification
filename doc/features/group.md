@@ -1,7 +1,7 @@
 # Group
 Groups are actors representing collection of actors. They may be individual or multiple game persistent. Groups can be moderated through administrator tools or users, or set up and managed through the game as described by the game designers. 
 
-[Relationships](/articles/Relationships) describe which actors belong to which groups. Groups can have associated achievements,  which can be set for all members of a group to complete. 
+[Relationships](relationship.md) describe which actors belong to which groups. Groups can have associated achievements,  which can be set for all members of a group to complete. 
 
 Actors can join, leave or add another actor to a group. 
 
