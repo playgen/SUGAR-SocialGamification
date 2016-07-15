@@ -6,7 +6,7 @@ SUGAR provides a software platform consisting of Web API and Client side compone
 
 The documentation includes : 
 
-- [Installation](installation/index.md) : Link to step-by-step process to install SUGAR on your server. 
+- Installation(coming in July 2016) : Link to step-by-step process to install SUGAR on your server. 
 
 - [Features](features/index.md) : Detailed description of features supported by the software including the roadmap for up-and-coming features.
 
