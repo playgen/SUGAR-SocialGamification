@@ -77,6 +77,83 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
+		public void GetGroupById()
+		{
+			Group newGroup = CreateGroup("GetGroupById");
+
+			int id = newGroup.Id;
+
+			var group = _groupDbController.Search(id);
+
+			Assert.NotNull(group);
+			Assert.Equal(newGroup.Name, group.Name);
+		}
+
+		[Fact]
+		public void GetNonExistingGroupById()
+		{
+			var group = _groupDbController.Search(-1);
+
+			Assert.Null(group);
+		}
+
+		[Fact]
+		public void UpdateGroup()
+		{
+			string groupName = "UpdateExistingGroup";
+
+			Group newGroup = CreateGroup(groupName);
+
+			var groups = _groupDbController.Search(groupName);
+
+			int matches = groups.Count(g => g.Name == groupName);
+
+			Assert.Equal(1, matches);
+
+			var updateGroup = new Group
+			{
+				Id = newGroup.Id,
+				Name = "UpdateExistingGroupProof"
+			};
+
+			_groupDbController.Update(updateGroup);
+
+			var updatedGroup = _groupDbController.Search(newGroup.Id);
+
+			Assert.Equal("UpdateExistingGroupProof", updatedGroup.Name);
+		}
+
+		[Fact]
+		public void UpdateGroupToDuplicateName()
+		{
+			string groupName = "UpdateGroupToDuplicateName";
+
+			Group newGroup = CreateGroup(groupName);
+
+			Group newGroupDuplicate = CreateGroup(groupName + " Two");
+
+			var updateGroup = new Group
+			{
+				Id = newGroupDuplicate.Id,
+				Name = newGroup.Name
+			};
+
+			Assert.Throws<DuplicateRecordException>(() => _groupDbController.Update(updateGroup));
+		}
+
+		[Fact]
+		public void UpdateNonExistingGroup()
+		{
+			var group = new Group
+			{
+				Id = -1,
+				Name = "UpdateNonExistingGroup"
+			};
+
+			Assert.Throws<MissingRecordException>(() => _groupDbController.Update(group));
+		}
+
+		[Fact]
 		public void DeleteExistingGroup()
 		{
 			string groupName = "DeleteExistingGroup";

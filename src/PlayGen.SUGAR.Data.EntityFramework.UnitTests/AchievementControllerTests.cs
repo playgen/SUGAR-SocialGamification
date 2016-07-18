@@ -1,113 +1,240 @@
 ﻿using System.Linq;
+using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using Xunit;
-/*
+
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class GroupAchievementControllerTests : IClassFixture<TestEnvironment>
+	public class AchievementControllerTests : IClassFixture<TestEnvironment>
 	{
 		#region Configuration
-		private readonly AchievementController _groupAchievementDbController;
+		private readonly AchievementController _achievementDbController;
+		private readonly GameController _gameController;
 
-		public GroupAchievementControllerTests(TestEnvironment testEnvironment)
+		public AchievementControllerTests(TestEnvironment testEnvironment)
 		{
-			_groupAchievementDbController = testEnvironment.AchievementController;
+			_achievementDbController = testEnvironment.AchievementController;
+			_gameController = testEnvironment.GameController;
 		}
 		#endregion
 
 		
 		#region Tests
 		[Fact]
-		public void CreateAndGetGroupAchievement()
+		public void CreateAndGetAchievement()
 		{
-			string groupAchievementName = "CreateGroupAchievement";
+			string achievementName = "CreateAchievement";
 
-			var newAchievement = CreateGroupAchievement(groupAchievementName);
+			var newAchievement = CreateAchievement(achievementName);
 
-			var groupAchievements = _groupAchievementDbController.Get(new int[] { newAchievement.Id });
+			var achievement = _achievementDbController.Get(newAchievement.Token, newAchievement.GameId);
 
-			int matches = groupAchievements.Count(g => g.Name == groupAchievementName && g.GameId == newAchievement.GameId);
-
-			Assert.Equal(matches, 1);
+			Assert.Equal(achievementName, achievement.Name);
 		}
 
 		[Fact]
-		public void CreateGroupAchievementWithNonExistingGame()
+		public void CreateAndGetGlobalAchievement()
 		{
-			string groupAchievementName = "CreateGroupAchievementWithNonExistingGame";
-			Assert.Throws<MissingRecordException>(() => CreateGroupAchievement(groupAchievementName, -1));
+			string achievementName = "CreateGlobalAchievement";
+
+			var newAchievement = CreateAchievement(achievementName, 0);
+
+			var achievement = _achievementDbController.Get(newAchievement.Token, newAchievement.GameId);
+
+			Assert.Equal(achievementName, achievement.Name);
 		}
 
 		[Fact]
-		public void CreateDuplicateGroupAchievement()
+		public void CreateDuplicateAchievement()
 		{
-			string groupAchievementName = "CreateDuplicateGroupAchievement";
+			string achievementName = "CreateDuplicateAchievement";
 
-			var firstachievement = CreateGroupAchievement(groupAchievementName);
+			var firstachievement = CreateAchievement(achievementName);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateGroupAchievement(groupAchievementName, firstachievement.GameId.Value));
+			Assert.Throws<DuplicateRecordException>(() => CreateAchievement(achievementName, firstachievement.GameId));
 		}
 
 		[Fact]
-		public void GetNonExistingGroupAchievements()
+		public void GetAchievementsByGame()
 		{
-			var groupAchievements = _groupAchievementDbController.Get(new int[] { -1 });
+			var baseAchievement = CreateAchievement("GetAchievementsByBaseGame");
 
-			Assert.Empty(groupAchievements);
+			int gameId = baseAchievement.GameId;
+
+			string[] names = new[]
+			{
+				"GetAchievementsByGame1",
+				"GetAchievementsByGame2",
+				"GetAchievementsByGame3",
+				"GetAchievementsByGame4",
+			};
+
+			foreach (var name in names)
+			{
+				CreateAchievement(name, gameId);
+			}
+
+			var achievements = _achievementDbController.GetByGame(gameId);
+
+			var matching = achievements.Where(a => names.Contains(a.Name));
+
+			Assert.Equal(names.Length, matching.Count());
 		}
 
 		[Fact]
-		public void DeleteExistingGroupAchievement()
+		public void GetAchievementsByNonExistingGame()
 		{
-			string groupAchievementName = "DeleteExistingGroupAchievement";
+			var achievements = _achievementDbController.GetByGame(-1);
 
-			var groupAchievement = CreateGroupAchievement(groupAchievementName);
-			var groupId = groupAchievement.Id;
+			Assert.Empty(achievements);
+		}
 
-			var groupAchievements = _groupAchievementDbController.Get(new int[] { groupId });
-			Assert.Equal(groupAchievements.Count(), 1);
-			Assert.Equal(groupAchievements.ElementAt(0).Name, groupAchievementName);
+		[Fact]
+		public void GetNonExistingAchievement()
+		{
+			var achievement = _achievementDbController.Get("GetNonExistingAchievement", -1);
 
-			_groupAchievementDbController.Delete(groupAchievement.Id);
-			groupAchievements = _groupAchievementDbController.Get(new int[] { groupId });
+			Assert.Null(achievement);
+		}
 
-			Assert.Empty(groupAchievements);
+		[Fact]
+		public void UpdateAchievement()
+		{
+			string achievementName = "UpdateExistingAchievement";
+
+			Achievement newAchievement = CreateAchievement(achievementName);
+
+			var foundAchievement = _achievementDbController.Get(newAchievement.Token, newAchievement.GameId);
+
+			Assert.NotNull(foundAchievement);
+
+			var update = new Achievement
+			{
+				Name = newAchievement.Name + "Updated",
+				Token = newAchievement.Token,
+				GameId = newAchievement.GameId,
+				ActorType = newAchievement.ActorType,
+				CompletionCriteriaCollection = newAchievement.CompletionCriteriaCollection,
+				RewardCollection = newAchievement.RewardCollection
+			};
+
+			_achievementDbController.Update(update);
+
+			var updatedAchievement = _achievementDbController.Get(newAchievement.Token, newAchievement.GameId);
+
+			Assert.NotEqual(foundAchievement.Name, updatedAchievement.Name);
+			Assert.Equal(foundAchievement.Name + "Updated", updatedAchievement.Name);
+		}
+
+		[Fact]
+		public void UpdateAchievementToDuplicateName()
+		{
+			string achievementName = "UpdateAchievementToDuplicateName";
+
+			Achievement newAchievement = CreateAchievement(achievementName);
+
+			Achievement newAchievementDuplicate = CreateAchievement(achievementName + " Two", newAchievement.GameId);
+
+			var update = new Achievement
+			{
+				Name = achievementName,
+				Token = newAchievementDuplicate.Token,
+				GameId = newAchievementDuplicate.GameId,
+				ActorType = newAchievementDuplicate.ActorType,
+				CompletionCriteriaCollection = newAchievementDuplicate.CompletionCriteriaCollection,
+				RewardCollection = newAchievementDuplicate.RewardCollection
+			};
+
+			Assert.Throws<DuplicateRecordException>(() => _achievementDbController.Update(update));
+		}
+
+		[Fact]
+		public void UpdateNonExistingAchievement()
+		{
+			string achievementName = "UpdateNonExistingAchievement";
+
+			var achievement = new Achievement
+			{
+				Name = achievementName,
+				Token = achievementName,
+				GameId = -1,
+				ActorType = ActorType.User,
+				CompletionCriteriaCollection = new AchievementCriteriaCollection(),
+				RewardCollection = new RewardCollection()
+			};
+
+			Assert.Throws<MissingRecordException>(() => _achievementDbController.Update(achievement));
+		}
+
+		[Fact]
+		public void DeleteExistingAchievement()
+		{
+			string achievementName = "DeleteExistingAchievement";
+
+			var achievement = CreateAchievement(achievementName);
+
+			var achievementReturned = _achievementDbController.Get(achievement.Token, achievement.GameId);
+			Assert.NotNull(achievementReturned);
+			Assert.Equal(achievementReturned.Name, achievementName);
+
+			_achievementDbController.Delete(achievement.Token, achievement.GameId);
+			achievementReturned = _achievementDbController.Get(achievement.Token, achievement.GameId);
+
+			Assert.Null(achievementReturned);
 		}
 
 		[Fact]
 		public void DeleteNonExistingGroupAchievement()
 		{
-			_groupAchievementDbController.Delete(-1);
+			_achievementDbController.Delete("DeleteNonExistingGroupAchievement", -1);
 		}
 		#endregion
 
 		#region Helpers
-		private Achievement CreateGroupAchievement(string name, int gameId = 0)
+		private Achievement CreateAchievement(string name, int? gameId = null, bool addCriteria = true)
 		{
-			GameController gameDbController = new GameController(NameOrConnectionString);
-			if (gameId == 0) {
+			if (gameId == null) {
 				Game game = new Game
 				{
 					Name = name
 				};
-				gameDbController.Create(game);
+				_gameController.Create(game);
 				gameId = game.Id;
 			}
 
-			var groupAchievement = new Achievement
+			var achievement = new Achievement
 			{
 				Name = name,
-				GameId = gameId,
+				Token = name,
+				GameId = gameId.Value,
+				ActorType = ActorType.User,
 				CompletionCriteriaCollection = new AchievementCriteriaCollection(),
 				RewardCollection = new RewardCollection()
 			};
-			_groupAchievementDbController.Create(groupAchievement);
+			if (addCriteria)
+			{
+				var criteria = new AchievementCriteriaCollection
+				{
+					new AchievementCriteria
+					{
+						Key = "CreateAchievementKey",
+						DataType = GameDataType.String,
+						CriteriaQueryType = CriteriaQueryType.Any,
+						ComparisonType = ComparisonType.Equals,
+						Scope = CriteriaScope.Actor,
+						Value = "CreateAchievementValue"
+					}
+				};
+				achievement.CompletionCriteriaCollection = criteria;
+			}
 
-			return groupAchievement;
+			_achievementDbController.Create(achievement);
+
+			return achievement;
 		}
 		#endregion
 	}
 }
-*/
+ 

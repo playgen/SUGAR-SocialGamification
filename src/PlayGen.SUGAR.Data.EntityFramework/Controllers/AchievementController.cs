@@ -71,6 +71,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				{
 					context.Entry(existing).State = EntityState.Modified;
 
+					var hasConflicts = context.Achievements.Where(a => (a.Name == achievement.Name && a.GameId == achievement.GameId));
+
+					if (hasConflicts.Count() > 0)
+					{
+						if (hasConflicts.Any(a => a.Token != achievement.Token))
+						{
+							throw new DuplicateRecordException($"An achievement with the name {achievement.Name} for this game already exists.");
+						}
+					}
+
 					existing.Name = achievement.Name;
 					existing.CompletionCriteriaCollection = achievement.CompletionCriteriaCollection;
 					existing.RewardCollection = achievement.RewardCollection;

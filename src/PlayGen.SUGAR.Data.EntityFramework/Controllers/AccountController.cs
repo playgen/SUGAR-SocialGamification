@@ -48,8 +48,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				var account = context.Accounts.Where(g => id == g.Id);
-				context.Accounts.RemoveRange(account);
+				var account = context.Accounts.Find(id);
+				context.Accounts.Remove(account);
 				SaveChanges(context);
 			}
 		}

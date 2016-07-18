@@ -89,6 +89,31 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
+		public void GetUserSentFriendRequests()
+		{
+			string userFriendName = "GetUserSentFriendRequests";
+
+			var requestor = CreateUser(userFriendName + " Requestor");
+			var acceptor = CreateUser(userFriendName + " Acceptor");
+
+			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
+
+			var userRequests = _userRelationshipDbController.GetSentRequests(newFriend.RequestorId);
+
+			int matches = userRequests.Count(g => g.Name == userFriendName + " Acceptor");
+
+			Assert.Equal(matches, 1);
+		}
+
+		[Fact]
+		public void GetNonExistingUserSentFriendRequests()
+		{
+			var userFriends = _userRelationshipDbController.GetSentRequests(-1);
+
+			Assert.Empty(userFriends);
+		}
+
+		[Fact]
 		public void AcceptUserFriendRequest()
 		{
 			string userFriendName = "AcceptUserFriendRequest";
@@ -152,18 +177,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				AcceptorId = acceptor.Id
 			};
 
-			bool hadException = false;
-
-			try
-			{
-				_userRelationshipDbController.UpdateRequest(newFriend, true);
-			}
-			catch (Exception)
-			{
-				hadException = true;
-			}
-
-			Assert.True(hadException);
+			Assert.Throws<InvalidOperationException>(() => _userRelationshipDbController.UpdateRequest(newFriend, true));
 		}
 
 		[Fact]

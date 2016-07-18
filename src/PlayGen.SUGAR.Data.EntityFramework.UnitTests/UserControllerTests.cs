@@ -76,6 +76,83 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
+		public void GetUserById()
+		{
+			User newUser = CreateUser("GetUserById");
+
+			int id = newUser.Id;
+
+			var user = _userDbController.Search(id);
+
+			Assert.NotNull(user);
+			Assert.Equal(newUser.Name, user.Name);
+		}
+
+		[Fact]
+		public void GetNonExistingUserById()
+		{
+			var user = _userDbController.Search(-1);
+
+			Assert.Null(user);
+		}
+
+		[Fact]
+		public void UpdateUser()
+		{
+			string userName = "UpdateExistingUser";
+
+			User newUser = CreateUser(userName);
+
+			var users = _userDbController.Search(userName);
+
+			int matches = users.Count(g => g.Name == userName);
+
+			Assert.Equal(1, matches);
+
+			var updateUser = new User
+			{
+				Id = newUser.Id,
+				Name = "UpdateExistingUserProof"
+			};
+
+			_userDbController.Update(updateUser);
+
+			var updatedUser = _userDbController.Search(newUser.Id);
+
+			Assert.Equal("UpdateExistingUserProof", updatedUser.Name);
+		}
+
+		[Fact]
+		public void UpdateUserToDuplicateName()
+		{
+			string userName = "UpdateUserToDuplicateName";
+
+			User newUser = CreateUser(userName);
+
+			User newUserDuplicate = CreateUser(userName + " Two");
+
+			var updateUser = new User
+			{
+				Id = newUserDuplicate.Id,
+				Name = newUser.Name
+			};
+
+			Assert.Throws<DuplicateRecordException>(() => _userDbController.Update(updateUser));
+		}
+
+		[Fact]
+		public void UpdateNonExistingUser()
+		{
+			var user = new User
+			{
+				Id = -1,
+				Name = "UpdateNonExistingUser"
+			};
+
+			Assert.Throws<MissingRecordException>(() => _userDbController.Update(user));
+		}
+
+		[Fact]
 		public void DeleteExistingUser()
 		{
 			string userName = "DeleteExistingUser";
