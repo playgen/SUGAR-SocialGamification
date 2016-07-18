@@ -40,10 +40,10 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="id">User id.</param>
 		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
-		public IEnumerable<ActorResponse> Get(int id)
+		public ActorResponse Get(int id)
 		{
 			var query = GetUriBuilder($"api/user/findbyid/{id}").ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			return Get<ActorResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>

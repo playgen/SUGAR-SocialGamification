@@ -9,6 +9,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
     {
 		public static AchievementCriteria ToContract(this AchievementCriteria completionCriteria)
 		{
+			if (completionCriteria == null)
+			{
+				return null;
+			}
 			return new AchievementCriteria
 			{
 				Key = completionCriteria.Key,

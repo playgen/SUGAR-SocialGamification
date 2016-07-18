@@ -9,6 +9,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 	{
 		public static AchievementResponse ToContract(this Skill model)
 		{
+			if (model == null)
+			{
+				return null;
+			}
 			var skillContract = new AchievementResponse
 			{
 				Name = model.Name,

@@ -9,6 +9,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 	{
 		public static GameResponse ToContract(this Game gameModel)
 		{
+			if (gameModel == null)
+			{
+				return null;
+			}
 			var gameContract = new GameResponse
 			{
 				Id = gameModel.Id,

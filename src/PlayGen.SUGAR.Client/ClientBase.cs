@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
@@ -35,52 +36,52 @@ namespace PlayGen.SUGAR.Client
 			}
 			return new UriBuilder(_baseAddress + separator + apiSuffix);
 		}
-		
-		protected TResponse Get<TResponse>(string uri)
+
+		protected TResponse Get<TResponse>(string uri, HttpStatusCode[] acceptableStatusCodes = null)
 		{
 			var request = CreateRequest(uri, "GET");
 			var response = (HttpWebResponse)request.GetResponse();
-			ProcessResponse(response, HttpStatusCode.OK);
+			ProcessResponse(response, acceptableStatusCodes ?? new HttpStatusCode[] { HttpStatusCode.OK });
 			return GetResponse<TResponse>(response);
 		}
 
 		protected TResponse Post<TRequest, TResponse>(string url, TRequest payload)
 		{
 			var response = PostPut(url, payload, "POST");
-			ProcessResponse(response, HttpStatusCode.OK);
+			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
 			return GetResponse<TResponse>(response);
 		}
 
 		protected void Post<TRequest>(string url, TRequest payload)
 		{
 			var response = PostPut(url, payload, "POST");
-			ProcessResponse(response, HttpStatusCode.OK);
+			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
 		}
 
 		protected TResponse Put<TRequest, TResponse>(string url, TRequest payload)
 		{
 			var response = PostPut(url, payload, "PUT");
-			ProcessResponse(response, HttpStatusCode.OK);
+			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
 			return GetResponse<TResponse>(response);
 		}
 
 		protected void Put<TRequest>(string url, TRequest payload)
 		{
 			var response = PostPut(url, payload, "PUT");
-			ProcessResponse(response, HttpStatusCode.OK);
+			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
 		}
 
 		protected TResponse Delete<TResponse>(string url)
 		{
 			var response = DeleteRequest(url);
-			ProcessResponse(response, HttpStatusCode.OK);
+			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
 			return GetResponse<TResponse>(response);
 		}
 
 		protected void Delete(string url)
 		{
 			var response = DeleteRequest(url);
-			ProcessResponse(response, HttpStatusCode.NoContent);
+			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
@@ -108,7 +109,7 @@ namespace PlayGen.SUGAR.Client
 			var dataStream = response.GetResponseStream();
 			if (dataStream == null || response.ContentLength == 0)
 			{
-				throw new Exception("Response was empty :(");
+				return default(TResponse);
 			}
 			var reader = new StreamReader(dataStream);
 			return JsonConvert.DeserializeObject<TResponse>(reader.ReadToEnd());
@@ -133,9 +134,9 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="response"></param>
 		/// <exception cref="Exception">HTTP Status Code not equal to 200 (OK)</exception>
-		private void ProcessResponse(HttpWebResponse response, HttpStatusCode expectedStatusCode)
+		private void ProcessResponse(HttpWebResponse response, HttpStatusCode[] expectedStatusCode)
 		{
-			if (response.StatusCode != expectedStatusCode)
+			if (!expectedStatusCode.Contains(response.StatusCode))
 			{
 				throw new Exception("API ERROR, Status Code: " + response.StatusCode + ". Message: " + response.StatusDescription);
 			}

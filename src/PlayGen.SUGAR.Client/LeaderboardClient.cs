@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Client
 		public LeaderboardResponse Get(string token, int gameId)
         {
             var query = GetUriBuilder($"api/leaderboards/{token}/{gameId}").ToString();
-            return Get<LeaderboardResponse>(query);
+            return Get<LeaderboardResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
         }
 
         /// <summary>

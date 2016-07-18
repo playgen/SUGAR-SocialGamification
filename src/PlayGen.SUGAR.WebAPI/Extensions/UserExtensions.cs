@@ -10,6 +10,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static ActorResponse ToContract(this User userModel)
 		{
+			if (userModel == null)
+			{
+				return null;
+			}
 			var actorContract = new ActorResponse
 			{
 				Id = userModel.Id,

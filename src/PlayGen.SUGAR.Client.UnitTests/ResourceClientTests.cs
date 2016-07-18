@@ -98,7 +98,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var updatedResource = _resourceClient.Get(createdResource.GameId, createdResource.ActorId,
 				new[] {createdResource.Key}).Single();
 
-			Assert.Equal(updatedQuantity, updatedResource.Quantity);
+			Assert.Equal(createdQuantity + updatedQuantity, updatedResource.Quantity);
 			Assert.Equal(createdResource.Id, updatedResource.Id);
 		}
 

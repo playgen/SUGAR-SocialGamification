@@ -9,6 +9,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 	{
 		public static ResourceResponse ToResourceContract(this Data.Model.GameData gameData)
 		{
+			if (gameData == null)
+			{
+				return null;
+			}
 			return new ResourceResponse
 			{
 				Id = gameData.Id,

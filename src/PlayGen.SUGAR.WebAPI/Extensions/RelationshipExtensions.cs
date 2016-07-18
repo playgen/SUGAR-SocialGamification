@@ -9,6 +9,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 	{
 		public static RelationshipResponse ToContract(this UserToGroupRelationship relationshipModel)
 		{
+			if (relationshipModel == null)
+			{
+				return null;
+			}
 			var relationshipContract = new RelationshipResponse
 			{
 				RequestorId = relationshipModel.RequestorId,
@@ -20,6 +24,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static RelationshipResponse ToContract(this UserToUserRelationship relationshipModel)
 		{
+			if (relationshipModel == null)
+			{
+				return null;
+			}
 			var relationshipContract = new RelationshipResponse
 			{
 				RequestorId = relationshipModel.RequestorId,

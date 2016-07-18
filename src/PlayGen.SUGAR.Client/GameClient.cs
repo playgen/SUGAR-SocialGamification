@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.Client
 		public GameResponse Get(int id)
 		{
 			var query = GetUriBuilder($"api/game/findbyid/{id}").ToString();
-			return Get<GameResponse>(query);
+			return Get<GameResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>

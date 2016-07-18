@@ -9,6 +9,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 	{
 		public static LeaderboardResponse ToContract(this Leaderboard leaderboardModel)
 		{
+			if (leaderboardModel == null)
+			{
+				return null;
+			}
 			var leaderboardContract = new LeaderboardResponse
 			{
 				GameId = leaderboardModel.GameId,

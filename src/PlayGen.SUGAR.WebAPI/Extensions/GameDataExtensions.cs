@@ -8,6 +8,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 	{
 		public static GameDataResponse ToContract(this Data.Model.GameData gameData)
 		{
+			if (gameData == null)
+			{
+				return null;
+			}
 			var dataContract = new GameDataResponse
 			{
 				ActorId = gameData.ActorId,

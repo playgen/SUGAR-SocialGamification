@@ -9,6 +9,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 	{
 		public static ActorResponse ToContract(this Group groupModel)
 		{
+			if (groupModel == null)
+			{
+				return null;
+			}
 			var actorContract = new ActorResponse
 			{
 				Id = groupModel.Id,

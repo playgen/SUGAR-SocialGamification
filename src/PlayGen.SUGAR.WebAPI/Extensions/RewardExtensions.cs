@@ -9,6 +9,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 	{
 		public static Reward ToContract(this Reward reward)
 		{
+			if (reward == null)
+			{
+				return null;
+			}
 			return new Reward
 			{
 				Key = reward.Key,

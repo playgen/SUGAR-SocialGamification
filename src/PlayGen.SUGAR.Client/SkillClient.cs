@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Client
 		public AchievementResponse GetGlobalById(string token)
 		{
 			var query = GetUriBuilder($"api/skills/find/{token}/global").ToString();
-			return Get<AchievementResponse>(query);
+			return Get<AchievementResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Client
 		public AchievementResponse GetById(string token, int gameId)
 		{
 			var query = GetUriBuilder($"api/skills/find/{token}/{gameId}").ToString();
-			return Get<AchievementResponse>(query);
+			return Get<AchievementResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
