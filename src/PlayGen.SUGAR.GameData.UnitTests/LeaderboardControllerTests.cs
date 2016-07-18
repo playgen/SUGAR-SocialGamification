@@ -325,13 +325,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
 				int randomId = random.Next(1, UserCount + 1);
-				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
+				Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
 			}
 		}
 
@@ -346,13 +346,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
 				int randomId = random.Next(1, UserCount + 1);
-				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
+				Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
 			}
 		}
 
@@ -367,13 +367,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
 				int randomId = random.Next(1, UserCount + 1);
-				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
+				Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
 			}
 		}
 
@@ -388,13 +388,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
 				int randomId = random.Next(1, UserCount + 1);
-				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
+				Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
 			}
 		}
 
@@ -409,7 +409,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
@@ -430,7 +430,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
@@ -451,13 +451,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
 				int randomId = random.Next(1, UserCount + 1);
-				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
+				Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
 			}
 		}
 
@@ -472,13 +472,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
 				int randomId = random.Next(1, UserCount + 1);
-				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
+				Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
 			}
 		}
 
@@ -493,7 +493,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
@@ -514,7 +514,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
@@ -535,13 +535,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
 				int randomId = random.Next(1, UserCount + 1);
-				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
+				Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
 			}
 		}
 
@@ -556,13 +556,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
 			for (int i = 0; i < 5; i++)
 			{
 				Random random = new Random();
 				int randomId = random.Next(1, UserCount + 1);
-				Assert.Equal(randomId, standings[filter.Limit - randomId].ActorId);
+				Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
 			}
 		}
 
@@ -578,11 +578,11 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
-			for (int i = 0; i < filter.Limit; i++)
+			for (int i = 0; i < filter.PageLimit; i++)
 			{
-				int offset = ((filter.ActorId.Value - 1) / (UserCount/ filter.Limit)) * filter.Limit;
+				int offset = ((filter.ActorId.Value - 1) / (UserCount/ filter.PageLimit)) * filter.PageLimit;
 				Assert.Equal(offset + i + 1, standings[i].ActorId);
 			}
 		}
@@ -619,11 +619,11 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var standings = _leaderboardEvaulationController.GetStandings(leaderboard, filter).ToArray();
 
-			Assert.Equal(filter.Limit, standings.Length);
+			Assert.Equal(filter.PageLimit, standings.Length);
 
-			for (int i = 0; i < filter.Limit; i++)
+			for (int i = 0; i < filter.PageLimit; i++)
 			{
-				int offset = (filter.ActorId.Value - UserCount - 1) * filter.Limit;
+				int offset = (filter.ActorId.Value - UserCount - 1) * filter.PageLimit;
 				Assert.Equal(offset + i + 1, standings[i].ActorId);
 			}
 		}
@@ -661,8 +661,8 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 				LeaderboardToken = token,
 				GameId = gameId,
 				LeaderboardFilterType = filterType,
-				Limit = limit,
-				Offset = 0
+				PageLimit = limit,
+				PageOffset = 0
 			};
 
 			if (actorId != 0)

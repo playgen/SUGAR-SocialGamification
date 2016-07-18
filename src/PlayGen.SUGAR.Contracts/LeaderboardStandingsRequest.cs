@@ -51,14 +51,14 @@ namespace PlayGen.SUGAR.Contracts
 		/// The maximum number of results which will be returned.
 		/// </summary>
 		[Required]
-		public int Limit { get; set; }
+		public int PageLimit { get; set; }
 
 		/// <summary>
 		/// The set of results which will be returned based on the limit.
 		/// 0 returns the first set of results for Top, Friends and Group Member and the nearest range for Near.
 		/// </summary>
 		[Required]
-		public int Offset { get; set; }
+		public int PageOffset { get; set; }
 
 		/// <summary>
 		/// The earliest point which data should be collected from.

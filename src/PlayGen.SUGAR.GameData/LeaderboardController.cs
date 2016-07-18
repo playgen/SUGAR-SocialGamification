@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.GameData
 			{
 				throw new MissingRecordException("The provided leaderboard does not exist.");
 			}
-			if (request.Limit <= 0)
+			if (request.PageLimit <= 0)
 			{
 				throw new ArgumentException("You must request at least one ranking from the leaderboard.");
 			}
@@ -80,7 +80,7 @@ namespace PlayGen.SUGAR.GameData
 					return null;
 			}
 
-			var results = FilterResults(typeResults, request.Limit, request.Offset, request.LeaderboardFilterType, request.ActorId);
+			var results = FilterResults(typeResults, request.PageLimit, request.PageOffset, request.LeaderboardFilterType, request.ActorId);
 			return results;
 		}
 
@@ -391,15 +391,14 @@ namespace PlayGen.SUGAR.GameData
 						Ranking = ++position
 					});
 				case LeaderboardFilterType.Near:
-					// TODO check that this works for cases with both an even or odd limit.
 					bool actorCheck = typeResults.Any(r => r.ActorId == actorId.Value);
 					if (actorCheck)
 					{
 						int actorPosition = typeResults.TakeWhile(r => r.ActorId != actorId.Value).Count();
-						offset += actorPosition / limit; // TODO should this not be offset = (actorPosition - (limit/2)) + offset
+						offset += actorPosition / limit;
 					}
 					typeResults = typeResults.Skip(offset * limit).Take(limit);
-					position = (offset * limit); // TODO position = (actorPosition - offset)
+					position = (offset * limit);
 					return typeResults.Select(s => new LeaderboardStandingsResponse
 					{
 						ActorId = s.ActorId,

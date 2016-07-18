@@ -80,8 +80,8 @@ Leaderboards provide a visual comparison tool for measurements of resources or o
 				GameId = _gameId,
 				ActorId = _userId,
 				LeaderboardFilterType = LeaderboardFilterType.Near,
-				Limit = 8,
-				Offset = 0
+				PageLimit = 8,
+				PageOffset = 0
 			};
 
 			// retreive the standings and store the responses
