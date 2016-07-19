@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.Eventing.Reader;
+﻿using System;
 using System.Linq;
 using System.Net;
 using PlayGen.SUGAR.Contracts;
@@ -68,6 +68,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		}
 
 		[Fact]
+		public void CannotCreateGameWithNoName()
+		{
+			var gameRequest = new GameRequest{};
+
+			Assert.Throws<WebException>(() => _gameClient.Create(gameRequest));
+		}
+
+		[Fact]
 		public void CanGetGamesByName()
 		{
 			var gameRequestOne = new GameRequest
@@ -95,6 +103,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var getGames = _gameClient.Get("CannotGetNotExistingGameByName");
 
 			Assert.Empty(getGames);
+		}
+
+		[Fact]
+		public void CannotGetGameByEmptyName()
+		{
+			Assert.Throws<Exception>(() => _gameClient.Get(""));
 		}
 
 		[Fact]
@@ -141,7 +155,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var getGame = _gameClient.Get(response.Id);
 
 			Assert.NotEqual(response.Name, updateRequest.Name);
-			Assert.Equal("CanUpdateGame Updated", updateRequest.Name);
+			Assert.Equal("CanUpdateGame Updated", getGame.Name);
 		}
 
 		[Fact]
@@ -178,6 +192,50 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			};
 
 			Assert.Throws<WebException>(() => _gameClient.Update(-1, updateGame));
+		}
+
+		[Fact]
+		public void CannotUpdateGameToNoName()
+		{
+			var gameRequest = new GameRequest
+			{
+				Name = "CannotUpdateGameToNoName",
+			};
+
+			var response = _gameClient.Create(gameRequest);
+
+			var updateRequest = new GameRequest
+			{
+			};
+
+			Assert.Throws<WebException>(() => _gameClient.Update(response.Id, updateRequest));
+		}
+
+		[Fact]
+		public void CanDeleteGame()
+		{
+			var gameRequest = new GameRequest
+			{
+				Name = "CanGetGameById",
+			};
+
+			var response = _gameClient.Create(gameRequest);
+
+			var getGame = _gameClient.Get(response.Id);
+
+			Assert.NotNull(getGame);
+
+			_gameClient.Delete(response.Id);
+
+			getGame = _gameClient.Get(response.Id);
+
+			Assert.Null(getGame);
+		}
+
+		[Fact]
+		public void CannotDeleteNonExistingGame()
+		{
+			_gameClient.Delete(-1);
 		}
 
 		// TODO test the rest of the game controller fucntionaity

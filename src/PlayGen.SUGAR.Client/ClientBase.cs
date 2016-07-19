@@ -21,20 +21,41 @@ namespace PlayGen.SUGAR.Client
 			_baseAddress = baseAddress;
 			_credentials = credentials;
 		}
-		
+
 		/// <summary>
 		/// Get a UriBuilder object with the origin and web api path
 		/// </summary>
 		/// <param name="apiSuffix">WebAPI path relative to web origin, eg. /api</param>
 		/// <returns></returns>
-		protected UriBuilder GetUriBuilder(string apiSuffix)
+
+		protected bool IsURIParamsValid(object[] param)
 		{
+			foreach (var pa in param)
+			{
+				if (string.IsNullOrEmpty(pa.ToString()))
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		protected UriBuilder GetUriBuilder(string apiSuffix, params object[] param)
+		{
+			if (!IsURIParamsValid(param))
+			{
+				throw new Exception("Passed values must not be empty or null");
+			}
+
+			var formattedURI = string.Format(apiSuffix, param);
+
 			var separator = "";
-			if (!(_baseAddress.EndsWith("/") || apiSuffix.StartsWith("/")))
+			if (!(_baseAddress.EndsWith("/") || formattedURI.StartsWith("/")))
 			{
 				separator = "/";
 			}
-			return new UriBuilder(_baseAddress + separator + apiSuffix);
+			return new UriBuilder(_baseAddress + separator + formattedURI);
 		}
 
 		protected TResponse Get<TResponse>(string uri, HttpStatusCode[] acceptableStatusCodes = null)
@@ -81,7 +102,7 @@ namespace PlayGen.SUGAR.Client
 		protected void Delete(string url)
 		{
 			var response = DeleteRequest(url);
-			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.NoContent });
+			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
 		}
 
 		/// <summary>

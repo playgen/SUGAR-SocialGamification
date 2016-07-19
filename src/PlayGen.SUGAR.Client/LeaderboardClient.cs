@@ -31,29 +31,29 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
 		public IEnumerable<LeaderboardResponse> Get(int gameId)
 		{
-			var query = GetUriBuilder($"api/leaderboards/game/{gameId}/list").ToString();
+			var query = GetUriBuilder("api/leaderboards/game/{0}/list", gameId).ToString();
 			return Get<IEnumerable<LeaderboardResponse>>(query);
 		}
 
-        /// <summary>
-        /// Find a single leaderboard matching the token and gameId.
-        /// </summary>
-        /// <param name="token">Token </param>
-        /// <param name="gameId"></param>
-        /// <returns>Returns a single <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
+		/// <summary>
+		/// Find a single leaderboard matching the token and gameId.
+		/// </summary>
+		/// <param name="token">Token </param>
+		/// <param name="gameId"></param>
+		/// <returns>Returns a single <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
 		public LeaderboardResponse Get(string token, int gameId)
-        {
-            var query = GetUriBuilder($"api/leaderboards/{token}/{gameId}").ToString();
-            return Get<LeaderboardResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
-        }
+		{
+			var query = GetUriBuilder("api/leaderboards/{0}/{1}", token, gameId).ToString();
+			return Get<LeaderboardResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+		}
 
-        /// <summary>
-        /// Create a new Leaderboard.
-        /// Requires <see cref="LeaderboardRequest.Name"/> and <see cref="LeaderboardRequest.Token"/> to be unique to that <see cref="LeaderboardRequest.GameId"/>.
-        /// </summary>
-        /// <param name="newLeaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the new Leaderboard.</param>
-        /// <returns>Returns a <see cref="LeaderboardResponse"/> object containing details for the newly created Leaderboard.</returns>
-        public LeaderboardResponse Create(LeaderboardRequest newLeaderboard)
+		/// <summary>
+		/// Create a new Leaderboard.
+		/// Requires <see cref="LeaderboardRequest.Name"/> and <see cref="LeaderboardRequest.Token"/> to be unique to that <see cref="LeaderboardRequest.GameId"/>.
+		/// </summary>
+		/// <param name="newLeaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the new Leaderboard.</param>
+		/// <returns>Returns a <see cref="LeaderboardResponse"/> object containing details for the newly created Leaderboard.</returns>
+		public LeaderboardResponse Create(LeaderboardRequest newLeaderboard)
 		{
 			var query = GetUriBuilder("api/leaderboards/create").ToString();
 			return Post<LeaderboardRequest, LeaderboardResponse>(query, newLeaderboard);
@@ -76,7 +76,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="leaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the Leaderboard.</param>
 		public void Update(LeaderboardRequest leaderboard)
 		{
-			var query = GetUriBuilder($"api/leaderboards/update").ToString();
+			var query = GetUriBuilder("api/leaderboards/update").ToString();
 			Put(query, leaderboard);
 		}
 
@@ -86,7 +86,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="token">Token of Leaderboard</param>
 		public void DeleteGlobal(string token)
 		{
-			var query = GetUriBuilder($"api/leaderboards/{token}/global").ToString();
+			var query = GetUriBuilder("api/leaderboards/{0}/global", token).ToString();
 			Delete(query);
 		}
 
@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="gameId">ID of the Game the Leaderboard is for</param>
 		public void Delete(string token, int gameId)
 		{
-			var query = GetUriBuilder($"api/leaderboards/{token}/{gameId}").ToString();
+			var query = GetUriBuilder("api/leaderboards/{0}/{1}", token, gameId).ToString();
 			Delete(query);
 		}
 	}

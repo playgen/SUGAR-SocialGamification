@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> Get(string name, bool exactMatch = false)
 		{
-			var query = GetUriBuilder($"api/user/find/{name}").ToString();
+			var query = GetUriBuilder("api/user/find/{0}", name).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
 		public ActorResponse Get(int id)
 		{
-			var query = GetUriBuilder($"api/user/findbyid/{id}").ToString();
+			var query = GetUriBuilder("api/user/findbyid/{0}", id).ToString();
 			return Get<ActorResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
@@ -65,7 +65,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="user"><see cref="ActorRequest"/> object that holds the details of the User.</param>
 		public void Update(int id, ActorRequest user)
 		{
-			var query = GetUriBuilder($"api/user/update/{id}").ToString();
+			var query = GetUriBuilder("api/user/update/{0}", id).ToString();
 			Put(query, user);
 		}
 
@@ -75,7 +75,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="id">User ID.</param>
 		public void Delete(int id)
 		{
-			var query = GetUriBuilder($"api/user/{id}").ToString();
+			var query = GetUriBuilder("api/user/{0}", id).ToString();
 			Delete(query);
 		}
 	}

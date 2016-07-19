@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
 		public AccountResponse Register(int userId, AccountRequest newAccount)
 		{
-			var query = GetUriBuilder($"api/account/registerwithid/{userId}").ToString();
+			var query = GetUriBuilder("api/account/registerwithid/{0}", userId).ToString();
 			return Post<AccountRequest, AccountResponse>(query, newAccount);
 		}
 
@@ -59,7 +59,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="id">Account ID.</param>
 		public void Delete(int id)
 		{
-			var query = GetUriBuilder($"api/account/{id}").ToString();
+			var query = GetUriBuilder("api/account/{0}", id).ToString();
 			Delete(query);
 		}
 	}
