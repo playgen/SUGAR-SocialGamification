@@ -159,7 +159,15 @@ namespace PlayGen.SUGAR.Client
 		{
 			if (!expectedStatusCode.Contains(response.StatusCode))
 			{
-				throw new Exception("API ERROR, Status Code: " + response.StatusCode + ". Message: " + response.StatusDescription);
+				var error = "API ERROR. Status Code: " + response.StatusCode + ".";
+				if (!((int)response.StatusCode >= 200 && (int)response.StatusCode <= 299))
+				{
+					using (var reader = new StreamReader(response.GetResponseStream()))
+					{
+						error += " Message: " + reader.ReadToEnd();
+					}
+				}
+				throw new Exception(error);
 			}
 
 			_credentials.Authorization = response.Headers["Authorization"];
@@ -171,14 +179,32 @@ namespace PlayGen.SUGAR.Client
 			var payloadBytes = Encoding.UTF8.GetBytes(payloadString);
 			var request = CreateRequest(url, method);
 			SendData(request, payloadBytes);
-			var response = (HttpWebResponse)request.GetResponse();
+			HttpWebResponse response;
+			try
+			{
+				response = (HttpWebResponse)request.GetResponse();
+			}
+			catch (WebException ex)
+			{
+				response = (HttpWebResponse)ex.Response;
+			}
+			
 			return response;
 		}
 
 		private HttpWebResponse DeleteRequest(string url)
 		{
 			var request = CreateRequest(url, "DELETE");
-			var response = (HttpWebResponse)request.GetResponse();
+			HttpWebResponse response;
+			try
+			{
+				response = (HttpWebResponse)request.GetResponse();
+			}
+			catch (WebException ex)
+			{
+				response = (HttpWebResponse)ex.Response;
+			}
+
 			return response;
 		}
 	}

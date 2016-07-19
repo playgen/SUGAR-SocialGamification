@@ -89,6 +89,7 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddMvc(options =>
 			{
 				options.Filters.Add(new ModelValidationFilter());
+				options.Filters.Add(new ExceptionFilter());
 				options.Filters.Add(typeof(AuthorizationHeaderFilter));
 			});
 
