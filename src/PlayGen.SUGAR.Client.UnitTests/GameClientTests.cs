@@ -216,7 +216,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var gameRequest = new GameRequest
 			{
-				Name = "CanGetGameById",
+				Name = "CanDeleteGame",
 			};
 
 			var response = _gameClient.Create(gameRequest);
@@ -238,7 +238,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			_gameClient.Delete(-1);
 		}
 
-		// TODO test the rest of the game controller fucntionaity
+
 		#endregion
 	}
 }

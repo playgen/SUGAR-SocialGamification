@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Linq;
 using System.Net;
 using PlayGen.SUGAR.Contracts;
 using Xunit;
@@ -11,11 +12,13 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 	{
 		#region Configuration
 		private readonly AchievementClient _achievementClient;
+		private readonly GameDataClient _gameDataClient;
 
 		public AchievementClientTests()
 		{
 			var testSugarClient = new TestSUGARClient();
 			_achievementClient = testSugarClient.Achievement;
+			_gameDataClient = testSugarClient.GameData;
 
 			RegisterAndLogin(testSugarClient.Account);
 		}
@@ -919,7 +922,107 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<Exception>(() => _achievementClient.DeleteGlobal(""));
 		}
 
-		// TODO test the rest of the game controller fucntionaity
+		[Fact]
+		public void CanGetGlobalAchievementProgress()
+		{
+			var achievementRequest = new AchievementRequest()
+			{
+				Name = "CanGetGlobalAchievementProgress",
+				ActorType = ActorType.Undefined,
+				Token = "CanGetGlobalAchievementProgress",
+				CompletionCriteria = new List<AchievementCriteria>()
+				{
+					new AchievementCriteria()
+					{
+						Key = "CanGetGlobalAchievementProgress",
+						ComparisonType = ComparisonType.Equals,
+						CriteriaQueryType = CriteriaQueryType.Any,
+						DataType = GameDataType.Float,
+						Scope = CriteriaScope.Actor,
+						Value = "1"
+					}
+				},
+			};
+
+			var response = _achievementClient.Create(achievementRequest);
+
+			var progressGame = _achievementClient.GetGlobalProgress(1);
+			Assert.True(progressGame.Count() > 0);
+
+			var progressAchievement = _achievementClient.GetGlobalAchievementProgress(response.Token, 1);
+			Assert.Equal(0, progressAchievement.Progress);
+
+			var gameData = new GameDataRequest()
+			{
+				Key = "CanGetGlobalAchievementProgress",
+				Value = "1",
+				ActorId = 1,
+				GameDataType = GameDataType.Float
+			};
+
+			_gameDataClient.Add(gameData);
+
+			progressAchievement = _achievementClient.GetGlobalAchievementProgress(response.Token, 1);
+			Assert.Equal(1, progressAchievement.Progress);
+		}
+
+		[Fact]
+		public void CannotGetNotExistingGlobalAchievementProgress()
+		{
+			Assert.Throws<Exception>(() => _achievementClient.GetGlobalAchievementProgress("CannotGetNotExistingGlobalAchievementProgress", 1));
+		}
+
+		[Fact]
+		public void CanGetAchievementProgress()
+		{
+			var achievementRequest = new AchievementRequest()
+			{
+				Name = "CanGetAchievementProgress",
+				GameId = 10,
+				ActorType = ActorType.Undefined,
+				Token = "CanGetAchievementProgress",
+				CompletionCriteria = new List<AchievementCriteria>()
+				{
+					new AchievementCriteria()
+					{
+						Key = "CanGetAchievementProgress",
+						ComparisonType = ComparisonType.Equals,
+						CriteriaQueryType = CriteriaQueryType.Any,
+						DataType = GameDataType.Float,
+						Scope = CriteriaScope.Actor,
+						Value = "1"
+					}
+				},
+			};
+
+			var response = _achievementClient.Create(achievementRequest);
+
+			var progressGame = _achievementClient.GetGameProgress(10, 1);
+			Assert.True(progressGame.Count() > 0);
+
+			var progressAchievement = _achievementClient.GetAchievementProgress(response.Token, 10, 1);
+			Assert.Equal(0, progressAchievement.Progress);
+
+			var gameData = new GameDataRequest()
+			{
+				Key = "CanGetAchievementProgress",
+				Value = "1",
+				ActorId = 1,
+				GameId = 10,
+				GameDataType = GameDataType.Float
+			};
+
+			_gameDataClient.Add(gameData);
+
+			progressAchievement = _achievementClient.GetAchievementProgress(response.Token, 10, 1);
+			Assert.Equal(1, progressAchievement.Progress);
+		}
+
+		[Fact]
+		public void CannotGetNotExistingAchievementProgress()
+		{
+			Assert.Throws<Exception>(() => _achievementClient.GetAchievementProgress("CannotGetNotExistingAchievementProgress", 10, 1));
+		}
 		#endregion
 	}
 }

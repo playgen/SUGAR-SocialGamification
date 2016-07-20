@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">ID of Game</param>
 		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold Achievement progress details</returns>
+		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
 		public IEnumerable<AchievementProgressResponse> GetGameProgress(int gameId, int actorId)
 		{
 			var query = GetUriBuilder("api/achievements/game/{0}/evaluate/{1}", gameId, actorId).ToString();
@@ -85,11 +85,11 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="token">Token of Achievement</param>
 		/// <param name="actorId">ID of actor/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
-		public IEnumerable<AchievementProgressResponse> GetGlobalAchievementProgress(string token, int actorId)
+		/// <returns>Returns <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
+		public AchievementProgressResponse GetGlobalAchievementProgress(string token, int actorId)
 		{
 			var query = GetUriBuilder("api/achievements/{0}/global/evaluate/{1}", token, actorId).ToString();
-			return Get<IEnumerable<AchievementProgressResponse>>(query);
+			return Get<AchievementProgressResponse>(query);
 		}
 
 		/// <summary>
@@ -98,11 +98,11 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="token">Token of Achievement</param>
 		/// <param name="gameId">ID of the Game the Achievement is for</param>
 		/// <param name="actorId">ID of actor/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
-		public IEnumerable<AchievementProgressResponse> GetAchievementProgress(string token, int gameId, int actorId)
+		/// <returns>Returns <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
+		public AchievementProgressResponse GetAchievementProgress(string token, int gameId, int actorId)
 		{
 			var query = GetUriBuilder("api/achievements/{0}/{1}/evaluate/{2}", token, gameId, actorId).ToString();
-			return Get<IEnumerable<AchievementProgressResponse>>(query);
+			return Get<AchievementProgressResponse>(query);
 		}
 
 		/// <summary>

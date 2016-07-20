@@ -71,6 +71,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				{
 					context.Entry(existing).State = EntityState.Modified;
 
+					var hasConflicts = context.Skills.Where(a => (a.Name == skill.Name && a.GameId == skill.GameId));
+
+					if (hasConflicts.Count() > 0)
+					{
+						if (hasConflicts.Any(a => a.Token != skill.Token))
+						{
+							throw new DuplicateRecordException($"A skill with the name {skill.Name} for this game already exists.");
+						}
+					}
+
 					existing.Name = skill.Name;
 					existing.CompletionCriteriaCollection = skill.CompletionCriteriaCollection;
 					existing.RewardCollection = skill.RewardCollection;

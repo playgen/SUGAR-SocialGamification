@@ -49,8 +49,6 @@ namespace PlayGen.SUGAR.Client
 
 		/// <summary>
 		/// Find a list of Skills that match <param name="gameId"/>.
-		/// 
-		/// Example Usage: GET api/skills/game/1/list
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Skill details</returns>
@@ -73,8 +71,6 @@ namespace PlayGen.SUGAR.Client
 
 		/// <summary>
 		/// Find the current progress for all skills for a <param name="gameId"/> for <param name="actorId"/>.
-		/// 
-		/// Example Usage: GET api/skills/game/1/evaluate/1
 		/// </summary>
 		/// <param name="gameId">ID of Game</param>
 		/// <param name="actorId">ID of Group/User</param>
@@ -90,11 +86,11 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="token">Token of Skill</param>
 		/// <param name="actorId">ID of actor/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward skill.</returns>
-		public IEnumerable<AchievementProgressResponse> GetGlobalAchievementProgress(string token, int actorId)
+		/// <returns>Returns <see cref="AchievementProgressResponse"/> that hold current progress toward skill.</returns>
+		public AchievementProgressResponse GetGlobalSkillProgress(string token, int actorId)
 		{
 			var query = GetUriBuilder("api/skills/{0}/global/evaluate/{1}", token, actorId).ToString();
-			return Get<IEnumerable<AchievementProgressResponse>>(query);
+			return Get<AchievementProgressResponse>(query);
 		}
 
 		/// <summary>
@@ -103,11 +99,11 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="token">Token of Skill</param>
 		/// <param name="gameId">ID of the Game the Skill is for</param>
 		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward skill.</returns>
-		public IEnumerable<AchievementProgressResponse> GetAchievementProgress(string token, int gameId, int actorId)
+		/// <returns>Returns <see cref="AchievementProgressResponse"/> that hold current progress toward skill.</returns>
+		public AchievementProgressResponse GetSkillProgress(string token, int gameId, int actorId)
 		{
 			var query = GetUriBuilder("api/skills/{0}/{1}/evaluate/{2}", token, gameId, actorId).ToString();
-			return Get<IEnumerable<AchievementProgressResponse>>(query);
+			return Get<AchievementProgressResponse>(query);
 		}
 
 		/// <summary>

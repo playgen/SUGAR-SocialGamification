@@ -61,7 +61,15 @@ namespace PlayGen.SUGAR.Client
 		protected TResponse Get<TResponse>(string uri, HttpStatusCode[] acceptableStatusCodes = null)
 		{
 			var request = CreateRequest(uri, "GET");
-			var response = (HttpWebResponse)request.GetResponse();
+			HttpWebResponse response;
+			try
+			{
+				response = (HttpWebResponse)request.GetResponse();
+			}
+			catch (WebException ex)
+			{
+				response = (HttpWebResponse)ex.Response;
+			}
 			ProcessResponse(response, acceptableStatusCodes ?? new HttpStatusCode[] { HttpStatusCode.OK });
 			return GetResponse<TResponse>(response);
 		}
