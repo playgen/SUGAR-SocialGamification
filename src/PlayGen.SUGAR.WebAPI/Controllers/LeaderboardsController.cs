@@ -43,17 +43,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(leaderboardContract);
 		}
 
-        /// <summary>
-        /// Find a single leaderboard matching the token and gameId.
-        /// 
-        /// Example Usage: GET api/leaderboards/LEADERBOARD_TOKEN/1
-        /// </summary>
-        /// <param name="token">Token </param>
-        /// <param name="gameId"></param>
-        /// <returns>Returns a single <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
-        [HttpGet("{token}/{gameId:int}")]
+		/// <summary>
+		/// Find a single leaderboard matching the token and gameId.
+		/// 
+		/// Example Usage: GET api/leaderboards/LEADERBOARD_TOKEN/1
+		/// </summary>
+		/// <param name="token">Token </param>
+		/// <param name="gameId"></param>
+		/// <returns>Returns a single <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
+		[HttpGet("{token}/global")]
+		[HttpGet("{token}/{gameId:int}")]
 		[ResponseType(typeof(IEnumerable<LeaderboardResponse>))]
-		public IActionResult Get([FromRoute]string token, [FromRoute]int gameId)
+		public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
 		{
 			var leaderboard = _leaderboardController.Get(token, gameId);
 			var leaderboardContract = leaderboard.ToContract();

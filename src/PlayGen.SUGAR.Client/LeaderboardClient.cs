@@ -36,6 +36,17 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Find a single global leaderboard matching the token.
+		/// </summary>
+		/// <param name="token">Token </param>
+		/// <returns>Returns a single <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
+		public LeaderboardResponse GetGlobal(string token)
+		{
+			var query = GetUriBuilder("api/leaderboards/{0}/global", token).ToString();
+			return Get<LeaderboardResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+		}
+
+		/// <summary>
 		/// Find a single leaderboard matching the token and gameId.
 		/// </summary>
 		/// <param name="token">Token </param>

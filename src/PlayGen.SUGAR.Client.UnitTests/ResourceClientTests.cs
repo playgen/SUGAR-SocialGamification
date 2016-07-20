@@ -207,7 +207,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		}
 
 		[Fact]
-		public void CantTransferNonExistingResource()
+		public void CannotTransferNonExistingResource()
 		{
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
@@ -227,7 +227,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[InlineData(0)]
 		[InlineData(-1)]
 		[InlineData(-2000)]
-		public void CantTransfer_WithLessThan1Quantity(long transferQuantity)
+		public void CannotTransfer_WithLessThan1Quantity(long transferQuantity)
 		{
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
@@ -236,7 +236,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			{
 				GameId = null,
 				ActorId = null,
-				Key = "CantTransfer_WithLessThan1Quantity" + transferQuantity,
+				Key = "CannotTransfer_WithLessThan1Quantity" + transferQuantity,
 				Quantity = 100,
 			});		
 
@@ -251,7 +251,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		}
 
 		[Fact]
-		public void CantTransfer_WithOutOfRangeQuantity()
+		public void CannotTransfer_WithOutOfRangeQuantity()
 		{
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
@@ -260,7 +260,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			{
 				GameId = null,
 				ActorId = null,
-				Key = "CantTransfer_WithOutOfRangeQuantity",
+				Key = "CannotTransfer_WithOutOfRangeQuantity",
 				Quantity = 100,
 			});
 

@@ -51,16 +51,45 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		}
 
 		[Fact]
-		public void CantRegisterInvalidUser()
+		public void CannotRegisterDuplicate()
+		{
+			var accountRequest = new AccountRequest
+			{
+				Name = "CannotRegisterDuplicate",
+				Password = "CannotRegisterDuplicatePassword",
+			};
+
+			var registerResponse = _accountClient.Register(accountRequest);
+
+			Assert.Throws<Exception>(() => _accountClient.Register(accountRequest));
+		}
+
+		[Fact]
+		public void CannotRegisterInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
 			Assert.Throws<Exception>(() => _accountClient.Register(accountRequest));
 		}
 
-		// TODO: Test logging in an existing user
+		[Fact]
+		public void CanLoginValidUser()
+		{
+			var accountRequest = new AccountRequest
+			{
+				Name = "CanLoginValidUser",
+				Password = "CanLoginValidUserPassword",
+			};
+
+			var registerResponse = _accountClient.Register(accountRequest);
+
+			var logged = _accountClient.Login(accountRequest);
+
+			Assert.True(logged.User.Id > 0);
+			Assert.Equal(accountRequest.Name, logged.User.Name);
+		}
 
 		[Fact]
-		public void CantLoginInvalidUser()
+		public void CannotLoginInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
 			Assert.Throws<Exception>(() => _accountClient.Login(accountRequest));
