@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 	{
 		#region Configuration
 		private readonly UserClient _userClient;
-
+		
 		public UserClientTests()
 		{
 			var testSugarClient = new TestSUGARClient();

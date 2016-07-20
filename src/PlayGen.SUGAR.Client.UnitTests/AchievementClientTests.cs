@@ -13,12 +13,16 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		#region Configuration
 		private readonly AchievementClient _achievementClient;
 		private readonly GameDataClient _gameDataClient;
+		private readonly UserClient _userClient;
+		private readonly GameClient _gameClient;
 
 		public AchievementClientTests()
 		{
 			var testSugarClient = new TestSUGARClient();
 			_achievementClient = testSugarClient.Achievement;
 			_gameDataClient = testSugarClient.GameData;
+			_userClient = testSugarClient.User;
+			_gameClient = testSugarClient.Game;
 
 			RegisterAndLogin(testSugarClient.Account);
 		}
@@ -47,12 +51,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanCreateAchievement()
 		{
+			var game = GetOrCreateGame("Create");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CanCreateAchievement",
 				ActorType = ActorType.User,
 				Token = "CanCreateAchievement",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -105,12 +111,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateDuplicateAchievement()
 		{
+			var game = GetOrCreateGame("Create");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotCreateDuplicateAchievement",
 				ActorType = ActorType.User,
 				Token = "CannotCreateDuplicateAchievement",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -134,11 +142,13 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateAchievementWithNoName()
 		{
+			var game = GetOrCreateGame("Create");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				ActorType = ActorType.User,
 				Token = "CannotCreateAchievementWithNoName",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -160,11 +170,13 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateAchievementWithNoToken()
 		{
+			var game = GetOrCreateGame("Create");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotCreateAchievementWithNoToken",
 				ActorType = ActorType.User,
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -186,12 +198,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateAchievementWithNoCompletionCriteria()
 		{
+			var game = GetOrCreateGame("Create");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotCreateAchievementWithNoCompletionCriteria",
 				ActorType = ActorType.User,
 				Token = "CannotCreateAchievementWithNoCompletionCriteria",
-				GameId = 1,
+				GameId = game.Id,
 			};
 
 			Assert.Throws<Exception>(() => _achievementClient.Create(achievementRequest));
@@ -200,12 +214,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateAchievementWithNoAchievementCriteriaKey()
 		{
+			var game = GetOrCreateGame("Create");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotCreateAchievementWithNoAchievementCriteriaKey",
 				ActorType = ActorType.User,
 				Token = "CannotCreateAchievementWithNoAchievementCriteriaKey",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -226,12 +242,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateAchievementWithNoAchievementCriteriaValue()
 		{
+			var game = GetOrCreateGame("Create");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotCreateAchievementWithNoAchievementCriteriaValue",
 				ActorType = ActorType.User,
 				Token = "CannotCreateAchievementWithNoAchievementCriteriaValue",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -251,12 +269,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateAchievementWithNoAchievementCriteriaDataTypeMismatch()
 		{
+			var game = GetOrCreateGame("Create");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotCreateAchievementWithNoAchievementCriteriaDataTypeMismatch",
 				ActorType = ActorType.User,
 				Token = "CannotCreateAchievementWithNoAchievementCriteriaDataTypeMismatch",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -275,14 +295,72 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		}
 
 		[Fact]
+		public void CanGetAchievementsByGame()
+		{
+			var game = GetOrCreateGame("GameGet");
+
+			var achievementRequestOne = new AchievementRequest()
+			{
+				Name = "CanGetAchievementsByGameOne",
+				ActorType = ActorType.User,
+				Token = "CanGetAchievementsByGameOne",
+				GameId = game.Id,
+				CompletionCriteria = new List<AchievementCriteria>()
+				{
+					new AchievementCriteria()
+					{
+						Key = "CanGetAchievementsByGameOne",
+						ComparisonType = ComparisonType.Equals,
+						CriteriaQueryType = CriteriaQueryType.Any,
+						DataType = GameDataType.Float,
+						Scope = CriteriaScope.Actor,
+						Value = "1"
+
+					}
+				},
+			};
+
+			var responseOne = _achievementClient.Create(achievementRequestOne);
+
+			var achievementRequestTwo = new AchievementRequest()
+			{
+				Name = "CanGetAchievementsByGameTwo",
+				ActorType = ActorType.User,
+				Token = "CanGetAchievementsByGameTwo",
+				GameId = game.Id,
+				CompletionCriteria = new List<AchievementCriteria>()
+				{
+					new AchievementCriteria()
+					{
+						Key = "CanGetAchievementsByGameTwo",
+						ComparisonType = ComparisonType.Equals,
+						CriteriaQueryType = CriteriaQueryType.Any,
+						DataType = GameDataType.Float,
+						Scope = CriteriaScope.Actor,
+						Value = "1"
+
+					}
+				},
+			};
+
+			var responseTwo = _achievementClient.Create(achievementRequestTwo);
+
+			var getAchievement = _achievementClient.GetByGame(game.Id);
+
+			Assert.Equal(2, getAchievement.Count());
+		}
+
+		[Fact]
 		public void CanGetAchievementByKeys()
 		{
+			var game = GetOrCreateGame("Get");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CanGetAchievementByKeys",
 				ActorType = ActorType.User,
 				Token = "CanGetAchievementByKeys",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -309,7 +387,9 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotGetNotExistingAchievementByKeys()
 		{
-			var getAchievement = _achievementClient.GetById("CannotGetNotExistingAchievementByKeys", 1);
+			var game = GetOrCreateGame("Get");
+
+			var getAchievement = _achievementClient.GetById("CannotGetNotExistingAchievementByKeys", game.Id);
 
 			Assert.Null(getAchievement);
 		}
@@ -317,13 +397,17 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotGetAchievementByEmptyToken()
 		{
-			Assert.Throws<Exception>(() => _achievementClient.GetById("", 1));
+			var game = GetOrCreateGame("Get");
+
+			Assert.Throws<Exception>(() => _achievementClient.GetById("", game.Id));
 		}
 
 		[Fact]
 		public void CanGetAchievementByKeysThatContainSlashes()
 		{
-			var getAchievement = _achievementClient.GetById("Can/Get/Achievement/By/Keys/That/Contain/Slashes", 1);
+			var game = GetOrCreateGame("Get");
+
+			var getAchievement = _achievementClient.GetById("Can/Get/Achievement/By/Keys/That/Contain/Slashes", game.Id);
 
 			Assert.Null(getAchievement);
 		}
@@ -392,10 +476,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanUpdateAchievement()
 		{
+			var game = GetOrCreateGame("Update");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CanUpdateAchievement",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CanUpdateAchievement",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -418,7 +504,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var updateRequest = new AchievementRequest()
 			{
 				Name = "CanUpdateAchievement Updated",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CanUpdateAchievement",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -447,10 +533,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotUpdateAchievementToDuplicateName()
 		{
+			var game = GetOrCreateGame("Update");
+
 			var achievementRequestOne = new AchievementRequest()
 			{
 				Name = "CannotUpdateAchievementToDuplicateNameOne",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementToDuplicateNameOne",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -473,7 +561,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var achievementRequestTwo = new AchievementRequest()
 			{
 				Name = "CannotUpdateAchievementToDuplicateNameTwo",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementToDuplicateNameTwo",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -496,7 +584,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var updateRequest = new AchievementRequest()
 			{
 				Name = "CannotUpdateAchievementToDuplicateNameOne",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementToDuplicateNameTwo",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -520,10 +608,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotUpdateNonExistingAchievement()
 		{
+			var game = GetOrCreateGame("Update");
+
 			var updateRequest = new AchievementRequest()
 			{
 				Name = "CannotUpdateNonExistingAchievement",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateNonExistingAchievement",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -547,10 +637,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotUpdateAchievemenWithNoName()
 		{
+			var game = GetOrCreateGame("Update");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotUpdateAchievemenWithNoName",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievemenWithNoName",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -574,7 +666,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			{
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievemenWithNoName",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -596,10 +688,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotUpdateAchievementWithNoToken()
 		{
+			var game = GetOrCreateGame("Update");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotUpdateAchievementWithNoToken",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoToken",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -623,7 +717,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			{
 				Name = "CannotUpdateAchievementWithNoToken",
 				ActorType = ActorType.User,
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -645,10 +739,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotUpdateAchievementWithNoCompletionCriteria()
 		{
+			var game = GetOrCreateGame("Update");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotUpdateAchievementWithNoCompletionCriteria",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoCompletionCriteria",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -673,7 +769,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = "CannotUpdateAchievementWithNoCompletionCriteria",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoCompletionCriteria",
-				GameId = 1,
+				GameId = game.Id,
 			};
 
 			Assert.Throws<Exception>(() => _achievementClient.Update(updateRequest));
@@ -682,10 +778,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotUpdateAchievementWithNoAchievementCriteriaKey()
 		{
+			var game = GetOrCreateGame("Update");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotUpdateAchievementWithNoAchievementCriteriaKey",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoAchievementCriteriaKey",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -710,7 +808,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = "CannotUpdateAchievementWithNoAchievementCriteriaKey",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoAchievementCriteriaKey",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -731,10 +829,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotUpdateAchievementWithNoAchievementCriteriaValue()
 		{
+			var game = GetOrCreateGame("Update");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotUpdateAchievementWithNoAchievementCriteriaValue",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoAchievementCriteriaValue",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -759,7 +859,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = "CannotUpdateAchievementWithNoAchievementCriteriaValue",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoAchievementCriteriaValue",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -779,10 +879,12 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotUpdateAchievementWithNoAchievementCriteriaDataTypeMismatch()
 		{
+			var game = GetOrCreateGame("Update");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CannotUpdateAchievementWithNoAchievementCriteriaDataTypeMismatch",
-				GameId = 1,
+				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoAchievementCriteriaDataTypeMismatch",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -807,7 +909,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = "CannotUpdateAchievementWithNoAchievementCriteriaDataTypeMismatch",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoAchievementCriteriaDataTypeMismatch",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -828,12 +930,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanDeleteAchievement()
 		{
+			var game = GetOrCreateGame("Delete");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CanDeleteAchievement",
 				ActorType = ActorType.User,
 				Token = "CanDeleteAchievement",
-				GameId = 1,
+				GameId = game.Id,
 				CompletionCriteria = new List<AchievementCriteria>()
 				{
 					new AchievementCriteria()
@@ -865,13 +969,17 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotDeleteNonExistingAchievement()
 		{
-			_achievementClient.Delete("CannotDeleteNonExistingAchievement", 1);
+			var game = GetOrCreateGame("Delete");
+
+			_achievementClient.Delete("CannotDeleteNonExistingAchievement", game.Id);
 		}
 
 		[Fact]
 		public void CannotDeleteAchievementByEmptyToken()
 		{
-			Assert.Throws<Exception>(() => _achievementClient.Delete("", 1));
+			var game = GetOrCreateGame("Delete");
+
+			Assert.Throws<Exception>(() => _achievementClient.Delete("", game.Id));
 		}
 
 		[Fact]
@@ -925,6 +1033,8 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanGetGlobalAchievementProgress()
 		{
+			var user = GetOrCreateUser("Get");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CanGetGlobalAchievementProgress",
@@ -946,39 +1056,44 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var response = _achievementClient.Create(achievementRequest);
 
-			var progressGame = _achievementClient.GetGlobalProgress(1);
-			Assert.True(progressGame.Count() > 0);
+			var progressGame = _achievementClient.GetGlobalProgress(user.Id);
+			Assert.Equal(1, progressGame.Count());
 
-			var progressAchievement = _achievementClient.GetGlobalAchievementProgress(response.Token, 1);
+			var progressAchievement = _achievementClient.GetGlobalAchievementProgress(response.Token, user.Id);
 			Assert.Equal(0, progressAchievement.Progress);
 
 			var gameData = new GameDataRequest()
 			{
 				Key = "CanGetGlobalAchievementProgress",
 				Value = "1",
-				ActorId = 1,
+				ActorId = user.Id,
 				GameDataType = GameDataType.Float
 			};
 
 			_gameDataClient.Add(gameData);
 
-			progressAchievement = _achievementClient.GetGlobalAchievementProgress(response.Token, 1);
+			progressAchievement = _achievementClient.GetGlobalAchievementProgress(response.Token, user.Id);
 			Assert.Equal(1, progressAchievement.Progress);
 		}
 
 		[Fact]
 		public void CannotGetNotExistingGlobalAchievementProgress()
 		{
-			Assert.Throws<Exception>(() => _achievementClient.GetGlobalAchievementProgress("CannotGetNotExistingGlobalAchievementProgress", 1));
+			var user = GetOrCreateUser("Get");
+
+			Assert.Throws<Exception>(() => _achievementClient.GetGlobalAchievementProgress("CannotGetNotExistingGlobalAchievementProgress", user.Id));
 		}
 
 		[Fact]
 		public void CanGetAchievementProgress()
 		{
+			var user = GetOrCreateUser("Get");
+			var game = GetOrCreateGame("Get");
+
 			var achievementRequest = new AchievementRequest()
 			{
 				Name = "CanGetAchievementProgress",
-				GameId = 10,
+				GameId = game.Id,
 				ActorType = ActorType.Undefined,
 				Token = "CanGetAchievementProgress",
 				CompletionCriteria = new List<AchievementCriteria>()
@@ -997,31 +1112,77 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var response = _achievementClient.Create(achievementRequest);
 
-			var progressGame = _achievementClient.GetGameProgress(10, 1);
-			Assert.True(progressGame.Count() > 0);
+			var progressGame = _achievementClient.GetGameProgress(game.Id, user.Id);
+			Assert.Equal(1, progressGame.Count());
 
-			var progressAchievement = _achievementClient.GetAchievementProgress(response.Token, 10, 1);
+			var progressAchievement = _achievementClient.GetAchievementProgress(response.Token, game.Id, user.Id);
 			Assert.Equal(0, progressAchievement.Progress);
 
 			var gameData = new GameDataRequest()
 			{
 				Key = "CanGetAchievementProgress",
 				Value = "1",
-				ActorId = 1,
-				GameId = 10,
+				ActorId = user.Id,
+				GameId = game.Id,
 				GameDataType = GameDataType.Float
 			};
 
 			_gameDataClient.Add(gameData);
 
-			progressAchievement = _achievementClient.GetAchievementProgress(response.Token, 10, 1);
+			progressAchievement = _achievementClient.GetAchievementProgress(response.Token, game.Id, user.Id);
 			Assert.Equal(1, progressAchievement.Progress);
 		}
 
 		[Fact]
 		public void CannotGetNotExistingAchievementProgress()
 		{
-			Assert.Throws<Exception>(() => _achievementClient.GetAchievementProgress("CannotGetNotExistingAchievementProgress", 10, 1));
+			var user = GetOrCreateUser("Get");
+			var game = GetOrCreateGame("Get");
+
+			Assert.Throws<Exception>(() => _achievementClient.GetAchievementProgress("CannotGetNotExistingAchievementProgress", game.Id, user.Id));
+		}
+		#endregion
+		#region Helpers
+		private ActorResponse GetOrCreateUser(string suffix)
+		{
+			string name = "AchievementControllerTests" + suffix ?? $"_{suffix}";
+			var users = _userClient.Get(name, true);
+			ActorResponse user;
+
+			if (users.Any())
+			{
+				user = users.Single();
+			}
+			else
+			{
+				user = _userClient.Create(new ActorRequest
+				{
+					Name = name
+				});
+			}
+
+			return user;
+		}
+
+		private GameResponse GetOrCreateGame(string suffix)
+		{
+			string name = "AchievementControllerTests" + suffix ?? $"_{suffix}";
+			var games = _gameClient.Get(name);
+			GameResponse game;
+
+			if (games.Any())
+			{
+				game = games.Single();
+			}
+			else
+			{
+				game = _gameClient.Create(new GameRequest
+				{
+					Name = name
+				});
+			}
+
+			return game;
 		}
 		#endregion
 	}

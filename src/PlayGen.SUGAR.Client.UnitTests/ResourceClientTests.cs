@@ -12,12 +12,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		#region Configuration
 		private readonly ResourceClient _resourceClient;
 		private readonly UserClient _userClient;
+		private readonly GameClient _gameClient;
 
 		public ResourceClientTests()
 		{
 			var testSugarClient = new TestSUGARClient();
 			_resourceClient = testSugarClient.Resource;
 			_userClient = testSugarClient.User;
+			_gameClient = testSugarClient.Game;
 
 			RegisterAndLogin(testSugarClient.Account);
 		}
@@ -46,8 +48,13 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanCreate()
 		{
+			var user = GetOrCreateUser("Create");
+			var game = GetOrCreateGame("Create");
+
 			var resourceRequest = new ResourceAddRequest
 			{
+				ActorId = user.Id,
+				GameId = game.Id,
 				Key = "CanCreate",
 				Quantity = 100,
 			};
@@ -59,17 +66,39 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		}
 
 		[Fact]
-		public void CannotCreateDuplicate()
+		public void CanCreateWithoutGameId()
 		{
+			var user = GetOrCreateUser("Create");
+
 			var resourceRequest = new ResourceAddRequest
 			{
-				Key = "CannotCreateDuplicate",
+				ActorId = user.Id,
+				Key = "CanCreateWithoutGameId",
 				Quantity = 100,
 			};
 
-			_resourceClient.AddOrUpdate(resourceRequest);
+			var response = _resourceClient.AddOrUpdate(resourceRequest);
 
-			Assert.Throws<Exception>(() => _resourceClient.AddOrUpdate(resourceRequest));
+			Assert.Equal(resourceRequest.Key, response.Key);
+			Assert.Equal(resourceRequest.Quantity, response.Quantity);
+		}
+
+		[Fact]
+		public void CanCreateWithoutActorId()
+		{
+			var game = GetOrCreateGame("Create");
+
+			var resourceRequest = new ResourceAddRequest
+			{
+				GameId = game.Id,
+				Key = "CanCreateWithoutActorId",
+				Quantity = 100,
+			};
+
+			var response = _resourceClient.AddOrUpdate(resourceRequest);
+
+			Assert.Equal(resourceRequest.Key, response.Key);
+			Assert.Equal(resourceRequest.Quantity, response.Quantity);
 		}
 
 		[Fact]
@@ -100,18 +129,6 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			Assert.Equal(createdQuantity + updatedQuantity, updatedResource.Quantity);
 			Assert.Equal(createdResource.Id, updatedResource.Id);
-		}
-
-		[Fact]
-		public void CantUpdateNonexisting()
-		{
-			var resourceRequest = new ResourceAddRequest
-			{
-				Key = "CantUpdateNonexisting",
-				Quantity = 100,
-			};
-
-			Assert.Throws<Exception>(() => _resourceClient.AddOrUpdate(resourceRequest));
 		}
 
 		[Fact]
@@ -258,6 +275,114 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = transferQuantity,
 			}));
 		}
+
+		[Fact]
+		public void CanGetResource()
+		{
+			var user = GetOrCreateUser("Get");
+			var game = GetOrCreateGame("Get");
+
+			var resourceRequest = new ResourceAddRequest
+			{
+				ActorId = user.Id,
+				GameId = game.Id,
+				Key = "CanGetResource",
+				Quantity = 100,
+			};
+
+			var response = _resourceClient.AddOrUpdate(resourceRequest);
+
+			var get = _resourceClient.Get(game.Id, user.Id, new string[] { "CanGetResource" });
+
+			Assert.Equal(1, get.Count());
+			Assert.Equal(resourceRequest.Key, get.First().Key);
+			Assert.Equal(resourceRequest.Quantity, get.First().Quantity);
+		}
+
+		[Fact]
+		public void CanGetResourceWithoutActorId()
+		{
+			var game = GetOrCreateGame("Get");
+
+			var resourceRequest = new ResourceAddRequest
+			{
+				GameId = game.Id,
+				Key = "CanGetResourceWithoutActorId",
+				Quantity = 100,
+			};
+
+			var response = _resourceClient.AddOrUpdate(resourceRequest);
+
+			var get = _resourceClient.Get(game.Id, null, new string[] { "CanGetResourceWithoutActorId" });
+
+			Assert.Equal(1, get.Count());
+			Assert.Equal(resourceRequest.Key, get.First().Key);
+			Assert.Equal(resourceRequest.Quantity, get.First().Quantity);
+		}
+
+		[Fact]
+		public void CanGetResourceWithoutGameId()
+		{
+			var user = GetOrCreateUser("Get");
+
+			var resourceRequest = new ResourceAddRequest
+			{
+				ActorId = user.Id,
+				Key = "CanGetResourceWithoutGameId",
+				Quantity = 100,
+			};
+
+			var response = _resourceClient.AddOrUpdate(resourceRequest);
+
+			var get = _resourceClient.Get(null, user.Id, new string[] { "CanGetResourceWithoutGameId" });
+
+			Assert.Equal(1, get.Count());
+			Assert.Equal(resourceRequest.Key, get.First().Key);
+			Assert.Equal(resourceRequest.Quantity, get.First().Quantity);
+		}
+
+		[Fact]
+		public void CanGetResourceByMultipleKeys()
+		{
+			var user = GetOrCreateUser("Get");
+			var game = GetOrCreateGame("Get");
+
+			var resourceRequestOne = new ResourceAddRequest
+			{
+				ActorId = user.Id,
+				GameId = game.Id,
+				Key = "CanGetResourceByMultipleKeys1",
+				Quantity = 100,
+			};
+
+			var resourceRequestTwo = new ResourceAddRequest
+			{
+				ActorId = user.Id,
+				GameId = game.Id,
+				Key = "CanGetResourceByMultipleKeys2",
+				Quantity = 100,
+			};
+
+			var resourceRequestThree = new ResourceAddRequest
+			{
+				ActorId = user.Id,
+				GameId = game.Id,
+				Key = "CanGetResourceByMultipleKeys3",
+				Quantity = 100,
+			};
+
+			var responseOne = _resourceClient.AddOrUpdate(resourceRequestOne);
+			var responseTwo = _resourceClient.AddOrUpdate(resourceRequestTwo);
+			var responseThree = _resourceClient.AddOrUpdate(resourceRequestThree);
+
+			var get = _resourceClient.Get(game.Id, user.Id, new string[] { "CanGetResourceByMultipleKeys1", "CanGetResourceByMultipleKeys2", "CanGetResourceByMultipleKeys3" });
+
+			Assert.Equal(3, get.Count());
+			foreach (var r in get)
+			{
+				Assert.Equal(100, r.Quantity);
+			}
+		}
 		#endregion
 
 		#region Helpers
@@ -280,6 +405,27 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			}
 
 			return user;
+		}
+
+		private GameResponse GetOrCreateGame(string suffix)
+		{
+			string name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
+			var games = _gameClient.Get(name);
+			GameResponse game;
+
+			if (games.Any())
+			{
+				game = games.Single();
+			}
+			else
+			{
+				game = _gameClient.Create(new GameRequest
+				{
+					Name = name
+				});
+			}
+
+			return game;
 		}
 		#endregion
 	}

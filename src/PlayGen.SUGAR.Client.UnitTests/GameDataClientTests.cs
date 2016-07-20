@@ -11,11 +11,15 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 	{
 		#region Configuration
 		private readonly GameDataClient _gameDataClient;
+		private readonly UserClient _userClient;
+		private readonly GameClient _gameClient;
 
 		public GameDataClientTests()
 		{
 			var testSugarClient = new TestSUGARClient();
 			_gameDataClient = testSugarClient.GameData;
+			_userClient = testSugarClient.User;
+			_gameClient = testSugarClient.Game;
 
 			RegisterAndLogin(testSugarClient.Account);
 		}
@@ -44,10 +48,13 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanCreate()
 		{
+			var user = GetOrCreateUser("Create");
+			var game = GetOrCreateGame("Create");
+
 			var gameDataRequest = new GameDataRequest
 			{
-				ActorId = 1,
-				GameId = 1,
+				ActorId = user.Id,
+				GameId = game.Id,
 				Key = "CanCreate",
 				Value = "Test Value",
 				GameDataType = GameDataType.String,
@@ -65,9 +72,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanCreateWithoutGameId()
 		{
+			var user = GetOrCreateUser("Create");
+
 			var gameDataRequest = new GameDataRequest
 			{
-				ActorId = 1,
+				ActorId = user.Id,
 				Key = "CanCreateWithoutGameId",
 				Value = "Test Value",
 				GameDataType = GameDataType.String,
@@ -85,9 +94,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanCreateWithoutActorId()
 		{
+			var game = GetOrCreateGame("Create");
+
 			var gameDataRequest = new GameDataRequest
 			{
-				GameId = 1,
+				GameId = game.Id,
 				Key = "CanCreateWithoutActorId",
 				Value = "Test Value",
 				GameDataType = GameDataType.String,
@@ -105,10 +116,13 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateWithoutKey()
 		{
+			var user = GetOrCreateUser("Create");
+			var game = GetOrCreateGame("Create");
+
 			var gameDataRequest = new GameDataRequest
 			{
-				ActorId = 1,
-				GameId = 1,
+				ActorId = user.Id,
+				GameId = game.Id,
 				Value = "Test Value",
 				GameDataType = GameDataType.String,
 			};
@@ -119,10 +133,13 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateWithoutValue()
 		{
+			var user = GetOrCreateUser("Create");
+			var game = GetOrCreateGame("Create");
+
 			var gameDataRequest = new GameDataRequest
 			{
-				ActorId = 1,
-				GameId = 1,
+				ActorId = user.Id,
+				GameId = game.Id,
 				Key = "CannotCreateWithoutKey",
 				GameDataType = GameDataType.String,
 			};
@@ -133,10 +150,13 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotCreateWithMismatchedData()
 		{
+			var user = GetOrCreateUser("Create");
+			var game = GetOrCreateGame("Create");
+
 			var gameDataRequest = new GameDataRequest
 			{
-				ActorId = 1,
-				GameId = 1,
+				ActorId = user.Id,
+				GameId = game.Id,
 				Key = "CannotCreateWithMismatchedData",
 				Value = "Test Value",
 				GameDataType = GameDataType.Float,
@@ -170,10 +190,13 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanGetGameData()
 		{
+			var user = GetOrCreateUser("Get");
+			var game = GetOrCreateGame("Get");
+
 			var gameDataRequest = new GameDataRequest
 			{
-				ActorId = 1,
-				GameId = 1,
+				ActorId = user.Id,
+				GameId = game.Id,
 				Key = "CanGetGameData",
 				Value = "Test Value",
 				GameDataType = GameDataType.String,
@@ -181,7 +204,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var response = _gameDataClient.Add(gameDataRequest);
 
-			var get = _gameDataClient.Get(1, 1, new string[] { "CanGetGameData" });
+			var get = _gameDataClient.Get(user.Id, game.Id, new string[] { "CanGetGameData" });
 
 			Assert.Equal(1, get.Count());
 			Assert.Equal(get.First().ActorId, response.ActorId);
@@ -194,9 +217,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanGetGameDataWithoutActorId()
 		{
+			var game = GetOrCreateGame("Get");
+
 			var gameDataRequest = new GameDataRequest
 			{
-				GameId = 1,
+				GameId = game.Id,
 				Key = "CanGetGameDataWithoutActorId",
 				Value = "Test Value",
 				GameDataType = GameDataType.String,
@@ -204,7 +229,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var response = _gameDataClient.Add(gameDataRequest);
 
-			var get = _gameDataClient.Get(null, 1, new string[] { "CanGetGameDataWithoutActorId" });
+			var get = _gameDataClient.Get(null, game.Id, new string[] { "CanGetGameDataWithoutActorId" });
 
 			Assert.Equal(1, get.Count());
 			Assert.Equal(get.First().ActorId, response.ActorId);
@@ -217,9 +242,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanGetGameDataWithoutGameId()
 		{
+			var user = GetOrCreateUser("Get");
+
 			var gameDataRequest = new GameDataRequest
 			{
-				ActorId = 1,
+				ActorId = user.Id,
 				Key = "CanGetGameDataWithoutGameId",
 				Value = "Test Value",
 				GameDataType = GameDataType.String,
@@ -227,7 +254,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var response = _gameDataClient.Add(gameDataRequest);
 
-			var get = _gameDataClient.Get(1, null, new string[] { "CanGetGameDataWithoutGameId" });
+			var get = _gameDataClient.Get(user.Id, null, new string[] { "CanGetGameDataWithoutGameId" });
 
 			Assert.Equal(1, get.Count());
 			Assert.Equal(get.First().ActorId, response.ActorId);
@@ -238,12 +265,15 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		}
 
 		[Fact]
-		public void CanGetGameDatByMultipleKeys()
+		public void CanGetGameDataByMultipleKeys()
 		{
+			var user = GetOrCreateUser("Get");
+			var game = GetOrCreateGame("Get");
+
 			var gameDataRequestOne = new GameDataRequest
 			{
-				ActorId = 1,
-				GameId = 1,
+				ActorId = user.Id,
+				GameId = game.Id,
 				Key = "CanGetGameDatByMultipleKeys1",
 				Value = "Test Value",
 				GameDataType = GameDataType.String,
@@ -251,8 +281,8 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var gameDataRequestTwo = new GameDataRequest
 			{
-				ActorId = 1,
-				GameId = 1,
+				ActorId = user.Id,
+				GameId = game.Id,
 				Key = "CanGetGameDatByMultipleKeys2",
 				Value = "Test Value",
 				GameDataType = GameDataType.String,
@@ -260,8 +290,8 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var gameDataRequestThree = new GameDataRequest
 			{
-				ActorId = 1,
-				GameId = 1,
+				ActorId = user.Id,
+				GameId = game.Id,
 				Key = "CanGetGameDatByMultipleKeys3",
 				Value = "Test Value",
 				GameDataType = GameDataType.String,
@@ -271,9 +301,56 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var responseTwo = _gameDataClient.Add(gameDataRequestTwo);
 			var responseThree = _gameDataClient.Add(gameDataRequestThree);
 
-			var get = _gameDataClient.Get(1, 1, new string[] { "CanGetGameDatByMultipleKeys1", "CanGetGameDatByMultipleKeys2", "CanGetGameDatByMultipleKeys3" });
+			var get = _gameDataClient.Get(user.Id, game.Id, new string[] { "CanGetGameDatByMultipleKeys1", "CanGetGameDatByMultipleKeys2", "CanGetGameDatByMultipleKeys3" });
 
 			Assert.Equal(3, get.Count());
+			foreach (var g in get)
+			{
+				Assert.Equal("Test Value", g.Value);
+			}
+		}
+		#endregion
+		#region Helpers
+		private ActorResponse GetOrCreateUser(string suffix)
+		{
+			string name = "GameDataControllerTests" + suffix ?? $"_{suffix}";
+			var users = _userClient.Get(name, true);
+			ActorResponse user;
+
+			if (users.Any())
+			{
+				user = users.Single();
+			}
+			else
+			{
+				user = _userClient.Create(new ActorRequest
+				{
+					Name = name
+				});
+			}
+
+			return user;
+		}
+
+		private GameResponse GetOrCreateGame(string suffix)
+		{
+			string name = "GameDataControllerTests" + suffix ?? $"_{suffix}";
+			var games = _gameClient.Get(name);
+			GameResponse game;
+
+			if (games.Any())
+			{
+				game = games.Single();
+			}
+			else
+			{
+				game = _gameClient.Create(new GameRequest
+				{
+					Name = name
+				});
+			}
+
+			return game;
 		}
 		#endregion
 	}
