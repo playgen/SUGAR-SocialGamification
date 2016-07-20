@@ -69,7 +69,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			_resourceClient.AddOrUpdate(resourceRequest);
 
-			Assert.Throws<WebException>(() => _resourceClient.AddOrUpdate(resourceRequest));
+			Assert.Throws<Exception>(() => _resourceClient.AddOrUpdate(resourceRequest));
 		}
 
 		[Fact]
@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 100,
 			};
 
-			Assert.Throws<WebException>(() => _resourceClient.AddOrUpdate(resourceRequest));
+			Assert.Throws<Exception>(() => _resourceClient.AddOrUpdate(resourceRequest));
 		}
 
 		[Fact]
@@ -195,7 +195,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
 
-			Assert.Throws<WebException>(() => _resourceClient.Transfer(new ResourceTransferRequest
+			Assert.Throws<Exception>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
 
 				SenderActorId = fromUser.Id,
@@ -223,7 +223,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 100,
 			});		
 
-			Assert.Throws<WebException>(() => _resourceClient.Transfer(new ResourceTransferRequest
+			Assert.Throws<Exception>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
 				SenderActorId = fromUser.Id,
 				RecipientActorId = toUser.Id,
@@ -249,7 +249,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			long transferQuantity = fromResource.Quantity*2;
 
-			Assert.Throws<WebException>(() => _resourceClient.Transfer(new ResourceTransferRequest
+			Assert.Throws<Exception>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
 				GameId = fromResource.GameId,
 				SenderActorId = fromUser.Id,

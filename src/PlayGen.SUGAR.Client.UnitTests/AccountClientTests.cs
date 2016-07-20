@@ -54,7 +54,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		public void CantRegisterInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
-			Assert.Throws<WebException>(() => _accountClient.Register(accountRequest));
+			Assert.Throws<Exception>(() => _accountClient.Register(accountRequest));
 		}
 
 		// TODO: Test logging in an existing user
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		public void CantLoginInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
-			Assert.Throws<WebException>(() => _accountClient.Login(accountRequest));
+			Assert.Throws<Exception>(() => _accountClient.Login(accountRequest));
 		}
 		#endregion
 	}

@@ -64,7 +64,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			_gameClient.Create(gameRequest);
 
-			Assert.Throws<WebException>(() => _gameClient.Create(gameRequest));
+			Assert.Throws<Exception>(() => _gameClient.Create(gameRequest));
 		}
 
 		[Fact]
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var gameRequest = new GameRequest{};
 
-			Assert.Throws<WebException>(() => _gameClient.Create(gameRequest));
+			Assert.Throws<Exception>(() => _gameClient.Create(gameRequest));
 		}
 
 		[Fact]
@@ -180,7 +180,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = gameRequestOne.Name
 			};
 
-			Assert.Throws<WebException>(() => _gameClient.Update(responseTwo.Id, updateGame));
+			Assert.Throws<Exception>(() => _gameClient.Update(responseTwo.Id, updateGame));
 		}
 
 		[Fact]
@@ -191,7 +191,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = "CannotUpdateNonExistingGame"
 			};
 
-			Assert.Throws<WebException>(() => _gameClient.Update(-1, updateGame));
+			Assert.Throws<Exception>(() => _gameClient.Update(-1, updateGame));
 		}
 
 		[Fact]
@@ -208,7 +208,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			{
 			};
 
-			Assert.Throws<WebException>(() => _gameClient.Update(response.Id, updateRequest));
+			Assert.Throws<Exception>(() => _gameClient.Update(response.Id, updateRequest));
 		}
 
 		[Fact]

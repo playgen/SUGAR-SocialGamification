@@ -14,7 +14,22 @@ namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 		{
 			if (!context.ModelState.IsValid)
 			{
-				context.Result = new BadRequestObjectResult(context.ModelState);
+				var errorString = "";
+				foreach (var value in context.ModelState.Values)
+				{
+					foreach (var error in value.Errors)
+					{
+						if (!string.IsNullOrEmpty(error.ErrorMessage))
+						{
+							errorString += error.ErrorMessage;
+						} else
+						{
+							errorString += error.Exception.Message;
+						}
+						errorString += "\n";
+					}
+				}
+				context.Result = new BadRequestObjectResult(errorString);
 			}
 		}
 

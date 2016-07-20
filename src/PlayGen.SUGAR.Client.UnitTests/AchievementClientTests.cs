@@ -125,7 +125,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			_achievementClient.Create(achievementRequest);
 
-			Assert.Throws<WebException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Create(achievementRequest));
 		}
 
 		[Fact]
@@ -151,7 +151,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Create(achievementRequest));
 		}
 
 		[Fact]
@@ -177,7 +177,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Create(achievementRequest));
 		}
 
 		[Fact]
@@ -191,7 +191,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				GameId = 1,
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Create(achievementRequest));
 		}
 
 		[Fact]
@@ -217,7 +217,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Create(achievementRequest));
 		}
 
 		[Fact]
@@ -242,7 +242,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Create(achievementRequest));
 		}
 
 		[Fact]
@@ -268,7 +268,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Create(achievementRequest));
 		}
 
 		[Fact]
@@ -511,7 +511,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Update(updateRequest));
 		}
 
 		[Fact]
@@ -538,7 +538,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Update(updateRequest));
 		}
 
 		[Fact]
@@ -587,7 +587,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Update(updateRequest));
 		}
 
 		[Fact]
@@ -636,7 +636,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Update(updateRequest));
 		}
 
 		[Fact]
@@ -673,7 +673,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				GameId = 1,
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Update(updateRequest));
 		}
 
 		[Fact]
@@ -722,7 +722,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Update(updateRequest));
 		}
 
 		[Fact]
@@ -770,7 +770,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Update(updateRequest));
 		}
 
 		[Fact]
@@ -819,7 +819,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<WebException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<Exception>(() => _achievementClient.Update(updateRequest));
 		}
 
 		[Fact]
