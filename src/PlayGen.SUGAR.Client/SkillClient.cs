@@ -75,7 +75,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="gameId">ID of Game</param>
 		/// <param name="actorId">ID of Group/User</param>
 		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward skill.</returns>
-		public IEnumerable<AchievementProgressResponse> GetGameProgress(int actorId, int gameId)
+		public IEnumerable<AchievementProgressResponse> GetGameProgress(int gameId, int actorId)
 		{
 			var query = GetUriBuilder("api/skills/game/{0}/evaluate/{1}", gameId, actorId).ToString();
 			return Get<IEnumerable<AchievementProgressResponse>>(query);

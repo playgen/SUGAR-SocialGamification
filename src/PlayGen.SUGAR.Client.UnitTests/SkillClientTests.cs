@@ -1033,7 +1033,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanGetGlobalSkillProgress()
 		{
-			var user = GetOrCreateUser("Get");
+			var user = GetOrCreateUser("ProgressGet");
 
 			var skillRequest = new AchievementRequest()
 			{
@@ -1079,7 +1079,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotGetNotExistingGlobalSkillProgress()
 		{
-			var user = GetOrCreateUser("Get");
+			var user = GetOrCreateUser("ProgressGet");
 
 			Assert.Throws<Exception>(() => _skillClient.GetGlobalSkillProgress("CannotGetNotExistingGlobalSkillProgress", user.Id));
 		}
@@ -1087,8 +1087,8 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanGetSkillProgress()
 		{
-			var user = GetOrCreateUser("Get");
-			var game = GetOrCreateGame("Get");
+			var user = GetOrCreateUser("ProgressGet");
+			var game = GetOrCreateGame("ProgressGet");
 
 			var skillRequest = new AchievementRequest()
 			{
@@ -1136,8 +1136,8 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotGetNotExistingSkillProgress()
 		{
-			var user = GetOrCreateUser("Get");
-			var game = GetOrCreateGame("Get");
+			var user = GetOrCreateUser("ProgressGet");
+			var game = GetOrCreateGame("ProgressGet");
 
 			Assert.Throws<Exception>(() => _skillClient.GetSkillProgress("CannotGetNotExistingSkillProgress", game.Id, user.Id));
 		}

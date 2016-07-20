@@ -1033,7 +1033,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanGetGlobalAchievementProgress()
 		{
-			var user = GetOrCreateUser("Get");
+			var user = GetOrCreateUser("ProgressGet");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -1079,7 +1079,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotGetNotExistingGlobalAchievementProgress()
 		{
-			var user = GetOrCreateUser("Get");
+			var user = GetOrCreateUser("ProgressGet");
 
 			Assert.Throws<Exception>(() => _achievementClient.GetGlobalAchievementProgress("CannotGetNotExistingGlobalAchievementProgress", user.Id));
 		}
@@ -1087,8 +1087,8 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CanGetAchievementProgress()
 		{
-			var user = GetOrCreateUser("Get");
-			var game = GetOrCreateGame("Get");
+			var user = GetOrCreateUser("ProgressGet");
+			var game = GetOrCreateGame("ProgressGet");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -1136,8 +1136,8 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Fact]
 		public void CannotGetNotExistingAchievementProgress()
 		{
-			var user = GetOrCreateUser("Get");
-			var game = GetOrCreateGame("Get");
+			var user = GetOrCreateUser("ProgressGet");
+			var game = GetOrCreateGame("ProgressGet");
 
 			Assert.Throws<Exception>(() => _achievementClient.GetAchievementProgress("CannotGetNotExistingAchievementProgress", game.Id, user.Id));
 		}
