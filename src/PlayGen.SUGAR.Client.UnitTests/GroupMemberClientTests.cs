@@ -369,6 +369,135 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			Assert.Throws<Exception>(() => _groupMemberClient.UpdateMember(relationshipStatusUpdate));
 		}
+
+		[Fact]
+		public void CanGetMemberRequests()
+		{
+			var acceptor = GetOrCreateGroup("CanGetMemberRequests");
+			var requestorNames = new string[] {
+				"CanGetMemberRequests1",
+				"CanGetMemberRequests2",
+				"CanGetMemberRequests3",
+				"CanGetMemberRequests4",
+				"CanGetMemberRequests5"
+			};
+
+			foreach (var name in requestorNames)
+			{
+				var requestor = GetOrCreateUser(name);
+				var relationshipRequest = new RelationshipRequest() {
+					RequestorId = requestor.Id,
+					AcceptorId = acceptor.Id
+				};
+				_groupMemberClient.CreateMemberRequest(relationshipRequest);
+			}
+
+			var requests = _groupMemberClient.GetMemberRequests(acceptor.Id);
+
+			Assert.Equal(5, requests.Count());
+
+			var requestCheck = requests.Select(r => requestorNames.Contains(r.Name));
+
+			Assert.Equal(5, requestCheck.Count());
+		}
+
+		[Fact]
+		public void CanGetSentRequests()
+		{
+			var requestor = GetOrCreateUser("CanGetSentRequests");
+			var acceptorNames = new string[] {
+				"CanGetSentRequests1",
+				"CanGetSentRequests2",
+				"CanGetSentRequests3",
+				"CanGetSentRequests4",
+				"CanGetSentRequests5"
+			};
+
+			foreach (var name in acceptorNames)
+			{
+				var acceptor = GetOrCreateGroup(name);
+				var relationshipRequest = new RelationshipRequest()
+				{
+					RequestorId = requestor.Id,
+					AcceptorId = acceptor.Id
+				};
+				_groupMemberClient.CreateMemberRequest(relationshipRequest);
+			}
+
+			var requests = _groupMemberClient.GetSentRequests(requestor.Id);
+
+			Assert.Equal(5, requests.Count());
+
+			var requestCheck = requests.Select(r => acceptorNames.Contains(r.Name));
+
+			Assert.Equal(5, requestCheck.Count());
+		}
+
+		[Fact]
+		public void CanGetMembers()
+		{
+			var acceptor = GetOrCreateGroup("CanGetMembers");
+			var requestorNames = new string[] {
+				"CanGetMembers1",
+				"CanGetMembers2",
+				"CanGetMembers3",
+				"CanGetMembers4",
+				"CanGetMembers5"
+			};
+
+			foreach (var name in requestorNames)
+			{
+				var requestor = GetOrCreateUser(name);
+				var relationshipRequest = new RelationshipRequest()
+				{
+					RequestorId = requestor.Id,
+					AcceptorId = acceptor.Id,
+					AutoAccept = true
+				};
+				_groupMemberClient.CreateMemberRequest(relationshipRequest);
+			}
+
+			var members = _groupMemberClient.GetMembers(acceptor.Id);
+
+			Assert.Equal(5, members.Count());
+
+			var memberCheck = members.Select(r => requestorNames.Contains(r.Name));
+
+			Assert.Equal(5, memberCheck.Count());
+		}
+
+		[Fact]
+		public void CanGetUserGroups()
+		{
+			var requestor = GetOrCreateUser("CanGetUserGroups");
+			var acceptorNames = new string[] {
+				"CanGetUserGroups1",
+				"CanGetUserGroups2",
+				"CanGetUserGroups3",
+				"CanGetUserGroups4",
+				"CanGetUserGroups5"
+			};
+
+			foreach (var name in acceptorNames)
+			{
+				var acceptor = GetOrCreateGroup(name);
+				var relationshipRequest = new RelationshipRequest()
+				{
+					RequestorId = requestor.Id,
+					AcceptorId = acceptor.Id,
+					AutoAccept = true
+				};
+				_groupMemberClient.CreateMemberRequest(relationshipRequest);
+			}
+
+			var userGroups = _groupMemberClient.GetUserGroups(requestor.Id);
+
+			Assert.Equal(5, userGroups.Count());
+
+			var groupCheck = userGroups.Select(r => acceptorNames.Contains(r.Name));
+
+			Assert.Equal(5, groupCheck.Count());
+		}
 		#endregion
 
 		#region Helpers
