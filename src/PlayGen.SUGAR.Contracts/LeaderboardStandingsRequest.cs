@@ -32,7 +32,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// <summary>
 		/// The Id of the Game the leaderboard. Can be left null for system-wide leaderboards.
 		/// </summary>
-		[Required]
 		public int? GameId { get; set; }
 
 		/// <summary>
@@ -68,7 +67,7 @@ namespace PlayGen.SUGAR.Contracts
 
 		/// <summary>
 		/// The latest point which data should be collected from.
-		/// Can be left null to gather ll data up to the present time.
+		/// Can be left null to gather all data up to the present time.
 		/// </summary>
 		public DateTime DateEnd { get; set; }
 	}

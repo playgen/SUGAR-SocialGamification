@@ -45,6 +45,7 @@ namespace PlayGen.SUGAR.Contracts
 		/// <summary>
 		/// The GameData key which is checked against in order to create the leaderboard standings.
 		/// </summary>
+		[Required]
 		[StringLength(64)]
 		public string Key { get; set; }
 

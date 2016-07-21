@@ -79,6 +79,25 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				{
 					context.Entry(existing).State = EntityState.Modified;
 
+					var hasConflicts = context.Leaderboards.Where(l => (l.Name == leaderboard.Name && l.GameId == leaderboard.GameId));
+
+					if (hasConflicts.Count() > 0)
+					{
+						if (hasConflicts.Any(a => a.Token != leaderboard.Token))
+						{
+							throw new DuplicateRecordException($"A leaderboard with the name {leaderboard.Name} for this game already exists.");
+						}
+					} else
+					{
+						var hasTypeConflicts = ((int)leaderboard.LeaderboardType < 3 && ((int)leaderboard.GameDataType == 1 || (int)leaderboard.GameDataType == 2)) ||
+								((int)leaderboard.LeaderboardType > 2 && ((int)leaderboard.GameDataType == 0 || (int)leaderboard.GameDataType == 3)) ? false : true;
+
+						if (hasTypeConflicts)
+						{
+							throw new System.ArgumentException($"A leaderboard cannot be updated to use LeaderboardType {leaderboard.LeaderboardType.ToString()} and GameDataType{leaderboard.GameDataType.ToString()}, as it would always return zero results.");
+						}
+					}
+
 					existing.Name = leaderboard.Name;
 					existing.Key = leaderboard.Key;
 					existing.ActorType = leaderboard.ActorType;
