@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.Client
 
 		protected bool AreUriParamsValid(object[] param)
 		{
-			return param.All(pa => !string.IsNullOrEmpty(pa.ToString()));
+			return param == null || param.Length == 0 || param.All(pa => !string.IsNullOrEmpty(pa?.ToString()));
 		}
 
 		/// <summary>
