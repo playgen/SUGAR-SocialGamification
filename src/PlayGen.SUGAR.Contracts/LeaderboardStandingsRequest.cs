@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PlayGen.SUGAR.Contracts
@@ -43,7 +41,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// The filter for what standings will be returned.
 		/// </summary>
 		[Required]
-		[JsonConverter(typeof(StringEnumConverter))]
 		public LeaderboardFilterType LeaderboardFilterType { get; set; }
 
 		/// <summary>

@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
-namespace PlayGen.SUGAR.Contracts
+﻿namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
 	/// Encapsulates GameData details from the server.
@@ -41,7 +38,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// <summary>
 		/// The type of the value for this data.
 		/// </summary>
-		[JsonConverter(typeof(StringEnumConverter))]
 		public GameDataType GameDataType { get; set; }
 	}
 }

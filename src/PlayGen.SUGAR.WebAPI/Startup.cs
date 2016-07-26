@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using NLog;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
@@ -91,6 +93,13 @@ namespace PlayGen.SUGAR.WebAPI
 				options.Filters.Add(new ModelValidationFilter());
 				options.Filters.Add(new ExceptionFilter());
 				options.Filters.Add(typeof(AuthorizationHeaderFilter));
+
+			})
+			.AddJsonOptions(json =>
+			{
+				json.SerializerSettings.Formatting = Formatting.Indented;
+				json.SerializerSettings.Converters.Add(new StringEnumConverter());
+				json.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 			});
 
 			services.AddScoped<AuthorizationAttribute>();
@@ -106,9 +115,8 @@ namespace PlayGen.SUGAR.WebAPI
 			loggerFactory.AddDebug();
 			ConfigureCors(app);
 			app.UseMvc();
-
+			
 			ConfigureDocumentationGenerator(app);
-
 		}
 
 		private static void ConfigureRouting(IServiceCollection services)

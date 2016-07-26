@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace PlayGen.SUGAR.Contracts
 {
@@ -47,7 +45,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// The type of data which is being stored.
 		/// </summary>
 		[Required]
-		[JsonConverter(typeof(StringEnumConverter))]
 		public GameDataType GameDataType { get; set; }
 	}
 }

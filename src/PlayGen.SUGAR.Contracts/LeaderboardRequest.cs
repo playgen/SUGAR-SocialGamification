@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PlayGen.SUGAR.Contracts
 {
@@ -53,28 +51,24 @@ namespace PlayGen.SUGAR.Contracts
 		/// The type of actor which this leaderboard is intended for.
 		/// </summary>
 		[Required]
-		[JsonConverter(typeof(StringEnumConverter))]
 		public ActorType ActorType { get; set; }
 
 		/// <summary>
 		/// The GameDataType of the GameData being checked against.
 		/// </summary>
 		[Required]
-		[JsonConverter(typeof(StringEnumConverter))]
 		public GameDataType GameDataType { get; set; }
 
 		/// <summary>
 		/// Whether the criteria will be checked against the actor or relatedactors (i.e. group members, user friends).
 		/// </summary>
 		[Required]
-		[JsonConverter(typeof(StringEnumConverter))]
 		public CriteriaScope CriteriaScope { get; set; }
 
 		/// <summary>
 		/// The method which data will be collected and sorted for this leaderboard.
 		/// </summary>
 		[Required]
-		[JsonConverter(typeof(StringEnumConverter))]
 		public LeaderboardType LeaderboardType { get; set; }
 	}
 }

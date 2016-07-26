@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PlayGen.SUGAR.Contracts
 {
@@ -55,7 +53,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// <summary>
 		/// The type of actor which this achievement/skill is intended to be completed by.
 		/// </summary>
-		[JsonConverter(typeof(StringEnumConverter))]
 		public ActorType ActorType { get; set; }
 
 		/// <summary>

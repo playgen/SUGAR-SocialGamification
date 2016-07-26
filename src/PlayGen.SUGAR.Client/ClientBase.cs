@@ -7,6 +7,7 @@ using System.Net;
 //using System.Net;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
@@ -16,7 +17,19 @@ namespace PlayGen.SUGAR.Client
 		private readonly string _baseAddress;
 		private readonly Credentials _credentials;
 		private readonly IHttpHandler _httpHandler;
-		
+
+		private static readonly JsonSerializerSettings _serializerSettings;
+
+		static ClientBase()
+		{
+			_serializerSettings = new JsonSerializerSettings()
+			{
+				Formatting = Formatting.Indented,
+				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+			};
+			_serializerSettings.Converters.Add(new StringEnumConverter());
+		}
+
 		protected ClientBase(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
 		{
 			if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
@@ -60,7 +73,7 @@ namespace PlayGen.SUGAR.Client
 
 		private static string SerializePayload(Object payload)
 		{
-			return payload == null ? string.Empty : JsonConvert.SerializeObject(payload);
+			return payload == null ? string.Empty : JsonConvert.SerializeObject(payload, _serializerSettings);
 		}
 
 		private HttpRequest CreateRequest(string url, string method, object payload = null, Dictionary<string, string> headers = null)
@@ -89,7 +102,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns></returns>
 		private static TResponse DeserializeResponse<TResponse>(HttpResponse response)
 		{
-			return JsonConvert.DeserializeObject<TResponse>(response.Content);
+			return JsonConvert.DeserializeObject<TResponse>(response.Content, _serializerSettings);
 		}
 
 		protected TResponse Get<TResponse>(string url, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
