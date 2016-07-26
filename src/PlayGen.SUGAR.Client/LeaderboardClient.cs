@@ -10,7 +10,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class LeaderboardClient : ClientBase
 	{
-		public LeaderboardClient(string baseAddress, Credentials credentials) : base(baseAddress, credentials)
+		public LeaderboardClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
+			: base(baseAddress, credentials, httpHandler)
 		{
 		}
 		

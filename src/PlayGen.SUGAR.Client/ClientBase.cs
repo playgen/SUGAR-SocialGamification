@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+//using System.Net;
 using System.Text;
 using Newtonsoft.Json;
+using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
 {
@@ -11,8 +15,9 @@ namespace PlayGen.SUGAR.Client
 	{
 		private readonly string _baseAddress;
 		private readonly Credentials _credentials;
+		private readonly IHttpHandler _httpHandler;
 		
-		protected ClientBase(string baseAddress, Credentials credentials)
+		protected ClientBase(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
 		{
 			if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
 			{
@@ -20,112 +25,61 @@ namespace PlayGen.SUGAR.Client
 			}
 			_baseAddress = baseAddress;
 			_credentials = credentials;
+			_httpHandler = httpHandler;
+		}
+
+		protected bool AreUriParamsValid(object[] param)
+		{
+			return param.All(pa => !string.IsNullOrEmpty(pa.ToString()));
 		}
 
 		/// <summary>
 		/// Get a UriBuilder object with the origin and web api path
 		/// </summary>
 		/// <param name="apiSuffix">WebAPI path relative to web origin, eg. /api</param>
+		/// <param name="param">URI para</param>
 		/// <returns></returns>
-
-		protected bool IsURIParamsValid(object[] param)
-		{
-			foreach (var pa in param)
-			{
-				if (string.IsNullOrEmpty(pa.ToString()))
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
-
 		protected UriBuilder GetUriBuilder(string apiSuffix, params object[] param)
 		{
-			if (!IsURIParamsValid(param))
+			Console.WriteLine("ClientBase::GetUriBuilder");
+
+			if (!AreUriParamsValid(param))
 			{
 				throw new Exception("Passed values must not be empty or null");
 			}
 
-			var formattedURI = string.Format(apiSuffix, param);
+			var formattedUri = string.Format(apiSuffix, param);
 
 			var separator = "";
-			if (!(_baseAddress.EndsWith("/") || formattedURI.StartsWith("/")))
+			if (!(_baseAddress.EndsWith("/") || formattedUri.StartsWith("/")))
 			{
 				separator = "/";
 			}
-			return new UriBuilder(_baseAddress + separator + formattedURI);
+			return new UriBuilder(_baseAddress + separator + formattedUri);
 		}
 
-		protected TResponse Get<TResponse>(string uri, HttpStatusCode[] acceptableStatusCodes = null)
+		private static string SerializePayload(Object payload)
 		{
-			var request = CreateRequest(uri, "GET");
-			HttpWebResponse response;
-			try
+			return payload == null ? string.Empty : JsonConvert.SerializeObject(payload);
+		}
+
+		private HttpRequest CreateRequest(string url, string method, object payload = null, Dictionary<string, string> headers = null)
+		{
+			var requestHeaders = headers == null ? new Dictionary<string, string>() : new Dictionary<string, string>(headers);
+			if (requestHeaders.ContainsKey("Authorization") == false)
 			{
-				response = (HttpWebResponse)request.GetResponse();
+				requestHeaders.Add("Authorization", _credentials.Authorization);
 			}
-			catch (WebException ex)
+
+			return new HttpRequest()
 			{
-				response = (HttpWebResponse)ex.Response;
-			}
-			ProcessResponse(response, acceptableStatusCodes ?? new HttpStatusCode[] { HttpStatusCode.OK });
-			return GetResponse<TResponse>(response);
+				Url = url,
+				Method = method,
+				Headers = requestHeaders,
+				Content = SerializePayload(payload)
+			};
 		}
 
-		protected TResponse Post<TRequest, TResponse>(string url, TRequest payload)
-		{
-			var response = PostPut(url, payload, "POST");
-			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
-			return GetResponse<TResponse>(response);
-		}
-
-		protected void Post<TRequest>(string url, TRequest payload)
-		{
-			var response = PostPut(url, payload, "POST");
-			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
-		}
-
-		protected TResponse Put<TRequest, TResponse>(string url, TRequest payload)
-		{
-			var response = PostPut(url, payload, "PUT");
-			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
-			return GetResponse<TResponse>(response);
-		}
-
-		protected void Put<TRequest>(string url, TRequest payload)
-		{
-			var response = PostPut(url, payload, "PUT");
-			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
-		}
-
-		protected TResponse Delete<TResponse>(string url)
-		{
-			var response = DeleteRequest(url);
-			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
-			return GetResponse<TResponse>(response);
-		}
-
-		protected void Delete(string url)
-		{
-			var response = DeleteRequest(url);
-			ProcessResponse(response, new HttpStatusCode[] { HttpStatusCode.OK });
-		}
-
-		/// <summary>
-		/// Set the content stream and related properties of the specified WebRequest object with the byte array
-		/// </summary>
-		/// <param name="request"></param>
-		/// <param name="payload"></param>
-		private static void SendData(WebRequest request, byte[] payload)
-		{
-			request.ContentLength = payload.Length;
-			request.ContentType = "application/json";
-			var dataStream = request.GetRequestStream();
-			dataStream.Write(payload, 0, payload.Length);
-			dataStream.Close();
-		}
 
 		/// <summary>
 		/// 
@@ -133,87 +87,96 @@ namespace PlayGen.SUGAR.Client
 		/// <typeparam name="TResponse"></typeparam>
 		/// <param name="response"></param>
 		/// <returns></returns>
-		private static TResponse GetResponse<TResponse>(WebResponse response)
+		private static TResponse DeserializeResponse<TResponse>(HttpResponse response)
 		{
-			var dataStream = response.GetResponseStream();
-			if (dataStream == null || response.ContentLength == 0)
-			{
-				return default(TResponse);
-			}
-			var reader = new StreamReader(dataStream);
-			return JsonConvert.DeserializeObject<TResponse>(reader.ReadToEnd());
+			return JsonConvert.DeserializeObject<TResponse>(response.Content);
 		}
 
-		/// <summary>
-		/// Create a WebRequest for the specified uri and HTTP verb
-		/// </summary>
-		/// <param name="uri"></param>
-		/// <param name="method">HTTP verb (GET or DELETE)</param>
-		/// <returns></returns>
-		private WebRequest CreateRequest(string uri, string method)
+		protected TResponse Get<TResponse>(string url, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
 		{
-			var request = WebRequest.Create(uri);
-			request.Method = method;
-			request.Headers.Add("Authorization", _credentials.Authorization);
-			return request;
+			return GetDelete<TResponse>(url, "GET");
+		}
+
+		protected void Get(string url, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			GetDelete(url, "GET");
+		}
+
+		protected TResponse Post<TRequest, TResponse>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			return PostPut<TResponse>(url, "POST", payload);
+		}
+
+		protected void Post<TRequest>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			PostPut(url, "POST", payload);
+		}
+
+		protected TResponse Put<TRequest, TResponse>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			return PostPut<TResponse>(url, "PUT", payload);
+		}
+
+		protected void Put<TRequest>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			PostPut(url, "PUT", payload);
+		}
+
+		protected TResponse Delete<TResponse>(string url, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			return GetDelete<TResponse>(url, "DELETE");
+		}
+
+		protected void Delete(string url)
+		{
+			GetDelete(url, "DELETE");
+		}
+
+		protected TResponse PostPut<TResponse>(string url, string method, object payload = null, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			var response = _httpHandler.HandleRequest(CreateRequest(url, method, payload, headers));
+			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
+			return DeserializeResponse<TResponse>(response);
+		}
+
+		protected void PostPut(string url, string method, object payload = null, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			var response = _httpHandler.HandleRequest(CreateRequest(url, method, payload, headers));
+			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
+		}
+
+		protected TResponse GetDelete<TResponse>(string url, string method, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			var response = _httpHandler.HandleRequest(CreateRequest(url, method, headers));
+			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
+			return DeserializeResponse<TResponse>(response);
+		}
+
+		protected void GetDelete(string url, string method, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			var response = _httpHandler.HandleRequest(CreateRequest(url, method, headers));
+			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
 		}
 
 		/// <summary>
 		/// Inspect the web response status code, returns on success or throw.
 		/// </summary>
 		/// <param name="response"></param>
+		/// <param name="expectedStatusCodes"></param>
 		/// <exception cref="Exception">HTTP Status Code not equal to 200 (OK)</exception>
-		private void ProcessResponse(HttpWebResponse response, HttpStatusCode[] expectedStatusCode)
+		private void ProcessResponse(HttpResponse response, IEnumerable<HttpStatusCode> expectedStatusCodes)
 		{
-			if (!expectedStatusCode.Contains(response.StatusCode))
+			if (!expectedStatusCodes.Contains((HttpStatusCode)response.StatusCode))
 			{
 				var error = "API ERROR. Status Code: " + response.StatusCode + ".";
 				if (!((int)response.StatusCode >= 200 && (int)response.StatusCode <= 299))
 				{
-					using (var reader = new StreamReader(response.GetResponseStream()))
-					{
-						error += " Message: " + reader.ReadToEnd();
-					}
+					error += " Message: " + response.Content;
 				}
 				throw new Exception(error);
 			}
 
 			_credentials.Authorization = response.Headers["Authorization"];
-		}
-
-		private HttpWebResponse PostPut<TRequest>(string url, TRequest payload, string method)
-		{
-			var payloadString = JsonConvert.SerializeObject(payload);
-			var payloadBytes = Encoding.UTF8.GetBytes(payloadString);
-			var request = CreateRequest(url, method);
-			SendData(request, payloadBytes);
-			HttpWebResponse response;
-			try
-			{
-				response = (HttpWebResponse)request.GetResponse();
-			}
-			catch (WebException ex)
-			{
-				response = (HttpWebResponse)ex.Response;
-			}
-			
-			return response;
-		}
-
-		private HttpWebResponse DeleteRequest(string url)
-		{
-			var request = CreateRequest(url, "DELETE");
-			HttpWebResponse response;
-			try
-			{
-				response = (HttpWebResponse)request.GetResponse();
-			}
-			catch (WebException ex)
-			{
-				response = (HttpWebResponse)ex.Response;
-			}
-
-			return response;
 		}
 	}
 }

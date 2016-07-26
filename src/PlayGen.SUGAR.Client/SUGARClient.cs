@@ -2,6 +2,8 @@
 {
 	public class SUGARClient
 	{
+		private readonly IHttpHandler _httpHandler;
+
 		private readonly string _baseAddress;
 		private readonly Credentials _credentials = new Credentials();
 
@@ -17,21 +19,22 @@
 		private LeaderboardClient _leaderboardClient;
 		private SkillClient _skillClient;
 
-		public AccountClient Account					=> _accountClient ?? (_accountClient = new AccountClient(_baseAddress, _credentials));
-		public AchievementClient Achievement			=> _achievementClient ?? (_achievementClient = new AchievementClient(_baseAddress, _credentials));
-		public GameClient Game							=> _gameClient ?? (_gameClient = new GameClient(_baseAddress, _credentials));
-		public GameDataClient GameData					=> _gameDataClient ?? (_gameDataClient = new GameDataClient(_baseAddress, _credentials));
-		public GroupClient Group						=> _groupClient ?? (_groupClient = new GroupClient(_baseAddress, _credentials));
-		public GroupMemberClient GroupMember			=> _groupMemberClient ?? (_groupMemberClient = new GroupMemberClient(_baseAddress, _credentials));
-		public UserClient User							=> _userClient ?? (_userClient = new UserClient(_baseAddress, _credentials));
-		public UserFriendClient UserFriend				=> _userFriendClient ?? (_userFriendClient = new UserFriendClient(_baseAddress, _credentials));
-		public ResourceClient Resource					=> _resourceClient ?? (_resourceClient = new ResourceClient(_baseAddress, _credentials));
-		public LeaderboardClient Leaderboard			=> _leaderboardClient ?? (_leaderboardClient = new LeaderboardClient(_baseAddress, _credentials));
-		public SkillClient Skill						=> _skillClient ?? (_skillClient = new SkillClient(_baseAddress, _credentials));
+		public AccountClient Account			=> _accountClient ?? (_accountClient = new AccountClient(_baseAddress, _credentials, _httpHandler));
+		public AchievementClient Achievement	=> _achievementClient ?? (_achievementClient = new AchievementClient(_baseAddress, _credentials, _httpHandler));
+		public GameClient Game					=> _gameClient ?? (_gameClient = new GameClient(_baseAddress, _credentials, _httpHandler));
+		public GameDataClient GameData			=> _gameDataClient ?? (_gameDataClient = new GameDataClient(_baseAddress, _credentials, _httpHandler));
+		public GroupClient Group				=> _groupClient ?? (_groupClient = new GroupClient(_baseAddress, _credentials, _httpHandler));
+		public GroupMemberClient GroupMember	=> _groupMemberClient ?? (_groupMemberClient = new GroupMemberClient(_baseAddress, _credentials, _httpHandler));
+		public UserClient User					=> _userClient ?? (_userClient = new UserClient(_baseAddress, _credentials, _httpHandler));
+		public UserFriendClient UserFriend		=> _userFriendClient ?? (_userFriendClient = new UserFriendClient(_baseAddress, _credentials, _httpHandler));
+		public ResourceClient Resource			=> _resourceClient ?? (_resourceClient = new ResourceClient(_baseAddress, _credentials, _httpHandler));
+		public LeaderboardClient Leaderboard	=> _leaderboardClient ?? (_leaderboardClient = new LeaderboardClient(_baseAddress, _credentials, _httpHandler));
+		public SkillClient Skill				=> _skillClient ?? (_skillClient = new SkillClient(_baseAddress, _credentials, _httpHandler));
 
-		public SUGARClient(string baseAddress)
+		public SUGARClient(string baseAddress, IHttpHandler httpHandler = null)
 		{
 			_baseAddress = baseAddress;
+			_httpHandler = httpHandler ?? new DefaultHttpHandler();
 		}
 	}
 }

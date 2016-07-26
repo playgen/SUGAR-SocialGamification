@@ -9,6 +9,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 	public class GroupMemberClientTests
 	{
 		#region Configuration
+
 		private readonly GroupMemberClient _groupMemberClient;
 		private readonly GroupClient _groupClient;
 		private readonly UserClient _userClient;
@@ -41,9 +42,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				client.Register(accountRequest);
 			}
 		}
+
 		#endregion
 
 		#region Tests
+
 		[Fact]
 		public void CanCreateRequest()
 		{
@@ -498,6 +501,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			Assert.Equal(5, groupCheck.Count());
 		}
+
 		#endregion
 
 		#region Helpers
@@ -542,6 +546,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			return group;
 		}
+
 		#endregion
 
 	}

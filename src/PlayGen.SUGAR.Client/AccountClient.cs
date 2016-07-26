@@ -1,4 +1,6 @@
-﻿using PlayGen.SUGAR.Client.Extensions;
+﻿using System;
+using System.Diagnostics;
+using PlayGen.SUGAR.Client.Extensions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Controllers;
 
@@ -9,7 +11,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class AccountClient : ClientBase
 	{
-		public AccountClient(string baseAddress, Credentials credentials) : base(baseAddress, credentials)
+		public AccountClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
+			: base(baseAddress, credentials, httpHandler)
 		{
 		}
 
@@ -21,6 +24,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		public AccountResponse Login(AccountRequest account)
 		{
+			Console.WriteLine("AccountClient::Login");
 			var query = GetUriBuilder("api/account/login").ToString();
 			return Post<AccountRequest, AccountResponse>(query, account);
 		}

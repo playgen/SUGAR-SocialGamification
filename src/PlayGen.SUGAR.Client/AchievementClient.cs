@@ -9,7 +9,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class AchievementClient : ClientBase
 	{
-		public AchievementClient(string baseAddress, Credentials credentials) : base(baseAddress, credentials)
+		public AchievementClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler) 
+			: base(baseAddress, credentials, httpHandler)
 		{
 		}
 
@@ -21,7 +22,7 @@ namespace PlayGen.SUGAR.Client
 		public AchievementResponse GetGlobalById(string token)
 		{
 			var query = GetUriBuilder("api/achievements/find/{0}/global", token).ToString();
-			return Get<AchievementResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<AchievementResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
@@ -33,7 +34,7 @@ namespace PlayGen.SUGAR.Client
 		public AchievementResponse GetById(string token, int gameId)
 		{
 			var query = GetUriBuilder("api/achievements/find/{0}/{1}", token, gameId).ToString();
-			return Get<AchievementResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<AchievementResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>

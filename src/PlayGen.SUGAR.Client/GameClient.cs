@@ -10,7 +10,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class GameClient : ClientBase
 	{
-		public GameClient(string baseAddress, Credentials credentials) : base(baseAddress, credentials)
+		public GameClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
+			: base(baseAddress, credentials, httpHandler)
 		{
 		}
 
