@@ -1,3 +1,7 @@
+---
+uid: relationship
+---
+
 # Relationship
 Relationships are connections between two or more entities. For example a user belonging to a group or a user being friends or following another user. Relationships may follow a step by step process depending on the use case, for example in adding a ‘friend’, the relationship is initially stored as a request from the requester to the receiver until accepted by the receiver. Whereas the receiver may also refuse or block the request. 
 

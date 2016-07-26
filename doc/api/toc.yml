@@ -9,6 +9,8 @@
     name: ClientBase
   - uid: PlayGen.SUGAR.Client.Credentials
     name: Credentials
+  - uid: PlayGen.SUGAR.Client.DefaultHttpHandler
+    name: DefaultHttpHandler
   - uid: PlayGen.SUGAR.Client.GameClient
     name: GameClient
   - uid: PlayGen.SUGAR.Client.GameDataClient
@@ -17,6 +19,12 @@
     name: GroupClient
   - uid: PlayGen.SUGAR.Client.GroupMemberClient
     name: GroupMemberClient
+  - uid: PlayGen.SUGAR.Client.HttpRequest
+    name: HttpRequest
+  - uid: PlayGen.SUGAR.Client.HttpResponse
+    name: HttpResponse
+  - uid: PlayGen.SUGAR.Client.IHttpHandler
+    name: IHttpHandler
   - uid: PlayGen.SUGAR.Client.LeaderboardClient
     name: LeaderboardClient
   - uid: PlayGen.SUGAR.Client.ResourceClient
@@ -47,12 +55,27 @@
     name: GameClientTests
   - uid: PlayGen.SUGAR.Client.IntegrationTests.GameDataClientTests
     name: GameDataClientTests
+  - uid: PlayGen.SUGAR.Client.IntegrationTests.GroupClientTests
+    name: GroupClientTests
+  - uid: PlayGen.SUGAR.Client.IntegrationTests.GroupMemberClientTests
+    name: GroupMemberClientTests
   - uid: PlayGen.SUGAR.Client.IntegrationTests.LeaderboardClientTests
     name: LeaderboardClientTests
   - uid: PlayGen.SUGAR.Client.IntegrationTests.ResourceClientTests
     name: ResourceClientTests
+  - uid: PlayGen.SUGAR.Client.IntegrationTests.SkillClientTests
+    name: SkillClientTests
   - uid: PlayGen.SUGAR.Client.IntegrationTests.TestSUGARClient
     name: TestSUGARClient
+  - uid: PlayGen.SUGAR.Client.IntegrationTests.UserClientTests
+    name: UserClientTests
+  - uid: PlayGen.SUGAR.Client.IntegrationTests.UserFriendClientTests
+    name: UserFriendClientTests
+- uid: PlayGen.SUGAR.Client.Unity
+  name: PlayGen.SUGAR.Client.Unity
+  items:
+  - uid: PlayGen.SUGAR.Client.Unity.UnityWebGlHttpHandler
+    name: UnityWebGlHttpHandler
 - uid: PlayGen.SUGAR.Contracts
   name: PlayGen.SUGAR.Contracts
   items:
@@ -208,6 +231,8 @@
   items:
   - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.AccountControllerTests
     name: AccountControllerTests
+  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.AchievementControllerTests
+    name: AchievementControllerTests
   - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.GameControllerTests
     name: GameControllerTests
   - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.GameDataControllerTests
@@ -358,6 +383,8 @@
     name: AuthorizationAttribute
   - uid: PlayGen.SUGAR.WebAPI.Controllers.Filters.AuthorizationHeaderFilter
     name: AuthorizationHeaderFilter
+  - uid: PlayGen.SUGAR.WebAPI.Controllers.Filters.ExceptionFilter
+    name: ExceptionFilter
   - uid: PlayGen.SUGAR.WebAPI.Controllers.Filters.ModelValidationFilter
     name: ModelValidationFilter
 - uid: PlayGen.SUGAR.WebAPI.Exceptions

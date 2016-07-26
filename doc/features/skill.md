@@ -1,3 +1,7 @@
+---
+uid: skill
+---
+
 # Skills
 Skills represent a players proficiency or ability. SUGAR allows the game designer to define and track which skills the game is designed to teach.
 

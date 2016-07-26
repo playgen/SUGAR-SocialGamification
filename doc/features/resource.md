@@ -1,3 +1,7 @@
+---
+uid: resource
+---
+
 # Resources
 Resources provide a flexible set of game objects which may be associated with actors. Resources may represent or track such objects as scores, experience points, in-game currency or in-game items. They may be earned, spent, gifted or otherwise associated. Resource provide the ability for inventories to be assigned to individual or group actors. 
 

@@ -1,7 +1,7 @@
 .navbar-inverse .navbar-nav>li>a {
 	color: #ffffff;
 	font-weight: bold;
-	font-size: +1.5em;
+	font-size: +1.4em;
 }
 
 .navbar-inverse .navbar-nav>.active>a, 
@@ -30,4 +30,13 @@ button.navbar-toggle:hover {
 }
 button.navbar-toggle:hover .icon-bar {
 	background-color: black;
+}
+
+@media (min-width: 1300px)
+.container {
+    width: 1245px;
+}
+
+.nav>li>a {
+    padding: 15px 10px;
 }

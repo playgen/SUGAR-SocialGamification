@@ -1,3 +1,7 @@
+---
+uid: group
+---
+
 # Group
 Groups are actors representing collection of actors. They may be individual or multiple game persistent. Groups can be moderated through administrator tools or users, or set up and managed through the game as described by the game designers. 
 

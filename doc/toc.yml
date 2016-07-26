@@ -1,15 +1,15 @@
 ﻿- name: Home
   href: index.md
   homepage: index.md
+- name: Concepts
+  href: concepts/
 - name: Features
   href: features/
-- name: Core Concepts
-  href: concepts/
+- name: C# API
+  href: api/
+- name: REST API
+  href: restapi/
+- name: Source & Deployment
+  href: development/
 - name: Demo
   href: demo/
-- name: Client API Reference
-  href: api/
-- name: RESTful API Reference
-  href: restapi/
-- name: Installation
-  href: installation/

@@ -1,9 +1,13 @@
+---
+uid: gameData
+---
+
 # GameData
 GameData is a storage system, following a key-value structure. It is used by SUGAR features and provides flexibility in providing custom game-specific storage solutions.
 
-GameData provides storage for [Achievements](achievement.md), [Skills](skill.md), [Resources](resource.md) and custom general data. 
+GameData provides storage for <xref:achievement>, [Skills](skill.md), [Resources](resource.md) and custom general data. 
 
-GameData storage is used by [Achievements](achievement.md), [Leaderboards](leaderboard.md), [Skills](skill.md), [Resources](resource.md) and custom general data. 
+GameData storage is used by <xref:achievement>, [Leaderboards](leaderboard.md), [Skills](skill.md), [Resources](resource.md) and custom general data. 
 
 ## Features
 * CRD GameData 
@@ -21,18 +25,18 @@ GameData storage is used by [Achievements](achievement.md), [Leaderboards](leade
 
 ## API
 * Client
-    * [GameDataClient](xref:PlayGen.SUGAR.Client.GameDataClient)
+    * <xref:PlayGen.SUGAR.Client.GameDataClient)
 * Contracts
-    * [GameDataRequest](xref:PlayGen.SUGAR.Contracts.GameDataRequest)
-    * [GameDataResponse](xref:PlayGen.SUGAR.Contracts.GameDataResponse)
-    * [GameDataType](xref:PlayGen.SUGAR.Contracts.CriteriaQueryType)
+    * <xref:PlayGen.SUGAR.Contracts.GameDataRequest>
+    * <xref:PlayGen.SUGAR.Contracts.GameDataResponse>
+    * <xref:PlayGen.SUGAR.Contracts.CriteriaQueryType>
 * WebAPI
-    * [GameDataController](xref:PlayGen.SUGAR.WebAPI.Controllers.GameDataController)
+    * <xref:PlayGen.SUGAR.WebAPI.Controllers.GameDataController>
 
 ## Examples
 * Submitting custom GameData
 
- 	Custom GameData is submitted using the [GameDataClient](xref:PlayGen.SUGAR.Client.GameDataClient)'s Add function with a [GameDataRequest](xref:PlayGen.SUGAR.Contracts.GameDataRequest) as the parameter. This explains how to track the number of dragon eggs hatched by the user, specifying "EggHatched" as the key.
+ 	Custom GameData is submitted using the <(xref:PlayGen.SUGAR.Client.GameDataClient>'s Add function with a <xref:PlayGen.SUGAR.Contracts.GameDataRequest> as the parameter. This explains how to track the number of dragon eggs hatched by the user, specifying "EggHatched" as the key.
 
 ```cs 
 		public SUGARClient sugarClient = new SUGARClient(BaseUri);
@@ -62,7 +66,7 @@ GameData storage is used by [Achievements](achievement.md), [Leaderboards](leade
 
 * Querying for GameData
 
-	GameData is retreived using the [GameDataClient](xref:PlayGen.SUGAR.Client.GameDataClient)'s Get function with the ActorId and GameId you want to query as parameters. The parameters also takes a list of keys you want to find entries for in gameData. This example shows how to retrieve the user's "EggHatched" [GameDataResponse](xref:PlayGen.SUGAR.Contracts.GameDataResponse) objects and count them.
+	GameData is retreived using the <xref:PlayGen.SUGAR.Client.GameDataClient>'s Get function with the ActorId and GameId you want to query as parameters. The parameters also takes a list of keys you want to find entries for in gameData. This example shows how to retrieve the user's "EggHatched" <xref:PlayGen.SUGAR.Contracts.GameDataResponse> objects and count them.
 
 ```cs 
 		private long GetEggsHatched()

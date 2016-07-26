@@ -1,0 +1,6 @@
+- name: Installation
+  href: index.md
+  homepage: index.md
+- name: WebAPI
+- name: Client
+- name: Admin Interface
