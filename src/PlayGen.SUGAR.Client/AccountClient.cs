@@ -38,6 +38,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
 		public AccountResponse Register(AccountRequest accountRequest)
 		{
+			Console.WriteLine("AccountClient::Register");
 			var query = GetUriBuilder("api/account/register").ToString();
 			return Post<AccountRequest, AccountResponse>(query, accountRequest);
 		}
