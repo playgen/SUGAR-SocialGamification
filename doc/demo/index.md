@@ -1,13 +1,5 @@
 # Demo
 
-## Admin Panel
-
-The admin panel provides user-friendly interactions for altering data in the SUGAR engine. 
-
-	 *Username: admin
-	 *Password: admin 
-
-[Admin Panel Demo](https://admindemo.sugarengine.org/) 
 
 ## Game
 
