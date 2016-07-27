@@ -23,7 +23,6 @@ namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers
 			_accountController = new AccountController(
 				new Data.EntityFramework.Controllers.AccountController(TestController.NameOrConnectionString),
 				new Data.EntityFramework.Controllers.UserController(TestController.NameOrConnectionString),
-				new PasswordEncryption(),
 				new JsonWebTokenUtility("5Y2gQ33IrRffE66030Dy1om5nk4HI58V"));
 
 			_userDbController = new Data.EntityFramework.Controllers.UserController(TestController.NameOrConnectionString);

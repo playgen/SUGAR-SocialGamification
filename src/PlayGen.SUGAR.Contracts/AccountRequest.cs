@@ -32,7 +32,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// <summary>
 		/// Whether the user will be logged in upon registering.
 		/// </summary>
-		[Required]
 		public bool AutoLogin { get; set; }
 	}
 }

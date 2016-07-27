@@ -22,16 +22,20 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	{
 		private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
 		private readonly Data.EntityFramework.Controllers.UserController _userDbController;
-		private readonly PasswordEncryption _passwordEncryption;
 		private readonly JsonWebTokenUtility _jsonWebTokenUtility;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="accountDbController"></param>
+		/// <param name="userDbController"></param>
+		/// <param name="passwordEncryption"></param>
+		/// <param name="jsonWebTokenUtility"></param>
 		public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
 			Data.EntityFramework.Controllers.UserController userDbController,
-			PasswordEncryption passwordEncryption,
 			JsonWebTokenUtility jsonWebTokenUtility)
 		{
 			_accountDbController = accountDbController;
-			_passwordEncryption = passwordEncryption;
 			_userDbController = userDbController;
 			_jsonWebTokenUtility = jsonWebTokenUtility;
 		}
@@ -50,16 +54,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
 		public IActionResult Login([FromBody]AccountRequest accountRequest)
 		{
-			var accounts = _accountDbController.Get(new string[] { accountRequest.Name });
+			var account = _accountDbController.Get(new string[] { accountRequest.Name }).SingleOrDefault();
 
-			if (!accounts.Any())
-			{
-				throw new InvalidAccountDetailsException("Invalid Login Details.");
-			}
-
-			var account = accounts.ElementAt(0);
-
-			if (account.PasswordHash != _passwordEncryption.Encrypt(accountRequest.Password, account.Salt))
+			if (account == null || PasswordEncryption.Verify(accountRequest.Password, account.Password) == false)
 			{
 				throw new InvalidAccountDetailsException("Invalid Login Details.");
 			}
@@ -153,11 +150,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		private Account CreateAccount(AccountRequest accountRequest, User user)
 		{
 			var newAccount = accountRequest.ToModel();
-			newAccount.Salt = _passwordEncryption.CreateSalt();
-			newAccount.PasswordHash = _passwordEncryption.Encrypt(accountRequest.Password, newAccount.Salt);
+			newAccount.Password = PasswordEncryption.Encrypt(accountRequest.Password);
 			newAccount.UserId = user.Id;
 			newAccount.User = user;
-
 			return _accountDbController.Create(newAccount);
 		}
 
