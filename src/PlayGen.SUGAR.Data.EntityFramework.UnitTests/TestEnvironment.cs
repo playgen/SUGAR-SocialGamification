@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		private void DeleteDatabase()
 		{
-			using (var context = new SGAContext(_connectionString))
+			using (var context = new SUGARContext(_connectionString))
 			{
 				if (context.Database.Connection.Database == _dbName)
 				{

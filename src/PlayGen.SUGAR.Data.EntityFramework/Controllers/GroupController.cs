@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Group> Get()
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Group> Search(string name)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Group Search(int id)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(Group group)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(Group group)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Delete(int id)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 

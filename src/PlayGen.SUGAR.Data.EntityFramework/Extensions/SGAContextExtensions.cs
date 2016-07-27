@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
 	public static class SGAContextExtensions
 	{
-		public static void HandleDetatchedGame(this SGAContext context, int? gameId)
+		public static void HandleDetatchedGame(this SUGARContext context, int? gameId)
 		{
 			if (gameId != null && gameId != 0)
 			{
@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			}
 		}
 
-		public static void HandleDetatchedActor(this SGAContext context, int? actorId)
+		public static void HandleDetatchedActor(this SUGARContext context, int? actorId)
 		{
 			if (actorId != null)
 			{
@@ -33,7 +33,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			}
 		}
 
-		public static void HandleDetatchedActor(this SGAContext context, Actor actor)
+		public static void HandleDetatchedActor(this SUGARContext context, Actor actor)
 		{
 			if (actor != null && context.Entry(actor).State == EntityState.Detached)
 			{
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			}
 		}
 
-		public static void HandleDetatchedGameData(this SGAContext context, GameData gameData)
+		public static void HandleDetatchedGameData(this SUGARContext context, GameData gameData)
 		{
 			if (gameData != null && context.Entry(gameData).State == EntityState.Detached)
 			{

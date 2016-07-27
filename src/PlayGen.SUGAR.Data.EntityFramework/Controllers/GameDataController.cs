@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<GameData> Get(IEnumerable<int> ids)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<GameData> Get(int? gameId = null, int? actorId = null, IEnumerable<string> keys = null)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public IEnumerable<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public IEnumerable<float> AllFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -112,7 +112,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public IEnumerable<string> AllStrings(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -132,7 +132,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public IEnumerable<bool> AllBools(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -152,7 +152,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public float SumFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -172,7 +172,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public long SumLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -192,7 +192,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public float GetHighestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -217,7 +217,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public long GetHighestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -242,7 +242,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public float GetLowestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -267,7 +267,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public long GetLowestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -292,7 +292,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public bool TryGetLatestLong(int? gameId, int? actorId, string key, out long latestLong, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -318,7 +318,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public bool TryGetLatestFloat(int? gameId, int? actorId, string key, out float latestFloat, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -344,7 +344,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public bool TryGetLatestBool(int? gameId, int? actorId, string key, out bool latestBool, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -370,7 +370,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public bool TryGetLatestString(int? gameId, int? actorId, string key, out string latestString, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -396,7 +396,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public int CountKeys(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -416,7 +416,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			end = EndSet(end);
 			DateTime dataDateTime;
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -445,7 +445,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			end = EndSet(end);
 			DateTime dataDateTime;
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -472,7 +472,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(GameData data)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -506,7 +506,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				}
 				if (dataList.Count >= 1000)
 				{
-					using (var context = new SGAContext(NameOrConnectionString))
+					using (var context = new SUGARContext(NameOrConnectionString))
 					{
 						SetLog(context);
 
@@ -518,7 +518,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 			if (dataList.Count > 0)
 			{
-				using (var context = new SGAContext(NameOrConnectionString))
+				using (var context = new SUGARContext(NameOrConnectionString))
 				{
 					SetLog(context);
 
@@ -531,7 +531,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(GameData updatedData)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 

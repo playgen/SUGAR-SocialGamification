@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<User> GetRequests(int id)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Group> GetSentRequests(int id)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<User> GetMembers(int id)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Group> GetUserGroups(int id)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(UserToGroupRelationship newRelation, bool autoAccept)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -122,7 +122,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void UpdateRequest(UserToGroupRelationship newRelation, bool accepted)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -145,7 +145,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(UserToGroupRelationship newRelation)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 

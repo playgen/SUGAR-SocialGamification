@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Actor> Get()
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Actor Get(int id)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(Actor actor)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Delete(int[] id)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 

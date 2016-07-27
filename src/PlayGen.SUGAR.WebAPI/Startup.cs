@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.WebAPI
 		{
 			// Set EntityFramework's DBContext's connection string
 			string connectionString = Configuration.GetConnectionString("DefaultConnection");
-			using (var db = new SGAContext(connectionString))
+			using (var db = new SUGARContext(connectionString))
 			{
 				db.Database.Initialize(true);
 			}

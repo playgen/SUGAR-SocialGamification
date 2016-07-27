@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Achievement> GetByGame(int? gameId)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 				gameId = gameId ?? 0;
@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Achievement Get(string token, int? gameId)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Achievement Create(Achievement achievement)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(Achievement achievement)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -99,7 +99,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		
 		public void Delete(string token, int? gameId)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
