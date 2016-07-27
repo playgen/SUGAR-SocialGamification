@@ -1,26 +1,26 @@
 ﻿- name: Overview
-  href: index.md
-  homepage: index.md
+  uid: feature_overview
+  homepageUid: feature_overview
 - name: Achievements
-  href: achievement.md
+  uid: achievement
 - name: Games
-  href: game.md
+  uid: game
 - name: Groups
-  href: group.md
+  uid: group
 - name: Leaderboards
-  href: leaderboard.md
+  uid: leaderboard
 - name: Relationships
-  href: relationship.md
+  uid: relationship
 - name: GameData
-  href: gameData.md
+  uid: gameData
 - name: Resources
-  href: resource.md
+  uid: resource
 - name: Skills
-  href: skill.md
+  uid: skill
 - name: Users
-  href: user.md
+  uid: user
 - name: Roadmap
-  href: roadmap.md
+  uid: roadmap
 - name: Admin Panel
   href: admin/toc.yml
   homepage: admin/index.md
