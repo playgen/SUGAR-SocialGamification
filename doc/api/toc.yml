@@ -37,6 +37,11 @@
     name: UserClient
   - uid: PlayGen.SUGAR.Client.UserFriendClient
     name: UserFriendClient
+- uid: PlayGen.SUGAR.Client.Exceptions
+  name: PlayGen.SUGAR.Client.Exceptions
+  items:
+  - uid: PlayGen.SUGAR.Client.Exceptions.ClientException
+    name: ClientException
 - uid: PlayGen.SUGAR.Client.Extensions
   name: PlayGen.SUGAR.Client.Extensions
   items:
@@ -168,11 +173,18 @@
     name: IUserDataController
   - uid: PlayGen.SUGAR.Contracts.Controllers.IUserFriendController
     name: IUserFriendController
+- uid: PlayGen.SUGAR.Contracts.Exceptions
+  name: PlayGen.SUGAR.Contracts.Exceptions
+  items:
+  - uid: PlayGen.SUGAR.Contracts.Exceptions.SUGARException
+    name: SUGARException
 - uid: PlayGen.SUGAR.Data.EntityFramework
   name: PlayGen.SUGAR.Data.EntityFramework
   items:
-  - uid: PlayGen.SUGAR.Data.EntityFramework.SGAContext
-    name: SGAContext
+  - uid: PlayGen.SUGAR.Data.EntityFramework.SUGARContext
+    name: SUGARContext
+  - uid: PlayGen.SUGAR.Data.EntityFramework.SUGARContextInitializer
+    name: SUGARContextInitializer
 - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers
   name: PlayGen.SUGAR.Data.EntityFramework.Controllers
   items:

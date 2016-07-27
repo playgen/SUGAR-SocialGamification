@@ -6,6 +6,8 @@ uid: installation
 
 SUGAR is currently in active development and subject to change. We are committed to delivering a feature complete version of the components by the end of 2017. 
 
+For upcoming features and development direction see the [Roadmap](xref:roadmap)
+
 ## Source Repositories
 
 All source code is provided under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0) and is hosten on GitHub. We welcome pull requests for bug fixes and engagement in discussion on feture development.

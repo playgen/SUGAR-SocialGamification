@@ -8,7 +8,7 @@ The documentation includes :
 
 - Installation(coming in July 2016) : Link to step-by-step process to install SUGAR on your server. 
 
-- [Features](features/index.md) : Detailed description of features supported by the software including the roadmap for up-and-coming features.
+- [Features](xref:feature_overview) : Detailed description of features supported by the software including the roadmap for up-and-coming features.
 
 - [Core Concepts](concepts/index.md) : Description of core concepts behind features within SUGAR. 
 

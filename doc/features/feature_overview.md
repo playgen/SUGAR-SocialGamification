@@ -1,3 +1,7 @@
+---
+uid: feature_overview
+---
+
 # Feature Overview
 
 This section provides detailed description of SUGAR’s features. 
@@ -17,4 +21,4 @@ The high level features of SUGAR in the current version (July 2016) can be group
 	
 ## Roadmap
 
-See [Roadmap](roadmap.md) for new features being implemented for future releases. 
+See [Roadmap](xref:roadmap) for new features being implemented for future releases. 
