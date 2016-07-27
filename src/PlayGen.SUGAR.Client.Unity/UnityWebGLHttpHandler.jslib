@@ -1,7 +1,7 @@
 ﻿var UnityWebGlHttpHandlerPlugin = { 
 	HttpRequest: function (requestString) {
 		try {
-			var request = JSON.parse(requestString);
+			var request = JSON.parse(Pointer_stringify(requestString));
 			var xhr = new XMLHttpRequest();
 			xhr.open(request.method, request.url, false);
 			if (Object.getOwnPropertyNames(request.headers).indexOf("Authorisation") > -1) {
@@ -27,7 +27,10 @@
 				headers: headersObj,
 				statusCode: xhr.status
 			};
-			return JSON.stringify(responseObj);
+			var responseString = JSON.stringify(responseObj);
+			var buffer = _malloc(lengthBytesUTF8(responseString) + 1);
+			writeStringToMemory(responseString, buffer);
+			return buffer;
 		} catch (exception) {
 			return JSON.stringify({ statusCode: 599 });
 		}
