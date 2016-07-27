@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts;
 
@@ -19,16 +20,17 @@ namespace PlayGen.SUGAR.Client
 		private readonly Credentials _credentials;
 		private readonly IHttpHandler _httpHandler;
 
-		private static readonly JsonSerializerSettings _serializerSettings;
+		private static readonly JsonSerializerSettings SerializerSettings;
 
 		static ClientBase()
 		{
-			_serializerSettings = new JsonSerializerSettings()
+			SerializerSettings = new JsonSerializerSettings()
 			{
-				Formatting = Formatting.Indented,
+				//Formatting = Formatting.Indented,
 				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+				ContractResolver = new CamelCasePropertyNamesContractResolver(),
 			};
-			_serializerSettings.Converters.Add(new StringEnumConverter());
+			SerializerSettings.Converters.Add(new StringEnumConverter());
 		}
 
 		protected ClientBase(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
@@ -72,12 +74,12 @@ namespace PlayGen.SUGAR.Client
 			return new UriBuilder(_baseAddress + separator + formattedUri);
 		}
 
-		private static string SerializePayload(Object payload)
+		private static string SerializePayload(object payload)
 		{
-			return payload == null ? string.Empty : JsonConvert.SerializeObject(payload, _serializerSettings);
+			return payload == null ? string.Empty : JsonConvert.SerializeObject(payload, SerializerSettings);
 		}
 
-		private HttpRequest CreateRequest(string url, string method, Dictionary<string, string> headers = null, object payload = null)
+		private HttpRequest CreateRequest(string url, string method, IDictionary<string, string> headers, object payload)
 		{
 			var requestHeaders = headers == null ? new Dictionary<string, string>() : new Dictionary<string, string>(headers);
 			if (requestHeaders.ContainsKey("Authorization") == false)
@@ -103,78 +105,86 @@ namespace PlayGen.SUGAR.Client
 		/// <returns></returns>
 		private static TResponse DeserializeResponse<TResponse>(HttpResponse response)
 		{
-			return JsonConvert.DeserializeObject<TResponse>(response.Content, _serializerSettings);
+			return JsonConvert.DeserializeObject<TResponse>(response.Content, SerializerSettings);
 		}
 
-		protected TResponse Get<TResponse>(string url, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
-		{
-			return GetDelete<TResponse>(url, "GET", expectedStatusCodes, headers);
-		}
-
-		protected void Get(string url, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
-		{
-			GetDelete(url, "GET", expectedStatusCodes, headers);
-		}
+		#region PostPut
 
 		protected TResponse Post<TRequest, TResponse>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
 		{
-			return PostPut<TResponse>(url, "POST", payload, expectedStatusCodes, headers);
+			return PostPut<TResponse>(url, "POST", headers, payload, expectedStatusCodes);
 		}
 
 		protected void Post<TRequest>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
 		{
-			PostPut(url, "POST", payload, expectedStatusCodes, headers);
+			PostPut(url, "POST", headers, payload, expectedStatusCodes);
 		}
 
 		protected TResponse Put<TRequest, TResponse>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
 		{
-			return PostPut<TResponse>(url, "PUT", payload, expectedStatusCodes, headers);
+			return PostPut<TResponse>(url, "PUT", headers, payload, expectedStatusCodes);
 		}
 
 		protected void Put<TRequest>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
 		{
-			PostPut(url, "PUT", payload, expectedStatusCodes, headers);
+			PostPut(url, "PUT", headers, payload, expectedStatusCodes);
+		}
+
+		protected TResponse PostPut<TResponse>(string url, string method, Dictionary<string, string> headers, object payload, IEnumerable<HttpStatusCode> expectedStatusCodes)
+		{
+			var request = CreateRequest(url, method, headers, payload);
+			var response = _httpHandler.HandleRequest(request);
+			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
+			return DeserializeResponse<TResponse>(response);
+		}
+
+		protected void PostPut(string url, string method, Dictionary<string, string> headers, object payload, IEnumerable<HttpStatusCode> expectedStatusCodes)
+		{
+			var request = CreateRequest(url, method, headers, payload);
+			var response = _httpHandler.HandleRequest(request);
+			ProcessResponse(response, expectedStatusCodes ?? new[] { HttpStatusCode.OK });
+		}
+
+		#endregion
+
+		#region GetDelete
+
+		protected TResponse Get<TResponse>(string url, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			return GetDelete<TResponse>(url, "GET", headers, expectedStatusCodes);
+		}
+
+		protected void Get(string url, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			GetDelete(url, "GET", headers, expectedStatusCodes);
 		}
 
 		protected TResponse Delete<TResponse>(string url, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
 		{
-			return GetDelete<TResponse>(url, "DELETE", expectedStatusCodes, headers);
+			return GetDelete<TResponse>(url, "DELETE", headers, expectedStatusCodes);
 		}
 
 		protected void Delete(string url, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
 		{
-			GetDelete(url, "DELETE", expectedStatusCodes, headers);
+			GetDelete(url, "DELETE", headers, expectedStatusCodes);
 		}
 
-		protected TResponse PostPut<TResponse>(string url, string method, object payload = null, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		protected TResponse GetDelete<TResponse>(string url, string method, Dictionary<string, string> headers, IEnumerable<HttpStatusCode> expectedStatusCodes)
 		{
-			var request = CreateRequest(url, method, headers, payload);
+			var request = CreateRequest(url, method, headers, null);
 			var response = _httpHandler.HandleRequest(request);
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
 			return DeserializeResponse<TResponse>(response);
 		}
 
-		protected void PostPut(string url, string method, object payload = null, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		protected void GetDelete(string url, string method, Dictionary<string, string> headers, IEnumerable<HttpStatusCode> expectedStatusCodes)
 		{
-			var request = CreateRequest(url, method, headers, payload);
+			var request = CreateRequest(url, method, headers, null);
 			var response = _httpHandler.HandleRequest(request);
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
 		}
 
-		protected TResponse GetDelete<TResponse>(string url, string method, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
-		{
-			var request = CreateRequest(url, method, headers);
-			var response = _httpHandler.HandleRequest(request);
-			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
-			return DeserializeResponse<TResponse>(response);
-		}
-
-		protected void GetDelete(string url, string method, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
-		{
-			var request = CreateRequest(url, method, headers);
-			var response = _httpHandler.HandleRequest(request);
-			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
-		}
+		#endregion
 
 		/// <summary>
 		/// Inspect the web response status code, returns on success or throw.

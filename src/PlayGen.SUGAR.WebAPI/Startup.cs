@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using NLog;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
@@ -100,6 +101,7 @@ namespace PlayGen.SUGAR.WebAPI
 				json.SerializerSettings.Formatting = Formatting.Indented;
 				json.SerializerSettings.Converters.Add(new StringEnumConverter());
 				json.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+				json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			});
 
 			services.AddScoped<AuthorizationAttribute>();
