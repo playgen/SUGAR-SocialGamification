@@ -1,8 +1,16 @@
 # Demo
 
-The WebGL demo is coming soon (in July). We are having some problems with the JSON serialiser working correctly in WebGL. 
+## Admin Panel
 
-For now the link below leads to Windows Executable which can be run from the desktop. 
+The admin panel provides user-friendly interactions for altering data in the SUGAR engine. 
 
-[Download Folder Link](https://www.dropbox.com/sh/32l7yafkjh9rhh6/AADQLEDmnMKmXGnvxV3ZIivia?dl=0) 
+	 *Username: admin
+	 *Password: admin 
 
+[Admin Panel Demo](https://admindemo.sugarengine.org/) 
+
+## Game
+
+The demo game serves as a simple tutorial of how one could implement the features of the SUGAR engine. 
+
+[Unity Demo](https://unitydemo.sugarengine.org/)
