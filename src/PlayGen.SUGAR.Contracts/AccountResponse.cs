@@ -20,5 +20,9 @@ namespace PlayGen.SUGAR.Contracts
 		/// ActorResponse object containing the user details.
 		/// </summary>
 		public ActorResponse User { get; set; }
+
+		public AccountResponse()
+		{
+		}
 	}
 }

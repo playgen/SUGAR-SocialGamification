@@ -24,11 +24,11 @@ namespace PlayGen.SUGAR.Client.Unity
 				case "POST":
 				case "PUT":
 					Console.WriteLine("UnityWebGlHttpHandler::HandleRequest::1");
-					var requestString = JsonConvert.SerializeObject(request);
+					var requestString = JsonConvert.SerializeObject(request, ClientBase.SerializerSettings);
 					Console.WriteLine("UnityWebGlHttpHandler::HandleRequest::requestString::" + requestString);
 					var responseString = HttpRequest(requestString);
 					Console.WriteLine("UnityWebGlHttpHandler::HandleRequest::responseString::" + responseString);
-					return JsonConvert.DeserializeObject<HttpResponse>(responseString);
+					return JsonConvert.DeserializeObject<HttpResponse>(responseString, ClientBase.SerializerSettings);
 
 				default:
 					Console.WriteLine("UnityWebGlHttpHandler::HandleRequest::4");

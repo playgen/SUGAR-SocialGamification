@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Client
 		private readonly Credentials _credentials;
 		private readonly IHttpHandler _httpHandler;
 
-		private static readonly JsonSerializerSettings SerializerSettings;
+		public static readonly JsonSerializerSettings SerializerSettings;
 
 		static ClientBase()
 		{
@@ -29,6 +29,7 @@ namespace PlayGen.SUGAR.Client
 				//Formatting = Formatting.Indented,
 				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 				ContractResolver = new CamelCasePropertyNamesContractResolver(),
+				ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
 			};
 			SerializerSettings.Converters.Add(new StringEnumConverter());
 		}
@@ -134,7 +135,9 @@ namespace PlayGen.SUGAR.Client
 		{
 			var request = CreateRequest(url, method, headers, payload);
 			var response = _httpHandler.HandleRequest(request);
+			Console.WriteLine("ClientBase::PostPut::ProcessResponse");
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
+			Console.WriteLine("ClientBase::PostPut::DeserializeResponse");
 			return DeserializeResponse<TResponse>(response);
 		}
 

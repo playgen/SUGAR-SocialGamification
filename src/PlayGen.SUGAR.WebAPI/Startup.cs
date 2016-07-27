@@ -98,7 +98,6 @@ namespace PlayGen.SUGAR.WebAPI
 			})
 			.AddJsonOptions(json =>
 			{
-				json.SerializerSettings.Formatting = Formatting.Indented;
 				json.SerializerSettings.Converters.Add(new StringEnumConverter());
 				json.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 				json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
