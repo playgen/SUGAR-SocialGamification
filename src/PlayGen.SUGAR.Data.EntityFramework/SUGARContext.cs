@@ -16,15 +16,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 	/// Entity Framework Database Configuration
 	/// </summary>
 	[DbConfigurationType(typeof(MySqlEFConfiguration))]
-	public class SGAContext : DbContext
+	public class SUGARContext : DbContext
 	{
 		private readonly bool _isSaveDisabled;
 
-		public SGAContext(string nameOrConnectionString, bool disableSave = false) : base(nameOrConnectionString)
+		public SUGARContext(string nameOrConnectionString, bool disableSave = false) : base(nameOrConnectionString)
 		{
 			_isSaveDisabled = disableSave;
-			Database.SetInitializer(new CreateDatabaseIfNotExists<SGAContext>());
-			Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SGAContext>());
+			//Database.SetInitializer(new CreateDatabaseIfNotExists<SUGARContext>());
+			Database.SetInitializer(new SUGARContextInitializer());
 		}
 
 		public DbSet<Account> Accounts { get; set; }

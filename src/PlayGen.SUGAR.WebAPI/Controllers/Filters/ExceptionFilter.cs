@@ -1,24 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.WebAPI.Exceptions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class ExceptionFilter : ExceptionFilterAttribute
 	{
+		/// <inheritdoc />
 		public override void OnException(ExceptionContext context)
 		{
-			string exceptionName = context.Exception.GetType().ToString();
-			switch (exceptionName)
+			var exception = context.Exception;
+			var handled = false;
+
+			if (exception is DuplicateRecordException)
 			{
-				case "PlayGen.SUGAR.Data.EntityFramework.Exceptions.DuplicateRecordException":
-					context.Result = new ObjectResult("Invalid data provided.");
-					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
-					break;
-				default:
-					context.Result = new ObjectResult(context.Exception.Message);
-					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-					break;
+				context.Result = new ObjectResult("Invalid data provided.");
+				context.HttpContext.Response.StatusCode = (int) HttpStatusCode.Conflict;
+				handled = true;
+			}
+
+			if (exception is InvalidAccountDetailsException)
+			{
+				context.Result = new ObjectResult(exception.Message);
+				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+				handled = true;
+			}
+
+			if (!handled)
+			{ 
+				context.Result = new ObjectResult(context.Exception.Message);
+				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 			}
 			
 			context.Exception = null;

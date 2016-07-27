@@ -6,25 +6,16 @@ namespace PlayGen.SUGAR.ServerAuthentication
 {
 	public class PasswordEncryption
 	{
-		public string Encrypt(string password, string salt)
+		private const int BCryptWorkFactor = 13;
+
+		public static string Encrypt(string password)
 		{
-			using (var hashAlgorithm = SHA256.Create())
-			{
-				var saltedPassword = $"{salt}{password}";
-				var saltedPasswordAsBytes = Encoding.UTF8.GetBytes(saltedPassword);
-				var saltedPasswordHash = hashAlgorithm.ComputeHash(saltedPasswordAsBytes);
-				return Convert.ToBase64String(saltedPasswordHash);
-			}
+			return BCrypt.Net.BCrypt.HashPassword(password, BCryptWorkFactor);
 		}
 
-		public string CreateSalt()
+		public static bool Verify(string password, string hash)
 		{
-			var data = new byte[0x10];
-			using (var cryptoServiceProvider = RandomNumberGenerator.Create())
-			{
-				cryptoServiceProvider.GetBytes(data);
-				return Convert.ToBase64String(data);
-			}
+			return BCrypt.Net.BCrypt.Verify(password, hash);
 		}
 	}
 }

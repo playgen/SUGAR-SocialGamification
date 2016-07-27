@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Game> Get()
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Game> Search(string name)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Game Search(int id)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(Game game)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 				
@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(Game game)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Delete(int id)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 

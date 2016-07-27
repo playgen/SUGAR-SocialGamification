@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Leaderboard> GetByGame(int? gameId)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 				gameId = gameId ?? 0;
@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Leaderboard Get(string token, int? gameId)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Leaderboard Create(Leaderboard leaderboard)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -69,7 +69,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(Leaderboard leaderboard)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 
@@ -118,7 +118,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		
 		public void Delete(string token, int? gameId)
 		{
-			using (var context = new SGAContext(NameOrConnectionString))
+			using (var context = new SUGARContext(NameOrConnectionString))
 			{
 				SetLog(context);
 

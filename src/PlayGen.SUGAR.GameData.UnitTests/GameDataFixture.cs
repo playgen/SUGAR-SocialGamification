@@ -188,7 +188,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 		private void DeleteExisting()
 		{
-			using (var context = new SGAContext(TestController.NameOrConnectionString))
+			using (var context = new SUGARContext(TestController.NameOrConnectionString))
 			{
 				if (context.Database.Connection.Database == TestController.DbName)
 				{

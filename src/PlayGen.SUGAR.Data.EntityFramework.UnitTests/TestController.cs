@@ -31,7 +31,7 @@
 		{
 			if (!_deletedDatabase)
 			{
-				using (var context = new SGAContext(NameOrConnectionString))
+				using (var context = new SUGARContext(NameOrConnectionString))
 				{
 					if (context.Database.Connection.Database == DbName)
 					{

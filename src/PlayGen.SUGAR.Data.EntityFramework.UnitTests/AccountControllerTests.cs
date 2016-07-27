@@ -112,7 +112,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var account = new Account
 			{
 				Name = name,
-				PasswordHash = password,
+				Password = password,
 				UserId = user.Id,
 				User = user
 			};
