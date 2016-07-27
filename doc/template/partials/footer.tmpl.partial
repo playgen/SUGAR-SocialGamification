@@ -1,13 +1,14 @@
 <footer>
-  <div class="grad-bottom"></div>
-  <div class="footer">
-    <div class="container">
-      <span class="pull-right">
-        <a href="#top">Back to top</a>
-      </span>
-      {{{_appFooter}}}
-      {{^_appFooter}}<span>Copyright © 2016 PlayGen<br />
-      Licensed under the Apache License, Version 2.0</span>{{/_appFooter}}
-    </div>
-  </div>
+	<div class="grad-bottom"></div>
+		<div class="footer">
+			<div class="container">
+				<span class="pull-right">
+					<a href="#top">Back to top</a>
+				</span>
+				{{{_appFooter}}}
+				{{^_appFooter}}
+				Copyright © 2016 PlayGen
+				{{/_appFooter}}
+		</div>
+	</div>
 </footer>

@@ -4,7 +4,11 @@ uid: installation
 
 # Development and Deployment
 
+SUGAR is currently in active development and subject to change. We are committed to delivering a feature complete version of the components by the end of 2017. 
+
 ## Source Repositories
+
+All source code is provided under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0) and is hosten on GitHub. We welcome pull requests for bug fixes and engagement in discussion on feture development.
 
 - [API Service Repository](https://github.com/playgenhub/SUGAR-SocialGamification/) 
 
@@ -55,7 +59,7 @@ In the near future the <xref:gameData> key/value storage will most likely be mig
 
 ## API Client
 
-The API client provides a C# interface to the [RESTful API](../restapi) exposed by the service. The client is intended to be hosted in C# projects and in Unity3D applications.
+The API client provides a C# interface to the [RESTful API](../restapi/restapi.swagger2.json) exposed by the service. The client is intended to be hosted in C# projects and in Unity3D applications.
 
 ### Development Dependencies
 
@@ -65,30 +69,30 @@ The API client provides a C# interface to the [RESTful API](../restapi) exposed 
 
 This issue has been addressed by SaladLab who have produced a lightweight version of the JSON.Net library specifically for use in Unity projects (https://github.com/SaladLab/Json.Net.Unity3D). We have decided to use this library for the C# client regardless of the target platform as it provided all required functionality. 
 
-SaladLab only currently provide this in the unitypackage format, we have packaged this for NuGet which can currently be downloaded [here](../files/PlayGen.Json.Net.Unity3D.9.0.1.nupkg), however this will be published to the nuget.org package feed in the near future. For details on how to configure a local filesystem based nuger package feed see (https://docs.nuget.org/create/hosting-your-own-nuget-feeds).
+SaladLab only currently provide this in the unitypackage format, we have packaged this for NuGet which can currently be downloaded [here](../files/PlayGen.Json.Net.Unity3D.9.0.1.nupkg), however this will be published to the nuget.org package feed in the near future. For details on how to configure a local filesystem based NuGeT package feed see [here](https://docs.nuget.org/create/hosting-your-own-nuget-feeds).
 
 ### Unity
 
-Unity uses Mono in place of Microsoft's .NET implementation and runs with .NET Framewrok 3.5 compatibility, therefore there a number or limitations on different platforms and those that we are currently aware of are detailed below:
+Unity uses Mono in place of Microsoft's .NET implementation and provides .NET 3.5 compatibility, because of this there a number or limitations on different platforms and those that we are currently aware of are detailed below:
 
 #### WebClient
 
-In Unity WebGL builds the socket operations performed by the [System.Net.WebClient](https://msdn.microsoft.com/en-us/library/system.net.webclient(v=vs.90).aspx) are not available and an alternative method must be used to perform HTTP operations. This has been solved in the <xref:PlayGen.SUGAR.Client> by abstracting the HTTP operations to a <xref:PlayGen.SUGAR.Client.IHttpHandler>, in WebGL builds this uses the browsers native [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) via external calls to a JavaScript library embedded in the project
+In Unity WebGL builds the socket operations performed by the [System.Net.WebClient](https://msdn.microsoft.com/en-us/library/system.net.webclient(v=vs.90).aspx) are not available and an alternative method must be used to perform HTTP operations. This has been solved in the <xref:PlayGen.SUGAR.Client> by delegating the HTTP operations to a platform specific implementation. Unity WebGL applications can use the browsers native [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) via external calls to a JavaScript library embedded in the project.
 
 * TODO: JSLib installation instructions
 
 #### HTTPS 
 
-Unity on Windows and mobile devices uses the Mono .NET runtime. Mono does not use the system certificate store and by default has no root trust certificates therefore all SSL certificates will be treated as untrusted. Mono can be configured to trust certificates from any source via the methods detailed [here](http://www.mono-project.com/docs/faq/security/), however there does not currently appears to be a way to use the machines trust store by default.
+Mono does not use the system certificate store and by default has no root trust certificates present causing all SSL certificates to be treated as untrusted. Mono can be configured to trust certificates from any source via the methods detailed [here](http://www.mono-project.com/docs/faq/security/), however there does not currently appear to be a way to use the machines trust store by default.
 
 This issue is discussed extensively by the [Unity community](http://answers.unity3d.com/topics/ssl.html)
 
-We have not currently arrived at a satisfactory solution, with the options below being considered at present:
+We have not currently arrived at a satisfactory solution with the options below being considered at present:
 
 * Validate the fingerprint of specific certifictes by intercepting the validation operation as detailed [here](http://forum.unity3d.com/threads/ssl-certificate-storage.371219/#post-2404806)
 * Add specific certificates corresponding to the root of trust for your instance of the API service to the mono trust store during application installation or initialization
 
 Both of these methods have limitations that undermine the security and maintenance of the system as approved certificates or fingerprints must be embedded in the application deployable.
-* Application updates must be deployed if server certificates change
-* Security could be undermined if application integrity cannot be verified and binaries were tampered with by a 3rd party
-* Certificate revocation checks would have to be performed explicitly and could also be subject to tampering
+* Application updates must be deployed if server certificates change.
+* Security could be undermined if application integrity cannot be verified and binaries were tampered with by a 3rd party.
+* Certificate revocation checks would have to be performed explicitly and could also be subject to tampering.

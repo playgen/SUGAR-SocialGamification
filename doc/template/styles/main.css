@@ -40,3 +40,7 @@ button.navbar-toggle:hover .icon-bar {
 .nav>li>a {
     padding: 15px 10px;
 }
+
+.footer {
+	background-color: #c4c4c4;
+}
