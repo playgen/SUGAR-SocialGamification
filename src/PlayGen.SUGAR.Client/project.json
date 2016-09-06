@@ -1,13 +1,17 @@
 {
   "version": "1.0.0-*",
-	"dependencies": {
-		"PlayGen.Json.Net.Unity3D": "9.0.1",
-		"PlayGen.SUGAR.Contracts": "1.0.0-*"
-	},
+  "dependencies": {
+    "PlayGen.Json.Net.Unity3D": "9.0.1",
+    "PlayGen.SUGAR.Contracts": "1.0.0-*"
+  },
   "frameworks": {
-	"net35": { }
+    "net35": {}
   },
   "configurations": {
-	"UnitTest": { }
+    "UnitTest": {},
+    "UnityDebug": {}
+  },
+  "scripts": {
+    "postcompile": "CopyToUnity.bat %compile:OutputDir% %project:Directory%"
   }
 }
