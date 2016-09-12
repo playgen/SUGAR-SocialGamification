@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Client
 		public AchievementResponse GetGlobalById(string token)
 		{
 			var query = GetUriBuilder("api/achievements/find/{0}/global", token).ToString();
-			return Get<AchievementResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<AchievementResponse>(query, expectedStatusCodes: new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
