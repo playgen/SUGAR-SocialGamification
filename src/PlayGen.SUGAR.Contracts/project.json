@@ -1,18 +1,17 @@
 {
-	"version": "1.0.0-*",
-	"dependencies": {
-	},
+  "version": "1.0.0-*",
+  "dependencies": {
+  },
   "frameworks": {
-	"net35": {
-		"frameworkAssemblies": {
-			"System.ComponentModel.DataAnnotations": "3.5.0.0"
-		}
-	}
+    "net35": {
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": "3.5.0.0"
+      }
+    }
   },
   "configurations": {
-	"UnitTest": {}
-  },
-  "buildOptions": {
-	"xmlDoc": true
+    "UnitTest": {},
+    "UnityDebug": {}
   }
 }
+
