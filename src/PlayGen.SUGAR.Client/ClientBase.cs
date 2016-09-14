@@ -207,8 +207,11 @@ namespace PlayGen.SUGAR.Client
 				throw new ClientException((HttpStatusCode)response.StatusCode, error);
 			}
 
-			//TODO: check if this has changed
-			_credentials.Authorization = response.Headers["Authorization"];
+            //TODO: check if this has changed
+            if (response.Headers.ContainsKey("Authorization"))
+            {
+                _credentials.Authorization = response.Headers["Authorization"];
+            }
 		}
 	}
 }
