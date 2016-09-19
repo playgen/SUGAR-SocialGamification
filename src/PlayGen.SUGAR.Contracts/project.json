@@ -9,9 +9,12 @@
       }
     }
   },
-  "configurations": {
-    "UnitTest": {},
-    "UnityDebug": {}
-  }
+    "configurations": {
+        "UnitTest": {},
+        "UnityDebug": {}
+    },
+    "buildOptions": {
+        "xmlDoc": true
+    }
 }
 
