@@ -2,5 +2,5 @@
 %2
  SET BuildDir=%1
  SET ProjectDir=%2
-copy %BuildDir% "%ProjectDir%/../../../Assets/Plugins/SUGAR"
+xcopy %BuildDir% "%ProjectDir%/../../../Client/Assets/Plugins/SUGAR" /Y /I
 
