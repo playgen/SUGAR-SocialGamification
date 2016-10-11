@@ -12,6 +12,6 @@
     "UnityDebug": {}
   },
   "scripts": {
-    "postcompile": "CopyToUnity.bat %compile:OutputDir% %project:Directory%"
+	"postcompile": [ "xcopy /I /Y %compile:OutputDir%\\* %project:Directory%\\..\\..\\..\\Client\\Assets\\Plugins\\SUGAR" ]
   }
 }
