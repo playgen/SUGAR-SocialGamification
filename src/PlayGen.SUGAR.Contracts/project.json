@@ -10,8 +10,6 @@
     }
   },
     "configurations": {
-        "UnitTest": {},
-        "UnityDebug": {}
     },
     "buildOptions": {
         "xmlDoc": true
