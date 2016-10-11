@@ -9,10 +9,13 @@
       }
     }
   },
-    "configurations": {
-    },
-    "buildOptions": {
-        "xmlDoc": true
-    }
+  "configurations": {
+  },
+  "buildOptions": {
+    "xmlDoc": true
+  },
+  "scripts": {
+    "postcompile": [ "xcopy /I /Y \"%compile:OutputDir%\\*\" \"%project:Directory%\\..\\..\\..\\Client\\Assets\\Plugins\\SUGAR\"" ]
+  }
 }
 
