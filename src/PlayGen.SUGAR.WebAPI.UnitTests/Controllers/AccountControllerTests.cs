@@ -1,11 +1,9 @@
-﻿using System;
-using System.Net.Configuration;
-using PlayGen.SUGAR.Contracts;
-using PlayGen.SUGAR.Data.Model;
+﻿using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Controllers;
-using PlayGen.SUGAR.WebAPI.Exceptions;
+using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.UnitTests;
+using PlayGen.SUGAR.WebAPI.Exceptions;
 using Xunit;
 
 namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers

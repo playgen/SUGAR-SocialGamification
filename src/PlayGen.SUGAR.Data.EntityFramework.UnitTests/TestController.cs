@@ -14,13 +14,12 @@
 			{
 				if (_nameOrConnectionString == null)
 				{
-					_nameOrConnectionString = "Server=localhost;" +
-											  "Port=3306;" +
-											  $"Database={DbName};" +
-											  "Uid=root;" +
-											  "Pwd=t0pSECr3t;" +
-											  "Convert Zero Datetime=true;" +
-											  "Allow Zero Datetime=true";
+				    _nameOrConnectionString = "Server=(localdb)\\mssqllocaldb;" +
+				                              $"Database={DbName};" +
+				                              "Uid=root;" +
+				                              "Pwd=t0pSECr3t;" +
+				                              "Trusted_Connection=True;" +
+				                              "MultipleActiveResultSets=true";
 				}
 
 				return _nameOrConnectionString;
