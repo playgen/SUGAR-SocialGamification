@@ -74,8 +74,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void CanTransferCreate_FromUserToUser()
 		{
-			var fromUser = GetOrCreateUser("From");
-			var toUser = GetOrCreateUser("To");
+			var fromUser = GetOrCreateUser("CanTransferCreate_FromUserToUser_From");
+			var toUser = GetOrCreateUser("CanTransferCreate_FromUserToUser_To");
 
 			var fromResource = CreateResource("CanTransfer_FromUserToUser", actorId:fromUser.Id);
 

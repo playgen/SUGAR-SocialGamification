@@ -127,7 +127,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var userRequests = _userRelationshipDbController.GetRequests(newFriend.AcceptorId);
 
-			int matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
+			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 
 			Assert.Equal(matches, 0);
 

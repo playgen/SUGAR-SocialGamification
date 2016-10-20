@@ -82,10 +82,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
 		public IActionResult Register([FromBody] AccountRequest accountRequest)
 		{
-			User user = new User
+            if(string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
+		    {
+		        throw new InvalidAccountDetailsException("Invalid username or password.");
+		    }
+
+            User user = new User
 			{
 				Name = accountRequest.Name,
 			};
+			
 			_userDbController.Create(user);
 
 			var account = CreateAccount(accountRequest, user);

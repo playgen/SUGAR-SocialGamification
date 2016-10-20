@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingAccount()
 		{
-			_accountDbController.Delete(-1);
+			Assert.Throws<MissingRecordException>(() => _accountDbController.Delete(-1));
 		}
 		#endregion
 

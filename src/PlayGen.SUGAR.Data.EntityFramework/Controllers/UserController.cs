@@ -66,12 +66,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				SetLog(context);
 
-				//check for existing needed due to MySQL bug - http://bugs.mysql.com/bug.php?id=71502
-				if (!context.Users.Any(g => g.Name == user.Name))
+				if (context.Users.Any(g => g.Name == user.Name))
 				{
-					context.Users.Add(user);
-					SaveChanges(context);
+					throw new DuplicateRecordException($"A user with the name: \"{user.Name}\" already exists.");
 				}
+				
+				context.Users.Add(user);
+				SaveChanges(context);
 			}
 		}
 

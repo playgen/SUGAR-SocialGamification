@@ -1,4 +1,7 @@
-﻿using PlayGen.SUGAR.Data.Model;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Controllers;
 using PlayGen.SUGAR.Contracts;
@@ -8,7 +11,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers
 {
-    public class AccountControllerTests
+    public class AccountControllerTests : IClassFixture<TestEnvironment>
     {
         #region Configuration
         private readonly AccountController _accountController;
@@ -16,19 +19,18 @@ namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers
 
         public AccountControllerTests()
         {
-            InitializeEnvironment();
-
             _accountController = new AccountController(
                 new Data.EntityFramework.Controllers.AccountController(TestController.NameOrConnectionString),
                 new Data.EntityFramework.Controllers.UserController(TestController.NameOrConnectionString),
                 new JsonWebTokenUtility("5Y2gQ33IrRffE66030Dy1om5nk4HI58V"));
 
-            _userDbController = new Data.EntityFramework.Controllers.UserController(TestController.NameOrConnectionString);
-        }
+            // This needs to be set for testing as it doesn't get created 
+            _accountController.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext()
+            };
 
-        private void InitializeEnvironment()
-        {
-            TestController.DeleteDatabase();
+            _userDbController = new Data.EntityFramework.Controllers.UserController(TestController.NameOrConnectionString);
         }
         #endregion
 
@@ -80,13 +82,14 @@ namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers
         public void LoginUser()
         {
             var accountRequest = CreatAccountRequest("LoginUser", "LoginUserPassword");
-
+            
             _accountController.Register(accountRequest);
             var response = _accountController.Login(accountRequest);
 
             // Todo modify to evaluate new type returned by _accountController
         }
 
+        /* Functionality has been commented out in AccountController
         [Fact]
         public void RegisterInvalidUser()
         {
@@ -106,8 +109,7 @@ namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers
             {
                 Name = accountRequest.Name,
             };
-            _userDbController.Create(user);
-
+            
             var response = _accountController.Register(accountRequest);
 
             // Todo modify to evaluate new type returned by _accountController
@@ -115,7 +117,7 @@ namespace PlayGen.SUGAR.WebAPI.UnitTests.Controllers
             response = _accountController.Login(accountRequest);
 
             // Todo modify to evaluate new type returned by _accountController
-        }
+        }*/
 
         [Fact]
         public void LoginInvalidAccountName()
