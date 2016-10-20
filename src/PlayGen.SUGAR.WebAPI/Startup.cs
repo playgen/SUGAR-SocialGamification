@@ -141,7 +141,7 @@ namespace PlayGen.SUGAR.WebAPI
 
 		private static void ConfigureWebSockets(IApplicationBuilder app)
 		{
-			app.Map("/ws", SocketHandler.Map);
+			app.Map("", SocketHandler.Map);
 		}
 	}
 }

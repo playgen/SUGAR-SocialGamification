@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "exports": {
+    "websocket-sharp/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v3.5",
+      "compile": {
+        "bin/Debug/websocket-sharp.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/websocket-sharp.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/websocket-sharp.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>17d856c5-db17-4d1b-88d1-cad0a60165f2</ProjectGuid>
+    <ProjectGuid>b2581bb4-d3f3-4e63-a31d-e2512244baf2</ProjectGuid>
     <RootNamespace>PlayGen.SUGAR.Client.UnitTests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>

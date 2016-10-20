@@ -1,0 +1,3 @@
+[submodule "websocket-sharp"]
+	path = websocket-sharp
+	url = git@github.com:playgenhub/websocket-sharp.git
