@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
                 webSocket.SendString(message);
                 
-                while (true && timer.ElapsedMilliseconds < timeoutMilliseconds)
+                while (timer.ElapsedMilliseconds < timeoutMilliseconds)
                 {
                     var reply = webSocket.RecieveString();
 

@@ -25,20 +25,6 @@ namespace PlayGen.SUGAR.Client
             }
         }
 
-        public void SendString(string str)
-        {
-            Send(Encoding.UTF8.GetBytes(str));
-        }
-
-        public string RecieveString()
-        {
-            var retval = Recieve();
-
-            return retval == null 
-                ? null
-                : Encoding.UTF8.GetString(retval);
-        }
-
         public void Connect()
         {
             _socket = new WebSocketSharp.WebSocket(_url.ToString());
@@ -49,6 +35,20 @@ namespace PlayGen.SUGAR.Client
             _socket.OnError += (sender, e) => Error = e.Message;
 
             _socket.Connect();
+        }
+        
+        public void SendString(string str)
+        {
+            Send(Encoding.UTF8.GetBytes(str));
+        }
+
+        public string RecieveString()
+        {
+            var retval = Recieve();
+
+            return retval == null
+                ? null
+                : Encoding.UTF8.GetString(retval);
         }
 
         public void Send(byte[] buffer)
