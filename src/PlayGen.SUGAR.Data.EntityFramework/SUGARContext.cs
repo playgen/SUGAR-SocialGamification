@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Threading.Tasks;
+using MySql.Data.Entity;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.Model.Interfaces;
 using PlayGen.SUGAR.Data.EntityFramework.ExtensionMethods;
@@ -14,6 +15,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 	/// <summary>
 	/// Entity Framework Database Configuration
 	/// </summary>
+	[DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public class SUGARContext : DbContext
 	{
 		private readonly bool _isSaveDisabled;

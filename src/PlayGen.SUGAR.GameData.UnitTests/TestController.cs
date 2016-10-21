@@ -26,12 +26,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			{
 				if (_nameOrConnectionString == null)
 				{
-					_nameOrConnectionString = "Server=(localdb)\\mssqllocaldb;" +
+					_nameOrConnectionString = "Server=localhost;" +
+											  "Port=3306;" +
 											  $"Database={DbName};" +
 											  "Uid=root;" +
 											  "Pwd=t0pSECr3t;" +
-											  "Trusted_Connection=True;" +
-											  "MultipleActiveResultSets=true";
+											  "Convert Zero Datetime=true;" +
+											  "Allow Zero Datetime=true";
 				}
 
 				return _nameOrConnectionString;

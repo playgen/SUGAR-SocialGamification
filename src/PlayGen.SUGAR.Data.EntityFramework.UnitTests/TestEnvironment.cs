@@ -1,7 +1,5 @@
 ﻿using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using System;
-using System.Data.Entity;
-using System.Data.SqlClient;
 using PlayGen.SUGAR.GameData;
 using Xunit;
 using AchievementController = PlayGen.SUGAR.Data.EntityFramework.Controllers.AchievementController;
@@ -12,7 +10,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
 	public class TestEnvironment : IDisposable
 	{
-		private readonly string _dbName = "SUGARUnitTests";
+		private readonly string _dbName = "sgaunittests";
 		private readonly string _connectionString;
 
 		private AccountController _accountController;
@@ -61,32 +59,27 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		private string GetNameOrConnectionString(string dbName)
 		{
-			return "Server=(localdb)\\mssqllocaldb;" +
+			return "Server=localhost;" +
+					"Port=3306;" +
 					$"Database={dbName};" +
 					"Uid=root;" +
 					"Pwd=t0pSECr3t;" +
-					"Trusted_Connection=True;" +
-					"MultipleActiveResultSets=true";
+					"Convert Zero Datetime=true;" +
+					"Allow Zero Datetime=true";
 		}
 
 		private void DeleteDatabase()
 		{
 			using (var context = new SUGARContext(_connectionString))
 			{
-			    try
-			    {
-			        if (context.Database.Connection.Database == _dbName)
-			        {
-			            context.Database.Delete();
-			        }
-			    }
-			    catch (SqlException e)
-			    {
-			        if (!e.Message.Contains("you do not have permission"))
-			        {
-			            throw e;
-			        }
-			    }
+				if (context.Database.Connection.Database == _dbName)
+				{
+					context.Database.Delete();
+				}
+				else
+				{
+					throw new Exception($"Database with name: {_dbName} doesn't exist.");
+				}
 			}
 		}
 		
