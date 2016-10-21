@@ -38,5 +38,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
                 Assert.LessOrEqual(timer.ElapsedMilliseconds, timeoutMilliseconds, $"Test forced process timeout after {timeoutMilliseconds} milliseconds.");
             }
         }
+
+        [Test]
+        public void GameData()
+        {
+            // todo
+            // create web socket client commands to send gamedata
+                // compose web socket command with reqyest object
+
+            // intercept on server
+            // route to correct api call - find using reflection
+            // cache api route from command to methodinfo
+
+            // refactor echo test so connection can be tested, have echo web api controller
+        }
     }
 }

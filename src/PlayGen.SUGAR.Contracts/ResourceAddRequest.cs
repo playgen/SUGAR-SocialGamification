@@ -5,8 +5,8 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates Resource Data details.
 	/// </summary>
-	public class ResourceAddRequest
-	{
+	public class ResourceAddRequest : IRequest
+    {
 		/// <summary>
 		/// The id of the Actor which this Resource is being ensigned to. Can be left null to ensign to the system/game.
 		/// </summary>

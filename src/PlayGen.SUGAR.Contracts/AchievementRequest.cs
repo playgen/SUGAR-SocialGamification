@@ -29,8 +29,8 @@ namespace PlayGen.SUGAR.Contracts
 	/// }]
 	/// }
 	/// </example>
-	public class AchievementRequest
-	{
+	public class AchievementRequest : IRequest
+    {
 		/// <summary>
 		/// A unique identifier used in development to reference the achievement/skill.
 		/// </summary>
