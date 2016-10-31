@@ -3,26 +3,26 @@ using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using Xunit;
+using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class AchievementControllerTests : IClassFixture<TestEnvironment>
+	public class AchievementControllerTests
 	{
 		#region Configuration
 		private readonly AchievementController _achievementDbController;
 		private readonly GameController _gameController;
 
-		public AchievementControllerTests(TestEnvironment testEnvironment)
+		public AchievementControllerTests()
 		{
-			_achievementDbController = testEnvironment.AchievementController;
-			_gameController = testEnvironment.GameController;
+			_achievementDbController = TestEnvironment.AchievementController;
+			_gameController = TestEnvironment.GameController;
 		}
 		#endregion
 
 		
 		#region Tests
-		[Fact]
+		[Test]
 		public void CreateAndGetAchievement()
 		{
 			string achievementName = "CreateAchievement";
@@ -31,10 +31,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var achievement = _achievementDbController.Get(newAchievement.Token, newAchievement.GameId);
 
-			Assert.Equal(achievementName, achievement.Name);
+			Assert.AreEqual(achievementName, achievement.Name);
 		}
 
-		[Fact]
+		[Test]
 		public void CreateAndGetGlobalAchievement()
 		{
 			string achievementName = "CreateGlobalAchievement";
@@ -43,10 +43,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var achievement = _achievementDbController.Get(newAchievement.Token, newAchievement.GameId);
 
-			Assert.Equal(achievementName, achievement.Name);
+			Assert.AreEqual(achievementName, achievement.Name);
 		}
 
-		[Fact]
+		[Test]
 		public void CreateDuplicateAchievement()
 		{
 			string achievementName = "CreateDuplicateAchievement";
@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<DuplicateRecordException>(() => CreateAchievement(achievementName, firstachievement.GameId));
 		}
 
-		[Fact]
+		[Test]
 		public void GetAchievementsByGame()
 		{
 			var baseAchievement = CreateAchievement("GetAchievementsByBaseGame");
@@ -80,18 +80,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matching = achievements.Where(a => names.Contains(a.Name));
 
-			Assert.Equal(names.Length, matching.Count());
+			Assert.AreEqual(names.Length, matching.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void GetAchievementsByNonExistingGame()
 		{
 			var achievements = _achievementDbController.GetByGame(-1);
 
-			Assert.Empty(achievements);
+			Assert.IsEmpty(achievements);
 		}
 
-		[Fact]
+		[Test]
 		public void GetNonExistingAchievement()
 		{
 			var achievement = _achievementDbController.Get("GetNonExistingAchievement", -1);
@@ -99,7 +99,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Null(achievement);
 		}
 
-		[Fact]
+		[Test]
 		public void UpdateAchievement()
 		{
 			string achievementName = "UpdateExistingAchievement";
@@ -124,11 +124,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var updatedAchievement = _achievementDbController.Get(newAchievement.Token, newAchievement.GameId);
 
-			Assert.NotEqual(foundAchievement.Name, updatedAchievement.Name);
-			Assert.Equal(foundAchievement.Name + "Updated", updatedAchievement.Name);
+			Assert.AreNotEqual(foundAchievement.Name, updatedAchievement.Name);
+			Assert.AreEqual(foundAchievement.Name + "Updated", updatedAchievement.Name);
 		}
 
-		[Fact]
+		[Test]
 		public void UpdateAchievementToDuplicateName()
 		{
 			string achievementName = "UpdateAchievementToDuplicateName";
@@ -150,7 +150,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<DuplicateRecordException>(() => _achievementDbController.Update(update));
 		}
 
-		[Fact]
+		[Test]
 		public void UpdateNonExistingAchievement()
 		{
 			string achievementName = "UpdateNonExistingAchievement";
@@ -168,7 +168,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<MissingRecordException>(() => _achievementDbController.Update(achievement));
 		}
 
-		[Fact]
+		[Test]
 		public void DeleteExistingAchievement()
 		{
 			string achievementName = "DeleteExistingAchievement";
@@ -177,7 +177,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var achievementReturned = _achievementDbController.Get(achievement.Token, achievement.GameId);
 			Assert.NotNull(achievementReturned);
-			Assert.Equal(achievementReturned.Name, achievementName);
+			Assert.AreEqual(achievementReturned.Name, achievementName);
 
 			_achievementDbController.Delete(achievement.Token, achievement.GameId);
 			achievementReturned = _achievementDbController.Get(achievement.Token, achievement.GameId);
@@ -185,7 +185,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Null(achievementReturned);
 		}
 
-		[Fact]
+		[Test]
 		public void DeleteNonExistingGroupAchievement()
 		{
 			_achievementDbController.Delete("DeleteNonExistingGroupAchievement", -1);

@@ -2,24 +2,24 @@
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using Xunit;
+using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class GameControllerTests : IClassFixture<TestEnvironment>
+	public class GameControllerTests
 	{
 		#region Configuration
 		private readonly GameController _gameDbController;
 
-		public GameControllerTests(TestEnvironment testEnvironment)
+		public GameControllerTests()
 		{
-			_gameDbController = testEnvironment.GameController;
+			_gameDbController = TestEnvironment.GameController;
 		}
 		#endregion
 
 
 		#region Tests
-		[Fact]
+		[Test]
 		public void CreateAndGetGame()
 		{
 			string gameName = "CreateGame";
@@ -30,10 +30,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			int matches = games.Count(g => g.Name == gameName);
 
-			Assert.Equal(1, matches);
+			Assert.AreEqual(1, matches);
 		}
 
-		[Fact]
+		[Test]
 		public void CreateDuplicateGame()
 		{
 			string gameName = "CreateDuplicateGame";
@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<DuplicateRecordException>(() => CreateGame(gameName));
 		}
 		
-		[Fact]
+		[Test]
 		public void GetMultipleGames()
 		{
 			string[] gameNames = new[]
@@ -65,18 +65,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matchingGames = games.Select(g => gameNames.Contains(g.Name));
 			
-			Assert.Equal(gameNames.Length, matchingGames.Count());
+			Assert.AreEqual(gameNames.Length, matchingGames.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void GetNonExistingGame()
 		{
 			var games = _gameDbController.Search("GetNonExistingGame");
 
-			Assert.Empty(games);
+			Assert.IsEmpty(games);
 		}
 
-		[Fact]
+		[Test]
 		public void GetGameById()
 		{
 			Game newGame = CreateGame("GetGameById");
@@ -86,10 +86,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var game = _gameDbController.Search(id);
 
 			Assert.NotNull(game);
-			Assert.Equal(newGame.Name, game.Name);
+			Assert.AreEqual(newGame.Name, game.Name);
 		}
 
-		[Fact]
+		[Test]
 		public void GetNonExistingGameById()
 		{
 			var game = _gameDbController.Search(-1);
@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Null(game);
 		}
 
-		[Fact]
+		[Test]
 		public void UpdateGame()
 		{
 			string gameName = "UpdateExistingGame";
@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			int matches = games.Count(g => g.Name == gameName);
 
-			Assert.Equal(1, matches);
+			Assert.AreEqual(1, matches);
 
 			var updateGame = new Game
 			{
@@ -120,10 +120,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var updatedGame = _gameDbController.Search(newGame.Id);
 
-			Assert.Equal("UpdateExistingGameProof", updatedGame.Name);
+			Assert.AreEqual("UpdateExistingGameProof", updatedGame.Name);
 		}
 
-		[Fact]
+		[Test]
 		public void UpdateGameToDuplicateName()
 		{
 			string gameName = "UpdateGameToDuplicateName";
@@ -141,7 +141,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<DuplicateRecordException>(() => _gameDbController.Update(updateGame));
 		}
 
-		[Fact]
+		[Test]
 		public void UpdateNonExistingGame()
 		{
 			var game = new Game
@@ -153,7 +153,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<MissingRecordException>(() => _gameDbController.Update(game));
 		}
 
-		[Fact]
+		[Test]
 		public void DeleteExistingGame()
 		{
 			string gameName = "DeleteExistingGame";
@@ -161,16 +161,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var game = CreateGame(gameName);
 
 			var games = _gameDbController.Search(gameName);
-			Assert.Equal(games.Count(), 1);
-			Assert.Equal(games.ElementAt(0).Name, gameName);
+			Assert.AreEqual(games.Count(), 1);
+			Assert.AreEqual(games.ElementAt(0).Name, gameName);
 
 			_gameDbController.Delete(game.Id);
 			games = _gameDbController.Search(gameName);
 
-			Assert.Empty(games);
+			Assert.IsEmpty(games);
 		}
 
-		[Fact]
+		[Test]
 		public void DeleteNonExistingGame()
 		{
 			_gameDbController.Delete(-1);

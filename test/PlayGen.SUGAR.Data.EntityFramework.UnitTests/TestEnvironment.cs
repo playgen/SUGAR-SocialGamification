@@ -1,63 +1,62 @@
 ﻿using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using System;
 using PlayGen.SUGAR.GameData;
-using Xunit;
 using AchievementController = PlayGen.SUGAR.Data.EntityFramework.Controllers.AchievementController;
 using LeaderboardController = PlayGen.SUGAR.Data.EntityFramework.Controllers.LeaderboardController;
 using SkillController = PlayGen.SUGAR.Data.EntityFramework.Controllers.SkillController;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class TestEnvironment : IDisposable
+    public static class TestEnvironment
 	{
-		private readonly string _dbName = "sugarunittests";
-		private readonly string _connectionString;
+		private static readonly string _dbName = "sugarunittests";
+		private static readonly string _connectionString;
 
-		private AccountController _accountController;
-		private AchievementController _achievementController;
-		private ActorController _actorController;
-		private GameController _gameController;
-		private GameDataController _gameDataController;
-		private GroupController _groupController;
-		private GroupRelationshipController _groupRelationshipController;
-		private LeaderboardController _leaderboardController;
-		private ResourceController _resourceController;
-		private SkillController _skillController;
-		private UserController _userController;
-		private UserRelationshipController _userRelationshipController;
+		private static AccountController _accountController;
+		private static AchievementController _achievementController;
+		private static ActorController _actorController;
+		private static GameController _gameController;
+		private static GameDataController _gameDataController;
+		private static GroupController _groupController;
+		private static GroupRelationshipController _groupRelationshipController;
+		private static LeaderboardController _leaderboardController;
+		private static ResourceController _resourceController;
+		private static SkillController _skillController;
+		private static UserController _userController;
+		private static UserRelationshipController _userRelationshipController;
 
-		public AccountController AccountController
+		public static  AccountController AccountController
 			=> _accountController ?? (_accountController = new AccountController(_connectionString));
-		public AchievementController AchievementController
+		public static  AchievementController AchievementController
 			=> _achievementController ?? (_achievementController = new AchievementController(_connectionString));
-		public ActorController ActorController
+		public static  ActorController ActorController
 			=> _actorController ?? (_actorController = new ActorController(_connectionString));
-		public GameController GameController 
+		public static  GameController GameController 
 			=> _gameController ?? (_gameController = new GameController(_connectionString));
-		public GameDataController GameDataController 
+		public static  GameDataController GameDataController 
 			=> _gameDataController ?? (_gameDataController = new GameDataController(_connectionString));
-		public GroupController GroupController
+		public static  GroupController GroupController
 			=> _groupController ?? (_groupController = new GroupController(_connectionString));
-		public GroupRelationshipController GroupRelationshipController
+		public static  GroupRelationshipController GroupRelationshipController
 			=>_groupRelationshipController ?? (_groupRelationshipController = new GroupRelationshipController(_connectionString));
-		public LeaderboardController LeaderboardController
+		public static  LeaderboardController LeaderboardController
 			=> _leaderboardController ?? (_leaderboardController = new LeaderboardController(_connectionString));
-		public ResourceController ResourceController 
+		public static  ResourceController ResourceController 
 			=> _resourceController ?? (_resourceController = new ResourceController(_connectionString));
-		public SkillController SkillController
+		public static  SkillController SkillController
 			=> _skillController ?? (_skillController = new SkillController(_connectionString));
-		public UserController UserController 
+		public static  UserController UserController 
 			=> _userController ?? (_userController = new UserController(_connectionString));
-		public UserRelationshipController UserRelationshipController
+		public static  UserRelationshipController UserRelationshipController
 			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(_connectionString));
-
-		public TestEnvironment()
+        
+		static TestEnvironment()
 		{
 			_connectionString = GetNameOrConnectionString(_dbName);
-			DeleteDatabase();
+		    DeleteDatabase();
 		}
 
-		private string GetNameOrConnectionString(string dbName)
+		private static string GetNameOrConnectionString(string dbName)
 		{
 			return "Server=localhost;" +
 					"Port=3306;" +
@@ -68,7 +67,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 					"Allow Zero Datetime=true";
 		}
 
-		private void DeleteDatabase()
+		public static void DeleteDatabase()
 		{
 			using (var context = new SUGARContext(_connectionString))
 			{
@@ -81,10 +80,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 					throw new Exception($"Database with name: {_dbName} doesn't exist.");
 				}
 			}
-		}
-		
-		public void Dispose()
-		{
 		}
 	}
 }

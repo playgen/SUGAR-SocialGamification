@@ -2,24 +2,24 @@
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using Xunit;
+using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class GroupControllerTests : IClassFixture<TestEnvironment>
+	public class GroupControllerTests
 	{
 		#region Configuration
 		private readonly GroupController _groupDbController;
 
-		public GroupControllerTests(TestEnvironment testEnvironment)
+		public GroupControllerTests()
 		{
-			_groupDbController = testEnvironment.GroupController;
+			_groupDbController = TestEnvironment.GroupController;
 		}
 		#endregion
 
 
 		#region Tests
-		[Fact]
+		[Test]
 		public void CreateAndGetGroup()
 		{
 			string groupName = "CreateGroup";
@@ -30,10 +30,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			int matches = groups.Count(g => g.Name == groupName);
 
-			Assert.Equal(matches, 1);
+			Assert.AreEqual(matches, 1);
 		}
 
-		[Fact]
+		[Test]
 		public void CreateDuplicateGroup()
 		{
 			string groupName = "CreateDuplicateGroup";
@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<DuplicateRecordException>(() => CreateGroup(groupName));
 		}
 
-		[Fact]
+		[Test]
 		public void GetMultipleGroups()
 		{
 			string[] groupNames = new[]
@@ -65,18 +65,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matchingGroups = groups.Select(g => groupNames.Contains(g.Name));
 
-			Assert.Equal(matchingGroups.Count(), groupNames.Length);
+			Assert.AreEqual(matchingGroups.Count(), groupNames.Length);
 		}
 
-		[Fact]
+		[Test]
 		public void GetNonExistingGroup()
 		{
 			var groups = _groupDbController.Search("GetNonExsitingGroup");
 
-			Assert.Empty(groups);
+			Assert.IsEmpty(groups);
 		}
 
-		[Fact]
+		[Test]
 		public void GetGroupById()
 		{
 			Group newGroup = CreateGroup("GetGroupById");
@@ -86,10 +86,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var group = _groupDbController.Search(id);
 
 			Assert.NotNull(group);
-			Assert.Equal(newGroup.Name, group.Name);
+			Assert.AreEqual(newGroup.Name, group.Name);
 		}
 
-		[Fact]
+		[Test]
 		public void GetNonExistingGroupById()
 		{
 			var group = _groupDbController.Search(-1);
@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Null(group);
 		}
 
-		[Fact]
+		[Test]
 		public void UpdateGroup()
 		{
 			string groupName = "UpdateExistingGroup";
@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			int matches = groups.Count(g => g.Name == groupName);
 
-			Assert.Equal(1, matches);
+			Assert.AreEqual(1, matches);
 
 			var updateGroup = new Group
 			{
@@ -120,10 +120,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var updatedGroup = _groupDbController.Search(newGroup.Id);
 
-			Assert.Equal("UpdateExistingGroupProof", updatedGroup.Name);
+			Assert.AreEqual("UpdateExistingGroupProof", updatedGroup.Name);
 		}
 
-		[Fact]
+		[Test]
 		public void UpdateGroupToDuplicateName()
 		{
 			string groupName = "UpdateGroupToDuplicateName";
@@ -141,7 +141,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<DuplicateRecordException>(() => _groupDbController.Update(updateGroup));
 		}
 
-		[Fact]
+		[Test]
 		public void UpdateNonExistingGroup()
 		{
 			var group = new Group
@@ -153,7 +153,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<MissingRecordException>(() => _groupDbController.Update(group));
 		}
 
-		[Fact]
+		[Test]
 		public void DeleteExistingGroup()
 		{
 			string groupName = "DeleteExistingGroup";
@@ -161,16 +161,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var group = CreateGroup(groupName);
 
 			var groups = _groupDbController.Search(groupName);
-			Assert.Equal(groups.Count(), 1);
-			Assert.Equal(groups.ElementAt(0).Name, groupName);
+			Assert.AreEqual(groups.Count(), 1);
+			Assert.AreEqual(groups.ElementAt(0).Name, groupName);
 
 			_groupDbController.Delete(group.Id);
 			groups = _groupDbController.Search(groupName);
 
-			Assert.Empty(groups);
+			Assert.IsEmpty(groups);
 		}
 
-		[Fact]
+		[Test]
 		public void DeleteNonExistingGroup()
 		{
 			_groupDbController.Delete(-1);

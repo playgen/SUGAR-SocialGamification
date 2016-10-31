@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using PlayGen.SUGAR.Contracts;
-using Xunit;
+using NUnit.Framework;
 
 namespace PlayGen.SUGAR.GameData.UnitTests
 {
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		#endregion
 
 		#region Tests
-		[Fact]
+		[Test]
 		public void SumLongs()
 		{
 			User user;
@@ -45,10 +45,10 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var summedValue = generatedData["longs"].Values.Sum(v => Convert.ToInt64(v));
 
-			Assert.Equal(summedValue, dbResult);
+			Assert.AreEqual(summedValue, dbResult);
 		}
 
-		[Fact]
+		[Test]
 		public void SumFloats()
 		{
 			User user;
@@ -59,10 +59,10 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
 			var summedValue = generatedData["floats"].Values.Sum(v => Convert.ToSingle(v));
 
-			Assert.Equal(summedValue, dbResult);
+			Assert.AreEqual(summedValue, dbResult);
 		}
 
-		[Fact]
+		[Test]
 		public void LatestString()
 		{
 			User user;
@@ -75,10 +75,10 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			var lastValue = (string)generatedData["strings"].Values[generatedData["strings"].Values.Length - 1];
 
 			Assert.True(gotResult);
-			Assert.Equal(lastValue, dbResult);
+			Assert.AreEqual(lastValue, dbResult);
 		}
 
-		[Fact]
+		[Test]
 		public void LatestBool()
 		{
 			User user;
@@ -91,26 +91,26 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			var lastValue = (bool)generatedData["bools"].Values[generatedData["bools"].Values.Length - 1];
 
 			Assert.True(gotResult);
-			Assert.Equal(lastValue, dbResult);
+			Assert.AreEqual(lastValue, dbResult);
 		}
 
-		[Fact]
+		[Test]
 		public void SumMissingLongs()
 		{
 			var dbResult = _userSaveDataDbController.SumLongs(1, 1, "SumMissingLongs");
 
-			Assert.Equal(0, dbResult);
+			Assert.AreEqual(0, dbResult);
 		}
 
-		[Fact]
+		[Test]
 		public void SumMissingFloats()
 		{
 			var dbResult = _userSaveDataDbController.SumFloats(1, 1, "SumMissingFloats");
 
-			Assert.Equal(0, dbResult);
+			Assert.AreEqual(0, dbResult);
 		}
 
-		[Fact]
+		[Test]
 		public void LatestMissingStrings()
 		{
 			string dbResult;
@@ -119,7 +119,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 			Assert.False(gotResult);
 		}
 
-		[Fact]
+		[Test]
 		public void LatestMissingBools()
 		{
 			bool dbResult;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+using NUnit.Framework;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Contracts;
@@ -9,6 +8,7 @@ using PlayGen.SUGAR.Data.EntityFramework;
 
 namespace PlayGen.SUGAR.GameData.UnitTests
 {
+	[SetUpFixture]
 	public class GameDataFixture : IDisposable
 	{
 		private readonly UserController _userController;
@@ -17,7 +17,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		private readonly UserRelationshipController _userRelationshipController;
 		private readonly GroupRelationshipController _groupRelationshipController;
 		private readonly GameDataController _gameDataController;
-
+        
 		public GameDataFixture()
 		{
 			DeleteExisting();

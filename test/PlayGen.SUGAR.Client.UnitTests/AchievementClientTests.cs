@@ -406,6 +406,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Test]
 		public void CanGetAchievementByKeysThatContainSlashes()
 		{
+            // todo this test seems incorrect
 			var game = GetOrCreateGame("Get");
 
 			var getAchievement = _achievementClient.GetById("Can/Get/Achievement/By/Keys/That/Contain/Slashes", game.Id);
@@ -461,8 +462,10 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Test]
 		public void CanGetGlobalAchievementByKeysThatContainSlashes()
 		{
+            // todo this test seems incorrect
 			var getAchievement = _achievementClient.GetGlobalById("Can/Get/Achievement/By/Keys/That/Contain/Slashes");
 
+            // todo should this not be an exception?
 			Assert.Null(getAchievement);
 		}
 

@@ -126,11 +126,16 @@ namespace PlayGen.SUGAR.GameData
 					{
 						throw new ArgumentException("This leaderboard cannot filter by group members");
 					}
+
+                    // todo this doesn't get the group!
 					var group = ActorController.Get(actorId.Value);
 					if (group == null || group.ActorType != ActorType.Group)
 					{
 						throw new ArgumentException("The provided ActorId is not a group.");
 					}
+
+                    // todo and then doesn't return the members of that group!
+                    // todo what happens in the case where a user is in multiple groups?
 					break;
 			}
 
