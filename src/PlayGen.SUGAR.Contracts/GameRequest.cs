@@ -11,7 +11,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// Name : "Game Name"
 	/// }
 	/// </example>
-	public class GameRequest : IRequest
+	public class GameRequest
     {
 		/// <summary>
 		/// The display name for the game.

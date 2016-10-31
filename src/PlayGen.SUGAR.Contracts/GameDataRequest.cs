@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// GameDataType : "Long"
 	/// }
 	/// </example>
-	public class GameDataRequest : IRequest
+	public class GameDataRequest
     {
 		/// <summary>
 		/// The id of the Actor which this GameData is being ensigned to. Can be left null to ensign to the system/game.

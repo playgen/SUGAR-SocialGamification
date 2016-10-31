@@ -19,7 +19,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// DateEnd : "2016-12-31 23:59:59"
 	/// }
 	/// </example>
-	public class LeaderboardStandingsRequest : IRequest
+	public class LeaderboardStandingsRequest
     {
 		/// <summary>
 		/// The Token of the Leaderboard which the standings are being gathered for.

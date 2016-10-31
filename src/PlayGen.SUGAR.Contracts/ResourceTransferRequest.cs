@@ -5,7 +5,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates Resource Transfer details.
 	/// </summary>
-	public class ResourceTransferRequest : IRequest
+	public class ResourceTransferRequest 
 	{
 		/// <summary>
 		/// The Id of the Actor who will send this Resource. Can be left null to only give/take from the current owner.

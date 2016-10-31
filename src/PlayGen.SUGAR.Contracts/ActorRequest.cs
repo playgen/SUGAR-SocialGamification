@@ -11,7 +11,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// Name : "Actor Name"
 	/// }
 	/// </example>
-	public class ActorRequest : IRequest
+	public class ActorRequest
     {
 		/// <summary>
 		/// The display name of the user/group.

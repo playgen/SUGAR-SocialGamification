@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// AutoAccept : true
 	/// }
 	/// </example>
-	public class RelationshipRequest : IRequest
+	public class RelationshipRequest
     {
 		/// <summary>
 		/// The Id of the requesting actor.

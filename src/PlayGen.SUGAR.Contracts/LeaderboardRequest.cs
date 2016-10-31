@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// LeaderboardType : "Highest"
 	/// }
 	/// </example>
-	public class LeaderboardRequest : IRequest
+	public class LeaderboardRequest
     {
 		/// <summary>
 		/// A unique identifier used in development to reference the leaderboard.
