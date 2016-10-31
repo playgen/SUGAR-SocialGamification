@@ -15,7 +15,6 @@ using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.GameData;
 using NLog.Extensions.Logging;
-using PlayGen.SUGAR.WebAPI.WebSockets;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -116,7 +115,6 @@ namespace PlayGen.SUGAR.WebAPI
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 			ConfigureCors(app);
-			ConfigureWebSockets(app);
 
 			app.UseMvc();
 			
@@ -137,11 +135,6 @@ namespace PlayGen.SUGAR.WebAPI
 		private static void ConfigureCors(IApplicationBuilder application)
 		{
 			application.UseCors("AllowAll");
-		}
-
-		private static void ConfigureWebSockets(IApplicationBuilder app)
-		{
-			app.Map("", SocketHandler.Map);
 		}
 	}
 }

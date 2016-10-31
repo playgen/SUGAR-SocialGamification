@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// AutoLogin : true
 	/// }
 	/// </example>
-	public class AccountRequest : IRequest
+	public class AccountRequest
 	{
 		/// <summary>
 		/// The user's log-in name.

@@ -7,11 +7,6 @@
   },
   "frameworks": {
     "net35": {
-      "dependencies": {
-        "websocket-sharp": {
-          "target": "project"
-        }
-      }
     }
     },
     "configurations": {

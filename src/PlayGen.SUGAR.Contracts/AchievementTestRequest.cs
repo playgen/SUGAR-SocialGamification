@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PlayGen.SUGAR.Contracts
 {
-    public class AchievementTestRequest : IRequest
+    public class AchievementTestRequest
     {
 		[Required]
 	    public AchievementRequest Achievement { get; set; }

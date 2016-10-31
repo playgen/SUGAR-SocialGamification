@@ -6,11 +6,11 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>4fa47786-87e4-4251-8496-9bdc9ead0809</ProjectGuid>
-    <RootNamespace>PlayGen.SUGAR.Client.UnitTests</RootNamespace>
+    <ProjectGuid>862f7dfd-9f83-496b-9bc1-677b54364d71</ProjectGuid>
+    <RootNamespace>PlayGen.SUGAR.WebAPI.UnitTests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>

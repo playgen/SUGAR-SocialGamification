@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PlayGen.SUGAR.Client.UnitTests")]
+[assembly: AssemblyProduct("PlayGen.SUGAR.WebAPI.UnitTests")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4fa47786-87e4-4251-8496-9bdc9ead0809")]
+[assembly: Guid("b8caa947-18b8-40dd-9b64-33d6b95b0965")]
