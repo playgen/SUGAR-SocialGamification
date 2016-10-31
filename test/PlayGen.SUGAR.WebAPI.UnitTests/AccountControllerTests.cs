@@ -90,8 +90,6 @@ namespace PlayGen.SUGAR.WebAPI.UnitTests
 		[Fact]
 		public void RegisterInvalidUser()
 		{
-			int userId = -1;
-
 			var accountRequest = CreatAccountRequest("RegisterInvalidUser", "RegisterInvalidUser");
 
 			Assert.Throws<InvalidAccountDetailsException>(() => _accountController.Register(accountRequest));
