@@ -2,6 +2,7 @@
 using PlayGen.SUGAR.Contracts;
 using System.Net;
 using NUnit.Framework;
+using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
@@ -61,14 +62,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var registerResponse = _accountClient.Register(accountRequest);
 
-			Assert.Throws<Exception>(() => _accountClient.Register(accountRequest));
+			Assert.Throws<ClientException>(() => _accountClient.Register(accountRequest));
 		}
 
 		[Test]
 		public void CannotRegisterInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
-			Assert.Throws<Exception>(() => _accountClient.Register(accountRequest));
+			Assert.Throws<ClientException>(() => _accountClient.Register(accountRequest));
 		}
 
 		[Test]
@@ -92,7 +93,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		public void CannotLoginInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
-			Assert.Throws<Exception>(() => _accountClient.Login(accountRequest));
+			Assert.Throws<ClientException>(() => _accountClient.Login(accountRequest));
 		}
 		#endregion
 	}

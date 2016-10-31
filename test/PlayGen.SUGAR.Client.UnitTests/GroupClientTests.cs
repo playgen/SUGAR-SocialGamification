@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using PlayGen.SUGAR.Contracts;
 using NUnit.Framework;
+using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
@@ -64,7 +65,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			_groupClient.Create(groupRequest);
 
-			Assert.Throws<Exception>(() => _groupClient.Create(groupRequest));
+			Assert.Throws<ClientException>(() => _groupClient.Create(groupRequest));
 		}
 
 		[Test]
@@ -72,7 +73,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var groupRequest = new ActorRequest { };
 
-			Assert.Throws<Exception>(() => _groupClient.Create(groupRequest));
+			Assert.Throws<ClientException>(() => _groupClient.Create(groupRequest));
 		}
 
 		[Test]
@@ -108,7 +109,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Test]
 		public void CannotGetGroupByEmptyName()
 		{
-			Assert.Throws<Exception>(() => _groupClient.Get(""));
+			Assert.Throws<ClientException>(() => _groupClient.Get(""));
 		}
 
 		[Test]
@@ -180,7 +181,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = groupRequestOne.Name
 			};
 
-			Assert.Throws<Exception>(() => _groupClient.Update(responseTwo.Id, updateGroup));
+			Assert.Throws<ClientException>(() => _groupClient.Update(responseTwo.Id, updateGroup));
 		}
 
 		[Test]
@@ -191,7 +192,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = "CannotUpdateNonExistingGroup"
 			};
 
-			Assert.Throws<Exception>(() => _groupClient.Update(-1, updateGroup));
+			Assert.Throws<ClientException>(() => _groupClient.Update(-1, updateGroup));
 		}
 
 		[Test]
@@ -208,7 +209,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			{
 			};
 
-			Assert.Throws<Exception>(() => _groupClient.Update(response.Id, updateRequest));
+			Assert.Throws<ClientException>(() => _groupClient.Update(response.Id, updateRequest));
 		}
 
 		[Test]

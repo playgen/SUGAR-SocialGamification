@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using PlayGen.SUGAR.Contracts;
 using NUnit.Framework;
+using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
@@ -64,7 +65,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			_gameClient.Create(gameRequest);
 
-			Assert.Throws<Exception>(() => _gameClient.Create(gameRequest));
+			Assert.Throws<ClientException>(() => _gameClient.Create(gameRequest));
 		}
 
 		[Test]
@@ -72,7 +73,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var gameRequest = new GameRequest{};
 
-			Assert.Throws<Exception>(() => _gameClient.Create(gameRequest));
+			Assert.Throws<ClientException>(() => _gameClient.Create(gameRequest));
 		}
 
 		[Test]
@@ -108,7 +109,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Test]
 		public void CannotGetGameByEmptyName()
 		{
-			Assert.Throws<Exception>(() => _gameClient.Get(""));
+			Assert.Throws<ClientException>(() => _gameClient.Get(""));
 		}
 
 		[Test]
@@ -180,7 +181,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = gameRequestOne.Name
 			};
 
-			Assert.Throws<Exception>(() => _gameClient.Update(responseTwo.Id, updateGame));
+			Assert.Throws<ClientException>(() => _gameClient.Update(responseTwo.Id, updateGame));
 		}
 
 		[Test]
@@ -191,7 +192,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = "CannotUpdateNonExistingGame"
 			};
 
-			Assert.Throws<Exception>(() => _gameClient.Update(-1, updateGame));
+			Assert.Throws<ClientException>(() => _gameClient.Update(-1, updateGame));
 		}
 
 		[Test]
@@ -208,7 +209,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			{
 			};
 
-			Assert.Throws<Exception>(() => _gameClient.Update(response.Id, updateRequest));
+			Assert.Throws<ClientException>(() => _gameClient.Update(response.Id, updateRequest));
 		}
 
 		[Test]

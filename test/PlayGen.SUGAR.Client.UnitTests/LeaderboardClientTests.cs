@@ -2,6 +2,7 @@
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using NUnit.Framework;
+using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
@@ -139,7 +140,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var createResponse = _leaderboardClient.Create(createRequest);
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
 		[Test]
@@ -158,7 +159,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
 		[Test]
@@ -177,7 +178,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
 		[Test]
@@ -196,7 +197,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
 		[Test]
@@ -216,7 +217,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
 		[Test]
@@ -236,7 +237,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
 		[Test]
@@ -256,32 +257,32 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Count
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Earliest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Latest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.GameDataType = GameDataType.Float;
 			createRequest.LeaderboardType = LeaderboardType.Count;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Earliest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Latest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.GameDataType = GameDataType.String;
 			createRequest.LeaderboardType = LeaderboardType.Highest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Lowest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Cumulative;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.GameDataType = GameDataType.Boolean;
 			createRequest.LeaderboardType = LeaderboardType.Highest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Lowest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Cumulative;
-			Assert.Throws<Exception>(() => _leaderboardClient.Create(createRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
 		[Test]
@@ -343,7 +344,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var game = GetOrCreateGame("Get");
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Get("", game.Id));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Get("", game.Id));
 		}
 
 		[Test]
@@ -357,7 +358,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Test]
 		public void CannotGetGlobalLeaderboardWithEmptyToken()
 		{
-			Assert.Throws<Exception>(() => _leaderboardClient.GetGlobal(""));
+			Assert.Throws<ClientException>(() => _leaderboardClient.GetGlobal(""));
 		}
 
 		[Test]
@@ -461,7 +462,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -481,7 +482,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Lowest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -514,7 +515,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -547,7 +548,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -580,7 +581,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -614,7 +615,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -648,32 +649,32 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				LeaderboardType = LeaderboardType.Count
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Earliest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Latest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.GameDataType = GameDataType.Float;
 			updateRequest.LeaderboardType = LeaderboardType.Count;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Earliest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Latest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.GameDataType = GameDataType.String;
 			updateRequest.LeaderboardType = LeaderboardType.Highest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Lowest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Cumulative;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.GameDataType = GameDataType.Boolean;
 			updateRequest.LeaderboardType = LeaderboardType.Highest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Lowest;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Cumulative;
-			Assert.Throws<Exception>(() => _leaderboardClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -711,7 +712,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Test]
 		public void CannotDeleteGlobalLeaderboardByEmptyToken()
 		{
-			Assert.Throws<Exception>(() => _leaderboardClient.DeleteGlobal(""));
+			Assert.Throws<ClientException>(() => _leaderboardClient.DeleteGlobal(""));
 		}
 
 		[Test]
@@ -756,7 +757,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var game = GetOrCreateGame("Delete");
 
-			Assert.Throws<Exception>(() => _leaderboardClient.Delete("", game.Id));
+			Assert.Throws<ClientException>(() => _leaderboardClient.Delete("", game.Id));
 		}
 
 		[Test]
@@ -860,7 +861,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -904,7 +905,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -935,7 +936,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -966,7 +967,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -997,7 +998,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -1028,7 +1029,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -1072,7 +1073,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<Exception>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		#endregion

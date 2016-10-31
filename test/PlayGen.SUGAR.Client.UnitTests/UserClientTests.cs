@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using PlayGen.SUGAR.Contracts;
 using NUnit.Framework;
+using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
@@ -64,7 +65,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			_userClient.Create(userRequest);
 
-			Assert.Throws<Exception>(() => _userClient.Create(userRequest));
+			Assert.Throws<ClientException>(() => _userClient.Create(userRequest));
 		}
 
 		[Test]
@@ -72,7 +73,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var userRequest = new ActorRequest { };
 
-			Assert.Throws<Exception>(() => _userClient.Create(userRequest));
+			Assert.Throws<ClientException>(() => _userClient.Create(userRequest));
 		}
 
 		[Test]
@@ -108,7 +109,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Test]
 		public void CannotGetUserByEmptyName()
 		{
-			Assert.Throws<Exception>(() => _userClient.Get(""));
+			Assert.Throws<ClientException>(() => _userClient.Get(""));
 		}
 
 		[Test]
@@ -180,7 +181,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = userRequestOne.Name
 			};
 
-			Assert.Throws<Exception>(() => _userClient.Update(responseTwo.Id, updateUser));
+			Assert.Throws<ClientException>(() => _userClient.Update(responseTwo.Id, updateUser));
 		}
 
 		[Test]
@@ -191,7 +192,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Name = "CannotUpdateNonExistingUser"
 			};
 
-			Assert.Throws<Exception>(() => _userClient.Update(-1, updateUser));
+			Assert.Throws<ClientException>(() => _userClient.Update(-1, updateUser));
 		}
 
 		[Test]
@@ -208,7 +209,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			{
 			};
 
-			Assert.Throws<Exception>(() => _userClient.Update(response.Id, updateRequest));
+			Assert.Throws<ClientException>(() => _userClient.Update(response.Id, updateRequest));
 		}
 
 		[Test]

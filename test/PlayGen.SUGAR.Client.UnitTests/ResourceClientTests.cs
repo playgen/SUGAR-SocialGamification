@@ -4,6 +4,7 @@ using System.Net;
 using PlayGen.SUGAR.Contracts;
 using NUnit.Framework;
 using System.Linq;
+using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
@@ -212,7 +213,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var fromUser = GetOrCreateUser("From");
 			var toUser = GetOrCreateUser("To");
 
-			Assert.Throws<Exception>(() => _resourceClient.Transfer(new ResourceTransferRequest
+			Assert.Throws<ClientException>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
 
 				SenderActorId = fromUser.Id,
@@ -239,7 +240,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				Quantity = 100,
 			});		
 
-			Assert.Throws<Exception>(() => _resourceClient.Transfer(new ResourceTransferRequest
+			Assert.Throws<ClientException>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
 				SenderActorId = fromUser.Id,
 				RecipientActorId = toUser.Id,
@@ -265,7 +266,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			long transferQuantity = fromResource.Quantity*2;
 
-			Assert.Throws<Exception>(() => _resourceClient.Transfer(new ResourceTransferRequest
+			Assert.Throws<ClientException>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
 				GameId = fromResource.GameId,
 				SenderActorId = fromUser.Id,

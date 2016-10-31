@@ -4,6 +4,7 @@ using System.Net;
 using PlayGen.SUGAR.Contracts;
 using NUnit.Framework;
 using System.Linq;
+using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
@@ -127,7 +128,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				GameDataType = GameDataType.String,
 			};
 
-			Assert.Throws<Exception>(() => _gameDataClient.Add(gameDataRequest));
+			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 		}
 
 		[Test]
@@ -144,7 +145,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				GameDataType = GameDataType.String,
 			};
 
-			Assert.Throws<Exception>(() => _gameDataClient.Add(gameDataRequest));
+			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 		}
 
 		[Test]
@@ -162,29 +163,29 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				GameDataType = GameDataType.Float,
 			};
 
-			Assert.Throws<Exception>(() => _gameDataClient.Add(gameDataRequest));
+			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 
 			gameDataRequest.GameDataType = GameDataType.Long;
 
-			Assert.Throws<Exception>(() => _gameDataClient.Add(gameDataRequest));
+			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 
 			gameDataRequest.GameDataType = GameDataType.Boolean;
 
-			Assert.Throws<Exception>(() => _gameDataClient.Add(gameDataRequest));
+			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 
 			gameDataRequest.GameDataType = GameDataType.Float;
 			gameDataRequest.Value = "True";
 
-			Assert.Throws<Exception>(() => _gameDataClient.Add(gameDataRequest));
+			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 
 			gameDataRequest.GameDataType = GameDataType.Long;
 
-			Assert.Throws<Exception>(() => _gameDataClient.Add(gameDataRequest));
+			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 
 			gameDataRequest.GameDataType = GameDataType.Boolean;
 			gameDataRequest.Value = "2";
 
-			Assert.Throws<Exception>(() => _gameDataClient.Add(gameDataRequest));
+			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 		}
 
 		[Test]

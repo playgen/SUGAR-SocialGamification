@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using PlayGen.SUGAR.Contracts;
 using NUnit.Framework;
+using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
@@ -136,7 +137,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			_skillClient.Create(skillRequest);
 
-			Assert.Throws<Exception>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
 		}
 
 		[Test]
@@ -164,7 +165,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
 		}
 
 		[Test]
@@ -192,7 +193,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
 		}
 
 		[Test]
@@ -208,7 +209,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				GameId = game.Id,
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
 		}
 
 		[Test]
@@ -236,7 +237,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
 		}
 
 		[Test]
@@ -263,7 +264,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
 		}
 
 		[Test]
@@ -291,7 +292,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
 		}
 
 		[Test]
@@ -399,7 +400,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var game = GetOrCreateGame("Get");
 
-			Assert.Throws<Exception>(() => _skillClient.GetById("", game.Id));
+			Assert.Throws<ClientException>(() => _skillClient.GetById("", game.Id));
 		}
 
 		[Test]
@@ -454,7 +455,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Test]
 		public void CannotGetGlobalSkillByEmptyToken()
 		{
-			Assert.Throws<Exception>(() => _skillClient.GetGlobalById(""));
+			Assert.Throws<ClientException>(() => _skillClient.GetGlobalById(""));
 		}
 
 		[Test]
@@ -602,7 +603,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -631,7 +632,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -682,7 +683,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -733,7 +734,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -772,7 +773,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				GameId = game.Id,
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -823,7 +824,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -873,7 +874,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -924,7 +925,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 				},
 			};
 
-			Assert.Throws<Exception>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
 		}
 
 		[Test]
@@ -979,7 +980,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var game = GetOrCreateGame("Delete");
 
-			Assert.Throws<Exception>(() => _skillClient.Delete("", game.Id));
+			Assert.Throws<ClientException>(() => _skillClient.Delete("", game.Id));
 		}
 
 		[Test]
@@ -1027,7 +1028,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		[Test]
 		public void CannotDeleteGlobalSkillByEmptyToken()
 		{
-			Assert.Throws<Exception>(() => _skillClient.DeleteGlobal(""));
+			Assert.Throws<ClientException>(() => _skillClient.DeleteGlobal(""));
 		}
 
 		[Test]
@@ -1081,7 +1082,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var user = GetOrCreateUser("ProgressGet");
 
-			Assert.Throws<Exception>(() => _skillClient.GetGlobalSkillProgress("CannotGetNotExistingGlobalSkillProgress", user.Id));
+			Assert.Throws<ClientException>(() => _skillClient.GetGlobalSkillProgress("CannotGetNotExistingGlobalSkillProgress", user.Id));
 		}
 
 		[Test]
@@ -1139,7 +1140,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var user = GetOrCreateUser("ProgressGet");
 			var game = GetOrCreateGame("ProgressGet");
 
-			Assert.Throws<Exception>(() => _skillClient.GetSkillProgress("CannotGetNotExistingSkillProgress", game.Id, user.Id));
+			Assert.Throws<ClientException>(() => _skillClient.GetSkillProgress("CannotGetNotExistingSkillProgress", game.Id, user.Id));
 		}
 		#endregion
 		#region Helpers
