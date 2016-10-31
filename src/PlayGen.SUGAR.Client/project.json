@@ -9,8 +9,6 @@
     "net35": {
     }
     },
-    "configurations": {
-    },
     "scripts": {
       "postcompile": [ "xcopy /I /Y \"%compile:OutputDir%\\*\" \"%project:Directory%\\..\\..\\..\\Client\\Assets\\Plugins\\SUGAR\"" ]
     }

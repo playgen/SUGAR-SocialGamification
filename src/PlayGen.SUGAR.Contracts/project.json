@@ -9,8 +9,6 @@
       }
     }
   },
-  "configurations": {
-  },
   "buildOptions": {
     "xmlDoc": true
   },

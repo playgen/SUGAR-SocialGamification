@@ -3,38 +3,23 @@ using PlayGen.SUGAR.Contracts;
 using System.Net;
 using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Client.UnitTests;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
 {
-	public class AccountClientTests
+    [TestFixture]
+	public class AccountClientTests : ClientTestBase
 	{
 		#region Configuration
 		private readonly AccountClient _accountClient;
 
 		public AccountClientTests()
 		{
-			var testSugarClient = new TestSUGARClient();
-			_accountClient = testSugarClient.Account;
+			_accountClient = TestSugarClient.Account;
 		}
 		#endregion
 
 		#region Tests
-		[Test]
-		public void CanRegisterNewUser()
-		{
-			var accountRequest = new AccountRequest
-			{
-				Name = "CanRegisterNewUser",
-				Password = "CanRegisterNewUserPassword",
-				AutoLogin = false,
-			};
-
-			var registerResponse = _accountClient.Register(accountRequest);
-
-			Assert.True(registerResponse.User.Id > 0);
-			Assert.AreEqual(accountRequest.Name, registerResponse.User.Name);
-		}
-
 		[Test]
 		public void CanRegisterNewUserAndLogin()
 		{
@@ -50,7 +35,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.True(registerResponse.User.Id > 0);
 			Assert.AreEqual(accountRequest.Name, registerResponse.User.Name);
 		}
-
+        /*
 		[Test]
 		public void CannotRegisterDuplicate()
 		{
@@ -94,7 +79,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		{
 			var accountRequest = new AccountRequest();
 			Assert.Throws<ClientException>(() => _accountClient.Login(accountRequest));
-		}
+		}*/
 		#endregion
 	}
 }
