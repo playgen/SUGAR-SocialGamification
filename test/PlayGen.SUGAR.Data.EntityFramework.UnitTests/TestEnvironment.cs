@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
 	public class TestEnvironment : IDisposable
 	{
-		private readonly string _dbName = "sgaunittests";
+		private readonly string _dbName = "sugarunittests";
 		private readonly string _connectionString;
 
 		private AccountController _accountController;
