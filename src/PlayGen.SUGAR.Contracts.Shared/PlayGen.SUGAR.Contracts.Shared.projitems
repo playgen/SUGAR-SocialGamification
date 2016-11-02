@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>eba79d21-610f-4a2e-b4c2-db3f5786f057</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>PlayGen.SUGAR.Contracts.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AccountRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AccountResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AchievementCriteria.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AchievementProgressResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AchievementRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AchievementResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AchievementTestRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AchievementTestResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ComparisonType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\IAccountController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\IGameController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\IGroupAchievementController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\IGroupController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\IGroupMemberController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\IGroupSaveDataController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\IUserAchievementController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\IUserController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\IUserDataController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\IUserFriendController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CriteriaQueryType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CriteriaScope.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\SUGARException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameDataRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameDataResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameDataType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LeaderboardFilterType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LeaderboardRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LeaderboardResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LeaderboardStandingsRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LeaderboardStandingsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LeaderboardType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RelationshipRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RelationshipResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RelationshipStatusUpdate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ResourceAddRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ResourceResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ResourceTransferRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ResourceTransferResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Reward.cs" />
+  </ItemGroup>
+</Project>
