@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
 using System.Globalization;
+using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.GameData
 {
