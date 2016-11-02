@@ -2,6 +2,9 @@
 	"version": "1.0.0-*",
   "dependencies": {
     "Microsoft.EntityFrameworkCore": "1.0.1",
+    "MySql.Data.Core": "7.0.4-IR-191",
+    "MySql.Data.EntityFrameworkCore": "7.0.4-IR-191",
+
     "NETStandard.Library": "1.6.0",
     "PlayGen.SUGAR.Contracts": "1.0.0-*",
     "PlayGen.SUGAR.Data.Model": "1.0.0-*"

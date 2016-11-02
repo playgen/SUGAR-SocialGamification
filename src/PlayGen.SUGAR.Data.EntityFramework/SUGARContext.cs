@@ -1,30 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using System.Threading.Tasks;
-using MySql.Data.Entity;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.Model.Interfaces;
-using PlayGen.SUGAR.Data.EntityFramework.ExtensionMethods;
-using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace PlayGen.SUGAR.Data.EntityFramework
 {
 	/// <summary>
 	/// Entity Framework Database Configuration
 	/// </summary>
-	[DbConfigurationType(typeof(MySqlEFConfiguration))]
+	//[DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public class SUGARContext : DbContext
 	{
 		private readonly bool _isSaveDisabled;
 
-		public SUGARContext(string nameOrConnectionString, bool disableSave = false) : base(nameOrConnectionString)
+		internal SUGARContext(DbContextOptions<SUGARContext> options, bool disableSave = false) : base(options)
 		{
 			_isSaveDisabled = disableSave;
 			//Database.SetInitializer(new CreateDatabaseIfNotExists<SUGARContext>());
-			Database.SetInitializer(new SUGARContextInitializer());
+			//Database.SetInitializer(new SUGARContextInitializer());
 		}
 
 		public DbSet<Account> Accounts { get; set; }
@@ -50,7 +44,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		public DbSet<UserToGroupRelationship> UserToGroupRelationships { get; set; }
 
 
-		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<User>().ToTable("Users");
 			modelBuilder.Entity<Group>().ToTable("Groups");
@@ -60,20 +54,24 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 			// Setup foreign key relationships in the database tables
 			modelBuilder.Entity<UserToUserRelationship>()
-				.HasRequired(u => u.Requestor)
-				.WithMany(u => u.Requestors)
+				.HasOne(u => u.Requestor) 
+                //.HasRequired(u => u.Requestor)
+                .WithMany(u => u.Requestors)
 				.HasForeignKey(u => u.RequestorId);
 			modelBuilder.Entity<UserToUserRelationship>()
-				.HasRequired(u => u.Acceptor)
-				.WithMany(u => u.Acceptors)
+				.HasOne(u => u.Acceptor)
+                //.HasRequired(u => u.Requestor)
+                .WithMany(u => u.Acceptors)
 				.HasForeignKey(u => u.AcceptorId);
 			modelBuilder.Entity<UserToUserRelationshipRequest>()
-				.HasRequired(u => u.Requestor)
-				.WithMany(u => u.RequestRequestors)
+				.HasOne(u => u.Requestor)
+                //.HasRequired(u => u.Requestor)
+                .WithMany(u => u.RequestRequestors)
 				.HasForeignKey(u => u.RequestorId);
 			modelBuilder.Entity<UserToUserRelationshipRequest>()
-				.HasRequired(u => u.Acceptor)
-				.WithMany(u => u.RequestAcceptors)
+				.HasOne(u => u.Acceptor)
+                //.HasRequired(u => u.Requestor)
+                .WithMany(u => u.RequestAcceptors)
 				.HasForeignKey(u => u.AcceptorId);
 
 			// Setup composite primary keys
@@ -86,54 +84,52 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 			// Setup unique fields
 			modelBuilder.Entity<Game>()
-				.Property(g => g.Name)
-				.IsUnique();
-			modelBuilder.Entity<User>()
-				.Property(u => u.Name)
-				.IsUnique();
-			modelBuilder.Entity<Group>()
-				.Property(g => g.Name)
-				.IsUnique();
-			modelBuilder.Entity<Account>()
-				.Property(a => a.Name)
-				.IsUnique();
+                .HasAlternateKey(g => g.Name); 
+            // .Property(g => g.Name) 
+            // .IsUnique();
+            modelBuilder.Entity<User>()
+				.HasAlternateKey(u => u.Name);
+            // .Property(u => u.Name) 
+            // .IsUnique();
+            modelBuilder.Entity<Group>()
+                .HasAlternateKey(g => g.Name);
+            // .Property(g => g.Name) 
+            // .IsUnique();
+            modelBuilder.Entity<Account>()
+				.HasAlternateKey(a => a.Name);
+            // .Property(a => a.Name) 
+            // .IsUnique();
 
-			// multiple indexes for a single property must be added in the same fluent call
-			modelBuilder.Entity<GameData>()
-				.Property(gd => gd.Key)
-				.IsIndexed("IX_GameData_Game_Actor_Key", 0)
-				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 0);
-			modelBuilder.Entity<GameData>()
-				.Property(gd => gd.GameId)
-				.IsIndexed("IX_GameData_Game_Actor_Key", 1)
-				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 1);
-			modelBuilder.Entity<GameData>()
-				.Property(gd => gd.ActorId)
-				.IsIndexed("IX_GameData_Game_Actor_Key", 2)
-				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 2);
-			modelBuilder.Entity<GameData>()
-				.Property(gd => gd.DataType)
-				.IsIndexed("IX_GameData_Game_Actor_Key_Type", 4);
+            // todo find api to achieve below:
+            // multiple indexes for a single property must be added in the same fluent call
+            modelBuilder.Entity<GameData>()
+                .HasIndex(p => new {p.Key, p.DataType});
+				//.Property(gd => gd.Key)
+				//.IsIndexed("IX_GameData_Game_Actor_Key", 0)
+				//.IsIndexed("IX_GameData_Game_Actor_Key_Type", 0);
+			//modelBuilder.Entity<GameData>()
+				//.Property(gd => gd.GameId)
+				//.IsIndexed("IX_GameData_Game_Actor_Key", 1)
+				//.IsIndexed("IX_GameData_Game_Actor_Key_Type", 1);
+			//modelBuilder.Entity<GameData>()
+				//.Property(gd => gd.ActorId)
+				//.IsIndexed("IX_GameData_Game_Actor_Key", 2)
+				//.IsIndexed("IX_GameData_Game_Actor_Key_Type", 2);
+			//modelBuilder.Entity<GameData>()
+				//.Property(gd => gd.DataType)
+				//.IsIndexed("IX_GameData_Game_Actor_Key_Type", 4);
 
-			// Serialize specific objects as Json objects instead of creating a new table
-			modelBuilder.ComplexType<AchievementCriteriaCollection>()
-				.Property(p => p.Serialised)
-				.HasColumnName("CompletionCriteria")
-				.HasMaxLength(1024);
-			modelBuilder.ComplexType<RewardCollection>()
-				.Property(p => p.Serialised)
-				.HasColumnName("RewardCollection")
-				.HasMaxLength(1024);
-
-			modelBuilder.Entity<GameData>()
-				.Property(g => g.DateCreated)
-				.HasPrecision(3);
-			modelBuilder.Entity<GameData>()
-				.Property(g => g.DateModified)
-				.HasPrecision(3);
+			// Set precision of data
+			//modelBuilder.Entity<GameData>()
+			//	.Property(g => g.DateCreated)
+			//	.HasPrecision(3);
+			//modelBuilder.Entity<GameData>()
+			//	.Property(g => g.DateModified)
+			//	.HasPrecision(3);
 
 			// Change all string fields to have a max length of 64 chars
-			modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
+            // todo find api to achieve below:
+			//modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
 
 			modelBuilder.Entity<Achievement>()
 				.Property(p => p.Description)

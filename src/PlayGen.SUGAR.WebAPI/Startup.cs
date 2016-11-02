@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.WebAPI
 
 		public Startup(IHostingEnvironment env)
 		{
-			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+    		//AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
 			#region Logging
 
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.WebAPI
 				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
 
 
-				if (env.IsEnvironment("Development"))
+			if (env.IsEnvironment("Development"))
 			{
 				// This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
 				builder.AddApplicationInsightsSettings(developerMode: true);
@@ -47,10 +47,10 @@ namespace PlayGen.SUGAR.WebAPI
 			Configuration = builder.Build();
 		}
 
-		private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-		{
-			Logger.Error($"AppDomain UnhandledException: {e.ExceptionObject}");
-		}
+		//private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+		//{
+		//	Logger.Error($"AppDomain UnhandledException: {e.ExceptionObject}");
+		//}
 
 		public IConfigurationRoot Configuration { get; }
 
@@ -78,6 +78,8 @@ namespace PlayGen.SUGAR.WebAPI
 				json.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 				json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			});
+
+            services.AddDbContext<>()
             
             ConfigureDbControllers(services);
             ConfigureGameDataControllers(services);

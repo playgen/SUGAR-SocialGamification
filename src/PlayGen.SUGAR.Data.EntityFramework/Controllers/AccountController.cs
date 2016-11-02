@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
