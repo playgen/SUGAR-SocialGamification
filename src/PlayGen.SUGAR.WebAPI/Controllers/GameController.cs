@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <returns>A list of <see cref="GameResponse"/> that hold Game details.</returns>
 		[HttpGet("list")]
-		[ResponseType(typeof(IEnumerable<GameResponse>))]
+		//[ResponseType(typeof(IEnumerable<GameResponse>))]
 		public IActionResult Get()
 		{
 			var games = _gameDbController.Get();
@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="name">Game name</param>
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
-		[ResponseType(typeof(IEnumerable<GameResponse>))]
+		//[ResponseType(typeof(IEnumerable<GameResponse>))]
 		public IActionResult Get([FromRoute]string name)
 		{
 			var games = _gameDbController.Search(name);
@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="id">Game id</param>
 		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
 		[HttpGet("findbyid/{id:int}", Name = "GetByGameId")]
-		[ResponseType(typeof(GameResponse))]
+		//[ResponseType(typeof(GameResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
 			var game = _gameDbController.Search(id);
@@ -77,7 +77,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="newGame"><see cref="GameRequest"/> object that contains the details of the new Game.</param>
 		/// <returns>A <see cref="GameResponse"/> containing the new Game details.</returns>
 		[HttpPost]
-		[ResponseType(typeof(GameResponse))]
+		//[ResponseType(typeof(GameResponse))]
 		[ArgumentsNotNull]
 		public IActionResult Create([FromBody]GameRequest newGame)
 		{

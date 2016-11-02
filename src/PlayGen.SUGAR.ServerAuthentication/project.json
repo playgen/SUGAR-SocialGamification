@@ -3,11 +3,13 @@
   "dependencies": {
     "JWT.DNX": "1.0.0.1",
     "NETStandard.Library": "1.6.0",
-    "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
-    "Newtonsoft.Json": "8.0.3",
-    "BCrypt-Official": "0.1.109"
+    "Microsoft.AspNetCore.Mvc": "1.0.1",
+    "Newtonsoft.Json": "9.0.1"
   },
+
   "frameworks": {
-	"net46": { }
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
   }
 }

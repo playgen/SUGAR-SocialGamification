@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="userId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("requests/{userId:int}")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetFriendRequests([FromRoute]int userId)
 		{
 			var actor = _userRelationshipController.GetRequests(userId);
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("sentrequests/{userId:int}")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetSentRequests([FromRoute]int userId)
 		{
 			var actor = _userRelationshipController.GetSentRequests(userId);
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("friends/{userId:int}")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetFriends([FromRoute]int userId)
 		{
 			var actor = _userRelationshipController.GetFriends(userId);
@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipRequest"/> object that holds the details of the new relationship request.</param>
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
 		[HttpPost]
-		[ResponseType(typeof(RelationshipResponse))]
+		//[ResponseType(typeof(RelationshipResponse))]
 		[ArgumentsNotNull]
 		public IActionResult CreateFriendRequest([FromBody]RelationshipRequest relationship)
 		{

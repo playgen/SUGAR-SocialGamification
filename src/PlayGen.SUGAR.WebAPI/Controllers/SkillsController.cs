@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>Returns <see cref="AchievementResponse"/> that holds Skill details</returns>
 		[HttpGet("find/{token}/{gameId:int}")]
 		[HttpGet("find/{token}/global")]
-		[ResponseType(typeof(AchievementResponse))]
+		//[ResponseType(typeof(AchievementResponse))]
 		public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
 		{
 			var skill = _skillController.Get(token, gameId);
@@ -54,7 +54,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Skill details</returns>
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
-		[ResponseType(typeof(IEnumerable<AchievementResponse>))]
+		//[ResponseType(typeof(IEnumerable<AchievementResponse>))]
 		public IActionResult Get([FromRoute]int? gameId)
 		{
 			var skill = _skillController.GetByGame(gameId);
@@ -74,7 +74,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpGet("global/evaluate")]
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("global/evaluate/{actorId:int}")]
-		[ResponseType(typeof(IEnumerable<AchievementProgressResponse>))]
+		//[ResponseType(typeof(IEnumerable<AchievementProgressResponse>))]
 		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
 			var skills = _skillController.GetByGame(gameId);
@@ -105,7 +105,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpGet("{token}/global/evaluate")]
 		[HttpGet("{token}/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("{token}/global/evaluate/{actorId:int}")]
-		[ResponseType(typeof(AchievementProgressResponse))]
+		//[ResponseType(typeof(AchievementProgressResponse))]
 		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
 			var skill = _skillController.Get(token, gameId);
@@ -126,7 +126,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="newSkill"><see cref="AchievementRequest"/> object that holds the details of the new Skill.</param>
 		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created Skill.</returns>
 		[HttpPost("create")]
-		[ResponseType(typeof(AchievementResponse))]
+		//[ResponseType(typeof(AchievementResponse))]
 		[ArgumentsNotNull]
 		public IActionResult Create([FromBody] AchievementRequest newSkill)
 		{

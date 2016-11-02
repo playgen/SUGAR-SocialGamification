@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,11 +8,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NLog;
-using PlayGen.SUGAR.Data.EntityFramework;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
-using PlayGen.SUGAR.GameData;
 using NLog.Extensions.Logging;
 
 namespace PlayGen.SUGAR.WebAPI
@@ -38,7 +34,16 @@ namespace PlayGen.SUGAR.WebAPI
 				.SetBasePath(env.ContentRootPath)
 				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-				.AddEnvironmentVariables();
+
+
+				if (env.IsEnvironment("Development"))
+			{
+				// This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
+				builder.AddApplicationInsightsSettings(developerMode: true);
+			}
+
+			builder.AddEnvironmentVariables();
+
 			Configuration = builder.Build();
 		}
 
@@ -52,44 +57,15 @@ namespace PlayGen.SUGAR.WebAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			// Set EntityFramework's DBContext's connection string
-			string connectionString = Configuration.GetConnectionString("DefaultConnection");
-			/*using (var db = new SUGARContext(connectionString))
-			{
-				db.Database.Initialize(true);
-			}*/
-			services.AddScoped((_) => new AccountController(connectionString));
-			services.AddScoped((_) => new GameController(connectionString));
-			services.AddScoped((_) => new GroupController(connectionString));
-			services.AddScoped((_) => new UserController(connectionString));
-			services.AddScoped((_) => new ActorController(connectionString));
-			services.AddScoped((_) => new GameDataController(connectionString));
-			services.AddScoped((_) => new Data.EntityFramework.Controllers.AchievementController(connectionString));
-			services.AddScoped((_) => new Data.EntityFramework.Controllers.SkillController(connectionString));
-			services.AddScoped((_) => new Data.EntityFramework.Controllers.LeaderboardController(connectionString));
-			services.AddScoped((_) => new GameData.ResourceController(connectionString));
-			services.AddScoped((_) => new GroupRelationshipController(connectionString));
-			services.AddScoped((_) => new UserRelationshipController(connectionString));
+            var apiKey = Configuration["APIKey"];
 
-			// TODO set category types for GameDataControllers used by other controllers
-			services.AddScoped((_) => new GameData.AchievementController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString), new ActorController(connectionString),
-										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString))));
-			services.AddScoped((_) => new GameData.SkillController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString), new ActorController(connectionString),
-										new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString))));
-			services.AddScoped((_) => new RewardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), new UserRelationshipController(connectionString)));
+            services.AddScoped((_) => new JsonWebTokenUtility(apiKey));
+            services.AddScoped((_) => new PasswordEncryption());
+            services.AddScoped<AuthorizationAttribute>();
+            services.AddApplicationInsightsTelemetry(Configuration);
 
-			services.AddScoped((_) => new GameData.LeaderboardController(new GameDataController(connectionString), new GroupRelationshipController(connectionString), 
-				new UserRelationshipController(connectionString), new ActorController(connectionString), new GroupController(connectionString),
-				new UserController(connectionString)));
-
-			services.AddScoped((_) => new PasswordEncryption());
-
-			var apiKey = Configuration["APIKey"];
-			services.AddScoped((_) => new JsonWebTokenUtility(apiKey));
-
-			ConfigureRouting(services);
-			// Add framework services.
-			services.AddMvc(options =>
+            // Add framework services.
+            services.AddMvc(options =>
 			{
 				options.Filters.Add(new ModelValidationFilter());
 				options.Filters.Add(new ExceptionFilter());
@@ -102,10 +78,11 @@ namespace PlayGen.SUGAR.WebAPI
 				json.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 				json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			});
-
-			services.AddScoped<AuthorizationAttribute>();
-
-			ConfigureDocumentationGeneratorServices(services);
+            
+            ConfigureDbControllers(services);
+            ConfigureGameDataControllers(services);
+            ConfigureRouting(services);
+            ConfigureDocumentationGeneratorServices(services);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,27 +91,13 @@ namespace PlayGen.SUGAR.WebAPI
 			loggerFactory.AddNLog();
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
-			ConfigureCors(app);
 
-			app.UseMvc();
+            app.UseCors("AllowAll");
+            app.UseApplicationInsightsRequestTelemetry();
+            app.UseApplicationInsightsExceptionTelemetry();
+            app.UseMvc();
 			
 			ConfigureDocumentationGenerator(app);
-		}
-
-		private static void ConfigureRouting(IServiceCollection services)
-		{
-			services.AddCors(options => options.AddPolicy("AllowAll", p => p
-				// TODO: this should be specified in config at each deployment
-				.AllowAnyOrigin()
-				.AllowAnyMethod()
-				.AllowAnyHeader()
-				.AllowCredentials()
-				.WithExposedHeaders(new [] { "Authorization "})));
-		}
-
-		private static void ConfigureCors(IApplicationBuilder application)
-		{
-			application.UseCors("AllowAll");
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿{
   "version": "1.0.0-*",
+  "testRunner": "nunit",
 
   "dependencies": {
     "Microsoft.AspNetCore.TestHost": "1.0.0",
@@ -11,7 +12,8 @@
   },
 
   "frameworks": {
-    "net46": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
     }
   }
 }

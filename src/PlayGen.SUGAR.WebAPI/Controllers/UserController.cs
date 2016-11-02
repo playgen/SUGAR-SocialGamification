@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <returns>A list of <see cref="ActorResponse"/> that hold User details.</returns>
 		[HttpGet("list")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult Get()
 		{
 			var users = _userController.Get();
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param exactMatch="exactMatch">Match the name exactly.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult Get([FromRoute]string name, bool exactMatch)
 		{
 			var users = _userController.Search(name, exactMatch);
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="id">User id.</param>
 		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
 		[HttpGet("findbyid/{id:int}", Name = "GetByUserId")]
-		[ResponseType(typeof(ActorResponse))]
+		//[ResponseType(typeof(ActorResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
 			var user = _userController.Search(id);
@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new User.</param>
 		/// <returns>A <see cref="ActorResponse"/> containing the new User details.</returns>
 		[HttpPost]
-		[ResponseType(typeof(ActorResponse))]
+		//[ResponseType(typeof(ActorResponse))]
 		[ArgumentsNotNull]
 		public IActionResult Create([FromBody]ActorRequest actor)
 		{

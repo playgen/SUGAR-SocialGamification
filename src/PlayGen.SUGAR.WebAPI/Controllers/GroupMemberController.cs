@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("requests/{groupId:int}")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetMemberRequests([FromRoute]int groupId)
 		{
 			var users = _groupRelationshipController.GetRequests(groupId);
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("sentrequests/{userId:int}")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetSentRequests([FromRoute]int userId)
 		{
 			var requests = _groupRelationshipController.GetSentRequests(userId);
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("members/{groupId:int}")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetMembers([FromRoute]int groupId)
 		{
 			var members = _groupRelationshipController.GetMembers(groupId);
@@ -77,7 +77,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="userId">ID of the User.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("usergroups/{userId:int}")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetUserGroups([FromRoute]int userId)
 		{
 			var groups = _groupRelationshipController.GetUserGroups(userId);
@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipRequest"/> object that holds the details of the new relationship request.</param>
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
 		[HttpPost]
-		[ResponseType(typeof(RelationshipResponse))]
+		//[ResponseType(typeof(RelationshipResponse))]
 		[ArgumentsNotNull]
 		public IActionResult CreateMemberRequest([FromBody]RelationshipRequest relationship)
 		{

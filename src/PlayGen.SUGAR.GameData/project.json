@@ -5,7 +5,10 @@
     "PlayGen.SUGAR.Data.EntityFramework": "1.0.0-*",
     "PlayGen.SUGAR.Data.Model": "1.0.0-*"
   },
+
   "frameworks": {
-	"net46": { }
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
   }
 }

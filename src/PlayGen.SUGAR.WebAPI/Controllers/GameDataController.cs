@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="key">Array of Key names.</param>
 		/// <returns>A list of <see cref="GameDataResponse"/> which match the search criteria.</returns>
 		[HttpGet]
-		[ResponseType(typeof(IEnumerable<GameDataResponse>))]
+		//[ResponseType(typeof(IEnumerable<GameDataResponse>))]
 		public IActionResult Get(int? actorId, int? gameId, string[] key)
 		{
 			var data = _gameDataController.Get(gameId, actorId, key);
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="newData"><see cref="GameDataRequest"/> object that holds the details of the new GameData.</param>
 		/// <returns>A <see cref="GameDataResponse"/> containing the new GameData details.</returns>
 		[HttpPost]
-		[ResponseType(typeof(GameDataResponse))]
+		//[ResponseType(typeof(GameDataResponse))]
 		[ArgumentsNotNull]
 		public IActionResult Add([FromBody]GameDataRequest newData)
 		{

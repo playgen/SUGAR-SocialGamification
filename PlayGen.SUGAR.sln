@@ -34,7 +34,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{523FD157-5
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.Client.UnitTests", "test\PlayGen.SUGAR.Client.UnitTests\PlayGen.SUGAR.Client.UnitTests.xproj", "{4FA47786-87E4-4251-8496-9BDC9EAD0809}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PlayGen.SUGAR.Contracts.Shared", "src\PlayGen.SUGAR.Contracts.Shared\PlayGen.SUGAR.Contracts.Shared.shproj", "{EBA79D21-610F-4A2E-B4C2-DB3F5786F057}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\PlayGen.SUGAR.Contracts.Shared\PlayGen.SUGAR.Contracts.Shared.projitems*{eba79d21-610f-4a2e-b4c2-db3f5786f057}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Ubuntu|Any CPU = Debug_Ubuntu|Any CPU
 		Debug_Ubuntu|x64 = Debug_Ubuntu|x64
@@ -284,5 +289,6 @@ Global
 		{68FEF561-CC91-4C49-95F8-6A153A383DB4} = {523FD157-540A-4EDB-B212-B49DF998EF21}
 		{E17FA592-1321-4B46-83F1-209EC1853871} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
 		{4FA47786-87E4-4251-8496-9BDC9EAD0809} = {523FD157-540A-4EDB-B212-B49DF998EF21}
+		{EBA79D21-610F-4A2E-B4C2-DB3F5786F057} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
 	EndGlobalSection
 EndGlobal

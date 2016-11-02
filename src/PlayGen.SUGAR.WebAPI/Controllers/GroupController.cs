@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <returns>A list of <see cref="ActorResponse"/> that hold Group details.</returns>
 		[HttpGet("list")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult Get()
 		{
 			var groups = _groupController.Get();
@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="name">Group name.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
-		[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult Get([FromRoute]string name)
 		{
 			var groups = _groupController.Search(name);
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="id">Group id.</param>
 		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
 		[HttpGet("findbyid/{id:int}", Name = "GetByGroupId")]
-		[ResponseType(typeof(ActorResponse))]
+		//[ResponseType(typeof(ActorResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
 			var group = _groupController.Search(id);
@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new Group.</param>
 		/// <returns>A <see cref="ActorResponse"/> containing the new Group details.</returns>
 		[HttpPost]
-		[ResponseType(typeof(ActorResponse))]
+		//[ResponseType(typeof(ActorResponse))]
 		[ArgumentsNotNull]
 		public IActionResult Create([FromBody]ActorRequest actor)
 		{

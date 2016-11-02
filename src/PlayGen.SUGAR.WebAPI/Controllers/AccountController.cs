@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web.Http.Description;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Contracts;
-
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
@@ -50,7 +48,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		[HttpPost("login")]
-		[ResponseType(typeof(AccountResponse))]
+		//[ResponseType(typeof(AccountResponse))]
 		[ArgumentsNotNull]
 		public IActionResult Login([FromBody]AccountRequest accountRequest)
 		{
@@ -78,7 +76,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
 		[HttpPost("register")]
-		[ResponseType(typeof(AccountResponse))]
+		//[ResponseType(typeof(AccountResponse))]
 		[ArgumentsNotNull]
 		public IActionResult Register([FromBody] AccountRequest accountRequest)
 		{

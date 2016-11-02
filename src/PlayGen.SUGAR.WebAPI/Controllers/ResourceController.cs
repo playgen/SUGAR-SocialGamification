@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="keys">Optional array of Key names to filter results by.</param>
 		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
 		[HttpGet]
-		[ResponseType(typeof(IEnumerable<ResourceResponse>))]
+		//[ResponseType(typeof(IEnumerable<ResourceResponse>))]
 		public IActionResult Get(int? gameId, int? actorId, string[] keys)
 		{
 			var resource = _resourceController.Get(gameId, actorId, keys.Any() ? keys : null);
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="resourceRequest"><see cref="ResourceAddRequest"/> object that holds the details of the ResourceData.</param>
 		/// <returns>A <see cref="ResourceResponse"/> containing the new Resource details.</returns>
 		[HttpPost]
-		[ResponseType(typeof(ResourceResponse))]
+		//[ResponseType(typeof(ResourceResponse))]
 		[ArgumentsNotNull]
 		public IActionResult AddOrUpdate([FromBody]ResourceAddRequest resourceRequest)
 		{
@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="transferRequest"><see cref="ResourceTransferRequest"/> object that holds the details of the resoruce transfer.</param>
 		/// <returns>A <see cref="ResourceTransferResponse"/> containing the modified resources.</returns>
 		[HttpPost("transfer")]
-		[ResponseType(typeof(ResourceTransferResponse))]
+		//[ResponseType(typeof(ResourceTransferResponse))]
 		[ArgumentsNotNull]
 		public IActionResult Transfer([FromBody] ResourceTransferRequest transferRequest)
 		{

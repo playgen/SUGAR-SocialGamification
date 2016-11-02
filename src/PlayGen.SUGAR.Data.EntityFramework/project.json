@@ -1,16 +1,15 @@
 {
 	"version": "1.0.0-*",
   "dependencies": {
-    "EntityFramework": "6.1.3",
-    "MySql.Data.Entity": "6.9.8",
+    "Microsoft.EntityFrameworkCore": "1.0.1",
     "NETStandard.Library": "1.6.0",
     "PlayGen.SUGAR.Contracts": "1.0.0-*",
     "PlayGen.SUGAR.Data.Model": "1.0.0-*"
   },
+
   "frameworks": {
-	"net46": {
-	  "frameworkAssemblies": {
-	  }
-	}
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
   }
 }

@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
-		[ResponseType(typeof(IEnumerable<LeaderboardResponse>))]
+		//[ResponseType(typeof(IEnumerable<LeaderboardResponse>))]
 		public IActionResult Get([FromRoute]int? gameId)
 		{
 			var leaderboard = _leaderboardController.GetByGame(gameId);
@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>Returns a single <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
 		[HttpGet("{token}/global")]
 		[HttpGet("{token}/{gameId:int}")]
-		[ResponseType(typeof(IEnumerable<LeaderboardResponse>))]
+		//[ResponseType(typeof(IEnumerable<LeaderboardResponse>))]
 		public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
 		{
 			var leaderboard = _leaderboardController.Get(token, gameId);
@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="newLeaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the new Leaderboard.</param>
 		/// <returns>Returns a <see cref="LeaderboardResponse"/> object containing details for the newly created Leaderboard.</returns>
 		[HttpPost("create")]
-		[ResponseType(typeof(LeaderboardResponse))]
+		//[ResponseType(typeof(LeaderboardResponse))]
 		[ArgumentsNotNull]
 		public IActionResult Create([FromBody] LeaderboardRequest newLeaderboard)
 		{
@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="leaderboardDetails"><see cref="LeaderboardStandingsRequest"/> object that holds the details that are wanted from the Leaderboard.</param>
 		/// <returns>Returns multiple <see cref="LeaderboardStandingsResponse"/> that hold actor positions in the leaderboard.</returns>
 		[HttpPost("standings")]
-		[ResponseType(typeof(IEnumerable<LeaderboardStandingsResponse>))]
+		//[ResponseType(typeof(IEnumerable<LeaderboardStandingsResponse>))]
 		public IActionResult GetLeaderboardStandings([FromBody]LeaderboardStandingsRequest leaderboardDetails)
 		{
 			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardToken, leaderboardDetails.GameId);
