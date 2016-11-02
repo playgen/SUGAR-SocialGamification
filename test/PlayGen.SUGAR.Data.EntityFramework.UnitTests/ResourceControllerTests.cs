@@ -5,6 +5,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.GameData;
 using NUnit.Framework;
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {

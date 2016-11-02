@@ -5,6 +5,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using NUnit.Framework;
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
@@ -162,7 +163,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = achievementName,
 				GameId = -1,
 				ActorType = ActorType.User,
-				CompletionCriterias = new List<AchievementCriteria>(),
+				CompletionCriterias = new List<CompletionCriteria>(),
 				Rewards = new List<Reward>()
 			};
 
@@ -211,14 +212,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = name,
 				GameId = gameId.Value,
 				ActorType = ActorType.User,
-				CompletionCriterias = new List<AchievementCriteria>(),
+				CompletionCriterias = new List<CompletionCriteria>(),
 				Rewards = new List<Reward>()
 			};
 			if (addCriteria)
 			{
-				var criteria = new List<AchievementCriteria>
+				var criteria = new List<CompletionCriteria>
 				{
-					new AchievementCriteria
+					new CompletionCriteria
 					{
 						Key = "CreateAchievementKey",
 						DataType = GameDataType.String,
