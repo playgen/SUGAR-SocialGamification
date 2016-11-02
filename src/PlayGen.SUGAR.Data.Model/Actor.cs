@@ -1,4 +1,4 @@
-﻿using PlayGen.SUGAR.Contracts;
+﻿using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.Model
 {
@@ -8,6 +8,4 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public abstract ActorType ActorType { get; }
 	}
-
-
 }

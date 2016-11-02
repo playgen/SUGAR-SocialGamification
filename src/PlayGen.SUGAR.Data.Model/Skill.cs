@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Contracts;
-using PlayGen.SUGAR.Data.Model.Interfaces;
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.Model
 {
 	public class Skill
 	{
 		public int GameId { get; set; }
-
-		//public virtual Game Game { get; set; }
 
 		public string Name { get; set; }
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Data.Model
