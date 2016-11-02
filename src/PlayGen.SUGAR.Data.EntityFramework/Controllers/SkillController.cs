@@ -1,23 +1,23 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using System.Data.Entity;
+using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class SkillController : DbController
 	{
-		public SkillController(string nameOrConnectionString)
-			: base(nameOrConnectionString)
+		public SkillController(SUGARContextFactory contextFactory) 
+			: base(contextFactory)
 		{
 		}
 
 		public IEnumerable<Skill> GetByGame(int? gameId)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
 				gameId = gameId ?? 0;
 
 				var skills = context.Skills.Where(a => a.GameId == gameId).ToList();
@@ -27,10 +27,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Skill Get(string token, int? gameId)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				gameId = gameId ?? 0;
 
 				var skill = context.Skills.Find(token, gameId);
@@ -40,10 +38,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Skill Create(Skill skill)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				//TODO: refine duplicate text for actor type and game id
 				var hasConflicts = context.Skills.Any(a => (a.Name == skill.Name && a.GameId == skill.GameId)
 									|| (a.Token == skill.Token && a.GameId == skill.GameId));
@@ -61,10 +57,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(Skill skill)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var existing = context.Skills.Find(skill.Token, skill.GameId);
 
 				if (existing != null)
@@ -82,8 +76,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					}
 
 					existing.Name = skill.Name;
-					existing.CompletionCriteriaCollection = skill.CompletionCriteriaCollection;
-					existing.RewardCollection = skill.RewardCollection;
+					existing.CompletionCriterias = skill.CompletionCriterias;
+					existing.Rewards = skill.Rewards;
 					existing.Description = skill.Description;
 					existing.ActorType = skill.ActorType;
 					existing.GameId = skill.GameId;
@@ -100,10 +94,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Delete(string token, int? gameId)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				gameId = gameId ?? 0;
 
 				var skill = context.Skills.Find(token, gameId);

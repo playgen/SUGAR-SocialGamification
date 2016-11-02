@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Contracts
+﻿namespace PlayGen.SUGAR.Contracts.Shared
 {
 	/// <summary>
 	/// Encapsulates Resource Transfer details from the server.

@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.GameData
 		// TODO: currently this is binary but should eventually return a progress value
 		// The method of returning calculating the progress (for multiple criteria conditions) and 
 		// how the progress is going to be represented (0f to 1f ?) need to be determined first.
-		public float IsCriteriaSatisified(int? gameId, int? actorId, AchievementCriteriaCollection completionCriterias, ActorType actorType)
+		public float IsCriteriaSatisified(int? gameId, int? actorId, List<AchievementCriteria> completionCriterias, ActorType actorType)
 		{
 			return completionCriterias.Sum(cc => Evaluate(gameId, actorId, cc, actorType)) / completionCriterias.Count;
 		}

@@ -4,6 +4,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 
 namespace PlayGen.SUGAR.GameData
@@ -12,9 +13,9 @@ namespace PlayGen.SUGAR.GameData
 	{
 		private IGameDataController _gameDataController;
 
-		public ResourceController(string nameOrConnectionString)
+		public ResourceController(SUGARContextFactory contextFactory)
 		{
-			_gameDataController = new GameDataController(nameOrConnectionString, GameDataCategory.Resource);
+			_gameDataController = new GameDataController(contextFactory, GameDataCategory.Resource);
 		}
 
 		public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))

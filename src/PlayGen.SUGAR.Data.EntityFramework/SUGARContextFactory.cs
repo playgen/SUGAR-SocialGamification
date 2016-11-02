@@ -5,22 +5,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 {
     public class SUGARContextFactory
     {
-        public string ConnectionString { get; set; }
+        private readonly string _connectionString;
+
+        public SUGARContextFactory(string connectionString = null)
+        {
+            _connectionString = connectionString;
+        }
 
         public SUGARContext Create()
         {
-            if (ConnectionString == null)
-            {
-                return null;
-            }
-
-            return Create(ConnectionString);
-        }
-
-        public SUGARContext Create(string connectionString)
-        {
             var optionsBuilder = new DbContextOptionsBuilder<SUGARContext>();
-            optionsBuilder.UseMySQL(connectionString);
+            optionsBuilder.UseMySQL(_connectionString);
 
             var context = new SUGARContext(optionsBuilder.Options);
             context.Database.EnsureCreated();

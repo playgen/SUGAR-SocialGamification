@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Contracts
+﻿namespace PlayGen.SUGAR.Common.Shared
 {
 	/// <summary>
 	/// Enum for selecting target comparison between current value and target value.

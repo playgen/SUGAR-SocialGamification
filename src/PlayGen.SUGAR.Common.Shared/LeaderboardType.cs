@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Contracts
+﻿namespace PlayGen.SUGAR.Common.Shared
 {
 	/// <summary>
 	/// Enum for selecting the type and sorting order of the leaderboard being created.

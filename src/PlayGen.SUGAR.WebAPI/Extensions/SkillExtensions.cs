@@ -20,8 +20,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				GameId = model.GameId,
 				ActorType = model.ActorType,
 				Token = model.Token,
-				CompletionCriteria = model.CompletionCriteriaCollection.ToContractList(),
-				Reward = model.RewardCollection.ToContractList(),
+				CompletionCriteria = model.CompletionCriterias.ToContractList(),
+				Reward = model.Rewards.ToContractList(),
 			};
 
 			return skillContract;
@@ -41,16 +41,16 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				GameId = skillContract.GameId ?? 0,
 				ActorType = skillContract.ActorType,
 				Token = skillContract.Token,
-				CompletionCriteriaCollection = skillContract.CompletionCriteria.ToSkillModel(),
-				RewardCollection = skillContract.Reward.ToSkillModel(),
+				CompletionCriterias = skillContract.CompletionCriteria.ToSkillModel(),
+				Rewards = skillContract.Reward.ToSkillModel(),
 			};
 
 			return skillModel;
 		}
 
-		public static AchievementCriteriaCollection ToSkillModel(this List<AchievementCriteria> skillContracts)
+		public static List<AchievementCriteria> ToSkillModel(this List<AchievementCriteria> skillContracts)
 		{
-			var skillCollection = new AchievementCriteriaCollection();
+			var skillCollection = new List<AchievementCriteria>();
 			if (skillContracts != null)
 			{
 				skillCollection.Add(skillContracts.Select(ToModel).ToList());

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Http.Description;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.GameData;

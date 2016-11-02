@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PlayGen.SUGAR.Contracts
+namespace PlayGen.SUGAR.Contracts.Shared
 {
 	/// <summary>
 	/// Encapsulates relationship details.
@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// }
 	/// </example>
 	public class RelationshipRequest
-    {
+	{
 		/// <summary>
 		/// The Id of the requesting actor.
 		/// </summary>

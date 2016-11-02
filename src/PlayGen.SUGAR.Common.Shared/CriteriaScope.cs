@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Contracts
+﻿namespace PlayGen.SUGAR.Common.Shared
 {
 	/// <summary>
 	/// Enum for selecting if GameData is to checked against just the actor in question or other actors relating to them (i.e. group members)

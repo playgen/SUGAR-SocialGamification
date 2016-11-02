@@ -3,22 +3,21 @@ using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class AccountController : DbController
 	{
-		public AccountController(string nameOrConnectionString) 
-			: base(nameOrConnectionString)
+		public AccountController(SUGARContextFactory contextFactory) 
+			: base(contextFactory)
 		{
 		}
 
 		public Account Create(Account account)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				context.HandleDetatchedActor(account.User);
 
 				context.Accounts.Add(account);
@@ -30,10 +29,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Account> Get(string[] names)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var accounts = context.Accounts
 					.Where(a => names.Contains(a.Name))
 					.Include(a => a.User);
@@ -44,9 +41,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Delete(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
 
 				var account = context.Accounts.Find(id);
 

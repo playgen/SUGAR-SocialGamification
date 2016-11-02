@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Contracts
+﻿namespace PlayGen.SUGAR.Common.Shared
 {
 	/// <summary>
 	/// Enum for selecting what values will be used to query if criteria is met.

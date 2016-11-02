@@ -7,16 +7,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class UserRelationshipController : DbController
 	{
-		public UserRelationshipController(string nameOrConnectionString) : base(nameOrConnectionString)
-		{
-		}
+		public UserRelationshipController(SUGARContextFactory contextFactory)
+            : base(contextFactory)
+        {
+        }
 
-		public IEnumerable<User> GetRequests(int id)
+        public IEnumerable<User> GetRequests(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var requestors = context.UserToUserRelationshipRequests
 					.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
 
@@ -26,10 +25,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<User> GetSentRequests(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var acceptors = context.UserToUserRelationshipRequests
 					.Where(r => r.RequestorId == id).Select(u => u.Acceptor).ToList();
 
@@ -39,10 +36,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<User> GetFriends(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var requestors = context.UserToUserRelationships
 					.Where(r => r.AcceptorId == id)
 					.Select(u => u.Requestor).ToList();
@@ -59,10 +54,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(UserToUserRelationship newRelation, bool autoAccept)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				if (newRelation.AcceptorId == newRelation.RequestorId) {
 					throw new DuplicateRecordException(string.Format("Two different users are needed to create a relationship."));
 				}
@@ -115,10 +108,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void UpdateRequest(UserToUserRelationship newRelation, bool accepted)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var relation = context.UserToUserRelationshipRequests
 					.Single(r => r.RequestorId == newRelation.RequestorId 
 					&& r.AcceptorId == newRelation.AcceptorId);
@@ -138,10 +129,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(UserToUserRelationship newRelation)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var relation = context.UserToUserRelationships
 					.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
 					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));

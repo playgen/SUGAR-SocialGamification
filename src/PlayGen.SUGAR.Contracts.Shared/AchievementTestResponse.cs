@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Contracts
+﻿namespace PlayGen.SUGAR.Contracts.Shared
 {
 	public class AchievementTestResponse
     {

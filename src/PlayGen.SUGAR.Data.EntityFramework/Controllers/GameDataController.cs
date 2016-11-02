@@ -5,7 +5,6 @@ using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
-using System.Data.Entity;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
@@ -14,13 +13,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 	{
 		private readonly GameDataCategory _category = GameDataCategory.GameData;
 
-		public GameDataController(string nameOrConnectionString)
-			: base(nameOrConnectionString)
-		{
-		}
+		public GameDataController(SUGARContextFactory contextFactory)
+            : base(contextFactory)
+        {
+        }
 
-		public GameDataController(string nameOrConnectionString, GameDataCategory category) 
-			: base(nameOrConnectionString)
+        public GameDataController(SUGARContextFactory contextFactory, GameDataCategory category) 
+			: base(contextFactory)
 		{
 			_category = category;
 		}
@@ -28,10 +27,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				return context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -43,10 +40,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<GameData> Get(IEnumerable<int> ids)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByIds(ids)
 					.ToList();
@@ -56,10 +51,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<GameData> Get(int? gameId = null, int? actorId = null, IEnumerable<string> keys = null)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -72,10 +65,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public IEnumerable<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -92,10 +83,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public IEnumerable<float> AllFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -112,10 +101,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public IEnumerable<string> AllStrings(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -132,10 +119,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public IEnumerable<bool> AllBools(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -152,10 +137,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public float SumFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -172,10 +155,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public long SumLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -192,10 +173,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public float GetHighestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -217,10 +196,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public long GetHighestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -242,10 +219,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public float GetLowestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -267,10 +242,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public long GetLowestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -292,10 +265,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public bool TryGetLatestLong(int? gameId, int? actorId, string key, out long latestLong, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -318,10 +289,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public bool TryGetLatestFloat(int? gameId, int? actorId, string key, out float latestFloat, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -344,10 +313,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public bool TryGetLatestBool(int? gameId, int? actorId, string key, out bool latestBool, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -370,10 +337,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public bool TryGetLatestString(int? gameId, int? actorId, string key, out string latestString, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -396,10 +361,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public int CountKeys(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -416,10 +379,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			end = EndSet(end);
 			DateTime dataDateTime;
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -445,10 +406,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			end = EndSet(end);
 			DateTime dataDateTime;
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
@@ -472,10 +431,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(GameData data)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				context.HandleDetatchedGame(data.GameId);
 				context.HandleDetatchedActor(data.ActorId);
 
@@ -506,10 +463,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				}
 				if (dataList.Count >= 1000)
 				{
-					using (var context = new SUGARContext(NameOrConnectionString))
+					using (var context = ContextFactory.Create())
 					{
-						SetLog(context);
-
 						context.GameData.AddRange(dataList);
 						SaveChanges(context);
 						dataList.Clear();
@@ -518,10 +473,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 			if (dataList.Count > 0)
 			{
-				using (var context = new SUGARContext(NameOrConnectionString))
+				using (var context = ContextFactory.Create())
 				{
-					SetLog(context);
-
 					context.GameData.AddRange(dataList);
 					SaveChanges(context);
 					dataList.Clear();
@@ -531,10 +484,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(GameData updatedData)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var existingData = context.GameData.Find(updatedData.Id);
 				if (existingData == null)
 				{

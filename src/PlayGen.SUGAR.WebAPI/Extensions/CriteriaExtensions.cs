@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static List<Contracts.AchievementCriteria> ToContractList(this AchievementCriteriaCollection completionCriteriaCollection)
+		public static List<Contracts.AchievementCriteria> ToContractList(this List<AchievementCriteria> completionCriteriaCollection)
 		{
 			return completionCriteriaCollection.Select(completionCriteria => completionCriteria.ToContract()).ToList();
 		}

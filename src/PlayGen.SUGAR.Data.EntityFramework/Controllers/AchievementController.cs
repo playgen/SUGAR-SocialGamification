@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class AchievementController : DbController
 	{
-		public AchievementController(string nameOrConnectionString)
-			: base(nameOrConnectionString)
+		public AchievementController(SUGARContextFactory contextFactory)
+			: base(contextFactory)
 		{
 		}
 
 		public IEnumerable<Achievement> GetByGame(int? gameId)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
 				gameId = gameId ?? 0;
 
 				var achievements = context.Achievements.Where(a => a.GameId == gameId).ToList();
@@ -27,10 +27,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Achievement Get(string token, int? gameId)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				gameId = gameId ?? 0;
 				
 				var achievement = context.Achievements.Find(token, gameId);
@@ -40,10 +38,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Achievement Create(Achievement achievement)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				//TODO: refine duplicate text for actor type and game id
 				var hasConflicts = context.Achievements.Any(a => (a.Name == achievement.Name && a.GameId == achievement.GameId)
 									|| (a.Token == achievement.Token && a.GameId == achievement.GameId));
@@ -61,10 +57,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(Achievement achievement)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var existing = context.Achievements.Find(achievement.Token, achievement.GameId);
 
 				if (existing != null)
@@ -82,8 +76,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					}
 
 					existing.Name = achievement.Name;
-					existing.CompletionCriteriaCollection = achievement.CompletionCriteriaCollection;
-					existing.RewardCollection = achievement.RewardCollection;
+					existing.CompletionCriterias = achievement.CompletionCriterias;
+					existing.Rewards = achievement.Rewards;
 					existing.Description = achievement.Description;
 					existing.ActorType = achievement.ActorType;
 					existing.GameId = achievement.GameId;
@@ -99,10 +93,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		
 		public void Delete(string token, int? gameId)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				gameId = gameId ?? 0;
 
 				var achievement = context.Achievements.Find(token, gameId);

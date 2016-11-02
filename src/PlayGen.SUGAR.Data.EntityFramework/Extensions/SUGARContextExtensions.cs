@@ -1,14 +1,10 @@
 ﻿using PlayGen.SUGAR.Data.Model;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
-	public static class SGAContextExtensions
+	public static class SUGARContextExtensions
 	{
 		public static void HandleDetatchedGame(this SUGARContext context, int? gameId)
 		{

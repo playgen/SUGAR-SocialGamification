@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using Microsoft.Extensions.Configuration;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -9,19 +8,18 @@ namespace PlayGen.SUGAR.WebAPI
         private void ConfigureDbControllers(IServiceCollection services)
         {
             // Set EntityFramework's DBContext's connection string
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddScoped((_) => new AccountController(connectionString));
-            services.AddScoped((_) => new GameController(connectionString));
-            services.AddScoped((_) => new GroupController(connectionString));
-            services.AddScoped((_) => new UserController(connectionString));
-            services.AddScoped((_) => new ActorController(connectionString));
-            services.AddScoped((_) => new GameDataController(connectionString));
-            services.AddScoped((_) => new Data.EntityFramework.Controllers.AchievementController(connectionString));
-            services.AddScoped((_) => new Data.EntityFramework.Controllers.SkillController(connectionString));
-            services.AddScoped((_) => new Data.EntityFramework.Controllers.LeaderboardController(connectionString));
-            services.AddScoped((_) => new GameData.ResourceController(connectionString));
-            services.AddScoped((_) => new GroupRelationshipController(connectionString));
-            services.AddScoped((_) => new UserRelationshipController(connectionString));
+            services.AddScoped<AccountController>();
+            services.AddScoped<GameController>();
+            services.AddScoped<GroupController>();
+            services.AddScoped<UserController>();
+            services.AddScoped<ActorController>();
+            services.AddScoped<GameDataController>();
+            services.AddScoped<Data.EntityFramework.Controllers.AchievementController>();
+            services.AddScoped<Data.EntityFramework.Controllers.SkillController>();
+            services.AddScoped<Data.EntityFramework.Controllers.LeaderboardController>();
+            services.AddScoped<GameData.ResourceController>();
+            services.AddScoped<GroupRelationshipController>();
+            services.AddScoped<UserRelationshipController>();
         }
     }
 }

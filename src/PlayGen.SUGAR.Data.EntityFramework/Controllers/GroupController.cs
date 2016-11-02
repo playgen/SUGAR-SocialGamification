@@ -1,24 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class GroupController : DbController
 	{
-		public GroupController(string nameOrConnectionString) 
-			: base(nameOrConnectionString)
+		public GroupController(SUGARContextFactory contextFactory) 
+			: base(contextFactory)
 		{
 		}
 
 		public IEnumerable<Group> Get()
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var groups = context.Groups.ToList();
 
 				return groups;
@@ -27,10 +26,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Group> Search(string name)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var groups = context.Groups
 					.Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
 
@@ -40,10 +37,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Group Search(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var group = context.Groups.Find(id);
 
 				return group;
@@ -52,10 +47,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(Group group)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				context.Groups.Add(group);
 				SaveChanges(context);
 			}
@@ -63,10 +56,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(Group group)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var existing = context.Groups.Find(group.Id);
 
 				if (existing != null)
@@ -84,10 +75,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Delete(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var group = context.Groups
 					.Where(g => id == g.Id);
 

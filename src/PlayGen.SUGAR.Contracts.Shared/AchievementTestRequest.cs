@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
-namespace PlayGen.SUGAR.Contracts
+namespace PlayGen.SUGAR.Contracts.Shared
 {
-    public class AchievementTestRequest
-    {
+	public class AchievementTestRequest
+	{
 		[Required]
-	    public AchievementRequest Achievement { get; set; }
+		public AchievementRequest Achievement { get; set; }
 
 		[Required]
 		public List<GameDataRequest> GameDatas { get; set; }
-    }
+	}
 }

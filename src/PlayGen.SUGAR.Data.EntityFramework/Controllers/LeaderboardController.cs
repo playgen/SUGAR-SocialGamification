@@ -1,23 +1,23 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using System.Data.Entity;
+using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class LeaderboardController : DbController
 	{
-		public LeaderboardController(string nameOrConnectionString)
-			: base(nameOrConnectionString)
-		{
-		}
+		public LeaderboardController(SUGARContextFactory contextFactory)
+            : base(contextFactory)
+        {
+        }
 
-		public IEnumerable<Leaderboard> GetByGame(int? gameId)
+        public IEnumerable<Leaderboard> GetByGame(int? gameId)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
 				gameId = gameId ?? 0;
 
 				var leaderboards = context.Leaderboards.Where(l => l.GameId == gameId).ToList();
@@ -27,10 +27,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Leaderboard Get(string token, int? gameId)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				gameId = gameId ?? 0;
 
 				var leaderboard = context.Leaderboards.Find(token, gameId);
@@ -40,10 +38,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Leaderboard Create(Leaderboard leaderboard)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				//TODO: refine duplicate text for actor type and game id
 				var hasConflicts = context.Leaderboards.Any(l => (l.Name == leaderboard.Name && l.GameId == leaderboard.GameId)
 									|| (l.Token == leaderboard.Token && l.GameId == leaderboard.GameId));
@@ -69,10 +65,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(Leaderboard leaderboard)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var existing = context.Leaderboards.Find(leaderboard.Token, leaderboard.GameId);
 
 				if (existing != null)
@@ -118,10 +112,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		
 		public void Delete(string token, int? gameId)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				gameId = gameId ?? 0;
 
 				var leaderboard = context.Leaderboards.Find(token, gameId);

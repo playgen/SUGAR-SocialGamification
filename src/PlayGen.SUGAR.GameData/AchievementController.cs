@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.GameData
 			var completedProgress = completed ? 1f : 0f;
 			if (!completed)
 			{
-				completedProgress = IsCriteriaSatisified(achievement.GameId, actorId, achievement.CompletionCriteriaCollection, achievement.ActorType);
+				completedProgress = IsCriteriaSatisified(achievement.GameId, actorId, achievement.CompletionCriterias, achievement.ActorType);
 				if (completedProgress >= 1)
 				{
 					ProcessAchievementRewards(achievement, actorId);
@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.GameData
 				Value = null
 			};
 			GameDataController.Create(gameData);
-			achievement.RewardCollection.All(reward => RewardController.AddReward(actorId, achievement.GameId, reward));
+			achievement.Rewards.All(reward => RewardController.AddReward(actorId, achievement.GameId, reward));
 		}
 
 		public void EvaluateAchievement(Achievement achievement, int? actorId)

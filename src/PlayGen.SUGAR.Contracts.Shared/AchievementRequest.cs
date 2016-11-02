@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using PlayGen.SUGAR.Common.Shared;
 
-namespace PlayGen.SUGAR.Contracts
+namespace PlayGen.SUGAR.Contracts.Shared
 {
 	/// <summary>
 	/// Encapsulates achievement/skill details.
@@ -66,12 +67,12 @@ namespace PlayGen.SUGAR.Contracts
 		/// Must contain at least one criteria.
 		/// </summary>
 		[Required]
-		public List<AchievementCriteria> CompletionCriteria { get; set; }
+		public List<CompletionCriteria> CompletionCriterias { get; set; }
 
 		/// <summary>
 		/// A list of rewards that will be provided to the actor upon completion of the achievement/skill criteria.
 		/// An achievement does not need to contain a reward.
 		/// </summary>
-		public List<Reward> Reward { get; set; }
+		public List<Reward> Rewards { get; set; }
 	}
 }

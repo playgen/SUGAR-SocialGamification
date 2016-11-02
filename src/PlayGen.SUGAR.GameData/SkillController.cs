@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.GameData
 			var completedProgress = completed ? 1f : 0f;
 			if (!completed)
 			{
-				completedProgress = IsCriteriaSatisified(skill.GameId, actorId, skill.CompletionCriteriaCollection, skill.ActorType);
+				completedProgress = IsCriteriaSatisified(skill.GameId, actorId, skill.CompletionCriterias, skill.ActorType);
 				if (completedProgress >= 1)
 				{
 					ProcessSkillRewards(skill, actorId);
@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.GameData
 				Value = null
 			};
 			GameDataController.Create(gameData);
-			skill.RewardCollection.All(reward => RewardController.AddReward(actorId, skill.GameId, reward));
+			skill.Rewards.All(reward => RewardController.AddReward(actorId, skill.GameId, reward));
 		}
 
 		public void EvaluateSkill(Skill skill, int? actorId)

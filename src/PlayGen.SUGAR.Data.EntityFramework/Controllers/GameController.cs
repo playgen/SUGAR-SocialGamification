@@ -1,24 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class GameController : DbController
 	{
-		public GameController(string nameOrConnectionString) 
-			: base(nameOrConnectionString)
-		{
-		}
+		public GameController(SUGARContextFactory contextFactory)
+            : base(contextFactory)
+        {
+        }
 
-		public IEnumerable<Game> Get()
+        public IEnumerable<Game> Get()
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var games = context.Games.ToList();
 				return games;
 			}
@@ -26,10 +25,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Game> Search(string name)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var games = context.Games
 					.Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
 				return games;
@@ -38,10 +35,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public Game Search(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var game = context.Games.Find(id);
 				return game;
 			}
@@ -49,10 +44,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(Game game)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-				
 				context.Games.Add(game);
 				SaveChanges(context);
 			}
@@ -60,10 +53,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(Game game)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var existing = context.Games.Find(game.Id);
 
 				if (existing != null)
@@ -81,10 +72,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Delete(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var game = context.Games
 					.Where(g => id == g.Id);
 

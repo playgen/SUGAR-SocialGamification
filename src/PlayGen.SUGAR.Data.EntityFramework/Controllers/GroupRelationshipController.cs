@@ -7,18 +7,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class GroupRelationshipController : DbController
 	{
-		public GroupRelationshipController(string nameOrConnectionString) 
-			: base(nameOrConnectionString)
+		public GroupRelationshipController(SUGARContextFactory contextFactory) 
+			: base(contextFactory)
 		{
 		}
 
 		public IEnumerable<User> GetRequests(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
-				var requestors = context.UserToGroupRelationshipRequests
+                var requestors = context.UserToGroupRelationshipRequests
 					.Where(r => r.AcceptorId == id)
 					.Select(u => u.Requestor).ToList();
 
@@ -28,10 +26,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Group> GetSentRequests(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var acceptors = context.UserToGroupRelationshipRequests
 					.Where(r => r.RequestorId == id)
 					.Select(u => u.Acceptor).ToList();
@@ -42,10 +38,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<User> GetMembers(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var requestors = context.UserToGroupRelationships
 					.Where(r => r.AcceptorId == id)
 					.Select(u => u.Requestor).ToList();
@@ -56,10 +50,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<Group> GetUserGroups(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var acceptors = context.UserToGroupRelationships
 					.Where(r => r.RequestorId == id)
 					.Select(u => u.Acceptor).ToList();
@@ -70,10 +62,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(UserToGroupRelationship newRelation, bool autoAccept)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var hasConflicts = context.UserToGroupRelationships
 					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) 
 					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
@@ -122,10 +112,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void UpdateRequest(UserToGroupRelationship newRelation, bool accepted)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var relation = context.UserToGroupRelationshipRequests
 					.Single(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId);
 
@@ -145,10 +133,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(UserToGroupRelationship newRelation)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var relation = context.UserToGroupRelationships
 					.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) 
 						|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));

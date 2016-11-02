@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PlayGen.SUGAR.Contracts
+﻿namespace PlayGen.SUGAR.Contracts.Shared
 {
 	/// <summary>
 	/// Encapsulates user and token details at log-in.

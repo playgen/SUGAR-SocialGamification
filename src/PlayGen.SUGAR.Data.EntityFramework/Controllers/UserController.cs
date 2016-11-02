@@ -1,24 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class UserController : DbController
 	{
-		public UserController(string nameOrConnectionString) 
-			: base(nameOrConnectionString)
-		{
-		}
+		public UserController(SUGARContextFactory contextFactory)
+            : base(contextFactory)
+        {
+        }
 
-		public IEnumerable<User> Get()
+        public IEnumerable<User> Get()
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var users = context.Users.ToList();
 
 				return users;
@@ -27,10 +26,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public IEnumerable<User> Search(string name, bool exactMatch = false)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				IEnumerable<User> users;
 
 				if (!exactMatch)
@@ -50,10 +47,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public User Search(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var user = context.Users.Find(id);
 
 				return user;
@@ -62,10 +57,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Create(User user)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				if (context.Users.Any(g => g.Name == user.Name))
 				{
 					throw new DuplicateRecordException($"A user with the name: \"{user.Name}\" already exists.");
@@ -78,10 +71,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Update(User user)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var existing = context.Users.Find(user.Id);
 
 				if (existing != null)
@@ -99,10 +90,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 		public void Delete(int id)
 		{
-			using (var context = new SUGARContext(NameOrConnectionString))
+			using (var context = ContextFactory.Create())
 			{
-				SetLog(context);
-
 				var user = context.Users
 					.Where(g => id == g.Id);
 

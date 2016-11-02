@@ -11,6 +11,7 @@ using NLog;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using NLog.Extensions.Logging;
+using PlayGen.SUGAR.Data.EntityFramework;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -20,7 +21,7 @@ namespace PlayGen.SUGAR.WebAPI
 
 		public Startup(IHostingEnvironment env)
 		{
-    		//AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+			//AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
 			#region Logging
 
@@ -33,7 +34,7 @@ namespace PlayGen.SUGAR.WebAPI
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
 				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
 
 			if (env.IsEnvironment("Development"))
@@ -57,15 +58,15 @@ namespace PlayGen.SUGAR.WebAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-            var apiKey = Configuration["APIKey"];
+			var apiKey = Configuration["APIKey"];
 
-            services.AddScoped((_) => new JsonWebTokenUtility(apiKey));
-            services.AddScoped((_) => new PasswordEncryption());
-            services.AddScoped<AuthorizationAttribute>();
-            services.AddApplicationInsightsTelemetry(Configuration);
+			services.AddScoped((_) => new JsonWebTokenUtility(apiKey));
+			services.AddScoped((_) => new PasswordEncryption());
+			services.AddScoped<AuthorizationAttribute>();
+			services.AddApplicationInsightsTelemetry(Configuration);
 
-            // Add framework services.
-            services.AddMvc(options =>
+			// Add framework services.
+			services.AddMvc(options =>
 			{
 				options.Filters.Add(new ModelValidationFilter());
 				options.Filters.Add(new ExceptionFilter());
@@ -79,12 +80,11 @@ namespace PlayGen.SUGAR.WebAPI
 				json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			});
 
-            services.AddDbContext<>()
-            
+		    ConfigureDbContextFactory(services);
             ConfigureDbControllers(services);
-            ConfigureGameDataControllers(services);
-            ConfigureRouting(services);
-            ConfigureDocumentationGeneratorServices(services);
+			ConfigureGameDataControllers(services);
+			ConfigureRouting(services);
+			ConfigureDocumentationGeneratorServices(services);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,10 +94,10 @@ namespace PlayGen.SUGAR.WebAPI
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 
-            app.UseCors("AllowAll");
-            app.UseApplicationInsightsRequestTelemetry();
-            app.UseApplicationInsightsExceptionTelemetry();
-            app.UseMvc();
+			app.UseCors("AllowAll");
+			app.UseApplicationInsightsRequestTelemetry();
+			app.UseApplicationInsightsExceptionTelemetry();
+			app.UseMvc();
 			
 			ConfigureDocumentationGenerator(app);
 		}

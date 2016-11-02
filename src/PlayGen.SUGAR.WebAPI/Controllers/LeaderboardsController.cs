@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Http.Description;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.GameData;
 using PlayGen.SUGAR.WebAPI.Controllers.Filters;

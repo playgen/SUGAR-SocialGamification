@@ -5,9 +5,9 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
-	public static class AchievementExtensions
+	internal static class AchievementExtensions
 	{
-		public static AchievementResponse ToContract(this Achievement model)
+		internal static AchievementResponse ToContract(this Achievement model)
 		{
 			if (model == null)
 			{
@@ -20,76 +20,65 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				GameId = model.GameId,
 				ActorType = model.ActorType,
 				Token = model.Token,
-				CompletionCriteria = model.CompletionCriteriaCollection.ToContractList(),
-				Reward = model.RewardCollection.ToContractList(),
+				CompletionCriterias = model.CompletionCriterias.ToContract(),
+				Rewards = model.Rewards.ToContract(),
 			};
 
 			return achievementContract;
 		}
 
-		public static IEnumerable<AchievementResponse> ToContractList(this IEnumerable<Achievement> models)
+		internal static IEnumerable<AchievementResponse> ToContract(this IEnumerable<Achievement> models)
 		{
 			return models.Select(ToContract).ToList();
 		}
 
-		public static Achievement ToAchievementModel(this AchievementRequest achieveContract)
+		internal static Achievement ToModel(this AchievementRequest contract)
 		{
 			var achieveModel = new Achievement
 			{
-				Name = achieveContract.Name,
-				Description = achieveContract.Description,
-				GameId = achieveContract.GameId ?? 0,
-				ActorType = achieveContract.ActorType,
-				Token = achieveContract.Token,
-				CompletionCriteriaCollection = achieveContract.CompletionCriteria.ToAchievementModel(),
-				RewardCollection = achieveContract.Reward.ToAchievementModel(),
+				Name = contract.Name,
+				Description = contract.Description,
+				GameId = contract.GameId ?? 0,
+				ActorType = contract.ActorType,
+				Token = contract.Token,
+				CompletionCriterias = contract.CompletionCriterias.ToModel(),
+				Rewards = contract.Rewards.ToModel(),
 			};
 
 			return achieveModel;
 		}
 
-		public static AchievementCriteriaCollection ToAchievementModel(this List<AchievementCriteria> achievementContracts)
+		internal static List<AchievementCriteria> ToModel(this List<Contracts.AchievementCriteria> contracts)
 		{
-			var achievementCollection = new AchievementCriteriaCollection();
-			if (achievementContracts != null)
+			var models = new List<Data.Model.Achievement>();
+			if (contracts != null)
 			{
-				achievementCollection.Add(achievementContracts.Select(ToModel).ToList());
+                models.Add(contracts.Select(ToModel).ToList());
 			}
 
-			return achievementCollection;
+			return models;
 		}
 
-		public static AchievementCriteria ToModel(this Contracts.AchievementCriteria achievementContract)
+		internal static AchievementCriteria ToModel(this AchievementCriteria contract)
 		{
 			return new AchievementCriteria
 			{
-				Key = achievementContract.Key,
-				ComparisonType = (ComparisonType)achievementContract.ComparisonType,
-				CriteriaQueryType = (CriteriaQueryType)achievementContract.CriteriaQueryType,
-				DataType = (GameDataType)achievementContract.DataType,
-				Scope = (CriteriaScope)achievementContract.Scope,
-				Value = achievementContract.Value,
+				Key = contract.Key,
+				ComparisonType = contract.ComparisonType,
+				CriteriaQueryType = contract.CriteriaQueryType,
+				DataType = contract.DataType,
+				Scope = contract.Scope,
+				Value = contract.Value,
 			};
 		}
-
-		public static RewardCollection ToAchievementModel(this List<Reward> achievementContracts)
-		{
-			var rewardCollection = new RewardCollection();
-			if (achievementContracts != null)
-			{
-				rewardCollection.Add(achievementContracts.Select(ToModel).ToList());
-			}
-
-			return rewardCollection;
-		}
-
-		public static Reward ToModel(this Contracts.Reward achievementContract)
+        
+		internal static Reward ToModel(this Reward contract)
 		{
 			return new Reward
 			{
-				Key = achievementContract.Key,
-				DataType = (GameDataType)achievementContract.DataType,
-				Value = achievementContract.Value,
+				Key = contract.Key,
+				DataType = contract.DataType,
+				Value = contract.Value,
 			};
 		}
 	}

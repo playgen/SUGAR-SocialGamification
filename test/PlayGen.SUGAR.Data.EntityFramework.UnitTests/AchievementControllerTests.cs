@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
@@ -116,8 +117,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = newAchievement.Token,
 				GameId = newAchievement.GameId,
 				ActorType = newAchievement.ActorType,
-				CompletionCriteriaCollection = newAchievement.CompletionCriteriaCollection,
-				RewardCollection = newAchievement.RewardCollection
+				CompletionCriterias = newAchievement.CompletionCriterias,
+				Rewards = newAchievement.Rewards
 			};
 
 			_achievementDbController.Update(update);
@@ -143,8 +144,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = newAchievementDuplicate.Token,
 				GameId = newAchievementDuplicate.GameId,
 				ActorType = newAchievementDuplicate.ActorType,
-				CompletionCriteriaCollection = newAchievementDuplicate.CompletionCriteriaCollection,
-				RewardCollection = newAchievementDuplicate.RewardCollection
+				CompletionCriterias = newAchievementDuplicate.CompletionCriterias,
+				Rewards = newAchievementDuplicate.Rewards
 			};
 
 			Assert.Throws<DuplicateRecordException>(() => _achievementDbController.Update(update));
@@ -161,8 +162,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = achievementName,
 				GameId = -1,
 				ActorType = ActorType.User,
-				CompletionCriteriaCollection = new AchievementCriteriaCollection(),
-				RewardCollection = new RewardCollection()
+				CompletionCriterias = new List<AchievementCriteria>(),
+				Rewards = new List<Reward>()
 			};
 
 			Assert.Throws<MissingRecordException>(() => _achievementDbController.Update(achievement));
@@ -210,12 +211,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = name,
 				GameId = gameId.Value,
 				ActorType = ActorType.User,
-				CompletionCriteriaCollection = new AchievementCriteriaCollection(),
-				RewardCollection = new RewardCollection()
+				CompletionCriterias = new List<AchievementCriteria>(),
+				Rewards = new List<Reward>()
 			};
 			if (addCriteria)
 			{
-				var criteria = new AchievementCriteriaCollection
+				var criteria = new List<AchievementCriteria>
 				{
 					new AchievementCriteria
 					{
@@ -227,7 +228,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 						Value = "CreateAchievementValue"
 					}
 				};
-				achievement.CompletionCriteriaCollection = criteria;
+				achievement.CompletionCriterias = criteria;
 			}
 
 			_achievementDbController.Create(achievement);

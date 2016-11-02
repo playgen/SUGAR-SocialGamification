@@ -1,4 +1,5 @@
-﻿using PlayGen.SUGAR.Contracts;
+﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Data.Model
@@ -17,8 +18,8 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public string Token { get; set; }
 
-		public virtual AchievementCriteriaCollection CompletionCriteriaCollection { get; set; }
+		public virtual List<CompletionCriteria> CompletionCriterias { get; set; }
 
-		public virtual RewardCollection RewardCollection { get; set; }
+		public virtual List<Reward> Rewards { get; set; }
 	}
 }

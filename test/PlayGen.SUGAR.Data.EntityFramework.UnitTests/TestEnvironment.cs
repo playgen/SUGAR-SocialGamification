@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
     public static class TestEnvironment
 	{
 		private static readonly string _dbName = "sugarunittests";
-		private static readonly string _connectionString;
+	    private static readonly SUGARContextFactory ContextFactory;
 
 		private static AccountController _accountController;
 		private static AchievementController _achievementController;
@@ -26,35 +26,37 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		private static UserRelationshipController _userRelationshipController;
 
 		public static  AccountController AccountController
-			=> _accountController ?? (_accountController = new AccountController(_connectionString));
+			=> _accountController ?? (_accountController = new AccountController(ContextFactory));
 		public static  AchievementController AchievementController
-			=> _achievementController ?? (_achievementController = new AchievementController(_connectionString));
+			=> _achievementController ?? (_achievementController = new AchievementController(ContextFactory));
 		public static  ActorController ActorController
-			=> _actorController ?? (_actorController = new ActorController(_connectionString));
+			=> _actorController ?? (_actorController = new ActorController(ContextFactory));
 		public static  GameController GameController 
-			=> _gameController ?? (_gameController = new GameController(_connectionString));
+			=> _gameController ?? (_gameController = new GameController(ContextFactory));
 		public static  GameDataController GameDataController 
-			=> _gameDataController ?? (_gameDataController = new GameDataController(_connectionString));
+			=> _gameDataController ?? (_gameDataController = new GameDataController(ContextFactory));
 		public static  GroupController GroupController
-			=> _groupController ?? (_groupController = new GroupController(_connectionString));
+			=> _groupController ?? (_groupController = new GroupController(ContextFactory));
 		public static  GroupRelationshipController GroupRelationshipController
-			=>_groupRelationshipController ?? (_groupRelationshipController = new GroupRelationshipController(_connectionString));
+			=>_groupRelationshipController ?? (_groupRelationshipController = new GroupRelationshipController(ContextFactory));
 		public static  LeaderboardController LeaderboardController
-			=> _leaderboardController ?? (_leaderboardController = new LeaderboardController(_connectionString));
+			=> _leaderboardController ?? (_leaderboardController = new LeaderboardController(ContextFactory));
 		public static  ResourceController ResourceController 
-			=> _resourceController ?? (_resourceController = new ResourceController(_connectionString));
+			=> _resourceController ?? (_resourceController = new ResourceController(ContextFactory));
 		public static  SkillController SkillController
-			=> _skillController ?? (_skillController = new SkillController(_connectionString));
+			=> _skillController ?? (_skillController = new SkillController(ContextFactory));
 		public static  UserController UserController 
-			=> _userController ?? (_userController = new UserController(_connectionString));
+			=> _userController ?? (_userController = new UserController(ContextFactory));
 		public static  UserRelationshipController UserRelationshipController
-			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(_connectionString));
+			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(ContextFactory));
         
 		static TestEnvironment()
 		{
-			_connectionString = GetNameOrConnectionString(_dbName);
+			var connectionString = GetNameOrConnectionString(_dbName);
 		    DeleteDatabase();
-		}
+            ContextFactory = new SUGARContextFactory(connectionString);
+
+        }
 
 		private static string GetNameOrConnectionString(string dbName)
 		{
@@ -69,16 +71,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		public static void DeleteDatabase()
 		{
-			using (var context = new SUGARContext(_connectionString))
+			using (var context = ContextFactory.Create())
 			{
-				if (context.Database.Connection.Database == _dbName)
-				{
-					context.Database.Delete();
-				}
-				else
-				{
-					throw new Exception($"Database with name: {_dbName} doesn't exist.");
-				}
+			    context.Database.EnsureDeleted();
 			}
 		}
 	}
