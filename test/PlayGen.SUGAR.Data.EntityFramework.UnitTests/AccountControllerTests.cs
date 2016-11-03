@@ -6,21 +6,16 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class AccountControllerTests
+    [Collection("Project Fixture Collection")]
+    public class AccountControllerTests
 	{
-		#region Configuration
-		private readonly AccountController _accountDbController;
-		private readonly UserController _userDbController; 
+        #region Configuration
+	    private readonly AccountController _accountController = ControllerLocator.AccountController;
+	    private readonly UserController _userController = ControllerLocator.UserController;
+        #endregion
 
-		public AccountControllerTests()
-		{
-			_accountDbController = TestEnvironment.AccountController;
-			_userDbController = TestEnvironment.UserController;
-		}
-		#endregion
-
-		#region Tests
-		[Fact]
+        #region Tests
+        [Fact]
 		public void CreateAndGetAccount()
 		{
 			var name = "CreateAndGetAccount";
@@ -28,7 +23,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateAccount(name, password);
 
-			var accounts = _accountDbController.Get(new string[] { name });
+			var accounts = _accountController.Get(new string[] { name });
 
 			var matches = accounts.Count(a => a.Name == name);
 
@@ -64,7 +59,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateAccount("GetMultipleAccountsByName_DontGetThis", "GetMultipleAccountsByName_DontGetThisPassword");
 
-			var accounts = _accountDbController.Get(names);
+			var accounts = _accountController.Get(names);
 
 			var matchingAccounts = accounts.Select(a => names.Contains(a.Name));
 
@@ -74,7 +69,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingAccounts()
 		{
-			var accounts = _accountDbController.Get(new string[] { "GetNonExsitingAccounts" });
+			var accounts = _accountController.Get(new string[] { "GetNonExsitingAccounts" });
 
 			Assert.Empty(accounts);
 		}
@@ -87,12 +82,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var account = CreateAccount(name, password);
 
-			var accounts = _accountDbController.Get(new string[] { name });
+			var accounts = _accountController.Get(new string[] { name });
 			Assert.Equal(accounts.Count(), 1);
 			Assert.Equal(accounts.ElementAt(0).Name, name);
 
-			_accountDbController.Delete(account.Id);
-			accounts = _accountDbController.Get(new string[] { name });
+			_accountController.Delete(account.Id);
+			accounts = _accountController.Get(new string[] { name });
 
 			Assert.Empty(accounts);
 		}
@@ -100,7 +95,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingAccount()
 		{
-			Assert.Throws<MissingRecordException>(() => _accountDbController.Delete(-1));
+			Assert.Throws<MissingRecordException>(() => _accountController.Delete(-1));
 		}
 		#endregion
 
@@ -117,7 +112,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				User = user
 			};
 			
-			return _accountDbController.Create(account);
+			return _accountController.Create(account);
 		}
 
 		private User CreateUser(string name)
@@ -127,7 +122,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = name,
 			};
 
-			_userDbController.Create(user);
+			_userController.Create(user);
 
 			return user;
 		}

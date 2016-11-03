@@ -1,25 +1,17 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
-using System.IO;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
+	[Collection("Project Fixture Collection")]
 	public class GameDataControllerTests
 	{
 		#region Configuration
-		private readonly GameDataController _gameDataController;
-		private readonly GameController _gameController;
-		private readonly UserController _userController;
-
-		public GameDataControllerTests()
-		{
-			_gameDataController = TestEnvironment.GameDataController;
-			_gameController = TestEnvironment.GameController;
-			_userController = TestEnvironment.UserController;
-		}
+		private readonly GameDataController _gameDataController = ControllerLocator.GameDataController;
+		private readonly GameController _gameController = ControllerLocator.GameController;
+		private readonly UserController _userController = ControllerLocator.UserController;
 		#endregion
 		
 		#region Tests

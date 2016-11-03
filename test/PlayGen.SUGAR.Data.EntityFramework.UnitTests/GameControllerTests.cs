@@ -6,15 +6,11 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class GameControllerTests
+    [Collection("Project Fixture Collection")]
+    public class GameControllerTests
 	{
 		#region Configuration
-		private readonly GameController _gameDbController;
-
-		public GameControllerTests()
-		{
-			_gameDbController = TestEnvironment.GameController;
-		}
+		private readonly GameController _gameController = ControllerLocator.GameController;
 		#endregion
 
 		#region Tests
@@ -25,7 +21,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateGame(gameName);
 			
-			var games = _gameDbController.Search(gameName);
+			var games = _gameController.Search(gameName);
 
 			var matches = games.Count(g => g.Name == gameName);
 
@@ -60,7 +56,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateGame("GetMultiple_Games_DontGetThis");
 
-			var games = _gameDbController.Search("GetMultipleGames");
+			var games = _gameController.Search("GetMultipleGames");
 
 			var matchingGames = games.Select(g => gameNames.Contains(g.Name));
 			
@@ -70,7 +66,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingGame()
 		{
-			var games = _gameDbController.Search("GetNonExistingGame");
+			var games = _gameController.Search("GetNonExistingGame");
 
 			Assert.Empty(games);
 		}
@@ -82,7 +78,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var id = newGame.Id;
 
-			var game = _gameDbController.Search(id);
+			var game = _gameController.Search(id);
 
 			Assert.NotNull(game);
 			Assert.Equal(newGame.Name, game.Name);
@@ -91,7 +87,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingGameById()
 		{
-			var game = _gameDbController.Search(-1);
+			var game = _gameController.Search(-1);
 
 			Assert.Null(game);
 		}
@@ -103,7 +99,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newGame = CreateGame(gameName);
 
-			var games = _gameDbController.Search(gameName);
+			var games = _gameController.Search(gameName);
 
 			var matches = games.Count(g => g.Name == gameName);
 
@@ -115,9 +111,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = "UpdateExistingGameProof"
 			};
 
-			_gameDbController.Update(updateGame);
+			_gameController.Update(updateGame);
 
-			var updatedGame = _gameDbController.Search(newGame.Id);
+			var updatedGame = _gameController.Search(newGame.Id);
 
 			Assert.Equal("UpdateExistingGameProof", updatedGame.Name);
 		}
@@ -137,7 +133,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = newGame.Name
 			};
 
-			Assert.Throws<DuplicateRecordException>(() => _gameDbController.Update(updateGame));
+			Assert.Throws<DuplicateRecordException>(() => _gameController.Update(updateGame));
 		}
 
 		[Fact]
@@ -149,7 +145,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = "UpdateNonExistingGame"
 			};
 
-			Assert.Throws<MissingRecordException>(() => _gameDbController.Update(game));
+			Assert.Throws<MissingRecordException>(() => _gameController.Update(game));
 		}
 
 		[Fact]
@@ -159,12 +155,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var game = CreateGame(gameName);
 
-			var games = _gameDbController.Search(gameName);
+			var games = _gameController.Search(gameName);
 			Assert.Equal(games.Count(), 1);
 			Assert.Equal(games.ElementAt(0).Name, gameName);
 
-			_gameDbController.Delete(game.Id);
-			games = _gameDbController.Search(gameName);
+			_gameController.Delete(game.Id);
+			games = _gameController.Search(gameName);
 
 			Assert.Empty(games);
 		}
@@ -172,7 +168,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingGame()
 		{
-			_gameDbController.Delete(-1);
+			_gameController.Delete(-1);
 		}
 		#endregion
 
@@ -184,7 +180,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = name,
 			};
 
-			_gameDbController.Create(game);
+			_gameController.Create(game);
 
 			return game;
 		}

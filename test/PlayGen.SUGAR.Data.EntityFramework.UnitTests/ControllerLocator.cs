@@ -6,11 +6,8 @@ using SkillController = PlayGen.SUGAR.Data.EntityFramework.Controllers.SkillCont
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public static class TestEnvironment
+	public abstract class ControllerLocator
 	{
-        public const string ConnectionString = "Server=localhost;Port=3306;Database=sugarunittests;Uid=root;Pwd=t0pSECr3t;Convert Zero Datetime=true;Allow Zero Datetime=true";
-        private static readonly SUGARContextFactory ContextFactory = new SUGARContextFactory(ConnectionString);
-
 		private static AccountController _accountController;
 		private static AchievementController _achievementController;
 		private static ActorController _actorController;
@@ -25,36 +22,28 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		private static UserRelationshipController _userRelationshipController;
 
 		public static  AccountController AccountController
-			=> _accountController ?? (_accountController = new AccountController(ContextFactory));
+			=> _accountController ?? (_accountController = new AccountController(ProjectFixture.ContextFactory));
 		public static  AchievementController AchievementController
-			=> _achievementController ?? (_achievementController = new AchievementController(ContextFactory));
+			=> _achievementController ?? (_achievementController = new AchievementController(ProjectFixture.ContextFactory));
 		public static  ActorController ActorController
-			=> _actorController ?? (_actorController = new ActorController(ContextFactory));
+			=> _actorController ?? (_actorController = new ActorController(ProjectFixture.ContextFactory));
 		public static  GameController GameController 
-			=> _gameController ?? (_gameController = new GameController(ContextFactory));
+			=> _gameController ?? (_gameController = new GameController(ProjectFixture.ContextFactory));
 		public static  GameDataController GameDataController 
-			=> _gameDataController ?? (_gameDataController = new GameDataController(ContextFactory));
+			=> _gameDataController ?? (_gameDataController = new GameDataController(ProjectFixture.ContextFactory));
 		public static  GroupController GroupController
-			=> _groupController ?? (_groupController = new GroupController(ContextFactory));
+			=> _groupController ?? (_groupController = new GroupController(ProjectFixture.ContextFactory));
 		public static  GroupRelationshipController GroupRelationshipController
-			=>_groupRelationshipController ?? (_groupRelationshipController = new GroupRelationshipController(ContextFactory));
+			=>_groupRelationshipController ?? (_groupRelationshipController = new GroupRelationshipController(ProjectFixture.ContextFactory));
 		public static  LeaderboardController LeaderboardController
-			=> _leaderboardController ?? (_leaderboardController = new LeaderboardController(ContextFactory));
+			=> _leaderboardController ?? (_leaderboardController = new LeaderboardController(ProjectFixture.ContextFactory));
 		public static  ResourceController ResourceController 
-			=> _resourceController ?? (_resourceController = new ResourceController(ContextFactory));
+			=> _resourceController ?? (_resourceController = new ResourceController(ProjectFixture.ContextFactory));
 		public static  SkillController SkillController
-			=> _skillController ?? (_skillController = new SkillController(ContextFactory));
+			=> _skillController ?? (_skillController = new SkillController(ProjectFixture.ContextFactory));
 		public static  UserController UserController 
-			=> _userController ?? (_userController = new UserController(ContextFactory));
+			=> _userController ?? (_userController = new UserController(ProjectFixture.ContextFactory));
 		public static  UserRelationshipController UserRelationshipController
-			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(ContextFactory));
-
-	    public static void DeleteDatabase()
-		{
-			using (var context = ContextFactory.Create())
-			{
-				context.Database.EnsureDeleted();
-			}
-		}
+			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(ProjectFixture.ContextFactory));
 	}
 }

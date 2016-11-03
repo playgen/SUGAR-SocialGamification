@@ -6,15 +6,12 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class UserControllerTests
+    [Collection("Project Fixture Collection")]
+    public class UserControllerTests
 	{
 		#region Configuration
-		private readonly UserController _userDbController;
 
-		public UserControllerTests()
-		{
-			_userDbController = TestEnvironment.UserController;
-		}
+	    private readonly UserController _userController = ControllerLocator.UserController;
 		#endregion
 
 		#region Tests
@@ -25,7 +22,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateUser(userName);
 
-			var users = _userDbController.Search(userName);
+			var users = _userController.Search(userName);
 
 			var matches = users.Count(g => g.Name == userName);
 
@@ -60,7 +57,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateUser("GetMultiple_UsersByName_DontGetThis");
 
-			var users = _userDbController.Search("GetMultipleUsersByName");
+			var users = _userController.Search("GetMultipleUsersByName");
 
 			var matchingUsers = users.Select(g => userNames.Contains(g.Name));
 
@@ -70,7 +67,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingUser()
 		{
-			var users = _userDbController.Search("GetNonExsitingUsers");
+			var users = _userController.Search("GetNonExsitingUsers");
 
 			Assert.Empty(users);
 		}
@@ -82,7 +79,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var id = newUser.Id;
 
-			var user = _userDbController.Search(id);
+			var user = _userController.Search(id);
 
 			Assert.NotNull(user);
 			Assert.Equal(newUser.Name, user.Name);
@@ -91,7 +88,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingUserById()
 		{
-			var user = _userDbController.Search(-1);
+			var user = _userController.Search(-1);
 
 			Assert.Null(user);
 		}
@@ -103,7 +100,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newUser = CreateUser(userName);
 
-			var users = _userDbController.Search(userName);
+			var users = _userController.Search(userName);
 
 			var matches = users.Count(g => g.Name == userName);
 
@@ -115,9 +112,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = "UpdateExistingUserProof"
 			};
 
-			_userDbController.Update(updateUser);
+			_userController.Update(updateUser);
 
-			var updatedUser = _userDbController.Search(newUser.Id);
+			var updatedUser = _userController.Search(newUser.Id);
 
 			Assert.Equal("UpdateExistingUserProof", updatedUser.Name);
 		}
@@ -137,7 +134,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = newUser.Name
 			};
 
-			Assert.Throws<DuplicateRecordException>(() => _userDbController.Update(updateUser));
+			Assert.Throws<DuplicateRecordException>(() => _userController.Update(updateUser));
 		}
 
 		[Fact]
@@ -149,7 +146,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = "UpdateNonExistingUser"
 			};
 
-			Assert.Throws<MissingRecordException>(() => _userDbController.Update(user));
+			Assert.Throws<MissingRecordException>(() => _userController.Update(user));
 		}
 
 		[Fact]
@@ -159,12 +156,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var user = CreateUser(userName);
 
-			var users = _userDbController.Search(userName);
+			var users = _userController.Search(userName);
 			Assert.Equal(users.Count(), 1);
 			Assert.Equal(users.ElementAt(0).Name, userName);
 
-			_userDbController.Delete(user.Id);
-			users = _userDbController.Search(userName);
+			_userController.Delete(user.Id);
+			users = _userController.Search(userName);
 
 			Assert.Empty(users);
 		}
@@ -172,7 +169,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingUser()
 		{
-			_userDbController.Delete(-1);
+			_userController.Delete(-1);
 		}
 		#endregion
 
@@ -184,7 +181,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = name,
 			};
 
-			_userDbController.Create(user);
+			_userController.Create(user);
 
 			return user;
 		}

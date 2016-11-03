@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using PlayGen.SUGAR.Contracts;
+﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.GameData;
@@ -9,19 +7,13 @@ using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	public class ResourceControllerTests
+    [Collection("Project Fixture Collection")]
+    public class ResourceControllerTests
 	{
 		#region Configuration
-		private readonly ResourceController _resourceController;
-		private readonly UserController _userController;
-		private readonly GameController _gameController;
-
-		public ResourceControllerTests()
-		{
-			_resourceController = TestEnvironment.ResourceController;
-			_userController = TestEnvironment.UserController;
-			_gameController = TestEnvironment.GameController;
-		}
+		private readonly ResourceController _resourceController = ControllerLocator.ResourceController;
+		private readonly UserController _userController = ControllerLocator.UserController;
+		private readonly GameController _gameController = ControllerLocator.GameController;
 		#endregion
 
 		#region Tests
