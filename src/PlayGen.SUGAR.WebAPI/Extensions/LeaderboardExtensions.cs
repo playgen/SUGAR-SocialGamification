@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
@@ -13,7 +13,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				return null;
 			}
-			var leaderboardContract = new LeaderboardResponse
+
+
+            return new LeaderboardResponse
 			{
 				GameId = leaderboardModel.GameId,
 				Name = leaderboardModel.Name,
@@ -24,8 +26,6 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				CriteriaScope = leaderboardModel.CriteriaScope,
 				LeaderboardType = leaderboardModel.LeaderboardType
 			};
-
-			return leaderboardContract;
 		}
 
 		public static IEnumerable<LeaderboardResponse> ToContractList(this IEnumerable<Leaderboard> leaderboardModels)
@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static Leaderboard ToModel(this LeaderboardRequest leaderboardContract)
 		{
-			var leaderboardModel = new Leaderboard
+			return new Leaderboard
 			{
 				GameId = leaderboardContract.GameId ?? 0,
 				Name = leaderboardContract.Name,
@@ -46,8 +46,6 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				CriteriaScope = leaderboardContract.CriteriaScope,
 				LeaderboardType = leaderboardContract.LeaderboardType
 			};
-
-			return leaderboardModel;
 		}
 	}
 }

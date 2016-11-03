@@ -7,13 +7,14 @@
       "type": "platform",
       "version": "1.0.0"
     },
+
     "NETStandard.Library": "1.6.0",
-    
+
     "PlayGen.SUGAR.Data.EntityFramework": "1.0.0-*",
     "PlayGen.SUGAR.Data.Model": "1.0.0-*",
     "PlayGen.SUGAR.GameData": "1.0.0-*",
     "PlayGen.SUGAR.Common": "1.0.0-*",
-    
+
     "dotnet-test-nunit": "3.4.0-beta-3",
     "NUnit": "3.5.0",
     "NUnit3TestAdapter": "3.5.1"

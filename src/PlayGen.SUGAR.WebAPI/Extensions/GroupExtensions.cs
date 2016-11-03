@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
@@ -29,9 +29,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static Group ToGroupModel(this ActorRequest actorContract)
 		{
-			var actorModel = new Group { Name = actorContract.Name };
-
-			return actorModel;
+			return new Group
+			{
+			    Name = actorContract.Name
+			};
 		}
 	}
 }

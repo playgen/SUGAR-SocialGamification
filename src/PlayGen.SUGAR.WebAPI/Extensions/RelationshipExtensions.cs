@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using PlayGen.SUGAR.Contracts;
+﻿using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
@@ -13,13 +11,12 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				return null;
 			}
-			var relationshipContract = new RelationshipResponse
+
+            return new RelationshipResponse
 			{
 				RequestorId = relationshipModel.RequestorId,
 				AcceptorId = relationshipModel.AcceptorId
 			};
-
-			return relationshipContract;
 		}
 
 		public static RelationshipResponse ToContract(this UserToUserRelationship relationshipModel)
@@ -28,36 +25,31 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				return null;
 			}
-			var relationshipContract = new RelationshipResponse
+
+            return new RelationshipResponse
 			{
 				RequestorId = relationshipModel.RequestorId,
 				AcceptorId = relationshipModel.AcceptorId
 			};
-
-			return relationshipContract;
 		}
 
 		
 		public static UserToUserRelationship ToUserModel(this RelationshipRequest relationContract)
 		{
-			var relationModel = new UserToUserRelationship
+			return new UserToUserRelationship
 			{
 				RequestorId = relationContract.RequestorId,
 				AcceptorId = relationContract.AcceptorId
 			};
-
-			return relationModel;
 		}
 
 		public static UserToGroupRelationship ToGroupModel(this RelationshipRequest relationContract)
 		{
-			var relationModel = new UserToGroupRelationship
+			return new UserToGroupRelationship
 			{
 				RequestorId = relationContract.RequestorId,
 				AcceptorId = relationContract.AcceptorId
 			};
-
-			return relationModel;
 		}
 	}
 }

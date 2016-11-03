@@ -1,19 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Contracts;
-using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class CriteriaExtensions
     {
-		public static AchievementCriteria ToContract(this AchievementCriteria completionCriteria)
+		public static Contracts.Shared.CompletionCriteria ToContract(this Common.Shared.CompletionCriteria completionCriteria)
 		{
 			if (completionCriteria == null)
 			{
 				return null;
 			}
-			return new AchievementCriteria
+			return new Contracts.Shared.CompletionCriteria
 			{
 				Key = completionCriteria.Key,
 				DataType = completionCriteria.DataType,
@@ -24,9 +22,31 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static List<Contracts.AchievementCriteria> ToContractList(this List<AchievementCriteria> completionCriteriaCollection)
+		public static List<Contracts.Shared.CompletionCriteria> ToContractList(this List<Common.Shared.CompletionCriteria> completionCriterias)
 		{
-			return completionCriteriaCollection.Select(completionCriteria => completionCriteria.ToContract()).ToList();
+			return completionCriterias.Select(ToContract).ToList();
 		}
-	}
+
+        public static Common.Shared.CompletionCriteria ToModel(this Contracts.Shared.CompletionCriteria completionCriteria)
+        {
+            if (completionCriteria == null)
+            {
+                return null;
+            }
+            return new Common.Shared.CompletionCriteria
+            {
+                Key = completionCriteria.Key,
+                DataType = completionCriteria.DataType,
+                CriteriaQueryType = completionCriteria.CriteriaQueryType,
+                ComparisonType = completionCriteria.ComparisonType,
+                Scope = completionCriteria.Scope,
+                Value = completionCriteria.Value,
+            };
+        }
+
+        public static List<Common.Shared.CompletionCriteria> ToModelList(this List<Contracts.Shared.CompletionCriteria> completionCriterias)
+        {
+            return completionCriterias.Select(ToModel).ToList();
+        }
+    }
 }

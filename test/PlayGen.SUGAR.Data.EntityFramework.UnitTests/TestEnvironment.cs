@@ -1,5 +1,4 @@
 ﻿using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using System;
 using PlayGen.SUGAR.GameData;
 using AchievementController = PlayGen.SUGAR.Data.EntityFramework.Controllers.AchievementController;
 using LeaderboardController = PlayGen.SUGAR.Data.EntityFramework.Controllers.LeaderboardController;
@@ -7,10 +6,10 @@ using SkillController = PlayGen.SUGAR.Data.EntityFramework.Controllers.SkillCont
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-    public static class TestEnvironment
+	public static class TestEnvironment
 	{
 		private static readonly string _dbName = "sugarunittests";
-	    private static readonly SUGARContextFactory ContextFactory;
+		private static readonly SUGARContextFactory ContextFactory;
 
 		private static AccountController _accountController;
 		private static AchievementController _achievementController;
@@ -49,14 +48,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			=> _userController ?? (_userController = new UserController(ContextFactory));
 		public static  UserRelationshipController UserRelationshipController
 			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(ContextFactory));
-        
+		
 		static TestEnvironment()
 		{
 			var connectionString = GetNameOrConnectionString(_dbName);
-		    DeleteDatabase();
-            ContextFactory = new SUGARContextFactory(connectionString);
+			DeleteDatabase();
+			ContextFactory = new SUGARContextFactory(connectionString);
 
-        }
+		}
 
 		private static string GetNameOrConnectionString(string dbName)
 		{
@@ -73,7 +72,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			using (var context = ContextFactory.Create())
 			{
-			    context.Database.EnsureDeleted();
+				context.Database.EnsureDeleted();
 			}
 		}
 	}

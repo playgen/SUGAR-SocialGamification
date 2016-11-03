@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
@@ -12,7 +12,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				return null;
 			}
-			var dataContract = new GameDataResponse
+
+            return new GameDataResponse
 			{
 				ActorId = gameData.ActorId,
 				GameId = gameData.GameId,
@@ -20,18 +21,16 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				Value = gameData.Value,
 				GameDataType = gameData.DataType
 			};
-
-			return dataContract;
 		}
 
-		public static IEnumerable<GameDataResponse> ToContractList(this IEnumerable<Data.Model.GameData> gameData)
+		public static IEnumerable<GameDataResponse> ToContractList(this IEnumerable<Data.Model.GameData> gameDatas)
 		{
-			return gameData.Select(ToContract).ToList();
+			return gameDatas.Select(ToContract).ToList();
 		}
 
 		public static Data.Model.GameData ToModel(this GameDataRequest dataContract)
 		{
-			var dataModel = new Data.Model.GameData
+			return new Data.Model.GameData
 			{
 				ActorId = dataContract.ActorId,
 				GameId = dataContract.GameId,
@@ -39,8 +38,6 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				Value = dataContract.Value,
 				DataType = dataContract.GameDataType
 			};
-
-			return dataModel;
 		}
 	}
 }

@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
+	[TestFixture]
 	public class AccountControllerTests
 	{
 		#region Configuration

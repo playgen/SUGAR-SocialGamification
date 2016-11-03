@@ -1,28 +1,29 @@
-﻿using PlayGen.SUGAR.Contracts;
+﻿using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class AccountExtensions
 	{
-		public static AccountResponse ToContract(this Account accountModel)
+		public static AccountResponse ToContract(this Account model)
 		{
-			if (accountModel == null)
+			if (model == null)
 			{
 				return null;
 			}
+
 			return new AccountResponse
 			{
-				User = accountModel.User.ToContract()
+				User = model.User.ToContract()
 			};
 		}
 
-		public static Account ToModel(this AccountRequest accountContract)
+		public static Account ToModel(this AccountRequest contract)
 		{
 			return new Account
 			{
-				Name = accountContract.Name,
-				Password = accountContract.Password
+				Name = contract.Name,
+				Password = contract.Password
 			};
 		}
 	}

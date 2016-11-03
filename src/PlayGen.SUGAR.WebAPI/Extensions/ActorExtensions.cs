@@ -1,4 +1,4 @@
-﻿using PlayGen.SUGAR.Contracts;
+﻿using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
@@ -11,12 +11,11 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				return null;
 			}
-			var actorContract = new ActorResponse
+
+			return new ActorResponse
 			{
 				Id = actorModel.Id,
 			};
-
-			return actorContract;
 		}
 	}
 }

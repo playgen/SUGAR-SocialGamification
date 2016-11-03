@@ -1,68 +1,54 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	internal static class AchievementExtensions
 	{
-		internal static AchievementResponse ToContract(this Achievement model)
+        public static AchievementResponse ToContract(this Achievement model)
 		{
 			if (model == null)
 			{
 				return null;
 			}
-			var achievementContract = new AchievementResponse
+
+            return new AchievementResponse
 			{
 				Name = model.Name,
 				Description = model.Description,
 				GameId = model.GameId,
 				ActorType = model.ActorType,
 				Token = model.Token,
-				CompletionCriterias = model.CompletionCriterias.ToContract(),
-				Rewards = model.Rewards.ToContract(),
+				CompletionCriterias = model.CompletionCriterias.ToContractList(),
+				Rewards = model.Rewards.ToContractList(),
 			};
-
-			return achievementContract;
 		}
 
-		internal static IEnumerable<AchievementResponse> ToContract(this IEnumerable<Achievement> models)
+        public static IEnumerable<AchievementResponse> ToContractList(this IEnumerable<Achievement> models)
 		{
 			return models.Select(ToContract).ToList();
 		}
 
-		internal static Achievement ToModel(this AchievementRequest contract)
+        public static Achievement ToAchievementModel(this AchievementRequest contract)
 		{
-			var achieveModel = new Achievement
+			return new Achievement
 			{
 				Name = contract.Name,
 				Description = contract.Description,
 				GameId = contract.GameId ?? 0,
 				ActorType = contract.ActorType,
 				Token = contract.Token,
-				CompletionCriterias = contract.CompletionCriterias.ToModel(),
-				Rewards = contract.Rewards.ToModel(),
+				CompletionCriterias = contract.CompletionCriterias.ToModelList(),
+				Rewards = contract.Rewards.ToModelList(),
 			};
-
-			return achieveModel;
 		}
 
-		internal static List<AchievementCriteria> ToModel(this List<Contracts.AchievementCriteria> contracts)
+        public static Common.Shared.CompletionCriteria ToModel(this Contracts.Shared.CompletionCriteria contract)
 		{
-			var models = new List<Data.Model.Achievement>();
-			if (contracts != null)
-			{
-                models.Add(contracts.Select(ToModel).ToList());
-			}
-
-			return models;
-		}
-
-		internal static AchievementCriteria ToModel(this AchievementCriteria contract)
-		{
-			return new AchievementCriteria
-			{
+			return new Common.Shared.CompletionCriteria
+            {
 				Key = contract.Key,
 				ComparisonType = contract.ComparisonType,
 				CriteriaQueryType = contract.CriteriaQueryType,
@@ -72,9 +58,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
         
-		internal static Reward ToModel(this Reward contract)
+		public static Common.Shared.Reward ToModel(this Contracts.Shared.Reward contract)
 		{
-			return new Reward
+			return new Common.Shared.Reward
 			{
 				Key = contract.Key,
 				DataType = contract.DataType,

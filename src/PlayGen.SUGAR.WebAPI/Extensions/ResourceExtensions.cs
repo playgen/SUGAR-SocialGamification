@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
@@ -13,6 +14,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				return null;
 			}
+
 			return new ResourceResponse
 			{
 				Id = gameData.Id,
