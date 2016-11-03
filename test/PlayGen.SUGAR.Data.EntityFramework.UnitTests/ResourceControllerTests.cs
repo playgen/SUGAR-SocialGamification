@@ -60,8 +60,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var newResource = CreateResource("CanUpdateResource");
 
-			string originalValue = newResource.Value;
-			string newValue = originalValue + "999";
+			var originalValue = newResource.Value;
+			var newValue = originalValue + "999";
 			newResource.Value = newValue;
 
 			_resourceController.Update(newResource);
@@ -80,8 +80,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var fromResource = CreateResource("CanTransfer_FromUserToUser", actorId:fromUser.Id);
 
-			long originalQuantity = long.Parse(fromResource.Value);
-			long transferQuantity = originalQuantity/3;
+			var originalQuantity = long.Parse(fromResource.Value);
+			var transferQuantity = originalQuantity/3;
 
 			var toResource = _resourceController.Transfer(fromResource.GameId, fromUser.Id, toUser.Id, fromResource.Key, transferQuantity, out fromResource);
 
@@ -100,8 +100,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var fromResource = CreateResource("CanTransfer_FromUserToUser", actorId: fromUser.Id);
 			var existingToResource = CreateResource(fromResource.Key, actorId: toUser.Id);
 
-			long originalQuantity = long.Parse(fromResource.Value);
-			long transferQuantity = originalQuantity / 3;
+			var originalQuantity = long.Parse(fromResource.Value);
+			var transferQuantity = originalQuantity / 3;
 
 			var processedToResource = _resourceController.Transfer(fromResource.GameId, fromUser.Id, toUser.Id, fromResource.Key, transferQuantity, out fromResource);
 
@@ -161,7 +161,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		private Actor GetOrCreateUser(string suffix = null)
 		{
-			string name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
+			var name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
 			var users = _userController.Search(name, true);
 			User user;
 

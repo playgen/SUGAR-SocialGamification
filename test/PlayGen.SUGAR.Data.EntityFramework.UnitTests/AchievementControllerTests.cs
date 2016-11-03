@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateAndGetAchievement()
 		{
-			string achievementName = "CreateAchievement";
+			var achievementName = "CreateAchievement";
 
 			var newAchievement = CreateAchievement(achievementName);
 
@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateAndGetGlobalAchievement()
 		{
-			string achievementName = "CreateGlobalAchievement";
+			var achievementName = "CreateGlobalAchievement";
 
 			var newAchievement = CreateAchievement(achievementName, 0);
 
@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateAchievement()
 		{
-			string achievementName = "CreateDuplicateAchievement";
+			var achievementName = "CreateDuplicateAchievement";
 
 			var firstachievement = CreateAchievement(achievementName);
 
@@ -63,9 +63,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var baseAchievement = CreateAchievement("GetAchievementsByBaseGame");
 
-			int gameId = baseAchievement.GameId;
+			var gameId = baseAchievement.GameId;
 
-			string[] names = new[]
+			var names = new[]
 			{
 				"GetAchievementsByGame1",
 				"GetAchievementsByGame2",
@@ -104,9 +104,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateAchievement()
 		{
-			string achievementName = "UpdateExistingAchievement";
+			var achievementName = "UpdateExistingAchievement";
 
-			Achievement newAchievement = CreateAchievement(achievementName);
+			var newAchievement = CreateAchievement(achievementName);
 
 			var foundAchievement = _achievementDbController.Get(newAchievement.Token, newAchievement.GameId);
 
@@ -133,11 +133,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateAchievementToDuplicateName()
 		{
-			string achievementName = "UpdateAchievementToDuplicateName";
+			var achievementName = "UpdateAchievementToDuplicateName";
 
-			Achievement newAchievement = CreateAchievement(achievementName);
+			var newAchievement = CreateAchievement(achievementName);
 
-			Achievement newAchievementDuplicate = CreateAchievement(achievementName + " Two", newAchievement.GameId);
+			var newAchievementDuplicate = CreateAchievement(achievementName + " Two", newAchievement.GameId);
 
 			var update = new Achievement
 			{
@@ -155,7 +155,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateNonExistingAchievement()
 		{
-			string achievementName = "UpdateNonExistingAchievement";
+			var achievementName = "UpdateNonExistingAchievement";
 
 			var achievement = new Achievement
 			{
@@ -173,7 +173,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void DeleteExistingAchievement()
 		{
-			string achievementName = "DeleteExistingAchievement";
+			var achievementName = "DeleteExistingAchievement";
 
 			var achievement = CreateAchievement(achievementName);
 
@@ -198,7 +198,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		private Achievement CreateAchievement(string name, int? gameId = null, bool addCriteria = true)
 		{
 			if (gameId == null) {
-				Game game = new Game
+				var game = new Game
 				{
 					Name = name
 				};

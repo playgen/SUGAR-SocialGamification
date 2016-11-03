@@ -21,13 +21,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateAndGetUser()
 		{
-			string userName = "CreateUser";
+			var userName = "CreateUser";
 
 			CreateUser(userName);
 
 			var users = _userDbController.Search(userName);
 
-			int matches = users.Count(g => g.Name == userName);
+			var matches = users.Count(g => g.Name == userName);
 
 			Assert.AreEqual(matches, 1);
 		}
@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateUser()
 		{
-			string userName = "CreateDuplicateUser";
+			var userName = "CreateDuplicateUser";
 
 			CreateUser(userName);
 
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void GetMultipleUsersByName()
 		{
-			string[] userNames = new[]
+			var userNames = new[]
 			{
 				"GetMultipleUsersByName1",
 				"GetMultipleUsersByName2",
@@ -78,9 +78,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void GetUserById()
 		{
-			User newUser = CreateUser("GetUserById");
+			var newUser = CreateUser("GetUserById");
 
-			int id = newUser.Id;
+			var id = newUser.Id;
 
 			var user = _userDbController.Search(id);
 
@@ -99,13 +99,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateUser()
 		{
-			string userName = "UpdateExistingUser";
+			var userName = "UpdateExistingUser";
 
-			User newUser = CreateUser(userName);
+			var newUser = CreateUser(userName);
 
 			var users = _userDbController.Search(userName);
 
-			int matches = users.Count(g => g.Name == userName);
+			var matches = users.Count(g => g.Name == userName);
 
 			Assert.AreEqual(1, matches);
 
@@ -125,11 +125,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateUserToDuplicateName()
 		{
-			string userName = "UpdateUserToDuplicateName";
+			var userName = "UpdateUserToDuplicateName";
 
-			User newUser = CreateUser(userName);
+			var newUser = CreateUser(userName);
 
-			User newUserDuplicate = CreateUser(userName + " Two");
+			var newUserDuplicate = CreateUser(userName + " Two");
 
 			var updateUser = new User
 			{
@@ -155,7 +155,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void DeleteExistingUser()
 		{
-			string userName = "DeleteExistingUser";
+			var userName = "DeleteExistingUser";
 
 			var user = CreateUser(userName);
 

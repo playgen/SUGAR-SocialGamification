@@ -23,14 +23,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateAndGetAccount()
 		{
-			string name = "CreateAndGetAccount";
+			var name = "CreateAndGetAccount";
 			string password = $"{name}Password";
 
 			CreateAccount(name, password);
 
 			var accounts = _accountDbController.Get(new string[] { name });
 
-			int matches = accounts.Count(a => a.Name == name);
+			var matches = accounts.Count(a => a.Name == name);
 
 			Assert.AreEqual(1, matches);
 		}
@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateAccount()
 		{
-			string name = "CreateDuplicateAccount";
+			var name = "CreateDuplicateAccount";
 			string password = $"{name}Password";
 
 			CreateAccount(name, password);
@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void GetMultipleAccountsByName()
 		{
-			string[] names = new[]
+			var names = new[]
 			{
 				"GetMultipleAccountsByName1",
 				"GetMultipleAccountsByName2",
@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void DeleteExistingAccount()
 		{
-			string name = "DeleteExistingAccount";
+			var name = "DeleteExistingAccount";
 			string password = $"{name}Password";
 
 			var account = CreateAccount(name, password);
@@ -122,7 +122,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		private User CreateUser(string name)
 		{
-			User user = new User()
+			var user = new User()
 			{
 				Name = name,
 			};

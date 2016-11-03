@@ -22,13 +22,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateAndGetGroup()
 		{
-			string groupName = "CreateGroup";
+			var groupName = "CreateGroup";
 
 			CreateGroup(groupName);
 
 			var groups = _groupDbController.Search(groupName);
 
-			int matches = groups.Count(g => g.Name == groupName);
+			var matches = groups.Count(g => g.Name == groupName);
 
 			Assert.AreEqual(matches, 1);
 		}
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateGroup()
 		{
-			string groupName = "CreateDuplicateGroup";
+			var groupName = "CreateDuplicateGroup";
 
 			CreateGroup(groupName);
 
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void GetMultipleGroups()
 		{
-			string[] groupNames = new[]
+			var groupNames = new[]
 			{
 					"GetMultipleGroups1",
 					"GetMultipleGroups2",
@@ -79,9 +79,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void GetGroupById()
 		{
-			Group newGroup = CreateGroup("GetGroupById");
+			var newGroup = CreateGroup("GetGroupById");
 
-			int id = newGroup.Id;
+			var id = newGroup.Id;
 
 			var group = _groupDbController.Search(id);
 
@@ -100,13 +100,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateGroup()
 		{
-			string groupName = "UpdateExistingGroup";
+			var groupName = "UpdateExistingGroup";
 
-			Group newGroup = CreateGroup(groupName);
+			var newGroup = CreateGroup(groupName);
 
 			var groups = _groupDbController.Search(groupName);
 
-			int matches = groups.Count(g => g.Name == groupName);
+			var matches = groups.Count(g => g.Name == groupName);
 
 			Assert.AreEqual(1, matches);
 
@@ -126,11 +126,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateGroupToDuplicateName()
 		{
-			string groupName = "UpdateGroupToDuplicateName";
+			var groupName = "UpdateGroupToDuplicateName";
 
-			Group newGroup = CreateGroup(groupName);
+			var newGroup = CreateGroup(groupName);
 
-			Group newGroupDuplicate = CreateGroup(groupName + " Two");
+			var newGroupDuplicate = CreateGroup(groupName + " Two");
 
 			var updateGroup = new Group
 			{
@@ -156,7 +156,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void DeleteExistingGroup()
 		{
-			string groupName = "DeleteExistingGroup";
+			var groupName = "DeleteExistingGroup";
 
 			var group = CreateGroup(groupName);
 

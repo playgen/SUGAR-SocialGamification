@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateAndGetGroupMemberRequest()
 		{
-			string groupMemberName = "CreateGroupMemberRequest";
+			var groupMemberName = "CreateGroupMemberRequest";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var groupRequests = _groupMemberDbController.GetRequests(newMember.AcceptorId);
 
-			int matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
+			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
 
 			Assert.AreEqual(matches, 1);
 		}
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateGroupMemberWithNonExistingRequestor()
 		{
-			string groupMemberName = "CreateGroupMemberWithNonExistingRequestor";
+			var groupMemberName = "CreateGroupMemberWithNonExistingRequestor";
 			var acceptor = CreateGroup(groupMemberName);
 			Assert.Throws<MissingRecordException>(() => CreateGroupMember(-1, acceptor.Id));
 		}
@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateGroupMemberWithNonExistingAcceptor()
 		{
-			string groupMemberName = "CreateGroupMemberWithNonExistingAcceptor";
+			var groupMemberName = "CreateGroupMemberWithNonExistingAcceptor";
 			var requestor = CreateUser(groupMemberName);
 			Assert.Throws<MissingRecordException>(() => CreateGroupMember(requestor.Id, -1));
 		}
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateGroupMember()
 		{
-			string groupMemberName = "CreateDuplicateGroupMember";
+			var groupMemberName = "CreateDuplicateGroupMember";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -74,7 +74,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateReversedGroupMember()
 		{
-			string groupMemberName = "CreateDuplicateReversedGroupMember";
+			var groupMemberName = "CreateDuplicateReversedGroupMember";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -95,7 +95,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void GetUserSentGroupRequests()
 		{
-			string groupMemberName = "GetUserSentGroupRequests";
+			var groupMemberName = "GetUserSentGroupRequests";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -104,7 +104,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var groupRequests = _groupMemberDbController.GetSentRequests(newMember.RequestorId);
 
-			int matches = groupRequests.Count(g => g.Name == groupMemberName + " Acceptor");
+			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Acceptor");
 
 			Assert.AreEqual(matches, 1);
 		}
@@ -120,7 +120,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void AcceptGroupMemberRequest()
 		{
-			string groupMemberName = "AcceptGroupMemberRequest";
+			var groupMemberName = "AcceptGroupMemberRequest";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -131,7 +131,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var groupRequests = _groupMemberDbController.GetRequests(newMember.AcceptorId);
 
-			int matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
+			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
 
 			Assert.AreEqual(matches, 0);
 
@@ -151,7 +151,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void RejectGroupMemberRequest()
 		{
-			string groupMemberName = "RejectGroupMemberRequest";
+			var groupMemberName = "RejectGroupMemberRequest";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -162,7 +162,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var groupRequests = _groupMemberDbController.GetRequests(newMember.AcceptorId);
 
-			int matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
+			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
 
 			Assert.AreEqual(matches, 0);
 
@@ -182,7 +182,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateNonExistingGroupMemberRequest()
 		{
-			string groupMemberName = "UpdateNonExistingGroupMemberRequest";
+			var groupMemberName = "UpdateNonExistingGroupMemberRequest";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -215,7 +215,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateAcceptedGroupMember()
 		{
-			string groupMemberName = "CreateDuplicateAcceptedGroupMember";
+			var groupMemberName = "CreateDuplicateAcceptedGroupMember";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -230,7 +230,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateReversedAcceptedGroupMember()
 		{
-			string groupMemberName = "CreateDuplicateReversedAcceptedGroupMember";
+			var groupMemberName = "CreateDuplicateReversedAcceptedGroupMember";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -245,7 +245,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateGroupMember()
 		{
-			string groupMemberName = "UpdateGroupMember";
+			var groupMemberName = "UpdateGroupMember";
 
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
@@ -263,7 +263,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateNonExistingGroupMember()
 		{
-			string groupMemberName = "UpdateNonExistingGroupMember";
+			var groupMemberName = "UpdateNonExistingGroupMember";
 
 			var requestor = CreateGroup(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");

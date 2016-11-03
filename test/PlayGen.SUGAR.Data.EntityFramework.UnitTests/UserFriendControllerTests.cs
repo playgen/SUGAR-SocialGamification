@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateAndGetUserFriendRequest()
 		{
-			string userFriendName = "CreateUserFriendRequest";
+			var userFriendName = "CreateUserFriendRequest";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -33,7 +33,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var userRequests = _userRelationshipDbController.GetRequests(newFriend.AcceptorId);
 
-			int matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
+			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 
 			Assert.AreEqual(matches, 1);
 		}
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateUserFriendWithNonExistingRequestor()
 		{
-			string userFriendName = "CreateUserFriendWithNonExistingRequestor";
+			var userFriendName = "CreateUserFriendWithNonExistingRequestor";
 			var acceptor = CreateUser(userFriendName);
 			Assert.Throws<MissingRecordException>(() => CreateUserFriend(-1, acceptor.Id));
 		}
@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateUserFriendWithNonExistingAcceptor()
 		{
-			string userFriendName = "CreateUserFriendWithNonExistingAcceptor";
+			var userFriendName = "CreateUserFriendWithNonExistingAcceptor";
 			var requestor = CreateUser(userFriendName);
 			Assert.Throws<MissingRecordException>(() => CreateUserFriend(requestor.Id, -1));
 		}
@@ -57,7 +57,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateUserFriend()
 		{
-			string userFriendName = "CreateDuplicateUserFriend";
+			var userFriendName = "CreateDuplicateUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateReversedUserFriend()
 		{
-			string userFriendName = "CreateDuplicateReversedUserFriend";
+			var userFriendName = "CreateDuplicateReversedUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void GetUserSentFriendRequests()
 		{
-			string userFriendName = "GetUserSentFriendRequests";
+			var userFriendName = "GetUserSentFriendRequests";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var userRequests = _userRelationshipDbController.GetSentRequests(newFriend.RequestorId);
 
-			int matches = userRequests.Count(g => g.Name == userFriendName + " Acceptor");
+			var matches = userRequests.Count(g => g.Name == userFriendName + " Acceptor");
 
 			Assert.AreEqual(matches, 1);
 		}
@@ -116,7 +116,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void AcceptUserFriendRequest()
 		{
-			string userFriendName = "AcceptUserFriendRequest";
+			var userFriendName = "AcceptUserFriendRequest";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -141,7 +141,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void RejectUserFriendRequest()
 		{
-			string userFriendName = "RejectUserFriendRequest";
+			var userFriendName = "RejectUserFriendRequest";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -152,7 +152,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var userRequests = _userRelationshipDbController.GetRequests(newFriend.AcceptorId);
 
-			int matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
+			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 
 			Assert.AreEqual(matches, 0);
 
@@ -166,7 +166,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateNonExistingUserFriendRequest()
 		{
-			string userFriendName = "UpdateNonExistingUserFriendRequest";
+			var userFriendName = "UpdateNonExistingUserFriendRequest";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -191,7 +191,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateAcceptedUserFriend()
 		{
-			string userFriendName = "CreateDuplicateAcceptedUserFriend";
+			var userFriendName = "CreateDuplicateAcceptedUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -206,7 +206,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateReversedAcceptedUserFriend()
 		{
-			string userFriendName = "CreateDuplicateReversedAcceptedUserFriend";
+			var userFriendName = "CreateDuplicateReversedAcceptedUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -221,7 +221,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateUserFriend()
 		{
-			string userFriendName = "UpdateUserFriend";
+			var userFriendName = "UpdateUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
@@ -239,7 +239,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateNonExistingUserFriend()
 		{
-			string userFriendName = "UpdateNonExistingUserFriend";
+			var userFriendName = "UpdateNonExistingUserFriend";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");

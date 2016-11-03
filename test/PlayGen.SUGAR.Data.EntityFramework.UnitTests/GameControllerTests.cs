@@ -22,13 +22,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateAndGetGame()
 		{
-			string gameName = "CreateGame";
+			var gameName = "CreateGame";
 
 			CreateGame(gameName);
 			
 			var games = _gameDbController.Search(gameName);
 
-			int matches = games.Count(g => g.Name == gameName);
+			var matches = games.Count(g => g.Name == gameName);
 
 			Assert.AreEqual(1, matches);
 		}
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void CreateDuplicateGame()
 		{
-			string gameName = "CreateDuplicateGame";
+			var gameName = "CreateDuplicateGame";
 
 			CreateGame(gameName);
 			
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void GetMultipleGames()
 		{
-			string[] gameNames = new[]
+			var gameNames = new[]
 			{
 				"GetMultipleGames1",
 				"GetMultipleGames2",
@@ -79,9 +79,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void GetGameById()
 		{
-			Game newGame = CreateGame("GetGameById");
+			var newGame = CreateGame("GetGameById");
 
-			int id = newGame.Id;
+			var id = newGame.Id;
 
 			var game = _gameDbController.Search(id);
 
@@ -100,13 +100,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateGame()
 		{
-			string gameName = "UpdateExistingGame";
+			var gameName = "UpdateExistingGame";
 
-			Game newGame = CreateGame(gameName);
+			var newGame = CreateGame(gameName);
 
 			var games = _gameDbController.Search(gameName);
 
-			int matches = games.Count(g => g.Name == gameName);
+			var matches = games.Count(g => g.Name == gameName);
 
 			Assert.AreEqual(1, matches);
 
@@ -126,11 +126,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void UpdateGameToDuplicateName()
 		{
-			string gameName = "UpdateGameToDuplicateName";
+			var gameName = "UpdateGameToDuplicateName";
 
-			Game newGame = CreateGame(gameName);
+			var newGame = CreateGame(gameName);
 
-			Game newGameDuplicate = CreateGame(gameName + " Two");
+			var newGameDuplicate = CreateGame(gameName + " Two");
 
 			var updateGame = new Game
 			{
@@ -156,7 +156,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Test]
 		public void DeleteExistingGame()
 		{
-			string gameName = "DeleteExistingGame";
+			var gameName = "DeleteExistingGame";
 
 			var game = CreateGame(gameName);
 
