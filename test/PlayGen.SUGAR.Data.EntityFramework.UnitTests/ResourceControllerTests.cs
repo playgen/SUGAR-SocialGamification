@@ -4,30 +4,30 @@ using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.GameData;
-using NUnit.Framework;
+using Xunit;
 using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
 	public class ResourceControllerTests
-    {
+	{
 		#region Configuration
-	    private readonly ResourceController _resourceController;
+		private readonly ResourceController _resourceController;
 		private readonly UserController _userController;
 		private readonly GameController _gameController;
 
-	    public ResourceControllerTests()
-	    {
-		    _resourceController = TestEnvironment.ResourceController;
-		    _userController = TestEnvironment.UserController;
-		    _gameController = TestEnvironment.GameController;
-	    }
+		public ResourceControllerTests()
+		{
+			_resourceController = TestEnvironment.ResourceController;
+			_userController = TestEnvironment.UserController;
+			_gameController = TestEnvironment.GameController;
+		}
 		#endregion
 
 		#region Tests
-	    [Test]
-	    public void CanGetResourceByKey()
-	    {
+		[Fact]
+		public void CanGetResourceByKey()
+		{
 			var newResource = CreateResource("CanGetExistingResourceByKey");
 
 			var gotResources = _resourceController.Get(keys: new []{newResource.Key});
@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetResourceActorId()
 		{
 			var newResource = CreateResource("CanGetExistingResourceActorId", createNewUser: true);
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetResourceeGameId()
 		{
 			var newResource = CreateResource("CanGetExistingResourceGameId", createNewGame: true);
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
 		}
 
-		[Test]
+		[Fact]
 		public void CanUpdateResource()
 		{
 			var newResource = CreateResource("CanUpdateResource");
@@ -69,10 +69,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var resources = _resourceController.Get(newResource.GameId, newResource.ActorId, new string[] {newResource.Key});
 			newResource = resources.Single();
 
-			Assert.AreEqual(newValue, newResource.Value);
+			Assert.Equal(newValue, newResource.Value);
 		}
 
-		[Test]
+		[Fact]
 		public void CanTransferCreate_FromUserToUser()
 		{
 			var fromUser = GetOrCreateUser("CanTransferCreate_FromUserToUser_From");
@@ -85,13 +85,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var toResource = _resourceController.Transfer(fromResource.GameId, fromUser.Id, toUser.Id, fromResource.Key, transferQuantity, out fromResource);
 
-			Assert.AreEqual(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
-			Assert.AreEqual(transferQuantity, long.Parse(toResource.Value));
-			Assert.AreEqual(toUser.Id, toResource.ActorId);
-			Assert.AreEqual(fromResource.GameId, toResource.GameId);
+			Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
+			Assert.Equal(transferQuantity, long.Parse(toResource.Value));
+			Assert.Equal(toUser.Id, toResource.ActorId);
+			Assert.Equal(fromResource.GameId, toResource.GameId);
 		}
 
-		[Test]
+		[Fact]
 		public void CanTransferUpdate_FromUserToUser()
 		{
 			var fromUser = GetOrCreateUser("From");
@@ -105,15 +105,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var processedToResource = _resourceController.Transfer(fromResource.GameId, fromUser.Id, toUser.Id, fromResource.Key, transferQuantity, out fromResource);
 
-			Assert.AreEqual(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
-			Assert.AreEqual(originalQuantity + transferQuantity, long.Parse(processedToResource.Value));
-			Assert.AreEqual(existingToResource.Id, processedToResource.Id);
+			Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
+			Assert.Equal(originalQuantity + transferQuantity, long.Parse(processedToResource.Value));
+			Assert.Equal(existingToResource.Id, processedToResource.Id);
 		}
 		#endregion
 
 		#region Helpers
 		private Model.GameData CreateResource(string key, int? gameId = null, int? actorId = null,
-              bool createNewGame = false, bool createNewUser = false)
+			  bool createNewGame = false, bool createNewUser = false)
 		{
 			if (createNewGame)
 			{

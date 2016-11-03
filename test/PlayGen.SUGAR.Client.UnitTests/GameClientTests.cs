@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 using PlayGen.SUGAR.Contracts;
-using NUnit.Framework;
+using Xunit;
 using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		#endregion
 
 		#region Tests
-		[Test]
+		[Fact]
 		public void CanCreateGame()
 		{
 			var gameRequest = new GameRequest
@@ -51,11 +51,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var response = _gameClient.Create(gameRequest);
 
-			Assert.AreEqual(gameRequest.Name, response.Name);
+			Assert.Equal(gameRequest.Name, response.Name);
 			Assert.True(response.Id > 0);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateDuplicateGame()
 		{
 			var gameRequest = new GameRequest
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _gameClient.Create(gameRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateGameWithNoName()
 		{
 			var gameRequest = new GameRequest{};
@@ -76,7 +76,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _gameClient.Create(gameRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetGamesByName()
 		{
 			var gameRequestOne = new GameRequest
@@ -95,24 +95,24 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var getGames = _gameClient.Get("CanGetGamesByName");
 
-			Assert.AreEqual(2, getGames.Count());
+			Assert.Equal(2, getGames.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void CannotGetNotExistingGameByName()
 		{
 			var getGames = _gameClient.Get("CannotGetNotExistingGameByName");
 
-			Assert.IsEmpty(getGames);
+			Assert.Empty(getGames);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotGetGameByEmptyName()
 		{
 			Assert.Throws<ClientException>(() => _gameClient.Get(""));
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetGameById()
 		{
 			var gameRequest = new GameRequest
@@ -124,11 +124,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var getGame = _gameClient.Get(response.Id);
 
-			Assert.AreEqual(response.Name, getGame.Name);
-			Assert.AreEqual(gameRequest.Name, getGame.Name);
+			Assert.Equal(response.Name, getGame.Name);
+			Assert.Equal(gameRequest.Name, getGame.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotGetNotExistingGameById()
 		{
 			var getGame = _gameClient.Get(-1);
@@ -136,7 +136,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Null(getGame);
 		}
 
-		[Test]
+		[Fact]
 		public void CanUpdateGame()
 		{
 			var gameRequest = new GameRequest
@@ -155,11 +155,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var getGame = _gameClient.Get(response.Id);
 
-			Assert.AreNotEqual(response.Name, updateRequest.Name);
-			Assert.AreEqual("CanUpdateGame Updated", getGame.Name);
+			Assert.NotEqual(response.Name, updateRequest.Name);
+			Assert.Equal("CanUpdateGame Updated", getGame.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateGameToDuplicateName()
 		{
 			var gameRequestOne = new GameRequest
@@ -184,7 +184,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _gameClient.Update(responseTwo.Id, updateGame));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateNonExistingGame()
 		{
 			var updateGame = new GameRequest
@@ -195,7 +195,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _gameClient.Update(-1, updateGame));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateGameToNoName()
 		{
 			var gameRequest = new GameRequest
@@ -212,7 +212,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _gameClient.Update(response.Id, updateRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CanDeleteGame()
 		{
 			var gameRequest = new GameRequest
@@ -233,7 +233,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Null(getGame);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotDeleteNonExistingGame()
 		{
 			_gameClient.Delete(-1);

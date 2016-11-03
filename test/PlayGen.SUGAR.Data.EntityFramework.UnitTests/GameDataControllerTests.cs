@@ -2,7 +2,7 @@
 using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
-using NUnit.Framework;
+using Xunit;
 using System.IO;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 		
 		#region Tests
-		[Test]
+		[Fact]
 		public void CreateAndGetUserGameSaveData()
 		{
 			var userDataName = "CreateAndGetUserGameSaveData";
@@ -34,10 +34,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
 
-			Assert.AreEqual(1, matches);
+			Assert.Equal(1, matches);
 		}
 
-		[Test]
+		[Fact]
 		public void CreateAndGetUserGlobalSaveData()
 		{
 			var userDataName = "CreateAndGetUserGlobalSaveData";
@@ -48,10 +48,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == null && g.ActorId == newSaveData.ActorId);
 
-			Assert.AreEqual(1, matches);
+			Assert.Equal(1, matches);
 		}
 
-		[Test]
+		[Fact]
 		public void CreateAndGetGameGlobalSaveData()
 		{
 			var userDataName = "CreateAndGetGameGlobalSaveData";
@@ -62,10 +62,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matches = userDatas.Count(g => g.Key == newSaveData.Key && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
 
-			Assert.AreEqual(1, matches);
+			Assert.Equal(1, matches);
 		}
 
-		[Test]
+		[Fact]
 		public void GetMultipleUserSaveDatas()
 		{
 			var userDataNames = new[]
@@ -89,10 +89,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matchingUserSaveDatas = userDatas.Select(g => userDataNames.Contains(g.Key));
 
-			Assert.AreEqual(matchingUserSaveDatas.Count(), userDataNames.Length);
+			Assert.Equal(matchingUserSaveDatas.Count(), userDataNames.Length);
 		}
 
-		[Test]
+		[Fact]
 		public void GetUserSaveDatasWithNonExistingKey()
 		{
 			var userDataName = "GetUserSaveDatasWithNonExistingKey";
@@ -101,10 +101,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { "null key" });
 
-			Assert.IsEmpty(userDatas);
+			Assert.Empty(userDatas);
 		}
 
-		[Test]
+		[Fact]
 		public void GetUserSaveDatasWithNonExistingGame()
 		{
 			var userDataName = "GetUserSaveDatasWithNonExistingGame";
@@ -113,10 +113,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var userDatas = _gameDataController.Get(-1, newSaveData.ActorId, new string[] { userDataName });
 
-			Assert.IsEmpty(userDatas);
+			Assert.Empty(userDatas);
 		}
 
-		[Test]
+		[Fact]
 		public void GetUserSaveDatasWithNonExistingUser()
 		{
 			var userDataName = "GetUserSaveDatasWithNonExistingUser";
@@ -125,7 +125,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var userDatas = _gameDataController.Get(newSaveData.GameId, -1, new string[] { userDataName });
 
-			Assert.IsEmpty(userDatas);
+			Assert.Empty(userDatas);
 		}
 		#endregion
 

@@ -1,23 +1,19 @@
 {
   "version": "1.0.0-*",
-  "testRunner": "nunit",
+  "testRunner": "xunit",
 
   "dependencies": {
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.0"
     },
-
     "NETStandard.Library": "1.6.0",
-
     "PlayGen.SUGAR.Data.EntityFramework": "1.0.0-*",
     "PlayGen.SUGAR.Data.Model": "1.0.0-*",
     "PlayGen.SUGAR.GameData": "1.0.0-*",
     "PlayGen.SUGAR.Common": "1.0.0-*",
-
-    "dotnet-test-nunit": "3.4.0-beta-3",
-    "NUnit": "3.5.0",
-    "NUnit3TestAdapter": "3.5.1"
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "xunit": "2.1.0"
   },
 
   "frameworks": {

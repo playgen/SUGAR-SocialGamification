@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 using PlayGen.SUGAR.Contracts;
-using NUnit.Framework;
+using Xunit;
 using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.IntegrationTests
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		#endregion
 
 		#region Tests
-		[Test]
+		[Fact]
 		public void CanCreateGroup()
 		{
 			var groupRequest = new ActorRequest
@@ -51,11 +51,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var response = _groupClient.Create(groupRequest);
 
-			Assert.AreEqual(groupRequest.Name, response.Name);
+			Assert.Equal(groupRequest.Name, response.Name);
 			Assert.True(response.Id > 0);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateDuplicateGroup()
 		{
 			var groupRequest = new ActorRequest
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _groupClient.Create(groupRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateGroupWithNoName()
 		{
 			var groupRequest = new ActorRequest { };
@@ -76,7 +76,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _groupClient.Create(groupRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetGroupsByName()
 		{
 			var groupRequestOne = new ActorRequest
@@ -95,24 +95,24 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var getGroups = _groupClient.Get("CanGetGroupsByName");
 
-			Assert.AreEqual(2, getGroups.Count());
+			Assert.Equal(2, getGroups.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void CannotGetNotExistingGroupByName()
 		{
 			var getGroups = _groupClient.Get("CannotGetNotExistingGroupByName");
 
-			Assert.IsEmpty(getGroups);
+			Assert.Empty(getGroups);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotGetGroupByEmptyName()
 		{
 			Assert.Throws<ClientException>(() => _groupClient.Get(""));
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetGroupById()
 		{
 			var groupRequest = new ActorRequest
@@ -124,11 +124,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var getGroup = _groupClient.Get(response.Id);
 
-			Assert.AreEqual(response.Name, getGroup.Name);
-			Assert.AreEqual(groupRequest.Name, getGroup.Name);
+			Assert.Equal(response.Name, getGroup.Name);
+			Assert.Equal(groupRequest.Name, getGroup.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotGetNotExistingGroupById()
 		{
 			var getGroup = _groupClient.Get(-1);
@@ -136,7 +136,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Null(getGroup);
 		}
 
-		[Test]
+		[Fact]
 		public void CanUpdateGroup()
 		{
 			var groupRequest = new ActorRequest
@@ -155,11 +155,11 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 
 			var getGroup = _groupClient.Get(response.Id);
 
-			Assert.AreNotEqual(response.Name, updateRequest.Name);
-			Assert.AreEqual("CanUpdateGroup Updated", getGroup.Name);
+			Assert.NotEqual(response.Name, updateRequest.Name);
+			Assert.Equal("CanUpdateGroup Updated", getGroup.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateGroupToDuplicateName()
 		{
 			var groupRequestOne = new ActorRequest
@@ -184,7 +184,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _groupClient.Update(responseTwo.Id, updateGroup));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateNonExistingGroup()
 		{
 			var updateGroup = new ActorRequest
@@ -195,7 +195,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _groupClient.Update(-1, updateGroup));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateGroupToNoName()
 		{
 			var groupRequest = new ActorRequest
@@ -212,7 +212,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _groupClient.Update(response.Id, updateRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CanDeleteGroup()
 		{
 			var groupRequest = new ActorRequest
@@ -233,7 +233,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Null(getGroup);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotDeleteNonExistingGroup()
 		{
 			_groupClient.Delete(-1);

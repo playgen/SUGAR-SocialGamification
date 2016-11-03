@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
-using NUnit.Framework;
+using Xunit;
 using PlayGen.SUGAR.Client.IntegrationTests;
 using PlayGen.SUGAR.WebAPI;
 

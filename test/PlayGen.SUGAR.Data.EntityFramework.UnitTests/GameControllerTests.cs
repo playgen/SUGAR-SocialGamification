@@ -2,7 +2,7 @@
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using NUnit.Framework;
+using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
@@ -17,9 +17,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 		#endregion
 
-
 		#region Tests
-		[Test]
+		[Fact]
 		public void CreateAndGetGame()
 		{
 			var gameName = "CreateGame";
@@ -30,10 +29,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matches = games.Count(g => g.Name == gameName);
 
-			Assert.AreEqual(1, matches);
+			Assert.Equal(1, matches);
 		}
 
-		[Test]
+		[Fact]
 		public void CreateDuplicateGame()
 		{
 			var gameName = "CreateDuplicateGame";
@@ -43,7 +42,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<DuplicateRecordException>(() => CreateGame(gameName));
 		}
 		
-		[Test]
+		[Fact]
 		public void GetMultipleGames()
 		{
 			var gameNames = new[]
@@ -65,18 +64,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matchingGames = games.Select(g => gameNames.Contains(g.Name));
 			
-			Assert.AreEqual(gameNames.Length, matchingGames.Count());
+			Assert.Equal(gameNames.Length, matchingGames.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void GetNonExistingGame()
 		{
 			var games = _gameDbController.Search("GetNonExistingGame");
 
-			Assert.IsEmpty(games);
+			Assert.Empty(games);
 		}
 
-		[Test]
+		[Fact]
 		public void GetGameById()
 		{
 			var newGame = CreateGame("GetGameById");
@@ -86,10 +85,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var game = _gameDbController.Search(id);
 
 			Assert.NotNull(game);
-			Assert.AreEqual(newGame.Name, game.Name);
+			Assert.Equal(newGame.Name, game.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void GetNonExistingGameById()
 		{
 			var game = _gameDbController.Search(-1);
@@ -97,7 +96,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Null(game);
 		}
 
-		[Test]
+		[Fact]
 		public void UpdateGame()
 		{
 			var gameName = "UpdateExistingGame";
@@ -108,7 +107,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matches = games.Count(g => g.Name == gameName);
 
-			Assert.AreEqual(1, matches);
+			Assert.Equal(1, matches);
 
 			var updateGame = new Game
 			{
@@ -120,10 +119,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var updatedGame = _gameDbController.Search(newGame.Id);
 
-			Assert.AreEqual("UpdateExistingGameProof", updatedGame.Name);
+			Assert.Equal("UpdateExistingGameProof", updatedGame.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void UpdateGameToDuplicateName()
 		{
 			var gameName = "UpdateGameToDuplicateName";
@@ -141,7 +140,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<DuplicateRecordException>(() => _gameDbController.Update(updateGame));
 		}
 
-		[Test]
+		[Fact]
 		public void UpdateNonExistingGame()
 		{
 			var game = new Game
@@ -153,7 +152,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<MissingRecordException>(() => _gameDbController.Update(game));
 		}
 
-		[Test]
+		[Fact]
 		public void DeleteExistingGame()
 		{
 			var gameName = "DeleteExistingGame";
@@ -161,16 +160,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var game = CreateGame(gameName);
 
 			var games = _gameDbController.Search(gameName);
-			Assert.AreEqual(games.Count(), 1);
-			Assert.AreEqual(games.ElementAt(0).Name, gameName);
+			Assert.Equal(games.Count(), 1);
+			Assert.Equal(games.ElementAt(0).Name, gameName);
 
 			_gameDbController.Delete(game.Id);
 			games = _gameDbController.Search(gameName);
 
-			Assert.IsEmpty(games);
+			Assert.Empty(games);
 		}
 
-		[Test]
+		[Fact]
 		public void DeleteNonExistingGame()
 		{
 			_gameDbController.Delete(-1);

@@ -1,7 +1,7 @@
 ﻿using System;
 using PlayGen.SUGAR.Contracts;
 using System.Net;
-using NUnit.Framework;
+using Xunit;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Client.UnitTests;
 
@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 		#endregion
 
 		#region Tests
-		[Test]
+		[Fact]
 		public void CanRegisterNewUserAndLogin()
 		{
 			var accountRequest = new AccountRequest
@@ -33,10 +33,10 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var registerResponse = _accountClient.Register(accountRequest);
 
 			Assert.True(registerResponse.User.Id > 0);
-			Assert.AreEqual(accountRequest.Name, registerResponse.User.Name);
+			Assert.Equal(accountRequest.Name, registerResponse.User.Name);
 		}
         /*
-		[Test]
+		[Fact]
 		public void CannotRegisterDuplicate()
 		{
 			var accountRequest = new AccountRequest
@@ -50,14 +50,14 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.Throws<ClientException>(() => _accountClient.Register(accountRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotRegisterInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
 			Assert.Throws<ClientException>(() => _accountClient.Register(accountRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CanLoginValidUser()
 		{
 			var accountRequest = new AccountRequest
@@ -71,10 +71,10 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			var logged = _accountClient.Login(accountRequest);
 
 			Assert.True(logged.User.Id > 0);
-			Assert.AreEqual(accountRequest.Name, logged.User.Name);
+			Assert.Equal(accountRequest.Name, logged.User.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotLoginInvalidUser()
 		{
 			var accountRequest = new AccountRequest();

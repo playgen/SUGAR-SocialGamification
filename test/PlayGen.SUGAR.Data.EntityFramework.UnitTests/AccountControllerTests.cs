@@ -2,11 +2,10 @@
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
-using NUnit.Framework;
+using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-	[TestFixture]
 	public class AccountControllerTests
 	{
 		#region Configuration
@@ -21,7 +20,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Tests
-		[Test]
+		[Fact]
 		public void CreateAndGetAccount()
 		{
 			var name = "CreateAndGetAccount";
@@ -33,10 +32,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matches = accounts.Count(a => a.Name == name);
 
-			Assert.AreEqual(1, matches);
+			Assert.Equal(1, matches);
 		}
 
-		[Test]
+		[Fact]
 		public void CreateDuplicateAccount()
 		{
 			var name = "CreateDuplicateAccount";
@@ -47,7 +46,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			Assert.Throws<DuplicateRecordException>(() => CreateAccount(name, password));
 		}
 
-		[Test]
+		[Fact]
 		public void GetMultipleAccountsByName()
 		{
 			var names = new[]
@@ -69,18 +68,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matchingAccounts = accounts.Select(a => names.Contains(a.Name));
 
-			Assert.AreEqual(names.Length, matchingAccounts.Count());
+			Assert.Equal(names.Length, matchingAccounts.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void GetNonExistingAccounts()
 		{
 			var accounts = _accountDbController.Get(new string[] { "GetNonExsitingAccounts" });
 
-			Assert.IsEmpty(accounts);
+			Assert.Empty(accounts);
 		}
 
-		[Test]
+		[Fact]
 		public void DeleteExistingAccount()
 		{
 			var name = "DeleteExistingAccount";
@@ -89,16 +88,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var account = CreateAccount(name, password);
 
 			var accounts = _accountDbController.Get(new string[] { name });
-			Assert.AreEqual(accounts.Count(), 1);
-			Assert.AreEqual(accounts.ElementAt(0).Name, name);
+			Assert.Equal(accounts.Count(), 1);
+			Assert.Equal(accounts.ElementAt(0).Name, name);
 
 			_accountDbController.Delete(account.Id);
 			accounts = _accountDbController.Get(new string[] { name });
 
-			Assert.IsEmpty(accounts);
+			Assert.Empty(accounts);
 		}
 
-		[Test]
+		[Fact]
 		public void DeleteNonExistingAccount()
 		{
 			Assert.Throws<MissingRecordException>(() => _accountDbController.Delete(-1));

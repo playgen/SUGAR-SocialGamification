@@ -8,8 +8,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
 	public static class TestEnvironment
 	{
-		private static readonly string _dbName = "sugarunittests";
-		private static readonly SUGARContextFactory ContextFactory;
+        public const string ConnectionString = "Server=localhost;Port=3306;Database=sugarunittests;Uid=root;Pwd=t0pSECr3t;Convert Zero Datetime=true;Allow Zero Datetime=true";
+        private static readonly SUGARContextFactory ContextFactory = new SUGARContextFactory(ConnectionString);
 
 		private static AccountController _accountController;
 		private static AchievementController _achievementController;
@@ -48,27 +48,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			=> _userController ?? (_userController = new UserController(ContextFactory));
 		public static  UserRelationshipController UserRelationshipController
 			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(ContextFactory));
-		
-		static TestEnvironment()
-		{
-			var connectionString = GetNameOrConnectionString(_dbName);
-			DeleteDatabase();
-			ContextFactory = new SUGARContextFactory(connectionString);
 
-		}
-
-		private static string GetNameOrConnectionString(string dbName)
-		{
-			return "Server=localhost;" +
-					"Port=3306;" +
-					$"Database={dbName};" +
-					"Uid=root;" +
-					"Pwd=t0pSECr3t;" +
-					"Convert Zero Datetime=true;" +
-					"Allow Zero Datetime=true";
-		}
-
-		public static void DeleteDatabase()
+	    public static void DeleteDatabase()
 		{
 			using (var context = ContextFactory.Create())
 			{
