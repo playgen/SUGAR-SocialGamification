@@ -5,6 +5,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared;
+using CompletionCriteria = PlayGen.SUGAR.Data.Model.CompletionCriteria;
 
 namespace PlayGen.SUGAR.GameData
 {

@@ -18,7 +18,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework
             optionsBuilder.UseMySQL(_connectionString);
 
             var context = new SUGARContext(optionsBuilder.Options);
-            context.Database.EnsureCreated();
+            var newlyCreated = context.Database.EnsureCreated();
+
+            if (newlyCreated)
+            {
+                context.Seed();
+            }
 
             return context;
         }

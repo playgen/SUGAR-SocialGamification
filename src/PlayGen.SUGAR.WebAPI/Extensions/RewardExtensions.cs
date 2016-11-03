@@ -19,26 +19,26 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static List<Contracts.Shared.Reward> ToContractList(this List<Common.Shared.Reward> rewards)
+		public static List<Contracts.Shared.Reward> ToContractList(this List<Data.Model.Reward> rewards)
 		{
 			return rewards.Select(ToContract).ToList();
 		}
 
-		public static Common.Shared.Reward ToModel(this Contracts.Shared.Reward reward)
+		public static Data.Model.Reward ToModel(this Contracts.Shared.Reward reward)
 		{
 			if (reward == null)
 			{
 				return null;
 			}
-			return new Common.Shared.Reward
-			{
+			return new Data.Model.Reward
+            {
 				Key = reward.Key,
 				DataType = reward.DataType,
 				Value = reward.Value,
 			};
 		}
 
-		public static List<Common.Shared.Reward> ToModelList(this List<Contracts.Shared.Reward> rewards)
+		public static List<Data.Model.Reward> ToModelList(this List<Contracts.Shared.Reward> rewards)
 		{
 			return rewards.Select(ToModel).ToList();
 		}

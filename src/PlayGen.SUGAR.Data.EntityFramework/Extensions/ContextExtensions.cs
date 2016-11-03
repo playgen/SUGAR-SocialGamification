@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
-	public static class SUGARContextExtensions
+	public static class ContextExtensions
 	{
 		public static void HandleDetatchedGame(this SUGARContext context, int? gameId)
 		{

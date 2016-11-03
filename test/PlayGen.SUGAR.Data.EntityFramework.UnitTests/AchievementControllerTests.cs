@@ -162,8 +162,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = achievementName,
 				GameId = -1,
 				ActorType = ActorType.User,
-				CompletionCriterias = new List<CompletionCriteria>(),
-				Rewards = new List<Reward>()
+				CompletionCriterias = new List<Model.CompletionCriteria>(),
+				Rewards = new List<Model.Reward>()
 			};
 
 			Assert.Throws<MissingRecordException>(() => _achievementDbController.Update(achievement));
@@ -211,15 +211,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = name,
 				GameId = gameId.Value,
 				ActorType = ActorType.User,
-				CompletionCriterias = new List<CompletionCriteria>(),
-				Rewards = new List<Reward>()
+				CompletionCriterias = new List<Model.CompletionCriteria>(),
+				Rewards = new List<Model.Reward>()
 			};
 			if (addCriteria)
 			{
-				var criteria = new List<CompletionCriteria>
+				var criteria = new List<Model.CompletionCriteria>
 				{
-					new CompletionCriteria
-					{
+					new Model.CompletionCriteria
+                    {
 						Key = "CreateAchievementKey",
 						DataType = GameDataType.String,
 						CriteriaQueryType = CriteriaQueryType.Any,
