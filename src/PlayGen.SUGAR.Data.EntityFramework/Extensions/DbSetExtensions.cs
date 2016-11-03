@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
@@ -18,8 +19,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
         /// <returns></returns>
         public static TEntity Find<TEntity>(this DbSet<TEntity> set, params object[] keyValues) where TEntity : class
         {
-            var context = set.GetService<DbContext>();
-
+            var context = (SUGARContext) set.GetType().GetField("_context", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(set);
+                
             var entityType = context.Model.FindEntityType(typeof(TEntity));
             var key = entityType.FindPrimaryKey();
 
