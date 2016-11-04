@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Client.Extensions;
-using PlayGen.SUGAR.Contracts;
-using PlayGen.SUGAR.Contracts.Controllers;
+using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client
 {
 	/// <summary>
 	/// Controller that facilitates User to User relationship specific operations.
 	/// </summary>
-	public class UserFriendClient : ClientBase, IUserFriendController
+	public class UserFriendClient : ClientBase
 	{
 		public UserFriendClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
 			: base(baseAddress, credentials, httpHandler)

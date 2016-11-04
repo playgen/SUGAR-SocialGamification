@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net;
-//using System.Net;
-using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
 {

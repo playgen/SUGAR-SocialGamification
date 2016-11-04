@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using PlayGen.SUGAR.Client.Extensions;
-using PlayGen.SUGAR.Contracts;
-using PlayGen.SUGAR.Contracts.Controllers;
+using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client
 {
@@ -37,7 +36,7 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Create or Updates a Resource record.
 		/// </summary>
-		/// <param name="data"><see cref="PlayGen.SUGAR.Contracts.ResourceAddRequest"/> object that holds the details of the new Resource.</param>
+		/// <param name="data"><see cref="ResourceAddRequest"/> object that holds the details of the new Resource.</param>
 		/// <returns>A <see cref="ResourceResponse"/> containing the new Resource details.</returns>
 		public ResourceResponse AddOrUpdate(ResourceAddRequest data)
 		{

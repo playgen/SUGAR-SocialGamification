@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Client.Extensions;
-using PlayGen.SUGAR.Contracts;
-using PlayGen.SUGAR.Contracts.Controllers;
+using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client
 {

@@ -1,15 +1,29 @@
 {
   "version": "1.0.0-*",
+
   "dependencies": {
     "NETStandard.Library": "1.6.0",
-    "PlayGen.Json.Net.Unity3D": "9.0.1",
-    "PlayGen.SUGAR.Contracts": "1.0.0-*"
+    "PlayGen.Json.Net.Unity3D": "9.0.1"
   },
+  
   "frameworks": {
     "net35": {
     }
+  },
+
+  "buildOptions": {
+    "compile": {
+      "include": [
+        "../PlayGen.SUGAR.Common.Shared/*.cs",
+        "../PlayGen.SUGAR.Common.Shared/**/*.cs",
+        "../PlayGen.SUGAR.Contracts.Shared/*.cs",
+        "../PlayGen.SUGAR.Contracts.Shared/**/*.cs"
+      ]
     },
-    "scripts": {
-      "postcompile": [ "xcopy /I /Y \"%compile:OutputDir%\\*\" \"%project:Directory%\\..\\..\\..\\Client\\Assets\\Plugins\\SUGAR\"" ]
-    }
+    "xmlDoc": true
+  },
+
+  "scripts": {
+    "postcompile": [ "xcopy /I /Y \"%compile:OutputDir%\\*\" \"%project:Directory%\\..\\..\\..\\Client\\Assets\\Plugins\\SUGAR\"" ]
   }
+}
