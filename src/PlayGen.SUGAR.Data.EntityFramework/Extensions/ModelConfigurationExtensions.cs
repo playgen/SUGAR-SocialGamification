@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.Model;
+using CompletionCriteria = PlayGen.SUGAR.Data.Model.CompletionCriteria;
 
 namespace PlayGen.SUGAR.Data.EntityFramework
 {
@@ -13,7 +16,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
             builder.Entity<Group>()
                 .ToTable("Groups");
-            
+
             // Need to be abbreviated otherwise foreign key constraint names are too long.
             builder.Entity<Achievement>()
                 .ToTable("Achvmnt");
@@ -79,7 +82,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
             // Multiple columns
             builder.Entity<GameData>()
                 .HasIndex(g => new { g.Key, g.GameId, g.Category, g.ActorId, g.DataType });
-        
+
             // Unique
             builder.Entity<Game>()
                 .HasIndex(g => g.Name)
@@ -101,9 +104,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework
         internal static void ConfigureHierarchy(this ModelBuilder builder)
         {
             builder.Entity<Actor>()
-               .HasDiscriminator<string>("discriminator")
-               .HasValue<Group>("group")
-               .HasValue<User>("user");
+               .HasDiscriminator<ActorType>("Discriminator")
+               .HasValue<Group>(ActorType.Group)
+               .HasValue<User>(ActorType.User);
         }
 
         internal static void ConfigureProperties(this ModelBuilder builder)

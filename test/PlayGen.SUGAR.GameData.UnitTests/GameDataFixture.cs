@@ -107,7 +107,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var user = new User
 			{
-				Name = name,
+				Name = "User_" + name,
 			};
 			_userController.Create(user);
 
@@ -118,7 +118,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var group = new Group
 			{
-				Name = name,
+				Name = "Group_" + name,
 			};
 			_groupController.Create(group);
 
@@ -129,7 +129,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 		{
 			var game = new Game
 			{
-				Name = name,
+				Name = "Game_" + name,
 			};
 			_gameController.Create(game);
 

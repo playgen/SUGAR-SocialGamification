@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
@@ -22,18 +21,13 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 	    private readonly GroupController _groupController = ControllerLocator.GroupController;
         private readonly GroupRelationshipController _groupRelationshipController = ControllerLocator.GroupRelationshipController;
 
-        private readonly GameData.LeaderboardController _leaderboardEvaulationController;
-
-        public LeaderboardControllerTests()
-		{
-			_leaderboardEvaulationController = new LeaderboardController(
+        private readonly GameData.LeaderboardController _leaderboardEvaulationController = new LeaderboardController(
                 ControllerLocator.GameDataController,
                 ControllerLocator.GroupRelationshipController,
                 ControllerLocator.UserRelationshipController,
                 ControllerLocator.ActorController,
                 ControllerLocator.GroupController,
                 ControllerLocator.UserController);
-        }
 		#endregion
 
 		#region Tests
