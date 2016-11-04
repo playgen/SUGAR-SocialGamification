@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.GameData;
 using Xunit;
 using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.GameData;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-    [Collection("Project Fixture Collection")]
-    public class ResourceControllerTests
+	[Collection("Project Fixture Collection")]
+	public class ResourceControllerTests
 	{
 		#region Configuration
 		private readonly ResourceController _resourceController = ControllerLocator.ResourceController;

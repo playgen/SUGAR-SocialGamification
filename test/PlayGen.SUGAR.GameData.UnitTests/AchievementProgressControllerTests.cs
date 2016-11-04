@@ -10,7 +10,8 @@ using Xunit;
 
 namespace PlayGen.SUGAR.GameData.UnitTests
 {
-	public class AchievementProgressControllerTests
+    [Collection("Game Data Fixture Collection")]
+    public class AchievementProgressControllerTests
 	{
 		/*
 		#region Configuration

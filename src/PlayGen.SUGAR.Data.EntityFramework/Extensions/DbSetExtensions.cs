@@ -11,7 +11,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
     {
         /// <summary>
         /// Currently Find is missing from the Entity framework Core API.
-        /// Fix taken from: http://myview.rahulnivi.net/dbset-find-api-missing-entity-framework-core-final-rc1-version/
+        /// Fix taken from: http://stackoverflow.com/questions/29030472/dbset-doesnt-have-a-find-method-in-ef7
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="set"></param>
@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
         public static TEntity Find<TEntity>(this DbSet<TEntity> set, params object[] keyValues) where TEntity : class
         {
             var context = (SUGARContext) set.GetType().GetField("_context", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(set);
-                
+
             var entityType = context.Model.FindEntityType(typeof(TEntity));
             var key = entityType.FindPrimaryKey();
 
@@ -29,7 +29,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
             var i = 0;
             foreach (var property in key.Properties)
             {
-                entries = Enumerable.Where(entries, e => e.Property(property.Name).CurrentValue == keyValues[i]);
+                var i1 = i;
+                entries = entries.Where(e => e.Property(property.Name).CurrentValue == keyValues[i1]);
                 i++;
             }
 
@@ -40,15 +41,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 return entry.Entity;
             }
 
-            // TODO: Build the real LINQ Expression
-            // set.Where(x => x.Id == keyValues[0]);
             var parameter = Expression.Parameter(typeof(TEntity), "x");
-            var query = Queryable.Where(set, (Expression<Func<TEntity, bool>>)
-                Expression.Lambda(
-                    Expression.Equal(
-                        Expression.Property(parameter, "Id"),
-                        Expression.Constant(keyValues[0])),
-                    parameter));
+            var query = set.AsQueryable();
+            i = 0;
+            foreach (var property in key.Properties)
+            {
+                var i1 = i;
+                query = query.Where((Expression<Func<TEntity, bool>>)
+                 Expression.Lambda(
+                     Expression.Equal(
+                         Expression.Property(parameter, property.Name),
+                         Expression.Constant(keyValues[i1])),
+                     parameter));
+                i++;
+            }
 
             // Look in the database
             return query.FirstOrDefault();
