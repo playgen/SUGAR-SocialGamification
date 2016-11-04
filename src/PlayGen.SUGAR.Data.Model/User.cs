@@ -18,7 +18,6 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public virtual List<UserToUserRelationshipRequest> RequestAcceptors { get; set; }
 
-
 		public override Common.Shared.ActorType ActorType => Common.Shared.ActorType.User;
 	}
 }

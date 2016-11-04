@@ -5,7 +5,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
     public class ProjectFixture : IDisposable
     {
-        public const string ConnectionString = "Server=localhost;Port=3306;Database=sugarunittests;Uid=root;Pwd=t0pSECr3t;Convert Zero Datetime=true;Allow Zero Datetime=true";
+        // Pooling needs to be set to false due to a MySQL bug that reports "Nested transactions are not supported"
+        // See: 
+        // http://stackoverflow.com/questions/26320679/asp-net-web-forms-and-mysql-entity-framework-nested-transactions-are-not-suppo
+        // http://bugs.mysql.com/bug.php?id=71502
+        public const string ConnectionString = "Server=localhost;Port=3306;Database=sugarunittests;Uid=root;Pwd=t0pSECr3t;Convert Zero Datetime=true;Allow Zero Datetime=true;Pooling=false";
         public static readonly SUGARContextFactory ContextFactory = new SUGARContextFactory(ConnectionString);
 
         public ProjectFixture()
