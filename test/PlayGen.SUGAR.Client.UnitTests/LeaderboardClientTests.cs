@@ -2,7 +2,7 @@
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
-using Xunit;
+using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		#endregion
 
 		#region Tests
-		[Fact]
+		[Test]
 		public void CanCreateAndGetGlobalLeaderboard()
 		{
 			var createRequest = new LeaderboardRequest
@@ -65,24 +65,24 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var createResponse = _leaderboardClient.Create(createRequest);
 			var getResponse = _leaderboardClient.GetGlobal(createRequest.Token);
 
-			Assert.Equal(createRequest.Token, createResponse.Token);
-			Assert.Equal(createRequest.Name, createResponse.Name);
-			Assert.Equal(createRequest.Key, createResponse.Key);
-			Assert.Equal(createRequest.ActorType, createResponse.ActorType);
-			Assert.Equal(createRequest.GameDataType, createResponse.GameDataType);
-			Assert.Equal(createRequest.CriteriaScope, createResponse.CriteriaScope);
-			Assert.Equal(createRequest.LeaderboardType, createResponse.LeaderboardType);
+			Assert.AreEqual(createRequest.Token, createResponse.Token);
+			Assert.AreEqual(createRequest.Name, createResponse.Name);
+			Assert.AreEqual(createRequest.Key, createResponse.Key);
+			Assert.AreEqual(createRequest.ActorType, createResponse.ActorType);
+			Assert.AreEqual(createRequest.GameDataType, createResponse.GameDataType);
+			Assert.AreEqual(createRequest.CriteriaScope, createResponse.CriteriaScope);
+			Assert.AreEqual(createRequest.LeaderboardType, createResponse.LeaderboardType);
 
-			Assert.Equal(createRequest.Token, getResponse.Token);
-			Assert.Equal(createRequest.Name, getResponse.Name);
-			Assert.Equal(createRequest.Key, getResponse.Key);
-			Assert.Equal(createRequest.ActorType, getResponse.ActorType);
-			Assert.Equal(createRequest.GameDataType, getResponse.GameDataType);
-			Assert.Equal(createRequest.CriteriaScope, getResponse.CriteriaScope);
-			Assert.Equal(createRequest.LeaderboardType, getResponse.LeaderboardType);
+			Assert.AreEqual(createRequest.Token, getResponse.Token);
+			Assert.AreEqual(createRequest.Name, getResponse.Name);
+			Assert.AreEqual(createRequest.Key, getResponse.Key);
+			Assert.AreEqual(createRequest.ActorType, getResponse.ActorType);
+			Assert.AreEqual(createRequest.GameDataType, getResponse.GameDataType);
+			Assert.AreEqual(createRequest.CriteriaScope, getResponse.CriteriaScope);
+			Assert.AreEqual(createRequest.LeaderboardType, getResponse.LeaderboardType);
 		}
 
-		[Fact]
+		[Test]
 		public void CanCreateAndGetGameLeaderboard()
 		{
 			var game = GetOrCreateGame("Create");
@@ -102,26 +102,26 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var createResponse = _leaderboardClient.Create(createRequest);
 			var getResponse = _leaderboardClient.Get(createRequest.Token, createRequest.GameId.Value);
 
-			Assert.Equal(createRequest.Token, createResponse.Token);
-			Assert.Equal(createRequest.GameId, createResponse.GameId);
-			Assert.Equal(createRequest.Name, createResponse.Name);
-			Assert.Equal(createRequest.Key, createResponse.Key);
-			Assert.Equal(createRequest.ActorType, createResponse.ActorType);
-			Assert.Equal(createRequest.GameDataType, createResponse.GameDataType);
-			Assert.Equal(createRequest.CriteriaScope, createResponse.CriteriaScope);
-			Assert.Equal(createRequest.LeaderboardType, createResponse.LeaderboardType);
+			Assert.AreEqual(createRequest.Token, createResponse.Token);
+			Assert.AreEqual(createRequest.GameId, createResponse.GameId);
+			Assert.AreEqual(createRequest.Name, createResponse.Name);
+			Assert.AreEqual(createRequest.Key, createResponse.Key);
+			Assert.AreEqual(createRequest.ActorType, createResponse.ActorType);
+			Assert.AreEqual(createRequest.GameDataType, createResponse.GameDataType);
+			Assert.AreEqual(createRequest.CriteriaScope, createResponse.CriteriaScope);
+			Assert.AreEqual(createRequest.LeaderboardType, createResponse.LeaderboardType);
 
-			Assert.Equal(createRequest.Token, getResponse.Token);
-			Assert.Equal(createRequest.GameId, getResponse.GameId);
-			Assert.Equal(createRequest.Name, getResponse.Name);
-			Assert.Equal(createRequest.Key, getResponse.Key);
-			Assert.Equal(createRequest.ActorType, getResponse.ActorType);
-			Assert.Equal(createRequest.GameDataType, getResponse.GameDataType);
-			Assert.Equal(createRequest.CriteriaScope, getResponse.CriteriaScope);
-			Assert.Equal(createRequest.LeaderboardType, getResponse.LeaderboardType);
+			Assert.AreEqual(createRequest.Token, getResponse.Token);
+			Assert.AreEqual(createRequest.GameId, getResponse.GameId);
+			Assert.AreEqual(createRequest.Name, getResponse.Name);
+			Assert.AreEqual(createRequest.Key, getResponse.Key);
+			Assert.AreEqual(createRequest.ActorType, getResponse.ActorType);
+			Assert.AreEqual(createRequest.GameDataType, getResponse.GameDataType);
+			Assert.AreEqual(createRequest.CriteriaScope, getResponse.CriteriaScope);
+			Assert.AreEqual(createRequest.LeaderboardType, getResponse.LeaderboardType);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateDuplicateLeaderboard()
 		{
 			var game = GetOrCreateGame("Create");
@@ -143,7 +143,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateLeaderboardWithoutToken()
 		{
 			var game = GetOrCreateGame("Create");
@@ -162,7 +162,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateLeaderboardWithoutName()
 		{
 			var game = GetOrCreateGame("Create");
@@ -181,7 +181,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateLeaderboardWithoutKey()
 		{
 			var game = GetOrCreateGame("Create");
@@ -200,7 +200,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateLeaderboardWithEmptyName()
 		{
 			var game = GetOrCreateGame("Create");
@@ -220,7 +220,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateLeaderboardWithEmptyToken()
 		{
 			var game = GetOrCreateGame("Create");
@@ -240,7 +240,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateLeaderboardWithTypeMismatch()
 		{
 			var game = GetOrCreateGame("Create");
@@ -285,7 +285,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetLeaderboardsByGame()
 		{
 			var game = GetOrCreateGame("GameGet");
@@ -316,22 +316,22 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var getResponse = _leaderboardClient.Get(game.Id);
 
-			Assert.Equal(3, getResponse.Count());
+			Assert.AreEqual(3, getResponse.Count());
 
 			var getCheck = getResponse.Select(g => leaderboardNames.Contains(g.Name));
 
-			Assert.Equal(3, getCheck.Count());
+			Assert.AreEqual(3, getCheck.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetLeaderboardsByNotExistingGame()
 		{
 			var getResponse = _leaderboardClient.Get(-1);
 
-			Assert.Empty(getResponse);
+			Assert.IsEmpty(getResponse);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetNotExistingLeaderboard()
 		{
 			var getResponse = _leaderboardClient.Get("CannotGetNotExistingLeaderboard", -1);
@@ -339,7 +339,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Null(getResponse);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetLeaderboardWithEmptyToken()
 		{
 			var game = GetOrCreateGame("Get");
@@ -347,7 +347,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Get("", game.Id));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetNotExistingGlobalLeaderboard()
 		{
 			var getResponse = _leaderboardClient.GetGlobal("CannotGetNotExistingGlobalLeaderboard");
@@ -355,13 +355,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Null(getResponse);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetGlobalLeaderboardWithEmptyToken()
 		{
 			Assert.Throws<ClientException>(() => _leaderboardClient.GetGlobal(""));
 		}
 
-		[Fact]
+		[Test]
 		public void CanUpdateLeaderboard()
 		{
 			var game = GetOrCreateGame("Update");
@@ -382,14 +382,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var getResponse = _leaderboardClient.Get(createRequest.Token, createRequest.GameId.Value);
 
-			Assert.Equal(createRequest.Token, getResponse.Token);
-			Assert.Equal(createRequest.GameId, getResponse.GameId);
-			Assert.Equal(createRequest.Name, getResponse.Name);
-			Assert.Equal(createRequest.Key, getResponse.Key);
-			Assert.Equal(createRequest.ActorType, getResponse.ActorType);
-			Assert.Equal(createRequest.GameDataType, getResponse.GameDataType);
-			Assert.Equal(createRequest.CriteriaScope, getResponse.CriteriaScope);
-			Assert.Equal(createRequest.LeaderboardType, getResponse.LeaderboardType);
+			Assert.AreEqual(createRequest.Token, getResponse.Token);
+			Assert.AreEqual(createRequest.GameId, getResponse.GameId);
+			Assert.AreEqual(createRequest.Name, getResponse.Name);
+			Assert.AreEqual(createRequest.Key, getResponse.Key);
+			Assert.AreEqual(createRequest.ActorType, getResponse.ActorType);
+			Assert.AreEqual(createRequest.GameDataType, getResponse.GameDataType);
+			Assert.AreEqual(createRequest.CriteriaScope, getResponse.CriteriaScope);
+			Assert.AreEqual(createRequest.LeaderboardType, getResponse.LeaderboardType);
 
 			var updateRequest = new LeaderboardRequest
 			{
@@ -407,17 +407,17 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			getResponse = _leaderboardClient.Get(createRequest.Token, createRequest.GameId.Value);
 
-			Assert.Equal(updateRequest.Token, getResponse.Token);
-			Assert.Equal(updateRequest.GameId, getResponse.GameId);
-			Assert.Equal(updateRequest.Name, getResponse.Name);
-			Assert.Equal(updateRequest.Key, getResponse.Key);
-			Assert.Equal(updateRequest.ActorType, getResponse.ActorType);
-			Assert.Equal(updateRequest.GameDataType, getResponse.GameDataType);
-			Assert.Equal(updateRequest.CriteriaScope, getResponse.CriteriaScope);
-			Assert.Equal(updateRequest.LeaderboardType, getResponse.LeaderboardType);
+			Assert.AreEqual(updateRequest.Token, getResponse.Token);
+			Assert.AreEqual(updateRequest.GameId, getResponse.GameId);
+			Assert.AreEqual(updateRequest.Name, getResponse.Name);
+			Assert.AreEqual(updateRequest.Key, getResponse.Key);
+			Assert.AreEqual(updateRequest.ActorType, getResponse.ActorType);
+			Assert.AreEqual(updateRequest.GameDataType, getResponse.GameDataType);
+			Assert.AreEqual(updateRequest.CriteriaScope, getResponse.CriteriaScope);
+			Assert.AreEqual(updateRequest.LeaderboardType, getResponse.LeaderboardType);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateToDuplicateLeaderboard()
 		{
 			var game = GetOrCreateGame("Update");
@@ -465,7 +465,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateNotExistingLeaderboard()
 		{
 			var game = GetOrCreateGame("Update");
@@ -485,7 +485,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateLeaderboardWithoutToken()
 		{
 			var game = GetOrCreateGame("Update");
@@ -518,7 +518,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateLeaderboardWithoutName()
 		{
 			var game = GetOrCreateGame("Update");
@@ -551,7 +551,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateLeaderboardWithoutKey()
 		{
 			var game = GetOrCreateGame("Update");
@@ -584,7 +584,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateLeaderboardWithEmptyName()
 		{
 			var game = GetOrCreateGame("Update");
@@ -618,7 +618,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateLeaderboardWithTypeMismatch()
 		{
 			var game = GetOrCreateGame("Update");
@@ -677,7 +677,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CanDeleteGlobalLeaderboard()
 		{
 			var createRequest = new LeaderboardRequest
@@ -703,19 +703,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Null(getResponse);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotDeleteNonExistingGlobalLeaderboard()
 		{
 			_leaderboardClient.DeleteGlobal("CannotDeleteNonExistingGlobalLeaderboard");
 		}
 
-		[Fact]
+		[Test]
 		public void CannotDeleteGlobalLeaderboardByEmptyToken()
 		{
 			Assert.Throws<ClientException>(() => _leaderboardClient.DeleteGlobal(""));
 		}
 
-		[Fact]
+		[Test]
 		public void CanDeleteLeaderboard()
 		{
 			var game = GetOrCreateGame("Delete");
@@ -744,7 +744,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Null(getResponse);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotDeleteNonExistingLeaderboard()
 		{
 			var game = GetOrCreateGame("Delete");
@@ -752,7 +752,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			_leaderboardClient.Delete("CannotDeleteNonExistingLeaderboard", game.Id);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotDeleteLeaderboardByEmptyToken()
 		{
 			var game = GetOrCreateGame("Delete");
@@ -760,7 +760,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Delete("", game.Id));
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetGlobalLeaderboardStandings()
 		{
 			var createRequest = new LeaderboardRequest
@@ -797,11 +797,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var standingsResponse = _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest);
 
-			Assert.Equal(1, standingsResponse.Count());
-			Assert.Equal(user.Name, standingsResponse.First().ActorName);
+			Assert.AreEqual(1, standingsResponse.Count());
+			Assert.AreEqual(user.Name, standingsResponse.First().ActorName);
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetLeaderboardStandings()
 		{
 			var game = GetOrCreateGame("Standings");
@@ -843,11 +843,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var standingsResponse = _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest);
 
-			Assert.Equal(1, standingsResponse.Count());
-			Assert.Equal(user.Name, standingsResponse.First().ActorName);
+			Assert.AreEqual(1, standingsResponse.Count());
+			Assert.AreEqual(user.Name, standingsResponse.First().ActorName);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetNotExistingLeaderboardStandings()
 		{
 			var game = GetOrCreateGame("Standings");
@@ -864,7 +864,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetLeaderboardStandingsWithIncorrectActorType()
 		{
 			var game = GetOrCreateGame("Standings");
@@ -908,7 +908,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetLeaderboardStandingsWithZeroPageLimit()
 		{
 			var game = GetOrCreateGame("Standings");
@@ -939,7 +939,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetNearLeaderboardStandingsWithoutActorId()
 		{
 			var game = GetOrCreateGame("Standings");
@@ -970,7 +970,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetFriendsLeaderboardStandingsWithoutActorId()
 		{
 			var game = GetOrCreateGame("Standings");
@@ -1001,7 +1001,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetGroupMemberLeaderboardStandingsWithoutActorId()
 		{
 			var game = GetOrCreateGame("Standings");
@@ -1032,7 +1032,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType()
 		{
 			var game = GetOrCreateGame("Standings");

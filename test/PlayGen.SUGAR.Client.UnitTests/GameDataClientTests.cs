@@ -2,7 +2,7 @@
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
-using Xunit;
+using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		#endregion
 
 		#region Tests
-		[Fact]
+		[Test]
 		public void CanCreate()
 		{
 			var user = GetOrCreateUser("Create");
@@ -61,14 +61,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = _gameDataClient.Add(gameDataRequest);
 
-			Assert.Equal(gameDataRequest.ActorId, response.ActorId);
-			Assert.Equal(gameDataRequest.GameId, response.GameId);
-			Assert.Equal(gameDataRequest.Key, response.Key);
-			Assert.Equal(gameDataRequest.Value, response.Value);
-			Assert.Equal(gameDataRequest.GameDataType, response.GameDataType);
+			Assert.AreEqual(gameDataRequest.ActorId, response.ActorId);
+			Assert.AreEqual(gameDataRequest.GameId, response.GameId);
+			Assert.AreEqual(gameDataRequest.Key, response.Key);
+			Assert.AreEqual(gameDataRequest.Value, response.Value);
+			Assert.AreEqual(gameDataRequest.GameDataType, response.GameDataType);
 		}
 
-		[Fact]
+		[Test]
 		public void CanCreateWithoutGameId()
 		{
 			var user = GetOrCreateUser("Create");
@@ -83,14 +83,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = _gameDataClient.Add(gameDataRequest);
 
-			Assert.Equal(gameDataRequest.ActorId, response.ActorId);
-			Assert.Equal(gameDataRequest.GameId, response.GameId);
-			Assert.Equal(gameDataRequest.Key, response.Key);
-			Assert.Equal(gameDataRequest.Value, response.Value);
-			Assert.Equal(gameDataRequest.GameDataType, response.GameDataType);
+			Assert.AreEqual(gameDataRequest.ActorId, response.ActorId);
+			Assert.AreEqual(gameDataRequest.GameId, response.GameId);
+			Assert.AreEqual(gameDataRequest.Key, response.Key);
+			Assert.AreEqual(gameDataRequest.Value, response.Value);
+			Assert.AreEqual(gameDataRequest.GameDataType, response.GameDataType);
 		}
 
-		[Fact]
+		[Test]
 		public void CanCreateWithoutActorId()
 		{
 			var game = GetOrCreateGame("Create");
@@ -105,14 +105,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = _gameDataClient.Add(gameDataRequest);
 
-			Assert.Equal(gameDataRequest.ActorId, response.ActorId);
-			Assert.Equal(gameDataRequest.GameId, response.GameId);
-			Assert.Equal(gameDataRequest.Key, response.Key);
-			Assert.Equal(gameDataRequest.Value, response.Value);
-			Assert.Equal(gameDataRequest.GameDataType, response.GameDataType);
+			Assert.AreEqual(gameDataRequest.ActorId, response.ActorId);
+			Assert.AreEqual(gameDataRequest.GameId, response.GameId);
+			Assert.AreEqual(gameDataRequest.Key, response.Key);
+			Assert.AreEqual(gameDataRequest.Value, response.Value);
+			Assert.AreEqual(gameDataRequest.GameDataType, response.GameDataType);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateWithoutKey()
 		{
 			var user = GetOrCreateUser("Create");
@@ -129,7 +129,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateWithoutValue()
 		{
 			var user = GetOrCreateUser("Create");
@@ -146,7 +146,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateWithMismatchedData()
 		{
 			var user = GetOrCreateUser("Create");
@@ -186,7 +186,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _gameDataClient.Add(gameDataRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetGameData()
 		{
 			var user = GetOrCreateUser("Get");
@@ -205,15 +205,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = _gameDataClient.Get(user.Id, game.Id, new string[] { "CanGetGameData" });
 
-			Assert.Equal(1, get.Count());
-			Assert.Equal(get.First().ActorId, response.ActorId);
-			Assert.Equal(get.First().GameId, response.GameId);
-			Assert.Equal(get.First().Key, response.Key);
-			Assert.Equal(get.First().Value, response.Value);
-			Assert.Equal(get.First().GameDataType, response.GameDataType);
+			Assert.AreEqual(1, get.Count());
+			Assert.AreEqual(get.First().ActorId, response.ActorId);
+			Assert.AreEqual(get.First().GameId, response.GameId);
+			Assert.AreEqual(get.First().Key, response.Key);
+			Assert.AreEqual(get.First().Value, response.Value);
+			Assert.AreEqual(get.First().GameDataType, response.GameDataType);
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetGameDataWithoutActorId()
 		{
 			var game = GetOrCreateGame("Get");
@@ -230,15 +230,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = _gameDataClient.Get(null, game.Id, new string[] { "CanGetGameDataWithoutActorId" });
 
-			Assert.Equal(1, get.Count());
-			Assert.Equal(get.First().ActorId, response.ActorId);
-			Assert.Equal(get.First().GameId, response.GameId);
-			Assert.Equal(get.First().Key, response.Key);
-			Assert.Equal(get.First().Value, response.Value);
-			Assert.Equal(get.First().GameDataType, response.GameDataType);
+			Assert.AreEqual(1, get.Count());
+			Assert.AreEqual(get.First().ActorId, response.ActorId);
+			Assert.AreEqual(get.First().GameId, response.GameId);
+			Assert.AreEqual(get.First().Key, response.Key);
+			Assert.AreEqual(get.First().Value, response.Value);
+			Assert.AreEqual(get.First().GameDataType, response.GameDataType);
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetGameDataWithoutGameId()
 		{
 			var user = GetOrCreateUser("Get");
@@ -255,15 +255,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = _gameDataClient.Get(user.Id, null, new string[] { "CanGetGameDataWithoutGameId" });
 
-			Assert.Equal(1, get.Count());
-			Assert.Equal(get.First().ActorId, response.ActorId);
-			Assert.Equal(get.First().GameId, response.GameId);
-			Assert.Equal(get.First().Key, response.Key);
-			Assert.Equal(get.First().Value, response.Value);
-			Assert.Equal(get.First().GameDataType, response.GameDataType);
+			Assert.AreEqual(1, get.Count());
+			Assert.AreEqual(get.First().ActorId, response.ActorId);
+			Assert.AreEqual(get.First().GameId, response.GameId);
+			Assert.AreEqual(get.First().Key, response.Key);
+			Assert.AreEqual(get.First().Value, response.Value);
+			Assert.AreEqual(get.First().GameDataType, response.GameDataType);
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetGameDataByMultipleKeys()
 		{
 			var user = GetOrCreateUser("Get");
@@ -302,10 +302,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = _gameDataClient.Get(user.Id, game.Id, new string[] { "CanGetGameDatByMultipleKeys1", "CanGetGameDatByMultipleKeys2", "CanGetGameDatByMultipleKeys3" });
 
-			Assert.Equal(3, get.Count());
+			Assert.AreEqual(3, get.Count());
 			foreach (var g in get)
 			{
-				Assert.Equal("Test Value", g.Value);
+				Assert.AreEqual("Test Value", g.Value);
 			}
 		}
 		#endregion

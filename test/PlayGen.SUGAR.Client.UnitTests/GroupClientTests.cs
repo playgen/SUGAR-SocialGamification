@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts.Shared;
-using Xunit;
+using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		#endregion
 
 		#region Tests
-		[Fact]
+		[Test]
 		public void CanCreateGroup()
 		{
 			var groupRequest = new ActorRequest
@@ -49,11 +49,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = _groupClient.Create(groupRequest);
 
-			Assert.Equal(groupRequest.Name, response.Name);
+			Assert.AreEqual(groupRequest.Name, response.Name);
 			Assert.True(response.Id > 0);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateDuplicateGroup()
 		{
 			var groupRequest = new ActorRequest
@@ -66,7 +66,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupClient.Create(groupRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateGroupWithNoName()
 		{
 			var groupRequest = new ActorRequest { };
@@ -74,7 +74,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupClient.Create(groupRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetGroupsByName()
 		{
 			var groupRequestOne = new ActorRequest
@@ -93,24 +93,24 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var getGroups = _groupClient.Get("CanGetGroupsByName");
 
-			Assert.Equal(2, getGroups.Count());
+			Assert.AreEqual(2, getGroups.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetNotExistingGroupByName()
 		{
 			var getGroups = _groupClient.Get("CannotGetNotExistingGroupByName");
 
-			Assert.Empty(getGroups);
+			Assert.IsEmpty(getGroups);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetGroupByEmptyName()
 		{
 			Assert.Throws<ClientException>(() => _groupClient.Get(""));
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetGroupById()
 		{
 			var groupRequest = new ActorRequest
@@ -122,11 +122,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var getGroup = _groupClient.Get(response.Id);
 
-			Assert.Equal(response.Name, getGroup.Name);
-			Assert.Equal(groupRequest.Name, getGroup.Name);
+			Assert.AreEqual(response.Name, getGroup.Name);
+			Assert.AreEqual(groupRequest.Name, getGroup.Name);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotGetNotExistingGroupById()
 		{
 			var getGroup = _groupClient.Get(-1);
@@ -134,7 +134,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Null(getGroup);
 		}
 
-		[Fact]
+		[Test]
 		public void CanUpdateGroup()
 		{
 			var groupRequest = new ActorRequest
@@ -153,11 +153,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var getGroup = _groupClient.Get(response.Id);
 
-			Assert.NotEqual(response.Name, updateRequest.Name);
-			Assert.Equal("CanUpdateGroup Updated", getGroup.Name);
+			Assert.AreNotEqual(response.Name, updateRequest.Name);
+			Assert.AreEqual("CanUpdateGroup Updated", getGroup.Name);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateGroupToDuplicateName()
 		{
 			var groupRequestOne = new ActorRequest
@@ -182,7 +182,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupClient.Update(responseTwo.Id, updateGroup));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateNonExistingGroup()
 		{
 			var updateGroup = new ActorRequest
@@ -193,7 +193,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupClient.Update(-1, updateGroup));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateGroupToNoName()
 		{
 			var groupRequest = new ActorRequest
@@ -210,7 +210,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupClient.Update(response.Id, updateRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CanDeleteGroup()
 		{
 			var groupRequest = new ActorRequest
@@ -231,7 +231,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Null(getGroup);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotDeleteNonExistingGroup()
 		{
 			_groupClient.Delete(-1);

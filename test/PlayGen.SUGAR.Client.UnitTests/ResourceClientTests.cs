@@ -2,7 +2,7 @@
 using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts.Shared;
-using Xunit;
+using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		#endregion
 
 		#region Tests
-		[Fact]
+		[Test]
 		public void CanCreate()
 		{
 			var user = GetOrCreateUser("Create");
@@ -60,11 +60,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = _resourceClient.AddOrUpdate(resourceRequest);
 
-			Assert.Equal(resourceRequest.Key, response.Key);
-			Assert.Equal(resourceRequest.Quantity, response.Quantity);
+			Assert.AreEqual(resourceRequest.Key, response.Key);
+			Assert.AreEqual(resourceRequest.Quantity, response.Quantity);
 		}
 
-		[Fact]
+		[Test]
 		public void CanCreateWithoutGameId()
 		{
 			var user = GetOrCreateUser("Create");
@@ -78,11 +78,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = _resourceClient.AddOrUpdate(resourceRequest);
 
-			Assert.Equal(resourceRequest.Key, response.Key);
-			Assert.Equal(resourceRequest.Quantity, response.Quantity);
+			Assert.AreEqual(resourceRequest.Key, response.Key);
+			Assert.AreEqual(resourceRequest.Quantity, response.Quantity);
 		}
 
-		[Fact]
+		[Test]
 		public void CanCreateWithoutActorId()
 		{
 			var game = GetOrCreateGame("Create");
@@ -96,11 +96,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = _resourceClient.AddOrUpdate(resourceRequest);
 
-			Assert.Equal(resourceRequest.Key, response.Key);
-			Assert.Equal(resourceRequest.Quantity, response.Quantity);
+			Assert.AreEqual(resourceRequest.Key, response.Key);
+			Assert.AreEqual(resourceRequest.Quantity, response.Quantity);
 		}
 
-		[Fact]
+		[Test]
 		public void CanUpdateExisting()
 		{
 			var resourceRequest = new ResourceAddRequest
@@ -126,11 +126,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var updatedResource = _resourceClient.Get(createdResource.GameId, createdResource.ActorId,
 				new[] {createdResource.Key}).Single();
 
-			Assert.Equal(createdQuantity + updatedQuantity, updatedResource.Quantity);
-			Assert.Equal(createdResource.Id, updatedResource.Id);
+			Assert.AreEqual(createdQuantity + updatedQuantity, updatedResource.Quantity);
+			Assert.AreEqual(createdResource.Id, updatedResource.Id);
 		}
 
-		[Fact]
+		[Test]
 		public void CanTransferCreateResource_FromUserToUser()
 		{
 			var fromUser = GetOrCreateUser("From");
@@ -156,14 +156,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Quantity = transferQuantity
 			});
 
-			Assert.Equal(originalQuantity - transferQuantity, transferResponse.FromResource.Quantity);
-			Assert.Equal(transferQuantity, transferResponse.ToResource.Quantity);
-			Assert.Equal(toUser.Id, transferResponse.ToResource.ActorId);
-			Assert.Equal(fromResource.GameId, transferResponse.FromResource.GameId);
-			Assert.Equal(fromResource.GameId, transferResponse.ToResource.GameId);
+			Assert.AreEqual(originalQuantity - transferQuantity, transferResponse.FromResource.Quantity);
+			Assert.AreEqual(transferQuantity, transferResponse.ToResource.Quantity);
+			Assert.AreEqual(toUser.Id, transferResponse.ToResource.ActorId);
+			Assert.AreEqual(fromResource.GameId, transferResponse.FromResource.GameId);
+			Assert.AreEqual(fromResource.GameId, transferResponse.ToResource.GameId);
 		}
 
-		[Fact]
+		[Test]
 		public void CanTransferUpdateResource_FromUserToUser()
 		{
 			var fromUser = GetOrCreateUser("From");
@@ -198,14 +198,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Quantity = transferQuantity
 			});
 
-			Assert.Equal(originalFrmoQuantity - transferQuantity, transferResponse.FromResource.Quantity);
-			Assert.Equal(originalToQuantity + transferQuantity, transferResponse.ToResource.Quantity);
-			Assert.Equal(toUser.Id, transferResponse.ToResource.ActorId);
-			Assert.Equal(fromResource.GameId, transferResponse.FromResource.GameId);
-			Assert.Equal(fromResource.GameId, transferResponse.ToResource.GameId);
+			Assert.AreEqual(originalFrmoQuantity - transferQuantity, transferResponse.FromResource.Quantity);
+			Assert.AreEqual(originalToQuantity + transferQuantity, transferResponse.ToResource.Quantity);
+			Assert.AreEqual(toUser.Id, transferResponse.ToResource.ActorId);
+			Assert.AreEqual(fromResource.GameId, transferResponse.FromResource.GameId);
+			Assert.AreEqual(fromResource.GameId, transferResponse.ToResource.GameId);
 		}
 
-		[Fact]
+		[Test]
 		public void CannotTransferNonExistingResource()
 		{
 			var fromUser = GetOrCreateUser("From");
@@ -222,10 +222,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			}));
 		}
 
-        [Theory]
-		[InlineData(0)]
-		[InlineData(-1)]
-		[InlineData(-2000)]
+		[TestCase(0)]
+		[TestCase(-1)]
+		[TestCase(-2000)]
 		public void CannotTransfer_WithLessThan1Quantity(long transferQuantity)
 		{
 			var fromUser = GetOrCreateUser("From");
@@ -249,7 +248,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			}));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotTransfer_WithOutOfRangeQuantity()
 		{
 			var fromUser = GetOrCreateUser("From");
@@ -275,7 +274,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			}));
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetResource()
 		{
 			var user = GetOrCreateUser("Get");
@@ -293,12 +292,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = _resourceClient.Get(game.Id, user.Id, new string[] { "CanGetResource" });
 
-			Assert.Equal(1, get.Count());
-			Assert.Equal(resourceRequest.Key, get.First().Key);
-			Assert.Equal(resourceRequest.Quantity, get.First().Quantity);
+			Assert.AreEqual(1, get.Count());
+			Assert.AreEqual(resourceRequest.Key, get.First().Key);
+			Assert.AreEqual(resourceRequest.Quantity, get.First().Quantity);
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetResourceWithoutActorId()
 		{
 			var game = GetOrCreateGame("Get");
@@ -314,12 +313,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = _resourceClient.Get(game.Id, null, new string[] { "CanGetResourceWithoutActorId" });
 
-			Assert.Equal(1, get.Count());
-			Assert.Equal(resourceRequest.Key, get.First().Key);
-			Assert.Equal(resourceRequest.Quantity, get.First().Quantity);
+			Assert.AreEqual(1, get.Count());
+			Assert.AreEqual(resourceRequest.Key, get.First().Key);
+			Assert.AreEqual(resourceRequest.Quantity, get.First().Quantity);
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetResourceWithoutGameId()
 		{
 			var user = GetOrCreateUser("Get");
@@ -335,12 +334,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = _resourceClient.Get(null, user.Id, new string[] { "CanGetResourceWithoutGameId" });
 
-			Assert.Equal(1, get.Count());
-			Assert.Equal(resourceRequest.Key, get.First().Key);
-			Assert.Equal(resourceRequest.Quantity, get.First().Quantity);
+			Assert.AreEqual(1, get.Count());
+			Assert.AreEqual(resourceRequest.Key, get.First().Key);
+			Assert.AreEqual(resourceRequest.Quantity, get.First().Quantity);
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetResourceByMultipleKeys()
 		{
 			var user = GetOrCreateUser("Get");
@@ -376,10 +375,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = _resourceClient.Get(game.Id, user.Id, new string[] { "CanGetResourceByMultipleKeys1", "CanGetResourceByMultipleKeys2", "CanGetResourceByMultipleKeys3" });
 
-			Assert.Equal(3, get.Count());
+			Assert.AreEqual(3, get.Count());
 			foreach (var r in get)
 			{
-				Assert.Equal(100, r.Quantity);
+				Assert.AreEqual(100, r.Quantity);
 			}
 		}
 		#endregion

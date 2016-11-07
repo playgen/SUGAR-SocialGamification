@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts.Shared;
-using Xunit;
+using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 		#region Tests
 
-		[Fact]
+		[Test]
 		public void CanCreateRequest()
 		{
 			var requestor = GetOrCreateUser("CanCreateRequest");
@@ -60,19 +60,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var relationshipResponse = _groupMemberClient.CreateMemberRequest(relationshipRequest);
 
-			Assert.Equal(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
-			Assert.Equal(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
+			Assert.AreEqual(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
+			Assert.AreEqual(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
 
 			var sent = _groupMemberClient.GetSentRequests(requestor.Id);
 
-			Assert.Equal(1, sent.Count());
+			Assert.AreEqual(1, sent.Count());
 
 			var received = _groupMemberClient.GetMemberRequests(acceptor.Id);
 
-			Assert.Equal(1, received.Count());
+			Assert.AreEqual(1, received.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void CanCreateAutoAcceptedRequest()
 		{
 			var requestor = GetOrCreateUser("CanCreateAutoAcceptedRequest");
@@ -87,19 +87,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var relationshipResponse = _groupMemberClient.CreateMemberRequest(relationshipRequest);
 
-			Assert.Equal(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
-			Assert.Equal(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
+			Assert.AreEqual(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
+			Assert.AreEqual(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
 
 			var sent = _groupMemberClient.GetUserGroups(requestor.Id);
 
-			Assert.Equal(1, sent.Count());
+			Assert.AreEqual(1, sent.Count());
 
 			var received = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.Equal(1, received.Count());
+			Assert.AreEqual(1, received.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateDuplicateRequest()
 		{
 			var requestor = GetOrCreateUser("CannotCreateDuplicateRequest");
@@ -116,7 +116,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupMemberClient.CreateMemberRequest(relationshipRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateDuplicateRequestOfAccepted()
 		{
 			var requestor = GetOrCreateUser("DuplicateRequestOfAccepted");
@@ -136,7 +136,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupMemberClient.CreateMemberRequest(relationshipRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateDuplicateAutoAcceptedRequest()
 		{
 			var requestor = GetOrCreateUser("DuplicateAutoAcceptedRequest");
@@ -155,7 +155,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupMemberClient.CreateMemberRequest(relationshipRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateRequestWithNonExistingUser()
 		{
 			var acceptor = GetOrCreateGroup("CannotCreateRequestWithNonExistingUser");
@@ -169,7 +169,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupMemberClient.CreateMemberRequest(relationshipRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotCreateRequestWithNonExistingGroup()
 		{
 			var requestor = GetOrCreateUser("RequestWithNonExistingGroup");
@@ -183,7 +183,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupMemberClient.CreateMemberRequest(relationshipRequest));
 		}
 
-		[Fact]
+		[Test]
 		public void CanAcceptRequest()
 		{
 			var requestor = GetOrCreateUser("CanAcceptRequest");
@@ -199,11 +199,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var sent = _groupMemberClient.GetSentRequests(requestor.Id);
 
-			Assert.Equal(1, sent.Count());
+			Assert.AreEqual(1, sent.Count());
 
 			var received = _groupMemberClient.GetMemberRequests(acceptor.Id);
 
-			Assert.Equal(1, received.Count());
+			Assert.AreEqual(1, received.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
 			{
@@ -216,22 +216,22 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			sent = _groupMemberClient.GetSentRequests(requestor.Id);
 
-			Assert.Equal(0, sent.Count());
+			Assert.AreEqual(0, sent.Count());
 
 			received = _groupMemberClient.GetMemberRequests(acceptor.Id);
 
-			Assert.Equal(0, received.Count());
+			Assert.AreEqual(0, received.Count());
 
 			sent = _groupMemberClient.GetUserGroups(requestor.Id);
 
-			Assert.Equal(1, sent.Count());
+			Assert.AreEqual(1, sent.Count());
 
 			received = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.Equal(1, received.Count());
+			Assert.AreEqual(1, received.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void CanRejectRequest()
 		{
 			var requestor = GetOrCreateUser("CanRejectRequest");
@@ -247,11 +247,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var sent = _groupMemberClient.GetSentRequests(requestor.Id);
 
-			Assert.Equal(1, sent.Count());
+			Assert.AreEqual(1, sent.Count());
 
 			var received = _groupMemberClient.GetMemberRequests(acceptor.Id);
 
-			Assert.Equal(1, received.Count());
+			Assert.AreEqual(1, received.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
 			{
@@ -264,22 +264,22 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			sent = _groupMemberClient.GetSentRequests(requestor.Id);
 
-			Assert.Equal(0, sent.Count());
+			Assert.AreEqual(0, sent.Count());
 
 			received = _groupMemberClient.GetMemberRequests(acceptor.Id);
 
-			Assert.Equal(0, received.Count());
+			Assert.AreEqual(0, received.Count());
 
 			sent = _groupMemberClient.GetUserGroups(requestor.Id);
 
-			Assert.Equal(0, sent.Count());
+			Assert.AreEqual(0, sent.Count());
 
 			received = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.Equal(0, received.Count());
+			Assert.AreEqual(0, received.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateAlreadyAcceptedRequest()
 		{
 			var requestor = GetOrCreateUser("CannotUpdateAlreadyAcceptedRequest");
@@ -304,7 +304,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupMemberClient.UpdateMemberRequest(relationshipStatusUpdate));
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateNotExistingRequest()
 		{
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
@@ -317,7 +317,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupMemberClient.UpdateMemberRequest(relationshipStatusUpdate));
 		}
 
-		[Fact]
+		[Test]
 		public void CanUpdateRelationship()
 		{
 			var requestor = GetOrCreateUser("CanUpdateRelationship");
@@ -334,11 +334,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var sent = _groupMemberClient.GetUserGroups(requestor.Id);
 
-			Assert.Equal(1, sent.Count());
+			Assert.AreEqual(1, sent.Count());
 
 			var received = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.Equal(1, received.Count());
+			Assert.AreEqual(1, received.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
 			{
@@ -350,14 +350,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			sent = _groupMemberClient.GetUserGroups(requestor.Id);
 
-			Assert.Equal(0, sent.Count());
+			Assert.AreEqual(0, sent.Count());
 
 			received = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.Equal(0, received.Count());
+			Assert.AreEqual(0, received.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void CannotUpdateNotExistingRelationship()
 		{
 			var requestor = GetOrCreateUser("CannotUpdateNotExistingRelationship");
@@ -372,7 +372,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _groupMemberClient.UpdateMember(relationshipStatusUpdate));
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetMemberRequests()
 		{
 			var acceptor = GetOrCreateGroup("CanGetMemberRequests");
@@ -396,14 +396,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var requests = _groupMemberClient.GetMemberRequests(acceptor.Id);
 
-			Assert.Equal(5, requests.Count());
+			Assert.AreEqual(5, requests.Count());
 
 			var requestCheck = requests.Select(r => requestorNames.Contains(r.Name));
 
-			Assert.Equal(5, requestCheck.Count());
+			Assert.AreEqual(5, requestCheck.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetSentRequests()
 		{
 			var requestor = GetOrCreateUser("CanGetSentRequests");
@@ -428,14 +428,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var requests = _groupMemberClient.GetSentRequests(requestor.Id);
 
-			Assert.Equal(5, requests.Count());
+			Assert.AreEqual(5, requests.Count());
 
 			var requestCheck = requests.Select(r => acceptorNames.Contains(r.Name));
 
-			Assert.Equal(5, requestCheck.Count());
+			Assert.AreEqual(5, requestCheck.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetMembers()
 		{
 			var acceptor = GetOrCreateGroup("CanGetMembers");
@@ -461,14 +461,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var members = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.Equal(5, members.Count());
+			Assert.AreEqual(5, members.Count());
 
 			var memberCheck = members.Select(r => requestorNames.Contains(r.Name));
 
-			Assert.Equal(5, memberCheck.Count());
+			Assert.AreEqual(5, memberCheck.Count());
 		}
 
-		[Fact]
+		[Test]
 		public void CanGetUserGroups()
 		{
 			var requestor = GetOrCreateUser("CanGetUserGroups");
@@ -494,11 +494,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var userGroups = _groupMemberClient.GetUserGroups(requestor.Id);
 
-			Assert.Equal(5, userGroups.Count());
+			Assert.AreEqual(5, userGroups.Count());
 
 			var groupCheck = userGroups.Select(r => acceptorNames.Contains(r.Name));
 
-			Assert.Equal(5, groupCheck.Count());
+			Assert.AreEqual(5, groupCheck.Count());
 		}
 
 		#endregion
