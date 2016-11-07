@@ -1,12 +1,10 @@
-﻿using System;
-using System.Diagnostics.Eventing.Reader;
-using System.Net;
-using PlayGen.SUGAR.Contracts;
-using Xunit;
-using System.Linq;
+﻿using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Contracts.Shared;
+using Xunit;
 
-namespace PlayGen.SUGAR.Client.IntegrationTests
+namespace PlayGen.SUGAR.Client.UnitTests
 {
 	public class GameDataClientTests
 	{

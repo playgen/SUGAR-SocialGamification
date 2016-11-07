@@ -1,21 +1,17 @@
-﻿using System;
-using PlayGen.SUGAR.Contracts;
-using System.Net;
+﻿using PlayGen.SUGAR.Contracts.Shared;
 using Xunit;
-using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Client.UnitTests;
 
-namespace PlayGen.SUGAR.Client.IntegrationTests
+namespace PlayGen.SUGAR.Client.UnitTests
 {
-    [TestFixture]
-	public class AccountClientTests : ClientTestBase
+	public class AccountClientTests
 	{
 		#region Configuration
 		private readonly AccountClient _accountClient;
 
 		public AccountClientTests()
 		{
-			_accountClient = TestSugarClient.Account;
+			var testSugarClient = new TestSUGARClient();
+			_accountClient = testSugarClient.Account;
 		}
 		#endregion
 
@@ -35,7 +31,7 @@ namespace PlayGen.SUGAR.Client.IntegrationTests
 			Assert.True(registerResponse.User.Id > 0);
 			Assert.Equal(accountRequest.Name, registerResponse.User.Name);
 		}
-        /*
+		/*
 		[Fact]
 		public void CannotRegisterDuplicate()
 		{

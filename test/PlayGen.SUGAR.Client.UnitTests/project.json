@@ -1,19 +1,19 @@
 ﻿{
   "version": "1.0.0-*",
-  "testRunner": "nunit",
+  "testRunner": "xunit",
 
   "dependencies": {
-    "Microsoft.AspNetCore.TestHost": "1.0.0",
+    "dotnet-test-xunit": "1.0.0-rc2-build10025",
     "NETStandard.Library": "1.6.0",
-    "NUnit": "3.5.0",
-    "NUnit3TestAdapter": "3.5.0",
     "PlayGen.SUGAR.Client": "1.0.0-*",
-    "PlayGen.SUGAR.WebAPI": "1.0.0-*"
+    "xunit": "2.1.0"
   },
 
   "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50"
+    "net46": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0.0"
+      }
     }
   }
 }
