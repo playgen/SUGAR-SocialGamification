@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static List<Contracts.Shared.Reward> ToContractList(this List<Data.Model.Reward> rewards)
 		{
-			return rewards.Select(ToContract).ToList();
+			return rewards?.Select(ToContract).ToList();
 		}
 
 		public static Data.Model.Reward ToModel(this Contracts.Shared.Reward reward)
@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static List<Data.Model.Reward> ToModelList(this List<Contracts.Shared.Reward> rewards)
 		{
-			return rewards.Select(ToModel).ToList();
+		    return rewards?.Select(ToModel).ToList();
 		}
 	}
 }
