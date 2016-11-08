@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.GameData
 		protected readonly RewardController RewardController;
 		protected readonly ActorController ActorController;
 
-		public AchievementController(IGameDataController gameDataController, 
+		public AchievementController(GameDataController gameDataController, 
 			GroupRelationshipController groupRelationshipController,
 			UserRelationshipController userRelationshipController,
 			ActorController actorController, 
