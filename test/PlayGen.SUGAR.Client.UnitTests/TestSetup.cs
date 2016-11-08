@@ -1,4 +1,4 @@
-﻿#define DEBUG_SERVER
+﻿//#define DEBUG_SERVER
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -17,7 +17,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         private const string ConnectionString = "";
         public const string BaseAddress = "http://localhost:62312/";
 #else
-        private const string ConnectionString = "Server=localhost;Port=3306;Database=SUGAR;Uid=root;Pwd=t0pSECr3t;Convert Zero Datetime=true;Allow Zero Datetime=true";
+        private const string ConnectionString = "Server=localhost;Port=3306;Database=SUGAR;Uid=root;Pwd=t0pSECr3t;Convert Zero Datetime=true;Allow Zero Datetime=true;Pooling=false;";
         public const string BaseAddress = "http://localhost:5000/";
 #endif
         private Process _process;
