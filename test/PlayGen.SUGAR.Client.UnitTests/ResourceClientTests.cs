@@ -47,8 +47,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreate()
 		{
-			var user = GetOrCreateUser("Create");
-			var game = GetOrCreateGame("Create");
+			var user = Helpers.GetOrCreateUser(_userClient, "Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var resourceRequest = new ResourceAddRequest
 			{
@@ -67,7 +67,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateWithoutGameId()
 		{
-			var user = GetOrCreateUser("Create");
+			var user = Helpers.GetOrCreateUser(_userClient, "Create");
 
 			var resourceRequest = new ResourceAddRequest
 			{
@@ -85,7 +85,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateWithoutActorId()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var resourceRequest = new ResourceAddRequest
 			{
@@ -133,8 +133,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanTransferCreateResource_FromUserToUser()
 		{
-			var fromUser = GetOrCreateUser("From");
-			var toUser = GetOrCreateUser("To");
+			var fromUser = Helpers.GetOrCreateUser(_userClient, "From");
+			var toUser = Helpers.GetOrCreateUser(_userClient, "To");
 
 			var fromResource = _resourceClient.AddOrUpdate(new ResourceAddRequest
 			{
@@ -166,8 +166,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanTransferUpdateResource_FromUserToUser()
 		{
-			var fromUser = GetOrCreateUser("From");
-			var toUser = GetOrCreateUser("To");
+			var fromUser = Helpers.GetOrCreateUser(_userClient, "From");
+			var toUser = Helpers.GetOrCreateUser(_userClient, "To");
 
 			var fromResource = _resourceClient.AddOrUpdate(new ResourceAddRequest
 			{
@@ -208,8 +208,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotTransferNonExistingResource()
 		{
-			var fromUser = GetOrCreateUser("From");
-			var toUser = GetOrCreateUser("To");
+			var fromUser = Helpers.GetOrCreateUser(_userClient, "From");
+			var toUser = Helpers.GetOrCreateUser(_userClient, "To");
 
 			Assert.Throws<ClientException>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
@@ -227,8 +227,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[TestCase(-2000)]
 		public void CannotTransfer_WithLessThan1Quantity(long transferQuantity)
 		{
-			var fromUser = GetOrCreateUser("From");
-			var toUser = GetOrCreateUser("To");
+			var fromUser = Helpers.GetOrCreateUser(_userClient, "From");
+			var toUser = Helpers.GetOrCreateUser(_userClient, "To");
 
 			var fromResource = _resourceClient.AddOrUpdate(new ResourceAddRequest
 			{
@@ -251,8 +251,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotTransfer_WithOutOfRangeQuantity()
 		{
-			var fromUser = GetOrCreateUser("From");
-			var toUser = GetOrCreateUser("To");
+			var fromUser = Helpers.GetOrCreateUser(_userClient, "From");
+			var toUser = Helpers.GetOrCreateUser(_userClient, "To");
 
 			var fromResource = _resourceClient.AddOrUpdate(new ResourceAddRequest
 			{
@@ -262,7 +262,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Quantity = 100,
 			});
 
-			long transferQuantity = fromResource.Quantity*2;
+			var transferQuantity = fromResource.Quantity*2;
 
 			Assert.Throws<ClientException>(() => _resourceClient.Transfer(new ResourceTransferRequest
 			{
@@ -277,8 +277,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetResource()
 		{
-			var user = GetOrCreateUser("Get");
-			var game = GetOrCreateGame("Get");
+			var user = Helpers.GetOrCreateUser(_userClient, "Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			var resourceRequest = new ResourceAddRequest
 			{
@@ -300,7 +300,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetResourceWithoutActorId()
 		{
-			var game = GetOrCreateGame("Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			var resourceRequest = new ResourceAddRequest
 			{
@@ -321,7 +321,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetResourceWithoutGameId()
 		{
-			var user = GetOrCreateUser("Get");
+			var user = Helpers.GetOrCreateUser(_userClient, "Get");
 
 			var resourceRequest = new ResourceAddRequest
 			{
@@ -342,8 +342,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetResourceByMultipleKeys()
 		{
-			var user = GetOrCreateUser("Get");
-			var game = GetOrCreateGame("Get");
+			var user = Helpers.GetOrCreateUser(_userClient, "Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			var resourceRequestOne = new ResourceAddRequest
 			{
@@ -380,50 +380,6 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Assert.AreEqual(100, r.Quantity);
 			}
-		}
-		#endregion
-
-		#region Helpers
-		private ActorResponse GetOrCreateUser(string suffix)
-		{
-			string name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
-			var users = _userClient.Get(name, true);
-			ActorResponse user;
-
-			if (users.Any())
-			{
-				user = users.Single();
-			}
-			else
-			{
-				user = _userClient.Create(new ActorRequest
-				{
-					Name = name
-				});
-			}
-
-			return user;
-		}
-
-		private GameResponse GetOrCreateGame(string suffix)
-		{
-			string name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
-			var games = _gameClient.Get(name);
-			GameResponse game;
-
-			if (games.Any())
-			{
-				game = games.Single();
-			}
-			else
-			{
-				game = _gameClient.Create(new GameRequest
-				{
-					Name = name
-				});
-			}
-
-			return game;
 		}
 		#endregion
 	}

@@ -47,8 +47,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreate()
 		{
-			var user = GetOrCreateUser("Create");
-			var game = GetOrCreateGame("Create");
+			var user = Helpers.GetOrCreateUser(_userClient, "Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var gameDataRequest = new GameDataRequest
 			{
@@ -71,7 +71,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateWithoutGameId()
 		{
-			var user = GetOrCreateUser("Create");
+			var user = Helpers.GetOrCreateUser(_userClient, "Create");
 
 			var gameDataRequest = new GameDataRequest
 			{
@@ -93,7 +93,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateWithoutActorId()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var gameDataRequest = new GameDataRequest
 			{
@@ -115,8 +115,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateWithoutKey()
 		{
-			var user = GetOrCreateUser("Create");
-			var game = GetOrCreateGame("Create");
+			var user = Helpers.GetOrCreateUser(_userClient, "Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var gameDataRequest = new GameDataRequest
 			{
@@ -132,8 +132,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateWithoutValue()
 		{
-			var user = GetOrCreateUser("Create");
-			var game = GetOrCreateGame("Create");
+			var user = Helpers.GetOrCreateUser(_userClient, "Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var gameDataRequest = new GameDataRequest
 			{
@@ -149,8 +149,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateWithMismatchedData()
 		{
-			var user = GetOrCreateUser("Create");
-			var game = GetOrCreateGame("Create");
+			var user = Helpers.GetOrCreateUser(_userClient, "Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var gameDataRequest = new GameDataRequest
 			{
@@ -189,8 +189,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGameData()
 		{
-			var user = GetOrCreateUser("Get");
-			var game = GetOrCreateGame("Get");
+			var user = Helpers.GetOrCreateUser(_userClient, "Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			var gameDataRequest = new GameDataRequest
 			{
@@ -216,7 +216,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGameDataWithoutActorId()
 		{
-			var game = GetOrCreateGame("Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			var gameDataRequest = new GameDataRequest
 			{
@@ -241,7 +241,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGameDataWithoutGameId()
 		{
-			var user = GetOrCreateUser("Get");
+			var user = Helpers.GetOrCreateUser(_userClient, "Get");
 
 			var gameDataRequest = new GameDataRequest
 			{
@@ -266,8 +266,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGameDataByMultipleKeys()
 		{
-			var user = GetOrCreateUser("Get");
-			var game = GetOrCreateGame("Get");
+			var user = Helpers.GetOrCreateUser(_userClient, "Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			var gameDataRequestOne = new GameDataRequest
 			{
@@ -307,49 +307,6 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Assert.AreEqual("Test Value", g.Value);
 			}
-		}
-		#endregion
-		#region Helpers
-		private ActorResponse GetOrCreateUser(string suffix)
-		{
-			string name = "GameDataControllerTests" + suffix ?? $"_{suffix}";
-			var users = _userClient.Get(name, true);
-			ActorResponse user;
-
-			if (users.Any())
-			{
-				user = users.Single();
-			}
-			else
-			{
-				user = _userClient.Create(new ActorRequest
-				{
-					Name = name
-				});
-			}
-
-			return user;
-		}
-
-		private GameResponse GetOrCreateGame(string suffix)
-		{
-			string name = "GameDataControllerTests" + suffix ?? $"_{suffix}";
-			var games = _gameClient.Get(name);
-			GameResponse game;
-
-			if (games.Any())
-			{
-				game = games.Single();
-			}
-			else
-			{
-				game = _gameClient.Create(new GameRequest
-				{
-					Name = name
-				});
-			}
-
-			return game;
 		}
 		#endregion
 	}

@@ -50,8 +50,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateRequest()
 		{
-			var requestor = GetOrCreateUser("CanCreateRequest");
-			var acceptor = GetOrCreateGroup("CanCreateRequest");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "CanCreateRequest");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CanCreateRequest");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -76,8 +76,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateAutoAcceptedRequest()
 		{
-			var requestor = GetOrCreateUser("CanCreateAutoAcceptedRequest");
-			var acceptor = GetOrCreateGroup("CanCreateAutoAcceptedRequest");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "CanCreateAutoAcceptedRequest");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CanCreateAutoAcceptedRequest");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -103,8 +103,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateDuplicateRequest()
 		{
-			var requestor = GetOrCreateUser("CannotCreateDuplicateRequest");
-			var acceptor = GetOrCreateGroup("CannotCreateDuplicateRequest");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "CannotCreateDuplicateRequest");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CannotCreateDuplicateRequest");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -120,8 +120,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateDuplicateRequestOfAccepted()
 		{
-			var requestor = GetOrCreateUser("DuplicateRequestOfAccepted");
-			var acceptor = GetOrCreateGroup("DuplicateRequestOfAccepted");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "DuplicateRequestOfAccepted");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "DuplicateRequestOfAccepted");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -140,8 +140,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateDuplicateAutoAcceptedRequest()
 		{
-			var requestor = GetOrCreateUser("DuplicateAutoAcceptedRequest");
-			var acceptor = GetOrCreateGroup("DuplicateAutoAcceptedRequest");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "DuplicateAutoAcceptedRequest");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "DuplicateAutoAcceptedRequest");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -159,7 +159,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateRequestWithNonExistingUser()
 		{
-			var acceptor = GetOrCreateGroup("CannotCreateRequestWithNonExistingUser");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CCRWNonExistingUser");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -173,7 +173,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateRequestWithNonExistingGroup()
 		{
-			var requestor = GetOrCreateUser("RequestWithNonExistingGroup");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "RequestWithNonExistingGroup");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -187,8 +187,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanAcceptRequest()
 		{
-			var requestor = GetOrCreateUser("CanAcceptRequest");
-			var acceptor = GetOrCreateGroup("CanAcceptRequest");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "CanAcceptRequest");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CanAcceptRequest");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -235,8 +235,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanRejectRequest()
 		{
-			var requestor = GetOrCreateUser("CanRejectRequest");
-			var acceptor = GetOrCreateGroup("CanRejectRequest");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "CanRejectRequest");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CanRejectRequest");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -283,8 +283,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateAlreadyAcceptedRequest()
 		{
-			var requestor = GetOrCreateUser("CannotUpdateAlreadyAcceptedRequest");
-			var acceptor = GetOrCreateGroup("CannotUpdateAlreadyAcceptedRequest");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "CannotUpdateAlreadyAcceptedRequest");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CannotUpdateAlreadyAcceptedRequest");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -321,8 +321,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanUpdateRelationship()
 		{
-			var requestor = GetOrCreateUser("CanUpdateRelationship");
-			var acceptor = GetOrCreateGroup("CanUpdateRelationship");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "CanUpdateRelationship");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CanUpdateRelationship");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -361,8 +361,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateNotExistingRelationship()
 		{
-			var requestor = GetOrCreateUser("CannotUpdateNotExistingRelationship");
-			var acceptor = GetOrCreateGroup("CannotUpdateNotExistingRelationship");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "CannotUpdateNotExistingRelationship");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CannotUpdateNotExistingRelationship");
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
 			{
@@ -376,7 +376,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetMemberRequests()
 		{
-			var acceptor = GetOrCreateGroup("CanGetMemberRequests");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CanGetMemberRequests");
 			var requestorNames = new string[] {
 				"CanGetMemberRequests1",
 				"CanGetMemberRequests2",
@@ -387,7 +387,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			foreach (var name in requestorNames)
 			{
-				var requestor = GetOrCreateUser(name);
+				var requestor = Helpers.GetOrCreateUser(_userClient, name);
 				var relationshipRequest = new RelationshipRequest() {
 					RequestorId = requestor.Id,
 					AcceptorId = acceptor.Id
@@ -407,7 +407,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetSentRequests()
 		{
-			var requestor = GetOrCreateUser("CanGetSentRequests");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "CanGetSentRequests");
 			var acceptorNames = new string[] {
 				"CanGetSentRequests1",
 				"CanGetSentRequests2",
@@ -418,7 +418,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			foreach (var name in acceptorNames)
 			{
-				var acceptor = GetOrCreateGroup(name);
+				var acceptor = Helpers.GetOrCreateGroup(_groupClient, name);
 				var relationshipRequest = new RelationshipRequest()
 				{
 					RequestorId = requestor.Id,
@@ -439,7 +439,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetMembers()
 		{
-			var acceptor = GetOrCreateGroup("CanGetMembers");
+			var acceptor = Helpers.GetOrCreateGroup(_groupClient, "CanGetMembers");
 			var requestorNames = new string[] {
 				"CanGetMembers1",
 				"CanGetMembers2",
@@ -450,7 +450,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			foreach (var name in requestorNames)
 			{
-				var requestor = GetOrCreateUser(name);
+				var requestor = Helpers.GetOrCreateUser(_userClient, name);
 				var relationshipRequest = new RelationshipRequest()
 				{
 					RequestorId = requestor.Id,
@@ -472,7 +472,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetUserGroups()
 		{
-			var requestor = GetOrCreateUser("CanGetUserGroups");
+			var requestor = Helpers.GetOrCreateUser(_userClient, "CanGetUserGroups");
 			var acceptorNames = new string[] {
 				"CanGetUserGroups1",
 				"CanGetUserGroups2",
@@ -483,7 +483,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			foreach (var name in acceptorNames)
 			{
-				var acceptor = GetOrCreateGroup(name);
+				var acceptor = Helpers.GetOrCreateGroup(_groupClient, name);
 				var relationshipRequest = new RelationshipRequest()
 				{
 					RequestorId = requestor.Id,
@@ -503,51 +503,5 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		}
 
 		#endregion
-
-		#region Helpers
-		private ActorResponse GetOrCreateUser(string suffix)
-		{
-			string name = "GroupMemberControllerTests" + suffix ?? $"_{suffix}";
-			var users = _userClient.Get(name, true);
-			ActorResponse user;
-
-			if (users.Any())
-			{
-				user = users.Single();
-			}
-			else
-			{
-				user = _userClient.Create(new ActorRequest
-				{
-					Name = name
-				});
-			}
-
-			return user;
-		}
-
-		private ActorResponse GetOrCreateGroup(string suffix)
-		{
-			string name = "GroupMemberControllerTests" + suffix ?? $"_{suffix}";
-			var groups = _groupClient.Get(name);
-			ActorResponse group;
-
-			if (groups.Any())
-			{
-				group = groups.Single();
-			}
-			else
-			{
-				group = _groupClient.Create(new ActorRequest
-				{
-					Name = name
-				});
-			}
-
-			return group;
-		}
-
-		#endregion
-
 	}
 }

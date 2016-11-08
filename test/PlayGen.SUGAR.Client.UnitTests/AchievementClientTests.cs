@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateAchievement()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateDuplicateAchievement()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -142,7 +142,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateAchievementWithNoName()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -170,7 +170,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateAchievementWithNoToken()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -198,7 +198,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateAchievementWithNoCompletionCriteria()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -214,7 +214,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateAchievementWithNoCompletionCriteriaKey()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -242,7 +242,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateAchievementWithNoCompletionCriteriaValue()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -269,7 +269,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateAchievementWithNoCompletionCriteriaDataTypeMismatch()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -297,7 +297,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetAchievementsByGame()
 		{
-			var game = GetOrCreateGame("GameGet");
+			var game = Helpers.GetOrCreateGame(_gameClient, "GameGet");
 
 			var achievementRequestOne = new AchievementRequest()
 			{
@@ -353,7 +353,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetAchievementByKeys()
 		{
-			var game = GetOrCreateGame("Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -387,7 +387,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNotExistingAchievementByKeys()
 		{
-			var game = GetOrCreateGame("Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			var getAchievement = _achievementClient.GetById("CannotGetNotExistingAchievementByKeys", game.Id);
 
@@ -397,7 +397,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetAchievementByEmptyToken()
 		{
-			var game = GetOrCreateGame("Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			Assert.Throws<ClientException>(() => _achievementClient.GetById("", game.Id));
 		}
@@ -406,7 +406,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		public void CanGetAchievementByKeysThatContainSlashes()
 		{
             // todo this test seems incorrect
-			var game = GetOrCreateGame("Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			var getAchievement = _achievementClient.GetById("Can/Get/Achievement/By/Keys/That/Contain/Slashes", game.Id);
 
@@ -479,7 +479,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanUpdateAchievement()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -536,7 +536,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateAchievementToDuplicateName()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var achievementRequestOne = new AchievementRequest()
 			{
@@ -611,7 +611,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateNonExistingAchievement()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var updateRequest = new AchievementRequest()
 			{
@@ -640,7 +640,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateAchievemenWithNoName()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -691,7 +691,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateAchievementWithNoToken()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -742,7 +742,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateAchievementWithNoCompletionCriteria()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -781,7 +781,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateAchievementWithNoCompletionCriteriaKey()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -832,7 +832,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateAchievementWithNoCompletionCriteriaValue()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -882,7 +882,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateAchievementWithNoCompletionCriteriaDataTypeMismatch()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -933,7 +933,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanDeleteAchievement()
 		{
-			var game = GetOrCreateGame("Delete");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -972,7 +972,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotDeleteNonExistingAchievement()
 		{
-			var game = GetOrCreateGame("Delete");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
 
 			_achievementClient.Delete("CannotDeleteNonExistingAchievement", game.Id);
 		}
@@ -980,7 +980,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotDeleteAchievementByEmptyToken()
 		{
-			var game = GetOrCreateGame("Delete");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
 
 			Assert.Throws<ClientException>(() => _achievementClient.Delete("", game.Id));
 		}
@@ -1036,7 +1036,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGlobalAchievementProgress()
 		{
-			var user = GetOrCreateUser("ProgressGet");
+			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -1082,7 +1082,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNotExistingGlobalAchievementProgress()
 		{
-			var user = GetOrCreateUser("ProgressGet");
+			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
 
 			Assert.Throws<ClientException>(() => _achievementClient.GetGlobalAchievementProgress("CannotGetNotExistingGlobalAchievementProgress", user.Id));
 		}
@@ -1090,8 +1090,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetAchievementProgress()
 		{
-			var user = GetOrCreateUser("ProgressGet");
-			var game = GetOrCreateGame("ProgressGet");
+			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
+			var game = Helpers.GetOrCreateGame(_gameClient, "ProgressGet");
 
 			var achievementRequest = new AchievementRequest()
 			{
@@ -1139,53 +1139,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNotExistingAchievementProgress()
 		{
-			var user = GetOrCreateUser("ProgressGet");
-			var game = GetOrCreateGame("ProgressGet");
+			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
+			var game = Helpers.GetOrCreateGame(_gameClient, "ProgressGet");
 
 			Assert.Throws<ClientException>(() => _achievementClient.GetAchievementProgress("CannotGetNotExistingAchievementProgress", game.Id, user.Id));
-		}
-		#endregion
-		#region Helpers
-		private ActorResponse GetOrCreateUser(string suffix)
-		{
-			string name = "AchievementControllerTests" + suffix ?? $"_{suffix}";
-			var users = _userClient.Get(name, true);
-			ActorResponse user;
-
-			if (users.Any())
-			{
-				user = users.Single();
-			}
-			else
-			{
-				user = _userClient.Create(new ActorRequest
-				{
-					Name = name
-				});
-			}
-
-			return user;
-		}
-
-		private GameResponse GetOrCreateGame(string suffix)
-		{
-			string name = "AchievementControllerTests" + suffix ?? $"_{suffix}";
-			var games = _gameClient.Get(name);
-			GameResponse game;
-
-			if (games.Any())
-			{
-				game = games.Single();
-			}
-			else
-			{
-				game = _gameClient.Create(new GameRequest
-				{
-					Name = name
-				});
-			}
-
-			return game;
 		}
 		#endregion
 	}

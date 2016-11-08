@@ -85,7 +85,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateAndGetGameLeaderboard()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -124,7 +124,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateDuplicateLeaderboard()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -146,7 +146,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateLeaderboardWithoutToken()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -165,7 +165,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateLeaderboardWithoutName()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -184,7 +184,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateLeaderboardWithoutKey()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -203,7 +203,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateLeaderboardWithEmptyName()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -223,7 +223,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateLeaderboardWithEmptyToken()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -243,7 +243,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateLeaderboardWithTypeMismatch()
 		{
-			var game = GetOrCreateGame("Create");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -288,7 +288,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetLeaderboardsByGame()
 		{
-			var game = GetOrCreateGame("GameGet");
+			var game = Helpers.GetOrCreateGame(_gameClient, "GameGet");
 
 			var leaderboardNames = new string[]
 			{
@@ -342,7 +342,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetLeaderboardWithEmptyToken()
 		{
-			var game = GetOrCreateGame("Get");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
 
 			Assert.Throws<ClientException>(() => _leaderboardClient.Get("", game.Id));
 		}
@@ -364,7 +364,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanUpdateLeaderboard()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -420,7 +420,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateToDuplicateLeaderboard()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var createRequestOne = new LeaderboardRequest
 			{
@@ -468,7 +468,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateNotExistingLeaderboard()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var updateRequest = new LeaderboardRequest
 			{
@@ -488,7 +488,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateLeaderboardWithoutToken()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -521,7 +521,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateLeaderboardWithoutName()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -554,7 +554,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateLeaderboardWithoutKey()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -587,7 +587,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateLeaderboardWithEmptyName()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -621,7 +621,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateLeaderboardWithTypeMismatch()
 		{
-			var game = GetOrCreateGame("Update");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -718,7 +718,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanDeleteLeaderboard()
 		{
-			var game = GetOrCreateGame("Delete");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -747,7 +747,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotDeleteNonExistingLeaderboard()
 		{
-			var game = GetOrCreateGame("Delete");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
 
 			_leaderboardClient.Delete("CannotDeleteNonExistingLeaderboard", game.Id);
 		}
@@ -755,7 +755,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotDeleteLeaderboardByEmptyToken()
 		{
-			var game = GetOrCreateGame("Delete");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
 
 			Assert.Throws<ClientException>(() => _leaderboardClient.Delete("", game.Id));
 		}
@@ -776,7 +776,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var createResponse = _leaderboardClient.Create(createRequest);
 
-			var user = GetOrCreateUser("Standings");
+			var user = Helpers.GetOrCreateUser(_userClient, "Standings");
 			var gameData = new GameDataRequest
 			{
 				Key = createRequest.Key,
@@ -804,7 +804,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetLeaderboardStandings()
 		{
-			var game = GetOrCreateGame("Standings");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -820,7 +820,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var createResponse = _leaderboardClient.Create(createRequest);
 
-			var user = GetOrCreateUser("Standings");
+			var user = Helpers.GetOrCreateUser(_userClient, "Standings");
 			var gameData = new GameDataRequest
 			{
 				Key = createRequest.Key,
@@ -850,7 +850,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNotExistingLeaderboardStandings()
 		{
-			var game = GetOrCreateGame("Standings");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Standings");
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -867,7 +867,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetLeaderboardStandingsWithIncorrectActorType()
 		{
-			var game = GetOrCreateGame("Standings");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -881,7 +881,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			var group = GetOrCreateGroup("Standings");
+			var group = Helpers.GetOrCreateGroup(_groupClient, "Standings");
 			var gameData = new GameDataRequest
 			{
 				Key = createRequest.Key,
@@ -911,7 +911,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetLeaderboardStandingsWithZeroPageLimit()
 		{
-			var game = GetOrCreateGame("Standings");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -942,7 +942,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNearLeaderboardStandingsWithoutActorId()
 		{
-			var game = GetOrCreateGame("Standings");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -973,7 +973,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetFriendsLeaderboardStandingsWithoutActorId()
 		{
-			var game = GetOrCreateGame("Standings");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -1004,7 +1004,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetGroupMemberLeaderboardStandingsWithoutActorId()
 		{
-			var game = GetOrCreateGame("Standings");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -1035,7 +1035,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType()
 		{
-			var game = GetOrCreateGame("Standings");
+			var game = Helpers.GetOrCreateGame(_gameClient, "Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -1049,7 +1049,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			var user = GetOrCreateUser("Standings");
+			var user = Helpers.GetOrCreateUser(_userClient, "Standings");
 			var gameData = new GameDataRequest
 			{
 				Key = createRequest.Key,
@@ -1076,71 +1076,6 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
-		#endregion
-
-		#region Helpers
-		private ActorResponse GetOrCreateUser(string suffix)
-		{
-			string name = "LeaderboardControllerTests" + suffix ?? $"_{suffix}";
-			var users = _userClient.Get(name, true);
-			ActorResponse user;
-
-			if (users.Any())
-			{
-				user = users.Single();
-			}
-			else
-			{
-				user = _userClient.Create(new ActorRequest
-				{
-					Name = name
-				});
-			}
-
-			return user;
-		}
-
-		private ActorResponse GetOrCreateGroup(string suffix)
-		{
-			string name = "LeaderboardControllerTests" + suffix ?? $"_{suffix}";
-			var groups = _groupClient.Get(name);
-			ActorResponse group;
-
-			if (groups.Any())
-			{
-				group = groups.Single();
-			}
-			else
-			{
-				group = _groupClient.Create(new ActorRequest
-				{
-					Name = name
-				});
-			}
-
-			return group;
-		}
-
-		private GameResponse GetOrCreateGame(string suffix)
-		{
-			string name = "LeaderboardControllerTests" + suffix ?? $"_{suffix}";
-			var games = _gameClient.Get(name);
-			GameResponse game;
-
-			if (games.Any())
-			{
-				game = games.Single();
-			}
-			else
-			{
-				game = _gameClient.Create(new GameRequest
-				{
-					Name = name
-				});
-			}
-
-			return game;
-		}
 		#endregion
 	}
 }
