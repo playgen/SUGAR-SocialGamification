@@ -20,7 +20,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				gameId = gameId ?? 0;
 
-				var skills = context.Skills.Where(a => a.GameId == gameId).ToList();
+				var skills = context.Skills
+					.IncludeAll()
+					.Where(a => a.GameId == gameId).ToList();
 				return skills;
 			}
 		}
@@ -31,7 +33,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				gameId = gameId ?? 0;
 
-				var skill = context.Skills.Find(token, gameId);
+				var skill = context.Skills
+					.IncludeAll()
+					.Find(context, token, gameId);
 				return skill;
 			}
 		}
@@ -59,13 +63,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var existing = context.Skills.Find(skill.Token, skill.GameId);
+				var existing = context.Skills
+					.IncludeAll()
+					.Find(context, skill.Token, skill.GameId);
 
 				if (existing != null)
 				{
 					context.Entry(existing).State = EntityState.Modified;
 
-					var hasConflicts = context.Skills.Where(a => (a.Name == skill.Name && a.GameId == skill.GameId));
+					var hasConflicts = context.Skills
+						.Where(a => (a.Name == skill.Name && a.GameId == skill.GameId));
 
 					if (hasConflicts.Count() > 0)
 					{
@@ -98,7 +105,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				gameId = gameId ?? 0;
 
-				var skill = context.Skills.Find(token, gameId);
+				var skill = context.Skills
+					.IncludeAll()
+					.Find(context, token, gameId);
+
 				if (skill != null)
 				{
 					context.Skills.Remove(skill);

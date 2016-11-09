@@ -20,7 +20,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				gameId = gameId ?? 0;
 
-				var achievements = context.Achievements.Where(a => a.GameId == gameId).ToList();
+				var achievements = context.Achievements
+					.IncludeAll()
+					.Where(a => a.GameId == gameId).ToList();
+
 				return achievements;
 			}
 		}
@@ -30,9 +33,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				gameId = gameId ?? 0;
-				
-				var achievement = context.Achievements.Find(token, gameId);
-				return achievement;
+
+				return context.Achievements
+					.IncludeAll()
+					.Find(context, token, gameId);
 			}
 		}
 
@@ -59,13 +63,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var existing = context.Achievements.Find(achievement.Token, achievement.GameId);
+				var existing = context.Achievements
+					.IncludeAll()
+					.Find(context, achievement.Token, achievement.GameId);
 
 				if (existing != null)
 				{
 					context.Entry(existing).State = EntityState.Modified;
 
-					var hasConflicts = context.Achievements.Where(a => (a.Name == achievement.Name && a.GameId == achievement.GameId));
+					var hasConflicts = context.Achievements
+						.Where(a => (a.Name == achievement.Name && a.GameId == achievement.GameId));
 
 					if (hasConflicts.Count() > 0)
 					{
@@ -90,14 +97,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				}
 			}
 		}
-		
+
 		public void Delete(string token, int? gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				gameId = gameId ?? 0;
+				
+				var achievement = context.Achievements
+					.IncludeAll()
+					.Find(context, token, gameId);
 
-				var achievement = context.Achievements.Find(token, gameId);
 				if (achievement != null)
 				{
 					context.Achievements.Remove(achievement);

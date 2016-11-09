@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				return context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
+                    .FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
 					.FilterByDateTimeRange(start, end)
@@ -486,7 +486,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var existingData = context.GameData.Find(updatedData.Id);
+				var existingData = context.GameData
+                    .Find(context, updatedData.Id);
+
 				if (existingData == null)
 				{
 					throw new MissingRecordException("Cannot find the object to update.");

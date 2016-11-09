@@ -18,7 +18,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var groups = context.Groups.ToList();
+				var groups = context.Groups
+					.IncludeAll()
+					.ToList();
 
 				return groups;
 			}
@@ -29,6 +31,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var groups = context.Groups
+					.IncludeAll()
 					.Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
 
 				return groups;
@@ -39,7 +42,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var group = context.Groups.Find(id);
+				var group = context.Groups
+					.IncludeAll()
+					.Find(context, id);
 
 				return group;
 			}
@@ -58,7 +63,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var existing = context.Groups.Find(group.Id);
+				var existing = context.Groups
+					.IncludeAll()
+					.Find(context, group.Id);
 
 				if (existing != null)
 				{
@@ -78,6 +85,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var group = context.Groups
+					.IncludeAll()
 					.Where(g => id == g.Id);
 
 				context.Groups.RemoveRange(group);

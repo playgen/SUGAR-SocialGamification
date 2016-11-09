@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var actor = context.Actors.Find(id);
+				var actor = context.Actors.Find(context, id);
 
 				return actor;
 			}

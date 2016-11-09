@@ -5,6 +5,7 @@ using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
 using NUnit.Framework;
 using CompletionCriteria = PlayGen.SUGAR.Contracts.Shared.CompletionCriteria;
+using System;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -937,10 +938,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var achievementRequest = new AchievementRequest()
 			{
-				Name = "CanDeleteAchievement",
+                Token = "CanDeleteAchievement",
+                GameId = game.Id,
+                Name = "CanDeleteAchievement",
 				ActorType = ActorType.User,
-				Token = "CanDeleteAchievement",
-				GameId = game.Id,
 				CompletionCriterias = new List<CompletionCriteria>()
 				{
 					new CompletionCriteria()
@@ -956,7 +957,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+            var response = CreateAchievement(achievementRequest);
 
 			var getAchievement = _achievementClient.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
 
@@ -969,7 +970,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Null(getAchievement);
 		}
 
-		[Test]
+        [Test]
 		public void CannotDeleteNonExistingAchievement()
 		{
 			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
@@ -1144,6 +1145,22 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			Assert.Throws<ClientException>(() => _achievementClient.GetAchievementProgress("CannotGetNotExistingAchievementProgress", game.Id, user.Id));
 		}
-		#endregion
-	}
+        #endregion
+
+        #region Helpers
+        private object CreateAchievement(AchievementRequest achievementRequest)
+        {
+            var getAchievement = _achievementClient.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
+
+            if (getAchievement != null)
+            {
+                _achievementClient.Delete(achievementRequest.Token, achievementRequest.GameId.Value);
+            }
+            
+            var response = _achievementClient.Create(achievementRequest);
+            
+            return response;
+        }
+        #endregion
+    }
 }

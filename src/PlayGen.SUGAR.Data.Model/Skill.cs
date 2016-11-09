@@ -3,7 +3,7 @@
 namespace PlayGen.SUGAR.Data.Model
 {
 	public class Skill
-	{
+    {
 		public int GameId { get; set; }
 
 		public string Name { get; set; }
