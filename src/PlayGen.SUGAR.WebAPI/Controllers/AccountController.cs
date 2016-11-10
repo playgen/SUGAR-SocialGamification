@@ -3,12 +3,13 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
-using PlayGen.SUGAR.ServerAuthentication.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
+using PlayGen.SUGAR.ServerAuthentication.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -18,9 +19,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Route("api/[controller]")]
 	public class AccountController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
-		private readonly Data.EntityFramework.Controllers.UserController _userDbController;
 		private readonly JsonWebTokenUtility _jsonWebTokenUtility;
+	    private readonly Core.Controllers.AccountController _accountCoreController;
 
 		/// <summary>
 		/// 
@@ -29,13 +29,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="userDbController"></param>
 		/// <param name="passwordEncryption"></param>
 		/// <param name="jsonWebTokenUtility"></param>
-		public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
-			Data.EntityFramework.Controllers.UserController userDbController,
+		public AccountController(Core.Controllers.AccountController accountCoreController,
+
+            Data.EntityFramework.Controllers.UserController userDbController,
 			JsonWebTokenUtility jsonWebTokenUtility)
 		{
-			_accountDbController = accountDbController;
-			_userDbController = userDbController;
-			_jsonWebTokenUtility = jsonWebTokenUtility;
+		    _accountCoreController = accountCoreController;
+            _jsonWebTokenUtility = jsonWebTokenUtility;
 		}
 		
 		//Todo: Move log-in into a separate controller
@@ -52,12 +52,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
 		public IActionResult Login([FromBody]AccountRequest accountRequest)
 		{
-			var account = _accountDbController.Get(new string[] { accountRequest.Name }).SingleOrDefault();
+		    var account = accountRequest.ToModel();
 
-			if (account == null || PasswordEncryption.Verify(accountRequest.Password, account.Password) == false)
-			{
-				throw new InvalidAccountDetailsException("Invalid Login Details.");
-			}
+            account = _accountCoreController.Login(account);
 
 			var token = CreateToken(account);
 			HttpContext.Response.SetAuthorizationToken(token);
@@ -80,19 +77,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
 		public IActionResult Register([FromBody] AccountRequest accountRequest)
 		{
-            if(string.IsNullOrWhiteSpace(accountRequest.Name) || string.IsNullOrWhiteSpace(accountRequest.Password))
-		    {
-		        throw new InvalidAccountDetailsException("Invalid username or password.");
-		    }
+		    var account = accountRequest.ToModel();
 
-            User user = new User
-			{
-				Name = accountRequest.Name,
-			};
-			
-			_userDbController.Create(user);
-
-			var account = CreateAccount(accountRequest, user);
+		    account = _accountCoreController.Register(account);
 
 			var response = account.ToContract();
 			if (accountRequest.AutoLogin)
@@ -147,19 +134,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[Authorization]
 		public void Delete([FromRoute]int id)
 		{
-			_accountDbController.Delete(id);
+            _accountCoreController.Delete(id);
 		}
 		
 		#region Helpers
-		private Account CreateAccount(AccountRequest accountRequest, User user)
-		{
-			var newAccount = accountRequest.ToModel();
-			newAccount.Password = PasswordEncryption.Encrypt(accountRequest.Password);
-			newAccount.UserId = user.Id;
-			newAccount.User = user;
-			return _accountDbController.Create(newAccount);
-		}
-
 		private string CreateToken(Account account)
 		{
 			return _jsonWebTokenUtility.CreateToken(new Dictionary<string, object>

@@ -14,9 +14,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class ResourceController : Controller
 	{
-		private readonly Gore.ResourceController _resourceController;
+		private readonly Core.Controllers.ResourceController _resourceController;
 
-		public ResourceController(Gore.ResourceController resourceController)
+		public ResourceController(Core.Controllers.ResourceController resourceController)
 		{
 			_resourceController = resourceController;
 		}

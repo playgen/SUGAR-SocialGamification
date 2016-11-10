@@ -3,7 +3,8 @@ using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
 using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Gore;
+using PlayGen.SUGAR.Core;
+using PlayGen.SUGAR.Core.Controllers;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {

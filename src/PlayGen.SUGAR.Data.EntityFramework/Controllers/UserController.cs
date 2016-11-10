@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Create(User user)
+		public User Create(User user)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -72,6 +72,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				
 				context.Users.Add(user);
 				SaveChanges(context);
+
+                return user;
 			}
 		}
 

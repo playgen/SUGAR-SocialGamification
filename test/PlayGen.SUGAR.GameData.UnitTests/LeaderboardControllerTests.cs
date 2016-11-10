@@ -8,7 +8,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.UnitTests;
 using Xunit;
-using LeaderboardController = PlayGen.SUGAR.Gore.LeaderboardController;
+using LeaderboardController = PlayGen.SUGAR.Core.Controllers.LeaderboardController;
 
 namespace PlayGen.SUGAR.GameData.UnitTests
 {
