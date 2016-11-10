@@ -9,31 +9,89 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class EvaluationController : DataEvaluationController
 	{
-		protected readonly RewardController RewardController;
-		protected readonly ActorController ActorController;
+		private readonly RewardController _rewardController;
+		private readonly ActorController _actorController;
+	    private readonly Data.EntityFramework.Controllers.EvaluationController _evaluationDbController;
 
-	    private readonly Dictionary<EvaluationType, string> _evaluationFormatMappings = new Dictionary<EvaluationType, string>
+        private readonly Dictionary<EvaluationType, string> _evaluationFormatMappings = new Dictionary<EvaluationType, string>
 	    {
 	        {EvaluationType.Achievement, KeyConstants.AchievementCompleteFormat},
 	        {EvaluationType.Skill, KeyConstants.SkillCompleteFormat},
 	    };
 
-        public EvaluationController(GameDataController gameDataController,
+        public EvaluationController(Data.EntityFramework.Controllers.EvaluationController evaluationDbController,
+            GameDataController gameDataController,
 			GroupRelationshipController groupRelationshipController,
 			UserRelationshipController userRelationshipController,
 			ActorController actorController,
 			RewardController rewardController)
 			: base(gameDataController, groupRelationshipController, userRelationshipController)
-		{
-			RewardController = rewardController;
-			ActorController = actorController;
+        {
+            _evaluationDbController = evaluationDbController;
+            _rewardController = rewardController;
+			_actorController = actorController;
 		}
 
-		public IEnumerable<Evaluation> FilterByActorType(IEnumerable<Evaluation> evaluations, int? actorId)
+        
+        public Evaluation Get(string token, int? gameId)
+        {
+            var evaluation = _evaluationDbController.Get(token, gameId);
+            return evaluation;
+        }
+        
+        public IEnumerable<Evaluation> GetByGame(int? gameId)
+        {
+            var evaluations = _evaluationDbController.GetByGame(gameId);
+            return evaluations;
+        }
+        
+        public IEnumerable<EvaluationProgress> GetGameProgress(int gameId, int? actorId)
+        {
+            var evaluations = _evaluationDbController.GetByGame(gameId);
+            evaluations = FilterByActorType(evaluations, actorId);
+
+            var evaluationsProgress = evaluations.Select(e => new EvaluationProgress
+            {
+                Name = e.Name,
+                Progress = EvaluateProgress(e, actorId),
+            });
+
+            return evaluationsProgress;
+        }
+       
+        public EvaluationProgress GetProgress(string token, int? gameId, int? actorId)
+        {
+            var evaluation = _evaluationDbController.Get(token, gameId);
+            var progress = EvaluateProgress(evaluation, actorId);
+
+            return new EvaluationProgress
+            {
+                Name = evaluation.Name,
+                Progress = progress,
+            };
+        }
+        
+        public Evaluation Create(Evaluation evaluation)
+        {
+            evaluation = _evaluationDbController.Create(evaluation);
+            return evaluation;
+        }
+        
+        public void Update(Evaluation evaluation)
+        {
+            _evaluationDbController.Update(evaluation);
+        }
+        
+        public void Delete(string token, int? gameId)
+        {
+            _evaluationDbController.Delete(token, gameId);
+        }
+
+        public IEnumerable<Evaluation> FilterByActorType(IEnumerable<Evaluation> evaluations, int? actorId)
 		{
 			if (actorId.HasValue)
 			{
-				var provided = ActorController.Get(actorId.Value);
+				var provided = _actorController.Get(actorId.Value);
 				if (provided == null)
 				{
 					evaluations = evaluations.Where(a => a.ActorType == ActorType.Undefined);
@@ -46,14 +104,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 			return evaluations;
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="evaluation"></param>
-		/// <param name="actorId"></param>
-		/// <returns></returns>
-		public float IsEvaluationCompleted(Evaluation evaluation, int? actorId)
+        
+		public float EvaluateProgress(Evaluation evaluation, int? actorId)
 		{
 			if (evaluation == null)
 			{
@@ -61,7 +113,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 			if (actorId != null)
 			{
-				var provided = ActorController.Get(actorId.Value);
+				var provided = _actorController.Get(actorId.Value);
 				if (evaluation.ActorType != ActorType.Undefined && (provided == null || provided.ActorType != evaluation.ActorType))
 				{
 					throw new MissingRecordException("The provided ActorId cannot complete this evaluation.");
@@ -94,11 +146,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 				Value = null
 			};
 			GameDataController.Create(gameData);
-			evaluation.Rewards.All(reward => RewardController.AddReward(actorId, evaluation.GameId, reward));
-		}
-
-		public void EvaluateEvaluation(Evaluation evaluation, int? actorId)
-		{
+			evaluation.Rewards.All(reward => _rewardController.AddReward(actorId, evaluation.GameId, reward));
 		}
 	}
 }

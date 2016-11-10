@@ -9,6 +9,7 @@ namespace PlayGen.SUGAR.WebAPI
         {
             // Set EntityFramework's DBContext's connection string
             services.AddScoped<AccountController>();
+            services.AddScoped<EvaluationController>();
         }
     }
 }

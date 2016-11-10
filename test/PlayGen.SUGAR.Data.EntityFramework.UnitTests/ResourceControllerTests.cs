@@ -152,7 +152,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				&& lhs.Value == rhs.Value;
 		}
 
-		private Actor GetOrCreateUser(string suffix = null)
+		private Model.Actor GetOrCreateUser(string suffix = null)
 		{
 			var name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
 			var users = _userController.Search(name, true);

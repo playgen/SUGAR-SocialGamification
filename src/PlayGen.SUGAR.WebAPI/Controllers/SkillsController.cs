@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			skills = _evaluationController.FilterByActorType(skills, actorId);
 			var skillResponses = skills.Select(a =>
 			{
-				var completed = _evaluationController.IsEvaluationCompleted(a, actorId);
+				var completed = _evaluationController.EvaluateProgress(a, actorId);
 				return new EvaluationProgressResponse
 				{
 					Name = a.Name,
@@ -109,7 +109,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
 			var skill = _evaluationDbController.Get(token, gameId);
-			var completed = _evaluationController.IsEvaluationCompleted(skill, actorId);
+			var completed = _evaluationController.EvaluateProgress(skill, actorId);
 			return new ObjectResult(new EvaluationProgressResponse
 			{
 				Name = skill.Name,
