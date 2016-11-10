@@ -8,6 +8,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.UnitTests;
 using Xunit;
+using LeaderboardController = PlayGen.SUGAR.Gore.LeaderboardController;
 
 namespace PlayGen.SUGAR.GameData.UnitTests
 {
@@ -21,7 +22,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 	    private readonly GroupController _groupController = ControllerLocator.GroupController;
         private readonly GroupRelationshipController _groupRelationshipController = ControllerLocator.GroupRelationshipController;
 
-        private readonly GameData.LeaderboardController _leaderboardEvaulationController = new LeaderboardController(
+        private readonly LeaderboardController _leaderboardEvaulationController = new LeaderboardController(
                 ControllerLocator.GameDataController,
                 ControllerLocator.GroupRelationshipController,
                 ControllerLocator.UserRelationshipController,

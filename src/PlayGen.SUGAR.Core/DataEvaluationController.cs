@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
-using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
+using System.Linq;
 
-namespace PlayGen.SUGAR.GameData
+namespace PlayGen.SUGAR.Gore
 {
 	public class DataEvaluationController
 	{

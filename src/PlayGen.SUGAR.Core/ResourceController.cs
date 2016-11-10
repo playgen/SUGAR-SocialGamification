@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
-using PlayGen.SUGAR.Data.EntityFramework;
-using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 
-namespace PlayGen.SUGAR.GameData
+namespace PlayGen.SUGAR.Gore
 {
 	public class ResourceController
 	{

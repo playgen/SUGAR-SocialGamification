@@ -1,6 +1,6 @@
 ﻿using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.GameData;
-using EvaluationController = PlayGen.SUGAR.GameData.EvaluationController;
+using PlayGen.SUGAR.Gore;
+using EvaluationController = PlayGen.SUGAR.Gore.EvaluationController;
 using LeaderboardController = PlayGen.SUGAR.Data.EntityFramework.Controllers.LeaderboardController;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests

@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.GameData
+﻿namespace PlayGen.SUGAR.Gore
 {
 	public class KeyConstants
 	{

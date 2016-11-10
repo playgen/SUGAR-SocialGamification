@@ -10,7 +10,7 @@
     "NETStandard.Library": "1.6.0",
     "PlayGen.SUGAR.Data.EntityFramework": "1.0.0-*",
     "PlayGen.SUGAR.Data.Model": "1.0.0-*",
-    "PlayGen.SUGAR.GameData": "1.0.0-*",
+    "PlayGen.SUGAR.Core": "1.0.0-*",
     "xunit": "2.1.0",
     "PlayGen.SUGAR.Data.EntityFramework.UnitTests": "1.0.0-*",
     "dotnet-test-xunit": "2.2.0-preview2-build1029"

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PlayGen.SUGAR.GameData;
+using PlayGen.SUGAR.Gore;
 
 namespace PlayGen.SUGAR.WebAPI
 {

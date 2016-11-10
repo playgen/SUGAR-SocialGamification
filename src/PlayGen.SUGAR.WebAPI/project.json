@@ -20,7 +20,7 @@
     "NLog.Extensions.Logging": "1.0.0-rtm-alpha3",
     "PlayGen.SUGAR.Contracts": "1.0.0-*",
     "PlayGen.SUGAR.Data.EntityFramework": "1.0.0-*",
-    "PlayGen.SUGAR.GameData": "1.0.0-*",
+    "PlayGen.SUGAR.Core": "1.0.0-*",
     "Swashbuckle": "6.0.0-beta901",
     "PlayGen.SUGAR.ServerAuthentication": "1.0.0-*"
   },

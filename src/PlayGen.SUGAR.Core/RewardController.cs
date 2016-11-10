@@ -1,8 +1,7 @@
-﻿using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Common.Shared;
+﻿using PlayGen.SUGAR.Data.EntityFramework.Controllers;
+using PlayGen.SUGAR.Data.Model;
 
-namespace PlayGen.SUGAR.GameData
+namespace PlayGen.SUGAR.Gore
 {
 	public class RewardController : DataEvaluationController
 	{
