@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
+namespace PlayGen.SUGAR.WebAPI.Filters
 {
 	/// <summary>
 	/// Checks if models are valid.

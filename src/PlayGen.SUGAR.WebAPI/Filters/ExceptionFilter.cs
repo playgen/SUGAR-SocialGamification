@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Net;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 
-namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
+namespace PlayGen.SUGAR.WebAPI.Filters
 {
 	/// <summary>
 	/// 

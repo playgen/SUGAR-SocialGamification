@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.ServerAuthentication.Extensions;
 
-namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
+namespace PlayGen.SUGAR.WebAPI.Filters
 {
 	public class AuthorizationAttribute : TypeFilterAttribute
 	{

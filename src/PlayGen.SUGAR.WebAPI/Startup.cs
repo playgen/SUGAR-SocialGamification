@@ -9,9 +9,9 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NLog;
 using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using NLog.Extensions.Logging;
 using PlayGen.SUGAR.Data.EntityFramework;
+using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI
 {

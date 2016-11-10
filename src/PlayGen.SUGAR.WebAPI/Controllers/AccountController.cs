@@ -5,10 +5,10 @@ using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.ServerAuthentication.Extensions;
+using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {

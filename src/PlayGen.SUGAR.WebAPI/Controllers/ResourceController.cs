@@ -2,8 +2,8 @@
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.WebAPI.Controllers.Filters;
 using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {

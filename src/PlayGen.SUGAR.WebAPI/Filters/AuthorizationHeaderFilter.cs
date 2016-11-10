@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using PlayGen.SUGAR.ServerAuthentication.Extensions;
 
-namespace PlayGen.SUGAR.WebAPI.Controllers.Filters
+namespace PlayGen.SUGAR.WebAPI.Filters
 {
 	/// <summary>
 	/// Intercepts token attached to the incomming request and re-attatches
