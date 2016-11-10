@@ -21,8 +21,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		public DbSet<Account> Accounts { get; set; }
 
 		public DbSet<Game> Games { get; set; }
-
-		public DbSet<GameData> GameData { get; set; }
 		
 		public DbSet<Evaluation> Evaluations { get; set; }
 		public DbSet<Achievement> Achievements { get; set; }
@@ -32,12 +30,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		public DbSet<User> Users { get; set; }
 		public DbSet<Group> Groups { get; set; }
 
+		public DbSet<GameData> GameData { get; set; }
+		public DbSet<ActorData> ActorData { get; set; }
+
 		public DbSet<UserToUserRelationshipRequest> UserToUserRelationshipRequests { get; set; }
 		public DbSet<UserToUserRelationship> UserToUserRelationships { get; set; }
 		public DbSet<UserToGroupRelationshipRequest> UserToGroupRelationshipRequests { get; set; }
 		public DbSet<UserToGroupRelationship> UserToGroupRelationships { get; set; }
 
 		public DbSet<Leaderboard> Leaderboards { get; set; }
+		public DbSet<Claim> Permissions { get; set; }
+		public DbSet<ActorClaim> ActorPermissions { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

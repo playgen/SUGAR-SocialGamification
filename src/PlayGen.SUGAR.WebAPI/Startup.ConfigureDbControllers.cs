@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
+using PlayGen.SUGAR.ServerAuthentication;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -18,6 +19,10 @@ namespace PlayGen.SUGAR.WebAPI
             services.AddScoped<LeaderboardController>();
             services.AddScoped<GroupRelationshipController>();
             services.AddScoped<UserRelationshipController>();
+            services.AddScoped<ActorDataController>();
+            services.AddScoped<ActorPermissionController>();
+            services.AddScoped<PermissionController>();
+            services.AddScoped<TokenController>();
         }
     }
 }

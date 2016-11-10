@@ -166,7 +166,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 				// their entry into the database needs to be temporally separated.
 				// Could rather try sort these values in a linq expression in the test evaluation as the 
 				// ticks may vary but this method seems close to what a user would do.
-				if (valueType == DataType.Boolean || valueType == DataType.String)
+				if (valueType == GameDataType.Boolean || valueType == GameDataType.String)
 				{
 					Thread.Sleep(1000);
 				}
@@ -211,7 +211,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 							.Select(i => (random.NextDouble()*1000) - 100)
 							.ToArray().Cast<object>().ToArray(),
 
-						DataType = DataType.Float,
+						DataType = GameDataType.Float,
 					}
 				},
 				{
@@ -223,7 +223,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 							.Select(i => random.Next(-10, 100))
 							.ToArray().Cast<object>().ToArray(),
 
-						DataType = DataType.Long,
+						DataType = GameDataType.Long,
 					}
 				},
 				{
@@ -235,7 +235,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 							.Select(c => c.EnglishName)
 							.ToArray().Cast<object>().ToArray(),
 
-						DataType = DataType.String,
+						DataType = GameDataType.String,
 					}
 				},
 				{
@@ -246,7 +246,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 							.Select(i => random.Next(0, 2) == 1)
 							.ToArray().Cast<object>().ToArray(),
 
-						DataType = DataType.Boolean,
+						DataType = GameDataType.Boolean,
 					}
 				},
 			};

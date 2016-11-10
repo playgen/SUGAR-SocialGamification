@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Security.Cryptography;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +15,8 @@ using PlayGen.SUGAR.ServerAuthentication;
 using NLog.Extensions.Logging;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.WebAPI.Filters;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -19,7 +24,11 @@ namespace PlayGen.SUGAR.WebAPI
 	{
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-		public Startup(IHostingEnvironment env)
+        private RsaSecurityKey key;
+        private TokenAuthOptions tokenOptions;
+
+
+        public Startup(IHostingEnvironment env)
 		{
 			//AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
@@ -58,15 +67,40 @@ namespace PlayGen.SUGAR.WebAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			var apiKey = Configuration["APIKey"];
+            //todo: Remove random key. Change to load file from secure file.
+			//var apiKey = Configuration["APIKey"];
+            using (var rsa = new RSACryptoServiceProvider(2048))
+            {
+                try
+                {
+                    key = new RsaSecurityKey(rsa.ExportParameters(true));
+                }
+                finally
+                {
+                    rsa.PersistKeyInCsp = false;
+                }
+            }
+            tokenOptions = new TokenAuthOptions()
+            {
+                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature)
+            };
+            services.AddSingleton(tokenOptions);
 
-			services.AddScoped((_) => new JsonWebTokenUtility(apiKey));
 			services.AddScoped((_) => new PasswordEncryption());
 			services.AddScoped<AuthorizationAttribute>();
 			services.AddApplicationInsightsTelemetry(Configuration);
 
-			// Add framework services.
-			services.AddMvc(options =>
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build());
+            });
+
+            services.AddSingleton<IAuthorizationHandler, AuthorizationHandler>();
+
+            // Add framework services.
+            services.AddMvc(options =>
 			{
 				options.Filters.Add(new ModelValidationFilter());
 				options.Filters.Add(new ExceptionFilter());
@@ -98,8 +132,29 @@ namespace PlayGen.SUGAR.WebAPI
 			app.UseApplicationInsightsRequestTelemetry();
 			app.UseApplicationInsightsExceptionTelemetry();
 			app.UseMvc();
-			
-			ConfigureDocumentationGenerator(app);
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                // Basic settings - signing key to validate with, audience and issuer.
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = key,
+                    ValidAudience = tokenOptions.Audience,
+                    ValidIssuer = tokenOptions.Issuer,
+                    // When receiving a token, check that we've signed it.
+                    ValidateIssuer = true,
+                    ValidateIssuerSigningKey = true,
+                    // When receiving a token, check that it is still valid.
+                    ValidateLifetime = true,
+                    // This defines the maximum allowable clock skew - i.e. provides a tolerance on the token expiry time 
+                    // when validating the lifetime. As we're creating the tokens locally and validating them on the same 
+                    // machines which should have synchronised time, this can be set to zero. Where external tokens are
+                    // used, some leeway here could be useful.
+                    ClockSkew = TimeSpan.FromMinutes(0),
+                }
+            });
+
+            ConfigureDocumentationGenerator(app);
 		}
 	}
 }

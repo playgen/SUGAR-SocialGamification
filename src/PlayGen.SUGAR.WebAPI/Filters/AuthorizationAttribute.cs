@@ -13,17 +13,17 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 		{
 		}
 
-		private class AuthorizationAttributeImpl : AuthorizeAttribute, IAuthorizationFilter
+        private class AuthorizationAttributeImpl : AuthorizeAttribute, IAuthorizationFilter
 		{
-			private readonly JsonWebTokenUtility _jsonWebTokenUtility;
+			private readonly TokenController _jsonWebTokenUtility;
 
-			public AuthorizationAttributeImpl(JsonWebTokenUtility jsonWebTokenUtility)
+			public AuthorizationAttributeImpl(TokenController jsonWebTokenUtility)
 			{
 				_jsonWebTokenUtility = jsonWebTokenUtility;
 			}
 
 			// See account controller for token header info
-			public void OnAuthorization(AuthorizationFilterContext context)
+			/*public void OnAuthorization(AuthorizationFilterContext context)
 			{
 				string token = null;
 				var authorized = false;
@@ -50,7 +50,12 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 				{
 					context.Result = new StatusCodeResult((int) HttpStatusCode.Unauthorized);
 				}
-			}
+			}*/
+
+		    public void OnAuthorization(AuthorizationFilterContext context)
+		    {
+		        throw new System.NotImplementedException();
+		    }
 		}
-	}
+    }
 }

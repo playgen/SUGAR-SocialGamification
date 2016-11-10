@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using PlayGen.SUGAR.WebAPI.Extensions;
-using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.WebAPI.Filters;
+using PlayGen.SUGAR.ServerAuthentication;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -10,14 +11,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Game specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	[Authorization]
+	[Authorize("Bearer")]
 	public class GameController : Controller
 	{
 		private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
-		
-		public GameController(Data.EntityFramework.Controllers.GameController gameDbController)
+		private readonly IAuthorizationService _authorizationService;
+
+		public GameController(Data.EntityFramework.Controllers.GameController gameDbController, IAuthorizationService authorizationService)
 		{
 			_gameDbController = gameDbController;
+			_authorizationService = authorizationService;
 		}
 
 		/// <summary>
@@ -62,9 +65,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(GameResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
-			var game = _gameDbController.Search(id);
-			var gameContract = game.ToContract();
-			return new ObjectResult(gameContract);
+			if (_authorizationService.AuthorizeAsync(User, id, new[] { AuthOperations.ReadGame }).Result)
+			{
+				var game = _gameDbController.Search(id);
+				var gameContract = game.ToContract();
+				return new ObjectResult(gameContract);
+			}
+			return new BadRequestObjectResult("");
 		}
 
 		/// <summary>

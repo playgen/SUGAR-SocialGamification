@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	{
 		private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
 		private readonly Data.EntityFramework.Controllers.UserController _userDbController;
-		private readonly JsonWebTokenUtility _jsonWebTokenUtility;
+		private readonly TokenController _tokenController;
 
 		/// <summary>
 		/// 
@@ -28,14 +28,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="accountDbController"></param>
 		/// <param name="userDbController"></param>
 		/// <param name="passwordEncryption"></param>
-		/// <param name="jsonWebTokenUtility"></param>
+		/// <param name="tokenController"></param>
 		public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
 			Data.EntityFramework.Controllers.UserController userDbController,
-			JsonWebTokenUtility jsonWebTokenUtility)
+			TokenController tokenController)
 		{
 			_accountDbController = accountDbController;
 			_userDbController = userDbController;
-			_jsonWebTokenUtility = jsonWebTokenUtility;
+			_tokenController = tokenController;
 		}
 		
 		//Todo: Move log-in into a separate controller
@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			}
 
 			var token = CreateToken(account);
-			HttpContext.Response.SetAuthorizationToken(token);
+			//HttpContext.Response.SetAuthorizationToken(token);
 
 			var response = account.ToContract();
 			return new ObjectResult(response);
@@ -160,13 +160,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return _accountDbController.Create(newAccount);
 		}
 
-		private string CreateToken(Account account)
+		private dynamic CreateToken(Account account)
 		{
-			return _jsonWebTokenUtility.CreateToken(new Dictionary<string, object>
-			{
-				{ "userid", account.UserId}
-			});
-		}
+            return _tokenController.CreateToken(account.UserId);
+
+        }
 		#endregion
 	}
 }

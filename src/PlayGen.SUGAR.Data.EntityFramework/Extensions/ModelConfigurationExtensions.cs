@@ -76,6 +76,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
             builder.Entity<UserToGroupRelationship>()
                 .HasKey(k => new { k.RequestorId, k.AcceptorId });
+
+            builder.Entity<ActorClaim>()
+                .HasKey(k => new { k.ActorId, k.PermissionId, k.EntityId });
         }
 
         internal static void ConfigureIndexes(this ModelBuilder builder)
@@ -139,6 +142,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework
             //modelBuilder.Entity<GameData>()
             //	.Property(g => g.DateModified)
             //	.HasPrecision(3);
+            //modelBuilder.Entity<ActorData>()
+            //    .Property(g => g.DateCreated)
+            //    .HasPrecision(3);
+            //modelBuilder.Entity<ActorData>()
+            //    .Property(g => g.DateModified)
+            //    .HasPrecision(3);
         }
     }
 }
