@@ -486,7 +486,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var existingData = context.GameData
+                // todo replace with entire block with: (and update unit tests)
+                // context.[tablename].Update(entity);
+                // context.SaveChanges();
+
+                var existingData = context.GameData
                     .Find(context, updatedData.Id);
 
 				if (existingData == null)

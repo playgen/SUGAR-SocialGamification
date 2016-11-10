@@ -10,11 +10,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 	public class LeaderboardController : DbController
 	{
 		public LeaderboardController(SUGARContextFactory contextFactory)
-            : base(contextFactory)
-        {
-        }
+			: base(contextFactory)
+		{
+		}
 
-        public IEnumerable<Leaderboard> GetByGame(int? gameId)
+		public IEnumerable<Leaderboard> GetByGame(int? gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{

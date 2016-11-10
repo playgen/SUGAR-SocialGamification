@@ -6,16 +6,16 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-    [Collection("Project Fixture Collection")]
-    public class AccountControllerTests
+	[Collection("Project Fixture Collection")]
+	public class AccountControllerTests
 	{
-        #region Configuration
-	    private readonly AccountController _accountController = ControllerLocator.AccountController;
-	    private readonly UserController _userController = ControllerLocator.UserController;
-        #endregion
+		#region Configuration
+		private readonly AccountController _accountController = ControllerLocator.AccountController;
+		private readonly UserController _userController = ControllerLocator.UserController;
+		#endregion
 
-        #region Tests
-        [Fact]
+		#region Tests
+		[Fact]
 		public void CreateAndGetAccount()
 		{
 			var name = "CreateAndGetAccount";

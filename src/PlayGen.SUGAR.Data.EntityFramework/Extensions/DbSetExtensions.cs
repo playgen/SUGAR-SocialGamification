@@ -5,8 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
@@ -22,25 +20,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 .Include(s => s.User);
         }
 
-        public static IQueryable<Achievement> IncludeAll(this DbSet<Achievement> dbSet)
+        public static IQueryable<Evaluation> IncludeAll(this DbSet<Evaluation> dbSet)
         {
             return dbSet
-                .Include(s => s.CompletionCriterias)
+                .Include(s => s.EvaluationCriterias)
                 .Include(s => s.Rewards);
         }
-
+        
         public static IQueryable<Group> IncludeAll(this DbSet<Group> dbSet)
         {
             return dbSet
                 .Include(s => s.UserToGroupRelationships)
                 .Include(s => s.UserToGroupRelationshipRequests);
-        }
-
-        public static IQueryable<Skill> IncludeAll(this DbSet<Skill> dbSet)
-        {
-            return dbSet
-                .Include(s => s.CompletionCriterias)
-                .Include(s => s.Rewards);
         }
 
         public static IQueryable<User> IncludeAll(this DbSet<User> dbSet)

@@ -63,7 +63,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var existing = context.Groups
+                // todo replace with entire block with: (and update unit tests)
+                // context.[tablename].Update(entity);
+                // context.SaveChanges();
+
+                var existing = context.Groups
 					.IncludeAll()
 					.Find(context, group.Id);
 

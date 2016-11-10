@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Encapsulates requirements for completing an achievement or skill.
 	/// </summary>
-	public class CompletionCriteria
+	public class EvaluationCriteria
 	{
 		/// <summary>
 		/// The key which will be queried against to check if criteria is met.

@@ -14,7 +14,7 @@
     /// Value : "GameData Key Value"
     /// }
     /// </example>
-    public class CompletionCriteria : Common.Shared.CompletionCriteria
+    public class EvaluationCriteriaCreateRequest : Common.Shared.EvaluationCriteria
     {
         // todo make all fields required for contracts
     }

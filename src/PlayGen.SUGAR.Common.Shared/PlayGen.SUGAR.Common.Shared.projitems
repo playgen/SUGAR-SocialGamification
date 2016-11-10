@@ -9,7 +9,8 @@
     <Import_RootNamespace>PlayGen.SUGAR.Common.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)CompletionCriteria.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteria.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ComparisonType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CriteriaQueryType.cs" />

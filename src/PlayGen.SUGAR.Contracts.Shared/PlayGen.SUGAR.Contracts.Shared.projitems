@@ -11,14 +11,17 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AccountRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AchievementProgressResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AchievementRequest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AchievementResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AchievementTestRequest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AchievementTestResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CompletionCriteria.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationCreateRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaUpdateRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaCreateRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationProgressResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationTestRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationTestResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationUpdateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameDataRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameDataResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameRequest.cs" />
@@ -34,6 +37,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ResourceResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResourceTransferRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResourceTransferResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Reward.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RewardUpdateRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RewardResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RewardCreateRequest.cs" />
   </ItemGroup>
 </Project>

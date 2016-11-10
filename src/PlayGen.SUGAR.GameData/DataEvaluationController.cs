@@ -5,7 +5,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared;
-using CompletionCriteria = PlayGen.SUGAR.Data.Model.CompletionCriteria;
+using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
 namespace PlayGen.SUGAR.GameData
 {
@@ -25,13 +25,13 @@ namespace PlayGen.SUGAR.GameData
 		// TODO: currently this is binary but should eventually return a progress value
 		// The method of returning calculating the progress (for multiple criteria conditions) and 
 		// how the progress is going to be represented (0f to 1f ?) need to be determined first.
-		public float IsCriteriaSatisified(int? gameId, int? actorId, List<CompletionCriteria> completionCriterias, ActorType actorType)
+		public float IsCriteriaSatisified(int? gameId, int? actorId, List<EvaluationCriteria> completionCriterias, ActorType actorType)
 		{
 			return completionCriterias.Sum(cc => Evaluate(gameId, actorId, cc, actorType)) / completionCriterias.Count;
 		}
 
 
-		protected float Evaluate(int? gameId, int? actorId, CompletionCriteria completionCriteria, ActorType actorType)
+		protected float Evaluate(int? gameId, int? actorId, EvaluationCriteria completionCriteria, ActorType actorType)
 		{
 			if (completionCriteria.Scope == CriteriaScope.RelatedActors && actorId != null)
 			{
@@ -80,7 +80,7 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected float EvaluateLong(int? gameId, int? actorId, CompletionCriteria completionCriteria)
+		protected float EvaluateLong(int? gameId, int? actorId, EvaluationCriteria completionCriteria)
 		{
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -110,7 +110,7 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected float EvaluateFloat(int? gameId, int? actorId, CompletionCriteria completionCriteria)
+		protected float EvaluateFloat(int? gameId, int? actorId, EvaluationCriteria completionCriteria)
 		{
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -140,7 +140,7 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected float EvaluateString(int? gameId, int? actorId, CompletionCriteria completionCriteria)
+		protected float EvaluateString(int? gameId, int? actorId, EvaluationCriteria completionCriteria)
 		{
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -168,7 +168,7 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected float EvaluateBool(int? gameId, int? actorId, CompletionCriteria completionCriteria)
+		protected float EvaluateBool(int? gameId, int? actorId, EvaluationCriteria completionCriteria)
 		{
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -196,7 +196,7 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected float EvaluateManyLong(int? gameId, IEnumerable<Actor> actor, CompletionCriteria completionCriteria)
+		protected float EvaluateManyLong(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
 		{
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -213,7 +213,7 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected float EvaluateManyFloat(int? gameId, IEnumerable<Actor> actor, CompletionCriteria completionCriteria)
+		protected float EvaluateManyFloat(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
 		{
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -230,12 +230,12 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected float EvaluateManyString(int? gameId, IEnumerable<Actor> actor, CompletionCriteria completionCriteria)
+		protected float EvaluateManyString(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
 		{
 			return actor.Sum(a => EvaluateString(gameId, a.Id, completionCriteria)) / actor.Count();
 		}
 
-		protected float EvaluateManyBool(int? gameId, IEnumerable<Actor> actor, CompletionCriteria completionCriteria)
+		protected float EvaluateManyBool(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
 		{
 			return actor.Sum(a => EvaluateBool(gameId, a.Id, completionCriteria)) / actor.Count();
 		}

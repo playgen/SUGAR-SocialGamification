@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.Model;
-using CompletionCriteria = PlayGen.SUGAR.Data.Model.CompletionCriteria;
+using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
 namespace PlayGen.SUGAR.Data.EntityFramework
 {
@@ -18,12 +16,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework
             builder.Entity<Group>()
                 .ToTable("Groups");
 
-            // Need to be abbreviated otherwise foreign key constraint names are too long.
             builder.Entity<Achievement>()
-                .ToTable("Achvmnt");
+                .ToTable("Achievements");
 
-            builder.Entity<CompletionCriteria>()
-                .ToTable("CompCri");
+            builder.Entity<Skill>()
+                .ToTable("Skills");
+
+            builder.Entity<Evaluation>()
+                .ToTable("Evaluations");
+
+            builder.Entity<EvaluationCriteria>()
+                .ToTable("EvaluationCriterias");
+
+            builder.Entity<Model.Reward>()
+                .ToTable("Rewards");
         }
 
         internal static void ConfigureForeignKeys(this ModelBuilder builder)
@@ -31,37 +37,31 @@ namespace PlayGen.SUGAR.Data.EntityFramework
             // Setup foreign key relationships in the database tables
             builder.Entity<UserToUserRelationship>()
                 .HasOne(u => u.Requestor)
-                //.HasRequired(u => u.Requestor)
                 .WithMany(u => u.Requestors)
-                .HasForeignKey(u => u.RequestorId);
+                .HasForeignKey(u => u.RequestorId)
+                .IsRequired();
 
             builder.Entity<UserToUserRelationship>()
                 .HasOne(u => u.Acceptor)
-                //.HasRequired(u => u.Requestor)
                 .WithMany(u => u.Acceptors)
-                .HasForeignKey(u => u.AcceptorId);
+                .HasForeignKey(u => u.AcceptorId)
+                .IsRequired();
 
             builder.Entity<UserToUserRelationshipRequest>()
                 .HasOne(u => u.Requestor)
-                //.HasRequired(u => u.Requestor)
                 .WithMany(u => u.RequestRequestors)
-                .HasForeignKey(u => u.RequestorId);
+                .HasForeignKey(u => u.RequestorId)
+                .IsRequired();
 
             builder.Entity<UserToUserRelationshipRequest>()
                 .HasOne(u => u.Acceptor)
-                //.HasRequired(u => u.Requestor)
                 .WithMany(u => u.RequestAcceptors)
-                .HasForeignKey(u => u.AcceptorId);
+                .HasForeignKey(u => u.AcceptorId)
+                .IsRequired();
         }
 
         internal static void ConfigureCompositePrimaryKeys(this ModelBuilder builder)
         {
-            builder.Entity<Achievement>()
-                .HasKey(a => new { a.Token, a.GameId });
-
-            builder.Entity<Skill>()
-                .HasKey(a => new { a.Token, a.GameId });
-
             builder.Entity<Leaderboard>()
                 .HasKey(a => new { a.Token, a.GameId });
 
@@ -83,6 +83,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework
             // Multiple columns
             builder.Entity<GameData>()
                 .HasIndex(g => new { g.Key, g.GameId, g.Category, g.ActorId, g.DataType });
+
+            builder.Entity<Evaluation>()
+                .HasIndex(e => new { e.Token, e.GameId, e.ActorType });
 
             // Unique
             builder.Entity<Game>()
@@ -108,6 +111,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework
                .HasDiscriminator<ActorType>("Discriminator")
                .HasValue<Group>(ActorType.Group)
                .HasValue<User>(ActorType.User);
+
+            builder.Entity<Evaluation>()
+               .HasDiscriminator<EvaluationType>("Discriminator")
+               .HasValue<Achievement>(EvaluationType.Achievement)
+               .HasValue<Skill>(EvaluationType.Skill);
         }
 
         internal static void ConfigureProperties(this ModelBuilder builder)
@@ -117,6 +125,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework
             //modelBuilder.Properties<string>().Configure(p => p.HasMaxLength(64));
 
             builder.Entity<Achievement>()
+                .Property(p => p.Description)
+                .HasMaxLength(256);
+
+            builder.Entity<Skill>()
                 .Property(p => p.Description)
                 .HasMaxLength(256);
 

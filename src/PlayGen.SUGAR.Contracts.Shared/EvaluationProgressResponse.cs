@@ -14,7 +14,7 @@
 	/// Progress : 0
 	/// }
 	/// </example>
-	public class AchievementProgressResponse
+	public class EvaluationProgressResponse
 	{
 		/// <summary>
 		/// The details of the actor whose progress was being checked.

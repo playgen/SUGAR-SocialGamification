@@ -6,12 +6,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public abstract class DbController
 	{
-	    protected readonly SUGARContextFactory ContextFactory;
-        protected readonly DbExceptionHandler DbExceptionHandler = new DbExceptionHandler();
+		protected readonly SUGARContextFactory ContextFactory;
+		protected readonly DbExceptionHandler DbExceptionHandler = new DbExceptionHandler();
 
 		protected DbController(SUGARContextFactory contextFactory)
 		{
-		    ContextFactory = contextFactory;
+			ContextFactory = contextFactory;
 		}
 		
 		protected void SaveChanges(DbContext context)

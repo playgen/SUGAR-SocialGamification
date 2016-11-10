@@ -1,46 +1,61 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class RewardExtensions
 	{
-		public static Contracts.Shared.Reward ToContract(this Common.Shared.Reward reward)
+        public static List<RewardResponse> ToContractList(this List<Reward> rewards)
+        {
+            return rewards?.Select(ToContract).ToList();
+        }
+
+        public static RewardResponse ToContract(this Reward reward)
 		{
 			if (reward == null)
 			{
 				return null;
 			}
-			return new Contracts.Shared.Reward
+			return new RewardResponse
 			{
+                Id = reward.Id,
 				Key = reward.Key,
 				DataType = reward.DataType,
 				Value = reward.Value,
 			};
 		}
 
-		public static List<Contracts.Shared.Reward> ToContractList(this List<Data.Model.Reward> rewards)
-		{
-			return rewards?.Select(ToContract).ToList();
-		}
-
-		public static Data.Model.Reward ToModel(this Contracts.Shared.Reward reward)
-		{
-			if (reward == null)
-			{
-				return null;
-			}
-			return new Data.Model.Reward
-            {
-				Key = reward.Key,
-				DataType = reward.DataType,
-				Value = reward.Value,
-			};
-		}
-
-		public static List<Data.Model.Reward> ToModelList(this List<Contracts.Shared.Reward> rewards)
+        public static List<Reward> ToModelList(this List<RewardCreateRequest> rewards)
 		{
 		    return rewards?.Select(ToModel).ToList();
 		}
-	}
+
+        public static List<Reward> ToModelList(this List<RewardUpdateRequest> rewards)
+        {
+            return rewards?.Select(ToModel).ToList();
+        }
+
+        public static Reward ToModel(this RewardCreateRequest contract)
+        {
+            return new Reward
+            {
+                Key = contract.Key,
+                DataType = contract.DataType,
+                Value = contract.Value,
+            };
+        }
+
+        public static Reward ToModel(this RewardUpdateRequest contract)
+        {
+            return new Reward
+            {
+                Id = contract.Id,
+                Key = contract.Key,
+                DataType = contract.DataType,
+                Value = contract.Value,
+            };
+        }
+    }
 }

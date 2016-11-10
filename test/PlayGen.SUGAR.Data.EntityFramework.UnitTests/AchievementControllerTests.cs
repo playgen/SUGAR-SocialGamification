@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
     public class AchievementControllerTests
 	{
 		#region Configuration
-		private readonly AchievementController _achievementController = ControllerLocator.AchievementController;
+		private readonly EvaluationController _evaluationController = ControllerLocator.EvaluationController;
 		private readonly GameController _gameController = ControllerLocator.GameController;
 		#endregion
 		
@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newAchievement = CreateAchievement(achievementName);
 
-			var achievement = _achievementController.Get(newAchievement.Token, newAchievement.GameId);
+			var achievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
 
 			Assert.Equal(achievementName, achievement.Name);
 		}
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newAchievement = CreateAchievement(achievementName, 0);
 
-			var achievement = _achievementController.Get(newAchievement.Token, newAchievement.GameId);
+			var achievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
 
 			Assert.Equal(achievementName, achievement.Name);
 		}
@@ -71,7 +71,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				CreateAchievement(name, gameId);
 			}
 
-			var achievements = _achievementController.GetByGame(gameId);
+			var achievements = _evaluationController.GetByGame(gameId);
 
 			var matching = achievements.Where(a => names.Contains(a.Name));
 
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetAchievementsByNonExistingGame()
 		{
-			var achievements = _achievementController.GetByGame(-1);
+			var achievements = _evaluationController.GetByGame(-1);
 
 			Assert.Empty(achievements);
 		}
@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingAchievement()
 		{
-			var achievement = _achievementController.Get("GetNonExistingAchievement", -1);
+			var achievement = _evaluationController.Get("GetNonExistingAchievement", -1);
 
 			Assert.Null(achievement);
 		}
@@ -101,26 +101,19 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newAchievement = CreateAchievement(achievementName);
 
-			var foundAchievement = _achievementController.Get(newAchievement.Token, newAchievement.GameId);
+			var foundAchievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
 
 			Assert.NotNull(foundAchievement);
+            Assert.NotEqual(newAchievement.Name + "Updated", foundAchievement.Name);
 
-			var update = new Achievement
-			{
-				Name = newAchievement.Name + "Updated",
-				Token = newAchievement.Token,
-				GameId = newAchievement.GameId,
-				ActorType = newAchievement.ActorType,
-				CompletionCriterias = newAchievement.CompletionCriterias,
-				Rewards = newAchievement.Rewards
-			};
+            foundAchievement.Name = newAchievement.Name + "Updated";
 
-			_achievementController.Update(update);
+			_evaluationController.Update(foundAchievement);
 
-			var updatedAchievement = _achievementController.Get(newAchievement.Token, newAchievement.GameId);
+			var updatedAchievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
 
-			Assert.NotEqual(foundAchievement.Name, updatedAchievement.Name);
-			Assert.Equal(foundAchievement.Name + "Updated", updatedAchievement.Name);
+			Assert.NotEqual(achievementName, updatedAchievement.Name);
+			Assert.Equal(foundAchievement.Name, updatedAchievement.Name);
 		}
 
 		[Fact]
@@ -138,11 +131,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = newAchievementDuplicate.Token,
 				GameId = newAchievementDuplicate.GameId,
 				ActorType = newAchievementDuplicate.ActorType,
-				CompletionCriterias = newAchievementDuplicate.CompletionCriterias,
+				EvaluationCriterias = newAchievementDuplicate.EvaluationCriterias,
 				Rewards = newAchievementDuplicate.Rewards
 			};
 
-			Assert.Throws<DuplicateRecordException>(() => _achievementController.Update(update));
+			Assert.Throws<DuplicateRecordException>(() => _evaluationController.Update(update));
 		}
 
 		[Fact]
@@ -156,11 +149,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = achievementName,
 				GameId = -1,
 				ActorType = ActorType.User,
-				CompletionCriterias = new List<Model.CompletionCriteria>(),
+				EvaluationCriterias = new List<Model.EvaluationCriteria>(),
 				Rewards = new List<Model.Reward>()
 			};
 
-			Assert.Throws<MissingRecordException>(() => _achievementController.Update(achievement));
+			Assert.Throws<MissingRecordException>(() => _evaluationController.Update(achievement));
 		}
 
 		[Fact]
@@ -170,12 +163,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var achievement = CreateAchievement(achievementName);
 
-			var achievementReturned = _achievementController.Get(achievement.Token, achievement.GameId);
+			var achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId);
 			Assert.NotNull(achievementReturned);
 			Assert.Equal(achievementReturned.Name, achievementName);
 
-			_achievementController.Delete(achievement.Token, achievement.GameId);
-			achievementReturned = _achievementController.Get(achievement.Token, achievement.GameId);
+			_evaluationController.Delete(achievement.Token, achievement.GameId);
+			achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId);
 
 			Assert.Null(achievementReturned);
 		}
@@ -183,7 +176,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void DeleteNonExistingGroupAchievement()
 		{
-			_achievementController.Delete("DeleteNonExistingGroupAchievement", -1);
+			_evaluationController.Delete("DeleteNonExistingGroupAchievement", -1);
 		}
 		#endregion
 
@@ -205,14 +198,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Token = name,
 				GameId = gameId.Value,
 				ActorType = ActorType.User,
-				CompletionCriterias = new List<Model.CompletionCriteria>(),
+				EvaluationCriterias = new List<Model.EvaluationCriteria>(),
 				Rewards = new List<Model.Reward>()
 			};
 			if (addCriteria)
 			{
-				var criteria = new List<Model.CompletionCriteria>
+				var criteria = new List<Model.EvaluationCriteria>
 				{
-					new Model.CompletionCriteria
+					new Model.EvaluationCriteria
                     {
 						Key = "CreateAchievementKey",
 						DataType = GameDataType.String,
@@ -222,10 +215,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 						Value = "CreateAchievementValue"
 					}
 				};
-				achievement.CompletionCriterias = criteria;
+				achievement.EvaluationCriterias = criteria;
 			}
 
-			_achievementController.Create(achievement);
+			_evaluationController.Create(achievement);
 
 			return achievement;
 		}

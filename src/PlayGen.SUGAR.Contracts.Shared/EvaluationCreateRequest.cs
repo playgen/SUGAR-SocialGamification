@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// Name : "Achievement Unlocked",
 	/// Description : "Fulfil the criteria to get the reward",
 	/// ActorType : "User",
-	/// CompletionCriteria : [{
+	/// EvaluationCriteria : [{
 	/// Key : "Criteria Key",
 	/// DataType : "Long",
 	/// CriteriaQueryType : "Any",
@@ -30,12 +30,12 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// }]
 	/// }
 	/// </example>
-	public class AchievementRequest
+	public class EvaluationCreateRequest
     {
-		/// <summary>
-		/// A unique identifier used in development to reference the achievement/skill.
-		/// </summary>
-		[Required]
+        /// <summary>
+        /// A unique identifier used in development to reference the achievement/skill.
+        /// </summary>
+        [Required]
 		public string Token { get; set; }
 
 		/// <summary>
@@ -67,12 +67,12 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		/// Must contain at least one criteria.
 		/// </summary>
 		[Required]
-		public List<CompletionCriteria> CompletionCriterias { get; set; }
+		public List<EvaluationCriteriaCreateRequest> EvaluationCriterias { get; set; }
 
 		/// <summary>
 		/// A list of rewards that will be provided to the actor upon completion of the achievement/skill criteria.
 		/// An achievement does not need to contain a reward.
 		/// </summary>
-		public List<Reward> Rewards { get; set; }
+		public List<RewardCreateRequest> Rewards { get; set; }
 	}
 }

@@ -7,31 +7,32 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class SkillExtensions
 	{
-		public static AchievementResponse ToContract(this Skill model)
+		public static EvaluationResponse ToContract(this Skill model)
 		{
 			if (model == null)
 			{
 				return null;
 			}
 
-            return new AchievementResponse
+            return new EvaluationResponse
 			{
+                Id = model.Id,
 				Name = model.Name,
 				Description = model.Description,
 				GameId = model.GameId,
 				ActorType = model.ActorType,
 				Token = model.Token,
-				CompletionCriterias = model.CompletionCriterias.ToContractList(),
+				EvaluationCriterias = model.EvaluationCriterias.ToContractList(),
 				Rewards = model.Rewards.ToContractList(),
 			};
 		}
 
-		public static IEnumerable<AchievementResponse> ToContractList(this IEnumerable<Skill> models)
+		public static IEnumerable<EvaluationResponse> ToContractList(this IEnumerable<Skill> models)
 		{
 			return models.Select(ToContract).ToList();
 		}
         
-        public static Skill ToSkillModel(this AchievementRequest skillContract)
+        public static Skill ToSkillModel(this EvaluationCreateRequest skillContract)
         {
             var skillModel = new Skill
             {
@@ -40,7 +41,24 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
                 GameId = skillContract.GameId ?? 0,
                 ActorType = skillContract.ActorType,
                 Token = skillContract.Token,
-                CompletionCriterias = skillContract.CompletionCriterias.ToModelList(),
+                EvaluationCriterias = skillContract.EvaluationCriterias.ToModelList(),
+                Rewards = skillContract.Rewards.ToModelList(),
+            };
+
+            return skillModel;
+        }
+
+        public static Skill ToSkillModel(this EvaluationUpdateRequest skillContract)
+        {
+            var skillModel = new Skill
+            {
+                Id = skillContract.Id,
+                Name = skillContract.Name,
+                Description = skillContract.Description,
+                GameId = skillContract.GameId ?? 0,
+                ActorType = skillContract.ActorType,
+                Token = skillContract.Token,
+                EvaluationCriterias = skillContract.EvaluationCriterias.ToModelList(),
                 Rewards = skillContract.Rewards.ToModelList(),
             };
 

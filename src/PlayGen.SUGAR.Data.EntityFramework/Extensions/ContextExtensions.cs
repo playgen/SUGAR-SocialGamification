@@ -45,5 +45,5 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 				context.GameData.Attach(gameData);
 			}
 		}
-	}
+    }
 }

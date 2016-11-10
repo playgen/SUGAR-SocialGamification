@@ -17,14 +17,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class AchievementsController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.AchievementController _achievementController;
-		private readonly AchievementController _achievementEvaluationController;
+		private readonly Data.EntityFramework.Controllers.EvaluationController _evaluationDbController;
+		private readonly EvaluationController _evaluatorController;
 
-		public AchievementsController(Data.EntityFramework.Controllers.AchievementController achievementController,
-			AchievementController achievementEvaluationController)
+		public AchievementsController(Data.EntityFramework.Controllers.EvaluationController evaluationDbController,
+            EvaluationController evaluatorController)
 		{
-			_achievementController = achievementController;
-			_achievementEvaluationController = achievementEvaluationController;
+			_evaluationDbController = evaluationDbController;
+			_evaluatorController = evaluatorController;
 		}
 
 		/// <summary>
@@ -34,13 +34,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="token">Token of Achievement</param>
 		/// <param name="gameId">ID of the Game the Achievement is for</param>
-		/// <returns>Returns <see cref="AchievementResponse"/> that holds Achievement details</returns>
+		/// <returns>Returns <see cref="EvaluationResponse"/> that holds Achievement details</returns>
 		[HttpGet("find/{token}/{gameId:int}")]
 		[HttpGet("find/{token}/global")]
-		//[ResponseType(typeof(AchievementResponse))]
+		//[ResponseType(typeof(EvaluationResponse))]
 		public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			var achievement = _achievementController.Get(token, gameId);
+			var achievement = _evaluationDbController.Get(token, gameId);
 			var achievementContract = achievement.ToContract();
 			return new ObjectResult(achievementContract);
 		}
@@ -52,13 +52,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: GET api/achievements/game/1/list
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
-		/// <returns>Returns multiple <see cref="AchievementResponse"/> that hold Achievement details</returns>
+		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Achievement details</returns>
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
-		//[ResponseType(typeof(IEnumerable<AchievementResponse>))]
+		//[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
 		public IActionResult Get([FromRoute]int? gameId)
 		{
-			var achievement = _achievementController.GetByGame(gameId);
+			var achievement = _evaluationDbController.GetByGame(gameId);
 			var achievementContract = achievement.ToContractList();
 			return new ObjectResult(achievementContract);
 		}
@@ -70,20 +70,20 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="gameId">ID of Game</param>
 		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
+		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
 		[HttpGet("game/{gameId:int}/evaluate")]
 		[HttpGet("global/evaluate")]
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("global/evaluate/{actorId:int}")]
-		//[ResponseType(typeof(IEnumerable<AchievementProgressResponse>))]
+		//[ResponseType(typeof(IEnumerable<EvaluationProgressResponse>))]
 		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
-			var achievements = _achievementController.GetByGame(gameId);
-			achievements = _achievementEvaluationController.FilterByActorType(achievements, actorId);
+			var achievements = _evaluationDbController.GetByGame(gameId);
+			achievements = _evaluatorController.FilterByActorType(achievements, actorId);
 			var achievementResponses = achievements.Select(a =>
 			{
-				var completed = _achievementEvaluationController.IsAchievementCompleted(a, actorId);
-				return new AchievementProgressResponse
+				var completed = _evaluatorController.IsEvaluationCompleted(a, actorId);
+				return new EvaluationProgressResponse
 				{
 					Name = a.Name,
 					Progress = completed,
@@ -101,17 +101,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="token">Token of Achievement</param>
 		/// <param name="gameId">ID of the Game the Achievement is for</param>
 		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="AchievementProgressResponse"/> that hold current progress toward achievement.</returns>
+		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
 		[HttpGet("{token}/{gameId:int}/evaluate")]
 		[HttpGet("{token}/global/evaluate")]
 		[HttpGet("{token}/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("{token}/global/evaluate/{actorId:int}")]
-		//[ResponseType(typeof(AchievementProgressResponse))]
+		//[ResponseType(typeof(EvaluationProgressResponse))]
 		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
-			var achievement = _achievementController.Get(token, gameId);
-			var completed = _achievementEvaluationController.IsAchievementCompleted(achievement, actorId);
-			return new ObjectResult(new AchievementProgressResponse
+			var achievement = _evaluationDbController.Get(token, gameId);
+			var completed = _evaluatorController.IsEvaluationCompleted(achievement, actorId);
+			return new ObjectResult(new EvaluationProgressResponse
 			{
 				Name = achievement.Name,
 				Progress = completed,
@@ -120,19 +120,19 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new Achievement.
-		/// Requires <see cref="AchievementRequest.Name"/> to be unique to that <see cref="AchievementRequest.GameId"/>.
+		/// Requires <see cref="EvaluationRequest.Name"/> to be unique to that <see cref="EvaluationRequest.GameId"/>.
 		/// 
 		/// Example Usage: POST api/achievements/create
 		/// </summary>
-		/// <param name="newAchievement"><see cref="AchievementRequest"/> object that holds the details of the new Achievement.</param>
-		/// <returns>Returns a <see cref="AchievementResponse"/> object containing details for the newly created Achievement.</returns>
+		/// <param name="newAchievement"><see cref="EvaluationRequest"/> object that holds the details of the new Achievement.</param>
+		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
 		[HttpPost("create")]
-		//[ResponseType(typeof(AchievementResponse))]
+		//[ResponseType(typeof(EvaluationResponse))]
 		[ArgumentsNotNull]
-		public IActionResult Create([FromBody] AchievementRequest newAchievement)
+		public IActionResult Create([FromBody] EvaluationCreateRequest newAchievement)
 		{
 			var achievement = newAchievement.ToAchievementModel();
-			_achievementController.Create(achievement);
+			_evaluationDbController.Create(achievement);
 			var achievementContract = achievement.ToContract();
 			return new ObjectResult(achievementContract);
 		}
@@ -142,13 +142,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// 
 		/// Example Usage: PUT api/achievements/update
 		/// </summary>
-		/// <param name="achievement"><see cref="AchievementRequest"/> object that holds the details of the Achievement.</param>
+		/// <param name="achievement"><see cref="EvaluationRequest"/> object that holds the details of the Achievement.</param>
 		[HttpPut("update")]
 		[ArgumentsNotNull]
-		public void Update([FromBody] AchievementRequest achievement)
+		public void Update([FromBody] EvaluationUpdateRequest achievement)
 		{
 			var achievementModel = achievement.ToAchievementModel();
-			_achievementController.Update(achievementModel);
+			_evaluationDbController.Update(achievementModel);
 		}
 
 		/// <summary>
@@ -162,7 +162,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpDelete("{token}/{gameId:int}")]
 		public void Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			_achievementController.Delete(token, gameId);
+			_evaluationDbController.Delete(token, gameId);
 		}
 
 	}

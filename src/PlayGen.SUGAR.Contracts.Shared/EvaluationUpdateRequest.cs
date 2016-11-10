@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Contracts.Shared
 {
 	/// <summary>
-	/// Encapsulates achievement/skill details returned from the server.
+	/// Encapsulates achievement/skill details.
 	/// </summary>
 	/// <example>
 	/// JSON
@@ -14,7 +15,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// Name : "Achievement Unlocked",
 	/// Description : "Fulfil the criteria to get the reward",
 	/// ActorType : "User",
-	/// CompletionCriteria : [{
+	/// EvaluationCriteria : [{
 	/// Key : "Criteria Key",
 	/// DataType : "Long",
 	/// CriteriaQueryType : "Any",
@@ -29,41 +30,55 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// }]
 	/// }
 	/// </example>
-	public class AchievementResponse
-	{
-		/// <summary>
-		/// A unique identifier used in development to reference the achievement/skill.
+	public class EvaluationUpdateRequest
+    {
+        /// <summary>
+		/// The unqiue identifier for the achievement/skill.
 		/// </summary>
+		[Required]
+		public int Id { get; set; }
+
+        /// <summary>
+        /// A unique identifier used in development to reference the achievement/skill.
+        /// </summary>
+        [Required]
 		public string Token { get; set; }
 
 		/// <summary>
-		/// The ID of the Game which this achievement/skill belongs to.
+		/// The ID of the Game which this achievement/skill should belong to. Can be left null to make the achievement/skill system-wide.
 		/// </summary>
 		public int? GameId { get; set; }
 
 		/// <summary>
 		/// The display name for the achievement/skill.
 		/// </summary>
+		[Required]
+		[StringLength(64)]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// The description of the achievement/skill.
 		/// </summary>
+		[StringLength(256)]
 		public string Description { get; set; }
 
 		/// <summary>
 		/// The type of actor which this achievement/skill is intended to be completed by.
 		/// </summary>
+		[Required]
 		public ActorType ActorType { get; set; }
 
 		/// <summary>
-		/// A list of criteria which is checked in order to see if an actor has completed the achievement/skill.
+		/// A list of criteria which will be checked in order to see if an actor has completed the achievement/skill.
+		/// Must contain at least one criteria.
 		/// </summary>
-		public List<CompletionCriteria> CompletionCriterias { get; set; }
+		[Required]
+		public List<EvaluationCriteriaUpdateRequest> EvaluationCriterias { get; set; }
 
 		/// <summary>
-		/// A list of rewards that is provided to the actor upon completion of the achievement/skill criteria.
+		/// A list of rewards that will be provided to the actor upon completion of the achievement/skill criteria.
+		/// An achievement does not need to contain a reward.
 		/// </summary>
-		public List<Reward> Rewards { get; set; }
+		public List<RewardUpdateRequest> Rewards { get; set; }
 	}
 }
