@@ -80,9 +80,9 @@ namespace PlayGen.SUGAR.WebAPI
 				json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			});
 
-		    ConfigureDbContextFactory(services);
-            ConfigureDbControllers(services);
-            ConfigureCoreControllers(services);
+			ConfigureDbContextFactory(services);
+			ConfigureDbControllers(services);
+			ConfigureCoreControllers(services);
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
 			ConfigureDocumentationGeneratorServices(services);

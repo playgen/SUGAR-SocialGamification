@@ -13,6 +13,7 @@ namespace PlayGen.SUGAR.WebAPI
             services.AddScoped<GameController>();
             services.AddScoped<GroupController>();
             services.AddScoped<GroupMemberController>();
+            services.AddScoped<UserController>();
         }
     }
 }

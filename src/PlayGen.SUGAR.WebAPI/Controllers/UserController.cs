@@ -13,11 +13,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class UserController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.UserController _userController;
+		private readonly Core.Controllers.UserController _userCoreController;
 
-		public UserController(Data.EntityFramework.Controllers.UserController userController)
+		public UserController(Core.Controllers.UserController userCoreController)
 		{
-			_userController = userController;
+			_userCoreController = userCoreController;
 		}
 
 		/// <summary>
@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult Get()
 		{
-			var users = _userController.Get();
+			var users = _userCoreController.Get();
 			var actorContract = users.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult Get([FromRoute]string name, bool exactMatch)
 		{
-			var users = _userController.Search(name, exactMatch);
+			var users = _userCoreController.Get(name, exactMatch);
 			var actorContract = users.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(ActorResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
-			var user = _userController.Search(id);
+			var user = _userCoreController.Get(id);
 			var actorContract = user.ToContract();
 			return new ObjectResult(actorContract);
 		}
@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult Create([FromBody]ActorRequest actor)
 		{
 			var user = actor.ToUserModel();
-			_userController.Create(user);
+			_userCoreController.Create(user);
 			var actorContract = user.ToContract();
 			return new ObjectResult(actorContract);
 		}
@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var userModel = user.ToUserModel();
 			userModel.Id = id;
-			_userController.Update(userModel);
+			_userCoreController.Update(userModel);
 		}
 
 		/// <summary>
@@ -112,7 +112,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpDelete("{id:int}")]
 		public void Delete([FromRoute]int id)
 		{
-			_userController.Delete(id);
+			_userCoreController.Delete(id);
 		}
 	}
 }

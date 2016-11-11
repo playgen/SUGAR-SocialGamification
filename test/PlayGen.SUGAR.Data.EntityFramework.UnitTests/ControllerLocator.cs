@@ -17,7 +17,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		private static LeaderboardController _leaderboardController;
 		private static ResourceController _resourceController;
 		private static EntityFramework.Controllers.EvaluationController _evaluationController;
-		private static UserController _userController;
+		private static Controllers.UserController _userController;
 		private static UserRelationshipController _userRelationshipController;
 
 		public static Controllers.AccountController AccountController
@@ -38,8 +38,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			=> _leaderboardController ?? (_leaderboardController = new LeaderboardController(ProjectFixture.ContextFactory));
 		public static  ResourceController ResourceController 
 			=> _resourceController ?? (_resourceController = new ResourceController(ProjectFixture.ContextFactory));
-		public static  UserController UserController 
-			=> _userController ?? (_userController = new UserController(ProjectFixture.ContextFactory));
+		public static Controllers.UserController UserController 
+			=> _userController ?? (_userController = new Controllers.UserController(ProjectFixture.ContextFactory));
 		public static  UserRelationshipController UserRelationshipController
 			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(ProjectFixture.ContextFactory));
 	}
