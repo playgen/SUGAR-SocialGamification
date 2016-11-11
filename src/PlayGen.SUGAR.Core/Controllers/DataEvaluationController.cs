@@ -11,11 +11,12 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class DataEvaluationController
 	{
-		protected readonly IGameDataController GameDataController;
+		protected readonly Data.EntityFramework.Controllers.GameDataController GameDataController;
 		protected readonly GroupRelationshipController GroupRelationshipController;
 		protected readonly UserRelationshipController UserRelationshipController;
 
-		public DataEvaluationController(IGameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
+		// todo change all db controller usage to core controller usage
+		public DataEvaluationController(Data.EntityFramework.Controllers.GameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
 		{
 			GameDataController = gameDataController;
 			GroupRelationshipController = groupRelationshipController;

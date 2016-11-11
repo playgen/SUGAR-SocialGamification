@@ -11,83 +11,84 @@ namespace PlayGen.SUGAR.Core.Controllers
 	{
 		private readonly RewardController _rewardController;
 		private readonly ActorController _actorController;
-	    private readonly Data.EntityFramework.Controllers.EvaluationController _evaluationDbController;
+		private readonly Data.EntityFramework.Controllers.EvaluationController _evaluationDbController;
 
-        private readonly Dictionary<EvaluationType, string> _evaluationFormatMappings = new Dictionary<EvaluationType, string>
-	    {
-	        {EvaluationType.Achievement, KeyConstants.AchievementCompleteFormat},
-	        {EvaluationType.Skill, KeyConstants.SkillCompleteFormat},
-	    };
+		private readonly Dictionary<EvaluationType, string> _evaluationFormatMappings = new Dictionary<EvaluationType, string>
+		{
+			{EvaluationType.Achievement, KeyConstants.AchievementCompleteFormat},
+			{EvaluationType.Skill, KeyConstants.SkillCompleteFormat},
+		};
 
-        public EvaluationController(Data.EntityFramework.Controllers.EvaluationController evaluationDbController,
-            GameDataController gameDataController,
+        // todo change all db controller usages to core controller usages
+		public EvaluationController(Data.EntityFramework.Controllers.EvaluationController evaluationDbController,
+            Data.EntityFramework.Controllers.GameDataController gameDataController,
 			GroupRelationshipController groupRelationshipController,
 			UserRelationshipController userRelationshipController,
 			ActorController actorController,
 			RewardController rewardController)
 			: base(gameDataController, groupRelationshipController, userRelationshipController)
-        {
-            _evaluationDbController = evaluationDbController;
-            _rewardController = rewardController;
+		{
+			_evaluationDbController = evaluationDbController;
+			_rewardController = rewardController;
 			_actorController = actorController;
 		}
 
-        
-        public Evaluation Get(string token, int? gameId)
-        {
-            var evaluation = _evaluationDbController.Get(token, gameId);
-            return evaluation;
-        }
-        
-        public IEnumerable<Evaluation> GetByGame(int? gameId)
-        {
-            var evaluations = _evaluationDbController.GetByGame(gameId);
-            return evaluations;
-        }
-        
-        public IEnumerable<EvaluationProgress> GetGameProgress(int gameId, int? actorId)
-        {
-            var evaluations = _evaluationDbController.GetByGame(gameId);
-            evaluations = FilterByActorType(evaluations, actorId);
+		
+		public Evaluation Get(string token, int? gameId)
+		{
+			var evaluation = _evaluationDbController.Get(token, gameId);
+			return evaluation;
+		}
+		
+		public IEnumerable<Evaluation> GetByGame(int? gameId)
+		{
+			var evaluations = _evaluationDbController.GetByGame(gameId);
+			return evaluations;
+		}
+		
+		public IEnumerable<EvaluationProgress> GetGameProgress(int gameId, int? actorId)
+		{
+			var evaluations = _evaluationDbController.GetByGame(gameId);
+			evaluations = FilterByActorType(evaluations, actorId);
 
-            var evaluationsProgress = evaluations.Select(e => new EvaluationProgress
-            {
-                Name = e.Name,
-                Progress = EvaluateProgress(e, actorId),
-            });
+			var evaluationsProgress = evaluations.Select(e => new EvaluationProgress
+			{
+				Name = e.Name,
+				Progress = EvaluateProgress(e, actorId),
+			});
 
-            return evaluationsProgress;
-        }
-       
-        public EvaluationProgress GetProgress(string token, int? gameId, int? actorId)
-        {
-            var evaluation = _evaluationDbController.Get(token, gameId);
-            var progress = EvaluateProgress(evaluation, actorId);
+			return evaluationsProgress;
+		}
+	   
+		public EvaluationProgress GetProgress(string token, int? gameId, int? actorId)
+		{
+			var evaluation = _evaluationDbController.Get(token, gameId);
+			var progress = EvaluateProgress(evaluation, actorId);
 
-            return new EvaluationProgress
-            {
-                Name = evaluation.Name,
-                Progress = progress,
-            };
-        }
-        
-        public Evaluation Create(Evaluation evaluation)
-        {
-            evaluation = _evaluationDbController.Create(evaluation);
-            return evaluation;
-        }
-        
-        public void Update(Evaluation evaluation)
-        {
-            _evaluationDbController.Update(evaluation);
-        }
-        
-        public void Delete(string token, int? gameId)
-        {
-            _evaluationDbController.Delete(token, gameId);
-        }
+			return new EvaluationProgress
+			{
+				Name = evaluation.Name,
+				Progress = progress,
+			};
+		}
+		
+		public Evaluation Create(Evaluation evaluation)
+		{
+			evaluation = _evaluationDbController.Create(evaluation);
+			return evaluation;
+		}
+		
+		public void Update(Evaluation evaluation)
+		{
+			_evaluationDbController.Update(evaluation);
+		}
+		
+		public void Delete(string token, int? gameId)
+		{
+			_evaluationDbController.Delete(token, gameId);
+		}
 
-        public IEnumerable<Evaluation> FilterByActorType(IEnumerable<Evaluation> evaluations, int? actorId)
+		public IEnumerable<Evaluation> FilterByActorType(IEnumerable<Evaluation> evaluations, int? actorId)
 		{
 			if (actorId.HasValue)
 			{
@@ -104,7 +105,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 			return evaluations;
 		}
-        
+		
 		public float EvaluateProgress(Evaluation evaluation, int? actorId)
 		{
 			if (evaluation == null)
@@ -120,7 +121,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 				}
 			}
 
-            var key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token);
+			var key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token);
 			var completed = GameDataController.KeyExists(evaluation.GameId, actorId, key);
 			var completedProgress = completed ? 1f : 0f;
 			if (!completed)

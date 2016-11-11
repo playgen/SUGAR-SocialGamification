@@ -9,7 +9,7 @@ using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	public class GameDataController : DbController, IGameDataController
+	public class GameDataController : DbController
 	{
 		private readonly GameDataCategory _category = GameDataCategory.GameData;
 
@@ -375,6 +375,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
+        // todo change to bool TryGet[name](out value) pattern
 		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
@@ -429,56 +430,26 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Create(GameData data)
+		public GameData Create(GameData data)
+		{
+		    using (var context = ContextFactory.Create())
+		    {
+		        context.HandleDetatchedGame(data.GameId);
+		        context.HandleDetatchedActor(data.ActorId);
+
+		        context.GameData.Add(data);
+		        SaveChanges(context);
+
+		        return data;
+		    }
+		}
+
+		public void Create(IEnumerable<GameData> datas)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				context.HandleDetatchedGame(data.GameId);
-				context.HandleDetatchedActor(data.ActorId);
-
-				if (ParseCheck(data))
-				{
-					context.GameData.Add(data);
-					SaveChanges(context);
-				}
-				else
-				{
-					throw new ArgumentException($"Invalid Value {data.Value} for GameDataType {data.DataType}");
-				}
-			}
-		}
-
-		public void Create(GameData[] data)
-		{
-			List<GameData> dataList = new List<GameData>();
-			foreach (var d in data)
-			{
-				if (ParseCheck(d))
-				{
-					dataList.Add(d);
-				}
-				else
-				{
-					throw new ArgumentException($"Invalid Value {d.Value} for GameDataType {d.DataType}");
-				}
-				if (dataList.Count >= 1000)
-				{
-					using (var context = ContextFactory.Create())
-					{
-						context.GameData.AddRange(dataList);
-						SaveChanges(context);
-						dataList.Clear();
-					}
-				}
-			}
-			if (dataList.Count > 0)
-			{
-				using (var context = ContextFactory.Create())
-				{
-					context.GameData.AddRange(dataList);
-					SaveChanges(context);
-					dataList.Clear();
-				}
+				context.GameData.AddRange(datas);
+				SaveChanges(context);
 			}
 		}
 
@@ -504,55 +475,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		protected bool ParseCheck(GameData data)
-		{
-			switch (data.DataType) {
-				case GameDataType.String:
-					return true;
-				case GameDataType.Long:
-					long tryLong;
-					if (long.TryParse(data.Value, out tryLong))
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				case GameDataType.Float:
-					float tryFloat;
-					if (float.TryParse(data.Value, out tryFloat))
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				case GameDataType.Boolean:
-					bool tryBoolean;
-					if (bool.TryParse(data.Value, out tryBoolean))
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				default:
-					return false;
-			}
-		}
-
-		protected DateTime EndSet (DateTime end)
-		{
-			if (end == default(DateTime))
-			{
-				return DateTime.Now;
-			} else
-			{
-				return end;
-			}
-		}
-	}
+        protected DateTime EndSet(DateTime end)
+        {
+            if (end == default(DateTime))
+            {
+                return DateTime.Now;
+            }
+            else
+            {
+                return end;
+            }
+        }
+    }
 }

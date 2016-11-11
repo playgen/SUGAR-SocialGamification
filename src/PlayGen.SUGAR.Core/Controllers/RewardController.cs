@@ -5,7 +5,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class RewardController : DataEvaluationController
 	{
-		public RewardController(GameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
+		// todo change all db controller usage to core controller usage
+		public RewardController(Data.EntityFramework.Controllers.GameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
 			: base(gameDataController, groupRelationshipController, userRelationshipController)
 		{
 		}

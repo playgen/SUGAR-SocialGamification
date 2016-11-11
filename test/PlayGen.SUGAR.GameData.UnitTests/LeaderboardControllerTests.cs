@@ -17,7 +17,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 	{
 		#region Configuration
 		private readonly Data.EntityFramework.Controllers.LeaderboardController _leaderboardController = ControllerLocator.LeaderboardController;
-	    private readonly GameDataController _gameDataController = ControllerLocator.GameDataController;
+	    private readonly Data.EntityFramework.Controllers.GameDataController _gameDataController = ControllerLocator.GameDataController;
 	    private readonly UserController _userController = ControllerLocator.UserController;
 	    private readonly GroupController _groupController = ControllerLocator.GroupController;
         private readonly GroupRelationshipController _groupRelationshipController = ControllerLocator.GroupRelationshipController;

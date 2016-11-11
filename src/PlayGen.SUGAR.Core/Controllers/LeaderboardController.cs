@@ -1,4 +1,6 @@
-﻿using System;
+﻿// todo remove any references to the contracts project
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -16,7 +18,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 		protected readonly GroupController GroupController;
 		protected readonly UserController UserController;
 
-		public LeaderboardController(GameDataController gameDataController,
+        // todo replace db controller usage with core controller usage (all cases except for leaderbaordDbController)
+		public LeaderboardController(Data.EntityFramework.Controllers.GameDataController gameDataController,
 			GroupRelationshipController groupRelationshipController,
 			UserRelationshipController userRelationshipController,
 			ActorController actorController,
