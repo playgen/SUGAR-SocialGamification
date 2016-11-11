@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#region Configuration
 		private readonly ResourceController _resourceController = ControllerLocator.ResourceController;
 		private readonly UserController _userController = ControllerLocator.UserController;
-		private readonly GameController _gameController = ControllerLocator.GameController;
+		private readonly Controllers.GameController _gameController = ControllerLocator.GameController;
 		#endregion
 
 		#region Tests

@@ -43,8 +43,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 		    {
 		        throw new InvalidAccountDetailsException("Invalid username or password.");
 		    }
-            
-		    var user = _userDbController.Create(new User
+
+            // todo use the user core controller to create user instead of db controller
+            var user = _userDbController.Create(new User
 		    {
                 Name = toRegister.Name
 		    });
