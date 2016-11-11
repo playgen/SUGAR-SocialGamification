@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Create(UserToGroupRelationship newRelation, bool autoAccept)
+		public UserToGroupRelationship Create(UserToGroupRelationship newRelation, bool autoAccept)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -107,6 +107,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					context.UserToGroupRelationshipRequests.Add(relation);
 				}
 				SaveChanges(context);
+
+			    return newRelation;
 			}
 		}
 
