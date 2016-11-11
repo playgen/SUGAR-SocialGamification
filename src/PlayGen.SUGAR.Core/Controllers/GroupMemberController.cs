@@ -36,10 +36,9 @@ namespace PlayGen.SUGAR.Core.Controllers
             return membershipGroups;
         }
         
-        public UserToGroupRelationship CreateMemberRequest(UserToGroupRelationship newRelationship, bool autoAccept)
+        public void CreateMemberRequest(UserToGroupRelationship newRelationship, bool autoAccept)
         {
-            newRelationship =  _groupRelationshipDbController.Create(newRelationship, autoAccept);
-            return newRelationship;
+            _groupRelationshipDbController.Create(newRelationship, autoAccept);
         }
       
         public void UpdateMemberRequest(UserToGroupRelationship relationship, bool autoAccept)

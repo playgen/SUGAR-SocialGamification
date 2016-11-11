@@ -13,11 +13,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class UserFriendController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.UserRelationshipController _userRelationshipController;
+		private readonly Core.Controllers.UserFriendController _userFriendCoreController;
 
-		public UserFriendController(Data.EntityFramework.Controllers.UserRelationshipController userRelationshipController)
+		public UserFriendController(Core.Controllers.UserFriendController userFriendCoreController)
 		{
-			_userRelationshipController = userRelationshipController;
+			_userFriendCoreController = userFriendCoreController;
 		}
 
 		/// <summary>
@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetFriendRequests([FromRoute]int userId)
 		{
-			var actor = _userRelationshipController.GetRequests(userId);
+			var actor = _userFriendCoreController.GetFriendRequests(userId);
 			var actorContract = actor.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetSentRequests([FromRoute]int userId)
 		{
-			var actor = _userRelationshipController.GetSentRequests(userId);
+			var actor = _userFriendCoreController.GetSentRequests(userId);
 			var actorContract = actor.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetFriends([FromRoute]int userId)
 		{
-			var actor = _userRelationshipController.GetFriends(userId);
+			var actor = _userFriendCoreController.GetFriends(userId);
 			var actorContract = actor.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult CreateFriendRequest([FromBody]RelationshipRequest relationship)
 		{
 			var request = relationship.ToGroupModel();
-			_userRelationshipController.Create(relationship.ToUserModel(), relationship.AutoAccept);
+			_userFriendCoreController.CreateFriendRequest(relationship.ToUserModel(), relationship.AutoAccept);
 			var relationshipContract = request.ToContract();
 			return new ObjectResult(relationshipContract);
 		}
@@ -103,7 +103,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				RequestorId = relationship.RequestorId,
 				AcceptorId = relationship.AcceptorId
 			};
-			_userRelationshipController.UpdateRequest(relation.ToUserModel(), relationship.Accepted);
+			_userFriendCoreController.UpdateFriendRequest(relation.ToUserModel(), relationship.Accepted);
 		}
 
 		/// <summary>
@@ -122,7 +122,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				RequestorId = relationship.RequestorId,
 				AcceptorId = relationship.AcceptorId
 			};
-			_userRelationshipController.Update(relation.ToUserModel());
+			_userFriendCoreController.UpdateFriend(relation.ToUserModel());
 		}
 	}
 }

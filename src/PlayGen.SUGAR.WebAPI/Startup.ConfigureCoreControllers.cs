@@ -7,13 +7,13 @@ namespace PlayGen.SUGAR.WebAPI
     {
         private void ConfigureCoreControllers(IServiceCollection services)
         {
-            // Set EntityFramework's DBContext's connection string
             services.AddScoped<AccountController>();
             services.AddScoped<EvaluationController>();
             services.AddScoped<GameController>();
             services.AddScoped<GroupController>();
             services.AddScoped<GroupMemberController>();
             services.AddScoped<UserController>();
+            services.AddScoped<UserFriendController>();
         }
     }
 }
