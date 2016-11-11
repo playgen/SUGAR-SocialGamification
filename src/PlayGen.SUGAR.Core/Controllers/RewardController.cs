@@ -1,9 +1,10 @@
-﻿using PlayGen.SUGAR.Data.EntityFramework.Controllers;
+﻿using PlayGen.SUGAR.Core.Utilities;
+using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-	public class RewardController : DataEvaluationController
+	public class RewardController : EvaluationCriteriaEvaluator
 	{
 		// todo change all db controller usage to core controller usage
 		public RewardController(Data.EntityFramework.Controllers.GameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)

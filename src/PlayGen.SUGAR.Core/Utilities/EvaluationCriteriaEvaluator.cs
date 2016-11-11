@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
-using PlayGen.SUGAR.Data.Model;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Core.Utilities
 {
-	public class DataEvaluationController
+	public class EvaluationCriteriaEvaluator
 	{
 		protected readonly Data.EntityFramework.Controllers.GameDataController GameDataController;
 		protected readonly GroupRelationshipController GroupRelationshipController;
 		protected readonly UserRelationshipController UserRelationshipController;
 
 		// todo change all db controller usage to core controller usage
-		public DataEvaluationController(Data.EntityFramework.Controllers.GameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
+		public EvaluationCriteriaEvaluator(Data.EntityFramework.Controllers.GameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
 		{
 			GameDataController = gameDataController;
 			GroupRelationshipController = groupRelationshipController;

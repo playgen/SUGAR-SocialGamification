@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-	public class EvaluationController : DataEvaluationController
+	public class EvaluationController : EvaluationCriteriaEvaluator
 	{
 		private readonly RewardController _rewardController;
 		private readonly ActorController _actorController;

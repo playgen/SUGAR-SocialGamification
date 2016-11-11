@@ -6,13 +6,14 @@ using System.Globalization;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-	public class LeaderboardController : DataEvaluationController
+	public class LeaderboardController : EvaluationCriteriaEvaluator
 	{
 		protected readonly ActorController ActorController;
 		protected readonly GroupController GroupController;
