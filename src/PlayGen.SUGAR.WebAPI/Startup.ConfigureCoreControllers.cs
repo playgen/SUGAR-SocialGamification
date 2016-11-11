@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlayGen.SUGAR.Core.Controllers;
-using PlayGen.SUGAR.Core.Utilities;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -12,6 +11,7 @@ namespace PlayGen.SUGAR.WebAPI
             services.AddScoped<AccountController>();
             services.AddScoped<EvaluationController>();
             services.AddScoped<GameController>();
+            services.AddScoped<GroupController>();
         }
     }
 }

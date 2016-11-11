@@ -13,11 +13,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class GameController : Controller
 	{
-		private readonly Core.Controllers.GameController _gameController;
+		private readonly Core.Controllers.GameController _gameCoreController;
 		
-		public GameController(Core.Controllers.GameController gameController)
+		public GameController(Core.Controllers.GameController gameCoreController)
 		{
-			_gameController = gameController;
+			_gameCoreController = gameCoreController;
 		}
 
 		/// <summary>
@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<GameResponse>))]
 		public IActionResult Get()
 		{
-			var games = _gameController.Get();
+			var games = _gameCoreController.Get();
 			var gameContract = games.ToContractList();
 			return new ObjectResult(gameContract);
 		}
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<GameResponse>))]
 		public IActionResult Get([FromRoute]string name)
 		{
-			var games = _gameController.Get(name);
+			var games = _gameCoreController.Get(name);
 			var gameContract = games.ToContractList();
 			return new ObjectResult(gameContract);
 		}
@@ -62,7 +62,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(GameResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
-			var game = _gameController.Get(id);
+			var game = _gameCoreController.Get(id);
 			var gameContract = game.ToContract();
 			return new ObjectResult(gameContract);
 		}
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult Create([FromBody]GameRequest newGame)
 		{
 			var game = newGame.ToModel();
-			_gameController.Create(game);
+			_gameCoreController.Create(game);
 			var gameContract = game.ToContract();
 			return new ObjectResult(gameContract);
 		}
@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var gameModel = game.ToModel();
 			gameModel.Id = id;
-			_gameController.Update(gameModel);
+			_gameCoreController.Update(gameModel);
 		}
 
 		/// <summary>
@@ -112,7 +112,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpDelete("{id:int}")]
 		public void Delete([FromRoute]int id)
 		{
-			_gameController.Delete(id);
+			_gameCoreController.Delete(id);
 		}
 	}
 }

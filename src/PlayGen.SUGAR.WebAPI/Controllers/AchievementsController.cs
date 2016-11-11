@@ -15,11 +15,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class AchievementsController : Controller
 	{
-		private readonly EvaluationController _evaluationController;
+		private readonly EvaluationController _evaluationCoreController;
 
 		public AchievementsController(EvaluationController evaluationController)
 		{
-            _evaluationController = _evaluationController;
+            _evaluationCoreController = _evaluationCoreController;
 		}
 
 		/// <summary>
@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(EvaluationResponse))]
 		public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			var achievement = _evaluationController.Get(token, gameId);
+			var achievement = _evaluationCoreController.Get(token, gameId);
 			var achievementContract = achievement.ToContract();
 			return new ObjectResult(achievementContract);
 		}
@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
 		public IActionResult Get([FromRoute]int? gameId)
 		{
-			var achievement = _evaluationController.GetByGame(gameId);
+			var achievement = _evaluationCoreController.GetByGame(gameId);
 			var achievementContract = achievement.ToContractList();
 			return new ObjectResult(achievementContract);
 		}
@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<EvaluationProgressResponse>))]
 		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
-			var achievementsProgress = _evaluationController.GetGameProgress(gameId, actorId);
+			var achievementsProgress = _evaluationCoreController.GetGameProgress(gameId, actorId);
 		    var achievementsProgressResponses = achievementsProgress.ToContractList();
             return new ObjectResult(achievementsProgressResponses);
 		}
@@ -94,8 +94,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(EvaluationProgressResponse))]
 		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
-			var achievement = _evaluationController.Get(token, gameId);
-			var progress = _evaluationController.EvaluateProgress(achievement, actorId);
+			var achievement = _evaluationCoreController.Get(token, gameId);
+			var progress = _evaluationCoreController.EvaluateProgress(achievement, actorId);
 			return new ObjectResult(new EvaluationProgressResponse
 			{
 				Name = achievement.Name,
@@ -117,7 +117,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult Create([FromBody] EvaluationCreateRequest newAchievement)
 		{
 			var achievement = newAchievement.ToAchievementModel();
-            achievement = (Achievement)_evaluationController.Create(achievement);
+            achievement = (Achievement)_evaluationCoreController.Create(achievement);
 			var achievementContract = achievement.ToContract();
 			return new ObjectResult(achievementContract);
 		}
@@ -133,7 +133,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public void Update([FromBody] EvaluationUpdateRequest achievement)
 		{
 			var achievementModel = achievement.ToAchievementModel();
-            _evaluationController.Update(achievementModel);
+            _evaluationCoreController.Update(achievementModel);
 		}
 
 		/// <summary>
@@ -147,7 +147,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpDelete("{token}/{gameId:int}")]
 		public void Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-            _evaluationController.Delete(token, gameId);
+            _evaluationCoreController.Delete(token, gameId);
 		}
 
 	}

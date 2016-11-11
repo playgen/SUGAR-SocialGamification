@@ -50,12 +50,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Create(Group group)
+		public Group Create(Group group)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				context.Groups.Add(group);
 				SaveChanges(context);
+
+			    return group;
 			}
 		}
 

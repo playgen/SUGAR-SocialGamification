@@ -1,6 +1,8 @@
 ﻿using System;
 using Xunit;
 
+// todo change these to test the core layer (as that makes use of the ef layer but imposes restrictions too).
+
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
     public class ProjectFixture : IDisposable

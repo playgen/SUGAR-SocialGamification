@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 	public class LeaderboardController : EvaluationCriteriaEvaluator
 	{
 		protected readonly ActorController ActorController;
-		protected readonly GroupController GroupController;
+		protected readonly Data.EntityFramework.Controllers.GroupController GroupController;
 		protected readonly UserController UserController;
 
         // todo replace db controller usage with core controller usage (all cases except for leaderbaordDbController)
@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			GroupRelationshipController groupRelationshipController,
 			UserRelationshipController userRelationshipController,
 			ActorController actorController,
-			GroupController groupController,
+            Data.EntityFramework.Controllers.GroupController groupController,
 			UserController userController)
 			: base(gameDataController, groupRelationshipController, userRelationshipController)
 		{
