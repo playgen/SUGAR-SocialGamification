@@ -11,9 +11,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NLog;
-using PlayGen.SUGAR.ServerAuthentication;
 using NLog.Extensions.Logging;
-using PlayGen.SUGAR.Data.EntityFramework;
+using PlayGen.SUGAR.Core.Utilities;
+using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
@@ -120,8 +120,9 @@ namespace PlayGen.SUGAR.WebAPI
 				json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			});
 
-		    ConfigureDbContextFactory(services);
-            ConfigureDbControllers(services);
+			ConfigureDbContextFactory(services);
+			ConfigureDbControllers(services);
+			ConfigureCoreControllers(services);
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
 			ConfigureDocumentationGeneratorServices(services);

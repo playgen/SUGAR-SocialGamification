@@ -13,11 +13,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class GroupMemberController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.GroupRelationshipController _groupRelationshipController;
+		private readonly Core.Controllers.GroupMemberController _groupMemberCoreController;
 
-		public GroupMemberController(Data.EntityFramework.Controllers.GroupRelationshipController groupRelationshipController)
+		public GroupMemberController(Core.Controllers.GroupMemberController groupMemberCoreController)
 		{
-			_groupRelationshipController = groupRelationshipController;
+			_groupMemberCoreController = groupMemberCoreController;
 		}
 
 		/// <summary>
@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetMemberRequests([FromRoute]int groupId)
 		{
-			var users = _groupRelationshipController.GetRequests(groupId);
+			var users = _groupMemberCoreController.GetMemberRequests(groupId);
 			var actorContract = users.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetSentRequests([FromRoute]int userId)
 		{
-			var requests = _groupRelationshipController.GetSentRequests(userId);
+			var requests = _groupMemberCoreController.GetSentRequests(userId);
 			var actorContract = requests.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetMembers([FromRoute]int groupId)
 		{
-			var members = _groupRelationshipController.GetMembers(groupId);
+			var members = _groupMemberCoreController.GetMembers(groupId);
 			var actorContract = members.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -79,7 +79,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetUserGroups([FromRoute]int userId)
 		{
-			var groups = _groupRelationshipController.GetUserGroups(userId);
+			var groups = _groupMemberCoreController.GetUserGroups(userId);
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -98,7 +98,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult CreateMemberRequest([FromBody]RelationshipRequest relationship)
 		{
 			var request = relationship.ToGroupModel();
-			_groupRelationshipController.Create(relationship.ToGroupModel(), relationship.AutoAccept);
+			_groupMemberCoreController.CreateMemberRequest(relationship.ToGroupModel(), relationship.AutoAccept);
 			var relationshipContract = request.ToContract();
 			return new ObjectResult(relationshipContract);
 		}
@@ -118,7 +118,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				RequestorId = relationship.RequestorId,
 				AcceptorId = relationship.AcceptorId
 			};
-			_groupRelationshipController.UpdateRequest(relation.ToGroupModel(), relationship.Accepted);
+			_groupMemberCoreController.UpdateMemberRequest(relation.ToGroupModel(), relationship.Accepted);
 		}
 
 		/// <summary>
@@ -137,7 +137,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				RequestorId = relationship.RequestorId,
 				AcceptorId = relationship.AcceptorId
 			};
-			_groupRelationshipController.Update(relation.ToGroupModel());
+			_groupMemberCoreController.UpdateMember(relation.ToGroupModel());
 		}
 	}
 }

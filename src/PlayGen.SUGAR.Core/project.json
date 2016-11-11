@@ -3,9 +3,10 @@
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "PlayGen.SUGAR.Common": "1.0.0-*",
-    "PlayGen.SUGAR.Contracts": "1.0.0-*",
     "PlayGen.SUGAR.Data.EntityFramework": "1.0.0-*",
-    "PlayGen.SUGAR.Data.Model": "1.0.0-*"
+    "PlayGen.SUGAR.Data.Model": "1.0.0-*",
+    "BCrypt.Net-Core": "1.1.0",
+    "PlayGen.SUGAR.Contracts": "1.0.0-*"
   },
 
   "frameworks": {

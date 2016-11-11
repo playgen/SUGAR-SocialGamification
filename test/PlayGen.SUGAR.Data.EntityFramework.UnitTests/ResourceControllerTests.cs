@@ -3,7 +3,8 @@ using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
 using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.GameData;
+using PlayGen.SUGAR.Core;
+using PlayGen.SUGAR.Core.Controllers;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
@@ -12,8 +13,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	{
 		#region Configuration
 		private readonly ResourceController _resourceController = ControllerLocator.ResourceController;
-		private readonly UserController _userController = ControllerLocator.UserController;
-		private readonly GameController _gameController = ControllerLocator.GameController;
+		private readonly Data.EntityFramework.Controllers.UserController _userController = ControllerLocator.UserController;
+		private readonly Controllers.GameController _gameController = ControllerLocator.GameController;
 		#endregion
 
 		#region Tests
@@ -151,7 +152,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				&& lhs.Value == rhs.Value;
 		}
 
-		private Actor GetOrCreateUser(string suffix = null)
+		private Model.Actor GetOrCreateUser(string suffix = null)
 		{
 			var name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
 			var users = _userController.Search(name, true);

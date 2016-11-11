@@ -13,11 +13,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class GroupController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.GroupController _groupController;
+		private readonly Core.Controllers.GroupController _groupCoreController;
 
-		public GroupController(Data.EntityFramework.Controllers.GroupController groupController)
+		public GroupController(Core.Controllers.GroupController groupCoreController)
 		{
-			_groupController = groupController;
+			_groupCoreController = groupCoreController;
 		}
 
 		/// <summary>
@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult Get()
 		{
-			var groups = _groupController.Get();
+			var groups = _groupCoreController.Get();
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult Get([FromRoute]string name)
 		{
-			var groups = _groupController.Search(name);
+			var groups = _groupCoreController.Search(name);
 			var actorContract = groups.ToContractList();
 
 			return new ObjectResult(actorContract);
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(ActorResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
-			var group = _groupController.Search(id);
+			var group = _groupCoreController.Get(id);
 			var actorContract = group.ToContract();
 			return new ObjectResult(actorContract);
 		}
@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult Create([FromBody]ActorRequest actor)
 		{
 			var group = actor.ToGroupModel();
-			_groupController.Create(group);
+			_groupCoreController.Create(group);
 			var actorContract = group.ToContract();
 			return new ObjectResult(actorContract);
 		}
@@ -96,11 +96,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="group"><see cref="ActorRequest"/> object that holds the details of the Group.</param>
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
+		// todo refactor to use groupupdaterequest that contains an Id property and have a separate groupcreaterequest that doen't have the Id
 		public void Update([FromRoute] int id, [FromBody] ActorRequest group)
 		{
 			var groupModel = group.ToGroupModel();
 			groupModel.Id = id;
-			_groupController.Update(groupModel);
+			_groupCoreController.Update(groupModel);
 		}
 
 		/// <summary>
@@ -112,7 +113,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpDelete("{id:int}")]
 		public void Delete([FromRoute]int id)
 		{
-			_groupController.Delete(id);
+			_groupCoreController.Delete(id);
 		}
 	}
 }

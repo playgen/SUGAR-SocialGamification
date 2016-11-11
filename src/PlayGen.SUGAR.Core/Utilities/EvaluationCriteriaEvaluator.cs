@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Linq;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
-using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
+using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
-namespace PlayGen.SUGAR.GameData
+namespace PlayGen.SUGAR.Core.Utilities
 {
-	public class DataEvaluationController
+	public class EvaluationCriteriaEvaluator
 	{
-		protected readonly IGameDataController GameDataController;
+		protected readonly Data.EntityFramework.Controllers.GameDataController GameDataController;
 		protected readonly GroupRelationshipController GroupRelationshipController;
 		protected readonly UserRelationshipController UserRelationshipController;
 
-		public DataEvaluationController(IGameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
+		// todo change all db controller usage to core controller usage
+		public EvaluationCriteriaEvaluator(Data.EntityFramework.Controllers.GameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
 		{
 			GameDataController = gameDataController;
 			GroupRelationshipController = groupRelationshipController;
@@ -196,7 +195,7 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected float EvaluateManyLong(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyLong(int? gameId, IEnumerable<Data.Model.Actor> actor, EvaluationCriteria completionCriteria)
 		{
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -213,7 +212,7 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected float EvaluateManyFloat(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyFloat(int? gameId, IEnumerable<Data.Model.Actor> actor, EvaluationCriteria completionCriteria)
 		{
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -230,12 +229,12 @@ namespace PlayGen.SUGAR.GameData
 			}
 		}
 
-		protected float EvaluateManyString(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyString(int? gameId, IEnumerable<Data.Model.Actor> actor, EvaluationCriteria completionCriteria)
 		{
 			return actor.Sum(a => EvaluateString(gameId, a.Id, completionCriteria)) / actor.Count();
 		}
 
-		protected float EvaluateManyBool(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyBool(int? gameId, IEnumerable<Data.Model.Actor> actor, EvaluationCriteria completionCriteria)
 		{
 			return actor.Sum(a => EvaluateBool(gameId, a.Id, completionCriteria)) / actor.Count();
 		}

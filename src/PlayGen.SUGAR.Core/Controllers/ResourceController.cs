@@ -1,37 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework;
+using PlayGen.SUGAR.Data.EntityFramework.Controllers;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
+using PlayGen.SUGAR.Data.Model;
 
-namespace PlayGen.SUGAR.GameData
+namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class ResourceController
 	{
-		private IGameDataController _gameDataController;
+		private Data.EntityFramework.Controllers.GameDataController _gameDataDbController;
 
 		public ResourceController(SUGARContextFactory contextFactory)
 		{
-			_gameDataController = new GameDataController(contextFactory, GameDataCategory.Resource);
+			// todo use game data core controller instead of db controller!!!
+			_gameDataDbController = new Data.EntityFramework.Controllers.GameDataController(contextFactory, GameDataCategory.Resource);
 		}
 
 		public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			return _gameDataController.KeyExists(gameId, actorId, key, start = default(DateTime), end = default(DateTime));
+			return _gameDataDbController.KeyExists(gameId, actorId, key, start = default(DateTime), end = default(DateTime));
 		}
 
 		public IEnumerable<Data.Model.GameData> Get(int? gameId = null, int? actorId = null, IEnumerable<string> keys = null)
 		{
-			return _gameDataController.Get(gameId, actorId, keys);
+			return _gameDataDbController.Get(gameId, actorId, keys);
 		}
 
 		public void Update(Data.Model.GameData resource)
 		{
 
-			_gameDataController.Update(resource);
+			_gameDataDbController.Update(resource);
 		}
 
 		public Data.Model.GameData Transfer(int? gameId, int? fromActorId, int? toActorId, string key, long transferQuantity, out Data.Model.GameData fromResource)
@@ -47,7 +48,7 @@ namespace PlayGen.SUGAR.GameData
 			UpdateQuantity(fromResource, -transferQuantity);
 
 			Data.Model.GameData toResource;
-			var foundResources = _gameDataController.Get(gameId, toActorId, new string[] { fromResource.Key });
+			var foundResources = _gameDataDbController.Get(gameId, toActorId, new string[] { fromResource.Key });
 
 			if (foundResources.Any())
 			{
@@ -73,13 +74,13 @@ namespace PlayGen.SUGAR.GameData
 
 		public void Create(Data.Model.GameData data)
 		{
-			var existingEntries = _gameDataController.Get(data.GameId, data.ActorId, new [] {data.Key});
+			var existingEntries = _gameDataDbController.Get(data.GameId, data.ActorId, new [] {data.Key});
 			if (existingEntries.Any())
 			{
 				throw new DuplicateRecordException();
 			}
 
-			_gameDataController.Create(data);
+			_gameDataDbController.Create(data);
 		}
 
 		public void UpdateQuantity(Data.Model.GameData resource, long modifyAmount)
@@ -87,12 +88,12 @@ namespace PlayGen.SUGAR.GameData
 			long currentValue = long.Parse(resource.Value);
 			resource.Value = (currentValue + modifyAmount).ToString();
 
-			_gameDataController.Update(resource);
+			_gameDataDbController.Update(resource);
 		}
 
 		private Data.Model.GameData GetExistingResource(int? gameId, int? ownerId, string key)
 		{
-			var foundResources = _gameDataController.Get(gameId, ownerId, new []{ key });
+			var foundResources = _gameDataDbController.Get(gameId, ownerId, new []{ key });
 
 			if (!foundResources.Any())
 			{

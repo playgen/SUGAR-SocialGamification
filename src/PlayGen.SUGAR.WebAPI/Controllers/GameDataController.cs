@@ -13,12 +13,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorization]
 	public class GameDataController : Controller
 	{
-		 private readonly Data.EntityFramework.Controllers.GameDataController _gameDataController;
+		 private readonly Data.EntityFramework.Controllers.GameDataController _gameDataCoreController;
 
 
-		public GameDataController(Data.EntityFramework.Controllers.GameDataController gameDataController)
+		public GameDataController(Data.EntityFramework.Controllers.GameDataController gameDataCoreController)
 		{
-			_gameDataController = gameDataController;
+			_gameDataCoreController = gameDataCoreController;
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<GameDataResponse>))]
 		public IActionResult Get(int? actorId, int? gameId, string[] key)
 		{
-			var data = _gameDataController.Get(gameId, actorId, key);
+			var data = _gameDataCoreController.Get(gameId, actorId, key);
 			var dataContract = data.ToContractList();
 			return new ObjectResult(dataContract);
 		}
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult Add([FromBody]GameDataRequest newData)
 		{
 			var data = newData.ToModel();
-			_gameDataController.Create(data);
+			_gameDataCoreController.Create(data);
 			var dataContract = data.ToContract();
 			return new ObjectResult(dataContract);
 		}

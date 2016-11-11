@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Group> Search(string name)
+		public IEnumerable<Group> Get(string name)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public Group Search(int id)
+		public Group Get(int id)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -50,12 +50,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Create(Group group)
+		public Group Create(Group group)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				context.Groups.Add(group);
 				SaveChanges(context);
+
+			    return group;
 			}
 		}
 

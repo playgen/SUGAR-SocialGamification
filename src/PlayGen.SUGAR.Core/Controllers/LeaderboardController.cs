@@ -1,28 +1,31 @@
-﻿using System;
+﻿// todo remove any references to the contracts project
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using PlayGen.SUGAR.Data.EntityFramework.Interfaces;
-using PlayGen.SUGAR.Data.Model;
 using System.Globalization;
+using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Core.Utilities;
+using PlayGen.SUGAR.Data.EntityFramework.Controllers;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.Model;
 
-namespace PlayGen.SUGAR.GameData
+namespace PlayGen.SUGAR.Core.Controllers
 {
-	public class LeaderboardController : DataEvaluationController
+	public class LeaderboardController : EvaluationCriteriaEvaluator
 	{
 		protected readonly ActorController ActorController;
-		protected readonly GroupController GroupController;
-		protected readonly UserController UserController;
+		protected readonly Data.EntityFramework.Controllers.GroupController GroupController;
+		protected readonly Data.EntityFramework.Controllers.UserController UserController;
 
-		public LeaderboardController(GameDataController gameDataController,
+        // todo replace db controller usage with core controller usage (all cases except for leaderbaordDbController)
+		public LeaderboardController(Data.EntityFramework.Controllers.GameDataController gameDataController,
 			GroupRelationshipController groupRelationshipController,
 			UserRelationshipController userRelationshipController,
 			ActorController actorController,
-			GroupController groupController,
-			UserController userController)
+            Data.EntityFramework.Controllers.GroupController groupController,
+            Data.EntityFramework.Controllers.UserController userController)
 			: base(gameDataController, groupRelationshipController, userRelationshipController)
 		{
 			ActorController = actorController;
@@ -174,10 +177,10 @@ namespace PlayGen.SUGAR.GameData
 			switch (actorType)
 			{
 				case ActorType.User:
-					return UserController.Search(id).Name;
+					return UserController.Get(id).Name;
 
 				case ActorType.Group:
-					return GroupController.Search(id).Name;
+					return GroupController.Get(id).Name;
 
 				default:
 					return "";

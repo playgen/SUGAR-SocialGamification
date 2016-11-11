@@ -60,7 +60,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Create(UserToGroupRelationship newRelation, bool autoAccept)
+        // todo move auto accept logic into core controller
+        public void Create(UserToGroupRelationship newRelation, bool autoAccept)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -110,7 +111,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void UpdateRequest(UserToGroupRelationship newRelation, bool accepted)
+        // todo move auto accept logic into core controller
+        public void UpdateRequest(UserToGroupRelationship newRelation, bool accepted)
 		{
 			using (var context = ContextFactory.Create())
 			{

@@ -15,13 +15,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Authorize("Bearer")]
 	public class GameController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
 		private readonly IAuthorizationService _authorizationService;
+        private readonly Core.Controllers.GameController _gameCoreController;
 
-		public GameController(Data.EntityFramework.Controllers.GameController gameDbController, IAuthorizationService authorizationService)
-		{
-			_gameDbController = gameDbController;
-			_authorizationService = authorizationService;
+        public GameController(Core.Controllers.GameController gameCoreController, IAuthorizationService authorizationService)
+        {
+            _gameCoreController = gameCoreController;
+            _authorizationService = authorizationService;
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<GameResponse>))]
 		public IActionResult Get()
 		{
-			var games = _gameDbController.Get();
+			var games = _gameCoreController.Get();
 			var gameContract = games.ToContractList();
 			return new ObjectResult(gameContract);
 		}
@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<GameResponse>))]
 		public IActionResult Get([FromRoute]string name)
 		{
-			var games = _gameDbController.Search(name);
+			var games = _gameCoreController.Search(name);
 			var gameContract = games.ToContractList();
 			return new ObjectResult(gameContract);
 		}
@@ -67,9 +67,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [AuthOperation(ClaimScope.Game, AuthOperation.Read)]
         public IActionResult GetById([FromRoute]int id)
 		{
-			if (_authorizationService.AuthorizeAsync(User, id, new[] { AuthHelper.GetAuth(GetType()) }).Result)
+			if (_authorizationService.AuthorizeAsync(User, id, new[] { AuthHelper.GetAuth(GetType())}).Result)
 			{
-				var game = _gameDbController.Search(id);
+				var game = _gameCoreController.Get(id);
 				var gameContract = game.ToContract();
 				return new ObjectResult(gameContract);
 			}
@@ -90,7 +90,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult Create([FromBody]GameRequest newGame)
 		{
 			var game = newGame.ToModel();
-			_gameDbController.Create(game);
+			_gameCoreController.Create(game);
 			var gameContract = game.ToContract();
 			return new ObjectResult(gameContract);
 		}
@@ -104,11 +104,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="game"><see cref="GameRequest"/> object that holds the details of the Game.</param>
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
+        // todo refactor game request into GameUpdateRequest (which requires the Id) and GameCreateRequest (which has no required Id field) - and remove the Id param from the definition below
 		public void Update([FromRoute] int id, [FromBody] GameRequest game)
 		{
 			var gameModel = game.ToModel();
 			gameModel.Id = id;
-			_gameDbController.Update(gameModel);
+			_gameCoreController.Update(gameModel);
 		}
 
 		/// <summary>
@@ -120,7 +121,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpDelete("{id:int}")]
 		public void Delete([FromRoute]int id)
 		{
-			_gameDbController.Delete(id);
+			_gameCoreController.Delete(id);
 		}
 	}
 }

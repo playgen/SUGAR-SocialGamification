@@ -8,6 +8,7 @@ using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.UnitTests;
 using Xunit;
+using LeaderboardController = PlayGen.SUGAR.Core.Controllers.LeaderboardController;
 
 namespace PlayGen.SUGAR.GameData.UnitTests
 {
@@ -16,12 +17,12 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 	{
 		#region Configuration
 		private readonly Data.EntityFramework.Controllers.LeaderboardController _leaderboardController = ControllerLocator.LeaderboardController;
-	    private readonly GameDataController _gameDataController = ControllerLocator.GameDataController;
+	    private readonly Data.EntityFramework.Controllers.GameDataController _gameDataController = ControllerLocator.GameDataController;
 	    private readonly UserController _userController = ControllerLocator.UserController;
 	    private readonly GroupController _groupController = ControllerLocator.GroupController;
         private readonly GroupRelationshipController _groupRelationshipController = ControllerLocator.GroupRelationshipController;
 
-        private readonly GameData.LeaderboardController _leaderboardEvaulationController = new LeaderboardController(
+        private readonly LeaderboardController _leaderboardEvaulationController = new LeaderboardController(
                 ControllerLocator.GameDataController,
                 ControllerLocator.GroupRelationshipController,
                 ControllerLocator.UserRelationshipController,
@@ -650,7 +651,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
             _groupController.Create(group);
 
-            group = _groupController.Search(group.Name).ElementAt(0);
+            group = _groupController.Get(group.Name).ElementAt(0);
 
             foreach (var user in users)
             {

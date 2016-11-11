@@ -17,5 +17,15 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				Id = actorModel.Id,
 			};
 		}
+
+	    public static ActorResponse ToContract(this Common.Shared.Actor model)
+	    {
+	        return new ActorResponse
+	        {
+	            Id = model.Id,
+
+	            Name = model.Name
+	        };
+	    }
 	}
 }
