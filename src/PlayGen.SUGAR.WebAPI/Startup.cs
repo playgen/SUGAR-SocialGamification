@@ -26,8 +26,8 @@ namespace PlayGen.SUGAR.WebAPI
 	{
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        const string TokenAudience = "SUGAR";
-        const string TokenIssuer = "Players";
+        const string TokenAudience = "User";
+        const string TokenIssuer = "SUGAR";
         private RsaSecurityKey key;
         private TokenAuthOptions tokenOptions;
 

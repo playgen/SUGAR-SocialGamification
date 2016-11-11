@@ -9,10 +9,10 @@ namespace PlayGen.SUGAR.ServerAuthentication
 
         public string Name { get; set; }
 
-        public AuthRequirement(ClaimScope scope, string name)
+        public AuthRequirement(AuthOperation operation)
         {
-            ClaimScope = scope;
-            Name = name;
+            ClaimScope = operation.ClaimScope;
+            Name = operation.Name;
         }
     }
 }

@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameDataType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardFilterType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Permissions\AuthOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Permissions\ClaimScope.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Reward.cs" />
   </ItemGroup>

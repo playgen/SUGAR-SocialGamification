@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.WebAPI.Filters;
-using PlayGen.SUGAR.ServerAuthentication;
+using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.WebAPI.Helpers;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -62,10 +63,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="id">Game id</param>
 		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
 		[HttpGet("findbyid/{id:int}", Name = "GetByGameId")]
-		//[ResponseType(typeof(GameResponse))]
-		public IActionResult Get([FromRoute]int id)
+        //[ResponseType(typeof(GameResponse))]
+        [AuthOperation(ClaimScope.Game, AuthOperation.Read)]
+        public IActionResult GetById([FromRoute]int id)
 		{
-			if (_authorizationService.AuthorizeAsync(User, id, new[] { AuthOperations.ReadGame }).Result)
+			if (_authorizationService.AuthorizeAsync(User, id, new[] { AuthHelper.GetAuth(GetType()) }).Result)
 			{
 				var game = _gameDbController.Search(id);
 				var gameContract = game.ToContract();
