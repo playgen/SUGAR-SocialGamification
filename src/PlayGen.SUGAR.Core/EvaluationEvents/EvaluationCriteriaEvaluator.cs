@@ -5,7 +5,7 @@ using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
-namespace PlayGen.SUGAR.Core.Utilities
+namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
 	public class EvaluationCriteriaEvaluator
 	{

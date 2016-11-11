@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared;
-using Xunit;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.UnitTests;
+using PlayGen.SUGAR.Data.Model;
+using Xunit;
 
-namespace PlayGen.SUGAR.GameData.UnitTests
+namespace PlayGen.SUGAR.Core.UnitTests
 {
     [CollectionDefinition("Game Data Fixture Collection")]
     public class GameDataFixtureCollection : ICollectionFixture<GameDataFixture>

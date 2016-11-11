@@ -1,4 +1,5 @@
-﻿using PlayGen.SUGAR.Core.Utilities;
+﻿using PlayGen.SUGAR.Core.EvaluationEvents;
+using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 

@@ -86,6 +86,8 @@ namespace PlayGen.SUGAR.WebAPI
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
 			ConfigureDocumentationGeneratorServices(services);
+		    ConfigureEvaluationEvents(services);
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

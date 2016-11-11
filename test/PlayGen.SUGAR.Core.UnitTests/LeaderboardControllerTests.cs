@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.UnitTests;
+using PlayGen.SUGAR.Data.Model;
 using Xunit;
 using LeaderboardController = PlayGen.SUGAR.Core.Controllers.LeaderboardController;
 
-namespace PlayGen.SUGAR.GameData.UnitTests
+namespace PlayGen.SUGAR.Core.UnitTests
 {
     [Collection("Game Data Fixture Collection")]
     public class LeaderboardControllerTests 
