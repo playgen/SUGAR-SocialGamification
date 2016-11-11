@@ -10,7 +10,6 @@ using Newtonsoft.Json.Serialization;
 using NLog;
 using NLog.Extensions.Logging;
 using PlayGen.SUGAR.Core.Utilities;
-using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Filters;
 

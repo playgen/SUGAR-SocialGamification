@@ -6,6 +6,7 @@ using PlayGen.SUGAR.Core;
 using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -16,13 +17,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[Authorization]
 		public class SkillsController : Controller
 	{
-		private readonly Data.EntityFramework.Controllers.EvaluationController _evaluationDbController;
 		private readonly EvaluationController _evaluationController;
 
-		public SkillsController(Data.EntityFramework.Controllers.EvaluationController evaluationDbController,
-			EvaluationController evaluationController)
+		public SkillsController(EvaluationController evaluationController)
 		{
-			_evaluationDbController = evaluationDbController;
 			_evaluationController = evaluationController;
 		}
 
@@ -39,7 +37,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(EvaluationResponse))]
 		public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			var skill = _evaluationDbController.Get(token, gameId);
+			var skill = _evaluationController.Get(token, gameId);
 			var skillContract = skill.ToContract();
 			return new ObjectResult(skillContract);
 		}
@@ -57,7 +55,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
 		public IActionResult Get([FromRoute]int? gameId)
 		{
-			var skill = _evaluationDbController.GetByGame(gameId);
+			var skill = _evaluationController.GetByGame(gameId);
 			var skillContract = skill.ToContractList();
 			return new ObjectResult(skillContract);
 		}
@@ -77,20 +75,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<EvaluationProgressResponse>))]
 		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
-			var skills = _evaluationDbController.GetByGame(gameId);
-			skills = _evaluationController.FilterByActorType(skills, actorId);
-			var skillResponses = skills.Select(a =>
-			{
-				var completed = _evaluationController.EvaluateProgress(a, actorId);
-				return new EvaluationProgressResponse
-				{
-					Name = a.Name,
-					Progress = completed,
-				};
-			});
-
-			return new ObjectResult(skillResponses);
-		}
+            var skillsProgress = _evaluationController.GetGameProgress(gameId, actorId);
+            var skillsProgressResponses = skillsProgress.ToContractList();
+            return new ObjectResult(skillsProgressResponses);
+        }
 
 		/// <summary>
 		/// Find the current progress for a Skill for <param name="actorId"/>.
@@ -106,16 +94,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpGet("{token}/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("{token}/global/evaluate/{actorId:int}")]
 		//[ResponseType(typeof(EvaluationProgressResponse))]
-		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
+		public IActionResult GetSkillProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
-			var skill = _evaluationDbController.Get(token, gameId);
-			var completed = _evaluationController.EvaluateProgress(skill, actorId);
-			return new ObjectResult(new EvaluationProgressResponse
-			{
-				Name = skill.Name,
-				Progress = completed,
-			});
-		}
+            var skill = _evaluationController.Get(token, gameId);
+            var progress = _evaluationController.EvaluateProgress(skill, actorId);
+            return new ObjectResult(new EvaluationProgressResponse
+            {
+                Name = skill.Name,
+                Progress = progress,
+            });
+        }
 
 		/// <summary>
 		/// Create a new Skill.
@@ -130,11 +118,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
 		public IActionResult Create([FromBody] EvaluationCreateRequest newSkill)
 		{
-			var skill = newSkill.ToSkillModel();
-			_evaluationDbController.Create(skill);
-			var skillContract = skill.ToContract();
-			return new ObjectResult(skillContract);
-		}
+            var skill = newSkill.ToSkillModel();
+            skill = (Skill)_evaluationController.Create(skill);
+            var achievementContract = skill.ToContract();
+            return new ObjectResult(achievementContract);
+        }
 
 		/// <summary>
 		/// Update an existing Skill.
@@ -147,7 +135,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public void Update([FromBody] EvaluationUpdateRequest skill)
 		{
 			var skillModel = skill.ToSkillModel();
-			_evaluationDbController.Update(skillModel);
+			_evaluationController.Update(skillModel);
 		}
 
 		/// <summary>
@@ -161,7 +149,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpDelete("{token}/{gameId:int}")]
 		public void Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			_evaluationDbController.Delete(token, gameId);
+			_evaluationController.Delete(token, gameId);
 		}
 	}
 }

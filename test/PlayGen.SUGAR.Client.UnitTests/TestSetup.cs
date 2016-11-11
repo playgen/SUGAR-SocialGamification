@@ -1,4 +1,4 @@
-﻿#define DEBUG_SERVER
+﻿//#define DEBUG_SERVER
 using System;
 using System.Diagnostics;
 using System.IO;

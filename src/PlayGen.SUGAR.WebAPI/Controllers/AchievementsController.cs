@@ -94,11 +94,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
 			var achievement = _evaluationController.Get(token, gameId);
-			var completed = _evaluationController.EvaluateProgress(achievement, actorId);
+			var progress = _evaluationController.EvaluateProgress(achievement, actorId);
 			return new ObjectResult(new EvaluationProgressResponse
 			{
 				Name = achievement.Name,
-				Progress = completed,
+				Progress = progress,
 			});
 		}
 
