@@ -33,7 +33,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public Game Search(int id)
+		public Game Get(int id)
 		{
 			using (var context = ContextFactory.Create())
 			{

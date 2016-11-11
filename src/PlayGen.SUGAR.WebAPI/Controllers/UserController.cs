@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult Get([FromRoute]string name, bool exactMatch)
 		{
-			var users = _userCoreController.Get(name, exactMatch);
+			var users = _userCoreController.Search(name, exactMatch);
 			var actorContract = users.ToContractList();
 			return new ObjectResult(actorContract);
 		}

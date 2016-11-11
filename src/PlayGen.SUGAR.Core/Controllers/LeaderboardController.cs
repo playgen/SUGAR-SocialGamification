@@ -177,10 +177,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 			switch (actorType)
 			{
 				case ActorType.User:
-					return UserController.Search(id).Name;
+					return UserController.Get(id).Name;
 
 				case ActorType.Group:
-					return GroupController.Search(id).Name;
+					return GroupController.Get(id).Name;
 
 				default:
 					return "";

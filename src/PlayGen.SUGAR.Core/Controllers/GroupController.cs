@@ -17,17 +17,17 @@ namespace PlayGen.SUGAR.Core.Controllers
             var groups = _groupDbController.Get();
             return groups;
         }
-        
-        public IEnumerable<Group> Get(string name)
-        {
-            var groups = _groupDbController.Search(name);
-            return groups;
-        }
-        
+
         public Group Get(int id)
         {
-            var group = _groupDbController.Search(id);
+            var group = _groupDbController.Get(id);
             return group;
+        }
+
+        public IEnumerable<Group> Search(string name)
+        {
+            var groups = _groupDbController.Get(name);
+            return groups;
         }
         
         public Group Create(Group newGroup)

@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateGroup(groupName);
 
-			var groups = _groupController.Search(groupName);
+			var groups = _groupController.Get(groupName);
 
 			var matches = groups.Count(g => g.Name == groupName);
 
@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			CreateGroup("GetMultiple_Groups_DontGetThis");
 
-			var groups = _groupController.Search("GetMultipleGroups");
+			var groups = _groupController.Get("GetMultipleGroups");
 
 			var matchingGroups = groups.Select(g => groupNames.Contains(g.Name));
 
@@ -66,7 +66,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingGroup()
 		{
-			var groups = _groupController.Search("GetNonExsitingGroup");
+			var groups = _groupController.Get("GetNonExsitingGroup");
 
 			Assert.Empty(groups);
 		}
@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var id = newGroup.Id;
 
-			var group = _groupController.Search(id);
+			var group = _groupController.Get(id);
 
 			Assert.NotNull(group);
 			Assert.Equal(newGroup.Name, group.Name);
@@ -87,7 +87,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingGroupById()
 		{
-			var group = _groupController.Search(-1);
+			var group = _groupController.Get(-1);
 
 			Assert.Null(group);
 		}
@@ -99,7 +99,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newGroup = CreateGroup(groupName);
 
-			var groups = _groupController.Search(groupName);
+			var groups = _groupController.Get(groupName);
 
 			var matches = groups.Count(g => g.Name == groupName);
 
@@ -113,7 +113,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			_groupController.Update(updateGroup);
 
-			var updatedGroup = _groupController.Search(newGroup.Id);
+			var updatedGroup = _groupController.Get(newGroup.Id);
 
 			Assert.Equal("UpdateExistingGroupProof", updatedGroup.Name);
 		}
@@ -155,12 +155,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var group = CreateGroup(groupName);
 
-			var groups = _groupController.Search(groupName);
+			var groups = _groupController.Get(groupName);
 			Assert.Equal(groups.Count(), 1);
 			Assert.Equal(groups.ElementAt(0).Name, groupName);
 
 			_groupController.Delete(group.Id);
-			groups = _groupController.Search(groupName);
+			groups = _groupController.Get(groupName);
 
 			Assert.Empty(groups);
 		}

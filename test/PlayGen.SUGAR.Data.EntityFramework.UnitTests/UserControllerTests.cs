@@ -79,7 +79,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var id = newUser.Id;
 
-			var user = _userController.Search(id);
+			var user = _userController.Get(id);
 
 			Assert.NotNull(user);
 			Assert.Equal(newUser.Name, user.Name);
@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingUserById()
 		{
-			var user = _userController.Search(-1);
+			var user = _userController.Get(-1);
 
 			Assert.Null(user);
 		}
@@ -114,7 +114,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			_userController.Update(updateUser);
 
-			var updatedUser = _userController.Search(newUser.Id);
+			var updatedUser = _userController.Get(newUser.Id);
 
 			Assert.Equal("UpdateExistingUserProof", updatedUser.Name);
 		}

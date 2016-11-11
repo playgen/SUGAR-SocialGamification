@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<GameResponse>))]
 		public IActionResult Get([FromRoute]string name)
 		{
-			var games = _gameCoreController.Get(name);
+			var games = _gameCoreController.Search(name);
 			var gameContract = games.ToContractList();
 			return new ObjectResult(gameContract);
 		}

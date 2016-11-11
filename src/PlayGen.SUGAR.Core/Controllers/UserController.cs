@@ -17,17 +17,17 @@ namespace PlayGen.SUGAR.Core.Controllers
             var users = _userController.Get();
             return users;
         }
-        
-        public IEnumerable<User> Get(string name, bool exactMatch)
+
+        public User Get(int id)
+        {
+            var user = _userController.Get(id);
+            return user;
+        }
+
+        public IEnumerable<User> Search(string name, bool exactMatch)
         {
             var users = _userController.Search(name, exactMatch);
             return users;
-        }
-        
-        public User Get(int id)
-        {
-            var user = _userController.Search(id);
-            return user;
         }
         
         public User Create(User newUser)

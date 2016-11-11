@@ -17,17 +17,17 @@ namespace PlayGen.SUGAR.Core.Controllers
             var games = _gameDbController.Get();
             return games;
         }
-            
-        public IEnumerable<Game> Get(string name)
+
+        public Game Get(int id)
+        {
+            var game = _gameDbController.Get(id);
+            return game;
+        }
+
+        public IEnumerable<Game> Search(string name)
         {
             var games = _gameDbController.Search(name);
             return games;
-        }
-            
-        public Game Get(int id)
-        {
-            var game = _gameDbController.Search(id);
-            return game;
         }
         
         public Game Create(Game newGame)

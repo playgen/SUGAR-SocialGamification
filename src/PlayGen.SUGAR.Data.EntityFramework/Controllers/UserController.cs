@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public User Search(int id)
+		public User Get(int id)
 		{
 			using (var context = ContextFactory.Create())
 			{

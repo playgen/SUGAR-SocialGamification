@@ -651,7 +651,7 @@ namespace PlayGen.SUGAR.GameData.UnitTests
 
             _groupController.Create(group);
 
-            group = _groupController.Search(group.Name).ElementAt(0);
+            group = _groupController.Get(group.Name).ElementAt(0);
 
             foreach (var user in users)
             {

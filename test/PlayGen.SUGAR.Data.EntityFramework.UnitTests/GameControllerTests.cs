@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var id = newGame.Id;
 
-			var game = _gameController.Search(id);
+			var game = _gameController.Get(id);
 
 			Assert.NotNull(game);
 			Assert.Equal(newGame.Name, game.Name);
@@ -87,7 +87,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingGameById()
 		{
-			var game = _gameController.Search(-1);
+			var game = _gameController.Get(-1);
 
 			Assert.Null(game);
 		}
@@ -113,7 +113,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			_gameController.Update(updateGame);
 
-			var updatedGame = _gameController.Search(newGame.Id);
+			var updatedGame = _gameController.Get(newGame.Id);
 
 			Assert.Equal("UpdateExistingGameProof", updatedGame.Name);
 		}
