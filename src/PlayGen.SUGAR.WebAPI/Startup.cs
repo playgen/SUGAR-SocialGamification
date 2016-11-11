@@ -16,7 +16,9 @@ using NLog.Extensions.Logging;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.WebAPI.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -24,6 +26,8 @@ namespace PlayGen.SUGAR.WebAPI
 	{
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+        const string TokenAudience = "SUGAR";
+        const string TokenIssuer = "Players";
         private RsaSecurityKey key;
         private TokenAuthOptions tokenOptions;
 
@@ -82,6 +86,8 @@ namespace PlayGen.SUGAR.WebAPI
             }
             tokenOptions = new TokenAuthOptions()
             {
+                Audience = TokenAudience,
+                Issuer = TokenIssuer,
                 SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature)
             };
             services.AddSingleton(tokenOptions);
@@ -128,10 +134,38 @@ namespace PlayGen.SUGAR.WebAPI
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 
-			app.UseCors("AllowAll");
-			app.UseApplicationInsightsRequestTelemetry();
-			app.UseApplicationInsightsExceptionTelemetry();
-			app.UseMvc();
+            app.UseExceptionHandler(appBuilder =>
+            {
+                appBuilder.Use(async (context, next) =>
+                {
+                    var error = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
+                    // This should be much more intelligent - at the moment only expired 
+                    // security tokens are caught - might be worth checking other possible 
+                    // exceptions such as an invalid signature.
+                    if (error != null && error.Error is SecurityTokenExpiredException)
+                    {
+                        context.Response.StatusCode = 401;
+                        // What you choose to return here is up to you, in this case a simple 
+                        // bit of JSON to say you're no longer authenticated.
+                        context.Response.ContentType = "application/json";
+                        await context.Response.WriteAsync(
+                            JsonConvert.SerializeObject(
+                                new { authenticated = false, tokenExpired = true }));
+                    }
+                    else if (error != null && error.Error != null)
+                    {
+                        context.Response.StatusCode = 500;
+                        context.Response.ContentType = "application/json";
+                        // TODO: Shouldn't pass the exception message straight out, change this.
+                        await context.Response.WriteAsync(
+                            JsonConvert.SerializeObject
+                            (new { success = false, error = error.Error.Message }));
+                    }
+                    // We're not trying to handle anything else so just let the default 
+                    // handler handle.
+                    else await next();
+                });
+            });
 
             app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
@@ -153,6 +187,11 @@ namespace PlayGen.SUGAR.WebAPI
                     ClockSkew = TimeSpan.FromMinutes(0),
                 }
             });
+
+            app.UseCors("AllowAll");
+            app.UseApplicationInsightsRequestTelemetry();
+            app.UseApplicationInsightsExceptionTelemetry();
+            app.UseMvc();
 
             ConfigureDocumentationGenerator(app);
 		}

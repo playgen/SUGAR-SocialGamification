@@ -25,6 +25,7 @@
         "PlayGen.SUGAR.GameData": "1.0.0-*",
         "Swashbuckle": "6.0.0-beta901",
         "PlayGen.SUGAR.ServerAuthentication": "1.0.0-*",
+        "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     },
 
   "tools": {

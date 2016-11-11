@@ -1,13 +1,17 @@
 ﻿using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 
-public class AuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, int>
+namespace PlayGen.SUGAR.ServerAuthentication
 {
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, OperationAuthorizationRequirement requirement, int resource)
+    public class AuthorizationHandler : AuthorizationHandler<AuthRequirement, int>
     {
-        //todo: check against claims in db
-        context.Succeed(requirement);
-        return Task.CompletedTask;
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthRequirement requirement, int resource)
+        {
+            //todo: check against claims in db
+            context.Succeed(requirement);
+            return Task.CompletedTask;
+        }
     }
 }

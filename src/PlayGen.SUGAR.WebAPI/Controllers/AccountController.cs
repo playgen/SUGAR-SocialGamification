@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			}
 
 			var token = CreateToken(account);
-			//HttpContext.Response.SetAuthorizationToken(token);
+			HttpContext.Response.SetAuthorizationToken(token);
 
 			var response = account.ToContract();
 			return new ObjectResult(response);
@@ -98,8 +98,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			if (accountRequest.AutoLogin)
 			{
 				var token = CreateToken(account);
-				HttpContext.Response.SetAuthorizationToken(token);
-			}
+                HttpContext.Response.SetAuthorizationToken(token);
+            }
 			return new ObjectResult(response);
 		}
 
@@ -160,7 +160,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return _accountDbController.Create(newAccount);
 		}
 
-		private dynamic CreateToken(Account account)
+		private string CreateToken(Account account)
 		{
             return _tokenController.CreateToken(account.UserId);
 
