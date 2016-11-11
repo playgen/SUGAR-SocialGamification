@@ -23,6 +23,7 @@ namespace PlayGen.SUGAR.WebAPI
             services.AddScoped<ActorPermissionController>();
             services.AddScoped<PermissionController>();
             services.AddScoped<TokenController>();
+            services.AddScoped<ClaimController>();
         }
     }
 }

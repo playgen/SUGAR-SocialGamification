@@ -20,6 +20,8 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
 
+using PlayGen.SUGAR.Core.Authorization;
+
 namespace PlayGen.SUGAR.WebAPI
 {
 	public partial class Startup
@@ -126,7 +128,8 @@ namespace PlayGen.SUGAR.WebAPI
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
 			ConfigureDocumentationGeneratorServices(services);
-		}
+            ConfigureAuthorization(services);
+        }
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

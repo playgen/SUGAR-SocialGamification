@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		public DbSet<UserToGroupRelationship> UserToGroupRelationships { get; set; }
 
 		public DbSet<Leaderboard> Leaderboards { get; set; }
-		public DbSet<Claim> Permissions { get; set; }
+		public DbSet<Claim> Claims { get; set; }
 		public DbSet<ActorClaim> ActorPermissions { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
