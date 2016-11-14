@@ -23,6 +23,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
+        public Claim Get(ClaimScope scope, string name)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                var claim = context.Claims.FirstOrDefault(c => c.PermissionType == scope && c.Token == name);
+                return claim;
+            }
+        }
+
         public void Create(IEnumerable<Claim> claims)
         {
             using (var context = ContextFactory.Create())

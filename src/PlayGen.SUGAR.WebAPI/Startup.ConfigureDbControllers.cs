@@ -20,8 +20,7 @@ namespace PlayGen.SUGAR.WebAPI
             services.AddScoped<GroupRelationshipController>();
             services.AddScoped<UserRelationshipController>();
             services.AddScoped<ActorDataController>();
-            services.AddScoped<ActorPermissionController>();
-            services.AddScoped<PermissionController>();
+            services.AddScoped<ActorClaimController>();
             services.AddScoped<TokenController>();
             services.AddScoped<ClaimController>();
         }

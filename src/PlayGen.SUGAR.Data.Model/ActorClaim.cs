@@ -6,9 +6,9 @@
 
         public Actor Actor { get; set; }
 
-        public int PermissionId { get; set; }
+        public int ClaimId { get; set; }
 
-        public Claim Permission { get; set; }
+        public Claim Claim { get; set; }
 
         public int EntityId { get; set; }
     }

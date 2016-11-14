@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
                 .HasKey(k => new { k.RequestorId, k.AcceptorId });
 
             builder.Entity<ActorClaim>()
-                .HasKey(k => new { k.ActorId, k.PermissionId, k.EntityId });
+                .HasKey(k => new { k.ActorId, k.ClaimId, k.EntityId });
         }
 
         internal static void ConfigureIndexes(this ModelBuilder builder)
