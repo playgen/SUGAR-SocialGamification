@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PlayGen.SUGAR.Contracts;
+
+using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
 using PlayGen.SUGAR.ServerAuthentication.Extensions;
@@ -19,6 +18,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Route("api/[controller]")]
 	public class AccountController : Controller
 	{
+        private readonly IAuthorizationService _authorizationService;
         private readonly TokenController _tokenController;
         private readonly Core.Controllers.AccountController _accountCoreController;
 
@@ -30,10 +30,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <param name="passwordEncryption"></param>
         public AccountController(Core.Controllers.AccountController accountCoreController,
                     Data.EntityFramework.Controllers.UserController userDbController,
-                    TokenController tokenController)
+                    TokenController tokenController,
+                    IAuthorizationService authorizationService)
         {
             _accountCoreController = accountCoreController;
             _tokenController = tokenController;
+            _authorizationService = authorizationService;
         }
 		
 		//Todo: Move log-in into a separate controller
@@ -129,10 +131,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Account ID.</param>
 		[HttpDelete("{id:int}")]
-		[Authorization]
-		public void Delete([FromRoute]int id)
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.Account)]
+        public void Delete([FromRoute]int id)
 		{
-            _accountCoreController.Delete(id);
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                _accountCoreController.Delete(id);
+            }
 		}
 		
 		#region Helpers

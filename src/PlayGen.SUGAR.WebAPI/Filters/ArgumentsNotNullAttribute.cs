@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 	{
 		public override void OnActionExecuting(ActionExecutingContext context)
 		{
-			if (context.ActionArguments.Count == 0)
+            if (context.ActionArguments.Count == 0)
 			{
 				context.Result = new BadRequestObjectResult("An argument must be supplied.");
 			}

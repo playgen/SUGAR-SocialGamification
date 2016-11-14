@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
@@ -10,15 +14,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates User to Group relationship specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	[Authorization]
 	public class GroupMemberController : Controller
 	{
-		private readonly Core.Controllers.GroupMemberController _groupMemberCoreController;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly Core.Controllers.GroupMemberController _groupMemberCoreController;
 
-		public GroupMemberController(Core.Controllers.GroupMemberController groupMemberCoreController)
+		public GroupMemberController(Core.Controllers.GroupMemberController groupMemberCoreController,
+                    IAuthorizationService authorizationService)
 		{
 			_groupMemberCoreController = groupMemberCoreController;
-		}
+            _authorizationService = authorizationService;
+        }
 
 		/// <summary>
 		/// Get a list of all Users that have relationship requests for this <param name="groupId"/>.
@@ -28,13 +34,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("requests/{groupId:int}")]
-		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
-		public IActionResult GetMemberRequests([FromRoute]int groupId)
+        //[ResponseType(typeof(IEnumerable<ActorResponse>))]
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Get, AuthorizationOperation.GroupMemberRequest)]
+        public IActionResult GetMemberRequests([FromRoute]int groupId)
 		{
-			var users = _groupMemberCoreController.GetMemberRequests(groupId);
-			var actorContract = users.ToContractList();
-			return new ObjectResult(actorContract);
-		}
+            if (_authorizationService.AuthorizeAsync(User, groupId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var users = _groupMemberCoreController.GetMemberRequests(groupId);
+                var actorContract = users.ToContractList();
+                return new ObjectResult(actorContract);
+            }
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Get a list of all Groups that have been sent relationship requests for this <param name="userId"/>.
@@ -44,13 +55,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("sentrequests/{userId:int}")]
-		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
-		public IActionResult GetSentRequests([FromRoute]int userId)
+        //[ResponseType(typeof(IEnumerable<ActorResponse>))]
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Get, AuthorizationOperation.GroupMemberRequest)]
+        public IActionResult GetSentRequests([FromRoute]int userId)
 		{
-			var requests = _groupMemberCoreController.GetSentRequests(userId);
-			var actorContract = requests.ToContractList();
-			return new ObjectResult(actorContract);
-		}
+            if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var requests = _groupMemberCoreController.GetSentRequests(userId);
+                var actorContract = requests.ToContractList();
+                return new ObjectResult(actorContract);
+            }
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Get a list of all Users that have relationships with this <param name="groupId"/>.
@@ -95,13 +111,19 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(RelationshipResponse))]
 		[ArgumentsNotNull]
-		public IActionResult CreateMemberRequest([FromBody]RelationshipRequest relationship)
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Create, AuthorizationOperation.GroupMemberRequest)]
+        public IActionResult CreateMemberRequest([FromBody]RelationshipRequest relationship)
 		{
-			var request = relationship.ToGroupModel();
-			_groupMemberCoreController.CreateMemberRequest(relationship.ToGroupModel(), relationship.AutoAccept);
-			var relationshipContract = request.ToContract();
-			return new ObjectResult(relationshipContract);
-		}
+            if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var request = relationship.ToGroupModel();
+                _groupMemberCoreController.CreateMemberRequest(relationship.ToGroupModel(), relationship.AutoAccept);
+                var relationshipContract = request.ToContract();
+                return new ObjectResult(relationshipContract);
+            }
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Update an existing relationship request between <param name="relationship.UserId"/> and <param name="relationship.GroupId"/>.
@@ -112,13 +134,19 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut("request")]
 		[ArgumentsNotNull]
-		public void UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Update, AuthorizationOperation.GroupMemberRequest)]
+        public void UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
-			var relation = new RelationshipRequest {
-				RequestorId = relationship.RequestorId,
-				AcceptorId = relationship.AcceptorId
-			};
-			_groupMemberCoreController.UpdateMemberRequest(relation.ToGroupModel(), relationship.Accepted);
+            if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var relation = new RelationshipRequest
+                {
+                    RequestorId = relationship.RequestorId,
+                    AcceptorId = relationship.AcceptorId
+                };
+                _groupMemberCoreController.UpdateMemberRequest(relation.ToGroupModel(), relationship.Accepted);
+            }
 		}
 
 		/// <summary>
@@ -130,14 +158,19 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut]
 		[ArgumentsNotNull]
-		public void UpdateMember([FromBody] RelationshipStatusUpdate relationship)
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.GroupMember)]
+        public void UpdateMember([FromBody] RelationshipStatusUpdate relationship)
 		{
-			var relation = new RelationshipRequest
-			{
-				RequestorId = relationship.RequestorId,
-				AcceptorId = relationship.AcceptorId
-			};
-			_groupMemberCoreController.UpdateMember(relation.ToGroupModel());
+            if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var relation = new RelationshipRequest
+                {
+                    RequestorId = relationship.RequestorId,
+                    AcceptorId = relationship.AcceptorId
+                };
+                _groupMemberCoreController.UpdateMember(relation.ToGroupModel());
+            }
 		}
 	}
 }

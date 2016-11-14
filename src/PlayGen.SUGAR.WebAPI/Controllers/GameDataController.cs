@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.WebAPI.Extensions;
@@ -10,16 +14,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates GameData specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	[Authorization]
 	public class GameDataController : Controller
 	{
-		 private readonly Data.EntityFramework.Controllers.GameDataController _gameDataCoreController;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly Data.EntityFramework.Controllers.GameDataController _gameDataCoreController;
 
-
-		public GameDataController(Data.EntityFramework.Controllers.GameDataController gameDataCoreController)
+		public GameDataController(Data.EntityFramework.Controllers.GameDataController gameDataCoreController,
+                    IAuthorizationService authorizationService)
 		{
 			_gameDataCoreController = gameDataCoreController;
-		}
+            _authorizationService = authorizationService;
+        }
 
 		/// <summary>
 		/// Find a list of all GameData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
@@ -31,13 +36,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="key">Array of Key names.</param>
 		/// <returns>A list of <see cref="GameDataResponse"/> which match the search criteria.</returns>
 		[HttpGet]
-		//[ResponseType(typeof(IEnumerable<GameDataResponse>))]
-		public IActionResult Get(int? actorId, int? gameId, string[] key)
+        //[ResponseType(typeof(IEnumerable<GameDataResponse>))]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
+        public IActionResult Get(int? actorId, int? gameId, string[] key)
 		{
-			var data = _gameDataCoreController.Get(gameId, actorId, key);
-			var dataContract = data.ToContractList();
-			return new ObjectResult(dataContract);
-		}
+            if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var data = _gameDataCoreController.Get(gameId, actorId, key);
+                var dataContract = data.ToContractList();
+                return new ObjectResult(dataContract);
+            }
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Create a new GameData record.
@@ -49,12 +59,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(GameDataResponse))]
 		[ArgumentsNotNull]
-		public IActionResult Add([FromBody]GameDataRequest newData)
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.GameData)]
+        public IActionResult Add([FromBody]GameDataRequest newData)
 		{
-			var data = newData.ToModel();
-			_gameDataCoreController.Create(data);
-			var dataContract = data.ToContract();
-			return new ObjectResult(dataContract);
-		}
+            if (_authorizationService.AuthorizeAsync(User, newData.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var data = newData.ToModel();
+                _gameDataCoreController.Create(data);
+                var dataContract = data.ToContract();
+                return new ObjectResult(dataContract);
+            }
+            return Unauthorized();
+        }
 	}
 }

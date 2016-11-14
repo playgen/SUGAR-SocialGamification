@@ -40,6 +40,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PlayGen.SUGAR.Common.Shared
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.Core", "src\PlayGen.SUGAR.Core\PlayGen.SUGAR.Core.xproj", "{0B4E1081-D98E-445C-BCF0-45CB611315B0}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PlayGen.SUGAR.Authorization", "src\PlayGen.SUGAR.Authorization\PlayGen.SUGAR.Authorization.xproj", "{B20AB524-A5F4-4A80-94CF-4AE2329BF486}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\PlayGen.SUGAR.Common.Shared\PlayGen.SUGAR.Common.Shared.projitems*{a2dcba7a-e50f-4ca3-b521-8b42e77c4e38}*SharedItemsImports = 13
@@ -173,6 +175,16 @@ Global
 		{0B4E1081-D98E-445C-BCF0-45CB611315B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0B4E1081-D98E-445C-BCF0-45CB611315B0}.UnitTest|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B4E1081-D98E-445C-BCF0-45CB611315B0}.UnitTest|Any CPU.Build.0 = Debug|Any CPU
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486}.Debug_Ubuntu|Any CPU.ActiveCfg = Debug|Any CPU
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486}.Debug_Ubuntu|Any CPU.Build.0 = Debug|Any CPU
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486}.Release_Ubuntu|Any CPU.ActiveCfg = Release|Any CPU
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486}.Release_Ubuntu|Any CPU.Build.0 = Release|Any CPU
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486}.UnitTest|Any CPU.ActiveCfg = Debug|Any CPU
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486}.UnitTest|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -192,5 +204,6 @@ Global
 		{0E8E0BEE-72CA-474C-B323-00B012CBE1A1} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
 		{A2DCBA7A-E50F-4CA3-B521-8B42E77C4E38} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
 		{0B4E1081-D98E-445C-BCF0-45CB611315B0} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
+		{B20AB524-A5F4-4A80-94CF-4AE2329BF486} = {34A667C4-FE02-42C8-AF61-5D9D54525F3E}
 	EndGlobalSection
 EndGlobal

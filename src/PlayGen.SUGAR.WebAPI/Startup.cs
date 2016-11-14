@@ -19,8 +19,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
-
-using PlayGen.SUGAR.Core.Authorization;
+using PlayGen.SUGAR.Authorization;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -95,7 +94,6 @@ namespace PlayGen.SUGAR.WebAPI
             services.AddSingleton(tokenOptions);
 
 			services.AddScoped((_) => new PasswordEncryption());
-			services.AddScoped<AuthorizationAttribute>();
 			services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddAuthorization(auth =>
@@ -112,7 +110,6 @@ namespace PlayGen.SUGAR.WebAPI
 			{
 				options.Filters.Add(new ModelValidationFilter());
 				options.Filters.Add(new ExceptionFilter());
-				options.Filters.Add(typeof(AuthorizationHeaderFilter));
 
 			})
 			.AddJsonOptions(json =>

@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
@@ -10,15 +14,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates User specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	[Authorization]
 	public class UserController : Controller
 	{
-		private readonly Core.Controllers.UserController _userCoreController;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly Core.Controllers.UserController _userCoreController;
 
-		public UserController(Core.Controllers.UserController userCoreController)
+		public UserController(Core.Controllers.UserController userCoreController,
+                    IAuthorizationService authorizationService)
 		{
 			_userCoreController = userCoreController;
-		}
+            _authorizationService = authorizationService;
+        }
 
 		/// <summary>
 		/// Get a list of all Users.
@@ -27,13 +33,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <returns>A list of <see cref="ActorResponse"/> that hold User details.</returns>
 		[HttpGet("list")]
-		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
-		public IActionResult Get()
+        //[ResponseType(typeof(IEnumerable<ActorResponse>))]
+        [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.User)]
+        public IActionResult Get()
 		{
-			var users = _userCoreController.Get();
-			var actorContract = users.ToContractList();
-			return new ObjectResult(actorContract);
-		}
+            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var users = _userCoreController.Get();
+                var actorContract = users.ToContractList();
+                return new ObjectResult(actorContract);
+            }
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Get a list of Users that match <param name="name"/> provided.
@@ -79,13 +90,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(ActorResponse))]
 		[ArgumentsNotNull]
-		public IActionResult Create([FromBody]ActorRequest actor)
+        [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.User)]
+        public IActionResult Create([FromBody]ActorRequest actor)
 		{
-			var user = actor.ToUserModel();
-			_userCoreController.Create(user);
-			var actorContract = user.ToContract();
-			return new ObjectResult(actorContract);
-		}
+            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var user = actor.ToUserModel();
+                _userCoreController.Create(user);
+                var actorContract = user.ToContract();
+                return new ObjectResult(actorContract);
+            }
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Update an existing User.
@@ -96,11 +112,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="user"><see cref="ActorRequest"/> object that holds the details of the User.</param>
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
-		public void Update([FromRoute] int id, [FromBody] ActorRequest user)
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Update, AuthorizationOperation.User)]
+        public void Update([FromRoute] int id, [FromBody] ActorRequest user)
 		{
-			var userModel = user.ToUserModel();
-			userModel.Id = id;
-			_userCoreController.Update(userModel);
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var userModel = user.ToUserModel();
+                userModel.Id = id;
+                _userCoreController.Update(userModel);
+            }
 		}
 
 		/// <summary>
@@ -110,9 +130,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">User ID.</param>
 		[HttpDelete("{id:int}")]
-		public void Delete([FromRoute]int id)
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.User)]
+        public void Delete([FromRoute]int id)
 		{
-			_userCoreController.Delete(id);
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                _userCoreController.Delete(id);
+            }
 		}
 	}
 }

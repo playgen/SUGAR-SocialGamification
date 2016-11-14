@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using PlayGen.SUGAR.Common.Shared.Permissions;
 using System.Linq;
+using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Authorization
@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Core.Authorization
             _claimDbController = claimDbController;
         }
 
-        public void GetAuthOperations()
+        public void GetAuthorizationOperations()
         {
             var dbOperations = _claimDbController.Get();
             var currentOperations = new List<Claim>();
@@ -25,14 +25,17 @@ namespace PlayGen.SUGAR.Core.Authorization
             {
                 foreach (var method in type.GetMethods())
                 {
-                    var operation = method.GetCustomAttributes(typeof(AuthOperation), false).SingleOrDefault() as AuthOperation;
+                    var operation = method.GetCustomAttributes(typeof(AuthorizationAttribute), false).SingleOrDefault() as AuthorizationAttribute;
                     if (operation != null)
                     {
-                        currentOperations.Add(new Claim {PermissionType = operation.ClaimScope, Token = operation.Name});
+                        if (!currentOperations.Any(co => co.Token == operation.Name && co.PermissionType == operation.ClaimScope))
+                        {
+                            currentOperations.Add(new Claim { PermissionType = operation.ClaimScope, Token = operation.Name });
+                        }
                     }
                 }
             }
-            var newOperations = currentOperations.Where(o => dbOperations.All(db => db.Token != o.Token && db.PermissionType != o.PermissionType)).ToList();
+            var newOperations = currentOperations.Where(o => !dbOperations.Any(db => db.Token == o.Token && db.PermissionType == o.PermissionType)).ToList();
             _claimDbController.Create(newOperations);
         }
     }

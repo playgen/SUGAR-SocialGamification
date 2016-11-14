@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.WebAPI
             services.AddScoped<ClaimController>();
             var container = services.BuildServiceProvider();
             var claimController = container.GetService<ClaimController>();
-            claimController.GetAuthOperations();
+            claimController.GetAuthorizationOperations();
         }
     }
 }
