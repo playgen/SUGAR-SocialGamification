@@ -57,7 +57,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(GameDataResponse))]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.GameData)]
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Create, AuthorizationOperation.GameData)]
         public IActionResult Add([FromBody]GameDataRequest newData)
 		{
             if (_authorizationService.AuthorizeAsync(User, newData.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)

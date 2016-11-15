@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(ResourceResponse))]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Resource)]
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Create, AuthorizationOperation.Resource)]
         public IActionResult AddOrUpdate([FromBody]ResourceAddRequest resourceRequest)
 		{
             if (_authorizationService.AuthorizeAsync(User, resourceRequest.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost("transfer")]
 		//[ResponseType(typeof(ResourceTransferResponse))]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Resource)]
+        [Authorization(ClaimScope.Actor, AuthorizationOperation.Update, AuthorizationOperation.Resource)]
         public IActionResult Transfer([FromBody] ResourceTransferRequest transferRequest)
 		{
             if (_authorizationService.AuthorizeAsync(User, transferRequest.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)

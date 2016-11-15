@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Authorization
@@ -9,10 +11,16 @@ namespace PlayGen.SUGAR.Core.Authorization
     public class ClaimController
     {
         private readonly Data.EntityFramework.Controllers.ClaimController _claimDbController;
+        private readonly Data.EntityFramework.Controllers.RoleController _roleDbController;
+        private readonly Data.EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
 
-        public ClaimController(Data.EntityFramework.Controllers.ClaimController claimDbController)
+        public ClaimController(Data.EntityFramework.Controllers.ClaimController claimDbController,
+                    Data.EntityFramework.Controllers.RoleController roleDbController,
+                    Data.EntityFramework.Controllers.RoleClaimController roleClaimDbController)
         {
             _claimDbController = claimDbController;
+            _roleDbController = roleDbController;
+            _roleClaimDbController = roleClaimDbController;
         }
 
         public void GetAuthorizationClaims()
@@ -36,7 +44,22 @@ namespace PlayGen.SUGAR.Core.Authorization
                 }
             }
             var newOperations = currentOperations.Where(o => !dbOperations.Any(db => db.Token == o.Token && db.ClaimScope == o.ClaimScope)).ToList();
-            _claimDbController.Create(newOperations);
+            newOperations = _claimDbController.Create(newOperations).ToList();
+
+            var roles = _roleDbController.Get().ToList();
+            foreach (var claimScope in Enum.GetValues(typeof(ClaimScope)))
+            {
+                if (!roles.Select(r => r.Name).Contains(claimScope.ToString()))
+                {
+                    roles.Add(_roleDbController.Create(new Role { Name = claimScope.ToString() }));
+                }
+            }
+
+            foreach (var op in newOperations)
+            {
+                var role = roles.FirstOrDefault(r => r.Name == op.ClaimScope.ToString());
+                _roleClaimDbController.Create(new RoleClaim { RoleId = role.Id, ClaimId = op.Id });
+            }
         }
     }
 }

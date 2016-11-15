@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <returns>A list of <see cref="ActorRoleResponse"/> that hold ActorRole details.</returns>
         [HttpGet("role/{roleId:int}/entity/{entityId:int}")]
         //[ResponseType(typeof(IEnumerable<ActorRoleResponse>))]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
+        [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
         public IActionResult GetRoleActors([FromRoute]int roleId, [FromRoute]int entityId)
         {
             if (_authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)

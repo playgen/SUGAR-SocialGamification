@@ -41,12 +41,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-        public void Create(IEnumerable<Claim> claims)
+        public IEnumerable<Claim> Create(IEnumerable<Claim> claims)
         {
             using (var context = ContextFactory.Create())
             {
-                context.Claims.AddRange(claims);
+                var claimList = claims as List<Claim> ?? claims.ToList();
+                context.Claims.AddRange(claimList);
                 SaveChanges(context);
+
+                return claimList;
             }
         }
     }
