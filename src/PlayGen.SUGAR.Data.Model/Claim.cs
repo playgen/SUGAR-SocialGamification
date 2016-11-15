@@ -10,6 +10,6 @@ namespace PlayGen.SUGAR.Data.Model
 
         public string Description { get; set; }
 
-        public ClaimScope PermissionType { get; set; }
+        public ClaimScope ClaimScope { get; set; }
     }
 }

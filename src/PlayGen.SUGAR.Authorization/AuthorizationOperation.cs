@@ -19,6 +19,7 @@
         public const string Leaderboard = "Leaderboard";
         public const string Resource = "Resource";
         public const string Role = "Role";
+        public const string RoleClaim = "RoleClaim";
         public const string User = "User";
         public const string UserFriendRequest = "UserFriendRequest";
         public const string UserFriend = "UserFriend";

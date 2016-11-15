@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.Core.Authorization
             if (claim != null)
             {
                 var roles = _actorRoleDbController.GetActorRolesForEntity(int.Parse(context.User.Identity.Name), entityId);
-                var claims = _roleClaimDbController.GetByRoles(roles.Select(r => r.Id));
+                var claims = _roleClaimDbController.GetClaimsByRoles(roles.Select(r => r.Id));
                 if (claims.Any(c => c.Id == claim.Id))
                 {
                     context.Succeed(requirement);

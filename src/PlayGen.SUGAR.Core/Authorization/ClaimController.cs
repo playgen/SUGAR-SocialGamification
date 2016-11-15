@@ -28,14 +28,14 @@ namespace PlayGen.SUGAR.Core.Authorization
                     var operation = method.GetCustomAttributes(typeof(AuthorizationAttribute), false).SingleOrDefault() as AuthorizationAttribute;
                     if (operation != null)
                     {
-                        if (!currentOperations.Any(co => co.Token == operation.Name && co.PermissionType == operation.ClaimScope))
+                        if (!currentOperations.Any(co => co.Token == operation.Name && co.ClaimScope == operation.ClaimScope))
                         {
-                            currentOperations.Add(new Claim { PermissionType = operation.ClaimScope, Token = operation.Name });
+                            currentOperations.Add(new Claim { ClaimScope = operation.ClaimScope, Token = operation.Name });
                         }
                     }
                 }
             }
-            var newOperations = currentOperations.Where(o => !dbOperations.Any(db => db.Token == o.Token && db.PermissionType == o.PermissionType)).ToList();
+            var newOperations = currentOperations.Where(o => !dbOperations.Any(db => db.Token == o.Token && db.ClaimScope == o.ClaimScope)).ToList();
             _claimDbController.Create(newOperations);
         }
     }
