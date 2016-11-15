@@ -77,8 +77,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
             builder.Entity<UserToGroupRelationship>()
                 .HasKey(k => new { k.RequestorId, k.AcceptorId });
 
-            builder.Entity<ActorClaim>()
-                .HasKey(k => new { k.ActorId, k.ClaimId, k.EntityId });
+            builder.Entity<RoleClaim>()
+                .HasKey(k => new { k.RoleId, k.ClaimId });
         }
 
         internal static void ConfigureIndexes(this ModelBuilder builder)
@@ -89,6 +89,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 
             builder.Entity<Evaluation>()
                 .HasIndex(e => new { e.Token, e.GameId, e.ActorType });
+
+            builder.Entity<ActorRole>()
+                .HasIndex(a => new { a.ActorId, a.EntityId, a.RoleId });
 
             // Unique
             builder.Entity<Game>()
@@ -105,6 +108,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 
             builder.Entity<Account>()
                 .HasIndex(a => a.Name)
+                .IsUnique();
+
+            builder.Entity<Role>()
+                .HasIndex(r => r.Name)
                 .IsUnique();
         }
 

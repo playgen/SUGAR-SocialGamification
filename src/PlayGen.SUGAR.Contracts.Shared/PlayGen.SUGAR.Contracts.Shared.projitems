@@ -13,6 +13,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)AccountResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorRoleRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorRoleResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCreateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaUpdateRequest.cs" />
@@ -40,5 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)RewardUpdateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RewardResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RewardCreateRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RoleRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RoleResponse.cs" />
   </ItemGroup>
 </Project>

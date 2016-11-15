@@ -42,7 +42,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 		public DbSet<Leaderboard> Leaderboards { get; set; }
 		public DbSet<Claim> Claims { get; set; }
-		public DbSet<ActorClaim> ActorClaims { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<RoleClaim> RoleClaims { get; set; }
+        public DbSet<ActorRole> ActorRoles { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

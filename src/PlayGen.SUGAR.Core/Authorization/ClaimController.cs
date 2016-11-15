@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Core.Authorization
             _claimDbController = claimDbController;
         }
 
-        public void GetAuthorizationOperations()
+        public void GetAuthorizationClaims()
         {
             var dbOperations = _claimDbController.Get();
             var currentOperations = new List<Claim>();
