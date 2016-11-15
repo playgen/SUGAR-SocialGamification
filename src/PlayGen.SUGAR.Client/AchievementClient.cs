@@ -105,23 +105,23 @@ namespace PlayGen.SUGAR.Client
 			return Get<EvaluationProgressResponse>(query);
 		}
 
-		/// <summary>
-		/// Create a new Achievement.
-		/// Requires <see cref="EvaluationRequest.Name"/> to be unique to that <see cref="EvaluationRequest.GameId"/>.
-		/// </summary>
-		/// <param name="newAchievement"><see cref="EvaluationRequest"/> object that holds the details of the new Achievement.</param>
-		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
-		public EvaluationResponse Create(EvaluationCreateRequest newAchievement)
+        /// <summary>
+        /// Create a new Achievement.
+        /// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
+        /// </summary>
+        /// <param name="newAchievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Achievement.</param>
+        /// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
+        public EvaluationResponse Create(EvaluationCreateRequest newAchievement)
 		{
 			var query = GetUriBuilder("api/achievements/create").ToString();
 			return Post<EvaluationCreateRequest, EvaluationResponse>(query, newAchievement);
 		}
 
-		/// <summary>
-		/// Update an existing Achievement.
-		/// </summary>
-		/// <param name="achievement"><see cref="EvaluationRequest"/> object that holds the details of the Achievement.</param>
-		public void Update(EvaluationUpdateRequest achievement)
+        /// <summary>
+        /// Update an existing Achievement.
+        /// </summary>
+        /// <param name="achievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the Achievement.</param>
+        public void Update(EvaluationUpdateRequest achievement)
 		{
 			var query = GetUriBuilder("api/achievements/update").ToString();
 			Put(query, achievement);

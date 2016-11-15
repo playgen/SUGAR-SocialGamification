@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Client
 		public LeaderboardResponse GetGlobal(string token)
 		{
 			var query = GetUriBuilder("api/leaderboards/{0}/global", token).ToString();
-			return Get<LeaderboardResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<LeaderboardResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
@@ -54,7 +54,7 @@ namespace PlayGen.SUGAR.Client
 		public LeaderboardResponse Get(string token, int gameId)
 		{
 			var query = GetUriBuilder("api/leaderboards/{0}/{1}", token, gameId).ToString();
-			return Get<LeaderboardResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<LeaderboardResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
@@ -100,12 +100,12 @@ namespace PlayGen.SUGAR.Client
 			Delete(query);
 		}
 
-		/// <summary>
-		/// Delete Leaderboards with the <param name="id"/> provided.
-		/// </summary>
-		/// <param name="token">Token of Leaderboard</param>
-		/// <param name="gameId">ID of the Game the Leaderboard is for</param>
-		public void Delete(string token, int gameId)
+        /// <summary>
+        /// Delete Leaderboards with the <param name="gameId"/> and <param name="token"/> provided.
+        /// </summary>
+        /// <param name="token">Token of Leaderboard</param>
+        /// <param name="gameId">ID of the Game the Leaderboard is for</param>
+        public void Delete(string token, int gameId)
 		{
 			var query = GetUriBuilder("api/leaderboards/{0}/{1}", token, gameId).ToString();
 			Delete(query);

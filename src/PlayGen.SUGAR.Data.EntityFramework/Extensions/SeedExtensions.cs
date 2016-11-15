@@ -1,6 +1,6 @@
 ﻿using PlayGen.SUGAR.Data.Model;
 
-namespace PlayGen.SUGAR.Data.EntityFramework
+namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
     internal static class SUGARContextSeedExtensions
     {

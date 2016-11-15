@@ -4,6 +4,8 @@ using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
+using PlayGen.SUGAR.Data.EntityFramework.Extensions;
+
 namespace PlayGen.SUGAR.Data.EntityFramework
 {
 	/// <summary>
@@ -67,7 +69,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		/// </summary>
 		private void UpdateModificationHistory()
 		{
-			var histories = this.ChangeTracker.Entries()
+			var histories = ChangeTracker.Entries()
 				.Where(e => e.Entity is IModificationHistory && (e.State == EntityState.Added || e.State == EntityState.Modified))
 				.Select(e => e.Entity as IModificationHistory);
 

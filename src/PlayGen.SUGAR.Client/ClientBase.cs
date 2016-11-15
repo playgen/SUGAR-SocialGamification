@@ -195,7 +195,7 @@ namespace PlayGen.SUGAR.Client
 			if (!expectedStatusCodes.Contains((HttpStatusCode)response.StatusCode))
 			{
 				var error = "API ERROR. Status Code: " + response.StatusCode + ".";
-				if (!((int)response.StatusCode >= 200 && (int)response.StatusCode <= 299))
+				if (!(response.StatusCode >= 200 && response.StatusCode <= 299))
 				{
 					error += " Message: " + response.Content;
 				}

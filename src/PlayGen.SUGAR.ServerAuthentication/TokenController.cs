@@ -30,19 +30,16 @@ namespace PlayGen.SUGAR.ServerAuthentication
 		[Authorize("Bearer")]
 		public string Get()
 		{
-			bool authenticated;
-			string user;
-			string tok = null;
-			DateTime tokenExpires = default(DateTime);
+		    string tok = null;
 
-			var currentUser = HttpContext.User;
+		    var currentUser = HttpContext.User;
 			if (currentUser != null)
 			{
-				authenticated = currentUser.Identity.IsAuthenticated;
-				if (authenticated)
+			    var authenticated = currentUser.Identity.IsAuthenticated;
+			    if (authenticated)
 				{
-					user = currentUser.Identity.Name;
-					tokenExpires = DateTime.UtcNow.AddHours(2);
+					var user = currentUser.Identity.Name;
+					var tokenExpires = DateTime.UtcNow.AddHours(2);
 					tok = GetToken(user, tokenExpires);
 				}
 			}

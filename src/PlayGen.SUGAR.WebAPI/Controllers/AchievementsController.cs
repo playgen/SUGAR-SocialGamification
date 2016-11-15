@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.Controllers;
-using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
@@ -119,15 +117,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			});
 		}
 
-		/// <summary>
-		/// Create a new Achievement.
-		/// Requires <see cref="EvaluationRequest.Name"/> to be unique to that <see cref="EvaluationRequest.GameId"/>.
-		/// 
-		/// Example Usage: POST api/achievements/create
-		/// </summary>
-		/// <param name="newAchievement"><see cref="EvaluationRequest"/> object that holds the details of the new Achievement.</param>
-		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
-		[HttpPost("create")]
+        /// <summary>
+        /// Create a new Achievement.
+        /// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
+        /// 
+        /// Example Usage: POST api/achievements/create
+        /// </summary>
+        /// <param name="newAchievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Achievement.</param>
+        /// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
+        [HttpPost("create")]
 		//[ResponseType(typeof(EvaluationResponse))]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Achievement)]
@@ -143,13 +141,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Unauthorized();
         }
 
-		/// <summary>
-		/// Update an existing Achievement.
-		/// 
-		/// Example Usage: PUT api/achievements/update
-		/// </summary>
-		/// <param name="achievement"><see cref="EvaluationRequest"/> object that holds the details of the Achievement.</param>
-		[HttpPut("update")]
+        /// <summary>
+        /// Update an existing Achievement.
+        /// 
+        /// Example Usage: PUT api/achievements/update
+        /// </summary>
+        /// <param name="achievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the Achievement.</param>
+        [HttpPut("update")]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Achievement)]
         public void Update([FromBody] EvaluationUpdateRequest achievement)

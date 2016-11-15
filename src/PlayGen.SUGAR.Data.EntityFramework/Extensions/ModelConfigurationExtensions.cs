@@ -3,7 +3,7 @@ using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.Model;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
-namespace PlayGen.SUGAR.Data.EntityFramework
+namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
     internal static class ModelConfigurationExtensions
     {

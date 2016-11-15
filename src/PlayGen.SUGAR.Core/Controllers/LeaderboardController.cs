@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			IEnumerable<ActorResponse> actors = GetActors(request.LeaderboardFilterType, leaderboard.ActorType, request.ActorId);
 
-			IEnumerable<LeaderboardStandingsResponse> typeResults = Enumerable.Empty<LeaderboardStandingsResponse>();
+			IEnumerable<LeaderboardStandingsResponse> typeResults;
 
 			switch (leaderboard.LeaderboardType)
 			{
@@ -189,7 +189,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		protected IEnumerable<LeaderboardStandingsResponse> EvaluateHighest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			IEnumerable<LeaderboardStandingsResponse> results;
 			switch (gameDataType)
 			{
 				case GameDataType.Long:
@@ -221,7 +221,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLowest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			IEnumerable<LeaderboardStandingsResponse> results;
 			switch (gameDataType)
 			{
 				case GameDataType.Long:
@@ -253,7 +253,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		protected IEnumerable<LeaderboardStandingsResponse> EvaluateCumulative(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			IEnumerable<LeaderboardStandingsResponse> results;
 			switch (gameDataType)
 			{
 				case GameDataType.Long:
@@ -285,7 +285,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		protected IEnumerable<LeaderboardStandingsResponse> EvaluateCount(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			IEnumerable<LeaderboardStandingsResponse> results;
 			switch (gameDataType)
 			{
 				case GameDataType.String:
@@ -317,7 +317,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		protected IEnumerable<LeaderboardStandingsResponse> EvaluateEarliest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			IEnumerable<LeaderboardStandingsResponse> results;
 			switch (gameDataType)
 			{
 				case GameDataType.String:
@@ -351,7 +351,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLatest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results = Enumerable.Empty<LeaderboardStandingsResponse>();
+			IEnumerable<LeaderboardStandingsResponse> results;
 			switch (gameDataType)
 			{
 				case GameDataType.String:
@@ -385,7 +385,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		protected IEnumerable<LeaderboardStandingsResponse> FilterResults(IEnumerable<LeaderboardStandingsResponse> typeResults, int limit, int offset, LeaderboardFilterType filter, int? actorId)
 		{
-			int position = 0;
+			int position;
 			switch (filter)
 			{
 				case LeaderboardFilterType.Top:
@@ -399,13 +399,14 @@ namespace PlayGen.SUGAR.Core.Controllers
 						Ranking = ++position
 					});
 				case LeaderboardFilterType.Near:
-					bool actorCheck = typeResults.Any(r => r.ActorId == actorId.Value);
+			        var typeResultList = typeResults as List<LeaderboardStandingsResponse> ?? typeResults.ToList();
+			        bool actorCheck = actorId != null && typeResultList.Any(r => r.ActorId == actorId.Value);
 					if (actorCheck)
 					{
-						int actorPosition = typeResults.TakeWhile(r => r.ActorId != actorId.Value).Count();
+						int actorPosition = typeResultList.TakeWhile(r => r.ActorId != actorId.Value).Count();
 						offset += actorPosition / limit;
 					}
-					typeResults = typeResults.Skip(offset * limit).Take(limit);
+					typeResults = typeResultList.Skip(offset * limit).Take(limit);
 					position = (offset * limit);
 					return typeResults.Select(s => new LeaderboardStandingsResponse
 					{
@@ -423,11 +424,15 @@ namespace PlayGen.SUGAR.Core.Controllers
 						Value = s.Value,
 						Ranking = ++position
 					});
-					List<int> friends = UserRelationshipController.GetFriends(actorId.Value).Select(r => r.Id).ToList();
-					friends.Add(actorId.Value);
-					var friendsOnly = overall.Where(r => friends.Contains(r.ActorId));
-					friendsOnly = friendsOnly.Skip(offset * limit).Take(limit);
-					return friendsOnly;
+                    if (actorId != null)
+                    {
+                        List<int> friends = UserRelationshipController.GetFriends(actorId.Value).Select(r => r.Id).ToList();
+					    friends.Add(actorId.Value);
+                        var friendsOnly = overall.Where(r => friends.Contains(r.ActorId));
+                        friendsOnly = friendsOnly.Skip(offset * limit).Take(limit);
+                        return friendsOnly;
+                    }
+                    return Enumerable.Empty<LeaderboardStandingsResponse>();
 				case LeaderboardFilterType.GroupMembers:
 					position = (offset * limit);
 					var all = typeResults.Select(s => new LeaderboardStandingsResponse
@@ -437,11 +442,15 @@ namespace PlayGen.SUGAR.Core.Controllers
 						Value = s.Value,
 						Ranking = ++position
 					});
-					IEnumerable<int> members = GroupRelationshipController.GetMembers(actorId.Value).Select(r => r.Id);
-					var membersOnly = all.Where(r => members.Contains(r.ActorId));
-					membersOnly = membersOnly.Skip(offset * limit).Take(limit);
-					return membersOnly;
-				default:
+                    if (actorId != null)
+                    {
+                        IEnumerable<int> members = GroupRelationshipController.GetMembers(actorId.Value).Select(r => r.Id);
+                        var membersOnly = all.Where(r => members.Contains(r.ActorId));
+                        membersOnly = membersOnly.Skip(offset * limit).Take(limit);
+                        return membersOnly;
+                    }
+                    return Enumerable.Empty<LeaderboardStandingsResponse>();
+                default:
 					return null;
 			}
 		}

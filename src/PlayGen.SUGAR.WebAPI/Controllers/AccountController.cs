@@ -25,9 +25,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="accountDbController"></param>
+        /// <param name="accountCoreController"></param>
         /// <param name="userDbController"></param>
-        /// <param name="passwordEncryption"></param>
+        /// <param name="tokenController"></param>
+        /// <param name="authorizationService"></param>
         public AccountController(Core.Controllers.AccountController accountCoreController,
                     Data.EntityFramework.Controllers.UserController userDbController,
                     TokenController tokenController,
@@ -90,18 +91,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(response);
 		}
 
-		//Todo: Review if register with id is needed
-		/// <summary>
-		/// Register a new account for an existing user.
-		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
-		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// Example Usage: POST api/account/registerwithid/1
-		/// </summary>
-		// <param name="userId">ID of the existing User.</param>
-		/// <param name="newAccount"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
-		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
-		/*[HttpPost("registerwithid/{userId:int}")]
+        //Todo: Review if register with id is needed
+        /*/// <summary>
+        /// Register a new account for an existing user.
+        /// Requires the <see cref="AccountRequest.Name"/> to be unique.
+        /// Returns a JsonWebToken used for authorization in any further calls to the API.
+        /// 
+        /// Example Usage: POST api/account/registerwithid/1
+        /// </summary>
+        // <param name="userId">ID of the existing User.</param>
+        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
+        /// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
+        [HttpPost("registerwithid/{userId:int}")]
 		[ResponseType(typeof(AccountResponse))]
 		public IActionResult Register([FromRoute]int userId, [FromBody] AccountRequest accountRequest)
 		{
@@ -124,13 +125,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(response);
 		}*/
 
-		/// <summary>
-		/// Delete Account with the ID provided.
-		/// 
-		/// Example Usage: DELETE api/account/1
-		/// </summary>
-		/// <param name="id">Account ID.</param>
-		[HttpDelete("{id:int}")]
+        /// <summary>
+        /// Delete Account with the ID provided.
+        /// 
+        /// Example Usage: DELETE api/account/1
+        /// </summary>
+        /// <param name="id">Account ID.</param>
+        [HttpDelete("{id:int}")]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.Account)]
         public void Delete([FromRoute]int id)
 		{

@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Client
 		public ActorResponse Get(int id)
 		{
 			var query = GetUriBuilder("api/group/findbyid/{0}", id).ToString();
-			return Get<ActorResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<ActorResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>

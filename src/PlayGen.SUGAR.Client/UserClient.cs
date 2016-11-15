@@ -23,12 +23,13 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
-		/// <summary>
-		/// Get a list of Users that match <param name="name"/> provided.
-		/// </summary>
-		/// <param name="name">Array of User names.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> Get(string name, bool exactMatch = false)
+        /// <summary>
+        /// Get a list of Users that match <param name="name"/> provided.
+        /// </summary>
+        /// <param name="name">Array of User names.</param>
+        /// <param name="exactMatch">Match the name exactly.</param>
+        /// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+        public IEnumerable<ActorResponse> Get(string name, bool exactMatch = false)
 		{
 			var query = GetUriBuilder("api/user/find/{0}", name).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
@@ -42,7 +43,7 @@ namespace PlayGen.SUGAR.Client
 		public ActorResponse Get(int id)
 		{
 			var query = GetUriBuilder("api/user/findbyid/{0}", id).ToString();
-			return Get<ActorResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<ActorResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>

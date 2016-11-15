@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using PlayGen.SUGAR.Authorization;
 
-namespace PlayGen.SUGAR.Authorization
+namespace PlayGen.SUGAR.Core.Authorization
 {
     public class AuthorizationHandler : AuthorizationHandler<AuthorizationRequirement, int>
     {

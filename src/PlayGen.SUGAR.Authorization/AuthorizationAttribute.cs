@@ -24,13 +24,10 @@ namespace PlayGen.SUGAR.Authorization
         {
             var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
 
-            if (actionDescriptor != null)
+            var customAtt = actionDescriptor?.MethodInfo.GetCustomAttributes(typeof(AuthorizationAttribute), false).SingleOrDefault() as AuthorizationAttribute;
+            if (customAtt != null)
             {
-                var customAtt = actionDescriptor.MethodInfo.GetCustomAttributes(typeof(AuthorizationAttribute), false).SingleOrDefault() as AuthorizationAttribute;
-                if (customAtt != null)
-                {
-                    context.HttpContext.Items.Add("Requirements", new AuthorizationRequirement(customAtt.ClaimScope, customAtt.Name));
-                }
+                context.HttpContext.Items.Add("Requirements", new AuthorizationRequirement(customAtt.ClaimScope, customAtt.Name));
             }
         }
     }

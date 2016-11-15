@@ -19,9 +19,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 
         public Account Login(Account toVerify)
         {
-            Account verified = null;
+            Account verified;
 
-			var found = _accountDbController.Get(new string[] { toVerify.Name }).SingleOrDefault();
+			var found = _accountDbController.Get(new[] { toVerify.Name }).SingleOrDefault();
 
 			if (found != null && PasswordEncryption.Verify(toVerify.Password, found.Password))
 			{
@@ -37,9 +37,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 		
 		public Account Register(Account toRegister)
 		{
-		    Account registered = null;
-
-            if(string.IsNullOrWhiteSpace(toRegister.Name) || string.IsNullOrWhiteSpace(toRegister.Password))
+		    if(string.IsNullOrWhiteSpace(toRegister.Name) || string.IsNullOrWhiteSpace(toRegister.Password))
 		    {
 		        throw new InvalidAccountDetailsException("Invalid username or password.");
 		    }
@@ -50,8 +48,8 @@ namespace PlayGen.SUGAR.Core.Controllers
                 Name = toRegister.Name
 		    });
 
-		    registered = _accountDbController.Create(new Account
-		    {
+            var registered = _accountDbController.Create(new Account
+            {
                 Password = PasswordEncryption.Encrypt(toRegister.Password),
                 UserId = user.Id,
                 User = user

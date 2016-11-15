@@ -75,7 +75,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 					var hasConflicts = context.Leaderboards.Where(l => (l.Name == leaderboard.Name && l.GameId == leaderboard.GameId));
 
-					if (hasConflicts.Count() > 0)
+					if (hasConflicts.Any())
 					{
 						if (hasConflicts.Any(a => a.Token != leaderboard.Token))
 						{

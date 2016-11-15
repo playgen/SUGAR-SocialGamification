@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using System.Linq;
 using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {

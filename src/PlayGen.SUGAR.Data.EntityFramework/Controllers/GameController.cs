@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 			    return game;
 			}
-;		}
+		}
 
 		public void Update(Game game)
 		{

@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.WebAPI.Extensions;
-using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.WebAPI.Filters;
 
@@ -52,7 +50,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: GET api/user/find/user1
 		/// </summary>
 		/// <param name="name">User name.</param>
-		/// <param exactMatch="exactMatch">Match the name exactly.</param>
+		/// <param name="exactMatch">Match the name exactly.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlayGen.SUGAR.Core.Authorization;
-using PlayGen.SUGAR.Core.Controllers;
 
 namespace PlayGen.SUGAR.WebAPI
 {

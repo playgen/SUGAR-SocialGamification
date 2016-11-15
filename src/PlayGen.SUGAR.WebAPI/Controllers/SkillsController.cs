@@ -1,15 +1,9 @@
-﻿using System.Linq;
-
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Core;
 using PlayGen.SUGAR.Core.Controllers;
-using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
 using PlayGen.SUGAR.Data.Model;
@@ -123,15 +117,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             });
         }
 
-		/// <summary>
-		/// Create a new Skill.
-		/// Requires <see cref="EvaluationRequest.Name"/> to be unique to that <see cref="EvaluationRequest.GameId"/>.
-		/// 
-		/// Example Usage: POST api/skills/create
-		/// </summary>
-		/// <param name="newSkill"><see cref="EvaluationRequest"/> object that holds the details of the new Skill.</param>
-		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Skill.</returns>
-		[HttpPost("create")]
+        /// <summary>
+        /// Create a new Skill.
+        /// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
+        /// 
+        /// Example Usage: POST api/skills/create
+        /// </summary>
+        /// <param name="newSkill"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Skill.</param>
+        /// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Skill.</returns>
+        [HttpPost("create")]
 		//[ResponseType(typeof(EvaluationResponse))]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Achievement)]
@@ -147,13 +141,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Unauthorized();
         }
 
-		/// <summary>
-		/// Update an existing Skill.
-		/// 
-		/// Example Usage: PUT api/skills/update
-		/// </summary>
-		/// <param name="skill"><see cref="EvaluationRequest"/> object that holds the details of the Skill.</param>
-		[HttpPut("update")]
+        /// <summary>
+        /// Update an existing Skill.
+        /// 
+        /// Example Usage: PUT api/skills/update
+        /// </summary>
+        /// <param name="skill"><see cref="EvaluationCreateRequest"/> object that holds the details of the Skill.</param>
+        [HttpPut("update")]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Achievement)]
         public void Update([FromBody] EvaluationUpdateRequest skill)

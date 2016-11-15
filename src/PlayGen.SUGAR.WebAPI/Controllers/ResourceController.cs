@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-
 using Microsoft.AspNetCore.Authorization;
-
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
 
@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         }
 
 		/// <summary>
-		/// Find a list of all Resources filtered by the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+		/// Find a list of all Resources filtered by the <param name="actorId"/>, <param name="gameId"/> and <param name="keys"/> provided.
 		/// 
 		/// Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
 		/// </summary>
@@ -63,9 +63,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             {
                 var resource = resourceRequest.ToModel();
                 var resources = _resourceController.Get(resourceRequest.GameId, resourceRequest.ActorId, new[] { resourceRequest.Key });
-                if (resources.Any())
+                var resourceList = resources as List<GameData> ?? resources.ToList();
+                if (resourceList.Any())
                 {
-                    var firstResource = resources.ElementAt(0);
+                    var firstResource = resourceList.ElementAt(0);
                     _resourceController.UpdateQuantity(firstResource, resourceRequest.Quantity);
                 }
                 else
@@ -96,7 +97,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
             if (_authorizationService.AuthorizeAsync(User, transferRequest.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
-                Data.Model.GameData fromResource;
+                GameData fromResource;
 
                 var toResource = _resourceController.Transfer(transferRequest.GameId, transferRequest.SenderActorId, transferRequest.RecipientActorId, transferRequest.Key, transferRequest.Quantity, out fromResource);
 

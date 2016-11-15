@@ -8,7 +8,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public  static class ResourceExtensions
 	{
-		public static ResourceResponse ToResourceContract(this Data.Model.GameData gameData)
+		public static ResourceResponse ToResourceContract(this GameData gameData)
 		{
 			if (gameData == null)
 			{
@@ -25,14 +25,14 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static IEnumerable<ResourceResponse> ToResourceContractList(this IEnumerable<Data.Model.GameData> gameData)
+		public static IEnumerable<ResourceResponse> ToResourceContractList(this IEnumerable<GameData> gameData)
 		{
 			return gameData.Select(ToResourceContract).ToList();
 		}
 
-		public static Data.Model.GameData ToModel(this ResourceAddRequest resourceContract)
+		public static GameData ToModel(this ResourceAddRequest resourceContract)
 		{
-			return new Data.Model.GameData
+			return new GameData
 			{
 				ActorId = resourceContract.ActorId,
 				GameId = resourceContract.GameId,

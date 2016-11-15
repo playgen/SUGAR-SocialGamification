@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
-using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Core.Authorization;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -143,7 +143,7 @@ namespace PlayGen.SUGAR.WebAPI
                     // This should be much more intelligent - at the moment only expired 
                     // security tokens are caught - might be worth checking other possible 
                     // exceptions such as an invalid signature.
-                    if (error != null && error.Error is SecurityTokenExpiredException)
+                    if (error?.Error is SecurityTokenExpiredException)
                     {
                         context.Response.StatusCode = 401;
                         // What you choose to return here is up to you, in this case a simple 
@@ -153,7 +153,7 @@ namespace PlayGen.SUGAR.WebAPI
                             JsonConvert.SerializeObject(
                                 new { authenticated = false, tokenExpired = true }));
                     }
-                    else if (error != null && error.Error != null)
+                    else if (error?.Error != null)
                     {
                         context.Response.StatusCode = 500;
                         context.Response.ContentType = "application/json";
