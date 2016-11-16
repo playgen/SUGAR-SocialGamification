@@ -1,6 +1,4 @@
 ﻿using PlayGen.SUGAR.Core.EvaluationEvents;
-using PlayGen.SUGAR.Core.Utilities;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
@@ -8,8 +6,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 	public class RewardController : CriteriaEvaluator
 	{
 		// todo change all db controller usage to core controller usage
-		public RewardController(Data.EntityFramework.Controllers.GameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
-			: base(gameDataController, groupRelationshipController, userRelationshipController)
+		public RewardController(GameDataController gameDataCoreController, 
+            GroupMemberController groupMemberCoreController, 
+            UserFriendController userFriendCoreController)
+			: base(gameDataCoreController, groupMemberCoreController, userFriendCoreController)
 		{
 		}
 
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 				DataType = reward.DataType,
 				Value = reward.Value
 			};
-			GameDataController.Create(gameData);
+			GameDataCoreController.Add(gameData);
 			return true;
 		}
 	}

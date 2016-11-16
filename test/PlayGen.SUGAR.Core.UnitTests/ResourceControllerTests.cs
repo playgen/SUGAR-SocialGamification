@@ -1,20 +1,20 @@
 ﻿using System.Linq;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
 using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Core;
 using PlayGen.SUGAR.Core.Controllers;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
+using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
+
+namespace PlayGen.SUGAR.Core.UnitTests
 {
 	[Collection("Project Fixture Collection")]
 	public class ResourceControllerTests
 	{
 		#region Configuration
 		private readonly ResourceController _resourceController = ControllerLocator.ResourceController;
-		private readonly Data.EntityFramework.Controllers.UserController _userController = ControllerLocator.UserController;
-		private readonly Controllers.GameController _gameController = ControllerLocator.GameController;
+		private readonly Data.EntityFramework.Controllers.UserController _userController = DbControllerLocator.UserController;
+		private readonly Data.EntityFramework.Controllers.GameController _gameController = DbControllerLocator.GameController;
 		#endregion
 
 		#region Tests
@@ -105,7 +105,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Helpers
-		private Model.GameData CreateResource(string key, int? gameId = null, int? actorId = null,
+		private GameData CreateResource(string key, int? gameId = null, int? actorId = null,
 			  bool createNewGame = false, bool createNewUser = false)
 		{
 			if (createNewGame)
@@ -128,7 +128,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				actorId = user.Id;
 			}
 
-			var resource = new Model.GameData
+			var resource = new GameData
 			{
 				GameId = gameId,
 				ActorId = actorId,
@@ -142,7 +142,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			return resource;
 		}
  
-		private bool IsMatch(Model.GameData lhs, Model.GameData rhs)
+		private bool IsMatch(GameData lhs, GameData rhs)
 		{
 			return lhs.ActorId == rhs.ActorId
 				&& lhs.GameId == rhs.GameId
@@ -152,7 +152,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				&& lhs.Value == rhs.Value;
 		}
 
-		private Model.Actor GetOrCreateUser(string suffix = null)
+		private Data.Model.Actor GetOrCreateUser(string suffix = null)
 		{
 			var name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
 			var users = _userController.Search(name, true);

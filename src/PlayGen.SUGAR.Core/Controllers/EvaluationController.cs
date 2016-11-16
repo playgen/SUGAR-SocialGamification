@@ -21,14 +21,14 @@ namespace PlayGen.SUGAR.Core.Controllers
 			{EvaluationType.Skill, KeyConstants.SkillCompleteFormat},
 		};
 
-        // todo change all db controller usages to core controller usages
+        // todo change all db controller usages to core controller usages except for evaluation db controller
 		public EvaluationController(Data.EntityFramework.Controllers.EvaluationController evaluationDbController,
-            Data.EntityFramework.Controllers.GameDataController gameDataController,
-			GroupRelationshipController groupRelationshipController,
-			UserRelationshipController userRelationshipController,
+            GameDataController gameDataCoreController,
+			GroupMemberController groupMemberCoreController,
+			UserFriendController userFriendCoreController,
 			ActorController actorController,
 			RewardController rewardController)
-			: base(gameDataController, groupRelationshipController, userRelationshipController)
+			: base(gameDataCoreController, groupMemberCoreController, userFriendCoreController)
 		{
 			_evaluationDbController = evaluationDbController;
 			_rewardController = rewardController;
@@ -124,7 +124,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 
 			var key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token);
-			var completed = GameDataController.KeyExists(evaluation.GameId, actorId, key);
+			var completed = GameDataCoreController.KeyExists(evaluation.GameId, actorId, key);
 			var completedProgress = completed ? 1f : 0f;
 			if (!completed)
 			{
@@ -148,7 +148,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 				DataType = GameDataType.String,
 				Value = null
 			};
-			GameDataController.Create(gameData);
+			GameDataCoreController.Add(gameData);
 			evaluation.Rewards.All(reward => _rewardController.AddReward(actorId, evaluation.GameId, reward));
 		}
 	}

@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             _evaluationCriteriaEvaluator = evaluationCriteriaEvaluator;
         }
 
-        internal void StartTracking(int gameId, int actorId)
+        internal Dictionary<int, Dictionary<int, Dictionary<int, float>>> StartTracking(int gameId, int actorId)
         {
             // todo add game and user to list to evaluate against
             EvaluateActor(gameId, actorId);
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
-        internal void EvaluateActor(int gameId, int actorId)
+        internal Dictionary<int, Dictionary<int, Dictionary<int, float>>> EvaluateActor(int gameId, int actorId)
         {
             // todo run all evaluations for this game against this user's data and store the results
 
@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
-        internal void Evaluate(Evaluation evaluation)
+        internal Dictionary<int, Dictionary<int, Dictionary<int, float>>> Evaluate(Evaluation evaluation)
         {
             var affectedActors = GetAffectedActors(evaluation);
 
@@ -52,9 +52,11 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             {
                 EvaluateActor(evaluation, actorId);
             }
+
+            throw new NotImplementedException();
         }
 
-        internal void Evaluate(IEnumerable<Evaluation> evaluations, GameData gameData)
+        internal Dictionary<int, Dictionary<int, Dictionary<int, float>>> Evaluate(IEnumerable<Evaluation> evaluations, GameData gameData)
         {
             var affectedActorsByEvaluation = GetAffectedActorsForEvaluations(evaluations, gameData);
 
@@ -65,15 +67,17 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
                     EvaluateActor(evaluation, actorId);
                 }
             }
+
+            throw new NotImplementedException();
         }
 
-        private void EvaluateActor(Evaluation evaluation, int actorId)
+        private Dictionary<int, Dictionary<int, Dictionary<int, float>>> EvaluateActor(Evaluation evaluation, int actorId)
         {
             // todo evaluate against te actor
             throw new NotImplementedException();
         }
 
-        internal void Remove(Evaluation evaluation)
+        internal void Remove(int evaluationId)
         {
             // todo remove all progress for this evaluation
             throw new NotImplementedException();
