@@ -21,20 +21,20 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             _evaluationCriteriaEvaluator = evaluationCriteriaEvaluator;
         }
 
-        internal Dictionary<int, Dictionary<int, Dictionary<int, float>>> StartTracking(int gameId, int actorId)
+        public Dictionary<int, Dictionary<int, Dictionary<int, float>>> StartTracking(int gameId, int actorId)
         {
             // todo add game and user to list to evaluate against
             EvaluateActor(gameId, actorId);
             throw new NotImplementedException();
         }
 
-        internal void StopTracking(int gameId, int actorId)
+        public void StopTracking(int gameId, int actorId)
         {
             // todo remove progress for user for game
             throw new NotImplementedException();
         }
 
-        internal Dictionary<int, Dictionary<int, Dictionary<int, float>>> EvaluateActor(int gameId, int actorId)
+        public Dictionary<int, Dictionary<int, Dictionary<int, float>>> EvaluateActor(int gameId, int actorId)
         {
             // todo run all evaluations for this game against this user's data and store the results
 
@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
-        internal Dictionary<int, Dictionary<int, Dictionary<int, float>>> Evaluate(Evaluation evaluation)
+        public Dictionary<int, Dictionary<int, Dictionary<int, float>>> Evaluate(Evaluation evaluation)
         {
             var affectedActors = GetAffectedActors(evaluation);
 
@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
-        internal Dictionary<int, Dictionary<int, Dictionary<int, float>>> Evaluate(IEnumerable<Evaluation> evaluations, GameData gameData)
+        public Dictionary<int, Dictionary<int, Dictionary<int, float>>> Evaluate(IEnumerable<Evaluation> evaluations, GameData gameData)
         {
             var affectedActorsByEvaluation = GetAffectedActorsForEvaluations(evaluations, gameData);
 
@@ -77,13 +77,13 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
-        internal void Remove(int evaluationId)
+        public void Remove(int evaluationId)
         {
             // todo remove all progress for this evaluation
             throw new NotImplementedException();
         }
 
-        internal IReadOnlyDictionary<int, float> GetProgress(int gameId, int actorId)
+        public IReadOnlyDictionary<int, float> GetProgress(int gameId, int actorId)
         {
             var progress = _progressMappings[gameId][actorId];
             return new ReadOnlyDictionary<int, float>(progress);

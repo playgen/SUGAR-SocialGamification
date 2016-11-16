@@ -32,7 +32,6 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			return completionCriterias.Sum(cc => Evaluate(gameId, actorId, cc, actorType)) / completionCriterias.Count;
 		}
 
-
 		protected float Evaluate(int? gameId, int? actorId, EvaluationCriteria completionCriteria, ActorType actorType)
 		{
 			if (completionCriteria.Scope == CriteriaScope.RelatedActors && actorId != null)

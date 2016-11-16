@@ -37,9 +37,13 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         public void OnGameDataAdded(GameData gameData)
         {
-            var evaluations = _gameDataToEvaluationMapper.GetRelated(gameData);
-            var progress = _progressCache.Evaluate(evaluations, gameData);
-            _progressNotificationCache.Check(progress);
+            HashSet<Evaluation> evaluations;
+
+            if (_gameDataToEvaluationMapper.TryGetRelated(gameData, out evaluations))
+            {
+                var progress = _progressCache.Evaluate(evaluations, gameData);
+                _progressNotificationCache.Check(progress);
+            }
         }
 
         public void OnEvaluationAdded(Evaluation evaluation)

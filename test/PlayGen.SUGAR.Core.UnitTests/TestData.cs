@@ -27,9 +27,9 @@ namespace PlayGen.SUGAR.Core.UnitTests
         private static readonly GroupMemberController _groupMemberController = ControllerLocator.GroupMemberController;
         private static readonly GameDataController _gameDataController = ControllerLocator.GameDataController;
 
-        private static IReadOnlyList<Game> Games => _games;
-        private static IReadOnlyList<User> Users => _users;
-        private static IReadOnlyList<Group> Groups => _groups;
+        public static IReadOnlyList<Game> Games => _games;
+        public static IReadOnlyList<User> Users => _users;
+        public static IReadOnlyList<Group> Groups => _groups;
         
         public static void PopulateData()
         {

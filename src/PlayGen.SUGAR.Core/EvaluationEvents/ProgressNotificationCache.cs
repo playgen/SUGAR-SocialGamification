@@ -9,17 +9,17 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     public class ProgressNotificationCache
     {
         // <gameId, <actorId, <evaluationId, progress>>>
-        internal void Check(Dictionary<int, Dictionary<int, Dictionary<int, float>>> progress)
+        public void Check(Dictionary<int, Dictionary<int, Dictionary<int, float>>> progress)
         {
             throw new NotImplementedException();
         }
 
-        internal void Remove(int gameId, int actorId)
+        public void Remove(int gameId, int actorId)
         {
             throw new NotImplementedException();
         }
 
-        internal void Remove(int evaluationId)
+        public void Remove(int evaluationId)
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
@@ -9,33 +10,53 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     /// </summary>
     public class EvaluationGameDataMapper
     {
-        // todo create mapping game data key to related evaluation identifier list
-        // game data key + game id + actor id => evaluation
+        private readonly Dictionary<string, HashSet<Evaluation>> _mappings = new Dictionary<string, HashSet<Evaluation>>();
 
-        internal IEnumerable<Evaluation> GetRelated(GameData gameData)
+        public bool TryGetRelated(GameData gameData, out HashSet<Evaluation> relatedEvaluations)
         {
-            // todo get evaluations that were added to the mapping that evaluate this specific bit of game data
-            throw new NotImplementedException();
+            var mappedKey = CreateMappingKey(gameData.GameId, gameData.DataType, gameData.Key);
+            return _mappings.TryGetValue(mappedKey, out relatedEvaluations);
         }
 
-        internal void CreateMappings(Evaluation evaluation)
+        public void CreateMappings(Evaluation evaluation)
         {
-            // todo go through criteria and create mappings from the game data to the evaluation
-            throw new NotImplementedException();
+            foreach (var evaluationCriteria in evaluation.EvaluationCriterias)
+            {
+                var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.DataType, evaluationCriteria.Key);
+
+                HashSet<Evaluation> mappedEvaluationsForKey;
+
+                if (_mappings.TryGetValue(mappingKey, out mappedEvaluationsForKey))
+                {
+                    mappedEvaluationsForKey.Add(evaluation);
+                }
+                else
+                {
+                    _mappings[mappingKey] = new HashSet<Evaluation>
+                    {
+                        evaluation
+                    };
+                }
+            }
         }
 
-        internal void RemoveMappings(Evaluation evaluation)
+        public void RemoveMappings(Evaluation evaluation)
         {
             // todo all occurences of this evaluation from the mappings.
             // note: remember to remove gamedata mappings that don't have any other evaluations mapped any longer
             throw new NotImplementedException();
         }
 
-        internal void MapExisting(List<Evaluation> evaluations)
+        public void MapExisting(List<Evaluation> evaluations)
         {
             // todo remove all mappings
             // todo remap all mappings
             throw new NotImplementedException();
+        }
+
+        private string CreateMappingKey(int? gameId, GameDataType dataType, string gameDataKey)
+        {
+            return $"{gameId};{dataType};{gameDataKey}";
         }
     }
 }
