@@ -33,12 +33,15 @@ namespace PlayGen.SUGAR.Core.Authorization
             {
                 foreach (var method in type.GetMethods())
                 {
-                    var operation = method.GetCustomAttributes(typeof(AuthorizationAttribute), false).SingleOrDefault() as AuthorizationAttribute;
-                    if (operation != null)
+                    var operation = method.GetCustomAttributes(typeof(AuthorizationAttribute), false) as AuthorizationAttribute[];
+                    if (operation != null && operation.Length > 0)
                     {
-                        if (!currentOperations.Any(co => co.Token == operation.Name && co.ClaimScope == operation.ClaimScope))
+                        foreach (var op in operation)
                         {
-                            currentOperations.Add(new Claim { ClaimScope = operation.ClaimScope, Token = operation.Name });
+                            if (!currentOperations.Any(co => co.Token == op.Name && co.ClaimScope == op.ClaimScope))
+                            {
+                                currentOperations.Add(new Claim { ClaimScope = op.ClaimScope, Token = op.Name });
+                            }
                         }
                     }
                 }

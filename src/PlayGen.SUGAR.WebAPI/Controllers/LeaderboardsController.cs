@@ -13,7 +13,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Leaderboard specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class LeaderboardsController : Controller
+    [Authorize("Bearer")]
+    public class LeaderboardsController : Controller
 	{
         private readonly IAuthorizationService _authorizationService;
         private readonly Data.EntityFramework.Controllers.LeaderboardController _leaderboardController;

@@ -14,7 +14,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Achievement specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class AchievementsController : Controller
+    [Authorize("Bearer")]
+    public class AchievementsController : Controller
 	{
         private readonly IAuthorizationService _authorizationService;
         private readonly EvaluationController _evaluationCoreController;

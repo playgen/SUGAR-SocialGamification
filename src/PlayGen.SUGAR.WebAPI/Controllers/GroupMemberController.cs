@@ -12,7 +12,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates User to Group relationship specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class GroupMemberController : Controller
+    [Authorize("Bearer")]
+    public class GroupMemberController : Controller
 	{
         private readonly IAuthorizationService _authorizationService;
         private readonly Core.Controllers.GroupMemberController _groupMemberCoreController;

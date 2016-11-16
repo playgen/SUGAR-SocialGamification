@@ -12,7 +12,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates GameData specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class GameDataController : Controller
+    [Authorize("Bearer")]
+    public class GameDataController : Controller
 	{
         private readonly IAuthorizationService _authorizationService;
         private readonly Data.EntityFramework.Controllers.GameDataController _gameDataCoreController;
@@ -58,10 +59,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(GameDataResponse))]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Create, AuthorizationOperation.GameData)]
-        //todo add authorisation for game developers to add
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.GameData)]
         public IActionResult Add([FromBody]GameDataRequest newData)
 		{
-            if (_authorizationService.AuthorizeAsync(User, newData.ActorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, newData.ActorId, (AuthorizationRequirement)HttpContext.Items["ActorRequirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, newData.GameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
             {
                 var data = newData.ToModel();
                 _gameDataCoreController.Create(data);

@@ -9,14 +9,17 @@ namespace PlayGen.SUGAR.Core.Controllers
         private readonly Data.EntityFramework.Controllers.GroupController _groupDbController;
         private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleController;
         private readonly Data.EntityFramework.Controllers.RoleController _roleController;
+        private readonly GroupMemberController _groupMemberController;
 
         public GroupController(Data.EntityFramework.Controllers.GroupController groupDbController,
                     Data.EntityFramework.Controllers.ActorRoleController actorRoleController,
-                    Data.EntityFramework.Controllers.RoleController roleController)
+                    Data.EntityFramework.Controllers.RoleController roleController,
+                    GroupMemberController groupMemberController)
         {
             _groupDbController = groupDbController;
             _actorRoleController = actorRoleController;
             _roleController = roleController;
+            _groupMemberController = groupMemberController;
         }
         
         public IEnumerable<Group> Get()
@@ -44,6 +47,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             if (role != null)
             {
                 _actorRoleController.Create(new ActorRole { ActorId = creatorId, RoleId = role.Id, EntityId = newGroup.Id });
+                _groupMemberController.CreateMemberRequest(new UserToGroupRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
                 var admins = _actorRoleController.GetRoleActors(role.Id, 0);
                 foreach (var admin in admins)
                 {

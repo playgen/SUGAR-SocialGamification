@@ -48,7 +48,9 @@ namespace PlayGen.SUGAR.Core.Controllers
       
         public void UpdateMember(UserToGroupRelationship relationship)
         {
+            //todo Check if user is only group admin
             _groupRelationshipDbController.Update(relationship);
+            //todo Remove ActorRole for group if user has permissions
         }
     }
 }

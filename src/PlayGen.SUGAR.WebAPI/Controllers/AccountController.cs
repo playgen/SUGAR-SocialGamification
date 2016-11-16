@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates account specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class AccountController : Controller
+    public class AccountController : Controller
 	{
         private readonly IAuthorizationService _authorizationService;
         private readonly TokenController _tokenController;
@@ -132,6 +132,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// </summary>
         /// <param name="id">Account ID.</param>
         [HttpDelete("{id:int}")]
+        [Authorize("Bearer")]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.Account)]
         public IActionResult Delete([FromRoute]int id)
 		{

@@ -16,7 +16,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates UserData specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class ResourceController : Controller
+    [Authorize("Bearer")]
+    public class ResourceController : Controller
 	{
         private readonly IAuthorizationService _authorizationService;
         private readonly Core.Controllers.ResourceController _resourceController;
@@ -57,10 +58,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(ResourceResponse))]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Create, AuthorizationOperation.Resource)]
-        //todo add authorisation for game developers to add
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Resource)]
         public IActionResult AddOrUpdate([FromBody]ResourceAddRequest resourceRequest)
 		{
-            if (_authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, (AuthorizationRequirement)HttpContext.Items["ActorRequirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, resourceRequest.GameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
             {
                 var resource = resourceRequest.ToModel();
                 var resources = _resourceController.Get(resourceRequest.GameId, resourceRequest.ActorId, new[] { resourceRequest.Key });

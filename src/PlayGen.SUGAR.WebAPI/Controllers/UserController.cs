@@ -12,7 +12,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates User specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class UserController : Controller
+    [Authorize("Bearer")]
+    public class UserController : Controller
 	{
         private readonly IAuthorizationService _authorizationService;
         private readonly Core.Controllers.UserController _userCoreController;

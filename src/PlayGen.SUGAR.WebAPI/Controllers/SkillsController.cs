@@ -14,7 +14,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Skill specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class SkillsController : Controller
+    [Authorize("Bearer")]
+    public class SkillsController : Controller
 	{
         private readonly IAuthorizationService _authorizationService;
         private readonly EvaluationController _evaluationController;
