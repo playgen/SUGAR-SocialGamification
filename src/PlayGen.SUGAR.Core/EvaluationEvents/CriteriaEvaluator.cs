@@ -7,14 +7,17 @@ using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
-	public class EvaluationCriteriaEvaluator
+	/// <summary>
+	/// Evaluates evaluation criteria.
+	/// </summary>
+	public class CriteriaEvaluator
 	{
 		protected readonly Data.EntityFramework.Controllers.GameDataController GameDataController;
 		protected readonly GroupRelationshipController GroupRelationshipController;
 		protected readonly UserRelationshipController UserRelationshipController;
 
 		// todo change all db controller usage to core controller usage
-		public EvaluationCriteriaEvaluator(Data.EntityFramework.Controllers.GameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
+		public CriteriaEvaluator(Data.EntityFramework.Controllers.GameDataController gameDataController, GroupRelationshipController groupRelationshipController, UserRelationshipController userRelationshipController)
 		{
 			GameDataController = gameDataController;
 			GroupRelationshipController = groupRelationshipController;

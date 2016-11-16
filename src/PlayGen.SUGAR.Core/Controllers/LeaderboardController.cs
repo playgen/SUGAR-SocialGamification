@@ -14,7 +14,7 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-	public class LeaderboardController : EvaluationCriteriaEvaluator
+	public class LeaderboardController : CriteriaEvaluator
 	{
 		protected readonly ActorController ActorController;
 		protected readonly Data.EntityFramework.Controllers.GroupController GroupController;

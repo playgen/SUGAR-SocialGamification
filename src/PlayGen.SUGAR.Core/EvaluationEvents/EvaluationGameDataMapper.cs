@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
+    /// <summary>
+    /// Mappings of game data keys to evaluations with criteria that make use of the specific keys.
+    /// </summary>
     public class EvaluationGameDataMapper
     {
         // todo create mapping game data key to related evaluation identifier list

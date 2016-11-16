@@ -3,15 +3,18 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
+    /// <summary>
+    /// Evaluation tracking system.
+    /// </summary>
     public class EvaluationTracker
     {
-        private readonly EvaluationProgressTracker _progressTracker;
+        private readonly ProgressCache _progressCache;
         private readonly EvaluationGameDataMapper _gameDataToEvaluationMapper;
 
-        public EvaluationTracker(EvaluationProgressTracker progressTracker,
+        public EvaluationTracker(ProgressCache progressCache,
             EvaluationGameDataMapper gameDataToEvaluationMapper)
         {
-            _progressTracker = progressTracker;
+            _progressCache = progressCache;
             _gameDataToEvaluationMapper = gameDataToEvaluationMapper;
         }
 
@@ -22,24 +25,24 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         public void OnActorSessionStarted(int gameId, int actorId)
         {
-            _progressTracker.StartTracking(gameId, actorId);
+            _progressCache.StartTracking(gameId, actorId);
         }
 
         public void OnActorSessionEnded(int gameId, int actorId)
         {
-            _progressTracker.StopTracking(gameId, actorId);
+            _progressCache.StopTracking(gameId, actorId);
         }
 
         public void OnGameDataAdded(GameData gameData)
         {
             var evaluations = _gameDataToEvaluationMapper.GetRelated(gameData);
-            _progressTracker.Evaluate(evaluations, gameData);
+            _progressCache.Evaluate(evaluations, gameData);
         }
 
         public void OnEvaluationAdded(Evaluation evaluation)
         {
             _gameDataToEvaluationMapper.CreateMappings(evaluation);
-            _progressTracker.Evaluate(evaluation);
+            _progressCache.Evaluate(evaluation);
         }
 
         public void OnEvaluationUpdated(Evaluation evaluation)
@@ -47,19 +50,19 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             _gameDataToEvaluationMapper.RemoveMappings(evaluation);
             _gameDataToEvaluationMapper.CreateMappings(evaluation);
 
-            _progressTracker.Evaluate(evaluation);
+            _progressCache.Evaluate(evaluation);
         }
 
         public void OnEvaluationDeleted(Evaluation evaluation)
         {
             _gameDataToEvaluationMapper.RemoveMappings(evaluation);
 
-            _progressTracker.Remove(evaluation);
+            _progressCache.Remove(evaluation);
         }
 
         private void MapExistingEvaluations()
         {
-            var evaluations = new List<Evaluation>(); // todo create mappings for all existing evaluations
+            var evaluations = new List<Evaluation>();
             _gameDataToEvaluationMapper.MapExisting(evaluations);
         }
     }

@@ -9,7 +9,7 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-	public class EvaluationController : EvaluationCriteriaEvaluator
+	public class EvaluationController : CriteriaEvaluator
 	{
 		private readonly RewardController _rewardController;
 		private readonly ActorController _actorController;

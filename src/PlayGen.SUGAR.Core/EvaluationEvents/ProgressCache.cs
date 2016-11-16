@@ -2,19 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
-    public class EvaluationProgressTracker
+    /// <summary>
+    /// Evaluation progress on actor per game basis for every actor that has an active session.
+    /// </summary>
+    public class ProgressCache
     {
         // <gameId, <actorId, <evaluationId, progress>>>
         private readonly Dictionary<int, Dictionary<int, Dictionary<int, float>>> _progressMappings = new Dictionary<int, Dictionary<int, Dictionary<int, float>>>();
-        private readonly EvaluationCriteriaEvaluator _evaluationCriteriaEvaluator;
+        private readonly CriteriaEvaluator _evaluationCriteriaEvaluator;
 
-        public EvaluationProgressTracker(EvaluationCriteriaEvaluator evaluationCriteriaEvaluator)
+        public ProgressCache(CriteriaEvaluator evaluationCriteriaEvaluator)
         {
             _evaluationCriteriaEvaluator = evaluationCriteriaEvaluator;
         }
