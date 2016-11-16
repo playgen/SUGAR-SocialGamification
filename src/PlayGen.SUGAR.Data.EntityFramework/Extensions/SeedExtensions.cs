@@ -1,4 +1,7 @@
-﻿using PlayGen.SUGAR.Data.Model;
+﻿using System;
+
+using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
@@ -6,6 +9,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
     {
         internal static void Seed(this SUGARContext context)
         {
+            foreach (var claimScope in Enum.GetValues(typeof(ClaimScope)))
+            {
+                context.Roles.Add(new Role
+                {
+                    Name = claimScope.ToString()
+                });
+            }
+
             context.Accounts.Add(new Account()
             {
                 Name = "admin",
@@ -19,7 +30,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 UserId = 1
             });
 
-            /*context.ActorRoles.Add(new ActorRole
+            context.ActorRoles.Add(new ActorRole
             {
                 RoleId = 1,
                 ActorId = 1,
@@ -31,7 +42,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 RoleId = 3,
                 ActorId = 1,
                 EntityId = 1
-            });*/
+            });
 
             context.SaveChanges();
         }

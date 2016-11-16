@@ -57,9 +57,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(ResourceResponse))]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Create, AuthorizationOperation.Resource)]
+        //todo add authorisation for game developers to add
         public IActionResult AddOrUpdate([FromBody]ResourceAddRequest resourceRequest)
 		{
-            if (_authorizationService.AuthorizeAsync(User, resourceRequest.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var resource = resourceRequest.ToModel();
                 var resources = _resourceController.Get(resourceRequest.GameId, resourceRequest.ActorId, new[] { resourceRequest.Key });
@@ -95,7 +96,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Update, AuthorizationOperation.Resource)]
         public IActionResult Transfer([FromBody] ResourceTransferRequest transferRequest)
 		{
-            if (_authorizationService.AuthorizeAsync(User, transferRequest.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 GameData fromResource;
 

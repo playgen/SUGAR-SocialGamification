@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
         public IActionResult GetRoleActors([FromRoute]int roleId, [FromRoute]int entityId)
         {
-            if (_authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var actors = _actorRoleCoreController.GetRoleActors(roleId, entityId);
                 var actorContract = actors.ToContractList();
@@ -96,12 +96,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <param name="id">ActorRole ID.</param>
         [HttpDelete("{id:int}")]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.ActorRole)]
-        public void Delete([FromRoute]int id)
+        public IActionResult Delete([FromRoute]int id)
         {
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 _actorRoleCoreController.Delete(id);
+                return Ok();
             }
+            return Unauthorized();
         }
     }  
 }

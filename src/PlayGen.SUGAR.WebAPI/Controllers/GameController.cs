@@ -90,7 +90,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var game = newGame.ToModel();
-                _gameCoreController.Create(game);
+                _gameCoreController.Create(game, int.Parse(User.Identity.Name));
                 var gameContract = game.ToContract();
                 return new ObjectResult(gameContract);
             }
@@ -108,14 +108,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Game)]
         // todo refactor game request into GameUpdateRequest (which requires the Id) and GameCreateRequest (which has no required Id field) - and remove the Id param from the definition below
-        public void Update([FromRoute] int id, [FromBody] GameRequest game)
+        public IActionResult Update([FromRoute] int id, [FromBody] GameRequest game)
 		{
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var gameModel = game.ToModel();
                 gameModel.Id = id;
                 _gameCoreController.Update(gameModel);
+                return Ok();
             }
+            return Unauthorized();
 		}
 
 		/// <summary>
@@ -126,12 +128,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="id">Game ID.</param>
 		[HttpDelete("{id:int}")]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.Game)]
-        public void Delete([FromRoute]int id)
+        public IActionResult Delete([FromRoute]int id)
 		{
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 _gameCoreController.Delete(id);
+                return Ok();
             }
-		}
+            return Unauthorized();
+        }
 	}
 }

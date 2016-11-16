@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var group = actor.ToGroupModel();
-                _groupCoreController.Create(group);
+                _groupCoreController.Create(group, int.Parse(User.Identity.Name));
                 var actorContract = group.ToContract();
                 return new ObjectResult(actorContract);
             }
@@ -107,14 +107,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Update, AuthorizationOperation.Group)]
         // todo refactor to use groupupdaterequest that contains an Id property and have a separate groupcreaterequest that doen't have the Id
-        public void Update([FromRoute] int id, [FromBody] ActorRequest group)
+        public IActionResult Update([FromRoute] int id, [FromBody] ActorRequest group)
 		{
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var groupModel = group.ToGroupModel();
                 groupModel.Id = id;
                 _groupCoreController.Update(groupModel);
+                return Ok();
             }
+            return Unauthorized();
 		}
 
 		/// <summary>
@@ -125,12 +127,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="id">Group ID.</param>
 		[HttpDelete("{id:int}")]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.Group)]
-        public void Delete([FromRoute]int id)
+        public IActionResult Delete([FromRoute]int id)
 		{
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 _groupCoreController.Delete(id);
+                return Ok();
             }
-		}
+            return Unauthorized();
+        }
 	}
 }

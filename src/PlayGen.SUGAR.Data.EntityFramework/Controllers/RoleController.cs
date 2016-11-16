@@ -21,6 +21,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
+        public Role Get(string roleName)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                var role = context.Roles.FirstOrDefault(r => r.Name == roleName);
+                return role;
+            }
+        }
+
         public Role Create(Role role)
         {
             using (var context = ContextFactory.Create())

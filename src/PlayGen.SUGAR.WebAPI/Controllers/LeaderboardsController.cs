@@ -113,14 +113,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPut("update")]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Leaderboard)]
-        public void Update([FromBody] LeaderboardRequest leaderboard)
+        public IActionResult Update([FromBody] LeaderboardRequest leaderboard)
 		{
             if (_authorizationService.AuthorizeAsync(User, leaderboard.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var leaderboardModel = leaderboard.ToModel();
                 _leaderboardController.Update(leaderboardModel);
+                return Ok();
             }
-		}
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Delete Leaderboard with the <param name="token"/> and <param name="gameId"/> provided.
@@ -132,12 +134,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.Leaderboard)]
-        public void Delete([FromRoute]string token, [FromRoute]int? gameId)
+        public IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
             if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 _leaderboardController.Delete(token, gameId);
+                return Ok();
             }
-		}
+            return Unauthorized();
+        }
 	}
 }

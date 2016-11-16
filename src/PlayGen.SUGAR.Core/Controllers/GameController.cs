@@ -1,15 +1,22 @@
-﻿using PlayGen.SUGAR.Data.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
     public class GameController
     {
         private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
+        private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleController;
+        private readonly Data.EntityFramework.Controllers.RoleController _roleController;
 
-        public GameController(Data.EntityFramework.Controllers.GameController gameDbController)
+        public GameController(Data.EntityFramework.Controllers.GameController gameDbController,
+                    Data.EntityFramework.Controllers.ActorRoleController actorRoleController,
+                    Data.EntityFramework.Controllers.RoleController roleController)
         {
             _gameDbController = gameDbController;
+            _actorRoleController = actorRoleController;
+            _roleController = roleController;
         }
 
         public IEnumerable<Game> Get()
@@ -30,9 +37,19 @@ namespace PlayGen.SUGAR.Core.Controllers
             return games;
         }
         
-        public Game Create(Game newGame)
+        public Game Create(Game newGame, int creatorId)
         {
             newGame = _gameDbController.Create(newGame);
+            var role = _roleController.Get(ClaimScope.Game.ToString());
+            if (role != null)
+            {
+                _actorRoleController.Create(new ActorRole { ActorId = creatorId, RoleId = role.Id, EntityId = newGame.Id });
+                var admins = _actorRoleController.GetRoleActors(role.Id, 0);
+                foreach (var admin in admins)
+                {
+                    _actorRoleController.Create(new ActorRole { ActorId = admin.Id, RoleId = role.Id, EntityId = newGame.Id });
+                }
+            }
             return newGame;
         }
          

@@ -111,14 +111,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Update, AuthorizationOperation.User)]
-        public void Update([FromRoute] int id, [FromBody] ActorRequest user)
+        public IActionResult Update([FromRoute] int id, [FromBody] ActorRequest user)
 		{
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var userModel = user.ToUserModel();
                 userModel.Id = id;
                 _userCoreController.Update(userModel);
+                return Ok();
             }
+            return Unauthorized();
 		}
 
 		/// <summary>
@@ -129,12 +131,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="id">User ID.</param>
 		[HttpDelete("{id:int}")]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.User)]
-        public void Delete([FromRoute]int id)
+        public IActionResult Delete([FromRoute]int id)
 		{
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 _userCoreController.Delete(id);
+                return Ok();
             }
+            return Unauthorized();
 		}
 	}
 }

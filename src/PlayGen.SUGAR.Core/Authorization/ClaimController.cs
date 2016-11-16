@@ -47,13 +47,6 @@ namespace PlayGen.SUGAR.Core.Authorization
             newOperations = _claimDbController.Create(newOperations).ToList();
 
             var roles = _roleDbController.Get().ToList();
-            foreach (var claimScope in Enum.GetValues(typeof(ClaimScope)))
-            {
-                if (!roles.Select(r => r.Name).Contains(claimScope.ToString()))
-                {
-                    roles.Add(_roleDbController.Create(new Role { Name = claimScope.ToString() }));
-                }
-            }
 
             foreach (var op in newOperations)
             {

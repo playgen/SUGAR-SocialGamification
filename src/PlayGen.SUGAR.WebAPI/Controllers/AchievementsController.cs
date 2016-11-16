@@ -150,14 +150,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [HttpPut("update")]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Achievement)]
-        public void Update([FromBody] EvaluationUpdateRequest achievement)
+        public IActionResult Update([FromBody] EvaluationUpdateRequest achievement)
 		{
             if (_authorizationService.AuthorizeAsync(User, achievement.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var achievementModel = achievement.ToAchievementModel();
                 _evaluationCoreController.Update(achievementModel);
+                return Ok();
             }
-		}
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Delete Achievement with the <param name="token"/> and <param name="gameId"/> provided.
@@ -169,12 +171,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.Achievement)]
-        public void Delete([FromRoute]string token, [FromRoute]int? gameId)
+        public IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
             if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 _evaluationCoreController.Delete(token, gameId);
+                return Ok();
             }
-		}
+            return Unauthorized();
+        }
 	}
 }

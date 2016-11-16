@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.RoleClaim)]
         public IActionResult GetRoleClaims([FromRoute]int id)
         {
-            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var roles = _roleClaimCoreController.GetClaimsByRole(id);
                 var roleContract = roles.ToContractList();
@@ -77,12 +77,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <param name="claimId">Claim ID.</param>
         [HttpDelete("role/{roleId:int}/claim/{claimId:int}")]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Delete, AuthorizationOperation.RoleClaim)]
-        public void Delete([FromRoute]int roleId, [FromRoute]int claimId)
+        public IActionResult Delete([FromRoute]int roleId, [FromRoute]int claimId)
         {
             if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 _roleClaimCoreController.Delete(roleId, claimId);
+                return Ok();
             }
+            return Unauthorized();
         }
     }
 }

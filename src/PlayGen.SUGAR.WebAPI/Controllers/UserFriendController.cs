@@ -117,7 +117,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPut("request")]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Update, AuthorizationOperation.UserFriendRequest)]
-        public void UpdateFriendRequest([FromBody] RelationshipStatusUpdate relationship)
+        public IActionResult UpdateFriendRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
             if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result ||
                 _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
@@ -128,8 +128,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                     AcceptorId = relationship.AcceptorId
                 };
                 _userFriendCoreController.UpdateFriendRequest(relation.ToUserModel(), relationship.Accepted);
+                return Ok();
             }
-		}
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Update an existing relationship between <param name="relationship.RequestorId"/> and <param name="relationship.AcceptorId"/>.
@@ -141,7 +143,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPut]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.UserFriend)]
-        public void UpdateFriend([FromBody] RelationshipStatusUpdate relationship)
+        public IActionResult UpdateFriend([FromBody] RelationshipStatusUpdate relationship)
 		{
             if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result ||
                 _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
@@ -152,7 +154,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                     AcceptorId = relationship.AcceptorId
                 };
                 _userFriendCoreController.UpdateFriend(relation.ToUserModel());
+                return Ok();
             }
-		}
+            return Unauthorized();
+        }
 	}
 }

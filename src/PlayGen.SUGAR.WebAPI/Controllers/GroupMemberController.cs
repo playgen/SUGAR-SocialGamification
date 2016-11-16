@@ -133,7 +133,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPut("request")]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Update, AuthorizationOperation.GroupMemberRequest)]
-        public void UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
+        public IActionResult UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
             if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result ||
                 _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
@@ -144,7 +144,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                     AcceptorId = relationship.AcceptorId
                 };
                 _groupMemberCoreController.UpdateMemberRequest(relation.ToGroupModel(), relationship.Accepted);
+                return Ok();
             }
+            return Unauthorized();
 		}
 
 		/// <summary>
@@ -157,7 +159,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPut]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.GroupMember)]
-        public void UpdateMember([FromBody] RelationshipStatusUpdate relationship)
+        public IActionResult UpdateMember([FromBody] RelationshipStatusUpdate relationship)
 		{
             if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result ||
                 _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
@@ -168,7 +170,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                     AcceptorId = relationship.AcceptorId
                 };
                 _groupMemberCoreController.UpdateMember(relation.ToGroupModel());
+                return Ok();
             }
-		}
+            return Unauthorized();
+        }
 	}
 }
