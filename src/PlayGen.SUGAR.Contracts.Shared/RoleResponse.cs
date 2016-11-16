@@ -1,4 +1,6 @@
-﻿namespace PlayGen.SUGAR.Contracts.Shared
+﻿using PlayGen.SUGAR.Common.Shared.Permissions;
+
+namespace PlayGen.SUGAR.Contracts.Shared
 {
     /// <summary>
     /// Encapsulates role details from the server.
@@ -21,5 +23,10 @@
         /// The display name of the role.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// The ClaimScope of this role.
+        /// </summary>
+        public ClaimScope ClaimScope { get; set; }
     }
 }

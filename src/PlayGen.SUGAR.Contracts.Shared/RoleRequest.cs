@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PlayGen.SUGAR.Common.Shared.Permissions;
+using System.ComponentModel.DataAnnotations;
 
 namespace PlayGen.SUGAR.Contracts.Shared
 {
@@ -19,6 +20,11 @@ namespace PlayGen.SUGAR.Contracts.Shared
         [Required]
         [StringLength(64)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// The ClaimScope of this role.
+        /// </summary>
+        public ClaimScope ClaimScope { get; set; }
     }
 }
 

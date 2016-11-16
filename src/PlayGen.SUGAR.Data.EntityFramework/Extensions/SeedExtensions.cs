@@ -9,11 +9,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
     {
         internal static void Seed(this SUGARContext context)
         {
-            foreach (var claimScope in Enum.GetValues(typeof(ClaimScope)))
+            foreach (var claimScope in (ClaimScope[])Enum.GetValues(typeof(ClaimScope)))
             {
                 context.Roles.Add(new Role
                 {
-                    Name = claimScope.ToString()
+                    Name = claimScope.ToString(),
+                    ClaimScope = claimScope
                 });
             }
 

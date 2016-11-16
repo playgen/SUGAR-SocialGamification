@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
@@ -15,8 +16,14 @@ namespace PlayGen.SUGAR.Core.Controllers
 
         public IEnumerable<Role> Get()
         {
-            var games = _roleDbController.Get();
-            return games;
+            var roles = _roleDbController.Get();
+            return roles;
+        }
+
+        public IEnumerable<Role> GetByScope(ClaimScope scope)
+        {
+            var roles = _roleDbController.Get(scope);
+            return roles;
         }
 
         public Role Create(Role newRole)

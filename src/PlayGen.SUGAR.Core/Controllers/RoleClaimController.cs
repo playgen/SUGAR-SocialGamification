@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using PlayGen.SUGAR.Data.Model;
 
@@ -7,11 +8,18 @@ namespace PlayGen.SUGAR.Core.Controllers
     public class RoleClaimController
     {
         private readonly Data.EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
+        private readonly Data.EntityFramework.Controllers.ClaimController _claimDbController;
+        private readonly Data.EntityFramework.Controllers.RoleController _roleDbController;
 
-        public RoleClaimController(Data.EntityFramework.Controllers.RoleClaimController roleClaimDbController)
+        public RoleClaimController(Data.EntityFramework.Controllers.ClaimController claimDbController,
+                    Data.EntityFramework.Controllers.RoleController roleDbController,
+                    Data.EntityFramework.Controllers.RoleClaimController roleClaimDbController)
         {
+            _claimDbController = claimDbController;
+            _roleDbController = roleDbController;
             _roleClaimDbController = roleClaimDbController;
         }
+
 
         public IEnumerable<Claim> GetClaimsByRole(int roleId)
         {
@@ -27,6 +35,12 @@ namespace PlayGen.SUGAR.Core.Controllers
 
         public RoleClaim Create(RoleClaim newRoleClaim)
         {
+            var roleScope = _roleDbController.Get(newRoleClaim.RoleId).ClaimScope;
+            var claimScope = _claimDbController.Get(newRoleClaim.ClaimId).ClaimScope;
+            if (roleScope != claimScope)
+            {
+                throw new ArgumentException($"Claim ClaimScope {claimScope} does not match Role ClaimScope {roleScope}");
+            }
             newRoleClaim = _roleClaimDbController.Create(newRoleClaim);
             return newRoleClaim;
         }
