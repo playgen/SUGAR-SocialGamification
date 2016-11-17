@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
@@ -17,6 +18,12 @@ namespace PlayGen.SUGAR.Core.Controllers
             _roleController = roleController;
         }
 
+        public ActorRole Get(int id)
+        {
+            var role = _actorRoleDbController.Get(id);
+            return role;
+        }
+
         public IEnumerable<ActorRole> GetActorRoles(int actorId)
         {
             var roles = _actorRoleDbController.GetActorRoles(actorId);
@@ -29,8 +36,15 @@ namespace PlayGen.SUGAR.Core.Controllers
             return roles;
         }
 
+        public IEnumerable<Actor> GetRoleActors(int roleId, int entityId, int actorId)
+        {
+            var roles = GetRoleActors(roleId, entityId);
+            return roles;
+        }
+
         public ActorRole Create(ActorRole newRole)
         {
+            //todo Add additional permissions for every actor/game if global (or global claimscope?)
             newRole = _actorRoleDbController.Create(newRole);
             return newRole;
         }
@@ -51,8 +65,27 @@ namespace PlayGen.SUGAR.Core.Controllers
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int id, int actorId)
         {
+            var actor = Get(id).ActorId;
+            if (actor != actorId)
+            {
+                var isAdmin = GetActorRoles(actor).Select(r => _roleController.GetById(r.RoleId)).Any(r => r.ClaimScope == ClaimScope.Global);
+                if (isAdmin && GetActorRoles(actorId).Select(r => _roleController.GetById(r.RoleId)).All(r => r.ClaimScope != ClaimScope.Global))
+                {
+                    throw new ArgumentException($"Permission cannot be removed");
+                }
+            }
+            var actorRole = Get(id);
+            var role = _roleController.GetById(actorRole.RoleId);
+            if (role.Name == role.ClaimScope.ToString())
+            {
+                var roleCount = GetRoleActors(actorRole.RoleId, actorRole.EntityId).ToList().Count;
+                if (roleCount <= 1)
+                {
+                    throw new ArgumentException($"Permission cannot be removed");
+                }
+            }
             _actorRoleDbController.Delete(id);
         }
     }

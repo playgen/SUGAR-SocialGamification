@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
@@ -10,6 +11,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
         public ActorRoleController(SUGARContextFactory contextFactory)
             : base(contextFactory)
         {
+        }
+
+        public ActorRole Get(int id)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                var role = context.ActorRoles.Find(context, id);
+                return role;
+            }
         }
 
         public IEnumerable<Role> GetActorRolesForEntity(int actorId, int entityId)

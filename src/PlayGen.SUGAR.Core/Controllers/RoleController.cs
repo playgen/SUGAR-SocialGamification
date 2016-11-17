@@ -26,6 +26,12 @@ namespace PlayGen.SUGAR.Core.Controllers
             return role;
         }
 
+        public Role GetById(int id)
+        {
+            var role = _roleDbController.Get(id);
+            return role;
+        }
+
         public IEnumerable<Role> GetByScope(ClaimScope scope)
         {
             var roles = _roleDbController.Get(scope);
