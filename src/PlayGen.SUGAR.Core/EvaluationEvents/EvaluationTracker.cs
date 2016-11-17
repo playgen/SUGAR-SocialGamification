@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
@@ -72,8 +73,9 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         private void MapExistingEvaluations()
         {
-            // todo read from database
-            //_gameDataToEvaluationMapper.CreateMappings(evaluations);
+            // todo read from database  - and write tests
+            var evaluations = new List<Evaluation>();
+            _gameDataToEvaluationMapper.CreateMappings(evaluations);
         }
     }
 }

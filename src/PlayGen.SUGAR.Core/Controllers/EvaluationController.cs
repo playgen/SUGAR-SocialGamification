@@ -21,9 +21,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 			{EvaluationType.Skill, KeyConstants.SkillCompleteFormat},
 		};
 
-        // todo change all db controller usages to core controller usages except for evaluation db controller
+		// todo change all db controller usages to core controller usages except for evaluation db controller
 		public EvaluationController(Data.EntityFramework.Controllers.EvaluationController evaluationDbController,
-            GameDataController gameDataCoreController,
+			GameDataController gameDataCoreController,
 			GroupMemberController groupMemberCoreController,
 			UserFriendController userFriendCoreController,
 			ActorController actorController,

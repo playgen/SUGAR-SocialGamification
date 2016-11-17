@@ -34,6 +34,40 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
+        // progress: <evaluationId, progress>
+        public bool TryGetProgress(int gameId, int actorId, out Dictionary<int, float> progress)
+        {
+            var didGetProgress = false;
+            progress = null;
+
+            Dictionary<int, Dictionary<int, float>> gameProgress;
+
+            if (_progressMappings.TryGetValue(gameId, out gameProgress))
+            {
+                if (gameProgress.TryGetValue(actorId, out progress))
+                {
+                    didGetProgress = progress.Any();
+                }
+            }
+
+            return didGetProgress;
+        }
+
+        public bool TryGetProgress(int gameId, int actorId, int evaluationId, out float progress)
+        {
+            var didGetProgress = false;
+            progress = 0f;
+
+            Dictionary<int, float> actorProgress;
+
+            if (TryGetProgress(gameId, actorId, out actorProgress))
+            {
+                didGetProgress = actorProgress.TryGetValue(evaluationId, out progress);
+            }
+
+            return didGetProgress;
+        }
+
         public Dictionary<int, Dictionary<int, Dictionary<int, float>>> EvaluateActor(int gameId, int actorId)
         {
             // todo run all evaluations for this game against this user's data and store the results
