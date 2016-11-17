@@ -76,10 +76,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Role ID.</param>
 		[HttpDelete("{id:int}")]
-        [Authorization(ClaimScope.Global, AuthorizationOperation.Delete, AuthorizationOperation.Role)]
+        [Authorization(ClaimScope.Role, AuthorizationOperation.Delete, AuthorizationOperation.Role)]
         public IActionResult Delete([FromRoute]int id)
         {
-            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 _roleCoreController.Delete(id);
                 return Ok();

@@ -5,6 +5,7 @@
         Global,
         Game,
         Actor,
-        Account
+        Account,
+        Role
     }
 }

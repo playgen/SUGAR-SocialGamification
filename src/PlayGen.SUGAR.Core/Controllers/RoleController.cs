@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
@@ -46,6 +47,11 @@ namespace PlayGen.SUGAR.Core.Controllers
 
         public void Delete(int id)
         {
+            var role = GetById(id);
+            if (role.Name == role.ClaimScope.ToString())
+            {
+                throw new ArgumentException($"Cannot remove default roles");
+            }
             _roleDbController.Delete(id);
         }
     }
