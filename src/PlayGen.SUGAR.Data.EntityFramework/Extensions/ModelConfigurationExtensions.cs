@@ -91,7 +91,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 .HasIndex(e => new { e.Token, e.GameId, e.ActorType });
 
             builder.Entity<ActorRole>()
-                .HasIndex(a => new { a.ActorId, a.EntityId, a.RoleId });
+                .HasIndex(a => new { a.ActorId, a.EntityId, a.RoleId })
+                .IsUnique();
 
             // Unique
             builder.Entity<Game>()

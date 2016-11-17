@@ -4,6 +4,7 @@
     {
         Global,
         Game,
-        Actor
+        Actor,
+        Account
     }
 }

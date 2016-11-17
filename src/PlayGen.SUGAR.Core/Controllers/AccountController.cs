@@ -1,6 +1,8 @@
 ﻿using PlayGen.SUGAR.Core.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Core.Utilities;
 
 namespace PlayGen.SUGAR.Core.Controllers
@@ -9,13 +11,16 @@ namespace PlayGen.SUGAR.Core.Controllers
 	{
 		private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
 		private readonly Data.EntityFramework.Controllers.UserController _userDbController;
-		
-		public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
-			Data.EntityFramework.Controllers.UserController userDbController)
+        private readonly ActorRoleController _actorRoleController;
+
+        public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
+			        Data.EntityFramework.Controllers.UserController userDbController,
+                    ActorRoleController actorRoleController)
 		{
 			_accountDbController = accountDbController;
 			_userDbController = userDbController;
-		}
+            _actorRoleController = actorRoleController;
+        }
 
         public Account Login(Account toVerify)
         {
@@ -55,6 +60,8 @@ namespace PlayGen.SUGAR.Core.Controllers
                 User = user
 
             });
+
+            _actorRoleController.Create(ClaimScope.Account.ToString(), registered.UserId, registered.Id);
 
             return registered;
 		}

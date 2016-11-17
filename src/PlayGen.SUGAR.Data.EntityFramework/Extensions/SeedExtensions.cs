@@ -45,6 +45,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 EntityId = 1
             });
 
+            context.ActorRoles.Add(new ActorRole
+            {
+                RoleId = 4,
+                ActorId = 1,
+                EntityId = 1
+            });
+
             context.SaveChanges();
         }
     }

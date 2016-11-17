@@ -7,18 +7,15 @@ namespace PlayGen.SUGAR.Core.Controllers
     public class GroupController
     {
         private readonly Data.EntityFramework.Controllers.GroupController _groupDbController;
-        private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleController;
-        private readonly Data.EntityFramework.Controllers.RoleController _roleController;
+        private readonly ActorRoleController _actorRoleController;
         private readonly GroupMemberController _groupMemberController;
 
         public GroupController(Data.EntityFramework.Controllers.GroupController groupDbController,
-                    Data.EntityFramework.Controllers.ActorRoleController actorRoleController,
-                    Data.EntityFramework.Controllers.RoleController roleController,
+                    ActorRoleController actorRoleController,
                     GroupMemberController groupMemberController)
         {
             _groupDbController = groupDbController;
             _actorRoleController = actorRoleController;
-            _roleController = roleController;
             _groupMemberController = groupMemberController;
         }
         
@@ -43,17 +40,7 @@ namespace PlayGen.SUGAR.Core.Controllers
         public Group Create(Group newGroup, int creatorId)
         {
             newGroup = _groupDbController.Create(newGroup);
-            var role = _roleController.Get(ClaimScope.Actor.ToString());
-            if (role != null)
-            {
-                _actorRoleController.Create(new ActorRole { ActorId = creatorId, RoleId = role.Id, EntityId = newGroup.Id });
-                _groupMemberController.CreateMemberRequest(new UserToGroupRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
-                var admins = _actorRoleController.GetRoleActors(role.Id, 0);
-                foreach (var admin in admins)
-                {
-                    _actorRoleController.Create(new ActorRole { ActorId = admin.Id, RoleId = role.Id, EntityId = newGroup.Id });
-                }
-            }
+            _actorRoleController.Create(ClaimScope.Actor.ToString(), creatorId, newGroup.Id);
             return newGroup;
         }
         

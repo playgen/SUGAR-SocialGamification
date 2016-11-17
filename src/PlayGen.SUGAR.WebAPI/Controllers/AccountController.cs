@@ -133,7 +133,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <param name="id">Account ID.</param>
         [HttpDelete("{id:int}")]
         [Authorize("Bearer")]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.Account)]
+        [Authorization(ClaimScope.Account, AuthorizationOperation.Delete, AuthorizationOperation.Account)]
         public IActionResult Delete([FromRoute]int id)
 		{
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
