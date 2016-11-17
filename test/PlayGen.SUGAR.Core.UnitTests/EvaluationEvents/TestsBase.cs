@@ -68,6 +68,18 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 EvaluationCriterias = evaluationCriterias
             };
         }
+
+        protected GameData CreateGameData(EvaluationCriteria evaluationCriteria, int gameId)
+        {
+            return new GameData
+            {
+                Key = evaluationCriteria.Key,
+                DataType = evaluationCriteria.DataType,
+
+                GameId = gameId,
+                Value = "100"
+            };
+        }
     }
     #endregion
 }

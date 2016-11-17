@@ -48,15 +48,15 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         public void OnEvaluationAdded(Evaluation evaluation)
         {
-            _gameDataToEvaluationMapper.CreateMappings(evaluation);
+            _gameDataToEvaluationMapper.CreateMapping(evaluation);
             var progress = _progressCache.Evaluate(evaluation);
             _progressNotificationCache.Check(progress);
         }
 
         public void OnEvaluationUpdated(Evaluation evaluation)
         {
-            _gameDataToEvaluationMapper.RemoveMappings(evaluation);
-            _gameDataToEvaluationMapper.CreateMappings(evaluation);
+            _gameDataToEvaluationMapper.RemoveMapping(evaluation);
+            _gameDataToEvaluationMapper.CreateMapping(evaluation);
 
             var progress = _progressCache.Evaluate(evaluation);
             _progressNotificationCache.Check(progress);
@@ -64,7 +64,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         public void OnEvaluationDeleted(Evaluation evaluation)
         {
-            _gameDataToEvaluationMapper.RemoveMappings(evaluation);
+            _gameDataToEvaluationMapper.RemoveMapping(evaluation);
 
             _progressCache.Remove(evaluation.Id);
             _progressNotificationCache.Remove(evaluation.Id);
@@ -72,8 +72,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         private void MapExistingEvaluations()
         {
-            var evaluations = new List<Evaluation>();
-            _gameDataToEvaluationMapper.MapExisting(evaluations);
+            // todo read from database
+            //_gameDataToEvaluationMapper.CreateMappings(evaluations);
         }
     }
 }

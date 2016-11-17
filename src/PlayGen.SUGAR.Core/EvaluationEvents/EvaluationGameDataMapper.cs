@@ -2,6 +2,7 @@
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared;
+using System.Linq;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
@@ -18,7 +19,15 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             return _mappings.TryGetValue(mappedKey, out relatedEvaluations);
         }
 
-        public void CreateMappings(Evaluation evaluation)
+        public void CreateMappings(IEnumerable<Evaluation> evaluations)
+        {
+            foreach (var evaluation in evaluations)
+            {
+                CreateMapping(evaluation);
+            }   
+        }
+
+        public void CreateMapping(Evaluation evaluation)
         {
             foreach (var evaluationCriteria in evaluation.EvaluationCriterias)
             {
@@ -40,21 +49,28 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             }
         }
 
-        public void RemoveMappings(Evaluation evaluation)
+        public void RemoveMapping(Evaluation evaluation)
         {
-            // todo all occurences of this evaluation from the mappings.
-            // note: remember to remove gamedata mappings that don't have any other evaluations mapped any longer
-            throw new NotImplementedException();
+            foreach (var evaluationCriteria in evaluation.EvaluationCriterias)
+            {
+                var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.DataType, evaluationCriteria.Key);
+
+                HashSet<Evaluation> mappedEvaluationsForKey;
+
+                if (_mappings.TryGetValue(mappingKey, out mappedEvaluationsForKey))
+                {
+                    mappedEvaluationsForKey.Remove(evaluation);
+
+                    if (!mappedEvaluationsForKey.Any())
+                    {
+                        _mappings.Remove(mappingKey);
+                    }
+                }
+            }
         }
 
-        public void MapExisting(List<Evaluation> evaluations)
-        {
-            // todo remove all mappings
-            // todo remap all mappings
-            throw new NotImplementedException();
-        }
-
-        private string CreateMappingKey(int? gameId, GameDataType dataType, string gameDataKey)
+        private
+            string CreateMappingKey(int? gameId, GameDataType dataType, string gameDataKey)
         {
             return $"{gameId};{dataType};{gameDataKey}";
         }
