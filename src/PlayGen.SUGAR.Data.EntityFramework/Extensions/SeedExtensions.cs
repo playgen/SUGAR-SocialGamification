@@ -31,6 +31,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 UserId = 1
             });
 
+            //global (admin)
             context.ActorRoles.Add(new ActorRole
             {
                 RoleId = 1,
@@ -38,6 +39,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 EntityId = 0
             });
 
+            //global game
+            context.ActorRoles.Add(new ActorRole
+            {
+                RoleId = 2,
+                ActorId = 1,
+                EntityId = 0
+            });
+
+            //actor (user)
             context.ActorRoles.Add(new ActorRole
             {
                 RoleId = 3,
@@ -45,6 +55,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 EntityId = 1
             });
 
+            //account
             context.ActorRoles.Add(new ActorRole
             {
                 RoleId = 4,

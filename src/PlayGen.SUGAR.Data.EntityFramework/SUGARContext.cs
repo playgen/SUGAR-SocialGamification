@@ -33,7 +33,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		public DbSet<Group> Groups { get; set; }
 
 		public DbSet<GameData> GameData { get; set; }
-		public DbSet<ActorData> ActorData { get; set; }
 
 		public DbSet<UserToUserRelationshipRequest> UserToUserRelationshipRequests { get; set; }
 		public DbSet<UserToUserRelationship> UserToUserRelationships { get; set; }
