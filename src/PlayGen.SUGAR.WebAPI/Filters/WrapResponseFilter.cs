@@ -22,12 +22,11 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-
             var result = context.Result as ObjectResult;
 
             if (result == null)
             {
-                throw new Exception("Result type must be of ObjectResult.");
+                return;
             }
 
             // todo check if header has send events claim
