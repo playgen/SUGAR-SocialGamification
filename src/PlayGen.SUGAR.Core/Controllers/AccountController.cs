@@ -53,10 +53,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		    registered = _accountDbController.Create(new Account
 		    {
+                Name = toRegister.Name,
                 Password = PasswordEncryption.Encrypt(toRegister.Password),
                 UserId = user.Id,
                 User = user
-
             });
 
             return registered;
