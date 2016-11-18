@@ -13,13 +13,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
         private static AccountController _accountController;
 		private static ActorController _actorController;
-		private static GameController _gameController;
+        private static ActorRoleController _actorRoleController;
+        private static ClaimController _claimController;
+        private static GameController _gameController;
 		private static GameDataController _gameDataController;
 		private static GroupController _groupController;
 		private static GroupRelationshipController _groupRelationshipController;
 		private static LeaderboardController _leaderboardController;
 		private static EvaluationController _evaluationController;
-		private static UserController _userController;
+        private static RoleController _roleController;
+        private static RoleClaimController _roleClaimController;
+        private static UserController _userController;
 		private static UserRelationshipController _userRelationshipController;
 
         public static Controllers.AccountController AccountController
@@ -30,6 +34,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
         public static  ActorController ActorController
 			=> _actorController ?? (_actorController = new ActorController(ContextFactory));
+
+        public static ActorRoleController ActorRoleController
+       => _actorRoleController ?? (_actorRoleController = new ActorRoleController(ContextFactory));
+
+        public static ClaimController ClaimController
+        => _claimController ?? (_claimController = new ClaimController(ContextFactory));
 
         public static GameController GameController 
 			=> _gameController ?? (_gameController = new GameController(ContextFactory));
@@ -45,6 +55,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
         public static LeaderboardController LeaderboardController
 			=> _leaderboardController ?? (_leaderboardController = new LeaderboardController(ContextFactory));
+
+        public static RoleController RoleController
+            => _roleController ?? (_roleController = new RoleController(ContextFactory));
+
+        public static RoleClaimController RoleClaimController
+            => _roleClaimController ?? (_roleClaimController = new RoleClaimController(ContextFactory));
 
         public static UserController UserController 
 			=> _userController ?? (_userController = new UserController(ContextFactory));
