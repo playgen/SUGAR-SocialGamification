@@ -1,15 +1,19 @@
-﻿using PlayGen.SUGAR.Data.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
     public class GameController
     {
         private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
+        private readonly ActorRoleController _actorRoleController;
 
-        public GameController(Data.EntityFramework.Controllers.GameController gameDbController)
+        public GameController(Data.EntityFramework.Controllers.GameController gameDbController,
+                    ActorRoleController actorRoleController)
         {
             _gameDbController = gameDbController;
+            _actorRoleController = actorRoleController;
         }
 
         public IEnumerable<Game> Get()
@@ -30,9 +34,10 @@ namespace PlayGen.SUGAR.Core.Controllers
             return games;
         }
         
-        public Game Create(Game newGame)
+        public Game Create(Game newGame, int creatorId)
         {
             newGame = _gameDbController.Create(newGame);
+            _actorRoleController.Create(ClaimScope.Game.ToString(), creatorId, newGame.Id);
             return newGame;
         }
          

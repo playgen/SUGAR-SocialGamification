@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.WebAPI
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials()
-                .WithExposedHeaders(new[] { "Authorization " })));
+                .WithExposedHeaders("Authorization ")));
         }
     }
 }

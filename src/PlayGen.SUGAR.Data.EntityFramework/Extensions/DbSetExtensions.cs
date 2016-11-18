@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
+
 using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Data.Model;
 
@@ -51,6 +49,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="set"></param>
+        /// <param name="context"></param>
         /// <param name="keyValues"></param>
         /// <returns></returns>
         public static TEntity Find<TEntity>(this IQueryable<TEntity> set, SUGARContext context, params object[] keyValues) where TEntity : class

@@ -378,8 +378,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			DateTime dataDateTime;
-			using (var context = ContextFactory.Create())
+		    using (var context = ContextFactory.Create())
 			{
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
@@ -389,14 +388,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByDateTimeRange(start, end)
 					.FirstOrDefault();
 
-				if (data == null)
-				{
-					dataDateTime = default(DateTime);
-				}
-				else
-				{
-					dataDateTime = data.DateCreated;
-				}
+				var dataDateTime = data?.DateCreated ?? default(DateTime);
 				
 				return dataDateTime;
 			}
@@ -405,8 +397,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
-			DateTime dataDateTime;
-			using (var context = ContextFactory.Create())
+		    using (var context = ContextFactory.Create())
 			{
 				var data = context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
@@ -416,14 +407,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 
-				if (data == null)
-				{
-					dataDateTime = default(DateTime);
-				}
-				else
-				{
-					dataDateTime = data.DateModified;
-				}
+				var dataDateTime = data?.DateModified ?? default(DateTime);
 
 				return dataDateTime;
 			}
@@ -476,14 +460,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
         protected DateTime EndSet(DateTime end)
         {
-            if (end == default(DateTime))
-            {
-                return DateTime.Now;
-            }
-            else
-            {
-                return end;
-            }
+            return end == default(DateTime) ? DateTime.Now : end;
         }
     }
 }

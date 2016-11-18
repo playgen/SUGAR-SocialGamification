@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using PlayGen.SUGAR.Contracts;
+using Microsoft.AspNetCore.Authorization;
+using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
 
@@ -11,18 +16,21 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates UserData specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	[Authorization]
-	public class ResourceController : Controller
+    [Authorize("Bearer")]
+    public class ResourceController : Controller
 	{
-		private readonly Core.Controllers.ResourceController _resourceController;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly Core.Controllers.ResourceController _resourceController;
 
-		public ResourceController(Core.Controllers.ResourceController resourceController)
+		public ResourceController(Core.Controllers.ResourceController resourceController,
+                    IAuthorizationService authorizationService)
 		{
 			_resourceController = resourceController;
-		}
+            _authorizationService = authorizationService;
+        }
 
 		/// <summary>
-		/// Find a list of all Resources filtered by the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+		/// Find a list of all Resources filtered by the <param name="actorId"/>, <param name="gameId"/> and <param name="keys"/> provided.
 		/// 
 		/// Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
 		/// </summary>
@@ -31,8 +39,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="keys">Optional array of Key names to filter results by.</param>
 		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
 		[HttpGet]
-		//[ResponseType(typeof(IEnumerable<ResourceResponse>))]
-		public IActionResult Get(int? gameId, int? actorId, string[] keys)
+        //[ResponseType(typeof(IEnumerable<ResourceResponse>))]
+        public IActionResult Get(int? gameId, int? actorId, string[] keys)
 		{
 			var resource = _resourceController.Get(gameId, actorId, keys.Any() ? keys : null);
 			var resourceContract = resource.ToResourceContractList();
@@ -49,25 +57,35 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(ResourceResponse))]
 		[ArgumentsNotNull]
-		public IActionResult AddOrUpdate([FromBody]ResourceAddRequest resourceRequest)
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.Resource)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Create, AuthorizationOperation.Resource)]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Resource)]
+        public IActionResult AddOrUpdate([FromBody]ResourceAddRequest resourceRequest)
 		{
-			var resource = resourceRequest.ToModel();
-			var resources = _resourceController.Get(resourceRequest.GameId, resourceRequest.ActorId, new[] { resourceRequest.Key });
-			if (resources.Any())
-			{
-				var firstResource = resources.ElementAt(0);
-				_resourceController.UpdateQuantity(firstResource, resourceRequest.Quantity);
-			}
-			else
-			{
-				
-				_resourceController.Create(resource);
-				
-			}
+            if (_authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, resourceRequest.GameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+            {
+                var resource = resourceRequest.ToModel();
+                var resources = _resourceController.Get(resourceRequest.GameId, resourceRequest.ActorId, new[] { resourceRequest.Key });
+                var resourceList = resources as List<GameData> ?? resources.ToList();
+                if (resourceList.Any())
+                {
+                    var firstResource = resourceList.ElementAt(0);
+                    _resourceController.UpdateQuantity(firstResource, resourceRequest.Quantity);
+                }
+                else
+                {
 
-			var resourceContract = resource.ToResourceContract();
-			return new ObjectResult(resourceContract);
-		}
+                    _resourceController.Create(resource);
+
+                }
+
+                var resourceContract = resource.ToResourceContract();
+                return new ObjectResult(resourceContract);
+            }
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Transfers a quantity of a specific resource.
@@ -79,19 +97,26 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost("transfer")]
 		//[ResponseType(typeof(ResourceTransferResponse))]
 		[ArgumentsNotNull]
-		public IActionResult Transfer([FromBody] ResourceTransferRequest transferRequest)
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Resource)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.Resource)]
+        public IActionResult Transfer([FromBody] ResourceTransferRequest transferRequest)
 		{
-			Data.Model.GameData fromResource;
+            if (_authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)
+            {
+                GameData fromResource;
 
-			var toResource = _resourceController.Transfer(transferRequest.GameId, transferRequest.SenderActorId, transferRequest.RecipientActorId, transferRequest.Key, transferRequest.Quantity, out fromResource);
+                var toResource = _resourceController.Transfer(transferRequest.GameId, transferRequest.SenderActorId, transferRequest.RecipientActorId, transferRequest.Key, transferRequest.Quantity, out fromResource);
 
-			var resourceTransferRespone = new ResourceTransferResponse
-			{
-				FromResource = fromResource.ToResourceContract(),
-				ToResource = toResource.ToResourceContract(),
-			};
+                var resourceTransferRespone = new ResourceTransferResponse
+                {
+                    FromResource = fromResource.ToResourceContract(),
+                    ToResource = toResource.ToResourceContract(),
+                };
 
-			return new ObjectResult(resourceTransferRespone);
-		}
+                return new ObjectResult(resourceTransferRespone);
+            }
+            return Unauthorized();
+        }
 	}
 }

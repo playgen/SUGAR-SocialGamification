@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				if (newRelation.AcceptorId == newRelation.RequestorId) {
-					throw new DuplicateRecordException(string.Format("Two different users are needed to create a relationship."));
+					throw new DuplicateRecordException("Two different users are needed to create a relationship.");
 				}
 
 				var hasConflicts = context.UserToUserRelationships
@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				if (hasConflicts)
 				{
-					throw new DuplicateRecordException(string.Format("A relationship with these users already exists."));
+					throw new DuplicateRecordException("A relationship with these users already exists.");
 				}
 
 				var requestorExists = context.Users.Any(u => u.Id == newRelation.RequestorId);
@@ -81,12 +81,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				if (!requestorExists)
 				{
-					throw new MissingRecordException(string.Format("The requesting user does not exist."));
+					throw new MissingRecordException("The requesting user does not exist.");
 				}
 
 				if (!acceptorExists)
 				{
-					throw new MissingRecordException(string.Format("The targeted user does not exist."));
+					throw new MissingRecordException("The targeted user does not exist.");
 				}
 				if (autoAccept) {
 					var relation = new UserToUserRelationship

@@ -1,6 +1,8 @@
 ﻿using PlayGen.SUGAR.Core.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Core.Utilities;
 
 namespace PlayGen.SUGAR.Core.Controllers
@@ -9,20 +11,23 @@ namespace PlayGen.SUGAR.Core.Controllers
 	{
 		private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
 		private readonly Data.EntityFramework.Controllers.UserController _userDbController;
-		
+        private readonly ActorRoleController _actorRoleController;
+
         // todo only take in account db controller but use core user controller
-		public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
-			Data.EntityFramework.Controllers.UserController userDbController)
+        public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
+			        Data.EntityFramework.Controllers.UserController userDbController,
+                    ActorRoleController actorRoleController)
 		{
 			_accountDbController = accountDbController;
 			_userDbController = userDbController;
-		}
+            _actorRoleController = actorRoleController;
+        }
 
         public Account Login(Account toVerify)
         {
-            Account verified = null;
+            Account verified;
 
-			var found = _accountDbController.Get(new string[] { toVerify.Name }).SingleOrDefault();
+			var found = _accountDbController.Get(new[] { toVerify.Name }).SingleOrDefault();
 
 			if (found != null && PasswordEncryption.Verify(toVerify.Password, found.Password))
 			{
@@ -38,9 +43,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 		
 		public Account Register(Account toRegister)
 		{
-		    Account registered = null;
-
-            if(string.IsNullOrWhiteSpace(toRegister.Name) || string.IsNullOrWhiteSpace(toRegister.Password))
+		    if(string.IsNullOrWhiteSpace(toRegister.Name) || string.IsNullOrWhiteSpace(toRegister.Password))
 		    {
 		        throw new InvalidAccountDetailsException("Invalid username or password.");
 		    }
@@ -51,13 +54,15 @@ namespace PlayGen.SUGAR.Core.Controllers
                 Name = toRegister.Name
 		    });
 
-		    registered = _accountDbController.Create(new Account
+		    var registered = _accountDbController.Create(new Account
 		    {
                 Name = toRegister.Name,
                 Password = PasswordEncryption.Encrypt(toRegister.Password),
                 UserId = user.Id,
                 User = user
             });
+
+            _actorRoleController.Create(ClaimScope.Account.ToString(), registered.UserId, registered.Id);
 
             return registered;
 		}

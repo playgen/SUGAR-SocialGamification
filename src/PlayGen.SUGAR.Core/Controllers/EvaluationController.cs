@@ -94,15 +94,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			if (actorId.HasValue)
 			{
-				var provided = _actorController.Get(actorId.Value);
-				if (provided == null)
-				{
-					evaluations = evaluations.Where(a => a.ActorType == ActorType.Undefined);
-				}
-				else
-				{
-					evaluations = evaluations.Where(a => a.ActorType == ActorType.Undefined || a.ActorType == provided.ActorType);
-				}
+			    var provided = _actorController.Get(actorId.Value);
+			    evaluations = provided == null ? evaluations.Where(a => a.ActorType == ActorType.Undefined) :
+                                                evaluations.Where(a => a.ActorType == ActorType.Undefined || a.ActorType == provided.ActorType);
 			}
 
 			return evaluations;
@@ -140,7 +134,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		private void ProcessEvaluationRewards(Evaluation evaluation, int? actorId)
 		{
-			var gameData = new Data.Model.GameData()
+			var gameData = new GameData()
 			{
 				Key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token),
 				GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game
@@ -149,7 +143,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 				Value = null
 			};
 			GameDataCoreController.Add(gameData);
-			evaluation.Rewards.All(reward => _rewardController.AddReward(actorId, evaluation.GameId, reward));
+			evaluation.Rewards.ForEach(reward => _rewardController.AddReward(actorId, evaluation.GameId, reward));
 		}
 	}
 }

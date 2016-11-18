@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
@@ -6,10 +7,13 @@ namespace PlayGen.SUGAR.Core.Controllers
     public class UserController
     {
         private readonly Data.EntityFramework.Controllers.UserController _userController;
+        private readonly ActorRoleController _actorRoleController;
 
-        public UserController(Data.EntityFramework.Controllers.UserController userController)
+        public UserController(Data.EntityFramework.Controllers.UserController userController,
+                    ActorRoleController actorRoleController)
         {
             _userController = userController;
+            _actorRoleController = actorRoleController;
         }
         
         public IEnumerable<User> Get()
@@ -33,6 +37,7 @@ namespace PlayGen.SUGAR.Core.Controllers
         public User Create(User newUser)
         {
             newUser = _userController.Create(newUser);
+            _actorRoleController.Create(ClaimScope.User.ToString(), newUser.Id, newUser.Id);
             return newUser;
         }
         

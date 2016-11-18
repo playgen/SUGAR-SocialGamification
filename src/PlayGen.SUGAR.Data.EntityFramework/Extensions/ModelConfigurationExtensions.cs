@@ -3,7 +3,7 @@ using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.Model;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
-namespace PlayGen.SUGAR.Data.EntityFramework
+namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
     internal static class ModelConfigurationExtensions
     {
@@ -76,6 +76,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
             builder.Entity<UserToGroupRelationship>()
                 .HasKey(k => new { k.RequestorId, k.AcceptorId });
+
+            builder.Entity<RoleClaim>()
+                .HasKey(k => new { k.RoleId, k.ClaimId });
         }
 
         internal static void ConfigureIndexes(this ModelBuilder builder)
@@ -86,6 +89,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
             builder.Entity<Evaluation>()
                 .HasIndex(e => new { e.Token, e.GameId, e.ActorType });
+
+            builder.Entity<ActorRole>()
+                .HasIndex(a => new { a.ActorId, a.EntityId, a.RoleId })
+                .IsUnique();
 
             // Unique
             builder.Entity<Game>()
@@ -102,6 +109,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
             builder.Entity<Account>()
                 .HasIndex(a => a.Name)
+                .IsUnique();
+
+            builder.Entity<Role>()
+                .HasIndex(r => r.Name)
                 .IsUnique();
         }
 
@@ -139,6 +150,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework
             //modelBuilder.Entity<GameData>()
             //	.Property(g => g.DateModified)
             //	.HasPrecision(3);
+            //modelBuilder.Entity<ActorData>()
+            //    .Property(g => g.DateCreated)
+            //    .HasPrecision(3);
+            //modelBuilder.Entity<ActorData>()
+            //    .Property(g => g.DateModified)
+            //    .HasPrecision(3);
         }
     }
 }

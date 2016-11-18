@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Client
 		public EvaluationResponse GetGlobalById(string token)
 		{
 			var query = GetUriBuilder("api/skills/find/{0}/global", token).ToString();
-			return Get<EvaluationResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<EvaluationResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Client
 		public EvaluationResponse GetById(string token, int gameId)
 		{
 			var query = GetUriBuilder("api/skills/find/{0}/{1}", token, gameId).ToString();
-			return Get<EvaluationResponse>(query, new System.Net.HttpStatusCode[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<EvaluationResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
@@ -117,23 +117,23 @@ namespace PlayGen.SUGAR.Client
 			return Get<EvaluationProgressResponse>(query);
 		}
 
-		/// <summary>
-		/// Create a new Skill.
-		/// Requires <see cref="EvaluationRequest.Name"/> to be unique to that <see cref="EvaluationRequest.GameId"/>.
-		/// </summary>
-		/// <param name="newSkill"><see cref="EvaluationRequest"/> object that holds the details of the new Skill.</param>
-		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Skill.</returns>
-		public EvaluationResponse Create(EvaluationCreateRequest newSkill)
+        /// <summary>
+        /// Create a new Skill.
+        /// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
+        /// </summary>
+        /// <param name="newSkill"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Skill.</param>
+        /// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Skill.</returns>
+        public EvaluationResponse Create(EvaluationCreateRequest newSkill)
 		{
 			var query = GetUriBuilder("api/skills/create").ToString();
 			return Post<EvaluationCreateRequest, EvaluationResponse>(query, newSkill);
 		}
 
-		/// <summary>
-		/// Update an existing Skill.
-		/// </summary>
-		/// <param name="skill"><see cref="EvaluationRequest"/> object that holds the details of the Skill.</param>
-		public void Update(EvaluationUpdateRequest skill)
+        /// <summary>
+        /// Update an existing Skill.
+        /// </summary>
+        /// <param name="skill"><see cref="EvaluationCreateRequest"/> object that holds the details of the Skill.</param>
+        public void Update(EvaluationUpdateRequest skill)
 		{
 			var query = GetUriBuilder("api/skills/update").ToString();
 			Put(query, skill);

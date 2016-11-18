@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.WebAPI.Extensions;
-using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.WebAPI.Filters;
 
@@ -10,15 +12,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates Group specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	[Authorization]
-	public class GroupController : Controller
+    [Authorize("Bearer")]
+    public class GroupController : Controller
 	{
-		private readonly Core.Controllers.GroupController _groupCoreController;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly Core.Controllers.GroupController _groupCoreController;
 
-		public GroupController(Core.Controllers.GroupController groupCoreController)
+		public GroupController(Core.Controllers.GroupController groupCoreController,
+                    IAuthorizationService authorizationService)
 		{
 			_groupCoreController = groupCoreController;
-		}
+            _authorizationService = authorizationService;
+        }
 
 		/// <summary>
 		/// Get a list of all Groups.
@@ -79,13 +84,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(ActorResponse))]
 		[ArgumentsNotNull]
-		public IActionResult Create([FromBody]ActorRequest actor)
+        [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.Group)]
+        public IActionResult Create([FromBody]ActorRequest actor)
 		{
-			var group = actor.ToGroupModel();
-			_groupCoreController.Create(group);
-			var actorContract = group.ToContract();
-			return new ObjectResult(actorContract);
-		}
+            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var group = actor.ToGroupModel();
+                _groupCoreController.Create(group, int.Parse(User.Identity.Name));
+                var actorContract = group.ToContract();
+                return new ObjectResult(actorContract);
+            }
+            return Unauthorized();
+        }
 
 		/// <summary>
 		/// Update an existing Group.
@@ -96,12 +106,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="group"><see cref="ActorRequest"/> object that holds the details of the Group.</param>
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
-		// todo refactor to use groupupdaterequest that contains an Id property and have a separate groupcreaterequest that doen't have the Id
-		public void Update([FromRoute] int id, [FromBody] ActorRequest group)
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Group)]
+        // todo refactor to use groupupdaterequest that contains an Id property and have a separate groupcreaterequest that doen't have the Id
+        public IActionResult Update([FromRoute] int id, [FromBody] ActorRequest group)
 		{
-			var groupModel = group.ToGroupModel();
-			groupModel.Id = id;
-			_groupCoreController.Update(groupModel);
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var groupModel = group.ToGroupModel();
+                groupModel.Id = id;
+                _groupCoreController.Update(groupModel);
+                return Ok();
+            }
+            return Unauthorized();
 		}
 
 		/// <summary>
@@ -111,9 +127,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Group ID.</param>
 		[HttpDelete("{id:int}")]
-		public void Delete([FromRoute]int id)
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Delete, AuthorizationOperation.Group)]
+        public IActionResult Delete([FromRoute]int id)
 		{
-			_groupCoreController.Delete(id);
-		}
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                _groupCoreController.Delete(id);
+                return Ok();
+            }
+            return Unauthorized();
+        }
 	}
 }

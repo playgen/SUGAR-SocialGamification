@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
+using Actor = PlayGen.SUGAR.Data.Model.Actor;
 using PlayGen.SUGAR.Core.Controllers;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
@@ -86,14 +87,10 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
-					var any = GameDataCoreController.AllLongs(gameId, actorId, completionCriteria.Key);
+					var any = GameDataCoreController.AllLongs(gameId, actorId, completionCriteria.Key).ToList();
 
-					if (any.Count() == 0)
-					{
-						return CompareValues(0, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
-					}
-
-					return any.Max(value => CompareValues(value, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
+					return !any.Any() ? CompareValues(0, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType) :
+                                any.Max(value => CompareValues(value, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
 				case CriteriaQueryType.Sum:
 					var sum = GameDataCoreController.SumLongs(gameId, actorId, completionCriteria.Key);
 
@@ -116,14 +113,10 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
-					var any = GameDataCoreController.AllFloats(gameId, actorId, completionCriteria.Key);
+					var any = GameDataCoreController.AllFloats(gameId, actorId, completionCriteria.Key).ToList();
 
-					if (any.Count() == 0)
-					{
-						return CompareValues(0, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
-					}
-
-					return any.Max(value => CompareValues(value, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
+					return !any.Any() ? CompareValues(0, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType) : 
+                                any.Max(value => CompareValues(value, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
 				case CriteriaQueryType.Sum:
 					var sum = GameDataCoreController.SumFloats(gameId, actorId, completionCriteria.Key);
 
@@ -146,15 +139,12 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
-					var any = GameDataCoreController.AllStrings(gameId, actorId, completionCriteria.Key);
+					var any = GameDataCoreController.AllStrings(gameId, actorId, completionCriteria.Key).ToList();
 
-					if (any.Count() == 0)
-					{
-						return CompareValues("", completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.DataType);
-					}
+					return !any.Any() ? CompareValues("", completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.DataType) : 
+                                any.Max(value => CompareValues(value, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.DataType));
 
-					return any.Max(value => CompareValues(value, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.DataType));
-				case CriteriaQueryType.Sum:
+			    case CriteriaQueryType.Sum:
 					return 0;
 				case CriteriaQueryType.Latest:
 					string latest;
@@ -174,15 +164,12 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
-					var any = GameDataCoreController.AllBools(gameId, actorId, completionCriteria.Key);
+					var any = GameDataCoreController.AllBools(gameId, actorId, completionCriteria.Key).ToList();
 
-					if (any.Count() == 0)
-					{
-						return CompareValues(false, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
-					}
+					return !any.Any() ? CompareValues(false, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType) : 
+                                any.Max(value => CompareValues(value, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
 
-					return any.Max(value => CompareValues(value, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType));
-				case CriteriaQueryType.Sum:
+			    case CriteriaQueryType.Sum:
 					return 0;
 				case CriteriaQueryType.Latest:
 					bool latest;
@@ -197,144 +184,108 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			}
 		}
 
-		protected float EvaluateManyLong(int? gameId, IEnumerable<Data.Model.Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyLong(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
 		{
-			switch (completionCriteria.CriteriaQueryType)
+		    var actorList = actor as List<Actor> ?? actor.ToList();
+		    switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
-					return actor.Sum(a => EvaluateLong(gameId, a.Id, completionCriteria)) / actor.Count();
+					return actorList.Sum(a => EvaluateLong(gameId, a.Id, completionCriteria)) / actorList.Count;
 				case CriteriaQueryType.Sum:
-					var sum = actor.Sum(a => GameDataCoreController.SumLongs(gameId, a.Id, completionCriteria.Key));
+					var sum = actorList.Sum(a => GameDataCoreController.SumLongs(gameId, a.Id, completionCriteria.Key));
 
 					return CompareValues(sum, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
 				case CriteriaQueryType.Latest:
-					return actor.Sum(a => EvaluateLong(gameId, a.Id, completionCriteria)) / actor.Count();
+					return actorList.Sum(a => EvaluateLong(gameId, a.Id, completionCriteria)) / actorList.Count;
 				default:
 					return 0;
 			}
 		}
 
-		protected float EvaluateManyFloat(int? gameId, IEnumerable<Data.Model.Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyFloat(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
 		{
-			switch (completionCriteria.CriteriaQueryType)
+            var actorList = actor as List<Actor> ?? actor.ToList();
+            switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
-					return actor.Sum(a => EvaluateFloat(gameId, a.Id, completionCriteria)) / actor.Count();
+					return actorList.Sum(a => EvaluateFloat(gameId, a.Id, completionCriteria)) / actorList.Count;
 				case CriteriaQueryType.Sum:
-					var sum = actor.Sum(a => GameDataCoreController.SumFloats(gameId, a.Id, completionCriteria.Key));
+					var sum = actorList.Sum(a => GameDataCoreController.SumFloats(gameId, a.Id, completionCriteria.Key));
 
 					return CompareValues(sum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.DataType);
 				case CriteriaQueryType.Latest:
-					return actor.Sum(a => EvaluateFloat(gameId, a.Id, completionCriteria)) / actor.Count();
+					return actorList.Sum(a => EvaluateFloat(gameId, a.Id, completionCriteria)) / actorList.Count;
 				default:
 					return 0;
 			}
 		}
 
-		protected float EvaluateManyString(int? gameId, IEnumerable<Data.Model.Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyString(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
 		{
-			return actor.Sum(a => EvaluateString(gameId, a.Id, completionCriteria)) / actor.Count();
+            var actorList = actor as List<Actor> ?? actor.ToList();
+            return actorList.Sum(a => EvaluateString(gameId, a.Id, completionCriteria)) / actorList.Count;
 		}
 
-		protected float EvaluateManyBool(int? gameId, IEnumerable<Data.Model.Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyBool(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
 		{
-			return actor.Sum(a => EvaluateBool(gameId, a.Id, completionCriteria)) / actor.Count();
+            var actorList = actor as List<Actor> ?? actor.ToList();
+            return actorList.Sum(a => EvaluateBool(gameId, a.Id, completionCriteria)) / actorList.Count;
 		}
 
 		protected static float CompareValues<T>(T value, T expected, ComparisonType comparisonType, GameDataType dataType) where T : IComparable
 		{
 			var comparisonResult = value.CompareTo(expected);
 
-			switch (comparisonType)
+		    float expectedNum;
+		    switch (comparisonType)
 			{
 				case ComparisonType.Equals:
-					if (comparisonResult == 0)
-					{
-						return 1;
-					}
-					else
-					{
-						return 0;
-					}
+					return comparisonResult == 0 ? 1 : 0;
 
 				case ComparisonType.NotEqual:
-					if (comparisonResult != 0)
-					{
-						return 1;
-					}
-					else
-					{
-						return 0;
-					}
+					return comparisonResult != 0 ? 1 : 0;
 
 				case ComparisonType.Greater:
 					if (comparisonResult > 0)
 					{
 						return 1;
 					}
-					else if (!(comparisonResult > 0) && (dataType == GameDataType.String || dataType == GameDataType.Boolean))
-					{
-						return 0;
-					}
-					else
-					{
-						float expectedNum;
-						if ((float.TryParse(expected.ToString(), out expectedNum))) {
-							if (dataType == GameDataType.Long)
-							{
-								expectedNum += 1;
-							} else
-							{
-								expectedNum += 0.000001f;
-							}
-							return (float.Parse(value.ToString()) / expectedNum);
-						} else
-						{
-							return 0;
-						}
-					}
+			        if (!(comparisonResult > 0) && (dataType == GameDataType.String || dataType == GameDataType.Boolean))
+			        {
+			            return 0;
+			        }
+			        if ((float.TryParse(expected.ToString(), out expectedNum))) {
+			            if (dataType == GameDataType.Long)
+			            {
+			                expectedNum += 1;
+			            } else
+			            {
+			                expectedNum += 0.000001f;
+			            }
+			            return (float.Parse(value.ToString()) / expectedNum);
+			        }
+			        return 0;
 
-				case ComparisonType.GreaterOrEqual:
+			    case ComparisonType.GreaterOrEqual:
 					if (comparisonResult >= 0)
 					{
 						return 1;
 					}
-					else if (!(comparisonResult >= 0) && (dataType == GameDataType.String || dataType == GameDataType.Boolean))
-					{
-						return 0;
-					}
-					else
-					{
-						float expectedNum;
-						if ((float.TryParse(expected.ToString(), out expectedNum)))
-						{
-							return (float.Parse(value.ToString()) / expectedNum);
-						}
-						else
-						{
-							return 0;
-						}
-					}
+			        if (!(comparisonResult >= 0) && (dataType == GameDataType.String || dataType == GameDataType.Boolean))
+			        {
+			            return 0;
+			        }
+			        if ((float.TryParse(expected.ToString(), out expectedNum)))
+			        {
+			            return (float.Parse(value.ToString()) / expectedNum);
+			        }
+			        return 0;
 
-				case ComparisonType.Less:
-					if (comparisonResult < 0)
-					{
-						return 1;
-					}
-					else
-					{
-						return 0;
-					}
+			    case ComparisonType.Less:
+					return comparisonResult < 0 ? 1 : 0;
 
 				case ComparisonType.LessOrEqual:
-					if (comparisonResult <= 0)
-					{
-						return 1;
-					}
-					else
-					{
-						return 0;
-					}
+					return comparisonResult <= 0 ? 1 : 0;
 
 				default:
 					throw new NotImplementedException($"There is no case for the comparison type: {comparisonType}.");

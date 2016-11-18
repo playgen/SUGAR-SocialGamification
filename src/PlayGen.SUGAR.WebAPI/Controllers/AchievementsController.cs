@@ -1,52 +1,56 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.WebAPI.Controllers;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
-    /// <summary>
-    /// Web Controller that facilitates Achievement specific operations.
-    /// </summary>
-    [Route("api/[controller]")]
-    [Authorization]
+	/// <summary>
+	/// Web Controller that facilitates Achievement specific operations.
+	/// </summary>
+	[Route("api/[controller]")]    
     public class AchievementsController : EvaluationsController
     {
-        public AchievementsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker)
-            : base(evaluationCoreController, evaluationTracker)
+        private readonly EvaluationController _evaluationCoreController;
+
+        public AchievementsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
+            : base(evaluationCoreController, evaluationTracker, authorizationService)
         {
         }
-
-        /// <summary>
-        /// Find an Achievement that matches <param name="token"/> and <param name="gameId"/>.
-        /// 
-        /// Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1
-        /// </summary>
-        /// <param name="token">Token of Achievement</param>
-        /// <param name="gameId">ID of the Game the Achievement is for</param>
-        /// <returns>Returns <see cref="EvaluationResponse"/> that holds Achievement details</returns>
-        [HttpGet("find/{token}/{gameId:int}")]
-        [HttpGet("find/{token}/global")]
+		/// <summary>
+		/// Find an Achievement that matches <param name="token"/> and <param name="gameId"/>.
+		/// 
+		/// Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="gameId">ID of the Game the Achievement is for</param>
+		/// <returns>Returns <see cref="EvaluationResponse"/> that holds Achievement details</returns>
+		[HttpGet("find/{token}/{gameId:int}")]
+		[HttpGet("find/{token}/global")]
         //[ResponseType(typeof(EvaluationResponse))]
         public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
-        {
+		{
             return base.Get(token, gameId);
         }
 
-        /// <summary>
-        /// Find a list of Achievements that match <param name="gameId"/>.
-        /// If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.
-        /// 
-        /// Example Usage: GET api/achievements/game/1/list
-        /// </summary>
-        /// <param name="gameId">Game ID</param>
-        /// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Achievement details</returns>
-        [HttpGet("global/list")]
-        [HttpGet("game/{gameId:int}/list")]
+		/// <summary>
+		/// Find a list of Achievements that match <param name="gameId"/>.
+		/// If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.
+		/// 
+		/// Example Usage: GET api/achievements/game/1/list
+		/// </summary>
+		/// <param name="gameId">Game ID</param>
+		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Achievement details</returns>
+		[HttpGet("global/list")]
+		[HttpGet("game/{gameId:int}/list")]
         //[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
         public IActionResult Get([FromRoute]int? gameId)
         {
@@ -99,14 +103,19 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <param name="newAchievement"><see cref="EvaluationRequest"/> object that holds the details of the new Achievement.</param>
         /// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
         [HttpPost("create")]
-        //[ResponseType(typeof(EvaluationResponse))]
-        [ArgumentsNotNull]
+		//[ResponseType(typeof(EvaluationResponse))]
+		[ArgumentsNotNull]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Achievement)]
         public IActionResult Create([FromBody] EvaluationCreateRequest newAchievement)
-        {
-            var achievement = newAchievement.ToAchievementModel();
-            achievement = (Achievement)EvaluationCoreController.Create(achievement);
-            var achievementContract = achievement.ToContract();
-            return new ObjectResult(achievementContract);
+		{
+            if (_authorizationService.AuthorizeAsync(User, newAchievement.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var achievement = newAchievement.ToAchievementModel();
+                achievement = (Achievement)EvaluationCoreController.Create(achievement);
+                var achievementContract = achievement.ToContract();
+                return new ObjectResult(achievementContract);
+            }
+            return Unauthorized();
         }
 
         /// <summary>
@@ -114,27 +123,33 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// 
         /// Example Usage: PUT api/achievements/update
         /// </summary>
-        /// <param name="achievement"><see cref="EvaluationRequest"/> object that holds the details of the Achievement.</param>
+        /// <param name="achievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the Achievement.</param>
         [HttpPut("update")]
-        [ArgumentsNotNull]
-        public void Update([FromBody] EvaluationUpdateRequest achievement)
-        {
-            var achievementModel = achievement.ToAchievementModel();
-            EvaluationCoreController.Update(achievementModel);
+		[ArgumentsNotNull]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Achievement)]
+        public IActionResult Update([FromBody] EvaluationUpdateRequest achievement)
+		{
+            if (_authorizationService.AuthorizeAsync(User, achievement.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var achievementModel = achievement.ToAchievementModel();
+                EvaluationCoreController.Update(achievementModel);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
-        /// <summary>
-        /// Delete Achievement with the <param name="token"/> and <param name="gameId"/> provided.
-        /// 
-        /// Example Usage: DELETE api/achievements/ACHIEVEMENT_TOKEN/1
-        /// </summary>
-        /// <param name="token">Token of Achievement</param>
-        /// <param name="gameId">ID of the Game the Achievement is for</param>
-        [HttpDelete("{token}/global")]
-        [HttpDelete("{token}/{gameId:int}")]
-        public void Delete([FromRoute]string token, [FromRoute]int? gameId)
-        {
-            base.Delete(token, gameId);
-        }
-    }
+		/// <summary>
+		/// Delete Achievement with the <param name="token"/> and <param name="gameId"/> provided.
+		/// 
+		/// Example Usage: DELETE api/achievements/ACHIEVEMENT_TOKEN/1
+		/// </summary>
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="gameId">ID of the Game the Achievement is for</param>
+		[HttpDelete("{token}/global")]
+		[HttpDelete("{token}/{gameId:int}")]
+		public IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
+		{
+            return base.Delete(token, gameId);
+		}
+	}
 }

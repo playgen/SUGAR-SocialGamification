@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Security.Cryptography;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +15,11 @@ using NLog.Extensions.Logging;
 using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Filters;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
+using PlayGen.SUGAR.Core.Authorization;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -19,7 +27,13 @@ namespace PlayGen.SUGAR.WebAPI
 	{
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-		public Startup(IHostingEnvironment env)
+        const string TokenAudience = "User";
+        const string TokenIssuer = "SUGAR";
+        private RsaSecurityKey key;
+        private TokenAuthOptions tokenOptions;
+
+
+        public Startup(IHostingEnvironment env)
 		{
 			//AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
@@ -58,19 +72,45 @@ namespace PlayGen.SUGAR.WebAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			var apiKey = Configuration["APIKey"];
+            //todo: Remove random key. Change to load file from secure file.
+			//var apiKey = Configuration["APIKey"];
+            using (var rsa = new RSACryptoServiceProvider(2048))
+            {
+                try
+                {
+                    key = new RsaSecurityKey(rsa.ExportParameters(true));
+                }
+                finally
+                {
+                    rsa.PersistKeyInCsp = false;
+                }
+            }
+            tokenOptions = new TokenAuthOptions()
+            {
+                Audience = TokenAudience,
+                Issuer = TokenIssuer,
+                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature)
+            };
+            services.AddSingleton(tokenOptions);
 
-			services.AddScoped((_) => new JsonWebTokenUtility(apiKey));
 			services.AddScoped((_) => new PasswordEncryption());
-			services.AddScoped<AuthorizationAttribute>();
 			services.AddApplicationInsightsTelemetry(Configuration);
 
-			// Add framework services.
-			services.AddMvc(options =>
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build());
+            });
+
+            services.AddSingleton<IAuthorizationHandler, AuthorizationHandler>();
+            services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithoutEntity>();
+
+            // Add framework services.
+            services.AddMvc(options =>
 			{
 				options.Filters.Add(new ModelValidationFilter());
 				options.Filters.Add(new ExceptionFilter());
-				options.Filters.Add(typeof(AuthorizationHeaderFilter));
 			    options.Filters.Add(typeof(WrapResponseFilter));
 			})
 			.AddJsonOptions(json =>
@@ -86,8 +126,8 @@ namespace PlayGen.SUGAR.WebAPI
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
 			ConfigureDocumentationGeneratorServices(services);
+            ConfigureAuthorization(services);
 		    ConfigureEvaluationEvents(services);
-
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,12 +137,66 @@ namespace PlayGen.SUGAR.WebAPI
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 
-			app.UseCors("AllowAll");
-			app.UseApplicationInsightsRequestTelemetry();
-			app.UseApplicationInsightsExceptionTelemetry();
-			app.UseMvc();
-			
-			ConfigureDocumentationGenerator(app);
+            app.UseExceptionHandler(appBuilder =>
+            {
+                appBuilder.Use(async (context, next) =>
+                {
+                    var error = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
+                    // This should be much more intelligent - at the moment only expired 
+                    // security tokens are caught - might be worth checking other possible 
+                    // exceptions such as an invalid signature.
+                    if (error?.Error is SecurityTokenExpiredException)
+                    {
+                        context.Response.StatusCode = 401;
+                        // What you choose to return here is up to you, in this case a simple 
+                        // bit of JSON to say you're no longer authenticated.
+                        context.Response.ContentType = "application/json";
+                        await context.Response.WriteAsync(
+                            JsonConvert.SerializeObject(
+                                new { authenticated = false, tokenExpired = true }));
+                    }
+                    else if (error?.Error != null)
+                    {
+                        context.Response.StatusCode = 500;
+                        context.Response.ContentType = "application/json";
+                        // TODO: Shouldn't pass the exception message straight out, change this.
+                        await context.Response.WriteAsync(
+                            JsonConvert.SerializeObject
+                            (new { success = false, error = error.Error.Message }));
+                    }
+                    // We're not trying to handle anything else so just let the default 
+                    // handler handle.
+                    else await next();
+                });
+            });
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                // Basic settings - signing key to validate with, audience and issuer.
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = key,
+                    ValidAudience = tokenOptions.Audience,
+                    ValidIssuer = tokenOptions.Issuer,
+                    // When receiving a token, check that we've signed it.
+                    ValidateIssuer = true,
+                    ValidateIssuerSigningKey = true,
+                    // When receiving a token, check that it is still valid.
+                    ValidateLifetime = true,
+                    // This defines the maximum allowable clock skew - i.e. provides a tolerance on the token expiry time 
+                    // when validating the lifetime. As we're creating the tokens locally and validating them on the same 
+                    // machines which should have synchronised time, this can be set to zero. Where external tokens are
+                    // used, some leeway here could be useful.
+                    ClockSkew = TimeSpan.FromMinutes(0),
+                }
+            });
+
+            app.UseCors("AllowAll");
+            app.UseApplicationInsightsRequestTelemetry();
+            app.UseApplicationInsightsExceptionTelemetry();
+            app.UseMvc();
+
+            ConfigureDocumentationGenerator(app);
 		}
 	}
 }

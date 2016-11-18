@@ -1,9 +1,8 @@
-﻿using JWT;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace PlayGen.SUGAR.ServerAuthentication.Helpers
 {
-	class JWTSerializationAdapter : IJsonSerializer
+	class JWTSerializationAdapter : JsonSerializer
 	{
 		public T Deserialize<T>(string json)
 		{

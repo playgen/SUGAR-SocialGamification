@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
@@ -6,10 +7,16 @@ namespace PlayGen.SUGAR.Core.Controllers
     public class GroupController
     {
         private readonly Data.EntityFramework.Controllers.GroupController _groupDbController;
+        private readonly ActorRoleController _actorRoleController;
+        private readonly GroupMemberController _groupMemberController;
 
-        public GroupController(Data.EntityFramework.Controllers.GroupController groupDbController)
+        public GroupController(Data.EntityFramework.Controllers.GroupController groupDbController,
+                    ActorRoleController actorRoleController,
+                    GroupMemberController groupMemberController)
         {
             _groupDbController = groupDbController;
+            _actorRoleController = actorRoleController;
+            _groupMemberController = groupMemberController;
         }
         
         public IEnumerable<Group> Get()
@@ -30,9 +37,10 @@ namespace PlayGen.SUGAR.Core.Controllers
             return groups;
         }
         
-        public Group Create(Group newGroup)
+        public Group Create(Group newGroup, int creatorId)
         {
             newGroup = _groupDbController.Create(newGroup);
+            _actorRoleController.Create(ClaimScope.Group.ToString(), creatorId, newGroup.Id);
             return newGroup;
         }
         

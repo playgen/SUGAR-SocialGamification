@@ -78,18 +78,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				if (hasConflicts)
 				{
-					throw new DuplicateRecordException(string.Format("A relationship with this user and group already exists."));
+					throw new DuplicateRecordException("A relationship with this user and group already exists.");
 				}
 
 				var requestorExists = context.Users.Any(u => u.Id == newRelation.RequestorId);
 				var acceptorExists = context.Groups.Any(g => g.Id == newRelation.AcceptorId);
 
 				if (!requestorExists) {
-					throw new MissingRecordException(string.Format("The requesting user does not exist."));
+					throw new MissingRecordException("The requesting user does not exist.");
 				}
 
 				if (!acceptorExists) {
-					throw new MissingRecordException(string.Format("The targeted group does not exist."));
+					throw new MissingRecordException("The targeted group does not exist.");
 				}
 
 				if (autoAccept) {

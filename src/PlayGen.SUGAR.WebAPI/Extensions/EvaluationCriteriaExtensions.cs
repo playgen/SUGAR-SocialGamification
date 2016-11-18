@@ -24,12 +24,12 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static List<Contracts.Shared.EvaluationCriteriaResponse> ToContractList(this List<Data.Model.EvaluationCriteria> completionCriterias)
+		public static List<EvaluationCriteriaResponse> ToContractList(this List<Data.Model.EvaluationCriteria> completionCriterias)
 		{
 			return completionCriterias.Select(ToContract).ToList();
 		}
 
-        public static Data.Model.EvaluationCriteria ToModel(this Contracts.Shared.EvaluationCriteriaCreateRequest completionCriteria)
+        public static Data.Model.EvaluationCriteria ToModel(this EvaluationCriteriaCreateRequest completionCriteria)
         {
             if (completionCriteria == null)
             {
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             };
         }
 
-        public static Data.Model.EvaluationCriteria ToModel(this Contracts.Shared.EvaluationCriteriaUpdateRequest completionCriteria)
+        public static Data.Model.EvaluationCriteria ToModel(this EvaluationCriteriaUpdateRequest completionCriteria)
         {
             if (completionCriteria == null)
             {
@@ -64,12 +64,12 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             };
         }
 
-        public static List<Data.Model.EvaluationCriteria> ToModelList(this List<Contracts.Shared.EvaluationCriteriaCreateRequest> completionCriterias)
+        public static List<Data.Model.EvaluationCriteria> ToModelList(this List<EvaluationCriteriaCreateRequest> completionCriterias)
         {
             return completionCriterias.Select(ToModel).ToList();
         }
 
-        public static List<Data.Model.EvaluationCriteria> ToModelList(this List<Contracts.Shared.EvaluationCriteriaUpdateRequest> completionCriterias)
+        public static List<Data.Model.EvaluationCriteria> ToModelList(this List<EvaluationCriteriaUpdateRequest> completionCriterias)
         {
             return completionCriterias.Select(ToModel).ToList();
         }

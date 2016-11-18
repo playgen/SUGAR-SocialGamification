@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Core;
 using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Core.Utilities;
@@ -16,11 +16,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
     /// Web Controller that facilitates Skill specific operations.
     /// </summary>
     [Route("api/[controller]")]
-    [Authorization]
     public class SkillsController : EvaluationsController
     {
-        public SkillsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker)
-            : base(evaluationCoreController, evaluationTracker)
+        public SkillsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
+            : base(evaluationCoreController, evaluationTracker, authorizationService)
         {
         }
 
@@ -95,21 +94,26 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 
         /// <summary>
         /// Create a new Skill.
-        /// Requires <see cref="EvaluationRequest.Name"/> to be unique to that <see cref="EvaluationRequest.GameId"/>.
+        /// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
         /// 
         /// Example Usage: POST api/skills/create
         /// </summary>
-        /// <param name="newSkill"><see cref="EvaluationRequest"/> object that holds the details of the new Skill.</param>
+        /// <param name="newSkill"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Skill.</param>
         /// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Skill.</returns>
         [HttpPost("create")]
-        //[ResponseType(typeof(EvaluationResponse))]
-        [ArgumentsNotNull]
+		//[ResponseType(typeof(EvaluationResponse))]
+		[ArgumentsNotNull]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Achievement)]
         public IActionResult Create([FromBody] EvaluationCreateRequest newSkill)
-        {
-            var skill = newSkill.ToSkillModel();
-            skill = (Skill)EvaluationCoreController.Create(skill);
-            var achievementContract = skill.ToContract();
-            return new ObjectResult(achievementContract);
+		{
+            if (_authorizationService.AuthorizeAsync(User, newSkill.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var skill = newSkill.ToSkillModel();
+                skill = (Skill)EvaluationCoreController.Create(skill);
+                var achievementContract = skill.ToContract();
+                return new ObjectResult(achievementContract);
+            }
+            return Unauthorized();
         }
 
         /// <summary>
@@ -117,13 +121,19 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// 
         /// Example Usage: PUT api/skills/update
         /// </summary>
-        /// <param name="skill"><see cref="EvaluationRequest"/> object that holds the details of the Skill.</param>
+        /// <param name="skill"><see cref="EvaluationCreateRequest"/> object that holds the details of the Skill.</param>
         [HttpPut("update")]
-        [ArgumentsNotNull]
-        public void Update([FromBody] EvaluationUpdateRequest skill)
-        {
-            var skillModel = skill.ToSkillModel();
-            EvaluationCoreController.Update(skillModel);
+		[ArgumentsNotNull]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Achievement)]
+        public IActionResult Update([FromBody] EvaluationUpdateRequest skill)
+		{
+            if (_authorizationService.AuthorizeAsync(User, skill.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var skillModel = skill.ToSkillModel();
+                EvaluationCoreController.Update(skillModel);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
         /// <summary>
@@ -135,9 +145,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <param name="gameId">ID of the Game the Skill is for</param>
         [HttpDelete("{token}/global")]
         [HttpDelete("{token}/{gameId:int}")]
-        public void Delete([FromRoute]string token, [FromRoute]int? gameId)
+        public IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
         {
-            base.Delete(token, gameId);
+            return base.Delete(token, gameId);
         }
     }
 }

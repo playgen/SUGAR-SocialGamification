@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PlayGen.SUGAR.Contracts;
+
+using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.WebAPI.Exceptions;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
 using PlayGen.SUGAR.ServerAuthentication.Extensions;
@@ -18,28 +18,32 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates account specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class AccountController : Controller
+    public class AccountController : Controller
 	{
-		private readonly JsonWebTokenUtility _jsonWebTokenUtility;
-	    private readonly Core.Controllers.AccountController _accountCoreController;
+		private readonly IAuthorizationService _authorizationService;
+        private readonly TokenController _tokenController;
+        private readonly Core.Controllers.AccountController _accountCoreController;
 	    private readonly EvaluationTracker _evaluationTracker;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="accountDbController"></param>
-		/// <param name="userDbController"></param>
-		/// <param name="passwordEncryption"></param>
-		/// <param name="jsonWebTokenUtility"></param>
-		public AccountController(Core.Controllers.AccountController accountCoreController,
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accountDbController"></param>
+        /// <param name="userDbController"></param>
+        /// <param name="passwordEncryption"></param>
+        /// <param name="tokenController"></param>
+        /// <param name="authorizationService"></param>
+        public AccountController(Core.Controllers.AccountController accountCoreController,
 
             Data.EntityFramework.Controllers.UserController userDbController,
-			JsonWebTokenUtility jsonWebTokenUtility,
+            TokenController tokenController,
+            IAuthorizationService authorizationService,
             EvaluationTracker evaluationTracker)
 		{
 		    _accountCoreController = accountCoreController;
-            _jsonWebTokenUtility = jsonWebTokenUtility;
-		    _evaluationTracker = evaluationTracker;
+            _tokenController = tokenController;
+            _authorizationService = authorizationService;
+            _evaluationTracker = evaluationTracker;
 		}
 		
 		//Todo: Move log-in into a separate controller
@@ -98,18 +102,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(response);
 		}
 
-		//Todo: Review if register with id is needed
-		/// <summary>
-		/// Register a new account for an existing user.
-		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
-		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// Example Usage: POST api/account/registerwithid/1
-		/// </summary>
-		// <param name="userId">ID of the existing User.</param>
-		/// <param name="newAccount"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
-		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
-		/*[HttpPost("registerwithid/{userId:int}")]
+        //Todo: Review if register with id is needed
+        /*/// <summary>
+        /// Register a new account for an existing user.
+        /// Requires the <see cref="AccountRequest.Name"/> to be unique.
+        /// Returns a JsonWebToken used for authorization in any further calls to the API.
+        /// 
+        /// Example Usage: POST api/account/registerwithid/1
+        /// </summary>
+        // <param name="userId">ID of the existing User.</param>
+        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
+        /// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
+        [HttpPost("registerwithid/{userId:int}")]
 		[ResponseType(typeof(AccountResponse))]
 		public IActionResult Register([FromRoute]int userId, [FromBody] AccountRequest accountRequest)
 		{
@@ -132,27 +136,31 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(response);
 		}*/
 
-		/// <summary>
-		/// Delete Account with the ID provided.
-		/// 
-		/// Example Usage: DELETE api/account/1
-		/// </summary>
-		/// <param name="id">Account ID.</param>
-		[HttpDelete("{id:int}")]
-		[Authorization]
-		public void Delete([FromRoute]int id)
+        /// <summary>
+        /// Delete Account with the ID provided.
+        /// 
+        /// Example Usage: DELETE api/account/1
+        /// </summary>
+        /// <param name="id">Account ID.</param>
+        [HttpDelete("{id:int}")]
+        [Authorize("Bearer")]
+        [Authorization(ClaimScope.Account, AuthorizationOperation.Delete, AuthorizationOperation.Account)]
+        public IActionResult Delete([FromRoute]int id)
 		{
-            _accountCoreController.Delete(id);
-		}
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                _accountCoreController.Delete(id);
+                return Ok();
+            }
+            return Unauthorized();
+        }
 		
 		#region Helpers
 		private string CreateToken(Account account)
 		{
-			return _jsonWebTokenUtility.CreateToken(new Dictionary<string, object>
-			{
-				{ "userid", account.UserId}
-			});
-		}
+            return _tokenController.CreateToken(account.UserId);
+
+        }
 		#endregion
 	}
 }

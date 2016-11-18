@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="actorId">ID of a User/Group.</param>
-		/// <param name="key">Array of Key names.</param>
+		/// <param name="keys">Array of Key names.</param>
 		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ResourceResponse> Get(int? gameId, int? actorId, string[] keys)
 		{
