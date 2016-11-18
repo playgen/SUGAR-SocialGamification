@@ -15,26 +15,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var testSugarClient = new TestSUGARClient();
 			_groupClient = testSugarClient.Group;
 
-			RegisterAndLogin(testSugarClient.Account);
-		}
-
-		private void RegisterAndLogin(AccountClient client)
-		{
-			var accountRequest = new AccountRequest
-			{
-				Name = "GroupClientTests",
-				Password = "GroupClientTestsPassword",
-				AutoLogin = true,
-			};
-
-			try
-			{
-				client.Login(accountRequest);
-			}
-			catch
-			{
-				client.Register(accountRequest);
-			}
+			Helpers.RegisterAndLogin(testSugarClient.Account);
 		}
 		#endregion
 

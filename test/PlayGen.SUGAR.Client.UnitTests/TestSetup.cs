@@ -46,8 +46,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
             var didLogin = false;
             var request = new AccountRequest
             {
-                Name = "TestInit",
-                Password = "TestInitPassword",
+                Name = "admin",
+                Password = "admin",
                 AutoLogin = true
             };
 
