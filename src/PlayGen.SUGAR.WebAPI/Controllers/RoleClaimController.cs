@@ -33,10 +33,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <returns>A list of <see cref="ClaimResponse"/> that hold Claim details.</returns>
         [HttpGet("role/{id:int}")]
         //[ResponseType(typeof(IEnumerable<ClaimResponse>))]
-        [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.RoleClaim)]
+        [Authorization(ClaimScope.Role, AuthorizationOperation.Get, AuthorizationOperation.RoleClaim)]
         public IActionResult GetRoleClaims([FromRoute]int id)
         {
-            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var roles = _roleClaimCoreController.GetClaimsByRole(id);
                 var roleContract = roles.ToContractList();

@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("requests/{userId:int}")]
         //[ResponseType(typeof(IEnumerable<ActorResponse>))]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Get, AuthorizationOperation.UserFriendRequest)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.UserFriendRequest)]
         public IActionResult GetFriendRequests([FromRoute]int userId)
 		{
             if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("sentrequests/{userId:int}")]
         //[ResponseType(typeof(IEnumerable<ActorResponse>))]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Get, AuthorizationOperation.UserFriendRequest)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.UserFriendRequest)]
         public IActionResult GetSentRequests([FromRoute]int userId)
 		{
             if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(RelationshipResponse))]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Create, AuthorizationOperation.UserFriendRequest)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Create, AuthorizationOperation.UserFriendRequest)]
         public IActionResult CreateFriendRequest([FromBody]RelationshipRequest relationship)
 		{
             if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result ||
@@ -117,7 +117,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut("request")]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Update, AuthorizationOperation.UserFriendRequest)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.UserFriendRequest)]
         public IActionResult UpdateFriendRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
             if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result ||
@@ -143,7 +143,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.UserFriend)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Delete, AuthorizationOperation.UserFriend)]
         public IActionResult UpdateFriend([FromBody] RelationshipStatusUpdate relationship)
 		{
             if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result ||

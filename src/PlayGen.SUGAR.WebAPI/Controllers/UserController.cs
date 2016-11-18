@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.User)]
         public IActionResult Get()
 		{
-            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var users = _userCoreController.Get();
                 var actorContract = users.ToContractList();
@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.User)]
         public IActionResult Create([FromBody]ActorRequest actor)
 		{
-            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var user = actor.ToUserModel();
                 _userCoreController.Create(user);
@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="user"><see cref="ActorRequest"/> object that holds the details of the User.</param>
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Update, AuthorizationOperation.User)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.User)]
         public IActionResult Update([FromRoute] int id, [FromBody] ActorRequest user)
 		{
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
@@ -131,10 +131,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">User ID.</param>
 		[HttpDelete("{id:int}")]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.User)]
+        [Authorization(ClaimScope.Global, AuthorizationOperation.Delete, AuthorizationOperation.User)]
         public IActionResult Delete([FromRoute]int id)
 		{
-            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 _userCoreController.Delete(id);
                 return Ok();

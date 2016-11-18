@@ -13,13 +13,13 @@ namespace PlayGen.SUGAR.Core.Controllers
         private readonly Data.EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
         private readonly ClaimController _claimDbController;
         private readonly RoleController _roleDbController;
-        private readonly ActorRoleController _actorRoleDbController;
+        private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
 
 
         public RoleClaimController(ClaimController claimDbController,
                     RoleController roleDbController,
                     Data.EntityFramework.Controllers.RoleClaimController roleClaimDbController,
-                    ActorRoleController actorRoleDbController)
+                    Data.EntityFramework.Controllers.ActorRoleController actorRoleDbController)
         {
             _claimDbController = claimDbController;
             _roleDbController = roleDbController;

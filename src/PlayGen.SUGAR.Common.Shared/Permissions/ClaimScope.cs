@@ -4,7 +4,8 @@
     {
         Global,
         Game,
-        Actor,
+        Group,
+        User,
         Account,
         Role
     }

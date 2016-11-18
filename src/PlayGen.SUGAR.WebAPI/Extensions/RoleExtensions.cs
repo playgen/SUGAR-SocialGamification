@@ -17,7 +17,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             return new RoleResponse
             {
                 Id = roleModel.Id,
-                Name = roleModel.Name
+                Name = roleModel.Name,
+                ClaimScope = roleModel.ClaimScope
             };
         }
 
@@ -30,7 +31,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
         {
             return new Role
             {
-                Name = roleContract.Name
+                Name = roleContract.Name,
+                ClaimScope = roleContract.ClaimScope
             };
         }
 

@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Core.Controllers
         public Group Create(Group newGroup, int creatorId)
         {
             newGroup = _groupDbController.Create(newGroup);
-            _actorRoleController.Create(ClaimScope.Actor.ToString(), creatorId, newGroup.Id);
+            _actorRoleController.Create(ClaimScope.Group.ToString(), creatorId, newGroup.Id);
             return newGroup;
         }
         

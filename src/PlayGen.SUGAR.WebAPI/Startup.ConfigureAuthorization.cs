@@ -7,7 +7,6 @@ namespace PlayGen.SUGAR.WebAPI
     {
         private void ConfigureAuthorization(IServiceCollection services)
         {
-        
             services.AddScoped<ClaimController>();
             var container = services.BuildServiceProvider();
             var claimController = container.GetService<ClaimController>();

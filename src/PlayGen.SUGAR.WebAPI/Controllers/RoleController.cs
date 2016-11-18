@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.Role)]
         public IActionResult Get()
         {
-            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var roles = _roleCoreController.Get();
                 var roleContract = roles.ToContractList();
@@ -57,9 +57,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         //[ResponseType(typeof(RoleResponse))]
         [ArgumentsNotNull]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.Role)]
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.Role)]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Role)]
         public IActionResult Create([FromBody]RoleRequest newRole)
         {
-            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, ClaimScope.Global, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, ClaimScope.Group, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, ClaimScope.Game, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
             {
                 var role = newRole.ToModel();
                 _roleCoreController.Create(role);

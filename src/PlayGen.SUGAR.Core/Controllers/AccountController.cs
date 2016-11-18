@@ -57,7 +57,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             {
                 Password = PasswordEncryption.Encrypt(toRegister.Password),
                 UserId = user.Id,
-                User = user
+                Name = user.Name
 
             });
 

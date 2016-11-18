@@ -34,33 +34,65 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
             //global (admin)
             context.ActorRoles.Add(new ActorRole
             {
-                RoleId = 1,
+                RoleId = (int)ClaimScope.Global + 1,
                 ActorId = 1,
-                EntityId = 0
+                EntityId = -1
             });
 
-            //global game
+            //global game control
             context.ActorRoles.Add(new ActorRole
             {
-                RoleId = 2,
+                RoleId = (int)ClaimScope.Game + 1,
                 ActorId = 1,
-                EntityId = 0
+                EntityId = -1
             });
 
-            //actor (user)
+            //global group control
             context.ActorRoles.Add(new ActorRole
             {
-                RoleId = 3,
+                RoleId = (int)ClaimScope.Group + 1,
+                ActorId = 1,
+                EntityId = -1
+            });
+
+            //user
+            context.ActorRoles.Add(new ActorRole
+            {
+                RoleId = (int)ClaimScope.User + 1,
                 ActorId = 1,
                 EntityId = 1
+            });
+
+            //global user control
+            context.ActorRoles.Add(new ActorRole
+            {
+                RoleId = (int)ClaimScope.User + 1,
+                ActorId = 1,
+                EntityId = -1
             });
 
             //account
             context.ActorRoles.Add(new ActorRole
             {
-                RoleId = 4,
+                RoleId = (int)ClaimScope.Account + 1,
                 ActorId = 1,
                 EntityId = 1
+            });
+
+            //global account control
+            context.ActorRoles.Add(new ActorRole
+            {
+                RoleId = (int)ClaimScope.Account + 1,
+                ActorId = 1,
+                EntityId = -1
+            });
+
+            //global role control
+            context.ActorRoles.Add(new ActorRole
+            {
+                RoleId = (int)ClaimScope.Role + 1,
+                ActorId = 1,
+                EntityId = -1
             });
 
             context.SaveChanges();

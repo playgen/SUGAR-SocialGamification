@@ -10,12 +10,15 @@ namespace PlayGen.SUGAR.Core.Controllers
     {
         private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
         private readonly RoleController _roleController;
+        private readonly RoleClaimController _roleClaimController;
 
         public ActorRoleController(Data.EntityFramework.Controllers.ActorRoleController actorRoleDbController,
-                    RoleController roleController)
+                    RoleController roleController,
+                    RoleClaimController roleClaimController)
         {
             _actorRoleDbController = actorRoleDbController;
             _roleController = roleController;
+            _roleClaimController = roleClaimController;
         }
 
         public ActorRole Get(int id)
@@ -30,21 +33,48 @@ namespace PlayGen.SUGAR.Core.Controllers
             return roles;
         }
 
+        public IEnumerable<Role> GetActorRolesForEntity(int actorId, int entityId)
+        {
+            var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId);
+            return roles;
+        }
+
         public IEnumerable<Actor> GetRoleActors(int roleId, int entityId)
         {
             var roles = _actorRoleDbController.GetRoleActors(roleId, entityId);
             return roles;
         }
 
-        public IEnumerable<Actor> GetRoleActors(int roleId, int entityId, int actorId)
+        public IEnumerable<Role> GetControlled(int actorId)
         {
-            var roles = GetRoleActors(roleId, entityId);
+            var actorRoles = _actorRoleDbController.GetActorRoles(actorId).ToList();
+            var roles = actorRoles.Where(ar => ar.EntityId > 0).Select(ar => _roleController.GetById(ar.EntityId)).ToList();
+            roles = roles.Where(r => r.ClaimScope == ClaimScope.Role).ToList();
+            if (actorRoles.Any(ar => ar.EntityId < 0))
+            {
+                actorRoles = actorRoles.Where(ar => ar.EntityId < 0).ToList();
+                var newRoleScopes = actorRoles.Select(ar => _roleController.GetById(ar.RoleId)).Select(nr => nr.ClaimScope).ToList();
+                var newRoles = newRoleScopes.SelectMany(nr => _roleController.GetByScope(nr)).Distinct().ToList();
+                roles.AddRange(newRoles);
+            }
             return roles;
         }
 
         public ActorRole Create(ActorRole newRole)
         {
-            //todo Add additional permissions for every actor/game if global (or global claimscope?)
+            newRole = _actorRoleDbController.Create(newRole);
+            return newRole;
+        }
+
+        public ActorRole Create(ActorRole newRole, int actorId)
+        {
+            var creatorRoles = GetActorRoles(actorId).ToList();
+            var creatorClaims = _roleClaimController.GetClaimsByRoles(creatorRoles.Select(r => r.RoleId)).Select(c => c.Id);
+            var newClaims = _roleClaimController.GetClaimsByRole(newRole.RoleId).Select(c => c.Id);
+            if (!newClaims.All(nc => creatorClaims.Contains(nc)))
+            {
+                throw new UnauthorizedAccessException($"User does not have correct permissions");
+            }
             newRole = _actorRoleDbController.Create(newRole);
             return newRole;
         }
@@ -55,27 +85,11 @@ namespace PlayGen.SUGAR.Core.Controllers
             if (role != null)
             {
                 Create(new ActorRole { ActorId = actorId, RoleId = role.Id, EntityId = entityId });
-                var adminRole = _roleController.GetByName(ClaimScope.Global.ToString());
-                var admins = GetRoleActors(adminRole.Id, 0);
-                admins = admins.Where(a => a.Id != actorId);
-                foreach (var admin in admins)
-                {
-                    Create(new ActorRole { ActorId = admin.Id, RoleId = role.Id, EntityId = entityId });
-                }
             }
         }
 
         public void Delete(int id, int actorId)
         {
-            var actor = Get(id).ActorId;
-            if (actor != actorId)
-            {
-                var isAdmin = GetActorRoles(actor).Select(r => _roleController.GetById(r.RoleId)).Any(r => r.ClaimScope == ClaimScope.Global);
-                if (isAdmin && GetActorRoles(actorId).Select(r => _roleController.GetById(r.RoleId)).All(r => r.ClaimScope != ClaimScope.Global))
-                {
-                    throw new ArgumentException($"Permission cannot be removed");
-                }
-            }
             var actorRole = Get(id);
             var role = _roleController.GetById(actorRole.RoleId);
             if (role.Name == role.ClaimScope.ToString())

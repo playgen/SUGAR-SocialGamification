@@ -104,6 +104,7 @@ namespace PlayGen.SUGAR.WebAPI
             });
 
             services.AddSingleton<IAuthorizationHandler, AuthorizationHandler>();
+            services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithoutEntity>();
 
             // Add framework services.
             services.AddMvc(options =>

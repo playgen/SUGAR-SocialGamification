@@ -33,10 +33,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <returns>A list of <see cref="ActorRoleResponse"/> that hold ActorRole details.</returns>
         [HttpGet("actor/{id:int}")]
         //[ResponseType(typeof(IEnumerable<ActorRoleResponse>))]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
         public IActionResult GetActorRoles([FromRoute]int id)
         {
-            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)
             {
                 var roles = _actorRoleCoreController.GetActorRoles(id);
                 var roleContract = roles.ToContractList();
@@ -54,19 +56,34 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [HttpGet("role/{roleId:int}/entity/{entityId:int}")]
         //[ResponseType(typeof(IEnumerable<ActorRoleResponse>))]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
         public IActionResult GetRoleActors([FromRoute]int roleId, [FromRoute]int entityId)
         {
-            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
-                (int.Parse(User.Identity.Name) != entityId && _authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items["ActorRequirements"]).Result) ||
+            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
+               _authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
                 _authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
             {
-                var actors = _actorRoleCoreController.GetRoleActors(roleId, entityId, int.Parse(User.Identity.Name));
+                var actors = _actorRoleCoreController.GetRoleActors(roleId, entityId);
                 var actorContract = actors.ToContractList();
                 return new ObjectResult(actorContract);
             }
             return Unauthorized();
+        }
+
+        /// <summary>
+        /// Get a list of all Roles this Actor has control over.
+        /// 
+        /// Example Usage: GET api/actorrole/controlled
+        /// </summary>
+        /// <returns>A list of <see cref="RoleResponse"/> that hold Role details.</returns>
+        [HttpGet("controlled")]
+        //[ResponseType(typeof(IEnumerable<RoleResponse>))]
+        public IActionResult GetControlled()
+        {
+            var roles = _actorRoleCoreController.GetControlled(int.Parse(User.Identity.Name));
+            var roleContract = roles.ToContractList();
+            return new ObjectResult(roleContract);
         }
 
         /// <summary>
@@ -80,18 +97,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         //[ResponseType(typeof(ActorRoleResponse))]
         [ArgumentsNotNull]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.ActorRole)]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Create, AuthorizationOperation.ActorRole)]
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.ActorRole)]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.ActorRole)]
         public IActionResult Create([FromBody]ActorRoleRequest newRole)
         {
-            //todo also block if role claimscope doesn't match permission
-            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
-                (int.Parse(User.Identity.Name) != newRole.EntityId &&
-                _authorizationService.AuthorizeAsync(User, newRole.EntityId, (AuthorizationRequirement)HttpContext.Items["ActorRequirements"]).Result) ||
+            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, newRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
                 _authorizationService.AuthorizeAsync(User, newRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
             {
                 var role = newRole.ToModel();
-                _actorRoleCoreController.Create(role);
+                _actorRoleCoreController.Create(role, int.Parse(User.Identity.Name));
                 var roleContract = role.ToContract();
                 return new ObjectResult(roleContract);
             }
@@ -106,13 +121,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <param name="id">ActorRole ID.</param>
         [HttpDelete("{id:int}")]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Delete, AuthorizationOperation.ActorRole)]
-        [Authorization(ClaimScope.Actor, AuthorizationOperation.Delete, AuthorizationOperation.ActorRole)]
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Delete, AuthorizationOperation.ActorRole)]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.ActorRole)]
         public IActionResult Delete([FromRoute]int id)
         {
             var actorRole = _actorRoleCoreController.Get(id);
-            if (_authorizationService.AuthorizeAsync(User, 0, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
-                (int.Parse(User.Identity.Name) != actorRole.EntityId && _authorizationService.AuthorizeAsync(User, actorRole.EntityId, (AuthorizationRequirement)HttpContext.Items["ActorRequirements"]).Result) ||
+            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
+                _authorizationService.AuthorizeAsync(User, actorRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
                 _authorizationService.AuthorizeAsync(User, actorRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
             {
                 _actorRoleCoreController.Delete(id, int.Parse(User.Identity.Name));
