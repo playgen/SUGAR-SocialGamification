@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             }
         }
 
-        public Dictionary<int, Dictionary<int, float>> GetPendingNotifications(int gameId, int actorId)
+        public Dictionary<int, Dictionary<Evaluation, float>> GetPendingNotifications(int gameId, int actorId)
         {
             return _progressNotificationCache.GetNotifications(gameId, actorId);
         }

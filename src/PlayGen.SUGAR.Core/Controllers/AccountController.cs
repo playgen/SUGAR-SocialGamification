@@ -1,6 +1,7 @@
 ﻿using PlayGen.SUGAR.Core.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Core.Utilities;
 
 namespace PlayGen.SUGAR.Core.Controllers
@@ -12,7 +13,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 		
         // todo only take in account db controller but use core user controller
 		public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
-			Data.EntityFramework.Controllers.UserController userDbController)
+			Data.EntityFramework.Controllers.UserController userDbController,
+            EvaluationTracker evaluationTracker)
 		{
 			_accountDbController = accountDbController;
 			_userDbController = userDbController;
@@ -27,7 +29,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			if (found != null && PasswordEncryption.Verify(toVerify.Password, found.Password))
 			{
 			    verified = found;
-			}
+            }
 			else
 			{
                 throw new InvalidAccountDetailsException("Invalid Login Details.");

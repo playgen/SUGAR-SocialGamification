@@ -17,7 +17,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [Authorization]
-    public class SkillsController : EvaluationController
+    public class SkillsController : EvaluationsController
     {
         public SkillsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker) 
             : base(evaluationCoreController, evaluationTracker)
@@ -92,23 +92,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         {
             return base.GetEvaluationProgress(token, gameId, actorId);
         }
-
-        /// <summary>
-        /// Subscribe the current user for the current game to revieve notifications when skills
-        /// have been completed.
-        /// 
-        /// Example Usage: POST api/skills/true
-        /// </summary>
-        /// <param name="gameId">The game to send events for.</param>
-        /// <param name="actorId">The actor (user or group) to send events for.</param>
-        /// <param name="subscribed">Boolean value whether to subscribe or not.</param>
-        /// <returns>Any pending events will be attached to the response.</returns>
-        [HttpPost("setsubscribed/{subscribed}")]
-        public override IActionResult SetSubscribed(int gameId, int actorId, bool subscribed)
-        {
-            return base.SetSubscribed(gameId, actorId, subscribed);
-        }
-
+      
         /// <summary>
         /// Create a new Skill.
         /// Requires <see cref="EvaluationRequest.Name"/> to be unique to that <see cref="EvaluationRequest.GameId"/>.

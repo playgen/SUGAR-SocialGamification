@@ -22,6 +22,7 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
+
             var result = context.Result as ObjectResult;
 
             if (result == null)
@@ -29,7 +30,9 @@ namespace PlayGen.SUGAR.WebAPI.Filters
                 throw new Exception("Result type must be of ObjectResult.");
             }
 
+            // todo check if header has send events claim
             // todo need access to actor id and game id here - using session in header
+
             var gameId = 1;
             var actorId = 1;
 
@@ -48,8 +51,7 @@ namespace PlayGen.SUGAR.WebAPI.Filters
             var pendingNotifications = _evaluationTracker.GetPendingNotifications(gameId, actorId);
 
             // todo turn pending notifications into evaluation progress response list
-
-            return null;
+            return new List<EvaluationProgressResponse>();
         }
     }
 }
