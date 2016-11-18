@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client
@@ -65,7 +66,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns a boolean value indicating whether there was a notification to retrieve or not.</returns>
 		public bool TryGetPendingNotification(out EvaluationNotification notification)
 		{
-			return EvaluationNotifications.TryDequeue(out notification);
+			return EvaluationNotifications.TryDequeue(EvaluationType.Skill, out notification);
 		}
 
 		/// <summary>

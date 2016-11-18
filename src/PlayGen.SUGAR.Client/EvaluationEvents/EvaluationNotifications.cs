@@ -1,29 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Client.EvaluationEvents
 {
     public class EvaluationNotifications
     {
-        private readonly Queue<EvaluationNotification> _pendingNotifications = new Queue<EvaluationNotification>();
+        private readonly List<EvaluationNotification> _pendingNotifications = new List<EvaluationNotification>();
 
         public bool TryDequeue(out EvaluationNotification evaluationNotification)
         {
-            var didDequeue = false;
-            evaluationNotification = null;
+            evaluationNotification = _pendingNotifications.FirstOrDefault();
+            _pendingNotifications.Remove(evaluationNotification);
+            return evaluationNotification != null;
+        }
 
-            if (_pendingNotifications.Any())
-            {
-                _pendingNotifications.Dequeue();
-                didDequeue = true;
-            }
-
-            return didDequeue;
+        public bool TryDequeue(EvaluationType type, out EvaluationNotification evaluationNotification)
+        {
+            evaluationNotification = _pendingNotifications.FirstOrDefault(p => p.Type == type);
+            _pendingNotifications.Remove(evaluationNotification);
+            return evaluationNotification != null;
         }
 
         public void Enqueue(List<EvaluationNotification> evaluationNotifications)
         {
-            evaluationNotifications.ForEach(e => _pendingNotifications.Enqueue(e));
+            _pendingNotifications.InsertRange(0, evaluationNotifications);
         }
     }
 }
