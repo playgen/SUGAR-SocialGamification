@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.WebAPI
 			{
 				options.Filters.Add(new ModelValidationFilter());
 				options.Filters.Add(new ExceptionFilter());
-
+			    options.Filters.Add(typeof(WrapResponseFilter));
 			})
 			.AddJsonOptions(json =>
 			{

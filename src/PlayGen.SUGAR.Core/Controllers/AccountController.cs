@@ -54,12 +54,12 @@ namespace PlayGen.SUGAR.Core.Controllers
                 Name = toRegister.Name
 		    });
 
-            var registered = _accountDbController.Create(new Account
-            {
+		    var registered = _accountDbController.Create(new Account
+		    {
+                Name = toRegister.Name,
                 Password = PasswordEncryption.Encrypt(toRegister.Password),
                 UserId = user.Id,
-                Name = user.Name
-
+                User = user
             });
 
             _actorRoleController.Create(ClaimScope.Account.ToString(), registered.UserId, registered.Id);

@@ -8,7 +8,7 @@ namespace PlayGen.SUGAR.Client.EvaluationEvents
     {
         public static List<EvaluationNotification> ToNotifications(this List<EvaluationProgressResponse> progressResponses)
         {
-            return progressResponses.Select(ToNotification).ToList();
+            return progressResponses?.Select(ToNotification).ToList();
         }
 
         public static EvaluationNotification ToNotification(this EvaluationProgressResponse progressResponse)

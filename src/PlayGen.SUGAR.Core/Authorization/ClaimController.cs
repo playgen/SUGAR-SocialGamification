@@ -31,7 +31,8 @@ namespace PlayGen.SUGAR.Core.Authorization
             var assembly = Assembly.GetEntryAssembly();
             foreach (var type in assembly.GetTypes())
             {
-                foreach (var method in type.GetMethods())
+                var flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+                foreach (var method in type.GetMethods(flags))
                 {
                     var operation = method.GetCustomAttributes(typeof(AuthorizationAttribute), false) as AuthorizationAttribute[];
                     if (operation != null && operation.Length > 0)

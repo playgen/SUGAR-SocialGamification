@@ -24,7 +24,10 @@ namespace PlayGen.SUGAR.Client.EvaluationEvents
 
         public void Enqueue(List<EvaluationNotification> evaluationNotifications)
         {
-            _pendingNotifications.InsertRange(0, evaluationNotifications);
+            if (evaluationNotifications != null)
+            {
+                _pendingNotifications.InsertRange(0, evaluationNotifications);
+            }
         }
     }
 }
