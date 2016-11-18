@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.EvaluationEvents;
+using PlayGen.SUGAR.ServerAuthentication.Extensions;
+using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Filters
 {
@@ -29,17 +31,19 @@ namespace PlayGen.SUGAR.WebAPI.Filters
                 return;
             }
 
-            // todo check if header has send events claim
-            // todo need access to actor id and game id here - using session in header
+            int gameId;
+            int userId;
 
-            var gameId = 1;
-            var actorId = 1;
+            if (!context.HttpContext.Request.TryGetClaim("GameId", out gameId)
+                || !context.HttpContext.Request.TryGetClaim("UserId", out userId))
+            {
+                return;
+            }
 
             var wrappedResponse = new ResponseWrapper<object>
             {
                 Response = result.Value,
-
-                EvaluationsProgress = null //todo uncomment GetPendingEvents(gameId, actorId)
+                EvaluationsProgress = GetPendingEvents(gameId, userId)
             };
 
             context.Result = new ObjectResult(wrappedResponse);
@@ -48,9 +52,8 @@ namespace PlayGen.SUGAR.WebAPI.Filters
         private List<EvaluationProgressResponse> GetPendingEvents(int gameId, int actorId)
         {
             var pendingNotifications = _evaluationTracker.GetPendingNotifications(gameId, actorId);
-
-            // todo turn pending notifications into evaluation progress response list
-            return new List<EvaluationProgressResponse>();
+            var progressResponses = pendingNotifications.ToContractList();
+            return progressResponses;
         }
     }
 }

@@ -72,8 +72,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         {
             _gameDataToEvaluationMapper.RemoveMapping(evaluation);
 
-            _progressCache.Remove(evaluation.Id);
-            _progressNotificationCache.Remove(evaluation.Id);
+            _progressCache.Remove(evaluation);
+            _progressNotificationCache.Remove(evaluation);
         }
 
         private void MapExistingEvaluations()

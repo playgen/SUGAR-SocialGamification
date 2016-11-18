@@ -2,7 +2,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -18,38 +17,48 @@ namespace PlayGen.SUGAR.ServerAuthentication
 			_tokenOptions = token;
 		}
 
-		[HttpPost]
-		public string CreateToken([FromBody] int claimerId)
+        [HttpGet("{gameId:int}/{userId:int}")]
+        public string CreateToken([FromRoute]int gameId, [FromRoute]int userId)
 		{
 			var expiry = DateTime.UtcNow.AddHours(2);
-			var tok = GetToken(claimerId.ToString(), expiry);
+			var tok = CreateToken(gameId.ToString(), userId.ToString(), expiry);
 			return tok;
 		}
 
-		[HttpGet]
-		[Authorize("Bearer")]
-		public string Get()
-		{
-		    string tok = null;
 
-		    var currentUser = HttpContext.User;
-			if (currentUser != null)
-			{
-			    var authenticated = currentUser.Identity.IsAuthenticated;
-			    if (authenticated)
-				{
-					var user = currentUser.Identity.Name;
-					var tokenExpires = DateTime.UtcNow.AddHours(2);
-					tok = GetToken(user, tokenExpires);
-				}
-			}
-			return tok;
-		}
+		//[HttpGet]
+		//[Authorize("Bearer")]
+		//public string Get()
+		//{
+		//    string tok = null;
 
-		private string GetToken(string userId, DateTime expires)
+		//    var currentUser = HttpContext.User;
+		//	if (currentUser != null)
+		//	{
+		//	    var authenticated = currentUser.Identity.IsAuthenticated;
+		//	    if (authenticated)
+		//		{
+        //          // todo get game Id
+		//			var user = currentUser.Identity.Name;
+		//			var tokenExpires = DateTime.UtcNow.AddHours(2);
+		//			tok = GetToken(user, tokenExpires);
+		//		}
+		//	}
+		//	return tok;
+		//}
+
+		private string CreateToken(string gameId, string userId, DateTime expires)
 		{
 			var handler = new JwtSecurityTokenHandler();
-			ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(userId, "TokenAuth"), new[] { new Claim("Expiry", expires.ToString(), ClaimValueTypes.DateTime), new Claim("UserID", userId, ClaimValueTypes.Integer) });
+
+			var identity = new ClaimsIdentity(
+                new GenericIdentity(userId, "TokenAuth"), 
+                new[] 
+                {
+                    new Claim("Expiry", expires.ToString(), ClaimValueTypes.DateTime),
+                    new Claim("UserId", userId, ClaimValueTypes.Integer),
+                    new Claim("GameId", gameId, ClaimValueTypes.Integer)
+                });
 
 			var securityToken = handler.CreateToken(new SecurityTokenDescriptor
 			{
@@ -59,6 +68,7 @@ namespace PlayGen.SUGAR.ServerAuthentication
 				Subject = identity,
 				Expires = expires,
 			});
+
 			return handler.WriteToken(securityToken);
 		}
 	}

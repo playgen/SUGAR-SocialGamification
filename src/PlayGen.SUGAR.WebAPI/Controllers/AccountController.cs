@@ -60,14 +60,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ArgumentsNotNull]
 		public IActionResult Login([FromBody]AccountRequest accountRequest)
 		{
+            // todo check if has permission to login for specified game
 		    var account = accountRequest.ToModel();
 
             account = _accountCoreController.Login(account);
 
-			var token = CreateToken(account);
+			var token = CreateToken(accountRequest.GameId ?? -1, account);
 			HttpContext.Response.SetAuthorizationToken(token);
 
-            // todo _evaluationTracker.OnActorSessionStarted();
+            _evaluationTracker.OnActorSessionStarted(accountRequest.GameId ?? -1, account.UserId);
 
             var response = account.ToContract();
 			return new ObjectResult(response);
@@ -85,8 +86,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpPost("register")]
 		//[ResponseType(typeof(AccountResponse))]
 		[ArgumentsNotNull]
+        // todo split register and register with auto login contracts
 		public IActionResult Register([FromBody] AccountRequest accountRequest)
 		{
+            // todo check if has permission to autologin for specified game
 		    var account = accountRequest.ToModel();
 
 		    account = _accountCoreController.Register(account);
@@ -94,7 +97,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var response = account.ToContract();
 			if (accountRequest.AutoLogin)
 			{
-				var token = CreateToken(account);
+				var token = CreateToken(accountRequest.GameId ?? -1, account);
 				HttpContext.Response.SetAuthorizationToken(token);
 
                 // todo _evaluationTracker.OnActorSessionStarted();
@@ -156,10 +159,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         }
 		
 		#region Helpers
-		private string CreateToken(Account account)
+		private string CreateToken(int gameId, Account account)
 		{
-            return _tokenController.CreateToken(account.UserId);
-
+            return _tokenController.CreateToken(gameId, account.UserId);
         }
 		#endregion
 	}

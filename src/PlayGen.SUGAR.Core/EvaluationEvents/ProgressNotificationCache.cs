@@ -10,9 +10,12 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     public class ProgressNotificationCache
     {
         // <gameId, <actorId, <evaluation, progress>>>
+        private readonly Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> _pendingNotifications = new Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>>();
+        
+        // <gameId, <actorId, <evaluation, progress>>>
         public void Check(Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> progress)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void Remove(int gameId, int actorId)
@@ -20,7 +23,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
-        public void Remove(int evaluationId)
+        public void Remove(Evaluation evaluation)
         {
             throw new NotImplementedException();
         }
@@ -28,7 +31,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         // <actorId, <evaluation, progress>>
         public Dictionary<int, Dictionary<Evaluation, float>> GetNotifications(int gameId, int actorId)
         {
-            throw new NotImplementedException();
+            // todo get notifications and remove
+            return null;
         }
     }
 }

@@ -75,5 +75,36 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
                 Progress = model.Progress,
             };
         }
+
+        // <actorId, <evaluation, progress>>
+        public static List<EvaluationProgressResponse> ToContractList(this Dictionary<int, Dictionary<Evaluation, float>> pendingNotifications)
+        {
+            if (pendingNotifications == null) return null;
+
+            var progressResponses = new List<EvaluationProgressResponse>();
+
+            foreach (var actorProgress in pendingNotifications)
+            {
+                foreach (var evaluationProgress in actorProgress.Value)
+                {
+                    progressResponses.Add(new EvaluationProgressResponse
+                    {
+                        Actor = new ActorResponse
+                            {
+                                // todo get name
+                                Id = actorProgress.Key
+                            },
+
+                        Name = evaluationProgress.Key.Name,
+
+                        Progress = evaluationProgress.Value,
+
+                        Type = evaluationProgress.Key.EvaluationType
+                    });
+                }
+            }
+
+            return progressResponses;
+	    }
     }
 }
