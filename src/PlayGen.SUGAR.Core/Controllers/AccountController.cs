@@ -13,6 +13,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 		private readonly Data.EntityFramework.Controllers.UserController _userDbController;
         private readonly ActorRoleController _actorRoleController;
 
+        // todo only take in account db controller but use core user controller
         public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
 			        Data.EntityFramework.Controllers.UserController userDbController,
                     ActorRoleController actorRoleController)

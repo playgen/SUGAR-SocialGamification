@@ -4,6 +4,8 @@ using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.Controllers;
+using PlayGen.SUGAR.Core.EvaluationEvents;
+using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
@@ -13,20 +15,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// <summary>
 	/// Web Controller that facilitates Achievement specific operations.
 	/// </summary>
-	[Route("api/[controller]")]
-    [Authorize("Bearer")]
-    public class AchievementsController : Controller
-	{
-        private readonly IAuthorizationService _authorizationService;
+	[Route("api/[controller]")]    
+    public class AchievementsController : EvaluationController
+    {
         private readonly EvaluationController _evaluationCoreController;
 
-		public AchievementsController(EvaluationController evaluationController,
-                    IAuthorizationService authorizationService)
-		{
-            _evaluationCoreController = evaluationController;
-            _authorizationService = authorizationService;
+        public AchievementsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
+            : base(evaluationCoreController, evaluationTracker, authorizationService)
+        {
         }
-
 		/// <summary>
 		/// Find an Achievement that matches <param name="token"/> and <param name="gameId"/>.
 		/// 
@@ -38,17 +35,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpGet("find/{token}/{gameId:int}")]
 		[HttpGet("find/{token}/global")]
         //[ResponseType(typeof(EvaluationResponse))]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
-        public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
+        public override IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
 		{
-            if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var achievement = _evaluationCoreController.Get(token, gameId);
-                var achievementContract = achievement.ToContract();
-                return new ObjectResult(achievementContract);
-            }
-            return Unauthorized();
-		}
+            return base.Get(token, gameId);
+        }
 
 		/// <summary>
 		/// Find a list of Achievements that match <param name="gameId"/>.
@@ -61,36 +51,27 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
         //[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
-        public IActionResult Get([FromRoute]int? gameId)
-		{
-            if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var achievement = _evaluationCoreController.GetByGame(gameId);
-                var achievementContract = achievement.ToContractList();
-                return new ObjectResult(achievementContract);
-            }
-            return Unauthorized();
+        public override IActionResult Get([FromRoute]int? gameId)
+        {
+            return base.Get(gameId);
         }
 
-		/// <summary>
-		/// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
-		/// 
-		/// Example Usage: GET api/achievements/game/1/evaluate/1
-		/// </summary>
-		/// <param name="gameId">ID of Game</param>
-		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
-		[HttpGet("game/{gameId:int}/evaluate")]
+        /// <summary>
+        /// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
+        /// 
+        /// Example Usage: GET api/achievements/game/1/evaluate/1
+        /// </summary>
+        /// <param name="gameId">ID of Game</param>
+        /// <param name="actorId">ID of Group/User</param>
+        /// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
+        [HttpGet("game/{gameId:int}/evaluate")]
 		[HttpGet("global/evaluate")]
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("global/evaluate/{actorId:int}")]
 		//[ResponseType(typeof(IEnumerable<EvaluationProgressResponse>))]
-		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
+		public override IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
-			var achievementsProgress = _evaluationCoreController.GetGameProgress(gameId, actorId);
-		    var achievementsProgressResponses = achievementsProgress.ToContractList();
-            return new ObjectResult(achievementsProgressResponses);
+		    return base.GetGameProgress(gameId, actorId);
 		}
 
 		/// <summary>
@@ -109,22 +90,32 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(EvaluationProgressResponse))]
 		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
-			var achievement = _evaluationCoreController.Get(token, gameId);
-			var progress = _evaluationCoreController.EvaluateProgress(achievement, actorId);
-			return new ObjectResult(new EvaluationProgressResponse
-			{
-				Name = achievement.Name,
-				Progress = progress,
-			});
+		    return base.GetEvaluationProgress(token, gameId, actorId);
 		}
 
         /// <summary>
+        /// Subscribe the current user for the current game to revieve notifications when achievements
+        /// have been completed.
+        /// 
+        /// Example Usage: POST api/achievements/true
+        /// </summary>
+        /// <param name="gameId">The game to send events for.</param>
+        /// <param name="actorId">The actor (user or group) to send events for.</param>
+        /// <param name="subscribed">Boolean value whether to subscribe or not.</param>
+        /// <returns>Any pending events will be attached to the response.</returns>
+        [HttpPost("setsubscribed/{subscribed}")]
+        public override IActionResult SetSubscribed(int gameId, int actorId, bool subscribed)
+        {
+            return base.SetSubscribed(gameId, actorId, subscribed);
+        }
+
+        /// <summary>
         /// Create a new Achievement.
-        /// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
+        /// Requires <see cref="EvaluationRequest.Name"/> to be unique to that <see cref="EvaluationRequest.GameId"/>.
         /// 
         /// Example Usage: POST api/achievements/create
         /// </summary>
-        /// <param name="newAchievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Achievement.</param>
+        /// <param name="newAchievement"><see cref="EvaluationRequest"/> object that holds the details of the new Achievement.</param>
         /// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
         [HttpPost("create")]
 		//[ResponseType(typeof(EvaluationResponse))]
@@ -135,7 +126,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, newAchievement.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var achievement = newAchievement.ToAchievementModel();
-                achievement = (Achievement)_evaluationCoreController.Create(achievement);
+                achievement = (Achievement)EvaluationCoreController.Create(achievement);
                 var achievementContract = achievement.ToContract();
                 return new ObjectResult(achievementContract);
             }
@@ -156,7 +147,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, achievement.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var achievementModel = achievement.ToAchievementModel();
-                _evaluationCoreController.Update(achievementModel);
+                EvaluationCoreController.Update(achievementModel);
                 return Ok();
             }
             return Unauthorized();
@@ -171,15 +162,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="gameId">ID of the Game the Achievement is for</param>
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.Achievement)]
-        public IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
+		public override IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-            if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                _evaluationCoreController.Delete(token, gameId);
-                return Ok();
-            }
-            return Unauthorized();
-        }
+            return base.Delete(token, gameId);
+		}
 	}
 }

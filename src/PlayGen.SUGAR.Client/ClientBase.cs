@@ -5,7 +5,9 @@ using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client
 {
@@ -14,6 +16,7 @@ namespace PlayGen.SUGAR.Client
 		private readonly string _baseAddress;
 		private readonly Credentials _credentials;
 		private readonly IHttpHandler _httpHandler;
+	    protected readonly EvaluationNotifications EvaluationNotifications;
 
 		public static readonly JsonSerializerSettings SerializerSettings;
 
@@ -29,7 +32,7 @@ namespace PlayGen.SUGAR.Client
 			SerializerSettings.Converters.Add(new StringEnumConverter());
 		}
 
-		protected ClientBase(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
+		protected ClientBase(string baseAddress, Credentials credentials, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
 		{
 			if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
 			{
@@ -38,6 +41,7 @@ namespace PlayGen.SUGAR.Client
 			_baseAddress = baseAddress;
 			_credentials = credentials;
 			_httpHandler = httpHandler;
+		    EvaluationNotifications = evaluationNotifications;
 		}
 
 		protected bool AreUriParamsValid(object[] param)
@@ -91,17 +95,22 @@ namespace PlayGen.SUGAR.Client
 				Content = SerializePayload(payload)
 			};
 		}
+        
 
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <typeparam name="TResponse"></typeparam>
-		/// <param name="response"></param>
-		/// <returns></returns>
-		private static TResponse DeserializeResponse<TResponse>(HttpResponse response)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResponse"></typeparam>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        private TResponse UnpackResponse<TResponse>(HttpResponse response)
 		{
-			return JsonConvert.DeserializeObject<TResponse>(response.Content, SerializerSettings);
+            var wrappedResponse = JsonConvert.DeserializeObject<ResponseWrapper<TResponse>>(response.Content, SerializerSettings);
+		    var content = wrappedResponse.Response;
+
+		    EvaluationNotifications.Enqueue(wrappedResponse.EvaluationsProgress.ToNotifications());
+
+            return content;
 		}
 
 		#region PostPut
@@ -133,7 +142,8 @@ namespace PlayGen.SUGAR.Client
 			Console.WriteLine("ClientBase::PostPut::ProcessResponse");
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
 			Console.WriteLine("ClientBase::PostPut::DeserializeResponse");
-			return DeserializeResponse<TResponse>(response);
+
+            return UnpackResponse<TResponse>(response);
 		}
 
 		protected void PostPut(string url, string method, Dictionary<string, string> headers, object payload, IEnumerable<HttpStatusCode> expectedStatusCodes)
@@ -172,7 +182,7 @@ namespace PlayGen.SUGAR.Client
 			var request = CreateRequest(url, method, headers, null);
 			var response = _httpHandler.HandleRequest(request);
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
-			return DeserializeResponse<TResponse>(response);
+            return UnpackResponse<TResponse>(response);
 		}
 
 		protected void GetDelete(string url, string method, Dictionary<string, string> headers, IEnumerable<HttpStatusCode> expectedStatusCodes)

@@ -4,118 +4,108 @@ using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.Controllers;
+using PlayGen.SUGAR.Core.EvaluationEvents;
+using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
-	/// <summary>
-	/// Web Controller that facilitates Skill specific operations.
-	/// </summary>
-	[Route("api/[controller]")]
-    [Authorize("Bearer")]
-    public class SkillsController : Controller
-	{
-        private readonly IAuthorizationService _authorizationService;
-        private readonly EvaluationController _evaluationController;
-
-		public SkillsController(EvaluationController evaluationController,
-                    IAuthorizationService authorizationService)
-		{
-			_evaluationController = evaluationController;
-            _authorizationService = authorizationService;
+    /// <summary>
+    /// Web Controller that facilitates Skill specific operations.
+    /// </summary>
+    [Route("api/[controller]")]
+    public class SkillsController : EvaluationController
+    {
+        public SkillsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
+            : base(evaluationCoreController, evaluationTracker, authorizationService)
+        {
         }
 
-		/// <summary>
-		/// Find a Skill that matches <param name="token"/> and <param name="gameId"/>.
-		/// 
-		/// Example Usage: GET api/skills/find/SKILL_TOKEN/1
-		/// </summary>
-		/// <param name="token">Token of Skill</param>
-		/// <param name="gameId">ID of the Game the Skill is for</param>
-		/// <returns>Returns <see cref="EvaluationResponse"/> that holds Skill details</returns>
-		[HttpGet("find/{token}/{gameId:int}")]
-		[HttpGet("find/{token}/global")]
+        /// <summary>
+        /// Find a Skill that matches <param name="token"/> and <param name="gameId"/>.
+        /// 
+        /// Example Usage: GET api/skills/find/SKILL_TOKEN/1
+        /// </summary>
+        /// <param name="token">Token of Skill</param>
+        /// <param name="gameId">ID of the Game the Skill is for</param>
+        /// <returns>Returns <see cref="EvaluationResponse"/> that holds Skill details</returns>
+        [HttpGet("find/{token}/{gameId:int}")]
+        [HttpGet("find/{token}/global")]
         //[ResponseType(typeof(EvaluationResponse))]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
-        public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
-		{
-            if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var skill = _evaluationController.Get(token, gameId);
-                var skillContract = skill.ToContract();
-                return new ObjectResult(skillContract);
-            }
-            return Unauthorized();
+        public override IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
+        {
+            return base.Get(token, gameId);
         }
 
-		/// <summary>
-		/// Find a list of Skills that match <param name="gameId"/>.
-		/// If global is provided instead of a gameId, get all global skills, ie. skills that are not associated with a specific game.
-		/// 
-		/// Example Usage: GET api/skills/game/1/list
-		/// </summary>
-		/// <param name="gameId">Game ID</param>
-		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Skill details</returns>
-		[HttpGet("global/list")]
-		[HttpGet("game/{gameId:int}/list")]
+        /// <summary>
+        /// Find a list of Skills that match <param name="gameId"/>.
+        /// If global is provided instead of a gameId, get all global skills, ie. skills that are not associated with a specific game.
+        /// 
+        /// Example Usage: GET api/skills/game/1/list
+        /// </summary>
+        /// <param name="gameId">Game ID</param>
+        /// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Skill details</returns>
+        [HttpGet("global/list")]
+        [HttpGet("game/{gameId:int}/list")]
         //[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
-        public IActionResult Get([FromRoute]int? gameId)
-		{
-            if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var skill = _evaluationController.GetByGame(gameId);
-                var skillContract = skill.ToContractList();
-                return new ObjectResult(skillContract);
-            }
-            return Unauthorized();
+        public override IActionResult Get([FromRoute]int? gameId)
+        {
+            return base.Get(gameId);
         }
 
-		/// <summary>
-		/// Find the current progress for all skills for a <param name="gameId"/> for <param name="actorId"/>.
-		/// 
-		/// Example Usage: GET api/skills/game/1/evaluate/1
-		/// </summary>
-		/// <param name="gameId">ID of Game</param>
-		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward skill.</returns>
-		[HttpGet("game/{gameId:int}/evaluate")]
-		[HttpGet("global/evaluate")]
-		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
-		[HttpGet("global/evaluate/{actorId:int}")]
-		//[ResponseType(typeof(IEnumerable<EvaluationProgressResponse>))]
-		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
-		{
-            var skillsProgress = _evaluationController.GetGameProgress(gameId, actorId);
-            var skillsProgressResponses = skillsProgress.ToContractList();
-            return new ObjectResult(skillsProgressResponses);
+        /// <summary>
+        /// Find the current progress for all skills for a <param name="gameId"/> for <param name="actorId"/>.
+        /// 
+        /// Example Usage: GET api/skills/game/1/evaluate/1
+        /// </summary>
+        /// <param name="gameId">ID of Game</param>
+        /// <param name="actorId">ID of Group/User</param>
+        /// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward skill.</returns>
+        [HttpGet("game/{gameId:int}/evaluate")]
+        [HttpGet("global/evaluate")]
+        [HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
+        [HttpGet("global/evaluate/{actorId:int}")]
+        //[ResponseType(typeof(IEnumerable<EvaluationProgressResponse>))]
+        public override IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
+        {
+            return base.GetGameProgress(gameId, actorId);
         }
 
-		/// <summary>
-		/// Find the current progress for a Skill for <param name="actorId"/>.
-		/// 
-		/// Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1
-		/// </summary>
-		/// <param name="token">Token of Skill</param>
-		/// <param name="gameId">ID of the Game the Skill is for</param>
-		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward skill.</returns>
-		[HttpGet("{token}/{gameId:int}/evaluate")]
-		[HttpGet("{token}/global/evaluate")]
-		[HttpGet("{token}/{gameId:int}/evaluate/{actorId:int}")]
-		[HttpGet("{token}/global/evaluate/{actorId:int}")]
-		//[ResponseType(typeof(EvaluationProgressResponse))]
-		public IActionResult GetSkillProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
-		{
-            var skill = _evaluationController.Get(token, gameId);
-            var progress = _evaluationController.EvaluateProgress(skill, actorId);
-            return new ObjectResult(new EvaluationProgressResponse
-            {
-                Name = skill.Name,
-                Progress = progress,
-            });
+        /// <summary>
+        /// Find the current progress for a Skill for <param name="actorId"/>.
+        /// 
+        /// Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1
+        /// </summary>
+        /// <param name="token">Token of Skill</param>
+        /// <param name="gameId">ID of the Game the Skill is for</param>
+        /// <param name="actorId">ID of Group/User</param>
+        /// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward skill.</returns>
+        [HttpGet("{token}/{gameId:int}/evaluate")]
+        [HttpGet("{token}/global/evaluate")]
+        [HttpGet("{token}/{gameId:int}/evaluate/{actorId:int}")]
+        [HttpGet("{token}/global/evaluate/{actorId:int}")]
+        //[ResponseType(typeof(EvaluationProgressResponse))]
+        public IActionResult GetSkillProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
+        {
+            return base.GetEvaluationProgress(token, gameId, actorId);
+        }
+
+        /// <summary>
+        /// Subscribe the current user for the current game to revieve notifications when skills
+        /// have been completed.
+        /// 
+        /// Example Usage: POST api/skills/true
+        /// </summary>
+        /// <param name="gameId">The game to send events for.</param>
+        /// <param name="actorId">The actor (user or group) to send events for.</param>
+        /// <param name="subscribed">Boolean value whether to subscribe or not.</param>
+        /// <returns>Any pending events will be attached to the response.</returns>
+        [HttpPost("setsubscribed/{subscribed}")]
+        public override IActionResult SetSubscribed(int gameId, int actorId, bool subscribed)
+        {
+            return base.SetSubscribed(gameId, actorId, subscribed);
         }
 
         /// <summary>
@@ -135,7 +125,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, newSkill.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var skill = newSkill.ToSkillModel();
-                skill = (Skill)_evaluationController.Create(skill);
+                skill = (Skill)EvaluationCoreController.Create(skill);
                 var achievementContract = skill.ToContract();
                 return new ObjectResult(achievementContract);
             }
@@ -156,30 +146,24 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, skill.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var skillModel = skill.ToSkillModel();
-                _evaluationController.Update(skillModel);
+                EvaluationCoreController.Update(skillModel);
                 return Ok();
             }
             return Unauthorized();
         }
 
-		/// <summary>
-		/// Delete Skill with the <param name="token"/> and <param name="gameId"/> provided.
-		/// 
-		/// Example Usage: DELETE api/skills/SKILL_TOKEN/1
-		/// </summary>
-		/// <param name="token">Token of Skill</param>
-		/// <param name="gameId">ID of the Game the Skill is for</param>
-		[HttpDelete("{token}/global")]
-		[HttpDelete("{token}/{gameId:int}")]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.Achievement)]
-        public IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
-		{
-            if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                _evaluationController.Delete(token, gameId);
-                return Ok();
-            }
-            return Unauthorized();
+        /// <summary>
+        /// Delete Skill with the <param name="token"/> and <param name="gameId"/> provided.
+        /// 
+        /// Example Usage: DELETE api/skills/SKILL_TOKEN/1
+        /// </summary>
+        /// <param name="token">Token of Skill</param>
+        /// <param name="gameId">ID of the Game the Skill is for</param>
+        [HttpDelete("{token}/global")]
+        [HttpDelete("{token}/{gameId:int}")]
+        public override IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
+        {
+            return base.Delete(token, gameId);
         }
-	}
+    }
 }

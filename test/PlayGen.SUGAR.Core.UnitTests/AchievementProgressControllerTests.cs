@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using PlayGen.SUGAR.Contracts;
-using Xunit;
+﻿using Xunit;
 
-namespace PlayGen.SUGAR.GameData.UnitTests
+namespace PlayGen.SUGAR.Core.UnitTests
 {
-    [Collection("Game Data Fixture Collection")]
+    [Collection("Project Fixture Collection")]
     public class AchievementProgressControllerTests
 	{
 		/*
