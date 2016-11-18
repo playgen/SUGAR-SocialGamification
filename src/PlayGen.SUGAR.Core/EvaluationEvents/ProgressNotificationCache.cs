@@ -23,5 +23,11 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         {
             throw new NotImplementedException();
         }
+
+        // <actorId, <evaluationId, progress>>
+        public Dictionary<int, Dictionary<int, float>> GetNotifications(int gameId, int actorId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Extensions;
 using PlayGen.SUGAR.Contracts.Shared;
 
@@ -11,8 +12,8 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/gamedata";
 
-		public GameDataClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
-			: base(baseAddress, credentials, httpHandler)
+		public GameDataClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, credentials, httpHandler, evaluationNotifications)
 		{
 		}
 

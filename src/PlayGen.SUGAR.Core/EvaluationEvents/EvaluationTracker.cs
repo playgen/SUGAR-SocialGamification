@@ -47,6 +47,11 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             }
         }
 
+        public Dictionary<int, Dictionary<int, float>> GetPendingNotifications(int gameId, int actorId)
+        {
+            return _progressNotificationCache.GetNotifications(gameId, actorId);
+        }
+
         public void OnEvaluationAdded(Evaluation evaluation)
         {
             _gameDataToEvaluationMapper.CreateMapping(evaluation);

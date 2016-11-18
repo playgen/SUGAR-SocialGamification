@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client
@@ -8,8 +9,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class SkillClient : ClientBase
 	{
-		public SkillClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
-			: base(baseAddress, credentials, httpHandler)
+		public SkillClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, credentials, httpHandler, evaluationNotifications)
 		{
 		}
 
@@ -55,6 +56,16 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder("api/skills/game/{0}/list", gameId).ToString();
 			return Get<IEnumerable<EvaluationResponse>>(query);
+		}
+
+		/// <summary>
+		/// Gets pending skill progress notifications.
+		/// </summary>
+		/// <param name="notification"></param>
+		/// <returns>Returns a boolean value indicating whether there was a notification to retrieve or not.</returns>
+		public bool TryGetPendingNotification(out EvaluationNotification notification)
+		{
+			return EvaluationNotifications.TryDequeue(out notification);
 		}
 
 		/// <summary>

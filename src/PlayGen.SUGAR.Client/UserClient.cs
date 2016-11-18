@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client
@@ -8,8 +9,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class UserClient : ClientBase
 	{
-		public UserClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler)
-			: base(baseAddress, credentials, httpHandler)
+		public UserClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, credentials, httpHandler, evaluationNotifications)
 		{
 		}
 

@@ -37,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ResourceResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResourceTransferRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResourceTransferResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ResponseWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RewardUpdateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RewardResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RewardCreateRequest.cs" />
