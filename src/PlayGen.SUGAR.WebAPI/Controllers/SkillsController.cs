@@ -19,7 +19,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
     [Authorization]
     public class SkillsController : EvaluationsController
     {
-        public SkillsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker) 
+        public SkillsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker)
             : base(evaluationCoreController, evaluationTracker)
         {
         }
@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [HttpGet("find/{token}/{gameId:int}")]
         [HttpGet("find/{token}/global")]
         //[ResponseType(typeof(EvaluationResponse))]
-        public override IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
+        public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
         {
             return base.Get(token, gameId);
         }
@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [HttpGet("global/list")]
         [HttpGet("game/{gameId:int}/list")]
         //[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
-        public override IActionResult Get([FromRoute]int? gameId)
+        public IActionResult Get([FromRoute]int? gameId)
         {
             return base.Get(gameId);
         }
@@ -69,7 +69,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
         [HttpGet("global/evaluate/{actorId:int}")]
         //[ResponseType(typeof(IEnumerable<EvaluationProgressResponse>))]
-        public override IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
+        public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
         {
             return base.GetGameProgress(gameId, actorId);
         }
@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         {
             return base.GetEvaluationProgress(token, gameId, actorId);
         }
-      
+
         /// <summary>
         /// Create a new Skill.
         /// Requires <see cref="EvaluationRequest.Name"/> to be unique to that <see cref="EvaluationRequest.GameId"/>.
