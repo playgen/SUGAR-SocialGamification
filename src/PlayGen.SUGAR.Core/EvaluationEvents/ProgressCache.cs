@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         }
 
         // progress: <evaluationId, progress>
-        public bool TryGetProgress(int gameId, int actorId, out Dictionary<int, float> progress)
+        public bool TryGetProgress(int gameId, int actorId, out Dictionary<int, float> progress, int? evaluationId = null)
         {
             var didGetProgress = false;
             progress = null;
@@ -44,25 +44,29 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
             if (_progressMappings.TryGetValue(gameId, out gameProgress))
             {
-                if (gameProgress.TryGetValue(actorId, out progress))
+                Dictionary<int, float> actorProgress;
+
+                if (gameProgress.TryGetValue(actorId, out actorProgress))
                 {
+                    if(evaluationId != null)
+                    {
+                        float progressValue;
+
+                        if (progress.TryGetValue(evaluationId.Value, out progressValue))
+                        {
+                            progress = new Dictionary<int, float>()
+                            {
+                                {evaluationId.Value, progressValue}
+                            };
+                        }
+                        else
+                        {
+                            progress = null;
+                        }
+                    }
+
                     didGetProgress = progress.Any();
                 }
-            }
-
-            return didGetProgress;
-        }
-
-        public bool TryGetProgress(int gameId, int actorId, int evaluationId, out float progress)
-        {
-            var didGetProgress = false;
-            progress = 0f;
-
-            Dictionary<int, float> actorProgress;
-
-            if (TryGetProgress(gameId, actorId, out actorProgress))
-            {
-                didGetProgress = actorProgress.TryGetValue(evaluationId, out progress);
             }
 
             return didGetProgress;
@@ -115,12 +119,6 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         {
             // todo remove all progress for this evaluation
             throw new NotImplementedException();
-        }
-
-        public IReadOnlyDictionary<int, float> GetProgress(int gameId, int actorId)
-        {
-            var progress = _progressMappings[gameId][actorId];
-            return new ReadOnlyDictionary<int, float>(progress);
         }
 
         private Dictionary<Evaluation, List<int>> GetAffectedActorsForEvaluations(IEnumerable<Evaluation> evaluations, GameData gameData)
