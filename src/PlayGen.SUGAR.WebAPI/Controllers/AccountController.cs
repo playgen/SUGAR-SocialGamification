@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Core.EvaluationEvents;
+using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Extensions;
@@ -18,26 +20,31 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Route("api/[controller]")]
     public class AccountController : Controller
 	{
-        private readonly IAuthorizationService _authorizationService;
+		private readonly IAuthorizationService _authorizationService;
         private readonly TokenController _tokenController;
         private readonly Core.Controllers.AccountController _accountCoreController;
+	    private readonly EvaluationTracker _evaluationTracker;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="accountCoreController"></param>
+        /// <param name="accountDbController"></param>
         /// <param name="userDbController"></param>
+        /// <param name="passwordEncryption"></param>
         /// <param name="tokenController"></param>
         /// <param name="authorizationService"></param>
         public AccountController(Core.Controllers.AccountController accountCoreController,
-                    Data.EntityFramework.Controllers.UserController userDbController,
-                    TokenController tokenController,
-                    IAuthorizationService authorizationService)
-        {
-            _accountCoreController = accountCoreController;
+
+            Data.EntityFramework.Controllers.UserController userDbController,
+            TokenController tokenController,
+            IAuthorizationService authorizationService,
+            EvaluationTracker evaluationTracker)
+		{
+		    _accountCoreController = accountCoreController;
             _tokenController = tokenController;
             _authorizationService = authorizationService;
-        }
+            _evaluationTracker = evaluationTracker;
+		}
 		
 		//Todo: Move log-in into a separate controller
 		/// <summary>
@@ -60,7 +67,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var token = CreateToken(account);
 			HttpContext.Response.SetAuthorizationToken(token);
 
-			var response = account.ToContract();
+            // todo _evaluationTracker.OnActorSessionStarted();
+
+            var response = account.ToContract();
 			return new ObjectResult(response);
 		}
 		
@@ -86,7 +95,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			if (accountRequest.AutoLogin)
 			{
 				var token = CreateToken(account);
-                HttpContext.Response.SetAuthorizationToken(token);
+				HttpContext.Response.SetAuthorizationToken(token);
+
+                // todo _evaluationTracker.OnActorSessionStarted();
             }
 			return new ObjectResult(response);
 		}

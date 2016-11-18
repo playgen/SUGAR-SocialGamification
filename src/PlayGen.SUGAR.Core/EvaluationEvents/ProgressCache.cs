@@ -12,8 +12,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     /// </summary>
     public class ProgressCache
     {
-        // <gameId, <actorId, <evaluationId, progress>>>
-        private readonly Dictionary<int, Dictionary<int, Dictionary<int, float>>> _progressMappings = new Dictionary<int, Dictionary<int, Dictionary<int, float>>>();
+        // <gameId, <actorId, <evaluation, progress>>>
+        private readonly Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> _progressMappings = new Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>>();
         private readonly CriteriaEvaluator _evaluationCriteriaEvaluator;
 
         public ProgressCache(CriteriaEvaluator evaluationCriteriaEvaluator)
@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             _evaluationCriteriaEvaluator = evaluationCriteriaEvaluator;
         }
 
-        public Dictionary<int, Dictionary<int, Dictionary<int, float>>> StartTracking(int gameId, int actorId)
+        public Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> StartTracking(int gameId, int actorId)
         {
             // todo add game and user to list to evaluate against
             EvaluateActor(gameId, actorId);
@@ -35,28 +35,28 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         }
 
         // progress: <evaluationId, progress>
-        public bool TryGetProgress(int gameId, int actorId, out Dictionary<int, float> progress, int? evaluationId = null)
+        public bool TryGetProgress(int gameId, int actorId, out Dictionary<Evaluation, float> progress, Evaluation evaluation = null)
         {
             var didGetProgress = false;
             progress = null;
 
-            Dictionary<int, Dictionary<int, float>> gameProgress;
+            Dictionary<int, Dictionary<Evaluation, float>> gameProgress;
 
             if (_progressMappings.TryGetValue(gameId, out gameProgress))
             {
-                Dictionary<int, float> actorProgress;
+                Dictionary<Evaluation, float> actorProgress;
 
                 if (gameProgress.TryGetValue(actorId, out actorProgress))
                 {
-                    if(evaluationId != null)
+                    if(evaluation != null)
                     {
                         float progressValue;
 
-                        if (progress.TryGetValue(evaluationId.Value, out progressValue))
+                        if (progress.TryGetValue(evaluation, out progressValue))
                         {
-                            progress = new Dictionary<int, float>()
+                            progress = new Dictionary<Evaluation, float>()
                             {
-                                {evaluationId.Value, progressValue}
+                                {evaluation, progressValue}
                             };
                         }
                         else
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             return didGetProgress;
         }
 
-        public Dictionary<int, Dictionary<int, Dictionary<int, float>>> EvaluateActor(int gameId, int actorId)
+        public Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> EvaluateActor(int gameId, int actorId)
         {
             // todo run all evaluations for this game against this user's data and store the results
 
@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
-        public Dictionary<int, Dictionary<int, Dictionary<int, float>>> Evaluate(Evaluation evaluation)
+        public Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> Evaluate(Evaluation evaluation)
         {
             var affectedActors = GetAffectedActors(evaluation);
 
@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
-        public Dictionary<int, Dictionary<int, Dictionary<int, float>>> Evaluate(IEnumerable<Evaluation> evaluations, GameData gameData)
+        public Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> Evaluate(IEnumerable<Evaluation> evaluations, GameData gameData)
         {
             var affectedActorsByEvaluation = GetAffectedActorsForEvaluations(evaluations, gameData);
 
@@ -109,7 +109,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
-        private Dictionary<int, Dictionary<int, Dictionary<int, float>>> EvaluateActor(Evaluation evaluation, int actorId)
+        private Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> EvaluateActor(Evaluation evaluation, int actorId)
         {
             // todo evaluate against te actor
             throw new NotImplementedException();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
@@ -8,8 +9,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     /// </summary>
     public class ProgressNotificationCache
     {
-        // <gameId, <actorId, <evaluationId, progress>>>
-        public void Check(Dictionary<int, Dictionary<int, Dictionary<int, float>>> progress)
+        // <gameId, <actorId, <evaluation, progress>>>
+        public void Check(Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> progress)
         {
             throw new NotImplementedException();
         }
@@ -24,8 +25,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             throw new NotImplementedException();
         }
 
-        // <actorId, <evaluationId, progress>>
-        public Dictionary<int, Dictionary<int, float>> GetNotifications(int gameId, int actorId)
+        // <actorId, <evaluation, progress>>
+        public Dictionary<int, Dictionary<Evaluation, float>> GetNotifications(int gameId, int actorId)
         {
             throw new NotImplementedException();
         }

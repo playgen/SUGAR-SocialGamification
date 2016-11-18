@@ -5,18 +5,19 @@ using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
     // todo replace the skill and achievement controllers with this one and just specify 2 api routes for this class?
     [Authorize("Bearer")]
-    public abstract class EvaluationController : Controller
+    public abstract class EvaluationsController : Controller
     {
         protected readonly IAuthorizationService _authorizationService;
         protected readonly Core.Controllers.EvaluationController EvaluationCoreController;
         private readonly EvaluationTracker _evaluationTracker;
 
-        protected EvaluationController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
+        protected EvaluationsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
         {
             EvaluationCoreController = evaluationCoreController;
             _evaluationTracker = evaluationTracker;
@@ -24,7 +25,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         }
 
         [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
-        public virtual IActionResult Get(string token, int? gameId)
+        protected IActionResult Get(string token, int? gameId)
         {
             if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
@@ -36,7 +37,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         }
 
         [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
-        public virtual IActionResult Get(int? gameId)
+        protected IActionResult Get(int? gameId)
         {
             if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
@@ -46,16 +47,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             }
             return Unauthorized();
         }
-        
-        public virtual IActionResult GetGameProgress(int gameId, int? actorId)
+
+        protected IActionResult GetGameProgress(int gameId, int? actorId)
         {
             // todo: should this be taken from the progress cache?
             var evaluationsProgress = EvaluationCoreController.GetGameProgress(gameId, actorId);
             var evaluationsProgressResponses = evaluationsProgress.ToContractList();
             return new ObjectResult(evaluationsProgressResponses);
         }
-        
-        public virtual IActionResult GetEvaluationProgress(string token, int? gameId, int? actorId)
+
+        protected IActionResult GetEvaluationProgress(string token, int? gameId, int? actorId)
         {
             // todo: should this be taken from the progress cache?
             var evaluation = EvaluationCoreController.Get(token, gameId);
@@ -67,23 +68,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             });
         }
 
-        public virtual IActionResult SetSubscribed(int gameId, int actorId, bool subscribed)
-        {
-            // todo get game and actor id from "session" in HttpContext header
-            if (subscribed)
-            {
-                _evaluationTracker.OnActorSessionStarted(gameId, actorId);
-            }
-            else
-            {
-                _evaluationTracker.OnActorSessionEnded(gameId, actorId);
-            }
-
-            return new ObjectResult(null);
-        }
-
         [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.Achievement)]
-        public virtual IActionResult Delete(string token, int? gameId)
+        protected IActionResult Delete(string token, int? gameId)
         {
             if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {

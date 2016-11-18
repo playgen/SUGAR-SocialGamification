@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
     /// Web Controller that facilitates Skill specific operations.
     /// </summary>
     [Route("api/[controller]")]
-    public class SkillsController : EvaluationController
+    public class SkillsController : EvaluationsController
     {
         public SkillsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
             : base(evaluationCoreController, evaluationTracker, authorizationService)
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [HttpGet("find/{token}/{gameId:int}")]
         [HttpGet("find/{token}/global")]
         //[ResponseType(typeof(EvaluationResponse))]
-        public override IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
+        public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
         {
             return base.Get(token, gameId);
         }
@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [HttpGet("global/list")]
         [HttpGet("game/{gameId:int}/list")]
         //[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
-        public override IActionResult Get([FromRoute]int? gameId)
+        public IActionResult Get([FromRoute]int? gameId)
         {
             return base.Get(gameId);
         }
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
         [HttpGet("global/evaluate/{actorId:int}")]
         //[ResponseType(typeof(IEnumerable<EvaluationProgressResponse>))]
-        public override IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
+        public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
         {
             return base.GetGameProgress(gameId, actorId);
         }
@@ -90,22 +90,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         public IActionResult GetSkillProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
         {
             return base.GetEvaluationProgress(token, gameId, actorId);
-        }
-
-        /// <summary>
-        /// Subscribe the current user for the current game to revieve notifications when skills
-        /// have been completed.
-        /// 
-        /// Example Usage: POST api/skills/true
-        /// </summary>
-        /// <param name="gameId">The game to send events for.</param>
-        /// <param name="actorId">The actor (user or group) to send events for.</param>
-        /// <param name="subscribed">Boolean value whether to subscribe or not.</param>
-        /// <returns>Any pending events will be attached to the response.</returns>
-        [HttpPost("setsubscribed/{subscribed}")]
-        public override IActionResult SetSubscribed(int gameId, int actorId, bool subscribed)
-        {
-            return base.SetSubscribed(gameId, actorId, subscribed);
         }
 
         /// <summary>
@@ -161,7 +145,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <param name="gameId">ID of the Game the Skill is for</param>
         [HttpDelete("{token}/global")]
         [HttpDelete("{token}/{gameId:int}")]
-        public override IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
+        public IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
         {
             return base.Delete(token, gameId);
         }
