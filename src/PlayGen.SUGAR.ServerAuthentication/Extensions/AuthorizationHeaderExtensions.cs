@@ -1,19 +1,19 @@
 ﻿using Microsoft.AspNetCore.Http;
+using PlayGen.SUGAR.Common.Shared.Web;
 
 namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 {
 	public static class AuthorizationHeaderExtensions
 	{
-		private const string Key = "Authorization";
 		private const string ValuePrefix = "Bearer ";
 		
 		public static string GetAuthorization(this HttpRequest request)
 		{
 			string authorization = null;
 
-			if (request.Headers.ContainsKey(Key))
+			if (request.Headers.ContainsKey(HeaderKeys.Authorization))
 			{
-				authorization = request.Headers[Key];
+				authorization = request.Headers[HeaderKeys.Authorization];
 			}
 
 			return authorization;
@@ -21,22 +21,22 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 
 		public static bool HasAuthorization(this HttpResponse response)
 		{
-			return response.Headers.ContainsKey(Key);
+			return response.Headers.ContainsKey(HeaderKeys.Authorization);
 		}
 
 		public static bool HasAuthorization(this HttpRequest request)
 		{
-			return request.Headers.ContainsKey(Key);
+			return request.Headers.ContainsKey(HeaderKeys.Authorization);
 		}
 
 		public static void SetAuthorization(this HttpResponse response, string authorization)
 		{
-			response.Headers[Key] = authorization;
+			response.Headers[HeaderKeys.Authorization] = authorization;
 		}
 
 		public static void SetAuthorizationToken(this HttpResponse response, string token)
 		{
-			response.Headers[Key] = ValuePrefix + token;
+			response.Headers[HeaderKeys.Authorization] = ValuePrefix + token;
 		}
 
 		public static string GetAuthorizationToken(this HttpRequest request)
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 
 			if (request.HasAuthorization())
 			{
-				var authorization = (string)request.Headers[Key];
+				var authorization = (string)request.Headers[HeaderKeys.Authorization];
 
 				if (authorization.StartsWith(ValuePrefix))
 				{
