@@ -15,9 +15,10 @@ namespace PlayGen.SUGAR.Client
 	public abstract class ClientBase
 	{
 		private readonly string _baseAddress;
-		private readonly Dictionary<string, string> _persistentHeaders = new Dictionary<string, string>();
 		private readonly IHttpHandler _httpHandler;
-		protected readonly EvaluationNotifications EvaluationNotifications;
+
+        private static readonly Dictionary<string, string> _persistentHeaders = new Dictionary<string, string>();
+        protected readonly EvaluationNotifications EvaluationNotifications;
 
 		public static readonly JsonSerializerSettings SerializerSettings;
 
@@ -82,7 +83,11 @@ namespace PlayGen.SUGAR.Client
 		private HttpRequest CreateRequest(string url, string method, IDictionary<string, string> headers, object payload)
 		{
 			var requestHeaders = headers == null ? new Dictionary<string, string>() : new Dictionary<string, string>(headers);
-		    requestHeaders.Concat(_persistentHeaders);
+
+            foreach (var keyValuePair in _persistentHeaders)
+            {
+                requestHeaders[keyValuePair.Key] = keyValuePair.Value;
+            }
 
 			return new HttpRequest()
 			{
