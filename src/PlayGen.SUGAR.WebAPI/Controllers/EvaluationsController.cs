@@ -10,7 +10,6 @@ using PlayGen.SUGAR.WebAPI.Filters;
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
     // todo replace the skill and achievement controllers with this one and just specify 2 api routes for this class?
-    [Authorize("Bearer")]
     public abstract class EvaluationsController : Controller
     {
         protected readonly IAuthorizationService _authorizationService;
@@ -23,8 +22,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             _evaluationTracker = evaluationTracker;
             _authorizationService = authorizationService;
         }
-
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
+        
         protected IActionResult Get(string token, int? gameId)
         {
             if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
@@ -35,8 +33,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             }
             return Unauthorized();
         }
-
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
+        
         protected IActionResult Get(int? gameId)
         {
             if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
@@ -67,8 +64,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 Progress = progress,
             });
         }
-
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.Achievement)]
+        
         protected IActionResult Delete(string token, int? gameId)
         {
             if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)

@@ -6,6 +6,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 {
     public static class Helpers
     {
+        public static AccountResponse LoggedInAccount { get; private set; }
+
         public static void RegisterAndLogin(AccountClient client)
         {
             var accountRequest = new AccountRequest
@@ -17,11 +19,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
             try
             {
-                client.Login(accountRequest);
+                LoggedInAccount = client.Login(accountRequest);
             }
             catch
             {
-                client.Register(accountRequest);
+                LoggedInAccount = client.Register(accountRequest);
             }
         }
 

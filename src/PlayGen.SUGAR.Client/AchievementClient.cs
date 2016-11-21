@@ -59,22 +59,12 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<EvaluationResponse>>(query);
 		}
 
-		/// <summary>
-		/// Gets pending achievement progress notifications.
-		/// </summary>
-		/// <param name="notification"></param>
-		/// <returns>Returns a boolean value indicating whether there was a notification to retrieve or not.</returns>
-		public bool TryGetPendingNotification(out EvaluationNotification notification)
-		{
-			return EvaluationNotifications.TryDequeue(EvaluationType.Achievement, out notification);
-		}
-
-		/// <summary>
-		/// Find the current progress for all global achievements for <param name="actorId"/>.
-		/// </summary>
-		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold Achievement progress details</returns>
-		public IEnumerable<EvaluationProgressResponse> GetGlobalProgress(int actorId)
+        /// <summary>
+        /// Find the current progress for all global achievements for <param name="actorId"/>.
+        /// </summary>
+        /// <param name="actorId">ID of Group/User</param>
+        /// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold Achievement progress details</returns>
+        public IEnumerable<EvaluationProgressResponse> GetGlobalProgress(int actorId)
 		{
 			var query = GetUriBuilder("api/achievements/global/evaluate/{0}", actorId).ToString();
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
@@ -159,5 +149,26 @@ namespace PlayGen.SUGAR.Client
 			var query = GetUriBuilder("api/achievements/{0}/{1}", token, gameId).ToString();
 			Delete(query);
 		}
-	}
+
+        #region Evaluation Notifications
+        /// <summary>
+        /// Sets flag to return pending achievement notifications from the server as they become available.
+        /// </summary>
+        /// <param name="enable">Whether to enable or disable notifications.</param>
+        public void EnableNotifications(bool enable)
+        {
+            EnableEvaluationNotifications(enable);
+        }
+
+        /// <summary>
+        /// Gets pending achievement progress notifications.
+        /// </summary>
+        /// <param name="notification"></param>
+        /// <returns>Returns a boolean value indicating whether there was a notification to retrieve or not.</returns>
+        public bool TryGetPendingNotification(out EvaluationNotification notification)
+        {
+            return EvaluationNotifications.TryDequeue(EvaluationType.Achievement, out notification);
+        }
+        #endregion
+    }
 }

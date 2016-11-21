@@ -5,6 +5,7 @@ using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
 using NUnit.Framework;
 using System;
+using PlayGen.SUGAR.Client.EvaluationEvents;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -29,7 +30,58 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		#endregion
 
 		#region Tests
-		[Test]
+
+	    [Test]
+	    public void CanDisableNotifications()
+	    {
+            // Assign
+	        var key = "CanDisableNotifications";
+
+	        _achievementClient.EnableNotifications(true);
+            var achievement = CreateGenericAchievement(key);
+            _achievementClient.EnableNotifications(false);
+
+	        CompleteGenericAchievement(achievement, Helpers.LoggedInAccount.User.Id);
+
+            // Act
+            EvaluationNotification notification;
+            var didGetnotification = _achievementClient.TryGetPendingNotification(out notification);
+
+            // Assert
+            Assert.IsFalse(didGetnotification);
+            Assert.IsNull(notification);
+	    }
+
+        [Test]
+        public void CanGetNotifications()
+        {
+            // Assign
+            var key = "CanGetNotifications";
+
+            _achievementClient.EnableNotifications(true);
+            var achievement = CreateGenericAchievement(key);
+
+            CompleteGenericAchievement(achievement, Helpers.LoggedInAccount.User.Id);
+
+            // Act
+            EvaluationNotification notification;
+            var didGetnotification = false;
+            var didGetSpecificConfiguration = false;
+
+            while (_achievementClient.TryGetPendingNotification(out notification))
+            {
+                didGetnotification = true;
+
+                didGetSpecificConfiguration |= notification.Name != achievement.Name;
+            }
+
+            // Assert
+            Assert.IsTrue(didGetnotification);
+            Assert.IsNotNull(notification);
+            Assert.IsTrue(didGetSpecificConfiguration);
+        }
+
+        [Test]
 		public void CanCreateAchievement()
 		{
 			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
@@ -1145,9 +1197,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
         #endregion
 
         #region Helpers
-        private object CreateAchievement(EvaluationCreateRequest achievementRequest)
+        private EvaluationResponse CreateAchievement(EvaluationCreateRequest achievementRequest)
         {
-            var getAchievement = _achievementClient.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
+            var getAchievement = _achievementClient.GetById(achievementRequest.Token, achievementRequest.GameId ?? 0);
 
             if (getAchievement != null)
             {
@@ -1158,6 +1210,40 @@ namespace PlayGen.SUGAR.Client.UnitTests
             
             return response;
         }
+
+	    private EvaluationResponse CreateGenericAchievement(string key)
+	    {
+	        return CreateAchievement(new EvaluationCreateRequest
+	        {
+	            ActorType = ActorType.User,
+	            Description = key,
+	            EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
+	            {
+	                new EvaluationCriteriaCreateRequest
+	                {
+	                    ComparisonType = ComparisonType.GreaterOrEqual,
+	                    CriteriaQueryType = CriteriaQueryType.Sum,
+	                    DataType = GameDataType.Long,
+	                    Key = key,
+                        Value = $"{100}",
+	                }
+	            },
+	            Name = key,
+	            Token = key,
+	        });
+        }
+
+	    private void CompleteGenericAchievement(EvaluationResponse evaluation, int userId)
+	    {
+	        _gameDataClient.Add(new GameDataRequest
+	        {
+                ActorId = userId,
+                GameDataType = evaluation.EvaluationCriterias[0].DataType,
+                Value = $"{200}",
+                Key = evaluation.EvaluationCriterias[0].Key
+            });
+	    }
+
         #endregion
     }
 }

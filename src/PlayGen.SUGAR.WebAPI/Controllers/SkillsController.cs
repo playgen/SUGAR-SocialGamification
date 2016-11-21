@@ -16,6 +16,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
     /// Web Controller that facilitates Skill specific operations.
     /// </summary>
     [Route("api/[controller]")]
+    [Authorize("Bearer")]
     public class SkillsController : EvaluationsController
     {
         public SkillsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
@@ -34,6 +35,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [HttpGet("find/{token}/{gameId:int}")]
         [HttpGet("find/{token}/global")]
         //[ResponseType(typeof(EvaluationResponse))]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
         public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
         {
             return base.Get(token, gameId);
@@ -50,6 +52,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [HttpGet("global/list")]
         [HttpGet("game/{gameId:int}/list")]
         //[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
         public IActionResult Get([FromRoute]int? gameId)
         {
             return base.Get(gameId);
@@ -145,6 +148,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// <param name="gameId">ID of the Game the Skill is for</param>
         [HttpDelete("{token}/global")]
         [HttpDelete("{token}/{gameId:int}")]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.Achievement)]
         public IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
         {
             return base.Delete(token, gameId);

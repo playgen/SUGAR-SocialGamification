@@ -60,16 +60,6 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Gets pending skill progress notifications.
-		/// </summary>
-		/// <param name="notification"></param>
-		/// <returns>Returns a boolean value indicating whether there was a notification to retrieve or not.</returns>
-		public bool TryGetPendingNotification(out EvaluationNotification notification)
-		{
-			return EvaluationNotifications.TryDequeue(EvaluationType.Skill, out notification);
-		}
-
-		/// <summary>
 		/// Find the current progress for all global skills for <param name="actorId"/>.
 		/// </summary>
 		/// <param name="actorId">ID of Group/User</param>
@@ -160,5 +150,25 @@ namespace PlayGen.SUGAR.Client
 			Delete(query);
 		}
 
-	}
+        #region Evaluation Notifications
+        /// <summary>
+        /// Sets flag to return pending skill notifications from the server as they become available.
+        /// </summary>
+        /// <param name="enable">Whether to enable or disable notifications.</param>
+        public void EnableNotifications(bool enable)
+        {
+            EnableEvaluationNotifications(enable);
+        }
+
+        /// <summary>
+        /// Gets pending skill progress notifications.
+        /// </summary>
+        /// <param name="notification"></param>
+        /// <returns>Returns a boolean value indicating whether there was a notification to retrieve or not.</returns>
+        public bool TryGetPendingNotification(out EvaluationNotification notification)
+        {
+            return EvaluationNotifications.TryDequeue(EvaluationType.Skill, out notification);
+        }
+        #endregion
+    }
 }

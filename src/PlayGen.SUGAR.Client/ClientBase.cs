@@ -14,10 +14,11 @@ namespace PlayGen.SUGAR.Client
 {
 	public abstract class ClientBase
 	{
-		private readonly string _baseAddress;
+        private static readonly Dictionary<string, string> _persistentHeaders = new Dictionary<string, string>();
+
+        private readonly string _baseAddress;
 		private readonly IHttpHandler _httpHandler;
 
-        private static readonly Dictionary<string, string> _persistentHeaders = new Dictionary<string, string>();
         protected readonly EvaluationNotifications EvaluationNotifications;
 
 		public static readonly JsonSerializerSettings SerializerSettings;
@@ -44,6 +45,18 @@ namespace PlayGen.SUGAR.Client
 			_httpHandler = httpHandler;
 			EvaluationNotifications = evaluationNotifications;
 		}
+
+	    protected static void EnableEvaluationNotifications(bool enable = true)
+	    {
+	        if (enable)
+	        {
+	            _persistentHeaders[HeaderKeys.EvaluationNotifications] = $"{enable}";
+	        }
+	        else
+	        {
+	            _persistentHeaders.Remove(HeaderKeys.EvaluationNotifications);
+	        }
+	    }
 
 		protected bool AreUriParamsValid(object[] param)
 		{
