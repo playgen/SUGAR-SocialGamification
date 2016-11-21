@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.WebAPI.Filters
         {
             List<EvaluationProgressResponse> pendingEvents = null;
 
-            if (!request.Headers.ContainsKey(HeaderKeys.EvaluationNotifications))
+            if (request.Headers.ContainsKey(HeaderKeys.EvaluationNotifications))
             {
                 int gameId;
                 int userId;

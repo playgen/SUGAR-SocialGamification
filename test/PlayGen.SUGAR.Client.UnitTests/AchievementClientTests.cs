@@ -33,13 +33,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
 	        var key = "CanDisableNotifications";
 
 	        _achievementClient.EnableNotifications(true);
+
+            EvaluationNotification notification;
+	        while (_achievementClient.TryGetPendingNotification(out notification))
+	        {
+	        }
+
+	        _achievementClient.EnableNotifications(false);
+
             var achievement = CreateGenericEvaluation(key);
-            _achievementClient.EnableNotifications(false);
 
 	        CompleteGenericEvaluation(achievement, Helpers.LoggedInAccount.User.Id);
 
             // Act
-            EvaluationNotification notification;
             var didGetnotification = _achievementClient.TryGetPendingNotification(out notification);
 
             // Assert
@@ -61,18 +67,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
             // Act
             EvaluationNotification notification;
             var didGetnotification = false;
+            EvaluationNotification gotNotification= null;
             var didGetSpecificConfiguration = false;
 
             while (_achievementClient.TryGetPendingNotification(out notification))
             {
                 didGetnotification = true;
-
+                gotNotification = notification; 
                 didGetSpecificConfiguration |= notification.Name == achievement.Name;
             }
 
             // Assert
             Assert.IsTrue(didGetnotification);
-            Assert.IsNotNull(notification);
+            Assert.IsNotNull(gotNotification);
 
             // todo uncomment below when evaluation tracker is implemented server side
             //Assert.IsTrue(didGetSpecificConfiguration);
