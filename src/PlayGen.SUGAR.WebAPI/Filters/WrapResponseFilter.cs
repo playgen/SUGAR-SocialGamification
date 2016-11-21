@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using PlayGen.SUGAR.Common.Shared.Web;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.ServerAuthentication.Extensions;
@@ -24,29 +25,45 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            var result = context.Result as ObjectResult;
-
-            if (result == null)
-            {
-                return;
-            }
-
-            int gameId;
-            int userId;
-
-            if (!context.HttpContext.Request.TryGetClaim("GameId", out gameId)
-                || !context.HttpContext.Request.TryGetClaim("UserId", out userId))
-            {
-                return;
-            }
-
-            var wrappedResponse = new ResponseWrapper<object>
-            {
-                Response = result.Value,
-                EvaluationsProgress = GetPendingEvents(gameId, userId)
-            };
+            var wrappedResponse = WrapResponse(context.Result);
+            wrappedResponse.EvaluationsProgress = GetPendingEvents(context.HttpContext.Request);
 
             context.Result = new ObjectResult(wrappedResponse);
+        }
+
+        private ResponseWrapper<object> WrapResponse(IActionResult result)
+        {
+            var objectResult = result as ObjectResult;
+            object originalResult = null;
+
+            if (objectResult != null)
+            {
+                originalResult = objectResult.Value;
+            }
+
+            return new ResponseWrapper<object>
+            {
+                Response = originalResult,
+            };
+        }
+
+        private List<EvaluationProgressResponse> GetPendingEvents(HttpRequest request)
+        {
+            List<EvaluationProgressResponse> pendingEvents = null;
+
+            if (!request.Headers.ContainsKey(HeaderKeys.EvaluationNotifications))
+            {
+                int gameId;
+                int userId;
+
+                if (request.TryGetClaim("GameId", out gameId)
+                    && request.TryGetClaim("UserId", out userId))
+                {
+                    pendingEvents = GetPendingEvents(gameId, userId);
+                }
+            }
+
+            return pendingEvents;
         }
 
         private List<EvaluationProgressResponse> GetPendingEvents(int gameId, int actorId)
