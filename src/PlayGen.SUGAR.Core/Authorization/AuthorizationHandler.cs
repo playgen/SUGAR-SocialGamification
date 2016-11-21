@@ -25,18 +25,28 @@ namespace PlayGen.SUGAR.Core.Authorization
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement, int entityId)
         {
-            var claim = _claimDbController.Get(requirement.ClaimScope, requirement.Name);
-            if (claim != null)
-            {
-                var roles = _actorRoleDbController.GetActorRolesForEntity(int.Parse(context.User.Identity.Name), entityId).ToList();
-                roles.AddRange(_actorRoleDbController.GetActorRolesForEntity(int.Parse(context.User.Identity.Name), -1).ToList());
-                var claims = _roleClaimDbController.GetClaimsByRoles(roles.Select(r => r.Id));
-                if (claims.Any(c => c.Id == claim.Id))
-                {
-                    context.Succeed(requirement);
-                }
-            }
-            return Task.CompletedTask;
+            return AuthorizationHandlerHelper.HandleRequirements(_claimDbController, _actorRoleDbController, _roleClaimDbController, context, requirement, entityId);
+        }
+    }
+
+    public class AuthorizationHandlerWithNull : AuthorizationHandler<AuthorizationRequirement>
+    {
+        private readonly ActorRoleController _actorRoleDbController;
+        private readonly ClaimController _claimDbController;
+        private readonly RoleClaimController _roleClaimDbController;
+
+        public AuthorizationHandlerWithNull(ActorRoleController actorRoleDbController,
+                    ClaimController claimDbController,
+                    RoleClaimController roleClaimDbController)
+        {
+            _actorRoleDbController = actorRoleDbController;
+            _claimDbController = claimDbController;
+            _roleClaimDbController = roleClaimDbController;
+        }
+
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement)
+        {
+            return AuthorizationHandlerHelper.HandleRequirements(_claimDbController, _actorRoleDbController, _roleClaimDbController, context, requirement);
         }
     }
 

@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Achievement)]
         public IActionResult Create([FromBody] EvaluationCreateRequest newAchievement)
 		{
-            if (_authorizationService.AuthorizeAsync(User, newAchievement.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, null, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var achievement = newAchievement.ToAchievementModel();
                 achievement = (Achievement)EvaluationCoreController.Create(achievement);
