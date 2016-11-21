@@ -7,23 +7,18 @@ using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
-	public class SkillClientTests
+	public class SkillClientTests : Evaluations
 	{
 		#region Configuration
 		private readonly SkillClient _skillClient;
-		private readonly GameDataClient _gameDataClient;
 		private readonly UserClient _userClient;
 		private readonly GameClient _gameClient;
 
 		public SkillClientTests()
 		{
-			var testSugarClient = new TestSUGARClient();
-			_skillClient = testSugarClient.Skill;
-			_gameDataClient = testSugarClient.GameData;
-			_userClient = testSugarClient.User;
-			_gameClient = testSugarClient.Game;
-
-			Helpers.RegisterAndLogin(testSugarClient.Account);
+			_skillClient = TestSugarClient.Skill;
+			_userClient = TestSugarClient.User;
+			_gameClient = TestSugarClient.Game;
 		}
 		#endregion
 
@@ -1067,7 +1062,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				GameDataType = GameDataType.Float
 			};
 
-			_gameDataClient.Add(gameData);
+			GameDataClient.Add(gameData);
 
 			progressSkill = _skillClient.GetGlobalSkillProgress(response.Token, user.Id);
 			Assert.AreEqual(1, progressSkill.Progress);
@@ -1124,7 +1119,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				GameDataType = GameDataType.Float
 			};
 
-			_gameDataClient.Add(gameData);
+			GameDataClient.Add(gameData);
 
 			progressSkill = _skillClient.GetSkillProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(1, progressSkill.Progress);
@@ -1138,6 +1133,29 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			Assert.Throws<ClientException>(() => _skillClient.GetSkillProgress("CannotGetNotExistingSkillProgress", game.Id, user.Id));
 		}
-		#endregion
-	}
+        #endregion
+
+        #region Helpers
+        protected override EvaluationResponse CreateEvaluation(EvaluationCreateRequest skillRequest)
+        {
+            var getSkill = _skillClient.GetById(skillRequest.Token, skillRequest.GameId ?? 0);
+
+            if (getSkill != null)
+            {
+                if (skillRequest.GameId.HasValue)
+                {
+                    _skillClient.Delete(skillRequest.Token, skillRequest.GameId.Value);
+                }
+                else
+                {
+                    _skillClient.DeleteGlobal(skillRequest.Token);
+                }
+            }
+
+            var response = _skillClient.Create(skillRequest);
+
+            return response;
+        }
+        #endregion
+    }
 }
