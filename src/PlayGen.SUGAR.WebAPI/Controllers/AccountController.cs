@@ -45,49 +45,51 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             _authorizationService = authorizationService;
             _evaluationTracker = evaluationTracker;
 		}
-		
-		//Todo: Move log-in into a separate controller
-		/// <summary>
-		/// Logs in an account based on the name and password combination.
-		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// Example Usage: POST api/account/login
-		/// </summary>
-		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
-		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
-		[HttpPost("login")]
-		//[ResponseType(typeof(AccountResponse))]
-		[ArgumentsNotNull]
-		public IActionResult Login([FromBody]AccountRequest accountRequest)
+
+        //Todo: Move log-in into a separate controller
+        /// <summary>
+        /// Logs in an account based on the name and password combination.
+        /// Returns a JsonWebToken used for authorization in any further calls to the API.
+        /// 
+        /// Example Usage: POST api/account/login
+        /// </summary>
+        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
+        /// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
+        [HttpPost("login")]
+        [HttpPost("{gameId:int}/login")]
+        //[ResponseType(typeof(AccountResponse))]
+        [ArgumentsNotNull]
+		public IActionResult Login([FromRoute]int? gameId, [FromBody]AccountRequest accountRequest)
 		{
             // todo check if has permission to login for specified game
 		    var account = accountRequest.ToModel();
 
             account = _accountCoreController.Login(account);
 
-			var token = CreateToken(accountRequest.GameId ?? -1, account);
+			var token = CreateToken(gameId ?? -1, account);
 			HttpContext.Response.SetAuthorizationToken(token);
 
-            _evaluationTracker.OnActorSessionStarted(accountRequest.GameId ?? -1, account.UserId);
+            _evaluationTracker.OnActorSessionStarted(gameId ?? -1, account.UserId);
 
             var response = account.ToContract();
 			return new ObjectResult(response);
 		}
-		
-		/// <summary>
-		/// Register a new account and creates an associated user.
-		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
-		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// Example Usage: POST api/account/register
-		/// </summary>
-		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
-		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
-		[HttpPost("register")]
-		//[ResponseType(typeof(AccountResponse))]
-		[ArgumentsNotNull]
+
+        /// <summary>
+        /// Register a new account and creates an associated user.
+        /// Requires the <see cref="AccountRequest.Name"/> to be unique.
+        /// Returns a JsonWebToken used for authorization in any further calls to the API.
+        /// 
+        /// Example Usage: POST api/account/register
+        /// </summary>
+        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
+        /// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
+        [HttpPost("register")]
+        [HttpPost("{gameId:int}/register")]
+        //[ResponseType(typeof(AccountResponse))]
+        [ArgumentsNotNull]
         // todo split register and register with auto login contracts
-		public IActionResult Register([FromBody] AccountRequest accountRequest)
+		public IActionResult Register([FromRoute]int? gameId, [FromBody] AccountRequest accountRequest)
 		{
             // todo check if has permission to autologin for specified game
 		    var account = accountRequest.ToModel();
@@ -97,7 +99,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var response = account.ToContract();
 			if (accountRequest.AutoLogin)
 			{
-				var token = CreateToken(accountRequest.GameId ?? -1, account);
+				var token = CreateToken(gameId ?? 0, account);
 				HttpContext.Response.SetAuthorizationToken(token);
 
                 // todo _evaluationTracker.OnActorSessionStarted();
