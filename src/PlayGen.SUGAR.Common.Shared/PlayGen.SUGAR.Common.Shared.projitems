@@ -23,5 +23,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Permissions\ClaimScope.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Reward.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Web\HeaderKeys.cs" />
   </ItemGroup>
 </Project>
