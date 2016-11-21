@@ -23,7 +23,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 Name = "admin",
                 Password = "$2a$12$SSIgQE0cQejeH0dM61JV/eScAiHwJo/I3Gg6xZFUc0gmwh0FnMFv.",
                 Id = 1,
-                User = new User()
+                AccountSource = new AccountSource
+                {
+                    Description = "SUGAR",
+                    Token = "SUGAR",
+                    RequiresPassword = true
+                },
+                AccountSourceId = 1,
+                User = new User
                 {
                     Id = 1,
                     Name = "admin"

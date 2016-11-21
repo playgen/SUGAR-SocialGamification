@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			return new Account
 			{
 				Name = contract.Name,
-				Password = contract.Password
+				Password = contract.Password,
 			};
 		}
 	}
