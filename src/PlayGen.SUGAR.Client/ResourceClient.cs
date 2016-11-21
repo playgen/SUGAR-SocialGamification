@@ -12,8 +12,8 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/resource";
 
-		public ResourceClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, credentials, httpHandler, evaluationNotifications)
+		public ResourceClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, evaluationNotifications)
 		{
 		}
 

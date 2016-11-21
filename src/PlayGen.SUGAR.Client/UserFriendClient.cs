@@ -9,8 +9,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class UserFriendClient : ClientBase
 	{
-		public UserFriendClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, credentials, httpHandler, evaluationNotifications)
+		public UserFriendClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, evaluationNotifications)
 		{
 		}
 

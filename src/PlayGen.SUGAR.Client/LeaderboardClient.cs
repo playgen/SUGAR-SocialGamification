@@ -9,8 +9,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class LeaderboardClient : ClientBase
 	{
-		public LeaderboardClient(string baseAddress, Credentials credentials, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, credentials, httpHandler, evaluationNotifications)
+		public LeaderboardClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, evaluationNotifications)
 		{
 		}
 		

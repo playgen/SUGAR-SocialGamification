@@ -7,6 +7,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Common.Shared.Web;
 using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client
@@ -14,9 +15,9 @@ namespace PlayGen.SUGAR.Client
 	public abstract class ClientBase
 	{
 		private readonly string _baseAddress;
-		private readonly Credentials _credentials;
+		private readonly Dictionary<string, string> _persistentHeaders = new Dictionary<string, string>();
 		private readonly IHttpHandler _httpHandler;
-	    protected readonly EvaluationNotifications EvaluationNotifications;
+		protected readonly EvaluationNotifications EvaluationNotifications;
 
 		public static readonly JsonSerializerSettings SerializerSettings;
 
@@ -32,16 +33,15 @@ namespace PlayGen.SUGAR.Client
 			SerializerSettings.Converters.Add(new StringEnumConverter());
 		}
 
-		protected ClientBase(string baseAddress, Credentials credentials, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
+		protected ClientBase(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
 		{
 			if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
 			{
 				throw new Exception("Base address is not an absolute or valid URI");
 			}
 			_baseAddress = baseAddress;
-			_credentials = credentials;
 			_httpHandler = httpHandler;
-		    EvaluationNotifications = evaluationNotifications;
+			EvaluationNotifications = evaluationNotifications;
 		}
 
 		protected bool AreUriParamsValid(object[] param)
@@ -82,10 +82,7 @@ namespace PlayGen.SUGAR.Client
 		private HttpRequest CreateRequest(string url, string method, IDictionary<string, string> headers, object payload)
 		{
 			var requestHeaders = headers == null ? new Dictionary<string, string>() : new Dictionary<string, string>(headers);
-			if (requestHeaders.ContainsKey("Authorization") == false)
-			{
-				requestHeaders.Add("Authorization", _credentials.Authorization);
-			}
+		    requestHeaders.Concat(_persistentHeaders);
 
 			return new HttpRequest()
 			{
@@ -95,22 +92,22 @@ namespace PlayGen.SUGAR.Client
 				Content = SerializePayload(payload)
 			};
 		}
-        
+		
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TResponse"></typeparam>
-        /// <param name="response"></param>
-        /// <returns></returns>
-        private TResponse UnpackResponse<TResponse>(HttpResponse response)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TResponse"></typeparam>
+		/// <param name="response"></param>
+		/// <returns></returns>
+		private TResponse UnpackResponse<TResponse>(HttpResponse response)
 		{
-            var wrappedResponse = JsonConvert.DeserializeObject<ResponseWrapper<TResponse>>(response.Content, SerializerSettings);
-		    var content = wrappedResponse.Response;
+			var wrappedResponse = JsonConvert.DeserializeObject<ResponseWrapper<TResponse>>(response.Content, SerializerSettings);
+			var content = wrappedResponse.Response;
 
-		    EvaluationNotifications.Enqueue(wrappedResponse.EvaluationsProgress.ToNotifications());
+			EvaluationNotifications.Enqueue(wrappedResponse.EvaluationsProgress.ToNotifications());
 
-            return content;
+			return content;
 		}
 
 		#region PostPut
@@ -143,7 +140,7 @@ namespace PlayGen.SUGAR.Client
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
 			Console.WriteLine("ClientBase::PostPut::DeserializeResponse");
 
-            return UnpackResponse<TResponse>(response);
+			return UnpackResponse<TResponse>(response);
 		}
 
 		protected void PostPut(string url, string method, Dictionary<string, string> headers, object payload, IEnumerable<HttpStatusCode> expectedStatusCodes)
@@ -182,7 +179,7 @@ namespace PlayGen.SUGAR.Client
 			var request = CreateRequest(url, method, headers, null);
 			var response = _httpHandler.HandleRequest(request);
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
-            return UnpackResponse<TResponse>(response);
+			return UnpackResponse<TResponse>(response);
 		}
 
 		protected void GetDelete(string url, string method, Dictionary<string, string> headers, IEnumerable<HttpStatusCode> expectedStatusCodes)
@@ -212,11 +209,11 @@ namespace PlayGen.SUGAR.Client
 				throw new ClientException((HttpStatusCode)response.StatusCode, error);
 			}
 
-            //TODO: check if this has changed
-            if (response.Headers.ContainsKey("Authorization"))
-            {
-                _credentials.Authorization = response.Headers["Authorization"];
-            }
+			//TODO: check if this has changed
+			if (response.Headers.ContainsKey(HeaderKeys.Authorization))
+			{
+				_persistentHeaders[HeaderKeys.Authorization] = response.Headers[HeaderKeys.Authorization];
+			}
 		}
 	}
 }
