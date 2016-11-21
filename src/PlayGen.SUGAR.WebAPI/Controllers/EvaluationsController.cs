@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var evaluationContract = evaluation.ToContract();
                 return new ObjectResult(evaluationContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
         
         protected IActionResult Get(int? gameId)
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var evaluationContract = evaluation.ToContractList();
                 return new ObjectResult(evaluationContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
         protected IActionResult GetGameProgress(int gameId, int? actorId)
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 EvaluationCoreController.Delete(token, gameId);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
         }
     }
 }

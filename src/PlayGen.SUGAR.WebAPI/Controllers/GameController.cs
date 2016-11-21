@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var gameContract = game.ToContract();
                 return new ObjectResult(gameContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>
@@ -117,7 +117,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _gameCoreController.Update(gameModel);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
 		}
 
 		/// <summary>
@@ -135,7 +135,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _gameCoreController.Delete(id);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
         }
 	}
 }

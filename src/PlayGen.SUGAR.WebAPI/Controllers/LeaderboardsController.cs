@@ -86,7 +86,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var leaderboardContract = leaderboard.ToContract();
                 return new ObjectResult(leaderboardContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>
@@ -122,7 +122,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _leaderboardController.Update(leaderboardModel);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>
@@ -142,7 +142,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _leaderboardController.Delete(token, gameId);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
         }
 	}
 }

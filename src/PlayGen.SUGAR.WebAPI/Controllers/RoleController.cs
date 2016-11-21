@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var roleContract = roles.ToContractList();
                 return new ObjectResult(roleContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var roleContract = role.ToContract();
                 return new ObjectResult(roleContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _roleCoreController.Delete(id);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
         }
     }
 }

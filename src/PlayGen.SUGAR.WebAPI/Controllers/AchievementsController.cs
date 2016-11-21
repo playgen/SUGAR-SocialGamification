@@ -118,7 +118,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var achievementContract = achievement.ToContract();
                 return new ObjectResult(achievementContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 EvaluationCoreController.Update(achievementModel);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>

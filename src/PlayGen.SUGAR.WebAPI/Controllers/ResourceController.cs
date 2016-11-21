@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var resourceContract = resource.ToResourceContract();
                 return new ObjectResult(resourceContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>
@@ -116,7 +116,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 
                 return new ObjectResult(resourceTransferRespone);
             }
-            return Unauthorized();
+            return Forbid();
         }
 	}
 }

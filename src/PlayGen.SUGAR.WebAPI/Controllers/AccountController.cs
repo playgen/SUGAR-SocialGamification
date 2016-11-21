@@ -157,7 +157,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _accountCoreController.Delete(id);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
         }
 		
 		#region Helpers

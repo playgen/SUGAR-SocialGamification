@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var actorContract = actor.ToContractList();
                 return new ObjectResult(actorContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>
@@ -64,7 +64,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var actorContract = actor.ToContractList();
                 return new ObjectResult(actorContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>
@@ -105,7 +105,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var relationshipContract = request.ToContract();
                 return new ObjectResult(relationshipContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>
@@ -131,7 +131,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _userFriendCoreController.UpdateFriendRequest(relation.ToUserModel(), relationship.Accepted);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>
@@ -157,7 +157,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _userFriendCoreController.UpdateFriend(relation.ToUserModel());
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
         }
 	}
 }

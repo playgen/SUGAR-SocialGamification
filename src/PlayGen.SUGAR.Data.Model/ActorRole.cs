@@ -12,6 +12,6 @@
 
         public Role Role { get; set; }
 
-        public int EntityId { get; set; }
+        public int? EntityId { get; set; }
     }
 }

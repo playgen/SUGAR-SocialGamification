@@ -137,39 +137,6 @@ namespace PlayGen.SUGAR.WebAPI
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 
-            app.UseExceptionHandler(appBuilder =>
-            {
-                appBuilder.Use(async (context, next) =>
-                {
-                    var error = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
-                    // This should be much more intelligent - at the moment only expired 
-                    // security tokens are caught - might be worth checking other possible 
-                    // exceptions such as an invalid signature.
-                    if (error?.Error is SecurityTokenExpiredException)
-                    {
-                        context.Response.StatusCode = 401;
-                        // What you choose to return here is up to you, in this case a simple 
-                        // bit of JSON to say you're no longer authenticated.
-                        context.Response.ContentType = "application/json";
-                        await context.Response.WriteAsync(
-                            JsonConvert.SerializeObject(
-                                new { authenticated = false, tokenExpired = true }));
-                    }
-                    else if (error?.Error != null)
-                    {
-                        context.Response.StatusCode = 500;
-                        context.Response.ContentType = "application/json";
-                        // TODO: Shouldn't pass the exception message straight out, change this.
-                        await context.Response.WriteAsync(
-                            JsonConvert.SerializeObject
-                            (new { success = false, error = error.Error.Message }));
-                    }
-                    // We're not trying to handle anything else so just let the default 
-                    // handler handle.
-                    else await next();
-                });
-            });
-
             app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
                 // Basic settings - signing key to validate with, audience and issuer.

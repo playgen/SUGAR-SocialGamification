@@ -10,18 +10,15 @@ namespace PlayGen.SUGAR.Core.Controllers
 	public class AccountController
 	{
 		private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
-		private readonly Data.EntityFramework.Controllers.UserController _userDbController;
 	    private readonly UserController _userCoreController;
         private readonly ActorRoleController _actorRoleController;
 
         // todo only take in account db controller but use core user controller
         public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
-			        Data.EntityFramework.Controllers.UserController userDbController,
                     UserController userCoreController,
                     ActorRoleController actorRoleController)
 		{
 			_accountDbController = accountDbController;
-			_userDbController = userDbController;
 		    _userCoreController = userCoreController;
             _actorRoleController = actorRoleController;
         }
@@ -51,7 +48,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 		        throw new InvalidAccountDetailsException("Invalid username or password.");
 		    }
 
-		    var user = _userCoreController.Search(toRegister.Name, true).FirstOrDefault() ?? _userDbController.Create(new User
+		    var user = _userCoreController.Search(toRegister.Name, true).FirstOrDefault() ?? _userCoreController.Create(new User
 		               {
 		                   Name = toRegister.Name
 		               });

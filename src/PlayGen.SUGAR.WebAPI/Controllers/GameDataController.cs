@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var dataContract = data.ToContractList();
                 return new ObjectResult(dataContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var dataContract = data.ToContract();
                 return new ObjectResult(dataContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 	}
 }

@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         private static UserFriendController _userFriendController;
 
         public static AccountController AccountController
-            => _accountController ?? (_accountController = new AccountController(DbControllerLocator.AccountController, DbControllerLocator.UserController, ActorRoleController));
+            => _accountController ?? (_accountController = new AccountController(DbControllerLocator.AccountController, UserController, ActorRoleController));
 
         public static ActorRoleController ActorRoleController
             => _actorRoleController ?? (_actorRoleController = new ActorRoleController(DbControllerLocator.ActorRoleController, RoleController, RoleClaimController));

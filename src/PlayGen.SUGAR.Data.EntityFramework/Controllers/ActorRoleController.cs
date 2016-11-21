@@ -22,11 +22,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-        public IEnumerable<Role> GetActorRolesForEntity(int actorId, int entityId)
+        public IEnumerable<Role> GetActorRolesForEntity(int actorId, int? entityId)
         {
             using (var context = ContextFactory.Create())
             {
-                var roles = context.ActorRoles.Where(ar => ar.ActorId == actorId && ar.EntityId == entityId).Select(ar => ar.Role).ToList();
+                var roles = context.ActorRoles.Where(ar => ar.ActorId == actorId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Role).ToList();
                 return roles;
             }
         }
@@ -40,11 +40,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-        public IEnumerable<Actor> GetRoleActors(int roleId, int entityId)
+        public IEnumerable<Actor> GetRoleActors(int roleId, int? entityId)
         {
             using (var context = ContextFactory.Create())
             {
-                var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId == entityId).Select(ar => ar.Actor).ToList();
+                var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Actor).ToList();
                 return actors;
             }
         }

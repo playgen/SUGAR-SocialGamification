@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 var actorContract = group.ToContract();
                 return new ObjectResult(actorContract);
             }
-            return Unauthorized();
+            return Forbid();
         }
 
 		/// <summary>
@@ -117,7 +117,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _groupCoreController.Update(groupModel);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
 		}
 
 		/// <summary>
@@ -135,7 +135,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _groupCoreController.Delete(id);
                 return Ok();
             }
-            return Unauthorized();
+            return Forbid();
         }
 	}
 }
