@@ -33,10 +33,5 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		/// Whether the user will be logged in upon registering.
 		/// </summary>
 		public bool AutoLogin { get; set; }
-		
-		/// <summary>
-		/// Must be specified when AutoLogin is used
-		/// </summary>
-		public int? GameId { get; set; }
 	}
 }
