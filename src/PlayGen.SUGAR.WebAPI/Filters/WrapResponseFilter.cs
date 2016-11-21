@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Common.Shared.Web;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.EvaluationEvents;
@@ -25,27 +26,18 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            var wrappedResponse = WrapResponse(context.Result);
-            wrappedResponse.EvaluationsProgress = GetPendingEvents(context.HttpContext.Request);
+            var objectResult = context.Result as ObjectResult;
+
+            if (objectResult == null) return;
+
+            var wrappedResponse = new ResponseWrapper<object>()
+            {
+                Response = objectResult.Value,
+                EvaluationsProgress = GetPendingEvents(context.HttpContext.Request)
+            };
 
             context.Result = new ObjectResult(wrappedResponse);
-        }
-
-        private ResponseWrapper<object> WrapResponse(IActionResult result)
-        {
-            var objectResult = result as ObjectResult;
-            object originalResult = null;
-
-            if (objectResult != null)
-            {
-                originalResult = objectResult.Value;
-            }
-
-            return new ResponseWrapper<object>
-            {
-                Response = originalResult,
-            };
-        }
+        }        
 
         private List<EvaluationProgressResponse> GetPendingEvents(HttpRequest request)
         {
@@ -68,8 +60,38 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 
         private List<EvaluationProgressResponse> GetPendingEvents(int gameId, int actorId)
         {
-            var pendingNotifications = _evaluationTracker.GetPendingNotifications(gameId, actorId);
-            var progressResponses = pendingNotifications.ToContractList();
+            // todo when evaluation tracker is implemented, see todos below:
+
+            // todo remove this dummy code
+            var progressResponses = new List<EvaluationProgressResponse>()
+            {
+                new EvaluationProgressResponse
+                {
+                    Actor = new ActorResponse
+                    {
+                        Id = 1,
+                        Name = "DummyAchievementProgressActor"
+                    },
+                    Name = "DummyAchievementProgressResponse",
+                    Progress = 1,
+                    Type = EvaluationType.Achievement
+                },
+                new EvaluationProgressResponse
+                {
+                    Actor = new ActorResponse
+                    {
+                        Id = 1,
+                        Name = "DummySkillProgressActor"
+                    },
+                    Name = "DummySkillProgressResponse",
+                    Progress = 1,
+                    Type = EvaluationType.Skill
+                }
+            };
+
+            // todo uncomment below
+            //var pendingNotifications = _evaluationTracker.GetPendingNotifications(gameId, actorId);
+            //var progressResponses = pendingNotifications.ToContractList();
             return progressResponses;
         }
     }

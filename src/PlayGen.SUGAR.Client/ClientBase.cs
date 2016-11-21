@@ -118,7 +118,7 @@ namespace PlayGen.SUGAR.Client
 		/// <typeparam name="TResponse"></typeparam>
 		/// <param name="response"></param>
 		/// <returns></returns>
-		private TResponse UnpackResponse<TResponse>(HttpResponse response)
+		private TResponse UnwrapResponse<TResponse>(HttpResponse response)
 		{
 			var wrappedResponse = JsonConvert.DeserializeObject<ResponseWrapper<TResponse>>(response.Content, SerializerSettings);
 			var content = wrappedResponse.Response;
@@ -158,7 +158,7 @@ namespace PlayGen.SUGAR.Client
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
 			Console.WriteLine("ClientBase::PostPut::DeserializeResponse");
 
-			return UnpackResponse<TResponse>(response);
+			return UnwrapResponse<TResponse>(response);
 		}
 
 		protected void PostPut(string url, string method, Dictionary<string, string> headers, object payload, IEnumerable<HttpStatusCode> expectedStatusCodes)
@@ -197,7 +197,7 @@ namespace PlayGen.SUGAR.Client
 			var request = CreateRequest(url, method, headers, null);
 			var response = _httpHandler.HandleRequest(request);
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
-			return UnpackResponse<TResponse>(response);
+			return UnwrapResponse<TResponse>(response);
 		}
 
 		protected void GetDelete(string url, string method, Dictionary<string, string> headers, IEnumerable<HttpStatusCode> expectedStatusCodes)
