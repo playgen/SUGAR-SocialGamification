@@ -24,13 +24,13 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             MapExistingEvaluations();
         }
 
-        public void OnActorSessionStarted(int gameId, int actorId)
+        public void OnActorSessionStarted(int? gameId, int actorId)
         {
             var progress = _progressCache.StartTracking(gameId, actorId);
             _progressNotificationCache.Check(progress);
         }
 
-        public void OnActorSessionEnded(int gameId, int actorId)
+        public void OnActorSessionEnded(int? gameId, int actorId)
         {
             _progressCache.StopTracking(gameId, actorId);
             _progressNotificationCache.Remove(gameId, actorId);
@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             }
         }
 
-        public Dictionary<int, Dictionary<Evaluation, float>> GetPendingNotifications(int gameId, int actorId)
+        public Dictionary<int, Queue<KeyValuePair<Evaluation, float>>> GetPendingNotifications(int? gameId, int actorId)
         {
             return _progressNotificationCache.GetNotifications(gameId, actorId);
         }
