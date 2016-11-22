@@ -10,6 +10,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class AchievementClient : ClientBase
 	{
+		private const string ControllerPrefix = "api/achievements";
+
 		public AchievementClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications) 
 			: base(baseAddress, httpHandler, evaluationNotifications)
 		{
@@ -22,7 +24,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns <see cref="EvaluationResponse"/> that holds Achievement details</returns>
 		public EvaluationResponse GetGlobalById(string token)
 		{
-			var query = GetUriBuilder("api/achievements/find/{0}/global", token).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/global", token).ToString();
 			return Get<EvaluationResponse>(query, expectedStatusCodes: new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
@@ -34,7 +36,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns <see cref="EvaluationResponse"/> that holds Achievement details</returns>
 		public EvaluationResponse GetById(string token, int gameId)
 		{
-			var query = GetUriBuilder("api/achievements/find/{0}/{1}", token, gameId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/{1}", token, gameId).ToString();
 			return Get<EvaluationResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
@@ -44,7 +46,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Achievement details</returns>
 		public IEnumerable<EvaluationResponse> GetAllGlobal()
 		{
-			var query = GetUriBuilder("api/achievements/global/list").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/global/list").ToString();
 			return Get<IEnumerable<EvaluationResponse>>(query);
 		}
 
@@ -55,18 +57,18 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Achievement details</returns>
 		public IEnumerable<EvaluationResponse> GetByGame(int gameId)
 		{
-			var query = GetUriBuilder("api/achievements/game/{0}/list", gameId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/list", gameId).ToString();
 			return Get<IEnumerable<EvaluationResponse>>(query);
 		}
 
-        /// <summary>
-        /// Find the current progress for all global achievements for <param name="actorId"/>.
-        /// </summary>
-        /// <param name="actorId">ID of Group/User</param>
-        /// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold Achievement progress details</returns>
-        public IEnumerable<EvaluationProgressResponse> GetGlobalProgress(int actorId)
+		/// <summary>
+		/// Find the current progress for all global achievements for <param name="actorId"/>.
+		/// </summary>
+		/// <param name="actorId">ID of Group/User</param>
+		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold Achievement progress details</returns>
+		public IEnumerable<EvaluationProgressResponse> GetGlobalProgress(int actorId)
 		{
-			var query = GetUriBuilder("api/achievements/global/evaluate/{0}", actorId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/global/evaluate/{0}", actorId).ToString();
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
 		}
 
@@ -78,7 +80,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
 		public IEnumerable<EvaluationProgressResponse> GetGameProgress(int gameId, int actorId)
 		{
-			var query = GetUriBuilder("api/achievements/game/{0}/evaluate/{1}", gameId, actorId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/evaluate/{1}", gameId, actorId).ToString();
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
 		}
 
@@ -90,7 +92,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
 		public EvaluationProgressResponse GetGlobalAchievementProgress(string token, int actorId)
 		{
-			var query = GetUriBuilder("api/achievements/{0}/global/evaluate/{1}", token, actorId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/global/evaluate/{1}", token, actorId).ToString();
 			return Get<EvaluationProgressResponse>(query);
 		}
 
@@ -103,29 +105,29 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
 		public EvaluationProgressResponse GetAchievementProgress(string token, int gameId, int actorId)
 		{
-			var query = GetUriBuilder("api/achievements/{0}/{1}/evaluate/{2}", token, gameId, actorId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}/evaluate/{2}", token, gameId, actorId).ToString();
 			return Get<EvaluationProgressResponse>(query);
 		}
 
-        /// <summary>
-        /// Create a new Achievement.
-        /// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
-        /// </summary>
-        /// <param name="newAchievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Achievement.</param>
-        /// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
-        public EvaluationResponse Create(EvaluationCreateRequest newAchievement)
+		/// <summary>
+		/// Create a new Achievement.
+		/// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
+		/// </summary>
+		/// <param name="newAchievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Achievement.</param>
+		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
+		public EvaluationResponse Create(EvaluationCreateRequest newAchievement)
 		{
-			var query = GetUriBuilder("api/achievements/create").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/create").ToString();
 			return Post<EvaluationCreateRequest, EvaluationResponse>(query, newAchievement);
 		}
 
-        /// <summary>
-        /// Update an existing Achievement.
-        /// </summary>
-        /// <param name="achievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the Achievement.</param>
-        public void Update(EvaluationUpdateRequest achievement)
+		/// <summary>
+		/// Update an existing Achievement.
+		/// </summary>
+		/// <param name="achievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the Achievement.</param>
+		public void Update(EvaluationUpdateRequest achievement)
 		{
-			var query = GetUriBuilder("api/achievements/update").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/update").ToString();
 			Put(query, achievement);
 		}
 
@@ -135,7 +137,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="token">Token of Achievement</param>
 		public void DeleteGlobal(string token)
 		{
-			var query = GetUriBuilder("api/achievements/{0}/global", token).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/global", token).ToString();
 			Delete(query);
 		}
 
@@ -146,29 +148,29 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="gameId">ID of the Game the Achievement is for</param>
 		public void Delete(string token, int gameId)
 		{
-			var query = GetUriBuilder("api/achievements/{0}/{1}", token, gameId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}", token, gameId).ToString();
 			Delete(query);
 		}
 
-        #region Evaluation Notifications
-        /// <summary>
-        /// Sets flag to return pending achievement notifications from the server as they become available.
-        /// </summary>
-        /// <param name="enable">Whether to enable or disable notifications.</param>
-        public void EnableNotifications(bool enable)
-        {
-            EnableEvaluationNotifications(enable);
-        }
+		#region Evaluation Notifications
+		/// <summary>
+		/// Sets flag to return pending achievement notifications from the server as they become available.
+		/// </summary>
+		/// <param name="enable">Whether to enable or disable notifications.</param>
+		public void EnableNotifications(bool enable)
+		{
+			EnableEvaluationNotifications(enable);
+		}
 
-        /// <summary>
-        /// Gets pending achievement progress notifications.
-        /// </summary>
-        /// <param name="notification"></param>
-        /// <returns>Returns a boolean value indicating whether there was a notification to retrieve or not.</returns>
-        public bool TryGetPendingNotification(out EvaluationNotification notification)
-        {
-            return EvaluationNotifications.TryDequeue(EvaluationType.Achievement, out notification);
-        }
-        #endregion
-    }
+		/// <summary>
+		/// Gets pending achievement progress notifications.
+		/// </summary>
+		/// <param name="notification"></param>
+		/// <returns>Returns a boolean value indicating whether there was a notification to retrieve or not.</returns>
+		public bool TryGetPendingNotification(out EvaluationNotification notification)
+		{
+			return EvaluationNotifications.TryDequeue(EvaluationType.Achievement, out notification);
+		}
+		#endregion
+	}
 }

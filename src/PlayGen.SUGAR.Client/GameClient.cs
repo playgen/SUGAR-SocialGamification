@@ -9,6 +9,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class GameClient : ClientBase
 	{
+		private const string ControllerPrefix = "api/game";
+
 		public GameClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
 			: base(baseAddress, httpHandler, evaluationNotifications)
 		{
@@ -20,7 +22,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="GameResponse"/> that hold Games details.</returns>
 		public IEnumerable<GameResponse> Get()
 		{
-			var query = GetUriBuilder("api/game/list").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/list").ToString();
 			return Get<IEnumerable<GameResponse>>(query);
 		}
 
@@ -31,7 +33,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
 		public IEnumerable<GameResponse> Get(string name)
 		{
-			var query = GetUriBuilder("api/game/find/{0}", name).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/find/{0}", name).ToString();
 			
 			return Get<IEnumerable<GameResponse>>(query);
 		}
@@ -43,7 +45,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
 		public GameResponse Get(int id)
 		{
-			var query = GetUriBuilder("api/game/findbyid/{0}", id).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/findbyid/{0}", id).ToString();
 			return Get<GameResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
@@ -55,7 +57,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="GameResponse"/> containing the new Game details.</returns>
 		public GameResponse Create(GameRequest game)
 		{
-			var query = GetUriBuilder("api/game").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "").ToString();
 			return Post<GameRequest, GameResponse>(query, game);
 		}
 
@@ -66,7 +68,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="game"><see cref="GameRequest"/> object that holds the details of the Game.</param>
 		public void Update(int id, GameRequest game)
 		{
-			var query = GetUriBuilder("api/game/update/{0}", id).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/update/{0}", id).ToString();
 			Put(query, game);
 		}
 
@@ -76,7 +78,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="id">Game ID.</param>
 		public void Delete(int id)
 		{
-			var query = GetUriBuilder("api/game/{0}", id).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}", id).ToString();
 			Delete(query);
 		}
 	}

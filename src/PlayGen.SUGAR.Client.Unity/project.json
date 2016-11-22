@@ -1,14 +1,15 @@
-﻿{
+{
   "version": "1.0.0-*",
-
 	"dependencies": {
 		"Json.Net.Unity3D": "9.0.1",
 		"PlayGen.SUGAR.Client": "1.0.0-*",
 		"UnityEngine": "1.0.0"
 	},
-
-  "frameworks": {
-    "net35": {
+    "frameworks": {
+        "net35": {
+        }
+    },
+    "buildOptions": {
+        "define": [ "DEBUG", "TRACE" ]
     }
-  }
 }

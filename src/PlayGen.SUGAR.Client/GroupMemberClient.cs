@@ -9,6 +9,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class GroupMemberClient : ClientBase
 	{
+		private const string ControllerPrefix = "api/groupmember";
+
 		public GroupMemberClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
 			: base(baseAddress, httpHandler, evaluationNotifications)
 		{
@@ -21,7 +23,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
 		{
-			var query = GetUriBuilder("api/groupmember/requests/{0}", groupId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/requests/{0}", groupId).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -32,7 +34,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetSentRequests(int userId)
 		{
-			var query = GetUriBuilder("api/groupmember/sentrequests/{0}", userId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/sentrequests/{0}", userId).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -43,7 +45,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetMembers(int groupId)
 		{
-			var query = GetUriBuilder("api/groupmember/members/{0}", groupId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/members/{0}", groupId).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -54,7 +56,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetUserGroups(int userId)
 		{
-			var query = GetUriBuilder("api/groupmember/usergroups/{0}", userId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/usergroups/{0}", userId).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -66,7 +68,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
 		public RelationshipResponse CreateMemberRequest(RelationshipRequest relationship)
 		{
-			var query = GetUriBuilder("api/groupmember").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "").ToString();
 			return Post<RelationshipRequest, RelationshipResponse>(query, relationship);
 		}
 
@@ -77,7 +79,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		public void UpdateMemberRequest(RelationshipStatusUpdate relationship)
 		{
-			var query = GetUriBuilder("api/groupmember/request").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/request").ToString();
 			Put(query, relationship);
 		}
 
@@ -88,7 +90,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		public void UpdateMember(RelationshipStatusUpdate relationship)
 		{
-			var query = GetUriBuilder("api/groupmember").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "").ToString();
 			Put(query, relationship);
 		}
 	}

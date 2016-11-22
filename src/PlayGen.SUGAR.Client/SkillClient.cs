@@ -10,6 +10,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class SkillClient : ClientBase
 	{
+		private const string ControllerPrefix = "api/skills";
+
 		public SkillClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
 			: base(baseAddress, httpHandler, evaluationNotifications)
 		{
@@ -22,7 +24,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns <see cref="EvaluationResponse"/> that holds Skill details</returns>
 		public EvaluationResponse GetGlobalById(string token)
 		{
-			var query = GetUriBuilder("api/skills/find/{0}/global", token).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/global", token).ToString();
 			return Get<EvaluationResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
@@ -34,7 +36,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns <see cref="EvaluationResponse"/> that holds Skill details</returns>
 		public EvaluationResponse GetById(string token, int gameId)
 		{
-			var query = GetUriBuilder("api/skills/find/{0}/{1}", token, gameId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/{1}", token, gameId).ToString();
 			return Get<EvaluationResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
@@ -44,7 +46,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Skill details</returns>
 		public IEnumerable<EvaluationResponse> GetAllGlobal()
 		{
-			var query = GetUriBuilder("api/skills/global/list").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/global/list").ToString();
 			return Get<IEnumerable<EvaluationResponse>>(query);
 		}
 
@@ -55,7 +57,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Skill details</returns>
 		public IEnumerable<EvaluationResponse> GetByGame(int gameId)
 		{
-			var query = GetUriBuilder("api/skills/game/{0}/list", gameId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/list", gameId).ToString();
 			return Get<IEnumerable<EvaluationResponse>>(query);
 		}
 
@@ -66,7 +68,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold Skill progress details</returns>
 		public IEnumerable<EvaluationProgressResponse> GetGlobalProgress(int actorId)
 		{
-			var query = GetUriBuilder("api/skills/global/evaluate/{0}", actorId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/global/evaluate/{0}", actorId).ToString();
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
 		}
 
@@ -78,7 +80,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward skill.</returns>
 		public IEnumerable<EvaluationProgressResponse> GetGameProgress(int gameId, int actorId)
 		{
-			var query = GetUriBuilder("api/skills/game/{0}/evaluate/{1}", gameId, actorId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/evaluate/{1}", gameId, actorId).ToString();
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
 		}
 
@@ -90,7 +92,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns <see cref="EvaluationProgressResponse"/> that hold current progress toward skill.</returns>
 		public EvaluationProgressResponse GetGlobalSkillProgress(string token, int actorId)
 		{
-			var query = GetUriBuilder("api/skills/{0}/global/evaluate/{1}", token, actorId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/global/evaluate/{1}", token, actorId).ToString();
 			return Get<EvaluationProgressResponse>(query);
 		}
 
@@ -103,29 +105,29 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns <see cref="EvaluationProgressResponse"/> that hold current progress toward skill.</returns>
 		public EvaluationProgressResponse GetSkillProgress(string token, int gameId, int actorId)
 		{
-			var query = GetUriBuilder("api/skills/{0}/{1}/evaluate/{2}", token, gameId, actorId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}/evaluate/{2}", token, gameId, actorId).ToString();
 			return Get<EvaluationProgressResponse>(query);
 		}
 
-        /// <summary>
-        /// Create a new Skill.
-        /// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
-        /// </summary>
-        /// <param name="newSkill"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Skill.</param>
-        /// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Skill.</returns>
-        public EvaluationResponse Create(EvaluationCreateRequest newSkill)
+		/// <summary>
+		/// Create a new Skill.
+		/// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
+		/// </summary>
+		/// <param name="newSkill"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Skill.</param>
+		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Skill.</returns>
+		public EvaluationResponse Create(EvaluationCreateRequest newSkill)
 		{
-			var query = GetUriBuilder("api/skills/create").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/create").ToString();
 			return Post<EvaluationCreateRequest, EvaluationResponse>(query, newSkill);
 		}
 
-        /// <summary>
-        /// Update an existing Skill.
-        /// </summary>
-        /// <param name="skill"><see cref="EvaluationCreateRequest"/> object that holds the details of the Skill.</param>
-        public void Update(EvaluationUpdateRequest skill)
+		/// <summary>
+		/// Update an existing Skill.
+		/// </summary>
+		/// <param name="skill"><see cref="EvaluationCreateRequest"/> object that holds the details of the Skill.</param>
+		public void Update(EvaluationUpdateRequest skill)
 		{
-			var query = GetUriBuilder("api/skills/update").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/update").ToString();
 			Put(query, skill);
 		}
 
@@ -135,7 +137,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="token">Token of Skill</param>
 		public void DeleteGlobal(string token)
 		{
-			var query = GetUriBuilder("api/skills/{0}/global", token).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/global", token).ToString();
 			Delete(query);
 		}
 
@@ -146,29 +148,29 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="gameId">ID of the Game the Skill is for</param>
 		public void Delete(string token, int gameId)
 		{
-			var query = GetUriBuilder("api/skills/{0}/{1}", token, gameId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}", token, gameId).ToString();
 			Delete(query);
 		}
 
-        #region Evaluation Notifications
-        /// <summary>
-        /// Sets flag to return pending skill notifications from the server as they become available.
-        /// </summary>
-        /// <param name="enable">Whether to enable or disable notifications.</param>
-        public void EnableNotifications(bool enable)
-        {
-            EnableEvaluationNotifications(enable);
-        }
+		#region Evaluation Notifications
+		/// <summary>
+		/// Sets flag to return pending skill notifications from the server as they become available.
+		/// </summary>
+		/// <param name="enable">Whether to enable or disable notifications.</param>
+		public void EnableNotifications(bool enable)
+		{
+			EnableEvaluationNotifications(enable);
+		}
 
-        /// <summary>
-        /// Gets pending skill progress notifications.
-        /// </summary>
-        /// <param name="notification"></param>
-        /// <returns>Returns a boolean value indicating whether there was a notification to retrieve or not.</returns>
-        public bool TryGetPendingNotification(out EvaluationNotification notification)
-        {
-            return EvaluationNotifications.TryDequeue(EvaluationType.Skill, out notification);
-        }
-        #endregion
-    }
+		/// <summary>
+		/// Gets pending skill progress notifications.
+		/// </summary>
+		/// <param name="notification"></param>
+		/// <returns>Returns a boolean value indicating whether there was a notification to retrieve or not.</returns>
+		public bool TryGetPendingNotification(out EvaluationNotification notification)
+		{
+			return EvaluationNotifications.TryDequeue(EvaluationType.Skill, out notification);
+		}
+		#endregion
+	}
 }

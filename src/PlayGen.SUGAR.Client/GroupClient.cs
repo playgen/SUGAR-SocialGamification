@@ -9,6 +9,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class GroupClient : ClientBase
 	{
+		private const string ControllerPrefix = "api/group";
+
 		public GroupClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
 			: base(baseAddress, httpHandler, evaluationNotifications)
 		{
@@ -20,7 +22,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> that hold Group details.</returns>
 		public IEnumerable<ActorResponse> Get()
 		{
-			var query = GetUriBuilder("api/group/list").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/list").ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -31,7 +33,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> Get(string name)
 		{
-			var query = GetUriBuilder("api/group/find/{0}", name).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/find/{0}", name).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -42,7 +44,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
 		public ActorResponse Get(int id)
 		{
-			var query = GetUriBuilder("api/group/findbyid/{0}", id).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/findbyid/{0}", id).ToString();
 			return Get<ActorResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
@@ -54,7 +56,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="ActorResponse"/> containing the new Group details.</returns>
 		public ActorResponse Create(ActorRequest actor)
 		{
-			var query = GetUriBuilder("api/group").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "").ToString();
 			return Post<ActorRequest, ActorResponse>(query, actor);
 		}
 
@@ -65,7 +67,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="group"><see cref="ActorRequest"/> object that holds the details of the Group.</param>
 		public void Update(int id, ActorRequest group)
 		{
-			var query = GetUriBuilder("api/group/update/{0}", id).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/update/{0}", id).ToString();
 			Put(query, group);
 		}
 
@@ -75,7 +77,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="id">Group ID.</param>
 		public void Delete(int id)
 		{
-			var query = GetUriBuilder("api/group/{0}", id).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}", id).ToString();
 			Delete(query);
 		}
 	}
