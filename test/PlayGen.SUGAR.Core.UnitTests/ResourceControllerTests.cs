@@ -1,181 +1,180 @@
-﻿// todo uncomment
-//using System.Linq;
-//using PlayGen.SUGAR.Data.Model;
-//using Xunit;
-//using PlayGen.SUGAR.Common.Shared;
-//using PlayGen.SUGAR.Core.Controllers;
+﻿using System.Linq;
+using PlayGen.SUGAR.Data.Model;
+using Xunit;
+using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Core.Controllers;
 
-//using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
+using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
 
-//namespace PlayGen.SUGAR.Core.UnitTests
-//{
-//	[Collection("Project Fixture Collection")]
-//	public class ResourceControllerTests
-//	{
-//		#region Configuration
-//		private readonly ResourceController _resourceController = ControllerLocator.ResourceController;
-//		private readonly Data.EntityFramework.Controllers.UserController _userController = DbControllerLocator.UserController;
-//		private readonly Data.EntityFramework.Controllers.GameController _gameController = DbControllerLocator.GameController;
-//		#endregion
+namespace PlayGen.SUGAR.Core.UnitTests
+{
+    [Collection("Project Fixture Collection")]
+    public class ResourceControllerTests
+    {
+        #region Configuration
+        private readonly ResourceController _resourceController = ControllerLocator.ResourceController;
+        private readonly Data.EntityFramework.Controllers.UserController _userController = DbControllerLocator.UserController;
+        private readonly Data.EntityFramework.Controllers.GameController _gameController = DbControllerLocator.GameController;
+        #endregion
 
-//		#region Tests
-//		[Fact]
-//		public void CanGetResourceByKey()
-//		{
-//			var newResource = CreateResource("CanGetExistingResourceByKey");
+        #region Tests
+        [Fact]
+        public void CanGetResourceByKey()
+        {
+            var newResource = CreateResource("CanGetExistingResourceByKey");
 
-//			var gotResources = _resourceController.Get(keys: new []{newResource.Key});
+            var gotResources = _resourceController.Get(keys: new[] { newResource.Key });
 
-//			Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
-//		}
+            Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
+        }
 
-//		[Fact]
-//		public void CanGetResourceActorId()
-//		{
-//			var newResource = CreateResource("CanGetExistingResourceActorId", createNewUser: true);
+        [Fact]
+        public void CanGetResourceActorId()
+        {
+            var newResource = CreateResource("CanGetExistingResourceActorId", createNewUser: true);
 
-//			var gotResources = _resourceController.Get(actorId: newResource.ActorId);
+            var gotResources = _resourceController.Get(actorId: newResource.ActorId);
 
-//			Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
-//		}
+            Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
+        }
 
-//		[Fact]
-//		public void CanGetResourceeGameId()
-//		{
-//			var newResource = CreateResource("CanGetExistingResourceGameId", createNewGame: true);
+        [Fact]
+        public void CanGetResourceeGameId()
+        {
+            var newResource = CreateResource("CanGetExistingResourceGameId", createNewGame: true);
 
-//			var gotResources = _resourceController.Get(gameId: newResource.GameId);
+            var gotResources = _resourceController.Get(gameId: newResource.GameId);
 
-//			Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
-//		}
+            Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
+        }
 
-//		[Fact]
-//		public void CanUpdateResource()
-//		{
-//			var newResource = CreateResource("CanUpdateResource");
+        [Fact]
+        public void CanUpdateResource()
+        {
+            var newResource = CreateResource("CanUpdateResource");
 
-//			var originalValue = newResource.Value;
-//			var newValue = originalValue + "999";
-//			newResource.Value = newValue;
+            var originalValue = newResource.Value;
+            var newValue = originalValue + "999";
+            newResource.Value = newValue;
 
-//			_resourceController.Update(newResource);
+            _resourceController.Update(newResource);
 
-//			var resources = _resourceController.Get(newResource.GameId, newResource.ActorId, new string[] {newResource.Key});
-//			newResource = resources.Single();
+            var resources = _resourceController.Get(newResource.GameId, newResource.ActorId, new string[] { newResource.Key });
+            newResource = resources.Single();
 
-//			Assert.Equal(newValue, newResource.Value);
-//		}
+            Assert.Equal(newValue, newResource.Value);
+        }
 
-//		[Fact]
-//		public void CanTransferCreate_FromUserToUser()
-//		{
-//			var fromUser = GetOrCreateUser("CanTransferCreate_FromUserToUser_From");
-//			var toUser = GetOrCreateUser("CanTransferCreate_FromUserToUser_To");
+        [Fact]
+        public void CanTransferCreate_FromUserToUser()
+        {
+            var fromUser = GetOrCreateUser("CanTransferCreate_FromUserToUser_From");
+            var toUser = GetOrCreateUser("CanTransferCreate_FromUserToUser_To");
 
-//			var fromResource = CreateResource("CanTransfer_FromUserToUser", actorId:fromUser.Id);
+            var fromResource = CreateResource("CanTransfer_FromUserToUser", actorId: fromUser.Id);
 
-//			var originalQuantity = long.Parse(fromResource.Value);
-//			var transferQuantity = originalQuantity/3;
+            var originalQuantity = long.Parse(fromResource.Value);
+            var transferQuantity = originalQuantity / 3;
 
-//			var toResource = _resourceController.Transfer(fromResource.GameId, fromUser.Id, toUser.Id, fromResource.Key, transferQuantity, out fromResource);
+            var toResource = _resourceController.Transfer(fromResource.GameId, fromUser.Id, toUser.Id, fromResource.Key, transferQuantity, out fromResource);
 
-//			Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
-//			Assert.Equal(transferQuantity, long.Parse(toResource.Value));
-//			Assert.Equal(toUser.Id, toResource.ActorId);
-//			Assert.Equal(fromResource.GameId, toResource.GameId);
-//		}
+            Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
+            Assert.Equal(transferQuantity, long.Parse(toResource.Value));
+            Assert.Equal(toUser.Id, toResource.ActorId);
+            Assert.Equal(fromResource.GameId, toResource.GameId);
+        }
 
-//		[Fact]
-//		public void CanTransferUpdate_FromUserToUser()
-//		{
-//			var fromUser = GetOrCreateUser("From");
-//			var toUser = GetOrCreateUser("To");
+        [Fact]
+        public void CanTransferUpdate_FromUserToUser()
+        {
+            var fromUser = GetOrCreateUser("From");
+            var toUser = GetOrCreateUser("To");
 
-//			var fromResource = CreateResource("CanTransfer_FromUserToUser", actorId: fromUser.Id);
-//			var existingToResource = CreateResource(fromResource.Key, actorId: toUser.Id);
+            var fromResource = CreateResource("CanTransfer_FromUserToUser", actorId: fromUser.Id);
+            var existingToResource = CreateResource(fromResource.Key, actorId: toUser.Id);
 
-//			var originalQuantity = long.Parse(fromResource.Value);
-//			var transferQuantity = originalQuantity / 3;
+            var originalQuantity = long.Parse(fromResource.Value);
+            var transferQuantity = originalQuantity / 3;
 
-//			var processedToResource = _resourceController.Transfer(fromResource.GameId, fromUser.Id, toUser.Id, fromResource.Key, transferQuantity, out fromResource);
+            var processedToResource = _resourceController.Transfer(fromResource.GameId, fromUser.Id, toUser.Id, fromResource.Key, transferQuantity, out fromResource);
 
-//			Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
-//			Assert.Equal(originalQuantity + transferQuantity, long.Parse(processedToResource.Value));
-//			Assert.Equal(existingToResource.Id, processedToResource.Id);
-//		}
-//		#endregion
+            Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
+            Assert.Equal(originalQuantity + transferQuantity, long.Parse(processedToResource.Value));
+            Assert.Equal(existingToResource.Id, processedToResource.Id);
+        }
+        #endregion
 
-//		#region Helpers
-//		private GameData CreateResource(string key, int? gameId = null, int? actorId = null,
-//			  bool createNewGame = false, bool createNewUser = false)
-//		{
-//			if (createNewGame)
-//			{
-//				var game = new Game
-//				{
-//					Name = key
-//				};
-//				_gameController.Create(game);
-//				gameId = game.Id;
-//			}
+        #region Helpers
+        private GameData CreateResource(string key, int? gameId = null, int? actorId = null,
+              bool createNewGame = false, bool createNewUser = false)
+        {
+            if (createNewGame)
+            {
+                var game = new Game
+                {
+                    Name = key
+                };
+                _gameController.Create(game);
+                gameId = game.Id;
+            }
 
-//			if (createNewUser)
-//			{
-//				var user = new User
-//				{
-//					Name = key
-//				};
-//				_userController.Create(user);
-//				actorId = user.Id;
-//			}
+            if (createNewUser)
+            {
+                var user = new User
+                {
+                    Name = key
+                };
+                _userController.Create(user);
+                actorId = user.Id;
+            }
 
-//			var resource = new GameData
-//			{
-//				GameId = gameId,
-//				ActorId = actorId,
-//				Key = key,
-//				Value = "100",
-//				DataType = GameDataType.Long,
-//				Category = GameDataCategory.Resource,
-//			};
-//			_resourceController.Create(resource);
-			
-//			return resource;
-//		}
- 
-//		private bool IsMatch(GameData lhs, GameData rhs)
-//		{
-//			return lhs.ActorId == rhs.ActorId
-//				&& lhs.GameId == rhs.GameId
-//				&& lhs.Category == rhs.Category
-//				&& lhs.DataType == rhs.DataType
-//				&& lhs.Key == rhs.Key
-//				&& lhs.Value == rhs.Value;
-//		}
+            var resource = new GameData
+            {
+                GameId = gameId,
+                ActorId = actorId,
+                Key = key,
+                Value = "100",
+                DataType = GameDataType.Long,
+                Category = GameDataCategory.Resource,
+            };
+            _resourceController.Create(resource);
 
-//		private Data.Model.Actor GetOrCreateUser(string suffix = null)
-//		{
-//			var name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
-//			var users = _userController.Search(name, true);
-//			User user;
+            return resource;
+        }
 
-//			if (users.Any())
-//			{
-//				user = users.Single();
-//			}
-//			else
-//			{
-//				user = new User
-//				{
-//					Name = name,
-//				};
+        private bool IsMatch(GameData lhs, GameData rhs)
+        {
+            return lhs.ActorId == rhs.ActorId
+                && lhs.GameId == rhs.GameId
+                && lhs.Category == rhs.Category
+                && lhs.DataType == rhs.DataType
+                && lhs.Key == rhs.Key
+                && lhs.Value == rhs.Value;
+        }
 
-//				_userController.Create(user);
-//			}
+        private Data.Model.Actor GetOrCreateUser(string suffix = null)
+        {
+            var name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
+            var users = _userController.Search(name, true);
+            User user;
 
-//			return user;
-//		}
-		
-//		#endregion
-//	}
-//}
+            if (users.Any())
+            {
+                user = users.Single();
+            }
+            else
+            {
+                user = new User
+                {
+                    Name = name,
+                };
+
+                _userController.Create(user);
+            }
+
+            return user;
+        }
+
+        #endregion
+    }
+}
