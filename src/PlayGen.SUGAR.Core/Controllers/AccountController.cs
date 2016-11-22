@@ -10,40 +10,60 @@ namespace PlayGen.SUGAR.Core.Controllers
 	public class AccountController
 	{
 		private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
-	    private readonly UserController _userCoreController;
+        private readonly AccountSourceController _accountSourceCoreController;
+        private readonly UserController _userCoreController;
         private readonly ActorRoleController _actorRoleController;
 
         // todo only take in account db controller but use core user controller
         public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
+                    AccountSourceController accountSourceCoreController,
                     UserController userCoreController,
                     ActorRoleController actorRoleController)
 		{
 			_accountDbController = accountDbController;
-		    _userCoreController = userCoreController;
+            _accountSourceCoreController = accountSourceCoreController;
+            _userCoreController = userCoreController;
             _actorRoleController = actorRoleController;
         }
 
-        public Account Login(Account toVerify)
+        public Account Login(Account toVerify, string sourceToken)
         {
             Account verified;
 
-			var found = _accountDbController.Get(new[] { toVerify.Name }).SingleOrDefault();
+            var source = _accountSourceCoreController.GetByToken(sourceToken);
 
-			if (found != null && PasswordEncryption.Verify(toVerify.Password, found.Password))
-			{
-			    verified = found;
-			}
-			else
-			{
+            if (source != null)
+            {
+                var found = _accountDbController.Get(new[] { toVerify.Name }, source.Id).SingleOrDefault();
+                if (found != null)
+                {
+                    if (source.RequiresPassword)
+                    {
+                        if (PasswordEncryption.Verify(toVerify.Password, found.Password))
+                        {
+                            verified = found;
+                        }
+                        else
+                        {
+                            throw new InvalidAccountDetailsException("Invalid Login Details.");
+                        }
+                    }
+                    else
+                    {
+                        verified = found;
+                    }
+                    return verified;
+                }
                 throw new InvalidAccountDetailsException("Invalid Login Details.");
             }
-
-            return verified;
+            throw new InvalidAccountDetailsException("Invalid Login Details.");
         }
-		
-		public Account Register(Account toRegister)
+
+        public Account Register(Account toRegister, string sourceToken)
 		{
-		    if(string.IsNullOrWhiteSpace(toRegister.Name) || string.IsNullOrWhiteSpace(toRegister.Password))
+            var source = _accountSourceCoreController.GetByToken(sourceToken);
+
+            if (string.IsNullOrWhiteSpace(toRegister.Name) || (source.RequiresPassword && string.IsNullOrWhiteSpace(toRegister.Password)))
 		    {
 		        throw new InvalidAccountDetailsException("Invalid username or password.");
 		    }
@@ -56,10 +76,15 @@ namespace PlayGen.SUGAR.Core.Controllers
 		    var registered = _accountDbController.Create(new Account
 		    {
                 Name = toRegister.Name,
-                Password = PasswordEncryption.Encrypt(toRegister.Password),
+                AccountSourceId = source.Id,
                 UserId = user.Id,
                 User = user
             });
+
+            if (source.RequiresPassword)
+            {
+                registered.Password = PasswordEncryption.Encrypt(toRegister.Password);
+            }
 
             _actorRoleController.Create(ClaimScope.Account.ToString(), registered.UserId, registered.Id);
 

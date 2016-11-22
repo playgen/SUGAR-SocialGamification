@@ -21,8 +21,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		}
 		
 		public DbSet<Account> Accounts { get; set; }
+        public DbSet<AccountSource> AccountSources { get; set; }
 
-		public DbSet<Game> Games { get; set; }
+        public DbSet<Game> Games { get; set; }
 		
 		public DbSet<Evaluation> Evaluations { get; set; }
 		public DbSet<Achievement> Achievements { get; set; }

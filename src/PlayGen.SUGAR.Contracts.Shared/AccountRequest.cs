@@ -25,13 +25,19 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		/// <summary>
 		/// The user's password.
 		/// </summary>
-		[Required]
 		[StringLength(64)]
 		public string Password { get; set; }
 
-		/// <summary>
-		/// Whether the user will be logged in upon registering.
+        /// <summary>
+		/// The source from which the user is trying to log-in.
 		/// </summary>
-		public bool AutoLogin { get; set; }
+		[Required]
+        [StringLength(64)]
+        public string SourceToken { get; set; }
+
+        /// <summary>
+        /// Whether the user will be logged in upon registering.
+        /// </summary>
+        public bool AutoLogin { get; set; }
 	}
 }

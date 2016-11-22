@@ -27,12 +27,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Account> Get(string[] names)
+		public IEnumerable<Account> Get(string[] names, int sourceId)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				var accounts = context.Accounts
-					.Where(a => names.Contains(a.Name))
+					.Where(a => names.Contains(a.Name) && a.AccountSourceId == sourceId)
 					.Include(a => a.User);
 
 				return accounts.ToList();
