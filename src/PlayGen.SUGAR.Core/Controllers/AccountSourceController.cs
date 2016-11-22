@@ -24,6 +24,12 @@ namespace PlayGen.SUGAR.Core.Controllers
             return source;
         }
 
+        public AccountSource GetByToken(string token)
+        {
+            var source = _accountSourceDbController.Get(token);
+            return source;
+        }
+
         public AccountSource Create(AccountSource newSource)
         {
             newSource = _accountSourceDbController.Create(newSource);

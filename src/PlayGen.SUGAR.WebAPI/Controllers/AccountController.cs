@@ -64,7 +64,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             // todo check if has permission to login for specified game
 		    var account = accountRequest.ToModel();
 
-            account = _accountCoreController.Login(account);
+            account = _accountCoreController.Login(account, accountRequest.SourceToken);
 
 			var token = CreateToken(gameId ?? -1, account);
 			HttpContext.Response.SetAuthorizationToken(token);
@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             // todo check if has permission to autologin for specified game
 		    var account = accountRequest.ToModel();
 
-		    account = _accountCoreController.Register(account);
+		    account = _accountCoreController.Register(account, accountRequest.SourceToken);
 
 			var response = account.ToContract();
 			if (accountRequest.AutoLogin)

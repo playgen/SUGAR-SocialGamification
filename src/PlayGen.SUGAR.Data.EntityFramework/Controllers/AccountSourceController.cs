@@ -36,6 +36,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
+        public AccountSource Get(string token)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                var source = context.AccountSources.SingleOrDefault(s => s.Token == token);
+                return source;
+            }
+        }
+
         public AccountSource Create(AccountSource source)
         {
             using (var context = ContextFactory.Create())
