@@ -11,8 +11,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	{
 		#region Configuration
 		private readonly AccountController _accountController = ControllerLocator.AccountController;
-        private readonly AccountSourceController _accountSourceController = ControllerLocator.AccountSourceController;
-        private readonly UserController _userController = ControllerLocator.UserController;
+		private readonly AccountSourceController _accountSourceController = ControllerLocator.AccountSourceController;
+		private readonly UserController _userController = ControllerLocator.UserController;
 		#endregion
 
 		#region Tests
@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var name = "CreateAndGetAccount";
 			string password = $"{name}Password";
 
-            var source = CreateAccountSource(name);
+			var source = CreateAccountSource(name);
 			CreateAccount(name, password, source.Id);
 
 			var accounts = _accountController.Get(new string[] { name }, source.Id);
@@ -38,10 +38,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var name = "CreateDuplicateAccount";
 			string password = $"{name}Password";
 
-            var source = CreateAccountSource(name);
-            CreateAccount(name, password, source.Id);
+			var source = CreateAccountSource(name);
+			CreateAccount(name, password, source.Id);
 
-            Assert.Throws<DuplicateRecordException>(() => CreateAccount(name, password, source.Id));
+			Assert.Throws<DuplicateRecordException>(() => CreateAccount(name, password, source.Id));
 		}
 
 		[Fact]
@@ -55,9 +55,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				"GetMultipleAccountsByName4",
 			};
 
-            var source = CreateAccountSource("GetMultipleAccountsByName");
+			var source = CreateAccountSource("GetMultipleAccountsByName");
 
-            foreach (var name in names)
+			foreach (var name in names)
 			{
 				CreateAccount(name, $"{name}Password", source.Id);
 			}
@@ -74,9 +74,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingAccounts()
 		{
-            var source = CreateAccountSource("GetNonExistingAccounts");
+			var source = CreateAccountSource("GetNonExistingAccounts");
 
-            var accounts = _accountController.Get(new string[] { "GetNonExsitingAccounts" }, source.Id);
+			var accounts = _accountController.Get(new string[] { "GetNonExsitingAccounts" }, source.Id);
 
 			Assert.Empty(accounts);
 		}
@@ -87,9 +87,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var name = "DeleteExistingAccount";
 			string password = $"{name}Password";
 
-            var source = CreateAccountSource(name);
+			var source = CreateAccountSource(name);
 
-            var account = CreateAccount(name, password, source.Id);
+			var account = CreateAccount(name, password, source.Id);
 
 			var accounts = _accountController.Get(new string[] { name }, source.Id);
 			Assert.Equal(accounts.Count(), 1);
@@ -119,25 +119,25 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Password = password,
 				UserId = user.Id,
 				User = user,
-                AccountSourceId = sourceId
-            };
+				AccountSourceId = sourceId
+			};
 			
 			return _accountController.Create(account);
 		}
 
-        private AccountSource CreateAccountSource(string name)
-        {
-            var source = new AccountSource
-            {
-                Description = name,
-                Token = name,
-                RequiresPassword = true,
-            };
+		private AccountSource CreateAccountSource(string name)
+		{
+			var source = new AccountSource
+			{
+				Description = name,
+				Token = name,
+				RequiresPassword = true,
+			};
 
-            return _accountSourceController.Create(source);
-        }
+			return _accountSourceController.Create(source);
+		}
 
-        private User CreateUser(string name)
+		private User CreateUser(string name)
 		{
 			var user = new User()
 			{

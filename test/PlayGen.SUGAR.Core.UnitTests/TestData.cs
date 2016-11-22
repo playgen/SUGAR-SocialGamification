@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 Name = "Group_" + name,
             };
             //todo use actual user id instead of 0
-            _groupController.Create(group, 0);
+            _groupController.Create(group, 1);
 
             return group;
         }
@@ -120,7 +120,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 Name = "Game_" + name,
             };
             //todo use actual user id instead of 0
-            _gameController.Create(game, 0);
+            _gameController.Create(game, 1);
 
             return game;
         }
