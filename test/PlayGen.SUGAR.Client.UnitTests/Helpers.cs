@@ -14,6 +14,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             {
                 Name = "admin",
                 Password = "admin",
+                SourceToken = "SUGAR",
                 AutoLogin = true,
             };
 

@@ -7,6 +7,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
     public abstract class ControllerLocator
     {
         private static AccountController _accountController;
+        private static AccountSourceController _accountSourceController;
         private static ActorRoleController _actorRoleController;
         private static ClaimController _claimController;
         private static EvaluationController _evaluationController;
@@ -23,7 +24,10 @@ namespace PlayGen.SUGAR.Core.UnitTests
         private static UserFriendController _userFriendController;
 
         public static AccountController AccountController
-            => _accountController ?? (_accountController = new AccountController(DbControllerLocator.AccountController, UserController, ActorRoleController));
+            => _accountController ?? (_accountController = new AccountController(DbControllerLocator.AccountController, AccountSourceController, UserController, ActorRoleController));
+
+        public static AccountSourceController AccountSourceController
+            => _accountSourceController ?? (_accountSourceController = new AccountSourceController(DbControllerLocator.AccountSourceController));
 
         public static ActorRoleController ActorRoleController
             => _actorRoleController ?? (_actorRoleController = new ActorRoleController(DbControllerLocator.ActorRoleController, RoleController, RoleClaimController));

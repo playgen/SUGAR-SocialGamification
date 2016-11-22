@@ -23,6 +23,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Name = "CanRegisterNewUserAndLogin",
 				Password = "CanRegisterNewUserAndLoginPassword",
+                SourceToken = "SUGAR",
 				AutoLogin = true,
 			};
 

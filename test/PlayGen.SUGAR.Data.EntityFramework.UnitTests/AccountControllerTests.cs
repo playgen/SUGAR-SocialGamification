@@ -11,7 +11,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	{
 		#region Configuration
 		private readonly AccountController _accountController = ControllerLocator.AccountController;
-		private readonly UserController _userController = ControllerLocator.UserController;
+        private readonly AccountSourceController _accountSourceController = ControllerLocator.AccountSourceController;
+        private readonly UserController _userController = ControllerLocator.UserController;
 		#endregion
 
 		#region Tests
@@ -21,9 +22,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var name = "CreateAndGetAccount";
 			string password = $"{name}Password";
 
-			CreateAccount(name, password);
+            var source = CreateAccountSource(name);
+			CreateAccount(name, password, source.Id);
 
-			var accounts = _accountController.Get(new string[] { name });
+			var accounts = _accountController.Get(new string[] { name }, source.Id);
 
 			var matches = accounts.Count(a => a.Name == name);
 
@@ -36,9 +38,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var name = "CreateDuplicateAccount";
 			string password = $"{name}Password";
 
-			CreateAccount(name, password);
+            var source = CreateAccountSource(name);
+            CreateAccount(name, password, source.Id);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateAccount(name, password));
+            Assert.Throws<DuplicateRecordException>(() => CreateAccount(name, password, source.Id));
 		}
 
 		[Fact]
@@ -52,14 +55,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				"GetMultipleAccountsByName4",
 			};
 
-			foreach (var name in names)
+            var source = CreateAccountSource("GetMultipleAccountsByName");
+
+            foreach (var name in names)
 			{
-				CreateAccount(name, $"{name}Password");
+				CreateAccount(name, $"{name}Password", source.Id);
 			}
 
-			CreateAccount("GetMultipleAccountsByName_DontGetThis", "GetMultipleAccountsByName_DontGetThisPassword");
+			CreateAccount("GetMultipleAccountsByName_DontGetThis", "GetMultipleAccountsByName_DontGetThisPassword", source.Id);
 
-			var accounts = _accountController.Get(names);
+			var accounts = _accountController.Get(names, source.Id);
 
 			var matchingAccounts = accounts.Select(a => names.Contains(a.Name));
 
@@ -69,7 +74,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetNonExistingAccounts()
 		{
-			var accounts = _accountController.Get(new string[] { "GetNonExsitingAccounts" });
+            var source = CreateAccountSource("GetNonExistingAccounts");
+
+            var accounts = _accountController.Get(new string[] { "GetNonExsitingAccounts" }, source.Id);
 
 			Assert.Empty(accounts);
 		}
@@ -80,14 +87,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var name = "DeleteExistingAccount";
 			string password = $"{name}Password";
 
-			var account = CreateAccount(name, password);
+            var source = CreateAccountSource(name);
 
-			var accounts = _accountController.Get(new string[] { name });
+            var account = CreateAccount(name, password, source.Id);
+
+			var accounts = _accountController.Get(new string[] { name }, source.Id);
 			Assert.Equal(accounts.Count(), 1);
 			Assert.Equal(accounts.ElementAt(0).Name, name);
 
 			_accountController.Delete(account.Id);
-			accounts = _accountController.Get(new string[] { name });
+			accounts = _accountController.Get(new string[] { name }, source.Id);
 
 			Assert.Empty(accounts);
 		}
@@ -100,7 +109,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Helpers
-		private Account CreateAccount(string name, string password)
+		private Account CreateAccount(string name, string password, int sourceId)
 		{
 			var user = CreateUser(name);
 
@@ -109,13 +118,26 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Name = name,
 				Password = password,
 				UserId = user.Id,
-				User = user
-			};
+				User = user,
+                AccountSourceId = sourceId
+            };
 			
 			return _accountController.Create(account);
 		}
 
-		private User CreateUser(string name)
+        private AccountSource CreateAccountSource(string name)
+        {
+            var source = new AccountSource
+            {
+                Description = name,
+                Token = name,
+                RequiresPassword = true,
+            };
+
+            return _accountSourceController.Create(source);
+        }
+
+        private User CreateUser(string name)
 		{
 			var user = new User()
 			{

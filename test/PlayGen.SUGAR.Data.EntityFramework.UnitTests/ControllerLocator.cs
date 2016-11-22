@@ -12,7 +12,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
         public static readonly SUGARContextFactory ContextFactory = new SUGARContextFactory(ConnectionString);
 
         private static AccountController _accountController;
-		private static ActorController _actorController;
+        private static AccountSourceController _accountSourceController;
+        private static ActorController _actorController;
         private static ActorRoleController _actorRoleController;
         private static ClaimController _claimController;
         private static GameController _gameController;
@@ -26,10 +27,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
         private static UserController _userController;
 		private static UserRelationshipController _userRelationshipController;
 
-        public static Controllers.AccountController AccountController
-			=> _accountController ?? (_accountController = new Controllers.AccountController(ContextFactory));
+        public static AccountController AccountController
+			=> _accountController ?? (_accountController = new AccountController(ContextFactory));
 
-		public static EvaluationController EvaluationController
+        public static AccountSourceController AccountSourceController
+            => _accountSourceController ?? (_accountSourceController = new AccountSourceController(ContextFactory));
+
+        public static EvaluationController EvaluationController
 			=> _evaluationController ?? (_evaluationController = new EvaluationController(ContextFactory));
 
         public static  ActorController ActorController
