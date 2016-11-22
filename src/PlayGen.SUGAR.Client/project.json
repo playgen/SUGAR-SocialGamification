@@ -27,6 +27,6 @@
   },
 
   "scripts": {
-    "postcompile": [ "xcopy /I /Y \"%compile:OutputDir%\\*\" \"%project:Directory%\\..\\..\\..\\sugar-demo\\Assets\\Plugins\\SUGAR\"" ]
+    "postcompile": [ "xcopy /I /Y \"%compile:OutputDir%\\*\" \"%project:Directory%\\..\\..\\..\\Unity\\Assets\\Plugins\\SUGAR\"" ]
   }
 }
