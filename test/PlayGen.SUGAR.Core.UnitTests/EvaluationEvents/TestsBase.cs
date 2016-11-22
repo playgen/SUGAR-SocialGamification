@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                     Key = $"{name}_{i}",
                     DataType = GameDataType.Long,
                     CriteriaQueryType = CriteriaQueryType.Sum,
-                    ComparisonType = ComparisonType.Greater,
+                    ComparisonType = ComparisonType.GreaterOrEqual,
                     Scope = CriteriaScope.Actor,
                     Value = "100"
                 });
@@ -77,7 +77,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 DataType = evaluationCriteria.DataType,
 
                 GameId = gameId,
-                Value = "100"
+                Value = "50"
             };
         }
     }
