@@ -9,6 +9,8 @@ namespace PlayGen.SUGAR.Client
 	/// </summary>
 	public class UserFriendClient : ClientBase
 	{
+		private const string ControllerPrefix = "api/userfriend";
+
 		public UserFriendClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
 			: base(baseAddress, httpHandler, evaluationNotifications)
 		{
@@ -21,7 +23,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetFriendRequests(int userId)
 		{
-			var query = GetUriBuilder("api/userfriend/requests/{0}", userId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/requests/{0}", userId).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -32,7 +34,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetSentRequests(int userId)
 		{
-			var query = GetUriBuilder("api/userfriend/sentrequests/{0}", userId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/sentrequests/{0}", userId).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -43,7 +45,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetFriends(int userId)
 		{
-			var query = GetUriBuilder("api/userfriend/friends/{0}", userId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/friends/{0}", userId).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -55,7 +57,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
 		public RelationshipResponse CreateFriendRequest(RelationshipRequest relationship)
 		{
-			var query = GetUriBuilder("api/userfriend").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "").ToString();
 			return Post<RelationshipRequest, RelationshipResponse>(query, relationship);
 		}
 
@@ -66,7 +68,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		public void UpdateFriendRequest(RelationshipStatusUpdate relationship)
 		{
-			var query = GetUriBuilder("api/userfriend/request").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/request").ToString();
 			Put(query, relationship);
 		}
 
@@ -77,7 +79,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		public void UpdateFriend(RelationshipStatusUpdate relationship)
 		{
-			var query = GetUriBuilder("api/userfriend").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "").ToString();
 			Put(query, relationship);
 		}
 	}
