@@ -8,7 +8,6 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
     public class ActorRoleController
     {
-		//todo actorclaim needs actorrole which needs actorclaim...
         private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
 		private readonly Data.EntityFramework.Controllers.RoleController _roleController;
 

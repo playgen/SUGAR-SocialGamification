@@ -8,7 +8,8 @@ namespace PlayGen.SUGAR.Core.UnitTests
     {
         private static AccountController _accountController;
         private static AccountSourceController _accountSourceController;
-        private static ActorRoleController _actorRoleController;
+		private static ActorClaimController _actorClaimController;
+		private static ActorRoleController _actorRoleController;
         private static ClaimController _claimController;
         private static EvaluationController _evaluationController;
         private static GameController _gameController;
@@ -29,8 +30,11 @@ namespace PlayGen.SUGAR.Core.UnitTests
         public static AccountSourceController AccountSourceController
             => _accountSourceController ?? (_accountSourceController = new AccountSourceController(DbControllerLocator.AccountSourceController));
 
-        public static ActorRoleController ActorRoleController
-            => _actorRoleController ?? (_actorRoleController = new ActorRoleController(DbControllerLocator.ActorRoleController, RoleController, RoleClaimController));
+		public static ActorClaimController ActorClaimController
+			=> _actorClaimController ?? (_actorClaimController = new ActorClaimController(DbControllerLocator.ActorClaimController, ActorRoleController, RoleClaimController));
+
+		public static ActorRoleController ActorRoleController
+            => _actorRoleController ?? (_actorRoleController = new ActorRoleController(DbControllerLocator.ActorRoleController, DbControllerLocator.RoleController));
 
         public static ClaimController ClaimController
             => _claimController ?? (_claimController = new ClaimController(DbControllerLocator.ClaimController, DbControllerLocator.RoleController, DbControllerLocator.RoleClaimController));
@@ -63,10 +67,10 @@ namespace PlayGen.SUGAR.Core.UnitTests
             => _rewardController ?? (_rewardController = new RewardController(GameDataController, GroupMemberController, UserFriendController));
 
         public static RoleController RoleController
-            => _roleController ?? (_roleController = new RoleController(DbControllerLocator.RoleController));
+            => _roleController ?? (_roleController = new RoleController(DbControllerLocator.RoleController, ActorRoleController));
 
         public static RoleClaimController RoleClaimController
-            => _roleClaimController ?? (_roleClaimController = new RoleClaimController(ClaimController, RoleController, DbControllerLocator.RoleClaimController, DbControllerLocator.ActorRoleController));
+            => _roleClaimController ?? (_roleClaimController = new RoleClaimController(DbControllerLocator.RoleClaimController));
 
         public static UserController UserController
             => _userController ?? (_userController = new UserController(DbControllerLocator.UserController, ActorRoleController));

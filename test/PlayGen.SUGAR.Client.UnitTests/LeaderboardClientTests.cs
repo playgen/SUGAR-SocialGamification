@@ -299,7 +299,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			Assert.AreEqual(3, getResponse.Count());
 
-			var getCheck = getResponse.Select(g => leaderboardNames.Contains(g.Name));
+			var getCheck = getResponse.Where(g => leaderboardNames.Any(ln => g.Name.Contains(ln)));
 
 			Assert.AreEqual(3, getCheck.Count());
 		}

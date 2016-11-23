@@ -14,7 +14,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
         private static AccountController _accountController;
         private static AccountSourceController _accountSourceController;
         private static ActorController _actorController;
-        private static ActorRoleController _actorRoleController;
+		private static ActorClaimController _actorClaimController;
+		private static ActorRoleController _actorRoleController;
         private static ClaimController _claimController;
         private static GameController _gameController;
 		private static GameDataController _gameDataController;
@@ -39,11 +40,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
         public static  ActorController ActorController
 			=> _actorController ?? (_actorController = new ActorController(ContextFactory));
 
-        public static ActorRoleController ActorRoleController
-       => _actorRoleController ?? (_actorRoleController = new ActorRoleController(ContextFactory));
+		public static ActorClaimController ActorClaimController
+			=> _actorClaimController ?? (_actorClaimController = new ActorClaimController(ContextFactory));
+
+		public static ActorRoleController ActorRoleController
+			=> _actorRoleController ?? (_actorRoleController = new ActorRoleController(ContextFactory));
 
         public static ClaimController ClaimController
-        => _claimController ?? (_claimController = new ClaimController(ContextFactory));
+			=> _claimController ?? (_claimController = new ClaimController(ContextFactory));
 
         public static GameController GameController 
 			=> _gameController ?? (_gameController = new GameController(ContextFactory));

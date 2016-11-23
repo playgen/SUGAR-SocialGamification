@@ -77,7 +77,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var received = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.AreEqual(2, received.Count());
 		}
 
 		[Test]
@@ -209,7 +209,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			received = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.AreEqual(2, received.Count());
 		}
 
 		[Test]
@@ -257,7 +257,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			received = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.AreEqual(0, received.Count());
+			Assert.AreEqual(1, received.Count());
 		}
 
 		[Test]
@@ -319,7 +319,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var received = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.AreEqual(2, received.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
 			{
@@ -335,7 +335,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			received = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.AreEqual(0, received.Count());
+			Assert.AreEqual(1, received.Count());
 		}
 
 		[Test]
@@ -379,7 +379,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			Assert.AreEqual(5, requests.Count());
 
-			var requestCheck = requests.Select(r => requestorNames.Contains(r.Name));
+			var requestCheck = requests.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
 
 			Assert.AreEqual(5, requestCheck.Count());
 		}
@@ -411,7 +411,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			Assert.AreEqual(5, requests.Count());
 
-			var requestCheck = requests.Select(r => acceptorNames.Contains(r.Name));
+			var requestCheck = requests.Where(r => acceptorNames.Any(an => r.Name.Contains(an)));
 
 			Assert.AreEqual(5, requestCheck.Count());
 		}
@@ -442,9 +442,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var members = _groupMemberClient.GetMembers(acceptor.Id);
 
-			Assert.AreEqual(5, members.Count());
+			Assert.AreEqual(6, members.Count());
 
-			var memberCheck = members.Select(r => requestorNames.Contains(r.Name));
+			var memberCheck = members.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
 
 			Assert.AreEqual(5, memberCheck.Count());
 		}
@@ -477,7 +477,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			Assert.AreEqual(5, userGroups.Count());
 
-			var groupCheck = userGroups.Select(r => acceptorNames.Contains(r.Name));
+			var groupCheck = userGroups.Where(r => acceptorNames.Any(an => r.Name.Contains(an)));
 
 			Assert.AreEqual(5, groupCheck.Count());
 		}
