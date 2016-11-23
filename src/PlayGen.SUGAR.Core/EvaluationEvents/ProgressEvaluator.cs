@@ -19,74 +19,28 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 		{
 			_evaluationCriteriaEvaluator = evaluationCriteriaEvaluator;
 		}
-
-		// <gameId, <actorId, <evaluation, progress>>>
-		public Dictionary<int?, Dictionary<int, Dictionary<Evaluation, float>>> StartTracking(int? gameId, int actorId)
-		{
-			// todo add game and user to list to evaluate against
-			EvaluateActor(gameId, actorId);
-			//throw new NotImplementedException();
-			return null;
-		}
-
-		public void StopTracking(int? gameId, int actorId)
+		
+		public void RemoveActor(int? gameId, int actorId)
 		{
 			// todo remove progress for user for game
 			throw new NotImplementedException();
 		}
 
-		// progress: <evaluationId, progress>
-		public bool TryGetProgress(int? gameId, int actorId, out Dictionary<Evaluation, float> progress, Evaluation evaluation = null)
+		// <evaluation, progress>
+		public Dictionary<Evaluation, float> EvaluateActor(IEnumerable<Evaluation> evaluations, int? gameId, Actor actor)
 		{
-			var didGetProgress = false;
-			progress = null;
+		    foreach (var evaluation in evaluations)
+		    {
+                var progress = _evaluationCriteriaEvaluator.IsCriteriaSatisified(gameId, actor.Id, evaluation.EvaluationCriterias, actor.ActorType);
+		        _progressCache.AddProgress(gameId, actor.Id, evaluation, progress);
+		    }
 
-			Dictionary<int, Dictionary<Evaluation, float>> gameProgress;
-
-			if (_progressCache.TryGetValue(gameId, out gameProgress))
-			{
-				Dictionary<Evaluation, float> actorProgress;
-
-				if (gameProgress.TryGetValue(actorId, out actorProgress))
-				{
-					if(evaluation != null)
-					{
-						float progressValue;
-
-						if (progress.TryGetValue(evaluation, out progressValue))
-						{
-							progress = new Dictionary<Evaluation, float>()
-							{
-								{evaluation, progressValue}
-							};
-						}
-						else
-						{
-							progress = null;
-						}
-					}
-
-					didGetProgress = progress.Any();
-				}
-			}
-
-			return didGetProgress;
+		    var actorProgress = _progressCache.GetActorProgress(gameId, actor.Id);
+            return actorProgress;
 		}
 
 		// <gameId, <actorId, <evaluation, progress>>>
-		public Dictionary<int?, Dictionary<int, Dictionary<Evaluation, float>>> EvaluateActor(int? gameId, int actorId)
-		{
-			// todo run all evaluations for this game against this user's data and store the results
-
-			// todo if the evalution was completed, trigger an event to notify the user of the completion next time they 
-			// request their achievements - keep an evaluation progress stack that users can query to get their status
-
-			//throw new NotImplementedException();
-			return null;
-		}
-
-		// <gameId, <actorId, <evaluation, progress>>>
-		public Dictionary<int?, Dictionary<int, Dictionary<Evaluation, float>>> Evaluate(Evaluation evaluation)
+		public Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> Evaluate(Evaluation evaluation)
 		{
 			var affectedActors = GetAffectedActors(evaluation);
 
@@ -99,7 +53,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 		}
 
 		// <gameId, <actorId, <evaluation, progress>>>
-		public Dictionary<int?, Dictionary<int, Dictionary<Evaluation, float>>> Evaluate(IEnumerable<Evaluation> evaluations, GameData gameData)
+		public Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> Evaluate(IEnumerable<Evaluation> evaluations, GameData gameData)
 		{
 			var affectedActorsByEvaluation = GetAffectedActors(evaluations, gameData);
 
@@ -121,7 +75,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 		}
 
 		// <gameId, <actorId, <evaluation, progress>>>
-		private Dictionary<int?, Dictionary<int, Dictionary<Evaluation, float>>> EvaluateActor(Evaluation evaluation, int actorId)
+		private Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> EvaluateActor(Evaluation evaluation, int actorId)
 		{
 			// todo evaluate against te actor
 			throw new NotImplementedException();
@@ -142,7 +96,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 		private List<int> GetAffectedActors(Evaluation evaluation)
 		{
 			// todo based on evaluation actor type and scope
-			return _progressCache[evaluation.GameId].Keys.ToList();
+			return _progressCache.GetActors(evaluation.GameId);
 		}
 
 		private List<int> GetAffectedActors(Evaluation evaluation, GameData gameData)

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 {
-    public abstract class TestsBase : IDisposable
+    public abstract class EvaluationTestsBase : IDisposable
     {
         protected readonly EvaluationTracker EvaluationTracker;
         protected readonly EvaluationGameDataMapper GameDataMapper;
@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
         protected readonly ProgressNotificationCache ProgressNotificationCache;
         protected readonly CriteriaEvaluator CriteriaEvaluator;
 
-        protected TestsBase()
+        protected EvaluationTestsBase()
         {
             CriteriaEvaluator = new CriteriaEvaluator(ControllerLocator.GameDataController,
                 ControllerLocator.GroupMemberController, ControllerLocator.UserFriendController);
