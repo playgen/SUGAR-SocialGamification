@@ -26,13 +26,15 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         public void OnActorSessionStarted(int? gameId, int actorId)
         {
-            var progress = _progressEvaluator.StartTracking(gameId, actorId);
-            _progressNotificationCache.Check(progress);
+            // todo get evaluations for game
+
+            //var actorProgress = _progressEvaluator.EvaluateActor(gameId, actorId);
+            //_progressNotificationCache.CheckActor(gameId, actorId, actorProgress);
         }
 
         public void OnActorSessionEnded(int? gameId, int actorId)
         {
-            _progressEvaluator.StopTracking(gameId, actorId);
+            _progressEvaluator.RemoveActor(gameId, actorId);
             _progressNotificationCache.Remove(gameId, actorId);
         }
 
