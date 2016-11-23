@@ -134,7 +134,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 ActorId = actorId,
                 Key = key,
                 Value = "100",
-                DataType = GameDataType.Long,
+                SaveDataType = SaveDataType.Long,
                 Category = GameDataCategory.Resource,
             };
             _resourceController.Create(resource);
@@ -147,7 +147,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
             return lhs.ActorId == rhs.ActorId
                 && lhs.GameId == rhs.GameId
                 && lhs.Category == rhs.Category
-                && lhs.DataType == rhs.DataType
+                && lhs.SaveDataType == rhs.SaveDataType
                 && lhs.Key == rhs.Key
                 && lhs.Value == rhs.Value;
         }

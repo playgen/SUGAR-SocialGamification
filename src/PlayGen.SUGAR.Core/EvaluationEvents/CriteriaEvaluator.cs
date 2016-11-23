@@ -44,16 +44,16 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 				var groupActors = GroupMemberCoreController.GetMembers(actorId.Value);
 				switch (completionCriteria.DataType)
 				{
-					case GameDataType.Boolean:
+					case SaveDataType.Boolean:
 						return EvaluateManyBool(gameId, groupActors, completionCriteria);
 
-					case GameDataType.String:
+					case SaveDataType.String:
 						return EvaluateManyString(gameId, groupActors, completionCriteria);
 
-					case GameDataType.Float:
+					case SaveDataType.Float:
 						return EvaluateManyFloat(gameId, groupActors, completionCriteria);
 
-					case GameDataType.Long:
+					case SaveDataType.Long:
 						return EvaluateManyLong(gameId, groupActors, completionCriteria);
 
 					default:
@@ -64,16 +64,16 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			{
 				switch (completionCriteria.DataType)
 				{
-					case GameDataType.Boolean:
+					case SaveDataType.Boolean:
 						return EvaluateBool(gameId, actorId, completionCriteria);
 
-					case GameDataType.String:
+					case SaveDataType.String:
 						return EvaluateString(gameId, actorId, completionCriteria);
 
-					case GameDataType.Float:
+					case SaveDataType.Float:
 						return EvaluateFloat(gameId, actorId, completionCriteria);
 
-					case GameDataType.Long:
+					case SaveDataType.Long:
 						return EvaluateLong(gameId, actorId, completionCriteria);
 
 					default:
@@ -232,7 +232,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             return actorList.Sum(a => EvaluateBool(gameId, a.Id, completionCriteria)) / actorList.Count;
 		}
 
-		protected static float CompareValues<T>(T value, T expected, ComparisonType comparisonType, GameDataType dataType) where T : IComparable
+		protected static float CompareValues<T>(T value, T expected, ComparisonType comparisonType, SaveDataType dataType) where T : IComparable
 		{
 			var comparisonResult = value.CompareTo(expected);
 
@@ -250,12 +250,12 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 					{
 						return 1;
 					}
-			        if (!(comparisonResult > 0) && (dataType == GameDataType.String || dataType == GameDataType.Boolean))
+			        if (!(comparisonResult > 0) && (dataType == SaveDataType.String || dataType == SaveDataType.Boolean))
 			        {
 			            return 0;
 			        }
 			        if ((float.TryParse(expected.ToString(), out expectedNum))) {
-			            if (dataType == GameDataType.Long)
+			            if (dataType == SaveDataType.Long)
 			            {
 			                expectedNum += 1;
 			            } else
@@ -271,7 +271,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 					{
 						return 1;
 					}
-			        if (!(comparisonResult >= 0) && (dataType == GameDataType.String || dataType == GameDataType.Boolean))
+			        if (!(comparisonResult >= 0) && (dataType == SaveDataType.String || dataType == SaveDataType.Boolean))
 			        {
 			            return 0;
 			        }

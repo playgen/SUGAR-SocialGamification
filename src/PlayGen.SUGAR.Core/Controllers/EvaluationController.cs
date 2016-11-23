@@ -139,7 +139,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 				Key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token),
 				GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game
 				ActorId = actorId,
-				DataType = GameDataType.String,
+				SaveDataType = SaveDataType.String,
 				Value = null
 			};
 			GameDataCoreController.Add(gameData);

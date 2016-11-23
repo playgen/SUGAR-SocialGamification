@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 				Key = reward.Key,
 				GameId = gameId,    //TODO: handle the case where a global achievement has been completed for a specific game
 				ActorId = actorId,
-				DataType = reward.DataType,
+				SaveDataType = reward.DataType,
 				Value = reward.Value
 			};
 			GameDataCoreController.Add(gameData);

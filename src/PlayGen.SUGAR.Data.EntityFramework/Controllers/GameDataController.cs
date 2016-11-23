@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Long)
+					.FilterByDataType(SaveDataType.Long)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Float)
+					.FilterByDataType(SaveDataType.Float)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -106,7 +106,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.String)
+					.FilterByDataType(SaveDataType.String)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -124,7 +124,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Boolean)
+					.FilterByDataType(SaveDataType.Boolean)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -142,7 +142,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Float)
+					.FilterByDataType(SaveDataType.Float)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -160,7 +160,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Long)
+					.FilterByDataType(SaveDataType.Long)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -178,7 +178,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Float)
+					.FilterByDataType(SaveDataType.Float)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -201,7 +201,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Long)
+					.FilterByDataType(SaveDataType.Long)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -224,7 +224,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Float)
+					.FilterByDataType(SaveDataType.Float)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -247,7 +247,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Long)
+					.FilterByDataType(SaveDataType.Long)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -270,7 +270,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Long)
+					.FilterByDataType(SaveDataType.Long)
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 
@@ -294,7 +294,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Float)
+					.FilterByDataType(SaveDataType.Float)
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 
@@ -318,7 +318,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.Boolean)
+					.FilterByDataType(SaveDataType.Boolean)
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 				
@@ -342,7 +342,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(GameDataType.String)
+					.FilterByDataType(SaveDataType.String)
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 
@@ -357,7 +357,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public int CountKeys(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public int CountKeys(int? gameId, int? actorId, string key, SaveDataType SaveDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -366,7 +366,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(gameDataType)
+					.FilterByDataType(SaveDataType)
 					.FilterByDateTimeRange(start, end)
 					.Count();
 
@@ -375,7 +375,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		}
 
         // todo change to bool TryGet[name](out value) pattern
-		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, SaveDataType SaveDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 		    using (var context = ContextFactory.Create())
@@ -384,7 +384,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(gameDataType)
+					.FilterByDataType(SaveDataType)
 					.FilterByDateTimeRange(start, end)
 					.FirstOrDefault();
 
@@ -394,7 +394,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, SaveDataType SaveDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 		    using (var context = ContextFactory.Create())
@@ -403,7 +403,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(gameDataType)
+					.FilterByDataType(SaveDataType)
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 

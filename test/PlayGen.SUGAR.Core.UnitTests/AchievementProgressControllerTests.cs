@@ -132,13 +132,13 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
 			foreach (var kvp in dataValues)
 			{
-				CreateData(game, user, kvp.Key, kvp.Value.DataType, kvp.Value.Values);
+				CreateData(game, user, kvp.Key, kvp.Value.SaveDataType, kvp.Value.Values);
 			}
 
 			return dataValues;
 		}
 		
-		private void CreateData(Game game, User user, string key, DataType valueType, params object[] values)
+		private void CreateData(Game game, User user, string key, SaveDataType valueType, params object[] values)
 		{
 			foreach (var value in values)
 			{
@@ -151,14 +151,14 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
 					Key = key,
 					Value = value.ToString(),
-					DataType = valueType,
+					SaveDataType = valueType,
 				};
 
 				// Because the tests for these objects rely on their timestamps being different, 
 				// their entry into the database needs to be temporally separated.
 				// Could rather try sort these values in a linq expression in the test evaluation as the 
 				// ticks may vary but this method seems close to what a user would do.
-				if (valueType == GameDataType.Boolean || valueType == GameDataType.String)
+				if (valueType == SaveDataType.Boolean || valueType == SaveDataType.String)
 				{
 					Thread.Sleep(1000);
 				}
@@ -203,7 +203,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 							.Select(i => (random.NextDouble()*1000) - 100)
 							.ToArray().Cast<object>().ToArray(),
 
-						DataType = GameDataType.Float,
+						SaveDataType = SaveDataType.Float,
 					}
 				},
 				{
@@ -215,7 +215,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 							.Select(i => random.Next(-10, 100))
 							.ToArray().Cast<object>().ToArray(),
 
-						DataType = GameDataType.Long,
+						SaveDataType = SaveDataType.Long,
 					}
 				},
 				{
@@ -227,7 +227,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 							.Select(c => c.EnglishName)
 							.ToArray().Cast<object>().ToArray(),
 
-						DataType = GameDataType.String,
+						SaveDataType = SaveDataType.String,
 					}
 				},
 				{
@@ -238,7 +238,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 							.Select(i => random.Next(0, 2) == 1)
 							.ToArray().Cast<object>().ToArray(),
 
-						DataType = GameDataType.Boolean,
+						SaveDataType = SaveDataType.Boolean,
 					}
 				},
 			};
@@ -248,7 +248,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		{
 			public object[] Values { get; set; }
 
-			public DataType DataType;
+			public SaveDataType SaveDataType;
 		}
 		#endregion*/
 	}

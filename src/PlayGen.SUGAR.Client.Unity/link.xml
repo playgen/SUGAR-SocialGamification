@@ -12,9 +12,9 @@
 		<type fullname="PlayGen.SUGAR.Contracts.ComparisonType" preserve="all"/>
 		<type fullname="PlayGen.SUGAR.Contracts.CriteriaQueryType" preserve="all"/>
 		<type fullname="PlayGen.SUGAR.Contracts.CriteriaScope" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.GameDataRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.GameDataResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.GameDataType" preserve="all"/>
+		<type fullname="PlayGen.SUGAR.Contracts.SaveDataRequest" preserve="all"/>
+		<type fullname="PlayGen.SUGAR.Contracts.SaveDataResponse" preserve="all"/>
+		<type fullname="PlayGen.SUGAR.Contracts.SaveDataType" preserve="all"/>
 		<type fullname="PlayGen.SUGAR.Contracts.GameRequest" preserve="all"/>
 		<type fullname="PlayGen.SUGAR.Contracts.GameResponse" preserve="all"/>
 		<type fullname="PlayGen.SUGAR.Contracts.LeaderboardFilterType" preserve="all"/>

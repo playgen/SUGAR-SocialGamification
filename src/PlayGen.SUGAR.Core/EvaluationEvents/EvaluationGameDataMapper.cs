@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         public bool TryGetRelated(GameData gameData, out HashSet<Evaluation> relatedEvaluations)
         {
-            var mappedKey = CreateMappingKey(gameData.GameId, gameData.DataType, gameData.Key);
+            var mappedKey = CreateMappingKey(gameData.GameId, gameData.SaveDataType, gameData.Key);
             return _mappings.TryGetValue(mappedKey, out relatedEvaluations);
         }
 
@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             }
         }
 
-        private string CreateMappingKey(int? gameId, GameDataType dataType, string gameDataKey)
+        private string CreateMappingKey(int? gameId, SaveDataType dataType, string gameDataKey)
         {
             return $"{gameId};{dataType};{gameDataKey}";
         }

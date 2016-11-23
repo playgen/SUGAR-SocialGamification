@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Actor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataCategory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationProgress.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteria.cs" />
@@ -18,11 +19,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)CriteriaQueryType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CriteriaScope.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\SUGARException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameDataType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardFilterType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Permissions\ClaimScope.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Reward.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SaveDataType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Web\HeaderKeys.cs" />
   </ItemGroup>
 </Project>

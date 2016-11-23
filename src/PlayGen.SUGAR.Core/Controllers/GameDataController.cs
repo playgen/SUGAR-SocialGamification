@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Core.Controllers
                 }
                 else
                 {
-                    throw new ArgumentException($"Invalid Value {newData.Value} for GameDataType {newData.DataType}");
+                    throw new ArgumentException($"Invalid Value {newData.Value} for SaveDataType {newData.SaveDataType}");
                 }
 
                 if (dataList.Count >= chunkSize || i == datas.Length - 1)
@@ -59,7 +59,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             }
             else
             {
-                throw new ArgumentException($"Invalid Value {newData.Value} for GameDataType {newData.DataType}");
+                throw new ArgumentException($"Invalid Value {newData.Value} for SaveDataType {newData.SaveDataType}");
             }
         }
 
@@ -165,42 +165,42 @@ namespace PlayGen.SUGAR.Core.Controllers
             return didGetLatest;
         }
 
-        public int CountKeys(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public int CountKeys(int? gameId, int? actorId, string key, SaveDataType SaveDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
         {
-            var count = _gameDataDbController.CountKeys(gameId, actorId, key, gameDataType, start, end);
+            var count = _gameDataDbController.CountKeys(gameId, actorId, key, SaveDataType, start, end);
             return count;
         }
 
         // todo change to bool TryGet[name](out value) pattern
-        public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, SaveDataType SaveDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
         {
-            var didGetEarliestKey = _gameDataDbController.TryGetEarliestKey(gameId, actorId, key, gameDataType, start, end);
+            var didGetEarliestKey = _gameDataDbController.TryGetEarliestKey(gameId, actorId, key, SaveDataType, start, end);
             return didGetEarliestKey;
         }
 
         // todo change to bool TryGet[name](out value) pattern
-        public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, GameDataType gameDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, SaveDataType SaveDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
         {
-            var didGetLatestKey = _gameDataDbController.TryGetLatestKey(gameId, actorId, key, gameDataType, start, end);
+            var didGetLatestKey = _gameDataDbController.TryGetLatestKey(gameId, actorId, key, SaveDataType, start, end);
             return didGetLatestKey;
         }
 
         protected bool ParseCheck(GameData data)
         {
-            switch (data.DataType)
+            switch (data.SaveDataType)
             {
-                case GameDataType.String:
+                case SaveDataType.String:
                     return true;
 
-                case GameDataType.Long:
+                case SaveDataType.Long:
                     long tryLong;
                     return long.TryParse(data.Value, out tryLong);
                     
-                case GameDataType.Float:
+                case SaveDataType.Float:
                     float tryFloat;
                     return float.TryParse(data.Value, out tryFloat);
                     
-                case GameDataType.Boolean:
+                case SaveDataType.Boolean:
                     bool tryBoolean;
                     return bool.TryParse(data.Value, out tryBoolean);
 

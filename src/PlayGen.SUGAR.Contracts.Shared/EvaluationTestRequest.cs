@@ -9,6 +9,6 @@
 //		public EvaluationRequest Achievement { get; set; }
 
 //		[Required]
-//		public List<GameDataRequest> GameDatas { get; set; }
+//		public List<SaveDataRequest> GameDatas { get; set; }
 //	}
 //}

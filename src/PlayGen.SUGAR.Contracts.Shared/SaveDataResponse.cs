@@ -12,10 +12,10 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// GameId : 1,
 	/// Key : "Data Key",
 	/// Value : "10",
-	/// GameDataType : "Long"
+	/// SaveDataType : "Long"
 	/// }
 	/// </example>
-	public class GameDataResponse
+	public class SaveDataResponse
 	{
 		/// <summary>
 		/// The id of the Actor which this GameData relates to.
@@ -40,6 +40,6 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		/// <summary>
 		/// The type of the value for this data.
 		/// </summary>
-		public GameDataType GameDataType { get; set; }
+		public SaveDataType SaveDataType { get; set; }
 	}
 }

@@ -23,26 +23,26 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="key">Array of Key names.</param>
-		/// <returns>A list of <see cref="GameDataResponse"/> which match the search criteria.</returns>
-		public IEnumerable<GameDataResponse> Get(int? actorId, int? gameId, string[] key)
+		/// <returns>A list of <see cref="SaveDataResponse"/> which match the search criteria.</returns>
+		public IEnumerable<SaveDataResponse> Get(int? actorId, int? gameId, string[] key)
 		{
 			var query = GetUriBuilder(ControllerPrefix)
 				.AppendQueryParameter(actorId, "actorId={0}")
 				.AppendQueryParameter(gameId, "gameId={0}")
 				.AppendQueryParameters(key, "key={0}")
 				.ToString();
-			return Get<IEnumerable<GameDataResponse>>(query);
+			return Get<IEnumerable<SaveDataResponse>>(query);
 		}
 
 		/// <summary>
 		/// Create a new GameData record.
 		/// </summary>
-		/// <param name="data"><see cref="GameDataRequest"/> object that holds the details of the new GameData.</param>
-		/// <returns>A <see cref="GameDataResponse"/> containing the new GameData details.</returns>
-		public GameDataResponse Add(GameDataRequest data)
+		/// <param name="data"><see cref="SaveDataRequest"/> object that holds the details of the new GameData.</param>
+		/// <returns>A <see cref="SaveDataResponse"/> containing the new GameData details.</returns>
+		public SaveDataResponse Add(SaveDataRequest data)
 		{
 			var query = GetUriBuilder(ControllerPrefix).ToString();
-			return Post<GameDataRequest, GameDataResponse>(query, data);
+			return Post<SaveDataRequest, SaveDataResponse>(query, data);
 		}
 	}
 }
