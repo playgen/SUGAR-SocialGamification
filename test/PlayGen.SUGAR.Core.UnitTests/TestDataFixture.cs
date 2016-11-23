@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Data.Model;
+using Xunit;
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
-    public static class TestData
+    [CollectionDefinition("Test Data Fixture Collection")]
+    public class TestDataFixtureCollection : ICollectionFixture<TestDataFixture>
+    {
+        // This class has no code, and is never created. Its purpose is simply
+        // to be the place to apply [CollectionDefinition] and all the
+        // ICollectionFixture<> interfaces.
+    }
+    public class TestDataFixture : ProjectFixture
     {
         public const int UserCount = 100;
         public const int GameCount = 100;
@@ -30,8 +38,13 @@ namespace PlayGen.SUGAR.Core.UnitTests
         public static IReadOnlyList<Game> Games => _games;
         public static IReadOnlyList<User> Users => _users;
         public static IReadOnlyList<Group> Groups => _groups;
-        
-        public static void PopulateData()
+
+        public TestDataFixture()
+        {
+            PopulateData();
+        }
+
+        private void PopulateData()
         {
             _games.Clear();
             _users.Clear();
