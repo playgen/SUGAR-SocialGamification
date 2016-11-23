@@ -41,7 +41,8 @@ namespace PlayGen.SUGAR.Core.Controllers
         {
             newGroup = _groupDbController.Create(newGroup);
             _actorRoleController.Create(ClaimScope.Group.ToString(), creatorId, newGroup.Id);
-            return newGroup;
+			_groupMemberController.CreateMemberRequest(new UserToGroupRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
+			return newGroup;
         }
         
         public void Update(Group group)

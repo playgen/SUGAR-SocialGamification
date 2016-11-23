@@ -61,12 +61,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Role)]
         public IActionResult Create([FromBody]RoleRequest newRole)
         {
-            if (_authorizationService.AuthorizeAsync(User, ClaimScope.Global, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
-                _authorizationService.AuthorizeAsync(User, ClaimScope.Group, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-                _authorizationService.AuthorizeAsync(User, ClaimScope.Game, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+            if (_authorizationService.AuthorizeAsync(User, newRole.ClaimScope, (AuthorizationRequirement)HttpContext.Items[newRole.ClaimScope + "Requirements"]).Result)
             {
                 var role = newRole.ToModel();
-                _roleCoreController.Create(role);
+                _roleCoreController.Create(role, int.Parse(User.Identity.Name));
                 var roleContract = role.ToContract();
                 return new ObjectResult(roleContract);
             }
@@ -85,8 +83,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         {
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
-                _roleCoreController.Delete(id);
-                return Ok();
+				var role = _roleCoreController.GetById(id);
+				if (role.Name != role.ClaimScope.ToString())
+				{
+					_roleCoreController.Delete(id);
+					return Ok();
+				}
             }
             return Forbid();
         }

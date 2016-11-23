@@ -73,18 +73,19 @@ namespace PlayGen.SUGAR.Core.Controllers
 		                   Name = toRegister.Name
 		               });
 
-		    var registered = _accountDbController.Create(new Account
+			if (source.RequiresPassword)
+			{
+				toRegister.Password = PasswordEncryption.Encrypt(toRegister.Password);
+			}
+
+			var registered = _accountDbController.Create(new Account
 		    {
                 Name = toRegister.Name,
+				Password = toRegister.Password,
                 AccountSourceId = source.Id,
                 UserId = user.Id,
                 User = user
             });
-
-            if (source.RequiresPassword)
-            {
-                registered.Password = PasswordEncryption.Encrypt(toRegister.Password);
-            }
 
             _actorRoleController.Create(ClaimScope.Account.ToString(), registered.UserId, registered.Id);
 

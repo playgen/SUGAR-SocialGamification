@@ -9,7 +9,8 @@ namespace PlayGen.SUGAR.WebAPI
         {
             services.AddScoped<AccountController>();
             services.AddScoped<AccountSourceController>();
-            services.AddScoped<ActorRoleController>();
+			services.AddScoped<ActorClaimController>();
+			services.AddScoped<ActorRoleController>();
             services.AddScoped<EvaluationController>();
             services.AddScoped<GameController>();
             services.AddScoped<GameDataController>();

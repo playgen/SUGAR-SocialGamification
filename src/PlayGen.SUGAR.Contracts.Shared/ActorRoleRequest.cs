@@ -2,18 +2,18 @@
 
 namespace PlayGen.SUGAR.Contracts.Shared
 {
-    /// <summary>
-    /// Encapsulates role details.
-    /// </summary>
-    /// <example>
-    /// JSON
-    /// {
-    /// ActorId : 1,
-    /// RoleId : 1,
-    /// EntityId : 1
-    /// }
-    /// </example>
-    public class ActorRoleRequest
+	/// <summary>
+	/// Encapsulates actorrole details.
+	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// ActorId : 1,
+	/// RoleId : 1,
+	/// EntityId : 1
+	/// }
+	/// </example>
+	public class ActorRoleRequest
     {
         /// <summary>
         /// The ID of the actor related to this actorrole.

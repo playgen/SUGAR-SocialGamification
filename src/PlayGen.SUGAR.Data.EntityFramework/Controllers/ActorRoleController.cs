@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
         {
             using (var context = ContextFactory.Create())
             {
-                var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Actor).ToList();
+                var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Actor).Distinct().ToList();
                 return actors;
             }
         }

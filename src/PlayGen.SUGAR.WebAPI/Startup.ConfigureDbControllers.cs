@@ -24,7 +24,8 @@ namespace PlayGen.SUGAR.WebAPI
             services.AddScoped<ClaimController>();
             services.AddScoped<RoleController>();
             services.AddScoped<ActorRoleController>();
-            services.AddScoped<RoleClaimController>();
+			services.AddScoped<ActorClaimController>();
+			services.AddScoped<RoleClaimController>();
         }
     }
 }

@@ -10,70 +10,59 @@ namespace PlayGen.SUGAR.Core.Authorization
 {
     public class AuthorizationHandler : AuthorizationHandler<AuthorizationRequirement, int>
     {
-        private readonly ActorRoleController _actorRoleDbController;
+        private readonly ActorClaimController _actorClaimDbController;
         private readonly ClaimController _claimDbController;
-        private readonly RoleClaimController _roleClaimDbController;
 
-        public AuthorizationHandler(ActorRoleController actorRoleDbController,
-                    ClaimController claimDbController,
-                    RoleClaimController roleClaimDbController)
+        public AuthorizationHandler(ActorClaimController actorClaimDbController,
+                    ClaimController claimDbController)
         {
-            _actorRoleDbController = actorRoleDbController;
+            _actorClaimDbController = actorClaimDbController;
             _claimDbController = claimDbController;
-            _roleClaimDbController = roleClaimDbController;
         }
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement, int entityId)
         {
-            return AuthorizationHandlerHelper.HandleRequirements(_claimDbController, _actorRoleDbController, _roleClaimDbController, context, requirement, entityId);
+            return AuthorizationHandlerHelper.HandleRequirements(_claimDbController, _actorClaimDbController, context, requirement, entityId);
         }
     }
 
     public class AuthorizationHandlerWithNull : AuthorizationHandler<AuthorizationRequirement>
     {
-        private readonly ActorRoleController _actorRoleDbController;
-        private readonly ClaimController _claimDbController;
-        private readonly RoleClaimController _roleClaimDbController;
+		private readonly ActorClaimController _actorClaimDbController;
+		private readonly ClaimController _claimDbController;
 
-        public AuthorizationHandlerWithNull(ActorRoleController actorRoleDbController,
-                    ClaimController claimDbController,
-                    RoleClaimController roleClaimDbController)
-        {
-            _actorRoleDbController = actorRoleDbController;
-            _claimDbController = claimDbController;
-            _roleClaimDbController = roleClaimDbController;
-        }
+		public AuthorizationHandlerWithNull(ActorClaimController actorClaimDbController,
+					ClaimController claimDbController)
+		{
+			_actorClaimDbController = actorClaimDbController;
+			_claimDbController = claimDbController;
+		}
 
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement)
-        {
-            return AuthorizationHandlerHelper.HandleRequirements(_claimDbController, _actorRoleDbController, _roleClaimDbController, context, requirement);
-        }
-    }
+		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement)
+		{
+			return AuthorizationHandlerHelper.HandleRequirements(_claimDbController, _actorClaimDbController, context, requirement);
+		}
+	}
 
     public class AuthorizationHandlerWithoutEntity : AuthorizationHandler<AuthorizationRequirement, ClaimScope>
     {
-        private readonly ActorRoleController _actorRoleDbController;
-        private readonly ClaimController _claimDbController;
-        private readonly RoleClaimController _roleClaimDbController;
+		private readonly ActorClaimController _actorClaimDbController;
+		private readonly ClaimController _claimDbController;
 
-        public AuthorizationHandlerWithoutEntity(ActorRoleController actorRoleDbController,
-                    ClaimController claimDbController,
-                    RoleClaimController roleClaimDbController)
-        {
-            _actorRoleDbController = actorRoleDbController;
-            _claimDbController = claimDbController;
-            _roleClaimDbController = roleClaimDbController;
-        }
+		public AuthorizationHandlerWithoutEntity(ActorClaimController actorClaimDbController,
+					ClaimController claimDbController)
+		{
+			_actorClaimDbController = actorClaimDbController;
+			_claimDbController = claimDbController;
+		}
 
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement, ClaimScope scope)
+		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement, ClaimScope scope)
         {
             var claim = _claimDbController.Get(requirement.ClaimScope, requirement.Name);
-            if (claim != null)
+            if (claim != null && claim.ClaimScope == scope)
             {
-                var actorRoles = _actorRoleDbController.GetActorRoles(int.Parse(context.User.Identity.Name)).ToList();
-                actorRoles.AddRange(_actorRoleDbController.GetActorRoles(int.Parse(context.User.Identity.Name)).ToList());
-                var claims = _roleClaimDbController.GetClaimsByRoles(actorRoles.Select(r => r.RoleId));
-                if (claims.Any(c => c.Id == claim.Id))
+                var claims = _actorClaimDbController.GetActorClaims(int.Parse(context.User.Identity.Name)).ToList();
+				if (claims.Any(c => c.Id == claim.Id))
                 {
                     context.Succeed(requirement);
                 }
