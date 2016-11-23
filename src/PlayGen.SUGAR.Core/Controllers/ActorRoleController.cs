@@ -8,17 +8,15 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
     public class ActorRoleController
     {
+		//todo actorclaim needs actorrole which needs actorclaim...
         private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
-        private readonly RoleController _roleController;
-        private readonly RoleClaimController _roleClaimController;
+		private readonly Data.EntityFramework.Controllers.RoleController _roleController;
 
         public ActorRoleController(Data.EntityFramework.Controllers.ActorRoleController actorRoleDbController,
-                    RoleController roleController,
-                    RoleClaimController roleClaimController)
+					Data.EntityFramework.Controllers.RoleController roleController)
         {
             _actorRoleDbController = actorRoleDbController;
-            _roleController = roleController;
-            _roleClaimController = roleClaimController;
+			_roleController = roleController;
         }
 
         public ActorRole Get(int id)
@@ -35,8 +33,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 
         public IEnumerable<Role> GetActorRolesForEntity(int actorId, int? entityId)
         {
-            var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId.Value);
-            return roles;
+            var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId.Value).ToList();
+			var adminRoles = _actorRoleDbController.GetActorRolesForEntity(actorId, -1).ToList();
+			return roles.Concat(adminRoles).Distinct();
         }
 
         public IEnumerable<Actor> GetRoleActors(int roleId, int? entityId)
@@ -48,16 +47,13 @@ namespace PlayGen.SUGAR.Core.Controllers
         public IEnumerable<Role> GetControlled(int actorId)
         {
             var actorRoles = _actorRoleDbController.GetActorRoles(actorId).ToList();
-            var roles = actorRoles.Where(ar => ar.EntityId.Value != -1).Select(ar => _roleController.GetById(ar.EntityId.Value)).ToList();
-            roles = roles.Where(r => r.ClaimScope == ClaimScope.Role).ToList();
-            if (actorRoles.Any(ar => ar.EntityId.Value == -1))
-            {
-                actorRoles = actorRoles.Where(ar => ar.EntityId.Value == -1).ToList();
-                var newRoleScopes = actorRoles.Select(ar => _roleController.GetById(ar.RoleId)).Select(nr => nr.ClaimScope).ToList();
-                var newRoles = newRoleScopes.SelectMany(nr => _roleController.GetByScope(nr)).Distinct().ToList();
-                roles.AddRange(newRoles);
-            }
-            return roles;
+			var controlledRoles = actorRoles.Where(ar => _roleController.Get(ar.RoleId).ClaimScope == ClaimScope.Role).ToList();
+			if (controlledRoles.Any(ar => ar.EntityId.Value == -1))
+			{
+				return _roleController.Get();
+			}
+			var roles = controlledRoles.Select(cr => _roleController.Get(cr.EntityId.Value));
+			return roles;
         }
 
         public ActorRole Create(ActorRole newRole)
@@ -66,40 +62,17 @@ namespace PlayGen.SUGAR.Core.Controllers
             return newRole;
         }
 
-        public ActorRole Create(ActorRole newRole, int actorId)
-        {
-            var creatorRoles = GetActorRoles(actorId).ToList();
-            var creatorClaims = _roleClaimController.GetClaimsByRoles(creatorRoles.Select(r => r.RoleId)).Select(c => c.Id);
-            var newClaims = _roleClaimController.GetClaimsByRole(newRole.RoleId).Select(c => c.Id);
-            if (!newClaims.All(nc => creatorClaims.Contains(nc)))
-            {
-                throw new UnauthorizedAccessException($"User does not have correct permissions");
-            }
-            newRole = _actorRoleDbController.Create(newRole);
-            return newRole;
-        }
-
         public void Create(string roleName, int actorId, int? entityId)
         {
-            var role = _roleController.GetByName(roleName);
+            var role = _roleController.Get(roleName);
             if (role != null)
             {
                 Create(new ActorRole { ActorId = actorId, RoleId = role.Id, EntityId = entityId.Value });
             }
         }
 
-        public void Delete(int id, int actorId)
+        public void Delete(int id)
         {
-            var actorRole = Get(id);
-            var role = _roleController.GetById(actorRole.RoleId);
-            if (role.Name == role.ClaimScope.ToString())
-            {
-                var roleCount = GetRoleActors(actorRole.RoleId, actorRole.EntityId.Value).ToList().Count;
-                if (roleCount <= 1)
-                {
-                    throw new ArgumentException($"Permission cannot be removed");
-                }
-            }
             _actorRoleDbController.Delete(id);
         }
     }

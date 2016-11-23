@@ -13,6 +13,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)AccountResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountSourceRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountSourceResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorClaimRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorClaimResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorRoleRequest.cs" />
