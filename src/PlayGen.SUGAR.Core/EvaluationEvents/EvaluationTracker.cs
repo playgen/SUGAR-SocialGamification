@@ -9,15 +9,15 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     /// </summary>
     public class EvaluationTracker
     {
-        private readonly ProgressCache _progressCache;
+        private readonly ProgressEvaluator _progressEvaluator;
         private readonly ProgressNotificationCache _progressNotificationCache;
         private readonly EvaluationGameDataMapper _gameDataToEvaluationMapper;
 
         public EvaluationTracker(EvaluationGameDataMapper gameDataToEvaluationMapper,
-            ProgressCache progressCache,
+            ProgressEvaluator progressEvaluator,
             ProgressNotificationCache progressNotificationCache)
         {
-            _progressCache = progressCache;
+            _progressEvaluator = progressEvaluator;
             _gameDataToEvaluationMapper = gameDataToEvaluationMapper;
             _progressNotificationCache = progressNotificationCache;
         
@@ -26,13 +26,13 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         public void OnActorSessionStarted(int? gameId, int actorId)
         {
-            var progress = _progressCache.StartTracking(gameId, actorId);
+            var progress = _progressEvaluator.StartTracking(gameId, actorId);
             _progressNotificationCache.Check(progress);
         }
 
         public void OnActorSessionEnded(int? gameId, int actorId)
         {
-            _progressCache.StopTracking(gameId, actorId);
+            _progressEvaluator.StopTracking(gameId, actorId);
             _progressNotificationCache.Remove(gameId, actorId);
         }
 
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
             if (_gameDataToEvaluationMapper.TryGetRelated(gameData, out evaluations))
             {
-                var progress = _progressCache.Evaluate(evaluations, gameData);
+                var progress = _progressEvaluator.Evaluate(evaluations, gameData);
                 _progressNotificationCache.Check(progress);
             }
         }
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         public void OnEvaluationAdded(Evaluation evaluation)
         {
             _gameDataToEvaluationMapper.CreateMapping(evaluation);
-            var progress = _progressCache.Evaluate(evaluation);
+            var progress = _progressEvaluator.Evaluate(evaluation);
             _progressNotificationCache.Check(progress);
         }
 
@@ -64,7 +64,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             _gameDataToEvaluationMapper.RemoveMapping(evaluation);
             _gameDataToEvaluationMapper.CreateMapping(evaluation);
 
-            var progress = _progressCache.Evaluate(evaluation);
+            var progress = _progressEvaluator.Evaluate(evaluation);
             _progressNotificationCache.Check(progress);
         }
 
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         {
             _gameDataToEvaluationMapper.RemoveMapping(evaluation);
 
-            _progressCache.Remove(evaluation);
+            _progressEvaluator.Remove(evaluation);
             _progressNotificationCache.Remove(evaluation);
         }
 

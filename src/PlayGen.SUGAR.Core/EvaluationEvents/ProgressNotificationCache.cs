@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     public class ProgressNotificationCache
     {
         // <gameId, <actorId, <evaluation, progress>>>
-        private readonly Dictionary<int?, Dictionary<int, Queue<KeyValuePair<Evaluation, float>>>> _pendingNotifications = new Dictionary<int?, Dictionary<int, Queue<KeyValuePair<Evaluation, float>>>>();
+        private readonly Dictionary<int, Dictionary<int, Queue<KeyValuePair<Evaluation, float>>>> _pendingNotifications = new Dictionary<int, Dictionary<int, Queue<KeyValuePair<Evaluation, float>>>>();
         
         // <gameId, <actorId, <evaluation, progress>>>
         public void Check(Dictionary<int?, Dictionary<int, Dictionary<Evaluation, float>>> progress)

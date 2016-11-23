@@ -8,7 +8,7 @@ namespace PlayGen.SUGAR.Data.Model
 
         public abstract Common.Shared.EvaluationType EvaluationType { get; }
 
-        public int GameId { get; set; }
+        public int? GameId { get; set; }
 
         public string Name { get; set; }
 

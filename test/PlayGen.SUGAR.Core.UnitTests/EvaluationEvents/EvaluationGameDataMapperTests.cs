@@ -6,6 +6,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 {
+    //[Collection("Project Fixture Collection")]
     public class EvaluationGameDataMapperTests : TestsBase
     {
         [Fact]
@@ -18,10 +19,8 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 
             for (var i = 0; i < count; i++)
             {
-                var gameId = TestData.Games[i].Id;
-
-                shouldGetEvaluations.Add(CreateEvaluation($"MapsExistingEvaluationsGameData_{i}", gameId));
-                shouldntGetEvaluations.Add(CreateEvaluation($"MapsExistingEvaluationsGameData_Ignore_{i}", gameId));
+               shouldGetEvaluations.Add(Helpers.ComposeEvaluation($"MapsExistingEvaluationsGameData_{i}"));
+                shouldntGetEvaluations.Add(Helpers.ComposeEvaluation($"MapsExistingEvaluationsGameData_Ignore_{i}"));
             }
 
             // Act
@@ -33,7 +32,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             {
                 foreach (var evaluationCriteria in shouldGetEvaluation.EvaluationCriterias)
                 {
-                    var gameData = CreateGameData(evaluationCriteria, shouldGetEvaluation.GameId);
+                    var gameData = Helpers.ComposeGameData(evaluationCriteria, shouldGetEvaluation.GameId);
 
                     HashSet<Evaluation> relatedEvaluations;
                     var didGetRelated = GameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
@@ -51,15 +50,13 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
         {
             // Arrange
             var count = 10;
-            var gameId = TestData.Games[0].Id;
-            var removeEvaluation = CreateEvaluation($"RemovesEvaluationsGameDataMapping", gameId);
+            var removeEvaluation = Helpers.ComposeEvaluation($"RemovesEvaluationsGameDataMapping");
 
             var shouldntRemoveEvaluations = new List<Evaluation>(count);
 
             for (var i = 0; i < count; i++)
             {
-                gameId = TestData.Games[i].Id;
-                shouldntRemoveEvaluations.Add(CreateEvaluation($"RemovesEvaluationsGameDataMapping_ShouldntRemove_{i}", gameId));
+                shouldntRemoveEvaluations.Add(Helpers.ComposeEvaluation($"RemovesEvaluationsGameDataMapping_ShouldntRemove_{i}"));
             }
 
             GameDataMapper.CreateMapping(removeEvaluation);
@@ -72,7 +69,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             // Make sure removed evaluation isn't returned
             foreach (var evaluationCriteria in removeEvaluation.EvaluationCriterias)
             {
-                var gameData = CreateGameData(evaluationCriteria, removeEvaluation.GameId);
+                var gameData = Helpers.ComposeGameData(evaluationCriteria, removeEvaluation.GameId);
 
                 HashSet<Evaluation> relatedEvaluations;
                 var didGetRelated = GameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
@@ -89,7 +86,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             {
                 foreach (var evaluationCriteria in shouldntRemoveEvaluation.EvaluationCriterias)
                 {
-                    var gameData = CreateGameData(evaluationCriteria, shouldntRemoveEvaluation.GameId);
+                    var gameData = Helpers.ComposeGameData(evaluationCriteria, shouldntRemoveEvaluation.GameId);
 
                     HashSet<Evaluation> relatedEvaluations;
                     var didGetRelated = GameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
