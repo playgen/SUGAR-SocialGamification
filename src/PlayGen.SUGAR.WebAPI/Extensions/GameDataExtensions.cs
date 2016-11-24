@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				return null;
 			}
 
-            return new SaveDataResponse
+			return new SaveDataResponse
 			{
 				ActorId = gameData.ActorId,
 				GameId = gameData.GameId,
@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			return gameDatas.Select(ToContract).ToList();
 		}
 
-		public static Data.Model.GameData ToModel(this SaveDataRequest dataContract)
+		public static Data.Model.GameData ToGameDataModel(this SaveDataRequest dataContract)
 		{
 			return new Data.Model.GameData
 			{

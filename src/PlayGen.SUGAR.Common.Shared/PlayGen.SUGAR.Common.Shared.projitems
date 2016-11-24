@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Actor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DataCategory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationProgress.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteria.cs" />

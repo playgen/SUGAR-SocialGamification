@@ -3,7 +3,7 @@
 namespace PlayGen.SUGAR.Contracts.Shared
 {
 	/// <summary>
-	/// Encapsulates GameData details from the server.
+	/// Encapsulates ActorData/GameData details from the server.
 	/// </summary>
 	/// <example>
 	/// JSON
@@ -18,12 +18,12 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	public class SaveDataResponse
 	{
 		/// <summary>
-		/// The id of the Actor which this GameData relates to.
+		/// The id of the Actor which this ActorData/GameData relates to.
 		/// </summary>
 		public int? ActorId { get; set; }
 
 		/// <summary>
-		/// The id of the Game which this GameData relates to.
+		/// The id of the Game which this ActorData/GameData relates to.
 		/// </summary>
 		public int? GameId { get; set; }
 
