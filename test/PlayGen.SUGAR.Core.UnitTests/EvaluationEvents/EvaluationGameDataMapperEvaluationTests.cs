@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
@@ -35,7 +36,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
                 {
                     var gameData = Helpers.ComposeGameData(0, evaluationCriteria, shouldGetEvaluation.GameId);
 
-                    HashSet<Evaluation> relatedEvaluations;
+                    IEnumerable<Evaluation> relatedEvaluations;
                     var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
 
                     Assert.True(didGetRelated, "Should have gotten related evaluations.");
@@ -73,7 +74,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             {
                 var gameData = Helpers.ComposeGameData(0, evaluationCriteria, removeEvaluation.GameId);
 
-                HashSet<Evaluation> relatedEvaluations;
+                IEnumerable<Evaluation> relatedEvaluations;
                 var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
 
                 // Either shouldn't have gotten related or if did, shouldn't have returned the removed evaluation
@@ -90,7 +91,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
                 {
                     var gameData = Helpers.ComposeGameData(0, evaluationCriteria, shouldntRemoveEvaluation.GameId);
 
-                    HashSet<Evaluation> relatedEvaluations;
+                    IEnumerable<Evaluation> relatedEvaluations;
                     var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
 
                     Assert.True(didGetRelated, "Shouldn't have removed unremoved evaluations.");

@@ -71,7 +71,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         public void OnGameDataAdded(GameData gameData)
         {
-            HashSet<Evaluation> evaluations;
+            IEnumerable<Evaluation> evaluations;
 
             if (_gameDataToEvaluationMapper.TryGetRelated(gameData, out evaluations))
             {

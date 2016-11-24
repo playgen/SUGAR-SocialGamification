@@ -19,48 +19,48 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
 		public ProgressCache EvaluateActor(IEnumerable<Evaluation> evaluations, Session session)
 		{
-            var progress = new ProgressCache();
+			var progress = new ProgressCache();
 
-            foreach (var evaluation in evaluations)
-		    {
-                AddProgress(progress, evaluation, session);
-            }
+			foreach (var evaluation in evaluations)
+			{
+				AddProgress(progress, evaluation, session);
+			}
 
-            return progress;
+			return progress;
 		}
 
 		public ProgressCache EvaluateSessions(IEnumerable<Session> sessions, Evaluation evaluation)
 		{
-            var progress = new ProgressCache();
+			var progress = new ProgressCache();
 
-            foreach (var session in sessions)
-            {
-                AddProgress(progress, evaluation, session);
-            }
+			foreach (var session in sessions)
+			{
+				AddProgress(progress, evaluation, session);
+			}
 
-            return progress;
-        }
+			return progress;
+		}
 
 		public ProgressCache EvaluateSessions(IEnumerable<Session> sessions, IEnumerable<Evaluation> evaluations)
 		{
-            var progress = new ProgressCache();
+			var progress = new ProgressCache();
 
-            foreach (var session in sessions)
-		    {
-		        foreach (var evaluation in evaluations)
-		        {
-                    AddProgress(progress, evaluation, session);
-                }
-		    }
+			foreach (var session in sessions)
+			{
+				foreach (var evaluation in evaluations)
+				{
+					AddProgress(progress, evaluation, session);
+				}
+			}
 
-            return progress;
+			return progress;
 		}
 
-	    private void AddProgress(ProgressCache progress, Evaluation evaluation, Session session)
-	    {
-	        var progressValue = _evaluationCriteriaEvaluator.IsCriteriaSatisified(evaluation.GameId, session.Actor.Id,
-	            evaluation.EvaluationCriterias, session.Actor.ActorType);
-	        progress.AddProgress(session.GameId, session.Actor.Id, evaluation, progressValue);
-	    }
+		private void AddProgress(ProgressCache progress, Evaluation evaluation, Session session)
+		{
+			var progressValue = _evaluationCriteriaEvaluator.IsCriteriaSatisified(evaluation.GameId, session.Actor.Id,
+				evaluation.EvaluationCriterias, session.Actor.ActorType);
+			progress.AddProgress(session.GameId, session.Actor.Id, evaluation, progressValue);
+		}
 	}
 }
