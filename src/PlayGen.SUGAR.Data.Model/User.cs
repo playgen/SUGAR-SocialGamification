@@ -4,8 +4,6 @@ namespace PlayGen.SUGAR.Data.Model
 {
 	public class User : Actor
 	{
-		public string Name { get; set; }
-
 		public virtual List<UserToGroupRelationship> UserToGroupRelationships { get; set; }
 
 		public virtual List<UserToGroupRelationshipRequest> UserToGroupRelationshipRequests { get; set; }

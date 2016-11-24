@@ -4,106 +4,63 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+using PlayGen.SUGAR.Core.Sessions;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
-	/// <summary>
-	/// Evaluation progress on actor per game basis for every actor that has an active session.
-	/// </summary>
 	public class ProgressEvaluator
 	{
-		private readonly ProgressCache _progressCache = new ProgressCache();
 		private readonly CriteriaEvaluator _evaluationCriteriaEvaluator;
 
 		public ProgressEvaluator(CriteriaEvaluator evaluationCriteriaEvaluator)
 		{
 			_evaluationCriteriaEvaluator = evaluationCriteriaEvaluator;
 		}
-		
-		public void RemoveActor(int? gameId, int actorId)
+
+		public ProgressCache EvaluateActor(IEnumerable<Evaluation> evaluations, Session session)
 		{
-			// todo remove progress for user for game
-			throw new NotImplementedException();
+            var progress = new ProgressCache();
+
+            foreach (var evaluation in evaluations)
+		    {
+                AddProgress(progress, evaluation, session);
+            }
+
+            return progress;
 		}
 
-		// <evaluation, progress>
-		public Dictionary<Evaluation, float> EvaluateActor(IEnumerable<Evaluation> evaluations, int? gameId, Actor actor)
+		public ProgressCache EvaluateSessions(IEnumerable<Session> sessions, Evaluation evaluation)
 		{
-		    foreach (var evaluation in evaluations)
+            var progress = new ProgressCache();
+
+            foreach (var session in sessions)
+            {
+                AddProgress(progress, evaluation, session);
+            }
+
+            return progress;
+        }
+
+		public ProgressCache EvaluateSessions(IEnumerable<Session> sessions, IEnumerable<Evaluation> evaluations)
+		{
+            var progress = new ProgressCache();
+
+            foreach (var session in sessions)
 		    {
-                var progress = _evaluationCriteriaEvaluator.IsCriteriaSatisified(gameId, actor.Id, evaluation.EvaluationCriterias, actor.ActorType);
-		        _progressCache.AddProgress(gameId, actor.Id, evaluation, progress);
+		        foreach (var evaluation in evaluations)
+		        {
+                    AddProgress(progress, evaluation, session);
+                }
 		    }
 
-		    var actorProgress = _progressCache.GetActorProgress(gameId, actor.Id);
-            return actorProgress;
+            return progress;
 		}
 
-		// <gameId, <actorId, <evaluation, progress>>>
-		public Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> Evaluate(Evaluation evaluation)
-		{
-			var affectedActors = GetAffectedActors(evaluation);
-
-			foreach (var actorId in affectedActors)
-			{
-				EvaluateActor(evaluation, actorId);
-			}
-
-			throw new NotImplementedException();
-		}
-
-		// <gameId, <actorId, <evaluation, progress>>>
-		public Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> Evaluate(IEnumerable<Evaluation> evaluations, GameData gameData)
-		{
-			var affectedActorsByEvaluation = GetAffectedActors(evaluations, gameData);
-
-			foreach (var evaluation in affectedActorsByEvaluation.Keys)
-			{
-				foreach (var actorId in affectedActorsByEvaluation[evaluation])
-				{
-					EvaluateActor(evaluation, actorId);
-				}
-			}
-
-			throw new NotImplementedException();
-		}
-
-		public void Remove(Evaluation evaluation)
-		{
-			// todo remove all progress for this evaluation
-			throw new NotImplementedException();
-		}
-
-		// <gameId, <actorId, <evaluation, progress>>>
-		private Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> EvaluateActor(Evaluation evaluation, int actorId)
-		{
-			// todo evaluate against te actor
-			throw new NotImplementedException();
-		}
-
-		private Dictionary<Evaluation, List<int>> GetAffectedActors(IEnumerable<Evaluation> evaluations, GameData gameData)
-		{
-			var affectedActorsByEvaluation = new Dictionary<Evaluation, List<int>>();
-
-			foreach (var evaluation in evaluations)
-			{
-				affectedActorsByEvaluation[evaluation] = GetAffectedActors(evaluation, gameData);
-			}
-
-			return affectedActorsByEvaluation;
-		}
-
-		private List<int> GetAffectedActors(Evaluation evaluation)
-		{
-			// todo based on evaluation actor type and scope
-			return _progressCache.GetActors(evaluation.GameId);
-		}
-
-		private List<int> GetAffectedActors(Evaluation evaluation, GameData gameData)
-		{
-			// todo based on evaluation actor type, scope and game data id determine which actors are affected for each evaluation
-			// todo make sure actor id is in the tracked actor id list
-			return new List<int>() { gameData.ActorId.Value }; // 
-		}
+	    private void AddProgress(ProgressCache progress, Evaluation evaluation, Session session)
+	    {
+	        var progressValue = _evaluationCriteriaEvaluator.IsCriteriaSatisified(evaluation.GameId, session.Actor.Id,
+	            evaluation.EvaluationCriterias, session.Actor.ActorType);
+	        progress.AddProgress(session.GameId, session.Actor.Id, evaluation, progressValue);
+	    }
 	}
 }

@@ -10,35 +10,120 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     public class ProgressNotificationCache
     {
         // <gameId, <actorId, <evaluation, progress>>>
-        private readonly Dictionary<int, Dictionary<int, Queue<KeyValuePair<Evaluation, float>>>> _pendingNotifications = new Dictionary<int, Dictionary<int, Queue<KeyValuePair<Evaluation, float>>>>();
-
-        // <evaluation, progress>
-        public void CheckActor(int? gameId, int actorId, Dictionary<Evaluation, float> progress)
+        // Latest stored last in <evaluation, progress> list.
+        private readonly Dictionary<int, Dictionary<int, List<KeyValuePair<Evaluation, float>>>> _pendingNotifications = new Dictionary<int, Dictionary<int, List<KeyValuePair<Evaluation, float>>>>();
+       
+        public bool Remove(int? gameId, int actorId)
         {
-            //throw new NotImplementedException();
+            var didRemove = false;
+
+            Dictionary<int, List<KeyValuePair<Evaluation, float>>> gameProgress;
+            if (_pendingNotifications.TryGetValue(gameId.ToInt(), out gameProgress))
+            {
+                if (gameProgress.Remove(actorId))
+                {
+                    didRemove = true;
+
+                    if (gameProgress.Count == 0)
+                    {
+                        _pendingNotifications.Remove(gameId.ToInt());
+                    }
+                }
+            }
+
+            return didRemove;
         }
 
-        public void Remove(int? gameId, int actorId)
+        public bool Remove(Evaluation evaluation)
         {
-            throw new NotImplementedException();
+            var didRemove = false;
+
+            foreach (var gameProgress in _pendingNotifications)
+            {
+                foreach (var actorProgress in gameProgress.Value)
+                {
+                    if (actorProgress.Value.RemoveAll(p => p.Key == evaluation) > 0)
+                    {
+                        didRemove = true;
+
+                        if (actorProgress.Value.Count == 0)
+                        {
+                            gameProgress.Value.Remove(actorProgress.Key);
+
+                            if (gameProgress.Value.Count == 0)
+                            {
+                                _pendingNotifications.Remove(gameProgress.Key);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return didRemove;
         }
 
-        public void Remove(Evaluation evaluation)
+        public void Update(ProgressCache addProgress)
         {
-            throw new NotImplementedException();
+            foreach (var addGameProgress in addProgress)
+            {
+                Dictionary<int, List<KeyValuePair<Evaluation, float>>> existingGameProgress;
+                if (!_pendingNotifications.TryGetValue(addGameProgress.Key, out existingGameProgress))
+                {
+                    existingGameProgress = new Dictionary<int, List<KeyValuePair<Evaluation, float>>>();
+                    _pendingNotifications[addGameProgress.Key] = existingGameProgress;
+                }
+
+                foreach (var addActorProgress in addGameProgress.Value)
+                {
+                    List<KeyValuePair<Evaluation, float>> existingActorProgress;
+                    if (!existingGameProgress.TryGetValue(addActorProgress.Key, out existingActorProgress))
+                    {
+                        existingActorProgress = new List<KeyValuePair<Evaluation, float>>();
+                        existingGameProgress[addActorProgress.Key] = existingActorProgress;
+                    }
+
+                    foreach (var addEvaluationProgress in addActorProgress.Value)
+                    {
+                        existingActorProgress.RemoveAll(p => p.Key == addEvaluationProgress.Key);
+                        existingActorProgress.Add(addEvaluationProgress);
+                    }
+                }
+            }
         }
 
-        // <actorId, <evaluation, progress>>
-        public Dictionary<int, Queue<KeyValuePair<Evaluation, float>>> GetNotifications(int? gameId, int actorId)
+        public Dictionary<int, List<KeyValuePair<Evaluation, float>>> Get(int? gameId, int actorId)
         {
-            // todo get notifications and remove
-            return null;
+            var actorsProgress = new Dictionary<int, List<KeyValuePair<Evaluation, float>>>();
+
+            List<KeyValuePair<Evaluation, float>> actorProgress;
+            if (TryTake(gameId, actorId, out actorProgress))
+            {
+                actorsProgress[actorId] = actorProgress;
+            }
+
+            // todo also add progress updates for groups here
+            return actorsProgress;
         }
 
-        // <gameId, <actorId, <evaluation, progress>>>
-        public void Check(Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>> progress)
+        private bool TryTake(int? gameId, int actorId, out List<KeyValuePair<Evaluation, float>> actorProgress)
         {
-            throw new NotImplementedException();
+            actorProgress = null;
+
+            Dictionary<int, List<KeyValuePair<Evaluation, float>>> gameProgress;
+            if (_pendingNotifications.TryGetValue(gameId.ToInt(), out gameProgress))
+            {
+                if (gameProgress.TryGetValue(actorId, out actorProgress))
+                {
+                    gameProgress.Remove(actorId);
+
+                    if (gameProgress.Count == 0)
+                    {
+                        _pendingNotifications.Remove(gameId.ToInt());
+                    }
+                }
+            }
+
+            return actorProgress != null;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Core.EvaluationEvents;
@@ -11,7 +12,11 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class EvaluationController : CriteriaEvaluator
 	{
-		private readonly RewardController _rewardController;
+	    public static Action<Evaluation> EvaluationCreatedEvent;
+        public static Action<Evaluation> EvaluationUpdatedEvent;
+        public static Action<Evaluation> EvaluationDeletedEvent;
+
+        private readonly RewardController _rewardController;
 		private readonly ActorController _actorController;
 		private readonly Data.EntityFramework.Controllers.EvaluationController _evaluationDbController;
 
@@ -35,8 +40,13 @@ namespace PlayGen.SUGAR.Core.Controllers
 			_actorController = actorController;
 		}
 
-		
-		public Evaluation Get(string token, int? gameId)
+        public IEnumerable<Evaluation> All()
+        {
+            var evaluations = _evaluationDbController.All();
+            return evaluations;
+        }
+
+        public Evaluation Get(string token, int? gameId)
 		{
 			var evaluation = _evaluationDbController.Get(token, gameId);
 			return evaluation;
@@ -62,13 +72,14 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return evaluationsProgress;
 		}
 	   
-		public EvaluationProgress GetProgress(string token, int? gameId, int? actorId)
+		public EvaluationProgress GetProgress(string token, int? gameId, int actorId)
 		{
 			var evaluation = _evaluationDbController.Get(token, gameId);
 			var progress = EvaluateProgress(evaluation, actorId);
 
 			return new EvaluationProgress
 			{
+                Actor = _actorController.Get(actorId),
 				Name = evaluation.Name,
 				Progress = progress,
 			};
@@ -77,17 +88,29 @@ namespace PlayGen.SUGAR.Core.Controllers
 		public Evaluation Create(Evaluation evaluation)
 		{
 			evaluation = _evaluationDbController.Create(evaluation);
-			return evaluation;
+
+            EvaluationCreatedEvent?.Invoke(evaluation);
+            return evaluation;
 		}
 		
 		public void Update(Evaluation evaluation)
 		{
 			_evaluationDbController.Update(evaluation);
-		}
+
+            EvaluationUpdatedEvent?.Invoke(evaluation);
+        }
 		
 		public void Delete(string token, int? gameId)
 		{
-			_evaluationDbController.Delete(token, gameId);
+		    var evaluation = Get(token, gameId);
+
+		    if (evaluation == null)
+		    {
+		        throw new MissingRecordException($"The evaluation with token \"{token}\" for gameId {gameId} cannot be found.");
+		    }
+
+            EvaluationDeletedEvent?.Invoke(evaluation);
+            _evaluationDbController.Delete(token, gameId);
 		}
 
 		public IEnumerable<Evaluation> FilterByActorType(IEnumerable<Evaluation> evaluations, int? actorId)
@@ -132,7 +155,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return completedProgress;
 		}
 
-		private void ProcessEvaluationRewards(Evaluation evaluation, int? actorId)
+        private void ProcessEvaluationRewards(Evaluation evaluation, int? actorId)
 		{
 			var gameData = new GameData()
 			{

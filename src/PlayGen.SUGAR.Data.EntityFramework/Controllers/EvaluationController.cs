@@ -3,6 +3,7 @@ using System.Linq;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
+using System;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -67,7 +68,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Delete(string token, int? gameId)
+        public IEnumerable<Evaluation> All()
+        {
+            using (var context = ContextFactory.Create())
+            {
+                return context.Evaluations.ToList();
+            }
+        }
+
+        public void Delete(string token, int? gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{

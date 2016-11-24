@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.WebAPI.Filters
             };
 
             context.Result = new ObjectResult(wrappedResponse);
-        }        
+        }
 
         private List<EvaluationProgressResponse> GetPendingEvents(HttpRequest request)
         {
@@ -60,11 +60,11 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 
         private List<EvaluationProgressResponse> GetPendingEvents(int gameId, int actorId)
         {
-            // todo when evaluation tracker is implemented, see todos below:
+            var pendingNotifications = _evaluationTracker.GetPendingNotifications(gameId, actorId);
+            var progressResponses = pendingNotifications.ToContractList();
 
             // todo remove this dummy code
-            var progressResponses = new List<EvaluationProgressResponse>()
-            {
+            progressResponses.Add(
                 new EvaluationProgressResponse
                 {
                     Actor = new ActorResponse
@@ -75,7 +75,8 @@ namespace PlayGen.SUGAR.WebAPI.Filters
                     Name = "DummyAchievementProgressResponse",
                     Progress = 1,
                     Type = EvaluationType.Achievement
-                },
+                });
+            progressResponses.Add(
                 new EvaluationProgressResponse
                 {
                     Actor = new ActorResponse
@@ -86,12 +87,8 @@ namespace PlayGen.SUGAR.WebAPI.Filters
                     Name = "DummySkillProgressResponse",
                     Progress = 1,
                     Type = EvaluationType.Skill
-                }
-            };
+                });
 
-            // todo uncomment below
-            //var pendingNotifications = _evaluationTracker.GetPendingNotifications(gameId, actorId);
-            //var progressResponses = pendingNotifications.ToContractList();
             return progressResponses;
         }
     }

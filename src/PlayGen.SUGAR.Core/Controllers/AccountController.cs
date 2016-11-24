@@ -1,4 +1,5 @@
-﻿using PlayGen.SUGAR.Core.Exceptions;
+﻿using System;
+using PlayGen.SUGAR.Core.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 
@@ -52,6 +53,7 @@ namespace PlayGen.SUGAR.Core.Controllers
                     {
                         verified = found;
                     }
+
                     return verified;
                 }
                 throw new InvalidAccountDetailsException("Invalid Login Details.");

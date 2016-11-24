@@ -1,5 +1,6 @@
 ﻿using System;
 using PlayGen.SUGAR.Core.EvaluationEvents;
+using PlayGen.SUGAR.Core.Sessions;
 using Xunit;
 
 namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
@@ -7,21 +8,17 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
     public abstract class EvaluationTestsBase : IDisposable
     {
         protected readonly EvaluationTracker EvaluationTracker;
-        protected readonly EvaluationGameDataMapper GameDataMapper;
         protected readonly ProgressEvaluator ProgressEvaluator;
-        protected readonly ProgressNotificationCache ProgressNotificationCache;
         protected readonly CriteriaEvaluator CriteriaEvaluator;
+        protected readonly SessionTracker SessionTracker = new SessionTracker();
 
         protected EvaluationTestsBase()
         {
             CriteriaEvaluator = new CriteriaEvaluator(ControllerLocator.GameDataController,
                 ControllerLocator.GroupMemberController, ControllerLocator.UserFriendController);
-
-            GameDataMapper = new EvaluationGameDataMapper();
             ProgressEvaluator = new ProgressEvaluator(CriteriaEvaluator);
-            ProgressNotificationCache = new ProgressNotificationCache();
 
-            EvaluationTracker = new EvaluationTracker(GameDataMapper, ProgressEvaluator, ProgressNotificationCache);
+            EvaluationTracker = new EvaluationTracker(ProgressEvaluator, ControllerLocator.EvaluationController, SessionTracker);
         }
 
         public void Dispose()

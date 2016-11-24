@@ -1,8 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using PlayGen.SUGAR.Core.EvaluationEvents;
+using PlayGen.SUGAR.Core.Sessions;
 using Xunit;
 using PlayGen.SUGAR.Data.Model;
 
@@ -25,45 +24,38 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 
 		[Fact]
 		public void CanEvaluateActor()
-		{
-			// Assign
-		    var evaluationCount = 2;
-			var actor = Helpers.GetOrCreateUser("CanEvaluateActor");
+        {
+            // Assign
+            var evaluationCount = 2;
+            var session = new Session
+            {
+                Actor = Helpers.GetOrCreateUser("CanEvaluateActor"),
+                GameId = null
+            };
 
             var evaluations = new List<Evaluation>();
 
-		    for (var i = 0; i < evaluationCount; i++)
-		    {
-                var evaluation = Helpers.CreateGenericAchievement($"CanEvaluateActorComplete_{i}");
-                Helpers.CompleteGenericAchievement(evaluation, actor.Id);
+            for (var i = 0; i < evaluationCount; i++)
+            {
+                var evaluation = Helpers.CreateGenericAchievement($"CanEvaluateActorComplete_{i}", session.GameId);
+                Helpers.CompleteGenericAchievement(evaluation, session.Actor.Id);
                 evaluations.Add(evaluation);
             }
-			
-			// Act
-			var progress = _progressEvaluator.EvaluateActor(evaluations, evaluations[0].GameId, actor);
+
+            // Act
+            var progress = _progressEvaluator.EvaluateActor(evaluations, session);
 
             // Assert
-            Assert.Equal(evaluations.Count, progress.Count); // Should have a progress value for each evaluation
+            var actorProgress = progress.GetActorProgress(session.GameId, session.Actor.Id);
+            Assert.True(evaluations.Count <= actorProgress.Count); // Should have a progress value for each evaluation
 
-		    foreach (var evaluation in evaluations)
-		    {
-                Assert.Contains(evaluation, progress.Keys); // Each evaluation should be returned in the progress
-                Assert.True(progress[evaluation] > 0);      // Make sure actually processed progress
+            foreach (var evaluation in evaluations)
+            {
+                Assert.Contains(evaluation, actorProgress.Keys); // Each evaluation should be returned in the progress
+                Assert.True(actorProgress[evaluation] > 0);      // Make sure actually processed progress
             }
         }
-
-        [Fact]
-		public void CanRemoveActor()
-		{
-			throw new NotImplementedException();
-		}
-
-		[Fact]
-		public void CanGetProgress()
-		{
-			throw new NotImplementedException();
-		}
-
+        
 		[Fact]
 		public void CanEvaluateEvaluation()
 		{
@@ -72,12 +64,6 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 
 		[Fact]
 		public void CanEvaluateEvaluations()
-		{
-			throw new NotImplementedException();
-		}
-
-		[Fact]
-		public void CanRemoveEvaluationProgress()
 		{
 			throw new NotImplementedException();
 		}

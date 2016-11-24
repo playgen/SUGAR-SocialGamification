@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using PlayGen.SUGAR.Core.UnitTests;
-using PlayGen.SUGAR.Core.UnitTests.EvaluationEvents;
+﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
 
@@ -16,6 +13,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
         public void CreateAndGetRelated()
         {
             // Arrange
+            var gameDataMapper = new EvaluationGameDataMapper();
             var count = 10;
             var shouldGetEvaluations = new List<Evaluation>(count);
             var shouldntGetEvaluations = new List<Evaluation>(count);
@@ -27,8 +25,8 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             }
 
             // Act
-            GameDataMapper.CreateMappings(shouldGetEvaluations);
-            GameDataMapper.CreateMappings(shouldntGetEvaluations);
+            gameDataMapper.CreateMappings(shouldGetEvaluations);
+            gameDataMapper.CreateMappings(shouldntGetEvaluations);
 
             // Assert
             foreach (var shouldGetEvaluation in shouldGetEvaluations)
@@ -38,7 +36,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
                     var gameData = Helpers.ComposeGameData(0, evaluationCriteria, shouldGetEvaluation.GameId);
 
                     HashSet<Evaluation> relatedEvaluations;
-                    var didGetRelated = GameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
+                    var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
 
                     Assert.True(didGetRelated, "Should have gotten related evaluations.");
                     Assert.Contains(shouldGetEvaluation, relatedEvaluations);
@@ -52,6 +50,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
         public void RemovesEvaluationsGameDataMapping()
         {
             // Arrange
+            var gameDataMapper = new EvaluationGameDataMapper();
             var count = 10;
             var removeEvaluation = Helpers.ComposeGenericAchievement($"RemovesEvaluationsGameDataMapping");
 
@@ -62,11 +61,11 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
                 shouldntRemoveEvaluations.Add(Helpers.ComposeGenericAchievement($"RemovesEvaluationsGameDataMapping_ShouldntRemove_{i}"));
             }
 
-            GameDataMapper.CreateMapping(removeEvaluation);
-            GameDataMapper.CreateMappings(shouldntRemoveEvaluations);
+            gameDataMapper.CreateMapping(removeEvaluation);
+            gameDataMapper.CreateMappings(shouldntRemoveEvaluations);
 
             // Act
-            GameDataMapper.RemoveMapping(removeEvaluation);
+            gameDataMapper.RemoveMapping(removeEvaluation);
 
             // Assert
             // Make sure removed evaluation isn't returned
@@ -75,7 +74,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
                 var gameData = Helpers.ComposeGameData(0, evaluationCriteria, removeEvaluation.GameId);
 
                 HashSet<Evaluation> relatedEvaluations;
-                var didGetRelated = GameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
+                var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
 
                 // Either shouldn't have gotten related or if did, shouldn't have returned the removed evaluation
                 if (didGetRelated)
@@ -92,7 +91,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
                     var gameData = Helpers.ComposeGameData(0, evaluationCriteria, shouldntRemoveEvaluation.GameId);
 
                     HashSet<Evaluation> relatedEvaluations;
-                    var didGetRelated = GameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
+                    var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
 
                     Assert.True(didGetRelated, "Shouldn't have removed unremoved evaluations.");
                     Assert.Contains(shouldntRemoveEvaluation, relatedEvaluations);

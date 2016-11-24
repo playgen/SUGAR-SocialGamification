@@ -7,6 +7,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
     public class GameDataController
     {
+        public static Action<GameData> GameDataAddedEvent;
+
         private readonly Data.EntityFramework.Controllers.GameDataController _gameDataDbController;
 
         public GameDataController(Data.EntityFramework.Controllers.GameDataController gameDataDbController)
@@ -33,6 +35,8 @@ namespace PlayGen.SUGAR.Core.Controllers
                 if (ParseCheck(newData))
                 {
                     dataList.Add(newData);
+
+                    GameDataAddedEvent?.Invoke(newData);
                 }
                 else
                 {
@@ -55,6 +59,9 @@ namespace PlayGen.SUGAR.Core.Controllers
             if (ParseCheck(newData))
             {
                 newData = _gameDataDbController.Create(newData);
+
+                GameDataAddedEvent?.Invoke(newData);
+
                 return newData;
             }
             else

@@ -24,6 +24,52 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             return actorProgress != null;
         }
 
+        public bool RemoveActor(int? gameId, int actorId)
+        {
+            var didRemove = false;
+
+            Dictionary<int, Dictionary<Evaluation, float>> gameProgress;
+            if (TryGetGameProgress(gameId, out gameProgress))
+            {
+                didRemove = gameProgress.Remove(actorId);
+
+                if (gameProgress.Count == 0)
+                {
+                    _progress.Remove(gameId.ToInt());
+                }
+            }
+
+            return didRemove;
+        }
+
+        public void AddProgress(ProgressCache addProgressCache)
+        {
+            foreach (var addGameProgress in addProgressCache._progress)
+            {
+                Dictionary<int, Dictionary<Evaluation, float>> existingGameProgress;
+                if (!_progress.TryGetValue(addGameProgress.Key, out existingGameProgress))
+                {
+                    existingGameProgress = new Dictionary<int, Dictionary<Evaluation, float>>();
+                    _progress[addGameProgress.Key] = existingGameProgress;
+                }
+
+                foreach (var addActorProgress in addGameProgress.Value)
+                {
+                    Dictionary<Evaluation, float> existingActorProgress;
+                    if (!existingGameProgress.TryGetValue(addActorProgress.Key, out existingActorProgress))
+                    {
+                        existingActorProgress = new Dictionary<Evaluation, float>();
+                        existingGameProgress[addActorProgress.Key] = existingActorProgress;
+                    }
+
+                    foreach (var addEvaluationProgress in addActorProgress.Value)
+                    {
+                        existingActorProgress[addEvaluationProgress.Key] = addEvaluationProgress.Value;
+                    }
+                }
+            }
+        }
+
         public bool TryGetEvaluationProgress(int? gameId, int actorId, Evaluation evaluation, out float progress)
         {
             progress = 0;
@@ -44,6 +90,31 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             _progress.TryGetValue(gameId.ToInt(), out gameProgress);
 
             return gameProgress;
+        }
+
+        public bool Remove(Evaluation evaluation)
+        {
+            var didRemove = false;
+
+            foreach (var gameProgress in _progress)
+            {
+                foreach (var actorProgress in gameProgress.Value)
+                {
+                    var evaluationProgress = actorProgress.Value;
+
+                    if(evaluationProgress.Remove(evaluation) && evaluationProgress.Count == 0)
+                    {
+                        didRemove |= gameProgress.Value.Remove(actorProgress.Key);
+                    }
+                }
+            }
+
+            return didRemove;
+        }
+
+        public Dictionary<int, Dictionary<int, Dictionary<Evaluation, float>>>.Enumerator GetEnumerator()
+        {
+            return _progress.GetEnumerator();
         }
 
         // <evaluation, progress>
@@ -82,20 +153,6 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             }
 
             actorProgress[evaluation] = progress;
-        }
-
-        public List<int> GetActors(int? gameId)
-        {
-            List<int> actorIds = new List<int>();
-
-            Dictionary<int, Dictionary<Evaluation, float>> gameProgress;
-
-            if (TryGetGameProgress(gameId, out gameProgress))
-            {
-                actorIds = gameProgress.Keys.ToList();
-            }
-
-            return actorIds;
         }
     }
 }

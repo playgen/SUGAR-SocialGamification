@@ -61,9 +61,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             };
         }
 
-	    public static IEnumerable<EvaluationProgressResponse> ToContractList(this IEnumerable<EvaluationProgress> contracts)
+	    public static IEnumerable<EvaluationProgressResponse> ToContractList(this IEnumerable<EvaluationProgress> models)
 	    {
-	        return contracts.Select(ToContract).ToList();
+	        return models.Select(ToContract).ToList();
 	    }
 
         public static EvaluationProgressResponse ToContract(this EvaluationProgress model)
@@ -76,8 +76,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             };
         }
 
-        // <actorId, <evaluation, progress>>
-        public static List<EvaluationProgressResponse> ToContractList(this Dictionary<int, Dictionary<Evaluation, float>> pendingNotifications)
+        public static List<EvaluationProgressResponse> ToContractList(this Dictionary<int, List<KeyValuePair<Evaluation, float>>> pendingNotifications)
         {
             if (pendingNotifications == null) return null;
 

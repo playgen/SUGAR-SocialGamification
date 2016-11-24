@@ -1,41 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
+using PlayGen.SUGAR.Core.Controllers;
+using PlayGen.SUGAR.Core.Sessions;
 using PlayGen.SUGAR.Data.Model;
+using System.Linq;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
-    /// <summary>
-    /// Evaluation tracking system.
-    /// </summary>
-    public class EvaluationTracker
+    public class EvaluationTracker : IDisposable
     {
-        private readonly ProgressEvaluator _progressEvaluator;
-        private readonly ProgressNotificationCache _progressNotificationCache;
-        private readonly EvaluationGameDataMapper _gameDataToEvaluationMapper;
+        private readonly EvaluationGameDataMapper _gameDataToEvaluationMapper = new EvaluationGameDataMapper();
+        private readonly ProgressCache _progressCache = new ProgressCache();
+        private readonly ProgressNotificationCache _progressNotificationCache = new ProgressNotificationCache();
 
-        public EvaluationTracker(EvaluationGameDataMapper gameDataToEvaluationMapper,
-            ProgressEvaluator progressEvaluator,
-            ProgressNotificationCache progressNotificationCache)
+        private readonly ProgressEvaluator _progressEvaluator;
+        private readonly SessionTracker _sessionTracker;
+        private readonly EvaluationController _evaluationController;
+
+        private bool _isDisposed;
+
+        public EvaluationTracker(ProgressEvaluator progressEvaluator,
+            EvaluationController evaluationController,
+            SessionTracker sessionTracker)
         {
             _progressEvaluator = progressEvaluator;
-            _gameDataToEvaluationMapper = gameDataToEvaluationMapper;
-            _progressNotificationCache = progressNotificationCache;
-        
+            _evaluationController = evaluationController;
+            _sessionTracker = sessionTracker;
+
+            _sessionTracker.SessionStartedEvent += OnSessionStarted;
+            _sessionTracker.SessionEndedEvent += OnSessionEnded;
+            GameDataController.GameDataAddedEvent += OnGameDataAdded;
+            EvaluationController.EvaluationCreatedEvent += OnEvaluationCreated;
+            EvaluationController.EvaluationUpdatedEvent += OnEvaluationUpdated;
+            EvaluationController.EvaluationDeletedEvent += OnEvaluationDeleted;
+
             MapExistingEvaluations();
         }
 
-        public void OnActorSessionStarted(int? gameId, int actorId)
+        ~EvaluationTracker()
         {
-            // todo get evaluations for game
-
-            //var actorProgress = _progressEvaluator.EvaluateActor(gameId, actorId);
-            //_progressNotificationCache.CheckActor(gameId, actorId, actorProgress);
+            Dispose();
         }
 
-        public void OnActorSessionEnded(int? gameId, int actorId)
+        public void Dispose()
         {
-            _progressEvaluator.RemoveActor(gameId, actorId);
-            _progressNotificationCache.Remove(gameId, actorId);
+            if (_isDisposed) return;
+
+            _sessionTracker.SessionStartedEvent -= OnSessionStarted;
+            _sessionTracker.SessionEndedEvent -= OnSessionEnded;
+            GameDataController.GameDataAddedEvent -= OnGameDataAdded;
+            EvaluationController.EvaluationCreatedEvent -= OnEvaluationCreated;
+            EvaluationController.EvaluationUpdatedEvent -= OnEvaluationUpdated;
+            EvaluationController.EvaluationDeletedEvent -= OnEvaluationDeleted;
+
+            _isDisposed = true;
+        }
+
+        public void OnSessionStarted(Session session)
+        {
+            var evaluations = GetEvaluations(session.GameId);
+            var progress = _progressEvaluator.EvaluateActor(evaluations, session);
+            _progressNotificationCache.Update(progress);
+        }
+
+        public void OnSessionEnded(Session session)
+        {
+            _progressCache.RemoveActor(session.GameId, session.Actor.Id);
+            _progressNotificationCache.Remove(session.GameId, session.Actor.Id);
         }
 
         public void OnGameDataAdded(GameData gameData)
@@ -44,45 +75,92 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
             if (_gameDataToEvaluationMapper.TryGetRelated(gameData, out evaluations))
             {
-                var progress = _progressEvaluator.Evaluate(evaluations, gameData);
-                _progressNotificationCache.Check(progress);
+                var gameIds = GetGameIdsFromEvaluations(evaluations);
+                var sessions = _sessionTracker.GetByGames(gameIds);
+
+                var progress = _progressEvaluator.EvaluateSessions(sessions, evaluations);
+                _progressNotificationCache.Update(progress);
             }
         }
 
-        public Dictionary<int, Queue<KeyValuePair<Evaluation, float>>> GetPendingNotifications(int? gameId, int actorId)
-        {
-            return _progressNotificationCache.GetNotifications(gameId, actorId);
-        }
-
-        public void OnEvaluationAdded(Evaluation evaluation)
+        public void OnEvaluationCreated(Evaluation evaluation)
         {
             _gameDataToEvaluationMapper.CreateMapping(evaluation);
-            var progress = _progressEvaluator.Evaluate(evaluation);
-            _progressNotificationCache.Check(progress);
+
+            var gameIds = GetGameIdsFromEvaluation(evaluation);
+            var sessions = _sessionTracker.GetByGames(gameIds);
+            
+            var progress = _progressEvaluator.EvaluateSessions(sessions, evaluation);
+            _progressNotificationCache.Update(progress);
         }
 
         public void OnEvaluationUpdated(Evaluation evaluation)
         {
-            _gameDataToEvaluationMapper.RemoveMapping(evaluation);
-            _gameDataToEvaluationMapper.CreateMapping(evaluation);
-
-            var progress = _progressEvaluator.Evaluate(evaluation);
-            _progressNotificationCache.Check(progress);
+            OnEvaluationDeleted(evaluation);
+            OnEvaluationCreated(evaluation);
         }
 
         public void OnEvaluationDeleted(Evaluation evaluation)
         {
             _gameDataToEvaluationMapper.RemoveMapping(evaluation);
-
-            _progressEvaluator.Remove(evaluation);
+            _progressCache.Remove(evaluation);
             _progressNotificationCache.Remove(evaluation);
+        }
+
+        // <evaluation, progress>
+        public Dictionary<int, List<KeyValuePair<Evaluation, float>>> GetPendingNotifications(int? gameId, int actorId)
+        {
+            return _progressNotificationCache.Get(gameId, actorId);
         }
 
         private void MapExistingEvaluations()
         {
-            // todo read from database  - and write tests
-            var evaluations = new List<Evaluation>();
+            var evaluations = _evaluationController.All();
             _gameDataToEvaluationMapper.CreateMappings(evaluations);
+        }
+
+        private List<Evaluation> GetEvaluations(int? gameId)
+        {
+            var evaluations = _evaluationController.GetByGame(gameId).ToList();
+
+            if (gameId != null)
+            {
+                evaluations.AddRange(_evaluationController.GetByGame(null));
+            }
+
+            return evaluations;
+        }
+
+        private List<int?> GetGameIdsFromEvaluations(IEnumerable<Evaluation> evaluations)
+        {
+            var hasGlobal = false;
+            var gameIds = evaluations.Select(e =>
+            {
+                hasGlobal |= e.GameId == null;
+                return e.GameId;
+            }).Distinct().ToList();
+
+            if (!hasGlobal)
+            {
+                gameIds.Add(null);
+            }
+
+            return gameIds;
+        }
+
+        private List<int?> GetGameIdsFromEvaluation(Evaluation evaluation)
+        {
+            var gameIds = new List<int?>()
+            {
+                evaluation.GameId
+            };
+
+            if (evaluation.GameId != null)
+            {
+                gameIds.Add(null);
+            }
+
+            return gameIds;
         }
     }
 }
