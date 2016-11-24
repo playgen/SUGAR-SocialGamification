@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {

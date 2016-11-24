@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
-using Actor = PlayGen.SUGAR.Data.Model.Actor;
 using PlayGen.SUGAR.Core.Controllers;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 

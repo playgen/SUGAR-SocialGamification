@@ -126,7 +126,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 
         internal static void ConfigureHierarchy(this ModelBuilder builder)
         {
-            builder.Entity<Model.Actor>()
+            builder.Entity<Actor>()
                .HasDiscriminator<ActorType>("Discriminator")
                .HasValue<Group>(ActorType.Group)
                .HasValue<User>(ActorType.User);

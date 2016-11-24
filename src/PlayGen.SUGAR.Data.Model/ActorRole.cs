@@ -1,4 +1,6 @@
-﻿namespace PlayGen.SUGAR.Data.Model
+﻿using PlayGen.SUGAR.Common.Shared;
+
+namespace PlayGen.SUGAR.Data.Model
 {
     public class ActorRole
     {

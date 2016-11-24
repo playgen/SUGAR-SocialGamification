@@ -1,4 +1,4 @@
-﻿using PlayGen.SUGAR.Data.Model;
+﻿using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Core.Sessions
 {

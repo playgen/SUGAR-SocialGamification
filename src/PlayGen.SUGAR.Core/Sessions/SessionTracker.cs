@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
-using PlayGen.SUGAR.Core.Controllers;
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Core.Sessions
 {

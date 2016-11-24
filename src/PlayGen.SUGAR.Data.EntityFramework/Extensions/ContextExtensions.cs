@@ -1,6 +1,7 @@
 ﻿using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
