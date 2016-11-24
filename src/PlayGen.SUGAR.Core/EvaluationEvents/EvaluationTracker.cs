@@ -103,8 +103,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         public void OnEvaluationDeleted(Evaluation evaluation)
         {
             _gameDataToEvaluationMapper.RemoveMapping(evaluation);
-            _progressCache.Remove(evaluation);
-            _progressNotificationCache.Remove(evaluation);
+            _progressCache.Remove(evaluation.Id);
+            _progressNotificationCache.Remove(evaluation.Id);
         }
 
         // <evaluation, progress>

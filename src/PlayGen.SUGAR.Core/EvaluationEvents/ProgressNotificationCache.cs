@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             return didRemove;
         }
 
-        public bool Remove(Evaluation evaluation)
+        public bool Remove(int evaluationId)
         {
             var didRemove = false;
 
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             {
                 foreach (var actorProgress in gameProgress.Value)
                 {
-                    if (actorProgress.Value.RemoveAll(p => p.Key == evaluation) > 0)
+                    if (actorProgress.Value.RemoveAll(p => p.Key.Id == evaluationId) > 0)
                     {
                         didRemove = true;
 

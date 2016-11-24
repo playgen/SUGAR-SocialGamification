@@ -28,6 +28,8 @@ namespace PlayGen.SUGAR.Core.Controllers
             var i = 0;
             var chunkSize = 1000;
 
+            var uniqueAddedData = new Dictionary<string, GameData>();
+
             do
             {
                 var newData = datas[i];
@@ -35,8 +37,7 @@ namespace PlayGen.SUGAR.Core.Controllers
                 if (ParseCheck(newData))
                 {
                     dataList.Add(newData);
-
-                    GameDataAddedEvent?.Invoke(newData);
+                    uniqueAddedData[$"{newData.GameId}_{newData.Key}_{newData.Category}"] = newData;
                 }
                 else
                 {
@@ -52,6 +53,11 @@ namespace PlayGen.SUGAR.Core.Controllers
                 i++;
 
             } while (dataList.Count > 0 && i < datas.Length);
+
+            foreach (var addedData in uniqueAddedData.Values)
+            {
+                GameDataAddedEvent?.Invoke(addedData);   
+            }
         }
 
         public GameData Add(GameData newData)
