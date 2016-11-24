@@ -47,9 +47,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return gameDataQueryable;
 		}
 
-		public static IQueryable<GameData> FilterByDataType(this IQueryable<GameData> gameDataQueryable, GameDataType type)
+		public static IQueryable<GameData> FilterByDataType(this IQueryable<GameData> gameDataQueryable, SaveDataType type)
 		{
-			return gameDataQueryable.Where(gd => gd.DataType == type);
+			return gameDataQueryable.Where(gd => gd.SaveDataType == type);
 		}
 
 		public static IQueryable<GameData> FilterByDateTimeRange(this IQueryable<GameData> gameDataQueryable, DateTime start, DateTime end)

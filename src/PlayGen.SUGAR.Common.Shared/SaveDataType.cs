@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Enum for selecting the type of data being stored or looked for.
 	/// </summary>
-	public enum GameDataType
+	public enum SaveDataType
 	{
 		/// <summary>
 		/// A non-numeric set of characters.

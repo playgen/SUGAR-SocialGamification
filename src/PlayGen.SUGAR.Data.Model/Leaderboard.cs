@@ -10,7 +10,7 @@
 
 		public string Token { get; set; }
 
-		public Common.Shared.GameDataType GameDataType { get; set; }
+		public Common.Shared.SaveDataType SaveDataType { get; set; }
 
 		public Common.Shared.ActorType ActorType { get; set; }
 

@@ -6,29 +6,29 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class GameDataExtensions
 	{
-		public static GameDataResponse ToContract(this Data.Model.GameData gameData)
+		public static SaveDataResponse ToContract(this Data.Model.GameData gameData)
 		{
 			if (gameData == null)
 			{
 				return null;
 			}
 
-            return new GameDataResponse
+			return new SaveDataResponse
 			{
 				ActorId = gameData.ActorId,
 				GameId = gameData.GameId,
 				Key = gameData.Key,
 				Value = gameData.Value,
-				GameDataType = gameData.DataType
+				SaveDataType = gameData.SaveDataType
 			};
 		}
 
-		public static IEnumerable<GameDataResponse> ToContractList(this IEnumerable<Data.Model.GameData> gameDatas)
+		public static IEnumerable<SaveDataResponse> ToContractList(this IEnumerable<Data.Model.GameData> gameDatas)
 		{
 			return gameDatas.Select(ToContract).ToList();
 		}
 
-		public static Data.Model.GameData ToModel(this GameDataRequest dataContract)
+		public static Data.Model.GameData ToGameDataModel(this SaveDataRequest dataContract)
 		{
 			return new Data.Model.GameData
 			{
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				GameId = dataContract.GameId,
 				Key = dataContract.Key,
 				Value = dataContract.Value,
-				DataType = dataContract.GameDataType
+				SaveDataType = dataContract.SaveDataType
 			};
 		}
 	}

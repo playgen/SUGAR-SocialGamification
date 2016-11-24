@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				GameId = resourceContract.GameId,
 				Key = resourceContract.Key,
 				Value = resourceContract.Quantity.ToString(),
-				DataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				Category = GameDataCategory.Resource
 			};
 		}

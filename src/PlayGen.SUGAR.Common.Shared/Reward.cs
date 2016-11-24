@@ -12,10 +12,10 @@
         public string Key { get; set; }
 
         /// <summary>
-        /// GameDataType of the value for this GameData.
+        /// SaveDataType of the value for this GameData.
         /// </summary>
         //[Required]
-        public GameDataType DataType { get; set; }
+        public SaveDataType DataType { get; set; }
 
         /// <summary>
         /// The value of the GameData.

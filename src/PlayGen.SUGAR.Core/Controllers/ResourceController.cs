@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					Key = fromResource.Key,
 					Value = transferQuantity.ToString(),
 					Category = fromResource.Category,
-					DataType = fromResource.DataType,
+					SaveDataType = fromResource.SaveDataType,
 				};
 				Create(toResource);
 			}

@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
                     {
                         ComparisonType = ComparisonType.GreaterOrEqual,
                         CriteriaQueryType = CriteriaQueryType.Sum,
-                        DataType = GameDataType.Long,
+                        DataType = SaveDataType.Long,
                         Key = key,
                         Value = $"{100}",
                     }
@@ -42,10 +42,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
         protected void CompleteGenericEvaluation(EvaluationResponse evaluation, int userId)
         {
-            GameDataClient.Add(new GameDataRequest
+            GameDataClient.Add(new SaveDataRequest
             {
                 ActorId = userId,
-                GameDataType = evaluation.EvaluationCriterias[0].DataType,
+                SaveDataType = evaluation.EvaluationCriterias[0].DataType,
                 Value = $"{200}",
                 Key = evaluation.EvaluationCriterias[0].Key
             });

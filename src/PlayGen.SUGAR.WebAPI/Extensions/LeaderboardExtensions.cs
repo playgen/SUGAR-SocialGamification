@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				Token = leaderboardModel.Token,
 				Key = leaderboardModel.Key,
 				ActorType = leaderboardModel.ActorType,
-				GameDataType = leaderboardModel.GameDataType,
+				SaveDataType = leaderboardModel.SaveDataType,
 				CriteriaScope = leaderboardModel.CriteriaScope,
 				LeaderboardType = leaderboardModel.LeaderboardType
 			};
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				Token = leaderboardContract.Token,
 				Key = leaderboardContract.Key,
 				ActorType = leaderboardContract.ActorType,
-				GameDataType = leaderboardContract.GameDataType,
+				SaveDataType = leaderboardContract.SaveDataType,
 				CriteriaScope = leaderboardContract.CriteriaScope,
 				LeaderboardType = leaderboardContract.LeaderboardType
 			};

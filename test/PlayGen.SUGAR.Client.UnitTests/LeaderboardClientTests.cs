@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanCreateAndGetGlobalLeaderboard",
 				Key = "CanCreateAndGetGlobalLeaderboard",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.AreEqual(createRequest.Name, createResponse.Name);
 			Assert.AreEqual(createRequest.Key, createResponse.Key);
 			Assert.AreEqual(createRequest.ActorType, createResponse.ActorType);
-			Assert.AreEqual(createRequest.GameDataType, createResponse.GameDataType);
+			Assert.AreEqual(createRequest.SaveDataType, createResponse.SaveDataType);
 			Assert.AreEqual(createRequest.CriteriaScope, createResponse.CriteriaScope);
 			Assert.AreEqual(createRequest.LeaderboardType, createResponse.LeaderboardType);
 
@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.AreEqual(createRequest.Name, getResponse.Name);
 			Assert.AreEqual(createRequest.Key, getResponse.Key);
 			Assert.AreEqual(createRequest.ActorType, getResponse.ActorType);
-			Assert.AreEqual(createRequest.GameDataType, getResponse.GameDataType);
+			Assert.AreEqual(createRequest.SaveDataType, getResponse.SaveDataType);
 			Assert.AreEqual(createRequest.CriteriaScope, getResponse.CriteriaScope);
 			Assert.AreEqual(createRequest.LeaderboardType, getResponse.LeaderboardType);
 		}
@@ -75,7 +75,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanCreateAndGetGameLeaderboard",
 				Key = "CanCreateAndGetGameLeaderboard",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.AreEqual(createRequest.Name, createResponse.Name);
 			Assert.AreEqual(createRequest.Key, createResponse.Key);
 			Assert.AreEqual(createRequest.ActorType, createResponse.ActorType);
-			Assert.AreEqual(createRequest.GameDataType, createResponse.GameDataType);
+			Assert.AreEqual(createRequest.SaveDataType, createResponse.SaveDataType);
 			Assert.AreEqual(createRequest.CriteriaScope, createResponse.CriteriaScope);
 			Assert.AreEqual(createRequest.LeaderboardType, createResponse.LeaderboardType);
 
@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.AreEqual(createRequest.Name, getResponse.Name);
 			Assert.AreEqual(createRequest.Key, getResponse.Key);
 			Assert.AreEqual(createRequest.ActorType, getResponse.ActorType);
-			Assert.AreEqual(createRequest.GameDataType, getResponse.GameDataType);
+			Assert.AreEqual(createRequest.SaveDataType, getResponse.SaveDataType);
 			Assert.AreEqual(createRequest.CriteriaScope, getResponse.CriteriaScope);
 			Assert.AreEqual(createRequest.LeaderboardType, getResponse.LeaderboardType);
 		}
@@ -114,7 +114,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotCreateDuplicateLeaderboard",
 				Key = "CannotCreateDuplicateLeaderboard",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -135,7 +135,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotCreateLeaderboardWithoutToken",
 				Key = "CannotCreateLeaderboardWithoutToken",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -154,7 +154,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				GameId = game.Id,
 				Key = "CannotCreateLeaderboardWithoutName",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -173,7 +173,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				GameId = game.Id,
 				Name = "CannotCreateLeaderboardWithoutKey",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -193,7 +193,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "",
 				Key = "CannotCreateLeaderboardWithEmptyName",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -213,7 +213,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotCreateLeaderboardWithEmptyToken",
 				Key = "CannotCreateLeaderboardWithEmptyToken",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -233,7 +233,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotCreateLeaderboardWithTypeMismatch",
 				Key = "CannotCreateLeaderboardWithTypeMismatch",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Count
 			};
@@ -243,21 +243,21 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Latest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
-			createRequest.GameDataType = GameDataType.Float;
+			createRequest.SaveDataType = SaveDataType.Float;
 			createRequest.LeaderboardType = LeaderboardType.Count;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Earliest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Latest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
-			createRequest.GameDataType = GameDataType.String;
+			createRequest.SaveDataType = SaveDataType.String;
 			createRequest.LeaderboardType = LeaderboardType.Highest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Lowest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Cumulative;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
-			createRequest.GameDataType = GameDataType.Boolean;
+			createRequest.SaveDataType = SaveDataType.Boolean;
 			createRequest.LeaderboardType = LeaderboardType.Highest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Lowest;
@@ -287,7 +287,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 					Name = name,
 					Key = name,
 					ActorType = ActorType.User,
-					GameDataType = GameDataType.Long,
+					SaveDataType = SaveDataType.Long,
 					CriteriaScope = CriteriaScope.Actor,
 					LeaderboardType = LeaderboardType.Highest
 				};
@@ -354,7 +354,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanUpdateLeaderboard",
 				Key = "CanUpdateLeaderboard",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -368,7 +368,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.AreEqual(createRequest.Name, getResponse.Name);
 			Assert.AreEqual(createRequest.Key, getResponse.Key);
 			Assert.AreEqual(createRequest.ActorType, getResponse.ActorType);
-			Assert.AreEqual(createRequest.GameDataType, getResponse.GameDataType);
+			Assert.AreEqual(createRequest.SaveDataType, getResponse.SaveDataType);
 			Assert.AreEqual(createRequest.CriteriaScope, getResponse.CriteriaScope);
 			Assert.AreEqual(createRequest.LeaderboardType, getResponse.LeaderboardType);
 
@@ -379,7 +379,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanUpdateLeaderboard Updated",
 				Key = "CanUpdateLeaderboard Updated",
 				ActorType = ActorType.Group,
-				GameDataType = GameDataType.Float,
+				SaveDataType = SaveDataType.Float,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Lowest
 			};
@@ -393,7 +393,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.AreEqual(updateRequest.Name, getResponse.Name);
 			Assert.AreEqual(updateRequest.Key, getResponse.Key);
 			Assert.AreEqual(updateRequest.ActorType, getResponse.ActorType);
-			Assert.AreEqual(updateRequest.GameDataType, getResponse.GameDataType);
+			Assert.AreEqual(updateRequest.SaveDataType, getResponse.SaveDataType);
 			Assert.AreEqual(updateRequest.CriteriaScope, getResponse.CriteriaScope);
 			Assert.AreEqual(updateRequest.LeaderboardType, getResponse.LeaderboardType);
 		}
@@ -410,7 +410,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateToDuplicateLeaderboardOne",
 				Key = "CannotUpdateToDuplicateLeaderboardOne",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -424,7 +424,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateToDuplicateLeaderboardTwo",
 				Key = "CannotUpdateToDuplicateLeaderboardTwo",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -438,7 +438,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateToDuplicateLeaderboardOne",
 				Key = "CannotUpdateToDuplicateLeaderboardTwo",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -458,7 +458,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateNotExistingLeaderboard",
 				Key = "CannotUpdateNotExistingLeaderboard",
 				ActorType = ActorType.Group,
-				GameDataType = GameDataType.Float,
+				SaveDataType = SaveDataType.Float,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Lowest
 			};
@@ -478,7 +478,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotCreateLeaderboardWithoutToken",
 				Key = "CannotCreateLeaderboardWithoutToken",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -491,7 +491,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotCreateLeaderboardWithoutToken",
 				Key = "CannotCreateLeaderboardWithoutToken",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -511,7 +511,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateLeaderboardWithoutName",
 				Key = "CannotUpdateLeaderboardWithoutName",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -524,7 +524,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Token = "CannotUpdateLeaderboardWithoutName",
 				Key = "CannotUpdateLeaderboardWithoutName",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -544,7 +544,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateLeaderboardWithoutKey",
 				Key = "CannotUpdateLeaderboardWithoutKey",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -557,7 +557,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Token = "CannotUpdateLeaderboardWithoutKey",
 				Name = "CannotUpdateLeaderboardWithoutKey",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -577,7 +577,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateLeaderboardWithEmptyName",
 				Key = "CannotUpdateLeaderboardWithEmptyName",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -591,7 +591,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "",
 				Key = "CannotUpdateLeaderboardWithEmptyName",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -611,7 +611,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateLeaderboardWithTypeMismatch",
 				Key = "CannotUpdateLeaderboardWithTypeMismatch",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -625,7 +625,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotCreateLeaderboardWithTypeMismatch",
 				Key = "CannotCreateLeaderboardWithTypeMismatch",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Count
 			};
@@ -635,21 +635,21 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Latest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
-			updateRequest.GameDataType = GameDataType.Float;
+			updateRequest.SaveDataType = SaveDataType.Float;
 			updateRequest.LeaderboardType = LeaderboardType.Count;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Earliest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Latest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
-			updateRequest.GameDataType = GameDataType.String;
+			updateRequest.SaveDataType = SaveDataType.String;
 			updateRequest.LeaderboardType = LeaderboardType.Highest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Lowest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Cumulative;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
-			updateRequest.GameDataType = GameDataType.Boolean;
+			updateRequest.SaveDataType = SaveDataType.Boolean;
 			updateRequest.LeaderboardType = LeaderboardType.Highest;
 			Assert.Throws<ClientException>(() => _leaderboardClient.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Lowest;
@@ -667,7 +667,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanDeleteGlobalLeaderboard",
 				Key = "CanDeleteGlobalLeaderboard",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -708,7 +708,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanDeleteLeaderboard",
 				Key = "CanDeleteLeaderboard",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -750,7 +750,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanGetGlobalLeaderboardStandings",
 				Key = "CanGetGlobalLeaderboardStandings",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -758,10 +758,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var createResponse = _leaderboardClient.Create(createRequest);
 
 			var user = Helpers.GetOrCreateUser(_userClient, "Standings");
-			var gameData = new GameDataRequest
+			var gameData = new SaveDataRequest
 			{
 				Key = createRequest.Key,
-				GameDataType = createRequest.GameDataType,
+				SaveDataType = createRequest.SaveDataType,
 				ActorId = user.Id,
 				Value = "5"
 			};
@@ -794,7 +794,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanGetLeaderboardStandings",
 				Key = "CanGetLeaderboardStandings",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -802,10 +802,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var createResponse = _leaderboardClient.Create(createRequest);
 
 			var user = Helpers.GetOrCreateUser(_userClient, "Standings");
-			var gameData = new GameDataRequest
+			var gameData = new SaveDataRequest
 			{
 				Key = createRequest.Key,
-				GameDataType = createRequest.GameDataType,
+				SaveDataType = createRequest.SaveDataType,
 				ActorId = user.Id,
 				GameId = game.Id,
 				Value = "5"
@@ -857,16 +857,16 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotGetLeaderboardStandingsWithIncorrectActorType",
 				Key = "CannotGetLeaderboardStandingsWithIncorrectActorType",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
 
 			var group = Helpers.GetOrCreateGroup(_groupClient, "Standings");
-			var gameData = new GameDataRequest
+			var gameData = new SaveDataRequest
 			{
 				Key = createRequest.Key,
-				GameDataType = createRequest.GameDataType,
+				SaveDataType = createRequest.SaveDataType,
 				ActorId = group.Id,
 				GameId = game.Id,
 				Value = "5"
@@ -901,7 +901,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotGetLeaderboardStandingsWithZeroPageLimit",
 				Key = "CannotGetLeaderboardStandingsWithZeroPageLimit",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -932,7 +932,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotGetNearLeaderboardStandingsWithoutActorId",
 				Key = "CannotGetNearLeaderboardStandingsWithoutActorId",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -963,7 +963,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotGetFriendsLeaderboardStandingsWithoutActorId",
 				Key = "CannotGetFriendsLeaderboardStandingsWithoutActorId",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -994,7 +994,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotGetGroupMemberLeaderboardStandingsWithoutActorId",
 				Key = "CannotGetGroupMemberLeaderboardStandingsWithoutActorId",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
@@ -1025,16 +1025,16 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType",
 				Key = "CannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType",
 				ActorType = ActorType.User,
-				GameDataType = GameDataType.Long,
+				SaveDataType = SaveDataType.Long,
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
 
 			var user = Helpers.GetOrCreateUser(_userClient, "Standings");
-			var gameData = new GameDataRequest
+			var gameData = new SaveDataRequest
 			{
 				Key = createRequest.Key,
-				GameDataType = createRequest.GameDataType,
+				SaveDataType = createRequest.SaveDataType,
 				ActorId = user.Id,
 				GameId = game.Id,
 				Value = "5"

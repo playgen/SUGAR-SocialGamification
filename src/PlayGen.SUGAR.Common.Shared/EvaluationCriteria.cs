@@ -12,10 +12,10 @@
 		public string Key { get; set; }
 
 		/// <summary>
-		/// GameDataType of the key which is being queried.
+		/// SaveDataType of the key which is being queried.
 		/// </summary>
 		//[Required]
-		public GameDataType DataType { get; set; }
+		public SaveDataType DataType { get; set; }
 
 		/// <summary>
 		/// Which stored GameData will be queried.

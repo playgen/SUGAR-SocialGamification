@@ -57,7 +57,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 				evaluationCriterias.Add(new EvaluationCriteria
 				{
 					Key = $"{key}_{i}",
-					DataType = GameDataType.Long,
+					DataType = SaveDataType.Long,
 					CriteriaQueryType = CriteriaQueryType.Sum,
 					ComparisonType = ComparisonType.GreaterOrEqual,
 					Scope = CriteriaScope.Actor,
@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			return new GameData
 			{
                 Key = evaluationCriteria.Key,
-                DataType = evaluationCriteria.DataType,
+                SaveDataType = evaluationCriteria.DataType,
 
                 ActorId = actorId,
 				GameId = gameId,

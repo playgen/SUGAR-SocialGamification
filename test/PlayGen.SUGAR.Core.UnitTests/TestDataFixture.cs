@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 GameId = game.Id,
                 Key = data.DataType.ToString(),
                 Value = data.Value,
-                DataType = data.DataType,
+                SaveDataType = data.DataType,
             };
 
             return gameData;
@@ -167,22 +167,22 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 dataParams.Add(new DataParam
                 {
                     Value = (_random.NextDouble() * 1000).ToString("f5"),
-                    DataType = GameDataType.Float,
+                    DataType = SaveDataType.Float,
                 });
                 dataParams.Add(new DataParam
                 {
                     Value = _random.Next(0, 1000).ToString(),
-                    DataType = GameDataType.Long,
+                    DataType = SaveDataType.Long,
                 });
                 dataParams.Add(new DataParam
                 {
                     Value = _random.Next(0, 1000).ToString(),
-                    DataType = GameDataType.String,
+                    DataType = SaveDataType.String,
                 });
                 dataParams.Add(new DataParam
                 {
                     Value = (_random.Next(0, 2) == 1 ? true : false).ToString(),
-                    DataType = GameDataType.Boolean,
+                    DataType = SaveDataType.Boolean,
                 });
             }
 
@@ -193,7 +193,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         {
             public string Value { get; set; }
 
-            public GameDataType DataType;
+            public SaveDataType DataType;
         }
     }
 }

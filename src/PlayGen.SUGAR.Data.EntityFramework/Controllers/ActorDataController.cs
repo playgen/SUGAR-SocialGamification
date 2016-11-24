@@ -1,0 +1,75 @@
+﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Data.EntityFramework.Extensions;
+using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using System.Linq;
+
+namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
+{
+	public class ActorDataController : DbController
+	{
+		public ActorDataController(SUGARContextFactory contextFactory)
+			: base(contextFactory)
+		{
+		}
+
+		public bool KeyExists(int? gameId, int? actorId, string key)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				return context.FilterByActorId(actorId)
+					.FilterByGameId(gameId)
+					.FilterByKey(key)
+					.Any();
+			}
+		}
+
+		public IEnumerable<ActorData> Get(int? gameId = null, int? actorId = null, IEnumerable<string> keys = null)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				var data = context.FilterByActorId(actorId)
+					.FilterByGameId(gameId)
+					.FilterByKeys(keys)
+					.ToList();
+				return data;
+			}
+		}
+
+		public ActorData Create(ActorData data)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				context.HandleDetatchedGame(data.GameId);
+				context.HandleDetatchedActor(data.ActorId);
+
+				context.ActorData.Add(data);
+				SaveChanges(context);
+
+				return data;
+			}
+		}
+
+		public void Update(ActorData updatedData)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				// todo replace with entire block with: (and update unit tests)
+				// context.[tablename].Update(entity);
+				// context.SaveChanges();
+
+				var existingData = context.ActorData
+					.Find(context, updatedData.Id);
+
+				if (existingData == null)
+				{
+					throw new MissingRecordException("Cannot find the object to update.");
+				}
+
+				existingData.Value = updatedData.Value;
+
+				SaveChanges(context);
+			}
+		}
+	}
+}

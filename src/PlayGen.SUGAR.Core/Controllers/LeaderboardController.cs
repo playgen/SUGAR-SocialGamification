@@ -57,27 +57,27 @@ namespace PlayGen.SUGAR.Core.Controllers
 			switch (leaderboard.LeaderboardType)
 			{
 				case LeaderboardType.Highest:
-					typeResults = EvaluateHighest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					typeResults = EvaluateHighest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
 					break;
 
 				case LeaderboardType.Lowest:
-					typeResults = EvaluateLowest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					typeResults = EvaluateLowest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
 					break;
 
 				case LeaderboardType.Cumulative:
-					typeResults = EvaluateCumulative(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					typeResults = EvaluateCumulative(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
 					break;
 
 				case LeaderboardType.Count:
-					typeResults = EvaluateCount(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					typeResults = EvaluateCount(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
 					break;
 
 				case LeaderboardType.Earliest:
-					typeResults = EvaluateEarliest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					typeResults = EvaluateEarliest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
 					break;
 
 				case LeaderboardType.Latest:
-					typeResults = EvaluateLatest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.GameDataType, request);
+					typeResults = EvaluateLatest(actors, leaderboard.GameId, leaderboard.Key, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
 					break;
 
 				default:
@@ -188,12 +188,12 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateHighest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateHighest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
 		{
 			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (gameDataType)
+			switch (SaveDataType)
 			{
-				case GameDataType.Long:
+				case SaveDataType.Long:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
@@ -202,7 +202,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					});
 					break;
 
-				case GameDataType.Float:
+				case SaveDataType.Float:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
@@ -220,12 +220,12 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLowest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLowest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
 		{
 			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (gameDataType)
+			switch (SaveDataType)
 			{
-				case GameDataType.Long:
+				case SaveDataType.Long:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
@@ -234,7 +234,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					});
 					break;
 
-				case GameDataType.Float:
+				case SaveDataType.Float:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
@@ -252,12 +252,12 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateCumulative(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateCumulative(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
 		{
 			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (gameDataType)
+			switch (SaveDataType)
 			{
-				case GameDataType.Long:
+				case SaveDataType.Long:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
@@ -266,7 +266,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					});
 					break;
 
-				case GameDataType.Float:
+				case SaveDataType.Float:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
@@ -284,26 +284,26 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateCount(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateCount(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
 		{
 			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (gameDataType)
+			switch (SaveDataType)
 			{
-				case GameDataType.String:
+				case SaveDataType.String:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.CountKeys(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
+						Value = GameDataCoreController.CountKeys(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
-				case GameDataType.Boolean:
+				case SaveDataType.Boolean:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.CountKeys(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd).ToString()
+						Value = GameDataCoreController.CountKeys(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd).ToString()
 					});
 					break;
 
@@ -316,27 +316,27 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateEarliest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateEarliest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
 		{
 			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (gameDataType)
+			switch (SaveDataType)
 			{
-				case GameDataType.String:
+				case SaveDataType.String:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetEarliestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd)
+						Value = GameDataCoreController.TryGetEarliestKey(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					});
 					break;
 
-				case GameDataType.Boolean:
+				case SaveDataType.Boolean:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetEarliestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd)
+						Value = GameDataCoreController.TryGetEarliestKey(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					});
 					break;
@@ -350,27 +350,27 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLatest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, GameDataType gameDataType, LeaderboardStandingsRequest request)
+		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLatest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
 		{
 			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (gameDataType)
+			switch (SaveDataType)
 			{
-				case GameDataType.String:
+				case SaveDataType.String:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetLatestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd)
+						Value = GameDataCoreController.TryGetLatestKey(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					});
 					break;
 
-				case GameDataType.Boolean:
+				case SaveDataType.Boolean:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetLatestKey(gameId, r.Id, key, gameDataType, request.DateStart, request.DateEnd)
+						Value = GameDataCoreController.TryGetLatestKey(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					});
 					break;

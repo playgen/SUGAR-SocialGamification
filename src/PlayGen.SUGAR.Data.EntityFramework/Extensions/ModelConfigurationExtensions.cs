@@ -85,9 +85,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
         {
             // Multiple columns
             builder.Entity<GameData>()
-                .HasIndex(g => new { g.Key, g.GameId, g.Category, g.ActorId, g.DataType });
+                .HasIndex(g => new { g.Key, g.GameId, g.Category, g.ActorId, DataType = g.SaveDataType });
 
-            builder.Entity<Evaluation>()
+			builder.Entity<ActorData>()
+				.HasIndex(g => new { g.Key, g.GameId, g.ActorId, DataType = g.SaveDataType })
+				.IsUnique();
+
+			builder.Entity<Evaluation>()
                 .HasIndex(e => new { e.Token, e.GameId, e.ActorType });
 
             builder.Entity<ActorRole>()
@@ -131,7 +135,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                .HasDiscriminator<EvaluationType>("Discriminator")
                .HasValue<Achievement>(EvaluationType.Achievement)
                .HasValue<Skill>(EvaluationType.Skill);
-        }
+		}
 
         internal static void ConfigureProperties(this ModelBuilder builder)
         {

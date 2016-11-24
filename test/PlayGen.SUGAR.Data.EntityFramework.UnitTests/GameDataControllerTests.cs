@@ -151,7 +151,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				GameId = gameId,
 				ActorId = userId,
 				Value = key + " value",
-				DataType = 0
+				SaveDataType = 0
 			};
 			_gameDataController.Create(userData);
 			return userData;
