@@ -165,7 +165,9 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             }
             else
             {
-                foreach (var matchingEvaluation in actorProgress.Keys.Where(e => e.Id == evaluation.Id))
+                // todo rather replace all occurences of Dictionary<evaluation, progress> with a custom dictionary that does evaluation key comparrison bu Evaluation.Id.
+                var matchingEvaluation = actorProgress.Keys.SingleOrDefault(e => e.Id == evaluation.Id);
+                if(matchingEvaluation != null)
                 {
                     actorProgress.Remove(evaluation);
                 }
