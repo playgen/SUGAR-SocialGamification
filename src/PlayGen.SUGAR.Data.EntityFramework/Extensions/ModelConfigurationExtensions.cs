@@ -116,7 +116,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 .IsUnique();
 
             builder.Entity<Account>()
-                .HasIndex(a => a.Name)
+                .HasIndex(a => new { a.Name, a.AccountSourceId})
                 .IsUnique();
 
             builder.Entity<Role>()
