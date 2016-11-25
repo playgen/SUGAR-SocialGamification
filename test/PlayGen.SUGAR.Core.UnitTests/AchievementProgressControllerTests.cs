@@ -2,7 +2,7 @@
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
-    [Collection("Test Data Fixture Collection")]
+    [Collection("Project Fixture Collection")]
     public class AchievementProgressControllerTests
 	{
 		/*

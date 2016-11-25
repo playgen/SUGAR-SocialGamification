@@ -1,7 +1,6 @@
 ﻿using System;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Core.Sessions;
-using Xunit;
 
 namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 {

@@ -37,6 +37,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         public bool Remove(int evaluationId)
         {
             var didRemove = false;
+            var actorsToRemove = new List<KeyValuePair<int, int>>();    // <gameId, actorId>
 
             foreach (var gameProgress in _pendingNotifications)
             {
@@ -48,17 +49,14 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
                         if (actorProgress.Value.Count == 0)
                         {
-                            gameProgress.Value.Remove(actorProgress.Key);
-
-                            if (gameProgress.Value.Count == 0)
-                            {
-                                _pendingNotifications.Remove(gameProgress.Key);
-                            }
+                            actorsToRemove.Add(new KeyValuePair<int, int>(gameProgress.Key, actorProgress.Key));
                         }
                     }
                 }
             }
 
+            PruneActors(actorsToRemove);
+            
             return didRemove;
         }
 
@@ -124,6 +122,26 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             }
 
             return actorProgress != null;
+        }
+
+        private void PruneActors(List<KeyValuePair<int, int>> actorsToRemove)
+        {
+            var gamesToRemove = new List<int>();
+
+            foreach (var removeActor in actorsToRemove)
+            {
+                _pendingNotifications[removeActor.Key].Remove(removeActor.Value);
+
+                if (_pendingNotifications[removeActor.Key].Count == 0)
+                {
+                    gamesToRemove.Add(removeActor.Key);
+                }
+            }
+
+            foreach (var removeGame in gamesToRemove)
+            {
+                _pendingNotifications.Remove(removeGame);
+            }
         }
     }
 }

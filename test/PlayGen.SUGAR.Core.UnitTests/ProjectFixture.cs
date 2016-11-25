@@ -21,9 +21,9 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
         public ProjectFixture()
         {
-            _instanceCount++;
+            //_instanceCount++;
 
-            if (!_isInitialized)
+            //if (!_isInitialized)
             {
                 _dbProjectFixture = new Data.EntityFramework.UnitTests.ProjectFixture();
                 _isInitialized = true;
@@ -32,9 +32,9 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
 		public virtual void Dispose()
 		{
-		    _instanceCount--;
+		    //_instanceCount--;
 
-            if (!_isDisposed && _instanceCount == 0)
+      //      if (!_isDisposed && _instanceCount == 0)
 		    {
 		        _dbProjectFixture.Dispose();
 		        _isDisposed = true;

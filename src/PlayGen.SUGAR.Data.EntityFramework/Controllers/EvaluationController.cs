@@ -14,7 +14,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-		public IEnumerable<Evaluation> GetByGame(int? gameId)
+        public IEnumerable<Evaluation> Get()
+        {
+            using (var context = ContextFactory.Create())
+            {
+                return context.Evaluations
+                    .IncludeAll()
+                    .ToList();
+            }
+        }
+
+        public IEnumerable<Evaluation> GetByGame(int? gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -67,14 +77,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			    context.SaveChanges();
 			}
 		}
-
-        public IEnumerable<Evaluation> All()
-        {
-            using (var context = ContextFactory.Create())
-            {
-                return context.Evaluations.ToList();
-            }
-        }
 
         public void Delete(string token, int? gameId)
 		{

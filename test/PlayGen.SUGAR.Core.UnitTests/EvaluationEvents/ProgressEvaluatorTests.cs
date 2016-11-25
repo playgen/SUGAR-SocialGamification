@@ -7,9 +7,8 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 {
-	[Collection("Test Data Fixture Collection")] // todo change to use this one
-	//[Collection("Project Fixture Collection")] // having 2 different kinds of project fixtures seems to cause issues and tests fail where they would normally pass.
-	public class ProgressEvaluatorTests
+    [Collection("Project Fixture Collection")]
+    public class ProgressEvaluatorTests
 	{
 		private readonly ProgressEvaluator _progressEvaluator;
 
@@ -55,17 +54,5 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
                 Assert.True(actorProgress[evaluation] > 0);      // Make sure actually processed progress
             }
         }
-        
-		[Fact]
-		public void CanEvaluateEvaluation()
-		{
-			throw new NotImplementedException();
-		}
-
-		[Fact]
-		public void CanEvaluateEvaluations()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

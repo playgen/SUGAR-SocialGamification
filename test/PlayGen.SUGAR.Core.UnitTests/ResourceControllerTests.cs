@@ -8,7 +8,7 @@ using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.Control
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
-    [Collection("Test Data Fixture Collection")]
+    [Collection("Project Fixture Collection")]
     public class ResourceControllerTests
     {
         #region Configuration

@@ -3,7 +3,6 @@ using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
-using Reward = PlayGen.SUGAR.Data.Model.Reward;
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
@@ -111,12 +110,27 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		    return ControllerLocator.EvaluationController.Create(ComposeGenericAchievement(key, gameId));
 		}
 
-		public static void CompleteGenericAchievement(Evaluation evaluation, int actorId)
+        public static void CreateGenericAchievementGameData(Evaluation evaluation, int actorId)
+        {
+            var gameDatas = ComposeAchievementGameDatas(actorId, evaluation);
+            ControllerLocator.GameDataController.Create(gameDatas.ToArray());
+        }
+
+        public static void CompleteGenericAchievement(Evaluation evaluation, int actorId)
 		{
 		    var gameDatas = ComposeAchievementGameDatas(actorId, evaluation);
             gameDatas.AddRange(ComposeAchievementGameDatas(actorId, evaluation));
             
             ControllerLocator.GameDataController.Create(gameDatas.ToArray());
 		}
+
+	    public static Evaluation CreateAndCompleteGenericAchievement(string key, int actorId, int? gameId = null)
+	    {
+	        var evaluation = CreateGenericAchievement(key, gameId);
+	        CompleteGenericAchievement(evaluation, actorId);
+
+	        return evaluation;
+	    }
+
 	}
 }

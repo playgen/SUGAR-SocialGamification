@@ -40,9 +40,15 @@ namespace PlayGen.SUGAR.Core.Controllers
 			_actorController = actorController;
 		}
 
-        public IEnumerable<Evaluation> All()
+        public IEnumerable<Evaluation> Get()
         {
-            var evaluations = _evaluationDbController.All();
+            var evaluations = _evaluationDbController.Get();
+            return evaluations;
+        }
+
+        public IEnumerable<Evaluation> GetByGame(int? gameId)
+        {
+            var evaluations = _evaluationDbController.GetByGame(gameId);
             return evaluations;
         }
 
@@ -50,12 +56,6 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			var evaluation = _evaluationDbController.Get(token, gameId);
 			return evaluation;
-		}
-		
-		public IEnumerable<Evaluation> GetByGame(int? gameId)
-		{
-			var evaluations = _evaluationDbController.GetByGame(gameId);
-			return evaluations;
 		}
 		
 		public IEnumerable<EvaluationProgress> GetGameProgress(int gameId, int? actorId)

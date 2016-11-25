@@ -6,8 +6,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 {
-    [Collection("Test Data Fixture Collection")] // todo change to use this one
-    //[Collection("Project Fixture Collection")] // having 2 different kinds of project fixtures seems to cause issues and tests fail where they would normally pass.
+    [Collection("Project Fixture Collection")]
     public class EvaluationGameDataMapperEvaluationTests : EvaluationTestsBase
     {
         [Fact]
