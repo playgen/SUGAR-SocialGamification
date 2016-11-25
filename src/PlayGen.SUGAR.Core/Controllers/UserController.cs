@@ -4,7 +4,7 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-    public class UserController
+    public class UserController : ActorController
     {
         private readonly Data.EntityFramework.Controllers.UserController _userController;
         private readonly ActorRoleController _actorRoleController;
@@ -44,10 +44,14 @@ namespace PlayGen.SUGAR.Core.Controllers
         public void Update(User user)
         {
             _userController.Update(user);
+
+            TriggerUpdatedEvent(user);
         }
         
         public void Delete(int id)
         {
+            TriggerDeletedEvent(id);
+
             _userController.Delete(id);
         }
     }

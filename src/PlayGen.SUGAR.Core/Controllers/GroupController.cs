@@ -4,7 +4,7 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-    public class GroupController
+    public class GroupController : ActorController
     {
         private readonly Data.EntityFramework.Controllers.GroupController _groupDbController;
         private readonly ActorRoleController _actorRoleController;
@@ -48,10 +48,14 @@ namespace PlayGen.SUGAR.Core.Controllers
         public void Update(Group group)
         {
             _groupDbController.Update(group);
+
+            TriggerUpdatedEvent(group);
         }
         
         public void Delete(int id)
         {
+            TriggerDeletedEvent(id);
+
             _groupDbController.Delete(id);
         }
     }

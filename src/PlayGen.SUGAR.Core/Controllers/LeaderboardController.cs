@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class LeaderboardController : CriteriaEvaluator
 	{
-		protected readonly ActorController ActorController;
+		protected readonly Data.EntityFramework.Controllers.ActorController ActorController;
 		protected readonly Data.EntityFramework.Controllers.GroupController GroupController;
 		protected readonly Data.EntityFramework.Controllers.UserController UserController;
 
@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 		public LeaderboardController(GameDataController gameDataCoreController,
 			GroupMemberController groupMemberCoreController,
 			UserFriendController userFriendCoreController,
-			ActorController actorController,
+            Data.EntityFramework.Controllers.ActorController actorController,
             Data.EntityFramework.Controllers.GroupController groupController,
             Data.EntityFramework.Controllers.UserController userController)
 			: base(gameDataCoreController, groupMemberCoreController, userFriendCoreController)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 
@@ -6,6 +7,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
     public class GameController
     {
+        public static event Action<int> GameDeletedEvent;
+
         private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
         private readonly ActorRoleController _actorRoleController;
 
@@ -48,6 +51,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 
         public void Delete(int id)
         {
+            GameDeletedEvent?.Invoke(id);
+
             _gameDbController.Delete(id);
         }
     }

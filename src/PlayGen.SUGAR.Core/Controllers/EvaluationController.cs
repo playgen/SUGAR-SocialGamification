@@ -17,7 +17,7 @@ namespace PlayGen.SUGAR.Core.Controllers
         public static Action<Evaluation> EvaluationDeletedEvent;
 
         private readonly RewardController _rewardController;
-		private readonly ActorController _actorController;
+		private readonly Data.EntityFramework.Controllers.ActorController _actorController;
 		private readonly Data.EntityFramework.Controllers.EvaluationController _evaluationDbController;
 
 		private readonly Dictionary<EvaluationType, string> _evaluationFormatMappings = new Dictionary<EvaluationType, string>
@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			GameDataController gameDataCoreController,
 			GroupMemberController groupMemberCoreController,
 			UserFriendController userFriendCoreController,
-			ActorController actorController,
+            Data.EntityFramework.Controllers.ActorController actorController,
 			RewardController rewardController)
 			: base(gameDataCoreController, groupMemberCoreController, userFriendCoreController)
 		{
