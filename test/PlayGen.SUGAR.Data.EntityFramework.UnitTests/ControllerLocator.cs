@@ -23,7 +23,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		private static GroupRelationshipController _groupRelationshipController;
 		private static LeaderboardController _leaderboardController;
 		private static EvaluationController _evaluationController;
-	    private static SentEvaluationNotificationController _sentEvaluationNotificationController;
         private static RoleController _roleController;
         private static RoleClaimController _roleClaimController;
         private static UserController _userController;
@@ -37,9 +36,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
         public static EvaluationController EvaluationController
 			=> _evaluationController ?? (_evaluationController = new EvaluationController(ContextFactory));
-
-        public static SentEvaluationNotificationController SentEvaluationNotificationController
-            => _sentEvaluationNotificationController ?? (_sentEvaluationNotificationController = new SentEvaluationNotificationController(ContextFactory));
 
         public static  ActorController ActorController
 			=> _actorController ?? (_actorController = new ActorController(ContextFactory));
