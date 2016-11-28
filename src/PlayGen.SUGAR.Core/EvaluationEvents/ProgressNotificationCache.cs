@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Common.Shared.Extensions;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {

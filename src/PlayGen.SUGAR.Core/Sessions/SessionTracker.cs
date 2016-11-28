@@ -12,13 +12,19 @@ namespace PlayGen.SUGAR.Core.Sessions
         public event Action<Session> SessionEndedEvent;
 
         private bool _isDisposed;
+        private static int _idCounter;
         
-        private readonly List<Session> _sessions = new List<Session>();
+        private readonly Dictionary<int, Session> _sessions =  new Dictionary<int, Session>();
 
         public SessionTracker()
         {
             ActorController.ActorDeletedEvent += OnActorDeleted;
             GameController.GameDeletedEvent += OnGameDeleted;
+        }
+
+        public void SetLastActive(int sessionId, DateTime lastActive)
+        {
+            _sessions[sessionId].LastActive = lastActive;
         }
 
         ~SessionTracker()
@@ -36,51 +42,56 @@ namespace PlayGen.SUGAR.Core.Sessions
             _isDisposed = true;
         }
         
-        public void StartSession(int? gameId, int actorId)
+        public Session StartSession(int? gameId, int actorId)
         {
             var session = new Session
             {
+                Id = ++_idCounter,
                 GameId = gameId,
                 ActorId = actorId
             };
 
-            _sessions.Add(session);
+            _sessions[session.Id] = session;
 
             SessionStartedEvent(session);
+
+            return session;
         }
         
-        public void EndSession(int? gameId, Actor actor)
+        public void EndSession(int sessionId)
         {
-            var session = _sessions.Single(s => s.GameId == gameId && s.ActorId == actor.Id);
-            _sessions.Remove(session);
+            var session = _sessions[sessionId];
+            _sessions.Remove(sessionId);
 
             SessionEndedEvent(session);
         }
 
         public List<Session> GetByActor(int actorId)
         {
-            return _sessions.Where(s => s.ActorId == actorId).ToList();
+            return _sessions.Values.Where(s => s.ActorId == actorId).ToList();
         }
 
         public List<Session> GetByGames(List<int?> gameIds)
         {
-            return _sessions.Where(s => gameIds.Contains(s.GameId)).ToList();
-        }
-
-        private void OnActorUpdated(Actor updatedActor)
-        {
-            var actorsSessions = GetByActor(updatedActor.Id);
-            actorsSessions.ForEach(s => s.ActorId = updatedActor.Id);
+            return _sessions.Values.Where(s => gameIds.Contains(s.GameId)).ToList();
         }
 
         private void OnActorDeleted(int actorId)
         {
-            _sessions.RemoveAll(s => s.ActorId == actorId);
+            var kvps = _sessions
+                .Where(kvp => kvp.Value.ActorId == actorId)
+                .Select(kvp => kvp.Key).ToList();
+
+            kvps.ForEach(k => _sessions.Remove(k));
         }
         
         private void OnGameDeleted(int gameId)
         {
-            _sessions.RemoveAll(s => s.GameId == gameId);
+            var kvps = _sessions
+                .Where(kvp => kvp.Value.GameId == gameId)
+                .Select(kvp => kvp.Key).ToList();
+
+            kvps.ForEach(k => _sessions.Remove(k));
         }
     }
 }

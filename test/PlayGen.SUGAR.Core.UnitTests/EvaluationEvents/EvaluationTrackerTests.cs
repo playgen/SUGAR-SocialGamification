@@ -44,13 +44,13 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 
             Helpers.CreateAndCompleteGenericAchievement("RemovesOnSessionEnded", user.Id, game.Id);
 
-            SessionTracker.StartSession(game.Id, user.Id);
+            var session = SessionTracker.StartSession(game.Id, user.Id);
 
             var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
             Assert.True(progress.ContainsKey(user.Id)); // should have evalauted for this user
 
             // Act
-            SessionTracker.EndSession(game.Id, user);
+            SessionTracker.EndSession(session.Id);
 
             // Assert
             progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);

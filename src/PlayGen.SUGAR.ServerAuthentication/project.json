@@ -12,7 +12,8 @@
     "Microsoft.IdentityModel.Tokens": "5.0.0",
     "PlayGen.SUGAR.Common": "1.0.0-*",
     "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0",
-    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0"
+    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
+    "PlayGen.SUGAR.Core": "1.0.0-*"
   },
 
   "frameworks": {

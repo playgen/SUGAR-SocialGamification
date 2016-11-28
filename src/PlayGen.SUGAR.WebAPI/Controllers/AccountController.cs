@@ -19,106 +19,103 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates account specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-    public class AccountController : Controller
+	public class AccountController : Controller
 	{
 		private readonly IAuthorizationService _authorizationService;
-        private readonly TokenController _tokenController;
-        private readonly Core.Controllers.AccountController _accountCoreController;
-	    private readonly SessionTracker _sessionTracker;
+		private readonly TokenController _tokenController;
+		private readonly Core.Controllers.AccountController _accountCoreController;
+		private readonly SessionTracker _sessionTracker;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="accountDbController"></param>
-        /// <param name="userDbController"></param>
-        /// <param name="passwordEncryption"></param>
-        /// <param name="tokenController"></param>
-        /// <param name="authorizationService"></param>
-        public AccountController(Core.Controllers.AccountController accountCoreController,
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="accountDbController"></param>
+		/// <param name="userDbController"></param>
+		/// <param name="passwordEncryption"></param>
+		/// <param name="tokenController"></param>
+		/// <param name="authorizationService"></param>
+		public AccountController(Core.Controllers.AccountController accountCoreController,
 
-            Data.EntityFramework.Controllers.UserController userDbController,
-            TokenController tokenController,
-            IAuthorizationService authorizationService,
-            SessionTracker sessionTracker)
+			Data.EntityFramework.Controllers.UserController userDbController,
+			TokenController tokenController,
+			IAuthorizationService authorizationService,
+			SessionTracker sessionTracker)
 		{
-		    _accountCoreController = accountCoreController;
-            _tokenController = tokenController;
-            _authorizationService = authorizationService;
-		    _sessionTracker = sessionTracker;
+			_accountCoreController = accountCoreController;
+			_tokenController = tokenController;
+			_authorizationService = authorizationService;
+			_sessionTracker = sessionTracker;
 		}
 
-        //Todo: Move log-in into a separate controller
-        /// <summary>
-        /// Logs in an account based on the name and password combination.
-        /// Returns a JsonWebToken used for authorization in any further calls to the API.
-        /// 
-        /// Example Usage: POST api/account/login
-        /// </summary>
-        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
-        /// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
-        [HttpPost("login")]
-        [HttpPost("{gameId:int}/login")]
-        //[ResponseType(typeof(AccountResponse))]
-        [ArgumentsNotNull]
+		//Todo: Move log-in into a separate controller
+		/// <summary>
+		/// Logs in an account based on the name and password combination.
+		/// Returns a JsonWebToken used for authorization in any further calls to the API.
+		/// 
+		/// Example Usage: POST api/account/login
+		/// </summary>
+		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
+		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
+		[HttpPost("login")]
+		[HttpPost("{gameId:int}/login")]
+		//[ResponseType(typeof(AccountResponse))]
+		[ArgumentsNotNull]
 		public IActionResult Login([FromRoute]int? gameId, [FromBody]AccountRequest accountRequest)
 		{
-            // todo check if has permission to login for specified game
-		    var account = accountRequest.ToModel();
+			// todo check if has permission to login for specified game
+			var account = accountRequest.ToModel();
 
-            account = _accountCoreController.Login(account, accountRequest.SourceToken);
-            _sessionTracker.StartSession(gameId, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
+			account = _accountCoreController.Login(account, accountRequest.SourceToken);
 
-            var token = CreateToken(gameId ?? 0, account);
-			HttpContext.Response.SetAuthorizationToken(token);
+			var session = _sessionTracker.StartSession(gameId, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
+            _tokenController.IssueToken(HttpContext, session);
 
             var response = account.ToContract();
 			return new ObjectResult(response);
 		}
 
-        /// <summary>
-        /// Register a new account and creates an associated user.
-        /// Requires the <see cref="AccountRequest.Name"/> to be unique.
-        /// Returns a JsonWebToken used for authorization in any further calls to the API.
-        /// 
-        /// Example Usage: POST api/account/register
-        /// </summary>
-        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
-        /// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
-        [HttpPost("register")]
-        [HttpPost("{gameId:int}/register")]
-        //[ResponseType(typeof(AccountResponse))]
-        [ArgumentsNotNull]
-        // todo split register and register with auto login contracts
+		/// <summary>
+		/// Register a new account and creates an associated user.
+		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
+		/// Returns a JsonWebToken used for authorization in any further calls to the API.
+		/// 
+		/// Example Usage: POST api/account/register
+		/// </summary>
+		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
+		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
+		[HttpPost("register")]
+		[HttpPost("{gameId:int}/register")]
+		//[ResponseType(typeof(AccountResponse))]
+		[ArgumentsNotNull]
+		// todo split register and register with auto login contracts
 		public IActionResult Register([FromRoute]int? gameId, [FromBody] AccountRequest accountRequest)
 		{
-            // todo check if has permission to autologin for specified game
-		    var account = accountRequest.ToModel();
+			// todo check if has permission to autologin for specified game
+			var account = accountRequest.ToModel();
 
-		    account = _accountCoreController.Register(account, accountRequest.SourceToken);
+			account = _accountCoreController.Register(account, accountRequest.SourceToken);
 
-            var response = account.ToContract();
+			var response = account.ToContract();
 			if (accountRequest.AutoLogin)
 			{
-                _sessionTracker.StartSession(gameId, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
-
-                var token = CreateToken(gameId ?? 0, account);
-				HttpContext.Response.SetAuthorizationToken(token);
-            }
+				var session = _sessionTracker.StartSession(gameId, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
+			    _tokenController.IssueToken(HttpContext, session);
+			}
 			return new ObjectResult(response);
 		}
 
-        //Todo: Review if register with id is needed
-        /*/// <summary>
-        /// Register a new account for an existing user.
-        /// Requires the <see cref="AccountRequest.Name"/> to be unique.
-        /// Returns a JsonWebToken used for authorization in any further calls to the API.
-        /// 
-        /// Example Usage: POST api/account/registerwithid/1
-        /// </summary>
-        // <param name="userId">ID of the existing User.</param>
-        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
-        /// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
-        [HttpPost("registerwithid/{userId:int}")]
+		//Todo: Review if register with id is needed
+		/*/// <summary>
+		/// Register a new account for an existing user.
+		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
+		/// Returns a JsonWebToken used for authorization in any further calls to the API.
+		/// 
+		/// Example Usage: POST api/account/registerwithid/1
+		/// </summary>
+		// <param name="userId">ID of the existing User.</param>
+		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
+		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
+		[HttpPost("registerwithid/{userId:int}")]
 		[ResponseType(typeof(AccountResponse))]
 		public IActionResult Register([FromRoute]int userId, [FromBody] AccountRequest accountRequest)
 		{
@@ -141,30 +138,23 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(response);
 		}*/
 
-        /// <summary>
-        /// Delete Account with the ID provided.
-        /// 
-        /// Example Usage: DELETE api/account/1
-        /// </summary>
-        /// <param name="id">Account ID.</param>
-        [HttpDelete("{id:int}")]
-        [Authorize("Bearer")]
-        [Authorization(ClaimScope.Account, AuthorizationOperation.Delete, AuthorizationOperation.Account)]
-        public IActionResult Delete([FromRoute]int id)
+		/// <summary>
+		/// Delete Account with the ID provided.
+		/// 
+		/// Example Usage: DELETE api/account/1
+		/// </summary>
+		/// <param name="id">Account ID.</param>
+		[HttpDelete("{id:int}")]
+		[Authorize("Bearer")]
+		[Authorization(ClaimScope.Account, AuthorizationOperation.Delete, AuthorizationOperation.Account)]
+		public IActionResult Delete([FromRoute]int id)
 		{
-            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                _accountCoreController.Delete(id);
-                return Ok();
-            }
-            return Forbid();
-        }
-		
-		#region Helpers
-		private string CreateToken(int gameId, Account account)
-		{
-            return _tokenController.CreateToken(gameId, account.UserId);
-        }
-		#endregion
+			if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			{
+				_accountCoreController.Delete(id);
+				return Ok();
+			}
+			return Forbid();
+		}
 	}
 }

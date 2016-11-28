@@ -75,6 +75,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return Forbid();
 		}
 
-        // todo create method for adding abtches of gamedata
+        // todo create method for adding batches of gamedata
     }
 }

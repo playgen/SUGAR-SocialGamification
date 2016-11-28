@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
 using PlayGen.SUGAR.Core.Authorization;
+using PlayGen.SUGAR.ServerAuthentication.Filters;
 
 namespace PlayGen.SUGAR.WebAPI
 {
@@ -85,12 +86,15 @@ namespace PlayGen.SUGAR.WebAPI
                     rsa.PersistKeyInCsp = false;
                 }
             }
+            
             tokenOptions = new TokenAuthOptions()
             {
                 Audience = TokenAudience,
                 Issuer = TokenIssuer,
-                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature)
+                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature),
+                ValidityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]),
             };
+
             services.AddSingleton(tokenOptions);
 
 			services.AddScoped((_) => new PasswordEncryption());
@@ -113,6 +117,7 @@ namespace PlayGen.SUGAR.WebAPI
 				options.Filters.Add(new ModelValidationFilter());
 				options.Filters.Add(new ExceptionFilter());
 			    options.Filters.Add(typeof(WrapResponseFilter));
+			    options.Filters.Add(typeof(TokenReissueFilter));
 			})
 			.AddJsonOptions(json =>
 			{
