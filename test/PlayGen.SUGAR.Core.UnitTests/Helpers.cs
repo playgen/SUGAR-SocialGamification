@@ -79,19 +79,19 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			};
 		}
 
-        public static List<GameData> ComposeAchievementGameDatas(int actorId, Evaluation evaluation)
+        public static List<GameData> ComposeAchievementGameDatas(int actorId, Evaluation evaluation, string value = "50")
         {
             var gameDatas = new List<GameData>();
 
             foreach (var criteria in evaluation.EvaluationCriterias)
             {
-                gameDatas.Add(ComposeGameData(actorId, criteria, evaluation.GameId));
+                gameDatas.Add(ComposeGameData(actorId, criteria, evaluation.GameId, value));
             }
 
             return gameDatas;
         }
 
-        public static GameData ComposeGameData(int actorId, EvaluationCriteria evaluationCriteria, int? gameId = null)
+        public static GameData ComposeGameData(int actorId, EvaluationCriteria evaluationCriteria, int? gameId = null, string value = "50")
 		{
 			return new GameData
 			{
@@ -101,7 +101,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 ActorId = actorId,
 				GameId = gameId,
 
-                Value = "50"
+                Value = value
 			};
 		}
 
@@ -110,16 +110,15 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		    return ControllerLocator.EvaluationController.Create(ComposeGenericAchievement(key, gameId));
 		}
 
-        public static void CreateGenericAchievementGameData(Evaluation evaluation, int actorId)
+        public static void CreateGenericAchievementGameData(Evaluation evaluation, int actorId, string value = "50")
         {
-            var gameDatas = ComposeAchievementGameDatas(actorId, evaluation);
+            var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, value);
             ControllerLocator.GameDataController.Create(gameDatas.ToArray());
         }
 
         public static void CompleteGenericAchievement(Evaluation evaluation, int actorId)
 		{
-		    var gameDatas = ComposeAchievementGameDatas(actorId, evaluation);
-            gameDatas.AddRange(ComposeAchievementGameDatas(actorId, evaluation));
+		    var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, "100");
             
             ControllerLocator.GameDataController.Create(gameDatas.ToArray());
 		}

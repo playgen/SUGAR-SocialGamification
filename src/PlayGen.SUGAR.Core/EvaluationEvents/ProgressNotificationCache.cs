@@ -60,7 +60,12 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             return didRemove;
         }
 
-        public void Update(ProgressCache addProgress)
+        // todo store table of sent notifications so they don't get resent - check them here
+        /// <summary>
+        /// Only add if progress is completed (value 1) and the evaluation notification hasn't been sent before
+        /// </summary>
+        /// <param name="addProgress"></param>
+        public void Update(ProgressCache addProgress, float minProgress = 1f)   // todo make this config driven (should probably be stored on the achievemnt as notification progress interval)
         {
             foreach (var addGameProgress in addProgress)
             {
@@ -83,7 +88,11 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
                     foreach (var addEvaluationProgress in addActorProgress.Value)
                     {
                         existingActorProgress.RemoveAll(p => p.Key == addEvaluationProgress.Key);
-                        existingActorProgress.Add(addEvaluationProgress);
+
+                        if (minProgress <= addEvaluationProgress.Value)
+                        {
+                            existingActorProgress.Add(addEvaluationProgress);
+                        }
                     }
                 }
             }
@@ -105,6 +114,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         private bool TryTake(int? gameId, int actorId, out List<KeyValuePair<Evaluation, float>> actorProgress)
         {
+            // todo store that notification has been sent here
+
             actorProgress = null;
 
             Dictionary<int, List<KeyValuePair<Evaluation, float>>> gameProgress;

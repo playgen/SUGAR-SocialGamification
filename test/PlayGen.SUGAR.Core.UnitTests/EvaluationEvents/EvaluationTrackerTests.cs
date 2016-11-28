@@ -90,7 +90,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 
             var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnGameDataAdded", game.Id);
 
-            var gameDatas = Helpers.ComposeAchievementGameDatas(user.Id, evaluation);
+            var gameDatas = Helpers.ComposeAchievementGameDatas(user.Id, evaluation, "100");
 
             // Act
             gameDatas.ForEach(g => ControllerLocator.GameDataController.Add(g));
@@ -147,7 +147,10 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             Helpers.CreateGenericAchievementGameData(evaluation, user.Id);
 
             var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
-            progress[user.Id].ForEach(kvp => Assert.Equal(0.5f, kvp.Value)); // No progress should be completed by this point
+            if (progress?.ContainsKey(user.Id) == true)
+            {
+                Assert.False(progress[user.Id].Any(kvp => kvp.Key.Id == evaluation.Id));    // Make sure the evaluation wasn't returned when it wasn't completed
+            }
 
             // Act
             foreach (var criteria in evaluation.EvaluationCriterias)
@@ -161,7 +164,30 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
             progress[user.Id].ForEach(kvp => Assert.Equal(1, kvp.Value)); // Progress should be completed by this point
         }
-        
+
+        /// <summary>
+        /// No progress stored when there is no session for the user
+        /// </summary>
+        [Fact]
+        public void NoEvaluationWhenNotComplete()
+        {
+            // Arrange
+            var game = Helpers.GetOrCreateGame("NoEvaluationWhenNotComplete");
+            var user = Helpers.GetOrCreateUser("NoEvaluationWhenNotComplete");
+
+            var evaluation = Helpers.CreateGenericAchievement("NoEvaluationWhenNotComplete", game.Id);
+            Helpers.CreateGenericAchievementGameData(evaluation, user.Id);
+
+            // Act
+            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+
+            // Assert
+            if (progress.ContainsKey(user.Id))
+            {
+                Assert.False(progress[user.Id].Any(p => p.Key.Id == evaluation.Id));
+            }
+        }
+
         /// <summary>
         /// - add achievement and complete achievement
         /// - remove achievement
@@ -212,6 +238,32 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             // Assert
             progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
+            if (progress.ContainsKey(user.Id))
+            {
+                Assert.False(progress[user.Id].Any(p => p.Key.Id == evaluation.Id));
+            }
+        }
+
+        /// <summary>
+        /// Adding multiple game data triggers evaluations
+        /// </summary>
+        [Fact]
+        public void DoesntGetAlreadyRecievedNotifications()
+        {
+            // Arrange
+            var game = Helpers.GetOrCreateGame("DoesntGetAlreadyRecievedNotifications");
+            var user = Helpers.GetOrCreateUser("DoesntGetAlreadyRecievedNotifications");
+
+            SessionTracker.StartSession(game.Id, user);
+
+            var evaluation = Helpers.CreateAndCompleteGenericAchievement("DoesntGetAlreadyRecievedNotifications", user.Id, game.Id);
+            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+
+            Helpers.CompleteGenericAchievement(evaluation, game.Id);
+            // Act
+            progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+
+            // Assert
             if (progress.ContainsKey(user.Id))
             {
                 Assert.False(progress[user.Id].Any(p => p.Key.Id == evaluation.Id));

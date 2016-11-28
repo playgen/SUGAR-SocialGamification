@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
@@ -71,14 +72,14 @@ namespace PlayGen.SUGAR.Client
 			var query = GetUriBuilder(ControllerPrefix + "/global/evaluate/{0}", actorId).ToString();
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
 		}
-
-		/// <summary>
-		/// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
-		/// </summary>
-		/// <param name="gameId">ID of Game</param>
-		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
-		public IEnumerable<EvaluationProgressResponse> GetGameProgress(int gameId, int actorId)
+    
+        /// <summary>
+        /// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
+        /// </summary>
+        /// <param name="gameId">ID of Game</param>
+        /// <param name="actorId">ID of Group/User</param>
+        /// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
+        public IEnumerable<EvaluationProgressResponse> GetGameProgress(int gameId, int actorId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/evaluate/{1}", gameId, actorId).ToString();
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);

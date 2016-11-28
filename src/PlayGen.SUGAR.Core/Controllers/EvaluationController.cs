@@ -140,9 +140,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 				}
 			}
 
-			var key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token);
-			var completed = GameDataCoreController.KeyExists(evaluation.GameId, actorId, key);
+		    var completed = IsAlreadyCompleted(evaluation, actorId.Value);
 			var completedProgress = completed ? 1f : 0f;
+            
 			if (!completed)
 			{
 				completedProgress = IsCriteriaSatisified(evaluation.GameId, actorId, evaluation.EvaluationCriterias, evaluation.ActorType);
@@ -155,6 +155,14 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return completedProgress;
 		}
 
+	    public bool IsAlreadyCompleted(Evaluation evaluation, int actorId)
+	    {
+            var key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token);
+            var completed = GameDataCoreController.KeyExists(evaluation.GameId, actorId, key);
+            
+	        return completed;
+	    }
+
         private void ProcessEvaluationRewards(Evaluation evaluation, int? actorId)
 		{
 			var gameData = new GameData()
@@ -166,7 +174,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 				Value = null
 			};
 			GameDataCoreController.Add(gameData);
-			evaluation.Rewards.ForEach(reward => _rewardController.AddReward(actorId, evaluation.GameId, reward));
+
+			evaluation.Rewards?.ForEach(reward => _rewardController.AddReward(actorId, evaluation.GameId, reward));
 		}
 	}
 }

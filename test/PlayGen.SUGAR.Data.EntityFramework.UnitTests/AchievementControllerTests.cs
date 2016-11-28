@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var achievementName = "CreateAchievement";
 
-			var newAchievement = CreateAchievement(achievementName);
+			var newAchievement = Helpers.CreateAchievement(achievementName);
 
 			var achievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
 
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var achievementName = "CreateGlobalAchievement";
 
-			var newAchievement = CreateAchievement(achievementName, 0);
+			var newAchievement = Helpers.CreateAchievement(achievementName, 0);
 
 			var achievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
 
@@ -46,15 +46,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var achievementName = "CreateDuplicateAchievement";
 
-			var firstachievement = CreateAchievement(achievementName);
+			var firstachievement = Helpers.CreateAchievement(achievementName);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateAchievement(achievementName, firstachievement.GameId));
+			Assert.Throws<DuplicateRecordException>(() => Helpers.CreateAchievement(achievementName, firstachievement.GameId));
 		}
 
 		[Fact]
 		public void GetAchievementsByGame()
 		{
-			var baseAchievement = CreateAchievement("GetAchievementsByBaseGame");
+			var baseAchievement = Helpers.CreateAchievement("GetAchievementsByBaseGame");
 
 			var gameId = baseAchievement.GameId;
 
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			foreach (var name in names)
 			{
-				CreateAchievement(name, gameId);
+				Helpers.CreateAchievement(name, gameId);
 			}
 
 			var achievements = _evaluationController.GetByGame(gameId);
@@ -99,7 +99,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var achievementName = "UpdateExistingAchievement";
 
-			var newAchievement = CreateAchievement(achievementName);
+			var newAchievement = Helpers.CreateAchievement(achievementName);
 
 			var foundAchievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
 
@@ -121,9 +121,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var achievementName = "UpdateAchievementToDuplicateName";
 
-			var newAchievement = CreateAchievement(achievementName);
+			var newAchievement = Helpers.CreateAchievement(achievementName);
 
-			var newAchievementDuplicate = CreateAchievement(achievementName + " Two", newAchievement.GameId);
+			var newAchievementDuplicate = Helpers.CreateAchievement(achievementName + " Two", newAchievement.GameId);
 
 			var update = new Achievement
 			{
@@ -161,7 +161,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var achievementName = "DeleteExistingAchievement";
 
-			var achievement = CreateAchievement(achievementName);
+			var achievement = Helpers.CreateAchievement(achievementName);
 
 			var achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId);
 			Assert.NotNull(achievementReturned);
@@ -177,50 +177,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		public void DeleteNonExistingGroupAchievement()
 		{
 			_evaluationController.Delete("DeleteNonExistingGroupAchievement", -1);
-		}
-		#endregion
-
-		#region Helpers
-		private Achievement CreateAchievement(string name, int? gameId = null, bool addCriteria = true)
-		{
-			if (gameId == null) {
-				var game = new Game
-				{
-					Name = name
-				};
-				_gameController.Create(game);
-				gameId = game.Id;
-			}
-
-			var achievement = new Achievement
-			{
-				Name = name,
-				Token = name,
-				GameId = gameId.Value,
-				ActorType = ActorType.User,
-				EvaluationCriterias = new List<Model.EvaluationCriteria>(),
-				Rewards = new List<Model.Reward>()
-			};
-			if (addCriteria)
-			{
-				var criteria = new List<Model.EvaluationCriteria>
-				{
-					new Model.EvaluationCriteria
-                    {
-						Key = "CreateAchievementKey",
-						DataType = SaveDataType.String,
-						CriteriaQueryType = CriteriaQueryType.Any,
-						ComparisonType = ComparisonType.Equals,
-						Scope = CriteriaScope.Actor,
-						Value = "CreateAchievementValue"
-					}
-				};
-				achievement.EvaluationCriterias = criteria;
-			}
-
-			_evaluationController.Create(achievement);
-
-			return achievement;
 		}
 		#endregion
 	}

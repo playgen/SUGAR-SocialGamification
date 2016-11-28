@@ -14,11 +14,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 
 		public ProgressEvaluatorTests()
 		{
-			var criteriaEvaluator = new CriteriaEvaluator(ControllerLocator.GameDataController, 
-				ControllerLocator.GroupMemberController, 
-				ControllerLocator.UserFriendController);
-
-			_progressEvaluator = new ProgressEvaluator(criteriaEvaluator);
+			_progressEvaluator = new ProgressEvaluator(ControllerLocator.EvaluationController);
 		}
 
 		[Fact]

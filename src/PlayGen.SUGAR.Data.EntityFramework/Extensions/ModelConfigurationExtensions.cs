@@ -30,6 +30,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 
             builder.Entity<Model.Reward>()
                 .ToTable("Rewards");
+
+            builder.Entity<SentEvaluationNotification>()
+                .ToTable("SentEvaluationNotifications");
         }
 
         internal static void ConfigureForeignKeys(this ModelBuilder builder)
@@ -79,6 +82,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 
             builder.Entity<RoleClaim>()
                 .HasKey(k => new { k.RoleId, k.ClaimId });
+
+            builder.Entity<SentEvaluationNotification>()
+                .HasKey(k => new {k.GameId, k.ActorId, k.EvaluationId});
         }
 
         internal static void ConfigureIndexes(this ModelBuilder builder)

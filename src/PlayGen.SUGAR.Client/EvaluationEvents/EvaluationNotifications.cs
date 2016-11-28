@@ -26,8 +26,16 @@ namespace PlayGen.SUGAR.Client.EvaluationEvents
         {
             if (evaluationNotifications != null)
             {
-                _pendingNotifications.InsertRange(0, evaluationNotifications);
+                RemoveDuplicates(evaluationNotifications);
+
+                _pendingNotifications.AddRange(evaluationNotifications);
             }
+        }
+
+        private void RemoveDuplicates(List<EvaluationNotification> evaluationNotifications)
+        {
+            var names = evaluationNotifications.Select(n => n.Name);
+            _pendingNotifications.RemoveAll(n => names.Contains(n.Name));
         }
     }
 }

@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Core.Sessions;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
 	public class ProgressEvaluator
 	{
-		private readonly CriteriaEvaluator _evaluationCriteriaEvaluator;
+		private readonly EvaluationController _evaluationController;
 
-		public ProgressEvaluator(CriteriaEvaluator evaluationCriteriaEvaluator)
+		public ProgressEvaluator(EvaluationController evaluationController)
 		{
-			_evaluationCriteriaEvaluator = evaluationCriteriaEvaluator;
+			_evaluationController = evaluationController;
 		}
 
 		public ProgressCache EvaluateActor(IEnumerable<Evaluation> evaluations, Session session)
@@ -58,9 +59,11 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
 		private void AddProgress(ProgressCache progress, Evaluation evaluation, Session session)
 		{
-			var progressValue = _evaluationCriteriaEvaluator.IsCriteriaSatisified(evaluation.GameId, session.Actor.Id,
-				evaluation.EvaluationCriterias, session.Actor.ActorType);
-			progress.AddProgress(session.GameId, session.Actor.Id, evaluation, progressValue);
+		    if (!_evaluationController.IsAlreadyCompleted(evaluation, session.Actor.Id))
+		    {
+		        var progressValue = _evaluationController.EvaluateProgress(evaluation, session.Actor.Id);
+		        progress.AddProgress(session.GameId, session.Actor.Id, evaluation, progressValue);
+		    }
 		}
 	}
 }

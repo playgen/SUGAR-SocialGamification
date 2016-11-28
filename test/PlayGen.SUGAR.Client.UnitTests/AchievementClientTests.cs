@@ -81,8 +81,36 @@ namespace PlayGen.SUGAR.Client.UnitTests
             Assert.IsTrue(didGetnotification);
             Assert.IsNotNull(gotNotification);
 
-            // todo uncomment below when evaluation tracker is implemented server side
-            //Assert.IsTrue(didGetSpecificConfiguration);
+            Assert.IsTrue(didGetSpecificConfiguration);
+        }
+
+        [Test]
+        public void DontGetAlreadyRecievedNotifications()
+        {
+            // Assign
+            var key = "DontGetAlreadyRecievedNotifications";
+
+            _achievementClient.EnableNotifications(true);
+            var achievement = CreateGenericEvaluation(key);
+
+            CompleteGenericEvaluation(achievement, Helpers.LoggedInAccount.User.Id);
+
+            EvaluationNotification notification;
+            while (_achievementClient.TryGetPendingNotification(out notification))
+            {
+            }
+
+            CompleteGenericEvaluation(achievement, Helpers.LoggedInAccount.User.Id);
+
+            // Act
+            var didGetSpecificConfiguration = false;
+            while (_achievementClient.TryGetPendingNotification(out notification))
+            {
+                didGetSpecificConfiguration |= notification.Name == achievement.Name;
+            }
+
+            // Assert
+            Assert.IsFalse(didGetSpecificConfiguration);
         }
 
         [Test]

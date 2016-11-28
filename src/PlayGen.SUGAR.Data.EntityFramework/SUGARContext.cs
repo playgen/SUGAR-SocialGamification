@@ -26,6 +26,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
         public DbSet<Game> Games { get; set; }
 		
 		public DbSet<Evaluation> Evaluations { get; set; }
+        public DbSet<SentEvaluationNotification> SentEvaluationNotifications { get; set; }
 		public DbSet<Achievement> Achievements { get; set; }
 		public DbSet<Skill> Skills { get; set; }
 
