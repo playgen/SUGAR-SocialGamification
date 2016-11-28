@@ -22,16 +22,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Are the actor references in the sessions updated when the actor us updated via the core controller
-        /// </summary>
-        [Fact]
-        public void SessionActorUpdatedOnActorUpdated()
-        {
-            throw new NotImplementedException();
-        }
-
+      
         /// <summary>
         /// Are the sessions removed for actors that have been removed via the core controller
         /// </summary>

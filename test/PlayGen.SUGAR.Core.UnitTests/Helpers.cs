@@ -113,14 +113,14 @@ namespace PlayGen.SUGAR.Core.UnitTests
         public static void CreateGenericAchievementGameData(Evaluation evaluation, int actorId, string value = "50")
         {
             var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, value);
-            ControllerLocator.GameDataController.Create(gameDatas.ToArray());
+            ControllerLocator.GameDataController.Add(gameDatas.ToArray());
         }
 
         public static void CompleteGenericAchievement(Evaluation evaluation, int actorId)
 		{
 		    var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, "100");
             
-            ControllerLocator.GameDataController.Create(gameDatas.ToArray());
+            ControllerLocator.GameDataController.Add(gameDatas.ToArray());
 		}
 
 	    public static Evaluation CreateAndCompleteGenericAchievement(string key, int actorId, int? gameId = null)

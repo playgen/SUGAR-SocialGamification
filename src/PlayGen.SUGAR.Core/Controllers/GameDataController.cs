@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             return datas;
         }
 
-        public void Create(GameData[] datas)
+        public void Add(GameData[] datas)
         {
             var dataList = new List<GameData>();
             var i = 0;

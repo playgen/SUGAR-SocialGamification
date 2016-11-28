@@ -63,32 +63,6 @@ namespace PlayGen.SUGAR.WebAPI.Filters
             var pendingNotifications = _evaluationTracker.GetPendingNotifications(gameId, actorId);
             var progressResponses = pendingNotifications.ToContractList();
 
-            // todo remove this dummy code
-            progressResponses.Add(
-                new EvaluationProgressResponse
-                {
-                    Actor = new ActorResponse
-                    {
-                        Id = 1,
-                        Name = "DummyAchievementProgressActor"
-                    },
-                    Name = "DummyAchievementProgressResponse",
-                    Progress = 1,
-                    Type = EvaluationType.Achievement
-                });
-            progressResponses.Add(
-                new EvaluationProgressResponse
-                {
-                    Actor = new ActorResponse
-                    {
-                        Id = 1,
-                        Name = "DummySkillProgressActor"
-                    },
-                    Name = "DummySkillProgressResponse",
-                    Progress = 1,
-                    Type = EvaluationType.Skill
-                });
-
             return progressResponses;
         }
     }

@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
             {
                 gameDatas.Add(CreateData(_games[_random.Next(0, _games.Count)], _users[_random.Next(0, _users.Count)], dataValues[_random.Next(0, dataValues.Count)]));
             }
-            _gameDataController.Create(gameDatas.ToArray());
+            _gameDataController.Add(gameDatas.ToArray());
         }
 
         private static Data.Model.GameData CreateData(Game game, User user, DataParam data)

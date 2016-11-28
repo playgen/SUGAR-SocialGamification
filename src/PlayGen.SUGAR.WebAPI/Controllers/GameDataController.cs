@@ -16,9 +16,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	public class GameDataController : Controller
 	{
 		private readonly IAuthorizationService _authorizationService;
-		private readonly Data.EntityFramework.Controllers.GameDataController _gameDataCoreController;
+		private readonly Core.Controllers.GameDataController _gameDataCoreController;
 
-		public GameDataController(Data.EntityFramework.Controllers.GameDataController gameDataCoreController,
+		public GameDataController(Core.Controllers.GameDataController gameDataCoreController,
 					IAuthorizationService authorizationService)
 		{
 			_gameDataCoreController = gameDataCoreController;
@@ -68,11 +68,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				_authorizationService.AuthorizeAsync(User, newData.GameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var data = newData.ToGameDataModel();
-				_gameDataCoreController.Create(data);
+				_gameDataCoreController.Add(data);
 				var dataContract = data.ToContract();
 				return new ObjectResult(dataContract);
 			}
 			return Forbid();
 		}
-	}
+
+        // todo create method for adding abtches of gamedata
+    }
 }

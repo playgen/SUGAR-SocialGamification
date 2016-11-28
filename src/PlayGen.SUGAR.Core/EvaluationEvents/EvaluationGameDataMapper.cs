@@ -76,7 +76,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         private string CreateMappingKey(int? gameId, SaveDataType dataType, string gameDataKey)
         {
-            return $"{gameId};{dataType};{gameDataKey}";
+            return $"{gameId.ToInt()};{dataType};{gameDataKey}";
         }
     }
 }
