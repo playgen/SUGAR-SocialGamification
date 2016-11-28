@@ -66,7 +66,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		    var account = accountRequest.ToModel();
 
             account = _accountCoreController.Login(account, accountRequest.SourceToken);
-            _sessionTracker.StartSession(gameId, account.User); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
+            _sessionTracker.StartSession(gameId, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
 
             var token = CreateToken(gameId ?? 0, account);
 			HttpContext.Response.SetAuthorizationToken(token);
@@ -99,7 +99,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             var response = account.ToContract();
 			if (accountRequest.AutoLogin)
 			{
-                _sessionTracker.StartSession(gameId, account.User); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
+                _sessionTracker.StartSession(gameId, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
 
                 var token = CreateToken(gameId ?? 0, account);
 				HttpContext.Response.SetAuthorizationToken(token);

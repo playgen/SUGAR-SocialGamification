@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             var evaluation = Helpers.CreateAndCompleteGenericAchievement("EvaluatesOnSessionStarted", user.Id, game.Id);
 
             // Act
-            SessionTracker.StartSession(game.Id, user);
+            SessionTracker.StartSession(game.Id, user.Id);
 
             // Assert
             var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 
             Helpers.CreateAndCompleteGenericAchievement("RemovesOnSessionEnded", user.Id, game.Id);
 
-            SessionTracker.StartSession(game.Id, user);
+            SessionTracker.StartSession(game.Id, user.Id);
 
             var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
             Assert.True(progress.ContainsKey(user.Id)); // should have evalauted for this user
@@ -86,7 +86,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             var game = Helpers.GetOrCreateGame("EvaluatesOnGameDataAdded");
             var user = Helpers.GetOrCreateUser("EvaluatesOnGameDataAdded");
 
-            SessionTracker.StartSession(game.Id, user);
+            SessionTracker.StartSession(game.Id, user.Id);
 
             var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnGameDataAdded", game.Id);
 
@@ -112,7 +112,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             var game = Helpers.GetOrCreateGame("EvaluatesOnGameDatasAdded");
             var user = Helpers.GetOrCreateUser("EvaluatesOnGameDatasAdded");
 
-            SessionTracker.StartSession(game.Id, user);
+            SessionTracker.StartSession(game.Id, user.Id);
 
             var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnGameDatasAdded", game.Id);
 
@@ -141,7 +141,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             var game = Helpers.GetOrCreateGame("EvaluatesOnEvaluationUpdated");
             var user = Helpers.GetOrCreateUser("EvaluatesOnEvaluationUpdated");
 
-            SessionTracker.StartSession(game.Id, user);
+            SessionTracker.StartSession(game.Id, user.Id);
 
             var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnEvaluationUpdated", game.Id);
             Helpers.CreateGenericAchievementGameData(evaluation, user.Id);
@@ -200,7 +200,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             var game = Helpers.GetOrCreateGame("RemovesProgressOnEvaluationDeleted");
             var user = Helpers.GetOrCreateUser("RemovesProgressOnEvaluationDeleted");
 
-            SessionTracker.StartSession(game.Id, user);
+            SessionTracker.StartSession(game.Id, user.Id);
 
             var evaluation = Helpers.CreateAndCompleteGenericAchievement("RemovesProgressOnEvaluationDeleted", user.Id, game.Id);
 
@@ -228,7 +228,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             var game = Helpers.GetOrCreateGame("RemovesProgressWhenGotten");
             var user = Helpers.GetOrCreateUser("RemovesProgressWhenGotten");
 
-            SessionTracker.StartSession(game.Id, user);
+            SessionTracker.StartSession(game.Id, user.Id);
 
             var evaluation = Helpers.CreateAndCompleteGenericAchievement("RemovesProgressWhenGotten", user.Id, game.Id);
 
@@ -254,7 +254,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             var game = Helpers.GetOrCreateGame("DoesntGetAlreadyRecievedNotifications");
             var user = Helpers.GetOrCreateUser("DoesntGetAlreadyRecievedNotifications");
 
-            SessionTracker.StartSession(game.Id, user);
+            SessionTracker.StartSession(game.Id, user.Id);
 
             var evaluation = Helpers.CreateAndCompleteGenericAchievement("DoesntGetAlreadyRecievedNotifications", user.Id, game.Id);
             var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);

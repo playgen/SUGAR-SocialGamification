@@ -71,8 +71,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         private void OnSessionEnded(Session session)
         {
-            _progressCache.RemoveActor(session.GameId, session.Actor.Id);
-            _progressNotificationCache.Remove(session.GameId, session.Actor.Id);
+            _progressCache.RemoveActor(session.GameId, session.ActorId);
+            _progressNotificationCache.Remove(session.GameId, session.ActorId);
         }
 
         private void OnGameDataAdded(GameData gameData)

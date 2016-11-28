@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             var evaluationCount = 2;
             var session = new Session
             {
-                Actor = Helpers.GetOrCreateUser("CanEvaluateActor"),
+                ActorId = Helpers.GetOrCreateUser("CanEvaluateActor").Id,
                 GameId = null
             };
 
@@ -33,7 +33,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             for (var i = 0; i < evaluationCount; i++)
             {
                 var evaluation = Helpers.CreateGenericAchievement($"CanEvaluateActorComplete_{i}", session.GameId);
-                Helpers.CompleteGenericAchievement(evaluation, session.Actor.Id);
+                Helpers.CompleteGenericAchievement(evaluation, session.ActorId);
                 evaluations.Add(evaluation);
             }
 
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             var progress = _progressEvaluator.EvaluateActor(evaluations, session);
 
             // Assert
-            var actorProgress = progress.GetActorProgress(session.GameId, session.Actor.Id);
+            var actorProgress = progress.GetActorProgress(session.GameId, session.ActorId);
             Assert.True(evaluations.Count <= actorProgress.Count); // Should have a progress value for each evaluation
 
             foreach (var evaluation in evaluations)

@@ -44,8 +44,6 @@ namespace PlayGen.SUGAR.Core.Controllers
         public void Update(User user)
         {
             _userController.Update(user);
-
-            TriggerUpdatedEvent(user);
         }
         
         public void Delete(int id)

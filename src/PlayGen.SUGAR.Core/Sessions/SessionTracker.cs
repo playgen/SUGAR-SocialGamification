@@ -17,7 +17,6 @@ namespace PlayGen.SUGAR.Core.Sessions
 
         public SessionTracker()
         {
-            ActorController.ActorUpdatedEvent += OnActorUpdated;
             ActorController.ActorDeletedEvent += OnActorDeleted;
             GameController.GameDeletedEvent += OnGameDeleted;
         }
@@ -31,19 +30,18 @@ namespace PlayGen.SUGAR.Core.Sessions
         {
             if (_isDisposed) return;
 
-            ActorController.ActorUpdatedEvent -= OnActorUpdated;
             ActorController.ActorDeletedEvent -= OnActorDeleted;
             GameController.GameDeletedEvent -= OnGameDeleted;
 
             _isDisposed = true;
         }
         
-        public void StartSession(int? gameId, Actor actor)
+        public void StartSession(int? gameId, int actorId)
         {
             var session = new Session
             {
                 GameId = gameId,
-                Actor = actor
+                ActorId = actorId
             };
 
             _sessions.Add(session);
@@ -53,7 +51,7 @@ namespace PlayGen.SUGAR.Core.Sessions
         
         public void EndSession(int? gameId, Actor actor)
         {
-            var session = _sessions.Single(s => s.GameId == gameId && s.Actor.Id == actor.Id);
+            var session = _sessions.Single(s => s.GameId == gameId && s.ActorId == actor.Id);
             _sessions.Remove(session);
 
             SessionEndedEvent(session);
@@ -61,7 +59,7 @@ namespace PlayGen.SUGAR.Core.Sessions
 
         public List<Session> GetByActor(int actorId)
         {
-            return _sessions.Where(s => s.Actor.Id == actorId).ToList();
+            return _sessions.Where(s => s.ActorId == actorId).ToList();
         }
 
         public List<Session> GetByGames(List<int?> gameIds)
@@ -72,12 +70,12 @@ namespace PlayGen.SUGAR.Core.Sessions
         private void OnActorUpdated(Actor updatedActor)
         {
             var actorsSessions = GetByActor(updatedActor.Id);
-            actorsSessions.ForEach(s => s.Actor = updatedActor);
+            actorsSessions.ForEach(s => s.ActorId = updatedActor.Id);
         }
 
         private void OnActorDeleted(int actorId)
         {
-            _sessions.RemoveAll(s => s.Actor.Id == actorId);
+            _sessions.RemoveAll(s => s.ActorId == actorId);
         }
         
         private void OnGameDeleted(int gameId)

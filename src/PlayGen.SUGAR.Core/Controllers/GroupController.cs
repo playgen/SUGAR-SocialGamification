@@ -48,8 +48,6 @@ namespace PlayGen.SUGAR.Core.Controllers
         public void Update(Group group)
         {
             _groupDbController.Update(group);
-
-            TriggerUpdatedEvent(group);
         }
         
         public void Delete(int id)
