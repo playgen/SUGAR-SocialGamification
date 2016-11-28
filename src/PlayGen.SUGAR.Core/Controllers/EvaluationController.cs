@@ -65,6 +65,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 			var evaluationsProgress = evaluations.Select(e => new EvaluationProgress
 			{
+                Actor = _actorController.Get(actorId.Value),
 				Name = e.Name,
 				Progress = EvaluateProgress(e, actorId),
 			});
