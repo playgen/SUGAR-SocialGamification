@@ -170,8 +170,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGameData()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "Get");
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var user = Helpers.GetOrCreateUser(_userClient, "CanGetGameData");
+			var game = Helpers.GetOrCreateGame(_gameClient, "CanGetGameData");
 
 			var SaveDataRequest = new SaveDataRequest
 			{
@@ -184,7 +184,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = _gameDataClient.Add(SaveDataRequest);
 
-			var get = _gameDataClient.Get(user.Id, game.Id, new string[] { "CanGetGameData" });
+			var get = _gameDataClient.Get(user.Id, game.Id, new [] { "CanGetGameData" });
 
 			Assert.AreEqual(1, get.Count());
 			Assert.AreEqual(get.First().ActorId, response.ActorId);

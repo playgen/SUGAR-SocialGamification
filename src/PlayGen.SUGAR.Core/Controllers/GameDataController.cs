@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             _gameDataDbController = gameDataDbController;
         }
         
-        public IEnumerable<GameData> Get(int? actorId, int? gameId, string[] key)
+        public IEnumerable<GameData> Get(int? gameId, int? actorId, string[] key)
         {
             var datas = _gameDataDbController.Get(gameId, actorId, key);
             return datas;
