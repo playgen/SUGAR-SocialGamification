@@ -246,3 +246,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 doc/api/PlayGen.*.yml
+Unity/Assets/Plugins/PlayGen.SUGAR.Unity/

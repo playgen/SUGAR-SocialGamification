@@ -45,9 +45,6 @@
       <HintPath>..\..\packages\NUnit.3.5.0\lib\net35\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PlayGen.SUGAR.Client">
-      <HintPath>..\..\src\PlayGen.SUGAR.Client\bin\Debug\net35\PlayGen.SUGAR.Client.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -80,6 +77,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReleaseNotes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PlayGen.SUGAR.Client\PlayGen.SUGAR.Client.csproj">
+      <Project>{e7b6c8dc-262e-4b9d-85e3-2e6ae0467018}</Project>
+      <Name>PlayGen.SUGAR.Client</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
