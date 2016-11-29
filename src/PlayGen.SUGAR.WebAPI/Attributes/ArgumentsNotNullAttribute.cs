@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace PlayGen.SUGAR.WebAPI.Filters
+namespace PlayGen.SUGAR.WebAPI.Attributes
 {
 	/// <summary>
 	/// Attributes used to flag controller actions where not null arguments may be passed.

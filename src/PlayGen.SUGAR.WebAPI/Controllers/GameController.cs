@@ -6,6 +6,7 @@ using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.WebAPI.Filters;
 using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.WebAPI.Attributes;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -14,7 +15,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
-	public class GameController : Controller
+    [ValidateSession]
+    public class GameController : Controller
 	{
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.GameController _gameCoreController;

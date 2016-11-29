@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Core.Sessions
 
             _isDisposed = true;
         }
-        
+
         public Session StartSession(int? gameId, int actorId)
         {
             var session = new Session
@@ -64,6 +64,11 @@ namespace PlayGen.SUGAR.Core.Sessions
             _sessions.Remove(sessionId);
 
             SessionEndedEvent(session);
+        }
+
+        public bool IsActive(int sessionId)
+        {
+            return _sessions.ContainsKey(sessionId);
         }
 
         public List<Session> GetByActor(int actorId)

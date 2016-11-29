@@ -9,6 +9,7 @@ using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
 using System.Linq;
+using PlayGen.SUGAR.WebAPI.Attributes;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -17,7 +18,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
-	public class ActorDataController : Controller
+    [ValidateSession]
+    public class ActorDataController : Controller
 	{
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.ActorDataController _actorDataCoreController;

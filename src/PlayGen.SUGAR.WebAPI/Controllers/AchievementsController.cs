@@ -7,6 +7,7 @@ using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.WebAPI.Attributes;
 using PlayGen.SUGAR.WebAPI.Controllers;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
@@ -18,6 +19,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
     [Authorize("Bearer")]
+    [ValidateSession]
     public class AchievementsController : EvaluationsController
     {
         private readonly EvaluationController _evaluationCoreController;

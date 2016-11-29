@@ -7,6 +7,7 @@ using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
 using System.Linq;
+using PlayGen.SUGAR.WebAPI.Attributes;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -15,7 +16,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
-	public class ActorClaimController : Controller
+    [ValidateSession]
+    public class ActorClaimController : Controller
 	{
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.ActorClaimController _actorClaimCoreController;
