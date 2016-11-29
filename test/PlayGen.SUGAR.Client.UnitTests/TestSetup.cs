@@ -1,4 +1,4 @@
-﻿#define DEBUG_SERVER
+﻿//#define DEBUG_SERVER
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -81,9 +81,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
         {
             // Build and Start Server
             var assemblyDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var rootDir = Directory.GetParent(assemblyDir).Parent.Parent.Parent.Parent.FullName;
-            var serverDir =
-                $"{rootDir}{Path.DirectorySeparatorChar}src{Path.DirectorySeparatorChar}PlayGen.SUGAR.WebAPI";
+            var rootDir = Directory.GetParent(assemblyDir).Parent.Parent.Parent.FullName;
+            var serverDir = $"{rootDir}{Path.DirectorySeparatorChar}src{Path.DirectorySeparatorChar}PlayGen.SUGAR.WebAPI";
 
             _process = new Process
             {
