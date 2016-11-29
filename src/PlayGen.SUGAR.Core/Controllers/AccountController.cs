@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             _actorRoleController = actorRoleController;
         }
 
-        public Account Login(Account toVerify, string sourceToken)
+        public Account Authenticate(Account toVerify, string sourceToken)
         {
             Account verified;
 
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             throw new InvalidAccountDetailsException("Invalid Login Details.");
         }
 
-        public Account Register(Account toRegister, string sourceToken)
+        public Account Create(Account toRegister, string sourceToken)
 		{
             var source = _accountSourceCoreController.GetByToken(sourceToken);
 

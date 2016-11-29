@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			_userClient = testSugarClient.User;
 			_gameClient = testSugarClient.Game;
 
-			Helpers.RegisterAndLogin(testSugarClient.Account);
+			Helpers.CreateAndLogin(testSugarClient.Session);
 		}
 		#endregion
 

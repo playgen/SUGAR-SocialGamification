@@ -1,5 +1,6 @@
 ﻿using PlayGen.SUGAR.Contracts.Shared;
 using NUnit.Framework;
+using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -16,67 +17,27 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		#endregion
 
 		#region Tests
-		[Test]
-		public void CanRegisterNewUserAndLogin()
+        [Test]
+		public void CannotCreateDuplicate()
 		{
 			var accountRequest = new AccountRequest
 			{
-				Name = "CanRegisterNewUserAndLogin",
-				Password = "CanRegisterNewUserAndLoginPassword",
-                SourceToken = "SUGAR",
-				AutoLogin = true,
-			};
+				Name = "CannotCreateDuplicate",
+				Password = "CannotCreateDuplicatePassword",
+                SourceToken = "SUGAR"
+            };
 
-			var registerResponse = _accountClient.Register(accountRequest);
+			var registerResponse = _accountClient.Create(accountRequest);
 
-			Assert.True(registerResponse.User.Id > 0);
-			Assert.AreEqual(accountRequest.Name, registerResponse.User.Name);
-		}
-		/*
-		[Test]
-		public void CannotRegisterDuplicate()
-		{
-			var accountRequest = new AccountRequest
-			{
-				Name = "CannotRegisterDuplicate",
-				Password = "CannotRegisterDuplicatePassword",
-			};
-
-			var registerResponse = _accountClient.Register(accountRequest);
-
-			Assert.Throws<ClientException>(() => _accountClient.Register(accountRequest));
+			Assert.Throws<ClientException>(() => _accountClient.Create(accountRequest));
 		}
 
 		[Test]
-		public void CannotRegisterInvalidUser()
+		public void CannotCreateInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
-			Assert.Throws<ClientException>(() => _accountClient.Register(accountRequest));
+			Assert.Throws<ClientException>(() => _accountClient.Create(accountRequest));
 		}
-
-		[Test]
-		public void CanLoginValidUser()
-		{
-			var accountRequest = new AccountRequest
-			{
-				Name = "CanLoginValidUser",
-				Password = "CanLoginValidUserPassword",
-			};
-
-			var registerResponse = _accountClient.Register(accountRequest);
-
-			var logged = _accountClient.Login(accountRequest);
-
-			Assert.True(logged.User.Id > 0);
-			Assert.AreEqual(accountRequest.Name, logged.User.Name);
-		}
-
-		[Test]
-		public void CannotLoginInvalidUser()
-		{
-			var accountRequest = new AccountRequest();
-			Assert.Throws<ClientException>(() => _accountClient.Login(accountRequest));
-		}*/
 		#endregion
 	}
 }

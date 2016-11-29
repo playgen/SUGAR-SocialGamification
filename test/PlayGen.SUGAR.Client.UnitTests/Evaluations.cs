@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         {
             GameDataClient = TestSugarClient.GameData;
 
-			Helpers.RegisterAndLogin(TestSugarClient.Account);
+			Helpers.CreateAndLogin(TestSugarClient.Session);
         }
 
         protected abstract EvaluationResponse CreateEvaluation(EvaluationCreateRequest achievementRequest);

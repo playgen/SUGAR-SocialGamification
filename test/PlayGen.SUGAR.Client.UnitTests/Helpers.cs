@@ -8,14 +8,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
     {
         public static AccountResponse LoggedInAccount { get; private set; }
 
-        public static void RegisterAndLogin(AccountClient client)
+        public static void CreateAndLogin(SessionClient client)
         {
             var accountRequest = new AccountRequest
             {
                 Name = "admin",
                 Password = "admin",
                 SourceToken = "SUGAR",
-                AutoLogin = true,
             };
 
             try
@@ -24,7 +23,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             }
             catch
             {
-                LoggedInAccount = client.Register(accountRequest);
+                LoggedInAccount = client.CreateAndLogin(accountRequest);
             }
         }
 

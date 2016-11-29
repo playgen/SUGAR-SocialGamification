@@ -1,4 +1,4 @@
-﻿//#define DEBUG_SERVER
+﻿#define DEBUG_SERVER
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -26,11 +26,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
         public void SetUp()
         {
             DeleteDatabase();
-
-            if (!CanLogin())
+            
+#if DEBUG_SERVER
+            while (!CanLogin())
             {
-                StartServer();
             }
+#else
+            StartServer();
+#endif
         }
 
         [OneTimeTearDown]
@@ -49,18 +52,17 @@ namespace PlayGen.SUGAR.Client.UnitTests
                 Name = "admin",
                 Password = "admin",
                 SourceToken = "SUGAR",
-                AutoLogin = true
             };
 
             try
             {
                 try
                 {
-                    client.Account.Register(request);
+                    client.Session.CreateAndLogin(request);
                 }
                 catch (Exception e)
                 {
-                    client.Account.Login(request);
+                    client.Session.Login(request);
                 }
 
                 didLogin = true;

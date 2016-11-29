@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var testSugarClient = new TestSUGARClient();
 			_groupClient = testSugarClient.Group;
 
-			Helpers.RegisterAndLogin(testSugarClient.Account);
+			Helpers.CreateAndLogin(testSugarClient.Session);
 		}
 		#endregion
 

@@ -31,6 +31,11 @@ namespace PlayGen.SUGAR.ServerAuthentication
             var token = CreateToken(session.Id, session.GameId, session.ActorId);
             context.Response.SetAuthorizationToken(token);
         }
+
+	    public void RevokeToken(HttpContext context)
+	    {
+            context.Response.SetAuthorizationToken(null);
+        }
         
         private string CreateToken(int sessionId, int? gameId, int userId)
         {
