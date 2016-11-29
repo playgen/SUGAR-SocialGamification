@@ -64,6 +64,7 @@
     <Compile Include="LeaderboardClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceClient.cs" />
+    <Compile Include="SessionClient.cs" />
     <Compile Include="SkillClient.cs" />
     <Compile Include="SUGARClient.cs" />
     <Compile Include="UserClient.cs" />

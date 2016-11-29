@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	        _sessionTracker = sessionTracker;
 	    }
 
-    	[HttpPost("heartbeat")]
+    	[HttpGet("heartbeat")]
         public IActionResult Heartbeat()
 	    {
             return new ObjectResult(null);

@@ -67,6 +67,7 @@
     <Compile Include="LeaderboardClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceClientTests.cs" />
+    <Compile Include="SessionClientTests.cs" />
     <Compile Include="SkillClientTests.cs" />
     <Compile Include="TestSetup.cs" />
     <Compile Include="TestSUGARClient.cs" />

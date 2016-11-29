@@ -10,6 +10,7 @@ namespace PlayGen.SUGAR.Client
         private readonly EvaluationNotifications _evaluationNotifications = new EvaluationNotifications();
 
 		private AccountClient _accountClient;
+	    private SessionClient _sessionClient;
 		private AchievementClient _achievementClient;
 		private GameClient _gameClient;
 		private GameDataClient _gameDataClient;
@@ -22,6 +23,7 @@ namespace PlayGen.SUGAR.Client
 		private SkillClient _skillClient;
 
 		public AccountClient Account			=> _accountClient ?? (_accountClient = new AccountClient(_baseAddress, _httpHandler, _evaluationNotifications));
+        public SessionClient Session            => _sessionClient ?? (_sessionClient = new SessionClient(_baseAddress, _httpHandler, _evaluationNotifications));
 		public AchievementClient Achievement	=> _achievementClient ?? (_achievementClient = new AchievementClient(_baseAddress, _httpHandler, _evaluationNotifications));
 		public GameClient Game					=> _gameClient ?? (_gameClient = new GameClient(_baseAddress, _httpHandler, _evaluationNotifications));
 		public GameDataClient GameData			=> _gameDataClient ?? (_gameDataClient = new GameDataClient(_baseAddress, _httpHandler, _evaluationNotifications));

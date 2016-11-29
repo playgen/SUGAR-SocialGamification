@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Client
 {
 	public abstract class ClientBase
 	{
-        private static readonly Dictionary<string, string> _persistentHeaders = new Dictionary<string, string>();
+        private static readonly Dictionary<string, string> PersistentHeaders = new Dictionary<string, string>();
 
         private readonly string _baseAddress;
 		private readonly IHttpHandler _httpHandler;
@@ -50,11 +50,11 @@ namespace PlayGen.SUGAR.Client
 	    {
 	        if (enable)
 	        {
-	            _persistentHeaders[HeaderKeys.EvaluationNotifications] = $"{enable}";
+	            PersistentHeaders[HeaderKeys.EvaluationNotifications] = $"{enable}";
 	        }
 	        else
 	        {
-	            _persistentHeaders.Remove(HeaderKeys.EvaluationNotifications);
+	            PersistentHeaders.Remove(HeaderKeys.EvaluationNotifications);
 	        }
 	    }
 
@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Client
 		{
 			var requestHeaders = headers == null ? new Dictionary<string, string>() : new Dictionary<string, string>(headers);
 
-            foreach (var keyValuePair in _persistentHeaders)
+            foreach (var keyValuePair in PersistentHeaders)
             {
                 requestHeaders[keyValuePair.Key] = keyValuePair.Value;
             }
@@ -230,7 +230,7 @@ namespace PlayGen.SUGAR.Client
 			//TODO: check if this has changed
 			if (response.Headers.ContainsKey(HeaderKeys.Authorization))
 			{
-				_persistentHeaders[HeaderKeys.Authorization] = response.Headers[HeaderKeys.Authorization];
+				PersistentHeaders[HeaderKeys.Authorization] = response.Headers[HeaderKeys.Authorization];
 			}
 		}
 	}
