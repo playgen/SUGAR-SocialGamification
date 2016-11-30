@@ -73,8 +73,12 @@ namespace PlayGen.SUGAR.WebAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+		    var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
+            var timeoutCheckInterval = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TimeoutCheckInterval"]);
+
+
             //todo: Remove random key. Change to load file from secure file.
-			//var apiKey = Configuration["APIKey"];
+            //var apiKey = Configuration["APIKey"];
             using (var rsa = new RSACryptoServiceProvider(2048))
             {
                 try
@@ -92,7 +96,7 @@ namespace PlayGen.SUGAR.WebAPI
                 Audience = TokenAudience,
                 Issuer = TokenIssuer,
                 SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature),
-                ValidityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]),
+                ValidityTimeout = validityTimeout,
             };
 
             services.AddSingleton(tokenOptions);
@@ -135,7 +139,7 @@ namespace PlayGen.SUGAR.WebAPI
 			ConfigureDocumentationGeneratorServices(services);
             ConfigureAuthorization(services);
 		    ConfigureEvaluationEvents(services);
-		    ConfigureSessionTracking(services, tokenOptions.ValidityTimeout);
+		    ConfigureSessionTracking(services, validityTimeout, timeoutCheckInterval);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,8 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Core.Controllers;
+using System.Threading;
 
 namespace PlayGen.SUGAR.Core.Sessions
 {
@@ -12,16 +12,19 @@ namespace PlayGen.SUGAR.Core.Sessions
         public event Action<Session> SessionStartedEvent;
         public event Action<Session> SessionEndedEvent;
 
+        private readonly ConcurrentDictionary<long, Session> _sessions = new ConcurrentDictionary<long, Session>();
         private readonly TimeSpan _sessionTimeout;
-        private bool _isDisposed;
-        
-        private readonly ConcurrentDictionary<long, Session> _sessions =  new ConcurrentDictionary<long, Session>();
+        private readonly Timer _timer;
 
-        public SessionTracker(TimeSpan sessionTimeout)
+        private bool _isDisposed;
+
+        public SessionTracker(TimeSpan sessionTimeout, TimeSpan timeoutCheckInterval)
         {
             _sessionTimeout = sessionTimeout;
             ActorController.ActorDeletedEvent += OnActorDeleted;
             GameController.GameDeletedEvent += OnGameDeleted;
+
+            _timer = new Timer(state => RemoveTimedOut(), new object(), timeoutCheckInterval, timeoutCheckInterval);
         }
 
         public void SetLastActive(long sessionId, DateTime lastActive)
@@ -37,6 +40,8 @@ namespace PlayGen.SUGAR.Core.Sessions
         public void Dispose()
         {
             if (_isDisposed) return;
+
+            _timer.Dispose();
 
             ActorController.ActorDeletedEvent -= OnActorDeleted;
             GameController.GameDeletedEvent -= OnGameDeleted;
@@ -78,7 +83,7 @@ namespace PlayGen.SUGAR.Core.Sessions
             return _sessions.Values.Where(s => gameIds.Contains(s.GameId)).ToList();
         }
 
-        public void RemoveTimedOut()
+        private void RemoveTimedOut()
         {
             var activityThreshold = DateTime.UtcNow - _sessionTimeout;
 
