@@ -21,11 +21,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	{
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.ActorClaimController _actorClaimCoreController;
+		private readonly Core.Authorization.ClaimController _claimCoreController;
 
 		public ActorClaimController(Core.Controllers.ActorClaimController actorClaimCoreController,
+					Core.Authorization.ClaimController claimCoreController,
 					IAuthorizationService authorizationService)
 		{
 			_actorClaimCoreController = actorClaimCoreController;
+			_claimCoreController = claimCoreController;
 			_authorizationService = authorizationService;
 		}
 
@@ -54,6 +57,28 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Get a list of all Claims for this Actor.
+		/// 
+		/// Example Usage: GET api/actorclaim/actor/1/
+		/// </summary>
+		/// <returns>A list of <see cref="ActorClaimResponse"/> that hold ActorClaim details.</returns>
+		[HttpGet("actor/{id:int}")]
+		//[ResponseType(typeof(IEnumerable<ActorClaimResponse>))]
+		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.ActorClaim)]
+		[Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.ActorClaim)]
+		public IActionResult GetActorClaims([FromRoute]int id)
+		{
+			if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)
+			{
+				var claims = _actorClaimCoreController.GetActorClaims(id);
+				var claimsContract = claims.ToContractList();
+				return new ObjectResult(claimsContract);
+			}
+			return Forbid();
+		}
+
+		/// <summary>
 		/// Create a new ActorClaim.
 		/// 
 		/// Example Usage: POST api/actorclaim
@@ -72,7 +97,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				_authorizationService.AuthorizeAsync(User, newClaim.EntityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
 				_authorizationService.AuthorizeAsync(User, newClaim.EntityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
-				var creatorClaims = _actorClaimCoreController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newClaim.EntityId);
+				var claimScope = _claimCoreController.Get(newClaim.ClaimId).ClaimScope;
+				var creatorClaims = _actorClaimCoreController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newClaim.EntityId, claimScope);
 				if (creatorClaims.Select(cc => cc.Id).Contains(newClaim.ClaimId))
 				{
 					var claim = newClaim.ToModel();

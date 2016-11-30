@@ -24,9 +24,14 @@ namespace PlayGen.SUGAR.Contracts.Shared
         /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// The ClaimScope of this role.
-        /// </summary>
-        public ClaimScope ClaimScope { get; set; }
+		/// <summary>
+		/// Is this role a default role for the ClaimScope?
+		/// </summary>
+		public bool Default { get; set; }
+
+		/// <summary>
+		/// The ClaimScope of this role.
+		/// </summary>
+		public ClaimScope ClaimScope { get; set; }
     }
 }

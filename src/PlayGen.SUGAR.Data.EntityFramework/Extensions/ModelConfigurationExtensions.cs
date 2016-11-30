@@ -124,10 +124,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
             builder.Entity<Account>()
                 .HasIndex(a => new { a.Name, a.AccountSourceId})
                 .IsUnique();
-
-            builder.Entity<Role>()
-                .HasIndex(r => r.Name)
-                .IsUnique();
         }
 
         internal static void ConfigureHierarchy(this ModelBuilder builder)

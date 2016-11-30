@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
+using System.Linq;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
@@ -10,13 +11,16 @@ namespace PlayGen.SUGAR.Core.Controllers
         public static event Action<int> GameDeletedEvent;
 
         private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
-        private readonly ActorRoleController _actorRoleController;
+		private readonly ActorClaimController _actorClaimController;
+		private readonly ActorRoleController _actorRoleController;
 
         public GameController(Data.EntityFramework.Controllers.GameController gameDbController,
-                    ActorRoleController actorRoleController)
+					ActorClaimController actorClaimController,
+					ActorRoleController actorRoleController)
         {
             _gameDbController = gameDbController;
-            _actorRoleController = actorRoleController;
+			_actorClaimController = actorClaimController;
+			_actorRoleController = actorRoleController;
         }
 
         public IEnumerable<Game> Get()
@@ -25,7 +29,15 @@ namespace PlayGen.SUGAR.Core.Controllers
             return games;
         }
 
-        public Game Get(int id)
+		public IEnumerable<Game> GetByPermissions(int actorId)
+		{
+			var games = Get();
+			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Game).Select(p => p.EntityId).ToList();
+			games = games.Where(g => permissions.Contains(g.Id));
+			return games;
+		}
+
+		public Game Get(int id)
         {
             var game = _gameDbController.Get(id);
             return game;

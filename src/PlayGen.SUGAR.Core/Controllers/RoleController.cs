@@ -44,6 +44,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public Role Create(Role newRole, int creatorId)
 		{
+			if (newRole.Name == newRole.ClaimScope.ToString())
+			{
+				throw new ArgumentException("Roles cannot be created with the same name as the ClaimScope they are for.");
+			}
 			newRole = _roleDbController.Create(newRole);
 			_actorRoleController.Create(ClaimScope.Role.ToString(), creatorId, newRole.Id);
 			return newRole;

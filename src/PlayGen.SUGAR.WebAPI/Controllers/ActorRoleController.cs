@@ -96,7 +96,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _authorizationService.AuthorizeAsync(User, newRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
                 _authorizationService.AuthorizeAsync(User, newRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
             {
-				var creatorClaims = _actorClaimController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newRole.EntityId).Select(c => c.Id).ToList();
+				var claimScope = _roleController.GetById(newRole.RoleId).ClaimScope;
+				var creatorClaims = _actorClaimController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newRole.EntityId, claimScope).Select(c => c.Id).ToList();
 				var newClaims = _roleClaimController.GetClaimsByRole(newRole.RoleId).Select(c => c.Id);
 				if (newClaims.All(nc => creatorClaims.Contains(nc)))
 				{

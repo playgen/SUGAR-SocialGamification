@@ -3,6 +3,7 @@ using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -31,11 +32,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Claim> GetActorClaims(int actorId)
+		public IEnumerable<ActorClaim> GetActorClaims(int actorId)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var claims = context.ActorClaims.Where(ac => ac.ActorId == actorId).Select(ac => ac.Claim).ToList();
+				var claims = context.ActorClaims.Include(c => c.Claim).Where(ac => ac.ActorId == actorId).ToList();
 				return claims;
 			}
 		}

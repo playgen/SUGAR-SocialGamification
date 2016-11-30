@@ -77,7 +77,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				var claimScope = _claimController.Get(newRoleClaim.ClaimId).ClaimScope;
 				if (roleScope == claimScope)
 				{
-					var claims = _actorClaimController.GetActorClaims(int.Parse(User.Identity.Name)).Select(c => c.Id);
+					var claims = _actorClaimController.GetActorClaims(int.Parse(User.Identity.Name)).Select(c => c.ClaimId);
 					if (claims.Contains(newRoleClaim.ClaimId))
 					{
 						var roleClaim = newRoleClaim.ToModel();

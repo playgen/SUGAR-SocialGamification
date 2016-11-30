@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult Get()
 		{
-			var groups = _groupCoreController.Get();
+			var groups = _groupCoreController.GetByPermissions(int.Parse(User.Identity.Name));
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}

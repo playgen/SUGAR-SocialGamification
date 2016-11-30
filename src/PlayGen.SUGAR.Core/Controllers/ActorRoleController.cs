@@ -25,17 +25,18 @@ namespace PlayGen.SUGAR.Core.Controllers
             return role;
         }
 
-        public IEnumerable<ActorRole> GetActorRoles(int actorId)
+        public IEnumerable<ActorRole> GetActorRoles(int actorId, bool includeClaims = false)
         {
-            var roles = _actorRoleDbController.GetActorRoles(actorId);
+            var roles = _actorRoleDbController.GetActorRoles(actorId, includeClaims);
             return roles;
         }
 
-        public IEnumerable<Role> GetActorRolesForEntity(int actorId, int? entityId)
+        public IEnumerable<Role> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope)
         {
             var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId.Value).ToList();
 			var adminRoles = _actorRoleDbController.GetActorRolesForEntity(actorId, -1).ToList();
-			return roles.Concat(adminRoles).Distinct();
+			var totalRoles = roles.Concat(adminRoles).Distinct().Where(r => r.ClaimScope == scope);
+			return totalRoles;
         }
 
         public IEnumerable<Actor> GetRoleActors(int roleId, int? entityId)

@@ -3,73 +3,86 @@ using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-    public class ActorRoleController : DbController
-    {
-        public ActorRoleController(SUGARContextFactory contextFactory)
-            : base(contextFactory)
-        {
-        }
+	public class ActorRoleController : DbController
+	{
+		public ActorRoleController(SUGARContextFactory contextFactory)
+			: base(contextFactory)
+		{
+		}
 
-        public ActorRole Get(int id)
-        {
-            using (var context = ContextFactory.Create())
-            {
-                var role = context.ActorRoles.Find(context, id);
-                return role;
-            }
-        }
+		public ActorRole Get(int id)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				var role = context.ActorRoles.Find(context, id);
+				return role;
+			}
+		}
 
-        public IEnumerable<Role> GetActorRolesForEntity(int actorId, int? entityId)
-        {
-            using (var context = ContextFactory.Create())
-            {
-                var roles = context.ActorRoles.Where(ar => ar.ActorId == actorId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Role).ToList();
-                return roles;
-            }
-        }
+		public IEnumerable<Role> GetActorRolesForEntity(int actorId, int? entityId)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				var roles = context.ActorRoles.Where(ar => ar.ActorId == actorId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Role).ToList();
+				return roles;
+			}
+		}
 
-        public IEnumerable<ActorRole> GetActorRoles(int actorId)
-        {
-            using (var context = ContextFactory.Create())
-            {
-                var roles = context.ActorRoles.Where(ar => ar.ActorId == actorId).ToList();
-                return roles;
-            }
-        }
+		public IEnumerable<ActorRole> GetActorRoles(int actorId, bool includeClaims = false)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				if (includeClaims) 
+				{
+					var roles = context.ActorRoles
+						.Include(r => r.Role)
+						.ThenInclude(r => r.RoleClaims)
+						.ThenInclude(rc => rc.Claim)
+						.Where(ar => ar.ActorId == actorId).ToList();
+					return roles;
+				}
+				else
+				{
+					var roles = context.ActorRoles.Where(ar => ar.ActorId == actorId).ToList();
+					return roles;
+				}
+			}
+		}
 
-        public IEnumerable<Actor> GetRoleActors(int roleId, int? entityId)
-        {
-            using (var context = ContextFactory.Create())
-            {
-                var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Actor).Distinct().ToList();
-                return actors;
-            }
-        }
+		public IEnumerable<Actor> GetRoleActors(int roleId, int? entityId)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Actor).Distinct().ToList();
+				return actors;
+			}
+		}
 
-        public ActorRole Create(ActorRole actorRole)
-        {
-            using (var context = ContextFactory.Create())
-            {
-                context.ActorRoles.Add(actorRole);
-                SaveChanges(context);
+		public ActorRole Create(ActorRole actorRole)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				context.ActorRoles.Add(actorRole);
+				SaveChanges(context);
 
-                return actorRole;
-            }
-        }
+				return actorRole;
+			}
+		}
 
-        public void Delete(int id)
-        {
-            using (var context = ContextFactory.Create())
-            {
-                var actorRole = context.ActorRoles
-                    .Where(r => id == r.Id);
+		public void Delete(int id)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				var actorRole = context.ActorRoles
+					.Where(r => id == r.Id);
 
-                context.ActorRoles.RemoveRange(actorRole);
-                SaveChanges(context);
-            }
-        }
-    }
+				context.ActorRoles.RemoveRange(actorRole);
+				SaveChanges(context);
+			}
+		}
+	}
 }

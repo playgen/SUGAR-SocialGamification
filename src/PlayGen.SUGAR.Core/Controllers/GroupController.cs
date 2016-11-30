@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 
@@ -7,15 +9,18 @@ namespace PlayGen.SUGAR.Core.Controllers
     public class GroupController : ActorController
     {
         private readonly Data.EntityFramework.Controllers.GroupController _groupDbController;
-        private readonly ActorRoleController _actorRoleController;
+		private readonly ActorClaimController _actorClaimController;
+		private readonly ActorRoleController _actorRoleController;
         private readonly GroupMemberController _groupMemberController;
 
         public GroupController(Data.EntityFramework.Controllers.GroupController groupDbController,
-                    ActorRoleController actorRoleController,
+					ActorClaimController actorClaimController,
+					ActorRoleController actorRoleController,
                     GroupMemberController groupMemberController)
         {
             _groupDbController = groupDbController;
-            _actorRoleController = actorRoleController;
+			_actorClaimController = actorClaimController;
+			_actorRoleController = actorRoleController;
             _groupMemberController = groupMemberController;
         }
         
@@ -25,7 +30,15 @@ namespace PlayGen.SUGAR.Core.Controllers
             return groups;
         }
 
-        public Group Get(int id)
+		public IEnumerable<Group> GetByPermissions(int actorId)
+		{
+			var groups = Get();
+			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Group).Select(p => p.EntityId).ToList();
+			groups = groups.Where(g => permissions.Contains(g.Id));
+			return groups;
+		}
+
+		public Group Get(int id)
         {
             var group = _groupDbController.Get(id);
             return group;

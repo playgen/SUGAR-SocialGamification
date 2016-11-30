@@ -1,8 +1,10 @@
-﻿using PlayGen.SUGAR.Common.Shared;
+﻿using System;
+
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.Model
 {
-	public class ActorClaim
+	public class ActorClaim : IEquatable<ActorClaim>
 	{
 		public int Id { get; set; }
 
@@ -15,5 +17,10 @@ namespace PlayGen.SUGAR.Data.Model
 		public Claim Claim { get; set; }
 
 		public int? EntityId { get; set; }
+
+		public bool Equals(ActorClaim other)
+		{
+			return Id == other.Id;
+		}
 	}
 }

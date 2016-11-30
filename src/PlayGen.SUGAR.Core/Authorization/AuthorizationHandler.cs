@@ -62,7 +62,7 @@ namespace PlayGen.SUGAR.Core.Authorization
             if (claim != null && claim.ClaimScope == scope)
             {
                 var claims = _actorClaimDbController.GetActorClaims(int.Parse(context.User.Identity.Name)).ToList();
-				if (claims.Any(c => c.Id == claim.Id))
+				if (claims.Any(c => c.ClaimId == claim.Id))
                 {
                     context.Succeed(requirement);
                 }
