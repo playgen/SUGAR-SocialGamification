@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.ServerAuthentication
 			_tokenOptions = token;
 		}
 
-        public void IssueToken(HttpContext context, int sessionId, int gameId, int userId)
+        public void IssueToken(HttpContext context, long sessionId, int gameId, int userId)
         {
             var token = CreateToken(sessionId, gameId, userId);
             context.Response.SetAuthorizationToken(token);
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.ServerAuthentication
             context.Response.SetAuthorizationToken(null);
         }
         
-        private string CreateToken(int sessionId, int? gameId, int userId)
+        private string CreateToken(long sessionId, int? gameId, int userId)
         {
             var expiry = DateTime.UtcNow.Add(_tokenOptions.ValidityTimeout);
             var tok = CreateToken(sessionId.ToString(), gameId.ToInt().ToString(), userId.ToString(), expiry);
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.ServerAuthentication
                 new GenericIdentity(userId, "TokenAuth"), 
                 new[] 
                 {
-                    new Claim("SessionId", sessionId, ClaimValueTypes.Integer),
+                    new Claim("SessionId", sessionId, ClaimValueTypes.Integer64),
                     new Claim("GameId", gameId, ClaimValueTypes.Integer),
                     new Claim("UserId", userId, ClaimValueTypes.Integer),
                     new Claim("Expiry", expires.ToString(), ClaimValueTypes.DateTime),

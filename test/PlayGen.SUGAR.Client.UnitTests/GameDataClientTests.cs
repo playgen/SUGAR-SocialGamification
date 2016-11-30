@@ -6,30 +6,13 @@ using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
-	public class GameDataClientTests
+	public class GameDataTests : ClientTestsBase
 	{
-		#region Configuration
-		private readonly GameDataClient _gameDataClient;
-		private readonly UserClient _userClient;
-		private readonly GameClient _gameClient;
-
-		public GameDataClientTests()
-		{
-			var testSugarClient = new TestSUGARClient();
-			_gameDataClient = testSugarClient.GameData;
-			_userClient = testSugarClient.User;
-			_gameClient = testSugarClient.Game;
-
-			Helpers.CreateAndLogin(testSugarClient.Session);
-		}
-		#endregion
-
-		#region Tests
 		[Test]
 		public void CanCreate()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "Create");
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var SaveDataRequest = new SaveDataRequest
 			{
@@ -40,7 +23,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = _gameDataClient.Add(SaveDataRequest);
+			var response = SUGARClient.GameData.Add(SaveDataRequest);
 
 			Assert.AreEqual(SaveDataRequest.ActorId, response.ActorId);
 			Assert.AreEqual(SaveDataRequest.GameId, response.GameId);
@@ -52,7 +35,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateWithoutGameId()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "Create");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
 
 			var SaveDataRequest = new SaveDataRequest
 			{
@@ -62,7 +45,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = _gameDataClient.Add(SaveDataRequest);
+			var response = SUGARClient.GameData.Add(SaveDataRequest);
 
 			Assert.AreEqual(SaveDataRequest.ActorId, response.ActorId);
 			Assert.AreEqual(SaveDataRequest.GameId, response.GameId);
@@ -74,7 +57,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateWithoutActorId()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var SaveDataRequest = new SaveDataRequest
 			{
@@ -84,7 +67,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = _gameDataClient.Add(SaveDataRequest);
+			var response = SUGARClient.GameData.Add(SaveDataRequest);
 
 			Assert.AreEqual(SaveDataRequest.ActorId, response.ActorId);
 			Assert.AreEqual(SaveDataRequest.GameId, response.GameId);
@@ -96,8 +79,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateWithoutKey()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "Create");
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var SaveDataRequest = new SaveDataRequest
 			{
@@ -107,14 +90,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			Assert.Throws<ClientException>(() => _gameDataClient.Add(SaveDataRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 		}
 
 		[Test]
 		public void CannotCreateWithoutValue()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "Create");
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var SaveDataRequest = new SaveDataRequest
 			{
@@ -124,14 +107,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			Assert.Throws<ClientException>(() => _gameDataClient.Add(SaveDataRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 		}
 
 		[Test]
 		public void CannotCreateWithMismatchedData()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "Create");
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var SaveDataRequest = new SaveDataRequest
 			{
@@ -142,36 +125,36 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.Float,
 			};
 
-			Assert.Throws<ClientException>(() => _gameDataClient.Add(SaveDataRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Long;
 
-			Assert.Throws<ClientException>(() => _gameDataClient.Add(SaveDataRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Boolean;
 
-			Assert.Throws<ClientException>(() => _gameDataClient.Add(SaveDataRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Float;
 			SaveDataRequest.Value = "True";
 
-			Assert.Throws<ClientException>(() => _gameDataClient.Add(SaveDataRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Long;
 
-			Assert.Throws<ClientException>(() => _gameDataClient.Add(SaveDataRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Boolean;
 			SaveDataRequest.Value = "2";
 
-			Assert.Throws<ClientException>(() => _gameDataClient.Add(SaveDataRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 		}
 
 		[Test]
 		public void CanGetGameData()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "CanGetGameData");
-			var game = Helpers.GetOrCreateGame(_gameClient, "CanGetGameData");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "CanGetGameData");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "CanGetGameData");
 
 			var SaveDataRequest = new SaveDataRequest
 			{
@@ -182,9 +165,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = _gameDataClient.Add(SaveDataRequest);
+			var response = SUGARClient.GameData.Add(SaveDataRequest);
 
-			var get = _gameDataClient.Get(user.Id, game.Id, new [] { "CanGetGameData" });
+			var get = SUGARClient.GameData.Get(user.Id, game.Id, new [] { "CanGetGameData" });
 
 			Assert.AreEqual(1, get.Count());
 			Assert.AreEqual(get.First().ActorId, response.ActorId);
@@ -197,7 +180,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGameDataWithoutActorId()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
 			var SaveDataRequest = new SaveDataRequest
 			{
@@ -207,9 +190,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = _gameDataClient.Add(SaveDataRequest);
+			var response = SUGARClient.GameData.Add(SaveDataRequest);
 
-			var get = _gameDataClient.Get(null, game.Id, new string[] { "CanGetGameDataWithoutActorId" });
+			var get = SUGARClient.GameData.Get(null, game.Id, new string[] { "CanGetGameDataWithoutActorId" });
 
 			Assert.AreEqual(1, get.Count());
 			Assert.AreEqual(get.First().ActorId, response.ActorId);
@@ -222,7 +205,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGameDataWithoutGameId()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "Get");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Get");
 
 			var SaveDataRequest = new SaveDataRequest
 			{
@@ -232,9 +215,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = _gameDataClient.Add(SaveDataRequest);
+			var response = SUGARClient.GameData.Add(SaveDataRequest);
 
-			var get = _gameDataClient.Get(user.Id, null, new string[] { "CanGetGameDataWithoutGameId" });
+			var get = SUGARClient.GameData.Get(user.Id, null, new string[] { "CanGetGameDataWithoutGameId" });
 
 			Assert.AreEqual(1, get.Count());
 			Assert.AreEqual(get.First().ActorId, response.ActorId);
@@ -247,8 +230,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGameDataByMultipleKeys()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "Get");
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
 			var SaveDataRequestOne = new SaveDataRequest
 			{
@@ -277,11 +260,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var responseOne = _gameDataClient.Add(SaveDataRequestOne);
-			var responseTwo = _gameDataClient.Add(SaveDataRequestTwo);
-			var responseThree = _gameDataClient.Add(SaveDataRequestThree);
+			var responseOne = SUGARClient.GameData.Add(SaveDataRequestOne);
+			var responseTwo = SUGARClient.GameData.Add(SaveDataRequestTwo);
+			var responseThree = SUGARClient.GameData.Add(SaveDataRequestThree);
 
-			var get = _gameDataClient.Get(user.Id, game.Id, new string[] { "CanGetGameDatByMultipleKeys1", "CanGetGameDatByMultipleKeys2", "CanGetGameDatByMultipleKeys3" });
+			var get = SUGARClient.GameData.Get(user.Id, game.Id, new string[] { "CanGetGameDatByMultipleKeys1", "CanGetGameDatByMultipleKeys2", "CanGetGameDatByMultipleKeys3" });
 
 			Assert.AreEqual(3, get.Count());
 			foreach (var g in get)
@@ -289,6 +272,5 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Assert.AreEqual("Test Value", g.Value);
 			}
 		}
-		#endregion
 	}
 }

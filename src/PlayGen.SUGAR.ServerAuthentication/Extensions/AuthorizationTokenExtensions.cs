@@ -7,6 +7,20 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 {
     public static class AuthorizationTokenExtensions
     {
+        public static bool TryGetClaim(this HttpRequest request, string type, out long value)
+        {
+            string claimValue;
+            value = default(long);
+
+            if (TryGetClaim(request, type, ClaimValueTypes.Integer64, out claimValue))
+            {
+                value = long.Parse(claimValue);
+                return true;
+            }
+
+            return false;
+        }
+
         public static bool TryGetClaim(this HttpRequest request, string type, out int value)
         {
             string claimValue;

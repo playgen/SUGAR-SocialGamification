@@ -9,26 +9,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 {
 	public class SkillClientTests : Evaluations
 	{
-		#region Configuration
-		private readonly SkillClient _skillClient;
-		private readonly UserClient _userClient;
-		private readonly GameClient _gameClient;
-
-		public SkillClientTests()
-		{
-			_skillClient = TestSugarClient.Skill;
-			_userClient = TestSugarClient.User;
-			_gameClient = TestSugarClient.Game;
-
-            Helpers.CreateAndLogin(TestSugarClient.Session);
-        }
-		#endregion
-
-		#region Tests
 		[Test]
 		public void CanCreateSkill()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -51,7 +35,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
 			Assert.AreEqual(skillRequest.Token, response.Token);
 			Assert.AreEqual(skillRequest.ActorType, response.ActorType);
@@ -79,7 +63,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
 			Assert.AreEqual(skillRequest.Token, response.Token);
 			Assert.AreEqual(skillRequest.ActorType, response.ActorType);
@@ -88,7 +72,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateDuplicateSkill()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -111,15 +95,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			_skillClient.Create(skillRequest);
+			SUGARClient.Skill.Create(skillRequest);
 
-			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Create(skillRequest));
 		}
 
 		[Test]
 		public void CannotCreateSkillWithNoName()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -141,13 +125,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Create(skillRequest));
 		}
 
 		[Test]
 		public void CannotCreateSkillWithNoToken()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -169,13 +153,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Create(skillRequest));
 		}
 
 		[Test]
 		public void CannotCreateSkillWithNoEvaluationCriteria()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -185,13 +169,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				GameId = game.Id,
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Create(skillRequest));
 		}
 
 		[Test]
 		public void CannotCreateSkillWithNoEvaluationCriteriaKey()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -213,13 +197,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Create(skillRequest));
 		}
 
 		[Test]
 		public void CannotCreateSkillWithNoEvaluationCriteriaValue()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -240,13 +224,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Create(skillRequest));
 		}
 
 		[Test]
 		public void CannotCreateSkillWithNoEvaluationCriteriaDataTypeMismatch()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -268,13 +252,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Create(skillRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Create(skillRequest));
 		}
 
 		[Test]
 		public void CanGetSkillsByGame()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "GameGet");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "GameGet");
 
 			var skillRequestOne = new EvaluationCreateRequest()
 			{
@@ -297,7 +281,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var responseOne = _skillClient.Create(skillRequestOne);
+			var responseOne = SUGARClient.Skill.Create(skillRequestOne);
 
 			var skillRequestTwo = new EvaluationCreateRequest()
 			{
@@ -320,9 +304,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var responseTwo = _skillClient.Create(skillRequestTwo);
+			var responseTwo = SUGARClient.Skill.Create(skillRequestTwo);
 
-			var getSkill = _skillClient.GetByGame(game.Id);
+			var getSkill = SUGARClient.Skill.GetByGame(game.Id);
 
 			Assert.AreEqual(2, getSkill.Count());
 		}
@@ -330,7 +314,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetSkillByKeys()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -353,9 +337,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var getSkill = _skillClient.GetById(skillRequest.Token, skillRequest.GameId.Value);
+			var getSkill = SUGARClient.Skill.GetById(skillRequest.Token, skillRequest.GameId.Value);
 
 			Assert.AreEqual(response.Name, getSkill.Name);
 			Assert.AreEqual(skillRequest.Name, getSkill.Name);
@@ -364,9 +348,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNotExistingSkillByKeys()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-			var getSkill = _skillClient.GetById("CannotGetNotExistingSkillByKeys", game.Id);
+			var getSkill = SUGARClient.Skill.GetById("CannotGetNotExistingSkillByKeys", game.Id);
 
 			Assert.Null(getSkill);
 		}
@@ -374,17 +358,17 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetSkillByEmptyToken()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-			Assert.Throws<ClientException>(() => _skillClient.GetById("", game.Id));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.GetById("", game.Id));
 		}
 
 		[Test]
 		public void CanGetSkillByKeysThatContainSlashes()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-			var getSkill = _skillClient.GetById("Can/Get/Skill/By/Keys/That/Contain/Slashes", game.Id);
+			var getSkill = SUGARClient.Skill.GetById("Can/Get/Skill/By/Keys/That/Contain/Slashes", game.Id);
 
 			Assert.Null(getSkill);
 		}
@@ -412,9 +396,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var getSkill = _skillClient.GetGlobalById(skillRequest.Token);
+			var getSkill = SUGARClient.Skill.GetGlobalById(skillRequest.Token);
 
 			Assert.AreEqual(response.Name, getSkill.Name);
 			Assert.AreEqual(skillRequest.Name, getSkill.Name);
@@ -423,7 +407,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNotExistingGlobalSkillByKeys()
 		{
-			var getSkill = _skillClient.GetGlobalById("CannotGetNotExistingGlobalSkillByKeys");
+			var getSkill = SUGARClient.Skill.GetGlobalById("CannotGetNotExistingGlobalSkillByKeys");
 
 			Assert.Null(getSkill);
 		}
@@ -431,13 +415,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetGlobalSkillByEmptyToken()
 		{
-			Assert.Throws<ClientException>(() => _skillClient.GetGlobalById(""));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.GetGlobalById(""));
 		}
 
 		[Test]
 		public void CanGetGlobalSkillByKeysThatContainSlashes()
 		{
-			var getSkill = _skillClient.GetGlobalById("Can/Get/Skill/By/Keys/That/Contain/Slashes");
+			var getSkill = SUGARClient.Skill.GetGlobalById("Can/Get/Skill/By/Keys/That/Contain/Slashes");
 
 			Assert.Null(getSkill);
 		}
@@ -445,7 +429,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetBySkillsByNotExistingGameId()
 		{
-			var getSkills = _skillClient.GetByGame(-1);
+			var getSkills = SUGARClient.Skill.GetByGame(-1);
 
 			Assert.IsEmpty(getSkills);
 		}
@@ -453,7 +437,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanUpdateSkill()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -476,7 +460,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -501,9 +485,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			_skillClient.Update(updateRequest);
+			SUGARClient.Skill.Update(updateRequest);
 
-			var updateResponse = _skillClient.GetById(skillRequest.Token, skillRequest.GameId.Value);
+			var updateResponse = SUGARClient.Skill.GetById(skillRequest.Token, skillRequest.GameId.Value);
 
 			Assert.AreNotEqual(response.Name, updateResponse.Name);
 			Assert.AreEqual("CanUpdateSkill Updated", updateResponse.Name);
@@ -512,7 +496,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateSkillToDuplicateName()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var skillRequestOne = new EvaluationCreateRequest()
 			{
@@ -535,7 +519,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var responseOne = _skillClient.Create(skillRequestOne);
+			var responseOne = SUGARClient.Skill.Create(skillRequestOne);
 
 			var skillRequestTwo = new EvaluationCreateRequest()
 			{
@@ -558,7 +542,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var responseTwo = _skillClient.Create(skillRequestTwo);
+			var responseTwo = SUGARClient.Skill.Create(skillRequestTwo);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -583,13 +567,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateNonExistingSkill()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -614,13 +598,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateAchievemenWithNoName()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -643,7 +627,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -667,13 +651,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateSkillWithNoToken()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -696,7 +680,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -720,13 +704,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateSkillWithNoEvaluationCriteria()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -749,7 +733,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -760,13 +744,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				GameId = game.Id,
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateSkillWithNoEvaluationCriteriaKey()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -789,7 +773,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -813,13 +797,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateSkillWithNoEvaluationCriteriaValue()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -842,7 +826,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -865,13 +849,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateSkillWithNoEvaluationCriteriaDataTypeMismatch()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -894,7 +878,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -918,13 +902,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _skillClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Update(updateRequest));
 		}
 
 		[Test]
 		public void CanDeleteSkill()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Delete");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -947,15 +931,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var getSkill = _skillClient.GetById(skillRequest.Token, skillRequest.GameId.Value);
+			var getSkill = SUGARClient.Skill.GetById(skillRequest.Token, skillRequest.GameId.Value);
 
 			Assert.NotNull(getSkill);
 
-			_skillClient.Delete(skillRequest.Token, skillRequest.GameId.Value);
+			SUGARClient.Skill.Delete(skillRequest.Token, skillRequest.GameId.Value);
 
-			getSkill = _skillClient.GetById(skillRequest.Token, skillRequest.GameId.Value);
+			getSkill = SUGARClient.Skill.GetById(skillRequest.Token, skillRequest.GameId.Value);
 
 			Assert.Null(getSkill);
 		}
@@ -963,17 +947,17 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotDeleteNonExistingSkill()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Delete");
 
-			_skillClient.Delete("CannotDeleteNonExistingSkill", game.Id);
+			SUGARClient.Skill.Delete("CannotDeleteNonExistingSkill", game.Id);
 		}
 
 		[Test]
 		public void CannotDeleteSkillByEmptyToken()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Delete");
 
-			Assert.Throws<ClientException>(() => _skillClient.Delete("", game.Id));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.Delete("", game.Id));
 		}
 
 		[Test]
@@ -999,15 +983,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var getSkill = _skillClient.GetGlobalById(skillRequest.Token);
+			var getSkill = SUGARClient.Skill.GetGlobalById(skillRequest.Token);
 
 			Assert.NotNull(getSkill);
 
-			_skillClient.DeleteGlobal(skillRequest.Token);
+			SUGARClient.Skill.DeleteGlobal(skillRequest.Token);
 
-			getSkill = _skillClient.GetGlobalById(skillRequest.Token);
+			getSkill = SUGARClient.Skill.GetGlobalById(skillRequest.Token);
 
 			Assert.Null(getSkill);
 		}
@@ -1015,19 +999,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotDeleteNonExistingGlobalSkill()
 		{
-			_skillClient.DeleteGlobal("CannotDeleteNonExistingGlobalSkill");
+			SUGARClient.Skill.DeleteGlobal("CannotDeleteNonExistingGlobalSkill");
 		}
 
 		[Test]
 		public void CannotDeleteGlobalSkillByEmptyToken()
 		{
-			Assert.Throws<ClientException>(() => _skillClient.DeleteGlobal(""));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.DeleteGlobal(""));
 		}
 
 		[Test]
 		public void CanGetGlobalSkillProgress()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -1048,12 +1032,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var progressGame = _skillClient.GetGlobalProgress(user.Id);
+			var progressGame = SUGARClient.Skill.GetGlobalProgress(user.Id);
 			Assert.AreEqual(1, progressGame.Count());
 
-			var progressSkill = _skillClient.GetGlobalSkillProgress(response.Token, user.Id);
+			var progressSkill = SUGARClient.Skill.GetGlobalSkillProgress(response.Token, user.Id);
 			Assert.AreEqual(0, progressSkill.Progress);
 
 			var gameData = new SaveDataRequest()
@@ -1064,25 +1048,25 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.Float
 			};
 
-			GameDataClient.Add(gameData);
+			SUGARClient.GameData.Add(gameData);
 
-			progressSkill = _skillClient.GetGlobalSkillProgress(response.Token, user.Id);
+			progressSkill = SUGARClient.Skill.GetGlobalSkillProgress(response.Token, user.Id);
 			Assert.AreEqual(1, progressSkill.Progress);
 		}
 
 		[Test]
 		public void CannotGetNotExistingGlobalSkillProgress()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 
-			Assert.Throws<ClientException>(() => _skillClient.GetGlobalSkillProgress("CannotGetNotExistingGlobalSkillProgress", user.Id));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.GetGlobalSkillProgress("CannotGetNotExistingGlobalSkillProgress", user.Id));
 		}
 
 		[Test]
 		public void CanGetSkillProgress()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
-			var game = Helpers.GetOrCreateGame(_gameClient, "ProgressGet");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "ProgressGet");
 
 			var skillRequest = new EvaluationCreateRequest()
 			{
@@ -1104,12 +1088,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _skillClient.Create(skillRequest);
+			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var progressGame = _skillClient.GetGameProgress(game.Id, user.Id);
+			var progressGame = SUGARClient.Skill.GetGameProgress(game.Id, user.Id);
 			Assert.AreEqual(1, progressGame.Count());
 
-			var progressSkill = _skillClient.GetSkillProgress(response.Token, game.Id, user.Id);
+			var progressSkill = SUGARClient.Skill.GetSkillProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(0, progressSkill.Progress);
 
 			var gameData = new SaveDataRequest()
@@ -1121,40 +1105,39 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.Float
 			};
 
-			GameDataClient.Add(gameData);
+			SUGARClient.GameData.Add(gameData);
 
-			progressSkill = _skillClient.GetSkillProgress(response.Token, game.Id, user.Id);
+			progressSkill = SUGARClient.Skill.GetSkillProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(1, progressSkill.Progress);
 		}
 
 		[Test]
 		public void CannotGetNotExistingSkillProgress()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
-			var game = Helpers.GetOrCreateGame(_gameClient, "ProgressGet");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "ProgressGet");
 
-			Assert.Throws<ClientException>(() => _skillClient.GetSkillProgress("CannotGetNotExistingSkillProgress", game.Id, user.Id));
+			Assert.Throws<ClientException>(() => SUGARClient.Skill.GetSkillProgress("CannotGetNotExistingSkillProgress", game.Id, user.Id));
 		}
-        #endregion
 
         #region Helpers
         protected override EvaluationResponse CreateEvaluation(EvaluationCreateRequest skillRequest)
         {
-            var getSkill = _skillClient.GetById(skillRequest.Token, skillRequest.GameId ?? 0);
+            var getSkill = SUGARClient.Skill.GetById(skillRequest.Token, skillRequest.GameId ?? 0);
 
             if (getSkill != null)
             {
                 if (skillRequest.GameId.HasValue)
                 {
-                    _skillClient.Delete(skillRequest.Token, skillRequest.GameId.Value);
+                    SUGARClient.Skill.Delete(skillRequest.Token, skillRequest.GameId.Value);
                 }
                 else
                 {
-                    _skillClient.DeleteGlobal(skillRequest.Token);
+                    SUGARClient.Skill.DeleteGlobal(skillRequest.Token);
                 }
             }
 
-            var response = _skillClient.Create(skillRequest);
+            var response = SUGARClient.Skill.Create(skillRequest);
 
             return response;
         }

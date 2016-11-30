@@ -11,42 +11,27 @@ namespace PlayGen.SUGAR.Client.UnitTests
 {
 	public class AchievementClientTests : Evaluations
     { 
-		#region Configuration
-		private readonly AchievementClient _achievementClient;
-		private readonly UserClient _userClient;
-		private readonly GameClient _gameClient;
-
-		public AchievementClientTests()
-		{
-			_achievementClient = TestSugarClient.Achievement;
-			_userClient = TestSugarClient.User;
-			_gameClient = TestSugarClient.Game;
-		}
-		#endregion
-
-		#region Tests
-
 	    [Test]
 	    public void CanDisableNotifications()
 	    {
             // Assign
 	        var key = "CanDisableNotifications";
 
-	        _achievementClient.EnableNotifications(true);
+	        SUGARClient.Achievement.EnableNotifications(true);
 
             EvaluationNotification notification;
-	        while (_achievementClient.TryGetPendingNotification(out notification))
+	        while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
 	        {
 	        }
 
-	        _achievementClient.EnableNotifications(false);
+	        SUGARClient.Achievement.EnableNotifications(false);
 
             var achievement = CreateGenericEvaluation(key);
 
-	        CompleteGenericEvaluation(achievement, Helpers.LoggedInAccount.User.Id);
+	        CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
 
             // Act
-            var didGetnotification = _achievementClient.TryGetPendingNotification(out notification);
+            var didGetnotification = SUGARClient.Achievement.TryGetPendingNotification(out notification);
 
             // Assert
             Assert.IsFalse(didGetnotification);
@@ -59,10 +44,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
             // Assign
             var key = "CanGetNotifications";
 
-            _achievementClient.EnableNotifications(true);
+            SUGARClient.Achievement.EnableNotifications(true);
             var achievement = CreateGenericEvaluation(key);
 
-            CompleteGenericEvaluation(achievement, Helpers.LoggedInAccount.User.Id);
+            CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
 
             // Act
             EvaluationNotification notification;
@@ -70,7 +55,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             EvaluationNotification gotNotification= null;
             var didGetSpecificConfiguration = false;
 
-            while (_achievementClient.TryGetPendingNotification(out notification))
+            while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
             {
                 didGetnotification = true;
                 gotNotification = notification; 
@@ -90,21 +75,21 @@ namespace PlayGen.SUGAR.Client.UnitTests
             // Assign
             var key = "DontGetAlreadyRecievedNotifications";
 
-            _achievementClient.EnableNotifications(true);
+            SUGARClient.Achievement.EnableNotifications(true);
             var achievement = CreateGenericEvaluation(key);
 
-            CompleteGenericEvaluation(achievement, Helpers.LoggedInAccount.User.Id);
+            CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
 
             EvaluationNotification notification;
-            while (_achievementClient.TryGetPendingNotification(out notification))
+            while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
             {
             }
 
-            CompleteGenericEvaluation(achievement, Helpers.LoggedInAccount.User.Id);
+            CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
 
             // Act
             var didGetSpecificConfiguration = false;
-            while (_achievementClient.TryGetPendingNotification(out notification))
+            while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
             {
                 didGetSpecificConfiguration |= notification.Name == achievement.Name;
             }
@@ -116,7 +101,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
 		public void CanCreateAchievement()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -139,7 +124,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			Assert.AreEqual(achievementRequest.Token, response.Token);
 			Assert.AreEqual(achievementRequest.ActorType, response.ActorType);
@@ -167,7 +152,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			Assert.AreEqual(achievementRequest.Token, response.Token);
 			Assert.AreEqual(achievementRequest.ActorType, response.ActorType);
@@ -176,7 +161,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateDuplicateAchievement()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -199,15 +184,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			_achievementClient.Create(achievementRequest);
+			SUGARClient.Achievement.Create(achievementRequest);
 
-			Assert.Throws<ClientException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Create(achievementRequest));
 		}
 
 		[Test]
 		public void CannotCreateAchievementWithNoName()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -229,13 +214,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Create(achievementRequest));
 		}
 
 		[Test]
 		public void CannotCreateAchievementWithNoToken()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -257,13 +242,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Create(achievementRequest));
 		}
 
 		[Test]
 		public void CannotCreateAchievementWithNoEvaluationCriteria()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -273,13 +258,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				GameId = game.Id,
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Create(achievementRequest));
 		}
 
 		[Test]
 		public void CannotCreateAchievementWithNoEvaluationCriteriaKey()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -301,13 +286,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Create(achievementRequest));
 		}
 
 		[Test]
 		public void CannotCreateAchievementWithNoEvaluationCriteriaValue()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -328,13 +313,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Create(achievementRequest));
 		}
 
 		[Test]
 		public void CannotCreateAchievementWithNoEvaluationCriteriaDataTypeMismatch()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -356,13 +341,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Create(achievementRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Create(achievementRequest));
 		}
 
 		[Test]
 		public void CanGetAchievementsByGame()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "GameGet");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "GameGet");
 
 			var achievementRequestOne = new EvaluationCreateRequest()
 			{
@@ -385,7 +370,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var responseOne = _achievementClient.Create(achievementRequestOne);
+			var responseOne = SUGARClient.Achievement.Create(achievementRequestOne);
 
 			var achievementRequestTwo = new EvaluationCreateRequest()
 			{
@@ -408,9 +393,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var responseTwo = _achievementClient.Create(achievementRequestTwo);
+			var responseTwo = SUGARClient.Achievement.Create(achievementRequestTwo);
 
-			var getAchievement = _achievementClient.GetByGame(game.Id);
+			var getAchievement = SUGARClient.Achievement.GetByGame(game.Id);
 
 			Assert.AreEqual(2, getAchievement.Count());
 		}
@@ -418,7 +403,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetAchievementByKeys()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -441,9 +426,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var getAchievement = _achievementClient.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
+			var getAchievement = SUGARClient.Achievement.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
 
 			Assert.AreEqual(response.Name, getAchievement.Name);
 			Assert.AreEqual(achievementRequest.Name, getAchievement.Name);
@@ -452,9 +437,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNotExistingAchievementByKeys()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-			var getAchievement = _achievementClient.GetById("CannotGetNotExistingAchievementByKeys", game.Id);
+			var getAchievement = SUGARClient.Achievement.GetById("CannotGetNotExistingAchievementByKeys", game.Id);
 
 			Assert.Null(getAchievement);
 		}
@@ -462,18 +447,18 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetAchievementByEmptyToken()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-			Assert.Throws<ClientException>(() => _achievementClient.GetById("", game.Id));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.GetById("", game.Id));
 		}
 
 		[Test]
 		public void CanGetAchievementByKeysThatContainSlashes()
 		{
             // todo this test seems incorrect
-			var game = Helpers.GetOrCreateGame(_gameClient, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-			var getAchievement = _achievementClient.GetById("Can/Get/Achievement/By/Keys/That/Contain/Slashes", game.Id);
+			var getAchievement = SUGARClient.Achievement.GetById("Can/Get/Achievement/By/Keys/That/Contain/Slashes", game.Id);
 
 			Assert.Null(getAchievement);
 		}
@@ -501,9 +486,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var getAchievement = _achievementClient.GetGlobalById(achievementRequest.Token);
+			var getAchievement = SUGARClient.Achievement.GetGlobalById(achievementRequest.Token);
 
 			Assert.AreEqual(response.Name, getAchievement.Name);
 			Assert.AreEqual(achievementRequest.Name, getAchievement.Name);
@@ -512,7 +497,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNotExistingGlobalAchievementByKeys()
 		{
-			var getAchievement = _achievementClient.GetGlobalById("CannotGetNotExistingGlobalAchievementByKeys");
+			var getAchievement = SUGARClient.Achievement.GetGlobalById("CannotGetNotExistingGlobalAchievementByKeys");
 
 			Assert.Null(getAchievement);
 		}
@@ -520,14 +505,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetGlobalAchievementByEmptyToken()
 		{
-			Assert.Throws<ClientException>(() => _achievementClient.GetGlobalById(""));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.GetGlobalById(""));
 		}
 
 		[Test]
 		public void CanGetGlobalAchievementByKeysThatContainSlashes()
 		{
             // todo this test seems incorrect
-			var getAchievement = _achievementClient.GetGlobalById("Can/Get/Achievement/By/Keys/That/Contain/Slashes");
+			var getAchievement = SUGARClient.Achievement.GetGlobalById("Can/Get/Achievement/By/Keys/That/Contain/Slashes");
 
             // todo should this not be an exception?
 			Assert.Null(getAchievement);
@@ -536,7 +521,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetByAchievementsByNotExistingGameId()
 		{
-			var getAchievements = _achievementClient.GetByGame(-1);
+			var getAchievements = SUGARClient.Achievement.GetByGame(-1);
 
 			Assert.IsEmpty(getAchievements);
 		}
@@ -544,7 +529,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanUpdateAchievement()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -567,7 +552,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			var updateRequest = new EvaluationUpdateRequest
 			{
@@ -592,9 +577,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			_achievementClient.Update(updateRequest);
+			SUGARClient.Achievement.Update(updateRequest);
 
-			var updateResponse = _achievementClient.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
+			var updateResponse = SUGARClient.Achievement.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
 
 			Assert.AreNotEqual(response.Name, updateResponse.Name);
 			Assert.AreEqual("CanUpdateAchievement Updated", updateResponse.Name);
@@ -603,7 +588,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateAchievementToDuplicateName()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var achievementRequestOne = new EvaluationCreateRequest()
 			{
@@ -626,7 +611,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var responseOne = _achievementClient.Create(achievementRequestOne);
+			var responseOne = SUGARClient.Achievement.Create(achievementRequestOne);
 
 			var achievementRequestTwo = new EvaluationCreateRequest()
 			{
@@ -649,7 +634,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var responseTwo = _achievementClient.Create(achievementRequestTwo);
+			var responseTwo = SUGARClient.Achievement.Create(achievementRequestTwo);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -674,13 +659,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateNonExistingAchievement()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -705,13 +690,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateAchievemenWithNoName()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -734,7 +719,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -758,13 +743,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateAchievementWithNoToken()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -787,7 +772,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -811,13 +796,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateAchievementWithNoEvaluationCriteria()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var achievementRequest = new EvaluationCreateRequest
 			{
@@ -840,7 +825,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -851,13 +836,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				GameId = game.Id,
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateAchievementWithNoEvaluationCriteriaKey()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var achievementRequest = new EvaluationCreateRequest
 			{
@@ -880,7 +865,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -904,13 +889,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateAchievementWithNoEvaluationCriteriaValue()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -933,7 +918,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -956,13 +941,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Update(updateRequest));
 		}
 
 		[Test]
 		public void CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Update");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -985,7 +970,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			var updateRequest = new EvaluationUpdateRequest()
 			{
@@ -1009,13 +994,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			Assert.Throws<ClientException>(() => _achievementClient.Update(updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Update(updateRequest));
 		}
 
 		[Test]
 		public void CanDeleteAchievement()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Delete");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -1040,13 +1025,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
             var response = CreateEvaluation(achievementRequest);
 
-			var getAchievement = _achievementClient.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
+			var getAchievement = SUGARClient.Achievement.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
 
 			Assert.NotNull(getAchievement);
 
-			_achievementClient.Delete(achievementRequest.Token, achievementRequest.GameId.Value);
+			SUGARClient.Achievement.Delete(achievementRequest.Token, achievementRequest.GameId.Value);
 
-			getAchievement = _achievementClient.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
+			getAchievement = SUGARClient.Achievement.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
 
 			Assert.Null(getAchievement);
 		}
@@ -1054,17 +1039,17 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
 		public void CannotDeleteNonExistingAchievement()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Delete");
 
-			_achievementClient.Delete("CannotDeleteNonExistingAchievement", game.Id);
+			SUGARClient.Achievement.Delete("CannotDeleteNonExistingAchievement", game.Id);
 		}
 
 		[Test]
 		public void CannotDeleteAchievementByEmptyToken()
 		{
-			var game = Helpers.GetOrCreateGame(_gameClient, "Delete");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Delete");
 
-			Assert.Throws<ClientException>(() => _achievementClient.Delete("", game.Id));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.Delete("", game.Id));
 		}
 
 		[Test]
@@ -1090,15 +1075,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var getAchievement = _achievementClient.GetGlobalById(achievementRequest.Token);
+			var getAchievement = SUGARClient.Achievement.GetGlobalById(achievementRequest.Token);
 
 			Assert.NotNull(getAchievement);
 
-			_achievementClient.DeleteGlobal(achievementRequest.Token);
+			SUGARClient.Achievement.DeleteGlobal(achievementRequest.Token);
 
-			getAchievement = _achievementClient.GetGlobalById(achievementRequest.Token);
+			getAchievement = SUGARClient.Achievement.GetGlobalById(achievementRequest.Token);
 
 			Assert.Null(getAchievement);
 		}
@@ -1106,19 +1091,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotDeleteNonExistingGlobalAchievement()
 		{
-			_achievementClient.DeleteGlobal("CannotDeleteNonExistingGlobalAchievement");
+			SUGARClient.Achievement.DeleteGlobal("CannotDeleteNonExistingGlobalAchievement");
 		}
 
 		[Test]
 		public void CannotDeleteGlobalAchievementByEmptyToken()
 		{
-			Assert.Throws<ClientException>(() => _achievementClient.DeleteGlobal(""));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.DeleteGlobal(""));
 		}
 
 		[Test]
 		public void CanGetGlobalAchievementProgress()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -1139,12 +1124,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var progressGame = _achievementClient.GetGlobalProgress(user.Id);
+			var progressGame = SUGARClient.Achievement.GetGlobalProgress(user.Id);
 			Assert.AreEqual(1, progressGame.Count());
 
-			var progressAchievement = _achievementClient.GetGlobalAchievementProgress(response.Token, user.Id);
+			var progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(response.Token, user.Id);
 			Assert.AreEqual(0, progressAchievement.Progress);
 
 			var gameData = new SaveDataRequest()
@@ -1155,25 +1140,25 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.Float
 			};
 
-			GameDataClient.Add(gameData);
+			SUGARClient.GameData.Add(gameData);
 
-			progressAchievement = _achievementClient.GetGlobalAchievementProgress(response.Token, user.Id);
+			progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(response.Token, user.Id);
 			Assert.AreEqual(1, progressAchievement.Progress);
 		}
 
 		[Test]
 		public void CannotGetNotExistingGlobalAchievementProgress()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 
-			Assert.Throws<ClientException>(() => _achievementClient.GetGlobalAchievementProgress("CannotGetNotExistingGlobalAchievementProgress", user.Id));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.GetGlobalAchievementProgress("CannotGetNotExistingGlobalAchievementProgress", user.Id));
 		}
 
 		[Test]
 		public void CanGetAchievementProgress()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
-			var game = Helpers.GetOrCreateGame(_gameClient, "ProgressGet");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "ProgressGet");
 
 			var achievementRequest = new EvaluationCreateRequest()
 			{
@@ -1195,12 +1180,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				},
 			};
 
-			var response = _achievementClient.Create(achievementRequest);
+			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var progressGame = _achievementClient.GetGameProgress(game.Id, user.Id);
+			var progressGame = SUGARClient.Achievement.GetGameProgress(game.Id, user.Id);
 			Assert.AreEqual(1, progressGame.Count());
 
-			var progressAchievement = _achievementClient.GetAchievementProgress(response.Token, game.Id, user.Id);
+			var progressAchievement = SUGARClient.Achievement.GetAchievementProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(0, progressAchievement.Progress);
 
 			var gameData = new SaveDataRequest()
@@ -1212,40 +1197,39 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.Float
 			};
 
-			GameDataClient.Add(gameData);
+			SUGARClient.GameData.Add(gameData);
 
-			progressAchievement = _achievementClient.GetAchievementProgress(response.Token, game.Id, user.Id);
+			progressAchievement = SUGARClient.Achievement.GetAchievementProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(1, progressAchievement.Progress);
 		}
 
 		[Test]
 		public void CannotGetNotExistingAchievementProgress()
 		{
-			var user = Helpers.GetOrCreateUser(_userClient, "ProgressGet");
-			var game = Helpers.GetOrCreateGame(_gameClient, "ProgressGet");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "ProgressGet");
 
-			Assert.Throws<ClientException>(() => _achievementClient.GetAchievementProgress("CannotGetNotExistingAchievementProgress", game.Id, user.Id));
+			Assert.Throws<ClientException>(() => SUGARClient.Achievement.GetAchievementProgress("CannotGetNotExistingAchievementProgress", game.Id, user.Id));
 		}
-        #endregion
 
         #region Helpers
         protected override EvaluationResponse CreateEvaluation(EvaluationCreateRequest achievementRequest)
         {
-            var getAchievement = _achievementClient.GetById(achievementRequest.Token, achievementRequest.GameId ?? 0);
+            var getAchievement = SUGARClient.Achievement.GetById(achievementRequest.Token, achievementRequest.GameId ?? 0);
 
             if (getAchievement != null)
             {
                 if (achievementRequest.GameId.HasValue)
                 {
-                    _achievementClient.Delete(achievementRequest.Token, achievementRequest.GameId.Value);
+                    SUGARClient.Achievement.Delete(achievementRequest.Token, achievementRequest.GameId.Value);
                 }
                 else
                 {
-                    _achievementClient.DeleteGlobal(achievementRequest.Token);
+                    SUGARClient.Achievement.DeleteGlobal(achievementRequest.Token);
                 }
             }
             
-            var response = _achievementClient.Create(achievementRequest);
+            var response = SUGARClient.Achievement.Create(achievementRequest);
             
             return response;
         }

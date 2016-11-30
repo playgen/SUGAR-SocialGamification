@@ -4,18 +4,8 @@ using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
-    public abstract class Evaluations
+    public abstract class Evaluations : ClientTestsBase
     {
-        protected readonly TestSUGARClient TestSugarClient = new TestSUGARClient();
-        protected readonly GameDataClient GameDataClient;
-
-        protected Evaluations()
-        {
-            GameDataClient = TestSugarClient.GameData;
-
-            Helpers.CreateAndLogin(TestSugarClient.Session);
-        }
-
         protected abstract EvaluationResponse CreateEvaluation(EvaluationCreateRequest achievementRequest);
 
         protected EvaluationResponse CreateGenericEvaluation(string key)
@@ -42,7 +32,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
         protected void CompleteGenericEvaluation(EvaluationResponse evaluation, int userId)
         {
-            GameDataClient.Add(new SaveDataRequest
+            SUGARClient.GameData.Add(new SaveDataRequest
             {
                 ActorId = userId,
                 SaveDataType = evaluation.EvaluationCriterias[0].DataType,

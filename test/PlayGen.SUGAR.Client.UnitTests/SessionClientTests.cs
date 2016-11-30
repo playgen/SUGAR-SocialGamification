@@ -9,26 +9,8 @@ using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
-    public class SessionClientTests
+    public class SessionClientTests : ClientTestsBase
     {
-        private readonly SessionClient _sessionClient;
-        private readonly AccountClient _accountClient;
-        private readonly GameDataClient _gameDataClient;
-        private readonly UserClient _userClient;
-        private readonly GameClient _gameClient;
-
-        public SessionClientTests()
-        {
-            var testClient = new TestSUGARClient();
-            _sessionClient = testClient.Session;
-            _accountClient = testClient.Account;
-            _gameDataClient = testClient.GameData;
-            _userClient = testClient.User;
-            _gameClient = testClient.Game;
-
-            Helpers.CreateAndLogin(_sessionClient);
-        }
-
         [Test]
         public void CanHeartbeatAndReissueToken()
         {
@@ -36,7 +18,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             var headers = (Dictionary<string, string>)
                 typeof(ClientBase)
                 .GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
-                .GetValue(_sessionClient);
+                .GetValue(SUGARClient.Session);
 
             var originalToken = headers[HeaderKeys.Authorization];
 
@@ -45,7 +27,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             Thread.Sleep(1000);
 
             // Act
-            _sessionClient.Heartbeat();
+            SUGARClient.Session.Heartbeat();
 
             // Assert
             var postHeartbeatToken = headers[HeaderKeys.Authorization];
@@ -62,7 +44,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
                 SourceToken = "SUGAR",
             };
 
-            var registerResponse = _sessionClient.CreateAndLogin(accountRequest);
+            var registerResponse = SUGARClient.Session.CreateAndLogin(accountRequest);
 
             Assert.True(registerResponse.User.Id > 0);
             Assert.AreEqual(accountRequest.Name, registerResponse.User.Name);
@@ -78,9 +60,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
                 SourceToken = "SUGAR"
             };
 
-            _accountClient.Create(accountRequest);
+            SUGARClient.Account.Create(accountRequest);
 
-            var logged = _sessionClient.Login(accountRequest);
+            var logged = SUGARClient.Session.Login(accountRequest);
 
             Assert.True(logged.User.Id > 0);
             Assert.AreEqual(accountRequest.Name, logged.User.Name);
@@ -90,14 +72,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
         public void CannotLoginInvalidUser()
         {
             var accountRequest = new AccountRequest();
-            Assert.Throws<ClientException>(() => _sessionClient.Login(accountRequest));
+            Assert.Throws<ClientException>(() => SUGARClient.Session.Login(accountRequest));
         }
 
         [Test]
         public void CanLogoutAndInvalidateSessionMethod()
         {
             // Arrange
-            _sessionClient.CreateAndLogin(new AccountRequest
+            SUGARClient.Session.CreateAndLogin(new AccountRequest
             {
                 Name = "CanLogoutAndInvalidateSessionMethod",
                 Password = "CanLogoutAndInvalidateSessionMethodPassword",
@@ -105,17 +87,17 @@ namespace PlayGen.SUGAR.Client.UnitTests
             });
 
             // Act
-            _sessionClient.Logout();
+            SUGARClient.Session.Logout();
 
             // Assert
-            Assert.Throws<ClientException>(_sessionClient.Heartbeat);
+            Assert.Throws<ClientException>(SUGARClient.Session.Heartbeat);
         }
 
         [Test]
         public void CanLogoutAndInvalidateSessionClass()
         {
             // Arrange
-            _sessionClient.CreateAndLogin(new AccountRequest
+            SUGARClient.Session.CreateAndLogin(new AccountRequest
             {
                 Name = "CanLogoutAndInvalidateSessionClass",
                 Password = "CanLogoutAndInvalidateSessionClassPassword",
@@ -123,13 +105,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
             });
 
             // Act
-            _sessionClient.Logout();
+            SUGARClient.Session.Logout();
 
             // Assert
-            Assert.Throws<ClientException>(() => _gameDataClient.Add(new SaveDataRequest
+            Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(new SaveDataRequest
             {
-                ActorId = Helpers.GetOrCreateUser(_userClient, "CanLogoutAndInvalidateSessionClass").Id,
-                GameId = Helpers.GetOrCreateGame(_gameClient, "CanLogoutAndInvalidateSessionClass").Id,
+                ActorId = Helpers.GetOrCreateUser(SUGARClient.User, "CanLogoutAndInvalidateSessionClass").Id,
+                GameId = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLogoutAndInvalidateSessionClass").Id,
                 Key = "CanLogoutAndInvalidateSessionClass",
                 SaveDataType = SaveDataType.String,
                 Value = "CanLogoutAndInvalidateSessionClass"

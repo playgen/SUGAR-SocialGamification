@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Core.Sessions
 
         private bool _isDisposed;
         
-        private readonly Dictionary<int, Session> _sessions =  new Dictionary<int, Session>();
+        private readonly Dictionary<long, Session> _sessions =  new Dictionary<long, Session>();
 
         public SessionTracker()
         {
@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Core.Sessions
             GameController.GameDeletedEvent += OnGameDeleted;
         }
 
-        public void SetLastActive(int sessionId, DateTime lastActive)
+        public void SetLastActive(long sessionId, DateTime lastActive)
         {
             _sessions[sessionId].LastActive = lastActive;
         }
@@ -52,12 +52,12 @@ namespace PlayGen.SUGAR.Core.Sessions
             return session;
         }
         
-        public void EndSession(int sessionId)
+        public void EndSession(long sessionId)
         {
-            //var session = _sessions[sessionId];
-            //_sessions.Remove(sessionId);
+            var session = _sessions[sessionId];
+            _sessions.Remove(sessionId);
 
-            //SessionEndedEvent?.Invoke(session);
+            SessionEndedEvent?.Invoke(session);
         }
 
         public bool IsActive(int sessionId)

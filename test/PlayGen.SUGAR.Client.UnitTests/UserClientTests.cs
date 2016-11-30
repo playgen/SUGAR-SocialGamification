@@ -5,21 +5,8 @@ using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
-	public class UserClientTests
+	public class UserClientTests : ClientTestsBase
 	{
-		#region Configuration
-		private readonly UserClient _userClient;
-		
-		public UserClientTests()
-		{
-			var testSugarClient = new TestSUGARClient();
-			_userClient = testSugarClient.User;
-
-			Helpers.CreateAndLogin(testSugarClient.Session);
-		}
-		#endregion
-
-		#region Tests
 		[Test]
 		public void CanCreateUser()
 		{
@@ -28,7 +15,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanCreateUser",
 			};
 
-			var response = _userClient.Create(userRequest);
+			var response = SUGARClient.User.Create(userRequest);
 
 			Assert.AreEqual(userRequest.Name, response.Name);
 			Assert.True(response.Id > 0);
@@ -42,9 +29,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotCreateDuplicateUser",
 			};
 
-			_userClient.Create(userRequest);
+			SUGARClient.User.Create(userRequest);
 
-			Assert.Throws<ClientException>(() => _userClient.Create(userRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.User.Create(userRequest));
 		}
 
 		[Test]
@@ -52,7 +39,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var userRequest = new ActorRequest { };
 
-			Assert.Throws<ClientException>(() => _userClient.Create(userRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.User.Create(userRequest));
 		}
 
 		[Test]
@@ -63,16 +50,16 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanGetUsersByName 1",
 			};
 
-			var responseOne = _userClient.Create(userRequestOne);
+			var responseOne = SUGARClient.User.Create(userRequestOne);
 
 			var userRequestTwo = new ActorRequest
 			{
 				Name = "CanGetUsersByName 2",
 			};
 
-			var responseTwo = _userClient.Create(userRequestTwo);
+			var responseTwo = SUGARClient.User.Create(userRequestTwo);
 
-			var getUsers = _userClient.Get("CanGetUsersByName");
+			var getUsers = SUGARClient.User.Get("CanGetUsersByName");
 
 			Assert.AreEqual(2, getUsers.Count());
 		}
@@ -80,7 +67,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNotExistingUserByName()
 		{
-			var getUsers = _userClient.Get("CannotGetNotExistingUserByName");
+			var getUsers = SUGARClient.User.Get("CannotGetNotExistingUserByName");
 
 			Assert.IsEmpty(getUsers);
 		}
@@ -88,7 +75,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetUserByEmptyName()
 		{
-			Assert.Throws<ClientException>(() => _userClient.Get(""));
+			Assert.Throws<ClientException>(() => SUGARClient.User.Get(""));
 		}
 
 		[Test]
@@ -99,9 +86,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanGetUserById",
 			};
 
-			var response = _userClient.Create(userRequest);
+			var response = SUGARClient.User.Create(userRequest);
 
-			var getUser = _userClient.Get(response.Id);
+			var getUser = SUGARClient.User.Get(response.Id);
 
 			Assert.AreEqual(response.Name, getUser.Name);
 			Assert.AreEqual(userRequest.Name, getUser.Name);
@@ -110,7 +97,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotGetNotExistingUserById()
 		{
-			var getUser = _userClient.Get(-1);
+			var getUser = SUGARClient.User.Get(-1);
 
 			Assert.Null(getUser);
 		}
@@ -123,16 +110,16 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanUpdateUser",
 			};
 
-			var response = _userClient.Create(userRequest);
+			var response = SUGARClient.User.Create(userRequest);
 
 			var updateRequest = new ActorRequest
 			{
 				Name = "CanUpdateUser Updated"
 			};
 
-			_userClient.Update(response.Id, updateRequest);
+			SUGARClient.User.Update(response.Id, updateRequest);
 
-			var getUser = _userClient.Get(response.Id);
+			var getUser = SUGARClient.User.Get(response.Id);
 
 			Assert.AreNotEqual(response.Name, updateRequest.Name);
 			Assert.AreEqual("CanUpdateUser Updated", getUser.Name);
@@ -146,21 +133,21 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateUserToDuplicateName 1"
 			};
 
-			var responseOne = _userClient.Create(userRequestOne);
+			var responseOne = SUGARClient.User.Create(userRequestOne);
 
 			var userRequestTwo = new ActorRequest
 			{
 				Name = "CannotUpdateUserToDuplicateName 2"
 			};
 
-			var responseTwo = _userClient.Create(userRequestTwo);
+			var responseTwo = SUGARClient.User.Create(userRequestTwo);
 
 			var updateUser = new ActorRequest
 			{
 				Name = userRequestOne.Name
 			};
 
-			Assert.Throws<ClientException>(() => _userClient.Update(responseTwo.Id, updateUser));
+			Assert.Throws<ClientException>(() => SUGARClient.User.Update(responseTwo.Id, updateUser));
 		}
 
 		[Test]
@@ -171,7 +158,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateNonExistingUser"
 			};
 
-			Assert.Throws<ClientException>(() => _userClient.Update(-1, updateUser));
+			Assert.Throws<ClientException>(() => SUGARClient.User.Update(-1, updateUser));
 		}
 
 		[Test]
@@ -182,13 +169,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateUserToNoName",
 			};
 
-			var response = _userClient.Create(userRequest);
+			var response = SUGARClient.User.Create(userRequest);
 
 			var updateRequest = new ActorRequest
 			{
 			};
 
-			Assert.Throws<ClientException>(() => _userClient.Update(response.Id, updateRequest));
+			Assert.Throws<ClientException>(() => SUGARClient.User.Update(response.Id, updateRequest));
 		}
 
 		[Test]
@@ -199,15 +186,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CanDeleteUser",
 			};
 
-			var response = _userClient.Create(userRequest);
+			var response = SUGARClient.User.Create(userRequest);
 
-			var getUser = _userClient.Get(response.Id);
+			var getUser = SUGARClient.User.Get(response.Id);
 
 			Assert.NotNull(getUser);
 
-			_userClient.Delete(response.Id);
+			SUGARClient.User.Delete(response.Id);
 
-			getUser = _userClient.Get(response.Id);
+			getUser = SUGARClient.User.Get(response.Id);
 
 			Assert.Null(getUser);
 		}
@@ -215,10 +202,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotDeleteNonExistingUser()
 		{
-			_userClient.Delete(-1);
+			SUGARClient.User.Delete(-1);
 		}
-
-
-		#endregion
 	}
 }

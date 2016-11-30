@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AccountClientTests.cs" />
     <Compile Include="AchievementClientTests.cs" />
+    <Compile Include="ClientTestsBase.cs" />
     <Compile Include="Evaluations.cs" />
     <Compile Include="GameClientTests.cs" />
     <Compile Include="GameDataClientTests.cs" />

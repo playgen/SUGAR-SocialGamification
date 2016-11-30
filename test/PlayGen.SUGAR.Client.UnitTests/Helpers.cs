@@ -6,27 +6,6 @@ namespace PlayGen.SUGAR.Client.UnitTests
 {
     public static class Helpers
     {
-        public static AccountResponse LoggedInAccount { get; private set; }
-
-        public static void CreateAndLogin(SessionClient client)
-        {
-            var accountRequest = new AccountRequest
-            {
-                Name = "admin",
-                Password = "admin",
-                SourceToken = "SUGAR",
-            };
-
-            try
-            {
-                LoggedInAccount = client.Login(accountRequest);
-            }
-            catch
-            {
-                LoggedInAccount = client.CreateAndLogin(accountRequest);
-            }
-        }
-
         public static ActorResponse GetOrCreateUser(UserClient userClient, string suffix = null)
         {
             var name = GetCallingClassName() + (suffix ?? $"_{suffix}") + "_User";// "_User" suffix as temporary fix while lack of TPH in EF.Core means types inheriting from Actor cannot have the same "Name" value.

@@ -19,7 +19,8 @@ namespace PlayGen.SUGAR.ServerAuthentication.Filters
         public void OnActionExecuted(ActionExecutedContext context)
         {
             var request = context.HttpContext.Request;
-            int sessionId, gameId, userId;
+            long sessionId;
+            int gameId, userId;
 
             if (request.TryGetClaim("SessionId", out sessionId)
                 && request.TryGetClaim("GameId", out gameId)
