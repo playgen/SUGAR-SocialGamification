@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Core.Sessions;
@@ -10,7 +11,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     public class EvaluationTracker : IDisposable
     {
         private readonly EvaluationGameDataMapper _gameDataToEvaluationMapper = new EvaluationGameDataMapper();
-        private readonly ProgressCache _progressCache = new ProgressCache();
+        private readonly ConcurrentProgressCache _concurrentProgressCache = new ConcurrentProgressCache();
         private readonly ProgressNotificationCache _progressNotificationCache = new ProgressNotificationCache();
 
         private readonly ProgressEvaluator _progressEvaluator;
@@ -56,8 +57,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             _isDisposed = true;
         }
 
-        // <evaluation, progress>
-        public Dictionary<int, List<KeyValuePair<Evaluation, float>>> GetPendingNotifications(int? gameId, int actorId)
+        // <actorId, <evaluation, progress>>
+        public ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> GetPendingNotifications(int? gameId, int actorId)
         {
             return _progressNotificationCache.Get(gameId, actorId);
         }
@@ -71,7 +72,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         private void OnSessionEnded(Session session)
         {
-            _progressCache.RemoveActor(session.GameId, session.ActorId);
+            _concurrentProgressCache.RemoveActor(session.GameId, session.ActorId);
             _progressNotificationCache.Remove(session.GameId, session.ActorId);
         }
 
@@ -109,7 +110,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         private void OnEvaluationDeleted(Evaluation evaluation)
         {
             _gameDataToEvaluationMapper.RemoveMapping(evaluation);
-            _progressCache.Remove(evaluation.Id);
+            _concurrentProgressCache.Remove(evaluation.Id);
             _progressNotificationCache.Remove(evaluation.Id);
         }
 

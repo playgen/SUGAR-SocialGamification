@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared;
-using System.Linq;
 using PlayGen.SUGAR.Common.Shared.Extensions;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     public class EvaluationGameDataMapper
     {
         // <gamedata key, <evaluationId, evaluation>>
-        private readonly Dictionary<string, Dictionary<int, Evaluation>> _mappings = new Dictionary<string, Dictionary<int, Evaluation>>();
+        private readonly ConcurrentDictionary<string, ConcurrentDictionary<int, Evaluation>> _mappings = new ConcurrentDictionary<string, ConcurrentDictionary<int, Evaluation>>();
 
         public bool TryGetRelated(GameData gameData, out IEnumerable<Evaluation> evaluations)
         {
@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             evaluations = null;
             var mappedKey = CreateMappingKey(gameData.GameId, gameData.SaveDataType, gameData.Key);
 
-            Dictionary<int, Evaluation> relatedEvalautions;
+            ConcurrentDictionary<int, Evaluation> relatedEvalautions;
             if (_mappings.TryGetValue(mappedKey, out relatedEvalautions))
             {
                 evaluations = relatedEvalautions.Values;
@@ -45,11 +45,11 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             {
                 var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.DataType, evaluationCriteria.Key);
 
-                Dictionary<int, Evaluation> mappedEvaluationsForKey;
+                ConcurrentDictionary<int, Evaluation> mappedEvaluationsForKey;
 
                 if (!_mappings.TryGetValue(mappingKey, out mappedEvaluationsForKey))
                 {
-                    mappedEvaluationsForKey = new Dictionary<int, Evaluation>();
+                    mappedEvaluationsForKey = new ConcurrentDictionary<int, Evaluation>();
                     _mappings[mappingKey] = mappedEvaluationsForKey;
                 }
 
@@ -63,13 +63,14 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             {
                 var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.DataType, evaluationCriteria.Key);
 
-                Dictionary<int, Evaluation> mappedEvaluationsForKey;
-
+                ConcurrentDictionary<int, Evaluation> mappedEvaluationsForKey;
                 if (_mappings.TryGetValue(mappingKey, out mappedEvaluationsForKey))
                 {
-                    if (mappedEvaluationsForKey.Remove(evaluation.Id) && mappedEvaluationsForKey.Count == 0)
+                    Evaluation removedEvaluation;
+                    if (mappedEvaluationsForKey.TryRemove(evaluation.Id, out removedEvaluation) && mappedEvaluationsForKey.Count == 0)
                     {
-                        _mappings.Remove(mappingKey);
+                        ConcurrentDictionary<int, Evaluation> removedEvaluations;
+                        _mappings.TryRemove(mappingKey, out removedEvaluations);
                     }
                 }
             }

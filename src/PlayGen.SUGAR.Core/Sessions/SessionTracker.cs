@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
@@ -14,7 +15,7 @@ namespace PlayGen.SUGAR.Core.Sessions
         private readonly TimeSpan _sessionTimeout;
         private bool _isDisposed;
         
-        private readonly Dictionary<long, Session> _sessions =  new Dictionary<long, Session>();
+        private readonly ConcurrentDictionary<long, Session> _sessions =  new ConcurrentDictionary<long, Session>();
 
         public SessionTracker(TimeSpan sessionTimeout)
         {
@@ -47,7 +48,7 @@ namespace PlayGen.SUGAR.Core.Sessions
         {
             var session = new Session(gameId, actorId);
 
-            _sessions.Add(session.Id, session);
+            _sessions.TryAdd(session.Id, session);
 
             SessionStartedEvent?.Invoke(session);
 
@@ -56,8 +57,8 @@ namespace PlayGen.SUGAR.Core.Sessions
         
         public void EndSession(long sessionId)
         {
-            var session = _sessions[sessionId];
-            _sessions.Remove(sessionId);
+            Session session;
+            _sessions.TryRemove(sessionId, out session);
 
             SessionEndedEvent?.Invoke(session);
         }

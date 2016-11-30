@@ -8,7 +8,10 @@ namespace PlayGen.SUGAR.WebAPI
     {
         private void ConfigureSessionTracking(IServiceCollection services, TimeSpan sessionTimeout)
         {
-            services.AddSingleton(new SessionTracker(sessionTimeout));
+            var sessionTracker = new SessionTracker(sessionTimeout);
+            services.AddSingleton(sessionTracker);
+
+            sessionTracker.RemoveTimedOut();
         }
     }
 }

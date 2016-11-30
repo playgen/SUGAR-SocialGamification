@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Common.Shared.Extensions;
@@ -12,148 +13,29 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     {
         // <gameId, <actorId, <evaluation, progress>>>
         // Latest stored last in <evaluation, progress> list.
-        private readonly Dictionary<int, Dictionary<int, List<KeyValuePair<Evaluation, float>>>> _pendingNotifications = new Dictionary<int, Dictionary<int, List<KeyValuePair<Evaluation, float>>>>();
+        private readonly ConcurrentProgressCache _pendingNotifications = new ConcurrentProgressCache();
        
         public bool Remove(int? gameId, int actorId)
         {
-            var didRemove = false;
-
-            Dictionary<int, List<KeyValuePair<Evaluation, float>>> gameProgress;
-            if (_pendingNotifications.TryGetValue(gameId.ToInt(), out gameProgress))
-            {
-                if (gameProgress.Remove(actorId))
-                {
-                    didRemove = true;
-
-                    if (gameProgress.Count == 0)
-                    {
-                        _pendingNotifications.Remove(gameId.ToInt());
-                    }
-                }
-            }
-
-            return didRemove;
+            return _pendingNotifications.RemoveActor(gameId, actorId);
         }
 
         public bool Remove(int evaluationId)
         {
-            var didRemove = false;
-            var actorsToRemove = new List<KeyValuePair<int, int>>();    // <gameId, actorId>
-
-            foreach (var gameProgress in _pendingNotifications)
-            {
-                foreach (var actorProgress in gameProgress.Value)
-                {
-                    if (actorProgress.Value.RemoveAll(p => p.Key.Id == evaluationId) > 0)
-                    {
-                        didRemove = true;
-
-                        if (actorProgress.Value.Count == 0)
-                        {
-                            actorsToRemove.Add(new KeyValuePair<int, int>(gameProgress.Key, actorProgress.Key));
-                        }
-                    }
-                }
-            }
-
-            PruneActors(actorsToRemove);
-            
-            return didRemove;
+            return _pendingNotifications.Remove(evaluationId);
         }
 
-        // todo store table of sent notifications so they don't get resent - check them here
-        /// <summary>
-        /// Only add if progress is completed (value 1) and the evaluation notification hasn't been sent before
-        /// </summary>
-        /// <param name="addProgress"></param>
-        public void Update(ProgressCache addProgress, float minProgress = 1f)   // todo make this config driven (should probably be stored on the achievemnt as notification progress interval)
+        public void Update(ConcurrentProgressCache addProgress, float minProgress = 1f)   // todo make this config driven (should probably be stored on the achievemnt as notification progress interval)
         {
-            foreach (var addGameProgress in addProgress)
-            {
-                Dictionary<int, List<KeyValuePair<Evaluation, float>>> existingGameProgress;
-                if (!_pendingNotifications.TryGetValue(addGameProgress.Key, out existingGameProgress))
-                {
-                    existingGameProgress = new Dictionary<int, List<KeyValuePair<Evaluation, float>>>();
-                    _pendingNotifications[addGameProgress.Key] = existingGameProgress;
-                }
-
-                foreach (var addActorProgress in addGameProgress.Value)
-                {
-                    List<KeyValuePair<Evaluation, float>> existingActorProgress;
-                    if (!existingGameProgress.TryGetValue(addActorProgress.Key, out existingActorProgress))
-                    {
-                        existingActorProgress = new List<KeyValuePair<Evaluation, float>>();
-                        existingGameProgress[addActorProgress.Key] = existingActorProgress;
-                    }
-
-                    foreach (var addEvaluationProgress in addActorProgress.Value)
-                    {
-                        existingActorProgress.RemoveAll(p => p.Key == addEvaluationProgress.Key);
-
-                        if (minProgress <= addEvaluationProgress.Value)
-                        {
-                            existingActorProgress.Add(addEvaluationProgress);
-                        }
-                    }
-                }
-            }
+            _pendingNotifications.AddProgress(addProgress, (progress) => progress >= minProgress );
         }
 
-        public Dictionary<int, List<KeyValuePair<Evaluation, float>>> Get(int? gameId, int actorId)
+        public ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> Get(int? gameId, int actorId)
         {
-            var actorsProgress = new Dictionary<int, List<KeyValuePair<Evaluation, float>>>();
-
-            List<KeyValuePair<Evaluation, float>> actorProgress;
-            if (TryTake(gameId, actorId, out actorProgress))
-            {
-                actorsProgress[actorId] = actorProgress;
-            }
+            var actorsProgress = _pendingNotifications.TakeActorProgress(gameId, actorId);
 
             // todo also add progress updates for groups here
             return actorsProgress;
-        }
-
-        private bool TryTake(int? gameId, int actorId, out List<KeyValuePair<Evaluation, float>> actorProgress)
-        {
-            // todo store that notification has been sent here
-
-            actorProgress = null;
-
-            Dictionary<int, List<KeyValuePair<Evaluation, float>>> gameProgress;
-            if (_pendingNotifications.TryGetValue(gameId.ToInt(), out gameProgress))
-            {
-                if (gameProgress.TryGetValue(actorId, out actorProgress))
-                {
-                    gameProgress.Remove(actorId);
-
-                    if (gameProgress.Count == 0)
-                    {
-                        _pendingNotifications.Remove(gameId.ToInt());
-                    }
-                }
-            }
-
-            return actorProgress != null;
-        }
-
-        private void PruneActors(List<KeyValuePair<int, int>> actorsToRemove)
-        {
-            var gamesToRemove = new List<int>();
-
-            foreach (var removeActor in actorsToRemove)
-            {
-                _pendingNotifications[removeActor.Key].Remove(removeActor.Value);
-
-                if (_pendingNotifications[removeActor.Key].Count == 0)
-                {
-                    gamesToRemove.Add(removeActor.Key);
-                }
-            }
-
-            foreach (var removeGame in gamesToRemove)
-            {
-                _pendingNotifications.Remove(removeGame);
-            }
         }
     }
 }

@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			_evaluationController = evaluationController;
 		}
 
-		public ProgressCache EvaluateActor(IEnumerable<Evaluation> evaluations, Session session)
+		public ConcurrentProgressCache EvaluateActor(IEnumerable<Evaluation> evaluations, Session session)
 		{
-			var progress = new ProgressCache();
+			var progress = new ConcurrentProgressCache();
 
 			foreach (var evaluation in evaluations)
 			{
@@ -30,9 +30,9 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			return progress;
 		}
 
-		public ProgressCache EvaluateSessions(IEnumerable<Session> sessions, Evaluation evaluation)
+		public ConcurrentProgressCache EvaluateSessions(IEnumerable<Session> sessions, Evaluation evaluation)
 		{
-			var progress = new ProgressCache();
+			var progress = new ConcurrentProgressCache();
 
 			foreach (var session in sessions)
 			{
@@ -42,9 +42,9 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			return progress;
 		}
 
-		public ProgressCache EvaluateSessions(IEnumerable<Session> sessions, IEnumerable<Evaluation> evaluations)
+		public ConcurrentProgressCache EvaluateSessions(IEnumerable<Session> sessions, IEnumerable<Evaluation> evaluations)
 		{
-			var progress = new ProgressCache();
+			var progress = new ConcurrentProgressCache();
 
 			foreach (var session in sessions)
 			{
@@ -57,12 +57,12 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			return progress;
 		}
 
-		private void AddProgress(ProgressCache progress, Evaluation evaluation, Session session)
+		private void AddProgress(ConcurrentProgressCache concurrentProgress, Evaluation evaluation, Session session)
 		{
 		    if (!_evaluationController.IsAlreadyCompleted(evaluation, session.ActorId))
 		    {
 		        var progressValue = _evaluationController.EvaluateProgress(evaluation, session.ActorId);
-		        progress.AddProgress(session.GameId, session.ActorId, evaluation, progressValue);
+		        concurrentProgress.AddProgress(session.GameId, session.ActorId, evaluation, progressValue);
 		    }
 		}
 	}
