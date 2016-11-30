@@ -11,12 +11,14 @@ namespace PlayGen.SUGAR.Core.Sessions
         public event Action<Session> SessionStartedEvent;
         public event Action<Session> SessionEndedEvent;
 
+        private readonly TimeSpan _sessionTimeout;
         private bool _isDisposed;
         
         private readonly Dictionary<long, Session> _sessions =  new Dictionary<long, Session>();
 
-        public SessionTracker()
+        public SessionTracker(TimeSpan sessionTimeout)
         {
+            _sessionTimeout = sessionTimeout;
             ActorController.ActorDeletedEvent += OnActorDeleted;
             GameController.GameDeletedEvent += OnGameDeleted;
         }
@@ -60,7 +62,7 @@ namespace PlayGen.SUGAR.Core.Sessions
             SessionEndedEvent?.Invoke(session);
         }
 
-        public bool IsActive(int sessionId)
+        public bool IsActive(long sessionId)
         {
             return _sessions.ContainsKey(sessionId);
         }
@@ -73,6 +75,17 @@ namespace PlayGen.SUGAR.Core.Sessions
         public List<Session> GetByGames(List<int?> gameIds)
         {
             return _sessions.Values.Where(s => gameIds.Contains(s.GameId)).ToList();
+        }
+
+        public void RemoveTimedOut()
+        {
+            var activityThreshold = DateTime.UtcNow - _sessionTimeout;
+
+            var sessionIds = _sessions
+                .Where(kvp => kvp.Value.LastActive < activityThreshold)
+                .Select(kvp => kvp.Key).ToList();
+
+            sessionIds.ForEach(EndSession);
         }
 
         private void OnActorDeleted(int actorId)

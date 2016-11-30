@@ -8,7 +8,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
     {
         protected readonly EvaluationTracker EvaluationTracker;
         protected readonly ProgressEvaluator ProgressEvaluator;
-        protected readonly SessionTracker SessionTracker = new SessionTracker();
+        protected readonly SessionTracker SessionTracker = new SessionTracker(new TimeSpan(0, 2, 0));
 
         protected EvaluationTestsBase()
         {

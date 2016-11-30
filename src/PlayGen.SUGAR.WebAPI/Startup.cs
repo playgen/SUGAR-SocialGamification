@@ -135,7 +135,7 @@ namespace PlayGen.SUGAR.WebAPI
 			ConfigureDocumentationGeneratorServices(services);
             ConfigureAuthorization(services);
 		    ConfigureEvaluationEvents(services);
-		    ConfigureSessionTracking(services);
+		    ConfigureSessionTracking(services, tokenOptions.ValidityTimeout);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
