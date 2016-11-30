@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
@@ -82,6 +83,19 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/evaluate/{1}", gameId, actorId).ToString();
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
+		}
+
+		public void GetGameProgressAsync(int gameId, int actorId, Action<IEnumerable<EvaluationProgressResponse>> success, Action<Exception> error)
+		{
+			try
+			{
+				var result = GetGameProgress(gameId, actorId);
+				success(result);
+			}
+			catch (Exception e)
+			{
+				error(e);
+			}
 		}
 
 		/// <summary>

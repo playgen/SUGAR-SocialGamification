@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
 
@@ -40,6 +42,19 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/{0}/create", gameId).ToString();
 			return Post<AccountRequest, AccountResponse>(query, accountRequest);
+		}
+
+		public void CreateAsync(int gameId, AccountRequest accountRequest, Action<AccountResponse> success, Action<Exception> error)
+		{
+			try
+			{
+				var result = Create(gameId, accountRequest);
+				success(result);
+			}
+			catch (Exception e)
+			{
+				error(e);
+			}
 		}
 
 		/// <summary>
