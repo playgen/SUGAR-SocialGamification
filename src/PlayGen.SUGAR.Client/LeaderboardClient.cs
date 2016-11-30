@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
 
@@ -37,6 +38,19 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<LeaderboardResponse>>(query);
 		}
 
+		public void GetAsync(int gameId, Action<IEnumerable<LeaderboardResponse>> success, Action<Exception> error)
+		{
+			try
+			{
+				var result = Get(gameId);
+				success(result);
+			}
+			catch (Exception e)
+			{
+				error(e);
+			}
+		}
+
 		/// <summary>
 		/// Find a single global leaderboard matching the token.
 		/// </summary>
@@ -60,6 +74,19 @@ namespace PlayGen.SUGAR.Client
 			return Get<LeaderboardResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
+		public void GetAsync(string token, int gameId, Action<LeaderboardResponse> success, Action<Exception> error)
+		{
+			try
+			{
+				var result = Get(token, gameId);
+				success(result);
+			}
+			catch (Exception e)
+			{
+				error(e);
+			}
+		}
+
 		/// <summary>
 		/// Create a new Leaderboard.
 		/// Requires <see cref="LeaderboardRequest.Name"/> and <see cref="LeaderboardRequest.Token"/> to be unique to that <see cref="LeaderboardRequest.GameId"/>.
@@ -81,6 +108,19 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/standings").ToString();
 			return Post<LeaderboardStandingsRequest, IEnumerable<LeaderboardStandingsResponse>>(query, leaderboardDetails);
+		}
+
+		public void CreateGetLeaderboardStandingsAsync(LeaderboardStandingsRequest leaderboardDetails, Action<IEnumerable<LeaderboardStandingsResponse>> success, Action<Exception> error)
+		{
+			try
+			{
+				var result = CreateGetLeaderboardStandings(leaderboardDetails);
+				success(result);
+			}
+			catch (Exception e)
+			{
+				error(e);
+			}
 		}
 
 		/// <summary>

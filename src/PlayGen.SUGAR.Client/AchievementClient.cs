@@ -85,6 +85,19 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
 		}
 
+		public void GetGameProgressAsync(int gameId, int actorId, Action<IEnumerable<EvaluationProgressResponse>> success, Action<Exception> error)
+		{
+			try
+			{
+				var result = GetGameProgress(gameId, actorId);
+				success(result);
+			}
+			catch (Exception e)
+			{
+				error(e);
+			}
+		}
+
 		/// <summary>
 		/// Find the current progress for an Achievement for <param name="actorId"/>.
 		/// </summary>

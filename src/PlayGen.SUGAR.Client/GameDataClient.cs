@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Extensions;
 using PlayGen.SUGAR.Contracts.Shared;
@@ -43,6 +44,19 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix).ToString();
 			return Post<SaveDataRequest, SaveDataResponse>(query, data);
+		}
+
+		public void AddAsync(SaveDataRequest data, Action<SaveDataResponse> success, Action<Exception> error)
+		{
+			try
+			{
+				var result = Add(data);
+				success(result);
+			}
+			catch (Exception e)
+			{
+				error(e);
+			}
 		}
 	}
 }
