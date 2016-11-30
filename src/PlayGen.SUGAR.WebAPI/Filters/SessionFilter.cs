@@ -9,7 +9,7 @@ using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Filters
 {
-    public class SessionFilter : IResourceFilter
+    public class SessionFilter : IActionFilter
     {
         private readonly SessionTracker _sessionTracker;
 
@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.WebAPI.Filters
             _sessionTracker = sessionTracker;
         }
 
-        public void OnResourceExecuting(ResourceExecutingContext context)
+        public void OnActionExecuting(ActionExecutingContext context)
         {
-            if (!HasValidateSessionAttribute(context.ActionDescriptor)) return; 
+            if (!HasValidateSessionAttribute(context.ActionDescriptor)) return;
 
             int sessionId;
 
@@ -37,6 +37,10 @@ namespace PlayGen.SUGAR.WebAPI.Filters
             _sessionTracker.SetLastActive(sessionId, DateTime.UtcNow);
         }
 
+        public void OnActionExecuted(ActionExecutedContext context)
+        {
+        }
+        
         private bool HasValidateSessionAttribute(ActionDescriptor actionDescriptor)
         {
             // todo possibly cache these values - do a test first to see the performance benefit with caching vs non caching
@@ -46,10 +50,6 @@ namespace PlayGen.SUGAR.WebAPI.Filters
             }
 
             return actionDescriptor.GetCustomMethodAttribute<ValidateSessionAttribute>() != null;
-        }
-
-        public void OnResourceExecuted(ResourceExecutedContext context)
-        {
         }
     }
 }

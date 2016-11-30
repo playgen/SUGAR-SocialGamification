@@ -12,7 +12,6 @@ namespace PlayGen.SUGAR.Core.Sessions
         public event Action<Session> SessionEndedEvent;
 
         private bool _isDisposed;
-        private static int _idCounter;
         
         private readonly Dictionary<int, Session> _sessions =  new Dictionary<int, Session>();
 
@@ -44,26 +43,21 @@ namespace PlayGen.SUGAR.Core.Sessions
 
         public Session StartSession(int? gameId, int actorId)
         {
-            var session = new Session
-            {
-                Id = ++_idCounter,
-                GameId = gameId,
-                ActorId = actorId
-            };
+            var session = new Session(gameId, actorId);
 
-            _sessions[session.Id] = session;
+            _sessions.Add(session.Id, session);
 
-            SessionStartedEvent(session);
+            SessionStartedEvent?.Invoke(session);
 
             return session;
         }
         
         public void EndSession(int sessionId)
         {
-            var session = _sessions[sessionId];
-            _sessions.Remove(sessionId);
+            //var session = _sessions[sessionId];
+            //_sessions.Remove(sessionId);
 
-            SessionEndedEvent(session);
+            //SessionEndedEvent?.Invoke(session);
         }
 
         public bool IsActive(int sessionId)
@@ -83,20 +77,20 @@ namespace PlayGen.SUGAR.Core.Sessions
 
         private void OnActorDeleted(int actorId)
         {
-            var kvps = _sessions
+            var sessionIds = _sessions
                 .Where(kvp => kvp.Value.ActorId == actorId)
                 .Select(kvp => kvp.Key).ToList();
 
-            kvps.ForEach(k => _sessions.Remove(k));
+            sessionIds.ForEach(EndSession);
         }
         
         private void OnGameDeleted(int gameId)
         {
-            var kvps = _sessions
+            var sessionIds = _sessions
                 .Where(kvp => kvp.Value.GameId == gameId)
                 .Select(kvp => kvp.Key).ToList();
 
-            kvps.ForEach(k => _sessions.Remove(k));
+            sessionIds.ForEach(EndSession);
         }
     }
 }

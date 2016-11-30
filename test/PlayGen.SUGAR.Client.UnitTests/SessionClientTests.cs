@@ -97,8 +97,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
         public void CanLogoutAndInvalidateSessionMethod()
         {
             // Arrange
-            Helpers.CreateAndLogin(_sessionClient);
-            
+            _sessionClient.CreateAndLogin(new AccountRequest
+            {
+                Name = "CanLogoutAndInvalidateSessionMethod",
+                Password = "CanLogoutAndInvalidateSessionMethodPassword",
+                SourceToken = "SUGAR",
+            });
+
             // Act
             _sessionClient.Logout();
 
@@ -110,7 +115,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
         public void CanLogoutAndInvalidateSessionClass()
         {
             // Arrange
-            Helpers.CreateAndLogin(_sessionClient);
+            _sessionClient.CreateAndLogin(new AccountRequest
+            {
+                Name = "CanLogoutAndInvalidateSessionClass",
+                Password = "CanLogoutAndInvalidateSessionClassPassword",
+                SourceToken = "SUGAR",
+            });
 
             // Act
             _sessionClient.Logout();

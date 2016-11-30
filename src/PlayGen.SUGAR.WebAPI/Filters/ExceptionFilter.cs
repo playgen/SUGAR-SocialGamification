@@ -31,6 +31,13 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 				handled = true;
 			}
 
+			if (exception is InvalidSessionException)
+			{
+				context.Result = new ObjectResult(exception.Message);
+				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+				handled = true;
+			}
+
 			if (!handled)
 			{ 
 				context.Result = new ObjectResult(context.Exception.Message);

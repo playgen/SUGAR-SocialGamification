@@ -19,7 +19,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			_skillClient = TestSugarClient.Skill;
 			_userClient = TestSugarClient.User;
 			_gameClient = TestSugarClient.Game;
-		}
+
+            Helpers.CreateAndLogin(TestSugarClient.Session);
+        }
 		#endregion
 
 		#region Tests
