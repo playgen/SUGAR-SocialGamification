@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Unity\Assets\Plugins\PlayGen.SUGAR.Unity\</OutputPath>
+    <OutputPath>..\..\..\Unity\Assets\Plugins\SUGAR\DLLs\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
