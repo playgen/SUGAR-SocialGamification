@@ -162,7 +162,11 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 
             // Assert
             progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
-            progress[user.Id].ForEach(kvp => Assert.Equal(1, kvp.Value)); // Progress should be completed by this point
+
+            foreach (var actorProgress in progress.Values)
+            {
+                actorProgress.Values.ToList().ForEach(val => Assert.Equal(1, val));
+            }
         }
 
         /// <summary>

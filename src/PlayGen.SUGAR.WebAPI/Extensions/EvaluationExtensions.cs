@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
@@ -76,7 +77,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             };
         }
 
-        public static List<EvaluationProgressResponse> ToContractList(this Dictionary<int, List<KeyValuePair<Evaluation, float>>> pendingNotifications)
+        public static List<EvaluationProgressResponse> ToContractList(this ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> pendingNotifications)
         {
             if (pendingNotifications == null) return null;
 
