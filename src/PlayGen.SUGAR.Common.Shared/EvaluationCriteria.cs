@@ -1,4 +1,6 @@
-﻿namespace PlayGen.SUGAR.Common.Shared
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PlayGen.SUGAR.Common.Shared
 {
 	/// <summary>
 	/// Encapsulates requirements for completing an achievement or skill.
@@ -8,37 +10,39 @@
 		/// <summary>
 		/// The key which will be queried against to check if criteria is met.
 		/// </summary>
-		//[Required]
+		[Required]
+		[StringLength(64)]
 		public string Key { get; set; }
 
 		/// <summary>
 		/// SaveDataType of the key which is being queried.
 		/// </summary>
-		//[Required]
+		[Required]
 		public SaveDataType DataType { get; set; }
 
 		/// <summary>
 		/// Which stored GameData will be queried.
 		/// </summary>
-		//[Required]
+		[Required]
 		public CriteriaQueryType CriteriaQueryType { get; set; }
 
 		/// <summary>
 		/// How the target value and the actual value will be compared.
 		/// </summary>
-		//[Required]
+		[Required]
 		public ComparisonType ComparisonType { get; set; }
 
 		/// <summary>
 		/// Whether the criteria will be checked against the actor or related actors (i.e. group members, user friends).
 		/// </summary>
-		//[Required]
+		[Required]
 		public CriteriaScope Scope { get; set; }
 
 		/// <summary>
 		/// The value which will compared against in order to see if the criteria has been met.
 		/// </summary>
-		//[Required]
+		[Required]
+		[StringLength(64)]
 		public string Value { get; set; }
 	}
 }
