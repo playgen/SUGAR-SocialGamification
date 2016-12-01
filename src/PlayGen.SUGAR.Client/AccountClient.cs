@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
 
@@ -13,8 +13,8 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/account";
 
-		public AccountClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, evaluationNotifications)
+		public AccountClient(string baseAddress, IHttpHandler httpHandler, RequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}
 
@@ -44,17 +44,11 @@ namespace PlayGen.SUGAR.Client
 			return Post<AccountRequest, AccountResponse>(query, accountRequest);
 		}
 
-		public void CreateAsync(int gameId, AccountRequest accountRequest, Action<AccountResponse> success, Action<Exception> error)
+		public void CreateAsync(int gameId, AccountRequest accountRequest, Action<AccountResponse> onSuccess, Action<Exception> onError)
 		{
-			try
-			{
-				var result = Create(gameId, accountRequest);
-				success(result);
-			}
-			catch (Exception e)
-			{
-				error(e);
-			}
+			AsyncRequestController.EnqueueRequest(() => Create(gameId, accountRequest),
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>

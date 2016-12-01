@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
 
@@ -11,8 +12,8 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/group";
 
-		public GroupClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, evaluationNotifications)
+		public GroupClient(string baseAddress, IHttpHandler httpHandler, RequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}
 

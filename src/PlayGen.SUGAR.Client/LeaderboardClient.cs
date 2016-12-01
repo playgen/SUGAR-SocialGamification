@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
 
@@ -12,8 +13,8 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/leaderboards";
 
-		public LeaderboardClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, evaluationNotifications)
+		public LeaderboardClient(string baseAddress, IHttpHandler httpHandler, RequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}
 		
@@ -38,17 +39,11 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<LeaderboardResponse>>(query);
 		}
 
-		public void GetAsync(int gameId, Action<IEnumerable<LeaderboardResponse>> success, Action<Exception> error)
+		public void GetAsync(int gameId, Action<IEnumerable<LeaderboardResponse>> onSuccess, Action<Exception> onError)
 		{
-			try
-			{
-				var result = Get(gameId);
-				success(result);
-			}
-			catch (Exception e)
-			{
-				error(e);
-			}
+		    AsyncRequestController.EnqueueRequest(() => Get(gameId),
+		        onSuccess,
+		        onError);
 		}
 
 		/// <summary>
@@ -74,17 +69,11 @@ namespace PlayGen.SUGAR.Client
 			return Get<LeaderboardResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
-		public void GetAsync(string token, int gameId, Action<LeaderboardResponse> success, Action<Exception> error)
+		public void GetAsync(string token, int gameId, Action<LeaderboardResponse> onSuccess, Action<Exception> onError)
 		{
-			try
-			{
-				var result = Get(token, gameId);
-				success(result);
-			}
-			catch (Exception e)
-			{
-				error(e);
-			}
+		    AsyncRequestController.EnqueueRequest(() => Get(token, gameId),
+		        onSuccess,
+		        onError);
 		}
 
 		/// <summary>
@@ -110,17 +99,11 @@ namespace PlayGen.SUGAR.Client
 			return Post<LeaderboardStandingsRequest, IEnumerable<LeaderboardStandingsResponse>>(query, leaderboardDetails);
 		}
 
-		public void CreateGetLeaderboardStandingsAsync(LeaderboardStandingsRequest leaderboardDetails, Action<IEnumerable<LeaderboardStandingsResponse>> success, Action<Exception> error)
+		public void CreateGetLeaderboardStandingsAsync(LeaderboardStandingsRequest leaderboardDetails, Action<IEnumerable<LeaderboardStandingsResponse>> onSuccess, Action<Exception> onError)
 		{
-			try
-			{
-				var result = CreateGetLeaderboardStandings(leaderboardDetails);
-				success(result);
-			}
-			catch (Exception e)
-			{
-				error(e);
-			}
+		    AsyncRequestController.EnqueueRequest(() => CreateGetLeaderboardStandings(leaderboardDetails),
+		        onSuccess,
+		        onError);
 		}
 
 		/// <summary>
