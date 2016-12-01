@@ -11,17 +11,14 @@ namespace PlayGen.SUGAR.Core.Controllers
 	{
 		private readonly Data.EntityFramework.Controllers.ActorClaimController _actorClaimDbController;
 		private readonly ActorRoleController _actorRoleController;
-		private readonly ClaimController _claimController;
 		private readonly RoleClaimController _roleClaimController;
 
 		public ActorClaimController(Data.EntityFramework.Controllers.ActorClaimController actorClaimDbController,
 					ActorRoleController actorRoleController,
-					ClaimController claimController,
 					RoleClaimController roleClaimController)
 		{
 			_actorClaimDbController = actorClaimDbController;
 			_actorRoleController = actorRoleController;
-			_claimController = claimController;
 			_roleClaimController = roleClaimController;
 		}
 
@@ -52,12 +49,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public IEnumerable<Claim> GetActorClaimsForEntity(int actorId, int? entityId, ClaimScope scope)
 		{
-			var entityClaims = _actorClaimDbController.GetActorClaimsForEntity(actorId, entityId.Value).ToList();
-			var adminClaims = _actorClaimDbController.GetActorClaimsForEntity(actorId, -1);
-			var claims = entityClaims.Concat(adminClaims).Distinct();
-			var roles = _actorRoleController.GetActorRolesForEntity(actorId, entityId.Value, scope).Select(r => r.Id);
-			var roleClaims = _roleClaimController.GetClaimsByRoles(roles);
-			var totalClaims = claims.Concat(roleClaims).Distinct().Where(c => c.ClaimScope == scope).ToList();
+			var claims = _actorClaimDbController.GetActorClaimsForEntity(actorId, entityId.Value, scope).ToList();
+			var roleClaims = _actorRoleController.GetActorRolesForEntity(actorId, entityId.Value, scope).SelectMany(r => r.RoleClaims).Select(rc => rc.Claim).ToList();
+			var totalClaims = claims.Concat(roleClaims).Distinct().ToList();
 			return totalClaims;
 		}
 

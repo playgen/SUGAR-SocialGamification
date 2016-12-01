@@ -5,6 +5,8 @@ using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
+using PlayGen.SUGAR.Common.Shared.Permissions;
+
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class ActorRoleController : DbController
@@ -23,12 +25,25 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Role> GetActorRolesForEntity(int actorId, int? entityId)
+		public IEnumerable<ActorRole> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope, bool includeClaims = false)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var roles = context.ActorRoles.Where(ar => ar.ActorId == actorId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Role).ToList();
-				return roles;
+				if (includeClaims)
+				{
+					var roles = context.ActorRoles
+						.Include(r => r.Role)
+						.ThenInclude(r => r.RoleClaims)
+						.ThenInclude(rc => rc.Claim)
+						.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == -1) && ar.Role.ClaimScope == scope).ToList();
+					return roles;
+				}
+				else
+				{
+					var roles = context.ActorRoles
+					.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == -1) && ar.Role.ClaimScope == scope).ToList();
+					return roles;
+				}
 			}
 		}
 

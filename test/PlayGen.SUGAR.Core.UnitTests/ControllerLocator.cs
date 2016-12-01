@@ -44,13 +44,13 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 GameDataController, GroupMemberController, UserFriendController, DbControllerLocator.ActorController, RewardController));
 
         public static GameController GameController
-            => _gameController ?? (_gameController = new GameController(DbControllerLocator.GameController, ActorRoleController));
+            => _gameController ?? (_gameController = new GameController(DbControllerLocator.GameController, ActorClaimController, ActorRoleController));
 
         public static GameDataController GameDataController
             => _gameDataController ?? (_gameDataController = new GameDataController(DbControllerLocator.GameDataController));
 
         public static GroupController GroupController
-            => _groupController ?? (_groupController = new GroupController(DbControllerLocator.GroupController, ActorRoleController, GroupMemberController));
+            => _groupController ?? (_groupController = new GroupController(DbControllerLocator.GroupController, ActorClaimController, ActorRoleController, GroupMemberController));
 
         public static GroupMemberController GroupMemberController
             => _groupMemberController ?? (_groupMemberController = new GroupMemberController(DbControllerLocator.GroupRelationshipController));

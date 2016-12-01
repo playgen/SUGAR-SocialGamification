@@ -5,6 +5,8 @@ using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
+using PlayGen.SUGAR.Common.Shared.Permissions;
+
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class ActorClaimController : DbController
@@ -23,11 +25,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Claim> GetActorClaimsForEntity(int actorId, int? entityId)
+		public IEnumerable<Claim> GetActorClaimsForEntity(int actorId, int? entityId, ClaimScope scope)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var claims = context.ActorClaims.Where(ac => ac.ActorId == actorId && ac.EntityId.Value == entityId.Value).Select(ac => ac.Claim).ToList();
+				var claims = context.ActorClaims
+					.Where(ac => ac.ActorId == actorId && (ac.EntityId.Value == entityId.Value || ac.EntityId.Value == -1))
+					.Select(ac => ac.Claim)
+					.Where(c => c.ClaimScope == scope).ToList();
 				return claims;
 			}
 		}
