@@ -5,6 +5,7 @@ using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common.Shared.Web;
@@ -19,6 +20,7 @@ namespace PlayGen.SUGAR.Client
         private readonly string _baseAddress;
 		private readonly IHttpHandler _httpHandler;
 
+	    protected readonly AsyncRequestController AsyncRequestController;
         protected readonly EvaluationNotifications EvaluationNotifications;
 
 		public static readonly JsonSerializerSettings SerializerSettings;
@@ -35,7 +37,7 @@ namespace PlayGen.SUGAR.Client
 			SerializerSettings.Converters.Add(new StringEnumConverter());
 		}
 
-		protected ClientBase(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
+		protected ClientBase(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
 		{
 			if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
 			{
@@ -43,7 +45,8 @@ namespace PlayGen.SUGAR.Client
 			}
 			_baseAddress = baseAddress;
 			_httpHandler = httpHandler;
-			EvaluationNotifications = evaluationNotifications;
+		    AsyncRequestController = asyncRequestController;
+            EvaluationNotifications = evaluationNotifications;
 		}
 
 	    protected static void EnableEvaluationNotifications(bool enable = true)
@@ -56,6 +59,13 @@ namespace PlayGen.SUGAR.Client
 	        {
 	            PersistentHeaders.Remove(HeaderKeys.EvaluationNotifications);
 	        }
+	    }
+
+	    protected void ClearSessionData()
+	    {
+	        AsyncRequestController.Clear();
+            PersistentHeaders.Clear();
+	        EvaluationNotifications.Clear();
 	    }
 
 		protected bool AreUriParamsValid(object[] param)
