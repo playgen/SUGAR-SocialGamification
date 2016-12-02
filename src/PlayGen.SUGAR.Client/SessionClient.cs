@@ -44,9 +44,9 @@ namespace PlayGen.SUGAR.Client
 
 		public void LoginAsync(int gameId, AccountRequest account, Action<AccountResponse> onSuccess, Action<Exception> onError)
 		{
-		    AsyncRequestController.EnqueueRequest(() => Login(gameId, account),
-		        onSuccess,
-		        onError);
+			AsyncRequestController.EnqueueRequest(() => Login(gameId, account),
+				onSuccess,
+				onError);
 		}
 
 		// todo comment
@@ -74,6 +74,8 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/logout").ToString();
 			Get(query);
+
+			ClearSessionData();
 		}
 	}
 }

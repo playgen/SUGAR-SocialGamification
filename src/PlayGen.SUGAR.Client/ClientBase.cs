@@ -61,6 +61,13 @@ namespace PlayGen.SUGAR.Client
 	        }
 	    }
 
+	    protected void ClearSessionData()
+	    {
+	        AsyncRequestController.Clear();
+            PersistentHeaders.Clear();
+	        EvaluationNotifications.Clear();
+	    }
+
 		protected bool AreUriParamsValid(object[] param)
 		{
 			return param == null || param.Length == 0 || param.All(pa => !string.IsNullOrEmpty(pa?.ToString()));

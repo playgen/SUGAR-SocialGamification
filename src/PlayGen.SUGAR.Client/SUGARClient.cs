@@ -36,7 +36,6 @@ namespace PlayGen.SUGAR.Client
 		public ResourceClient Resource			=> _resourceClient ?? (_resourceClient = new ResourceClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
 		public LeaderboardClient Leaderboard	=> _leaderboardClient ?? (_leaderboardClient = new LeaderboardClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
 		public SkillClient Skill				=> _skillClient ?? (_skillClient = new SkillClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
-	    
 
         // todo possibly pass update event so async requests are either read in and handled there or this creates another thread to poll the async queue
         public SUGARClient(string baseAddress, IHttpHandler httpHandler = null)
@@ -44,5 +43,10 @@ namespace PlayGen.SUGAR.Client
 			_baseAddress = baseAddress;
 			_httpHandler = httpHandler ?? new DefaultHttpHandler();
 		}
+
+	    public bool TryExecuteResponse()
+	    {
+	        return _asyncRequestController.TryExecuteResponse();
+	    }
 	}
 }
