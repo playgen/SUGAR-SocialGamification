@@ -8,91 +8,104 @@ namespace PlayGen.SUGAR.Client.UnitTests
 {
     public class AsyncRequestControllerTests
     {
-        private List<int> _onSuccessValues = new List<int>();
-        private List<int> _onSuccessVoids = new List<int>();
-        private List<int> _onErrorValues = new List<int>();
-
         [Test]
         public void ValueRequestsTriggerOnSuccessCallbacks()
         {
             // Arrange
+            var onSuccessValues = new List<int>();
+            var onErrorValues = new List<int>();
+
             var asyncRequestController = new AsyncRequestController();
-            var values = Enumerable.Range(0, 100).ToList();
-            values.ForEach((i) =>
-            {
-                asyncRequestController.EnqueueRequest(() => i, 
-                    OnSuccess,
-                    OnError);
-            });
+            var values = Enumerable.Range(0, 1000).ToList();
 
             // Act
-            while(asyncRequestController.TryExecuteResponse()
-                || asyncRequestController.RequestCount > 0 
-                || asyncRequestController.ResponseCount > 0)
-            { }
+            values.ForEach(i =>
+            {
+                asyncRequestController.EnqueueRequest(() => i,
+                    r => onSuccessValues.Add(r),
+                    e => onErrorValues.Add(i));
+            });
+
+            var responseCount = 0;
+            while (responseCount < values.Count)
+            {
+                if (asyncRequestController.TryExecuteResponse())
+                {
+                    responseCount++;
+                }
+            }
 
             // Assert
-            CollectionAssert.AreEqual(values, _onSuccessValues);
+            CollectionAssert.IsEmpty(onErrorValues);
+            CollectionAssert.AreEqual(values, onSuccessValues);
         }
-        
+
         [Test]
         public void VoidRequestsTriggerOnSuccessCallbacks()
         {
             // Arrange
+            var onSuccessVoids = new List<int>();
+            var onErrorValues = new List<int>();
+
             var asyncRequestController = new AsyncRequestController();
-            var values = Enumerable.Range(0, 100).ToList();
-            values.ForEach((i) =>
-            {
-                asyncRequestController.EnqueueRequest(() => { },
-                    () => _onSuccessVoids.Add(i),
-                    OnError);
-            });
+            var values = Enumerable.Range(0, 1000).ToList();
 
             // Act
-            while (asyncRequestController.TryExecuteResponse()
-                || asyncRequestController.RequestCount > 0
-                || asyncRequestController.ResponseCount > 0)
-            { }
+            values.ForEach(i =>
+            {
+                asyncRequestController.EnqueueRequest(() => { },
+                    () => onSuccessVoids.Add(i),
+                    e => onErrorValues.Add(i));
+            });
+
+            var responseCount = 0;
+            while (responseCount < values.Count)
+            {
+                if (asyncRequestController.TryExecuteResponse())
+                {
+                    responseCount++;
+                }
+            }
 
             // Assert
-            CollectionAssert.AreEqual(values, _onSuccessVoids);
+            CollectionAssert.IsEmpty(onErrorValues);
+            CollectionAssert.AreEqual(values, onSuccessVoids);
         }
 
         [Test]
         public void ErrorsTriggerOnErrorCallbacks()
         {
             // Arrange
+            var onErrorValues = new List<int>();
+            var onSuccessValues = new List<int>();
+
             var asyncRequestController = new AsyncRequestController();
-            var values = Enumerable.Range(0, 100).ToList();
-            values.ForEach((i) =>
+            var values = Enumerable.Range(0, 1000).ToList();
+
+            // Act
+            values.ForEach(i =>
             {
-                asyncRequestController.EnqueueRequest(() => 
+                asyncRequestController.EnqueueRequest(() =>
                     {
                         throw new Exception($"{i}");
                         return i;
                     },
-                    OnSuccess,
-                    OnError);
+                    r => onSuccessValues.Add(r),
+                    e => onErrorValues.Add(int.Parse(e.Message)));
             });
 
-            // Act
-            while (asyncRequestController.TryExecuteResponse()
-                || asyncRequestController.RequestCount > 0
-                || asyncRequestController.ResponseCount > 0)
-            { }
+            var responseCount = 0;
+            while (responseCount < values.Count)
+            {
+                if (asyncRequestController.TryExecuteResponse())
+                {
+                    responseCount++;
+                }
+            }
 
             // Assert
-            CollectionAssert.AreEqual(values, _onErrorValues);
-        }
-
-        private void OnSuccess(int result)
-        {
-            _onSuccessValues.Add(result);
-        }
-
-        private void OnError(Exception e)
-        {
-            _onErrorValues.Add(int.Parse(e.Message));
+            CollectionAssert.IsEmpty(onSuccessValues);
+            CollectionAssert.AreEqual(values, onErrorValues);
         }
     }
 }

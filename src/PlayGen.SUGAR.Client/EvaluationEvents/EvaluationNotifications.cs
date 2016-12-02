@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
 
@@ -36,6 +37,11 @@ namespace PlayGen.SUGAR.Client.EvaluationEvents
         {
             var names = evaluationNotifications.Select(n => n.Name);
             _pendingNotifications.RemoveAll(n => names.Contains(n.Name));
+        }
+
+        internal void Clear()
+        {
+            _pendingNotifications.Clear();
         }
     }
 }

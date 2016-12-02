@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
             string claimValue;
             value = default(long);
 
-            if (TryGetClaim(request, type, ClaimValueTypes.Integer64, out claimValue))
+            if (TryGetClaim(request, type, ClaimValueTypes.Integer, out claimValue))
             {
                 value = long.Parse(claimValue);
                 return true;

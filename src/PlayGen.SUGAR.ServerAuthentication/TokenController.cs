@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.ServerAuthentication
                 new GenericIdentity(userId, "TokenAuth"), 
                 new[] 
                 {
-                    new Claim("SessionId", sessionId, ClaimValueTypes.Integer64),
+                    new Claim("SessionId", sessionId, ClaimValueTypes.Integer),
                     new Claim("GameId", gameId, ClaimValueTypes.Integer),
                     new Claim("UserId", userId, ClaimValueTypes.Integer),
                     new Claim("Expiry", expires.ToString(), ClaimValueTypes.DateTime),

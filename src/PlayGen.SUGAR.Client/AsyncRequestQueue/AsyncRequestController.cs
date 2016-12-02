@@ -1,30 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 {
     public class AsyncRequestController : IDisposable
     {
-        public Exception Exception { get; private set; }
-
-        private readonly Queue<QueueItem> _requests = new Queue<QueueItem>();
+        private readonly AsyncRequestWorker _asyncRequestWorker = new AsyncRequestWorker();
         private readonly Queue<Action> _responses = new Queue<Action>();
-        private readonly AutoResetEvent _processRequestHandle = new AutoResetEvent(false);
-        private readonly ManualResetEvent _abortHandle = new ManualResetEvent(false);
-        private readonly Thread _worker;
-        
-        private bool _isDisposed;
-        private object _requestsLock = new object();
-        private object _responsesLock = new object();
+        private readonly object _responsesLock = new object();
 
-        public int RequestCount => _requests.Count;
-        public int ResponseCount => _responses.Count;
+        private bool _isDisposed;
 
         public AsyncRequestController()
         {
-            _worker = new Thread(RequestWorker);
-            _worker.Start();
+            _asyncRequestWorker.ResponseEvent += EnqueueResponse;
         }
 
         ~AsyncRequestController()
@@ -36,20 +25,44 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
         {
             if (_isDisposed) return;
 
-            _abortHandle.Set();
-            _isDisposed = true;
+            _asyncRequestWorker.ResponseEvent -= EnqueueResponse;
+            _asyncRequestWorker.Dispose();
         }
 
         public void EnqueueRequest(Action request, Action onSuccess, Action<Exception> onError)
         {
-            var item = new QueueItem(request, onSuccess, onError);
-            EnqueueRequest(item);
+            _asyncRequestWorker.EnqueueRequest(request, onSuccess, onError);
         }
 
         public void EnqueueRequest<TResult>(Func<TResult> request, Action<TResult> onSuccess, Action<Exception> onError)
         {
-            var item = new QueueItem<TResult>(request, onSuccess, onError);
-            EnqueueRequest(item);
+            _asyncRequestWorker.EnqueueRequest(request, onSuccess, onError);
+        }
+
+        public bool TryExecuteResponse()
+        {
+            if (_asyncRequestWorker.Exception != null)
+            {
+                throw _asyncRequestWorker.Exception;
+            }
+
+            Action response = null;
+
+            lock (_responsesLock)
+            {
+                if(_responses.Count > 0)
+                { 
+                    response = _responses.Dequeue();
+                }
+            }
+
+            if (response != null)
+            {
+                response();
+                return true;
+            }
+
+            return false;
         }
 
         private void EnqueueResponse(Action response)
@@ -60,78 +73,13 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
             }
         }
 
-        public bool TryExecuteResponse()
+        internal void Clear()
         {
+            _asyncRequestWorker.Clear();
+
             lock (_responsesLock)
             {
-                if(_responses.Count > 0)
-                { 
-                    var response = _responses.Dequeue();
-                    response();
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
-        private void EnqueueRequest(QueueItem item)
-        {
-            lock (_requestsLock)
-            {
-                _requests.Enqueue(item);
-                _processRequestHandle.Set();
-            }
-        }
-
-        private void RequestWorker()
-        {
-            try
-            {
-                var handles = new WaitHandle[] {_processRequestHandle, _abortHandle};
-                int signal;
-
-                while (true)
-                {
-                    
-                    signal = WaitHandle.WaitAny(handles);
-
-                    if (signal == 1)
-                    {
-                        break;
-                    }
-
-                    QueueItem item = null;
-                    lock (_requestsLock)
-                    {
-                        if (_requests.Count > 0)
-                        {
-                            item = _requests.Dequeue();
-                        }
-                    }
-
-                    if(item != null)
-                    { 
-                        try
-                        {
-                            item.Request();
-                            EnqueueResponse(item.OnSuccess);
-                        }
-                        catch (Exception e)
-                        {
-                            EnqueueResponse(() => item.OnError(e));
-                        }
-                    }
-
-                    if (_requests.Count > 0)
-                    {
-                        _processRequestHandle.Set();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Exception = e;
+                _responses.Clear();
             }
         }
     }
