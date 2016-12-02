@@ -1,4 +1,6 @@
-﻿using System;
+﻿// todo v2.0: support group evaluations
+// todo store by sessionId instead of actor.Id?
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Core.Controllers;

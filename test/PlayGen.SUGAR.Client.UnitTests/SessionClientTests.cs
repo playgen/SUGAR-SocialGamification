@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Threading;
 using NUnit.Framework;
@@ -21,12 +22,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
                 .GetValue(SUGARClient.Session);
 
             var originalToken = headers[HeaderKeys.Authorization];
-
-            // Token seems to be seeded by the current time so this is needed to allow enough 
-            // time to pass for the re-issued token's seed to be different to that of the original.
-            Thread.Sleep(1000);
-
+            
             // Act
+            Thread.Sleep(1 * 1000);
             SUGARClient.Session.Heartbeat();
 
             // Assert
@@ -51,12 +49,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
         }
 
         [Test]
-        public void CanLoginValidUser()
+        public void CanLoginUser()
         {
             var accountRequest = new AccountRequest
             {
-                Name = "CanLoginValidUser",
-                Password = "CanLoginValidUserPassword",
+                Name = "CanLoginUser",
+                Password = "CanLoginUserPassword",
                 SourceToken = "SUGAR"
             };
 
@@ -66,6 +64,46 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
             Assert.True(logged.User.Id > 0);
             Assert.AreEqual(accountRequest.Name, logged.User.Name);
+        }
+
+        [Test]
+        public void CanLoginUserAsync()
+        {
+            // Arrange
+            var accountRequest = new AccountRequest
+            {
+                Name = "CanLoginUserAsync",
+                Password = "CanLoginUserAsyncPassword",
+                SourceToken = "SUGAR"
+            };
+
+            var game = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLoginUserAsync");
+
+            SUGARClient.Account.Create(accountRequest);
+
+            AccountResponse response = null;
+            Exception exception = null;
+
+            // Act
+            SUGARClient.Session.LoginAsync(game.Id,
+                accountRequest,
+                r => response = r,
+                e => exception = e);
+
+            // Assert
+            var executionCount = 0;
+            while (executionCount < 1)
+            {
+                if (SUGARClient.TryExecuteResponse())
+                {
+                    executionCount++;
+                }
+            }
+
+            Assert.NotNull(response);
+            Assert.IsNull(exception);
+            StringAssert.AreEqualIgnoringCase(accountRequest.Name, response.User.Name);
+            Assert.GreaterOrEqual(response.User.Id, 1);
         }
 
         [Test]

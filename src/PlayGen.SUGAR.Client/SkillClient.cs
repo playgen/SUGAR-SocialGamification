@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
@@ -13,8 +14,8 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/skills";
 
-		public SkillClient(string baseAddress, IHttpHandler httpHandler, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, evaluationNotifications)
+		public SkillClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}
 
@@ -85,17 +86,11 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
 		}
 
-		public void GetGameProgressAsync(int gameId, int actorId, Action<IEnumerable<EvaluationProgressResponse>> success, Action<Exception> error)
+		public void GetGameProgressAsync(int gameId, int actorId, Action<IEnumerable<EvaluationProgressResponse>> onSuccess, Action<Exception> onError)
 		{
-			try
-			{
-				var result = GetGameProgress(gameId, actorId);
-				success(result);
-			}
-			catch (Exception e)
-			{
-				error(e);
-			}
+		    AsyncRequestController.EnqueueRequest(() => GetGameProgress(gameId, actorId),
+		        onSuccess,
+		        onError);
 		}
 
 		/// <summary>
