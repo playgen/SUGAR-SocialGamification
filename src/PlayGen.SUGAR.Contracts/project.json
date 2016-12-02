@@ -20,9 +20,5 @@
       ]
     },
     "xmlDoc": true
-  },
-
-  "scripts": {
-    "postcompile": [ "xcopy /I /Y \"%compile:OutputDir%\\*\" \"%project:Directory%\\..\\..\\..\\Client\\Assets\\Plugins\\SUGAR\"" ]
   }
 }
