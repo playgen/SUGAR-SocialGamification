@@ -47,7 +47,7 @@
   <ItemGroup>
     <Compile Include="AccountClient.cs" />
     <Compile Include="AchievementClient.cs" />
-    <Compile Include="AsyncRequestQueue\RequestController.cs" />
+    <Compile Include="AsyncRequestQueue\AsyncRequestController.cs" />
     <Compile Include="AsyncRequestQueue\QueueItem.cs" />
     <Compile Include="ClientBase.cs" />
     <Compile Include="DefaultHttpHandler.cs" />

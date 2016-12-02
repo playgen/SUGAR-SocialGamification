@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/group";
 
-		public GroupClient(string baseAddress, IHttpHandler httpHandler, RequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
+		public GroupClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
 			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}

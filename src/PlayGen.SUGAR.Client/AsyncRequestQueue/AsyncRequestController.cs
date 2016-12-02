@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 {
-    public class RequestController : IDisposable
+    public class AsyncRequestController : IDisposable
     {
         public Exception Exception { get; private set; }
 
@@ -21,13 +21,13 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
         public int RequestCount => _requests.Count;
         public int ResponseCount => _responses.Count;
 
-        public RequestController()
+        public AsyncRequestController()
         {
             _worker = new Thread(RequestWorker);
             _worker.Start();
         }
 
-        ~RequestController()
+        ~AsyncRequestController()
         {
             Dispose();
         }
@@ -60,14 +60,19 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
             }
         }
 
-        public bool TryTakeResponse(out Action response)
+        public bool TryExecuteResponse()
         {
             lock (_responsesLock)
             {
-                response = _responses.Dequeue();
-            }
+                if(_responses.Count > 0)
+                { 
+                    var response = _responses.Dequeue();
+                    response();
+                    return true;
+                }
 
-            return response != null;
+                return false;
+            }
         }
 
         private void EnqueueRequest(QueueItem item)
@@ -88,20 +93,21 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 
                 while (true)
                 {
-                    if (_requests.Count == 0)
-                    {
-                        signal = WaitHandle.WaitAny(handles);
+                    
+                    signal = WaitHandle.WaitAny(handles);
 
-                        if (signal == 1)
-                        {
-                            break;
-                        }
+                    if (signal == 1)
+                    {
+                        break;
                     }
 
-                    QueueItem item;
+                    QueueItem item = null;
                     lock (_requestsLock)
                     {
-                        item = _requests.Dequeue();
+                        if (_requests.Count > 0)
+                        {
+                            item = _requests.Dequeue();
+                        }
                     }
 
                     if(item != null)
@@ -115,6 +121,11 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
                         {
                             EnqueueResponse(() => item.OnError(e));
                         }
+                    }
+
+                    if (_requests.Count > 0)
+                    {
+                        _processRequestHandle.Set();
                     }
                 }
             }

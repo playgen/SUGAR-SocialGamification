@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/leaderboards";
 
-		public LeaderboardClient(string baseAddress, IHttpHandler httpHandler, RequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
+		public LeaderboardClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
 			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}

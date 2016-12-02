@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Client
         private readonly string _baseAddress;
 		private readonly IHttpHandler _httpHandler;
 
-	    protected readonly RequestController AsyncRequestController;
+	    protected readonly AsyncRequestController AsyncRequestController;
         protected readonly EvaluationNotifications EvaluationNotifications;
 
 		public static readonly JsonSerializerSettings SerializerSettings;
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client
 			SerializerSettings.Converters.Add(new StringEnumConverter());
 		}
 
-		protected ClientBase(string baseAddress, IHttpHandler httpHandler, RequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
+		protected ClientBase(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
 		{
 			if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
 			{

@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/achievements";
 
-		public AchievementClient(string baseAddress, IHttpHandler httpHandler, RequestController asyncRequestController, EvaluationNotifications evaluationNotifications) 
+		public AchievementClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications) 
 			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}
