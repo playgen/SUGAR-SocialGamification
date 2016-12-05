@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
 using Microsoft.AspNetCore.Authorization;
@@ -19,6 +20,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.PlatformAbstractions;
 using PlayGen.SUGAR.Core.Authorization;
 using PlayGen.SUGAR.ServerAuthentication.Filters;
 
@@ -77,29 +79,53 @@ namespace PlayGen.SUGAR.WebAPI
             var timeoutCheckInterval = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TimeoutCheckInterval"]);
 
 
-            //todo: Remove random key. Change to load file from secure file.
-            //var apiKey = Configuration["APIKey"];
-            using (var rsa = new RSACryptoServiceProvider(2048))
-            {
-                try
-                {
-                    key = new RsaSecurityKey(rsa.ExportParameters(true));
-                }
-                finally
-                {
-                    rsa.PersistKeyInCsp = false;
-                }
-            }
-            
-            tokenOptions = new TokenAuthOptions()
-            {
-                Audience = TokenAudience,
-                Issuer = TokenIssuer,
-                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature),
-                ValidityTimeout = validityTimeout,
-            };
+			//todo: Remove random key. Change to load file from secure file.
 
-            services.AddSingleton(tokenOptions);
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+			{
+				//var apiKey = Configuration["APIKey"];
+#if DNXCORE50
+// On CoreCLR, use RSACng.
+				using (var rsa = new RSACng(2048))
+				{ 
+#else
+				// On desktop CLR, use RSACryptoServiceProvider.
+				using (var rsa = new RSACryptoServiceProvider(2048))
+				{
+#endif
+					try
+					{
+						key = new RsaSecurityKey(rsa.ExportParameters(true));
+					}
+					finally
+					{
+#if !DNXCORE50
+						rsa.PersistKeyInCsp = false;
+#endif
+					}
+				}
+			}
+			else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+			{
+#if DNXCORE50
+				using (var rsa = new RSAOpenSsl(2048))
+				{
+					key = new RsaSecurityKey(rsa.ExportParameters(true));
+				}
+#endif
+				// If no appropriate implementation can be found, throw an exception.
+				throw new PlatformNotSupportedException("No RSA implementation compatible with your configuration can be found.");
+			}
+
+			tokenOptions = new TokenAuthOptions()
+			{
+				Audience = TokenAudience,
+				Issuer = TokenIssuer,
+				SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature),
+				ValidityTimeout = validityTimeout,
+			};
+
+			services.AddSingleton(tokenOptions);
 
 			services.AddScoped((_) => new PasswordEncryption());
 			services.AddApplicationInsightsTelemetry(Configuration);
