@@ -1,19 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 {
     public class AsyncRequestController : IDisposable
     {
-        private readonly AsyncRequestWorker _asyncRequestWorker = new AsyncRequestWorker();
+
+        private readonly AutoResetEvent _processRequestHandle = new AutoResetEvent(false);
+        private readonly ManualResetEvent _abortHandle = new ManualResetEvent(false);
+
         private readonly Queue<Action> _responses = new Queue<Action>();
+        private readonly Queue<QueueItem> _requests = new Queue<QueueItem>();
+
+        private readonly object _requestsLock = new object();
         private readonly object _responsesLock = new object();
 
+        private readonly Thread _worker;
+
+        private int _timeoutMilliseconds = Timeout.Infinite;
+        private QueueItem _onTimeoutItem;
+        private Exception _workderException;
         private bool _isDisposed;
 
         public AsyncRequestController()
-        {
-            _asyncRequestWorker.ResponseEvent += EnqueueResponse;
+        {     
+            _worker = new Thread(DoWork);
+            _worker.Start();
         }
 
         ~AsyncRequestController()
@@ -21,48 +34,62 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
             Dispose();
         }
 
+        public void SetTimeout(int timeoutMilliseconds, Action onTimeout)
+        {
+            _timeoutMilliseconds = timeoutMilliseconds;
+            _onTimeoutItem = new QueueItem(onTimeout, null, e => { throw e; });
+        }
+
         public void Dispose()
         {
             if (_isDisposed) return;
 
-            _asyncRequestWorker.ResponseEvent -= EnqueueResponse;
-            _asyncRequestWorker.Dispose();
+            _abortHandle.Set();
+            _isDisposed = true;
         }
 
         public void EnqueueRequest(Action request, Action onSuccess, Action<Exception> onError)
         {
-            _asyncRequestWorker.EnqueueRequest(request, onSuccess, onError);
+            var item = new QueueItem(request, onSuccess, onError);
+            EnqueueRequest(item);
         }
 
         public void EnqueueRequest<TResult>(Func<TResult> request, Action<TResult> onSuccess, Action<Exception> onError)
         {
-            _asyncRequestWorker.EnqueueRequest(request, onSuccess, onError);
+            var item = new QueueItem<TResult>(request, onSuccess, onError);
+            EnqueueRequest(item);
+        }
+
+        public void Clear()
+        {
+            lock (_requests)
+            {
+                _responses.Clear();
+                _requests.Clear();
+            }
         }
 
         public bool TryExecuteResponse()
         {
-            if (_asyncRequestWorker.Exception != null)
+            if (_workderException != null)
             {
-                throw _asyncRequestWorker.Exception;
+                throw _workderException;
             }
 
             Action response = null;
+            var didDequeue = false;
 
             lock (_responsesLock)
             {
                 if(_responses.Count > 0)
                 { 
                     response = _responses.Dequeue();
+                    didDequeue = true;
                 }
             }
 
-            if (response != null)
-            {
-                response();
-                return true;
-            }
-
-            return false;
+            response?.Invoke();
+            return didDequeue;
         }
 
         private void EnqueueResponse(Action response)
@@ -73,13 +100,72 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
             }
         }
 
-        internal void Clear()
+        private void EnqueueRequest(QueueItem item)
         {
-            _asyncRequestWorker.Clear();
-
-            lock (_responsesLock)
+            lock (_requestsLock)
             {
-                _responses.Clear();
+                _requests.Enqueue(item);
+                _processRequestHandle.Set();
+            }
+        }
+
+        private void EnqueueOnTimeoutItem()
+        {
+            lock (_requestsLock)
+            {
+                _requests.Enqueue(_onTimeoutItem);
+            }
+        }
+
+        private void DoWork()
+        {
+            try
+            {
+                var handles = new WaitHandle[] { _processRequestHandle, _abortHandle };
+                var abortHandleIndex = 1;
+                int signal;
+
+                while (true)
+                {
+                    signal = WaitHandle.WaitAny(handles, _timeoutMilliseconds);
+
+                    if (signal == WaitHandle.WaitTimeout)
+                    {
+                        EnqueueOnTimeoutItem();
+                    }
+                    else if (signal == abortHandleIndex)
+                    {
+                        break;
+                    }
+
+                    QueueItem item;
+                    lock (_requestsLock)
+                    {
+                        item = _requests.Dequeue();
+
+                        if (_requests.Count > 0)
+                        {
+                            _processRequestHandle.Set();
+                        }
+                    }
+
+                    if (item != null)
+                    {
+                        try
+                        {
+                            item.Request();
+                            EnqueueResponse(item.OnSuccess);
+                        }
+                        catch (Exception e)
+                        {
+                            EnqueueResponse(() => item.OnError?.Invoke(e));
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                _workderException = e;
             }
         }
     }
