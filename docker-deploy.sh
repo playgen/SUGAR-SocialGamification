@@ -1,6 +1,8 @@
 #/bin/bash
 export DB_CONTAINER="sugar-mariadb"
-export CONTAINER="sugarengine"
+export CONTAINER="sugar"
 docker stop $CONTAINER
+# docker stop $DB_CONTAINER
 docker rm $CONTAINER
-docker run -d --net playgen --ip 172.17.0.3 --link=$DB_CONTAINER --name $CONTAINER $CONTAINER
+# docker rm $DB_CONTAINER
+docker-compose up -d
