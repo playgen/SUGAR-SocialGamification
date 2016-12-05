@@ -84,37 +84,25 @@ namespace PlayGen.SUGAR.WebAPI
 			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 			{
 				//var apiKey = Configuration["APIKey"];
-#if DNXCORE50
-// On CoreCLR, use RSACng.
-				using (var rsa = new RSACng(2048))
-				{ 
-#else
 				// On desktop CLR, use RSACryptoServiceProvider.
 				using (var rsa = new RSACryptoServiceProvider(2048))
 				{
-#endif
 					try
 					{
 						key = new RsaSecurityKey(rsa.ExportParameters(true));
 					}
 					finally
 					{
-#if !DNXCORE50
 						rsa.PersistKeyInCsp = false;
-#endif
 					}
 				}
 			}
 			else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 			{
-//#if DNXCORE50
 				using (var rsa = new RSAOpenSsl(2048))
 				{
 					key = new RsaSecurityKey(rsa.ExportParameters(true));
 				}
-//#endif
-//				// If no appropriate implementation can be found, throw an exception.
-//				throw new PlatformNotSupportedException("No RSA implementation compatible with your configuration can be found.");
 			}
 
 			tokenOptions = new TokenAuthOptions()
