@@ -1,4 +1,5 @@
-﻿using PlayGen.SUGAR.Client.AsyncRequestQueue;
+﻿using System;
+using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 
 namespace PlayGen.SUGAR.Client
@@ -6,12 +7,12 @@ namespace PlayGen.SUGAR.Client
 	public class SUGARClient
 	{
 		private readonly IHttpHandler _httpHandler;
-
+        
 		private readonly string _baseAddress;
+        private readonly AsyncRequestController _asyncRequestController;
         private readonly EvaluationNotifications _evaluationNotifications = new EvaluationNotifications();
-        private readonly AsyncRequestController _asyncRequestController = new AsyncRequestController();
 
-		private AccountClient _accountClient;
+        private AccountClient _accountClient;
 	    private SessionClient _sessionClient;
 		private AchievementClient _achievementClient;
 		private GameClient _gameClient;
@@ -38,11 +39,13 @@ namespace PlayGen.SUGAR.Client
 		public SkillClient Skill				=> _skillClient ?? (_skillClient = new SkillClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
 
         // todo possibly pass update event so async requests are either read in and handled there or this creates another thread to poll the async queue
-        public SUGARClient(string baseAddress, IHttpHandler httpHandler = null)
+        public SUGARClient(string baseAddress, IHttpHandler httpHandler = null, int timeoutMilliseconds = 60 * 1000)
 		{
 			_baseAddress = baseAddress;
 			_httpHandler = httpHandler ?? new DefaultHttpHandler();
-		}
+            _asyncRequestController = new AsyncRequestController();
+		    _asyncRequestController.SetTimeout(timeoutMilliseconds, Session.Heartbeat);
+    }
 
 	    public bool TryExecuteResponse()
 	    {
