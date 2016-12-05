@@ -8,6 +8,17 @@ namespace PlayGen.SUGAR.Client.UnitTests
 {
     public class AsyncRequestControllerTests
     {
+        private AsyncRequestController DefaultAsyncRequestController
+        {
+            get
+            {
+                var controller = new AsyncRequestController();
+                controller.SetTimeout(60*1000, null);
+
+                return controller;
+            }
+        }
+
         [Test]
         public void ValueRequestsTriggerOnSuccessCallbacks()
         {
@@ -15,7 +26,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             var onSuccessValues = new List<int>();
             var onErrorValues = new List<int>();
 
-            var asyncRequestController = new AsyncRequestController();
+            var asyncRequestController = DefaultAsyncRequestController;
             var values = Enumerable.Range(0, 1000).ToList();
 
             // Act
@@ -47,7 +58,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             var onSuccessVoids = new List<int>();
             var onErrorValues = new List<int>();
 
-            var asyncRequestController = new AsyncRequestController();
+            var asyncRequestController = DefaultAsyncRequestController;
             var values = Enumerable.Range(0, 1000).ToList();
 
             // Act
@@ -79,7 +90,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             var onErrorValues = new List<int>();
             var onSuccessValues = new List<int>();
 
-            var asyncRequestController = new AsyncRequestController();
+            var asyncRequestController = DefaultAsyncRequestController;
             var values = Enumerable.Range(0, 1000).ToList();
 
             // Act
@@ -106,6 +117,28 @@ namespace PlayGen.SUGAR.Client.UnitTests
             // Assert
             CollectionAssert.IsEmpty(onSuccessValues);
             CollectionAssert.AreEqual(values, onErrorValues);
+        }
+
+        [Test]
+        public void DoesTimeoutAction()
+        {
+            // Arrange
+            var didTimeout = false;
+            var asyncRequestController = new AsyncRequestController();
+            asyncRequestController.SetTimeout(100, () => didTimeout = true);
+
+            // Act
+            var responseCount = 0;
+            while (responseCount < 1)
+            {
+                if (asyncRequestController.TryExecuteResponse())
+                {
+                    responseCount++;
+                }
+            }
+
+            // Assert
+            Assert.IsTrue(didTimeout);
         }
     }
 }
