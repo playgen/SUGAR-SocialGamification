@@ -1,8 +1,7 @@
 version: '2'
 
-
 services: 
-    mariadb: 
+    sugar-mariadb: 
         network_mode: "bridge"
         environment:
             MYSQL_ROOT_PASSWORD: "t0pSECr3t"
@@ -14,9 +13,11 @@ services:
         network_mode: "bridge"
         build:
             context: ./
-            image: sugarengine
+        image: sugarengine
         container_name: "sugar"
-        depends_on:
-            - mariadb
+        links:
+            - sugar-mariadb
         expose:
-            - 80
+            - 5000
+        environment:
+            ASPNETCORE_URLS: "http://0.0.0.0:5000"
