@@ -30,13 +30,13 @@ namespace PlayGen.SUGAR.WebAPI
 	{
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        const string TokenAudience = "User";
-        const string TokenIssuer = "SUGAR";
-        private RsaSecurityKey key;
-        private TokenAuthOptions tokenOptions;
+		const string TokenAudience = "User";
+		const string TokenIssuer = "SUGAR";
+		private RsaSecurityKey key;
+		private TokenAuthOptions tokenOptions;
 
 
-        public Startup(IHostingEnvironment env)
+		public Startup(IHostingEnvironment env)
 		{
 			//AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
@@ -75,8 +75,8 @@ namespace PlayGen.SUGAR.WebAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-		    var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
-            var timeoutCheckInterval = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TimeoutCheckInterval"]);
+			var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
+			var timeoutCheckInterval = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TimeoutCheckInterval"]);
 
 
 			//todo: Remove random key. Change to load file from secure file.
@@ -107,14 +107,14 @@ namespace PlayGen.SUGAR.WebAPI
 			}
 			else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 			{
-#if DNXCORE50
+//#if DNXCORE50
 				using (var rsa = new RSAOpenSsl(2048))
 				{
 					key = new RsaSecurityKey(rsa.ExportParameters(true));
 				}
-#endif
-				// If no appropriate implementation can be found, throw an exception.
-				throw new PlatformNotSupportedException("No RSA implementation compatible with your configuration can be found.");
+//#endif
+//				// If no appropriate implementation can be found, throw an exception.
+//				throw new PlatformNotSupportedException("No RSA implementation compatible with your configuration can be found.");
 			}
 
 			tokenOptions = new TokenAuthOptions()
@@ -130,25 +130,25 @@ namespace PlayGen.SUGAR.WebAPI
 			services.AddScoped((_) => new PasswordEncryption());
 			services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddAuthorization(auth =>
-            {
-                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                    .RequireAuthenticatedUser().Build());
-            });
+			services.AddAuthorization(auth =>
+			{
+				auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+					.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+					.RequireAuthenticatedUser().Build());
+			});
 
-            services.AddSingleton<IAuthorizationHandler, AuthorizationHandler>();
-            services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithNull>();
-            services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithoutEntity>();
+			services.AddSingleton<IAuthorizationHandler, AuthorizationHandler>();
+			services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithNull>();
+			services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithoutEntity>();
 
-            // Add framework services.
-            services.AddMvc(options =>
+			// Add framework services.
+			services.AddMvc(options =>
 			{
 				options.Filters.Add(new ModelValidationFilter());
 				options.Filters.Add(new ExceptionFilter());
-			    options.Filters.Add(typeof(WrapResponseFilter));
-			    options.Filters.Add(typeof(TokenReissueFilter));
-                options.Filters.Add(typeof(SessionFilter));
+				options.Filters.Add(typeof(WrapResponseFilter));
+				options.Filters.Add(typeof(TokenReissueFilter));
+				options.Filters.Add(typeof(SessionFilter));
 			})
 			.AddJsonOptions(json =>
 			{
@@ -163,9 +163,9 @@ namespace PlayGen.SUGAR.WebAPI
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
 			ConfigureDocumentationGeneratorServices(services);
-            ConfigureAuthorization(services);
-		    ConfigureEvaluationEvents(services);
-		    ConfigureSessionTracking(services, validityTimeout, timeoutCheckInterval);
+			ConfigureAuthorization(services);
+			ConfigureEvaluationEvents(services);
+			ConfigureSessionTracking(services, validityTimeout, timeoutCheckInterval);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -175,33 +175,33 @@ namespace PlayGen.SUGAR.WebAPI
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
-            {
-                // Basic settings - signing key to validate with, audience and issuer.
-                TokenValidationParameters = new TokenValidationParameters
-                {
-                    IssuerSigningKey = key,
-                    ValidAudience = tokenOptions.Audience,
-                    ValidIssuer = tokenOptions.Issuer,
-                    // When receiving a token, check that we've signed it.
-                    ValidateIssuer = true,
-                    ValidateIssuerSigningKey = true,
-                    // When receiving a token, check that it is still valid.
-                    ValidateLifetime = true,
-                    // This defines the maximum allowable clock skew - i.e. provides a tolerance on the token expiry time 
-                    // when validating the lifetime. As we're creating the tokens locally and validating them on the same 
-                    // machines which should have synchronised time, this can be set to zero. Where external tokens are
-                    // used, some leeway here could be useful.
-                    ClockSkew = TimeSpan.FromMinutes(0),
-                }
-            });
+			app.UseJwtBearerAuthentication(new JwtBearerOptions
+			{
+				// Basic settings - signing key to validate with, audience and issuer.
+				TokenValidationParameters = new TokenValidationParameters
+				{
+					IssuerSigningKey = key,
+					ValidAudience = tokenOptions.Audience,
+					ValidIssuer = tokenOptions.Issuer,
+					// When receiving a token, check that we've signed it.
+					ValidateIssuer = true,
+					ValidateIssuerSigningKey = true,
+					// When receiving a token, check that it is still valid.
+					ValidateLifetime = true,
+					// This defines the maximum allowable clock skew - i.e. provides a tolerance on the token expiry time 
+					// when validating the lifetime. As we're creating the tokens locally and validating them on the same 
+					// machines which should have synchronised time, this can be set to zero. Where external tokens are
+					// used, some leeway here could be useful.
+					ClockSkew = TimeSpan.FromMinutes(0),
+				}
+			});
 
-            app.UseCors("AllowAll");
-            app.UseApplicationInsightsRequestTelemetry();
-            app.UseApplicationInsightsExceptionTelemetry();
-            app.UseMvc();
+			app.UseCors("AllowAll");
+			app.UseApplicationInsightsRequestTelemetry();
+			app.UseApplicationInsightsExceptionTelemetry();
+			app.UseMvc();
 
-            ConfigureDocumentationGenerator(app);
+			ConfigureDocumentationGenerator(app);
 		}
 	}
 }
