@@ -5,8 +5,8 @@ if [ -z ${SUGAR_MARIADB_PORT_3306_TCP} ]; then
 	exit 1
 fi
         
-until nc -z sugar-mariadb 3306; do
-	echo "$(date) - waiting for mariadb..."
+until nc -w 1 -z sugar-mariadb 3306; do
+	echo "$(date) - waiting for sugar-mariadb..."
 	sleep 1
 done
 
