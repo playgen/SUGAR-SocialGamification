@@ -1,0 +1,22 @@
+version: '2'
+
+
+services: 
+    mariadb: 
+        network_mode: "bridge"
+        environment:
+            MYSQL_ROOT_PASSWORD: "t0pSECr3t"
+        image: mariadb
+        container_name: "sugar-mariadb"
+        expose:
+            - 3306
+    sugar:
+        network_mode: "bridge"
+        build:
+            context: ./
+            image: sugarengine
+        container_name: "sugar"
+        depends_on:
+            - mariadb
+        expose:
+            - 80
