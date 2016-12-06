@@ -64,7 +64,6 @@
     <Compile Include="HttpResponse.cs" />
     <Compile Include="IHttpHandler.cs" />
     <Compile Include="LeaderboardClient.cs" />
-    <Compile Include="Utilities\Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceClient.cs" />
     <Compile Include="SessionClient.cs" />

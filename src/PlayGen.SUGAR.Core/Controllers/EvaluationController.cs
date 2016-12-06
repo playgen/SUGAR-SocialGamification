@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NLog;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Core.EvaluationEvents;
-using PlayGen.SUGAR.Core.Utilities;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 
@@ -12,7 +11,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class EvaluationController : CriteriaEvaluator
 	{
-		public static Action<Evaluation> EvaluationCreatedEvent;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
+        public static Action<Evaluation> EvaluationCreatedEvent;
 		public static Action<Evaluation> EvaluationUpdatedEvent;
 		public static Action<Evaluation> EvaluationDeletedEvent;
 
@@ -40,25 +41,34 @@ namespace PlayGen.SUGAR.Core.Controllers
 			_actorController = actorController;
 		}
 
-		public IEnumerable<Evaluation> Get()
+		public List<Evaluation> Get()
 		{
 			var evaluations = _evaluationDbController.Get();
+
+            Logger.Info($"{evaluations?.Count}");
+
 			return evaluations;
 		}
 
-		public IEnumerable<Evaluation> GetByGame(int? gameId)
+		public List<Evaluation> GetByGame(int? gameId)
 		{
 			var evaluations = _evaluationDbController.GetByGame(gameId);
-			return evaluations;
+
+            Logger.Info($"{evaluations?.Count} Evalautions for GameId: {gameId}");
+
+            return evaluations;
 		}
 
 		public Evaluation Get(string token, int? gameId)
 		{
 			var evaluation = _evaluationDbController.Get(token, gameId);
-			return evaluation;
+
+            Logger.Info($"Evalaution: {evaluation?.Id} for Token: {token}, GameId: {gameId}");
+
+            return evaluation;
 		}
 		
-		public IEnumerable<EvaluationProgress> GetGameProgress(int gameId, int? actorId)
+		public List<EvaluationProgress> GetGameProgress(int gameId, int? actorId)
 		{
 			var evaluations = _evaluationDbController.GetByGame(gameId);
 			evaluations = FilterByActorType(evaluations, actorId);
@@ -68,9 +78,11 @@ namespace PlayGen.SUGAR.Core.Controllers
 				Actor = _actorController.Get(actorId.Value),
 				Name = e.Name,
 				Progress = EvaluateProgress(e, actorId),
-			});
+			}).ToList();
 
-			return evaluationsProgress;
+            Logger.Info($"{evaluationsProgress?.Count} Evaluation Progresses for GameId: {gameId}, ActorId: {actorId}");
+
+            return evaluationsProgress;
 		}
 	   
 		public EvaluationProgress GetProgress(string token, int? gameId, int actorId)
@@ -78,12 +90,16 @@ namespace PlayGen.SUGAR.Core.Controllers
 			var evaluation = _evaluationDbController.Get(token, gameId);
 			var progress = EvaluateProgress(evaluation, actorId);
 
-			return new EvaluationProgress
-			{
-				Actor = _actorController.Get(actorId),
-				Name = evaluation.Name,
-				Progress = progress,
-			};
+            var result = new EvaluationProgress
+            {
+                Actor = _actorController.Get(actorId),
+                Name = evaluation.Name,
+                Progress = progress,
+            };
+
+            Logger.Info( $"{result?.Name} Evaluation Progresses for Token: {token}, GameId: {gameId}, ActorId: {actorId}");
+
+		    return result;
 		}
 		
 		public Evaluation Create(Evaluation evaluation)
@@ -98,7 +114,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 			evaluation = _evaluationDbController.Create(evaluation);
 
 			EvaluationCreatedEvent?.Invoke(evaluation);
-			return evaluation;
+
+            Logger.Info($"{evaluation?.Id}");
+
+            return evaluation;
 		}
 		
 		public void Update(Evaluation evaluation)
@@ -112,7 +131,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 			_evaluationDbController.Update(evaluation);
 
-			EvaluationUpdatedEvent?.Invoke(evaluation);
+            Logger.Info($"{evaluation?.Id}");
+
+            EvaluationUpdatedEvent?.Invoke(evaluation);
 		}
 		
 		public void Delete(string token, int? gameId)
@@ -126,7 +147,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 			EvaluationDeletedEvent?.Invoke(evaluation);
 			_evaluationDbController.Delete(token, gameId);
-		}
+
+            Logger.Info($"Deleted: {evaluation?.Id} for Token {token}, GameId: {gameId}");
+        }
 
 		private bool DataTypeValueValidation(SaveDataType dataType, string value)
 		{
@@ -146,18 +169,6 @@ namespace PlayGen.SUGAR.Core.Controllers
 				default:
 					return false;
 			}
-		}
-
-		public IEnumerable<Evaluation> FilterByActorType(IEnumerable<Evaluation> evaluations, int? actorId)
-		{
-			if (actorId.HasValue)
-			{
-				var provided = _actorController.Get(actorId.Value);
-				evaluations = provided == null ? evaluations.Where(a => a.ActorType == ActorType.Undefined) :
-												evaluations.Where(a => a.ActorType == ActorType.Undefined || a.ActorType == provided.ActorType);
-			}
-
-			return evaluations;
 		}
 		
 		public float EvaluateProgress(Evaluation evaluation, int? actorId)
@@ -187,15 +198,19 @@ namespace PlayGen.SUGAR.Core.Controllers
 				}
 			}
 
-			return completedProgress;
+            Logger.Debug($"Got: Progress: {completedProgress} for Evaluation.Id: {evaluation?.Id}, ActorId: {actorId}");
+
+            return completedProgress;
 		}
 
 		public bool IsAlreadyCompleted(Evaluation evaluation, int actorId)
 		{
 			var key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token);
 			var completed = GameDataCoreController.KeyExists(evaluation.GameId, actorId, key);
-			
-			return completed;
+
+            Logger.Debug($"Got: IsCompleted: {completed} for Evaluation.Id: {evaluation?.Id}, ActorId: {actorId}");
+
+            return completed;
 		}
 
 		private void ProcessEvaluationRewards(Evaluation evaluation, int? actorId)
@@ -212,5 +227,18 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 			evaluation.Rewards?.ForEach(reward => _rewardController.AddReward(actorId, evaluation.GameId, reward));
 		}
-	}
+
+        private List<Evaluation> FilterByActorType(List<Evaluation> evaluations, int? actorId)
+        {
+            if (actorId.HasValue)
+            {
+                var provided = _actorController.Get(actorId.Value);
+                evaluations = provided == null
+                    ? evaluations.Where(a => a.ActorType == ActorType.Undefined).ToList()
+                    : evaluations.Where(a => a.ActorType == ActorType.Undefined || a.ActorType == provided.ActorType).ToList();
+            }
+
+            return evaluations;
+        }
+    }
 }

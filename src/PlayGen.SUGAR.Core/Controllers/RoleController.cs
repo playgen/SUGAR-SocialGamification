@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using NLog;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 
@@ -8,7 +8,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class RoleController
 	{
-		private readonly Data.EntityFramework.Controllers.RoleController _roleDbController;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
+        private readonly Data.EntityFramework.Controllers.RoleController _roleDbController;
 		private readonly ActorRoleController _actorRoleController;
 
 		public RoleController(Data.EntityFramework.Controllers.RoleController roleDbController,
@@ -18,27 +20,39 @@ namespace PlayGen.SUGAR.Core.Controllers
 			_actorRoleController = actorRoleController;
 		}
 
-		public IEnumerable<Role> Get()
+		public List<Role> Get()
 		{
 			var roles = _roleDbController.Get();
-			return roles;
+
+            Logger.Info($"{roles.Count} Roles");
+
+            return roles;
 		}
 
 		public Role GetByName(string name)
 		{
 			var role = _roleDbController.Get(name);
-			return role;
+
+            Logger.Info($"Role: {role?.Id} for Name: {name}");
+
+            return role;
 		}
 
 		public Role GetById(int id)
 		{
 			var role = _roleDbController.Get(id);
+
+            Logger.Info($"Role: {role?.Id} for Id: {id}");
+
 			return role;
 		}
 
-		public IEnumerable<Role> GetByScope(ClaimScope scope)
+		public List<Role> GetByScope(ClaimScope scope)
 		{
 			var roles = _roleDbController.Get(scope);
+
+            Logger.Info($"{roles?.Count} Roles for {nameof(ClaimScope)}: {scope}");
+
 			return roles;
 		}
 
@@ -50,12 +64,17 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 			newRole = _roleDbController.Create(newRole);
 			_actorRoleController.Create(ClaimScope.Role.ToString(), creatorId, newRole.Id);
+
+            Logger.Info($"Role: {newRole?.Id} for CreatorId: {creatorId}");
+
 			return newRole;
 		}
 
 		public void Delete(int id)
 		{
 			_roleDbController.Delete(id);
+
+            Logger.Info($"{id}");
 		}
 	}
 }

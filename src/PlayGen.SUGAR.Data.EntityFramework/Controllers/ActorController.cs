@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-		public IEnumerable<Actor> Get()
+		public List<Actor> Get()
 		{
 			using (var context = ContextFactory.Create())
 			{

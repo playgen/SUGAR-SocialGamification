@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			_evaluationController = evaluationController;
 		}
 
-		public ConcurrentProgressCache EvaluateActor(IEnumerable<Evaluation> evaluations, Session session)
+		public ConcurrentProgressCache EvaluateActor(List<Evaluation> evaluations, Session session)
 		{
 			var progress = new ConcurrentProgressCache();
 
@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			return progress;
 		}
 
-		public ConcurrentProgressCache EvaluateSessions(IEnumerable<Session> sessions, Evaluation evaluation)
+		public ConcurrentProgressCache EvaluateSessions(ICollection<Session> sessions, Evaluation evaluation)
 		{
 			var progress = new ConcurrentProgressCache();
 
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			return progress;
 		}
 
-		public ConcurrentProgressCache EvaluateSessions(IEnumerable<Session> sessions, IEnumerable<Evaluation> evaluations)
+		public ConcurrentProgressCache EvaluateSessions(ICollection<Session> sessions, ICollection<Evaluation> evaluations)
 		{
 			var progress = new ConcurrentProgressCache();
 

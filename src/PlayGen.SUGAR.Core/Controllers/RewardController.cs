@@ -1,12 +1,15 @@
-﻿using PlayGen.SUGAR.Core.EvaluationEvents;
+﻿using NLog;
+using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class RewardController : CriteriaEvaluator
 	{
-		// todo change all db controller usage to core controller usage
-		public RewardController(GameDataController gameDataCoreController, 
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
+        // todo change all db controller usage to core controller usage
+        public RewardController(GameDataController gameDataCoreController, 
             GroupMemberController groupMemberCoreController, 
             UserFriendController userFriendCoreController)
 			: base(gameDataCoreController, groupMemberCoreController, userFriendCoreController)
@@ -24,6 +27,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 				Value = reward.Value
 			};
 			GameDataCoreController.Add(gameData);
+
+            Logger.Info($"Game Data: {gameData?.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward?.Id}");
+
 			return true;
 		}
 	}

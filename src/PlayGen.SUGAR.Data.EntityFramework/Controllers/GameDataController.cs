@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<GameData> Get(IEnumerable<int> ids)
+		public List<GameData> Get(List<int> ids)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<GameData> Get(int? gameId = null, int? actorId = null, IEnumerable<string> keys = null)
+		public List<GameData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -74,12 +74,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
-				var list = data.Select(s => long.Parse(s.Value));
+				var list = data.Select(s => long.Parse(s.Value)).ToList();
 				return list;
 			}
 		}
 
-		public IEnumerable<float> AllFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<float> AllFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -92,12 +92,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
-				var list = data.Select(s => float.Parse(s.Value));
+				var list = data.Select(s => float.Parse(s.Value)).ToList();
 				return list;
 			}
 		}
 
-		public IEnumerable<string> AllStrings(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<string> AllStrings(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -110,12 +110,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
-				var list = data.Select(s => s.Value);
+				var list = data.Select(s => s.Value).ToList();
 				return list;
 			}
 		}
 
-		public IEnumerable<bool> AllBools(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<bool> AllBools(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -128,7 +128,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
-				var list = data.Select(s => bool.Parse(s.Value));
+				var list = data.Select(s => bool.Parse(s.Value)).ToList();
 				return list;
 			}
 		}
@@ -427,7 +427,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		    }
 		}
 
-		public void Create(IEnumerable<GameData> datas)
+		public void Create(List<GameData> datas)
 		{
 			using (var context = ContextFactory.Create())
 			{

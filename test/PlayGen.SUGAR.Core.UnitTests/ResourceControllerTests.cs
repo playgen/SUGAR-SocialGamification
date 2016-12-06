@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
 using PlayGen.SUGAR.Common.Shared;
@@ -23,7 +24,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         {
             var newResource = CreateResource("CanGetExistingResourceByKey");
 
-            var gotResources = _resourceController.Get(keys: new[] { newResource.Key });
+            var gotResources = _resourceController.Get(keys: new List<string> { newResource.Key });
 
             Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
         }

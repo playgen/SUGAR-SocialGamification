@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+using NLog;
 using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class ActorRoleController
 	{
-		private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
+        private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
 		private readonly Data.EntityFramework.Controllers.RoleController _roleController;
 
 		public ActorRoleController(Data.EntityFramework.Controllers.ActorRoleController actorRoleDbController,
@@ -22,28 +24,40 @@ namespace PlayGen.SUGAR.Core.Controllers
 		public ActorRole Get(int id)
 		{
 			var role = _actorRoleDbController.Get(id);
+
+			Logger.Info($"{role?.Id} for {id}");
+
 			return role;
 		}
 
-		public IEnumerable<ActorRole> GetActorRoles(int actorId, bool includeClaims = false)
+		public List<ActorRole> GetActorRoles(int actorId, bool includeClaims = false)
 		{
 			var roles = _actorRoleDbController.GetActorRoles(actorId, includeClaims);
+
+			Logger.Info($"{roles?.Count} Actor Roles for ActorId: {actorId}, IncludeClaims: {includeClaims}");
+
 			return roles;
 		}
 
-		public IEnumerable<Role> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope)
+		public List<Role> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope)
 		{
 			var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId.Value, scope, true).Select(ar => ar.Role).ToList();
-			return roles;
+
+            Logger.Info($"{roles?.Count} Roles for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
+
+            return roles;
 		}
 
-		public IEnumerable<Actor> GetRoleActors(int roleId, int? entityId)
+		public List<Actor> GetRoleActors(int roleId, int? entityId)
 		{
 			var roles = _actorRoleDbController.GetRoleActors(roleId, entityId.Value);
-			return roles;
+
+            Logger.Info($"{roles?.Count} Actors for RoleId: {roleId}, EntityId: {entityId}");
+
+            return roles;
 		}
 
-		public IEnumerable<Role> GetControlled(int actorId)
+		public List<Role> GetControlled(int actorId)
 		{
 			var actorRoles = _actorRoleDbController.GetActorRoles(actorId, true).ToList();
 			var controlledRoles = actorRoles.Where(ar => ar.Role.ClaimScope == ClaimScope.Role).ToList();
@@ -51,28 +65,39 @@ namespace PlayGen.SUGAR.Core.Controllers
 			{
 				return _roleController.Get();
 			}
-			var roles = controlledRoles.Select(cr => _roleController.Get(cr.EntityId.Value));
-			return roles;
+			var roles = controlledRoles.Select(cr => _roleController.Get(cr.EntityId.Value)).ToList();
+
+            Logger.Info($"{roles?.Count} Roles for ActorId: {actorId}");
+
+            return roles;
 		}
 
 		public ActorRole Create(ActorRole newRole)
 		{
 			newRole = _actorRoleDbController.Create(newRole);
-			return newRole;
+
+            Logger.Info($"{newRole?.Id}");
+
+            return newRole;
 		}
 
 		public void Create(string roleName, int actorId, int? entityId)
 		{
 			var role = _roleController.Get(roleName);
-			if (role != null)
+
+            Logger.Info($"RoleName: {roleName}, ActorId: {actorId}, EntityId: {entityId}");
+
+            if (role != null)
 			{
 				Create(new ActorRole { ActorId = actorId, RoleId = role.Id, EntityId = entityId.Value });
 			}
-		}
+        }
 
 		public void Delete(int id)
 		{
 			_actorRoleDbController.Delete(id);
-		}
+
+            Logger.Info($"{id}");
+        }
 	}
 }

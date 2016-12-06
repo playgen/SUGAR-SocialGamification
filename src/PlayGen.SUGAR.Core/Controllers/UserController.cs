@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NLog;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 
@@ -6,6 +7,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
     public class UserController : ActorController
     {
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly Data.EntityFramework.Controllers.UserController _userController;
         private readonly ActorRoleController _actorRoleController;
 
@@ -16,21 +19,30 @@ namespace PlayGen.SUGAR.Core.Controllers
             _actorRoleController = actorRoleController;
         }
         
-        public IEnumerable<User> Get()
+        public List<User> Get()
         {
             var users = _userController.Get();
+
+            Logger.Info($"{users?.Count} Users");
+
             return users;
         }
 
         public User Get(int id)
         {
             var user = _userController.Get(id);
+
+            Logger.Info($"User: {user?.Id} for Id: {id}");
+
             return user;
         }
 
-        public IEnumerable<User> Search(string name, bool exactMatch)
+        public List<User> Search(string name, bool exactMatch)
         {
             var users = _userController.Search(name, exactMatch);
+
+            Logger.Info($"{users?.Count} Users for Name: {name}, ExactMatch: {exactMatch}");
+
             return users;
         }
         
@@ -38,12 +50,17 @@ namespace PlayGen.SUGAR.Core.Controllers
         {
             newUser = _userController.Create(newUser);
             _actorRoleController.Create(ClaimScope.User.ToString(), newUser.Id, newUser.Id);
+
+            Logger.Info($"{newUser.Id}");
+
             return newUser;
         }
         
         public void Update(User user)
         {
             _userController.Update(user);
+
+            Logger.Info($"{user.Id}");
         }
         
         public void Delete(int id)
@@ -51,6 +68,8 @@ namespace PlayGen.SUGAR.Core.Controllers
             TriggerDeletedEvent(id);
 
             _userController.Delete(id);
+
+            Logger.Info($"{id}");
         }
     }
 }

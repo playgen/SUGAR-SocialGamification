@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
     public static class ActorDataExtensions
     {
-		public static IQueryable<ActorData> FilterByIds(this SUGARContext context, IEnumerable<int> ids)
+		public static IQueryable<ActorData> FilterByIds(this SUGARContext context, List<int> ids)
 		{
 			return context.ActorData.Where(gd => ids.Contains(gd.Id));
 		}
@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return actorDataQueryable.Where(gd => gd.Key.Equals(key));
 		}
 
-		public static IQueryable<ActorData> FilterByKeys(this IQueryable<ActorData> actorDataQueryable, IEnumerable<string> keys)
+		public static IQueryable<ActorData> FilterByKeys(this IQueryable<ActorData> actorDataQueryable, ICollection<string> keys)
 		{
 			var keyList = keys as List<string> ?? keys.ToList();
 			if (keys != null && keyList.Any())

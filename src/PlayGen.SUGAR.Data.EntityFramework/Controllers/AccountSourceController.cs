@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
         {
         }
 
-        public IEnumerable<AccountSource> Get()
+        public List<AccountSource> Get()
         {
             using (var context = ContextFactory.Create())
             {

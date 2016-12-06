@@ -2,28 +2,37 @@
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
+using NLog;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class ActorDataController
 	{
-		private readonly Data.EntityFramework.Controllers.ActorDataController _actorDataDbController;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
+        private readonly Data.EntityFramework.Controllers.ActorDataController _actorDataDbController;
 
 		public ActorDataController(Data.EntityFramework.Controllers.ActorDataController actorDataDbController)
 		{
 			_actorDataDbController = actorDataDbController;
 		}
 
-		public IEnumerable<ActorData> Get(int? gameId = null, int? actorId = null, IEnumerable<string> keys = null)
+		public List<ActorData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
 		{
 			var datas = _actorDataDbController.Get(gameId, actorId, keys);
+
+			Logger.Info($"{datas?.Count} Actor Datas for GameId: {gameId}, ActorId: {actorId}, Keys: {string.Join(", ", keys)}");
+
 			return datas;
 		}
 
 		public bool KeyExists(int? gameId, int? actorId, string key)
 		{
 			var keyExists = _actorDataDbController.KeyExists(gameId, actorId, key);
-			return keyExists;
+
+            Logger.Info($"Key Exists: {keyExists} for GameId: {gameId}, ActorId: {actorId}, Key: {key}");
+
+            return keyExists;
 		}
 
 		public ActorData Add(ActorData newData)
@@ -31,7 +40,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 			if (ParseCheck(newData))
 			{
 				newData = _actorDataDbController.Create(newData);
-				return newData;
+
+                Logger.Info($"{newData?.Id}");
+
+                return newData;
 			}
 			else
 			{
@@ -42,7 +54,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 		public void Update(ActorData newData)
 		{
 			_actorDataDbController.Update(newData);
-		}
+
+            Logger.Info($"{newData?.Id}");
+        }
 
 		protected bool ParseCheck(ActorData data)
 		{

@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
         {
         }
 
-        public IEnumerable<User> GetRequests(int id)
+        public List<User> GetRequests(int id)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<User> GetSentRequests(int id)
+		public List<User> GetSentRequests(int id)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<User> GetFriends(int id)
+		public List<User> GetFriends(int id)
 		{
 			using (var context = ContextFactory.Create())
 			{

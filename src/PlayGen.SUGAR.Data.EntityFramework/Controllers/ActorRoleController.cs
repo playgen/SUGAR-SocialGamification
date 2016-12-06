@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<ActorRole> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope, bool includeClaims = false)
+		public List<ActorRole> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope, bool includeClaims = false)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<ActorRole> GetActorRoles(int actorId, bool includeClaims = false)
+		public List<ActorRole> GetActorRoles(int actorId, bool includeClaims = false)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Actor> GetRoleActors(int roleId, int? entityId)
+		public List<Actor> GetRoleActors(int roleId, int? entityId)
 		{
 			using (var context = ContextFactory.Create())
 			{

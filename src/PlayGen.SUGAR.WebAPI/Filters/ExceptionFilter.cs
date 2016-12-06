@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using NLog;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.WebAPI.Exceptions;
 
@@ -11,8 +12,10 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 	/// </summary>
 	public class ExceptionFilter : ExceptionFilterAttribute
 	{
-		/// <inheritdoc />
-		public override void OnException(ExceptionContext context)
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
+        /// <inheritdoc />
+        public override void OnException(ExceptionContext context)
 		{
 			var exception = context.Exception;
 			var handled = false;
@@ -43,8 +46,10 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 				context.Result = new ObjectResult(context.Exception.Message);
 				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 			}
-			
-			context.Exception = null;
+
+            Logger.Error(exception.Message);
+
+            context.Exception = null;
 			base.OnException(context);
 		}
 	}

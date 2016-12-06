@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
         {
         }
 
-        public IEnumerable<User> Get()
+        public List<User> Get()
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -26,11 +26,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<User> Search(string name, bool exactMatch = false)
+		public List<User> Search(string name, bool exactMatch = false)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				IEnumerable<User> users;
+				List<User> users;
 
 				if (!exactMatch)
 				{

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
@@ -22,7 +23,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newSaveData = CreateGameData(userDataName, createNewGame: true, createNewUser: true);
 
-			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
+			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new List<string> { newSaveData.Key });
 
 			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
 
@@ -36,7 +37,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newSaveData = CreateGameData(userDataName, createNewUser: true);
 
-			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
+			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new List<string> { newSaveData.Key });
 
 			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == null && g.ActorId == newSaveData.ActorId);
 
@@ -50,7 +51,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newSaveData = CreateGameData(userDataName, createNewGame: true);
 
-			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { newSaveData.Key });
+			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new List<string> { newSaveData.Key });
 
 			var matches = userDatas.Count(g => g.Key == newSaveData.Key && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
 
@@ -60,7 +61,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void GetMultipleUserSaveDatas()
 		{
-			var userDataNames = new[]
+			var userDataNames = new List<string>
 			{
 				"GetMultipleUserSaveDatas1",
 				"GetMultipleUserSaveDatas2",
@@ -81,7 +82,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var matchingUserSaveDatas = userDatas.Select(g => userDataNames.Contains(g.Key));
 
-			Assert.Equal(matchingUserSaveDatas.Count(), userDataNames.Length);
+			Assert.Equal(matchingUserSaveDatas.Count(), userDataNames.Count);
 		}
 
 		[Fact]
@@ -91,7 +92,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newSaveData = CreateGameData(userDataName);
 
-			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new string[] { "null key" });
+			var userDatas = _gameDataController.Get(newSaveData.GameId, newSaveData.ActorId, new List<string> { "null key" });
 
 			Assert.Empty(userDatas);
 		}
@@ -103,7 +104,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newSaveData = CreateGameData(userDataName);
 
-			var userDatas = _gameDataController.Get(-1, newSaveData.ActorId, new string[] { userDataName });
+			var userDatas = _gameDataController.Get(-1, newSaveData.ActorId, new List<string> { userDataName });
 
 			Assert.Empty(userDatas);
 		}
@@ -115,7 +116,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newSaveData = CreateGameData(userDataName);
 
-			var userDatas = _gameDataController.Get(newSaveData.GameId, -1, new string[] { userDataName });
+			var userDatas = _gameDataController.Get(newSaveData.GameId, -1, new List<string> { userDataName });
 
 			Assert.Empty(userDatas);
 		}

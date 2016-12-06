@@ -769,7 +769,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 }
             }
 
-            _gameDataDbController.Create(data.ToArray());
+            _gameDataDbController.Create(data.ToList());
         }
 
         private void CreateGameData(string key, SaveDataType type, int gameId = 0, bool singular = false)
@@ -801,7 +801,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                         break;
                     }
                 }
-                _gameDataDbController.Create(data.ToArray());
+                _gameDataDbController.Create(data.ToList());
             }
         }
         #endregion

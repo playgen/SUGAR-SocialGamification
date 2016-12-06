@@ -91,12 +91,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
                 StartInfo = new ProcessStartInfo
                 {
                     WorkingDirectory = serverDir,
-                    FileName = "dotnet",
-                    Arguments = "run",
+                    FileName = "cmd.exe",
+                    RedirectStandardInput = true,
+                    UseShellExecute = false,
                 }
             };
-
+            
             _process.Start();
+            _process.StandardInput.WriteLine("SET ASPNETCORE_ENVIRONMENT=Development");
+            _process.StandardInput.WriteLine("dotnet run");
 
             // Wait for server to startup
             // todo find less hackey way to do this - handle cases where server wont startup

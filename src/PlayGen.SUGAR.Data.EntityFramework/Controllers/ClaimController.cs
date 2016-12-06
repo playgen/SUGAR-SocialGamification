@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
         }
 
-        public IEnumerable<Claim> Get()
+        public List<Claim> Get()
         {
             using (var context = ContextFactory.Create())
             {
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-        public IEnumerable<Claim> Create(IEnumerable<Claim> claims)
+        public List<Claim> Create(List<Claim> claims)
         {
             using (var context = ContextFactory.Create())
             {

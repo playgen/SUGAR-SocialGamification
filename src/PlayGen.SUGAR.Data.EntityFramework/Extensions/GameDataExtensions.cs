@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return context.GameData.Where(gd => gd.Category == category);
 		}
 
-		public static IQueryable<GameData> FilterByIds(this IQueryable<GameData> gameDataQueryable, IEnumerable<int> ids)
+		public static IQueryable<GameData> FilterByIds(this IQueryable<GameData> gameDataQueryable, List<int> ids)
 		{
 			return gameDataQueryable.Where(gd => ids.Contains(gd.Id));
 		}
@@ -37,12 +37,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return gameDataQueryable.Where(gd => gd.Key.Equals(key));
 		}
 
-		public static IQueryable<GameData> FilterByKeys(this IQueryable<GameData> gameDataQueryable, IEnumerable<string> keys)
+		public static IQueryable<GameData> FilterByKeys(this IQueryable<GameData> gameDataQueryable, ICollection<string> keys)
 		{
-		    var keyList = keys as List<string> ?? keys.ToList();
-		    if (keys != null && keyList.Any())
+		    if (keys != null && keys.Any())
 			{
-				return gameDataQueryable.Where(gd => keyList.Contains(gd.Key));
+				return gameDataQueryable.Where(gd => keys.Contains(gd.Key));
 			}
 			return gameDataQueryable;
 		}

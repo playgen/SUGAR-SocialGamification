@@ -1,8 +1,7 @@
-﻿using System;
-using PlayGen.SUGAR.Core.Exceptions;
+﻿using PlayGen.SUGAR.Core.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
-
+using NLog;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Core.Utilities;
 
@@ -10,7 +9,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class AccountController
 	{
-		private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
+        private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
         private readonly AccountSourceController _accountSourceCoreController;
         private readonly UserController _userCoreController;
         private readonly ActorRoleController _actorRoleController;
@@ -54,6 +55,8 @@ namespace PlayGen.SUGAR.Core.Controllers
                         verified = found;
                     }
 
+                    Logger.Info($"Account: {toVerify?.Id} passed verification: {verified}");
+
                     return verified;
                 }
                 throw new InvalidAccountDetailsException("Invalid Login Details.");
@@ -91,12 +94,16 @@ namespace PlayGen.SUGAR.Core.Controllers
 
             _actorRoleController.Create(ClaimScope.Account.ToString(), registered.UserId, registered.Id);
 
+            Logger.Info($"{registered?.Id}");
+
             return registered;
 		}
 
 		public void Delete(int id)
 		{
 			_accountDbController.Delete(id);
-		}
+
+            Logger.Info($"{id}");
+        }
 	}
 }

@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<ActorData> Get(int? gameId = null, int? actorId = null, IEnumerable<string> keys = null)
+		public List<ActorData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
 		{
 			using (var context = ContextFactory.Create())
 			{

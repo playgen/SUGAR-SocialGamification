@@ -4,11 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using NLog;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.EvaluationEvents;
-using PlayGen.SUGAR.Core.Utilities;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
 
@@ -16,7 +15,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class LeaderboardController : CriteriaEvaluator
 	{
-		protected readonly Data.EntityFramework.Controllers.ActorController ActorController;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
+        protected readonly Data.EntityFramework.Controllers.ActorController ActorController;
 		protected readonly Data.EntityFramework.Controllers.GroupController GroupController;
 		protected readonly Data.EntityFramework.Controllers.UserController UserController;
 
@@ -34,7 +35,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			UserController = userController;
 		}
 
-		public IEnumerable<LeaderboardStandingsResponse> GetStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
+		public List<LeaderboardStandingsResponse> GetStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
 		{
 			if (leaderboard == null)
 			{
@@ -45,14 +46,17 @@ namespace PlayGen.SUGAR.Core.Controllers
 				throw new ArgumentException("You must request at least one ranking from the leaderboard.");
 			}
 			var standings = GatherStandings(leaderboard, request);
+
+            Logger.Info($"{standings?.Count} Standings for Leaderboard: {leaderboard?.Token}");
+
 			return standings;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> GatherStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> GatherStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<ActorResponse> actors = GetActors(request.LeaderboardFilterType, leaderboard.ActorType, request.ActorId);
+			List<ActorResponse> actors = GetActors(request.LeaderboardFilterType, leaderboard.ActorType, request.ActorId);
 
-			IEnumerable<LeaderboardStandingsResponse> typeResults;
+			List<LeaderboardStandingsResponse> typeResults;
 
 			switch (leaderboard.LeaderboardType)
 			{
@@ -85,12 +89,16 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 
 			var results = FilterResults(typeResults, request.PageLimit, request.PageOffset, request.LeaderboardFilterType, request.ActorId);
-			return results;
+
+            Logger.Info($"{results?.Count} Standings for Leaderboard: {leaderboard?.Token}");
+
+            return results;
 		}
 
-		protected IEnumerable<ActorResponse> GetActors(LeaderboardFilterType filter, ActorType actorType, int? actorId)
+		protected List<ActorResponse> GetActors(LeaderboardFilterType filter, ActorType actorType, int? actorId)
 		{
-			IEnumerable<ActorResponse> actors = Enumerable.Empty<ActorResponse>();
+			var actors = Enumerable.Empty<ActorResponse>().ToList();
+
 			switch (filter)
 			{
 				case LeaderboardFilterType.Top:
@@ -150,7 +158,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						Id = a.Id,
 						Name = GetName(a.Id, a.ActorType)
-					});
+					}).ToList();
 					break;
 
 				case ActorType.User:
@@ -158,7 +166,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						Id = a.Id,
 						Name = a.Name
-					});
+					}).ToList();
 					break;
 
 				case ActorType.Group:
@@ -166,11 +174,13 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						Id = a.Id,
 						Name = a.Name
-					});
+					}).ToList();
 					break;
 			}
+            
+            Logger.Debug($"{actors?.Count} Actors for Filter: {filter}, ActorType: {actorType}, ActorId: {actorId}");
 
-			return actors;
+            return actors;
 		}
 
 		protected string GetName (int id, ActorType actorType)
@@ -188,10 +198,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateHighest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateHighest(List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (SaveDataType)
+			List<LeaderboardStandingsResponse> results;
+			switch (saveDataType)
 			{
 				case SaveDataType.Long:
 					results = actors.Select(r => new LeaderboardStandingsResponse
@@ -199,7 +209,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 						ActorId = r.Id,
 						ActorName = r.Name,
 						Value = GameDataCoreController.GetHighestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
-					});
+					}).ToList();
 					break;
 
 				case SaveDataType.Float:
@@ -208,7 +218,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 						ActorId = r.Id,
 						ActorName = r.Name,
 						Value = GameDataCoreController.GetHighestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
-					});
+					}).ToList();
 					break;
 
 				default:
@@ -216,14 +226,17 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 
 			results = results.OrderByDescending(r => float.Parse(r.Value))
-						.Where(r => float.Parse(r.Value) > 0);
-			return results;
+						.Where(r => float.Parse(r.Value) > 0).ToList();
+
+            Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+
+            return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLowest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateLowest(List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (SaveDataType)
+			List<LeaderboardStandingsResponse> results;
+			switch (saveDataType)
 			{
 				case SaveDataType.Long:
 					results = actors.Select(r => new LeaderboardStandingsResponse
@@ -231,7 +244,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 						ActorId = r.Id,
 						ActorName = r.Name,
 						Value = GameDataCoreController.GetLowestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
-					});
+					}).ToList();
 					break;
 
 				case SaveDataType.Float:
@@ -240,7 +253,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 						ActorId = r.Id,
 						ActorName = r.Name,
 						Value = GameDataCoreController.GetLowestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
-					});
+					}).ToList();
 					break;
 
 				default:
@@ -248,14 +261,17 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 
 			results = results.OrderBy(r => float.Parse(r.Value))
-						.Where(r => float.Parse(r.Value) > 0);
-			return results;
+						.Where(r => float.Parse(r.Value) > 0).ToList();
+
+            Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+
+            return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateCumulative(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateCumulative(List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (SaveDataType)
+			List<LeaderboardStandingsResponse> results;
+			switch (saveDataType)
 			{
 				case SaveDataType.Long:
 					results = actors.Select(r => new LeaderboardStandingsResponse
@@ -263,7 +279,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 						ActorId = r.Id,
 						ActorName = r.Name,
 						Value = GameDataCoreController.SumLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
-					});
+					}).ToList();
 					break;
 
 				case SaveDataType.Float:
@@ -272,7 +288,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 						ActorId = r.Id,
 						ActorName = r.Name,
 						Value = GameDataCoreController.SumFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
-					});
+					}).ToList();
 					break;
 
 				default:
@@ -280,22 +296,25 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 
 			results = results.OrderByDescending(r => float.Parse(r.Value))
-						.Where(r => float.Parse(r.Value) > 0);
-			return results;
+						.Where(r => float.Parse(r.Value) > 0).ToList();
+
+            Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+
+            return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateCount(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateCount(List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (SaveDataType)
+			List<LeaderboardStandingsResponse> results;
+			switch (saveDataType)
 			{
 				case SaveDataType.String:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.CountKeys(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd).ToString()
-					});
+						Value = GameDataCoreController.CountKeys(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToString()
+					}).ToList();
 					break;
 
 				case SaveDataType.Boolean:
@@ -303,8 +322,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.CountKeys(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd).ToString()
-					});
+						Value = GameDataCoreController.CountKeys(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToString()
+					}).ToList();
 					break;
 
 				default:
@@ -312,23 +331,26 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 
 			results = results.OrderByDescending(r => float.Parse(r.Value))
-						.Where(r => float.Parse(r.Value) > 0);
-			return results;
+						.Where(r => float.Parse(r.Value) > 0).ToList();
+
+            Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+
+            return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateEarliest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateEarliest(List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (SaveDataType)
+			List<LeaderboardStandingsResponse> results;
+			switch (saveDataType)
 			{
 				case SaveDataType.String:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetEarliestKey(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd)
+						Value = GameDataCoreController.TryGetEarliestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
-					});
+					}).ToList();
 					break;
 
 				case SaveDataType.Boolean:
@@ -336,9 +358,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetEarliestKey(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd)
+						Value = GameDataCoreController.TryGetEarliestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
-					});
+					}).ToList();
 					break;
 
 				default:
@@ -346,23 +368,26 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 
 			results = results.OrderBy(r => r.Value)
-						.Where(r => DateTime.Parse(r.Value) != default(DateTime));
-			return results;
+						.Where(r => DateTime.Parse(r.Value) != default(DateTime)).ToList();
+
+            Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+
+            return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> EvaluateLatest(IEnumerable<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType SaveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateLatest(List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
 		{
-			IEnumerable<LeaderboardStandingsResponse> results;
-			switch (SaveDataType)
+			List<LeaderboardStandingsResponse> results;
+			switch (saveDataType)
 			{
 				case SaveDataType.String:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetLatestKey(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd)
+						Value = GameDataCoreController.TryGetLatestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
-					});
+					}).ToList();
 					break;
 
 				case SaveDataType.Boolean:
@@ -370,9 +395,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetLatestKey(gameId, r.Id, key, SaveDataType, request.DateStart, request.DateEnd)
+						Value = GameDataCoreController.TryGetLatestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
-					});
+					}).ToList();
 					break;
 
 				default:
@@ -380,17 +405,20 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 
 			results = results.OrderByDescending(r => r.Value)
-						.Where(r => DateTime.Parse(r.Value) != default(DateTime));
-			return results;
+						.Where(r => DateTime.Parse(r.Value) != default(DateTime)).ToList();
+
+            Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+
+            return results;
 		}
 
-		protected IEnumerable<LeaderboardStandingsResponse> FilterResults(IEnumerable<LeaderboardStandingsResponse> typeResults, int limit, int offset, LeaderboardFilterType filter, int? actorId)
+		protected List<LeaderboardStandingsResponse> FilterResults(List<LeaderboardStandingsResponse> typeResults, int limit, int offset, LeaderboardFilterType filter, int? actorId)
 		{
 			int position;
 			switch (filter)
 			{
 				case LeaderboardFilterType.Top:
-					typeResults = typeResults.Skip(offset * limit).Take(limit);
+					typeResults = typeResults.Skip(offset * limit).Take(limit).ToList();
 					position = (offset * limit);
 					return typeResults.Select(s => new LeaderboardStandingsResponse
 					{
@@ -398,7 +426,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 						ActorName = s.ActorName,
 						Value = s.Value,
 						Ranking = ++position
-					});
+					}).ToList();
 				case LeaderboardFilterType.Near:
 			        var typeResultList = typeResults as List<LeaderboardStandingsResponse> ?? typeResults.ToList();
 			        bool actorCheck = actorId != null && typeResultList.Any(r => r.ActorId == actorId.Value);
@@ -407,7 +435,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 						int actorPosition = typeResultList.TakeWhile(r => r.ActorId != actorId.Value).Count();
 						offset += actorPosition / limit;
 					}
-					typeResults = typeResultList.Skip(offset * limit).Take(limit);
+					typeResults = typeResultList.Skip(offset * limit).Take(limit).ToList();
 					position = (offset * limit);
 					return typeResults.Select(s => new LeaderboardStandingsResponse
 					{
@@ -415,7 +443,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 						ActorName = s.ActorName,
 						Value = s.Value,
 						Ranking = ++position
-					});
+					}).ToList();
 				case LeaderboardFilterType.Friends:
 					position = (offset * limit);
 					var overall = typeResults.Select(s => new LeaderboardStandingsResponse
@@ -427,13 +455,13 @@ namespace PlayGen.SUGAR.Core.Controllers
 					});
                     if (actorId != null)
                     {
-                        List<int> friends = UserFriendCoreController.GetFriends(actorId.Value).Select(r => r.Id).ToList();
+                        var friends = UserFriendCoreController.GetFriends(actorId.Value).Select(r => r.Id).ToList();
 					    friends.Add(actorId.Value);
                         var friendsOnly = overall.Where(r => friends.Contains(r.ActorId));
                         friendsOnly = friendsOnly.Skip(offset * limit).Take(limit);
-                        return friendsOnly;
+                        return friendsOnly.ToList();
                     }
-                    return Enumerable.Empty<LeaderboardStandingsResponse>();
+                    return Enumerable.Empty<LeaderboardStandingsResponse>().ToList();
 				case LeaderboardFilterType.GroupMembers:
 					position = (offset * limit);
 					var all = typeResults.Select(s => new LeaderboardStandingsResponse
@@ -445,15 +473,15 @@ namespace PlayGen.SUGAR.Core.Controllers
 					});
                     if (actorId != null)
                     {
-                        IEnumerable<int> members = GroupMemberCoreController.GetMembers(actorId.Value).Select(r => r.Id);
+                        var members = GroupMemberCoreController.GetMembers(actorId.Value).Select(r => r.Id);
                         var membersOnly = all.Where(r => members.Contains(r.ActorId));
                         membersOnly = membersOnly.Skip(offset * limit).Take(limit);
-                        return membersOnly;
+                        return membersOnly.ToList();
                     }
-                    return Enumerable.Empty<LeaderboardStandingsResponse>();
+                    return Enumerable.Empty<LeaderboardStandingsResponse>().ToList();
                 default:
 					return null;
 			}
-		}
+        }
 	}
 }

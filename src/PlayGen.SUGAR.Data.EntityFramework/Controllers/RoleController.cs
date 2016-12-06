@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-		public IEnumerable<Role> Get()
+		public List<Role> Get()
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Role> Get(ClaimScope scope)
+		public List<Role> Get(ClaimScope scope)
 		{
 			using (var context = ContextFactory.Create())
 			{

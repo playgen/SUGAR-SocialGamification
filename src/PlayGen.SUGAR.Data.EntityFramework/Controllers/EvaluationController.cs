@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-        public IEnumerable<Evaluation> Get()
+        public List<Evaluation> Get()
         {
             using (var context = ContextFactory.Create())
             {
@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-        public IEnumerable<Evaluation> GetByGame(int? gameId)
+        public List<Evaluation> GetByGame(int? gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{

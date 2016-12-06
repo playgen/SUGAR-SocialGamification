@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Account> Get(string[] names, int sourceId)
+		public List<Account> Get(string[] names, int sourceId)
 		{
 			using (var context = ContextFactory.Create())
 			{

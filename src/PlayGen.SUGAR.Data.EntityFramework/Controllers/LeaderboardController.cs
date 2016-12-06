@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-		public IEnumerable<Leaderboard> GetByGame(int? gameId)
+		public List<Leaderboard> GetByGame(int? gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{

@@ -80,7 +80,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         private void OnGameDataAdded(GameData gameData)
         {
-            IEnumerable<Evaluation> evaluations;
+            ICollection<Evaluation> evaluations;
 
             if (_gameDataToEvaluationMapper.TryGetRelated(gameData, out evaluations))
             {
@@ -134,7 +134,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             return evaluations;
         }
 
-        private List<int?> GetGameIdsFromEvaluations(IEnumerable<Evaluation> evaluations)
+        private List<int?> GetGameIdsFromEvaluations(ICollection<Evaluation> evaluations)
         {
             var hasGlobal = false;
             var gameIds = evaluations.Select(e =>

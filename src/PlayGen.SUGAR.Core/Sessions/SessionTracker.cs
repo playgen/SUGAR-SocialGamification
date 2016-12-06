@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Core.Controllers;
 using System.Threading;
+using NLog;
 
 namespace PlayGen.SUGAR.Core.Sessions
 {
     public class SessionTracker : IDisposable
     {
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
         public event Action<Session> SessionStartedEvent;
         public event Action<Session> SessionEndedEvent;
 
@@ -57,6 +60,8 @@ namespace PlayGen.SUGAR.Core.Sessions
 
             SessionStartedEvent?.Invoke(session);
 
+            Logger.Info($"SessionId: {session.Id} for GameId: {gameId}, ActorId: {actorId}");
+
             return session;
         }
         
@@ -66,6 +71,8 @@ namespace PlayGen.SUGAR.Core.Sessions
             _sessions.TryRemove(sessionId, out session);
 
             SessionEndedEvent?.Invoke(session);
+
+            Logger.Info($"SessionId: {session.Id}");
         }
 
         public bool IsActive(long sessionId)
@@ -90,6 +97,8 @@ namespace PlayGen.SUGAR.Core.Sessions
             var sessionIds = _sessions
                 .Where(kvp => kvp.Value.LastActive < activityThreshold)
                 .Select(kvp => kvp.Key).ToList();
+
+            Logger.Info($"Timedout: {string.Join(", ", sessionIds)}");
 
             sessionIds.ForEach(EndSession);
         }

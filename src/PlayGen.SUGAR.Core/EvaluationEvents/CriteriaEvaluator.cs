@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 				{
 					throw new NotImplementedException("RelatedActors Scope is only implemented for groups");
 				}
-				var groupActors = GroupMemberCoreController.GetMembers(actorId.Value);
+				var groupActors = GroupMemberCoreController.GetMembers(actorId.Value).ToList<Actor>();
 				switch (completionCriteria.DataType)
 				{
 					case SaveDataType.Boolean:
@@ -183,7 +183,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			}
 		}
 
-		protected float EvaluateManyLong(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyLong(int? gameId, List<Actor> actor, EvaluationCriteria completionCriteria)
 		{
 		    var actorList = actor as List<Actor> ?? actor.ToList();
 		    switch (completionCriteria.CriteriaQueryType)
@@ -201,7 +201,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			}
 		}
 
-		protected float EvaluateManyFloat(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyFloat(int? gameId, List<Actor> actor, EvaluationCriteria completionCriteria)
 		{
             var actorList = actor as List<Actor> ?? actor.ToList();
             switch (completionCriteria.CriteriaQueryType)
@@ -219,16 +219,14 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 			}
 		}
 
-		protected float EvaluateManyString(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyString(int? gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
 		{
-            var actorList = actor as List<Actor> ?? actor.ToList();
-            return actorList.Sum(a => EvaluateString(gameId, a.Id, completionCriteria)) / actorList.Count;
+            return actors.Sum(a => EvaluateString(gameId, a.Id, completionCriteria)) / actors.Count;
 		}
 
-		protected float EvaluateManyBool(int? gameId, IEnumerable<Actor> actor, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyBool(int? gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
 		{
-            var actorList = actor as List<Actor> ?? actor.ToList();
-            return actorList.Sum(a => EvaluateBool(gameId, a.Id, completionCriteria)) / actorList.Count;
+            return actors.Sum(a => EvaluateBool(gameId, a.Id, completionCriteria)) / actors.Count;
 		}
 
 		protected static float CompareValues<T>(T value, T expected, ComparisonType comparisonType, SaveDataType dataType) where T : IComparable

@@ -11,7 +11,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
         }
 
-        public IEnumerable<Claim> GetClaimsByRole(int id)
+        public List<Claim> GetClaimsByRole(int id)
         {
             using (var context = ContextFactory.Create())
             {
@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-        public IEnumerable<Claim> GetClaimsByRoles(IEnumerable<int> ids)
+        public List<Claim> GetClaimsByRoles(List<int> ids)
         {
             using (var context = ContextFactory.Create())
             {
@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-		public IEnumerable<Role> GetRolesByClaim(int id)
+		public List<Role> GetRolesByClaim(int id)
 		{
 			using (var context = ContextFactory.Create())
 			{

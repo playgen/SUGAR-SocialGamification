@@ -41,8 +41,8 @@ namespace PlayGen.SUGAR.WebAPI
 			//AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
 			#region Logging
-
-			env.ConfigureNLog("NLog.config");
+			ConfigureNLog(env);
+			
 			Logger.Debug("ContentRootPath: {0}", env.ContentRootPath);
 			Logger.Debug("WebRootPath: {0}", env.WebRootPath);
 
@@ -159,9 +159,7 @@ namespace PlayGen.SUGAR.WebAPI
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
-			loggerFactory.AddNLog();
-			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-			loggerFactory.AddDebug();
+			ConfigureLogging(loggerFactory);
 
 			app.UseJwtBearerAuthentication(new JwtBearerOptions
 			{

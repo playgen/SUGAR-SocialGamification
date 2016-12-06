@@ -1,44 +1,61 @@
 ﻿using System.Collections.Generic;
+using NLog;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class RoleClaimController
 	{
-		private readonly Data.EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
+        private readonly Data.EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
 
 		public RoleClaimController(Data.EntityFramework.Controllers.RoleClaimController roleClaimDbController)
 		{
 			_roleClaimDbController = roleClaimDbController;
 		}
 
-		public IEnumerable<Claim> GetClaimsByRole(int roleId)
+		public List<Claim> GetClaimsByRole(int roleId)
 		{
 			var roles = _roleClaimDbController.GetClaimsByRole(roleId);
+
+            Logger.Info($"{roles.Count} Roles for RoleId: {roleId}");
+
 			return roles;
 		}
 
-		public IEnumerable<Claim> GetClaimsByRoles(IEnumerable<int> ids)
+		public List<Claim> GetClaimsByRoles(List<int> ids)
 		{
 			var roles = _roleClaimDbController.GetClaimsByRoles(ids);
-			return roles;
+
+            Logger.Info($"{roles.Count} Roles for Ids: {string.Join(", ", ids)}");
+
+            return roles;
 		}
 
-		public IEnumerable<Role> GetRolesByClaim(int id)
+		public List<Role> GetRolesByClaim(int id)
 		{
 			var claims = _roleClaimDbController.GetRolesByClaim(id);
-			return claims;
+
+            Logger.Info($"{claims.Count} Claims for Id: {id}");
+
+            return claims;
 		}
 
 		public RoleClaim Create(RoleClaim newRoleClaim)
 		{
 			newRoleClaim = _roleClaimDbController.Create(newRoleClaim);
-			return newRoleClaim;
+
+            Logger.Info($"RoleId: {newRoleClaim?.RoleId}, ClaimId: {newRoleClaim?.ClaimId}");
+
+            return newRoleClaim;
 		}
 
-		public void Delete(int roleID, int claim)
+		public void Delete(int roleId, int claimId)
 		{
-			_roleClaimDbController.Delete(roleID, claim);
-		}
+			_roleClaimDbController.Delete(roleId, claimId);
+
+            Logger.Info($"RoleId: {roleId}, ClaimId: {claimId}");
+        }
 	}
 }

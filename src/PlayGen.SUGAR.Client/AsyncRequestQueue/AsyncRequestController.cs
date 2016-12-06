@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using PlayGen.SUGAR.Client.Utilities;
-using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 {
@@ -54,16 +52,12 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
         {
             var item = new QueueItem(request, onSuccess, onError);
             EnqueueRequest(item);
-
-            Log.Debug($"AsyncRequestController.EnqueuedRequest");
         }
 
         public void EnqueueRequest<TResult>(Func<TResult> request, Action<TResult> onSuccess, Action<Exception> onError)
         {
             var item = new QueueItem<TResult>(request, onSuccess, onError);
             EnqueueRequest(item);
-
-            Log.Debug($"AsyncRequestController.EnqueuedRequest<{typeof(TResult).Name}>");
         }
 
         public void Clear()
@@ -73,8 +67,6 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
                 _responses.Clear();
                 _requests.Clear();
             }
-
-            Log.Debug($"AsyncRequestController.Clear");
         }
 
         public bool TryExecuteResponse()
@@ -93,8 +85,6 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
                 { 
                     response = _responses.Dequeue();
                     didDequeue = true;
-
-                    Log.Debug($"AsyncRequestController.TryExecuteResponse: Found and dequeued response");
                 }
             }
 

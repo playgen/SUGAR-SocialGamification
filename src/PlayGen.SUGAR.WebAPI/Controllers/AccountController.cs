@@ -13,6 +13,7 @@ using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
 using PlayGen.SUGAR.ServerAuthentication.Extensions;
 using PlayGen.SUGAR.WebAPI.Attributes;
+using NLog;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -25,7 +26,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.AccountController _accountCoreController;
 
-		public AccountController(Core.Controllers.AccountController accountCoreController,
+        public AccountController(Core.Controllers.AccountController accountCoreController,
 			IAuthorizationService authorizationService)
 		{
 			_accountCoreController = accountCoreController;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using NLog;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 
@@ -8,6 +8,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
     public class GroupController : ActorController
     {
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly Data.EntityFramework.Controllers.GroupController _groupDbController;
 		private readonly ActorClaimController _actorClaimController;
 		private readonly ActorRoleController _actorRoleController;
@@ -24,29 +26,41 @@ namespace PlayGen.SUGAR.Core.Controllers
             _groupMemberController = groupMemberController;
         }
         
-        public IEnumerable<Group> Get()
+        public List<Group> Get()
         {
             var groups = _groupDbController.Get();
+
+            Logger.Info($"{groups?.Count} Groups");
+
             return groups;
         }
 
-		public IEnumerable<Group> GetByPermissions(int actorId)
+		public List<Group> GetByPermissions(int actorId)
 		{
 			var groups = Get();
 			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Group).Select(p => p.EntityId).ToList();
-			groups = groups.Where(g => permissions.Contains(g.Id));
-			return groups;
+			groups = groups.Where(g => permissions.Contains(g.Id)).ToList();
+
+            Logger.Info($"{groups?.Count} Groups");
+
+            return groups;
 		}
 
 		public Group Get(int id)
         {
             var group = _groupDbController.Get(id);
+
+            Logger.Info($"Group: {group?.Id} for Id: {id}");
+
             return group;
         }
 
-        public IEnumerable<Group> Search(string name)
+        public List<Group> Search(string name)
         {
             var groups = _groupDbController.Get(name);
+
+            Logger.Info($"{groups?.Count} Groups for Name: {name}");
+
             return groups;
         }
         
@@ -55,12 +69,17 @@ namespace PlayGen.SUGAR.Core.Controllers
             newGroup = _groupDbController.Create(newGroup);
             _actorRoleController.Create(ClaimScope.Group.ToString(), creatorId, newGroup.Id);
 			_groupMemberController.CreateMemberRequest(new UserToGroupRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
-			return newGroup;
+
+            Logger.Info($"{newGroup?.Id} for CreatorId: {creatorId}");
+
+            return newGroup;
         }
         
         public void Update(Group group)
         {
             _groupDbController.Update(group);
+
+            Logger.Info($"{group?.Id}");
         }
         
         public void Delete(int id)
@@ -68,6 +87,8 @@ namespace PlayGen.SUGAR.Core.Controllers
             TriggerDeletedEvent(id);
 
             _groupDbController.Delete(id);
+
+            Logger.Info($"{id}");
         }
     }
 }

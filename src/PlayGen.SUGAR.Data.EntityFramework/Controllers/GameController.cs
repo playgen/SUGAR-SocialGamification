@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
         {
         }
 
-        public IEnumerable<Game> Get()
+        public List<Game> Get()
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public IEnumerable<Game> Search(string name)
+		public List<Game> Search(string name)
 		{
 			using (var context = ContextFactory.Create())
 			{
