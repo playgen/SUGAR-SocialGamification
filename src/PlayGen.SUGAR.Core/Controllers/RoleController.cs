@@ -29,9 +29,6 @@ namespace PlayGen.SUGAR.Core.Controllers
             return roles;
 		}
 
-
-            Logger.Info($"Role: {role?.Id} for Name: {name}");
-
 		public Role GetById(int id)
 		{
 			var role = _roleDbController.Get(id);
