@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var actor = _userFriendCoreController.GetFriendRequests(userId);
-                var actorContract = actor.ToContractList();
+                var actorContract = actor.ToActorContractList();
                 return new ObjectResult(actorContract);
             }
             return Forbid();
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var actor = _userFriendCoreController.GetSentRequests(userId);
-                var actorContract = actor.ToContractList();
+                var actorContract = actor.ToActorContractList();
                 return new ObjectResult(actorContract);
             }
             return Forbid();
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult GetFriends([FromRoute]int userId)
 		{
 			var actor = _userFriendCoreController.GetFriends(userId);
-			var actorContract = actor.ToContractList();
+			var actorContract = actor.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
 

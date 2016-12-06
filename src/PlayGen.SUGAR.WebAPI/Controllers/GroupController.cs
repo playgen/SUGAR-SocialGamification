@@ -32,9 +32,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// 
 		/// Example Usage: GET api/group/list
 		/// </summary>
-		/// <returns>A list of <see cref="ActorResponse"/> that hold Group details.</returns>
+		/// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
 		[HttpGet("list")]
-		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<GroupResponse>))]
 		public IActionResult Get()
 		{
 			var groups = _groupCoreController.GetByPermissions(int.Parse(User.Identity.Name));
@@ -48,9 +48,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: GET api/group/find/group1
 		/// </summary>
 		/// <param name="name">Group name.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		/// <returns>A list of <see cref="GroupResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
-		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<GroupResponse>))]
 		public IActionResult Get([FromRoute]string name)
 		{
 			var groups = _groupCoreController.Search(name);
@@ -65,9 +65,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: GET api/group/findbyid/1
 		/// </summary>
 		/// <param name="id">Group id.</param>
-		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
+		/// <returns><see cref="GroupResponse"/> which matches search criteria.</returns>
 		[HttpGet("findbyid/{id:int}", Name = "GetByGroupId")]
-		//[ResponseType(typeof(ActorResponse))]
+		//[ResponseType(typeof(GroupResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
 			var group = _groupCoreController.Get(id);
@@ -77,17 +77,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new Group.
-		/// Requires the <see cref="ActorRequest.Name"/> to be unique for Groups.
+		/// Requires the <see cref="GroupRequest.Name"/> to be unique for Groups.
 		/// 
 		/// Example Usage: POST api/group
 		/// </summary>
-		/// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new Group.</param>
-		/// <returns>A <see cref="ActorResponse"/> containing the new Group details.</returns>
+		/// <param name="actor"><see cref="GroupRequest"/> object that holds the details of the new Group.</param>
+		/// <returns>A <see cref="GroupResponse"/> containing the new Group details.</returns>
 		[HttpPost]
-		//[ResponseType(typeof(ActorResponse))]
+		//[ResponseType(typeof(GroupResponse))]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.Group)]
-        public IActionResult Create([FromBody]ActorRequest actor)
+        public IActionResult Create([FromBody]GroupRequest actor)
 		{
             if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
@@ -105,12 +105,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: PUT api/group/update/1
 		/// </summary>
 		/// <param name="id">Id of the existing Group.</param>
-		/// <param name="group"><see cref="ActorRequest"/> object that holds the details of the Group.</param>
+		/// <param name="group"><see cref="GroupRequest"/> object that holds the details of the Group.</param>
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Group)]
         // todo refactor to use groupupdaterequest that contains an Id property and have a separate groupcreaterequest that doen't have the Id
-        public IActionResult Update([FromRoute] int id, [FromBody] ActorRequest group)
+        public IActionResult Update([FromRoute] int id, [FromBody] GroupRequest group)
 		{
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {

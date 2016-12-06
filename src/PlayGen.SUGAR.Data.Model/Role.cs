@@ -12,6 +12,8 @@ namespace PlayGen.SUGAR.Data.Model
 
         public ClaimScope ClaimScope { get; set; }
 
+		public bool Default { get; set; }
+
 		public virtual List<RoleClaim> RoleClaims { get; set; }
 	}
 }

@@ -17,7 +17,7 @@
 		/// <summary>
 		/// ActorResponse object containing the user details.
 		/// </summary>
-		public ActorResponse User { get; set; }
+		public UserResponse User { get; set; }
 
 		public AccountResponse()
 		{

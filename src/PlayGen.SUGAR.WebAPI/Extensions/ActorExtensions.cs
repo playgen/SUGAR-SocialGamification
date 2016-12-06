@@ -7,12 +7,12 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class ActorExtensions
 	{
-        public static IEnumerable<ActorResponse> ToContractList(this IEnumerable<Actor> actorModels)
+        public static IEnumerable<ActorResponse> ToActorContractList(this IEnumerable<Actor> actorModels)
         {
-            return actorModels.Select(ToContract).ToList();
+            return actorModels.Select(ToActorContract).ToList();
         }
 
-        public static ActorResponse ToContract(this Actor model)
+        public static ActorResponse ToActorContract(this Actor model)
 	    {
 	        return new ActorResponse
 	        {

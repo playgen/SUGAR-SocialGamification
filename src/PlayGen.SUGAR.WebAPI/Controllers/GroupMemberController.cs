@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, groupId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var users = _groupMemberCoreController.GetMemberRequests(groupId);
-                var actorContract = users.ToContractList();
+                var actorContract = users.ToActorContractList();
                 return new ObjectResult(actorContract);
             }
             return Forbid();
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var requests = _groupMemberCoreController.GetSentRequests(userId);
-                var actorContract = requests.ToContractList();
+                var actorContract = requests.ToActorContractList();
                 return new ObjectResult(actorContract);
             }
             return Forbid();
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult GetMembers([FromRoute]int groupId)
 		{
 			var members = _groupMemberCoreController.GetMembers(groupId);
-			var actorContract = members.ToContractList();
+			var actorContract = members.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
 
@@ -112,7 +112,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult GetUserGroups([FromRoute]int userId)
 		{
 			var groups = _groupMemberCoreController.GetUserGroups(userId);
-			var actorContract = groups.ToContractList();
+			var actorContract = groups.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
 

@@ -31,6 +31,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationUpdateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GroupRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GroupResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardStandingsRequest.cs" />
@@ -52,5 +54,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)RoleResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaveDataRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaveDataResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UserRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UserResponse.cs" />
   </ItemGroup>
 </Project>

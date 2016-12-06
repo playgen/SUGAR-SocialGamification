@@ -8,31 +8,31 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 	public static class UserExtensions
 	{
 
-		public static ActorResponse ToContract(this User userModel)
+		public static UserResponse ToContract(this User userModel)
 		{
 			if (userModel == null)
 			{
 				return null;
 			}
-			var actorContract = new ActorResponse
+			var userContract = new UserResponse
 			{
 				Id = userModel.Id,
 				Name = userModel.Name
 			};
 
-			return actorContract;
+			return userContract;
 		}
 
-		public static IEnumerable<ActorResponse> ToContractList(this IEnumerable<User> userModels)
+		public static IEnumerable<UserResponse> ToContractList(this IEnumerable<User> userModels)
 		{
 			return userModels.Select(ToContract).ToList();
 		}
 
-		public static User ToUserModel(this ActorRequest actorContract)
+		public static User ToUserModel(this UserRequest userContract)
 		{
 			return new User
 			{
-			    Name = actorContract.Name
+			    Name = userContract.Name
 			};
 		}
 	}

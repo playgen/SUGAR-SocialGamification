@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// 
 		/// Example Usage: GET api/actorclaim/claim/1/entity/1
 		/// </summary>
-		/// <returns>A list of <see cref="ActorClaimResponse"/> that hold ActorClaim details.</returns>
+		/// <returns>A list of <see cref="ActorResponse"/> that hold ActorClaim details.</returns>
 		[HttpGet("claim/{claimId:int}/entity/{entityId:int}")]
 		//[ResponseType(typeof(IEnumerable<ActorClaimResponse>))]
 		[Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.ActorClaim)]
@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 				_authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var actors = _actorClaimCoreController.GetClaimActors(claimId, entityId);
-				var actorContract = actors.ToContractList();
+				var actorContract = actors.ToActorContractList();
 				return new ObjectResult(actorContract);
 			}
 			return Forbid();

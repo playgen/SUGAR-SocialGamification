@@ -71,7 +71,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
         {
             return new EvaluationProgressResponse
             {
-                Actor = model.Actor.ToContract(),
+                Actor = model.Actor.ToActorContract(),
                 Name = model.Name,
                 Progress = model.Progress,
             };

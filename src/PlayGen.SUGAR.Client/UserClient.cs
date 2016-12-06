@@ -20,11 +20,11 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Get a list of all Users.
 		/// </summary>
-		/// <returns>A list of <see cref="ActorResponse"/> that hold User details.</returns>
-		public IEnumerable<ActorResponse> Get()
+		/// <returns>A list of <see cref="UserResponse"/> that hold User details.</returns>
+		public IEnumerable<UserResponse> Get()
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/list").ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			return Get<IEnumerable<UserResponse>>(query);
 		}
 
 		/// <summary>
@@ -32,42 +32,42 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="name">Array of User names.</param>
 		/// <param name="exactMatch">Match the name exactly.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> Get(string name, bool exactMatch = false)
+		/// <returns>A list of <see cref="UserResponse"/> which match the search criteria.</returns>
+		public IEnumerable<UserResponse> Get(string name, bool exactMatch = false)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/find/{0}", name).ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			return Get<IEnumerable<UserResponse>>(query);
 		}
 
 		/// <summary>
 		/// Get User that matches <param name="id"/> provided.
 		/// </summary>
 		/// <param name="id">User id.</param>
-		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
-		public ActorResponse Get(int id)
+		/// <returns><see cref="UserResponse"/> which matches search criteria.</returns>
+		public UserResponse Get(int id)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/findbyid/{0}", id).ToString();
-			return Get<ActorResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<UserResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
 		/// Create a new User.
-		/// Requires the <see cref="ActorRequest.Name"/> to be unique for Users.
+		/// Requires the <see cref="UserRequest.Name"/> to be unique for Users.
 		/// </summary>
-		/// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new User.</param>
-		/// <returns>A <see cref="ActorResponse"/> containing the new User details.</returns>
-		public ActorResponse Create(ActorRequest actor)
+		/// <param name="actor"><see cref="UserRequest"/> object that holds the details of the new User.</param>
+		/// <returns>A <see cref="UserResponse"/> containing the new User details.</returns>
+		public UserResponse Create(UserRequest actor)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "").ToString();
-			return Post<ActorRequest, ActorResponse>(query, actor);
+			return Post<UserRequest, UserResponse>(query, actor);
 		}
 
 		/// <summary>
 		/// Update an existing User.
 		/// </summary>
 		/// <param name="id">Id of the existing User.</param>
-		/// <param name="user"><see cref="ActorRequest"/> object that holds the details of the User.</param>
-		public void Update(int id, ActorRequest user)
+		/// <param name="user"><see cref="UserRequest"/> object that holds the details of the User.</param>
+		public void Update(int id, UserRequest user)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/update/{0}", id).ToString();
 			Put(query, user);
