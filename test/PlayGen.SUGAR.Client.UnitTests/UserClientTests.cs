@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateUser()
 		{
-			var userRequest = new ActorRequest
+			var userRequest = new UserRequest
 			{
 				Name = "CanCreateUser",
 			};
@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateDuplicateUser()
 		{
-			var userRequest = new ActorRequest
+			var userRequest = new UserRequest
 			{
 				Name = "CannotCreateDuplicateUser",
 			};
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateUserWithNoName()
 		{
-			var userRequest = new ActorRequest { };
+			var userRequest = new UserRequest { };
 
 			Assert.Throws<ClientException>(() => SUGARClient.User.Create(userRequest));
 		}
@@ -45,14 +45,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetUsersByName()
 		{
-			var userRequestOne = new ActorRequest
+			var userRequestOne = new UserRequest
 			{
 				Name = "CanGetUsersByName 1",
 			};
 
 			var responseOne = SUGARClient.User.Create(userRequestOne);
 
-			var userRequestTwo = new ActorRequest
+			var userRequestTwo = new UserRequest
 			{
 				Name = "CanGetUsersByName 2",
 			};
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetUserById()
 		{
-			var userRequest = new ActorRequest
+			var userRequest = new UserRequest
 			{
 				Name = "CanGetUserById",
 			};
@@ -105,14 +105,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanUpdateUser()
 		{
-			var userRequest = new ActorRequest
+			var userRequest = new UserRequest
 			{
 				Name = "CanUpdateUser",
 			};
 
 			var response = SUGARClient.User.Create(userRequest);
 
-			var updateRequest = new ActorRequest
+			var updateRequest = new UserRequest
 			{
 				Name = "CanUpdateUser Updated"
 			};
@@ -128,21 +128,21 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateUserToDuplicateName()
 		{
-			var userRequestOne = new ActorRequest
+			var userRequestOne = new UserRequest
 			{
 				Name = "CannotUpdateUserToDuplicateName 1"
 			};
 
 			var responseOne = SUGARClient.User.Create(userRequestOne);
 
-			var userRequestTwo = new ActorRequest
+			var userRequestTwo = new UserRequest
 			{
 				Name = "CannotUpdateUserToDuplicateName 2"
 			};
 
 			var responseTwo = SUGARClient.User.Create(userRequestTwo);
 
-			var updateUser = new ActorRequest
+			var updateUser = new UserRequest
 			{
 				Name = userRequestOne.Name
 			};
@@ -153,7 +153,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateNonExistingUser()
 		{
-			var updateUser = new ActorRequest
+			var updateUser = new UserRequest
 			{
 				Name = "CannotUpdateNonExistingUser"
 			};
@@ -164,14 +164,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateUserToNoName()
 		{
-			var userRequest = new ActorRequest
+			var userRequest = new UserRequest
 			{
 				Name = "CannotUpdateUserToNoName",
 			};
 
 			var response = SUGARClient.User.Create(userRequest);
 
-			var updateRequest = new ActorRequest
+			var updateRequest = new UserRequest
 			{
 			};
 
@@ -181,7 +181,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanDeleteUser()
 		{
-			var userRequest = new ActorRequest
+			var userRequest = new UserRequest
 			{
 				Name = "CanDeleteUser",
 			};

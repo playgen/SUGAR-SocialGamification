@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanCreateGroup()
 		{
-			var groupRequest = new ActorRequest
+			var groupRequest = new GroupRequest
 			{
 				Name = "CanCreateGroup",
 			};
@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateDuplicateGroup()
 		{
-			var groupRequest = new ActorRequest
+			var groupRequest = new GroupRequest
 			{
 				Name = "CannotCreateDuplicateGroup",
 			};
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateGroupWithNoName()
 		{
-			var groupRequest = new ActorRequest { };
+			var groupRequest = new GroupRequest { };
 
 			Assert.Throws<ClientException>(() => SUGARClient.Group.Create(groupRequest));
 		}
@@ -45,14 +45,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGroupsByName()
 		{
-			var groupRequestOne = new ActorRequest
+			var groupRequestOne = new GroupRequest
 			{
 				Name = "CanGetGroupsByName 1",
 			};
 
 			var responseOne = SUGARClient.Group.Create(groupRequestOne);
 
-			var groupRequestTwo = new ActorRequest
+			var groupRequestTwo = new GroupRequest
 			{
 				Name = "CanGetGroupsByName 2",
 			};
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGroupById()
 		{
-			var groupRequest = new ActorRequest
+			var groupRequest = new GroupRequest
 			{
 				Name = "CanGetGroupById",
 			};
@@ -105,14 +105,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanUpdateGroup()
 		{
-			var groupRequest = new ActorRequest
+			var groupRequest = new GroupRequest
 			{
 				Name = "CanUpdateGroup",
 			};
 
 			var response = SUGARClient.Group.Create(groupRequest);
 
-			var updateRequest = new ActorRequest
+			var updateRequest = new GroupRequest
 			{
 				Name = "CanUpdateGroup Updated"
 			};
@@ -128,21 +128,21 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateGroupToDuplicateName()
 		{
-			var groupRequestOne = new ActorRequest
+			var groupRequestOne = new GroupRequest
 			{
 				Name = "CannotUpdateGroupToDuplicateName 1"
 			};
 
 			var responseOne = SUGARClient.Group.Create(groupRequestOne);
 
-			var groupRequestTwo = new ActorRequest
+			var groupRequestTwo = new GroupRequest
 			{
 				Name = "CannotUpdateGroupToDuplicateName 2"
 			};
 
 			var responseTwo = SUGARClient.Group.Create(groupRequestTwo);
 
-			var updateGroup = new ActorRequest
+			var updateGroup = new GroupRequest
 			{
 				Name = groupRequestOne.Name
 			};
@@ -153,7 +153,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateNonExistingGroup()
 		{
-			var updateGroup = new ActorRequest
+			var updateGroup = new GroupRequest
 			{
 				Name = "CannotUpdateNonExistingGroup"
 			};
@@ -164,14 +164,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotUpdateGroupToNoName()
 		{
-			var groupRequest = new ActorRequest
+			var groupRequest = new GroupRequest
 			{
 				Name = "CannotUpdateGroupToNoName",
 			};
 
 			var response = SUGARClient.Group.Create(groupRequest);
 
-			var updateRequest = new ActorRequest
+			var updateRequest = new GroupRequest
 			{
 			};
 
@@ -181,7 +181,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanDeleteGroup()
 		{
-			var groupRequest = new ActorRequest
+			var groupRequest = new GroupRequest
 			{
 				Name = "CanDeleteGroup",
 			};

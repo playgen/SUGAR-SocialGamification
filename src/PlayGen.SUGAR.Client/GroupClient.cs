@@ -20,53 +20,53 @@ namespace PlayGen.SUGAR.Client
 		/// <summary>
 		/// Get a list of all Groups.
 		/// </summary>
-		/// <returns>A list of <see cref="ActorResponse"/> that hold Group details.</returns>
-		public IEnumerable<ActorResponse> Get()
+		/// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
+		public IEnumerable<GroupResponse> Get()
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/list").ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			return Get<IEnumerable<GroupResponse>>(query);
 		}
 
 		/// <summary>
 		/// Get a list of Groups that match <param name="name"/> provided.
 		/// </summary>
 		/// <param name="name">Group name.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> Get(string name)
+		/// <returns>A list of <see cref="GroupResponse"/> which match the search criteria.</returns>
+		public IEnumerable<GroupResponse> Get(string name)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/find/{0}", name).ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			return Get<IEnumerable<GroupResponse>>(query);
 		}
 
 		/// <summary>
 		/// Get Group that matches <param name="id"/> provided.
 		/// </summary>
 		/// <param name="id">Group id.</param>
-		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
-		public ActorResponse Get(int id)
+		/// <returns><see cref="GroupResponse"/> which matches search criteria.</returns>
+		public GroupResponse Get(int id)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/findbyid/{0}", id).ToString();
-			return Get<ActorResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
+			return Get<GroupResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
 		/// <summary>
 		/// Create a new Group.
-		/// Requires the <see cref="ActorRequest.Name"/> to be unique for Groups.
+		/// Requires the <see cref="GroupRequest.Name"/> to be unique for Groups.
 		/// </summary>
-		/// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new Group.</param>
-		/// <returns>A <see cref="ActorResponse"/> containing the new Group details.</returns>
-		public ActorResponse Create(ActorRequest actor)
+		/// <param name="actor"><see cref="GroupRequest"/> object that holds the details of the new Group.</param>
+		/// <returns>A <see cref="GroupResponse"/> containing the new Group details.</returns>
+		public GroupResponse Create(GroupRequest actor)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "").ToString();
-			return Post<ActorRequest, ActorResponse>(query, actor);
+			return Post<GroupRequest, GroupResponse>(query, actor);
 		}
 
 		/// <summary>
 		/// Update an existing Group.
 		/// </summary>
 		/// <param name="id">Id of the existing Group.</param>
-		/// <param name="group"><see cref="ActorRequest"/> object that holds the details of the Group.</param>
-		public void Update(int id, ActorRequest group)
+		/// <param name="group"><see cref="GroupRequest"/> object that holds the details of the Group.</param>
+		public void Update(int id, GroupRequest group)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/update/{0}", id).ToString();
 			Put(query, group);

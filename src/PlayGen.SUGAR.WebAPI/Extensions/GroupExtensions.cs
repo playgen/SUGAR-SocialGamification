@@ -7,31 +7,32 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class GroupExtensions
 	{
-		public static ActorResponse ToContract(this Group groupModel)
+		public static GroupResponse ToContract(this Group groupModel)
 		{
 			if (groupModel == null)
 			{
 				return null;
 			}
-			var actorContract = new ActorResponse
+			var groupContract = new GroupResponse
 			{
 				Id = groupModel.Id,
-				Name = groupModel.Name
+				Name = groupModel.Name,
+				MemberCount = groupModel.UserToGroupRelationships != null ? groupModel.UserToGroupRelationships.Count : 0
 			};
 
-			return actorContract;
+			return groupContract;
 		}
 
-		public static IEnumerable<ActorResponse> ToContractList(this IEnumerable<Group> groupModels)
+		public static IEnumerable<GroupResponse> ToContractList(this IEnumerable<Group> groupModels)
 		{
 			return groupModels.Select(ToContract).ToList();
 		}
 
-		public static Group ToGroupModel(this ActorRequest actorContract)
+		public static Group ToGroupModel(this GroupRequest groupContract)
 		{
 			return new Group
 			{
-			    Name = actorContract.Name
+			    Name = groupContract.Name
 			};
 		}
 	}

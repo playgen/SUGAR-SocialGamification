@@ -32,9 +32,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// 
 		/// Example Usage: GET api/user/list
 		/// </summary>
-		/// <returns>A list of <see cref="ActorResponse"/> that hold User details.</returns>
+		/// <returns>A list of <see cref="UserResponse"/> that hold User details.</returns>
 		[HttpGet("list")]
-        //[ResponseType(typeof(IEnumerable<ActorResponse>))]
+        //[ResponseType(typeof(IEnumerable<UserResponse>))]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.User)]
         public IActionResult Get()
 		{
@@ -54,9 +54,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// </summary>
 		/// <param name="name">User name.</param>
 		/// <param name="exactMatch">Match the name exactly.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		/// <returns>A list of <see cref="UserResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
-		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
+		//[ResponseType(typeof(IEnumerable<UserResponse>))]
 		public IActionResult Get([FromRoute]string name, bool exactMatch)
 		{
 			var users = _userCoreController.Search(name, exactMatch);
@@ -70,9 +70,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: GET api/user/findbyid/1
 		/// </summary>
 		/// <param name="id">User id.</param>
-		/// <returns><see cref="ActorResponse"/> which matches search criteria.</returns>
+		/// <returns><see cref="UserResponse"/> which matches search criteria.</returns>
 		[HttpGet("findbyid/{id:int}", Name = "GetByUserId")]
-		//[ResponseType(typeof(ActorResponse))]
+		//[ResponseType(typeof(UserResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
 			var user = _userCoreController.Get(id);
@@ -82,17 +82,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new User.
-		/// Requires the <see cref="ActorRequest.Name"/> to be unique for Users.
+		/// Requires the <see cref="UserRequest.Name"/> to be unique for Users.
 		/// 
 		/// Example Usage: POST api/user
 		/// </summary>
-		/// <param name="actor"><see cref="ActorRequest"/> object that holds the details of the new User.</param>
-		/// <returns>A <see cref="ActorResponse"/> containing the new User details.</returns>
+		/// <param name="actor"><see cref="UserRequest"/> object that holds the details of the new User.</param>
+		/// <returns>A <see cref="UserResponse"/> containing the new User details.</returns>
 		[HttpPost]
-		//[ResponseType(typeof(ActorResponse))]
+		//[ResponseType(typeof(UserResponse))]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.User)]
-        public IActionResult Create([FromBody]ActorRequest actor)
+        public IActionResult Create([FromBody]UserRequest actor)
 		{
             if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
@@ -110,11 +110,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// Example Usage: PUT api/user/update/1
 		/// </summary>
 		/// <param name="id">Id of the existing User.</param>
-		/// <param name="user"><see cref="ActorRequest"/> object that holds the details of the User.</param>
+		/// <param name="user"><see cref="UserRequest"/> object that holds the details of the User.</param>
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
         [Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.User)]
-        public IActionResult Update([FromRoute] int id, [FromBody] ActorRequest user)
+        public IActionResult Update([FromRoute] int id, [FromBody] UserRequest user)
 		{
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {

@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public Role Create(Role newRole, int creatorId)
 		{
-			if (newRole.Name == newRole.ClaimScope.ToString())
+			if (newRole.Name.ToLower() == newRole.ClaimScope.ToString().ToLower())
 			{
 				throw new ArgumentException("Roles cannot be created with the same name as the ClaimScope they are for.");
 			}
@@ -72,6 +72,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public void Delete(int id)
 		{
+			//To-do: May need to check claims don't become inaccessible due to deletion
 			_roleDbController.Delete(id);
 
             Logger.Info($"{id}");

@@ -19,7 +19,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             }
             else
             {
-                user = userClient.Create(new ActorRequest
+                user = userClient.Create(new UserRequest
                 {
                     Name = name
                 });
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             }
             else
             {
-                group = groupClient.Create(new ActorRequest
+                group = groupClient.Create(new GroupRequest
                 {
                     Name = name
                 });

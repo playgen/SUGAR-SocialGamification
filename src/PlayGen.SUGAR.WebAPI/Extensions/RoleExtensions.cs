@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             {
                 Id = roleModel.Id,
                 Name = roleModel.Name,
-				Default = Enum.GetNames(typeof(ClaimScope)).Contains(roleModel.Name),
+				Default = roleModel.Default,
                 ClaimScope = roleModel.ClaimScope
             };
         }
@@ -36,7 +36,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             return new Role
             {
                 Name = roleContract.Name,
-                ClaimScope = roleContract.ClaimScope
+                ClaimScope = roleContract.ClaimScope,
+				Default = false
             };
         }
 

@@ -32,7 +32,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				var groups = context.Groups
 					.IncludeAll()
-					.Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
+					.Where(g => g.Name.ToLower().Contains(name.ToLower()))
+					.ToList();
 
 				return groups;
 			}

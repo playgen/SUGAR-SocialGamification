@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, groupId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var users = _groupMemberCoreController.GetMemberRequests(groupId);
-                var actorContract = users.ToContractList();
+                var actorContract = users.ToActorContractList();
                 return new ObjectResult(actorContract);
             }
             return Forbid();
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
                 var requests = _groupMemberCoreController.GetSentRequests(userId);
-                var actorContract = requests.ToContractList();
+                var actorContract = requests.ToActorContractList();
                 return new ObjectResult(actorContract);
             }
             return Forbid();
@@ -81,8 +81,23 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult GetMembers([FromRoute]int groupId)
 		{
 			var members = _groupMemberCoreController.GetMembers(groupId);
-			var actorContract = members.ToContractList();
+			var actorContract = members.ToActorContractList();
 			return new ObjectResult(actorContract);
+		}
+
+		/// <summary>
+		/// Get a count of users that have a relationship with this <param name="groupId"/>.
+		/// 
+		/// Example Usage: GET api/groupmember/membercount/1
+		/// </summary>
+		/// <param name="groupId">ID of the group.</param>
+		/// <returns>A count of members in the group thst matches the search criteria.</returns>
+		[HttpGet("membercount/{groupId:int}")]
+		//[ResponseType(typeof(int))]
+		public IActionResult GetMemberCount([FromRoute]int groupId)
+		{
+			var count = _groupMemberCoreController.GetMemberCount(groupId);
+			return new ObjectResult(count);
 		}
 
 		/// <summary>
@@ -97,7 +112,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		public IActionResult GetUserGroups([FromRoute]int userId)
 		{
 			var groups = _groupMemberCoreController.GetUserGroups(userId);
-			var actorContract = groups.ToContractList();
+			var actorContract = groups.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
 

@@ -14,7 +14,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 context.Roles.Add(new Role
                 {
                     Name = claimScope.ToString(),
-                    ClaimScope = claimScope
+                    ClaimScope = claimScope,
+					Default = true
                 });
             }
 
