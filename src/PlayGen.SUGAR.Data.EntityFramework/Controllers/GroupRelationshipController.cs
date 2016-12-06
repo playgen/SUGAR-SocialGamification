@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-                var requestors = context.UserToGroupRelationshipRequests
+				var requestors = context.UserToGroupRelationshipRequests
 					.Where(r => r.AcceptorId == id)
 					.Select(u => u.Requestor).ToList();
 
@@ -48,6 +48,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
+		public int GetMemberCount(int id)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				var count = context.UserToGroupRelationships
+					.Count(r => r.AcceptorId == id);
+
+				return count;
+			}
+		}
+
 		public IEnumerable<Group> GetUserGroups(int id)
 		{
 			using (var context = ContextFactory.Create())
@@ -60,8 +71,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-        // todo move auto accept logic into core controller
-        public void Create(UserToGroupRelationship newRelation, bool autoAccept)
+		// todo move auto accept logic into core controller
+		public void Create(UserToGroupRelationship newRelation, bool autoAccept)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -111,8 +122,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-        // todo move auto accept logic into core controller
-        public void UpdateRequest(UserToGroupRelationship newRelation, bool accepted)
+		// todo move auto accept logic into core controller
+		public void UpdateRequest(UserToGroupRelationship newRelation, bool accepted)
 		{
 			using (var context = ContextFactory.Create())
 			{

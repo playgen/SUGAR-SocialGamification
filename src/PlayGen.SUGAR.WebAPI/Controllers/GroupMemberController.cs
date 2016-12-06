@@ -86,6 +86,21 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// Get a count of users that have a relationship with this <param name="groupId"/>.
+		/// 
+		/// Example Usage: GET api/groupmember/membercount/1
+		/// </summary>
+		/// <param name="groupId">ID of the group.</param>
+		/// <returns>A count of members in the group thst matches the search criteria.</returns>
+		[HttpGet("membercount/{groupId:int}")]
+		//[ResponseType(typeof(int))]
+		public IActionResult GetMemberCount([FromRoute]int groupId)
+		{
+			var count = _groupMemberCoreController.GetMemberCount(groupId);
+			return new ObjectResult(count);
+		}
+
+		/// <summary>
 		/// Get a list of all Groups that have relationships with this <param name="userId"/>.
 		/// 
 		/// Example Usage: GET api/groupmember/usergroups/1
