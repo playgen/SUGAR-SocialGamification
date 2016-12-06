@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         public void SetUp()
         {
             DeleteDatabase();
-            
+
 #if DEBUG_SERVER
             while (!CanLogin())
             {
@@ -86,20 +86,16 @@ namespace PlayGen.SUGAR.Client.UnitTests
             var rootDir = Directory.GetParent(assemblyDir).Parent.Parent.Parent.FullName;
             var serverDir = $"{rootDir}{Path.DirectorySeparatorChar}src{Path.DirectorySeparatorChar}PlayGen.SUGAR.WebAPI";
 
-            _process = new Process
+            var startInfo = new ProcessStartInfo
             {
-                StartInfo = new ProcessStartInfo
-                {
-                    WorkingDirectory = serverDir,
-                    FileName = "cmd.exe",
-                    RedirectStandardInput = true,
-                    UseShellExecute = false,
-                }
+                WorkingDirectory = serverDir,
+                FileName = "dotnet",
+                Arguments = "run",
+                UseShellExecute = false,
+                EnvironmentVariables = { { "ASPNETCORE_ENVIRONMENT", "Development" } }
             };
-            
-            _process.Start();
-            _process.StandardInput.WriteLine("SET ASPNETCORE_ENVIRONMENT=Development");
-            _process.StandardInput.WriteLine("dotnet run");
+
+            _process = Process.Start(startInfo);
 
             // Wait for server to startup
             // todo find less hackey way to do this - handle cases where server wont startup
