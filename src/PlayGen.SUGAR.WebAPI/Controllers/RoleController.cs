@@ -85,9 +85,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         {
             if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
             {
+				
 				var role = _roleCoreController.GetById(id);
-				if (role.Name != role.ClaimScope.ToString())
+				if (!role.Default)
 				{
+					//Todo: May need to check claims don't become inaccessible due to deletion
 					_roleCoreController.Delete(id);
 					return Ok();
 				}

@@ -73,17 +73,20 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			if (_authorizationService.AuthorizeAsync(User, newRoleClaim.RoleId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
 			{
-				var roleScope = _roleController.GetById(newRoleClaim.RoleId).ClaimScope;
-				var claimScope = _claimController.Get(newRoleClaim.ClaimId).ClaimScope;
-				if (roleScope == claimScope)
+				var role = _roleController.GetById(newRoleClaim.RoleId);
+				if (!role.Default)
 				{
-					var claims = _actorClaimController.GetActorClaims(int.Parse(User.Identity.Name)).Select(c => c.ClaimId);
-					if (claims.Contains(newRoleClaim.ClaimId))
+					var claimScope = _claimController.Get(newRoleClaim.ClaimId).ClaimScope;
+					if (role.ClaimScope == claimScope)
 					{
-						var roleClaim = newRoleClaim.ToModel();
-						_roleClaimCoreController.Create(roleClaim);
-						var roleContract = roleClaim.ToContract();
-						return new ObjectResult(roleContract);
+						var claims = _actorClaimController.GetActorClaims(int.Parse(User.Identity.Name)).Select(c => c.ClaimId);
+						if (claims.Contains(newRoleClaim.ClaimId))
+						{
+							var roleClaim = newRoleClaim.ToModel();
+							_roleClaimCoreController.Create(roleClaim);
+							var roleContract = roleClaim.ToContract();
+							return new ObjectResult(roleContract);
+						}
 					}
 				}
 			}
@@ -104,8 +107,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			if (_authorizationService.AuthorizeAsync(User, roleId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
 			{
 				var role = _roleController.GetById(roleId);
-				if (role.Name != role.ClaimScope.ToString())
+				if (!role.Default)
 				{
+					//Todo: May need to check claims don't become inaccessible due to deletion
 					_roleClaimCoreController.Delete(roleId, claimId);
 					return Ok();
 				}

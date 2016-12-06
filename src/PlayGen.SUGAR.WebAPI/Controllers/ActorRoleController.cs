@@ -128,7 +128,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _authorizationService.AuthorizeAsync(User, actorRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
             {
 				var role = _roleController.GetById(actorRole.RoleId);
-				if (role.Name == role.ClaimScope.ToString())
+				if (role.Default)
 				{
 					var roleCount = _actorRoleCoreController.GetRoleActors(actorRole.RoleId, actorRole.EntityId.Value).Count();
 					if (roleCount > 1)
