@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public void Create(string roleName, int actorId, int? entityId)
 		{
-			var role = _roleController.Get(roleName);
+			var role = _roleController.GetDefault(roleName);
 			if (role != null)
 			{
 				Create(new ActorRole { ActorId = actorId, RoleId = role.Id, EntityId = entityId.Value });

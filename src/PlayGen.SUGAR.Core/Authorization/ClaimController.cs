@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.Core.Authorization
             var newOperations = currentOperations.Where(o => !dbOperations.Any(db => db.Token == o.Token && db.ClaimScope == o.ClaimScope)).ToList();
             newOperations = _claimDbController.Create(newOperations).ToList();
 
-            var roles = _roleDbController.Get().ToList();
+            var roles = _roleDbController.Get().Where(r => r.Default).ToList();
 
             foreach (var op in newOperations)
             {
