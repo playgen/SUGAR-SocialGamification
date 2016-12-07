@@ -30,6 +30,11 @@
 		public int ClaimId { get; set; }
 
 		/// <summary>
+		/// The name of the claim related to this actorclaim.
+		/// </summary>
+		public string ClaimName { get; set; }
+
+		/// <summary>
 		/// The ID of the entity (game, actor etc) related to this actorclaim.
 		/// </summary>
 		public int? EntityId { get; set; }

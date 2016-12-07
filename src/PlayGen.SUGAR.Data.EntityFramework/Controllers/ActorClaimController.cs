@@ -61,6 +61,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				context.ActorClaims.Add(actorClaim);
 				SaveChanges(context);
+				actorClaim.Claim = context.Claims.Find(context, actorClaim.ClaimId);
 
 				return actorClaim;
 			}

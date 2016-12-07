@@ -18,7 +18,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				Id = actorClaimModel.Id,
 				ActorId = actorClaimModel.ActorId,
-				ClaimId = actorClaimModel.ClaimId,
+				ClaimId = actorClaimModel.Claim.Id,
+				ClaimName = actorClaimModel.Claim.Token,
 				EntityId = actorClaimModel.EntityId
 			};
 		}
