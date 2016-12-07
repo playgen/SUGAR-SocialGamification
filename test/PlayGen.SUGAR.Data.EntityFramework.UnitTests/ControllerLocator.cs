@@ -27,6 +27,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
         private static RoleClaimController _roleClaimController;
         private static UserController _userController;
 		private static UserRelationshipController _userRelationshipController;
+	    private static MatchController _matchController;
 
         public static AccountController AccountController
 			=> _accountController ?? (_accountController = new AccountController(ContextFactory));
@@ -75,5 +76,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
         public static UserRelationshipController UserRelationshipController
 			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(ContextFactory));
-    }
+
+	    public static MatchController MatchController
+	        => _matchController ?? (_matchController = new MatchController(ContextFactory));
+	}
 }

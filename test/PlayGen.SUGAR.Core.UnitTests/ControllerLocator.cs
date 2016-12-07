@@ -23,6 +23,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         private static RoleClaimController _roleClaimController;
         private static UserController _userController;
         private static UserFriendController _userFriendController;
+        private static MatchController _matchController;
 
         public static AccountController AccountController
             => _accountController ?? (_accountController = new AccountController(DbControllerLocator.AccountController, AccountSourceController, UserController, ActorRoleController));
@@ -78,5 +79,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         public static UserFriendController UserFriendController
             => _userFriendController ?? (_userFriendController = new UserFriendController(DbControllerLocator.UserRelationshipController));
 
+        public static MatchController MatchController
+            => _matchController ?? (_matchController = new MatchController(DbControllerLocator.MatchController));
     }
 }

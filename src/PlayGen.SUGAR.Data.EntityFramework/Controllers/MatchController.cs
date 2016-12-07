@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             using (var context = ContextFactory.Create())
             {
                 return context.Matches
-                    .Where(m => start <= m.Started && m.Ended <= end)
+                    .FilterByDateTimeRange(start, end)
                     .ToList();
             }
         }
@@ -46,7 +46,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             using (var context = ContextFactory.Create())
             {
                 return context.Matches
-                    .Where(m => m.GameId == gameId && start <= m.Started && m.Ended <= end)
+                    .Where(m => m.GameId == gameId)
+                    .FilterByDateTimeRange(start, end) 
                     .ToList();
             }
         }
@@ -66,7 +67,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             using (var context = ContextFactory.Create())
             {
                 return context.Matches
-                    .Where(m => m.CreatorId == creatorId && start <= m.Started && m.Ended <= end)
+                    .Where(m => m.CreatorId == creatorId)
+                    .FilterByDateTimeRange(start, end)
                     .ToList();
             }
         }

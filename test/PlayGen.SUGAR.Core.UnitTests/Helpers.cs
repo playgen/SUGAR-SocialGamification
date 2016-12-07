@@ -130,6 +130,5 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
 	        return evaluation;
 	    }
-
 	}
 }

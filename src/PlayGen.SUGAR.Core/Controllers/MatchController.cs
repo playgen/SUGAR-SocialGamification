@@ -32,13 +32,15 @@ namespace PlayGen.SUGAR.Core.Controllers
             return match;
         }
 
-        public void End(int matchId)
+        public Match End(int matchId)
         {
             var match = _matchDbController.Get(matchId);
             match.Ended = DateTime.UtcNow;
             _matchDbController.Update(match);
 
             Logger.Info($"Match: {match.Id} ended");
+
+            return match;
         }
 
         public List<Match> GetByTime(DateTime start, DateTime end)
