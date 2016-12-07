@@ -10,11 +10,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 	public class GameController : DbController
 	{
 		public GameController(SUGARContextFactory contextFactory)
-            : base(contextFactory)
-        {
-        }
+			: base(contextFactory)
+		{
+		}
 
-        public List<Game> Get()
+		public List<Game> Get()
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				context.Games.Add(game);
 				SaveChanges(context);
 
-			    return game;
+				return game;
 			}
 		}
 
@@ -57,11 +57,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-                // todo replace with entire block with: (and update unit tests)
-                // context.[tablename].Update(entity);
-                // context.SaveChanges();
+				// todo replace with entire block with: (and update unit tests)
+				// context.[tablename].Update(entity);
+				// context.SaveChanges();
 
-                var existing = context.Games.Find(context, game.Id);
+				var existing = context.Games.Find(context, game.Id);
 
 				if (existing != null)
 				{
@@ -80,8 +80,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-                // todo why are we removing multiple games?
-                // todo should we not also be deleting all data associated with this game?
+				// todo why are we removing multiple games?
+				// todo should we not also be deleting all data associated with this game?
 				var game = context.Games
 					.Where(g => id == g.Id);
 

@@ -37,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardStandingsRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardStandingsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MatchResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RelationshipRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RelationshipResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RelationshipStatusUpdate.cs" />
