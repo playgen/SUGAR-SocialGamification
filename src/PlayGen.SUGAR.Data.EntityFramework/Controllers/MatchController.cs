@@ -12,7 +12,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             : base(contextFactory)
         {
         }
-        
+
+        public Match Get(int matchId)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                return context.Matches.Find(context, matchId);
+            }
+        }
+
         public List<Match> GetByTime(DateTime start, DateTime end)
         {
             using (var context = ContextFactory.Create())
