@@ -25,6 +25,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [OneTimeSetUp]
         public void SetUp()
         {
+            KillPreviousServerInstances();
             DeleteDatabase();
 
 #if DEBUG_SERVER
@@ -40,7 +41,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
         public void TearDown()
         {
             // Stop Server
-            _process?.CloseMainWindow();
+            _process?.Kill();
+            _process?.WaitForExit();
         }
 
         private bool CanLogin()
@@ -77,6 +79,16 @@ namespace PlayGen.SUGAR.Client.UnitTests
             }
 
             return didLogin;
+        }
+
+        private void KillPreviousServerInstances()
+        {
+            var processes = Process.GetProcessesByName("dotnet");
+            foreach (var process in processes)
+            {
+                process.Kill();
+                process.WaitForExit();
+            }
         }
 
         private void StartServer()
