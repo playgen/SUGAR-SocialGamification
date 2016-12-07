@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Authorization;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.WebAPI.Attributes;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Filters;
@@ -50,14 +53,68 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return Forbid();
 		}
 
-		/// <summary>
-		/// Create a new GameData record.
-		/// 
-		/// Example Usage: POST api/gamedata
-		/// </summary>
-		/// <param name="newData"><see cref="SaveDataRequest"/> object that holds the details of the new GameData.</param>
-		/// <returns>A <see cref="SaveDataResponse"/> containing the new GameData details.</returns>
-		[HttpPost]
+        /// <summary>
+        /// Finds a list of GameData with the highest <param name="dataType"/> for each <param name="key"/> provided that matches the <param name="actorId"/> and <param name="gameId"/>.
+        /// 
+		/// Example Usage: GET api/gamedata/highest?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2&amp;dataType=1
+        /// </summary>
+        /// <param name="actorId">ID of a User/Group.</param>
+		/// <param name="gameId">ID of a Game.</param>
+		/// <param name="key">Array of Key names.</param>
+        /// <param name="dataType">Data type of value</param>
+        /// <returns></returns>
+        [HttpGet("highest")]
+        //[ResponseType(typeof(IEnumerable<SaveDataResponse>))]
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
+        public IActionResult GetHighest(int? actorId, int? gameId, string[] key, SaveDataType dataType)
+        {
+            if (_authorizationService.AuthorizeAsync(User, actorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+                 _authorizationService.AuthorizeAsync(User, actorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
+                 _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+            {
+                var dataList = new List<GameData>();
+                switch (dataType)
+                {
+                    case SaveDataType.Float:
+                        foreach (var dataKey in key)
+                        {
+                            var gameData = _gameDataCoreController.GetGameDataByHighestFloat(gameId, actorId, dataKey);
+                            if (gameData != null)
+                            {
+                                dataList.Add(gameData);
+                            }
+                        }
+                        break;
+                    case SaveDataType.Long:
+                        foreach (var dataKey in key)
+                        {
+                            var gameData = _gameDataCoreController.GetGameDataByHighestLong(gameId, actorId, dataKey);
+                            if (gameData != null)
+                            {
+                                dataList.Add(gameData);
+                            }
+                        }
+                        break;
+
+                }
+                var dataContract = dataList.ToContractList();
+                return new ObjectResult(dataContract);
+            }
+            return Forbid();
+        }
+
+
+
+        /// <summary>
+        /// Create a new GameData record.
+        /// 
+        /// Example Usage: POST api/gamedata
+        /// </summary>
+        /// <param name="newData"><see cref="SaveDataRequest"/> object that holds the details of the new GameData.</param>
+        /// <returns>A <see cref="SaveDataResponse"/> containing the new GameData details.</returns>
+        [HttpPost]
 		//[ResponseType(typeof(SaveDataResponse))]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.GameData)]

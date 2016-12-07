@@ -208,7 +208,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.GetHighestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = GameDataCoreController.GetHighestLong(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -217,7 +217,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.GetHighestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = GameDataCoreController.GetHighestFloat(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -243,7 +243,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.GetLowestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = GameDataCoreController.GetLowestLong(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -252,7 +252,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.GetLowestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = GameDataCoreController.GetLowestFloat(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
