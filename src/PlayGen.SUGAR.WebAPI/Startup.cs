@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.PlatformAbstractions;
+using MySql.Data.MySqlClient.Framework.NetCore10;
 using PlayGen.SUGAR.Core.Authorization;
 using PlayGen.SUGAR.ServerAuthentication.Filters;
 
@@ -32,7 +33,7 @@ namespace PlayGen.SUGAR.WebAPI
 
 		const string TokenAudience = "User";
 		const string TokenIssuer = "SUGAR";
-		private RsaSecurityKey key;
+		private SymmetricSecurityKey key;
 		private TokenAuthOptions tokenOptions;
 
 
@@ -75,60 +76,12 @@ namespace PlayGen.SUGAR.WebAPI
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
 			var timeoutCheckInterval = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TimeoutCheckInterval"]);
+            var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
 
-
-			//todo: Remove random key. Change to load file from secure file.
-
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-			{
-				//var apiKey = Configuration["APIKey"];
-				// On desktop CLR, use RSACryptoServiceProvider.
-				using (var rsa = new RSACryptoServiceProvider(2048))
-				{
-					try
-					{
-						key = new RsaSecurityKey(rsa.ExportParameters(true));
-					}
-					finally
-					{
-						rsa.PersistKeyInCsp = false;
-					}
-				}
-			}
-			else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-			{
-				using (var rsa = new RSAOpenSsl(2048))
-				{
-					key = new RsaSecurityKey(rsa.ExportParameters(true));
-				}
-			}
-
-			tokenOptions = new TokenAuthOptions()
-			{
-				Audience = TokenAudience,
-				Issuer = TokenIssuer,
-				SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256Signature),
-				ValidityTimeout = validityTimeout,
-			};
-
-			services.AddSingleton(tokenOptions);
-
-			services.AddScoped((_) => new PasswordEncryption());
+            services.AddScoped((_) => new PasswordEncryption());
 			services.AddApplicationInsightsTelemetry(Configuration);
-
-			services.AddAuthorization(auth =>
-			{
-				auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-					.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-					.RequireAuthenticatedUser().Build());
-			});
-
-			services.AddSingleton<IAuthorizationHandler, AuthorizationHandler>();
-			services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithNull>();
-			services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithoutEntity>();
-
+            
 			// Add framework services.
 			services.AddMvc(options =>
 			{
@@ -151,7 +104,7 @@ namespace PlayGen.SUGAR.WebAPI
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
 			ConfigureDocumentationGeneratorServices(services);
-			ConfigureAuthorization(services);
+			ConfigureAuthorization(services, validityTimeout);
 			ConfigureEvaluationEvents(services);
 			ConfigureSessionTracking(services, validityTimeout, timeoutCheckInterval);
 		}
@@ -160,29 +113,9 @@ namespace PlayGen.SUGAR.WebAPI
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
 			ConfigureLogging(loggerFactory);
+		    ConfigureAuthentication(app);
 
-			app.UseJwtBearerAuthentication(new JwtBearerOptions
-			{
-				// Basic settings - signing key to validate with, audience and issuer.
-				TokenValidationParameters = new TokenValidationParameters
-				{
-					IssuerSigningKey = key,
-					ValidAudience = tokenOptions.Audience,
-					ValidIssuer = tokenOptions.Issuer,
-					// When receiving a token, check that we've signed it.
-					ValidateIssuer = true,
-					ValidateIssuerSigningKey = true,
-					// When receiving a token, check that it is still valid.
-					ValidateLifetime = true,
-					// This defines the maximum allowable clock skew - i.e. provides a tolerance on the token expiry time 
-					// when validating the lifetime. As we're creating the tokens locally and validating them on the same 
-					// machines which should have synchronised time, this can be set to zero. Where external tokens are
-					// used, some leeway here could be useful.
-					ClockSkew = TimeSpan.FromMinutes(0),
-				}
-			});
-
-			app.UseCors("AllowAll");
+            app.UseCors("AllowAll");
 			app.UseApplicationInsightsRequestTelemetry();
 			app.UseApplicationInsightsExceptionTelemetry();
 			app.UseMvc();
