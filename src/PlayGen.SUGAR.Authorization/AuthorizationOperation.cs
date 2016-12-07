@@ -25,5 +25,6 @@
         public const string User = "User";
         public const string UserFriendRequest = "UserFriendRequest";
         public const string UserFriend = "UserFriend";
+        public const string Match = "Match";
     }
 }

@@ -14,8 +14,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
-    [ValidateSession]
-    public class GameDataController : Controller
+	[ValidateSession]
+	public class GameDataController : Controller
 	{
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.GameDataController _gameDataCoreController;
@@ -77,6 +77,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return Forbid();
 		}
 
-        // todo create method for adding batches of gamedata
-    }
+		// todo create method for adding batches of gamedata
+	}
 }
