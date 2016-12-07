@@ -25,7 +25,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [OneTimeSetUp]
         public void SetUp()
         {
+#if !DEBUG_SERVER
             KillPreviousServerInstances();
+#endif
+
             DeleteDatabase();
 
 #if DEBUG_SERVER
