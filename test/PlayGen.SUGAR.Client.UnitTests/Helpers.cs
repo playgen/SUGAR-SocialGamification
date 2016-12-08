@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using PlayGen.SUGAR.Contracts.Shared;
 using System.Linq;
+using System;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -77,6 +78,30 @@ namespace PlayGen.SUGAR.Client.UnitTests
             var method = new StackTrace().GetFrame(2).GetMethod();
             var className = method.ReflectedType.Name;
             return className;
+        }
+
+        public static void Login(SessionClient sessionClient, int gameId, AccountRequest accountRequest)
+        {
+            try
+            {
+                sessionClient.Login(gameId, accountRequest);
+            }
+            catch (Exception e)
+            {
+                sessionClient.CreateAndLogin(gameId, accountRequest);
+            }
+        }
+
+        public static void Login(SessionClient sessionClient, AccountRequest accountRequest)
+        {
+            try
+            {
+                sessionClient.Login(accountRequest);
+            }
+            catch (Exception e)
+            {
+                sessionClient.CreateAndLogin(accountRequest);
+            }
         }
     }
 }

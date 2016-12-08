@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -73,13 +74,34 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
+        public List<Match> GetByGameAndCreator(int gameId, int creatorId)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                return context.Matches
+                    .Where(m => m.GameId == gameId && m.CreatorId == creatorId)
+                    .ToList();
+            }
+        }
+
+        public List<Match> GetByGameAndCreator(int gameId, int creatorId, DateTime start, DateTime end)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                return context.Matches
+                    .Where(m => m.GameId == gameId && m.CreatorId == creatorId)
+                    .FilterByDateTimeRange(start, end)
+                    .ToList();
+            }
+        }
+
         public Match Create(Match match)
         {
             using (var context = ContextFactory.Create())
             {
                 context.Matches.Add(match);
                 SaveChanges(context);
-
+                
                 return match;
             }
         }

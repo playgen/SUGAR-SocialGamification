@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         }
 
         [SetUp]
-        public void Setup()
+        public virtual void Setup()
         {
             var accountRequest = new AccountRequest
             {
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         }
 
         [TearDown]
-        public void TearDown()
+        public virtual void TearDown()
         {
             try
             {

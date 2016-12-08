@@ -1,4 +1,4 @@
-﻿//#define DEBUG_SERVER
+﻿#define DEBUG_SERVER
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -27,10 +27,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
         {
 #if !DEBUG_SERVER
             KillPreviousServerInstances();
-#endif
-
             DeleteDatabase();
-
+#endif
+            
 #if DEBUG_SERVER
             while (!CanLogin())
             {
