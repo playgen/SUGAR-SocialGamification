@@ -19,6 +19,18 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 			return authorization;
 		}
 
+		public static string GetAuthorization(this HttpResponse response)
+		{
+			string authorization = null;
+
+			if (response.Headers.ContainsKey(HeaderKeys.Authorization))
+			{
+				authorization = response.Headers[HeaderKeys.Authorization];
+			}
+
+			return authorization;
+		}
+
 		public static bool HasAuthorization(this HttpResponse response)
 		{
 			return response.Headers.ContainsKey(HeaderKeys.Authorization);
@@ -39,21 +51,45 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 			response.Headers[HeaderKeys.Authorization] = ValuePrefix + token;
 		}
 
-		public static string GetAuthorizationToken(this HttpRequest request)
+        public static string GetAuthorizationToken(this HttpResponse response)
+        {
+            string token = null;
+
+            if (response.HasAuthorization())
+            {
+                token = response.Headers.GetAuthorizationToken();
+            }
+
+            return token;
+        }
+
+        public static string GetAuthorizationToken(this HttpRequest request)
 		{
 			string token = null;
 
 			if (request.HasAuthorization())
 			{
-				var authorization = (string)request.Headers[HeaderKeys.Authorization];
-
-				if (authorization.StartsWith(ValuePrefix))
-				{
-					token = authorization.Substring(ValuePrefix.Length);
-				}
+                token = request.Headers.GetAuthorizationToken();
 			}
 
 			return token;
 		}
+
+	    public static string GetAuthorizationToken(this IHeaderDictionary headers)
+	    {
+            string token = null;
+
+            if (headers.ContainsKey(HeaderKeys.Authorization))
+	        {
+	            var authorization = (string) headers[HeaderKeys.Authorization];
+
+	            if (authorization.StartsWith(ValuePrefix))
+	            {
+	                token = authorization.Substring(ValuePrefix.Length);
+	            }
+	        }
+
+	        return token;
+	    }
 	}
 }

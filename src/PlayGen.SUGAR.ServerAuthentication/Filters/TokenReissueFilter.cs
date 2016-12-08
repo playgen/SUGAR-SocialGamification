@@ -19,12 +19,15 @@ namespace PlayGen.SUGAR.ServerAuthentication.Filters
         public void OnActionExecuted(ActionExecutedContext context)
         {
             var request = context.HttpContext.Request;
+            var response = context.HttpContext.Response;
             long sessionId;
             int gameId, userId;
 
-            if (request.TryGetClaim("SessionId", out sessionId)
-                && request.TryGetClaim("GameId", out gameId)
-                && request.TryGetClaim("UserId", out userId))
+            // If there is no authorization added to the response already by a lower layer.
+            if (!response.HasAuthorization()
+                && request.Headers.TryGetClaim("SessionId", out sessionId)
+                && request.Headers.TryGetClaim("GameId", out gameId)
+                && request.Headers.TryGetClaim("UserId", out userId))
             {
                 _tokenController.IssueToken(context.HttpContext, sessionId, gameId, userId);
             }

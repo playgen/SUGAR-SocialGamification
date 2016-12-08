@@ -8,11 +8,11 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 {
     public static class AuthorizationTokenExtensions
     {
-        public static long GetClaimLong(this HttpRequest request, string type)
+        public static long GetClaimLong(this IHeaderDictionary headers, string type)
         {
             long value;
 
-            if (TryGetClaim(request, type, out value))
+            if (TryGetClaim(headers, type, out value))
             {
                 return value;
             }
@@ -20,11 +20,11 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
             throw new ClaimNotFoundException($"Couldn't find Claim: {type} of type {value.GetType()}");
         }
 
-        public static int GetClaimInt(this HttpRequest request, string type)
+        public static int GetClaimInt(this IHeaderDictionary headers, string type)
         {
             int value;
 
-            if (TryGetClaim(request, type, out value))
+            if (TryGetClaim(headers, type, out value))
             {
                 return value;
             }
@@ -32,11 +32,11 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
             throw new ClaimNotFoundException($"Couldn't find Claim: {type} of type {value.GetType()}");
         }
 
-        public static DateTime GetClaimDateTime(this HttpRequest request, string type)
+        public static DateTime GetClaimDateTime(this IHeaderDictionary headers, string type)
         {
             DateTime value;
 
-            if (TryGetClaim(request, type, out value))
+            if (TryGetClaim(headers, type, out value))
             {
                 return value;
             }
@@ -44,12 +44,12 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
             throw new ClaimNotFoundException($"Couldn't find Claim: {type} of type {value.GetType()}");
         }
 
-        public static bool TryGetClaim(this HttpRequest request, string type, out long value)
+        public static bool TryGetClaim(this IHeaderDictionary headers, string type, out long value)
         {
             string claimValue;
             value = default(long);
 
-            if (TryGetClaim(request, type, ClaimValueTypes.Integer, out claimValue))
+            if (TryGetClaim(headers, type, ClaimValueTypes.Integer, out claimValue))
             {
                 value = long.Parse(claimValue);
                 return true;
@@ -58,12 +58,12 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
             return false;
         }
 
-        public static bool TryGetClaim(this HttpRequest request, string type, out int value)
+        public static bool TryGetClaim(this IHeaderDictionary headers, string type, out int value)
         {
             string claimValue;
             value = default(int);
 
-            if (TryGetClaim(request, type, ClaimValueTypes.Integer, out claimValue))
+            if (TryGetClaim(headers, type, ClaimValueTypes.Integer, out claimValue))
             {
                 value = int.Parse(claimValue);
                 return true;
@@ -72,12 +72,12 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
             return false;
         }
 
-        public static bool TryGetClaim(this HttpRequest request, string type, out DateTime value)
+        public static bool TryGetClaim(this IHeaderDictionary headers, string type, out DateTime value)
         {
             string claimValue;
             value = default(DateTime);
 
-            if(TryGetClaim(request, type, ClaimValueTypes.DateTime, out claimValue))
+            if(TryGetClaim(headers, type, ClaimValueTypes.DateTime, out claimValue))
             {
                 value = DateTime.Parse(claimValue);
                 return true;
@@ -86,12 +86,12 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
             return false;
         }
 
-        private static bool TryGetClaim(this HttpRequest request, string type, string valueType, out string value)
+        private static bool TryGetClaim(this IHeaderDictionary headers, string type, string valueType, out string value)
         {
             value = null;
             var didGetClaim = false;
 
-            var serializedToken = request.GetAuthorizationToken();
+            var serializedToken = headers.GetAuthorizationToken();
 
             if (string.IsNullOrWhiteSpace(serializedToken)) return false;
 

@@ -33,6 +33,66 @@ namespace PlayGen.SUGAR.Client.UnitTests
         }
 
         [Test]
+        public void NewTokenForUserLogin()
+        {
+            // Arrange
+            var headers = (Dictionary<string, string>)
+                typeof(ClientBase)
+                .GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
+                .GetValue(SUGARClient.Session);
+
+            var originalToken = headers[HeaderKeys.Authorization];
+
+            // Act
+            Helpers.Login(SUGARClient.Session, new AccountRequest
+            {
+                Name = "NewTokenForUserLogin",
+                Password = "NewTokenForUserLoginPassword",
+                SourceToken = "SUGAR"
+            });
+
+            // Assert
+            var newToken = headers[HeaderKeys.Authorization];
+            Assert.AreNotEqual(originalToken, newToken);
+        }
+
+        [Test]
+        public void NewTokenForGameLogin()
+        {
+            // Arrange
+            var headers = (Dictionary<string, string>)
+                typeof(ClientBase)
+                .GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
+                .GetValue(SUGARClient.Session);
+
+            var originalToken = headers[HeaderKeys.Authorization];
+
+
+            var game = Helpers.GetOrCreateGame(SUGARClient.Game, "NewTokenForGameLogin_Original");
+
+            Helpers.Login(SUGARClient.Session, game.Id, new AccountRequest
+            {
+                Name = "NewTokenForGameLogin",
+                Password = "NewTokenForGameLoginPassword",
+                SourceToken = "SUGAR"
+            });
+
+            var newGame = Helpers.GetOrCreateGame(SUGARClient.Game, "NewTokenForGameLogin_New");
+
+            // Act
+            Helpers.Login(SUGARClient.Session, newGame.Id, new AccountRequest
+            {
+                Name = "NewTokenForGameLogin",
+                Password = "NewTokenForGameLoginPassword",
+                SourceToken = "SUGAR"
+            });
+
+            // Assert
+            var newToken = headers[HeaderKeys.Authorization];
+            Assert.AreNotEqual(originalToken, newToken);
+        }
+
+        [Test]
         public void CanCreateNewUserAndLogin()
         {
             var accountRequest = new AccountRequest

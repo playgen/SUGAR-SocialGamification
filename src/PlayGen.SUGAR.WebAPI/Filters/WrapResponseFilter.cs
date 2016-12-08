@@ -47,8 +47,8 @@ namespace PlayGen.SUGAR.WebAPI.Filters
                 int gameId;
                 int userId;
 
-                if (request.TryGetGameId(out gameId)
-                    && request.TryGetUserId(out userId))
+                if (request.Headers.TryGetGameId(out gameId)
+                    && request.Headers.TryGetUserId(out userId))
                 {
                     pendingEvents = GetPendingEvents(gameId, userId);
                 }

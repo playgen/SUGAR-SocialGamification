@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 
             int sessionId;
 
-            if (!context.HttpContext.Request.TryGetSessionId(out sessionId))
+            if (!context.HttpContext.Request.Headers.TryGetSessionId(out sessionId))
             {
                 throw new InvalidSessionException("No \"SessionId\" set in the token's claims.");
             }
