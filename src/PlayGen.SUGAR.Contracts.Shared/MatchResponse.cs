@@ -12,6 +12,6 @@ namespace PlayGen.SUGAR.Contracts.Shared
 
         public DateTime Started { get; set; }
 
-        public DateTime Ended { get; set; }
+        public DateTime? Ended { get; set; }
     }
 }

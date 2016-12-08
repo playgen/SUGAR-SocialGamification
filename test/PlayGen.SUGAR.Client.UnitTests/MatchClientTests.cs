@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [SetUp]
         public override void Setup()
         {
-            var _game = Helpers.GetOrCreateGame(SUGARClient.Game, "MatchClientTests");
+            _game = Helpers.GetOrCreateGame(SUGARClient.Game, "MatchClientTests");
 
             try
             {
@@ -67,7 +67,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
             SUGARClient.Match.End(match.Id);
 
             // Assert
-            Assert.AreNotEqual(match.Ended, default(DateTime));
+            Assert.AreNotEqual(match.Ended, null);
+            Assert.Less(match.Started, match.Ended);
         }
 
         [Test]

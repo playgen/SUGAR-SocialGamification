@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Core.Controllers
         {
             var match = _matchDbController.Get(matchId);
             match.Ended = DateTime.UtcNow;
-            _matchDbController.Update(match);
+            match = _matchDbController.Update(match);
 
             Logger.Info($"Match: {match.Id} ended");
 

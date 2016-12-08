@@ -16,6 +16,6 @@ namespace PlayGen.SUGAR.Data.Model
 
         public DateTime Started { get; set; }
 
-        public DateTime Ended { get; set; }
+        public DateTime? Ended { get; set; }
     }
 }

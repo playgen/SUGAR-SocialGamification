@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
                 _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
                 _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
             {
-                var match = _matchCoreController.Start(gameId, userId);
+                var match = _matchCoreController.End(matchId);
                 var contract = match.ToContract();
                 return new ObjectResult(contract);
             }

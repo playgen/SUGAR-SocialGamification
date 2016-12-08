@@ -43,6 +43,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 .Include(s => s.RequestAcceptors);
         }
 
+        public static IQueryable<Match> IncludeAll(this DbSet<Match> dbSet)
+        {
+            return dbSet
+                .Include(s => s.Game)
+                .Include(s => s.Creator);
+        }
+
         /// <summary>
         /// Currently Find is missing from the Entity framework Core API.
         /// Fix taken from: http://stackoverflow.com/questions/29030472/dbset-doesnt-have-a-find-method-in-ef7
