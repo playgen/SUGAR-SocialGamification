@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Forbid();
         }
 
-        [HttpGet("{start:DateTime}/{end:DateTime}")]
+        [HttpGet("{start:datetime}/{end:datetime}")]
         [ArgumentsNotNull]
         public IActionResult GetByTime(DateTime start, DateTime end)
         {
@@ -76,7 +76,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
-        [HttpGet("{gameId:int}")]
+        [HttpGet("game/{gameId:int}")]
         [ArgumentsNotNull]
         public IActionResult GetByGame(int gameId)
         {
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
-        [HttpGet("{gameId:int}/{start:DateTime}/{end:DateTime}")]
+        [HttpGet("game/{gameId:int}/{start:datetime}/{end:datetime}")]
         [ArgumentsNotNull]
         public IActionResult GetByGame(int gameId, DateTime start, DateTime end)
         {
@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
-        [HttpGet("{creatorId:int}")]
+        [HttpGet("creator/{creatorId:int}")]
         [ArgumentsNotNull]
         public IActionResult GetByCreator(int creatorId)
         {
@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
-        [HttpGet("{creatorId:int}/{start:DateTime}/{end:DateTime}")]
+        [HttpGet("creator/{creatorId:int}/{start:datetime}/{end:datetime}")]
         [ArgumentsNotNull]
         public IActionResult GetByCreator(int creatorId, DateTime start, DateTime end)
         {
@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
-        [HttpGet("{gameId:int}/{creatorId:int}")]
+        [HttpGet("game/{gameId:int}/creator/{creatorId:int}")]
         [ArgumentsNotNull]
         public IActionResult GetByGameAndCreator(int gameId, int creatorId)
         {
@@ -116,7 +116,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
-        [HttpGet("{gameId:int}/{creatorId:int}/{start:DateTime}/{end:DateTime}")]
+        [HttpGet("game/{gameId:int}/creator/{creatorId:int}/{start:datetime}/{end:datetime}")]
         [ArgumentsNotNull]
         public IActionResult GetByGameAndCreator(int gameId, int creatorId, DateTime start, DateTime end)
         {

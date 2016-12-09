@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Newtonsoft.Json;
@@ -88,7 +89,8 @@ namespace PlayGen.SUGAR.Client
 				throw new Exception("Passed values must not be empty or null");
 			}
 
-			var formattedUri = string.Format(apiSuffix, param);
+		    var formattedParams = FormatUriParameters(param);
+			var formattedUri = string.Format(apiSuffix, formattedParams);
 
 			var separator = "";
 			if (!(_baseAddress.EndsWith("/") || formattedUri.StartsWith("/")))
@@ -97,6 +99,31 @@ namespace PlayGen.SUGAR.Client
 			}
 			return new UriBuilder(_baseAddress + separator + formattedUri);
 		}
+
+	    private static object[] FormatUriParameters(params object[] parameters)
+	    {
+	        var formattedParameters = new object[parameters.Length];
+
+	        for (var i = 0; i < parameters.Length; i++)
+	        {
+	            var parameter = parameters[i];
+	            object formattedParameter;
+
+	            if (parameter is DateTime)
+	            {
+                    formattedParameter = ((DateTime)parameter).ToString("s", CultureInfo.InvariantCulture);
+                }
+	            else
+	            {
+                    formattedParameter = parameter;
+	            }
+
+	            formattedParameters[i] = formattedParameter;
+
+	        }
+
+            return formattedParameters;
+	    }
 
 		private static string SerializePayload(object payload)
 		{

@@ -15,17 +15,16 @@ namespace PlayGen.SUGAR.Client.UnitTests
         private AccountResponse _account;
         private GameResponse _game;
 
-        [SetUp]
-        public override void Setup()
+        private void LoginUserForGame(string key = "MatchClientTests")
         {
-            _game = Helpers.GetOrCreateGame(SUGARClient.Game, "MatchClientTests");
+            _game = Helpers.GetOrCreateGame(SUGARClient.Game, key);
 
             try
             {
                 _account = SUGARClient.Session.Login(_game.Id, new AccountRequest
                 {
-                    Name = "MatchClientTests",
-                    Password = "MatchClientTestsPassword",
+                    Name = key,
+                    Password = key + "Password",
                     SourceToken = "SUGAR"
                 });
             }
@@ -33,22 +32,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
             {
                 _account = SUGARClient.Session.CreateAndLogin(_game.Id, new AccountRequest
                 {
-                    Name = "MatchClientTests",
-                    Password = "MatchClientTestsPassword",
+                    Name = key,
+                    Password = key + "Password",
                     SourceToken = "SUGAR"
                 });
             }
         }
-
-        [TearDown]
-        public override void TearDown()
-        {
-            SUGARClient.Session.Logout();
-        }
-
+        
         [Test]
         public void CanStart()
         {
+            // Assign
+            LoginUserForGame();
+
             // Act
             var match = SUGARClient.Match.Start();
 
@@ -61,10 +57,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
         public void CanEnd()
         {
             // Assign
+            LoginUserForGame();
             var match = SUGARClient.Match.Start();
 
             // Act
-            SUGARClient.Match.End(match.Id);
+            match = SUGARClient.Match.End(match.Id);
 
             // Assert
             Assert.AreNotEqual(match.Ended, null);
@@ -75,6 +72,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         public void CanGetByTime()
         {
             // Assign
+            LoginUserForGame();
             var shouldntGet = StartMatches(10);
 
             Thread.Sleep(1000);
@@ -100,36 +98,51 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
         public void GetByGame()
         {
+            LoginUserForGame();
+            var got = SUGARClient.Match.GetByGame(_game.Id);
+
             throw new NotImplementedException();
         }
 
         [Test]
-        public void CanGetByGame()
+        public void GetByGameAndTime()
         {
+            LoginUserForGame();
+            var got = SUGARClient.Match.GetByGame(_game.Id, DateTime.MinValue, DateTime.MaxValue);
+
             throw new NotImplementedException();
         }
 
         [Test]
         public void CanGetByCreator()
         {
+            LoginUserForGame();
+            var got = SUGARClient.Match.GetByCreator(_account.User.Id);
+
             throw new NotImplementedException();
         }
 
         [Test]
         public void CanGetByCreatorAndTime()
         {
+            LoginUserForGame();
+            var got = SUGARClient.Match.GetByCreator(_account.User.Id, DateTime.MinValue, DateTime.MaxValue);
             throw new NotImplementedException();
         }
 
         [Test]
         public void CanGetByGameAndCreator()
         {
+            LoginUserForGame();
+            var got = SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id);
             throw new NotImplementedException();
         }
 
         [Test]
         public void CanGetByGameAndCreatorAndTime()
         {
+            LoginUserForGame();
+            var got = SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id, DateTime.MinValue, DateTime.MaxValue);
             throw new NotImplementedException();
         }
 

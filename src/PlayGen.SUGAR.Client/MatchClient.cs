@@ -38,37 +38,37 @@ namespace PlayGen.SUGAR.Client
 
         public List<MatchResponse> GetByGame(int gameId)
         {
-            var query = GetUriBuilder(ControllerPrefix + "/{0}", gameId).ToString();
+            var query = GetUriBuilder(ControllerPrefix + "/game/{0}", gameId).ToString();
             return Get<List<MatchResponse>>(query);
         }
 
         public List<MatchResponse> GetByGame(int gameId, DateTime start, DateTime end)
         {
-            var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}/{2}", gameId, start, end).ToString();
+            var query = GetUriBuilder(ControllerPrefix + "/game/{0}/{1}/{2}", gameId, start, end).ToString();
             return Get<List<MatchResponse>>(query);
         }
 
         public List<MatchResponse> GetByCreator(int creatorId)
         {
-            var query = GetUriBuilder(ControllerPrefix + "/{0}", creatorId).ToString();
+            var query = GetUriBuilder(ControllerPrefix + "/creator/{0}", creatorId).ToString();
             return Get<List<MatchResponse>>(query);
         }
 
         public List<MatchResponse> GetByCreator(int creatorId, DateTime start, DateTime end)
         {
-            var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}/{2}", creatorId, start, end).ToString();
+            var query = GetUriBuilder(ControllerPrefix + "/creator/{0}/{1}/{2}", creatorId, start, end).ToString();
             return Get<List<MatchResponse>>(query);
         }
 
         public List<MatchResponse> GetByGameAndCreator(int gameId, int creatorId)
         {
-            var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}", gameId, creatorId).ToString();
+            var query = GetUriBuilder(ControllerPrefix + "/game/{0}/creator/{1}", gameId, creatorId).ToString();
             return Get<List<MatchResponse>>(query);
         }
 
         public List<MatchResponse> GetByGameAndCreator(int gameId, int creatorId, DateTime start, DateTime end)
         {
-            var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}/{2}/{3}", gameId, creatorId, start, end).ToString();
+            var query = GetUriBuilder(ControllerPrefix + "/game/{0}/creator/{1}/{2}/{3}", gameId, creatorId, start, end).ToString();
             return Get<List<MatchResponse>>(query);
         }
     }
