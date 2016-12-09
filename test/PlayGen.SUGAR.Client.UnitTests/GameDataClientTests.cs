@@ -90,7 +90,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 		}
 
 		[Test]
@@ -107,7 +107,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 		}
 
 		[Test]
@@ -125,29 +125,29 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.Float,
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Long;
 
-			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Boolean;
 
-			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Float;
 			SaveDataRequest.Value = "True";
 
-			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Long;
 
-			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Boolean;
 			SaveDataRequest.Value = "2";
 
-			Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
 		}
 
 		[Test]

@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			SUGARClient.Group.Create(groupRequest);
 
-			Assert.Throws<ClientException>(() => SUGARClient.Group.Create(groupRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Group.Create(groupRequest));
 		}
 
 		[Test]
@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var groupRequest = new GroupRequest { };
 
-			Assert.Throws<ClientException>(() => SUGARClient.Group.Create(groupRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Group.Create(groupRequest));
 		}
 
 		[Test]
@@ -147,7 +147,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = groupRequestOne.Name
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Group.Update(responseTwo.Id, updateGroup));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Group.Update(responseTwo.Id, updateGroup));
 		}
 
 		[Test]
@@ -158,7 +158,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateNonExistingGroup"
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Group.Update(-1, updateGroup));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Group.Update(-1, updateGroup));
 		}
 
 		[Test]
@@ -175,7 +175,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Group.Update(response.Id, updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Group.Update(response.Id, updateRequest));
 		}
 
 		[Test]

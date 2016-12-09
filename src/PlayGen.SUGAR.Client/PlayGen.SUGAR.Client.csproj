@@ -55,6 +55,7 @@
     <Compile Include="EvaluationEvents\EvaluationNotification.cs" />
     <Compile Include="EvaluationEvents\EvaluationNotifications.cs" />
     <Compile Include="Exceptions\ClientException.cs" />
+    <Compile Include="Exceptions\ClientHttpException.cs" />
     <Compile Include="Extensions\UriBuilderExtensions.cs" />
     <Compile Include="GameClient.cs" />
     <Compile Include="GameDataClient.cs" />

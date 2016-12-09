@@ -1,32 +1,20 @@
 ﻿using System;
-using System.Net;
 using PlayGen.SUGAR.Common.Shared.Exceptions;
 
 namespace PlayGen.SUGAR.Client.Exceptions
 {
-    public class ClientException : SUGARException
-    {
-		public HttpStatusCode StatusCode { get; }
-
-	    public ClientException(HttpStatusCode statusCode)
+	public class ClientException : SUGARException
+	{
+	    public ClientException()
 	    {
-		    StatusCode = statusCode;
 	    }
 
-	    public ClientException(HttpStatusCode statusCode, string message) : base(message)
-	    {
-			StatusCode = statusCode;
+	    public ClientException(string message) : base(message)
+		{
 		}
 
-		public ClientException(HttpStatusCode statusCode, string message, Exception innerException) : base(message, innerException)
-	    {
-			StatusCode = statusCode;
+		public ClientException(string message, Exception innerException) : base(message, innerException)
+		{
 		}
-
-        // SerializationInfo not currently supported by .netcore
-		//protected ClientException(HttpStatusCode statusCode, SerializationInfo info, StreamingContext context) : base(info, context)
-	 //   {
-		//	StatusCode = statusCode;
-		//}
 	}
 }

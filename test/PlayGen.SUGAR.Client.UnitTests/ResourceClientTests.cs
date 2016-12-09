@@ -175,7 +175,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var fromUser = Helpers.GetOrCreateUser(SUGARClient.User, "From");
 			var toUser = Helpers.GetOrCreateUser(SUGARClient.User, "To");
 
-			Assert.Throws<ClientException>(() => SUGARClient.Resource.Transfer(new ResourceTransferRequest
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Resource.Transfer(new ResourceTransferRequest
 			{
 
 				SenderActorId = fromUser.Id,
@@ -202,7 +202,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Quantity = 100,
 			});		
 
-			Assert.Throws<ClientException>(() => SUGARClient.Resource.Transfer(new ResourceTransferRequest
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Resource.Transfer(new ResourceTransferRequest
 			{
 				SenderActorId = fromUser.Id,
 				RecipientActorId = toUser.Id,
@@ -228,7 +228,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var transferQuantity = fromResource.Quantity*2;
 
-			Assert.Throws<ClientException>(() => SUGARClient.Resource.Transfer(new ResourceTransferRequest
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Resource.Transfer(new ResourceTransferRequest
 			{
 				GameId = fromResource.GameId,
 				SenderActorId = fromUser.Id,

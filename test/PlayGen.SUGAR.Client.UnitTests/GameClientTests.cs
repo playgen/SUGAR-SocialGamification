@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			SUGARClient.Game.Create(gameRequest);
 
-			Assert.Throws<ClientException>(() => SUGARClient.Game.Create(gameRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Game.Create(gameRequest));
 		}
 
 		[Test]
@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var gameRequest = new GameRequest{};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Game.Create(gameRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Game.Create(gameRequest));
 		}
 
 		[Test]
@@ -147,7 +147,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = gameRequestOne.Name
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Game.Update(responseTwo.Id, updateGame));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Game.Update(responseTwo.Id, updateGame));
 		}
 
 		[Test]
@@ -158,7 +158,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Name = "CannotUpdateNonExistingGame"
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Game.Update(-1, updateGame));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Game.Update(-1, updateGame));
 		}
 
 		[Test]
@@ -175,7 +175,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Game.Update(response.Id, updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Game.Update(response.Id, updateRequest));
 		}
 
 		[Test]

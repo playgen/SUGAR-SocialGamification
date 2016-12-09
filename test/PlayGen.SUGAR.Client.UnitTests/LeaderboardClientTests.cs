@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 		}
 
 		[Test]
@@ -119,7 +119,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 		}
 
 		[Test]
@@ -138,7 +138,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 		}
 
 		[Test]
@@ -157,7 +157,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 		}
 
 		[Test]
@@ -177,7 +177,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 		}
 
 		[Test]
@@ -197,7 +197,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 		}
 
 		[Test]
@@ -217,32 +217,32 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Count
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Earliest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Latest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.SaveDataType = SaveDataType.Float;
 			createRequest.LeaderboardType = LeaderboardType.Count;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Earliest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Latest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.SaveDataType = SaveDataType.String;
 			createRequest.LeaderboardType = LeaderboardType.Highest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Lowest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Cumulative;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.SaveDataType = SaveDataType.Boolean;
 			createRequest.LeaderboardType = LeaderboardType.Highest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Lowest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 			createRequest.LeaderboardType = LeaderboardType.Cumulative;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Create(createRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Create(createRequest));
 		}
 
 		[Test]
@@ -422,7 +422,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 		}
 
 		[Test]
@@ -442,7 +442,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Lowest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 		}
 
 		[Test]
@@ -475,7 +475,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 		}
 
 		[Test]
@@ -508,7 +508,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 		}
 
 		[Test]
@@ -541,7 +541,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 		}
 
 		[Test]
@@ -575,7 +575,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 		}
 
 		[Test]
@@ -609,32 +609,32 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				LeaderboardType = LeaderboardType.Count
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Earliest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Latest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.SaveDataType = SaveDataType.Float;
 			updateRequest.LeaderboardType = LeaderboardType.Count;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Earliest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Latest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.SaveDataType = SaveDataType.String;
 			updateRequest.LeaderboardType = LeaderboardType.Highest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Lowest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Cumulative;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.SaveDataType = SaveDataType.Boolean;
 			updateRequest.LeaderboardType = LeaderboardType.Highest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Lowest;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 			updateRequest.LeaderboardType = LeaderboardType.Cumulative;
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Update(updateRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.Update(updateRequest));
 		}
 
 		[Test]
@@ -821,7 +821,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -865,7 +865,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -896,7 +896,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -927,7 +927,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -958,7 +958,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -989,7 +989,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Test]
@@ -1033,7 +1033,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 	}
 }

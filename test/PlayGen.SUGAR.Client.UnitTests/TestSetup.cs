@@ -25,7 +25,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [OneTimeSetUp]
         public void SetUp()
         {
-            KillPreviousServerInstances();
+            KillPreviousServerInstances("dotnet");
+            KillPreviousServerInstances("Console Window Host");
             DeleteDatabase();
 
 #if DEBUG_SERVER
@@ -69,7 +70,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
                 didLogin = true;
             }
-            catch (ClientException e)
+            catch (ClientHttpException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -81,9 +82,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
             return didLogin;
         }
 
-        private void KillPreviousServerInstances()
+        private void KillPreviousServerInstances(string name)
         {
-            var processes = Process.GetProcessesByName("dotnet");
+            var processes = Process.GetProcessesByName(name);
             foreach (var process in processes)
             {
                 process.Kill();

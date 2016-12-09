@@ -19,14 +19,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var registerResponse = SUGARClient.Account.Create(accountRequest);
 
-			Assert.Throws<ClientException>(() => SUGARClient.Account.Create(accountRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Account.Create(accountRequest));
 		}
 
 		[Test]
 		public void CannotCreateInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
-			Assert.Throws<ClientException>(() => SUGARClient.Account.Create(accountRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Account.Create(accountRequest));
 		}
 		#endregion
 	}
