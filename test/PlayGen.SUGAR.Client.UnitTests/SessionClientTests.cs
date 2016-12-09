@@ -67,7 +67,6 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
             var originalToken = headers[HeaderKeys.Authorization];
 
-
             var game = Helpers.GetOrCreateGame(SUGARClient.Game, "NewTokenForGameLogin_Original");
 
             Helpers.Login(SUGARClient.Session, game.Id, new AccountRequest
@@ -76,6 +75,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
                 Password = "NewTokenForGameLoginPassword",
                 SourceToken = "SUGAR"
             });
+
+            LoginAdmin();
 
             var newGame = Helpers.GetOrCreateGame(SUGARClient.Game, "NewTokenForGameLogin_New");
 
