@@ -18,6 +18,24 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [SetUp]
         public void Setup()
         {
+            LoginAdmin();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            try
+            {
+                SUGARClient.Session.Logout();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        protected void LoginAdmin()
+        {
             var accountRequest = new AccountRequest
             {
                 Name = "admin",
@@ -32,19 +50,6 @@ namespace PlayGen.SUGAR.Client.UnitTests
             catch
             {
                 LoggedInAccount = SUGARClient.Session.CreateAndLogin(accountRequest);
-            }
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            try
-            {
-                SUGARClient.Session.Logout();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
             }
         }
     }
