@@ -16,18 +16,28 @@ namespace PlayGen.SUGAR.Core.Controllers
             _matchDbController = matchDbController;
         }
 
-        public Match Start(int gameId, int creatorId)
+        public Match Create(int gameId, int creatorId)
         {
             var match = new Match
             {
                 GameId = gameId,
                 CreatorId = creatorId,
-                Started = DateTime.UtcNow,
             };
 
             _matchDbController.Create(match);
 
-            Logger.Info($"Match: {match.Id} started for Game: {gameId}, CreatorId: {creatorId}");
+            Logger.Info($"Match: {match.Id} created for Game: {gameId}, CreatorId: {creatorId}");
+
+            return match;
+        }
+
+        public Match Start(int matchId)
+        {
+            var match = _matchDbController.Get(matchId);
+            match.Started = DateTime.UtcNow;
+            match = _matchDbController.Update(match);
+
+            Logger.Info($"Match: {match.Id} started");
 
             return match;
         }
@@ -43,7 +53,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             return match;
         }
 
-        public List<Match> GetByTime(DateTime start, DateTime end)
+        public List<Match> GetByTime(DateTime? start, DateTime? end)
         {
             var results = _matchDbController.GetByTime(start, end);
 
@@ -61,7 +71,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             return results;
         }
 
-        public List<Match> GetByGame(int gameId, DateTime start, DateTime end)
+        public List<Match> GetByGame(int gameId, DateTime? start, DateTime? end)
         {
             var results = _matchDbController.GetByGame(gameId, start, end);
 
@@ -79,7 +89,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             return results;
         }
 
-        public List<Match> GetByCreator(int creatorId, DateTime start, DateTime end)
+        public List<Match> GetByCreator(int creatorId, DateTime? start, DateTime? end)
         {
             var results = _matchDbController.GetByCreator(creatorId, start, end);
 
@@ -97,7 +107,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             return results;
         }
 
-        public List<Match> GetByGameAndCreator(int gameId, int creatorId, DateTime start, DateTime end)
+        public List<Match> GetByGameAndCreator(int gameId, int creatorId, DateTime? start, DateTime? end)
         {
             var results = _matchDbController.GetByGameAndCreator(gameId, creatorId, start, end);
 

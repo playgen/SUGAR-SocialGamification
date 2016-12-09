@@ -28,7 +28,8 @@ namespace PlayGen.SUGAR.Core.UnitTests
             var preCreateTime = DateTime.UtcNow;
 
             // Act
-            var match = ControllerLocator.MatchController.Start(game.Id, user.Id);
+            var match = ControllerLocator.MatchController.Create(game.Id, user.Id);
+            match = ControllerLocator.MatchController.Start(match.Id);
 
             // Assert
             var postCreateTime = DateTime.UtcNow;
@@ -45,7 +46,8 @@ namespace PlayGen.SUGAR.Core.UnitTests
             var game = Helpers.GetOrCreateGame("CanEnd");
             var user = Helpers.GetOrCreateUser("CanEnd");
 
-            var match = ControllerLocator.MatchController.Start(game.Id, user.Id);
+            var match = ControllerLocator.MatchController.Create(game.Id, user.Id);
+            match = ControllerLocator.MatchController.Start(match.Id);
 
             // Act
             match = ControllerLocator.MatchController.End(match.Id);
@@ -130,7 +132,8 @@ namespace PlayGen.SUGAR.Core.UnitTests
             var matches = new List<Match>();
             for (var i = 0; i < 10; i++)
             {
-                var match = ControllerLocator.MatchController.Start(gameId, userId);
+                var match = ControllerLocator.MatchController.Create(gameId, userId);
+                match = ControllerLocator.MatchController.Start(match.Id);
                 match = ControllerLocator.MatchController.End(match.Id);
                 matches.Add(match);
             }

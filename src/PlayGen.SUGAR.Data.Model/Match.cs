@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Data.Model
 
         public virtual User Creator { get; set; }
 
-        public DateTime Started { get; set; }
+        public DateTime? Started { get; set; }
 
         public DateTime? Ended { get; set; }
     }

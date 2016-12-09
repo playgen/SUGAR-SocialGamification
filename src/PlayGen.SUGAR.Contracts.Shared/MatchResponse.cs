@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 
         public UserResponse Creator { get; set; }
 
-        public DateTime Started { get; set; }
+        public DateTime? Started { get; set; }
 
         public DateTime? Ended { get; set; }
     }

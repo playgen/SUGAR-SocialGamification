@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-        public List<Match> GetByTime(DateTime start, DateTime end)
+        public List<Match> GetByTime(DateTime? start, DateTime? end)
         {
             using (var context = ContextFactory.Create())
             {
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-        public List<Match> GetByGame(int gameId, DateTime start, DateTime end)
+        public List<Match> GetByGame(int gameId, DateTime? start, DateTime? end)
         {
             using (var context = ContextFactory.Create())
             {
@@ -69,7 +69,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-        public List<Match> GetByCreator(int creatorId, DateTime start, DateTime end)
+        public List<Match> GetByCreator(int creatorId, DateTime? start, DateTime? end)
         {
             using (var context = ContextFactory.Create())
             {
@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             }
         }
 
-        public List<Match> GetByGameAndCreator(int gameId, int creatorId, DateTime start, DateTime end)
+        public List<Match> GetByGameAndCreator(int gameId, int creatorId, DateTime? start, DateTime? end)
         {
             using (var context = ContextFactory.Create())
             {

@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             LoginUserForGame();
 
             // Act
-            var match = SUGARClient.Match.Start();
+            var match = SUGARClient.Match.CreateAndStart();
 
             // Assert
             Assert.AreEqual(_game.Id, match.Game.Id);
@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         {
             // Assign
             LoginUserForGame();
-            var match = SUGARClient.Match.Start();
+            var match = SUGARClient.Match.CreateAndStart();
 
             // Act
             match = SUGARClient.Match.End(match.Id);
@@ -253,7 +253,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             var matches = new List<MatchResponse>();
             for (var i = 0; i < count; i++)
             {
-                var match = SUGARClient.Match.Start();
+                var match = SUGARClient.Match.CreateAndStart();
                 matches.Add(match);
             }
 
