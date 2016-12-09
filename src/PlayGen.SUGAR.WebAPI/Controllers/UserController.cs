@@ -56,8 +56,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="exactMatch">Match the name exactly.</param>
 		/// <returns>A list of <see cref="UserResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
+		[HttpGet("find/{name}/{exactMatch:bool}")]
 		//[ResponseType(typeof(IEnumerable<UserResponse>))]
-		public IActionResult Get([FromRoute]string name, bool exactMatch)
+		public IActionResult Get([FromRoute]string name, bool exactMatch = false)
 		{
 			var users = _userCoreController.Search(name, exactMatch);
 			var actorContract = users.ToContractList();

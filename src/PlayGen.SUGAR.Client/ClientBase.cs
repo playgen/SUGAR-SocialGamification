@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Client
 		{
 			if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
 			{
-				throw new Exception("Base address is not an absolute or valid URI");
+				throw new ClientException("Base address is not an absolute or valid URI");
 			}
 			_baseAddress = baseAddress;
 			_httpHandler = httpHandler;
@@ -86,7 +86,7 @@ namespace PlayGen.SUGAR.Client
 
 			if (!AreUriParamsValid(param))
 			{
-				throw new Exception("Passed values must not be empty or null");
+				throw new ClientException("Passed values must not be empty or null");
 			}
 
 		    var formattedParams = FormatUriParameters(param);
@@ -261,7 +261,7 @@ namespace PlayGen.SUGAR.Client
 				{
 					error += " Message: " + response.Content;
 				}
-				throw new ClientException((HttpStatusCode)response.StatusCode, error);
+				throw new ClientHttpException((HttpStatusCode)response.StatusCode, error);
 			}
 
 			//TODO: check if this has changed

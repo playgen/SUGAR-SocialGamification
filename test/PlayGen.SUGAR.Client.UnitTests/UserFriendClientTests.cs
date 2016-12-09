@@ -74,7 +74,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var relationshipResponse = SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
-			Assert.Throws<ClientException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
 		[Test]
@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			relationshipRequest.AutoAccept = false;
 
-			Assert.Throws<ClientException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
 		[Test]
@@ -113,7 +113,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			relationshipRequest.AutoAccept = true;
 
-			Assert.Throws<ClientException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
 		[Test]
@@ -127,7 +127,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				AcceptorId = acceptor.Id,
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
 		[Test]
@@ -141,7 +141,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				AcceptorId = -1,
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
 		[Test]
@@ -262,7 +262,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Accepted = true
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate));
 		}
 
 		[Test]
@@ -275,7 +275,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Accepted = true
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate));
 		}
 
 		[Test]
@@ -330,7 +330,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				AcceptorId = acceptor.Id,
 			};
 
-			Assert.Throws<ClientException>(() => SUGARClient.UserFriend.UpdateFriend(relationshipStatusUpdate));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.UpdateFriend(relationshipStatusUpdate));
 		}
 		
 		[Test]

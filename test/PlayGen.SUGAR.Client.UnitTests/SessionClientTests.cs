@@ -170,7 +170,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         public void CannotLoginInvalidUser()
         {
             var accountRequest = new AccountRequest();
-            Assert.Throws<ClientException>(() => SUGARClient.Session.Login(accountRequest));
+            Assert.Throws<ClientHttpException>(() => SUGARClient.Session.Login(accountRequest));
         }
 
         [Test]
@@ -188,7 +188,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             SUGARClient.Session.Logout();
 
             // Assert
-            Assert.Throws<ClientException>(SUGARClient.Session.Heartbeat);
+            Assert.Throws<ClientHttpException>(SUGARClient.Session.Heartbeat);
         }
 
         [Test]
@@ -206,7 +206,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             SUGARClient.Session.Logout();
 
             // Assert
-            Assert.Throws<ClientException>(() => SUGARClient.GameData.Add(new SaveDataRequest
+            Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(new SaveDataRequest
             {
                 ActorId = Helpers.GetOrCreateUser(SUGARClient.User, "CanLogoutAndInvalidateSessionClass").Id,
                 GameId = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLogoutAndInvalidateSessionClass").Id,

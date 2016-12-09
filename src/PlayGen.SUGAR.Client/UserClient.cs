@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A list of <see cref="UserResponse"/> which match the search criteria.</returns>
 		public IEnumerable<UserResponse> Get(string name, bool exactMatch = false)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/find/{0}", name).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/{1}", name, exactMatch).ToString();
 			return Get<IEnumerable<UserResponse>>(query);
 		}
 
