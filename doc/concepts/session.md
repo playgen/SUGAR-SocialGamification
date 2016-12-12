@@ -9,7 +9,7 @@ The "Heartbeat" method can be used to keep sessions active.
 ## Features
 * Login
 * Logout
-* Heartbeeat
+* Heartbeat
 
 ## API
 * Client
