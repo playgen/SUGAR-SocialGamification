@@ -47,6 +47,15 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return roles;
 		}
 
+		public Role GetDefaultForScope(ClaimScope scope)
+		{
+			var role = _roleDbController.GetDefault(scope.ToString());
+
+			Logger.Info($"{role?.Id} Role ID for {nameof(ClaimScope)}: {scope}");
+
+			return role;
+		}
+
 		public Role Create(Role newRole, int creatorId)
 		{
 			newRole = _roleDbController.Create(newRole);

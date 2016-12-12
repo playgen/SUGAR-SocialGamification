@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.WebAPI.Extensions;
@@ -45,15 +47,69 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Forbid();
         }
 
-        /// <summary>
-        /// Create a new Role.
-        /// Requires the <see cref="RoleRequest.Name"/> to be unique.
-        /// 
-        /// Example Usage: POST api/role
-        /// </summary>
-        /// <param name="newRole"><see cref="RoleRequest"/> object that contains the details of the new Role.</param>
-        /// <returns>A <see cref="RoleResponse"/> containing the new Role details.</returns>
-        [HttpPost]
+		/// <summary>
+		/// Get a list of all Roles for the scope with this name.
+		/// 
+		/// Example Usage: GET api/role/scope/game
+		/// </summary>
+		/// <returns>A list of <see cref="RoleResponse"/> that hold Role details.</returns>
+		[HttpGet("scope/{name}")]
+		//[ResponseType(typeof(IEnumerable<RoleResponse>))]
+		[Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.Role)]
+		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.Role)]
+		[Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Role)]
+		public IActionResult GetByScope([FromRoute]string name)
+		{
+			ClaimScope claimScope;
+			if (Enum.TryParse(name, true, out claimScope))
+			{
+				if (_authorizationService.AuthorizeAsync(User, claimScope, (AuthorizationRequirement)HttpContext.Items[claimScope + "Requirements"]).Result)
+				{
+					var roles = _roleCoreController.GetByScope(claimScope);
+					var roleContract = roles.ToContractList();
+					return new ObjectResult(roleContract);
+				}
+				return Forbid();
+			}
+			return Forbid();
+		}
+
+		/// <summary>
+		/// Get default Role for the scope with this name.
+		/// 
+		/// Example Usage: GET api/role/scopedefault/game
+		/// </summary>
+		/// <returns>A <see cref="RoleResponse"/> that holds Role details.</returns>
+		[HttpGet("scopedefault/{name}")]
+		//[ResponseType(typeof(RoleRespons>))]
+		[Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.Role)]
+		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.Role)]
+		[Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Role)]
+		public IActionResult GetDefaultForScope([FromRoute]string name)
+		{
+			ClaimScope claimScope;
+			if (Enum.TryParse(name, true, out claimScope))
+			{
+				if (_authorizationService.AuthorizeAsync(User, claimScope, (AuthorizationRequirement)HttpContext.Items[claimScope + "Requirements"]).Result)
+				{
+					var role = _roleCoreController.GetDefaultForScope(claimScope);
+					var roleContract = role.ToContract();
+					return new ObjectResult(roleContract);
+				}
+				return Forbid();
+			}
+			return Forbid();
+		}
+
+		/// <summary>
+		/// Create a new Role.
+		/// Requires the <see cref="RoleRequest.Name"/> to be unique.
+		/// 
+		/// Example Usage: POST api/role
+		/// </summary>
+		/// <param name="newRole"><see cref="RoleRequest"/> object that contains the details of the new Role.</param>
+		/// <returns>A <see cref="RoleResponse"/> containing the new Role details.</returns>
+		[HttpPost]
         //[ResponseType(typeof(RoleResponse))]
         [ArgumentsNotNull]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.Role)]
