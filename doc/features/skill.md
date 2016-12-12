@@ -110,15 +110,33 @@ Both Skills and [Achievements](achievement.md) build on "Evaluations" which may 
 		}
 ```
 
-* Checking a skill's progress
+* Automatically recieve skill progress completion notifications:
 
-	Using the [SkillClient](xref:PlayGen.SUGAR.Client.SkillClient)'s GetAchievementProgress function and specifying the GameId, ActorId and Token returns an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse> object for that Actor's progress towards the skill in that game. 
+ Enable and use automatic notifications:
+
+```cs
+		_skillClient.EnableNotifications(true);
+```
+	
+  And then poll to see if any achievements have been recieved.
+
+```cs
+		EvaluationNotification notification;
+		if(_skillClient.TryGetPendingNotification(out notification))
+		{
+			// There was a penging skill notification, so do something with it
+			Log.Info($"Got skill notification: {notification.Name} " + 
+				$"with progress: {notification.Progress}");
+		}
+```
+
+* Requesting specific using the [SkillClient](xref:PlayGen.SUGAR.Client.SkillClient)'s GetSkillProgress function and specifying the GameId, ActorId and Token returns an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse> object for that Actor's progress towards the skill in that game. 
 
 ```cs
 		private float CheckSkillProgress()
 		{
 			// Check the user's progress towards the achievements in the specified game
-			var achievementProgressResponse = _skillClient.GetAchievementProgress
+			var skillProgressResponse = _skillClient.GetSkillProgress
 			(
 				"swordsmanship", 
 				_gameId,
@@ -126,6 +144,6 @@ Both Skills and [Achievements](achievement.md) build on "Evaluations" which may 
 			 );
 
 			// Output the progress
-			return achivementProgressResponse.Progress;
+			return skillProgressResponse.Progress;
 		}
 ```

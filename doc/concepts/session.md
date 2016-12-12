@@ -1,0 +1,21 @@
+# Session
+When a user logs in to a game, a new, unique session is created.
+When the user logs out, that session is ended.
+
+Sessions will automatically be ended if there has been no activity within a certain period.
+
+The "Heartbeat" method can be used to keep sessions active.
+
+## Features
+* Login
+* Logout
+* Heartbeeat
+
+## API
+* Client
+	* <xref:PlayGen.SUGAR.Client.SessionClient>
+* Contracts
+	* <xref:PlayGen.SUGAR.Contracts.Shared.AccountRequest>
+	* <xref:PlayGen.SUGAR.Contracts.Shared.AccountResponse>
+* WebAPI
+	* <xref:PlayGen.SUGAR.WebAPI.Controllers.SessionController>

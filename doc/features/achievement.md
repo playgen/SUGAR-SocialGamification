@@ -105,9 +105,27 @@ Both Achievements and [Skills](skill.md) build on "Evaluations" which may contai
 		}
 ```
 
-* Checking an achiement's progress
+* Automatically recieve achievemnt progress completion notifications:
 
-	Using the <xref:PlayGen.SUGAR.Client.AchievementClient> and specifying the GameId, ActorId and Token, returns an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse> object for that Actor's progress towards the achievement in that game. 
+ Enable and use automatic notifications:
+
+```cs
+		_achievementClient.EnableNotifications(true);
+```
+	
+  And then poll to see if any skills have been recieved.
+
+```cs
+		EvaluationNotification notification;
+		if(_achievementClient.TryGetPendingNotification(out notification))
+		{
+			// There was a penging achievement notification, so do something with it
+			Log.Info($"Got achievement notification: {notification.Name} " + 
+				$"with progress: {notification.Progress}");
+		}
+```
+
+ * Requesting specific achievement progress using the <xref:PlayGen.SUGAR.Client.AchievementClient> and specifying the GameId, ActorId and Token, returns an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse> object for that Actor's progress towards the achievement in that game. 
 
 ```cs
 		private float CheckAchievementProgress()
