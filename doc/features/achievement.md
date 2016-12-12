@@ -7,6 +7,9 @@ Achievements provide a flexible and simple way to increase user engagement, trac
 
 The criteria is flexible and can be written by the game developer or provided by the platform based on any game specific action. Achievements can be binary or incremental, ie. (complete/not complete) or have levels or percentages of progression toward their completion. They can be global, across all games, or associated with a single game. 
 
+# Note
+Both Achievements and [Skills](skill.md) build on "Evaluations" which may contain a multitude of "EvaluationCriteria", specifiying the conditions that need to be satisfied for this specific Evaluation to be considered complete.
+
 ## Features
 * Add/Update/Delete achievements
 * Search for achievements by Id/Game/Name/Actor

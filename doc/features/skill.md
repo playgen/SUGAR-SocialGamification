@@ -7,6 +7,9 @@ Skills represent a players proficiency or ability. SUGAR allows the game designe
 
 Such a skill is globally defined with a game-specific criteria. The criteria checks the [GameData](gameData.md) table for occurrences that serve as evidence of that skill's demonstration.
 
+# Note
+Both Skills and [Achievements](achievement.md) build on "Evaluations" which may contain a multitude of "EvaluationCriteria", specifiying the conditions that need to be satisfied for this specific Evaluation to be considered complete.
+
 ## Features
 * Get all skills
 * Get all skills that match a name/id
