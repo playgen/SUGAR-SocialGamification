@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			var results = _gameDataDbController.Get(gameId, actorId, keys);
 
-            Logger.Info($"{results?.Count} Game Datas for GameId: {gameId}, ActorId: {actorId}, Keys: {string.Join(", ", keys)}");
+            Logger.Info($"{results?.Count} Game Datas for GameId: {gameId}, ActorId: {actorId}" + (keys != null ? $"Keys: {string.Join(", ", keys)}" : ""));
 
             return results;
 		}
@@ -99,7 +99,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public void UpdateQuantity(GameData resource, long modifyAmount)
 		{
-			long currentValue = long.Parse(resource.Value);
+			var currentValue = long.Parse(resource.Value);
 			resource.Value = (currentValue + modifyAmount).ToString();
 
 			_gameDataDbController.Update(resource);
