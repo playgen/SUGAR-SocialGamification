@@ -428,7 +428,7 @@
     "/api/Achievements/create": {
       "post": {
         "tags": [ "Achievements" ],
-        "summary": "Create a new Achievement.\r\n            Requires {PlayGen.SUGAR.Contracts.AchievementRequest.Name} to be unique to that {PlayGen.SUGAR.Contracts.AchievementRequest.GameId}.\r\n            \r\n            Example Usage: POST api/achievements/create",
+        "summary": "Create a new Achievement.\r\n            Requires {PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name} to be unique to that {PlayGen.SUGAR.Contracts.EvaluationCreateRequest.GameId}.\r\n            \r\n            Example Usage: POST api/achievements/create",
         "operationId": "ApiAchievementsCreatePost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
@@ -436,9 +436,9 @@
           {
             "name": "newAchievement",
             "in": "body",
-            "description": "{PlayGen.SUGAR.Contracts.AchievementRequest} object that holds the details of the new Achievement.",
+            "description": "{PlayGen.SUGAR.Contracts.EvaluationCreateRequest} object that holds the details of the new Achievement.",
             "required": false,
-            "schema": { "$ref": "#/definitions/AchievementRequest" }
+            "schema": { "$ref": "#/definitions/EvaluationCreateRequest" }
           }
         ],
         "responses": { "204": { "description": "No Content" } },
@@ -456,9 +456,9 @@
           {
             "name": "achievement",
             "in": "body",
-            "description": "{PlayGen.SUGAR.Contracts.AchievementRequest} object that holds the details of the Achievement.",
+            "description": "{PlayGen.SUGAR.Contracts.EvaluationCreateRequest} object that holds the details of the Achievement.",
             "required": false,
-            "schema": { "$ref": "#/definitions/AchievementRequest" }
+            "schema": { "$ref": "#/definitions/EvaluationCreateRequest" }
           }
         ],
         "responses": { "204": { "description": "No Content" } },
@@ -1582,7 +1582,7 @@
     "/api/Skills/create": {
       "post": {
         "tags": [ "Skills" ],
-        "summary": "Create a new Skill.\r\n            Requires {PlayGen.SUGAR.Contracts.AchievementRequest.Name} to be unique to that {PlayGen.SUGAR.Contracts.AchievementRequest.GameId}.\r\n            \r\n            Example Usage: POST api/skills/create",
+        "summary": "Create a new Skill.\r\n            Requires {PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name} to be unique to that {PlayGen.SUGAR.Contracts.EvaluationCreateRequest.GameId}.\r\n            \r\n            Example Usage: POST api/skills/create",
         "operationId": "ApiSkillsCreatePost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
@@ -1590,9 +1590,9 @@
           {
             "name": "newSkill",
             "in": "body",
-            "description": "{PlayGen.SUGAR.Contracts.AchievementRequest} object that holds the details of the new Skill.",
+            "description": "{PlayGen.SUGAR.Contracts.EvaluationCreateRequest} object that holds the details of the new Skill.",
             "required": false,
-            "schema": { "$ref": "#/definitions/AchievementRequest" }
+            "schema": { "$ref": "#/definitions/EvaluationCreateRequest" }
           }
         ],
         "responses": { "204": { "description": "No Content" } },
@@ -1610,9 +1610,9 @@
           {
             "name": "skill",
             "in": "body",
-            "description": "{PlayGen.SUGAR.Contracts.AchievementRequest} object that holds the details of the Skill.",
+            "description": "{PlayGen.SUGAR.Contracts.EvaluationCreateRequest} object that holds the details of the Skill.",
             "required": false,
-            "schema": { "$ref": "#/definitions/AchievementRequest" }
+            "schema": { "$ref": "#/definitions/EvaluationCreateRequest" }
           }
         ],
         "responses": { "204": { "description": "No Content" } },
@@ -1948,7 +1948,7 @@
         }
       }
     },
-    "AchievementRequest": {
+    "EvaluationCreateRequest": {
       "description": "Encapsulates achievement/skill details.",
       "required": [ "token", "name", "actorType", "completionCriteria" ],
       "type": "object",
@@ -1982,7 +1982,7 @@
         "completionCriteria": {
           "description": "A list of criteria which will be checked in order to see if an actor has completed the achievement/skill.\r\n            Must contain at least one criteria.",
           "type": "array",
-          "items": { "$ref": "#/definitions/AchievementCriteria" }
+          "items": { "$ref": "#/definitions/EvaluationCriteria" }
         },
         "reward": {
           "description": "A list of rewards that will be provided to the actor upon completion of the achievement/skill criteria.\r\n            An achievement does not need to contain a reward.",
@@ -1991,7 +1991,7 @@
         }
       }
     },
-    "AchievementCriteria": {
+    "EvaluationCriteria": {
       "description": "Encapsulates requirements for completing an achievement or skill.",
       "required": [ "key", "dataType", "criteriaQueryType", "comparisonType", "scope", "value" ],
       "type": "object",

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +8,6 @@ using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.WebAPI.Attributes;
 using PlayGen.SUGAR.WebAPI.Extensions;
-using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {

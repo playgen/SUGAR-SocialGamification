@@ -15,17 +15,17 @@ Relationships are connections between two or more entities. For example a user b
     * [GroupMemberClient](xref:PlayGen.SUGAR.Client.GroupMemberClient)
     * [UserFriendClient](xref:PlayGen.SUGAR.Client.UserFriendClient)
 * Contracts
-    * [RelationshipStatusUpdate](xref:PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)
-    * [RelationshipRequest](xref:PlayGen.SUGAR.Contracts.RelationshipRequest)
-    * [RelationshipResponse](xref:PlayGen.SUGAR.Contracts.RelationshipResponse)
-    * [ActorResponse](xref:PlayGen.SUGAR.Contracts.ActorResponse)
+    * [RelationshipStatusUpdate](xref:PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate)
+    * [RelationshipRequest](xref:PlayGen.SUGAR.Contracts.Shared.RelationshipRequest)
+    * [RelationshipResponse](xref:PlayGen.SUGAR.Contracts.Shared.RelationshipResponse)
+    * [ActorResponse](xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse)
 * WebAPI
     * [GroupMemberController](xref:PlayGen.SUGAR.WebAPI.Controllers.GroupMemberController)
     * [UserFriendController](xref:PlayGen.SUGAR.WebAPI.Controllers.UserFriendController)
 
 ## Examples
 * Adding a User to a Group
-	A [Group](group.md) can be joined by an actor. This will create a user to group relationship request. In this example, we will set the AutoAccept property in the [RelationshipRequest](xref:PlayGen.SUGAR.Contracts.RelationshipRequest) object to true, so the relationship will be stored directly as a user to group relationship. The joined group's id is then extracted from the [RelationshipResponse](xref:PlayGen.SUGAR.Contracts.RelationshipResponse).
+	A [Group](group.md) can be joined by an actor. This will create a user to group relationship request. In this example, we will set the AutoAccept property in the [RelationshipRequest](xref:PlayGen.SUGAR.Contracts.Shared.RelationshipRequest) object to true, so the relationship will be stored directly as a user to group relationship. The joined group's id is then extracted from the [RelationshipResponse](xref:PlayGen.SUGAR.Contracts.Shared.RelationshipResponse).
 
 ```cs
 		public SUGARClient sugarClient = new SUGARClient(BaseUri);
@@ -55,7 +55,7 @@ Relationships are connections between two or more entities. For example a user b
 ```
 
 * Leaving a group
-	A user to group relationship status can be updated using a [RelationshipStatusUpdate](xref:PlayGen.SUGAR.Contracts.RelationshipStatusUpdate) with the [GroupMemberClient](xref:PlayGen.SUGAR.Client.GroupMemberClient)'s UpdateMember function. This example shows the user leaving the group joined in the previous example. Calling the function automatically breaks the relationship between the group and player if there is one, without the need of passing the additional Accepted property in the RelationshipStatusUpdate.
+	A user to group relationship status can be updated using a [RelationshipStatusUpdate](xref:PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate) with the [GroupMemberClient](xref:PlayGen.SUGAR.Client.GroupMemberClient)'s UpdateMember function. This example shows the user leaving the group joined in the previous example. Calling the function automatically breaks the relationship between the group and player if there is one, without the need of passing the additional Accepted property in the RelationshipStatusUpdate.
 
 ```cs
 		private void LeaveGroup() 
@@ -104,7 +104,7 @@ Relationships are connections between two or more entities. For example a user b
 ```
 
 * Removing a friend
-	Like leaving a group, removing a friend updates the user to user relationship using a [RelationshipStatusUpdate](xref:PlayGen.SUGAR.Contracts.RelationshipStatusUpdate) with [UserFriendClient](xref:PlayGen.SUGAR.Client.UserFriendClient)'s UpdateFriend function. 
+	Like leaving a group, removing a friend updates the user to user relationship using a [RelationshipStatusUpdate](xref:PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate) with [UserFriendClient](xref:PlayGen.SUGAR.Client.UserFriendClient)'s UpdateFriend function. 
 
 ```cs
 		private void RemoveFriend() 

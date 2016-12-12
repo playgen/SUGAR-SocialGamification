@@ -5,7 +5,6 @@ using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.WebAPI.Attributes;
-using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -83,7 +82,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new User.
-		/// Requires the <see cref="UserRequest.Name"/> to be unique for Users.
+		/// Requires the <see cref="UserRequest"/>'s Name to be unique for Users.
 		/// 
 		/// Example Usage: POST api/user
 		/// </summary>

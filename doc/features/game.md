@@ -17,8 +17,8 @@ A game is an individual application as defined by the platform. A single instanc
 * Client
     * <xref:PlayGen.SUGAR.Client.GameClient>
 * Contracts
-    * <xref:PlayGen.SUGAR.Contracts.GameRequest>
-    * <xref:PlayGen.SUGAR.Contracts.GameResponse>
+    * <xref:PlayGen.SUGAR.Contracts.Shared.GameRequest>
+    * <xref:PlayGen.SUGAR.Contracts.Shared.GameResponse>
 * WebAPI
     * <xref:PlayGen.SUGAR.WebAPI.Controllers.GameController>
 
@@ -26,7 +26,7 @@ A game is an individual application as defined by the platform. A single instanc
 ## Examples
 * Create a game
 	
-	Creating a game using the <xref:PlayGen.SUGAR.Client.GameClient>'s Create function, passing a <xref:PlayGen.SUGAR.Contracts.GameRequest> object as the parameter. This example will be used to create a game with the name "Thrones" and store its Id from the returned <xref:PlayGen.SUGAR.Contracts.GameResponse>.
+	Creating a game using the <xref:PlayGen.SUGAR.Client.GameClient>'s Create function, passing a <xref:PlayGen.SUGAR.Contracts.Shared.GameRequest> object as the parameter. This example will be used to create a game with the name "Thrones" and store its Id from the returned <xref:PlayGen.SUGAR.Contracts.Shared.GameResponse>.
 
 ```cs
 		public SUGARClient sugarClient = new SUGARClient(BaseUri);

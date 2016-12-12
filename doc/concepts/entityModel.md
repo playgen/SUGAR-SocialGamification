@@ -34,8 +34,8 @@ An achievement may check to see if an Actor's score is over 100, and if so, the 
 A Skill has the aim of teaching the player a "skill" in the process of completing it.
 For example, a Skill may be to give 10 gems to 10 different people to complete the "sharing" Skill.
 
-Achievements and Skills both have [AchievementCriteria](/concepts/criteria.html) which is a set of conditions that need to be met in order for the Skill or Achievement to be considered as completed.
-AchievementCriteria can look for specific data in GameData.
+Achievements and Skills both have [EvaluationCriteria](/concepts/criteria.html) which is a set of conditions that need to be met in order for the Skill or Achievement to be considered as completed.
+EvaluationCriteria can look for specific data in GameData.
 
 Once completed, an Achievement or Skill may offer rewards to the Actor. These rewards would be in the form of GameData. 
 For example, an Actor may be credited with 20 points on completing an Achievement or Skill.

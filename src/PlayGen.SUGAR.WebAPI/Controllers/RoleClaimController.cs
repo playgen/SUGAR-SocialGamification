@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.Authorization;
 using PlayGen.SUGAR.WebAPI.Extensions;
-using PlayGen.SUGAR.WebAPI.Filters;
 using System.Linq;
 using PlayGen.SUGAR.WebAPI.Attributes;
 

@@ -15,22 +15,23 @@ The criteria is flexible and can be written by the game developer or provided by
 * Client
     * <xref:PlayGen.SUGAR.Client.AchievementClient>
 * Contracts
-    * <xref:PlayGen.SUGAR.Contracts.AchievementCriteria>
-    * <xref:PlayGen.SUGAR.Contracts.AchievementProgressResponse>
-    * <xref:PlayGen.SUGAR.Contracts.AchievementRequest>
-    * <xref:PlayGen.SUGAR.Contracts.AchievementResponse>
-    * <xref:PlayGen.SUGAR.Contracts.GameDataType>
-    * <xref:PlayGen.SUGAR.Contracts.CriteriaQueryType>
-    * <xref:PlayGen.SUGAR.Contracts.ComparisonType>
-    * <xref:PlayGen.SUGAR.Contracts.ActorType>
-    * <xref:PlayGen.SUGAR.Contracts.CriteriaScope>
+    * <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria>
+    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse>
+    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest>
+    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationUpdateRequest>
+    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationResponse>
+    * <xref:PlayGen.SUGAR.Common.Shared.SaveDataType>
+    * <xref:PlayGen.SUGAR.Common.Shared.CriteriaQueryType>
+    * <xref:PlayGen.SUGAR.Common.Shared.ComparisonType>
+    * <xref:PlayGen.SUGAR.Common.Shared.ActorType>
+    * <xref:PlayGen.SUGAR.Common.Shared.CriteriaScope>
 * WebAPI
     * <xref:PlayGen.SUGAR.WebAPI.Controllers.AchievementsController>
 
 ## Examples
 * Specifying an achievement
 
-	This example will describe how to implement the 'Slay 10 Enemies!' achievement. An achievement must be specified with an @PlayGen.SUGAR.Contracts.AchievementRequest) with a list of @PlayGen.SUGAR.Contracts.AchievementCriteria) that will be evalutated against to determine progress.
+	This example will describe how to implement the 'Slay 10 Enemies!' achievement. An achievement must be specified with an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest> with a list of <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria> that will be evalutated against to determine progress.
 	All 'EnemiesSlain' keys will be checked in gameData and whether the sum of their values is greater than or equal to 10.
 
 ```cs
@@ -44,10 +45,10 @@ The criteria is flexible and can be written by the game developer or provided by
 			// create instance of the achievement client
 			_achievementClient = sugarClient.Achievement;
 			
-			// create an AchievementCriteria list
-			var achievementCriteria = new List<AchievementCriteria>()
+			// create an EvaluationCriteria list
+			var EvaluationCriteria = new List<EvaluationCriteria>()
 			{
-				new AchievementCriteria()
+				new EvaluationCriteria()
 				{
 					DataType = GameDataType.Long,
 					Value = "10",
@@ -58,24 +59,24 @@ The criteria is flexible and can be written by the game developer or provided by
 				}
 			};
 			
-			// place the criteria inside an AchievementRequest
-			var achievementRequest = new AchievementRequest()
+			// place the criteria inside an EvaluationCreateRequest
+			var EvaluationCreateRequest = new EvaluationCreateRequest()
 			{
 				GameId = _gameId,
 				Name = "Slay 10 Enemies!",
 				ActorType = ActorType.User,
 				Token = "slay_10_enemies",
-				CompletionCriteria = achievementCriteria
+				CompletionCriteria = EvaluationCriteria
 			};
 
 			// create the achievement
-			_achievementClient.Create(achievementRequest);
+			_achievementClient.Create(EvaluationCreateRequest);
 		}
 ```
 
 * Submitting data for when somthing which may be used to evaluate progress towards an Achievement  
 	
-	An achievement uses keys in <xref:gameData> that match its <xref:PlayGen.SUGAR.Contracts.AchievementCriteria>. This data is submitted at points in the game which demonstrate progress towards the achievement (as well as other uses).
+	An achievement uses keys in <xref:gameData> that match its <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria>. This data is submitted at points in the game which demonstrate progress towards the achievement (as well as other uses).
 
 ```cs
 		private void SlayEnemies(int quantity)
@@ -103,7 +104,7 @@ The criteria is flexible and can be written by the game developer or provided by
 
 * Checking an achiement's progress
 
-	Using the <xref:PlayGen.SUGAR.Client.AchievementClient> and specifying the GameId, ActorId and Token, returns an <xref:PlayGen.SUGAR.Contracts.AchievementProgressResponse> object for that Actor's progress towards the achievement in that game. 
+	Using the <xref:PlayGen.SUGAR.Client.AchievementClient> and specifying the GameId, ActorId and Token, returns an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse> object for that Actor's progress towards the achievement in that game. 
 
 ```cs
 		private float CheckAchievementProgress()

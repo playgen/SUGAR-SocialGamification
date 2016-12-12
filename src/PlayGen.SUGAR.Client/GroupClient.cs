@@ -49,13 +49,13 @@ namespace PlayGen.SUGAR.Client
 			return Get<GroupResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
-		/// <summary>
-		/// Create a new Group.
-		/// Requires the <see cref="GroupRequest.Name"/> to be unique for Groups.
-		/// </summary>
-		/// <param name="actor"><see cref="GroupRequest"/> object that holds the details of the new Group.</param>
-		/// <returns>A <see cref="GroupResponse"/> containing the new Group details.</returns>
-		public GroupResponse Create(GroupRequest actor)
+        /// <summary>
+        /// Create a new Group.
+        /// Requires the <see cref="GroupRequest"/>'s Name to be unique for Groups.
+        /// </summary>
+        /// <param name="actor"><see cref="GroupRequest"/> object that holds the details of the new Group.</param>
+        /// <returns>A <see cref="GroupResponse"/> containing the new Group details.</returns>
+        public GroupResponse Create(GroupRequest actor)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "").ToString();
 			return Post<GroupRequest, GroupResponse>(query, actor);

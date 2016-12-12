@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Client
 
 		/// <summary>
 		/// Create a new User.
-		/// Requires the <see cref="UserRequest.Name"/> to be unique for Users.
+		/// Requires the <see cref="UserRequest"/>'s Name to be unique for Users.
 		/// </summary>
 		/// <param name="actor"><see cref="UserRequest"/> object that holds the details of the new User.</param>
 		/// <returns>A <see cref="UserResponse"/> containing the new User details.</returns>

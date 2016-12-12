@@ -17,16 +17,16 @@ Resources are game objects which are obtained and exchanged by players. They may
 * Client
     * [ResourceClient](xref:PlayGen.SUGAR.Client.ResourceClient)
 * Contracts
-	* [ResourceAddRequest](xref:PlayGen.SUGAR.Contracts.ResourceAddRequest)
-	* [ResourceResponse](xref:PlayGen.SUGAR.Contracts.ResourceResponse)
-	* [ResourceTransferRequest](xref:PlayGen.SUGAR.Contracts.ResourceTransferRequest)
-	* [ResourceTransferResponse](xref:PlayGen.SUGAR.Contracts.ResourceTransferResponse)
+	* [ResourceAddRequest](xref:PlayGen.SUGAR.Contracts.Shared.ResourceAddRequest)
+	* [ResourceResponse](xref:PlayGen.SUGAR.Contracts.Shared.ResourceResponse)
+	* [ResourceTransferRequest](xref:PlayGen.SUGAR.Contracts.Shared.ResourceTransferRequest)
+	* [ResourceTransferResponse](xref:PlayGen.SUGAR.Contracts.Shared.ResourceTransferResponse)
 * WebAPI
     * [ResourceController](xref:PlayGen.SUGAR.WebAPI.Controllers.ResourceController)
 
 ## Examples
 * Creating a resource
-	The [ResourceClient](xref:PlayGen.SUGAR.Client.ResourceClient) has an AddOrUpdate function which adds a new resource entry belonging to the user into [GameData](gameData.md) or automatically updates an existing one if a duplicate entry was to be made. The function takes a [ResourceAddRequest](xref:PlayGen.SUGAR.Contracts.ResourceAddRequest) parameter and returns a [ResourceResponse](xref:PlayGen.SUGAR.Contracts.ResourceResponse). This example will show how to both add a new entry or increment a player's amount of Valyrian steel. This is done by specifying the key "ValyrianSteel" which will be added with a value matching the quantity to GameData. If the entry already exists, it will add the quantity to its value (or subtract if the quantity is negative).
+	The [ResourceClient](xref:PlayGen.SUGAR.Client.ResourceClient) has an AddOrUpdate function which adds a new resource entry belonging to the user into [GameData](gameData.md) or automatically updates an existing one if a duplicate entry was to be made. The function takes a [ResourceAddRequest](xref:PlayGen.SUGAR.Contracts.Shared.ResourceAddRequest) parameter and returns a [ResourceResponse](xref:PlayGen.SUGAR.Contracts.Shared.ResourceResponse). This example will show how to both add a new entry or increment a player's amount of Valyrian steel. This is done by specifying the key "ValyrianSteel" which will be added with a value matching the quantity to GameData. If the entry already exists, it will add the quantity to its value (or subtract if the quantity is negative).
 
 ```cs
 		public SUGARClient sugarClient = new SUGARClient(BaseUri);
@@ -54,7 +54,7 @@ Resources are game objects which are obtained and exchanged by players. They may
 ```
 
 * Transfer a resource
-	This example will show how to give Valryian to another player. The [ResourceClient](xref:PlayGen.SUGAR.Client.ResourceClient)'s Transfer function handles this taking a [ResourceTransferRequest](xref:PlayGen.SUGAR.Contracts.ResourceTransferRequest) parameter and returning a [ResourceTransferResponse](xref:PlayGen.SUGAR.Contracts.ResourceTransferResponse) object. When the transfer is made, it adds the resource quantity to the target user, and subtracts it from the source user. 
+	This example will show how to give Valryian to another player. The [ResourceClient](xref:PlayGen.SUGAR.Client.ResourceClient)'s Transfer function handles this taking a [ResourceTransferRequest](xref:PlayGen.SUGAR.Contracts.Shared.ResourceTransferRequest) parameter and returning a [ResourceTransferResponse](xref:PlayGen.SUGAR.Contracts.Shared.ResourceTransferResponse) object. When the transfer is made, it adds the resource quantity to the target user, and subtracts it from the source user. 
 
 ```cs 
 		private void TransferResource(int quantity, int targetUser) 

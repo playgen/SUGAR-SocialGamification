@@ -1,6 +1,6 @@
 # LeaderboardStandings
 
-[LeaderboardStandings](xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest) are used to obtain a collection of [users](/features/user.html) or [groups](/features/group.html) based on a specific Leaderboard.
+[LeaderboardStandings](xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest) are used to obtain a collection of [users](/features/user.html) or [groups](/features/group.html) based on a specific Leaderboard.
 
 In order to setup a LeaderboardStandings, the following must be passed:
 
@@ -10,7 +10,7 @@ In order to setup a LeaderboardStandings, the following must be passed:
 
 - ActorId - The [actor](/features/actor.html) that we are most concerned with. The actor is used in conjunction with the LeaderboardFilterType.
 
-- [LeaderboardFilterType](xref:PlayGen.SUGAR.Contracts.LeaderboardFilterType) - Allows you to specify how you want the results returned in relation to the actor:
+- [LeaderboardFilterType](xref:PlayGen.SUGAR.Common.Shared.LeaderboardFilterType) - Allows you to specify how you want the results returned in relation to the actor:
 	- Top: Returns the top globally ranked actors.
 	- Near: Returns the actors in relation to the actorId Provided. This works in conjunction with the PageOffset. By default it will return a collection that contains the provided actor.
 	- Friends: If the actor is a user, only the friends of that user are returned.

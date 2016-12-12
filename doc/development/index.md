@@ -71,7 +71,7 @@ The API client provides a C# interface to the [RESTful API](../restapi/restapi.s
 
 This issue has been addressed by SaladLab who have produced a lightweight version of the JSON.Net library specifically for use in Unity projects (https://github.com/SaladLab/Json.Net.Unity3D). We have decided to use this library for the C# client regardless of the target platform as it provided all required functionality. 
 
-SaladLab only currently provide this in the unitypackage format, we have packaged this for NuGet which can currently be downloaded [here](../files/PlayGen.Json.Net.Unity3D.9.0.1.nupkg), however this will be published to the nuget.org package feed in the near future. For details on how to configure a local filesystem based NuGeT package feed see [here](https://docs.nuget.org/create/hosting-your-own-nuget-feeds).
+SaladLab only currently provide this in the unitypackage format, we have packaged this for NuGet which can currently be downloaded [here](../files/Json.Net.Unity3D.9.0.1.nupkg), however this will be published to the nuget.org package feed in the near future. For details on how to configure a local filesystem based NuGeT package feed see [here](https://docs.nuget.org/create/hosting-your-own-nuget-feeds).
 
 ### Unity
 
