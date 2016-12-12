@@ -177,8 +177,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Group, AuthorizationOperation.Delete, AuthorizationOperation.GroupMemberRequest)]
-        [Authorization(ClaimScope.User, AuthorizationOperation.Delete, AuthorizationOperation.GroupMemberRequest)]
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Delete, AuthorizationOperation.GroupMember)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Delete, AuthorizationOperation.GroupMember)]
         public IActionResult UpdateMember([FromBody] RelationshipStatusUpdate relationship)
 		{
             if (_authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||

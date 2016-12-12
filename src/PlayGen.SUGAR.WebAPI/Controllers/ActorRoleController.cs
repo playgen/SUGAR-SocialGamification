@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
@@ -41,7 +43,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
         /// 
         /// Example Usage: GET api/actorrole/role/1/entity/1
         /// </summary>
-        /// <returns>A list of <see cref="ActorResponse"/> that hold ActorRole details.</returns>
+        /// <returns>A list of <see cref="ActorResponse"/> that hold Actor details.</returns>
         [HttpGet("role/{roleId:int}/entity/{entityId:int}")]
         //[ResponseType(typeof(IEnumerable<ActorRoleResponse>))]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
@@ -60,13 +62,40 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Forbid();
         }
 
-        /// <summary>
-        /// Get a list of all Roles this Actor has control over.
-        /// 
-        /// Example Usage: GET api/actorrole/controlled
-        /// </summary>
-        /// <returns>A list of <see cref="RoleResponse"/> that hold Role details.</returns>
-        [HttpGet("controlled")]
+		/// <summary>
+		/// Get a list of all Roles for this Actor, ClaimScope and Entity.
+		/// 
+		/// Example Usage: GET api/actorrole/actor/1/entity/1/claimscope/game
+		/// </summary>
+		/// <returns>A list of <see cref="RoleResponse"/> that hold Role details.</returns>
+		[HttpGet("actor/{actorId:int}/entity/{entityId:int}/claimscope/{scopeName}")]
+		//[ResponseType(typeof(IEnumerable<ActorRoleResponse>))]
+		[Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
+		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
+		[Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
+		public IActionResult GetActorEntityRoles([FromRoute]int actorId, [FromRoute]int entityId, [FromRoute]string scopeName)
+		{
+			ClaimScope claimScope;
+			if (Enum.TryParse(scopeName, true, out claimScope))
+			{
+				if (_authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items[claimScope + "Requirements"]).Result)
+				{
+					var roles = _actorRoleCoreController.GetActorRolesForEntity(actorId, entityId, claimScope).Distinct().ToList();
+					var roleContract = roles.ToContractList();
+					return new ObjectResult(roleContract);
+				}
+				return Forbid();
+			}
+			return Forbid();
+		}
+
+		/// <summary>
+		/// Get a list of all Roles this Actor has control over.
+		/// 
+		/// Example Usage: GET api/actorrole/controlled
+		/// </summary>
+		/// <returns>A list of <see cref="RoleResponse"/> that hold Role details.</returns>
+		[HttpGet("controlled")]
         //[ResponseType(typeof(IEnumerable<RoleResponse>))]
         public IActionResult GetControlled()
         {
