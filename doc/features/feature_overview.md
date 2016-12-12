@@ -18,6 +18,7 @@ The high level features of SUGAR in the current version (July 2016) can be group
 - [Resource](resource.md) : Generalised game object storage for any game variable. 
 - [Skill](skill.md) : Represent a players proficiency or ability.
 - [User](user.md) : Individual user of the system. 
+- [Matches](match.md)
 	
 ## Roadmap
 

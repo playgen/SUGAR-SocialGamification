@@ -305,6 +305,8 @@
   items:
   - uid: PlayGen.SUGAR.Core.Exceptions.InvalidAccountDetailsException
     name: InvalidAccountDetailsException
+  - uid: PlayGen.SUGAR.Core.Exceptions.InvalidOperationException
+    name: InvalidOperationException
 - uid: PlayGen.SUGAR.Core.Sessions
   name: PlayGen.SUGAR.Core.Sessions
   items:

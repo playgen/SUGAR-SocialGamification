@@ -19,6 +19,8 @@
   uid: skill
 - name: Users
   uid: user
+- name: Matches
+  uid: match
 - name: Roadmap
   uid: roadmap
 - name: Admin Panel

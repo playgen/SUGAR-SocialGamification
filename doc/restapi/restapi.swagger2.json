@@ -8,16 +8,10 @@
   "paths": {
     "/api/Account/create": {
       "post": {
-        "tags": [
-          "Account"
-        ],
+        "tags": [ "Account" ],
         "summary": "Register a new account and creates an associated user.\r\n            Requires the {PlayGen.SUGAR.Contracts.Shared.AccountRequest.Name} to be unique.\r\n            Returns a JsonWebToken used for authorization in any further calls to the API.\r\n            \r\n            Example Usage: POST api/account/create",
         "operationId": "ApiAccountCreatePost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -32,31 +26,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.AccountRequest} object that contains the details of the new Account.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/AccountRequest"
-            }
+            "schema": { "$ref": "#/definitions/AccountRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Account/{gameId}/create": {
       "post": {
-        "tags": [
-          "Account"
-        ],
+        "tags": [ "Account" ],
         "summary": "Register a new account and creates an associated user.\r\n            Requires the {PlayGen.SUGAR.Contracts.Shared.AccountRequest.Name} to be unique.\r\n            Returns a JsonWebToken used for authorization in any further calls to the API.\r\n            \r\n            Example Usage: POST api/account/create",
         "operationId": "ApiAccountByGameIdCreatePost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -71,24 +53,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.AccountRequest} object that contains the details of the new Account.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/AccountRequest"
-            }
+            "schema": { "$ref": "#/definitions/AccountRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Account/{id}": {
       "delete": {
-        "tags": [
-          "Account"
-        ],
+        "tags": [ "Account" ],
         "summary": "Delete Account with the ID provided.\r\n            \r\n            Example Usage: DELETE api/account/1",
         "operationId": "ApiAccountByIdDelete",
         "consumes": [],
@@ -103,36 +77,24 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/AccountSource/list": {
       "get": {
-        "tags": [
-          "AccountSource"
-        ],
+        "tags": [ "AccountSource" ],
         "summary": "Get a list of all AccountSources.\r\n            \r\n            Example Usage: GET api/accountSource/list",
         "operationId": "ApiAccountSourceListGet",
         "consumes": [],
         "produces": [],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/AccountSource/findbyid/{id}": {
       "get": {
-        "tags": [
-          "AccountSource"
-        ],
+        "tags": [ "AccountSource" ],
         "summary": "Get AccountSource that matches <param name=\"id\" /> provided.\r\n            \r\n            Example Usage: GET api/accountSource/findbyid/1",
         "operationId": "ApiAccountSourceFindbyidByIdGet",
         "consumes": [],
@@ -147,26 +109,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/AccountSource": {
       "post": {
-        "tags": [
-          "AccountSource"
-        ],
+        "tags": [ "AccountSource" ],
         "summary": "Create a new AccountSource.\r\n            Requires the {!:AccountSourceRequest.Name} to be unique.\r\n            \r\n            Example Usage: POST api/accountSource",
         "operationId": "ApiAccountSourcePost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -174,31 +126,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.AccountSourceRequest} object that contains the details of the new AccountSource.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/AccountSourceRequest"
-            }
+            "schema": { "$ref": "#/definitions/AccountSourceRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/AccountSource/update/{id}": {
       "put": {
-        "tags": [
-          "AccountSource"
-        ],
+        "tags": [ "AccountSource" ],
         "summary": "Update an existing AccountSource.\r\n            \r\n            Example Usage: PUT api/accountSource/update/1",
         "operationId": "ApiAccountSourceUpdateByIdPut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -214,24 +154,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.AccountSourceRequest} object that holds the details of the AccountSource.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/AccountSourceRequest"
-            }
+            "schema": { "$ref": "#/definitions/AccountSourceRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/AccountSource/{id}": {
       "delete": {
-        "tags": [
-          "AccountSource"
-        ],
+        "tags": [ "AccountSource" ],
         "summary": "Delete AccountSource with the ID provided.\r\n            \r\n            Example Usage: DELETE api/accountSource/1",
         "operationId": "ApiAccountSourceByIdDelete",
         "consumes": [],
@@ -246,19 +178,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/find/{token}/{gameId}": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find an Achievement that matches <param name=\"token\" /> and <param name=\"gameId\" />.\r\n            \r\n            Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1",
         "operationId": "ApiAchievementsFindByTokenByGameIdGet",
         "consumes": [],
@@ -280,19 +206,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/find/{token}/global": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find an Achievement that matches <param name=\"token\" /> and <param name=\"gameId\" />.\r\n            \r\n            Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1",
         "operationId": "ApiAchievementsFindByTokenGlobalGet",
         "consumes": [],
@@ -314,19 +234,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/global/list": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find a list of Achievements that match <param name=\"gameId\" />.\r\n            If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.\r\n            \r\n            Example Usage: GET api/achievements/game/1/list",
         "operationId": "ApiAchievementsGlobalListGet",
         "consumes": [],
@@ -341,19 +255,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/game/{gameId}/list": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find a list of Achievements that match <param name=\"gameId\" />.\r\n            If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.\r\n            \r\n            Example Usage: GET api/achievements/game/1/list",
         "operationId": "ApiAchievementsGameByGameIdListGet",
         "consumes": [],
@@ -368,19 +276,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/game/{gameId}/evaluate": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find the current progress for all achievements for a <param name=\"gameId\" /> for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/achievements/game/1/evaluate/1",
         "operationId": "ApiAchievementsGameByGameIdEvaluateGet",
         "consumes": [],
@@ -403,19 +305,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/global/evaluate": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find the current progress for all achievements for a <param name=\"gameId\" /> for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/achievements/game/1/evaluate/1",
         "operationId": "ApiAchievementsGlobalEvaluateGet",
         "consumes": [],
@@ -438,19 +334,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/game/{gameId}/evaluate/{actorId}": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find the current progress for all achievements for a <param name=\"gameId\" /> for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/achievements/game/1/evaluate/1",
         "operationId": "ApiAchievementsGameByGameIdEvaluateByActorIdGet",
         "consumes": [],
@@ -473,19 +363,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/global/evaluate/{actorId}": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find the current progress for all achievements for a <param name=\"gameId\" /> for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/achievements/game/1/evaluate/1",
         "operationId": "ApiAchievementsGlobalEvaluateByActorIdGet",
         "consumes": [],
@@ -508,19 +392,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/{token}/{gameId}/evaluate": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find the current progress for an Achievement for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/achievements/ACHIEVEMENT_TOKEN/1/evaluate/1",
         "operationId": "ApiAchievementsByTokenByGameIdEvaluateGet",
         "consumes": [],
@@ -550,19 +428,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/{token}/global/evaluate": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find the current progress for an Achievement for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/achievements/ACHIEVEMENT_TOKEN/1/evaluate/1",
         "operationId": "ApiAchievementsByTokenGlobalEvaluateGet",
         "consumes": [],
@@ -592,19 +464,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/{token}/{gameId}/evaluate/{actorId}": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find the current progress for an Achievement for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/achievements/ACHIEVEMENT_TOKEN/1/evaluate/1",
         "operationId": "ApiAchievementsByTokenByGameIdEvaluateByActorIdGet",
         "consumes": [],
@@ -634,19 +500,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/{token}/global/evaluate/{actorId}": {
       "get": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Find the current progress for an Achievement for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/achievements/ACHIEVEMENT_TOKEN/1/evaluate/1",
         "operationId": "ApiAchievementsByTokenGlobalEvaluateByActorIdGet",
         "consumes": [],
@@ -676,26 +536,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/create": {
       "post": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Create a new Achievement.\r\n            Requires {!:EvaluationRequest.Name} to be unique to that {!:EvaluationRequest.GameId}.\r\n            \r\n            Example Usage: POST api/achievements/create",
         "operationId": "ApiAchievementsCreatePost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -703,31 +553,19 @@
             "in": "body",
             "description": "{!:EvaluationRequest} object that holds the details of the new Achievement.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/EvaluationCreateRequest"
-            }
+            "schema": { "$ref": "#/definitions/EvaluationCreateRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/update": {
       "put": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Update an existing Achievement.\r\n            \r\n            Example Usage: PUT api/achievements/update",
         "operationId": "ApiAchievementsUpdatePut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -735,24 +573,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest} object that holds the details of the Achievement.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/EvaluationUpdateRequest"
-            }
+            "schema": { "$ref": "#/definitions/EvaluationUpdateRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/{token}/global": {
       "delete": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Delete Achievement with the <param name=\"token\" /> and <param name=\"gameId\" /> provided.\r\n            \r\n            Example Usage: DELETE api/achievements/ACHIEVEMENT_TOKEN/1",
         "operationId": "ApiAchievementsByTokenGlobalDelete",
         "consumes": [],
@@ -774,19 +604,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Achievements/{token}/{gameId}": {
       "delete": {
-        "tags": [
-          "Achievements"
-        ],
+        "tags": [ "Achievements" ],
         "summary": "Delete Achievement with the <param name=\"token\" /> and <param name=\"gameId\" /> provided.\r\n            \r\n            Example Usage: DELETE api/achievements/ACHIEVEMENT_TOKEN/1",
         "operationId": "ApiAchievementsByTokenByGameIdDelete",
         "consumes": [],
@@ -808,19 +632,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/ActorClaim/claim/{claimId}/entity/{entityId}": {
       "get": {
-        "tags": [
-          "ActorClaim"
-        ],
+        "tags": [ "ActorClaim" ],
         "summary": "Get a list of all Actors for this Claim and Entity.\r\n            \r\n            Example Usage: GET api/actorclaim/claim/1/entity/1",
         "operationId": "ApiActorClaimClaimByClaimIdEntityByEntityIdGet",
         "consumes": [],
@@ -841,19 +659,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/ActorClaim/actor/{id}": {
       "get": {
-        "tags": [
-          "ActorClaim"
-        ],
+        "tags": [ "ActorClaim" ],
         "summary": "Get a list of all Claims for this Actor.\r\n            \r\n            Example Usage: GET api/actorclaim/actor/1/",
         "operationId": "ApiActorClaimActorByIdGet",
         "consumes": [],
@@ -867,26 +679,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/ActorClaim": {
       "post": {
-        "tags": [
-          "ActorClaim"
-        ],
+        "tags": [ "ActorClaim" ],
         "summary": "Create a new ActorClaim.\r\n            \r\n            Example Usage: POST api/actorclaim",
         "operationId": "ApiActorClaimPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -894,24 +696,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.ActorClaimRequest} object that contains the details of the new ActorClaim.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ActorClaimRequest"
-            }
+            "schema": { "$ref": "#/definitions/ActorClaimRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/ActorClaim/{id}": {
       "delete": {
-        "tags": [
-          "ActorClaim"
-        ],
+        "tags": [ "ActorClaim" ],
         "summary": "Delete ActorClaim with the ID provided.\r\n            \r\n            Example Usage: DELETE api/actorclaim/1",
         "operationId": "ApiActorClaimByIdDelete",
         "consumes": [],
@@ -926,19 +720,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/ActorData": {
       "get": {
-        "tags": [
-          "ActorData"
-        ],
+        "tags": [ "ActorData" ],
         "summary": "Find a list of all ActorData that match the <param name=\"actorId\" />, <param name=\"gameId\" /> and <param name=\"key\" /> provided.\r\n            \r\n            Example Usage: GET api/actordata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2",
         "operationId": "ApiActorDataGet",
         "consumes": [],
@@ -966,30 +754,18 @@
             "description": "Array of Key names.",
             "required": false,
             "type": "array",
-            "items": {
-              "type": "string"
-            },
+            "items": { "type": "string" },
             "collectionFormat": "multi"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "ActorData"
-        ],
+        "tags": [ "ActorData" ],
         "summary": "Create a new ActorData record.\r\n            \r\n            Example Usage: POST api/actordata",
         "operationId": "ApiActorDataPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -997,24 +773,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.SaveDataRequest} object that holds the details of the new ActorData.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/SaveDataRequest"
-            }
+            "schema": { "$ref": "#/definitions/SaveDataRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/ActorRole/role/{roleId}/entity/{entityId}": {
       "get": {
-        "tags": [
-          "ActorRole"
-        ],
+        "tags": [ "ActorRole" ],
         "summary": "Get a list of all Actors for this Role and Entity.\r\n            \r\n            Example Usage: GET api/actorrole/role/1/entity/1",
         "operationId": "ApiActorRoleRoleByRoleIdEntityByEntityIdGet",
         "consumes": [],
@@ -1035,43 +803,60 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      }
+    },
+    "/api/ActorRole/actor/{actorId}/entity/{entityId}/claimscope/{scopeName}": {
+      "get": {
+        "tags": [ "ActorRole" ],
+        "summary": "Get a list of all Roles for this Actor, ClaimScope and Entity.\r\n            \r\n            Example Usage: GET api/actorrole/actor/1/entity/1/claimscope/game",
+        "operationId": "ApiActorRoleActorByActorIdEntityByEntityIdClaimscopeByScopeNameGet",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "actorId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
-        },
+        ],
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/ActorRole/controlled": {
       "get": {
-        "tags": [
-          "ActorRole"
-        ],
+        "tags": [ "ActorRole" ],
         "summary": "Get a list of all Roles this Actor has control over.\r\n            \r\n            Example Usage: GET api/actorrole/controlled",
         "operationId": "ApiActorRoleControlledGet",
         "consumes": [],
         "produces": [],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/ActorRole": {
       "post": {
-        "tags": [
-          "ActorRole"
-        ],
+        "tags": [ "ActorRole" ],
         "summary": "Create a new ActorRole.\r\n            \r\n            Example Usage: POST api/actorrole",
         "operationId": "ApiActorRolePost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1079,24 +864,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.ActorRoleRequest} object that contains the details of the new ActorRole.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ActorRoleRequest"
-            }
+            "schema": { "$ref": "#/definitions/ActorRoleRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/ActorRole/{id}": {
       "delete": {
-        "tags": [
-          "ActorRole"
-        ],
+        "tags": [ "ActorRole" ],
         "summary": "Delete ActorRole with the ID provided.\r\n            \r\n            Example Usage: DELETE api/actorrole/1",
         "operationId": "ApiActorRoleByIdDelete",
         "consumes": [],
@@ -1111,36 +888,24 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Game/list": {
       "get": {
-        "tags": [
-          "Game"
-        ],
+        "tags": [ "Game" ],
         "summary": "Get a list of all Games.\r\n            \r\n            Example Usage: GET api/game/list",
         "operationId": "ApiGameListGet",
         "consumes": [],
         "produces": [],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Game/find/{name}": {
       "get": {
-        "tags": [
-          "Game"
-        ],
+        "tags": [ "Game" ],
         "summary": "Get a list of Games that match <param name=\"name\" /> provided.\r\n            \r\n            Example Usage: GET api/game/find/game1",
         "operationId": "ApiGameFindByNameGet",
         "consumes": [],
@@ -1154,19 +919,13 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Game/findbyid/{id}": {
       "get": {
-        "tags": [
-          "Game"
-        ],
+        "tags": [ "Game" ],
         "summary": "Get Game that matches <param name=\"id\" /> provided.\r\n            \r\n            Example Usage: GET api/game/findbyid/1",
         "operationId": "ApiGameFindbyidByIdGet",
         "consumes": [],
@@ -1181,26 +940,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Game": {
       "post": {
-        "tags": [
-          "Game"
-        ],
+        "tags": [ "Game" ],
         "summary": "Create a new Game.\r\n            Requires the {PlayGen.SUGAR.Contracts.Shared.GameRequest.Name} to be unique.\r\n            \r\n            Example Usage: POST api/game",
         "operationId": "ApiGamePost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1208,31 +957,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.GameRequest} object that contains the details of the new Game.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/GameRequest"
-            }
+            "schema": { "$ref": "#/definitions/GameRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Game/update/{id}": {
       "put": {
-        "tags": [
-          "Game"
-        ],
+        "tags": [ "Game" ],
         "summary": "Update an existing Game.\r\n            \r\n            Example Usage: PUT api/game/update/1",
         "operationId": "ApiGameUpdateByIdPut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1248,24 +985,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.GameRequest} object that holds the details of the Game.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/GameRequest"
-            }
+            "schema": { "$ref": "#/definitions/GameRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Game/{id}": {
       "delete": {
-        "tags": [
-          "Game"
-        ],
+        "tags": [ "Game" ],
         "summary": "Delete Game with the ID provided.\r\n            \r\n            Example Usage: DELETE api/game/1",
         "operationId": "ApiGameByIdDelete",
         "consumes": [],
@@ -1280,19 +1009,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/GameData": {
       "get": {
-        "tags": [
-          "GameData"
-        ],
+        "tags": [ "GameData" ],
         "summary": "Find a list of all GameData that match the <param name=\"actorId\" />, <param name=\"gameId\" /> and <param name=\"key\" /> provided.\r\n            \r\n            Example Usage: GET api/gamedata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2",
         "operationId": "ApiGameDataGet",
         "consumes": [],
@@ -1320,30 +1043,18 @@
             "description": "Array of Key names.",
             "required": false,
             "type": "array",
-            "items": {
-              "type": "string"
-            },
+            "items": { "type": "string" },
             "collectionFormat": "multi"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "GameData"
-        ],
+        "tags": [ "GameData" ],
         "summary": "Create a new GameData record.\r\n            \r\n            Example Usage: POST api/gamedata",
         "operationId": "ApiGameDataPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1351,41 +1062,27 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.SaveDataRequest} object that holds the details of the new GameData.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/SaveDataRequest"
-            }
+            "schema": { "$ref": "#/definitions/SaveDataRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Group/list": {
       "get": {
-        "tags": [
-          "Group"
-        ],
+        "tags": [ "Group" ],
         "summary": "Get a list of all Groups.\r\n            \r\n            Example Usage: GET api/group/list",
         "operationId": "ApiGroupListGet",
         "consumes": [],
         "produces": [],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Group/find/{name}": {
       "get": {
-        "tags": [
-          "Group"
-        ],
+        "tags": [ "Group" ],
         "summary": "Get a list of Groups that match <param name=\"name\" /> provided.\r\n            \r\n            Example Usage: GET api/group/find/group1",
         "operationId": "ApiGroupFindByNameGet",
         "consumes": [],
@@ -1399,19 +1096,13 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Group/findbyid/{id}": {
       "get": {
-        "tags": [
-          "Group"
-        ],
+        "tags": [ "Group" ],
         "summary": "Get Group that matches <param name=\"id\" /> provided.\r\n            \r\n            Example Usage: GET api/group/findbyid/1",
         "operationId": "ApiGroupFindbyidByIdGet",
         "consumes": [],
@@ -1426,26 +1117,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Group": {
       "post": {
-        "tags": [
-          "Group"
-        ],
+        "tags": [ "Group" ],
         "summary": "Create a new Group.\r\n            Requires the {!:GroupRequest.Name} to be unique for Groups.\r\n            \r\n            Example Usage: POST api/group",
         "operationId": "ApiGroupPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1453,31 +1134,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.GroupRequest} object that holds the details of the new Group.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/GroupRequest"
-            }
+            "schema": { "$ref": "#/definitions/GroupRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Group/update/{id}": {
       "put": {
-        "tags": [
-          "Group"
-        ],
+        "tags": [ "Group" ],
         "summary": "Update an existing Group.\r\n            \r\n            Example Usage: PUT api/group/update/1",
         "operationId": "ApiGroupUpdateByIdPut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1493,24 +1162,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.GroupRequest} object that holds the details of the Group.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/GroupRequest"
-            }
+            "schema": { "$ref": "#/definitions/GroupRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Group/{id}": {
       "delete": {
-        "tags": [
-          "Group"
-        ],
+        "tags": [ "Group" ],
         "summary": "Delete group with the <param name=\"id\" /> provided.\r\n            \r\n            Example Usage: DELETE api/group/1",
         "operationId": "ApiGroupByIdDelete",
         "consumes": [],
@@ -1525,19 +1186,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/GroupMember/requests/{groupId}": {
       "get": {
-        "tags": [
-          "GroupMember"
-        ],
+        "tags": [ "GroupMember" ],
         "summary": "Get a list of all Users that have relationship requests for this <param name=\"groupId\" />.\r\n            \r\n            Example Usage: GET api/groupmember/requests/1",
         "operationId": "ApiGroupMemberRequestsByGroupIdGet",
         "consumes": [],
@@ -1552,19 +1207,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/GroupMember/sentrequests/{userId}": {
       "get": {
-        "tags": [
-          "GroupMember"
-        ],
+        "tags": [ "GroupMember" ],
         "summary": "Get a list of all Groups that have been sent relationship requests for this <param name=\"userId\" />.\r\n            \r\n            Example Usage: GET api/groupmember/sentrequests/1",
         "operationId": "ApiGroupMemberSentrequestsByUserIdGet",
         "consumes": [],
@@ -1579,19 +1228,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/GroupMember/members/{groupId}": {
       "get": {
-        "tags": [
-          "GroupMember"
-        ],
+        "tags": [ "GroupMember" ],
         "summary": "Get a list of all Users that have relationships with this <param name=\"groupId\" />.\r\n            \r\n            Example Usage: GET api/groupmember/members/1",
         "operationId": "ApiGroupMemberMembersByGroupIdGet",
         "consumes": [],
@@ -1606,19 +1249,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/GroupMember/membercount/{groupId}": {
       "get": {
-        "tags": [
-          "GroupMember"
-        ],
+        "tags": [ "GroupMember" ],
         "summary": "Get a count of users that have a relationship with this <param name=\"groupId\" />.\r\n            \r\n            Example Usage: GET api/groupmember/membercount/1",
         "operationId": "ApiGroupMemberMembercountByGroupIdGet",
         "consumes": [],
@@ -1633,19 +1270,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/GroupMember/usergroups/{userId}": {
       "get": {
-        "tags": [
-          "GroupMember"
-        ],
+        "tags": [ "GroupMember" ],
         "summary": "Get a list of all Groups that have relationships with this <param name=\"userId\" />.\r\n            \r\n            Example Usage: GET api/groupmember/usergroups/1",
         "operationId": "ApiGroupMemberUsergroupsByUserIdGet",
         "consumes": [],
@@ -1660,26 +1291,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/GroupMember": {
       "put": {
-        "tags": [
-          "GroupMember"
-        ],
+        "tags": [ "GroupMember" ],
         "summary": "Update an existing relationship between <param name=\"relationship.UserId.UserId\" /> and <param name=\"relationship.GroupId.GroupId\" />.\r\n            Requires the relationship to already exist between the User and Group.\r\n            \r\n            Example Usage: PUT api/groupmember",
         "operationId": "ApiGroupMemberPut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1687,29 +1308,17 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate} object that holds the details of the relationship.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RelationshipStatusUpdate"
-            }
+            "schema": { "$ref": "#/definitions/RelationshipStatusUpdate" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "GroupMember"
-        ],
+        "tags": [ "GroupMember" ],
         "summary": "Create a new relationship request between the User and Group.\r\n            Requires a relationship between the User and Group to not already exist.\r\n            \r\n            Example Usage: POST api/groupmember",
         "operationId": "ApiGroupMemberPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1717,31 +1326,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.RelationshipRequest} object that holds the details of the new relationship request.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RelationshipRequest"
-            }
+            "schema": { "$ref": "#/definitions/RelationshipRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/GroupMember/request": {
       "put": {
-        "tags": [
-          "GroupMember"
-        ],
+        "tags": [ "GroupMember" ],
         "summary": "Update an existing relationship request between <param name=\"relationship.UserId.UserId\" /> and <param name=\"relationship.GroupId.GroupId\" />.\r\n            Requires the relationship request to already exist between the User and Group.\r\n            \r\n            Example Usage: PUT api/groupmember/request",
         "operationId": "ApiGroupMemberRequestPut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1749,24 +1346,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate} object that holds the details of the relationship.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RelationshipStatusUpdate"
-            }
+            "schema": { "$ref": "#/definitions/RelationshipStatusUpdate" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Leaderboards/global/list": {
       "get": {
-        "tags": [
-          "Leaderboards"
-        ],
+        "tags": [ "Leaderboards" ],
         "summary": "Find a list of leaderboards that match <param name=\"gameId\" />.\r\n            If global is provided instead of a gameId, get all global leaderboards, ie. leaderboards that are not associated with a specific game.\r\n            \r\n            Example Usage: GET api/leaderboards/game/1/list",
         "operationId": "ApiLeaderboardsGlobalListGet",
         "consumes": [],
@@ -1781,19 +1370,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Leaderboards/game/{gameId}/list": {
       "get": {
-        "tags": [
-          "Leaderboards"
-        ],
+        "tags": [ "Leaderboards" ],
         "summary": "Find a list of leaderboards that match <param name=\"gameId\" />.\r\n            If global is provided instead of a gameId, get all global leaderboards, ie. leaderboards that are not associated with a specific game.\r\n            \r\n            Example Usage: GET api/leaderboards/game/1/list",
         "operationId": "ApiLeaderboardsGameByGameIdListGet",
         "consumes": [],
@@ -1808,19 +1391,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Leaderboards/{token}/global": {
       "get": {
-        "tags": [
-          "Leaderboards"
-        ],
+        "tags": [ "Leaderboards" ],
         "summary": "Find a single leaderboard matching the token and gameId.\r\n            \r\n            Example Usage: GET api/leaderboards/LEADERBOARD_TOKEN/1",
         "operationId": "ApiLeaderboardsByTokenGlobalGet",
         "consumes": [],
@@ -1842,17 +1419,11 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "Leaderboards"
-        ],
+        "tags": [ "Leaderboards" ],
         "summary": "Delete Leaderboard with the <param name=\"token\" /> and <param name=\"gameId\" /> provided.\r\n            \r\n            Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1",
         "operationId": "ApiLeaderboardsByTokenGlobalDelete",
         "consumes": [],
@@ -1874,19 +1445,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Leaderboards/{token}/{gameId}": {
       "get": {
-        "tags": [
-          "Leaderboards"
-        ],
+        "tags": [ "Leaderboards" ],
         "summary": "Find a single leaderboard matching the token and gameId.\r\n            \r\n            Example Usage: GET api/leaderboards/LEADERBOARD_TOKEN/1",
         "operationId": "ApiLeaderboardsByTokenByGameIdGet",
         "consumes": [],
@@ -1908,17 +1473,11 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "Leaderboards"
-        ],
+        "tags": [ "Leaderboards" ],
         "summary": "Delete Leaderboard with the <param name=\"token\" /> and <param name=\"gameId\" /> provided.\r\n            \r\n            Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1",
         "operationId": "ApiLeaderboardsByTokenByGameIdDelete",
         "consumes": [],
@@ -1940,26 +1499,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Leaderboards/create": {
       "post": {
-        "tags": [
-          "Leaderboards"
-        ],
+        "tags": [ "Leaderboards" ],
         "summary": "Create a new Leaderboard.\r\n            Requires {PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest.Name} and {PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest.Token} to be unique to that {PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest.GameId}.\r\n            \r\n            Example Usage: POST api/leaderboards/create",
         "operationId": "ApiLeaderboardsCreatePost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1967,31 +1516,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest} object that holds the details of the new Leaderboard.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/LeaderboardRequest"
-            }
+            "schema": { "$ref": "#/definitions/LeaderboardRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Leaderboards/standings": {
       "post": {
-        "tags": [
-          "Leaderboards"
-        ],
+        "tags": [ "Leaderboards" ],
         "summary": "Get the standings for a Leaderboard using a {PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest}.\r\n            \r\n            Example Usage: POST api/leaderboards/standings",
         "operationId": "ApiLeaderboardsStandingsPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -1999,31 +1536,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest} object that holds the details that are wanted from the Leaderboard.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/LeaderboardStandingsRequest"
-            }
+            "schema": { "$ref": "#/definitions/LeaderboardStandingsRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Leaderboards/update": {
       "put": {
-        "tags": [
-          "Leaderboards"
-        ],
+        "tags": [ "Leaderboards" ],
         "summary": "Update an existing Leaderboard.\r\n            \r\n            Example Usage: PUT api/leaderboards/update",
         "operationId": "ApiLeaderboardsUpdatePut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -2031,24 +1556,17 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest} object that holds the details of the Leaderboard.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/LeaderboardRequest"
-            }
+            "schema": { "$ref": "#/definitions/LeaderboardRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/create/{gameId}": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Method for admins to creates a match for a game they are not logged into.\r\n            \r\n            Example Usage: GET api/match/create/1",
         "operationId": "ApiMatchCreateByGameIdGet",
         "consumes": [],
         "produces": [],
@@ -2056,56 +1574,42 @@
           {
             "name": "gameId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/create": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Method to create a match for a game a user is currently logged into\r\n            \r\n            Example Usage: GET api/match/create",
         "operationId": "ApiMatchCreateGet",
         "consumes": [],
         "produces": [],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/createandstart": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Method to create a match for a game a user is currently logged into which is also started automatically.\r\n            \r\n            Example Usage: GET api/match/create",
         "operationId": "ApiMatchCreateandstartGet",
         "consumes": [],
         "produces": [],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/{matchId}/start": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Start a match for the game the user is currently logged into.\r\n            \r\n            Example Usage: GET api/match/1/start",
         "operationId": "ApiMatchByMatchIdStartGet",
         "consumes": [],
         "produces": [],
@@ -2113,24 +1617,20 @@
           {
             "name": "matchId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/{matchId}/end": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Ends a match for the game that the user is currently logged in for.\r\n            \r\n            Example Usage: GET api/match/1/end",
         "operationId": "ApiMatchByMatchIdEndGet",
         "consumes": [],
         "produces": [],
@@ -2138,24 +1638,20 @@
           {
             "name": "matchId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/{gameId}/{matchId}/end": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Method for admins to end a match for a game they are not logged into.\r\n            \r\n            Example Usage: GET api/match/1/end",
         "operationId": "ApiMatchByGameIdByMatchIdEndGet",
         "consumes": [],
         "produces": [],
@@ -2170,24 +1666,20 @@
           {
             "name": "matchId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/{start}/{end}": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Get a list of matches filtered by a time range.\r\n            \r\n            Example Usage: GET api/match/2016-12-20T15:40:30/2016-12-20T16:50:40",
         "operationId": "ApiMatchByStartByEndGet",
         "consumes": [],
         "produces": [],
@@ -2195,6 +1687,7 @@
           {
             "name": "start",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "string",
             "format": "date-time"
@@ -2202,24 +1695,20 @@
           {
             "name": "end",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "string",
             "format": "date-time"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/game/{gameId}": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Get a list of matches for a specific game.\r\n            \r\n            Example Usage: GET api/match/game/1",
         "operationId": "ApiMatchGameByGameIdGet",
         "consumes": [],
         "produces": [],
@@ -2227,24 +1716,20 @@
           {
             "name": "gameId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/game/{gameId}/{start}/{end}": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Get a list of matches for a specific game, filtered by a time range.\r\n            \r\n            Example Usage: GET api/match/game/1/2016-12-20T15:40:30/2016-12-20T16:50:40",
         "operationId": "ApiMatchGameByGameIdByStartByEndGet",
         "consumes": [],
         "produces": [],
@@ -2252,6 +1737,7 @@
           {
             "name": "gameId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -2259,6 +1745,7 @@
           {
             "name": "start",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "string",
             "format": "date-time"
@@ -2266,24 +1753,20 @@
           {
             "name": "end",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "string",
             "format": "date-time"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/creator/{creatorId}": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Get a list of matches that were created by a specific actor.\r\n            \r\n            Example Usage: GET api/match/creator/1",
         "operationId": "ApiMatchCreatorByCreatorIdGet",
         "consumes": [],
         "produces": [],
@@ -2291,24 +1774,20 @@
           {
             "name": "creatorId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/creator/{creatorId}/{start}/{end}": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Get a list of matches that were created by a specific actor, filtered by a time range.\r\n            \r\n            Example Usage: GET api/match/creator/1/2016-12-20T15:40:30/2016-12-20T16:50:40",
         "operationId": "ApiMatchCreatorByCreatorIdByStartByEndGet",
         "consumes": [],
         "produces": [],
@@ -2316,6 +1795,7 @@
           {
             "name": "creatorId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -2323,6 +1803,7 @@
           {
             "name": "start",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "string",
             "format": "date-time"
@@ -2330,24 +1811,20 @@
           {
             "name": "end",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "string",
             "format": "date-time"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/game/{gameId}/creator/{creatorId}": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Get a list of matches for a specific game created by a specific actor.\r\n            \r\n            Example Usage: GET api/match/game/1/creator/1",
         "operationId": "ApiMatchGameByGameIdCreatorByCreatorIdGet",
         "consumes": [],
         "produces": [],
@@ -2355,6 +1832,7 @@
           {
             "name": "gameId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -2362,24 +1840,20 @@
           {
             "name": "creatorId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Match/game/{gameId}/creator/{creatorId}/{start}/{end}": {
       "get": {
-        "tags": [
-          "Match"
-        ],
+        "tags": [ "Match" ],
+        "summary": "Get a list of matches for a specific game created by a specific user, filtered by a time range.\r\n            \r\n            Example Usage: GET api/match/game/1/creator/1/2016-12-20T15:40:30/2016-12-20T16:50:40",
         "operationId": "ApiMatchGameByGameIdCreatorByCreatorIdByStartByEndGet",
         "consumes": [],
         "produces": [],
@@ -2387,6 +1861,7 @@
           {
             "name": "gameId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -2394,6 +1869,7 @@
           {
             "name": "creatorId",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -2401,6 +1877,7 @@
           {
             "name": "start",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "string",
             "format": "date-time"
@@ -2408,24 +1885,19 @@
           {
             "name": "end",
             "in": "path",
+            "description": "",
             "required": true,
             "type": "string",
             "format": "date-time"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Resource": {
       "get": {
-        "tags": [
-          "Resource"
-        ],
+        "tags": [ "Resource" ],
         "summary": "Find a list of all Resources filtered by the <param name=\"actorId\" />, <param name=\"gameId\" /> and <param name=\"keys\" /> provided.\r\n            \r\n            Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2",
         "operationId": "ApiResourceGet",
         "consumes": [],
@@ -2453,30 +1925,18 @@
             "description": "Optional array of Key names to filter results by.",
             "required": false,
             "type": "array",
-            "items": {
-              "type": "string"
-            },
+            "items": { "type": "string" },
             "collectionFormat": "multi"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "Resource"
-        ],
+        "tags": [ "Resource" ],
         "summary": "Creates or updates a Resource record.\r\n            \r\n            Example Usage: POST api/resource",
         "operationId": "ApiResourcePost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -2484,31 +1944,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.ResourceAddRequest} object that holds the details of the ResourceData.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ResourceAddRequest"
-            }
+            "schema": { "$ref": "#/definitions/ResourceAddRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Resource/transfer": {
       "post": {
-        "tags": [
-          "Resource"
-        ],
+        "tags": [ "Resource" ],
         "summary": "Transfers a quantity of a specific resource.\r\n            \r\n            Example Usage: Post api/resource/transfer",
         "operationId": "ApiResourceTransferPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -2516,48 +1964,68 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.ResourceTransferRequest} object that holds the details of the resoruce transfer.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ResourceTransferRequest"
-            }
+            "schema": { "$ref": "#/definitions/ResourceTransferRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Role/list": {
       "get": {
-        "tags": [
-          "Role"
-        ],
+        "tags": [ "Role" ],
         "summary": "Get a list of all Roles.\r\n            \r\n            Example Usage: GET api/role/list",
         "operationId": "ApiRoleListGet",
         "consumes": [],
         "produces": [],
-        "responses": {
-          "204": {
-            "description": "No Content"
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      }
+    },
+    "/api/Role/scope/{name}": {
+      "get": {
+        "tags": [ "Role" ],
+        "summary": "Get a list of all Roles for the scope with this name.\r\n            \r\n            Example Usage: GET api/role/scope/game",
+        "operationId": "ApiRoleScopeByNameGet",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
-        },
+        ],
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      }
+    },
+    "/api/Role/scopedefault/{name}": {
+      "get": {
+        "tags": [ "Role" ],
+        "summary": "Get default Role for the scope with this name.\r\n            \r\n            Example Usage: GET api/role/scopedefault/game",
+        "operationId": "ApiRoleScopedefaultByNameGet",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Role": {
       "post": {
-        "tags": [
-          "Role"
-        ],
+        "tags": [ "Role" ],
         "summary": "Create a new Role.\r\n            Requires the {PlayGen.SUGAR.Contracts.Shared.RoleRequest.Name} to be unique.\r\n            \r\n            Example Usage: POST api/role",
         "operationId": "ApiRolePost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -2565,24 +2033,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.RoleRequest} object that contains the details of the new Role.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RoleRequest"
-            }
+            "schema": { "$ref": "#/definitions/RoleRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Role/{id}": {
       "delete": {
-        "tags": [
-          "Role"
-        ],
+        "tags": [ "Role" ],
         "summary": "Delete Role with the ID provided.\r\n            \r\n            Example Usage: DELETE api/role/1",
         "operationId": "ApiRoleByIdDelete",
         "consumes": [],
@@ -2597,19 +2057,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/RoleClaim/role/{id}": {
       "get": {
-        "tags": [
-          "RoleClaim"
-        ],
+        "tags": [ "RoleClaim" ],
         "summary": "Get a list of all Claims for this Role.\r\n            \r\n            Example Usage: GET api/roleclaim/role/1",
         "operationId": "ApiRoleClaimRoleByIdGet",
         "consumes": [],
@@ -2623,26 +2077,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/RoleClaim": {
       "post": {
-        "tags": [
-          "RoleClaim"
-        ],
+        "tags": [ "RoleClaim" ],
         "summary": "Create a new RoleClaim.\r\n            \r\n            Example Usage: POST api/roleclaim",
         "operationId": "ApiRoleClaimPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -2650,24 +2094,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.RoleClaimRequest} object that contains the details of the new RoleClaim.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RoleClaimRequest"
-            }
+            "schema": { "$ref": "#/definitions/RoleClaimRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/RoleClaim/role/{roleId}/claim/{claimId}": {
       "delete": {
-        "tags": [
-          "RoleClaim"
-        ],
+        "tags": [ "RoleClaim" ],
         "summary": "Delete RoleClaim with the ID provided.\r\n            \r\n            Example Usage: DELETE api/roleclaim/role/1/claim/1",
         "operationId": "ApiRoleClaimRoleByRoleIdClaimByClaimIdDelete",
         "consumes": [],
@@ -2690,26 +2126,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/login": {
       "post": {
-        "tags": [
-          "Session"
-        ],
+        "tags": [ "Session" ],
         "summary": "Logs in an account based on the name and password combination.\r\n            Returns a JsonWebToken used for authorization in any further calls to the API.\r\n            \r\n            Example Usage: POST api/login\r\n            Example Usage: POST api/1/login",
         "operationId": "ApiLoginPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -2725,31 +2151,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.AccountRequest} object that contains the account details provided.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/AccountRequest"
-            }
+            "schema": { "$ref": "#/definitions/AccountRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/{gameId}/login": {
       "post": {
-        "tags": [
-          "Session"
-        ],
+        "tags": [ "Session" ],
         "summary": "Logs in an account based on the name and password combination.\r\n            Returns a JsonWebToken used for authorization in any further calls to the API.\r\n            \r\n            Example Usage: POST api/login\r\n            Example Usage: POST api/1/login",
         "operationId": "ApiByGameIdLoginPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -2765,31 +2179,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.AccountRequest} object that contains the account details provided.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/AccountRequest"
-            }
+            "schema": { "$ref": "#/definitions/AccountRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/createandlogin": {
       "post": {
-        "tags": [
-          "Session"
-        ],
+        "tags": [ "Session" ],
         "summary": "Creates a new account and login that account.\r\n            \r\n            Example Usage: POST api/createandlogin\r\n            Example Usage: POST api/1/createandlogin",
         "operationId": "ApiCreateandloginPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -2805,31 +2207,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.AccountRequest} object that contains the account details provided.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/AccountRequest"
-            }
+            "schema": { "$ref": "#/definitions/AccountRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/{gameId}/createandlogin": {
       "post": {
-        "tags": [
-          "Session"
-        ],
+        "tags": [ "Session" ],
         "summary": "Creates a new account and login that account.\r\n            \r\n            Example Usage: POST api/createandlogin\r\n            Example Usage: POST api/1/createandlogin",
         "operationId": "ApiByGameIdCreateandloginPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -2845,58 +2235,38 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.AccountRequest} object that contains the account details provided.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/AccountRequest"
-            }
+            "schema": { "$ref": "#/definitions/AccountRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/heartbeat": {
       "get": {
-        "tags": [
-          "Session"
-        ],
+        "tags": [ "Session" ],
         "summary": "Heartbeat method to keep the specific session alive.\r\n            Calling it within a server defined interval will notify the server that the\r\n            session is still active.",
         "operationId": "ApiHeartbeatGet",
         "consumes": [],
         "produces": [],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/logout": {
       "get": {
-        "tags": [
-          "Session"
-        ],
+        "tags": [ "Session" ],
         "summary": "Logsout the currently logged in account, ending it's session and removing the \r\n            authorization token.",
         "operationId": "ApiLogoutGet",
         "consumes": [],
         "produces": [],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/find/{token}/{gameId}": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find a Skill that matches <param name=\"token\" /> and <param name=\"gameId\" />.\r\n            \r\n            Example Usage: GET api/skills/find/SKILL_TOKEN/1",
         "operationId": "ApiSkillsFindByTokenByGameIdGet",
         "consumes": [],
@@ -2918,19 +2288,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/find/{token}/global": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find a Skill that matches <param name=\"token\" /> and <param name=\"gameId\" />.\r\n            \r\n            Example Usage: GET api/skills/find/SKILL_TOKEN/1",
         "operationId": "ApiSkillsFindByTokenGlobalGet",
         "consumes": [],
@@ -2952,19 +2316,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/global/list": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find a list of Skills that match <param name=\"gameId\" />.\r\n            If global is provided instead of a gameId, get all global skills, ie. skills that are not associated with a specific game.\r\n            \r\n            Example Usage: GET api/skills/game/1/list",
         "operationId": "ApiSkillsGlobalListGet",
         "consumes": [],
@@ -2979,19 +2337,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/game/{gameId}/list": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find a list of Skills that match <param name=\"gameId\" />.\r\n            If global is provided instead of a gameId, get all global skills, ie. skills that are not associated with a specific game.\r\n            \r\n            Example Usage: GET api/skills/game/1/list",
         "operationId": "ApiSkillsGameByGameIdListGet",
         "consumes": [],
@@ -3006,19 +2358,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/game/{gameId}/evaluate": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find the current progress for all skills for a <param name=\"gameId\" /> for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/skills/game/1/evaluate/1",
         "operationId": "ApiSkillsGameByGameIdEvaluateGet",
         "consumes": [],
@@ -3041,19 +2387,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/global/evaluate": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find the current progress for all skills for a <param name=\"gameId\" /> for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/skills/game/1/evaluate/1",
         "operationId": "ApiSkillsGlobalEvaluateGet",
         "consumes": [],
@@ -3076,19 +2416,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/game/{gameId}/evaluate/{actorId}": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find the current progress for all skills for a <param name=\"gameId\" /> for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/skills/game/1/evaluate/1",
         "operationId": "ApiSkillsGameByGameIdEvaluateByActorIdGet",
         "consumes": [],
@@ -3111,19 +2445,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/global/evaluate/{actorId}": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find the current progress for all skills for a <param name=\"gameId\" /> for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/skills/game/1/evaluate/1",
         "operationId": "ApiSkillsGlobalEvaluateByActorIdGet",
         "consumes": [],
@@ -3146,19 +2474,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/{token}/{gameId}/evaluate": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find the current progress for a Skill for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1",
         "operationId": "ApiSkillsByTokenByGameIdEvaluateGet",
         "consumes": [],
@@ -3188,19 +2510,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/{token}/global/evaluate": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find the current progress for a Skill for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1",
         "operationId": "ApiSkillsByTokenGlobalEvaluateGet",
         "consumes": [],
@@ -3230,19 +2546,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/{token}/{gameId}/evaluate/{actorId}": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find the current progress for a Skill for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1",
         "operationId": "ApiSkillsByTokenByGameIdEvaluateByActorIdGet",
         "consumes": [],
@@ -3272,19 +2582,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/{token}/global/evaluate/{actorId}": {
       "get": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Find the current progress for a Skill for <param name=\"actorId\" />.\r\n            \r\n            Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1",
         "operationId": "ApiSkillsByTokenGlobalEvaluateByActorIdGet",
         "consumes": [],
@@ -3314,26 +2618,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/create": {
       "post": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Create a new Skill.\r\n            Requires {PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest.Name} to be unique to that {PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest.GameId}.\r\n            \r\n            Example Usage: POST api/skills/create",
         "operationId": "ApiSkillsCreatePost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -3341,31 +2635,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest} object that holds the details of the new Skill.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/EvaluationCreateRequest"
-            }
+            "schema": { "$ref": "#/definitions/EvaluationCreateRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/update": {
       "put": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Update an existing Skill.\r\n            \r\n            Example Usage: PUT api/skills/update",
         "operationId": "ApiSkillsUpdatePut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -3373,24 +2655,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest} object that holds the details of the Skill.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/EvaluationUpdateRequest"
-            }
+            "schema": { "$ref": "#/definitions/EvaluationUpdateRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/{token}/global": {
       "delete": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Delete Skill with the <param name=\"token\" /> and <param name=\"gameId\" /> provided.\r\n            \r\n            Example Usage: DELETE api/skills/SKILL_TOKEN/1",
         "operationId": "ApiSkillsByTokenGlobalDelete",
         "consumes": [],
@@ -3412,19 +2686,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/Skills/{token}/{gameId}": {
       "delete": {
-        "tags": [
-          "Skills"
-        ],
+        "tags": [ "Skills" ],
         "summary": "Delete Skill with the <param name=\"token\" /> and <param name=\"gameId\" /> provided.\r\n            \r\n            Example Usage: DELETE api/skills/SKILL_TOKEN/1",
         "operationId": "ApiSkillsByTokenByGameIdDelete",
         "consumes": [],
@@ -3446,36 +2714,24 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/User/list": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": [ "User" ],
         "summary": "Get a list of all Users.\r\n            \r\n            Example Usage: GET api/user/list",
         "operationId": "ApiUserListGet",
         "consumes": [],
         "produces": [],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/User/find/{name}": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": [ "User" ],
         "summary": "Get a list of Users that match <param name=\"name\" /> provided.\r\n            \r\n            Example Usage: GET api/user/find/user1",
         "operationId": "ApiUserFindByNameGet",
         "consumes": [],
@@ -3496,19 +2752,13 @@
             "type": "boolean"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/User/find/{name}/{exactMatch}": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": [ "User" ],
         "summary": "Get a list of Users that match <param name=\"name\" /> provided.\r\n            \r\n            Example Usage: GET api/user/find/user1",
         "operationId": "ApiUserFindByNameByExactMatchGet",
         "consumes": [],
@@ -3529,19 +2779,13 @@
             "type": "boolean"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/User/findbyid/{id}": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": [ "User" ],
         "summary": "Get User that matches <param name=\"id\" /> provided.\r\n            \r\n            Example Usage: GET api/user/findbyid/1",
         "operationId": "ApiUserFindbyidByIdGet",
         "consumes": [],
@@ -3556,26 +2800,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/User": {
       "post": {
-        "tags": [
-          "User"
-        ],
+        "tags": [ "User" ],
         "summary": "Create a new User.\r\n            Requires the {PlayGen.SUGAR.Contracts.Shared.UserRequest}'s Name to be unique for Users.\r\n            \r\n            Example Usage: POST api/user",
         "operationId": "ApiUserPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -3583,31 +2817,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.UserRequest} object that holds the details of the new User.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/UserRequest"
-            }
+            "schema": { "$ref": "#/definitions/UserRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/User/update/{id}": {
       "put": {
-        "tags": [
-          "User"
-        ],
+        "tags": [ "User" ],
         "summary": "Update an existing User.\r\n            \r\n            Example Usage: PUT api/user/update/1",
         "operationId": "ApiUserUpdateByIdPut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -3623,24 +2845,16 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.UserRequest} object that holds the details of the User.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/UserRequest"
-            }
+            "schema": { "$ref": "#/definitions/UserRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/User/{id}": {
       "delete": {
-        "tags": [
-          "User"
-        ],
+        "tags": [ "User" ],
         "summary": "Delete user with the <param name=\"id\" /> provided.\r\n            \r\n            Example Usage: DELETE api/user/1",
         "operationId": "ApiUserByIdDelete",
         "consumes": [],
@@ -3655,19 +2869,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/UserFriend/requests/{userId}": {
       "get": {
-        "tags": [
-          "UserFriend"
-        ],
+        "tags": [ "UserFriend" ],
         "summary": "Get a list of all Users that have relationship requests for this <param name=\"userId\" />.\r\n            \r\n            Example Usage: GET api/userfriend/requests/1",
         "operationId": "ApiUserFriendRequestsByUserIdGet",
         "consumes": [],
@@ -3682,19 +2890,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/UserFriend/sentrequests/{userId}": {
       "get": {
-        "tags": [
-          "UserFriend"
-        ],
+        "tags": [ "UserFriend" ],
         "summary": "Get a list of all Users that have been sent relationship requests for this <param name=\"userId\" />.\r\n            \r\n            Example Usage: GET api/userfriend/sentrequests/1",
         "operationId": "ApiUserFriendSentrequestsByUserIdGet",
         "consumes": [],
@@ -3709,19 +2911,13 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/UserFriend/friends/{userId}": {
       "get": {
-        "tags": [
-          "UserFriend"
-        ],
+        "tags": [ "UserFriend" ],
         "summary": "Get a list of all Users that have relationships with this <param name=\"userId\" />.\r\n            \r\n            Example Usage: GET api/userfriend/friends/1",
         "operationId": "ApiUserFriendFriendsByUserIdGet",
         "consumes": [],
@@ -3736,26 +2932,16 @@
             "format": "int32"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/UserFriend": {
       "put": {
-        "tags": [
-          "UserFriend"
-        ],
+        "tags": [ "UserFriend" ],
         "summary": "Update an existing relationship between <param name=\"relationship.RequestorId.RequestorId\" /> and <param name=\"relationship.AcceptorId.AcceptorId\" />.\r\n            Requires the relationship to already exist between the two Users.\r\n            \r\n            Example Usage: PUT api/userfriend",
         "operationId": "ApiUserFriendPut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -3763,29 +2949,17 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate} object that holds the details of the relationship.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RelationshipStatusUpdate"
-            }
+            "schema": { "$ref": "#/definitions/RelationshipStatusUpdate" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "UserFriend"
-        ],
+        "tags": [ "UserFriend" ],
         "summary": "Create a new relationship request between two Users.\r\n            Requires a relationship between the two to not already exist.\r\n            \r\n            Example Usage: POST api/userfriend",
         "operationId": "ApiUserFriendPost",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -3793,31 +2967,19 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.RelationshipRequest} object that holds the details of the new relationship request.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RelationshipRequest"
-            }
+            "schema": { "$ref": "#/definitions/RelationshipRequest" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     },
     "/api/UserFriend/request": {
       "put": {
-        "tags": [
-          "UserFriend"
-        ],
+        "tags": [ "UserFriend" ],
         "summary": "Update an existing relationship request between <param name=\"relationship.RequestorId.RequestorId\" /> and <param name=\"relationship.AcceptorId.AcceptorId\" />.\r\n            Requires the relationship request to already exist between the two Users.\r\n            \r\n            Example Usage: PUT api/userfriend/request",
         "operationId": "ApiUserFriendRequestPut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
         "produces": [],
         "parameters": [
           {
@@ -3825,16 +2987,10 @@
             "in": "body",
             "description": "{PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate} object that holds the details of the relationship.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RelationshipStatusUpdate"
-            }
+            "schema": { "$ref": "#/definitions/RelationshipStatusUpdate" }
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
+        "responses": { "204": { "description": "No Content" } },
         "deprecated": false
       }
     }
@@ -3842,10 +2998,7 @@
   "definitions": {
     "AccountRequest": {
       "description": "Encapsulates log-in details.",
-      "required": [
-        "name",
-        "sourceToken"
-      ],
+      "required": [ "name", "sourceToken" ],
       "type": "object",
       "properties": {
         "name": {
@@ -3870,10 +3023,7 @@
     },
     "AccountSourceRequest": {
       "description": "Encapsulates log-in source details.",
-      "required": [
-        "description",
-        "token"
-      ],
+      "required": [ "description", "token" ],
       "type": "object",
       "properties": {
         "description": {
@@ -3896,12 +3046,7 @@
     },
     "EvaluationCreateRequest": {
       "description": "Encapsulates achievement/skill details.",
-      "required": [
-        "token",
-        "name",
-        "actorType",
-        "evaluationCriterias"
-      ],
+      "required": [ "token", "name", "actorType", "evaluationCriterias" ],
       "type": "object",
       "properties": {
         "token": {
@@ -3927,39 +3072,24 @@
         },
         "actorType": {
           "description": "The type of actor which this achievement/skill is intended to be completed by.",
-          "enum": [
-            "Undefined",
-            "User",
-            "Group"
-          ],
+          "enum": [ "Undefined", "User", "Group" ],
           "type": "string"
         },
         "evaluationCriterias": {
           "description": "A list of criteria which will be checked in order to see if an actor has completed the achievement/skill.\r\n            Must contain at least one criteria.",
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/EvaluationCriteriaCreateRequest"
-          }
+          "items": { "$ref": "#/definitions/EvaluationCriteriaCreateRequest" }
         },
         "rewards": {
           "description": "A list of rewards that will be provided to the actor upon completion of the achievement/skill criteria.\r\n            An achievement does not need to contain a reward.",
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/RewardCreateRequest"
-          }
+          "items": { "$ref": "#/definitions/RewardCreateRequest" }
         }
       }
     },
     "EvaluationCriteriaCreateRequest": {
       "description": "Encapsulates requirements for completing an achievement or skill.",
-      "required": [
-        "key",
-        "dataType",
-        "criteriaQueryType",
-        "comparisonType",
-        "scope",
-        "value"
-      ],
+      "required": [ "key", "dataType", "criteriaQueryType", "comparisonType", "scope", "value" ],
       "type": "object",
       "properties": {
         "key": {
@@ -3968,38 +3098,19 @@
           "type": "string"
         },
         "dataType": {
-          "enum": [
-            "String",
-            "Long",
-            "Float",
-            "Boolean"
-          ],
+          "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         },
         "criteriaQueryType": {
-          "enum": [
-            "Any",
-            "Sum",
-            "Latest"
-          ],
+          "enum": [ "Any", "Sum", "Latest" ],
           "type": "string"
         },
         "comparisonType": {
-          "enum": [
-            "Equals",
-            "NotEqual",
-            "Greater",
-            "GreaterOrEqual",
-            "Less",
-            "LessOrEqual"
-          ],
+          "enum": [ "Equals", "NotEqual", "Greater", "GreaterOrEqual", "Less", "LessOrEqual" ],
           "type": "string"
         },
         "scope": {
-          "enum": [
-            "Actor",
-            "RelatedActors"
-          ],
+          "enum": [ "Actor", "RelatedActors" ],
           "type": "string"
         },
         "value": {
@@ -4011,11 +3122,7 @@
     },
     "RewardCreateRequest": {
       "description": "Encapsulates the reward given for completing an achievement or skill.",
-      "required": [
-        "key",
-        "dataType",
-        "value"
-      ],
+      "required": [ "key", "dataType", "value" ],
       "type": "object",
       "properties": {
         "key": {
@@ -4024,12 +3131,7 @@
           "type": "string"
         },
         "dataType": {
-          "enum": [
-            "String",
-            "Long",
-            "Float",
-            "Boolean"
-          ],
+          "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         },
         "value": {
@@ -4041,13 +3143,7 @@
     },
     "EvaluationUpdateRequest": {
       "description": "Encapsulates achievement/skill details.",
-      "required": [
-        "id",
-        "token",
-        "name",
-        "actorType",
-        "evaluationCriterias"
-      ],
+      "required": [ "id", "token", "name", "actorType", "evaluationCriterias" ],
       "type": "object",
       "properties": {
         "id": {
@@ -4078,39 +3174,24 @@
         },
         "actorType": {
           "description": "The type of actor which this achievement/skill is intended to be completed by.",
-          "enum": [
-            "Undefined",
-            "User",
-            "Group"
-          ],
+          "enum": [ "Undefined", "User", "Group" ],
           "type": "string"
         },
         "evaluationCriterias": {
           "description": "A list of criteria which will be checked in order to see if an actor has completed the achievement/skill.\r\n            Must contain at least one criteria.",
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/EvaluationCriteriaUpdateRequest"
-          }
+          "items": { "$ref": "#/definitions/EvaluationCriteriaUpdateRequest" }
         },
         "rewards": {
           "description": "A list of rewards that will be provided to the actor upon completion of the achievement/skill criteria.\r\n            An achievement does not need to contain a reward.",
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/RewardUpdateRequest"
-          }
+          "items": { "$ref": "#/definitions/RewardUpdateRequest" }
         }
       }
     },
     "EvaluationCriteriaUpdateRequest": {
       "description": "Encapsulates requirements for completing an achievement or skill.",
-      "required": [
-        "key",
-        "dataType",
-        "criteriaQueryType",
-        "comparisonType",
-        "scope",
-        "value"
-      ],
+      "required": [ "key", "dataType", "criteriaQueryType", "comparisonType", "scope", "value" ],
       "type": "object",
       "properties": {
         "id": {
@@ -4124,38 +3205,19 @@
           "type": "string"
         },
         "dataType": {
-          "enum": [
-            "String",
-            "Long",
-            "Float",
-            "Boolean"
-          ],
+          "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         },
         "criteriaQueryType": {
-          "enum": [
-            "Any",
-            "Sum",
-            "Latest"
-          ],
+          "enum": [ "Any", "Sum", "Latest" ],
           "type": "string"
         },
         "comparisonType": {
-          "enum": [
-            "Equals",
-            "NotEqual",
-            "Greater",
-            "GreaterOrEqual",
-            "Less",
-            "LessOrEqual"
-          ],
+          "enum": [ "Equals", "NotEqual", "Greater", "GreaterOrEqual", "Less", "LessOrEqual" ],
           "type": "string"
         },
         "scope": {
-          "enum": [
-            "Actor",
-            "RelatedActors"
-          ],
+          "enum": [ "Actor", "RelatedActors" ],
           "type": "string"
         },
         "value": {
@@ -4167,11 +3229,7 @@
     },
     "RewardUpdateRequest": {
       "description": "Encapsulates the reward given for completing an achievement or skill.",
-      "required": [
-        "key",
-        "dataType",
-        "value"
-      ],
+      "required": [ "key", "dataType", "value" ],
       "type": "object",
       "properties": {
         "id": {
@@ -4185,12 +3243,7 @@
           "type": "string"
         },
         "dataType": {
-          "enum": [
-            "String",
-            "Long",
-            "Float",
-            "Boolean"
-          ],
+          "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         },
         "value": {
@@ -4202,10 +3255,7 @@
     },
     "ActorClaimRequest": {
       "description": "Encapsulates actorclaim details.",
-      "required": [
-        "actorId",
-        "claimId"
-      ],
+      "required": [ "actorId", "claimId" ],
       "type": "object",
       "properties": {
         "actorId": {
@@ -4227,11 +3277,7 @@
     },
     "SaveDataRequest": {
       "description": "Encapsulates ActorData/GameData details.",
-      "required": [
-        "key",
-        "value",
-        "saveDataType"
-      ],
+      "required": [ "key", "value", "saveDataType" ],
       "type": "object",
       "properties": {
         "actorId": {
@@ -4258,22 +3304,14 @@
         },
         "saveDataType": {
           "description": "The type of data which is being stored.",
-          "enum": [
-            "String",
-            "Long",
-            "Float",
-            "Boolean"
-          ],
+          "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         }
       }
     },
     "ActorRoleRequest": {
       "description": "Encapsulates actorrole details.",
-      "required": [
-        "actorId",
-        "roleId"
-      ],
+      "required": [ "actorId", "roleId" ],
       "type": "object",
       "properties": {
         "actorId": {
@@ -4295,9 +3333,7 @@
     },
     "GameRequest": {
       "description": "Encapsulates game details.",
-      "required": [
-        "name"
-      ],
+      "required": [ "name" ],
       "type": "object",
       "properties": {
         "name": {
@@ -4310,9 +3346,7 @@
     },
     "GroupRequest": {
       "description": "Encapsulates group details.",
-      "required": [
-        "name"
-      ],
+      "required": [ "name" ],
       "type": "object",
       "properties": {
         "name": {
@@ -4325,11 +3359,7 @@
     },
     "RelationshipRequest": {
       "description": "Encapsulates relationship details.",
-      "required": [
-        "requestorId",
-        "acceptorId",
-        "autoAccept"
-      ],
+      "required": [ "requestorId", "acceptorId", "autoAccept" ],
       "type": "object",
       "properties": {
         "requestorId": {
@@ -4350,11 +3380,7 @@
     },
     "RelationshipStatusUpdate": {
       "description": "Encapsulates relationship details, including updated status of the relationship.",
-      "required": [
-        "requestorId",
-        "acceptorId",
-        "accepted"
-      ],
+      "required": [ "requestorId", "acceptorId", "accepted" ],
       "type": "object",
       "properties": {
         "requestorId": {
@@ -4375,15 +3401,7 @@
     },
     "LeaderboardRequest": {
       "description": "Encapsulates leaderboard details.",
-      "required": [
-        "token",
-        "name",
-        "key",
-        "actorType",
-        "saveDataType",
-        "criteriaScope",
-        "leaderboardType"
-      ],
+      "required": [ "token", "name", "key", "actorType", "saveDataType", "criteriaScope", "leaderboardType" ],
       "type": "object",
       "properties": {
         "token": {
@@ -4411,53 +3429,29 @@
         },
         "actorType": {
           "description": "The type of actor which this leaderboard is intended for.",
-          "enum": [
-            "Undefined",
-            "User",
-            "Group"
-          ],
+          "enum": [ "Undefined", "User", "Group" ],
           "type": "string"
         },
         "saveDataType": {
           "description": "The SaveDataType of the GameData being checked against.",
-          "enum": [
-            "String",
-            "Long",
-            "Float",
-            "Boolean"
-          ],
+          "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         },
         "criteriaScope": {
           "description": "Whether the criteria will be checked against the actor or relatedactors (i.e. group members, user friends).",
-          "enum": [
-            "Actor",
-            "RelatedActors"
-          ],
+          "enum": [ "Actor", "RelatedActors" ],
           "type": "string"
         },
         "leaderboardType": {
           "description": "The method which data will be collected and sorted for this leaderboard.",
-          "enum": [
-            "Highest",
-            "Lowest",
-            "Cumulative",
-            "Count",
-            "Earliest",
-            "Latest"
-          ],
+          "enum": [ "Highest", "Lowest", "Cumulative", "Count", "Earliest", "Latest" ],
           "type": "string"
         }
       }
     },
     "LeaderboardStandingsRequest": {
       "description": "Encapsulates leaderboard current standings request.",
-      "required": [
-        "leaderboardToken",
-        "leaderboardFilterType",
-        "pageLimit",
-        "pageOffset"
-      ],
+      "required": [ "leaderboardToken", "leaderboardFilterType", "pageLimit", "pageOffset" ],
       "type": "object",
       "properties": {
         "leaderboardToken": {
@@ -4476,12 +3470,7 @@
         },
         "leaderboardFilterType": {
           "description": "The filter for what standings will be returned.",
-          "enum": [
-            "Top",
-            "Near",
-            "Friends",
-            "GroupMembers"
-          ],
+          "enum": [ "Top", "Near", "Friends", "GroupMembers" ],
           "type": "string"
         },
         "pageLimit": {
@@ -4508,10 +3497,7 @@
     },
     "ResourceAddRequest": {
       "description": "Encapsulates Resource Data details.",
-      "required": [
-        "key",
-        "quantity"
-      ],
+      "required": [ "key", "quantity" ],
       "type": "object",
       "properties": {
         "actorId": {
@@ -4539,10 +3525,7 @@
     },
     "ResourceTransferRequest": {
       "description": "Encapsulates Resource Transfer details.",
-      "required": [
-        "quantity",
-        "key"
-      ],
+      "required": [ "quantity", "key" ],
       "type": "object",
       "properties": {
         "senderActorId": {
@@ -4575,9 +3558,7 @@
     },
     "RoleRequest": {
       "description": "Encapsulates role details.",
-      "required": [
-        "name"
-      ],
+      "required": [ "name" ],
       "type": "object",
       "properties": {
         "name": {
@@ -4588,24 +3569,14 @@
         },
         "claimScope": {
           "description": "The ClaimScope of this role.",
-          "enum": [
-            "Global",
-            "Game",
-            "Group",
-            "User",
-            "Account",
-            "Role"
-          ],
+          "enum": [ "Global", "Game", "Group", "User", "Account", "Role" ],
           "type": "string"
         }
       }
     },
     "RoleClaimRequest": {
       "description": "Encapsulates roleclaim details.",
-      "required": [
-        "roleId",
-        "claimId"
-      ],
+      "required": [ "roleId", "claimId" ],
       "type": "object",
       "properties": {
         "roleId": {
@@ -4622,9 +3593,7 @@
     },
     "UserRequest": {
       "description": "Encapsulates user details.",
-      "required": [
-        "name"
-      ],
+      "required": [ "name" ],
       "type": "object",
       "properties": {
         "name": {

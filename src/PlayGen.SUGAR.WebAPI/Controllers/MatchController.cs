@@ -3,14 +3,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.ServerAuthentication.Extensions;
 using PlayGen.SUGAR.WebAPI.Attributes;
 using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
-    // todo add comments
-
+    /// <summary>
+    /// Web controller that facillitates Match specific operations.
+    /// </summary>
     [Route("api/[controller]")]
     [Authorize("Bearer")]
     [ValidateSession]
@@ -26,7 +28,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             _authorizationService = authorizationService;
         }
 
-        // Method for system admins to create a match
+        /// <summary>
+        /// Method for admins to creates a match for a game they are not logged into.
+        /// 
+        /// Example Usage: GET api/match/create/1
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns>The newly created <see cref="MatchResponse"/></returns>
         [HttpGet("create/{gameId:int}")]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.Match)]
         public IActionResult Create(int gameId)
@@ -42,6 +50,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Forbid();
         }
 
+        /// <summary>
+        /// Method to create a match for a game a user is currently logged into
+        /// 
+        /// Example Usage: GET api/match/create
+        /// </summary>
+        /// <returns>The newly created <see cref="MatchResponse"/></returns>
         [HttpGet("create")]
         [Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Match)]
         [Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.Match)]
@@ -62,6 +76,12 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Forbid();
         }
 
+        /// <summary>
+        /// Method to create a match for a game a user is currently logged into which is also started automatically.
+        /// 
+        /// Example Usage: GET api/match/create
+        /// </summary>
+        /// <returns>The newly created <see cref="MatchResponse"/></returns>
         [HttpGet("createandstart")]
         [Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.Match)]
         [Authorization(ClaimScope.User, AuthorizationOperation.Create, AuthorizationOperation.Match)]
@@ -83,6 +103,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Forbid();
         }
 
+        /// <summary>
+        /// Start a match for the game the user is currently logged into.
+        /// 
+        /// Example Usage: GET api/match/1/start
+        /// </summary>
+        /// <param name="matchId"></param>
+        /// <returns><see cref="MatchResponse"/></returns>
         [HttpGet("{matchId:int}/start")]
         [Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Match)]
         [Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.Match)]
@@ -103,6 +130,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Forbid();
         }
 
+        /// <summary>
+        /// Ends a match for the game that the user is currently logged in for.
+        /// 
+        /// Example Usage: GET api/match/1/end
+        /// </summary>
+        /// <param name="matchId"></param>
+        /// <returns><see cref="MatchResponse"/></returns>
         [HttpGet("{matchId:int}/end")]
         [Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Match)]
         [Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.Match)]
@@ -123,7 +157,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Forbid();
         }
 
-        // Method for system admins to end a match
+        /// <summary>
+        /// Method for admins to end a match for a game they are not logged into.
+        /// 
+        /// Example Usage: GET api/match/1/end
+        /// </summary>
+        /// <param name="matchId"></param>
+        /// <returns><see cref="MatchResponse"/></returns>
         [HttpGet("{gameId:int}/{matchId:int}/end")]
         [ArgumentsNotNull]
         [Authorization(ClaimScope.Global, AuthorizationOperation.Update, AuthorizationOperation.Match)]
@@ -140,6 +180,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return Forbid();
         }
 
+        /// <summary>
+        /// Get a list of matches filtered by a time range.
+        /// 
+        /// Example Usage: GET api/match/2016-12-20T15:40:30/2016-12-20T16:50:40
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns>A list of <see cref="MatchResponse"/></returns>
         [HttpGet("{start:datetime}/{end:datetime}")]
         public IActionResult GetByTime(DateTime? start, DateTime? end)
         {
@@ -147,6 +195,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
+        /// <summary>
+        /// Get a list of matches for a specific game.
+        /// 
+        /// Example Usage: GET api/match/game/1
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns>A list of <see cref="MatchResponse"/></returns>
         [HttpGet("game/{gameId:int}")]
         [ArgumentsNotNull]
         public IActionResult GetByGame(int gameId)
@@ -155,6 +210,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
+        /// <summary>
+        /// Get a list of matches for a specific game, filtered by a time range.
+        /// 
+        /// Example Usage: GET api/match/game/1/2016-12-20T15:40:30/2016-12-20T16:50:40
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns>A list of <see cref="MatchResponse"/></returns>
         [HttpGet("game/{gameId:int}/{start:datetime}/{end:datetime}")]
         public IActionResult GetByGame(int gameId, DateTime? start, DateTime? end)
         {
@@ -162,6 +226,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
+        /// <summary>
+        /// Get a list of matches that were created by a specific actor.
+        /// 
+        /// Example Usage: GET api/match/creator/1
+        /// </summary>
+        /// <param name="creatorId"></param>
+        /// <returns>A list of <see cref="MatchResponse"/></returns>
         [HttpGet("creator/{creatorId:int}")]
         [ArgumentsNotNull]
         public IActionResult GetByCreator(int creatorId)
@@ -170,6 +241,15 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
+        /// <summary>
+        /// Get a list of matches that were created by a specific actor, filtered by a time range.
+        /// 
+        /// Example Usage: GET api/match/creator/1/2016-12-20T15:40:30/2016-12-20T16:50:40
+        /// </summary>
+        /// <param name="creatorId"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns>A list of <see cref="MatchResponse"/></returns>
         [HttpGet("creator/{creatorId:int}/{start:datetime}/{end:datetime}")]
         public IActionResult GetByCreator(int creatorId, DateTime? start, DateTime? end)
         {
@@ -177,6 +257,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
+        /// <summary>
+        /// Get a list of matches for a specific game created by a specific actor.
+        /// 
+        /// Example Usage: GET api/match/game/1/creator/1
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="creatorId"></param>
+        /// <returns>A list of <see cref="MatchResponse"/></returns>
         [HttpGet("game/{gameId:int}/creator/{creatorId:int}")]
         [ArgumentsNotNull]
         public IActionResult GetByGameAndCreator(int gameId, int creatorId)
@@ -185,6 +273,16 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             return new ObjectResult(matches.ToContractList());
         }
 
+        /// <summary>
+        /// Get a list of matches for a specific game created by a specific user, filtered by a time range.
+        /// 
+        /// Example Usage: GET api/match/game/1/creator/1/2016-12-20T15:40:30/2016-12-20T16:50:40
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="creatorId"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns>A list of <see cref="MatchResponse"/></returns>
         [HttpGet("game/{gameId:int}/creator/{creatorId:int}/{start:datetime}/{end:datetime}")]
         public IActionResult GetByGameAndCreator(int gameId, int creatorId, DateTime? start, DateTime? end)
         {

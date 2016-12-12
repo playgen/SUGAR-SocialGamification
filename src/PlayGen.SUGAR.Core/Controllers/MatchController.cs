@@ -2,6 +2,8 @@
 using NLog;
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
+using PlayGen.SUGAR.Common.Shared.Exceptions;
+using PlayGen.SUGAR.Core.Exceptions;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
@@ -45,6 +47,13 @@ namespace PlayGen.SUGAR.Core.Controllers
         public Match End(int matchId)
         {
             var match = _matchDbController.Get(matchId);
+            
+            if (match.Started == null)
+            {
+                throw new Exceptions.InvalidOperationException($"The match {matchId} hasn't had its Started time set. " +
+                                                               $"This must be set before setting the Ended time.");
+            }
+
             match.Ended = DateTime.UtcNow;
             match = _matchDbController.Update(match);
 
