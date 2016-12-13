@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public List<SaveData> Get(List<int> ids)
+		public List<SaveData> Get(ICollection<int> ids)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -437,7 +437,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public void Update(SaveData updatedData)
+		public SaveData Update(SaveData updatedData)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -456,6 +456,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				existingData.Value = updatedData.Value;
 
 				SaveChanges(context);
+
+			    return existingData;
 			}
 		}
 

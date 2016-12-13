@@ -85,6 +85,15 @@ namespace PlayGen.SUGAR.Core.Controllers
             }
         }
 
+        public SaveData Update(SaveData data)
+        {
+            data = _saveDataDbController.Update(data);
+
+            Logger.Info($"Updated: {data?.Id}");
+
+            return data;
+        }
+
         public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
         {
             var keyExists = _saveDataDbController.KeyExists(gameId, actorId, key, start, end);
@@ -94,7 +103,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             return keyExists;
         }
 
-        public List<SaveData> Get(List<int> ids)
+        public List<SaveData> Get(ICollection<int> ids)
         {
             var datas = _saveDataDbController.Get(ids);
             
@@ -107,7 +116,7 @@ namespace PlayGen.SUGAR.Core.Controllers
         {
             var datas = _saveDataDbController.Get(gameId, actorId, keys);
 
-            Logger.Info($"{datas?.Count} Game Datas for GameId: {gameId}, ActorId {actorId}, Keys: {string.Join(", ", keys)}");
+            Logger.Info($"{datas?.Count} Game Datas for GameId: {gameId}, ActorId {actorId}" + (keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
             return datas;
         }

@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return context.SaveData.Where(gd => gd.Category == category);
 		}
 
-		public static IQueryable<SaveData> FilterByIds(this IQueryable<SaveData> gameDataQueryable, List<int> ids)
+		public static IQueryable<SaveData> FilterByIds(this IQueryable<SaveData> gameDataQueryable, ICollection<int> ids)
 		{
 			return gameDataQueryable.Where(gd => ids.Contains(gd.Id));
 		}

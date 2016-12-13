@@ -68,11 +68,10 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
             {
                 var resource = resourceRequest.ToModel();
                 var resources = _resourceController.Get(resourceRequest.GameId, resourceRequest.ActorId, new[] { resourceRequest.Key });
-                var resourceList = resources as List<SaveData> ?? resources.ToList();
-                if (resourceList.Any())
+                if (resources.Any())
                 {
-                    var firstResource = resourceList.ElementAt(0);
-                    _resourceController.UpdateQuantity(firstResource, resourceRequest.Quantity);
+                    var firstResource = resources.Single();
+                    _resourceController.AddQuantity(firstResource.Id, resourceRequest.Quantity);
                 }
                 else
                 {

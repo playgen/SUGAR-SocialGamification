@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         {
             var newResource = CreateResource("CanGetExistingResourceByKey");
 
-            var gotResources = _resourceController.Get(keys: new List<string> { newResource.Key });
+            var gotResources = _resourceController.Get(keys: new [] { newResource.Key });
 
             Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
         }
@@ -50,20 +50,20 @@ namespace PlayGen.SUGAR.Core.UnitTests
         }
 
         [Fact]
-        public void CanUpdateResource()
+        public void CanModifyResource()
         {
-            var newResource = CreateResource("CanUpdateResource");
+            var newResource = CreateResource("CanModifyResource");
 
             var originalValue = newResource.Value;
-            var newValue = originalValue + "999";
-            newResource.Value = newValue;
+            var newValue = long.Parse(originalValue) + 999;
+            newResource.Value = newValue.ToString();
 
-            _resourceController.Update(newResource);
+            _resourceController.AddQuantity(newResource.Id, 999);
 
-            var resources = _resourceController.Get(newResource.GameId, newResource.ActorId, new string[] { newResource.Key });
+            var resources = _resourceController.Get(newResource.GameId, newResource.ActorId, new [] { newResource.Key });
             newResource = resources.Single();
 
-            Assert.Equal(newValue, newResource.Value);
+            Assert.Equal(newValue.ToString(), newResource.Value);
         }
 
         [Fact]
