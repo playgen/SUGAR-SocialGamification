@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NLog;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
@@ -11,40 +12,40 @@ namespace PlayGen.SUGAR.Core.Controllers
 	public class ResourceController
 	{
         private static Logger Logger = LogManager.GetCurrentClassLogger();
-        private readonly Data.EntityFramework.Controllers.GameDataController _gameDataDbController;
+        private readonly Data.EntityFramework.Controllers.SaveDataController _saveDataDbController;
 
 		public ResourceController(SUGARContextFactory contextFactory)
 		{
 			// todo use game data core controller instead of db controller!!!
-			_gameDataDbController = new Data.EntityFramework.Controllers.GameDataController(contextFactory, GameDataCategory.Resource);
+			_saveDataDbController = new Data.EntityFramework.Controllers.SaveDataController(contextFactory, SaveDataCategory.Resource);
 		}
 
 		public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var result = _gameDataDbController.KeyExists(gameId, actorId, key, start = default(DateTime), end = default(DateTime));
+			var result = _saveDataDbController.KeyExists(gameId, actorId, key, start = default(DateTime), end = default(DateTime));
 
             Logger.Info($"Key Exists: {result} for GameId: {gameId}, ActorId: {actorId}, Key: {key}, Start: {start}, End: {end}");
 
             return result;
 		}
 
-		public List<GameData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
+		public List<SaveData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
 		{
-			var results = _gameDataDbController.Get(gameId, actorId, keys);
+			var results = _saveDataDbController.Get(gameId, actorId, keys);
 
             Logger.Info($"{results?.Count} Game Datas for GameId: {gameId}, ActorId: {actorId}, Keys: {string.Join(", ", keys)}");
 
             return results;
 		}
 
-		public void Update(GameData resource)
+		public void Update(SaveData resource)
 		{
-			_gameDataDbController.Update(resource);
+			_saveDataDbController.Update(resource);
 
             Logger.Info($"{resource.Id}");
         }
 
-		public GameData Transfer(int? gameId, int? fromActorId, int? toActorId, string key, long transferQuantity, out GameData fromResource)
+		public SaveData Transfer(int? gameId, int? fromActorId, int? toActorId, string key, long transferQuantity, out SaveData fromResource)
 		{
 			fromResource = GetExistingResource(gameId, fromActorId, key);
 
@@ -56,10 +57,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 			UpdateQuantity(fromResource, -transferQuantity);
 
-			GameData toResource;
-			var foundResources = _gameDataDbController.Get(gameId, toActorId, new List<string> { fromResource.Key });
+			SaveData toResource;
+			var foundResources = _saveDataDbController.Get(gameId, toActorId, new List<string> { fromResource.Key });
 
-		    var foundResourceList = foundResources as List<GameData> ?? foundResources.ToList();
+		    var foundResourceList = foundResources as List<SaveData> ?? foundResources.ToList();
 		    if (foundResourceList.Any())
 			{
 				toResource = foundResourceList.ElementAt(0);
@@ -67,7 +68,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 			else
 			{
-				toResource = new GameData
+				toResource = new SaveData
 				{
 					GameId = gameId,
 					ActorId = toActorId,
@@ -84,32 +85,32 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return toResource;
 		}
 
-		public void Create(GameData data)
+		public void Create(SaveData data)
 		{
-			var existingEntries = _gameDataDbController.Get(data.GameId, data.ActorId, new List<string>() {data.Key});
+			var existingEntries = _saveDataDbController.Get(data.GameId, data.ActorId, new List<string>() {data.Key});
 			if (existingEntries.Any())
 			{
 				throw new DuplicateRecordException();
 			}
             
-			_gameDataDbController.Create(data);
+			_saveDataDbController.Create(data);
 
             Logger.Info($"{data?.Id}");
 		}
 
-		public void UpdateQuantity(GameData resource, long modifyAmount)
+		public void UpdateQuantity(SaveData resource, long modifyAmount)
 		{
 			long currentValue = long.Parse(resource.Value);
 			resource.Value = (currentValue + modifyAmount).ToString();
 
-			_gameDataDbController.Update(resource);
+			_saveDataDbController.Update(resource);
 
             Logger.Info($"{resource?.Id} with Amount: {modifyAmount}");
         }
 
-		private GameData GetExistingResource(int? gameId, int? ownerId, string key)
+		private SaveData GetExistingResource(int? gameId, int? ownerId, string key)
 		{
-			var foundResources = _gameDataDbController.Get(gameId, ownerId, new List<string> { key });
+			var foundResources = _saveDataDbController.Get(gameId, ownerId, new List<string> { key });
 
 		    if (!foundResources.Any())
 			{

@@ -79,21 +79,21 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			};
 		}
 
-        public static List<GameData> ComposeAchievementGameDatas(int actorId, Evaluation evaluation, string value = "50")
+        public static List<SaveData> ComposeAchievementGameDatas(int actorId, Evaluation evaluation, string value = "50")
         {
-            var gameDatas = new List<GameData>();
+            var gameDatas = new List<SaveData>();
 
             foreach (var criteria in evaluation.EvaluationCriterias)
             {
-                gameDatas.Add(ComposeGameData(actorId, criteria, evaluation.GameId, value));
+                gameDatas.Add(ComposeSaveData(actorId, criteria, evaluation.GameId, value));
             }
 
             return gameDatas;
         }
 
-        public static GameData ComposeGameData(int actorId, EvaluationCriteria evaluationCriteria, int? gameId = null, string value = "50")
+        public static SaveData ComposeSaveData(int actorId, EvaluationCriteria evaluationCriteria, int? gameId = null, string value = "50")
 		{
-			return new GameData
+			return new SaveData
 			{
                 Key = evaluationCriteria.Key,
                 SaveDataType = evaluationCriteria.DataType,
@@ -113,14 +113,14 @@ namespace PlayGen.SUGAR.Core.UnitTests
         public static void CreateGenericAchievementGameData(Evaluation evaluation, int actorId, string value = "50")
         {
             var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, value);
-            ControllerLocator.GameDataController.Add(gameDatas.ToArray());
+            ControllerLocator.SaveDataController.Add(gameDatas.ToArray());
         }
 
         public static void CompleteGenericAchievement(Evaluation evaluation, int actorId)
 		{
 		    var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, "100");
             
-            ControllerLocator.GameDataController.Add(gameDatas.ToArray());
+            ControllerLocator.SaveDataController.Add(gameDatas.ToArray());
 		}
 
 	    public static Evaluation CreateAndCompleteGenericAchievement(string key, int actorId, int? gameId = null)

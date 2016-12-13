@@ -29,12 +29,12 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		// todo change all db controller usages to core controller usages except for evaluation db controller
 		public EvaluationController(Data.EntityFramework.Controllers.EvaluationController evaluationDbController,
-			GameDataController gameDataCoreController,
+			SaveDataController saveDataCoreController,
 			GroupMemberController groupMemberCoreController,
 			UserFriendController userFriendCoreController,
 			Data.EntityFramework.Controllers.ActorController actorController,
 			RewardController rewardController)
-			: base(gameDataCoreController, groupMemberCoreController, userFriendCoreController)
+			: base(saveDataCoreController, groupMemberCoreController, userFriendCoreController)
 		{
 			_evaluationDbController = evaluationDbController;
 			_rewardController = rewardController;
@@ -206,7 +206,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 		public bool IsAlreadyCompleted(Evaluation evaluation, int actorId)
 		{
 			var key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token);
-			var completed = GameDataCoreController.KeyExists(evaluation.GameId, actorId, key);
+			var completed = SaveDataCoreController.KeyExists(evaluation.GameId, actorId, key);
 
             Logger.Debug($"Got: IsCompleted: {completed} for Evaluation.Id: {evaluation?.Id}, ActorId: {actorId}");
 
@@ -215,7 +215,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		private void ProcessEvaluationRewards(Evaluation evaluation, int? actorId)
 		{
-			var gameData = new GameData()
+			var SaveData = new SaveData()
 			{
 				Key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token),
 				GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game
@@ -223,7 +223,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 				SaveDataType = SaveDataType.String,
 				Value = null
 			};
-			GameDataCoreController.Add(gameData);
+			SaveDataCoreController.Add(SaveData);
 
 			evaluation.Rewards?.ForEach(reward => _rewardController.AddReward(actorId, evaluation.GameId, reward));
 		}

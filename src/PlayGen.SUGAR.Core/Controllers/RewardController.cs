@@ -9,16 +9,16 @@ namespace PlayGen.SUGAR.Core.Controllers
         private static Logger Logger = LogManager.GetCurrentClassLogger();
 
         // todo change all db controller usage to core controller usage
-        public RewardController(GameDataController gameDataCoreController, 
+        public RewardController(SaveDataController saveDataCoreController, 
             GroupMemberController groupMemberCoreController, 
             UserFriendController userFriendCoreController)
-			: base(gameDataCoreController, groupMemberCoreController, userFriendCoreController)
+			: base(saveDataCoreController, groupMemberCoreController, userFriendCoreController)
 		{
 		}
 
 		public bool AddReward(int? actorId, int? gameId, Reward reward)
 		{
-			var gameData = new GameData()
+			var saveData = new SaveData
 			{
 				Key = reward.Key,
 				GameId = gameId,    //TODO: handle the case where a global achievement has been completed for a specific game
@@ -26,9 +26,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 				SaveDataType = reward.DataType,
 				Value = reward.Value
 			};
-			GameDataCoreController.Add(gameData);
+			SaveDataCoreController.Add(saveData);
 
-            Logger.Info($"Game Data: {gameData?.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward?.Id}");
+            Logger.Info($"Game Data: {saveData?.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward?.Id}");
 
 			return true;
 		}

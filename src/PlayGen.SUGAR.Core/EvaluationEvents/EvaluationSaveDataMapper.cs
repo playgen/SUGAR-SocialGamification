@@ -10,16 +10,16 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
     /// <summary>
     /// Mappings of game data keys to evaluations with criteria that make use of the specific keys.
     /// </summary>
-    public class EvaluationGameDataMapper
+    public class EvaluationSaveDataMapper
     {
-        // <gamedata key, <evaluationId, evaluation>>
+        // <SaveData key, <evaluationId, evaluation>>
         private readonly ConcurrentDictionary<string, ConcurrentDictionary<int, Evaluation>> _mappings = new ConcurrentDictionary<string, ConcurrentDictionary<int, Evaluation>>();
 
-        public bool TryGetRelated(GameData gameData, out ICollection<Evaluation> evaluations)
+        public bool TryGetRelated(SaveData saveData, out ICollection<Evaluation> evaluations)
         {
             var didGetRelated = false;
             evaluations = null;
-            var mappedKey = CreateMappingKey(gameData.GameId, gameData.SaveDataType, gameData.Key);
+            var mappedKey = CreateMappingKey(saveData.GameId, saveData.SaveDataType, saveData.Key);
 
             ConcurrentDictionary<int, Evaluation> relatedEvalautions;
             if (_mappings.TryGetValue(mappedKey, out relatedEvalautions))
@@ -76,9 +76,9 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             }
         }
 
-        private string CreateMappingKey(int? gameId, SaveDataType dataType, string gameDataKey)
+        private string CreateMappingKey(int? gameId, SaveDataType dataType, string SaveDataKey)
         {
-            return $"{gameId.ToInt()};{dataType};{gameDataKey}";
+            return $"{gameId.ToInt()};{dataType};{SaveDataKey}";
         }
     }
 }

@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         private static readonly GameController _gameController = ControllerLocator.GameController;
         private static readonly UserFriendController _userFriendController = ControllerLocator.UserFriendController;
         private static readonly GroupMemberController _groupMemberController = ControllerLocator.GroupMemberController;
-        private static readonly GameDataController _gameDataController = ControllerLocator.GameDataController;
+        private static readonly SaveDataController SaveDataController = ControllerLocator.SaveDataController;
 
         public static IReadOnlyList<Game> Games => _games;
         public static IReadOnlyList<User> Users => _users;
@@ -77,17 +77,17 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 CreateMembership(_users[i].Id, _groups[i / GroupCount].Id);
             }
 
-            List<Data.Model.GameData> gameDatas = new List<Data.Model.GameData>();
+            List<Data.Model.SaveData> gameDatas = new List<Data.Model.SaveData>();
             for (int j = 0; j < DataCount; j++)
             {
                 gameDatas.Add(CreateData(_games[_random.Next(0, _games.Count)], _users[_random.Next(0, _users.Count)], dataValues[_random.Next(0, dataValues.Count)]));
             }
-            _gameDataController.Add(gameDatas.ToArray());
+            SaveDataController.Add(gameDatas.ToArray());
         }
 
-        private static Data.Model.GameData CreateData(Game game, User user, DataParam data)
+        private static SaveData CreateData(Game game, User user, DataParam data)
         {
-            var gameData = new Data.Model.GameData
+            var gameData = new Data.Model.SaveData
             {
                 ActorId = user.Id,
                 GameId = game.Id,

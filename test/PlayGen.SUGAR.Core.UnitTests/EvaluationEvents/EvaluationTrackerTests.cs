@@ -80,20 +80,20 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
         /// Adding game data triggers evaluations
         /// </summary>
         [Fact]
-        public void EvaluatesOnGameDataAdded()
+        public void EvaluatesOnSaveDataAdded()
         {
             // Arrange
-            var game = Helpers.GetOrCreateGame("EvaluatesOnGameDataAdded");
-            var user = Helpers.GetOrCreateUser("EvaluatesOnGameDataAdded");
+            var game = Helpers.GetOrCreateGame("EvaluatesOnSaveDataAdded");
+            var user = Helpers.GetOrCreateUser("EvaluatesOnSaveDataAdded");
 
             SessionTracker.StartSession(game.Id, user.Id);
 
-            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnGameDataAdded", game.Id);
+            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnSaveDataAdded", game.Id);
 
             var gameDatas = Helpers.ComposeAchievementGameDatas(user.Id, evaluation, "100");
 
             // Act
-            gameDatas.ForEach(g => ControllerLocator.GameDataController.Add(g));
+            gameDatas.ForEach(g => ControllerLocator.SaveDataController.Add(g));
 
             // Assert
             var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
@@ -106,15 +106,15 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
         /// Adding multiple game data triggers evaluations
         /// </summary>
         [Fact]
-        public void EvaluatesOnGameDatasAdded()
+        public void EvaluatesOnSaveDatasAdded()
         {
             // Arrange
-            var game = Helpers.GetOrCreateGame("EvaluatesOnGameDatasAdded");
-            var user = Helpers.GetOrCreateUser("EvaluatesOnGameDatasAdded");
+            var game = Helpers.GetOrCreateGame("EvaluatesOnSaveDatasAdded");
+            var user = Helpers.GetOrCreateUser("EvaluatesOnSaveDatasAdded");
 
             SessionTracker.StartSession(game.Id, user.Id);
 
-            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnGameDatasAdded", game.Id);
+            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnSaveDatasAdded", game.Id);
 
             // Act
             Helpers.CompleteGenericAchievement(evaluation, user.Id);

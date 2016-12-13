@@ -22,13 +22,13 @@ namespace PlayGen.SUGAR.Core.Controllers
 		protected readonly Data.EntityFramework.Controllers.UserController UserController;
 
         // todo replace db controller usage with core controller usage (all cases except for leaderbaordDbController)
-		public LeaderboardController(GameDataController gameDataCoreController,
+		public LeaderboardController(SaveDataController saveDataCoreController,
 			GroupMemberController groupMemberCoreController,
 			UserFriendController userFriendCoreController,
             Data.EntityFramework.Controllers.ActorController actorController,
             Data.EntityFramework.Controllers.GroupController groupController,
             Data.EntityFramework.Controllers.UserController userController)
-			: base(gameDataCoreController, groupMemberCoreController, userFriendCoreController)
+			: base(saveDataCoreController, groupMemberCoreController, userFriendCoreController)
 		{
 			ActorController = actorController;
 			GroupController = groupController;
@@ -208,7 +208,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.GetHighestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = SaveDataCoreController.GetHighestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -217,7 +217,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.GetHighestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = SaveDataCoreController.GetHighestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -243,7 +243,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.GetLowestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = SaveDataCoreController.GetLowestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -252,7 +252,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.GetLowestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = SaveDataCoreController.GetLowestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -278,7 +278,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.SumLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = SaveDataCoreController.SumLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -287,7 +287,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.SumFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = SaveDataCoreController.SumFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -313,7 +313,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.CountKeys(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToString()
+						Value = SaveDataCoreController.CountKeys(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -322,7 +322,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.CountKeys(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToString()
+						Value = SaveDataCoreController.CountKeys(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -348,7 +348,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetEarliestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
+						Value = SaveDataCoreController.TryGetEarliestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					}).ToList();
 					break;
@@ -358,7 +358,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetEarliestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
+						Value = SaveDataCoreController.TryGetEarliestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					}).ToList();
 					break;
@@ -385,7 +385,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetLatestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
+						Value = SaveDataCoreController.TryGetLatestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					}).ToList();
 					break;
@@ -395,7 +395,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = GameDataCoreController.TryGetLatestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
+						Value = SaveDataCoreController.TryGetLatestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd)
 									.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)
 					}).ToList();
 					break;

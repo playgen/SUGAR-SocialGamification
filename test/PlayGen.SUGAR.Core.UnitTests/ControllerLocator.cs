@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         private static ClaimController _claimController;
         private static EvaluationController _evaluationController;
         private static GameController _gameController;
-        private static GameDataController _gameDataController;
+        private static SaveDataController _saveDataController;
         private static GroupController _groupController;
         private static GroupMemberController _groupMemberController;
         private static LeaderboardController _leaderboardController;
@@ -42,13 +42,13 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
         public static EvaluationController EvaluationController
             => _evaluationController ?? (_evaluationController= new EvaluationController(DbControllerLocator.EvaluationController, 
-                GameDataController, GroupMemberController, UserFriendController, DbControllerLocator.ActorController, RewardController));
+                SaveDataController, GroupMemberController, UserFriendController, DbControllerLocator.ActorController, RewardController));
 
         public static GameController GameController
             => _gameController ?? (_gameController = new GameController(DbControllerLocator.GameController, ActorClaimController, ActorRoleController));
 
-        public static GameDataController GameDataController
-            => _gameDataController ?? (_gameDataController = new GameDataController(DbControllerLocator.GameDataController));
+        public static SaveDataController SaveDataController
+            => _saveDataController ?? (_saveDataController = new SaveDataController(DbControllerLocator.SaveDataController));
 
         public static GroupController GroupController
             => _groupController ?? (_groupController = new GroupController(DbControllerLocator.GroupController, ActorClaimController, ActorRoleController, GroupMemberController));
@@ -57,7 +57,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
             => _groupMemberController ?? (_groupMemberController = new GroupMemberController(DbControllerLocator.GroupRelationshipController));
 
         public static LeaderboardController LeaderboardController
-            => _leaderboardController ?? (_leaderboardController = new LeaderboardController(GameDataController, 
+            => _leaderboardController ?? (_leaderboardController = new LeaderboardController(SaveDataController, 
                 GroupMemberController, UserFriendController, DbControllerLocator.ActorController, 
                 DbControllerLocator.GroupController, DbControllerLocator.UserController));
 
@@ -65,7 +65,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
             => _resourceController ?? (_resourceController = new ResourceController(DbControllerLocator.ContextFactory));
 
         public static RewardController RewardController
-            => _rewardController ?? (_rewardController = new RewardController(GameDataController, GroupMemberController, UserFriendController));
+            => _rewardController ?? (_rewardController = new RewardController(SaveDataController, GroupMemberController, UserFriendController));
 
         public static RoleController RoleController
             => _roleController ?? (_roleController = new RoleController(DbControllerLocator.RoleController, ActorRoleController));
