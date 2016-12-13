@@ -15,8 +15,8 @@ GameData storage is used by <xref:achievement>, [Leaderboards](leaderboard.md), 
 
 ## GameData Categories
 - General Data - All information that does not fit into any other category.
-    - Example - A [user](/features/user.html) gaining 10 points in level 2.
-- Resources - Long-only data which can be transferred to and from [actors](/features/actor.html) within the system.
+    - Example - A <xref:user> gaining 10 points in level 2.
+- Resources - Long-only data which can be transferred to and from <xref:actor> within the system.
     - Example - A user collecting 10 gold, a consumable item within the game. 
 - Achievements - Stored completion of all <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria> for an achievement.
     - Example - A user meeting the criteria for the achievement "Score 10,000 points" in a game.
@@ -25,18 +25,16 @@ GameData storage is used by <xref:achievement>, [Leaderboards](leaderboard.md), 
 
 ## API
 * Client
-    * <xref:PlayGen.SUGAR.Client.GameDataClient)
+    * <xref:PlayGen.SUGAR.Client.GameDataClient>
 * Contracts
     * <xref:PlayGen.SUGAR.Contracts.Shared.SaveDataRequest>
     * <xref:PlayGen.SUGAR.Contracts.Shared.SaveDataResponse>
     * <xref:PlayGen.SUGAR.Common.Shared.CriteriaQueryType>
-* WebAPI
-    * <xref:PlayGen.SUGAR.WebAPI.Controllers.GameDataController>
 
 ## Examples
 * Submitting custom GameData
 
- 	Custom GameData is submitted using the <(xref:PlayGen.SUGAR.Client.GameDataClient>'s Add function with a <xref:PlayGen.SUGAR.Contracts.Shared.SaveDataRequest> as the parameter. This explains how to track the number of dragon eggs hatched by the user, specifying "EggHatched" as the key.
+ 	Custom GameData is submitted using the <xref:PlayGen.SUGAR.Client.GameDataClient>'s Add function with a <xref:PlayGen.SUGAR.Contracts.Shared.SaveDataRequest> as the parameter. This explains how to track the number of dragon eggs hatched by the user, specifying "EggHatched" as the key.
 
 ```cs 
 		public SUGARClient sugarClient = new SUGARClient(BaseUri);
@@ -72,7 +70,7 @@ GameData storage is used by <xref:achievement>, [Leaderboards](leaderboard.md), 
 		private long GetEggsHatched()
 		{
 			// add the GameData
-			var SaveDataResponses = gameDataClient.Get
+			var gameDataResponses = gameDataClient.Get
 			(
 				_actorId,
 				_gameId,
@@ -81,8 +79,8 @@ GameData storage is used by <xref:achievement>, [Leaderboards](leaderboard.md), 
 
 			long totalClicks = 0;
 
-			// count values from each SaveDataResponse
-			foreach (var response in SaveDataResponses)
+			// count values from each GameDataResponse
+			foreach (var response in gameDataResponses)
 			{
 				totalClicks += long.Parse(response.Value);
 			}

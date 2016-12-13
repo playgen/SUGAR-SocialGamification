@@ -23,16 +23,15 @@ Actors can join, leave or add another actor to a group.
 
 ## API
 * Client
-    * [GroupClient](xref:PlayGen.SUGAR.Client.GroupClient)
+    * <xref:PlayGen.SUGAR.Client.GroupClient>
 * Contracts
-    * [ActorResponse](xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse)
-    * [ActorRequest](xref:PlayGen.SUGAR.Contracts.Shared.ActorRequest)
-* WebAPI
-    * [GroupController](xref:PlayGen.SUGAR.WebAPI.Controllers.GroupController)
+    * <xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse>
+    * <xref:PlayGen.SUGAR.Contracts.Shared.ActorRequest>
+
     
 ## Examples
 * Create a group
-	This example will show how to create a group called "Wildlings" using the [GroupClient](xref:PlayGen.SUGAR.Client.GroupClient)'s Create function, passing an [ActorRequest](xref:PlayGen.SUGAR.Contracts.Shared.ActorRequest) as the parameter and storing the group's id returned inside the [ActorResponse](xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse) object.
+	This example will show how to create a group called "Wildlings" using the <xref:PlayGen.SUGAR.Client.GroupClient>'s Create function, passing an <xref:PlayGen.SUGAR.Contracts.Shared.ActorRequest> as the parameter and storing the group's id returned inside the <xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse> object.
 
 ```cs
 		public SUGARClient sugarClient = new SUGARClient(BaseUri);
@@ -60,7 +59,7 @@ Actors can join, leave or add another actor to a group.
 
 * Retreiving a game
 
-	Checking if a Group exists or finding the id of a Group may be desired functionalities. This is done using [GroupClient](xref:PlayGen.SUGAR.Client.GroupClient)'s Get function and passing the name of the group to match.
+	Checking if a Group exists or finding the id of a Group may be desired functionalities. This is done using <xref:PlayGen.SUGAR.Client.GroupClient>'s Get function and passing the name of the group to match.
 
 ```cs 
 		private bool CheckGroupExists() 
@@ -85,8 +84,7 @@ Actors can join, leave or add another actor to a group.
 
 ## Roadmap
 * Groups Alliance. 
-Provide the ability for relationship between groups. To form an [Alliance](/article/Alliances)
-
+Provide the ability for relationship between groups. To form an <xref:alliance>
 * Group leader.
 Providing the ability for individual actors to control the group membership, to add or remove other actors.
 

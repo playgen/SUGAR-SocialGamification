@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Extensions;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client
@@ -35,6 +36,25 @@ namespace PlayGen.SUGAR.Client
 				.ToString();
 			return Get<IEnumerable<SaveDataResponse>>(query);
 		}
+
+        /// <summary>
+        /// Finds a list of GameData with the highest <param name="dataType"/> for each <param name="key"/> provided that matches the <param name="actorId"/> and <param name="gameId"/>.
+        /// </summary>
+        /// <param name="actorId">ID of a User/Group.</param>
+		/// <param name="gameId">ID of a Game.</param>
+		/// <param name="key">Array of Key names.</param>
+        /// <param name="dataType">Data type of value</param>
+        /// <returns>A list of <see cref="SaveDataResponse"/> which match the search criteria.</returns>
+	    public IEnumerable<SaveDataResponse> GetHighest(int? actorId, int? gameId, string[] key, SaveDataType dataType)
+	    {
+            var query = GetUriBuilder(ControllerPrefix + "/highest")
+                .AppendQueryParameter(actorId, "actorId={0}")
+                .AppendQueryParameter(gameId, "gameId={0}")
+                .AppendQueryParameters(key, "key={0}")
+                .AppendQueryParameter(dataType, "dataType={0}")
+                .ToString();
+	        return Get<IEnumerable<SaveDataResponse>>(query);
+	    }
 
 		/// <summary>
 		/// Create a new GameData record.

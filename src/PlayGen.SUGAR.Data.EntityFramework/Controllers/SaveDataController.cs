@@ -170,7 +170,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public float GetHighestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public float GetHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -193,7 +193,30 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public long GetHighestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public SaveData GetSaveDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        {
+            end = EndSet(end);
+            using (var context = ContextFactory.Create())
+            {
+                var data = context.GetCategoryData(_category)
+                    .FilterByGameId(gameId)
+                    .FilterByActorId(actorId)
+                    .FilterByKey(key)
+                    .FilterByDataType(SaveDataType.Float)
+                    .FilterByDateTimeRange(start, end)
+                    .ToList();
+
+                if (data.Count == 0)
+                {
+                    return null;
+                }
+
+                var max = data.OrderByDescending(gameData => float.Parse(gameData.Value)).First();
+                return max;
+            }
+        }
+
+        public long GetHighestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -216,7 +239,31 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public float GetLowestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public SaveData GetSaveDataByHighestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        {
+            end = EndSet(end);
+            using (var context = ContextFactory.Create())
+            {
+                var data = context.GetCategoryData(_category)
+                    .FilterByGameId(gameId)
+                    .FilterByActorId(actorId)
+                    .FilterByKey(key)
+                    .FilterByDataType(SaveDataType.Long)
+                    .FilterByDateTimeRange(start, end)
+                    .ToList();
+
+                if (data.Count == 0)
+                {
+                    return null;
+                }
+
+                var max = data.OrderByDescending(gameData => float.Parse(gameData.Value)).First();
+                return max;
+            }
+        }
+
+
+        public float GetLowestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -239,7 +286,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public long GetLowestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public long GetLowestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
