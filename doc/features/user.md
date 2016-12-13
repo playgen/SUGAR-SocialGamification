@@ -2,7 +2,7 @@
 uid: user
 ---
 
-# Users
+# User
 Users are individuals interacting with the system. They may fulfil a range of roles including player, game master, game admin, teacher or system admin. Users can have metadata associated with them, such as nice name, profile image and bio.
 
 ## Features
@@ -16,14 +16,12 @@ Users are individuals interacting with the system. They may fulfil a range of ro
 
 ## API
 * Client
-    * [UserClient](xref:PlayGen.SUGAR.Client.UserClient)
+    * <xref:PlayGen.SUGAR.Client.UserClient>
 * Contracts
-    * [AchievementCriteria](xref:PlayGen.SUGAR.Contracts.AchievementCriteria)
-    * [AchievementProgressResponse](xref:PlayGen.SUGAR.Contracts.AchievementProgressResponse)
-    * [ActorRequest](xref:PlayGen.SUGAR.Contracts.ActorRequest)
-    * [ActorResponse](xref:PlayGen.SUGAR.Contracts.ActorResponse)
-* WebAPI
-    * [UserController](xref:PlayGen.SUGAR.WebAPI.Controllers.UserController)
+    * <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria>
+    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse>
+    * <xref:PlayGen.SUGAR.Contracts.Shared.ActorRequest>
+    * <xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse>
 
 ## Roadmap
 

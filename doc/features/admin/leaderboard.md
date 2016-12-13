@@ -1,4 +1,4 @@
-# Leaderboards
+# Leaderboard
 *For more information on leaderboards view the <a href="../leaderboard.md">documentation</a>*
 
 The leaderboards page prompts the admin to select a platform from the list of games or global leaderboards, once a platform has been selected, the user is shown the list of leaderboards that are already associated with that platform, from here the admin can:

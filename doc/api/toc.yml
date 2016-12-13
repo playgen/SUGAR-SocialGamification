@@ -7,8 +7,6 @@
     name: AchievementClient
   - uid: PlayGen.SUGAR.Client.ClientBase
     name: ClientBase
-  - uid: PlayGen.SUGAR.Client.Credentials
-    name: Credentials
   - uid: PlayGen.SUGAR.Client.DefaultHttpHandler
     name: DefaultHttpHandler
   - uid: PlayGen.SUGAR.Client.GameClient
@@ -29,6 +27,8 @@
     name: LeaderboardClient
   - uid: PlayGen.SUGAR.Client.ResourceClient
     name: ResourceClient
+  - uid: PlayGen.SUGAR.Client.SessionClient
+    name: SessionClient
   - uid: PlayGen.SUGAR.Client.SkillClient
     name: SkillClient
   - uid: PlayGen.SUGAR.Client.SUGARClient
@@ -37,6 +37,25 @@
     name: UserClient
   - uid: PlayGen.SUGAR.Client.UserFriendClient
     name: UserFriendClient
+- uid: PlayGen.SUGAR.Client.AsyncRequestQueue
+  name: PlayGen.SUGAR.Client.AsyncRequestQueue
+  items:
+  - uid: PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController
+    name: AsyncRequestController
+  - uid: PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem
+    name: QueueItem
+  - uid: PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem`1
+    name: QueueItem<TResult>
+    name.vb: QueueItem(Of TResult)
+- uid: PlayGen.SUGAR.Client.EvaluationEvents
+  name: PlayGen.SUGAR.Client.EvaluationEvents
+  items:
+  - uid: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationEventsExtensions
+    name: EvaluationEventsExtensions
+  - uid: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification
+    name: EvaluationNotification
+  - uid: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications
+    name: EvaluationNotifications
 - uid: PlayGen.SUGAR.Client.Exceptions
   name: PlayGen.SUGAR.Client.Exceptions
   items:
@@ -47,394 +66,149 @@
   items:
   - uid: PlayGen.SUGAR.Client.Extensions.UriBuilderExtensions
     name: UriBuilderExtensions
-- uid: PlayGen.SUGAR.Client.IntegrationTests
-  name: PlayGen.SUGAR.Client.IntegrationTests
-  items:
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.AccountClientTests
-    name: AccountClientTests
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.AchievementClientTests
-    name: AchievementClientTests
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.Class1
-    name: Class1
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.GameClientTests
-    name: GameClientTests
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.GameDataClientTests
-    name: GameDataClientTests
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.GroupClientTests
-    name: GroupClientTests
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.GroupMemberClientTests
-    name: GroupMemberClientTests
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.LeaderboardClientTests
-    name: LeaderboardClientTests
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.ResourceClientTests
-    name: ResourceClientTests
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.SkillClientTests
-    name: SkillClientTests
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.TestSUGARClient
-    name: TestSUGARClient
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.UserClientTests
-    name: UserClientTests
-  - uid: PlayGen.SUGAR.Client.IntegrationTests.UserFriendClientTests
-    name: UserFriendClientTests
 - uid: PlayGen.SUGAR.Client.Unity
   name: PlayGen.SUGAR.Client.Unity
   items:
   - uid: PlayGen.SUGAR.Client.Unity.UnityWebGlHttpHandler
     name: UnityWebGlHttpHandler
-- uid: PlayGen.SUGAR.Contracts
-  name: PlayGen.SUGAR.Contracts
+- uid: PlayGen.SUGAR.Common.Shared
+  name: PlayGen.SUGAR.Common.Shared
   items:
-  - uid: PlayGen.SUGAR.Contracts.AccountRequest
-    name: AccountRequest
-  - uid: PlayGen.SUGAR.Contracts.AccountResponse
-    name: AccountResponse
-  - uid: PlayGen.SUGAR.Contracts.AchievementCriteria
-    name: AchievementCriteria
-  - uid: PlayGen.SUGAR.Contracts.AchievementProgressResponse
-    name: AchievementProgressResponse
-  - uid: PlayGen.SUGAR.Contracts.AchievementRequest
-    name: AchievementRequest
-  - uid: PlayGen.SUGAR.Contracts.AchievementResponse
-    name: AchievementResponse
-  - uid: PlayGen.SUGAR.Contracts.AchievementTestRequest
-    name: AchievementTestRequest
-  - uid: PlayGen.SUGAR.Contracts.AchievementTestResponse
-    name: AchievementTestResponse
-  - uid: PlayGen.SUGAR.Contracts.ActorRequest
-    name: ActorRequest
-  - uid: PlayGen.SUGAR.Contracts.ActorResponse
-    name: ActorResponse
-  - uid: PlayGen.SUGAR.Contracts.ActorType
-    name: ActorType
-  - uid: PlayGen.SUGAR.Contracts.ComparisonType
-    name: ComparisonType
-  - uid: PlayGen.SUGAR.Contracts.CriteriaQueryType
-    name: CriteriaQueryType
-  - uid: PlayGen.SUGAR.Contracts.CriteriaScope
-    name: CriteriaScope
-  - uid: PlayGen.SUGAR.Contracts.GameDataRequest
-    name: GameDataRequest
-  - uid: PlayGen.SUGAR.Contracts.GameDataResponse
-    name: GameDataResponse
-  - uid: PlayGen.SUGAR.Contracts.GameDataType
-    name: GameDataType
-  - uid: PlayGen.SUGAR.Contracts.GameRequest
-    name: GameRequest
-  - uid: PlayGen.SUGAR.Contracts.GameResponse
-    name: GameResponse
-  - uid: PlayGen.SUGAR.Contracts.LeaderboardFilterType
-    name: LeaderboardFilterType
-  - uid: PlayGen.SUGAR.Contracts.LeaderboardRequest
-    name: LeaderboardRequest
-  - uid: PlayGen.SUGAR.Contracts.LeaderboardResponse
-    name: LeaderboardResponse
-  - uid: PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest
-    name: LeaderboardStandingsRequest
-  - uid: PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse
-    name: LeaderboardStandingsResponse
-  - uid: PlayGen.SUGAR.Contracts.LeaderboardType
-    name: LeaderboardType
-  - uid: PlayGen.SUGAR.Contracts.RelationshipRequest
-    name: RelationshipRequest
-  - uid: PlayGen.SUGAR.Contracts.RelationshipResponse
-    name: RelationshipResponse
-  - uid: PlayGen.SUGAR.Contracts.RelationshipStatusUpdate
-    name: RelationshipStatusUpdate
-  - uid: PlayGen.SUGAR.Contracts.ResourceAddRequest
-    name: ResourceAddRequest
-  - uid: PlayGen.SUGAR.Contracts.ResourceResponse
-    name: ResourceResponse
-  - uid: PlayGen.SUGAR.Contracts.ResourceTransferRequest
-    name: ResourceTransferRequest
-  - uid: PlayGen.SUGAR.Contracts.ResourceTransferResponse
-    name: ResourceTransferResponse
-  - uid: PlayGen.SUGAR.Contracts.Reward
-    name: Reward
-- uid: PlayGen.SUGAR.Contracts.Controllers
-  name: PlayGen.SUGAR.Contracts.Controllers
-  items:
-  - uid: PlayGen.SUGAR.Contracts.Controllers.IAccountController
-    name: IAccountController
-  - uid: PlayGen.SUGAR.Contracts.Controllers.IGameController
-    name: IGameController
-  - uid: PlayGen.SUGAR.Contracts.Controllers.IGroupAchievementController
-    name: IGroupAchievementController
-  - uid: PlayGen.SUGAR.Contracts.Controllers.IGroupController
-    name: IGroupController
-  - uid: PlayGen.SUGAR.Contracts.Controllers.IGroupMemberController
-    name: IGroupMemberController
-  - uid: PlayGen.SUGAR.Contracts.Controllers.IGroupSaveDataController
-    name: IGroupSaveDataController
-  - uid: PlayGen.SUGAR.Contracts.Controllers.IUserAchievementController
-    name: IUserAchievementController
-  - uid: PlayGen.SUGAR.Contracts.Controllers.IUserController
-    name: IUserController
-  - uid: PlayGen.SUGAR.Contracts.Controllers.IUserDataController
-    name: IUserDataController
-  - uid: PlayGen.SUGAR.Contracts.Controllers.IUserFriendController
-    name: IUserFriendController
-- uid: PlayGen.SUGAR.Contracts.Exceptions
-  name: PlayGen.SUGAR.Contracts.Exceptions
-  items:
-  - uid: PlayGen.SUGAR.Contracts.Exceptions.SUGARException
-    name: SUGARException
-- uid: PlayGen.SUGAR.Data.EntityFramework
-  name: PlayGen.SUGAR.Data.EntityFramework
-  items:
-  - uid: PlayGen.SUGAR.Data.EntityFramework.SUGARContext
-    name: SUGARContext
-  - uid: PlayGen.SUGAR.Data.EntityFramework.SUGARContextInitializer
-    name: SUGARContextInitializer
-- uid: PlayGen.SUGAR.Data.EntityFramework.Controllers
-  name: PlayGen.SUGAR.Data.EntityFramework.Controllers
-  items:
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.AccountController
-    name: AccountController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.AchievementController
-    name: AchievementController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.ActorController
-    name: ActorController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.DbController
-    name: DbController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.GameController
-    name: GameController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.GameDataController
-    name: GameDataController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.GroupController
-    name: GroupController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.GroupRelationshipController
-    name: GroupRelationshipController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.LeaderboardController
-    name: LeaderboardController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.SkillController
-    name: SkillController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.UserController
-    name: UserController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.UserRelationshipController
-    name: UserRelationshipController
-- uid: PlayGen.SUGAR.Data.EntityFramework.Exceptions
-  name: PlayGen.SUGAR.Data.EntityFramework.Exceptions
-  items:
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Exceptions.DbExceptionHandler
-    name: DbExceptionHandler
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Exceptions.DuplicateRecordException
-    name: DuplicateRecordException
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Exceptions.MissingRecordException
-    name: MissingRecordException
-- uid: PlayGen.SUGAR.Data.EntityFramework.ExtensionMethods
-  name: PlayGen.SUGAR.Data.EntityFramework.ExtensionMethods
-  items:
-  - uid: PlayGen.SUGAR.Data.EntityFramework.ExtensionMethods.ModelBuilderExtensions
-    name: ModelBuilderExtensions
-- uid: PlayGen.SUGAR.Data.EntityFramework.Extensions
-  name: PlayGen.SUGAR.Data.EntityFramework.Extensions
-  items:
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Extensions.GameDataExtensions
-    name: GameDataExtensions
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Extensions.SGAContextExtensions
-    name: SGAContextExtensions
-- uid: PlayGen.SUGAR.Data.EntityFramework.Interfaces
-  name: PlayGen.SUGAR.Data.EntityFramework.Interfaces
-  items:
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Interfaces.IGameDataController
-    name: IGameDataController
-- uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests
-  name: PlayGen.SUGAR.Data.EntityFramework.UnitTests
-  items:
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.AccountControllerTests
-    name: AccountControllerTests
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.AchievementControllerTests
-    name: AchievementControllerTests
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.GameControllerTests
-    name: GameControllerTests
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.GameDataControllerTests
-    name: GameDataControllerTests
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.GroupControllerTests
-    name: GroupControllerTests
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.GroupMemberControllerTests
-    name: GroupMemberControllerTests
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.ResourceControllerTests
-    name: ResourceControllerTests
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.TestController
-    name: TestController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.TestEnvironment
-    name: TestEnvironment
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.UserControllerTests
-    name: UserControllerTests
-  - uid: PlayGen.SUGAR.Data.EntityFramework.UnitTests.UserFriendControllerTests
-    name: UserFriendControllerTests
-- uid: PlayGen.SUGAR.Data.Model
-  name: PlayGen.SUGAR.Data.Model
-  items:
-  - uid: PlayGen.SUGAR.Data.Model.Account
-    name: Account
-  - uid: PlayGen.SUGAR.Data.Model.Achievement
-    name: Achievement
-  - uid: PlayGen.SUGAR.Data.Model.AchievementCriteriaCollection
-    name: AchievementCriteriaCollection
-  - uid: PlayGen.SUGAR.Data.Model.Actor
+  - uid: PlayGen.SUGAR.Common.Shared.Actor
     name: Actor
-  - uid: PlayGen.SUGAR.Data.Model.Game
-    name: Game
-  - uid: PlayGen.SUGAR.Data.Model.GameData
-    name: GameData
-  - uid: PlayGen.SUGAR.Data.Model.GameDataCategory
-    name: GameDataCategory
-  - uid: PlayGen.SUGAR.Data.Model.Group
-    name: Group
-  - uid: PlayGen.SUGAR.Data.Model.Leaderboard
-    name: Leaderboard
-  - uid: PlayGen.SUGAR.Data.Model.RewardCollection
-    name: RewardCollection
-  - uid: PlayGen.SUGAR.Data.Model.Skill
-    name: Skill
-  - uid: PlayGen.SUGAR.Data.Model.User
-    name: User
-  - uid: PlayGen.SUGAR.Data.Model.UserToGroupRelationship
-    name: UserToGroupRelationship
-  - uid: PlayGen.SUGAR.Data.Model.UserToGroupRelationshipRequest
-    name: UserToGroupRelationshipRequest
-  - uid: PlayGen.SUGAR.Data.Model.UserToUserRelationship
-    name: UserToUserRelationship
-  - uid: PlayGen.SUGAR.Data.Model.UserToUserRelationshipRequest
-    name: UserToUserRelationshipRequest
-- uid: PlayGen.SUGAR.Data.Model.Interfaces
-  name: PlayGen.SUGAR.Data.Model.Interfaces
+  - uid: PlayGen.SUGAR.Common.Shared.ActorType
+    name: ActorType
+  - uid: PlayGen.SUGAR.Common.Shared.ComparisonType
+    name: ComparisonType
+  - uid: PlayGen.SUGAR.Common.Shared.CriteriaQueryType
+    name: CriteriaQueryType
+  - uid: PlayGen.SUGAR.Common.Shared.CriteriaScope
+    name: CriteriaScope
+  - uid: PlayGen.SUGAR.Common.Shared.EvaluationCriteria
+    name: EvaluationCriteria
+  - uid: PlayGen.SUGAR.Common.Shared.EvaluationProgress
+    name: EvaluationProgress
+  - uid: PlayGen.SUGAR.Common.Shared.EvaluationType
+    name: EvaluationType
+  - uid: PlayGen.SUGAR.Common.Shared.LeaderboardFilterType
+    name: LeaderboardFilterType
+  - uid: PlayGen.SUGAR.Common.Shared.LeaderboardType
+    name: LeaderboardType
+  - uid: PlayGen.SUGAR.Common.Shared.Reward
+    name: Reward
+  - uid: PlayGen.SUGAR.Common.Shared.SaveDataType
+    name: SaveDataType
+- uid: PlayGen.SUGAR.Common.Shared.Exceptions
+  name: PlayGen.SUGAR.Common.Shared.Exceptions
   items:
-  - uid: PlayGen.SUGAR.Data.Model.Interfaces.IGameData
-    name: IGameData
-  - uid: PlayGen.SUGAR.Data.Model.Interfaces.IModificationHistory
-    name: IModificationHistory
-  - uid: PlayGen.SUGAR.Data.Model.Interfaces.IRelationship
-    name: IRelationship
-- uid: PlayGen.SUGAR.GameData
-  name: PlayGen.SUGAR.GameData
+  - uid: PlayGen.SUGAR.Common.Shared.Exceptions.SUGARException
+    name: SUGARException
+- uid: PlayGen.SUGAR.Common.Shared.Extensions
+  name: PlayGen.SUGAR.Common.Shared.Extensions
   items:
-  - uid: PlayGen.SUGAR.GameData.AchievementController
-    name: AchievementController
-  - uid: PlayGen.SUGAR.GameData.DataEvaluationController
-    name: DataEvaluationController
-  - uid: PlayGen.SUGAR.GameData.KeyConstants
-    name: KeyConstants
-  - uid: PlayGen.SUGAR.GameData.LeaderboardController
-    name: LeaderboardController
-  - uid: PlayGen.SUGAR.GameData.ResourceController
-    name: ResourceController
-  - uid: PlayGen.SUGAR.GameData.RewardController
-    name: RewardController
-  - uid: PlayGen.SUGAR.GameData.SkillController
-    name: SkillController
-- uid: PlayGen.SUGAR.GameData.Extensions
-  name: PlayGen.SUGAR.GameData.Extensions
+  - uid: PlayGen.SUGAR.Common.Shared.Extensions.NullableIntExtensions
+    name: NullableIntExtensions
+- uid: PlayGen.SUGAR.Common.Shared.Permissions
+  name: PlayGen.SUGAR.Common.Shared.Permissions
   items:
-  - uid: PlayGen.SUGAR.GameData.Extensions.SGAContextExtensions
-    name: SGAContextExtensions
-- uid: PlayGen.SUGAR.GameData.UnitTests
-  name: PlayGen.SUGAR.GameData.UnitTests
+  - uid: PlayGen.SUGAR.Common.Shared.Permissions.ClaimScope
+    name: ClaimScope
+- uid: PlayGen.SUGAR.Common.Shared.Web
+  name: PlayGen.SUGAR.Common.Shared.Web
   items:
-  - uid: PlayGen.SUGAR.GameData.UnitTests.AchievementProgressControllerTests
-    name: AchievementProgressControllerTests
-  - uid: PlayGen.SUGAR.GameData.UnitTests.GameDataFixture
-    name: GameDataFixture
-  - uid: PlayGen.SUGAR.GameData.UnitTests.LeaderboardControllerTests
-    name: LeaderboardControllerTests
-  - uid: PlayGen.SUGAR.GameData.UnitTests.TestController
-    name: TestController
-- uid: PlayGen.SUGAR.ServerAuthentication
-  name: PlayGen.SUGAR.ServerAuthentication
+  - uid: PlayGen.SUGAR.Common.Shared.Web.HeaderKeys
+    name: HeaderKeys
+- uid: PlayGen.SUGAR.Contracts.Shared
+  name: PlayGen.SUGAR.Contracts.Shared
   items:
-  - uid: PlayGen.SUGAR.ServerAuthentication.JsonWebTokenUtility
-    name: JsonWebTokenUtility
-  - uid: PlayGen.SUGAR.ServerAuthentication.PasswordEncryption
-    name: PasswordEncryption
-  - uid: PlayGen.SUGAR.ServerAuthentication.TokenValidity
-    name: TokenValidity
-- uid: PlayGen.SUGAR.ServerAuthentication.Extensions
-  name: PlayGen.SUGAR.ServerAuthentication.Extensions
-  items:
-  - uid: PlayGen.SUGAR.ServerAuthentication.Extensions.AuthorizationHeaderExtensions
-    name: AuthorizationHeaderExtensions
-- uid: PlayGen.SUGAR.WebAPI
-  name: PlayGen.SUGAR.WebAPI
-  items:
-  - uid: PlayGen.SUGAR.WebAPI.Program
-    name: Program
-  - uid: PlayGen.SUGAR.WebAPI.Startup
-    name: Startup
-- uid: PlayGen.SUGAR.WebAPI.Controllers
-  name: PlayGen.SUGAR.WebAPI.Controllers
-  items:
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.AccountController
-    name: AccountController
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.AchievementsController
-    name: AchievementsController
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.GameController
-    name: GameController
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.GameDataController
-    name: GameDataController
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.GroupController
-    name: GroupController
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.GroupMemberController
-    name: GroupMemberController
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.LeaderboardsController
-    name: LeaderboardsController
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.ResourceController
-    name: ResourceController
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.SkillsController
-    name: SkillsController
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.UserController
-    name: UserController
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.UserFriendController
-    name: UserFriendController
-- uid: PlayGen.SUGAR.WebAPI.Controllers.Filters
-  name: PlayGen.SUGAR.WebAPI.Controllers.Filters
-  items:
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.Filters.ArgumentsNotNullAttribute
-    name: ArgumentsNotNullAttribute
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.Filters.AuthorizationAttribute
-    name: AuthorizationAttribute
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.Filters.AuthorizationHeaderFilter
-    name: AuthorizationHeaderFilter
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.Filters.ExceptionFilter
-    name: ExceptionFilter
-  - uid: PlayGen.SUGAR.WebAPI.Controllers.Filters.ModelValidationFilter
-    name: ModelValidationFilter
-- uid: PlayGen.SUGAR.WebAPI.Exceptions
-  name: PlayGen.SUGAR.WebAPI.Exceptions
-  items:
-  - uid: PlayGen.SUGAR.WebAPI.Exceptions.InvalidAccountDetailsException
-    name: InvalidAccountDetailsException
-- uid: PlayGen.SUGAR.WebAPI.Extensions
-  name: PlayGen.SUGAR.WebAPI.Extensions
-  items:
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.AccountExtensions
-    name: AccountExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.AchievementExtensions
-    name: AchievementExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.ActorExtensions
-    name: ActorExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.CriteriaExtensions
-    name: CriteriaExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.GameDataExtensions
-    name: GameDataExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.GameExtensions
-    name: GameExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.GroupExtensions
-    name: GroupExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.LeaderboardExtensions
-    name: LeaderboardExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.RelationshipExtensions
-    name: RelationshipExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.ResourceExtensions
-    name: ResourceExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.RewardExtensions
-    name: RewardExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.SkillExtensions
-    name: SkillExtensions
-  - uid: PlayGen.SUGAR.WebAPI.Extensions.UserExtensions
-    name: UserExtensions
-- uid: PlayGen.SUGAR.WebAPI.UnitTests.Controllers
-  name: PlayGen.SUGAR.WebAPI.UnitTests.Controllers
-  items:
-  - uid: PlayGen.SUGAR.WebAPI.UnitTests.Controllers.AccountControllerTests
-    name: AccountControllerTests
+  - uid: PlayGen.SUGAR.Contracts.Shared.AccountRequest
+    name: AccountRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.AccountResponse
+    name: AccountResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.AccountSourceRequest
+    name: AccountSourceRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.AccountSourceResponse
+    name: AccountSourceResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.ActorClaimRequest
+    name: ActorClaimRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.ActorClaimResponse
+    name: ActorClaimResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.ActorRequest
+    name: ActorRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.ActorResponse
+    name: ActorResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.ActorRoleRequest
+    name: ActorRoleRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.ActorRoleResponse
+    name: ActorRoleResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.ClaimResponse
+    name: ClaimResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest
+    name: EvaluationCreateRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationCriteriaCreateRequest
+    name: EvaluationCriteriaCreateRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationCriteriaResponse
+    name: EvaluationCriteriaResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationCriteriaUpdateRequest
+    name: EvaluationCriteriaUpdateRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse
+    name: EvaluationProgressResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationResponse
+    name: EvaluationResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationUpdateRequest
+    name: EvaluationUpdateRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.GameRequest
+    name: GameRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.GameResponse
+    name: GameResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.GroupRequest
+    name: GroupRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.GroupResponse
+    name: GroupResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest
+    name: LeaderboardRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.LeaderboardResponse
+    name: LeaderboardResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest
+    name: LeaderboardStandingsRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsResponse
+    name: LeaderboardStandingsResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.RelationshipRequest
+    name: RelationshipRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.RelationshipResponse
+    name: RelationshipResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate
+    name: RelationshipStatusUpdate
+  - uid: PlayGen.SUGAR.Contracts.Shared.ResourceAddRequest
+    name: ResourceAddRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.ResourceResponse
+    name: ResourceResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.ResourceTransferRequest
+    name: ResourceTransferRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.ResourceTransferResponse
+    name: ResourceTransferResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.ResponseWrapper`1
+    name: ResponseWrapper<TResponse>
+    name.vb: ResponseWrapper(Of TResponse)
+  - uid: PlayGen.SUGAR.Contracts.Shared.RewardCreateRequest
+    name: RewardCreateRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.RewardResponse
+    name: RewardResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.RewardUpdateRequest
+    name: RewardUpdateRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.RoleClaimRequest
+    name: RoleClaimRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.RoleClaimResponse
+    name: RoleClaimResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.RoleRequest
+    name: RoleRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.RoleResponse
+    name: RoleResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.SaveDataRequest
+    name: SaveDataRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.SaveDataResponse
+    name: SaveDataResponse
+  - uid: PlayGen.SUGAR.Contracts.Shared.UserRequest
+    name: UserRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.UserResponse
+    name: UserResponse

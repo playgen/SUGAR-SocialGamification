@@ -24,3 +24,6 @@
 - name: Admin Panel
   href: admin/toc.yml
   homepage: admin/index.md
+- name: Unity UI Component
+  href: unity/toc.yml
+  homepage: unity/index.md

@@ -1,4 +1,4 @@
-# Achievements
+# Achievement
 *For more information on achievements view the <a href="../achievement.md">documentation</a>*
  
 The achievements page controls the achievements for a given game and global achievements by selecting from a list of games or the global achievements option
