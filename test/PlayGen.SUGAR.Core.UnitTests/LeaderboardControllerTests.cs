@@ -690,7 +690,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
             {
                 Name = name,
                 Token = name,
-                Key = dataType.ToString(),
+                SaveDataKey = dataType.ToString(),
                 GameId = random.Next(1, TestDataFixture.GameCount + 1),
                 ActorType = ActorType.User,
                 SaveDataType = dataType,
@@ -700,7 +700,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
             if (customKey.Length > 0)
             {
-                leaderboard.Key = customKey;
+                leaderboard.SaveDataKey = customKey;
             }
 
             _leaderboardDbController.Create(leaderboard);

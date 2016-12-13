@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         {
             foreach (var evaluationCriteria in evaluation.EvaluationCriterias)
             {
-                var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.DataType, evaluationCriteria.Key);
+                var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.SaveDataType, evaluationCriteria.SaveDataKey);
 
                 ConcurrentDictionary<int, Evaluation> mappedEvaluationsForKey;
 
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         {
             foreach (var evaluationCriteria in evaluation.EvaluationCriterias)
             {
-                var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.DataType, evaluationCriteria.Key);
+                var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.SaveDataType, evaluationCriteria.SaveDataKey);
 
                 ConcurrentDictionary<int, Evaluation> mappedEvaluationsForKey;
                 if (_mappings.TryGetValue(mappingKey, out mappedEvaluationsForKey))

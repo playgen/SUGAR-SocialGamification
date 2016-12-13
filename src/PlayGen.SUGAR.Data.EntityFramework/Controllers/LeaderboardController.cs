@@ -93,7 +93,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					}
 
 					existing.Name = leaderboard.Name;
-					existing.Key = leaderboard.Key;
+					existing.SaveDataKey = leaderboard.SaveDataKey;
 					existing.ActorType = leaderboard.ActorType;
 					existing.CriteriaScope = leaderboard.CriteriaScope;
 					existing.SaveDataType = leaderboard.SaveDataType;

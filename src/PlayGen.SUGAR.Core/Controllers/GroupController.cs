@@ -16,9 +16,10 @@ namespace PlayGen.SUGAR.Core.Controllers
         private readonly GroupMemberController _groupMemberController;
 
         public GroupController(Data.EntityFramework.Controllers.GroupController groupDbController,
-					ActorClaimController actorClaimController,
+                    Data.EntityFramework.Controllers.ActorController actorDbController,
+                    ActorClaimController actorClaimController,
 					ActorRoleController actorRoleController,
-                    GroupMemberController groupMemberController)
+                    GroupMemberController groupMemberController) : base(actorDbController)
         {
             _groupDbController = groupDbController;
 			_actorClaimController = actorClaimController;

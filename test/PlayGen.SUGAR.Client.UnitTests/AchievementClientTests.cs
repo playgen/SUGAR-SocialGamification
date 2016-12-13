@@ -113,10 +113,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest
 					{
-						Key = "CanCreateAchievement",
+						SaveDataKey  ="CanCreateAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -141,10 +141,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CanCreateGlobalAchievement",
+						SaveDataKey  ="CanCreateGlobalAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -173,10 +173,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotCreateDuplicateAchievement",
+						SaveDataKey  ="CannotCreateDuplicateAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -203,10 +203,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotCreateAchievementWithNoName",
+						SaveDataKey  ="CannotCreateAchievementWithNoName",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -231,10 +231,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotCreateAchievementWithNoToken",
+						SaveDataKey  ="CannotCreateAchievementWithNoToken",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -278,7 +278,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 					{
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -304,10 +304,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotCreateAchievementWithNoEvaluationCriteriaValue",
+						SaveDataKey  ="CannotCreateAchievementWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 					}
 				},
@@ -331,10 +331,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotCreateAchievementWithNoEvaluationCriteriaValue",
+						SaveDataKey  ="CannotCreateAchievementWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "A string"
 					}
@@ -359,10 +359,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CanGetAchievementsByGameOne",
+						SaveDataKey  ="CanGetAchievementsByGameOne",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -382,10 +382,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CanGetAchievementsByGameTwo",
+						SaveDataKey  ="CanGetAchievementsByGameTwo",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -415,10 +415,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CanGetAchievementByKeys",
+						SaveDataKey  ="CanGetAchievementByKeys",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -473,10 +473,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CanGetGlobalAchievementByToken",
+						SaveDataKey  ="CanGetGlobalAchievementByToken",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -535,10 +535,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CanUpdateAchievement",
+						SaveDataKey  ="CanUpdateAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -560,10 +560,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 					new EvaluationCriteriaUpdateRequest()
 					{
                         Id = response.EvaluationCriterias[0].Id,
-						Key = "CanUpdateAchievement",
+						SaveDataKey  ="CanUpdateAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -594,10 +594,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotUpdateAchievementToDuplicateNameOne",
+						SaveDataKey  ="CannotUpdateAchievementToDuplicateNameOne",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -617,10 +617,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotUpdateAchievementToDuplicateNameTwo",
+						SaveDataKey  ="CannotUpdateAchievementToDuplicateNameTwo",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -642,10 +642,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 					new EvaluationCriteriaUpdateRequest()
 					{
                         Id = responseTwo.EvaluationCriterias[0].Id,
-                        Key = "CannotUpdateAchievementToDuplicateNameTwo",
+                        SaveDataKey  ="CannotUpdateAchievementToDuplicateNameTwo",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -673,10 +673,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 					new EvaluationCriteriaUpdateRequest()
 					{
                         Id = int.MaxValue,
-						Key = "CannotUpdateNonExistingAchievement",
+						SaveDataKey  ="CannotUpdateNonExistingAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -702,10 +702,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotUpdateAchievemenWithNoName",
+						SaveDataKey  ="CannotUpdateAchievemenWithNoName",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -726,10 +726,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 					new EvaluationCriteriaUpdateRequest()
 					{
                         Id = response.EvaluationCriterias[0].Id,
-                        Key = "CannotUpdateAchievemenWithNoName",
+                        SaveDataKey  ="CannotUpdateAchievemenWithNoName",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -755,10 +755,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotUpdateAchievementWithNoToken",
+						SaveDataKey  ="CannotUpdateAchievementWithNoToken",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -779,10 +779,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 					new EvaluationCriteriaUpdateRequest()
 					{
                         Id = response.EvaluationCriterias[0].Id,
-                        Key = "CannotUpdateAchievementWithNoToken",
+                        SaveDataKey  ="CannotUpdateAchievementWithNoToken",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -808,10 +808,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotUpdateAchievementWithNoEvaluationCriteria",
+						SaveDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteria",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -848,10 +848,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotUpdateAchievementWithNoEvaluationCriteriaKey",
+						SaveDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteriaKey",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -875,7 +875,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
                         Id = response.EvaluationCriterias[0].Id,
                         ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -901,10 +901,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotUpdateAchievementWithNoEvaluationCriteriaValue",
+						SaveDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -926,10 +926,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 					new EvaluationCriteriaUpdateRequest()
 					{
                         Id = response.EvaluationCriterias[0].Id,
-                        Key = "CannotUpdateAchievementWithNoEvaluationCriteriaValue",
+                        SaveDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 					}
 				},
@@ -953,10 +953,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
+						SaveDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -978,10 +978,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 					new EvaluationCriteriaUpdateRequest()
 					{
                         Id = response.EvaluationCriterias[0].Id,
-                        Key = "CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
+                        SaveDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "A string"
 					}
@@ -1006,10 +1006,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CanDeleteAchievement",
+						SaveDataKey  ="CanDeleteAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -1058,10 +1058,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CanDeleteGlobalAchievement",
+						SaveDataKey  ="CanDeleteGlobalAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 
@@ -1108,10 +1108,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CanGetGlobalAchievementProgress",
+						SaveDataKey  ="CanGetGlobalAchievementProgress",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 					}
@@ -1128,7 +1128,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var gameData = new SaveDataRequest()
 			{
-				Key = "CanGetGlobalAchievementProgress",
+				Key  ="CanGetGlobalAchievementProgress",
 				Value = "1",
 				ActorId = user.Id,
 				SaveDataType = SaveDataType.Float
@@ -1164,10 +1164,10 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				{
 					new EvaluationCriteriaCreateRequest()
 					{
-						Key = "CanGetAchievementProgress",
+						SaveDataKey  ="CanGetAchievementProgress",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
-						DataType = SaveDataType.Float,
+						SaveDataType = SaveDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 					}
@@ -1184,7 +1184,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var gameData = new SaveDataRequest()
 			{
-				Key = "CanGetAchievementProgress",
+				Key  ="CanGetAchievementProgress",
 				Value = "1",
 				ActorId = user.Id,
 				GameId = game.Id,

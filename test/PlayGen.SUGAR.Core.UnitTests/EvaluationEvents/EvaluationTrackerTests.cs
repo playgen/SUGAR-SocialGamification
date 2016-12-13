@@ -93,7 +93,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             var gameDatas = Helpers.ComposeAchievementGameDatas(user.Id, evaluation, "100");
 
             // Act
-            gameDatas.ForEach(g => ControllerLocator.SaveDataController.Add(g));
+            gameDatas.ForEach(g => ControllerLocator.GameDataController.Add(g));
 
             // Assert
             var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);

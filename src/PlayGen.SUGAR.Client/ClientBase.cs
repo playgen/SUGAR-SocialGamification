@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Net;
 using Newtonsoft.Json;
@@ -9,6 +8,7 @@ using Newtonsoft.Json.Serialization;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Common.Shared.Extensions;
 using PlayGen.SUGAR.Common.Shared.Web;
 using PlayGen.SUGAR.Contracts.Shared;
 
@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.Client
 
 	            if (parameter is DateTime)
 	            {
-                    formattedParameter = ((DateTime)parameter).ToString("s", CultureInfo.InvariantCulture);
+                    formattedParameter = ((DateTime)parameter).ToSUGARString();
                 }
 	            else
 	            {

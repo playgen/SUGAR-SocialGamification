@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public string Value { get; set; }
 
-		public Common.Shared.SaveDataType SaveDataType { get; set; }
+		public SaveDataType SaveDataType { get; set; }
 
 		public DateTime DateCreated { get; set; }
 

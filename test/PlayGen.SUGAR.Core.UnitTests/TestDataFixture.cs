@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         private static readonly GameController _gameController = ControllerLocator.GameController;
         private static readonly UserFriendController _userFriendController = ControllerLocator.UserFriendController;
         private static readonly GroupMemberController _groupMemberController = ControllerLocator.GroupMemberController;
-        private static readonly SaveDataController SaveDataController = ControllerLocator.SaveDataController;
+        private static readonly GameDataController GameDataController = ControllerLocator.GameDataController;
 
         public static IReadOnlyList<Game> Games => _games;
         public static IReadOnlyList<User> Users => _users;
@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
             {
                 gameDatas.Add(CreateData(_games[_random.Next(0, _games.Count)], _users[_random.Next(0, _users.Count)], dataValues[_random.Next(0, dataValues.Count)]));
             }
-            SaveDataController.Add(gameDatas.ToArray());
+            GameDataController.Add(gameDatas.ToArray());
         }
 
         private static SaveData CreateData(Game game, User user, DataParam data)

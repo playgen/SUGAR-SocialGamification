@@ -21,8 +21,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			return new RewardResponse
 			{
                 Id = reward.Id,
-				Key = reward.Key,
-				DataType = reward.DataType,
+				SaveDataKey = reward.SaveDataKey,
+				SaveDataType = reward.SaveDataType,
 				Value = reward.Value,
 			};
 		}
@@ -41,8 +41,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
         {
             return new Reward
             {
-                Key = contract.Key,
-                DataType = contract.DataType,
+                SaveDataKey = contract.SaveDataKey,
+                SaveDataType = contract.SaveDataType,
                 Value = contract.Value,
             };
         }
@@ -52,8 +52,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             return new Reward
             {
                 Id = contract.Id,
-                Key = contract.Key,
-                DataType = contract.DataType,
+                SaveDataKey = contract.SaveDataKey,
+                SaveDataType = contract.SaveDataType,
                 Value = contract.Value,
             };
         }

@@ -1,21 +1,25 @@
-﻿namespace PlayGen.SUGAR.Data.Model
+﻿using PlayGen.SUGAR.Common.Shared;
+
+namespace PlayGen.SUGAR.Data.Model
 {
 	public class Leaderboard
 	{
 		public int GameId { get; set; }
 
-		public string Name { get; set; }
-
-		public string Key { get; set; }
-
 		public string Token { get; set; }
 
-		public Common.Shared.SaveDataType SaveDataType { get; set; }
+		public string Name { get; set; }
 
-		public Common.Shared.ActorType ActorType { get; set; }
+		public SaveDataCategory SaveDataCategory { get; set; }
 
-		public Common.Shared.CriteriaScope CriteriaScope { get; set; }
+		public string SaveDataKey { get; set; }
 
-		public Common.Shared.LeaderboardType LeaderboardType { get; set; }
+		public SaveDataType SaveDataType { get; set; }
+
+		public ActorType ActorType { get; set; }
+
+		public CriteriaScope CriteriaScope { get; set; }
+
+		public LeaderboardType LeaderboardType { get; set; }
 	}
 }

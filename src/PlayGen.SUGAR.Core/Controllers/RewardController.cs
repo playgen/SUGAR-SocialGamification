@@ -1,5 +1,6 @@
 ﻿using NLog;
 using PlayGen.SUGAR.Core.EvaluationEvents;
+using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
@@ -8,25 +9,28 @@ namespace PlayGen.SUGAR.Core.Controllers
 	{
         private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-        // todo change all db controller usage to core controller usage
-        public RewardController(SaveDataController saveDataCoreController, 
+        public RewardController(SUGARContextFactory contextFactory, 
             GroupMemberController groupMemberCoreController, 
             UserFriendController userFriendCoreController)
-			: base(saveDataCoreController, groupMemberCoreController, userFriendCoreController)
+			: base(contextFactory, groupMemberCoreController, userFriendCoreController)
 		{
 		}
 
 		public bool AddReward(int? actorId, int? gameId, Reward reward)
 		{
+		    var saveDataController = new SaveDataController(ContextFactory, reward.SaveDataCategory);
+
 			var saveData = new SaveData
 			{
-				Key = reward.Key,
+				Key = reward.SaveDataKey,
 				GameId = gameId,    //TODO: handle the case where a global achievement has been completed for a specific game
 				ActorId = actorId,
-				SaveDataType = reward.DataType,
+                Category = reward.SaveDataCategory,
+				SaveDataType = reward.SaveDataType,
 				Value = reward.Value
 			};
-			SaveDataCoreController.Add(saveData);
+
+            saveDataController.Add(saveData);
 
             Logger.Info($"Game Data: {saveData?.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward?.Id}");
 

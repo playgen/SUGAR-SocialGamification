@@ -12,13 +12,19 @@ namespace PlayGen.SUGAR.Common.Shared
 		/// </summary>
 		[Required]
 		[StringLength(64)]
-		public string Key { get; set; }
+		public string SaveDataKey { get; set; }
 
-		/// <summary>
-		/// SaveDataType of the key which is being queried.
+        /// <summary>
+		/// SaveDataCategory of the key which is being queried.
 		/// </summary>
 		[Required]
-		public SaveDataType DataType { get; set; }
+        public SaveDataCategory SaveDataCategory { get; set; }
+
+        /// <summary>
+        /// SaveDataType of the key which is being queried.
+        /// </summary>
+        [Required]
+		public SaveDataType SaveDataType { get; set; }
 
 		/// <summary>
 		/// Which stored GameData will be queried.

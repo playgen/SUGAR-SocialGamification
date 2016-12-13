@@ -26,5 +26,10 @@ namespace PlayGen.SUGAR.Core.Controllers
         {
             return _saveDataController.Add(newData);
         }
+
+        public void Add(SaveData[] newDatas)
+        {
+            _saveDataController.Add(newDatas);
+        }
     }
 }

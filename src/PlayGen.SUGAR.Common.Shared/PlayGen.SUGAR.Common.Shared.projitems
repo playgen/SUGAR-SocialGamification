@@ -18,6 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)CriteriaQueryType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CriteriaScope.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\SUGARException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\DateTimeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\EvaluationExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\NullableIntExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaveDataCategory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardFilterType.cs" />

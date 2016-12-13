@@ -13,7 +13,8 @@ namespace PlayGen.SUGAR.Core.Controllers
         private readonly ActorRoleController _actorRoleController;
 
         public UserController(Data.EntityFramework.Controllers.UserController userController,
-                    ActorRoleController actorRoleController)
+                    Data.EntityFramework.Controllers.ActorController actorDbController,
+                    ActorRoleController actorRoleController) : base(actorDbController)
         {
             _userController = userController;
             _actorRoleController = actorRoleController;

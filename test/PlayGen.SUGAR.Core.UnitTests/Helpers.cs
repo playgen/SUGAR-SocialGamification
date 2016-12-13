@@ -2,7 +2,9 @@
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Core.Controllers;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
+using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
@@ -55,8 +57,8 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			{
 				evaluationCriterias.Add(new EvaluationCriteria
 				{
-					Key = $"{key}_{i}",
-					DataType = SaveDataType.Long,
+					SaveDataKey = $"{key}_{i}",
+					SaveDataType = SaveDataType.Long,
 					CriteriaQueryType = CriteriaQueryType.Sum,
 					ComparisonType = ComparisonType.GreaterOrEqual,
 					Scope = CriteriaScope.Actor,
@@ -95,8 +97,8 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		{
 			return new SaveData
 			{
-                Key = evaluationCriteria.Key,
-                SaveDataType = evaluationCriteria.DataType,
+                Key = evaluationCriteria.SaveDataKey,
+                SaveDataType = evaluationCriteria.SaveDataType,
 
                 ActorId = actorId,
 				GameId = gameId,
@@ -113,15 +115,18 @@ namespace PlayGen.SUGAR.Core.UnitTests
         public static void CreateGenericAchievementGameData(Evaluation evaluation, int actorId, string value = "50")
         {
             var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, value);
-            ControllerLocator.SaveDataController.Add(gameDatas.ToArray());
+            
+            var saveDataController = new SaveDataController(DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].SaveDataCategory);
+            saveDataController.Add(gameDatas.ToArray());
         }
 
         public static void CompleteGenericAchievement(Evaluation evaluation, int actorId)
 		{
 		    var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, "100");
-            
-            ControllerLocator.SaveDataController.Add(gameDatas.ToArray());
-		}
+
+            var saveDataController = new SaveDataController(DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].SaveDataCategory);
+            saveDataController.Add(gameDatas.ToArray());
+        }
 
 	    public static Evaluation CreateAndCompleteGenericAchievement(string key, int actorId, int? gameId = null)
 	    {
