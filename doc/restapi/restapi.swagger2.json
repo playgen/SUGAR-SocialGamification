@@ -771,9 +771,9 @@
           {
             "name": "newData",
             "in": "body",
-            "description": "{PlayGen.SUGAR.Contracts.Shared.SaveDataRequest} object that holds the details of the new ActorData.",
+            "description": "{PlayGen.SUGAR.Contracts.Shared.EvaluationDataRequest} object that holds the details of the new ActorData.",
             "required": false,
-            "schema": { "$ref": "#/definitions/SaveDataRequest" }
+            "schema": { "$ref": "#/definitions/EvaluationDataRequest" }
           }
         ],
         "responses": { "204": { "description": "No Content" } },
@@ -1060,9 +1060,55 @@
           {
             "name": "newData",
             "in": "body",
-            "description": "{PlayGen.SUGAR.Contracts.Shared.SaveDataRequest} object that holds the details of the new GameData.",
+            "description": "{PlayGen.SUGAR.Contracts.Shared.EvaluationDataRequest} object that holds the details of the new GameData.",
             "required": false,
-            "schema": { "$ref": "#/definitions/SaveDataRequest" }
+            "schema": { "$ref": "#/definitions/EvaluationDataRequest" }
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } },
+        "deprecated": false
+      }
+    },
+    "/api/GameData/highest": {
+      "get": {
+        "tags": [ "GameData" ],
+        "summary": "Finds a list of GameData with the highest <param name=\"dataType\" /> for each <param name=\"key\" /> provided that matches the <param name=\"actorId\" /> and <param name=\"gameId\" />.\r\n            \r\n            Example Usage: GET api/gamedata/highest?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2&amp;dataType=1",
+        "operationId": "ApiGameDataHighestGet",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "actorId",
+            "in": "modelbinding",
+            "description": "ID of a User/Group.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "gameId",
+            "in": "modelbinding",
+            "description": "ID of a Game.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "key",
+            "in": "modelbinding",
+            "description": "Array of Key names.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "dataType",
+            "in": "modelbinding",
+            "description": "Data type of value",
+            "required": false,
+            "type": "string",
+            "enum": [ "String", "Long", "Float", "Boolean" ]
           }
         ],
         "responses": { "204": { "description": "No Content" } },
@@ -3089,15 +3135,19 @@
     },
     "EvaluationCriteriaCreateRequest": {
       "description": "Encapsulates requirements for completing an achievement or skill.",
-      "required": [ "key", "dataType", "criteriaQueryType", "comparisonType", "scope", "value" ],
+      "required": [ "evaluationDataKey", "evaluationDataCategory", "evaluationDataType", "criteriaQueryType", "comparisonType", "scope", "value" ],
       "type": "object",
       "properties": {
-        "key": {
+        "evaluationDataKey": {
           "maxLength": 64,
           "minLength": 0,
           "type": "string"
         },
-        "dataType": {
+        "evaluationDataCategory": {
+          "enum": [ "GameData", "Resource", "Skill", "Achievement", "Match" ],
+          "type": "string"
+        },
+        "evaluationDataType": {
           "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         },
@@ -3122,15 +3172,19 @@
     },
     "RewardCreateRequest": {
       "description": "Encapsulates the reward given for completing an achievement or skill.",
-      "required": [ "key", "dataType", "value" ],
+      "required": [ "evaluationDataKey", "evaluationDataCategory", "evaluationDataType", "value" ],
       "type": "object",
       "properties": {
-        "key": {
+        "evaluationDataKey": {
           "maxLength": 64,
           "minLength": 0,
           "type": "string"
         },
-        "dataType": {
+        "evaluationDataCategory": {
+          "enum": [ "GameData", "Resource", "Skill", "Achievement", "Match" ],
+          "type": "string"
+        },
+        "evaluationDataType": {
           "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         },
@@ -3191,7 +3245,7 @@
     },
     "EvaluationCriteriaUpdateRequest": {
       "description": "Encapsulates requirements for completing an achievement or skill.",
-      "required": [ "key", "dataType", "criteriaQueryType", "comparisonType", "scope", "value" ],
+      "required": [ "evaluationDataKey", "evaluationDataCategory", "evaluationDataType", "criteriaQueryType", "comparisonType", "scope", "value" ],
       "type": "object",
       "properties": {
         "id": {
@@ -3199,12 +3253,16 @@
           "description": "The unqiue identifier for this type.",
           "type": "integer"
         },
-        "key": {
+        "evaluationDataKey": {
           "maxLength": 64,
           "minLength": 0,
           "type": "string"
         },
-        "dataType": {
+        "evaluationDataCategory": {
+          "enum": [ "GameData", "Resource", "Skill", "Achievement", "Match" ],
+          "type": "string"
+        },
+        "evaluationDataType": {
           "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         },
@@ -3229,7 +3287,7 @@
     },
     "RewardUpdateRequest": {
       "description": "Encapsulates the reward given for completing an achievement or skill.",
-      "required": [ "key", "dataType", "value" ],
+      "required": [ "evaluationDataKey", "evaluationDataCategory", "evaluationDataType", "value" ],
       "type": "object",
       "properties": {
         "id": {
@@ -3237,12 +3295,16 @@
           "description": "The unqiue identifier for this type.",
           "type": "integer"
         },
-        "key": {
+        "evaluationDataKey": {
           "maxLength": 64,
           "minLength": 0,
           "type": "string"
         },
-        "dataType": {
+        "evaluationDataCategory": {
+          "enum": [ "GameData", "Resource", "Skill", "Achievement", "Match" ],
+          "type": "string"
+        },
+        "evaluationDataType": {
           "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         },
@@ -3275,9 +3337,9 @@
         }
       }
     },
-    "SaveDataRequest": {
+    "EvaluationDataRequest": {
       "description": "Encapsulates ActorData/GameData details.",
-      "required": [ "key", "value", "saveDataType" ],
+      "required": [ "key", "value", "evaluationDataType" ],
       "type": "object",
       "properties": {
         "actorId": {
@@ -3302,7 +3364,7 @@
           "minLength": 0,
           "type": "string"
         },
-        "saveDataType": {
+        "evaluationDataType": {
           "description": "The type of data which is being stored.",
           "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
@@ -3401,7 +3463,7 @@
     },
     "LeaderboardRequest": {
       "description": "Encapsulates leaderboard details.",
-      "required": [ "token", "name", "key", "actorType", "saveDataType", "criteriaScope", "leaderboardType" ],
+      "required": [ "token", "name", "key", "actorType", "evaluationDataType", "criteriaScope", "leaderboardType" ],
       "type": "object",
       "properties": {
         "token": {
@@ -3432,8 +3494,8 @@
           "enum": [ "Undefined", "User", "Group" ],
           "type": "string"
         },
-        "saveDataType": {
-          "description": "The SaveDataType of the GameData being checked against.",
+        "evaluationDataType": {
+          "description": "The EvaluationDataType of the GameData being checked against.",
           "enum": [ "String", "Long", "Float", "Boolean" ],
           "type": "string"
         },

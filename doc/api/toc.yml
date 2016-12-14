@@ -100,6 +100,10 @@
     name: CriteriaScope
   - uid: PlayGen.SUGAR.Common.Shared.EvaluationCriteria
     name: EvaluationCriteria
+  - uid: PlayGen.SUGAR.Common.Shared.EvaluationDataCategory
+    name: EvaluationDataCategory
+  - uid: PlayGen.SUGAR.Common.Shared.EvaluationDataType
+    name: EvaluationDataType
   - uid: PlayGen.SUGAR.Common.Shared.EvaluationProgress
     name: EvaluationProgress
   - uid: PlayGen.SUGAR.Common.Shared.EvaluationType
@@ -110,8 +114,6 @@
     name: LeaderboardType
   - uid: PlayGen.SUGAR.Common.Shared.Reward
     name: Reward
-  - uid: PlayGen.SUGAR.Common.Shared.SaveDataType
-    name: SaveDataType
 - uid: PlayGen.SUGAR.Common.Shared.Exceptions
   name: PlayGen.SUGAR.Common.Shared.Exceptions
   items:
@@ -120,6 +122,10 @@
 - uid: PlayGen.SUGAR.Common.Shared.Extensions
   name: PlayGen.SUGAR.Common.Shared.Extensions
   items:
+  - uid: PlayGen.SUGAR.Common.Shared.Extensions.DateTimeExtensions
+    name: DateTimeExtensions
+  - uid: PlayGen.SUGAR.Common.Shared.Extensions.EvaluationExtensions
+    name: EvaluationExtensions
   - uid: PlayGen.SUGAR.Common.Shared.Extensions.NullableIntExtensions
     name: NullableIntExtensions
 - uid: PlayGen.SUGAR.Common.Shared.Permissions
@@ -165,6 +171,10 @@
     name: EvaluationCriteriaResponse
   - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationCriteriaUpdateRequest
     name: EvaluationCriteriaUpdateRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationDataRequest
+    name: EvaluationDataRequest
+  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationDataResponse
+    name: EvaluationDataResponse
   - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse
     name: EvaluationProgressResponse
   - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationResponse
@@ -220,19 +230,10 @@
     name: RoleRequest
   - uid: PlayGen.SUGAR.Contracts.Shared.RoleResponse
     name: RoleResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.SaveDataRequest
-    name: SaveDataRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.SaveDataResponse
-    name: SaveDataResponse
   - uid: PlayGen.SUGAR.Contracts.Shared.UserRequest
     name: UserRequest
   - uid: PlayGen.SUGAR.Contracts.Shared.UserResponse
     name: UserResponse
-- uid: PlayGen.SUGAR.Core
-  name: PlayGen.SUGAR.Core
-  items:
-  - uid: PlayGen.SUGAR.Core.KeyConstants
-    name: KeyConstants
 - uid: PlayGen.SUGAR.Core.Authorization
   name: PlayGen.SUGAR.Core.Authorization
   items:
@@ -261,6 +262,8 @@
     name: ActorRoleController
   - uid: PlayGen.SUGAR.Core.Controllers.EvaluationController
     name: EvaluationController
+  - uid: PlayGen.SUGAR.Core.Controllers.EvaluationDataController
+    name: EvaluationDataController
   - uid: PlayGen.SUGAR.Core.Controllers.GameController
     name: GameController
   - uid: PlayGen.SUGAR.Core.Controllers.GameDataController
@@ -292,8 +295,8 @@
     name: ConcurrentProgressCache
   - uid: PlayGen.SUGAR.Core.EvaluationEvents.CriteriaEvaluator
     name: CriteriaEvaluator
-  - uid: PlayGen.SUGAR.Core.EvaluationEvents.EvaluationGameDataMapper
-    name: EvaluationGameDataMapper
+  - uid: PlayGen.SUGAR.Core.EvaluationEvents.EvaluationEvaluationDataMapper
+    name: EvaluationEvaluationDataMapper
   - uid: PlayGen.SUGAR.Core.EvaluationEvents.EvaluationTracker
     name: EvaluationTracker
   - uid: PlayGen.SUGAR.Core.EvaluationEvents.ProgressEvaluator
@@ -305,6 +308,8 @@
   items:
   - uid: PlayGen.SUGAR.Core.Exceptions.InvalidAccountDetailsException
     name: InvalidAccountDetailsException
+  - uid: PlayGen.SUGAR.Core.Exceptions.InvalidDataException
+    name: InvalidDataException
   - uid: PlayGen.SUGAR.Core.Exceptions.InvalidOperationException
     name: InvalidOperationException
 - uid: PlayGen.SUGAR.Core.Sessions
@@ -347,10 +352,10 @@
     name: DbController
   - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.EvaluationController
     name: EvaluationController
+  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.EvaluationDataController
+    name: EvaluationDataController
   - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.GameController
     name: GameController
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.GameDataController
-    name: GameDataController
   - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.GroupController
     name: GroupController
   - uid: PlayGen.SUGAR.Data.EntityFramework.Controllers.GroupRelationshipController
@@ -385,8 +390,8 @@
     name: ContextExtensions
   - uid: PlayGen.SUGAR.Data.EntityFramework.Extensions.DbSetExtensions
     name: DbSetExtensions
-  - uid: PlayGen.SUGAR.Data.EntityFramework.Extensions.GameDataExtensions
-    name: GameDataExtensions
+  - uid: PlayGen.SUGAR.Data.EntityFramework.Extensions.EvaluationDataExtensions
+    name: EvaluationDataExtensions
   - uid: PlayGen.SUGAR.Data.EntityFramework.Extensions.MatchExtensions
     name: MatchExtensions
 - uid: PlayGen.SUGAR.Data.Model
@@ -410,12 +415,10 @@
     name: Evaluation
   - uid: PlayGen.SUGAR.Data.Model.EvaluationCriteria
     name: EvaluationCriteria
+  - uid: PlayGen.SUGAR.Data.Model.EvaluationData
+    name: EvaluationData
   - uid: PlayGen.SUGAR.Data.Model.Game
     name: Game
-  - uid: PlayGen.SUGAR.Data.Model.GameData
-    name: GameData
-  - uid: PlayGen.SUGAR.Data.Model.GameDataCategory
-    name: GameDataCategory
   - uid: PlayGen.SUGAR.Data.Model.Group
     name: Group
   - uid: PlayGen.SUGAR.Data.Model.Leaderboard
