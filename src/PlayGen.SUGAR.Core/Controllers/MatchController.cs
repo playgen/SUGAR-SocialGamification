@@ -128,12 +128,12 @@ namespace PlayGen.SUGAR.Core.Controllers
             return results;
         }
 
-        public List<EvaluationData> Get(int? gameId, int matchId, int? actorId, string[] keys)
+        public List<EvaluationData> GetData(int matchId, string[] keys = null)
         {
-            return _evaluationDataController.Get(gameId, matchId, actorId, keys);
+            return _evaluationDataController.Get(matchId, keys);
         }
 
-        public EvaluationData Add(EvaluationData newData)
+        public EvaluationData AddData(EvaluationData newData)
         {
             ValidateData(newData);
 

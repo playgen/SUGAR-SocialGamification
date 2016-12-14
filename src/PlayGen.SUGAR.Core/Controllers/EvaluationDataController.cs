@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.Core.Controllers
                 EvaluationDataAddedEvent?.Invoke(addedData);
             }
 
-            Logger.Info($"Added: {datas?.Length} Game Datas.");
+            Logger.Info($"Added: {datas?.Length} Evaluation Datas.");
         }
 
         public EvaluationData Add(EvaluationData newData)
@@ -102,7 +102,17 @@ namespace PlayGen.SUGAR.Core.Controllers
         {
             var datas = _evaluationDataDbController.Get(ids);
 
-            Logger.Info($"{datas.Count} Game Datas for Ids: {string.Join(", ", ids)}");
+            Logger.Info($"{datas.Count} Evaluation Datas for Ids: {string.Join(", ", ids)}");
+
+            return datas;
+        }
+
+        public List<EvaluationData> Get(int entityId, string[] keys = null)
+        {
+            var datas = _evaluationDataDbController.Get(entityId, keys);
+
+            Logger.Info($"{datas?.Count} Evaluation Datas for EntityId {entityId}" +
+                        (keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
             return datas;
         }
@@ -111,17 +121,17 @@ namespace PlayGen.SUGAR.Core.Controllers
         {
             var datas = _evaluationDataDbController.Get(gameId, actorId, keys);
 
-            Logger.Info($"{datas?.Count} Game Datas for GameId: {gameId}, ActorId {actorId}" +
+            Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, ActorId {actorId}" +
                         (keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
             return datas;
         }
 
-        public List<EvaluationData> Get(int? gameId, int entityId, int? actorId, string[] keys)
+        public List<EvaluationData> Get(int? gameId, int? entityId, int? actorId, string[] keys)
         {
             var datas = _evaluationDataDbController.Get(gameId, entityId, actorId, keys);
 
-            Logger.Info($"{datas?.Count} Game Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
+            Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
                         (keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
             return datas;

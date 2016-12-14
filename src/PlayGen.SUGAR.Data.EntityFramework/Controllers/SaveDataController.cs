@@ -49,7 +49,6 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-        [Obsolete("Use version containing entityId")]
 		public List<EvaluationData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
 		{
 			using (var context = ContextFactory.Create())
@@ -62,6 +61,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				return data;
 			}
 		}
+
+        public List<EvaluationData> Get(int entityId, ICollection<string> keys = null)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                var data = context.GetCategoryData(_category)
+                    .FilterByEntityId(entityId)
+                    .FilterByKeys(keys)
+                    .ToList();
+                return data;
+            }
+        }
 
         public List<EvaluationData> Get(int? gameId = null, int? entityId = null, int? actorId = null, ICollection<string> keys = null)
         {

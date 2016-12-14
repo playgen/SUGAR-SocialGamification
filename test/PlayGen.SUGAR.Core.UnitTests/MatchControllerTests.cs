@@ -4,16 +4,17 @@ using System.Threading;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
 using System.Linq;
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
     public class MatchControllerTests : IDisposable
     {
         private bool _isDisposed;
-        
+
         public void Dispose()
         {
-            if(_isDisposed) return;
+            if (_isDisposed) return;
 
             _isDisposed = true;
         }
@@ -123,6 +124,41 @@ namespace PlayGen.SUGAR.Core.UnitTests
             // Assert
             shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));    // Make sure all matches created during specified time were returned
             shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));    // Make sure matches that weren't created during the specified time aren't returned
+        }
+
+        [Fact]
+        public void CanAddAndGetData()
+        {
+            // Arrange
+            // Arrange
+            var game = Helpers.GetOrCreateGame("CanAddAndGetData");
+            var user = Helpers.GetOrCreateUser("CanAddAndGetData");
+            var match = ControllerLocator.MatchController.Create(game.Id, user.Id);
+
+            // Act
+            var datas = new List<EvaluationData>();
+            for (var i = 0; i < 10; i++)
+            {
+                datas.Add(ControllerLocator.MatchController.AddData(new EvaluationData
+                {
+                    GameId = game.Id,
+                    ActorId = user.Id,
+                    EntityId = match.Id,
+                    Category = EvaluationDataCategory.Match,
+                    Key = "CanAddAndGetData",
+                    Value = i.ToString(),
+                    EvaluationDataType = EvaluationDataType.Long
+                }));
+            }
+
+            var got = ControllerLocator.MatchController.GetData(match.Id);
+
+            // Assert
+            datas.ForEach(a => Assert.True(got.Any(g => g.GameId == a.GameId
+                && g.EntityId == a.EntityId
+                && g.ActorId == a.ActorId
+                && g.Key == a.Key
+                && g.Value == a.Value)));
         }
 
         #region Helpers
