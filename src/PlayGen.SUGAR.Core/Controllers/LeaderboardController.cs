@@ -352,7 +352,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = evaluationDataController.TryGetEarliestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToSUGARString()
+						Value = evaluationDataController.TryGetEarliestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).SerializeToString()
             }).ToList();
 					break;
 
@@ -361,7 +361,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = evaluationDataController.TryGetEarliestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToSUGARString()
+						Value = evaluationDataController.TryGetEarliestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).SerializeToString()
             }).ToList();
 					break;
 
@@ -387,7 +387,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = evaluationDataController.TryGetLatestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToSUGARString()
+						Value = evaluationDataController.TryGetLatestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).SerializeToString()
 					}).ToList();
 					break;
 
@@ -396,7 +396,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = evaluationDataController.TryGetLatestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToSUGARString()
+						Value = evaluationDataController.TryGetLatestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).SerializeToString()
         }).ToList();
 					break;
 

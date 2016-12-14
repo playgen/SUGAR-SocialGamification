@@ -5,9 +5,9 @@ namespace PlayGen.SUGAR.Common.Shared.Extensions
 {
     public static class DateTimeExtensions
     {
-        public static string ToSUGARString(this DateTime dateTime)
+        public static string SerializeToString(this DateTime dateTime)
         {
-            return dateTime.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
+            return dateTime.ToString("O", CultureInfo.InvariantCulture);
         }
     }
 }

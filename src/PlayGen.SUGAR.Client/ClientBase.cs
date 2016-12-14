@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.Client
 
 	            if (parameter is DateTime)
 	            {
-                    formattedParameter = ((DateTime)parameter).ToSUGARString();
+                    formattedParameter = ((DateTime)parameter).SerializeToString();
                 }
 	            else
 	            {
