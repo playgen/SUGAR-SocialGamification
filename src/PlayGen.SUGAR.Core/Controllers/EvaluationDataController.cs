@@ -117,6 +117,16 @@ namespace PlayGen.SUGAR.Core.Controllers
             return datas;
         }
 
+        public List<EvaluationData> Get(int? gameId, int entityId, int? actorId, string[] keys)
+        {
+            var datas = _evaluationDataDbController.Get(gameId, entityId, actorId, keys);
+
+            Logger.Info($"{datas?.Count} Game Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
+                        (keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
+
+            return datas;
+        }
+
         public List<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
             DateTime end = default(DateTime))
         {

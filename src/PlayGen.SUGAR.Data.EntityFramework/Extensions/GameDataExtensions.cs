@@ -27,7 +27,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return gameDataQueryable.Where(gd => gd.GameId == gameId);
 		}
 
-		public static IQueryable<EvaluationData> FilterByActorId(this IQueryable<EvaluationData> gameDataQueryable, int? actorId)
+        public static IQueryable<EvaluationData> FilterByEntityId(this IQueryable<EvaluationData> gameDataQueryable, int? entityId)
+        {
+            if (!entityId.HasValue || entityId.Value == 0)
+            {
+                return gameDataQueryable.Where(gd => gd.EntityId == null || gd.EntityId == 0);
+            }
+            return gameDataQueryable.Where(gd => gd.EntityId == entityId);
+        }
+
+        public static IQueryable<EvaluationData> FilterByActorId(this IQueryable<EvaluationData> gameDataQueryable, int? actorId)
 		{
 			return gameDataQueryable.Where(gd => gd.ActorId == actorId);
 		}

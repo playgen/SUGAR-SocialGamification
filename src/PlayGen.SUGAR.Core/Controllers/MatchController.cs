@@ -2,7 +2,8 @@
 using NLog;
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared.Exceptions;
+using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Core.Exceptions;
 
 namespace PlayGen.SUGAR.Core.Controllers
@@ -12,10 +13,12 @@ namespace PlayGen.SUGAR.Core.Controllers
         private static Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly Data.EntityFramework.Controllers.MatchController _matchDbController;
-
-        public MatchController(Data.EntityFramework.Controllers.MatchController matchDbController)
+        private readonly EvaluationDataController _evaluationDataController;
+        
+        public MatchController(SUGARContextFactory contextFactory, Data.EntityFramework.Controllers.MatchController matchDbController)
         {
             _matchDbController = matchDbController;
+            _evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.Match);
         }
 
         public Match Create(int gameId, int creatorId)
@@ -123,6 +126,26 @@ namespace PlayGen.SUGAR.Core.Controllers
             Logger.Info($"{results.Count} Matches for GameId: {gameId}, CreatorId: {creatorId}, Start: {start}, End: {end}");
 
             return results;
+        }
+
+        public List<EvaluationData> Get(int? gameId, int matchId, int? actorId, string[] keys)
+        {
+            return _evaluationDataController.Get(gameId, matchId, actorId, keys);
+        }
+
+        public EvaluationData Add(EvaluationData newData)
+        {
+            ValidateData(newData);
+
+            return _evaluationDataController.Add(newData);
+        }
+
+        private static void ValidateData(EvaluationData data)
+        {
+            if (data.EntityId == null)
+            {
+                throw new InvalidDataException("Cannot save Match data with no EntityId. EntityId needs to be set to the match's Id.");
+            }
         }
     }
 }

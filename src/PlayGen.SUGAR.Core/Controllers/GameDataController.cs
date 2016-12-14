@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Core.Controllers
             _evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.GameData);
         }
 
-        public List<EvaluationData> Get(int? gameId, int? actorId, string[] key)
+        public List<EvaluationData> Get(int? gameId, int? actorId, string[] keys)
         {
-            return _evaluationDataController.Get(gameId, actorId, key);
+            return _evaluationDataController.Get(gameId, actorId, keys);
         }
 
         public EvaluationData Add(EvaluationData newData)

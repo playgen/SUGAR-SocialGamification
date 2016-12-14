@@ -76,7 +76,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
             => _userFriendController ?? (_userFriendController = new UserFriendController(DbControllerLocator.UserRelationshipController));
 
         public static MatchController MatchController
-            => _matchController ?? (_matchController = new MatchController(DbControllerLocator.MatchController));
+            => _matchController ?? (_matchController = new MatchController(DbControllerLocator.ContextFactory, DbControllerLocator.MatchController));
 
         public static ActorController ActorController
             => _actorController ?? (_actorController = new ActorController(DbControllerLocator.ActorController));
