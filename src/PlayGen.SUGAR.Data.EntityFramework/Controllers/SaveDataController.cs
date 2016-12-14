@@ -8,16 +8,17 @@ using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	public class GameDataController : DbController
+	public class EvaluationDataController : DbController
 	{
-		private readonly GameDataCategory _category = GameDataCategory.GameData;
+		private readonly EvaluationDataCategory _category = EvaluationDataCategory.GameData;
 
-		public GameDataController(SUGARContextFactory contextFactory)
+        [Obsolete]
+		public EvaluationDataController(SUGARContextFactory contextFactory)
             : base(contextFactory)
         {
         }
 
-        public GameDataController(SUGARContextFactory contextFactory, GameDataCategory category) 
+        public EvaluationDataController(SUGARContextFactory contextFactory, EvaluationDataCategory category) 
 			: base(contextFactory)
 		{
 			_category = category;
@@ -37,7 +38,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public List<GameData> Get(List<int> ids)
+		public List<EvaluationData> Get(ICollection<int> ids)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -48,7 +49,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public List<GameData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
+		public List<EvaluationData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -70,7 +71,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Long)
+					.FilterByDataType(EvaluationDataType.Long)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -88,7 +89,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Float)
+					.FilterByDataType(EvaluationDataType.Float)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -106,7 +107,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.String)
+					.FilterByDataType(EvaluationDataType.String)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -124,7 +125,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Boolean)
+					.FilterByDataType(EvaluationDataType.Boolean)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -142,7 +143,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Float)
+					.FilterByDataType(EvaluationDataType.Float)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -160,7 +161,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Long)
+					.FilterByDataType(EvaluationDataType.Long)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -169,7 +170,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public float GetHighestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public float GetHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -178,7 +179,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Float)
+					.FilterByDataType(EvaluationDataType.Float)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -192,7 +193,30 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public long GetHighestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        {
+            end = EndSet(end);
+            using (var context = ContextFactory.Create())
+            {
+                var data = context.GetCategoryData(_category)
+                    .FilterByGameId(gameId)
+                    .FilterByActorId(actorId)
+                    .FilterByKey(key)
+                    .FilterByDataType(EvaluationDataType.Float)
+                    .FilterByDateTimeRange(start, end)
+                    .ToList();
+
+                if (data.Count == 0)
+                {
+                    return null;
+                }
+
+                var max = data.OrderByDescending(gameData => float.Parse(gameData.Value)).First();
+                return max;
+            }
+        }
+
+        public long GetHighestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -201,7 +225,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Long)
+					.FilterByDataType(EvaluationDataType.Long)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -215,7 +239,31 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public float GetLowestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        {
+            end = EndSet(end);
+            using (var context = ContextFactory.Create())
+            {
+                var data = context.GetCategoryData(_category)
+                    .FilterByGameId(gameId)
+                    .FilterByActorId(actorId)
+                    .FilterByKey(key)
+                    .FilterByDataType(EvaluationDataType.Long)
+                    .FilterByDateTimeRange(start, end)
+                    .ToList();
+
+                if (data.Count == 0)
+                {
+                    return null;
+                }
+
+                var max = data.OrderByDescending(gameData => float.Parse(gameData.Value)).First();
+                return max;
+            }
+        }
+
+
+        public float GetLowestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -224,7 +272,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Float)
+					.FilterByDataType(EvaluationDataType.Float)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -238,7 +286,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public long GetLowestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public long GetLowestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -247,7 +295,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Long)
+					.FilterByDataType(EvaluationDataType.Long)
 					.FilterByDateTimeRange(start, end)
 					.ToList();
 
@@ -270,7 +318,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Long)
+					.FilterByDataType(EvaluationDataType.Long)
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 
@@ -294,7 +342,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Float)
+					.FilterByDataType(EvaluationDataType.Float)
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 
@@ -318,7 +366,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.Boolean)
+					.FilterByDataType(EvaluationDataType.Boolean)
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 				
@@ -342,7 +390,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType.String)
+					.FilterByDataType(EvaluationDataType.String)
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 
@@ -357,7 +405,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public int CountKeys(int? gameId, int? actorId, string key, SaveDataType SaveDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public int CountKeys(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
@@ -366,7 +414,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType)
+					.FilterByDataType(EvaluationDataType)
 					.FilterByDateTimeRange(start, end)
 					.Count();
 
@@ -375,7 +423,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		}
 
         // todo change to bool TryGet[name](out value) pattern
-		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, SaveDataType SaveDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 		    using (var context = ContextFactory.Create())
@@ -384,7 +432,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType)
+					.FilterByDataType(EvaluationDataType)
 					.FilterByDateTimeRange(start, end)
 					.FirstOrDefault();
 
@@ -394,7 +442,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, SaveDataType SaveDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 		    using (var context = ContextFactory.Create())
@@ -403,7 +451,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKey(key)
-					.FilterByDataType(SaveDataType)
+					.FilterByDataType(EvaluationDataType)
 					.FilterByDateTimeRange(start, end)
 					.LatestOrDefault();
 
@@ -413,30 +461,30 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public GameData Create(GameData data)
+		public EvaluationData Create(EvaluationData data)
 		{
 		    using (var context = ContextFactory.Create())
 		    {
 		        context.HandleDetatchedGame(data.GameId);
 		        context.HandleDetatchedActor(data.ActorId);
 
-		        context.GameData.Add(data);
+		        context.EvaluationData.Add(data);
 		        SaveChanges(context);
 
 		        return data;
 		    }
 		}
 
-		public void Create(List<GameData> datas)
+		public void Create(List<EvaluationData> datas)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				context.GameData.AddRange(datas);
+				context.EvaluationData.AddRange(datas);
 				SaveChanges(context);
 			}
 		}
 
-		public void Update(GameData updatedData)
+		public EvaluationData Update(EvaluationData updatedData)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -444,7 +492,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
                 // context.[tablename].Update(entity);
                 // context.SaveChanges();
 
-                var existingData = context.GameData
+                var existingData = context.EvaluationData
                     .Find(context, updatedData.Id);
 
 				if (existingData == null)
@@ -455,6 +503,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				existingData.Value = updatedData.Value;
 
 				SaveChanges(context);
+
+			    return existingData;
 			}
 		}
 

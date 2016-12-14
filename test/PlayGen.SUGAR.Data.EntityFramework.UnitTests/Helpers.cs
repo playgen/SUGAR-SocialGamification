@@ -49,8 +49,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
                 {
                     new Model.EvaluationCriteria
                     {
-                        Key = "CreateAchievementKey",
-                        DataType = SaveDataType.String,
+                        EvaluationDataKey = "CreateAchievementKey",
+                        EvaluationDataType = EvaluationDataType.String,
                         CriteriaQueryType = CriteriaQueryType.Any,
                         ComparisonType = ComparisonType.Equals,
                         Scope = CriteriaScope.Actor,

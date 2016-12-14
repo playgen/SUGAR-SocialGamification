@@ -18,12 +18,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)CriteriaQueryType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CriteriaScope.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\SUGARException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\DateTimeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\EvaluationExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\NullableIntExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationDataCategory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardFilterType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Permissions\ClaimScope.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Reward.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SaveDataType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationDataType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Web\HeaderKeys.cs" />
   </ItemGroup>
 </Project>

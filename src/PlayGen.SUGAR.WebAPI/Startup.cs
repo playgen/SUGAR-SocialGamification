@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,17 +8,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NLog;
-using NLog.Extensions.Logging;
 using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.ServerAuthentication;
 using PlayGen.SUGAR.WebAPI.Filters;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.PlatformAbstractions;
-using MySql.Data.MySqlClient.Framework.NetCore10;
-using PlayGen.SUGAR.Core.Authorization;
 using PlayGen.SUGAR.ServerAuthentication.Filters;
 
 namespace PlayGen.SUGAR.WebAPI

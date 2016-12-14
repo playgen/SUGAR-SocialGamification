@@ -1,9 +1,10 @@
 ﻿using System;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Data.Model
 {
-	public class GameData : IModificationHistory
+	public class EvaluationData : IModificationHistory
 	{
 		public int Id { get; set; }
 
@@ -11,13 +12,13 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public int? GameId { get; set; }
 
-		public GameDataCategory Category { get; set; }
+		public EvaluationDataCategory Category { get; set; }
 
 		public string Key { get; set; }
 
 		public string Value { get; set; }
 
-		public Common.Shared.SaveDataType SaveDataType { get; set; }
+		public EvaluationDataType EvaluationDataType { get; set; }
 
 		public DateTime DateCreated { get; set; }
 

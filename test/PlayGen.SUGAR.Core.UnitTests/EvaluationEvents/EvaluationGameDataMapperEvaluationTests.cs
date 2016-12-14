@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
         public void CreateAndGetRelated()
         {
             // Arrange
-            var gameDataMapper = new EvaluationGameDataMapper();
+            var gameDataMapper = new EvaluationEvaluationDataMapper();
             var count = 10;
             var shouldGetEvaluations = new List<Evaluation>(count);
             var shouldntGetEvaluations = new List<Evaluation>(count);
@@ -33,7 +33,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             {
                 foreach (var evaluationCriteria in shouldGetEvaluation.EvaluationCriterias)
                 {
-                    var gameData = Helpers.ComposeGameData(0, evaluationCriteria, shouldGetEvaluation.GameId);
+                    var gameData = Helpers.ComposeEvaluationData(0, evaluationCriteria, shouldGetEvaluation.GameId);
 
                     ICollection<Evaluation> relatedEvaluations;
                     var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
         public void RemovesEvaluationsGameDataMapping()
         {
             // Arrange
-            var gameDataMapper = new EvaluationGameDataMapper();
+            var gameDataMapper = new EvaluationEvaluationDataMapper();
             var count = 10;
             var removeEvaluation = Helpers.ComposeGenericAchievement($"RemovesEvaluationsGameDataMapping");
 
@@ -71,7 +71,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             // Make sure removed evaluation isn't returned
             foreach (var evaluationCriteria in removeEvaluation.EvaluationCriterias)
             {
-                var gameData = Helpers.ComposeGameData(0, evaluationCriteria, removeEvaluation.GameId);
+                var gameData = Helpers.ComposeEvaluationData(0, evaluationCriteria, removeEvaluation.GameId);
 
                 ICollection<Evaluation> relatedEvaluations;
                 var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
             {
                 foreach (var evaluationCriteria in shouldntRemoveEvaluation.EvaluationCriterias)
                 {
-                    var gameData = Helpers.ComposeGameData(0, evaluationCriteria, shouldntRemoveEvaluation.GameId);
+                    var gameData = Helpers.ComposeEvaluationData(0, evaluationCriteria, shouldntRemoveEvaluation.GameId);
 
                     ICollection<Evaluation> relatedEvaluations;
                     var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);

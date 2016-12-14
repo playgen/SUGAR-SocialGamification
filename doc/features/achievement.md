@@ -2,7 +2,7 @@
 uid: achievement
 ---
 
-# Achievements
+# Achievement
 Achievements provide a flexible and simple way to increase user engagement, tracking their actions within and across multiple games. Achievements may be viewed as goals that individual or multiple actors can acquire through meeting one or more criteria. 
 
 The criteria is flexible and can be written by the game developer or provided by the platform based on any game specific action. Achievements can be binary or incremental, ie. (complete/not complete) or have levels or percentages of progression toward their completion. They can be global, across all games, or associated with a single game. 
@@ -28,13 +28,11 @@ Both Achievements and [Skills](skill.md) build on "Evaluations" which may contai
     * <xref:PlayGen.SUGAR.Common.Shared.ComparisonType>
     * <xref:PlayGen.SUGAR.Common.Shared.ActorType>
     * <xref:PlayGen.SUGAR.Common.Shared.CriteriaScope>
-* WebAPI
-    * <xref:PlayGen.SUGAR.WebAPI.Controllers.AchievementsController>
 
 ## Examples
 * Specifying an achievement
 
-	This example will describe how to implement the 'Slay 10 Enemies!' achievement. An achievement must be specified with an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest> with a list of <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria> that will be evalutated against to determine progress.
+	This example will describe how to implement the 'Slay 10 Enemies!' achievement. An achievement must be specified with an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest> with a list of <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCriteriaCreateRequest> that will be evalutated against to determine progress.
 	All 'EnemiesSlain' keys will be checked in gameData and whether the sum of their values is greater than or equal to 10.
 
 ```cs
@@ -48,10 +46,10 @@ Both Achievements and [Skills](skill.md) build on "Evaluations" which may contai
 			// create instance of the achievement client
 			_achievementClient = sugarClient.Achievement;
 			
-			// create an EvaluationCriteria list
-			var EvaluationCriteria = new List<EvaluationCriteria>()
+			// create an AchievementCriteria list
+			var achievementCriteria = new List<EvaluationCriteriaCreateRequest>()
 			{
-				new EvaluationCriteria()
+				new EvaluationCriteriaCreateRequest()
 				{
 					DataType = GameDataType.Long,
 					Value = "10",
@@ -62,8 +60,8 @@ Both Achievements and [Skills](skill.md) build on "Evaluations" which may contai
 				}
 			};
 			
-			// place the criteria inside an EvaluationCreateRequest
-			var EvaluationCreateRequest = new EvaluationCreateRequest()
+			// place the criteria inside an AchievementRequest
+			var achievementRequest = new EvaluationCreateRequest()
 			{
 				GameId = _gameId,
 				Name = "Slay 10 Enemies!",

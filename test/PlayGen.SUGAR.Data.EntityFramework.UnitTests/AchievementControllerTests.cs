@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
@@ -135,7 +137,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Rewards = newAchievementDuplicate.Rewards
 			};
 
-			Assert.Throws<DuplicateRecordException>(() => _evaluationController.Update(update));
+			Assert.Throws<DbUpdateException>(() => _evaluationController.Update(update));
 		}
 
 		[Fact]
@@ -153,7 +155,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				Rewards = new List<Model.Reward>()
 			};
 
-			Assert.Throws<MissingRecordException>(() => _evaluationController.Update(achievement));
+			Assert.Throws<DbUpdateConcurrencyException>(() => _evaluationController.Update(achievement));
 		}
 
 		[Fact]

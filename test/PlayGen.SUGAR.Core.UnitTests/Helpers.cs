@@ -2,7 +2,9 @@
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Core.Controllers;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
+using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
@@ -55,8 +57,8 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			{
 				evaluationCriterias.Add(new EvaluationCriteria
 				{
-					Key = $"{key}_{i}",
-					DataType = SaveDataType.Long,
+					EvaluationDataKey = $"{key}_{i}",
+					EvaluationDataType = EvaluationDataType.Long,
 					CriteriaQueryType = CriteriaQueryType.Sum,
 					ComparisonType = ComparisonType.GreaterOrEqual,
 					Scope = CriteriaScope.Actor,
@@ -79,24 +81,24 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			};
 		}
 
-        public static List<GameData> ComposeAchievementGameDatas(int actorId, Evaluation evaluation, string value = "50")
+        public static List<EvaluationData> ComposeAchievementGameDatas(int actorId, Evaluation evaluation, string value = "50")
         {
-            var gameDatas = new List<GameData>();
+            var gameDatas = new List<EvaluationData>();
 
             foreach (var criteria in evaluation.EvaluationCriterias)
             {
-                gameDatas.Add(ComposeGameData(actorId, criteria, evaluation.GameId, value));
+                gameDatas.Add(ComposeEvaluationData(actorId, criteria, evaluation.GameId, value));
             }
 
             return gameDatas;
         }
 
-        public static GameData ComposeGameData(int actorId, EvaluationCriteria evaluationCriteria, int? gameId = null, string value = "50")
+        public static EvaluationData ComposeEvaluationData(int actorId, EvaluationCriteria evaluationCriteria, int? gameId = null, string value = "50")
 		{
-			return new GameData
+			return new EvaluationData
 			{
-                Key = evaluationCriteria.Key,
-                SaveDataType = evaluationCriteria.DataType,
+                Key = evaluationCriteria.EvaluationDataKey,
+                EvaluationDataType = evaluationCriteria.EvaluationDataType,
 
                 ActorId = actorId,
 				GameId = gameId,
@@ -113,15 +115,18 @@ namespace PlayGen.SUGAR.Core.UnitTests
         public static void CreateGenericAchievementGameData(Evaluation evaluation, int actorId, string value = "50")
         {
             var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, value);
-            ControllerLocator.GameDataController.Add(gameDatas.ToArray());
+            
+            var evaluationDataController = new EvaluationDataController(DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].EvaluationDataCategory);
+            evaluationDataController.Add(gameDatas.ToArray());
         }
 
         public static void CompleteGenericAchievement(Evaluation evaluation, int actorId)
 		{
 		    var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, "100");
-            
-            ControllerLocator.GameDataController.Add(gameDatas.ToArray());
-		}
+
+            var evaluationDataController = new EvaluationDataController(DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].EvaluationDataCategory);
+            evaluationDataController.Add(gameDatas.ToArray());
+        }
 
 	    public static Evaluation CreateAndCompleteGenericAchievement(string key, int actorId, int? gameId = null)
 	    {

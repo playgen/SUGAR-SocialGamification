@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         {
             var newResource = CreateResource("CanGetExistingResourceByKey");
 
-            var gotResources = _resourceController.Get(keys: new List<string> { newResource.Key });
+            var gotResources = _resourceController.Get(keys: new [] { newResource.Key });
 
             Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
         }
@@ -50,20 +50,20 @@ namespace PlayGen.SUGAR.Core.UnitTests
         }
 
         [Fact]
-        public void CanUpdateResource()
+        public void CanModifyResource()
         {
-            var newResource = CreateResource("CanUpdateResource");
+            var newResource = CreateResource("CanModifyResource");
 
             var originalValue = newResource.Value;
-            var newValue = originalValue + "999";
-            newResource.Value = newValue;
+            var newValue = long.Parse(originalValue) + 999;
+            newResource.Value = newValue.ToString();
 
-            _resourceController.Update(newResource);
+            _resourceController.AddQuantity(newResource.Id, 999);
 
-            var resources = _resourceController.Get(newResource.GameId, newResource.ActorId, new string[] { newResource.Key });
+            var resources = _resourceController.Get(newResource.GameId, newResource.ActorId, new [] { newResource.Key });
             newResource = resources.Single();
 
-            Assert.Equal(newValue, newResource.Value);
+            Assert.Equal(newValue.ToString(), newResource.Value);
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         #endregion
 
         #region Helpers
-        private GameData CreateResource(string key, int? gameId = null, int? actorId = null,
+        private EvaluationData CreateResource(string key, int? gameId = null, int? actorId = null,
               bool createNewGame = false, bool createNewUser = false)
         {
             if (createNewGame)
@@ -129,26 +129,26 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 actorId = user.Id;
             }
 
-            var resource = new GameData
+            var resource = new EvaluationData
             {
                 GameId = gameId,
                 ActorId = actorId,
                 Key = key,
                 Value = "100",
-                SaveDataType = SaveDataType.Long,
-                Category = GameDataCategory.Resource,
+                EvaluationDataType = EvaluationDataType.Long,
+                Category = EvaluationDataCategory.Resource,
             };
             _resourceController.Create(resource);
 
             return resource;
         }
 
-        private bool IsMatch(GameData lhs, GameData rhs)
+        private bool IsMatch(EvaluationData lhs, EvaluationData rhs)
         {
             return lhs.ActorId == rhs.ActorId
                 && lhs.GameId == rhs.GameId
                 && lhs.Category == rhs.Category
-                && lhs.SaveDataType == rhs.SaveDataType
+                && lhs.EvaluationDataType == rhs.EvaluationDataType
                 && lhs.Key == rhs.Key
                 && lhs.Value == rhs.Value;
         }

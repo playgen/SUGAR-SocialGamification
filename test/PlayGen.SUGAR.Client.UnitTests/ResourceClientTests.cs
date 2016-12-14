@@ -77,8 +77,6 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var createdQuantity = createdResource.Quantity;
 			var updatedQuantity = createdQuantity + 9000;
 
-			//resourceRequest.Quantity = updatedQuantity;
-
 			var resourceRequestUpdated = new ResourceAddRequest
 			{
 				Key = createdResource.Key,

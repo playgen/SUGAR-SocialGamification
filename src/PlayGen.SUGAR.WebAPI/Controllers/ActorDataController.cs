@@ -35,9 +35,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="key">Array of Key names.</param>
-		/// <returns>A list of <see cref="SaveDataResponse"/> which match the search criteria.</returns>
+		/// <returns>A list of <see cref="EvaluationDataResponse"/> which match the search criteria.</returns>
 		[HttpGet]
-		//[ResponseType(typeof(IEnumerable<SaveDataResponse>))]
+		//[ResponseType(typeof(IEnumerable<EvaluationDataResponse>))]
 		[Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.ActorData)]
 		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.ActorData)]
 		public IActionResult Get(int? actorId, int? gameId, string[] key)
@@ -57,14 +57,14 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// 
 		/// Example Usage: POST api/actordata
 		/// </summary>
-		/// <param name="newData"><see cref="SaveDataRequest"/> object that holds the details of the new ActorData.</param>
-		/// <returns>A <see cref="SaveDataResponse"/> containing the new ActorData details.</returns>
+		/// <param name="newData"><see cref="EvaluationDataRequest"/> object that holds the details of the new ActorData.</param>
+		/// <returns>A <see cref="EvaluationDataResponse"/> containing the new ActorData details.</returns>
 		[HttpPost]
-		//[ResponseType(typeof(SaveDataResponse))]
+		//[ResponseType(typeof(EvaluationDataResponse))]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.ActorData)]
 		[Authorization(ClaimScope.User, AuthorizationOperation.Create, AuthorizationOperation.ActorData)]
-		public IActionResult Add([FromBody]SaveDataRequest newData)
+		public IActionResult Add([FromBody]EvaluationDataRequest newData)
 		{
 			if (_authorizationService.AuthorizeAsync(User, newData.ActorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
 				_authorizationService.AuthorizeAsync(User, newData.ActorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)

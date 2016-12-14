@@ -80,15 +80,15 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
         /// Adding game data triggers evaluations
         /// </summary>
         [Fact]
-        public void EvaluatesOnGameDataAdded()
+        public void EvaluatesOnEvaluationDataAdded()
         {
             // Arrange
-            var game = Helpers.GetOrCreateGame("EvaluatesOnGameDataAdded");
-            var user = Helpers.GetOrCreateUser("EvaluatesOnGameDataAdded");
+            var game = Helpers.GetOrCreateGame("EvaluatesOnEvaluationDataAdded");
+            var user = Helpers.GetOrCreateUser("EvaluatesOnEvaluationDataAdded");
 
             SessionTracker.StartSession(game.Id, user.Id);
 
-            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnGameDataAdded", game.Id);
+            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnEvaluationDataAdded", game.Id);
 
             var gameDatas = Helpers.ComposeAchievementGameDatas(user.Id, evaluation, "100");
 
@@ -106,15 +106,15 @@ namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
         /// Adding multiple game data triggers evaluations
         /// </summary>
         [Fact]
-        public void EvaluatesOnGameDatasAdded()
+        public void EvaluatesOnEvaluationDatasAdded()
         {
             // Arrange
-            var game = Helpers.GetOrCreateGame("EvaluatesOnGameDatasAdded");
-            var user = Helpers.GetOrCreateUser("EvaluatesOnGameDatasAdded");
+            var game = Helpers.GetOrCreateGame("EvaluatesOnEvaluationDatasAdded");
+            var user = Helpers.GetOrCreateUser("EvaluatesOnEvaluationDatasAdded");
 
             SessionTracker.StartSession(game.Id, user.Id);
 
-            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnGameDatasAdded", game.Id);
+            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnEvaluationDatasAdded", game.Id);
 
             // Act
             Helpers.CompleteGenericAchievement(evaluation, user.Id);

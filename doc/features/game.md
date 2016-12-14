@@ -2,7 +2,7 @@
 uid: game
 ---
 
-# Games
+# Game
 A game is an individual application as defined by the platform. A single instance of the platform has the capacity to service multiple games. This allows for users to take part in multiple of games under the same login and to potentially share resource across games depending on the game design. 
 
 ## Features
@@ -19,9 +19,6 @@ A game is an individual application as defined by the platform. A single instanc
 * Contracts
     * <xref:PlayGen.SUGAR.Contracts.Shared.GameRequest>
     * <xref:PlayGen.SUGAR.Contracts.Shared.GameResponse>
-* WebAPI
-    * <xref:PlayGen.SUGAR.WebAPI.Controllers.GameController>
-
 
 ## Examples
 * Create a game

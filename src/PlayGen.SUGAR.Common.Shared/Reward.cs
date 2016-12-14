@@ -2,28 +2,34 @@
 
 namespace PlayGen.SUGAR.Common.Shared
 {
-    /// <summary>
-    /// Encapsulates the reward given for completing an achievement or skill.
-    /// </summary>
+	/// <summary>
+	/// Encapsulates the reward given for completing an achievement or skill.
+	/// </summary>
 	public class Reward
 	{
-        /// <summary>
-        /// The key which will be stored in GameData.
-        /// </summary>
-        [Required]
+		/// <summary>
+		/// The key which will be stored in EvaluationData.
+		/// </summary>
+		[Required]
 		[StringLength(64)]
-		public string Key { get; set; }
+		public string EvaluationDataKey { get; set; }
 
-        /// <summary>
-        /// SaveDataType of the value for this GameData.
-        /// </summary>
-        [Required]
-        public SaveDataType DataType { get; set; }
+		/// <summary>
+		/// EvaluationDataCategory of the value for this EvaluationData.
+		/// </summary>
+		[Required]
+		public EvaluationDataCategory EvaluationDataCategory { get; set; }
 
-        /// <summary>
-        /// The value of the GameData.
-        /// </summary>
-        [Required]
+		/// <summary>
+		/// EvaluationDataType of the value for this EvaluationData.
+		/// </summary>
+		[Required]
+		public EvaluationDataType EvaluationDataType { get; set; }
+
+		/// <summary>
+		/// The value of the EvaluationData.
+		/// </summary>
+		[Required]
 		[StringLength(64)]
 		public string Value { get; set; }
 	}

@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		private static ActorRoleController _actorRoleController;
         private static ClaimController _claimController;
         private static GameController _gameController;
-		private static GameDataController _gameDataController;
+		private static EvaluationDataController _evaluationDataController;
 		private static GroupController _groupController;
 		private static GroupRelationshipController _groupRelationshipController;
 		private static LeaderboardController _leaderboardController;
@@ -53,8 +53,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
         public static GameController GameController 
 			=> _gameController ?? (_gameController = new GameController(ContextFactory));
 
-        public static GameDataController GameDataController 
-			=> _gameDataController ?? (_gameDataController = new GameDataController(ContextFactory));
+        public static EvaluationDataController EvaluationDataController 
+			=> _evaluationDataController ?? (_evaluationDataController = new EvaluationDataController(ContextFactory));
 
         public static GroupController GroupController
 			=> _groupController ?? (_groupController = new GroupController(ContextFactory));

@@ -20,9 +20,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				GameId = leaderboardModel.GameId,
 				Name = leaderboardModel.Name,
 				Token = leaderboardModel.Token,
-				Key = leaderboardModel.Key,
+				Key = leaderboardModel.EvaluationDataKey,
 				ActorType = leaderboardModel.ActorType,
-				SaveDataType = leaderboardModel.SaveDataType,
+				EvaluationDataType = leaderboardModel.EvaluationDataType,
 				CriteriaScope = leaderboardModel.CriteriaScope,
 				LeaderboardType = leaderboardModel.LeaderboardType
 			};
@@ -40,9 +40,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				GameId = leaderboardContract.GameId ?? 0,
 				Name = leaderboardContract.Name,
 				Token = leaderboardContract.Token,
-				Key = leaderboardContract.Key,
+				EvaluationDataKey = leaderboardContract.Key,
 				ActorType = leaderboardContract.ActorType,
-				SaveDataType = leaderboardContract.SaveDataType,
+				EvaluationDataType = leaderboardContract.EvaluationDataType,
 				CriteriaScope = leaderboardContract.CriteriaScope,
 				LeaderboardType = leaderboardContract.LeaderboardType
 			};

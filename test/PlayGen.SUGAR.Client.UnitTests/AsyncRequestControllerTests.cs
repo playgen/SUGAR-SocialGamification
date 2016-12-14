@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
@@ -129,7 +130,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
             // Act
             var responseCount = 0;
-            while (responseCount < 1)
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            var timeout = 1*1000;
+
+            while (!didTimeout && stopWatch.ElapsedMilliseconds < timeout)
             {
                 if (asyncRequestController.TryExecuteResponse())
                 {

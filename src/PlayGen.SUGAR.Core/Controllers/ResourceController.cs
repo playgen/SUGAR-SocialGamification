@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NLog;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
@@ -11,40 +12,22 @@ namespace PlayGen.SUGAR.Core.Controllers
 	public class ResourceController
 	{
         private static Logger Logger = LogManager.GetCurrentClassLogger();
-        private readonly Data.EntityFramework.Controllers.GameDataController _gameDataDbController;
+
+	    private readonly EvaluationDataController _evaluationDataController;
 
 		public ResourceController(SUGARContextFactory contextFactory)
 		{
-			// todo use game data core controller instead of db controller!!!
-			_gameDataDbController = new Data.EntityFramework.Controllers.GameDataController(contextFactory, GameDataCategory.Resource);
+            _evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.Resource);
 		}
 
-		public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<EvaluationData> Get(int? gameId = null, int? actorId = null, string[] keys = null)
 		{
-			var result = _gameDataDbController.KeyExists(gameId, actorId, key, start = default(DateTime), end = default(DateTime));
-
-            Logger.Info($"Key Exists: {result} for GameId: {gameId}, ActorId: {actorId}, Key: {key}, Start: {start}, End: {end}");
-
-            return result;
-		}
-
-		public List<GameData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
-		{
-			var results = _gameDataDbController.Get(gameId, actorId, keys);
-
-            Logger.Info($"{results?.Count} Game Datas for GameId: {gameId}, ActorId: {actorId}, Keys: {string.Join(", ", keys)}");
+			var results = _evaluationDataController.Get(gameId, actorId, keys);
 
             return results;
 		}
 
-		public void Update(GameData resource)
-		{
-			_gameDataDbController.Update(resource);
-
-            Logger.Info($"{resource.Id}");
-        }
-
-		public GameData Transfer(int? gameId, int? fromActorId, int? toActorId, string key, long transferQuantity, out GameData fromResource)
+		public EvaluationData Transfer(int? gameId, int? fromActorId, int? toActorId, string key, long transferQuantity, out EvaluationData fromResource)
 		{
 			fromResource = GetExistingResource(gameId, fromActorId, key);
 
@@ -52,29 +35,28 @@ namespace PlayGen.SUGAR.Core.Controllers
 			if (!IsTransferValid(long.Parse(fromResource.Value), transferQuantity, out message))
 			{
 				throw new ArgumentException(message);
-			}	
+			}
 
-			UpdateQuantity(fromResource, -transferQuantity);
+            fromResource = AddQuantity(fromResource.Id, -transferQuantity);
 
-			GameData toResource;
-			var foundResources = _gameDataDbController.Get(gameId, toActorId, new List<string> { fromResource.Key });
+			EvaluationData toResource;
+			var foundResources = _evaluationDataController.Get(gameId, toActorId, new [] { fromResource.Key });
 
-		    var foundResourceList = foundResources as List<GameData> ?? foundResources.ToList();
-		    if (foundResourceList.Any())
-			{
-				toResource = foundResourceList.ElementAt(0);
-				UpdateQuantity(toResource, transferQuantity);
+		    if (foundResources.Any())
+		    {
+		        toResource = foundResources.Single();
+                toResource = AddQuantity(toResource.Id, transferQuantity);
 			}
 			else
 			{
-				toResource = new GameData
+				toResource = new EvaluationData
 				{
 					GameId = gameId,
 					ActorId = toActorId,
 					Key = fromResource.Key,
 					Value = transferQuantity.ToString(),
 					Category = fromResource.Category,
-					SaveDataType = fromResource.SaveDataType,
+					EvaluationDataType = fromResource.EvaluationDataType,
 				};
 				Create(toResource);
 			}
@@ -84,32 +66,37 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return toResource;
 		}
 
-		public void Create(GameData data)
+		public void Create(EvaluationData data)
 		{
-			var existingEntries = _gameDataDbController.Get(data.GameId, data.ActorId, new List<string>() {data.Key});
+			var existingEntries = _evaluationDataController.Get(data.GameId, data.ActorId, new [] {data.Key});
+
 			if (existingEntries.Any())
 			{
 				throw new DuplicateRecordException();
 			}
             
-			_gameDataDbController.Create(data);
+			_evaluationDataController.Add(data);
 
             Logger.Info($"{data?.Id}");
 		}
 
-		public void UpdateQuantity(GameData resource, long modifyAmount)
+		public EvaluationData AddQuantity(int resourceId, long addAmount)
 		{
-			long currentValue = long.Parse(resource.Value);
-			resource.Value = (currentValue + modifyAmount).ToString();
+            var resource = _evaluationDataController.Get(new [] { resourceId }).Single();
 
-			_gameDataDbController.Update(resource);
+			var currentValue = long.Parse(resource.Value);
+			resource.Value = (currentValue + addAmount).ToString();
 
-            Logger.Info($"{resource?.Id} with Amount: {modifyAmount}");
+			_evaluationDataController.Update(resource);
+
+            Logger.Info($"{resource?.Id} with Amount: {addAmount}");
+
+            return resource;
         }
 
-		private GameData GetExistingResource(int? gameId, int? ownerId, string key)
+		private EvaluationData GetExistingResource(int? gameId, int? ownerId, string key)
 		{
-			var foundResources = _gameDataDbController.Get(gameId, ownerId, new List<string> { key });
+			var foundResources = _evaluationDataController.Get(gameId, ownerId, new [] { key });
 
 		    if (!foundResources.Any())
 			{
@@ -123,7 +110,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return found;
 		}
 
-		private bool IsTransferValid(long current, long transfer, out string message)
+		private static bool IsTransferValid(long current, long transfer, out string message)
 		{
 			message = string.Empty;
 
