@@ -217,6 +217,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
             var SaveData = new SaveData
             {
+                Category = evaluation.EvaluationType.ToSaveDataCategory(),
                 Key = ComposeCompletionKey(evaluation),
                 GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game
                 ActorId = actorId,
