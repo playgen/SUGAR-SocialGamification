@@ -6,19 +6,19 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
-	public static class SaveDataExtensions
+	public static class EvaluationDataExtensions
 	{
-		public static IQueryable<SaveData> GetCategoryData(this SUGARContext context, SaveDataCategory category)
+		public static IQueryable<EvaluationData> GetCategoryData(this SUGARContext context, EvaluationDataCategory category)
 		{
-			return context.SaveData.Where(gd => gd.Category == category);
+			return context.EvaluationData.Where(gd => gd.Category == category);
 		}
 
-		public static IQueryable<SaveData> FilterByIds(this IQueryable<SaveData> gameDataQueryable, ICollection<int> ids)
+		public static IQueryable<EvaluationData> FilterByIds(this IQueryable<EvaluationData> gameDataQueryable, ICollection<int> ids)
 		{
 			return gameDataQueryable.Where(gd => ids.Contains(gd.Id));
 		}
 
-		public static IQueryable<SaveData> FilterByGameId(this IQueryable<SaveData> gameDataQueryable, int? gameId)
+		public static IQueryable<EvaluationData> FilterByGameId(this IQueryable<EvaluationData> gameDataQueryable, int? gameId)
 		{
 			if (!gameId.HasValue || gameId.Value == 0)
 			{
@@ -27,17 +27,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return gameDataQueryable.Where(gd => gd.GameId == gameId);
 		}
 
-		public static IQueryable<SaveData> FilterByActorId(this IQueryable<SaveData> gameDataQueryable, int? actorId)
+		public static IQueryable<EvaluationData> FilterByActorId(this IQueryable<EvaluationData> gameDataQueryable, int? actorId)
 		{
 			return gameDataQueryable.Where(gd => gd.ActorId == actorId);
 		}
 
-		public static IQueryable<SaveData> FilterByKey(this IQueryable<SaveData> gameDataQueryable, string key)
+		public static IQueryable<EvaluationData> FilterByKey(this IQueryable<EvaluationData> gameDataQueryable, string key)
 		{
 			return gameDataQueryable.Where(gd => gd.Key.Equals(key));
 		}
 
-		public static IQueryable<SaveData> FilterByKeys(this IQueryable<SaveData> gameDataQueryable, ICollection<string> keys)
+		public static IQueryable<EvaluationData> FilterByKeys(this IQueryable<EvaluationData> gameDataQueryable, ICollection<string> keys)
 		{
 		    if (keys != null && keys.Any())
 			{
@@ -46,17 +46,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return gameDataQueryable;
 		}
 
-		public static IQueryable<SaveData> FilterByDataType(this IQueryable<SaveData> gameDataQueryable, SaveDataType type)
+		public static IQueryable<EvaluationData> FilterByDataType(this IQueryable<EvaluationData> gameDataQueryable, EvaluationDataType type)
 		{
-			return gameDataQueryable.Where(gd => gd.SaveDataType == type);
+			return gameDataQueryable.Where(gd => gd.EvaluationDataType == type);
 		}
 
-		public static IQueryable<SaveData> FilterByDateTimeRange(this IQueryable<SaveData> gameDataQueryable, DateTime start, DateTime end)
+		public static IQueryable<EvaluationData> FilterByDateTimeRange(this IQueryable<EvaluationData> gameDataQueryable, DateTime start, DateTime end)
 		{
 			return gameDataQueryable.Where(gd => gd.DateModified >= start && gd.DateModified <= end);
 		}
 
-		public static SaveData LatestOrDefault(this IQueryable<SaveData> gameDataQueryable)
+		public static EvaluationData LatestOrDefault(this IQueryable<EvaluationData> gameDataQueryable)
 		{
 			return gameDataQueryable
 				.OrderByDescending(s => s.DateModified)

@@ -13,10 +13,10 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// GameId : 1,
 	/// Key : "Data Key",
 	/// Value : "10",
-	/// SaveDataType : "Long"
+	/// EvaluationDataType : "Long"
 	/// }
 	/// </example>
-	public class SaveDataRequest
+	public class EvaluationDataRequest
     {
 		/// <summary>
 		/// The id of the Actor which this ActorData/GameData is being ensigned to. Can be left null to ensign to the system/game.
@@ -46,6 +46,6 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		/// The type of data which is being stored.
 		/// </summary>
 		[Required]
-		public SaveDataType SaveDataType { get; set; }
+		public EvaluationDataType EvaluationDataType { get; set; }
 	}
 }

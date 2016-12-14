@@ -49,12 +49,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					throw new DuplicateRecordException($"A leaderboard with the name {leaderboard.Name} or token {leaderboard.Token} for this game already exists.");
 				}
 
-				hasConflicts = ((int)leaderboard.LeaderboardType < 3 && ((int)leaderboard.SaveDataType == 1 || (int)leaderboard.SaveDataType == 2)) ||
-								((int)leaderboard.LeaderboardType > 2 && ((int)leaderboard.SaveDataType == 0 || (int)leaderboard.SaveDataType == 3)) ? false : true;
+				hasConflicts = ((int)leaderboard.LeaderboardType < 3 && ((int)leaderboard.EvaluationDataType == 1 || (int)leaderboard.EvaluationDataType == 2)) ||
+								((int)leaderboard.LeaderboardType > 2 && ((int)leaderboard.EvaluationDataType == 0 || (int)leaderboard.EvaluationDataType == 3)) ? false : true;
 
 				if (hasConflicts)
 				{
-					throw new System.ArgumentException($"A leaderboard cannot be created with LeaderboardType {leaderboard.LeaderboardType.ToString()} and SaveDataType{leaderboard.SaveDataType.ToString()} as it would always return zero results.");
+					throw new System.ArgumentException($"A leaderboard cannot be created with LeaderboardType {leaderboard.LeaderboardType.ToString()} and EvaluationDataType{leaderboard.EvaluationDataType.ToString()} as it would always return zero results.");
 				}
 
 				context.Leaderboards.Add(leaderboard);
@@ -83,20 +83,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 						}
 					} else
 					{
-						var hasTypeConflicts = ((int)leaderboard.LeaderboardType < 3 && ((int)leaderboard.SaveDataType == 1 || (int)leaderboard.SaveDataType == 2)) ||
-								((int)leaderboard.LeaderboardType > 2 && ((int)leaderboard.SaveDataType == 0 || (int)leaderboard.SaveDataType == 3)) ? false : true;
+						var hasTypeConflicts = ((int)leaderboard.LeaderboardType < 3 && ((int)leaderboard.EvaluationDataType == 1 || (int)leaderboard.EvaluationDataType == 2)) ||
+								((int)leaderboard.LeaderboardType > 2 && ((int)leaderboard.EvaluationDataType == 0 || (int)leaderboard.EvaluationDataType == 3)) ? false : true;
 
 						if (hasTypeConflicts)
 						{
-							throw new System.ArgumentException($"A leaderboard cannot be updated to use LeaderboardType {leaderboard.LeaderboardType.ToString()} and SaveDataType{leaderboard.SaveDataType.ToString()}, as it would always return zero results.");
+							throw new System.ArgumentException($"A leaderboard cannot be updated to use LeaderboardType {leaderboard.LeaderboardType.ToString()} and EvaluationDataType{leaderboard.EvaluationDataType.ToString()}, as it would always return zero results.");
 						}
 					}
 
 					existing.Name = leaderboard.Name;
-					existing.SaveDataKey = leaderboard.SaveDataKey;
+					existing.EvaluationDataKey = leaderboard.EvaluationDataKey;
 					existing.ActorType = leaderboard.ActorType;
 					existing.CriteriaScope = leaderboard.CriteriaScope;
-					existing.SaveDataType = leaderboard.SaveDataType;
+					existing.EvaluationDataType = leaderboard.EvaluationDataType;
 					existing.GameId = leaderboard.GameId;
 					existing.LeaderboardType = leaderboard.LeaderboardType;
 					existing.Token = leaderboard.Token;

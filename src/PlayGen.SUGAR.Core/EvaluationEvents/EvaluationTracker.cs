@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 {
     public class EvaluationTracker : IDisposable
     {
-        private readonly EvaluationSaveDataMapper _SaveDataToEvaluationMapper = new EvaluationSaveDataMapper();
+        private readonly EvaluationEvaluationDataMapper _EvaluationDataToEvaluationMapper = new EvaluationEvaluationDataMapper();
         private readonly ConcurrentProgressCache _concurrentProgressCache = new ConcurrentProgressCache();
         private readonly ProgressNotificationCache _progressNotificationCache = new ProgressNotificationCache();
 
@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
             _sessionTracker.SessionStartedEvent += OnSessionStarted;
             _sessionTracker.SessionEndedEvent += OnSessionEnded;
-            SaveDataController.SaveDataAddedEvent += OnSaveDataAdded;
+            EvaluationDataController.EvaluationDataAddedEvent += OnEvaluationDataAdded;
             EvaluationController.EvaluationCreatedEvent += OnEvaluationCreated;
             EvaluationController.EvaluationUpdatedEvent += OnEvaluationUpdated;
             EvaluationController.EvaluationDeletedEvent += OnEvaluationDeleted;
@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
             _sessionTracker.SessionStartedEvent -= OnSessionStarted;
             _sessionTracker.SessionEndedEvent -= OnSessionEnded;
-            SaveDataController.SaveDataAddedEvent -= OnSaveDataAdded;
+            EvaluationDataController.EvaluationDataAddedEvent -= OnEvaluationDataAdded;
             EvaluationController.EvaluationCreatedEvent -= OnEvaluationCreated;
             EvaluationController.EvaluationUpdatedEvent -= OnEvaluationUpdated;
             EvaluationController.EvaluationDeletedEvent -= OnEvaluationDeleted;
@@ -78,11 +78,11 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             _progressNotificationCache.Remove(session.GameId, session.ActorId);
         }
 
-        private void OnSaveDataAdded(SaveData saveData)
+        private void OnEvaluationDataAdded(EvaluationData evaluationData)
         {
             ICollection<Evaluation> evaluations;
 
-            if (_SaveDataToEvaluationMapper.TryGetRelated(saveData, out evaluations))
+            if (_EvaluationDataToEvaluationMapper.TryGetRelated(evaluationData, out evaluations))
             {
                 var gameIds = GetGameIdsFromEvaluations(evaluations);
                 var sessions = _sessionTracker.GetByGames(gameIds);
@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         private void OnEvaluationCreated(Evaluation evaluation)
         {
-            _SaveDataToEvaluationMapper.CreateMapping(evaluation);
+            _EvaluationDataToEvaluationMapper.CreateMapping(evaluation);
 
             var gameIds = GetGameIdsFromEvaluation(evaluation);
             var sessions = _sessionTracker.GetByGames(gameIds);
@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 
         private void OnEvaluationDeleted(Evaluation evaluation)
         {
-            _SaveDataToEvaluationMapper.RemoveMapping(evaluation);
+            _EvaluationDataToEvaluationMapper.RemoveMapping(evaluation);
             _concurrentProgressCache.Remove(evaluation.Id);
             _progressNotificationCache.Remove(evaluation.Id);
         }
@@ -119,7 +119,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         private void MapExistingEvaluations()
         {
             var evaluations = _evaluationController.Get();
-            _SaveDataToEvaluationMapper.CreateMappings(evaluations);
+            _EvaluationDataToEvaluationMapper.CreateMappings(evaluations);
         }
 
         private List<Evaluation> GetEvaluations(int? gameId)

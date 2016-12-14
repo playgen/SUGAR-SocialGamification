@@ -106,7 +106,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         #endregion
 
         #region Helpers
-        private SaveData CreateResource(string key, int? gameId = null, int? actorId = null,
+        private EvaluationData CreateResource(string key, int? gameId = null, int? actorId = null,
               bool createNewGame = false, bool createNewUser = false)
         {
             if (createNewGame)
@@ -129,26 +129,26 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 actorId = user.Id;
             }
 
-            var resource = new SaveData
+            var resource = new EvaluationData
             {
                 GameId = gameId,
                 ActorId = actorId,
                 Key = key,
                 Value = "100",
-                SaveDataType = SaveDataType.Long,
-                Category = SaveDataCategory.Resource,
+                EvaluationDataType = EvaluationDataType.Long,
+                Category = EvaluationDataCategory.Resource,
             };
             _resourceController.Create(resource);
 
             return resource;
         }
 
-        private bool IsMatch(SaveData lhs, SaveData rhs)
+        private bool IsMatch(EvaluationData lhs, EvaluationData rhs)
         {
             return lhs.ActorId == rhs.ActorId
                 && lhs.GameId == rhs.GameId
                 && lhs.Category == rhs.Category
-                && lhs.SaveDataType == rhs.SaveDataType
+                && lhs.EvaluationDataType == rhs.EvaluationDataType
                 && lhs.Key == rhs.Key
                 && lhs.Value == rhs.Value;
         }

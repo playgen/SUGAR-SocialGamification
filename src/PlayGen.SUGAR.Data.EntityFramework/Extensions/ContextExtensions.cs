@@ -39,11 +39,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			}
 		}
 
-		public static void HandleDetatchedGameData(this SUGARContext context, SaveData saveData)
+		public static void HandleDetatchedGameData(this SUGARContext context, EvaluationData evaluationData)
 		{
-			if (saveData != null && context.Entry(saveData).State == EntityState.Detached)
+			if (evaluationData != null && context.Entry(evaluationData).State == EntityState.Detached)
 			{
-				context.SaveData.Attach(saveData);
+				context.EvaluationData.Attach(evaluationData);
 			}
 		}
 	}

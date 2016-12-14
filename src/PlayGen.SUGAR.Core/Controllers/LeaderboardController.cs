@@ -58,34 +58,34 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			var actors = GetActors(request.LeaderboardFilterType, leaderboard.ActorType, request.ActorId);
 
-            var saveDataController = new SaveDataController(ContextFactory, leaderboard.SaveDataCategory);
+            var evaluationDataController = new EvaluationDataController(ContextFactory, leaderboard.EvaluationDataCategory);
 
 			List<LeaderboardStandingsResponse> typeResults;
 
 			switch (leaderboard.LeaderboardType)
 			{
 				case LeaderboardType.Highest:
-					typeResults = EvaluateHighest(saveDataController, actors, leaderboard.GameId, leaderboard.SaveDataKey, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
+					typeResults = EvaluateHighest(evaluationDataController, actors, leaderboard.GameId, leaderboard.EvaluationDataKey, leaderboard.LeaderboardType, leaderboard.EvaluationDataType, request);
 					break;
 
 				case LeaderboardType.Lowest:
-					typeResults = EvaluateLowest(saveDataController, actors, leaderboard.GameId, leaderboard.SaveDataKey, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
+					typeResults = EvaluateLowest(evaluationDataController, actors, leaderboard.GameId, leaderboard.EvaluationDataKey, leaderboard.LeaderboardType, leaderboard.EvaluationDataType, request);
 					break;
 
 				case LeaderboardType.Cumulative:
-					typeResults = EvaluateCumulative(saveDataController, actors, leaderboard.GameId, leaderboard.SaveDataKey, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
+					typeResults = EvaluateCumulative(evaluationDataController, actors, leaderboard.GameId, leaderboard.EvaluationDataKey, leaderboard.LeaderboardType, leaderboard.EvaluationDataType, request);
 					break;
 
 				case LeaderboardType.Count:
-					typeResults = EvaluateCount(saveDataController, actors, leaderboard.GameId, leaderboard.SaveDataKey, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
+					typeResults = EvaluateCount(evaluationDataController, actors, leaderboard.GameId, leaderboard.EvaluationDataKey, leaderboard.LeaderboardType, leaderboard.EvaluationDataType, request);
 					break;
 
 				case LeaderboardType.Earliest:
-					typeResults = EvaluateEarliest(saveDataController, actors, leaderboard.GameId, leaderboard.SaveDataKey, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
+					typeResults = EvaluateEarliest(evaluationDataController, actors, leaderboard.GameId, leaderboard.EvaluationDataKey, leaderboard.LeaderboardType, leaderboard.EvaluationDataType, request);
 					break;
 
 				case LeaderboardType.Latest:
-					typeResults = EvaluateLatest(saveDataController, actors, leaderboard.GameId, leaderboard.SaveDataKey, leaderboard.LeaderboardType, leaderboard.SaveDataType, request);
+					typeResults = EvaluateLatest(evaluationDataController, actors, leaderboard.GameId, leaderboard.EvaluationDataKey, leaderboard.LeaderboardType, leaderboard.EvaluationDataType, request);
 					break;
 
 				default:
@@ -202,26 +202,26 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateHighest(SaveDataController saveDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateHighest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
 		{
 			List<LeaderboardStandingsResponse> results;
-			switch (saveDataType)
+			switch (evaluationDataType)
 			{
-				case SaveDataType.Long:
+				case EvaluationDataType.Long:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = SaveDataCoreController.GetHighestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.GetHighestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
-				case SaveDataType.Float:
+				case EvaluationDataType.Float:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = SaveDataCoreController.GetHighestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.GetHighestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -232,31 +232,31 @@ namespace PlayGen.SUGAR.Core.Controllers
 			results = results.OrderByDescending(r => float.Parse(r.Value))
 						.Where(r => float.Parse(r.Value) > 0).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateLowest(SaveDataController saveDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateLowest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
 		{
 			List<LeaderboardStandingsResponse> results;
-			switch (saveDataType)
+			switch (evaluationDataType)
 			{
-				case SaveDataType.Long:
+				case EvaluationDataType.Long:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = SaveDataCoreController.GetLowestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.GetLowestLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
-				case SaveDataType.Float:
+				case EvaluationDataType.Float:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = SaveDataCoreController.GetLowestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.GetLowestFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -267,31 +267,31 @@ namespace PlayGen.SUGAR.Core.Controllers
 			results = results.OrderBy(r => float.Parse(r.Value))
 						.Where(r => float.Parse(r.Value) > 0).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateCumulative(SaveDataController saveDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateCumulative(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
 		{
 			List<LeaderboardStandingsResponse> results;
-			switch (saveDataType)
+			switch (evaluationDataType)
 			{
-				case SaveDataType.Long:
+				case EvaluationDataType.Long:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = saveDataController.SumLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.SumLongs(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
-				case SaveDataType.Float:
+				case EvaluationDataType.Float:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = saveDataController.SumFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.SumFloats(gameId, r.Id, key, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -302,31 +302,31 @@ namespace PlayGen.SUGAR.Core.Controllers
 			results = results.OrderByDescending(r => float.Parse(r.Value))
 						.Where(r => float.Parse(r.Value) > 0).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateCount(SaveDataController saveDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateCount(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
 		{
 			List<LeaderboardStandingsResponse> results;
-			switch (saveDataType)
+			switch (evaluationDataType)
 			{
-				case SaveDataType.String:
+				case EvaluationDataType.String:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = saveDataController.CountKeys(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.CountKeys(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
-				case SaveDataType.Boolean:
+				case EvaluationDataType.Boolean:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = saveDataController.CountKeys(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.CountKeys(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -337,31 +337,31 @@ namespace PlayGen.SUGAR.Core.Controllers
 			results = results.OrderByDescending(r => float.Parse(r.Value))
 						.Where(r => float.Parse(r.Value) > 0).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateEarliest(SaveDataController saveDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateEarliest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
 		{
 			List<LeaderboardStandingsResponse> results;
-			switch (saveDataType)
+			switch (evaluationDataType)
 			{
-				case SaveDataType.String:
+				case EvaluationDataType.String:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = saveDataController.TryGetEarliestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToSUGARString()
+						Value = evaluationDataController.TryGetEarliestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToSUGARString()
             }).ToList();
 					break;
 
-				case SaveDataType.Boolean:
+				case EvaluationDataType.Boolean:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = saveDataController.TryGetEarliestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToSUGARString()
+						Value = evaluationDataController.TryGetEarliestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToSUGARString()
             }).ToList();
 					break;
 
@@ -372,31 +372,31 @@ namespace PlayGen.SUGAR.Core.Controllers
 			results = results.OrderBy(r => r.Value)
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime)).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateLatest(SaveDataController saveDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, SaveDataType saveDataType, LeaderboardStandingsRequest request)
+		protected List<LeaderboardStandingsResponse> EvaluateLatest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int? gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
 		{
 			List<LeaderboardStandingsResponse> results;
-			switch (saveDataType)
+			switch (evaluationDataType)
 			{
-				case SaveDataType.String:
+				case EvaluationDataType.String:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = saveDataController.TryGetLatestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToSUGARString()
+						Value = evaluationDataController.TryGetLatestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToSUGARString()
 					}).ToList();
 					break;
 
-				case SaveDataType.Boolean:
+				case EvaluationDataType.Boolean:
 					results = actors.Select(r => new LeaderboardStandingsResponse
 					{
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = saveDataController.TryGetLatestKey(gameId, r.Id, key, saveDataType, request.DateStart, request.DateEnd).ToSUGARString()
+						Value = evaluationDataController.TryGetLatestKey(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToSUGARString()
         }).ToList();
 					break;
 
@@ -407,7 +407,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			results = results.OrderByDescending(r => r.Value)
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime)).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {saveDataType}");
+			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}

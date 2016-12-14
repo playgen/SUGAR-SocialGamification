@@ -8,26 +8,26 @@ namespace PlayGen.SUGAR.Common.Shared
 	public class Reward
 	{
 		/// <summary>
-		/// The key which will be stored in SaveData.
+		/// The key which will be stored in EvaluationData.
 		/// </summary>
 		[Required]
 		[StringLength(64)]
-		public string SaveDataKey { get; set; }
+		public string EvaluationDataKey { get; set; }
 
 		/// <summary>
-		/// SaveDataCategory of the value for this SaveData.
+		/// EvaluationDataCategory of the value for this EvaluationData.
 		/// </summary>
 		[Required]
-		public SaveDataCategory SaveDataCategory { get; set; }
+		public EvaluationDataCategory EvaluationDataCategory { get; set; }
 
 		/// <summary>
-		/// SaveDataType of the value for this SaveData.
+		/// EvaluationDataType of the value for this EvaluationData.
 		/// </summary>
 		[Required]
-		public SaveDataType SaveDataType { get; set; }
+		public EvaluationDataType EvaluationDataType { get; set; }
 
 		/// <summary>
-		/// The value of the SaveData.
+		/// The value of the EvaluationData.
 		/// </summary>
 		[Required]
 		[StringLength(64)]

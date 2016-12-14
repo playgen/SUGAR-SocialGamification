@@ -9,15 +9,15 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		#region Configuration
 		private readonly UserDbController _userDbController;
 		private readonly GameDbController _gameDbController;
-		private readonly UserDataDbController _userSaveDataDbController;
+		private readonly UserDataDbController _userEvaluationDataDbController;
 
-		public SQLSaveDataQueryBuilderTests()
+		public SQLEvaluationDataQueryBuilderTests()
 		{
 			InitializeEnvironment();
 
 			_userDbController = new UserDbController(TestDbController.NameOrConnectionString);
 			_gameDbController = new GameDbController(TestDbController.NameOrConnectionString);
-			_userSaveDataDbController = new UserDataDbController(TestDbController.NameOrConnectionString);
+			_userEvaluationDataDbController = new UserDataDbController(TestDbController.NameOrConnectionString);
 		}
 
 		private void InitializeEnvironment()
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			Game game;
 			var generatedData = PopulateData("SumLongs", out game, out user);
 
-			var dbResult = _userSaveDataDbController.SumLongs(game.Id, user.Id, "longs");
+			var dbResult = _userEvaluationDataDbController.SumLongs(game.Id, user.Id, "longs");
 
 			var summedValue = generatedData["longs"].Values.Sum(v => Convert.ToInt64(v));
 
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			Game game;
 			var generatedData = PopulateData("SumFloats", out game, out user);
 
-			var dbResult = _userSaveDataDbController.SumFloats(game.Id, user.Id, "floats");
+			var dbResult = _userEvaluationDataDbController.SumFloats(game.Id, user.Id, "floats");
 
 			var summedValue = generatedData["floats"].Values.Sum(v => Convert.ToSingle(v));
 
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			var generatedData = PopulateData("TryGetLatestString", out game, out user);
 
 			string dbResult;
-			bool gotResult = _userSaveDataDbController.TryGetLatestString(game.Id, user.Id, "strings", out dbResult);
+			bool gotResult = _userEvaluationDataDbController.TryGetLatestString(game.Id, user.Id, "strings", out dbResult);
 
 			var lastValue = (string)generatedData["strings"].Values[generatedData["strings"].Values.Length - 1];
 
@@ -79,7 +79,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			var generatedData = PopulateData("TryGetLatestBool", out game, out user);
 
 			bool dbResult;
-			bool gotResult = _userSaveDataDbController.TryGetLatestBool(game.Id, user.Id, "bools", out dbResult);
+			bool gotResult = _userEvaluationDataDbController.TryGetLatestBool(game.Id, user.Id, "bools", out dbResult);
 
 			var lastValue = (bool)generatedData["bools"].Values[generatedData["bools"].Values.Length - 1];
 
@@ -90,7 +90,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		[Fact]
 		public void SumMissingLongs()
 		{
-			var dbResult = _userSaveDataDbController.SumLongs(1, 1, "SumMissingLongs");
+			var dbResult = _userEvaluationDataDbController.SumLongs(1, 1, "SumMissingLongs");
 
 			Assert.Equal(0, dbResult);
 		}
@@ -98,7 +98,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		[Fact]
 		public void SumMissingFloats()
 		{
-			var dbResult = _userSaveDataDbController.SumFloats(1, 1, "SumMissingFloats");
+			var dbResult = _userEvaluationDataDbController.SumFloats(1, 1, "SumMissingFloats");
 
 			Assert.Equal(0, dbResult);
 		}
@@ -107,7 +107,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		public void LatestMissingStrings()
 		{
 			string dbResult;
-			bool gotResult = _userSaveDataDbController.TryGetLatestString(1, 1, "LatestMissingStrings", out dbResult);
+			bool gotResult = _userEvaluationDataDbController.TryGetLatestString(1, 1, "LatestMissingStrings", out dbResult);
 
 			Assert.False(gotResult);
 		}
@@ -116,7 +116,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		public void LatestMissingBools()
 		{
 			bool dbResult;
-			bool gotResult = _userSaveDataDbController.TryGetLatestBool(1, 1, "LatestMissingBools", out dbResult);
+			bool gotResult = _userEvaluationDataDbController.TryGetLatestBool(1, 1, "LatestMissingBools", out dbResult);
 
 			Assert.False(gotResult);
 		}
@@ -132,17 +132,17 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
 			foreach (var kvp in dataValues)
 			{
-				CreateData(game, user, kvp.Key, kvp.Value.SaveDataType, kvp.Value.Values);
+				CreateData(game, user, kvp.Key, kvp.Value.EvaluationDataType, kvp.Value.Values);
 			}
 
 			return dataValues;
 		}
 		
-		private void CreateData(Game game, User user, string key, SaveDataType valueType, params object[] values)
+		private void CreateData(Game game, User user, string key, EvaluationDataType valueType, params object[] values)
 		{
 			foreach (var value in values)
 			{
-				var saveData = new UserData
+				var evaluationData = new UserData
 				{
 					UserId = user.Id,
 					User = user,
@@ -151,19 +151,19 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
 					Key = key,
 					Value = value.ToString(),
-					SaveDataType = valueType,
+					EvaluationDataType = valueType,
 				};
 
 				// Because the tests for these objects rely on their timestamps being different, 
 				// their entry into the database needs to be temporally separated.
 				// Could rather try sort these values in a linq expression in the test evaluation as the 
 				// ticks may vary but this method seems close to what a user would do.
-				if (valueType == SaveDataType.Boolean || valueType == SaveDataType.String)
+				if (valueType == EvaluationDataType.Boolean || valueType == EvaluationDataType.String)
 				{
 					Thread.Sleep(1000);
 				}
 
-				_userSaveDataDbController.Create(saveData);
+				_userEvaluationDataDbController.Create(evaluationData);
 			}
 		}
 
@@ -203,7 +203,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 							.Select(i => (random.NextDouble()*1000) - 100)
 							.ToArray().Cast<object>().ToArray(),
 
-						SaveDataType = SaveDataType.Float,
+						EvaluationDataType = EvaluationDataType.Float,
 					}
 				},
 				{
@@ -215,7 +215,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 							.Select(i => random.Next(-10, 100))
 							.ToArray().Cast<object>().ToArray(),
 
-						SaveDataType = SaveDataType.Long,
+						EvaluationDataType = EvaluationDataType.Long,
 					}
 				},
 				{
@@ -227,7 +227,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 							.Select(c => c.EnglishName)
 							.ToArray().Cast<object>().ToArray(),
 
-						SaveDataType = SaveDataType.String,
+						EvaluationDataType = EvaluationDataType.String,
 					}
 				},
 				{
@@ -238,7 +238,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 							.Select(i => random.Next(0, 2) == 1)
 							.ToArray().Cast<object>().ToArray(),
 
-						SaveDataType = SaveDataType.Boolean,
+						EvaluationDataType = EvaluationDataType.Boolean,
 					}
 				},
 			};
@@ -248,7 +248,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		{
 			public object[] Values { get; set; }
 
-			public SaveDataType SaveDataType;
+			public EvaluationDataType EvaluationDataType;
 		}
 		#endregion*/
 	}

@@ -4,7 +4,7 @@ using PlayGen.SUGAR.Data.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Data.Model
 {
-	public class SaveData : IModificationHistory
+	public class EvaluationData : IModificationHistory
 	{
 		public int Id { get; set; }
 
@@ -12,13 +12,13 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public int? GameId { get; set; }
 
-		public SaveDataCategory Category { get; set; }
+		public EvaluationDataCategory Category { get; set; }
 
 		public string Key { get; set; }
 
 		public string Value { get; set; }
 
-		public SaveDataType SaveDataType { get; set; }
+		public EvaluationDataType EvaluationDataType { get; set; }
 
 		public DateTime DateCreated { get; set; }
 

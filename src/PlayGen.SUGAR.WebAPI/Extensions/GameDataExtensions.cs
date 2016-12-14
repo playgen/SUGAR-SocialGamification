@@ -6,37 +6,37 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class GameDataExtensions
 	{
-		public static SaveDataResponse ToContract(this Data.Model.SaveData saveData)
+		public static EvaluationDataResponse ToContract(this Data.Model.EvaluationData evaluationData)
 		{
-			if (saveData == null)
+			if (evaluationData == null)
 			{
 				return null;
 			}
 
-			return new SaveDataResponse
+			return new EvaluationDataResponse
 			{
-				ActorId = saveData.ActorId,
-				GameId = saveData.GameId,
-				Key = saveData.Key,
-				Value = saveData.Value,
-				SaveDataType = saveData.SaveDataType
+				ActorId = evaluationData.ActorId,
+				GameId = evaluationData.GameId,
+				Key = evaluationData.Key,
+				Value = evaluationData.Value,
+				EvaluationDataType = evaluationData.EvaluationDataType
 			};
 		}
 
-		public static IEnumerable<SaveDataResponse> ToContractList(this IEnumerable<Data.Model.SaveData> gameDatas)
+		public static IEnumerable<EvaluationDataResponse> ToContractList(this IEnumerable<Data.Model.EvaluationData> gameDatas)
 		{
 			return gameDatas.Select(ToContract).ToList();
 		}
 
-		public static Data.Model.SaveData ToGameDataModel(this SaveDataRequest dataContract)
+		public static Data.Model.EvaluationData ToGameDataModel(this EvaluationDataRequest dataContract)
 		{
-			return new Data.Model.SaveData
+			return new Data.Model.EvaluationData
 			{
 				ActorId = dataContract.ActorId,
 				GameId = dataContract.GameId,
 				Key = dataContract.Key,
 				Value = dataContract.Value,
-				SaveDataType = dataContract.SaveDataType
+				EvaluationDataType = dataContract.EvaluationDataType
 			};
 		}
 	}

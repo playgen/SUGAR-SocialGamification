@@ -102,9 +102,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			foreach (var ec in evaluation.EvaluationCriterias)
 			{
-				if (!DataTypeValueValidation(ec.SaveDataType, ec.Value))
+				if (!DataTypeValueValidation(ec.EvaluationDataType, ec.Value))
 				{
-					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.SaveDataType}");
+					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.EvaluationDataType}");
 				}
 			}
 			evaluation = _evaluationDbController.Create(evaluation);
@@ -120,9 +120,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			foreach (var ec in evaluation.EvaluationCriterias)
 			{
-				if (!DataTypeValueValidation(ec.SaveDataType, ec.Value))
+				if (!DataTypeValueValidation(ec.EvaluationDataType, ec.Value))
 				{
-					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.SaveDataType}");
+					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.EvaluationDataType}");
 				}
 			}
 			_evaluationDbController.Update(evaluation);
@@ -147,19 +147,19 @@ namespace PlayGen.SUGAR.Core.Controllers
             Logger.Info($"Deleted: {evaluation?.Id} for Token {token}, GameId: {gameId}");
         }
 
-		private bool DataTypeValueValidation(SaveDataType dataType, string value)
+		private bool DataTypeValueValidation(EvaluationDataType dataType, string value)
 		{
 			switch (dataType)
 			{
-				case SaveDataType.String:
+				case EvaluationDataType.String:
 					return true;
-				case SaveDataType.Long:
+				case EvaluationDataType.Long:
 					long longValue;
 					return long.TryParse(value, out longValue);
-				case SaveDataType.Float:
+				case EvaluationDataType.Float:
 					float floatValue;
 					return float.TryParse(value, out floatValue);
-				case SaveDataType.Boolean:
+				case EvaluationDataType.Boolean:
 					bool boolValue;
 					return bool.TryParse(value, out boolValue);
 				default:
@@ -201,10 +201,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public bool IsAlreadyCompleted(Evaluation evaluation, int actorId)
 		{
-            var saveDataCoreController = new SaveDataController(ContextFactory, evaluation.EvaluationType.ToSaveDataCategory());
+            var evaluationDataCoreController = new EvaluationDataController(ContextFactory, evaluation.EvaluationType.ToEvaluationDataCategory());
 
 		    var key = ComposeCompletionKey(evaluation);
-			var completed = saveDataCoreController.KeyExists(evaluation.GameId, actorId, key);
+			var completed = evaluationDataCoreController.KeyExists(evaluation.GameId, actorId, key);
 
             Logger.Debug($"Got: IsCompleted: {completed} for Evaluation.Id: {evaluation?.Id}, ActorId: {actorId}");
 
@@ -213,19 +213,19 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 	    private void SetCompleted(Evaluation evaluation, int? actorId)
 	    {
-            var saveDataCoreController = new SaveDataController(ContextFactory, evaluation.EvaluationType.ToSaveDataCategory());
+            var evaluationDataCoreController = new EvaluationDataController(ContextFactory, evaluation.EvaluationType.ToEvaluationDataCategory());
 
-            var SaveData = new SaveData
+            var EvaluationData = new EvaluationData
             {
-                Category = evaluation.EvaluationType.ToSaveDataCategory(),
+                Category = evaluation.EvaluationType.ToEvaluationDataCategory(),
                 Key = ComposeCompletionKey(evaluation),
                 GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game
                 ActorId = actorId,
-                SaveDataType = SaveDataType.String,
+                EvaluationDataType = EvaluationDataType.String,
                 Value = null
             };
 
-            saveDataCoreController.Add(SaveData);
+            evaluationDataCoreController.Add(EvaluationData);
             
             ProcessEvaluationRewards(evaluation, actorId);
 	    }

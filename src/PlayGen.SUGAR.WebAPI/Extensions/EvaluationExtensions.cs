@@ -39,10 +39,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		{
 			return new EvaluationCriteria
             {
-				SaveDataKey = contract.SaveDataKey,
+				EvaluationDataKey = contract.EvaluationDataKey,
 				ComparisonType = contract.ComparisonType,
 				CriteriaQueryType = contract.CriteriaQueryType,
-				SaveDataType = contract.SaveDataType,
+				EvaluationDataType = contract.EvaluationDataType,
 				Scope = contract.Scope,
 				Value = contract.Value,
 			};
@@ -53,10 +53,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             return new EvaluationCriteria
             {
                 Id = contract.Id,
-                SaveDataKey = contract.SaveDataKey,
+                EvaluationDataKey = contract.EvaluationDataKey,
                 ComparisonType = contract.ComparisonType,
                 CriteriaQueryType = contract.CriteriaQueryType,
-                SaveDataType = contract.SaveDataType,
+                EvaluationDataType = contract.EvaluationDataType,
                 Scope = contract.Scope,
                 Value = contract.Value,
             };

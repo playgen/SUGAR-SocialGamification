@@ -15,8 +15,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			return new EvaluationCriteriaResponse
 			{
                 Id = completionCriteria.Id,
-                SaveDataKey = completionCriteria.SaveDataKey,
-				SaveDataType = completionCriteria.SaveDataType,
+                EvaluationDataKey = completionCriteria.EvaluationDataKey,
+				EvaluationDataType = completionCriteria.EvaluationDataType,
 				CriteriaQueryType = completionCriteria.CriteriaQueryType,
 				ComparisonType = completionCriteria.ComparisonType,
 				Scope = completionCriteria.Scope,
@@ -37,8 +37,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             }
             return new Data.Model.EvaluationCriteria
             {
-                SaveDataKey = completionCriteria.SaveDataKey,
-                SaveDataType = completionCriteria.SaveDataType,
+                EvaluationDataKey = completionCriteria.EvaluationDataKey,
+                EvaluationDataType = completionCriteria.EvaluationDataType,
                 CriteriaQueryType = completionCriteria.CriteriaQueryType,
                 ComparisonType = completionCriteria.ComparisonType,
                 Scope = completionCriteria.Scope,
@@ -55,8 +55,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             return new Data.Model.EvaluationCriteria
             {
                 Id = completionCriteria.Id,
-                SaveDataKey = completionCriteria.SaveDataKey,
-                SaveDataType = completionCriteria.SaveDataType,
+                EvaluationDataKey = completionCriteria.EvaluationDataKey,
+                EvaluationDataType = completionCriteria.EvaluationDataType,
                 CriteriaQueryType = completionCriteria.CriteriaQueryType,
                 ComparisonType = completionCriteria.ComparisonType,
                 Scope = completionCriteria.Scope,

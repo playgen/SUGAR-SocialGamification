@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 			else
 			{
-				throw new ArgumentException($"Invalid Value {newData.Value} for SaveDataType {newData.SaveDataType}");
+				throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
 			}
 		}
 
@@ -60,20 +60,20 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		protected bool ParseCheck(ActorData data)
 		{
-			switch (data.SaveDataType)
+			switch (data.EvaluationDataType)
 			{
-				case SaveDataType.String:
+				case EvaluationDataType.String:
 					return true;
 
-				case SaveDataType.Long:
+				case EvaluationDataType.Long:
 					long tryLong;
 					return long.TryParse(data.Value, out tryLong);
 
-				case SaveDataType.Float:
+				case EvaluationDataType.Float:
 					float tryFloat;
 					return float.TryParse(data.Value, out tryFloat);
 
-				case SaveDataType.Boolean:
+				case EvaluationDataType.Boolean:
 					bool tryBoolean;
 					return bool.TryParse(data.Value, out tryBoolean);
 

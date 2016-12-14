@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// Name : "Leaderboard Name",
 	/// Key : "Key",
 	/// ActorType : "User",
-	/// SaveDataType : "Long",
+	/// EvaluationDataType : "Long",
 	/// CriteriaScope : "Actor",
 	/// LeaderboardType : "Highest"
 	/// }
@@ -55,10 +55,10 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		public ActorType ActorType { get; set; }
 
 		/// <summary>
-		/// The SaveDataType of the GameData being checked against.
+		/// The EvaluationDataType of the GameData being checked against.
 		/// </summary>
 		[Required]
-		public SaveDataType SaveDataType { get; set; }
+		public EvaluationDataType EvaluationDataType { get; set; }
 
 		/// <summary>
 		/// Whether the criteria will be checked against the actor or relatedactors (i.e. group members, user friends).

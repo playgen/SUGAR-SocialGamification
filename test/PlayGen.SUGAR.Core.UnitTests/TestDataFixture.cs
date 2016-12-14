@@ -77,23 +77,23 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 CreateMembership(_users[i].Id, _groups[i / GroupCount].Id);
             }
 
-            List<Data.Model.SaveData> gameDatas = new List<Data.Model.SaveData>();
+            var datas = new List<EvaluationData>();
             for (int j = 0; j < DataCount; j++)
             {
-                gameDatas.Add(CreateData(_games[_random.Next(0, _games.Count)], _users[_random.Next(0, _users.Count)], dataValues[_random.Next(0, dataValues.Count)]));
+                datas.Add(CreateData(_games[_random.Next(0, _games.Count)], _users[_random.Next(0, _users.Count)], dataValues[_random.Next(0, dataValues.Count)]));
             }
-            GameDataController.Add(gameDatas.ToArray());
+            GameDataController.Add(datas.ToArray());
         }
 
-        private static SaveData CreateData(Game game, User user, DataParam data)
+        private static EvaluationData CreateData(Game game, User user, DataParam data)
         {
-            var gameData = new Data.Model.SaveData
+            var gameData = new Data.Model.EvaluationData
             {
                 ActorId = user.Id,
                 GameId = game.Id,
                 Key = data.DataType.ToString(),
                 Value = data.Value,
-                SaveDataType = data.DataType,
+                EvaluationDataType = data.DataType,
             };
 
             return gameData;
@@ -163,22 +163,22 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 dataParams.Add(new DataParam
                 {
                     Value = (_random.NextDouble() * 1000).ToString("f5"),
-                    DataType = SaveDataType.Float,
+                    DataType = EvaluationDataType.Float,
                 });
                 dataParams.Add(new DataParam
                 {
                     Value = _random.Next(0, 1000).ToString(),
-                    DataType = SaveDataType.Long,
+                    DataType = EvaluationDataType.Long,
                 });
                 dataParams.Add(new DataParam
                 {
                     Value = _random.Next(0, 1000).ToString(),
-                    DataType = SaveDataType.String,
+                    DataType = EvaluationDataType.String,
                 });
                 dataParams.Add(new DataParam
                 {
                     Value = (_random.Next(0, 2) == 1 ? true : false).ToString(),
-                    DataType = SaveDataType.Boolean,
+                    DataType = EvaluationDataType.Boolean,
                 });
             }
 
@@ -189,7 +189,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         {
             public string Value { get; set; }
 
-            public SaveDataType DataType;
+            public EvaluationDataType DataType;
         }
     }
 }

@@ -11,33 +11,37 @@ namespace PlayGen.SUGAR.Core.Controllers
     {
         private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private readonly SaveDataController _saveDataController;
+        private readonly EvaluationDataController _evaluationDataController;
 
         public GameDataController(SUGARContextFactory contextFactory)
         {
-            _saveDataController = new SaveDataController(contextFactory, SaveDataCategory.GameData);
+            _evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.GameData);
         }
 
-        public List<SaveData> Get(int? gameId, int? actorId, string[] key)
+        public List<EvaluationData> Get(int? gameId, int? actorId, string[] key)
         {
-            return _saveDataController.Get(gameId, actorId, key);
+            return _evaluationDataController.Get(gameId, actorId, key);
         }
 
-
-        public SaveData Add(SaveData newData)
+        public EvaluationData Add(EvaluationData newData)
         {
-            return _saveDataController.Add(newData);
+            return _evaluationDataController.Add(newData);
         }
 
-        public SaveData GetSaveDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public void Add(EvaluationData[] evaluationData)
         {
-            return _saveDataController.GetSaveDataByHighestFloat(gameId, actorId, key, start, end);
+            _evaluationDataController.Add(evaluationData);
         }
 
-        public SaveData GetSaveDataByHighestLong(int? gameId, int? actorId, string key,
+        public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        {
+            return _evaluationDataController.GetEvaluationDataByHighestFloat(gameId, actorId, key, start, end);
+        }
+
+        public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key,
             DateTime start = default(DateTime), DateTime end = default(DateTime))
         {
-            return _saveDataController.GetSaveDataByHighestLong(gameId, actorId, key, start, end);
+            return _evaluationDataController.GetEvaluationDataByHighestLong(gameId, actorId, key, start, end);
         }
     }
 }

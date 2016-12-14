@@ -1,6 +1,6 @@
 ﻿namespace PlayGen.SUGAR.Common.Shared
 {
-	public enum SaveDataCategory
+	public enum EvaluationDataCategory
 	{
 		GameData = 0,
 		Resource = 1,

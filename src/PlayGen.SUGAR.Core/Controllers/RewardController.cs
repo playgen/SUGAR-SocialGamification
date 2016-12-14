@@ -18,21 +18,21 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public bool AddReward(int? actorId, int? gameId, Reward reward)
 		{
-		    var saveDataController = new SaveDataController(ContextFactory, reward.SaveDataCategory);
+		    var evaluationDataController = new EvaluationDataController(ContextFactory, reward.EvaluationDataCategory);
 
-			var saveData = new SaveData
+			var evaluationData = new EvaluationData
 			{
-				Key = reward.SaveDataKey,
+				Key = reward.EvaluationDataKey,
 				GameId = gameId,    //TODO: handle the case where a global achievement has been completed for a specific game
 				ActorId = actorId,
-                Category = reward.SaveDataCategory,
-				SaveDataType = reward.SaveDataType,
+                Category = reward.EvaluationDataCategory,
+				EvaluationDataType = reward.EvaluationDataType,
 				Value = reward.Value
 			};
 
-            saveDataController.Add(saveData);
+            evaluationDataController.Add(evaluationData);
 
-            Logger.Info($"Game Data: {saveData?.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward?.Id}");
+            Logger.Info($"Game Data: {evaluationData?.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward?.Id}");
 
 			return true;
 		}

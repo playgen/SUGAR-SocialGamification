@@ -7,123 +7,123 @@ using Xunit;
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
 	[Collection("Project Fixture Collection")]
-	public class SaveDataControllerTests
+	public class EvaluationDataControllerTests
 	{
 		#region Configuration
-		private readonly SaveDataController _saveDataController = ControllerLocator.SaveDataController;
+		private readonly EvaluationDataController _evaluationDataController = ControllerLocator.EvaluationDataController;
 		private readonly GameController _gameController = ControllerLocator.GameController;
 		private readonly UserController _userController = ControllerLocator.UserController;
 		#endregion
 		
 		#region Tests
 		[Fact]
-		public void CreateAndGetUserGameSaveData()
+		public void CreateAndGetUserGameEvaluationData()
 		{
-			var userDataName = "CreateAndGetUserGameSaveData";
+			var userDataName = "CreateAndGetUserGameEvaluationData";
 
-			var newSaveData = CreateSaveData(userDataName, createNewGame: true, createNewUser: true);
+			var newEvaluationData = CreateEvaluationData(userDataName, createNewGame: true, createNewUser: true);
 
-			var userDatas = _saveDataController.Get(newSaveData.GameId, newSaveData.ActorId, new List<string> { newSaveData.Key });
+			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.ActorId, new List<string> { newEvaluationData.Key });
 
-			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
+			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == newEvaluationData.GameId && g.ActorId == newEvaluationData.ActorId);
 
 			Assert.Equal(1, matches);
 		}
 
 		[Fact]
-		public void CreateAndGetUserGlobalSaveData()
+		public void CreateAndGetUserGlobalEvaluationData()
 		{
-			var userDataName = "CreateAndGetUserGlobalSaveData";
+			var userDataName = "CreateAndGetUserGlobalEvaluationData";
 
-			var newSaveData = CreateSaveData(userDataName, createNewUser: true);
+			var newEvaluationData = CreateEvaluationData(userDataName, createNewUser: true);
 
-			var userDatas = _saveDataController.Get(newSaveData.GameId, newSaveData.ActorId, new List<string> { newSaveData.Key });
+			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.ActorId, new List<string> { newEvaluationData.Key });
 
-			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == null && g.ActorId == newSaveData.ActorId);
+			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == null && g.ActorId == newEvaluationData.ActorId);
 
 			Assert.Equal(1, matches);
 		}
 
 		[Fact]
-		public void CreateAndGetGameGlobalSaveData()
+		public void CreateAndGetGameGlobalEvaluationData()
 		{
-			var userDataName = "CreateAndGetGameGlobalSaveData";
+			var userDataName = "CreateAndGetGameGlobalEvaluationData";
 
-			var newSaveData = CreateSaveData(userDataName, createNewGame: true);
+			var newEvaluationData = CreateEvaluationData(userDataName, createNewGame: true);
 
-			var userDatas = _saveDataController.Get(newSaveData.GameId, newSaveData.ActorId, new List<string> { newSaveData.Key });
+			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.ActorId, new List<string> { newEvaluationData.Key });
 
-			var matches = userDatas.Count(g => g.Key == newSaveData.Key && g.GameId == newSaveData.GameId && g.ActorId == newSaveData.ActorId);
+			var matches = userDatas.Count(g => g.Key == newEvaluationData.Key && g.GameId == newEvaluationData.GameId && g.ActorId == newEvaluationData.ActorId);
 
 			Assert.Equal(1, matches);
 		}
 
 		[Fact]
-		public void GetMultipleUserSaveDatas()
+		public void GetMultipleUserEvaluationDatas()
 		{
 			var userDataNames = new List<string>
 			{
-				"GetMultipleUserSaveDatas1",
-				"GetMultipleUserSaveDatas2",
-				"GetMultipleUserSaveDatas3",
-				"GetMultipleUserSaveDatas4",
+				"GetMultipleUserEvaluationDatas1",
+				"GetMultipleUserEvaluationDatas2",
+				"GetMultipleUserEvaluationDatas3",
+				"GetMultipleUserEvaluationDatas4",
 			};
 
-			var doNotFind = CreateSaveData("GetMultipleUserSaveDatas_DontGetThis");
+			var doNotFind = CreateEvaluationData("GetMultipleUserEvaluationDatas_DontGetThis");
 			var gameId = doNotFind.GameId;
 			var userId = doNotFind.ActorId;
 
 			foreach (var userDataName in userDataNames)
 			{
-				CreateSaveData(userDataName, gameId, userId);
+				CreateEvaluationData(userDataName, gameId, userId);
 			}
 
-			var userDatas = _saveDataController.Get(gameId, userId, userDataNames);
+			var userDatas = _evaluationDataController.Get(gameId, userId, userDataNames);
 
-			var matchingUserSaveDatas = userDatas.Select(g => userDataNames.Contains(g.Key));
+			var matchingUserEvaluationDatas = userDatas.Select(g => userDataNames.Contains(g.Key));
 
-			Assert.Equal(matchingUserSaveDatas.Count(), userDataNames.Count);
+			Assert.Equal(matchingUserEvaluationDatas.Count(), userDataNames.Count);
 		}
 
 		[Fact]
-		public void GetUserSaveDatasWithNonExistingKey()
+		public void GetUserEvaluationDatasWithNonExistingKey()
 		{
-			var userDataName = "GetUserSaveDatasWithNonExistingKey";
+			var userDataName = "GetUserEvaluationDatasWithNonExistingKey";
 
-			var newSaveData = CreateSaveData(userDataName);
+			var newEvaluationData = CreateEvaluationData(userDataName);
 
-			var userDatas = _saveDataController.Get(newSaveData.GameId, newSaveData.ActorId, new List<string> { "null key" });
+			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.ActorId, new List<string> { "null key" });
 
 			Assert.Empty(userDatas);
 		}
 
 		[Fact]
-		public void GetUserSaveDatasWithNonExistingGame()
+		public void GetUserEvaluationDatasWithNonExistingGame()
 		{
-			var userDataName = "GetUserSaveDatasWithNonExistingGame";
+			var userDataName = "GetUserEvaluationDatasWithNonExistingGame";
 
-			var newSaveData = CreateSaveData(userDataName);
+			var newEvaluationData = CreateEvaluationData(userDataName);
 
-			var userDatas = _saveDataController.Get(-1, newSaveData.ActorId, new List<string> { userDataName });
+			var userDatas = _evaluationDataController.Get(-1, newEvaluationData.ActorId, new List<string> { userDataName });
 
 			Assert.Empty(userDatas);
 		}
 
 		[Fact]
-		public void GetUserSaveDatasWithNonExistingUser()
+		public void GetUserEvaluationDatasWithNonExistingUser()
 		{
-			var userDataName = "GetUserSaveDatasWithNonExistingUser";
+			var userDataName = "GetUserEvaluationDatasWithNonExistingUser";
 
-			var newSaveData = CreateSaveData(userDataName);
+			var newEvaluationData = CreateEvaluationData(userDataName);
 
-			var userDatas = _saveDataController.Get(newSaveData.GameId, -1, new List<string> { userDataName });
+			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, -1, new List<string> { userDataName });
 
 			Assert.Empty(userDatas);
 		}
 		#endregion
 
 		#region Helpers
-		private Model.SaveData CreateSaveData(string key, int? gameId = null, int? userId = null, 
+		private Model.EvaluationData CreateEvaluationData(string key, int? gameId = null, int? userId = null, 
 			bool createNewGame = false, bool createNewUser = false)
 		{
 			if (createNewGame)
@@ -146,15 +146,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				userId = user.Id;
 			}
 
-			var userData = new Model.SaveData
+			var userData = new Model.EvaluationData
 			{
 				Key = key,
 				GameId = gameId,
 				ActorId = userId,
 				Value = key + " value",
-				SaveDataType = 0
+				EvaluationDataType = 0
 			};
-			_saveDataController.Create(userData);
+			_evaluationDataController.Create(userData);
 			return userData;
 		}
 		#endregion

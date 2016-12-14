@@ -10,11 +10,11 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public string Name { get; set; }
 
-		public SaveDataCategory SaveDataCategory { get; set; }
+		public EvaluationDataCategory EvaluationDataCategory { get; set; }
 
-		public string SaveDataKey { get; set; }
+		public string EvaluationDataKey { get; set; }
 
-		public SaveDataType SaveDataType { get; set; }
+		public EvaluationDataType EvaluationDataType { get; set; }
 
 		public ActorType ActorType { get; set; }
 

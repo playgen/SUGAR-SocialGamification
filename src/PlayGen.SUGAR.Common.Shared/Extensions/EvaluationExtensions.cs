@@ -4,15 +4,15 @@ namespace PlayGen.SUGAR.Common.Shared.Extensions
 {
     public static class EvaluationExtensions
     {
-        public static SaveDataCategory ToSaveDataCategory(this EvaluationType evaluationType)
+        public static EvaluationDataCategory ToEvaluationDataCategory(this EvaluationType evaluationType)
         {
             switch (evaluationType)
             {
                 case EvaluationType.Achievement:
-                    return SaveDataCategory.Achievement;
+                    return EvaluationDataCategory.Achievement;
 
                 case EvaluationType.Skill:
-                    return SaveDataCategory.Skill;
+                    return EvaluationDataCategory.Skill;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(evaluationType), evaluationType, null);

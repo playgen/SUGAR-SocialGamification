@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         private static ClaimController _claimController;
         private static EvaluationController _evaluationController;
         private static GameController _gameController;
-        private static SaveDataController _saveDataController;
+        private static EvaluationDataController _evaluationDataController;
         private static GroupController _groupController;
         private static GroupMemberController _groupMemberController;
         private static LeaderboardController _leaderboardController;
