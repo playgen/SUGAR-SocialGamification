@@ -13,7 +13,7 @@ services:
         network_mode: "bridge"
         build:
             context: ./
-        image: sugarengine
+        image: "sugarengine"
         container_name: "sugar"
         links:
             - sugar-mariadb
