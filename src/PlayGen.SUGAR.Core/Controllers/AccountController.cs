@@ -59,6 +59,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 
                     return verified;
                 }
+                else if (source.AutoRegister)
+                {
+                    return Create(toVerify, sourceToken);
+                }
                 throw new InvalidAccountDetailsException("Invalid Login Details.");
             }
             throw new InvalidAccountDetailsException("Invalid Login Details.");
