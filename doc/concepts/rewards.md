@@ -1,6 +1,10 @@
-# Rewards
+---
+uid: reward
+---
 
-<xref:PlayGen.SUGAR.Common.Shared.Reward> can be provided to [users](/features/user.html) and [groups](/features/group.html) upon completion of [achievements](/features/achievement.html) and [skills](/features/skill.html). Rewards given are stored within GameData, meaning they can in theory be used toward further <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria> and [leaderboards](/features/leaderboard.html).
+# Reward
+
+Rewards can be provided to [Users](xref:user) and [Groups](xref:group) upon completion of [Achievements](xref:achievement) and [Skills](xref:skill). Rewards given are stored within GameData, meaning they can in theory be used toward further <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria> and [Leaderboards](xref:leaderboard).
 
 In order to set up aa <xref:PlayGen.SUGAR.Common.Shared.Reward>, the following must be passed:
 

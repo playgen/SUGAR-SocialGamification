@@ -181,10 +181,10 @@ namespace PlayGen.SUGAR.Core.Controllers
             return sum;
         }
 
-        public float GetHighestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+        public float GetHighestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
             DateTime end = default(DateTime))
         {
-            var highest = _saveDataDbController.GetHighestFloats(gameId, actorId, key, start, end);
+            var highest = _saveDataDbController.GetHighestFloat(gameId, actorId, key, start, end);
 
             Logger.Debug(
                 $"Highest: {highest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
@@ -192,10 +192,10 @@ namespace PlayGen.SUGAR.Core.Controllers
             return highest;
         }
 
-        public long GetHighestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+        public long GetHighestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
             DateTime end = default(DateTime))
         {
-            var highest = _saveDataDbController.GetHighestLongs(gameId, actorId, key, start, end);
+            var highest = _saveDataDbController.GetHighestLong(gameId, actorId, key, start, end);
 
             Logger.Debug(
                 $"Highest: {highest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
@@ -203,10 +203,35 @@ namespace PlayGen.SUGAR.Core.Controllers
             return highest;
         }
 
-        public float GetLowestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+
+        public SaveData GetSaveDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        {
+            var highest = _saveDataDbController.GetSaveDataByHighestFloat(gameId, actorId, key, start, end);
+
+            Logger.Debug(
+                highest != null
+                    ? $"HighestId: {highest.Id} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}"
+                    : $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+
+            return highest;
+        }
+
+        public SaveData GetSaveDataByHighestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        {
+            var highest = _saveDataDbController.GetSaveDataByHighestLong(gameId, actorId, key, start, end);
+
+            Logger.Debug(
+                highest != null
+                    ? $"HighestId: {highest.Id} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}"
+                    : $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+
+            return highest;
+        }
+
+        public float GetLowestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
             DateTime end = default(DateTime))
         {
-            var lowest = _saveDataDbController.GetLowestFloats(gameId, actorId, key, start, end);
+            var lowest = _saveDataDbController.GetLowestFloat(gameId, actorId, key, start, end);
 
             Logger.Debug(
                 $"Lowest: {lowest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
@@ -214,10 +239,10 @@ namespace PlayGen.SUGAR.Core.Controllers
             return lowest;
         }
 
-        public long GetLowestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+        public long GetLowestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
             DateTime end = default(DateTime))
         {
-            var lowest = _saveDataDbController.GetLowestLongs(gameId, actorId, key, start, end);
+            var lowest = _saveDataDbController.GetLowestLong(gameId, actorId, key, start, end);
 
             Logger.Debug(
                 $"Lowest: {lowest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");

@@ -1,4 +1,5 @@
-﻿using PlayGen.SUGAR.Data.Model;
+﻿using System;
+using PlayGen.SUGAR.Data.Model;
 using NLog;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.EntityFramework;
@@ -22,14 +23,21 @@ namespace PlayGen.SUGAR.Core.Controllers
             return _saveDataController.Get(gameId, actorId, key);
         }
 
+
         public SaveData Add(SaveData newData)
         {
             return _saveDataController.Add(newData);
         }
 
-        public void Add(SaveData[] newDatas)
+        public SaveData GetSaveDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
         {
-            _saveDataController.Add(newDatas);
+            return _saveDataController.GetSaveDataByHighestFloat(gameId, actorId, key, start, end);
+        }
+
+        public SaveData GetSaveDataByHighestLong(int? gameId, int? actorId, string key,
+            DateTime start = default(DateTime), DateTime end = default(DateTime))
+        {
+            return _saveDataController.GetSaveDataByHighestLong(gameId, actorId, key, start, end);
         }
     }
 }
