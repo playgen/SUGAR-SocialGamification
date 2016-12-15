@@ -91,9 +91,18 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
         {
             // Multiple columns
             builder.Entity<EvaluationData>()
-                .HasIndex(g => new { g.Key, g.GameId, g.Category, ActorId = g.CreatingActorId, DataType = g.EvaluationDataType });
+                .HasIndex(g => new { g.Key, g.GameId, g.Category, g.CreatingActorId, g.EvaluationDataType })
+                .HasName("IX_EvaluationData_Key_Game_Category_Creator_Type");
 
-			builder.Entity<ActorData>()
+            builder.Entity<EvaluationData>()
+                .HasIndex(g => new { g.GameId, g.Category, g.CreatingActorId, g.EvaluationDataType })
+                .HasName("IX_EvaluationData_Game_Category_Creator_Type");
+
+            builder.Entity<EvaluationData>()
+                .HasIndex(g => new { g.GameId, g.Category, g.RelatedEntityId, g.EvaluationDataType })
+                .HasName("IX_EvaluationData_Game_Category_Related_Type"); ;
+
+            builder.Entity<ActorData>()
 				.HasIndex(g => new { g.Key, g.GameId, g.ActorId, DataType = g.EvaluationDataType })
 				.IsUnique();
 
