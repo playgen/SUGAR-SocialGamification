@@ -23,7 +23,7 @@ Both Achievements and [Skills](skill.md) build on "Evaluations" which may contai
     * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest>
     * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationUpdateRequest>
     * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationResponse>
-    * <xref:PlayGen.SUGAR.Common.Shared.SaveDataType>
+    * <xref:PlayGen.SUGAR.Common.Shared.EvaluationDataType>
     * <xref:PlayGen.SUGAR.Common.Shared.CriteriaQueryType>
     * <xref:PlayGen.SUGAR.Common.Shared.ComparisonType>
     * <xref:PlayGen.SUGAR.Common.Shared.ActorType>

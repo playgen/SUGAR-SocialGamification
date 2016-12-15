@@ -569,6 +569,8 @@
     name: ClaimExtensions
   - uid: PlayGen.SUGAR.WebAPI.Extensions.EvaluationCriteriaExtensions
     name: EvaluationCriteriaExtensions
+  - uid: PlayGen.SUGAR.WebAPI.Extensions.EvaluationDataExtensions
+    name: EvaluationDataExtensions
   - uid: PlayGen.SUGAR.WebAPI.Extensions.GameDataExtensions
     name: GameDataExtensions
   - uid: PlayGen.SUGAR.WebAPI.Extensions.GameExtensions
