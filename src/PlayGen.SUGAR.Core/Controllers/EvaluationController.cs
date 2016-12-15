@@ -203,7 +203,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
             var evaluationDataCoreController = new EvaluationDataController(ContextFactory, evaluation.EvaluationType.ToEvaluationDataCategory());
 
-		    var key = ComposeCompletionKey(evaluation);
+		    var key = evaluation.Token;
 			var completed = evaluationDataCoreController.KeyExists(evaluation.GameId, actorId, key);
 
             Logger.Debug($"Got: IsCompleted: {completed} for Evaluation.Id: {evaluation?.Id}, ActorId: {actorId}");
@@ -218,7 +218,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             var EvaluationData = new EvaluationData
             {
                 Category = evaluation.EvaluationType.ToEvaluationDataCategory(),
-                Key = ComposeCompletionKey(evaluation),
+                Key = evaluation.Token,
                 GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game
                 CreatingActorId = actorId,
                 EvaluationDataType = EvaluationDataType.String,
@@ -246,11 +246,6 @@ namespace PlayGen.SUGAR.Core.Controllers
             }
 
             return evaluations;
-        }
-
-	    private string ComposeCompletionKey(Evaluation evaluation)
-	    {
-            return $"{evaluation.EvaluationType}_{evaluation.Token}";
         }
     }
 }
