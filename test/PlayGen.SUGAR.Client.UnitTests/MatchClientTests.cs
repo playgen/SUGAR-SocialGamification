@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using NUnit.Framework;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client.UnitTests
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
         public void CanStart()
         {
-            // Assign
+            // Arrange
             LoginUserForGame();
 
             // Act
@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
         public void CanEnd()
         {
-            // Assign
+            // Arrange
             LoginUserForGame();
             var match = SUGARClient.Match.CreateAndStart();
 
@@ -71,19 +71,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
         public void CanGetByTime()
         {
-            // Assign
+            // Arrange
             LoginUserForGame();
             var shouldntGet = StartAndEndMatches(10);
 
-            //Thread.Sleep(1000);
             var preTime = DateTime.UtcNow;
-            //Thread.Sleep(1000);
 
             var shouldGet = StartAndEndMatches(10);
             
-            //Thread.Sleep(1000);
             var postTime = DateTime.UtcNow;
-            //Thread.Sleep(1000);
 
             shouldntGet.AddRange(StartAndEndMatches(10));
 
@@ -98,7 +94,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
         public void GetByGame()
         {
-            // Assign
+            // Arrange
             LoginUserForGame("GetByGame_ShouldntGet");
             var shouldntGet = StartMatches(10);
 
@@ -117,22 +113,18 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
         public void GetByGameAndTime()
         {
-            // Assign
+            // Arrange
             LoginUserForGame("GetByGameAndTime_ShouldntGet");
             var shouldntGet = StartAndEndMatches(10);
 
-            //Thread.Sleep(1000);
             var pre = DateTime.UtcNow;
-            //Thread.Sleep(1000);
 
             shouldntGet.AddRange(StartAndEndMatches(10));
 
             LoginUserForGame("GetByGameAndTime_ShouldGet");
             var shouldGet = StartAndEndMatches(10);
 
-            //Thread.Sleep(1000);
             var post = DateTime.UtcNow;
-            //Thread.Sleep(1000);
 
             shouldntGet.AddRange(StartAndEndMatches(10));
 
@@ -148,7 +140,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
         public void CanGetByCreator()
         {
-            // Assign
+            // Arrange
             LoginUserForGame("CanGetByCreator_ShouldntGet");
             var shouldntGet = StartMatches(10);
 
@@ -167,22 +159,18 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
         public void CanGetByCreatorAndTime()
         {
-            // Assign
+            // Arrange
             LoginUserForGame("CanGetByCreatorAndTime_ShouldntGet");
             var shouldntGet = StartAndEndMatches(10);
 
-            //Thread.Sleep(1000);
             var pre = DateTime.UtcNow;
-            //Thread.Sleep(1000);
 
             shouldntGet.AddRange(StartAndEndMatches(10));
 
             LoginUserForGame("CanGetByCreatorAndTime_ShouldGet");
             var shouldGet = StartAndEndMatches(10);
 
-            //Thread.Sleep(1000);
             var post = DateTime.UtcNow;
-            //Thread.Sleep(1000);
 
             shouldntGet.AddRange(StartAndEndMatches(10));
 
@@ -198,7 +186,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
         public void CanGetByGameAndCreator()
         {
-            // Assign
+            // Arrange
             LoginUserForGame("CanGetByGameAndCreator_ShouldntGet");
             var shouldntGet = StartMatches(10);
 
@@ -218,22 +206,18 @@ namespace PlayGen.SUGAR.Client.UnitTests
         [Test]
         public void CanGetByGameAndCreatorAndTime()
         {
-            // Assign
+            // Arrange
             LoginUserForGame("CanGetByGameAndCreatorAndTime_ShouldntGet");
             var shouldntGet = StartAndEndMatches(10);
 
-            //Thread.Sleep(1000);
             var pre = DateTime.UtcNow;
-            //Thread.Sleep(1000);
 
             shouldntGet.AddRange(StartAndEndMatches(10));
 
             LoginUserForGame("CanGetByGameAndCreatorAndTime_ShouldGet");
             var shouldGet = StartAndEndMatches(10);
 
-            //Thread.Sleep(1000);
             var post = DateTime.UtcNow;
-            //Thread.Sleep(1000);
 
             shouldntGet.AddRange(StartAndEndMatches(10));
 
@@ -245,6 +229,40 @@ namespace PlayGen.SUGAR.Client.UnitTests
             got.ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
             shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
             shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+        }
+
+        [Test]
+        public void CanAddAndGetData()
+        {
+            // Arrange
+            LoginUserForGame("CanAddAndGetData");
+
+            var match = SUGARClient.Match.CreateAndStart();
+
+            var datas = new List<EvaluationDataResponse>();
+
+            // Act
+            for (var i = 0; i < 10; i++)
+            {
+                datas.Add(SUGARClient.Match.AddData(new EvaluationDataRequest
+                {
+                    EntityId = match.Id,
+                    GameId = _game.Id,
+                    ActorId = _account.User.Id,
+                    EvaluationDataType = EvaluationDataType.Long,
+                    Key = "CanAddAndGetData",
+                    Value = i.ToString()
+                }));
+            }
+
+            var got = SUGARClient.Match.GetData(match.Id);
+
+            // Assert
+            datas.ForEach(a => Assert.True(got.Any(g => g.GameId == a.GameId
+                && g.EntityId == a.EntityId
+                && g.ActorId == a.ActorId
+                && g.Key == a.Key
+                && g.Value == a.Value)));
         }
 
         #region Helpers

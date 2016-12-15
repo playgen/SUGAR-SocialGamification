@@ -2,6 +2,7 @@
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
@@ -21,6 +22,20 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
                 Creator = model.Creator?.ToContract(),
                 Started = model.Started,
                 Ended = model.Ended
+            };
+        }
+
+        public static EvaluationData ToMatchDataModel(this EvaluationDataRequest contract)
+        {
+            return new EvaluationData
+            {
+                GameId = contract.GameId,
+                EntityId = contract.EntityId,
+                ActorId = contract.ActorId,
+                Key = contract.Key,
+                Value = contract.Value,
+                EvaluationDataType = contract.EvaluationDataType,
+                Category = EvaluationDataCategory.MatchData,
             };
         }
     }

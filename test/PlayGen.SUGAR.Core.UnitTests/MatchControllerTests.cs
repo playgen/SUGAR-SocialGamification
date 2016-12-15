@@ -130,7 +130,6 @@ namespace PlayGen.SUGAR.Core.UnitTests
         public void CanAddAndGetData()
         {
             // Arrange
-            // Arrange
             var game = Helpers.GetOrCreateGame("CanAddAndGetData");
             var user = Helpers.GetOrCreateUser("CanAddAndGetData");
             var match = ControllerLocator.MatchController.Create(game.Id, user.Id);
@@ -144,7 +143,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                     GameId = game.Id,
                     ActorId = user.Id,
                     EntityId = match.Id,
-                    Category = EvaluationDataCategory.Match,
+                    Category = EvaluationDataCategory.MatchData,
                     Key = "CanAddAndGetData",
                     Value = i.ToString(),
                     EvaluationDataType = EvaluationDataType.Long

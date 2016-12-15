@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.Extensions;
 using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.Client
@@ -145,5 +146,31 @@ namespace PlayGen.SUGAR.Client
 			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/creator/{1}/{2}/{3}", gameId, creatorId, start, end).ToString();
 			return Get<List<MatchResponse>>(query);
 		}
-	}
+
+        /// <summary>
+        /// Create a new Match Data record.
+        /// </summary>
+        /// <param name="data"><see cref="EvaluationDataRequest"/> object that holds the details of the new Match Data.</param>
+        /// <returns>A <see cref="EvaluationDataResponse"/> containing the new Match Data details.</returns>
+        public EvaluationDataResponse AddData(EvaluationDataRequest data)
+        {
+            var query = GetUriBuilder(ControllerPrefix).ToString();
+            return Post<EvaluationDataRequest, EvaluationDataResponse>(query, data);
+        }
+
+        /// <summary>
+		/// Find a list of all Match Data that match the parameters provided.
+		/// </summary>
+		/// <param name="matchId">ID of the match.</param>
+		/// <param name="keys">Array of Key names.</param>
+		/// <returns>A list of <see cref="EvaluationDataResponse"/> which match the search criteria.</returns>
+		public IEnumerable<EvaluationDataResponse> GetData(int matchId, string[] keys = null)
+        {
+            var query = GetUriBuilder(ControllerPrefix)
+                .AppendQueryParameter(matchId, "matchId={0}")
+                .AppendQueryParameters(keys, "keys={1}")
+                .ToString();
+            return Get<IEnumerable<EvaluationDataResponse>>(query);
+        }
+    }
 }

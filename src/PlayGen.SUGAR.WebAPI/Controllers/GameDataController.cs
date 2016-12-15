@@ -8,7 +8,6 @@ using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.WebAPI.Attributes;
 using PlayGen.SUGAR.WebAPI.Extensions;
-using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
@@ -17,14 +16,13 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
-    [ValidateSession]
-    public class GameDataController : Controller
+	[ValidateSession]
+	public class GameDataController : Controller
 	{
-		private readonly IAuthorizationService _authorizationService;
+        private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.GameDataController _gameDataCoreController;
 
-
-        public GameDataController(Core.Controllers.GameDataController gameDataCoreController,
+		public GameDataController(Core.Controllers.GameDataController gameDataCoreController,
 					IAuthorizationService authorizationService)
 		{
 			_gameDataCoreController = gameDataCoreController;
@@ -54,68 +52,68 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return Forbid();
 		}
 
-        /// <summary>
-        /// Finds a list of GameData with the highest <param name="dataType"/> for each <param name="key"/> provided that matches the <param name="actorId"/> and <param name="gameId"/>.
-        /// 
+		/// <summary>
+		/// Finds a list of GameData with the highest <param name="dataType"/> for each <param name="key"/> provided that matches the <param name="actorId"/> and <param name="gameId"/>.
+		/// 
 		/// Example Usage: GET api/gamedata/highest?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2&amp;dataType=1
-        /// </summary>
-        /// <param name="actorId">ID of a User/Group.</param>
+		/// </summary>
+		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="key">Array of Key names.</param>
-        /// <param name="dataType">Data type of value</param>
-        /// <returns></returns>
-        [HttpGet("highest")]
-        //[ResponseType(typeof(IEnumerable<EvaluationDataResponse>))]
-        [Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
-        [Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
-        public IActionResult GetHighest(int? actorId, int? gameId, string[] key, EvaluationDataType dataType)
-        {
-            if (_authorizationService.AuthorizeAsync(User, actorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-                 _authorizationService.AuthorizeAsync(User, actorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
-                 _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
-            {
-                var dataList = new List<EvaluationData>();
-                switch (dataType)
-                {
-                    case EvaluationDataType.Float:
-                        foreach (var dataKey in key)
-                        {
-                            var gameData = _gameDataCoreController.GetEvaluationDataByHighestFloat(gameId, actorId, dataKey);
-                            if (gameData != null)
-                            {
-                                dataList.Add(gameData);
-                            }
-                        }
-                        break;
-                    case EvaluationDataType.Long:
-                        foreach (var dataKey in key)
-                        {
-                            var gameData = _gameDataCoreController.GetEvaluationDataByHighestLong(gameId, actorId, dataKey);
-                            if (gameData != null)
-                            {
-                                dataList.Add(gameData);
-                            }
-                        }
-                        break;
+		/// <param name="dataType">Data type of value</param>
+		/// <returns></returns>
+		[HttpGet("highest")]
+		//[ResponseType(typeof(IEnumerable<EvaluationDataResponse>))]
+		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
+		[Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
+		[Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
+		public IActionResult GetHighest(int? actorId, int? gameId, string[] key, EvaluationDataType dataType)
+		{
+			if (_authorizationService.AuthorizeAsync(User, actorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				 _authorizationService.AuthorizeAsync(User, actorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
+				 _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			{
+				var dataList = new List<EvaluationData>();
+				switch (dataType)
+				{
+					case EvaluationDataType.Float:
+						foreach (var dataKey in key)
+						{
+							var gameData = _gameDataCoreController.GetEvaluationDataByHighestFloat(gameId, actorId, dataKey);
+							if (gameData != null)
+							{
+								dataList.Add(gameData);
+							}
+						}
+						break;
+					case EvaluationDataType.Long:
+						foreach (var dataKey in key)
+						{
+							var gameData = _gameDataCoreController.GetEvaluationDataByHighestLong(gameId, actorId, dataKey);
+							if (gameData != null)
+							{
+								dataList.Add(gameData);
+							}
+						}
+						break;
 
-                }
-                var dataContract = dataList.ToContractList();
-                return new ObjectResult(dataContract);
-            }
-            return Forbid();
-        }
+				}
+				var dataContract = dataList.ToContractList();
+				return new ObjectResult(dataContract);
+			}
+			return Forbid();
+		}
 
 
 
-        /// <summary>
-        /// Create a new GameData record.
-        /// 
-        /// Example Usage: POST api/gamedata
-        /// </summary>
-        /// <param name="newData"><see cref="EvaluationDataRequest"/> object that holds the details of the new GameData.</param>
-        /// <returns>A <see cref="EvaluationDataResponse"/> containing the new GameData details.</returns>
-        [HttpPost]
+		/// <summary>
+		/// Create a new GameData record.
+		/// 
+		/// Example Usage: POST api/gamedata
+		/// </summary>
+		/// <param name="newData"><see cref="EvaluationDataRequest"/> object that holds the details of the new GameData.</param>
+		/// <returns>A <see cref="EvaluationDataResponse"/> containing the new GameData details.</returns>
+		[HttpPost]
 		//[ResponseType(typeof(EvaluationDataResponse))]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.GameData)]
@@ -135,6 +133,6 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return Forbid();
 		}
 
-        // todo create method for adding batches of gamedata
-    }
+		// todo create method for adding batches of gamedata
+	}
 }

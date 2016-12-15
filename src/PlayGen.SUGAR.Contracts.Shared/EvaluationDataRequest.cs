@@ -28,6 +28,11 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		/// </summary>
 		public int? GameId { get; set; }
 
+        /// <summary>
+        /// Id of the entity this data is related to.
+        /// </summary>
+        public int? EntityId { get; set; }
+
 		/// <summary>
 		/// The identifier of the data being stored.
 		/// </summary>

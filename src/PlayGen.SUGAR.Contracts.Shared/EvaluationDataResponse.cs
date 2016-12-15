@@ -17,15 +17,20 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// </example>
 	public class EvaluationDataResponse
 	{
+        /// <summary>
+		/// The id of the Game which this ActorData/GameData relates to.
+		/// </summary>
+		public int? GameId { get; set; }
+
+        /// <summary>
+        /// Id of the entity this data is related to.
+        /// </summary>
+        public int? EntityId { get; set; }
+
 		/// <summary>
 		/// The id of the Actor which this ActorData/GameData relates to.
 		/// </summary>
 		public int? ActorId { get; set; }
-
-		/// <summary>
-		/// The id of the Game which this ActorData/GameData relates to.
-		/// </summary>
-		public int? GameId { get; set; }
 
 		/// <summary>
 		/// The identifier of the data.

@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Core.Controllers
         public MatchController(SUGARContextFactory contextFactory, Data.EntityFramework.Controllers.MatchController matchDbController)
         {
             _matchDbController = matchDbController;
-            _evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.Match);
+            _evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.MatchData);
         }
 
         public Match Create(int gameId, int creatorId)
@@ -61,6 +61,15 @@ namespace PlayGen.SUGAR.Core.Controllers
             match = _matchDbController.Update(match);
 
             Logger.Info($"Match: {match.Id} ended");
+
+            return match;
+        }
+
+        public Match Get(int matchId)
+        {
+            var match = _matchDbController.Get(matchId);
+
+            Logger.Info($"Found {match?.Id}");
 
             return match;
         }
