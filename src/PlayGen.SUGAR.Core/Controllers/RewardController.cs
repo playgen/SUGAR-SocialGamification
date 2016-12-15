@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public bool AddReward(int? actorId, int? gameId, Reward reward)
 		{
-			var gameData = new GameData()
+			var gameData = new EvaluationData()
 			{
 				Key = reward.Key,
 				GameId = gameId,    //TODO: handle the case where a global achievement has been completed for a specific game

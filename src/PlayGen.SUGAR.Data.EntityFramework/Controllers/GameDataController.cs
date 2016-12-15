@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public List<GameData> Get(List<int> ids)
+		public List<EvaluationData> Get(List<int> ids)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public List<GameData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
+		public List<EvaluationData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -413,30 +413,30 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public GameData Create(GameData data)
+		public EvaluationData Create(EvaluationData data)
 		{
 		    using (var context = ContextFactory.Create())
 		    {
 		        context.HandleDetatchedGame(data.GameId);
 		        context.HandleDetatchedActor(data.ActorId);
 
-		        context.GameData.Add(data);
+		        context.EvaluationData.Add(data);
 		        SaveChanges(context);
 
 		        return data;
 		    }
 		}
 
-		public void Create(List<GameData> datas)
+		public void Create(List<EvaluationData> datas)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				context.GameData.AddRange(datas);
+				context.EvaluationData.AddRange(datas);
 				SaveChanges(context);
 			}
 		}
 
-		public void Update(GameData updatedData)
+		public void Update(EvaluationData updatedData)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -444,7 +444,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
                 // context.[tablename].Update(entity);
                 // context.SaveChanges();
 
-                var existingData = context.GameData
+                var existingData = context.EvaluationData
                     .Find(context, updatedData.Id);
 
 				if (existingData == null)

@@ -90,10 +90,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
         internal static void ConfigureIndexes(this ModelBuilder builder)
         {
             // Multiple columns
-            builder.Entity<GameData>()
+            builder.Entity<EvaluationData>()
                 .HasIndex(g => new { g.Key, g.GameId, g.Category, g.ActorId, DataType = g.SaveDataType });
 
-			builder.Entity<ActorData>()
+			builder.Entity<ActorDetails>()
 				.HasIndex(g => new { g.Key, g.GameId, g.ActorId, DataType = g.SaveDataType })
 				.IsUnique();
 
@@ -155,16 +155,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 .HasMaxLength(256);
 
             // Set precision of data
-            //modelBuilder.Entity<GameData>()
+            //modelBuilder.Entity<EvaluationData>()
             //	.Property(g => g.DateCreated)
             //	.HasPrecision(3);
-            //modelBuilder.Entity<GameData>()
+            //modelBuilder.Entity<EvaluationData>()
             //	.Property(g => g.DateModified)
             //	.HasPrecision(3);
-            //modelBuilder.Entity<ActorData>()
+            //modelBuilder.Entity<ActorDetails>()
             //    .Property(g => g.DateCreated)
             //    .HasPrecision(3);
-            //modelBuilder.Entity<ActorData>()
+            //modelBuilder.Entity<ActorDetails>()
             //    .Property(g => g.DateModified)
             //    .HasPrecision(3);
         }

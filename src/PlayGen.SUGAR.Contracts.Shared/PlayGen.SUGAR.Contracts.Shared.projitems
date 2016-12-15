@@ -53,8 +53,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)RoleClaimResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RoleRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RoleResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SaveDataRequest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SaveDataResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationDataRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationDataResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UserRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UserResponse.cs" />
   </ItemGroup>

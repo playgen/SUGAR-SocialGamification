@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
         protected void CompleteGenericEvaluation(EvaluationResponse evaluation, int userId)
         {
-            SUGARClient.GameData.Add(new SaveDataRequest
+            SUGARClient.EvaluationData.Add(new EvaluationDataRequest
             {
                 ActorId = userId,
                 SaveDataType = evaluation.EvaluationCriterias[0].DataType,

@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var SaveDataRequest = new SaveDataRequest
+			var SaveDataRequest = new EvaluationDataRequest
 			{
 				ActorId = user.Id,
 				GameId = game.Id,
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = SUGARClient.GameData.Add(SaveDataRequest);
+			var response = SUGARClient.EvaluationData.Add(SaveDataRequest);
 
 			Assert.AreEqual(SaveDataRequest.ActorId, response.ActorId);
 			Assert.AreEqual(SaveDataRequest.GameId, response.GameId);
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
 
-			var SaveDataRequest = new SaveDataRequest
+			var SaveDataRequest = new EvaluationDataRequest
 			{
 				ActorId = user.Id,
 				Key = "CanCreateWithoutGameId",
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = SUGARClient.GameData.Add(SaveDataRequest);
+			var response = SUGARClient.EvaluationData.Add(SaveDataRequest);
 
 			Assert.AreEqual(SaveDataRequest.ActorId, response.ActorId);
 			Assert.AreEqual(SaveDataRequest.GameId, response.GameId);
@@ -59,7 +59,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var SaveDataRequest = new SaveDataRequest
+			var SaveDataRequest = new EvaluationDataRequest
 			{
 				GameId = game.Id,
 				Key = "CanCreateWithoutActorId",
@@ -67,7 +67,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = SUGARClient.GameData.Add(SaveDataRequest);
+			var response = SUGARClient.EvaluationData.Add(SaveDataRequest);
 
 			Assert.AreEqual(SaveDataRequest.ActorId, response.ActorId);
 			Assert.AreEqual(SaveDataRequest.GameId, response.GameId);
@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var SaveDataRequest = new SaveDataRequest
+			var SaveDataRequest = new EvaluationDataRequest
 			{
 				ActorId = user.Id,
 				GameId = game.Id,
@@ -90,7 +90,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.EvaluationData.Add(SaveDataRequest));
 		}
 
 		[Test]
@@ -99,7 +99,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var SaveDataRequest = new SaveDataRequest
+			var SaveDataRequest = new EvaluationDataRequest
 			{
 				ActorId = user.Id,
 				GameId = game.Id,
@@ -107,7 +107,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.EvaluationData.Add(SaveDataRequest));
 		}
 
 		[Test]
@@ -116,7 +116,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var SaveDataRequest = new SaveDataRequest
+			var SaveDataRequest = new EvaluationDataRequest
 			{
 				ActorId = user.Id,
 				GameId = game.Id,
@@ -125,29 +125,29 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.Float,
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.EvaluationData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Long;
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.EvaluationData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Boolean;
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.EvaluationData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Float;
 			SaveDataRequest.Value = "True";
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.EvaluationData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Long;
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.EvaluationData.Add(SaveDataRequest));
 
 			SaveDataRequest.SaveDataType = SaveDataType.Boolean;
 			SaveDataRequest.Value = "2";
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(SaveDataRequest));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.EvaluationData.Add(SaveDataRequest));
 		}
 
 		[Test]
@@ -156,7 +156,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "CanGetGameData");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "CanGetGameData");
 
-			var SaveDataRequest = new SaveDataRequest
+			var SaveDataRequest = new EvaluationDataRequest
 			{
 				ActorId = user.Id,
 				GameId = game.Id,
@@ -165,9 +165,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = SUGARClient.GameData.Add(SaveDataRequest);
+			var response = SUGARClient.EvaluationData.Add(SaveDataRequest);
 
-			var get = SUGARClient.GameData.Get(user.Id, game.Id, new [] { "CanGetGameData" });
+			var get = SUGARClient.EvaluationData.Get(user.Id, game.Id, new [] { "CanGetGameData" });
 
 			Assert.AreEqual(1, get.Count());
 			Assert.AreEqual(get.First().ActorId, response.ActorId);
@@ -182,7 +182,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-			var SaveDataRequest = new SaveDataRequest
+			var SaveDataRequest = new EvaluationDataRequest
 			{
 				GameId = game.Id,
 				Key = "CanGetGameDataWithoutActorId",
@@ -190,9 +190,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = SUGARClient.GameData.Add(SaveDataRequest);
+			var response = SUGARClient.EvaluationData.Add(SaveDataRequest);
 
-			var get = SUGARClient.GameData.Get(null, game.Id, new string[] { "CanGetGameDataWithoutActorId" });
+			var get = SUGARClient.EvaluationData.Get(null, game.Id, new string[] { "CanGetGameDataWithoutActorId" });
 
 			Assert.AreEqual(1, get.Count());
 			Assert.AreEqual(get.First().ActorId, response.ActorId);
@@ -207,7 +207,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Get");
 
-			var SaveDataRequest = new SaveDataRequest
+			var SaveDataRequest = new EvaluationDataRequest
 			{
 				ActorId = user.Id,
 				Key = "CanGetGameDataWithoutGameId",
@@ -215,9 +215,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var response = SUGARClient.GameData.Add(SaveDataRequest);
+			var response = SUGARClient.EvaluationData.Add(SaveDataRequest);
 
-			var get = SUGARClient.GameData.Get(user.Id, null, new string[] { "CanGetGameDataWithoutGameId" });
+			var get = SUGARClient.EvaluationData.Get(user.Id, null, new string[] { "CanGetGameDataWithoutGameId" });
 
 			Assert.AreEqual(1, get.Count());
 			Assert.AreEqual(get.First().ActorId, response.ActorId);
@@ -233,7 +233,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Get");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-			var SaveDataRequestOne = new SaveDataRequest
+			var SaveDataRequestOne = new EvaluationDataRequest
 			{
 				ActorId = user.Id,
 				GameId = game.Id,
@@ -242,7 +242,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var SaveDataRequestTwo = new SaveDataRequest
+			var SaveDataRequestTwo = new EvaluationDataRequest
 			{
 				ActorId = user.Id,
 				GameId = game.Id,
@@ -251,7 +251,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var SaveDataRequestThree = new SaveDataRequest
+			var SaveDataRequestThree = new EvaluationDataRequest
 			{
 				ActorId = user.Id,
 				GameId = game.Id,
@@ -260,11 +260,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.String,
 			};
 
-			var responseOne = SUGARClient.GameData.Add(SaveDataRequestOne);
-			var responseTwo = SUGARClient.GameData.Add(SaveDataRequestTwo);
-			var responseThree = SUGARClient.GameData.Add(SaveDataRequestThree);
+			var responseOne = SUGARClient.EvaluationData.Add(SaveDataRequestOne);
+			var responseTwo = SUGARClient.EvaluationData.Add(SaveDataRequestTwo);
+			var responseThree = SUGARClient.EvaluationData.Add(SaveDataRequestThree);
 
-			var get = SUGARClient.GameData.Get(user.Id, game.Id, new string[] { "CanGetGameDatByMultipleKeys1", "CanGetGameDatByMultipleKeys2", "CanGetGameDatByMultipleKeys3" });
+			var get = SUGARClient.EvaluationData.Get(user.Id, game.Id, new string[] { "CanGetGameDatByMultipleKeys1", "CanGetGameDatByMultipleKeys2", "CanGetGameDatByMultipleKeys3" });
 
 			Assert.AreEqual(3, get.Count());
 			foreach (var g in get)

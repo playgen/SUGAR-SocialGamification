@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
-	public class ActorDataController : DbController
+	public class ActorDetailsController : DbController
 	{
-		public ActorDataController(SUGARContextFactory contextFactory)
+		public ActorDetailsController(SUGARContextFactory contextFactory)
 			: base(contextFactory)
 		{
 		}
@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public List<ActorData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
+		public List<ActorDetails> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -36,21 +36,21 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public ActorData Create(ActorData data)
+		public ActorDetails Create(ActorDetails details)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				context.HandleDetatchedGame(data.GameId);
-				context.HandleDetatchedActor(data.ActorId);
+				context.HandleDetatchedGame(details.GameId);
+				context.HandleDetatchedActor(details.ActorId);
 
-				context.ActorData.Add(data);
+				context.ActorDetails.Add(details);
 				SaveChanges(context);
 
-				return data;
+				return details;
 			}
 		}
 
-		public void Update(ActorData updatedData)
+		public void Update(ActorDetails updatedDetails)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -58,15 +58,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				// context.[tablename].Update(entity);
 				// context.SaveChanges();
 
-				var existingData = context.ActorData
-					.Find(context, updatedData.Id);
+				var existingData = context.ActorDetails
+					.Find(context, updatedDetails.Id);
 
 				if (existingData == null)
 				{
 					throw new MissingRecordException("Cannot find the object to update.");
 				}
 
-				existingData.Value = updatedData.Value;
+				existingData.Value = updatedDetails.Value;
 
 				SaveChanges(context);
 			}

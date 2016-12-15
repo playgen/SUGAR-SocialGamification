@@ -4,7 +4,7 @@ using PlayGen.SUGAR.Common.Shared;
 namespace PlayGen.SUGAR.Contracts.Shared
 {
 	/// <summary>
-	/// Encapsulates ActorData/GameData details.
+	/// Encapsulates ActorData/EvaluationData details.
 	/// </summary>
 	/// <example>
 	/// JSON
@@ -16,15 +16,15 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// SaveDataType : "Long"
 	/// }
 	/// </example>
-	public class SaveDataRequest
+	public class EvaluationDataRequest
     {
 		/// <summary>
-		/// The id of the Actor which this ActorData/GameData is being ensigned to. Can be left null to ensign to the system/game.
+		/// The id of the Actor which this ActorData/EvaluationData is being ensigned to. Can be left null to ensign to the system/game.
 		/// </summary>
 		public int? ActorId { get; set; }
 
 		/// <summary>
-		/// The id of the Game which this ActorData/GameData relates to. Can be left null to relate the ActorData/GameData to the wider system.
+		/// The id of the Game which this ActorData/EvaluationData relates to. Can be left null to relate the ActorData/EvaluationData to the wider system.
 		/// </summary>
 		public int? GameId { get; set; }
 

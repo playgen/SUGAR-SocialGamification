@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Core.Controllers
     public class GameDataController
     {
         private static Logger Logger = LogManager.GetCurrentClassLogger();
-        public static Action<GameData> GameDataAddedEvent;
+        public static Action<EvaluationData> GameDataAddedEvent;
 
         private readonly Data.EntityFramework.Controllers.GameDataController _gameDataDbController;
 
@@ -18,13 +18,13 @@ namespace PlayGen.SUGAR.Core.Controllers
             _gameDataDbController = gameDataDbController;
         }
         
-        public void Add(GameData[] datas)
+        public void Add(EvaluationData[] datas)
         {
-            var dataList = new List<GameData>();
+            var dataList = new List<EvaluationData>();
             var i = 0;
             var chunkSize = 1000;
 
-            var uniqueAddedData = new Dictionary<string, GameData>();
+            var uniqueAddedData = new Dictionary<string, EvaluationData>();
 
             do
             {
@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             Logger.Info($"Added: {datas?.Length} Game Datas.");
         }
 
-        public GameData Add(GameData newData)
+        public EvaluationData Add(EvaluationData newData)
         {
             if (ParseCheck(newData))
             {
@@ -85,7 +85,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             return keyExists;
         }
 
-        public List<GameData> Get(List<int> ids)
+        public List<EvaluationData> Get(List<int> ids)
         {
             var datas = _gameDataDbController.Get(ids);
             
@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             return datas;
         }
 
-        public List<GameData> Get(int? gameId = null, int? actorId = null, string[] keys = null)
+        public List<EvaluationData> Get(int? gameId = null, int? actorId = null, string[] keys = null)
         {
             var datas = _gameDataDbController.Get(gameId, actorId, keys);
 
@@ -258,7 +258,7 @@ namespace PlayGen.SUGAR.Core.Controllers
             return didGetLatestKey;
         }
 
-        protected bool ParseCheck(GameData data)
+        protected bool ParseCheck(EvaluationData data)
         {
             switch (data.SaveDataType)
             {

@@ -58,7 +58,7 @@
     <Compile Include="Exceptions\ClientHttpException.cs" />
     <Compile Include="Extensions\UriBuilderExtensions.cs" />
     <Compile Include="GameClient.cs" />
-    <Compile Include="GameDataClient.cs" />
+    <Compile Include="EvaluationDataClient.cs" />
     <Compile Include="GroupClient.cs" />
     <Compile Include="GroupMemberClient.cs" />
     <Compile Include="HttpRequest.cs" />

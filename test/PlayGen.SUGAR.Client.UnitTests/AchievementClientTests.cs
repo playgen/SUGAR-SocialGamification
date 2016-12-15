@@ -1126,7 +1126,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(response.Token, user.Id);
 			Assert.AreEqual(0, progressAchievement.Progress);
 
-			var gameData = new SaveDataRequest()
+			var gameData = new EvaluationDataRequest()
 			{
 				Key = "CanGetGlobalAchievementProgress",
 				Value = "1",
@@ -1134,7 +1134,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.Float
 			};
 
-			SUGARClient.GameData.Add(gameData);
+			SUGARClient.EvaluationData.Add(gameData);
 
 			progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(response.Token, user.Id);
 			Assert.GreaterOrEqual(progressAchievement.Progress, 1);
@@ -1182,7 +1182,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var progressAchievement = SUGARClient.Achievement.GetAchievementProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(0, progressAchievement.Progress);
 
-			var gameData = new SaveDataRequest()
+			var gameData = new EvaluationDataRequest()
 			{
 				Key = "CanGetAchievementProgress",
 				Value = "1",
@@ -1191,7 +1191,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				SaveDataType = SaveDataType.Float
 			};
 
-			SUGARClient.GameData.Add(gameData);
+			SUGARClient.EvaluationData.Add(gameData);
 
 			progressAchievement = SUGARClient.Achievement.GetAchievementProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(1, progressAchievement.Progress);

@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Client
 	    private SessionClient _sessionClient;
 		private AchievementClient _achievementClient;
 		private GameClient _gameClient;
-		private GameDataClient _gameDataClient;
+		private EvaluationDataClient _evaluationDataClient;
 		private GroupClient _groupClient;
 		private GroupMemberClient _groupMemberClient;
 		private UserClient _userClient;
@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.Client
         public SessionClient Session            => _sessionClient ?? (_sessionClient = new SessionClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
 		public AchievementClient Achievement	=> _achievementClient ?? (_achievementClient = new AchievementClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
 		public GameClient Game					=> _gameClient ?? (_gameClient = new GameClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
-		public GameDataClient GameData			=> _gameDataClient ?? (_gameDataClient = new GameDataClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
+		public EvaluationDataClient EvaluationData			=> _evaluationDataClient ?? (_evaluationDataClient = new EvaluationDataClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
 		public GroupClient Group				=> _groupClient ?? (_groupClient = new GroupClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
 		public GroupMemberClient GroupMember	=> _groupMemberClient ?? (_groupMemberClient = new GroupMemberClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
 		public UserClient User					=> _userClient ?? (_userClient = new UserClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));

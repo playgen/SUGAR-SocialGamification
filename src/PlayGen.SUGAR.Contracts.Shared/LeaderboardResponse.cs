@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		public string Name { get; set; }
 
 		/// <summary>
-		/// The GameData key which is checked against in order to create the leaderboard standings.
+		/// The EvaluationData key which is checked against in order to create the leaderboard standings.
 		/// </summary>
 		public string Key { get; set; }
 
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		public ActorType ActorType { get; set; }
 
 		/// <summary>
-		/// The SaveDataType of the GameData being checked against.
+		/// The SaveDataType of the EvaluationData being checked against.
 		/// </summary>
 		public SaveDataType SaveDataType { get; set; }
 

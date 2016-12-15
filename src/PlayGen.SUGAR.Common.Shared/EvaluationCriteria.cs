@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Common.Shared
 		public SaveDataType DataType { get; set; }
 
 		/// <summary>
-		/// Which stored GameData will be queried.
+		/// Which stored EvaluationData will be queried.
 		/// </summary>
 		[Required]
 		public CriteriaQueryType CriteriaQueryType { get; set; }

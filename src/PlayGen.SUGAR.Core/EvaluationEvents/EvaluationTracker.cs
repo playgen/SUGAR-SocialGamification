@@ -78,11 +78,11 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
             _progressNotificationCache.Remove(session.GameId, session.ActorId);
         }
 
-        private void OnGameDataAdded(GameData gameData)
+        private void OnGameDataAdded(EvaluationData evaluationData)
         {
             ICollection<Evaluation> evaluations;
 
-            if (_gameDataToEvaluationMapper.TryGetRelated(gameData, out evaluations))
+            if (_gameDataToEvaluationMapper.TryGetRelated(evaluationData, out evaluations))
             {
                 var gameIds = GetGameIdsFromEvaluations(evaluations);
                 var sessions = _sessionTracker.GetByGames(gameIds);

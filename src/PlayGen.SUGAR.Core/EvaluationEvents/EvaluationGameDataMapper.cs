@@ -15,11 +15,11 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
         // <gamedata key, <evaluationId, evaluation>>
         private readonly ConcurrentDictionary<string, ConcurrentDictionary<int, Evaluation>> _mappings = new ConcurrentDictionary<string, ConcurrentDictionary<int, Evaluation>>();
 
-        public bool TryGetRelated(GameData gameData, out ICollection<Evaluation> evaluations)
+        public bool TryGetRelated(EvaluationData evaluationData, out ICollection<Evaluation> evaluations)
         {
             var didGetRelated = false;
             evaluations = null;
-            var mappedKey = CreateMappingKey(gameData.GameId, gameData.SaveDataType, gameData.Key);
+            var mappedKey = CreateMappingKey(evaluationData.GameId, evaluationData.SaveDataType, evaluationData.Key);
 
             ConcurrentDictionary<int, Evaluation> relatedEvalautions;
             if (_mappings.TryGetValue(mappedKey, out relatedEvalautions))

@@ -3,13 +3,13 @@ using PlayGen.SUGAR.Data.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Data.Model
 {
-	public class ActorData : IModificationHistory
+	public class GameDetails : IModificationHistory
 	{
 		public int Id { get; set; }
 
-		public int? ActorId { get; set; }
+		public int GameId { get; set; }
 
-		public int? GameId { get; set; }
+        public Game Game { get; set; }
 
 		public string Key { get; set; }
 

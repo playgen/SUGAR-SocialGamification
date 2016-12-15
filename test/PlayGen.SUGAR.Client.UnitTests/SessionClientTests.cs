@@ -207,7 +207,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             SUGARClient.Session.Logout();
 
             // Assert
-            Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(new SaveDataRequest
+            Assert.Throws<ClientHttpException>(() => SUGARClient.EvaluationData.Add(new EvaluationDataRequest
             {
                 ActorId = Helpers.GetOrCreateUser(SUGARClient.User, "CanLogoutAndInvalidateSessionClass").Id,
                 GameId = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLogoutAndInvalidateSessionClass").Id,

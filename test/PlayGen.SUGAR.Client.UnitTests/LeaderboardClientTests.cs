@@ -737,7 +737,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
 
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Standings");
-			var gameData = new SaveDataRequest
+			var gameData = new EvaluationDataRequest
 			{
 				Key = createRequest.Key,
 				SaveDataType = createRequest.SaveDataType,
@@ -745,7 +745,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Value = "5"
 			};
 
-			SUGARClient.GameData.Add(gameData);
+			SUGARClient.EvaluationData.Add(gameData);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -781,7 +781,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
 
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Standings");
-			var gameData = new SaveDataRequest
+			var gameData = new EvaluationDataRequest
 			{
 				Key = createRequest.Key,
 				SaveDataType = createRequest.SaveDataType,
@@ -790,7 +790,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Value = "5"
 			};
 
-			SUGARClient.GameData.Add(gameData);
+			SUGARClient.EvaluationData.Add(gameData);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -842,7 +842,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			};
 
 			var group = Helpers.GetOrCreateGroup(SUGARClient.Group, "Standings");
-			var gameData = new SaveDataRequest
+			var gameData = new EvaluationDataRequest
 			{
 				Key = createRequest.Key,
 				SaveDataType = createRequest.SaveDataType,
@@ -851,7 +851,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Value = "5"
 			};
 
-			SUGARClient.GameData.Add(gameData);
+			SUGARClient.EvaluationData.Add(gameData);
 
 			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
 
@@ -1010,7 +1010,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			};
 
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Standings");
-			var gameData = new SaveDataRequest
+			var gameData = new EvaluationDataRequest
 			{
 				Key = createRequest.Key,
 				SaveDataType = createRequest.SaveDataType,
@@ -1019,7 +1019,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				Value = "5"
 			};
 
-			SUGARClient.GameData.Add(gameData);
+			SUGARClient.EvaluationData.Add(gameData);
 
 			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
 

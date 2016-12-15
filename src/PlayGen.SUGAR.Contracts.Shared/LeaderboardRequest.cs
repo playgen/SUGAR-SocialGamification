@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 
 		/// <summary>
 		/// The Id of the Game which this leaderboards belongs to. Can be left null to relate this leaderboard to the system rather than a game.
-		/// This Id is also used when gathering GameData using the Key provided.
+		/// This Id is also used when gathering EvaluationData using the Key provided.
 		/// </summary>
 		public int? GameId { get; set; }
 
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		public string Name { get; set; }
 
 		/// <summary>
-		/// The GameData key which is checked against in order to create the leaderboard standings.
+		/// The EvaluationData key which is checked against in order to create the leaderboard standings.
 		/// </summary>
 		[Required]
 		[StringLength(64)]
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		public ActorType ActorType { get; set; }
 
 		/// <summary>
-		/// The SaveDataType of the GameData being checked against.
+		/// The SaveDataType of the EvaluationData being checked against.
 		/// </summary>
 		[Required]
 		public SaveDataType SaveDataType { get; set; }

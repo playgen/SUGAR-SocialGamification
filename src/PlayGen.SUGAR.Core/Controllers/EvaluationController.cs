@@ -215,7 +215,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		private void ProcessEvaluationRewards(Evaluation evaluation, int? actorId)
 		{
-			var gameData = new GameData()
+			var gameData = new EvaluationData()
 			{
 				Key = string.Format(_evaluationFormatMappings[evaluation.EvaluationType], evaluation.Token),
 				GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game

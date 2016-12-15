@@ -6,12 +6,12 @@
     /// <example>
     /// JSON
     /// {
-    /// Key : "GameData Key",
+    /// Key : "EvaluationData Key",
     /// DataType : "String",
     /// CriteriaQueryType : "Any",
     /// ComparisonType : "Equals",
     /// Scope : "Actor",
-    /// Value : "GameData Key Value"
+    /// Value : "EvaluationData Key Value"
     /// }
     /// </example>
     public class EvaluationCriteriaResponse : Common.Shared.EvaluationCriteria

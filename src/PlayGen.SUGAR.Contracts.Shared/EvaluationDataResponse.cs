@@ -3,7 +3,7 @@
 namespace PlayGen.SUGAR.Contracts.Shared
 {
 	/// <summary>
-	/// Encapsulates ActorData/GameData details from the server.
+	/// Encapsulates ActorData/EvaluationData details from the server.
 	/// </summary>
 	/// <example>
 	/// JSON
@@ -15,15 +15,15 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// SaveDataType : "Long"
 	/// }
 	/// </example>
-	public class SaveDataResponse
+	public class EvaluationDataResponse
 	{
 		/// <summary>
-		/// The id of the Actor which this ActorData/GameData relates to.
+		/// The id of the Actor which this ActorData/EvaluationData relates to.
 		/// </summary>
 		public int? ActorId { get; set; }
 
 		/// <summary>
-		/// The id of the Game which this ActorData/GameData relates to.
+		/// The id of the Game which this ActorData/EvaluationData relates to.
 		/// </summary>
 		public int? GameId { get; set; }
 
