@@ -1026,7 +1026,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Key = "CanGetGlobalSkillProgress",
 				Value = "1",
-				ActorId = user.Id,
+				CreatingActorId = user.Id,
 				EvaluationDataType = EvaluationDataType.Float
 			};
 
@@ -1082,7 +1082,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Key = "CanGetSkillProgress",
 				Value = "1",
-				ActorId = user.Id,
+				CreatingActorId = user.Id,
 				GameId = game.Id,
 				EvaluationDataType = EvaluationDataType.Float
 			};

@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 Key = evaluationCriteria.EvaluationDataKey,
                 EvaluationDataType = evaluationCriteria.EvaluationDataType,
 
-                ActorId = actorId,
+                CreatingActorId = actorId,
 				GameId = gameId,
 
                 Value = value

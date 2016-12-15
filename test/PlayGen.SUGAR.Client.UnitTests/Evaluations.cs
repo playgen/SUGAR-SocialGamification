@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
         {
             SUGARClient.GameData.Add(new EvaluationDataRequest
             {
-                ActorId = userId,
+                CreatingActorId = userId,
                 EvaluationDataType = evaluation.EvaluationCriterias[0].EvaluationDataType,
                 Value = $"{200}",
                 Key = evaluation.EvaluationCriterias[0].EvaluationDataKey

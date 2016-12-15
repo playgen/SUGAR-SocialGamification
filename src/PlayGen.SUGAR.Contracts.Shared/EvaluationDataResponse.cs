@@ -25,12 +25,12 @@ namespace PlayGen.SUGAR.Contracts.Shared
         /// <summary>
         /// Id of the entity this data is related to.
         /// </summary>
-        public int? EntityId { get; set; }
+        public int? RelatedEntityId { get; set; }
 
 		/// <summary>
 		/// The id of the Actor which this ActorData/GameData relates to.
 		/// </summary>
-		public int? ActorId { get; set; }
+		public int? CreatingActorId { get; set; }
 
 		/// <summary>
 		/// The identifier of the data.

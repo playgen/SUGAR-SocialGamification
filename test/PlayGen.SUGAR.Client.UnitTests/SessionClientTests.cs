@@ -209,7 +209,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             // Assert
             Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(new EvaluationDataRequest
             {
-                ActorId = Helpers.GetOrCreateUser(SUGARClient.User, "CanLogoutAndInvalidateSessionClass").Id,
+                CreatingActorId = Helpers.GetOrCreateUser(SUGARClient.User, "CanLogoutAndInvalidateSessionClass").Id,
                 GameId = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLogoutAndInvalidateSessionClass").Id,
                 Key = "CanLogoutAndInvalidateSessionClass",
                 EvaluationDataType = EvaluationDataType.String,

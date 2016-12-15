@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         {
             var newResource = CreateResource("CanGetExistingResourceActorId", createNewUser: true);
 
-            var gotResources = _resourceController.Get(actorId: newResource.ActorId);
+            var gotResources = _resourceController.Get(actorId: newResource.CreatingActorId);
 
             Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
         }
@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
             _resourceController.AddQuantity(newResource.Id, 999);
 
-            var resources = _resourceController.Get(newResource.GameId, newResource.ActorId, new [] { newResource.Key });
+            var resources = _resourceController.Get(newResource.GameId, newResource.CreatingActorId, new [] { newResource.Key });
             newResource = resources.Single();
 
             Assert.Equal(newValue.ToString(), newResource.Value);
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
             Assert.Equal(originalQuantity - transferQuantity, long.Parse(fromResource.Value));
             Assert.Equal(transferQuantity, long.Parse(toResource.Value));
-            Assert.Equal(toUser.Id, toResource.ActorId);
+            Assert.Equal(toUser.Id, toResource.CreatingActorId);
             Assert.Equal(fromResource.GameId, toResource.GameId);
         }
 
@@ -132,7 +132,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
             var resource = new EvaluationData
             {
                 GameId = gameId,
-                ActorId = actorId,
+                CreatingActorId = actorId,
                 Key = key,
                 Value = "100",
                 EvaluationDataType = EvaluationDataType.Long,
@@ -145,7 +145,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
         private bool IsMatch(EvaluationData lhs, EvaluationData rhs)
         {
-            return lhs.ActorId == rhs.ActorId
+            return lhs.CreatingActorId == rhs.CreatingActorId
                 && lhs.GameId == rhs.GameId
                 && lhs.Category == rhs.Category
                 && lhs.EvaluationDataType == rhs.EvaluationDataType

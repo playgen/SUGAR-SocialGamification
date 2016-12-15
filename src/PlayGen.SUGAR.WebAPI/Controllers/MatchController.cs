@@ -320,8 +320,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Match)]
 		public IActionResult Add([FromBody]EvaluationDataRequest newData)
 		{
-			if (_authorizationService.AuthorizeAsync(User, newData.ActorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, newData.ActorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
+			if (_authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
 				_authorizationService.AuthorizeAsync(User, newData.GameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var data = newData.ToMatchDataModel();

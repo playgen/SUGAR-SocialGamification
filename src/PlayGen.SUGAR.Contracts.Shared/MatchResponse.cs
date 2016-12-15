@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		/// <summary>
 		/// User that created the match
 		/// </summary>
-		public UserResponse Creator { get; set; }
+		public ActorResponse Creator { get; set; }
 
 		/// <summary>
 		/// When the match was started

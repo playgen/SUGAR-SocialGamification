@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 			{
 				Key = reward.EvaluationDataKey,
 				GameId = gameId,    //TODO: handle the case where a global achievement has been completed for a specific game
-				ActorId = actorId,
+				CreatingActorId = actorId,
                 Category = reward.EvaluationDataCategory,
 				EvaluationDataType = reward.EvaluationDataType,
 				Value = reward.Value

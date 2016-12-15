@@ -492,7 +492,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		    using (var context = ContextFactory.Create())
 		    {
 		        context.HandleDetatchedGame(data.GameId);
-		        context.HandleDetatchedActor(data.ActorId);
+		        context.HandleDetatchedActor(data.CreatingActorId);
 
 		        context.EvaluationData.Add(data);
 		        SaveChanges(context);

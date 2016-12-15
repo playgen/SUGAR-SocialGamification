@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 			return new EvaluationDataResponse
 			{
-				ActorId = actorData.ActorId,
+				CreatingActorId = actorData.ActorId,
 				GameId = actorData.GameId,
 				Key = actorData.Key,
 				Value = actorData.Value,
@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		{
 			return new Data.Model.ActorData
 			{
-				ActorId = dataContract.ActorId,
+				ActorId = dataContract.CreatingActorId,
 				GameId = dataContract.GameId,
 				Key = dataContract.Key,
 				Value = dataContract.Value,

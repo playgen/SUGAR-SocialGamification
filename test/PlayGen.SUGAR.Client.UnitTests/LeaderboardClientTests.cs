@@ -741,7 +741,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Key = createRequest.Key,
 				EvaluationDataType = createRequest.EvaluationDataType,
-				ActorId = user.Id,
+				CreatingActorId = user.Id,
 				Value = "5"
 			};
 
@@ -785,7 +785,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Key = createRequest.Key,
 				EvaluationDataType = createRequest.EvaluationDataType,
-				ActorId = user.Id,
+				CreatingActorId = user.Id,
 				GameId = game.Id,
 				Value = "5"
 			};
@@ -846,7 +846,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Key = createRequest.Key,
 				EvaluationDataType = createRequest.EvaluationDataType,
-				ActorId = group.Id,
+				CreatingActorId = group.Id,
 				GameId = game.Id,
 				Value = "5"
 			};
@@ -1014,7 +1014,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Key = createRequest.Key,
 				EvaluationDataType = createRequest.EvaluationDataType,
-				ActorId = user.Id,
+				CreatingActorId = user.Id,
 				GameId = game.Id,
 				Value = "5"
 			};

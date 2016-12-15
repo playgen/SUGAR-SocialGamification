@@ -66,8 +66,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[Authorization(ClaimScope.User, AuthorizationOperation.Create, AuthorizationOperation.ActorData)]
 		public IActionResult Add([FromBody]EvaluationDataRequest newData)
 		{
-			if (_authorizationService.AuthorizeAsync(User, newData.ActorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, newData.ActorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)
+			if (_authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)
 			{
 				var data = newData.ToActorDataModel();
 				var exists = _actorDataCoreController.KeyExists(data.GameId, data.ActorId, data.Key);

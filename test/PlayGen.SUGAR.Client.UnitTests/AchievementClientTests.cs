@@ -1130,7 +1130,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Key  ="CanGetGlobalAchievementProgress",
 				Value = "1",
-				ActorId = user.Id,
+				CreatingActorId = user.Id,
 				EvaluationDataType = EvaluationDataType.Float
 			};
 
@@ -1186,7 +1186,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			{
 				Key  ="CanGetAchievementProgress",
 				Value = "1",
-				ActorId = user.Id,
+				CreatingActorId = user.Id,
 				GameId = game.Id,
 				EvaluationDataType = EvaluationDataType.Float
 			};

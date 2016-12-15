@@ -141,8 +141,8 @@ namespace PlayGen.SUGAR.Core.UnitTests
                 datas.Add(ControllerLocator.MatchController.AddData(new EvaluationData
                 {
                     GameId = game.Id,
-                    ActorId = user.Id,
-                    EntityId = match.Id,
+                    CreatingActorId = user.Id,
+                    RelatedEntityId = match.Id,
                     Category = EvaluationDataCategory.MatchData,
                     Key = "CanAddAndGetData",
                     Value = i.ToString(),
@@ -154,8 +154,8 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
             // Assert
             datas.ForEach(a => Assert.True(got.Any(g => g.GameId == a.GameId
-                && g.EntityId == a.EntityId
-                && g.ActorId == a.ActorId
+                && g.RelatedEntityId == a.RelatedEntityId
+                && g.CreatingActorId == a.CreatingActorId
                 && g.Key == a.Key
                 && g.Value == a.Value)));
         }

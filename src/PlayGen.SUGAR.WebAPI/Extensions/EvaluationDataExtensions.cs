@@ -21,8 +21,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			return new EvaluationDataResponse
 			{
                 GameId = evaluationData.GameId,
-                EntityId = evaluationData.EntityId,
-                ActorId = evaluationData.ActorId,
+                RelatedEntityId = evaluationData.RelatedEntityId,
+                CreatingActorId = evaluationData.CreatingActorId,
 				Key = evaluationData.Key,
 				Value = evaluationData.Value,
 				EvaluationDataType = evaluationData.EvaluationDataType

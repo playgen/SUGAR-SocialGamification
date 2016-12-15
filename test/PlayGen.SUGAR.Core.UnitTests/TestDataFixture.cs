@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
         {
             var gameData = new Data.Model.EvaluationData
             {
-                ActorId = user.Id,
+                CreatingActorId = user.Id,
                 GameId = game.Id,
                 Key = data.DataType.ToString(),
                 Value = data.Value,

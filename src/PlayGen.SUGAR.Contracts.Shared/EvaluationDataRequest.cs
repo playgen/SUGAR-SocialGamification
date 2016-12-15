@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		/// <summary>
 		/// The id of the Actor which this ActorData/GameData is being ensigned to. Can be left null to ensign to the system/game.
 		/// </summary>
-		public int? ActorId { get; set; }
+		public int? CreatingActorId { get; set; }
 
 		/// <summary>
 		/// The id of the Game which this ActorData/GameData relates to. Can be left null to relate the ActorData/GameData to the wider system.
@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
         /// <summary>
         /// Id of the entity this data is related to.
         /// </summary>
-        public int? EntityId { get; set; }
+        public int? RelatedEntityId { get; set; }
 
 		/// <summary>
 		/// The identifier of the data being stored.

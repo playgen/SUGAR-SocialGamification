@@ -30,8 +30,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             return new EvaluationData
             {
                 GameId = contract.GameId,
-                EntityId = contract.EntityId,
-                ActorId = contract.ActorId,
+                RelatedEntityId = contract.RelatedEntityId,
+                CreatingActorId = contract.CreatingActorId,
                 Key = contract.Key,
                 Value = contract.Value,
                 EvaluationDataType = contract.EvaluationDataType,
