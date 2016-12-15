@@ -1,3 +1,7 @@
+---
+uid: account
+---
+
 # Account
 Accounts are used by the User's to register and login to SUGAR.
 Each account is associated with a user. A user may have multiple accounts but an account may only have one user.

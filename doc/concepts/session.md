@@ -1,3 +1,7 @@
+---
+uid: session
+---
+
 # Session
 When a user logs in to a game, a new, unique session is created.
 When the user logs out, that session is ended.

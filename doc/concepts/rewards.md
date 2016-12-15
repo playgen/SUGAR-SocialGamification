@@ -10,7 +10,7 @@ In order to set up aa <xref:PlayGen.SUGAR.Common.Shared.Reward>, the following m
 
 - Key - The unique identifier for the reward being provided within GameData.
 
-- DataType - The <xref:PlayGen.SUGAR.Common.Shared.SaveDataType> of data being stored.
+- DataType - The <xref:PlayGen.SUGAR.Common.Shared.EvaluationDataType> of data being stored.
 
 - Value - The value which is being stored.
 

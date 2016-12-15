@@ -9,6 +9,7 @@ It can have various data attrubuted to it via the MatchData mechanism.
 ## Features
 * CRUD Match
 * Search Matches with filters: game, creator, start time, end time
+* Add and Get Match specific data
 
 ## API
 * Client
@@ -67,5 +68,39 @@ It can have various data attrubuted to it via the MatchData mechanism.
 			matchResponse = _matchClient?.End(matchResponse.Id);
 
 			return matchResponse:
+		}
+```
+
+* Adding match data
+
+```cs 
+		private EvaluationDataResponse AddMatchData(int matchId, int userId) 
+		{
+			var matchResponse = _matchClient.Get(matchId);
+
+			var matchData = SUGARClient.Match.AddData(new EvaluationDataRequest
+            {
+                RelatedEntityId = matchResponse.Id,
+                GameId = matchResponse.Game.Id,
+                CreatingActorId = userId,
+                EvaluationDataType = EvaluationDataType.Long,
+                Key = "MyMatchScore",
+                Value = 100
+            });						
+
+			return matchData:
+		}
+```
+
+* Getting match data
+
+```cs 
+		private EvaluationDataResponse GetAllMatchData(int matchId) 
+		{
+			var matchResponse = _matchClient.Get(matchId);
+
+			var allDataForMatch = SUGARClient.Match.GetData(matchId);
+
+			return allDataForMatch:
 		}
 ```

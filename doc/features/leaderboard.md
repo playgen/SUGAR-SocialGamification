@@ -27,7 +27,7 @@ Leaderboards provide a visual comparison tool for measurements of resources or o
     * <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsResponse>
     * <xref:PlayGen.SUGAR.Common.Shared.LeaderboardType>
     * <xref:PlayGen.SUGAR.Common.Shared.LeaderboardFilterType>
-    * <xref:PlayGen.SUGAR.Common.Shared.SaveDataType>
+    * <xref:PlayGen.SUGAR.Common.Shared.EvaluationDataType>
     * <xref:PlayGen.SUGAR.Common.Shared.CriteriaScope>
     * <xref:PlayGen.SUGAR.Common.Shared.ActorType>
 

@@ -13,6 +13,8 @@
   uid: relationship
 - name: GameData
   uid: gameData
+- name: EvaluationData
+  uid: evaluationData
 - name: Resources
   uid: resource
 - name: Skills

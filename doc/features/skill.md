@@ -30,7 +30,7 @@ Both Skills and [Achievements](achievement.md) build on "Evaluations" which may 
     * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest>
     * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationUpdateRequest>
     * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationResponse>
-    * <xref:PlayGen.SUGAR.Common.Shared.SaveDataType>
+    * <xref:PlayGen.SUGAR.Common.Shared.EvaluationDataType>
     * <xref:PlayGen.SUGAR.Common.Shared.CriteriaQueryType>
     * <xref:PlayGen.SUGAR.Common.Shared.ComparisonType>
     * <xref:PlayGen.SUGAR.Common.Shared.ActorType>
