@@ -246,7 +246,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             {
                 datas.Add(SUGARClient.Match.AddData(new EvaluationDataRequest
                 {
-                    RelatedEntityId = match.Id,
+                    MatchId = match.Id,
                     GameId = _game.Id,
                     CreatingActorId = _account.User.Id,
                     EvaluationDataType = EvaluationDataType.Long,
@@ -259,7 +259,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
             // Assert
             datas.ForEach(a => Assert.True(got.Any(g => g.GameId == a.GameId
-                && g.RelatedEntityId == a.RelatedEntityId
+                && g.MatchId == a.MatchId
                 && g.CreatingActorId == a.CreatingActorId
                 && g.Key == a.Key
                 && g.Value == a.Value)));

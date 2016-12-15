@@ -10,9 +10,11 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public int? GameId { get; set; }
 
-		public int? CreatingActorId { get; set; }
+		public int? ActorId { get; set; }
 
-		public int? RelatedEntityId { get; set; }
+		public int? MatchId { get; set; }
+
+		public virtual Match Match { get; set; }
 		
 		public EvaluationDataCategory Category { get; set; }
 

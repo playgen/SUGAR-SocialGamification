@@ -23,9 +23,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newEvaluationData = CreateEvaluationData(userDataName, createNewGame: true, createNewUser: true);
 
-			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.CreatingActorId, new List<string> { newEvaluationData.Key });
+			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.ActorId, new List<string> { newEvaluationData.Key });
 
-			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == newEvaluationData.GameId && g.CreatingActorId == newEvaluationData.CreatingActorId);
+			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == newEvaluationData.GameId && g.ActorId == newEvaluationData.ActorId);
 
 			Assert.Equal(1, matches);
 		}
@@ -37,9 +37,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newEvaluationData = CreateEvaluationData(userDataName, createNewUser: true);
 
-			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.CreatingActorId, new List<string> { newEvaluationData.Key });
+			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.ActorId, new List<string> { newEvaluationData.Key });
 
-			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == null && g.CreatingActorId == newEvaluationData.CreatingActorId);
+			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == null && g.ActorId == newEvaluationData.ActorId);
 
 			Assert.Equal(1, matches);
 		}
@@ -51,9 +51,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newEvaluationData = CreateEvaluationData(userDataName, createNewGame: true);
 
-			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.CreatingActorId, new List<string> { newEvaluationData.Key });
+			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.ActorId, new List<string> { newEvaluationData.Key });
 
-			var matches = userDatas.Count(g => g.Key == newEvaluationData.Key && g.GameId == newEvaluationData.GameId && g.CreatingActorId == newEvaluationData.CreatingActorId);
+			var matches = userDatas.Count(g => g.Key == newEvaluationData.Key && g.GameId == newEvaluationData.GameId && g.ActorId == newEvaluationData.ActorId);
 
 			Assert.Equal(1, matches);
 		}
@@ -71,7 +71,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var doNotFind = CreateEvaluationData("GetMultipleUserEvaluationDatas_DontGetThis");
 			var gameId = doNotFind.GameId;
-			var userId = doNotFind.CreatingActorId;
+			var userId = doNotFind.ActorId;
 
 			foreach (var userDataName in userDataNames)
 			{
@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newEvaluationData = CreateEvaluationData(userDataName);
 
-			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.CreatingActorId, new List<string> { "null key" });
+			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.ActorId, new List<string> { "null key" });
 
 			Assert.Empty(userDatas);
 		}
@@ -104,7 +104,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newEvaluationData = CreateEvaluationData(userDataName);
 
-			var userDatas = _evaluationDataController.Get(-1, newEvaluationData.CreatingActorId, new List<string> { userDataName });
+			var userDatas = _evaluationDataController.Get(-1, newEvaluationData.ActorId, new List<string> { userDataName });
 
 			Assert.Empty(userDatas);
 		}
@@ -150,7 +150,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			{
 				Key = key,
 				GameId = gameId,
-				CreatingActorId = userId,
+				ActorId = userId,
 				Value = key + " value",
 				EvaluationDataType = 0
 			};

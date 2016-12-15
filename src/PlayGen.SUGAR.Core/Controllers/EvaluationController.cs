@@ -220,7 +220,7 @@ namespace PlayGen.SUGAR.Core.Controllers
                 Category = evaluation.EvaluationType.ToEvaluationDataCategory(),
                 Key = evaluation.Token,
                 GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game
-                CreatingActorId = actorId,
+                ActorId = actorId,
                 EvaluationDataType = EvaluationDataType.String,
                 Value = null
             };

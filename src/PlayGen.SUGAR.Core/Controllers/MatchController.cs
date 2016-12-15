@@ -151,7 +151,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
         private static void ValidateData(EvaluationData data)
         {
-            if (data.RelatedEntityId == null)
+            if (data.MatchId == null)
             {
                 throw new InvalidDataException("Cannot save Match data with no EntityId. EntityId needs to be set to the match's Id.");
             }

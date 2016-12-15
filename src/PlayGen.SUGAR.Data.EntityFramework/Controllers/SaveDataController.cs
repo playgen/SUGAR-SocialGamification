@@ -67,7 +67,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             using (var context = ContextFactory.Create())
             {
                 var data = context.GetCategoryData(_category)
-                    .FilterByEntityId(entityId)
+                    .FilterByMatchId(entityId)
                     .FilterByKeys(keys)
                     .ToList();
                 return data;
@@ -80,7 +80,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
             {
                 var data = context.GetCategoryData(_category)
                     .FilterByGameId(gameId)
-                    .FilterByEntityId(entityId)
+                    .FilterByMatchId(entityId)
                     .FilterByActorId(actorId)
                     .FilterByKeys(keys)
                     .ToList();
@@ -492,7 +492,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		    using (var context = ContextFactory.Create())
 		    {
 		        context.HandleDetatchedGame(data.GameId);
-		        context.HandleDetatchedActor(data.CreatingActorId);
+		        context.HandleDetatchedActor(data.ActorId);
 
 		        context.EvaluationData.Add(data);
 		        SaveChanges(context);

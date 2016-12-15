@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PlayGen.SUGAR.Data.Model
 {
@@ -13,6 +14,8 @@ namespace PlayGen.SUGAR.Data.Model
         public int CreatorId { get; set; }
 
         public virtual User Creator { get; set; }
+
+        public virtual List<EvaluationData> Data { get; set; }
 
         public DateTime? Started { get; set; }
 

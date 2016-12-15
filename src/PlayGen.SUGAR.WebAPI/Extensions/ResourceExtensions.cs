@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			return new ResourceResponse
 			{
 				Id = evaluationData.Id,
-				ActorId = evaluationData.CreatingActorId,
+				ActorId = evaluationData.ActorId,
 				GameId = evaluationData.GameId,
 				Key = evaluationData.Key,
 				Quantity = long.Parse(evaluationData.Value),
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		{
 			return new EvaluationData
 			{
-				CreatingActorId = resourceContract.ActorId,
+				ActorId = resourceContract.ActorId,
 				GameId = resourceContract.GameId,
 				Key = resourceContract.Key,
 				Value = resourceContract.Quantity.ToString(),

@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 				toResource = new EvaluationData
 				{
 					GameId = gameId,
-					CreatingActorId = toActorId,
+					ActorId = toActorId,
 					Key = fromResource.Key,
 					Value = transferQuantity.ToString(),
 					Category = fromResource.Category,
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public void Create(EvaluationData data)
 		{
-			var existingEntries = _evaluationDataController.Get(data.GameId, data.CreatingActorId, new [] {data.Key});
+			var existingEntries = _evaluationDataController.Get(data.GameId, data.ActorId, new [] {data.Key});
 
 			if (existingEntries.Any())
 			{
