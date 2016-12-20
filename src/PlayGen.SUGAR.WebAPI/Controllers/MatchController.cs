@@ -65,9 +65,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var userId = HttpContext.Request.Headers.GetUserId();
 			var gameId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var match = _matchCoreController.Create(gameId, userId);
 				var contract = match.ToContract();
@@ -91,9 +91,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result || 
+                _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var match = _matchCoreController.Create(gameId, userId);
 				match = _matchCoreController.Start(match.Id);
@@ -119,9 +119,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var match = _matchCoreController.Start(matchId);
 				var contract = match.ToContract();
@@ -146,9 +146,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var match = _matchCoreController.End(matchId);
 				var contract = match.ToContract();
