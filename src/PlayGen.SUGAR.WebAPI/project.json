@@ -1,4 +1,8 @@
 {
+	"version": "1.1.0-rc1",
+	"title": "SUGAR Service",
+	"copyright": "PlayGen Ltd 2016",
+	"description": "Social Gamification Asset of the RAGE Ecosystem",
   "dependencies": {
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.1",
