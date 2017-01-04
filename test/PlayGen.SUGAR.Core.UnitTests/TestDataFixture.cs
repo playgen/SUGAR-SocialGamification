@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Data.Model;
 

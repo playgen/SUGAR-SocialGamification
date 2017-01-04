@@ -3,13 +3,12 @@ using PlayGen.SUGAR.Common.Shared.Permissions;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using NLog;
-using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class ActorRoleController
 	{
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
 		private readonly Data.EntityFramework.Controllers.RoleController _roleController;

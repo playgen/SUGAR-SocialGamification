@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class RewardController : CriteriaEvaluator
 	{
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public RewardController(SUGARContextFactory contextFactory, 
             GroupMemberController groupMemberCoreController, 

@@ -1,7 +1,6 @@
 ﻿using System;
 using PlayGen.SUGAR.Data.Model;
 using NLog;
-using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.EntityFramework;
 using System.Collections.Generic;
 
@@ -9,7 +8,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
     public class GameDataController
     {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly EvaluationDataController _evaluationDataController;
 

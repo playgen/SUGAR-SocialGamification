@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Core.Sessions
 {
     public class SessionTracker : IDisposable
     {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public event Action<Session> SessionStartedEvent;
         public event Action<Session> SessionEndedEvent;

@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[HttpGet("find/{token}/global")]
         //[ResponseType(typeof(EvaluationResponse))]
         [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
-        public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
+        public IActionResult Get([FromRoute]string token, [FromRoute]int gameId)
 		{
             return base.Get(token, gameId);
         }

@@ -25,11 +25,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var source = CreateAccountSource(name);
 			CreateAccount(name, password, source.Id);
 
-			var accounts = _accountController.Get(new string[] { name }, source.Id);
-
-			var matches = accounts.Count(a => a.Name == name);
-
-			Assert.Equal(1, matches);
+			Account account;
+			Assert.True(_accountController.TryGet(name, source.Id, out account));
 		}
 
 		[Fact]
@@ -45,30 +42,19 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
-		public void GetMultipleAccountsByName()
+		public void GetAccountByName()
 		{
-			var names = new[]
-			{
-				"GetMultipleAccountsByName1",
-				"GetMultipleAccountsByName2",
-				"GetMultipleAccountsByName3",
-				"GetMultipleAccountsByName4",
-			};
+			var name = "GetAccountsByName";
 
 			var source = CreateAccountSource("GetMultipleAccountsByName");
 
-			foreach (var name in names)
-			{
-				CreateAccount(name, $"{name}Password", source.Id);
-			}
+			CreateAccount(name, $"{name}Password", source.Id);
 
 			CreateAccount("GetMultipleAccountsByName_DontGetThis", "GetMultipleAccountsByName_DontGetThisPassword", source.Id);
 
-			var accounts = _accountController.Get(names, source.Id);
-
-			var matchingAccounts = accounts.Select(a => names.Contains(a.Name));
-
-			Assert.Equal(names.Length, matchingAccounts.Count());
+			Account account;
+				
+			Assert.True(_accountController.TryGet(name, source.Id, out account));
 		}
 
 		[Fact]
@@ -76,9 +62,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var source = CreateAccountSource("GetNonExistingAccounts");
 
-			var accounts = _accountController.Get(new string[] { "GetNonExsitingAccounts" }, source.Id);
+			Account account;
 
-			Assert.Empty(accounts);
+			Assert.False(_accountController.TryGet("GetNonExsitingAccounts", source.Id, out account));
 		}
 
 		[Fact]
@@ -89,16 +75,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var source = CreateAccountSource(name);
 
-			var account = CreateAccount(name, password, source.Id);
+			Account account = CreateAccount(name, password, source.Id);
 
-			var accounts = _accountController.Get(new string[] { name }, source.Id);
-			Assert.Equal(accounts.Count(), 1);
-			Assert.Equal(accounts.ElementAt(0).Name, name);
+			var found = _accountController.TryGet(name, source.Id, out account);
+
+			Assert.True(found);
 
 			_accountController.Delete(account.Id);
-			accounts = _accountController.Get(new string[] { name }, source.Id);
+			Assert.False(_accountController.TryGet(name, source.Id, out account));
 
-			Assert.Empty(accounts);
 		}
 
 		[Fact]

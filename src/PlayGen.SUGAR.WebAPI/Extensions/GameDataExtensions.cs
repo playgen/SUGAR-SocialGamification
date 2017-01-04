@@ -1,5 +1,4 @@
-﻿using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts.Shared;
+﻿using PlayGen.SUGAR.Contracts.Shared;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {

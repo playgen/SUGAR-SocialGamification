@@ -1,4 +1,6 @@
-﻿namespace PlayGen.SUGAR.Common.Shared
+﻿using PlayGen.SUGAR.Contracts.Shared;
+
+namespace PlayGen.SUGAR.Common.Shared
 {
     public class EvaluationProgress
     {

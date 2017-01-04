@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 	/// </summary>
 	public class ExceptionFilter : ExceptionFilterAttribute
 	{
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <inheritdoc />
         public override void OnException(ExceptionContext context)

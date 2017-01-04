@@ -3,7 +3,6 @@ using System.Linq;
 using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework
@@ -37,7 +36,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework
         public DbSet<Match> Matches { get; set; }
 
 		public DbSet<EvaluationData> EvaluationData { get; set; }
-		public DbSet<ActorData> ActorData { get; set; }
+		public DbSet<ActorDetails> ActorDetails { get; set; }
+		public DbSet<GameDetails> GameDetails { get; set; }
 
 		public DbSet<UserToUserRelationshipRequest> UserToUserRelationshipRequests { get; set; }
 		public DbSet<UserToUserRelationship> UserToUserRelationships { get; set; }

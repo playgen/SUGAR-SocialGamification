@@ -2,14 +2,13 @@
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using NLog;
-using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Common.Shared.Permissions;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class ActorClaimController
 	{
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly Data.EntityFramework.Controllers.ActorClaimController _actorClaimDbController;
 		private readonly ActorRoleController _actorRoleController;

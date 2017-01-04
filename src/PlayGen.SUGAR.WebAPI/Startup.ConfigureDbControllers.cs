@@ -11,7 +11,7 @@ namespace PlayGen.SUGAR.WebAPI
             // Set EntityFramework's DBContext's connection string
             services.AddScoped<AccountController>();
             services.AddScoped<AccountSourceController>();
-			services.AddScoped<ActorDataController>();
+			services.AddScoped<ActorDetailsController>();
 			services.AddScoped<GameController>();
             services.AddScoped<GroupController>();
             services.AddScoped<UserController>();

@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class GameController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		public static event Action<int> GameDeletedEvent;
 
 		private readonly Data.EntityFramework.Controllers.GameController _gameDbController;

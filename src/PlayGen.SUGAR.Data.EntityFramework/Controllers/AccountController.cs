@@ -27,15 +27,31 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public List<Account> Get(string[] names, int sourceId)
+
+
+		public bool TryGet(int id, out Account account)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var accounts = context.Accounts
-					.Where(a => names.Contains(a.Name) && a.AccountSourceId == sourceId)
-					.Include(a => a.User);
+				account = context.Accounts
+					.Where(a => a.Id == id)
+					.Include(a => a.User)
+					.SingleOrDefault();
 
-				return accounts.ToList();
+				return  account != null;
+			}
+		}
+
+		public bool TryGet(string username, int sourceId, out Account account)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				account = context.Accounts
+					.Where(a => a.Name.Equals(username) && a.AccountSourceId == sourceId)
+					.Include(a => a.User)
+					.SingleOrDefault();
+
+				return account != null;
 			}
 		}
 

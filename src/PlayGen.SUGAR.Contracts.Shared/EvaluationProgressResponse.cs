@@ -1,6 +1,4 @@
-﻿using PlayGen.SUGAR.Common.Shared;
-
-namespace PlayGen.SUGAR.Contracts.Shared
+﻿namespace PlayGen.SUGAR.Contracts.Shared
 {
 	/// <summary>
 	/// Encapsulates current progress to completing an achievement.

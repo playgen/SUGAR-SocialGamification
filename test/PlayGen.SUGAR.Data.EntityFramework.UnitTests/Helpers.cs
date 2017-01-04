@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests

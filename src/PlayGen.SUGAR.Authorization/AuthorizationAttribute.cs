@@ -19,6 +19,7 @@ namespace PlayGen.SUGAR.Authorization
             Name = string.Concat(action, type);
         }
 
+
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (context.HttpContext.Items.Count > 0)
@@ -30,17 +31,17 @@ namespace PlayGen.SUGAR.Authorization
             var customAtt = actionDescriptor?.MethodInfo.GetCustomAttributes(typeof(AuthorizationAttribute), false) as AuthorizationAttribute[];
             if (customAtt != null && customAtt.Length > 0)
             {
-                if (customAtt.Length == 1)
+                //if (customAtt.Length == 1)
+                //{
+                //    context.HttpContext.Items.Add("Requirements", new AuthorizationRequirement(customAtt[0].ClaimScope, customAtt[0].Name));
+                //}
+                //else
+                //{
+                foreach (var att in customAtt)
                 {
-                    context.HttpContext.Items.Add("Requirements", new AuthorizationRequirement(customAtt[0].ClaimScope, customAtt[0].Name));
+                    context.HttpContext.Items.Add(att.ClaimScope, new AuthorizationRequirement(att.ClaimScope, att.Name));
                 }
-                else
-                {
-                    foreach (var att in customAtt)
-                    {
-                        context.HttpContext.Items.Add(att.ClaimScope + "Requirements", new AuthorizationRequirement(att.ClaimScope, att.Name));
-                    }
-                }
+                //}
             }
         }
     }

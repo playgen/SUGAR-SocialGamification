@@ -8,9 +8,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
 	public static class EvaluationDataExtensions
 	{
-		public static IQueryable<EvaluationData> GetCategoryData(this SUGARContext context, EvaluationDataCategory category)
+		public static IQueryable<EvaluationData> GetCategoryData(this IQueryable<EvaluationData> evaluationData, EvaluationDataCategory category)
 		{
-			return context.EvaluationData.Where(gd => gd.Category == category);
+			return evaluationData.Where(gd => gd.Category == category);
 		}
 
 		public static IQueryable<EvaluationData> FilterByIds(this IQueryable<EvaluationData> gameDataQueryable, ICollection<int> ids)
@@ -27,16 +27,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return gameDataQueryable.Where(gd => gd.GameId == gameId);
 		}
 
-        public static IQueryable<EvaluationData> FilterByEntityId(this IQueryable<EvaluationData> gameDataQueryable, int? entityId)
-        {
-            if (!entityId.HasValue || entityId.Value == 0)
-            {
-                return gameDataQueryable.Where(gd => gd.EntityId == null || gd.EntityId == 0);
-            }
-            return gameDataQueryable.Where(gd => gd.EntityId == entityId);
-        }
+		public static IQueryable<EvaluationData> FilterByEntityId(this IQueryable<EvaluationData> gameDataQueryable, int? entityId)
+		{
+			if (!entityId.HasValue || entityId.Value == 0)
+			{
+				return gameDataQueryable.Where(gd => gd.EntityId == null || gd.EntityId == 0);
+			}
+			return gameDataQueryable.Where(gd => gd.EntityId == entityId);
+		}
 
-        public static IQueryable<EvaluationData> FilterByActorId(this IQueryable<EvaluationData> gameDataQueryable, int? actorId)
+		public static IQueryable<EvaluationData> FilterByActorId(this IQueryable<EvaluationData> gameDataQueryable, int? actorId)
 		{
 			return gameDataQueryable.Where(gd => gd.ActorId == actorId);
 		}
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 
 		public static IQueryable<EvaluationData> FilterByKeys(this IQueryable<EvaluationData> gameDataQueryable, ICollection<string> keys)
 		{
-		    if (keys != null && keys.Any())
+			if (keys != null && keys.Any())
 			{
 				return gameDataQueryable.Where(gd => keys.Contains(gd.Key));
 			}

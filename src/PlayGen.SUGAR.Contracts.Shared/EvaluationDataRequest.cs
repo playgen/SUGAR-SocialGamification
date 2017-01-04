@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Contracts.Shared
 {
@@ -16,7 +15,7 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// EvaluationDataType : "Long"
 	/// }
 	/// </example>
-	public class EvaluationDataRequest
+	public class ActorDetailsPostRequest
     {
 		/// <summary>
 		/// The id of the Actor which this ActorData/GameData is being ensigned to. Can be left null to ensign to the system/game.

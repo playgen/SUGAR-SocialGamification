@@ -3,20 +3,19 @@ using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
 
-using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
-
-
 namespace PlayGen.SUGAR.Core.UnitTests
 {
     [Collection("Project Fixture Collection")]
     public class AccountControllerTests
     {
         #region Configuration
+
         private readonly AccountController _accountController = ControllerLocator.AccountController;
         private readonly AccountSourceController _accountSourceController = ControllerLocator.AccountSourceController;
         //private readonly Data.EntityFramework.Controllers.UserController _userController = DbControllerLocator.UserController;
         //private readonly Data.EntityFramework.Controllers.GameController _gameController = DbControllerLocator.GameController;
-        #endregion
+        
+		#endregion
 
         #region Tests
 
@@ -27,14 +26,11 @@ namespace PlayGen.SUGAR.Core.UnitTests
             {
                 RequiresPassword = false,
                 Token = "testSource",
-                ApiSecret = "",
-                UsernamePattern = "",
-                Description = "",
+                //ApiSecret = "",
+                //UsernameRegex = "",
+                //Description = "",
                 AutoRegister = true
             }); 
-
-
-
 
             var toVerify = new Account()
             {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using PlayGen.SUGAR.Contracts.Shared;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.Model;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
@@ -61,9 +60,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
                 .WithMany(u => u.RequestAcceptors)
                 .HasForeignKey(u => u.AcceptorId)
                 .IsRequired();
-        }
 
-        internal static void ConfigureCompositePrimaryKeys(this ModelBuilder builder)
+	        builder.Entity<ActorDetails>()
+		        .HasOne(ad => ad.Actor)
+				.WithMany(a => a.);
+
+			builder.Entity<GameDetails>()
+				.HasOne(gd => gd.Game);
+		}
+
+		internal static void ConfigureCompositePrimaryKeys(this ModelBuilder builder)
         {
             builder.Entity<Leaderboard>()
                 .HasKey(a => new { a.Token, a.GameId });
@@ -93,8 +99,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
             builder.Entity<EvaluationData>()
                 .HasIndex(g => new { g.Key, g.GameId, g.Category, g.ActorId, DataType = g.EvaluationDataType });
 
-			builder.Entity<ActorData>()
-				.HasIndex(g => new { g.Key, g.GameId, g.ActorId, DataType = g.EvaluationDataType })
+			builder.Entity<ActorDetails>()
+				.HasIndex(g => new { g.Key, g.ActorId, DataType = g.EvaluationDataType })
+				.IsUnique();
+
+			builder.Entity<GameDetails>()
+				.HasIndex(g => new { g.Key, g.GameId, DataType = g.EvaluationDataType })
 				.IsUnique();
 
 			builder.Entity<Evaluation>()
@@ -161,10 +171,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
             //modelBuilder.Entity<EvaluationData>()
             //	.Property(g => g.DateModified)
             //	.HasPrecision(3);
-            //modelBuilder.Entity<ActorData>()
+            //modelBuilder.Entity<ActorDetails>()
             //    .Property(g => g.DateCreated)
             //    .HasPrecision(3);
-            //modelBuilder.Entity<ActorData>()
+            //modelBuilder.Entity<ActorDetails>()
             //    .Property(g => g.DateModified)
             //    .HasPrecision(3);
         }

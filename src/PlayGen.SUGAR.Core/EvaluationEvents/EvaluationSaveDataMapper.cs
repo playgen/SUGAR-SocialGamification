@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Common.Shared.Extensions;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents

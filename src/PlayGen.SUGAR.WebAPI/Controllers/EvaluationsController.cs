@@ -7,34 +7,38 @@ using PlayGen.SUGAR.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
-    // todo replace the skill and achievement controllers with this one and just specify 2 api routes for this class?
-    public abstract class EvaluationsController : Controller
+    //TODO: replace the skill and achievement controllers with this one and just specify 2 api routes for this class?
+    /// <summary>
+    /// Base controller for entities that require evaluation data processing
+    /// </summary>
+    public abstract class EvaluationsController : AuthorizedController
     {
-        protected readonly IAuthorizationService _authorizationService;
         protected readonly Core.Controllers.EvaluationController EvaluationCoreController;
         private readonly EvaluationTracker _evaluationTracker;
 
-        protected EvaluationsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
+        /// <summary>
+        /// TODO: fill this in
+        /// </summary>
+        /// <param name="authorizationService"></param>
+        /// <param name="evaluationCoreController"></param>
+        /// <param name="evaluationTracker"></param>
+        protected EvaluationsController(IAuthorizationService authorizationService, Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker)
+			: base (authorizationService)
         {
             EvaluationCoreController = evaluationCoreController;
             _evaluationTracker = evaluationTracker;
-            _authorizationService = authorizationService;
         }
         
-        protected IActionResult Get(string token, int? gameId)
+        protected IActionResult Get(string token, int gameId)
         {
-            if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var evaluation = EvaluationCoreController.Get(token, gameId);
-                var evaluationContract = evaluation.ToContract();
-                return new ObjectResult(evaluationContract);
-            }
-            return Forbid();
+            var evaluation = EvaluationCoreController.Get(token, gameId);
+            var evaluationContract = evaluation.ToContract();
+            return new ObjectResult(evaluationContract);
         }
         
-        protected IActionResult Get(int? gameId)
+        protected IActionResult Get(int gameId)
         {
-            if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            if (AuthorizedGame(gameId))
             {
                 var evaluation = EvaluationCoreController.GetByGame(gameId);
                 var evaluationContract = evaluation.ToContractList();

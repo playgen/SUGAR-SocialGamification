@@ -8,31 +8,29 @@ using PlayGen.SUGAR.Core.Controllers;
 
 namespace PlayGen.SUGAR.Core.Authorization
 {
-    public class AuthorizationHandler : AuthorizationHandler<AuthorizationRequirement, int>
-    {
-        private readonly ActorClaimController _actorClaimDbController;
-        private readonly ClaimController _claimDbController;
-
-        public AuthorizationHandler(ActorClaimController actorClaimDbController,
-                    ClaimController claimDbController)
-        {
-            _actorClaimDbController = actorClaimDbController;
-            _claimDbController = claimDbController;
-        }
-
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement, int entityId)
-        {
-            return AuthorizationHandlerHelper.HandleRequirements(_claimDbController, _actorClaimDbController, context, requirement, entityId);
-        }
-    }
-
-    public class AuthorizationHandlerWithNull : AuthorizationHandler<AuthorizationRequirement>
-    {
+	public class AuthorizationHandler : AuthorizationHandler<AuthorizationRequirement, int>
+	{
 		private readonly ActorClaimController _actorClaimDbController;
 		private readonly ClaimController _claimDbController;
 
-		public AuthorizationHandlerWithNull(ActorClaimController actorClaimDbController,
-					ClaimController claimDbController)
+		public AuthorizationHandler(ActorClaimController actorClaimDbController, ClaimController claimDbController)
+		{
+			_actorClaimDbController = actorClaimDbController;
+			_claimDbController = claimDbController;
+		}
+
+		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement, int entityId)
+		{
+			return AuthorizationHandlerHelper.HandleRequirements(_claimDbController, _actorClaimDbController, context, requirement, entityId);
+		}
+	}
+
+	public class AuthorizationHandlerWithNull : AuthorizationHandler<AuthorizationRequirement>
+	{
+		private readonly ActorClaimController _actorClaimDbController;
+		private readonly ClaimController _claimDbController;
+
+		public AuthorizationHandlerWithNull(ActorClaimController actorClaimDbController, ClaimController claimDbController)
 		{
 			_actorClaimDbController = actorClaimDbController;
 			_claimDbController = claimDbController;
@@ -44,30 +42,29 @@ namespace PlayGen.SUGAR.Core.Authorization
 		}
 	}
 
-    public class AuthorizationHandlerWithoutEntity : AuthorizationHandler<AuthorizationRequirement, ClaimScope>
-    {
+	public class AuthorizationHandlerWithoutEntity : AuthorizationHandler<AuthorizationRequirement, ClaimScope>
+	{
 		private readonly ActorClaimController _actorClaimDbController;
 		private readonly ClaimController _claimDbController;
 
-		public AuthorizationHandlerWithoutEntity(ActorClaimController actorClaimDbController,
-					ClaimController claimDbController)
+		public AuthorizationHandlerWithoutEntity(ActorClaimController actorClaimDbController, ClaimController claimDbController)
 		{
 			_actorClaimDbController = actorClaimDbController;
 			_claimDbController = claimDbController;
 		}
 
 		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement, ClaimScope scope)
-        {
-            var claim = _claimDbController.Get(requirement.ClaimScope, requirement.Name);
-            if (claim != null && claim.ClaimScope == scope)
-            {
-                var claims = _actorClaimDbController.GetActorClaims(int.Parse(context.User.Identity.Name)).ToList();
+		{
+			var claim = _claimDbController.Get(requirement.ClaimScope, requirement.Name);
+			if (claim != null && claim.ClaimScope == scope)
+			{
+				var claims = _actorClaimDbController.GetActorClaims(int.Parse(context.User.Identity.Name)).ToList();
 				if (claims.Any(c => c.ClaimId == claim.Id))
-                {
-                    context.Succeed(requirement);
-                }
-            }
-            return Task.CompletedTask;
-        }
-    }
+				{
+					context.Succeed(requirement);
+				}
+			}
+			return Task.CompletedTask;
+		}
+	}
 }

@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AccountResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountSourceRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountSourceResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Actor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorClaimRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorClaimResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorRequest.cs" />
@@ -24,6 +25,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaUpdateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaCreateRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorDetailsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorDetailsRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationProgressResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationTestRequest.cs" />

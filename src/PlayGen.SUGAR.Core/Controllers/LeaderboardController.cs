@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using NLog;
-using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Data.EntityFramework;
@@ -17,7 +16,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class LeaderboardController : CriteriaEvaluator
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		protected readonly Data.EntityFramework.Controllers.ActorController ActorController;
 		protected readonly Data.EntityFramework.Controllers.GroupController GroupController;

@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
     public class UserController : ActorController
     {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly Data.EntityFramework.Controllers.UserController _userController;
         private readonly ActorRoleController _actorRoleController;

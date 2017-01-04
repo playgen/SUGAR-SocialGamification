@@ -1,6 +1,4 @@
-﻿using PlayGen.SUGAR.Common.Shared;
-
-namespace PlayGen.SUGAR.Contracts.Shared
+﻿namespace PlayGen.SUGAR.Contracts.Shared
 {
 	/// <summary>
 	/// Encapsulates ActorData/GameData details from the server.
@@ -17,15 +15,15 @@ namespace PlayGen.SUGAR.Contracts.Shared
 	/// </example>
 	public class EvaluationDataResponse
 	{
-        /// <summary>
+		/// <summary>
 		/// The id of the Game which this ActorData/GameData relates to.
 		/// </summary>
 		public int? GameId { get; set; }
 
-        /// <summary>
-        /// Id of the entity this data is related to.
-        /// </summary>
-        public int? EntityId { get; set; }
+		/// <summary>
+		/// Id of the entity this data is related to.
+		/// </summary>
+		public int? EntityId { get; set; }
 
 		/// <summary>
 		/// The id of the Actor which this ActorData/GameData relates to.

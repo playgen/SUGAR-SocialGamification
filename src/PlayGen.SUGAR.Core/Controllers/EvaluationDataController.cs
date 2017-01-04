@@ -1,8 +1,8 @@
 ﻿using System;
-using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
 using NLog;
+using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Core.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework;
 
@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Core.Controllers
     {
         public static Action<EvaluationData> EvaluationDataAddedEvent;
 
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly Data.EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController;
         private readonly EvaluationDataCategory _category;

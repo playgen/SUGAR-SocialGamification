@@ -12,7 +12,7 @@
 
         public bool AutoRegister { get; set; }
 
-        public string UsernamePattern { get; set; }
+        public string UsernameRegex { get; set; }
 
         public string ApiSecret { get; set; }
     }

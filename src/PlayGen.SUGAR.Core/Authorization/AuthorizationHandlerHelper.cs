@@ -8,12 +8,12 @@ namespace PlayGen.SUGAR.Core.Authorization
 {
     internal class AuthorizationHandlerHelper
     {
-        internal static Task HandleRequirements(ClaimController _claimDbController, ActorClaimController _actorClaimDbController, AuthorizationHandlerContext context, AuthorizationRequirement requirement, int entityId = 0)
+        internal static Task HandleRequirements(ClaimController claimDbController, ActorClaimController actorClaimDbController, AuthorizationHandlerContext context, AuthorizationRequirement requirement, int entityId = 0)
         {
-            var claim = _claimDbController.Get(requirement.ClaimScope, requirement.Name);
+            var claim = claimDbController.Get(requirement.ClaimScope, requirement.Name);
             if (claim != null)
             {
-                var claims = _actorClaimDbController.GetActorClaimsForEntity(int.Parse(context.User.Identity.Name), entityId, requirement.ClaimScope).ToList();
+                var claims = actorClaimDbController.GetActorClaimsForEntity(int.Parse(context.User.Identity.Name), entityId, requirement.ClaimScope).ToList();
                 if (claims.Any(c => c.Id == claim.Id))
                 {
                     context.Succeed(requirement);

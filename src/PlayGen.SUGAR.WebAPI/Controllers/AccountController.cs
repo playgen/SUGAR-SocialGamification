@@ -12,17 +12,21 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	/// Web Controller that facilitates account specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-	public class AccountController : Controller
+	public class AccountController : AuthorizedController
 	{
-		private readonly IAuthorizationService _authorizationService;
-		private readonly Core.Controllers.AccountController _accountCoreController;
+		private readonly Core.Controllers.IAccountController _accountCoreController;
 
-        public AccountController(Core.Controllers.AccountController accountCoreController,
-			IAuthorizationService authorizationService)
+		/// <summary>
+		/// Web API Controlelr for account management
+		/// </summary>
+		/// <param name="authorizationService"></param>
+		/// <param name="accountCoreController"></param>
+		public AccountController(IAuthorizationService authorizationService, Core.Controllers.IAccountController accountCoreController) 
+			: base(authorizationService)
 		{
 			_accountCoreController = accountCoreController;
-			_authorizationService = authorizationService;
 		}
+
 
 		/// <summary>
 		/// Register a new account and creates an associated user.
@@ -34,9 +38,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
 		[HttpPost("create")]
-		[HttpPost("{gameId:int}/create")]
+		[Authorize("Bearer")]
 		[ArgumentsNotNull]
-		public IActionResult Create([FromRoute]int? gameId, [FromBody] AccountRequest accountRequest)
+		public IActionResult Create([FromBody] AccountRequest accountRequest)
 		{
 			var account = accountRequest.ToModel();
 			account = _accountCoreController.Create(account, accountRequest.SourceToken);
@@ -56,7 +60,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		[ValidateSession]
 		public IActionResult Delete([FromRoute]int id)
 		{
-			if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (AuthorizedAccount(id)) //TODO: OR authorized global?
 			{
 				_accountCoreController.Delete(id);
 				return Ok();
