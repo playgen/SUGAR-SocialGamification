@@ -16,13 +16,13 @@ namespace PlayGen.SUGAR.Client
 {
 	public abstract class ClientBase
 	{
-        private static readonly Dictionary<string, string> PersistentHeaders = new Dictionary<string, string>();
+		private static readonly Dictionary<string, string> PersistentHeaders = new Dictionary<string, string>();
 
-        private readonly string _baseAddress;
+		private readonly string _baseAddress;
 		private readonly IHttpHandler _httpHandler;
 
-	    protected readonly AsyncRequestController AsyncRequestController;
-        protected readonly EvaluationNotifications EvaluationNotifications;
+		protected readonly AsyncRequestController AsyncRequestController;
+		protected readonly EvaluationNotifications EvaluationNotifications;
 
 		public static readonly JsonSerializerSettings SerializerSettings;
 
@@ -46,28 +46,28 @@ namespace PlayGen.SUGAR.Client
 			}
 			_baseAddress = baseAddress;
 			_httpHandler = httpHandler;
-		    AsyncRequestController = asyncRequestController;
-            EvaluationNotifications = evaluationNotifications;
+			AsyncRequestController = asyncRequestController;
+			EvaluationNotifications = evaluationNotifications;
 		}
 
-	    protected static void EnableEvaluationNotifications(bool enable = true)
-	    {
-	        if (enable)
-	        {
-	            PersistentHeaders[HeaderKeys.EvaluationNotifications] = $"{enable}";
-	        }
-	        else
-	        {
-	            PersistentHeaders.Remove(HeaderKeys.EvaluationNotifications);
-	        }
-	    }
+		protected static void EnableEvaluationNotifications(bool enable = true)
+		{
+			if (enable)
+			{
+				PersistentHeaders[HeaderKeys.EvaluationNotifications] = $"{enable}";
+			}
+			else
+			{
+				PersistentHeaders.Remove(HeaderKeys.EvaluationNotifications);
+			}
+		}
 
-	    protected void ClearSessionData()
-	    {
-	        AsyncRequestController.Clear();
-            PersistentHeaders.Clear();
-	        EvaluationNotifications.Clear();
-	    }
+		protected void ClearSessionData()
+		{
+			AsyncRequestController.Clear();
+			PersistentHeaders.Clear();
+			EvaluationNotifications.Clear();
+		}
 
 		protected bool AreUriParamsValid(object[] param)
 		{
@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.Client
 				throw new ClientException("Passed values must not be empty or null");
 			}
 
-		    var formattedParams = FormatUriParameters(param);
+			var formattedParams = FormatUriParameters(param);
 			var formattedUri = string.Format(apiSuffix, formattedParams);
 
 			var separator = "";
@@ -100,30 +100,30 @@ namespace PlayGen.SUGAR.Client
 			return new UriBuilder(_baseAddress + separator + formattedUri);
 		}
 
-	    private static object[] FormatUriParameters(params object[] parameters)
-	    {
-	        var formattedParameters = new object[parameters.Length];
+		private static object[] FormatUriParameters(params object[] parameters)
+		{
+			var formattedParameters = new object[parameters.Length];
 
-	        for (var i = 0; i < parameters.Length; i++)
-	        {
-	            var parameter = parameters[i];
-	            object formattedParameter;
+			for (var i = 0; i < parameters.Length; i++)
+			{
+				var parameter = parameters[i];
+				object formattedParameter;
 
-	            if (parameter is DateTime)
-	            {
-                    formattedParameter = ((DateTime)parameter).SerializeToString();
-                }
-	            else
-	            {
-                    formattedParameter = parameter;
-	            }
+				if (parameter is DateTime)
+				{
+					formattedParameter = ((DateTime)parameter).SerializeToString();
+				}
+				else
+				{
+					formattedParameter = parameter;
+				}
 
-	            formattedParameters[i] = formattedParameter;
+				formattedParameters[i] = formattedParameter;
 
-	        }
+			}
 
-            return formattedParameters;
-	    }
+			return formattedParameters;
+		}
 
 		private static string SerializePayload(object payload)
 		{
@@ -134,10 +134,10 @@ namespace PlayGen.SUGAR.Client
 		{
 			var requestHeaders = headers == null ? new Dictionary<string, string>() : new Dictionary<string, string>(headers);
 
-            foreach (var keyValuePair in PersistentHeaders)
-            {
-                requestHeaders[keyValuePair.Key] = keyValuePair.Value;
-            }
+			foreach (var keyValuePair in PersistentHeaders)
+			{
+				requestHeaders[keyValuePair.Key] = keyValuePair.Value;
+			}
 
 			return new HttpRequest()
 			{

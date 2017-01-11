@@ -65,8 +65,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var userId = HttpContext.Request.Headers.GetUserId();
 			var gameId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
+			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
 				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var match = _matchCoreController.Create(gameId, userId);
@@ -91,8 +91,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result || 
-                _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result || 
+                _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
 				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var match = _matchCoreController.Create(gameId, userId);
@@ -119,8 +119,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
+			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
 				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var match = _matchCoreController.Start(matchId);
@@ -146,8 +146,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
+			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
 				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
 			{
 				var match = _matchCoreController.End(matchId);
