@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class ActorController : DbController
 	{
-		public ActorController(SUGARContextFactory contextFactory) 
+		public ActorController(SUGARContextFactory contextFactory)
 			: base(contextFactory)
 		{
 		}

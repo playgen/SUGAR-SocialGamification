@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.WebAPI
 
 			#region Logging
 			ConfigureNLog(env);
-			
+
 			Logger.Debug("ContentRootPath: {0}", env.ContentRootPath);
 			Logger.Debug("WebRootPath: {0}", env.WebRootPath);
 
@@ -66,11 +66,11 @@ namespace PlayGen.SUGAR.WebAPI
 		public void ConfigureServices(IServiceCollection services)
 		{
 			var timeoutCheckInterval = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TimeoutCheckInterval"]);
-            var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
+			var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
 
-            services.AddScoped((_) => new PasswordEncryption());
+			services.AddScoped((_) => new PasswordEncryption());
 			services.AddApplicationInsightsTelemetry(Configuration);
-            
+
 			// Add framework services.
 			services.AddMvc(options =>
 			{
@@ -102,9 +102,9 @@ namespace PlayGen.SUGAR.WebAPI
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
 			ConfigureLogging(loggerFactory);
-		    ConfigureAuthentication(app);
+			ConfigureAuthentication(app);
 
-            app.UseCors("AllowAll");
+			app.UseCors("AllowAll");
 			app.UseApplicationInsightsRequestTelemetry();
 			app.UseApplicationInsightsExceptionTelemetry();
 			app.UseMvc();

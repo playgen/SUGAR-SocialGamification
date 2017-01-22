@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			ContextFactory = contextFactory;
 		}
-		
+
 		protected void SaveChanges(DbContext context)
 		{
 			try

@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class GroupController : DbController
 	{
-		public GroupController(SUGARContextFactory contextFactory) 
+		public GroupController(SUGARContextFactory contextFactory)
 			: base(contextFactory)
 		{
 		}
@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				context.Groups.Add(group);
 				SaveChanges(context);
 
-			    return group;
+				return group;
 			}
 		}
 
@@ -66,11 +66,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-                // todo replace with entire block with: (and update unit tests)
-                // context.[tablename].Update(entity);
-                // context.SaveChanges();
+				// todo replace with entire block with: (and update unit tests)
+				// context.[tablename].Update(entity);
+				// context.SaveChanges();
 
-                var existing = context.Groups
+				var existing = context.Groups
 					.IncludeAll()
 					.Find(context, group.Id);
 

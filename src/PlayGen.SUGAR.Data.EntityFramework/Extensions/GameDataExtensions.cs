@@ -27,16 +27,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return gameDataQueryable.Where(data => data.GameId == gameId);
 		}
 
-        public static IQueryable<EvaluationData> FilterByMatchId(this IQueryable<EvaluationData> gameDataQueryable, int? entityId)
-        {
-            if (!entityId.HasValue || entityId.Value == 0)
-            {
-                return gameDataQueryable.Where(data => data.MatchId == null || data.MatchId == 0);
-            }
-            return gameDataQueryable.Where(data => data.MatchId == entityId);
-        }
+		public static IQueryable<EvaluationData> FilterByMatchId(this IQueryable<EvaluationData> gameDataQueryable, int? entityId)
+		{
+			if (!entityId.HasValue || entityId.Value == 0)
+			{
+				return gameDataQueryable.Where(data => data.MatchId == null || data.MatchId == 0);
+			}
+			return gameDataQueryable.Where(data => data.MatchId == entityId);
+		}
 
-        public static IQueryable<EvaluationData> FilterByActorId(this IQueryable<EvaluationData> gameDataQueryable, int? actorId)
+		public static IQueryable<EvaluationData> FilterByActorId(this IQueryable<EvaluationData> gameDataQueryable, int? actorId)
 		{
 			return gameDataQueryable.Where(data => data.ActorId == actorId);
 		}
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 
 		public static IQueryable<EvaluationData> FilterByKeys(this IQueryable<EvaluationData> gameDataQueryable, ICollection<string> keys)
 		{
-		    if (keys != null && keys.Any())
+			if (keys != null && keys.Any())
 			{
 				return gameDataQueryable.Where(data => keys.Contains(data.Key));
 			}

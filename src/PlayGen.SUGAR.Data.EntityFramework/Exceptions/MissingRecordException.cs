@@ -8,12 +8,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Exceptions
 		{
 		}
 
-		public MissingRecordException(string message) 
+		public MissingRecordException(string message)
 			: base(message)
 		{
 		}
 
-		public MissingRecordException(string message, Exception inner) 
+		public MissingRecordException(string message, Exception inner)
 			: base(message, inner)
 		{
 		}

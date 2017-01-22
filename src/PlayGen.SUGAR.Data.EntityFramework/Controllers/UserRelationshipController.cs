@@ -8,11 +8,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 	public class UserRelationshipController : DbController
 	{
 		public UserRelationshipController(SUGARContextFactory contextFactory)
-            : base(contextFactory)
-        {
-        }
+			: base(contextFactory)
+		{
+		}
 
-        public List<User> GetRequests(int id)
+		public List<User> GetRequests(int id)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -52,12 +52,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-        // todo move auto accept logic into core controller
+		// todo move auto accept logic into core controller
 		public void Create(UserToUserRelationship newRelation, bool autoAccept)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				if (newRelation.AcceptorId == newRelation.RequestorId) {
+				if (newRelation.AcceptorId == newRelation.RequestorId)
+				{
 					throw new DuplicateRecordException("Two different users are needed to create a relationship.");
 				}
 
@@ -65,7 +66,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
 					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
 
-				if (!hasConflicts) {
+				if (!hasConflicts)
+				{
 					hasConflicts = context.UserToUserRelationshipRequests
 					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
 					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
@@ -88,14 +90,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				{
 					throw new MissingRecordException("The targeted user does not exist.");
 				}
-				if (autoAccept) {
+				if (autoAccept)
+				{
 					var relation = new UserToUserRelationship
 					{
 						RequestorId = newRelation.RequestorId,
 						AcceptorId = newRelation.AcceptorId
 					};
 					context.UserToUserRelationships.Add(relation);
-				} else {
+				}
+				else
+				{
 					var relation = new UserToUserRelationshipRequest
 					{
 						RequestorId = newRelation.RequestorId,
@@ -107,16 +112,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-        // todo move auto accept logic into core controller
-        public void UpdateRequest(UserToUserRelationship newRelation, bool accepted)
+		// todo move auto accept logic into core controller
+		public void UpdateRequest(UserToUserRelationship newRelation, bool accepted)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				var relation = context.UserToUserRelationshipRequests
-					.Single(r => r.RequestorId == newRelation.RequestorId 
+					.Single(r => r.RequestorId == newRelation.RequestorId
 					&& r.AcceptorId == newRelation.AcceptorId);
 
-				if (accepted) {
+				if (accepted)
+				{
 					var acceptedRelation = new UserToUserRelationship
 					{
 						RequestorId = relation.RequestorId,

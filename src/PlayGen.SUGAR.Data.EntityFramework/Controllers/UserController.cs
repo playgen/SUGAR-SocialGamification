@@ -10,17 +10,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 	public class UserController : DbController
 	{
 		public UserController(SUGARContextFactory contextFactory)
-            : base(contextFactory)
-        {
-        }
+			: base(contextFactory)
+		{
+		}
 
-        public List<User> Get()
+		public List<User> Get()
 		{
 			using (var context = ContextFactory.Create())
 			{
 				var users = context.Users
-                    .IncludeAll()
-                    .ToList();
+					.IncludeAll()
+					.ToList();
 
 				return users;
 			}
@@ -35,16 +35,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				if (!exactMatch)
 				{
 					users = context.Users
-                        .IncludeAll()
-                    .Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
+						.IncludeAll()
+					.Where(g => g.Name.ToLower().Contains(name.ToLower())).ToList();
 				}
 				else
 				{
 					users = context.Users
-                        .IncludeAll()
-                        .Where(g => g.Name == name).ToList();
+						.IncludeAll()
+						.Where(g => g.Name == name).ToList();
 				}
-				
+
 				return users;
 			}
 		}
@@ -54,8 +54,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var user = context.Users
-                    .IncludeAll()
-                    .Find(context, id);
+					.IncludeAll()
+					.Find(context, id);
 
 				return user;
 			}
@@ -69,11 +69,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				{
 					throw new DuplicateRecordException($"A user with the name: \"{user.Name}\" already exists.");
 				}
-				
+
 				context.Users.Add(user);
 				SaveChanges(context);
 
-                return user;
+				return user;
 			}
 		}
 
@@ -82,8 +82,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var existing = context.Users
-                    .IncludeAll()
-                    .Find(context, user.Id);
+					.IncludeAll()
+					.Find(context, user.Id);
 
 				if (existing != null)
 				{
@@ -103,8 +103,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var user = context.Users
-                    .IncludeAll()
-                    .Where(g => id == g.Id);
+					.IncludeAll()
+					.Where(g => id == g.Id);
 
 				context.Users.RemoveRange(user);
 				SaveChanges(context);

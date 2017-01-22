@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class AccountController : DbController
 	{
-		public AccountController(SUGARContextFactory contextFactory) 
+		public AccountController(SUGARContextFactory contextFactory)
 			: base(contextFactory)
 		{
 		}
@@ -46,10 +46,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				var account = context.Accounts.Find(context, id);
 
-			    if (account == null)
-			    {
-			        throw new MissingRecordException($"No account exsits with Id: {id}");
-			    }
+				if (account == null)
+				{
+					throw new MissingRecordException($"No account exsits with Id: {id}");
+				}
 
 				context.Accounts.Remove(account);
 				SaveChanges(context);

@@ -9,14 +9,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Exceptions
 		{
 		}
 
-		public DuplicateRecordException(string message) 
+		public DuplicateRecordException(string message)
 			: base(message)
 		{
 		}
 
-		public DuplicateRecordException(string message, Exception inner) 
+		public DuplicateRecordException(string message, Exception inner)
 			: base(message, inner)
-		{   
+		{
 		}
 	}
 }

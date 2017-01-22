@@ -81,7 +81,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 						{
 							throw new DuplicateRecordException($"A leaderboard with the name {leaderboard.Name} for this game already exists.");
 						}
-					} else
+					}
+					else
 					{
 						var hasTypeConflicts = ((int)leaderboard.LeaderboardType < 3 && ((int)leaderboard.EvaluationDataType == 1 || (int)leaderboard.EvaluationDataType == 2)) ||
 								((int)leaderboard.LeaderboardType > 2 && ((int)leaderboard.EvaluationDataType == 0 || (int)leaderboard.EvaluationDataType == 3)) ? false : true;
@@ -109,7 +110,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				}
 			}
 		}
-		
+
 		public void Delete(string token, int? gameId)
 		{
 			using (var context = ContextFactory.Create())

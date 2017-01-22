@@ -5,8 +5,8 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
-    public static class ActorDataExtensions
-    {
+	public static class ActorDataExtensions
+	{
 		public static IQueryable<ActorData> FilterByIds(this SUGARContext context, List<int> ids)
 		{
 			return context.ActorData.Where(gd => ids.Contains(gd.Id));

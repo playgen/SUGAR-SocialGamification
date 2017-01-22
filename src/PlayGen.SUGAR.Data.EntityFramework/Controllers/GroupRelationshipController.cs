@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class GroupRelationshipController : DbController
 	{
-		public GroupRelationshipController(SUGARContextFactory contextFactory) 
+		public GroupRelationshipController(SUGARContextFactory contextFactory)
 			: base(contextFactory)
 		{
 		}
@@ -77,7 +77,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var hasConflicts = context.UserToGroupRelationships
-					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) 
+					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
 					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
 
 				if (!hasConflicts)
@@ -95,22 +95,27 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				var requestorExists = context.Users.Any(u => u.Id == newRelation.RequestorId);
 				var acceptorExists = context.Groups.Any(g => g.Id == newRelation.AcceptorId);
 
-				if (!requestorExists) {
+				if (!requestorExists)
+				{
 					throw new MissingRecordException("The requesting user does not exist.");
 				}
 
-				if (!acceptorExists) {
+				if (!acceptorExists)
+				{
 					throw new MissingRecordException("The targeted group does not exist.");
 				}
 
-				if (autoAccept) {
+				if (autoAccept)
+				{
 					var relation = new UserToGroupRelationship
 					{
 						RequestorId = newRelation.RequestorId,
 						AcceptorId = newRelation.AcceptorId
 					};
 					context.UserToGroupRelationships.Add(relation);
-				} else {
+				}
+				else
+				{
 					var relation = new UserToGroupRelationshipRequest
 					{
 						RequestorId = newRelation.RequestorId,
@@ -149,7 +154,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var relation = context.UserToGroupRelationships
-					.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId) 
+					.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
 						|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
 
 				context.UserToGroupRelationships.Remove(relation);

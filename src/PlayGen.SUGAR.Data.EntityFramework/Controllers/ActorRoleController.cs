@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				if (includeClaims) 
+				if (includeClaims)
 				{
 					var roles = context.ActorRoles
 						.Include(r => r.Role)

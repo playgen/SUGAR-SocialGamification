@@ -14,17 +14,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 		}
 
-        public List<Evaluation> Get()
-        {
-            using (var context = ContextFactory.Create())
-            {
-                return context.Evaluations
-                    .IncludeAll()
-                    .ToList();
-            }
-        }
+		public List<Evaluation> Get()
+		{
+			using (var context = ContextFactory.Create())
+			{
+				return context.Evaluations
+					.IncludeAll()
+					.ToList();
+			}
+		}
 
-        public List<Evaluation> GetByGame(int? gameId)
+		public List<Evaluation> GetByGame(int? gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -73,17 +73,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-			    context.Evaluations.Update(evaluation);
-			    context.SaveChanges();
+				context.Evaluations.Update(evaluation);
+				context.SaveChanges();
 			}
 		}
 
-        public void Delete(string token, int? gameId)
+		public void Delete(string token, int? gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				gameId = gameId ?? 0;
-				
+
 				var evaluation = context.Evaluations
 					.IncludeAll()
 					.SingleOrDefault(e => e.Token == token && e.GameId == gameId);

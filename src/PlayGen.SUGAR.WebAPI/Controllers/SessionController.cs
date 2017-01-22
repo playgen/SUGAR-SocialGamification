@@ -14,30 +14,30 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	[Route("api")]
 	public class SessionController : Controller
 	{
-        private readonly TokenController _tokenController;
-        private readonly Core.Controllers.AccountController _accountCoreController;
-        private readonly SessionTracker _sessionTracker;
-        
-        public SessionController(Core.Controllers.AccountController accountCoreController,
-            TokenController tokenController,
-            SessionTracker sessionTracker)
-        {
-            _accountCoreController = accountCoreController;
-            _sessionTracker = sessionTracker;
-            _tokenController = tokenController;
-        }
+		private readonly TokenController _tokenController;
+		private readonly Core.Controllers.AccountController _accountCoreController;
+		private readonly SessionTracker _sessionTracker;
 
-        /// <summary>
-        /// Logs in an account based on the name and password combination.
-        /// Returns a JsonWebToken used for authorization in any further calls to the API.
-        /// 
-        /// Example Usage: POST api/login
-        /// Example Usage: POST api/1/login
-        /// </summary>
-        /// <param name="gameId">Optional Id of the game the account is logging in for.</param>
-        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
-        /// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
-        [HttpPost("login")]
+		public SessionController(Core.Controllers.AccountController accountCoreController,
+			TokenController tokenController,
+			SessionTracker sessionTracker)
+		{
+			_accountCoreController = accountCoreController;
+			_sessionTracker = sessionTracker;
+			_tokenController = tokenController;
+		}
+
+		/// <summary>
+		/// Logs in an account based on the name and password combination.
+		/// Returns a JsonWebToken used for authorization in any further calls to the API.
+		/// 
+		/// Example Usage: POST api/login
+		/// Example Usage: POST api/1/login
+		/// </summary>
+		/// <param name="gameId">Optional Id of the game the account is logging in for.</param>
+		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
+		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
+		[HttpPost("login")]
 		[HttpPost("{gameId:int}/login")]
 		[ArgumentsNotNull]
 		public IActionResult Login([FromRoute]int? gameId, [FromBody]AccountRequest accountRequest)
@@ -54,49 +54,49 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return new ObjectResult(response);
 		}
 
-        /// <summary>
-        /// Creates a new account and login that account.
-        /// 
-        /// Example Usage: POST api/createandlogin
-        /// Example Usage: POST api/1/createandlogin
-        /// </summary>
-        /// <param name="gameId">Optional Id of the game the account is logging in for.</param>
-        /// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
-        /// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
-        [HttpPost("createandlogin")]
-        [HttpPost("{gameId:int}/createandlogin")]
-        [ArgumentsNotNull]
-        public IActionResult CreateAndLogin([FromRoute]int? gameId, [FromBody] AccountRequest accountRequest)
-        {
-            var account = accountRequest.ToModel();
-            _accountCoreController.Create(account, accountRequest.SourceToken);
+		/// <summary>
+		/// Creates a new account and login that account.
+		/// 
+		/// Example Usage: POST api/createandlogin
+		/// Example Usage: POST api/1/createandlogin
+		/// </summary>
+		/// <param name="gameId">Optional Id of the game the account is logging in for.</param>
+		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
+		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
+		[HttpPost("createandlogin")]
+		[HttpPost("{gameId:int}/createandlogin")]
+		[ArgumentsNotNull]
+		public IActionResult CreateAndLogin([FromRoute]int? gameId, [FromBody] AccountRequest accountRequest)
+		{
+			var account = accountRequest.ToModel();
+			_accountCoreController.Create(account, accountRequest.SourceToken);
 
-            var result = Login(gameId, accountRequest);
-            return result;
-        }
+			var result = Login(gameId, accountRequest);
+			return result;
+		}
 
-        /// <summary>
-        /// Heartbeat method to keep the specific session alive.
-        /// Calling it within a server defined interval will notify the server that the
-        /// session is still active.
-        /// </summary>
-        [HttpGet("heartbeat")]
-        [Authorize("Bearer")]
-        [ValidateSession]
-        public IActionResult Heartbeat()
+		/// <summary>
+		/// Heartbeat method to keep the specific session alive.
+		/// Calling it within a server defined interval will notify the server that the
+		/// session is still active.
+		/// </summary>
+		[HttpGet("heartbeat")]
+		[Authorize("Bearer")]
+		[ValidateSession]
+		public IActionResult Heartbeat()
 		{
 			return new ObjectResult(null);
 		}
 
 		/// <summary>
-        /// Logsout the currently logged in account, ending it's session and removing the 
-        /// authorization token.
-        /// </summary>
-        /// <returns></returns>
+		/// Logsout the currently logged in account, ending it's session and removing the 
+		/// authorization token.
+		/// </summary>
+		/// <returns></returns>
 		[HttpGet("logout")]
 		[Authorize("Bearer")]
-        [ValidateSession]
-        public IActionResult Logout()
+		[ValidateSession]
+		public IActionResult Logout()
 		{
 			var sessionId = HttpContext.GetSessionId();
 			_sessionTracker.EndSession(sessionId);

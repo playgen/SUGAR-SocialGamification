@@ -21,12 +21,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		}
 		
 		public DbSet<Account> Accounts { get; set; }
-        public DbSet<AccountSource> AccountSources { get; set; }
+		public DbSet<AccountSource> AccountSources { get; set; }
 
-        public DbSet<Game> Games { get; set; }
+		public DbSet<Game> Games { get; set; }
 		
 		public DbSet<Evaluation> Evaluations { get; set; }
-        public DbSet<SentEvaluationNotification> SentEvaluationNotifications { get; set; }
+		public DbSet<SentEvaluationNotification> SentEvaluationNotifications { get; set; }
 		public DbSet<Achievement> Achievements { get; set; }
 		public DbSet<Skill> Skills { get; set; }
 
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		public DbSet<User> Users { get; set; }
 		public DbSet<Group> Groups { get; set; }
 
-        public DbSet<Match> Matches { get; set; }
+		public DbSet<Match> Matches { get; set; }
 
 		public DbSet<EvaluationData> EvaluationData { get; set; }
 		public DbSet<ActorData> ActorData { get; set; }
@@ -46,9 +46,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 
 		public DbSet<Leaderboard> Leaderboards { get; set; }
 		public DbSet<Claim> Claims { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<RoleClaim> RoleClaims { get; set; }
-        public DbSet<ActorRole> ActorRoles { get; set; }
+		public DbSet<Role> Roles { get; set; }
+		public DbSet<RoleClaim> RoleClaims { get; set; }
+		public DbSet<ActorRole> ActorRoles { get; set; }
 		public DbSet<ActorClaim> ActorClaims { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

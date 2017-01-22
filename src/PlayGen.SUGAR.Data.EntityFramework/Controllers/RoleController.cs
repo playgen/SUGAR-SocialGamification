@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
 	public class RoleController : DbController
 	{
-		public RoleController(SUGARContextFactory contextFactory) 
+		public RoleController(SUGARContextFactory contextFactory)
 			: base(contextFactory)
 		{
 		}
