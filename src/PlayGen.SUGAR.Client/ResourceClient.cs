@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Extensions;
@@ -35,6 +36,13 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<ResourceResponse>>(query);
 		}
 
+		public void GetAsync(int? gameId, int? actorId, string[] keys, Action<IEnumerable<ResourceResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => Get(gameId, actorId, keys),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Create or Updates a Resource record.
 		/// </summary>
@@ -46,6 +54,13 @@ namespace PlayGen.SUGAR.Client
 			return Post<ResourceAddRequest, ResourceResponse>(query, data);
 		}
 
+		public void AddOrUpdateAsync(ResourceAddRequest data, Action<ResourceResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => AddOrUpdate(data),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Transfers a quantity of a specific resource.
 		/// </summary>
@@ -55,6 +70,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/transfer").ToString();
 			return Post<ResourceTransferRequest, ResourceTransferResponse>(query, data);
+		}
+
+		public void TransferAsync(ResourceTransferRequest data, Action<ResourceTransferResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => Transfer(data),
+				onSuccess,
+				onError);
 		}
 	}
 }

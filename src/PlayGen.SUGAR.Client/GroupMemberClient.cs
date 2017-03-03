@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
@@ -28,6 +29,13 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
+		public void GetMemberRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetMemberRequests(userId),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Get a list of all Groups that have been sent relationship requests for this <param name="userId"/>.
 		/// </summary>
@@ -37,6 +45,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/sentrequests/{0}", userId).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
+		}
+
+		public void GetSentRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetSentRequests(userId),
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>
@@ -50,6 +65,13 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
+		public void GetMembersAsync(int groupId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetMembers(groupId),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Get a list of all Groups that have relationships with this <param name="userId"/>.
 		/// </summary>
@@ -59,6 +81,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/usergroups/{0}", userId).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
+		}
+
+		public void GetUserGroupsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetUserGroups(userId),
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>
@@ -73,6 +102,13 @@ namespace PlayGen.SUGAR.Client
 			return Post<RelationshipRequest, RelationshipResponse>(query, relationship);
 		}
 
+		public void CreateMemberRequestAsync(RelationshipRequest relationship, Action<RelationshipResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => CreateMemberRequest(relationship),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Update an existing relationship request between <param name="relationship.UserId"/> and <param name="relationship.GroupId"/>.
 		/// Requires the relationship request to already exist between the User and Group.
@@ -84,6 +120,13 @@ namespace PlayGen.SUGAR.Client
 			Put(query, relationship);
 		}
 
+		public void UpdateMemberRequestAsync(RelationshipStatusUpdate relationship, Action onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => UpdateMemberRequest(relationship),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Update an existing relationship between <param name="relationship.UserId"/> and <param name="relationship.GroupId"/>.
 		/// Requires the relationship to already exist between the User and Group.
@@ -93,6 +136,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "").ToString();
 			Put(query, relationship);
+		}
+
+		public void UpdateMemberAsync(RelationshipStatusUpdate relationship, Action onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => UpdateMember(relationship),
+				onSuccess,
+				onError);
 		}
 	}
 }

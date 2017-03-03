@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
@@ -28,6 +29,13 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
+		public void GetFriendRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetFriendRequests(userId),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Get a list of all Users that have been sent relationship requests for this <param name="userId"/>.
 		/// </summary>
@@ -39,6 +47,13 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
+		public void GetSentRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetSentRequests(userId),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Get a list of all Users that have relationships with this <param name="userId"/>.
 		/// </summary>
@@ -48,6 +63,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/friends/{0}", userId).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
+		}
+
+		public void GetFriendsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetFriends(userId),
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>
@@ -62,6 +84,13 @@ namespace PlayGen.SUGAR.Client
 			return Post<RelationshipRequest, RelationshipResponse>(query, relationship);
 		}
 
+		public void CreateFriendRequestAsync(RelationshipRequest relationship, Action<RelationshipResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => CreateFriendRequest(relationship),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Update an existing relationship request between <param name="relationship.RequestorId"/> and <param name="relationship.AcceptorId"/>.
 		/// Requires the relationship request to already exist between the two Users.
@@ -73,6 +102,13 @@ namespace PlayGen.SUGAR.Client
 			Put(query, relationship);
 		}
 
+		public void UpdateFriendRequestAsync(RelationshipStatusUpdate relationship, Action onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => UpdateFriendRequest(relationship),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Update an existing relationship between <param name="relationship.RequestorId"/> and <param name="relationship.AcceptorId"/>.
 		/// Requires the relationship to already exist between the two Users.
@@ -82,6 +118,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "").ToString();
 			Put(query, relationship);
+		}
+
+		public void UpdateFriendAsync(RelationshipStatusUpdate relationship, Action onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => UpdateFriend(relationship),
+				onSuccess,
+				onError);
 		}
 	}
 }

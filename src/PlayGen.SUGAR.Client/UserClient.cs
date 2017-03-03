@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
@@ -37,6 +38,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/{1}", name, exactMatch).ToString();
 			return Get<IEnumerable<UserResponse>>(query);
+		}
+
+		public void GetAsync(string name, Action < IEnumerable<UserResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => Get(name),
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>
