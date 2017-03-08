@@ -91,8 +91,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 				case CriteriaQueryType.Any:
 					var any = evaluationDataController.AllLongs(gameId, actorId, completionCriteria.EvaluationDataKey).ToList();
 
-					return !any.Any() ? CompareValues(0, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType) :
-                                any.Max(value => CompareValues(value, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
+					return !any.Any() ? 0 : any.Max(value => CompareValues(value, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
 				case CriteriaQueryType.Sum:
 					var sum = evaluationDataController.SumLongs(gameId, actorId, completionCriteria.EvaluationDataKey);
 
@@ -101,7 +100,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 					long latest;
 					if (!evaluationDataController.TryGetLatestLong(gameId, actorId, completionCriteria.EvaluationDataKey, out latest))
 					{
-						latest = 0;
+                        return 0;
 					}
 
 					return CompareValues(latest, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
@@ -119,8 +118,7 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 				case CriteriaQueryType.Any:
 					var any = evaluationDataController.AllFloats(gameId, actorId, completionCriteria.EvaluationDataKey).ToList();
 
-					return !any.Any() ? CompareValues(0, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType) : 
-                                any.Max(value => CompareValues(value, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
+					return !any.Any() ? 0 : any.Max(value => CompareValues(value, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
 				case CriteriaQueryType.Sum:
 					var sum = evaluationDataController.SumFloats(gameId, actorId, completionCriteria.EvaluationDataKey);
 
@@ -129,8 +127,8 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 					float latest;
 					if (!evaluationDataController.TryGetLatestFloat(gameId, actorId, completionCriteria.EvaluationDataKey, out latest))
 					{
-						latest = 0;
-					}
+                        return 0;
+                    }
 
 					return CompareValues(latest, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
 				default:
@@ -147,17 +145,13 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 				case CriteriaQueryType.Any:
 					var any = evaluationDataController.AllStrings(gameId, actorId, completionCriteria.EvaluationDataKey).ToList();
 
-					return !any.Any() ? CompareValues("", completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.EvaluationDataType) : 
-                                any.Max(value => CompareValues(value, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
-
-			    case CriteriaQueryType.Sum:
-					return 0;
+					return !any.Any() ? 0 : any.Max(value => CompareValues(value, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
 				case CriteriaQueryType.Latest:
 					string latest;
 					if (!evaluationDataController.TryGetLatestString(gameId, actorId, completionCriteria.EvaluationDataKey, out latest))
 					{
-						latest = "";
-					}
+                        return 0;
+                    }
 
 					return CompareValues(latest, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
 				default:
@@ -174,17 +168,13 @@ namespace PlayGen.SUGAR.Core.EvaluationEvents
 				case CriteriaQueryType.Any:
 					var any = evaluationDataController.AllBools(gameId, actorId, completionCriteria.EvaluationDataKey).ToList();
 
-					return !any.Any() ? CompareValues(false, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType) : 
-                                any.Max(value => CompareValues(value, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
-
-			    case CriteriaQueryType.Sum:
-					return 0;
+					return !any.Any() ? 0 : any.Max(value => CompareValues(value, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
 				case CriteriaQueryType.Latest:
 					bool latest;
 					if (!evaluationDataController.TryGetLatestBool(gameId, actorId, completionCriteria.EvaluationDataKey, out latest))
 					{
-						latest = false;
-					}
+                        return 0;
+                    }
 
 					return CompareValues(latest, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
 				default:
