@@ -41,10 +41,16 @@ namespace PlayGen.SUGAR.Contracts.Shared
 		[StringLength(64)]
 		public string Name { get; set; }
 
-		/// <summary>
-		/// The GameData key which is checked against in order to create the leaderboard standings.
+        /// <summary>
+		/// The EvaluationDataCategory of the GameData being checked against.
 		/// </summary>
 		[Required]
+        public EvaluationDataCategory EvaluationDataCategory { get; set; }
+
+        /// <summary>
+        /// The GameData key which is checked against in order to create the leaderboard standings.
+        /// </summary>
+        [Required]
 		[StringLength(64)]
 		public string Key { get; set; }
 

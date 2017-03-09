@@ -19,7 +19,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
                 Id = sourceModel.Id,
                 Description = sourceModel.Description,
                 Token = sourceModel.Token,
-                RequiresPassword = sourceModel.RequiresPassword
+                RequiresPassword = sourceModel.RequiresPassword,
+                AutoRegister = sourceModel.AutoRegister
             };
         }
 
@@ -34,7 +35,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
             {
                 Description = sourceContract.Description,
                 Token = sourceContract.Token,
-                RequiresPassword = sourceContract.RequiresPassword
+                RequiresPassword = sourceContract.RequiresPassword,
+                AutoRegister = sourceContract.AutoRegister
             };
         }
 

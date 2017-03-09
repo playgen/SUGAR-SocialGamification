@@ -34,5 +34,10 @@
         /// Whether the user needs to pass a password when logging in via this source
         /// </summary>
         public bool RequiresPassword { get; set; }
-	}
+
+        /// <summary>
+        /// Whether an account is created if one does not already exist for this source
+        /// </summary>
+        public bool AutoRegister { get; set; }
+    }
 }
