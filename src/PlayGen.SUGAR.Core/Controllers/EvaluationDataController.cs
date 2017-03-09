@@ -137,6 +137,33 @@ namespace PlayGen.SUGAR.Core.Controllers
             return datas;
         }
 
+        public List<int?> GetGameActors(int? gameId)
+        {
+            var actors = _evaluationDataDbController.GetGameActors(gameId);
+
+            Logger.Info($"{actors?.Count} Actors for GameId {gameId}");
+
+            return actors;
+        }
+
+        public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int? gameId)
+        {
+            var datas = _evaluationDataDbController.GetGameKeys(gameId);
+
+            Logger.Info($"{datas?.Count} Evaluation Data Keys for GameId {gameId}");
+
+            return datas;
+        }
+
+        public List<EvaluationData> GetActorData(int? actorId)
+        {
+            var datas = _evaluationDataDbController.GetActorData(actorId);
+
+            Logger.Info($"{datas?.Count} Evaluation Data Keys for ActorId {actorId}");
+
+            return datas;
+        }
+
         public List<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
             DateTime end = default(DateTime))
         {

@@ -82,6 +82,6 @@ namespace PlayGen.SUGAR.Core.UnitTests
             => _actorController ?? (_actorController = new ActorController(DbControllerLocator.ActorController));
 
         public static GameDataController GameDataController =>
-            _gameDataController ?? (_gameDataController = new GameDataController(DbControllerLocator.ContextFactory));
+            _gameDataController ?? (_gameDataController = new GameDataController(DbControllerLocator.ContextFactory, ActorController));
     }
 }

@@ -52,17 +52,76 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			return Forbid();
 		}
 
-		/// <summary>
-		/// Finds a list of GameData with the highest <param name="dataType"/> for each <param name="key"/> provided that matches the <param name="actorId"/> and <param name="gameId"/>.
+        /// <summary>
+		/// Find a list of all Actors that have data saved for the game <param name="id"/> provided.
 		/// 
-		/// Example Usage: GET api/gamedata/highest?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2&amp;dataType=1
+		/// Example Usage: GET api/gamedata/gameactors/1
 		/// </summary>
-		/// <param name="actorId">ID of a User/Group.</param>
-		/// <param name="gameId">ID of a Game.</param>
-		/// <param name="key">Array of Key names.</param>
-		/// <param name="dataType">Data type of value</param>
-		/// <returns></returns>
-		[HttpGet("highest")]
+		/// <param name="id">ID of a Game.</param>
+		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		[HttpGet("gameactors/{id:int}")]
+        //[ResponseType(typeof(IEnumerable<string>))]
+        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
+        public IActionResult GetGameActors(int? id)
+        {
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+            {
+                var data = _gameDataCoreController.GetGameActors(id);
+                var dataContract = data.ToActorContractList();
+                return new ObjectResult(data);
+            }
+            return Forbid();
+        }
+
+        /// <summary>
+		/// Find a list of all GameData keys for the <param name="id"/> provided.
+		/// 
+		/// Example Usage: GET api/gamedata/gamekeys/1
+		/// </summary>
+		/// <param name="id">ID of a Game.</param>
+		/// <returns>A list of GameData keys and their EvaluationDataType that has data saved for the provided game ID</returns>
+		[HttpGet("gamekeys/{id:int}")]
+        //[ResponseType(typeof(IEnumerable<string>))]
+        public IActionResult GetGameKeys(int? id)
+        {
+            var data = _gameDataCoreController.GetGameKeys(id);
+            return new ObjectResult(data);
+        }
+
+        /// <summary>
+		/// Find a list of all GameData keys for the <param name="id"/> provided.
+		/// 
+		/// Example Usage: GET api/gamedata/actor/1
+		/// </summary>
+		/// <param name="id">ID of a Game.</param>
+		/// <returns>A list of <see cref="EvaluationDataResponse"/> that has data saved for the provided actor ID</returns>
+		[HttpGet("actor/{id:int}")]
+        //[ResponseType(typeof(IEnumerable<string>))]
+        [Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
+        [Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
+        public IActionResult GetActorData(int? id)
+        {
+            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
+                 _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)
+            {
+                var data = _gameDataCoreController.GetActorData(id);
+                var dataContract = data.ToContractList();
+                return new ObjectResult(data);
+            }
+            return Forbid();
+        }
+
+        /// <summary>
+        /// Finds a list of GameData with the highest <param name="dataType"/> for each <param name="key"/> provided that matches the <param name="actorId"/> and <param name="gameId"/>.
+        /// 
+        /// Example Usage: GET api/gamedata/highest?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2&amp;dataType=1
+        /// </summary>
+        /// <param name="actorId">ID of a User/Group.</param>
+        /// <param name="gameId">ID of a Game.</param>
+        /// <param name="key">Array of Key names.</param>
+        /// <param name="dataType">Data type of value</param>
+        /// <returns></returns>
+        [HttpGet("highest")]
 		//[ResponseType(typeof(IEnumerable<EvaluationDataResponse>))]
 		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.GameData)]
 		[Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.GameData)]

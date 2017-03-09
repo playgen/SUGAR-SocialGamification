@@ -88,7 +88,46 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public List<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public List<int?> GetGameActors(int? gameId = null)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                var actors = context.GetCategoryData(_category)
+                    .FilterByGameId(gameId)
+                    .ToList()
+                    .Select(d => d.ActorId)
+                    .Distinct()
+                    .ToList();
+                return actors;
+            }
+        }
+
+        public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int? gameId = null)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                var data = context.GetCategoryData(_category)
+                    .FilterByGameId(gameId)
+                    .ToList()
+                    .Select(d => new KeyValuePair<string, EvaluationDataType>(d.Key, d.EvaluationDataType))
+                    .Distinct()
+                    .ToList();
+                return data;
+            }
+        }
+
+        public List<EvaluationData> GetActorData(int? actorId = null)
+        {
+            using (var context = ContextFactory.Create())
+            {
+                var data = context.GetCategoryData(_category)
+                    .FilterByActorId(actorId)
+                    .ToList();
+                return data;
+            }
+        }
+
+        public List<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			end = EndSet(end);
 			using (var context = ContextFactory.Create())
