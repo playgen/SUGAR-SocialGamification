@@ -14,8 +14,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				return null;
 			}
 
-            return new GameResponse
-			{
+			return new GameResponse {
 				Id = gameModel.Id,
 				Name = gameModel.Name
 			};
@@ -28,9 +27,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static Game ToModel(this GameRequest gameContract)
 		{
-			return new Game
-			{
-			    Name = gameContract.Name 
+			return new Game {
+				Name = gameContract.Name
 			};
 		}
 

@@ -12,8 +12,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				return null;
 			}
 
-            return new RelationshipResponse
-			{
+			return new RelationshipResponse {
 				RequestorId = relationshipModel.RequestorId,
 				AcceptorId = relationshipModel.AcceptorId
 			};
@@ -26,18 +25,16 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				return null;
 			}
 
-            return new RelationshipResponse
-			{
+			return new RelationshipResponse {
 				RequestorId = relationshipModel.RequestorId,
 				AcceptorId = relationshipModel.AcceptorId
 			};
 		}
 
-		
+
 		public static UserToUserRelationship ToUserModel(this RelationshipRequest relationContract)
 		{
-			return new UserToUserRelationship
-			{
+			return new UserToUserRelationship {
 				RequestorId = relationContract.RequestorId,
 				AcceptorId = relationContract.AcceptorId
 			};
@@ -45,8 +42,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static UserToGroupRelationship ToGroupModel(this RelationshipRequest relationContract)
 		{
-			return new UserToGroupRelationship
-			{
+			return new UserToGroupRelationship {
 				RequestorId = relationContract.RequestorId,
 				AcceptorId = relationContract.AcceptorId
 			};

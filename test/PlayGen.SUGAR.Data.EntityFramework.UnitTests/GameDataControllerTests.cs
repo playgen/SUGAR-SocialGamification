@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		private readonly GameController _gameController = ControllerLocator.GameController;
 		private readonly UserController _userController = ControllerLocator.UserController;
 		#endregion
-		
+
 		#region Tests
 		[Fact]
 		public void CreateAndGetUserGameEvaluationData()
@@ -123,13 +123,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 
 		#region Helpers
-		private Model.EvaluationData CreateEvaluationData(string key, int? gameId = null, int? userId = null, 
+		private Model.EvaluationData CreateEvaluationData(string key, int? gameId = null, int? userId = null,
 			bool createNewGame = false, bool createNewUser = false)
 		{
 			if (createNewGame)
 			{
-				var game = new Game
-				{
+				var game = new Game {
 					Name = key
 				};
 				_gameController.Create(game);
@@ -138,16 +137,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			if (createNewUser)
 			{
-				var user = new User
-				{
+				var user = new User {
 					Name = key
 				};
 				_userController.Create(user);
 				userId = user.Id;
 			}
 
-			var userData = new Model.EvaluationData
-			{
+			var userData = new Model.EvaluationData {
 				Key = key,
 				GameId = gameId,
 				ActorId = userId,

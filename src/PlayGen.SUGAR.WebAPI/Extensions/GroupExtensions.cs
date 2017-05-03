@@ -13,8 +13,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			{
 				return null;
 			}
-			var groupContract = new GroupResponse
-			{
+			var groupContract = new GroupResponse {
 				Id = groupModel.Id,
 				Name = groupModel.Name,
 				MemberCount = groupModel.UserToGroupRelationships != null ? groupModel.UserToGroupRelationships.Count : 0
@@ -30,9 +29,8 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static Group ToGroupModel(this GroupRequest groupContract)
 		{
-			return new Group
-			{
-			    Name = groupContract.Name
+			return new Group {
+				Name = groupContract.Name
 			};
 		}
 	}

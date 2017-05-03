@@ -10,16 +10,15 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	internal static class EvaluationExtensions
 	{
-        public static EvaluationResponse ToContract(this Evaluation model)
+		public static EvaluationResponse ToContract(this Evaluation model)
 		{
 			if (model == null)
 			{
 				return null;
 			}
 
-            return new EvaluationResponse
-			{
-                Id = model.Id,
+			return new EvaluationResponse {
+				Id = model.Id,
 				Name = model.Name,
 				Description = model.Description,
 				GameId = model.GameId,
@@ -30,15 +29,14 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-        public static IEnumerable<EvaluationResponse> ToContractList(this IEnumerable<Evaluation> models)
+		public static IEnumerable<EvaluationResponse> ToContractList(this IEnumerable<Evaluation> models)
 		{
 			return models.Select(ToContract).ToList();
 		}
 
-        public static EvaluationCriteria ToModel(this EvaluationCriteriaCreateRequest contract)
+		public static EvaluationCriteria ToModel(this EvaluationCriteriaCreateRequest contract)
 		{
-			return new EvaluationCriteria
-            {
+			return new EvaluationCriteria {
 				EvaluationDataKey = contract.EvaluationDataKey,
 				ComparisonType = contract.ComparisonType,
 				CriteriaQueryType = contract.CriteriaQueryType,
@@ -48,63 +46,60 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-        public static EvaluationCriteria ToModel(this EvaluationCriteriaUpdateRequest contract)
-        {
-            return new EvaluationCriteria
-            {
-                Id = contract.Id,
-                EvaluationDataKey = contract.EvaluationDataKey,
-                ComparisonType = contract.ComparisonType,
-                CriteriaQueryType = contract.CriteriaQueryType,
-                EvaluationDataType = contract.EvaluationDataType,
-                Scope = contract.Scope,
-                Value = contract.Value,
-            };
-        }
+		public static EvaluationCriteria ToModel(this EvaluationCriteriaUpdateRequest contract)
+		{
+			return new EvaluationCriteria {
+				Id = contract.Id,
+				EvaluationDataKey = contract.EvaluationDataKey,
+				ComparisonType = contract.ComparisonType,
+				CriteriaQueryType = contract.CriteriaQueryType,
+				EvaluationDataType = contract.EvaluationDataType,
+				Scope = contract.Scope,
+				Value = contract.Value,
+			};
+		}
 
-	    public static IEnumerable<EvaluationProgressResponse> ToContractList(this IEnumerable<EvaluationProgress> models)
-	    {
-	        return models.Select(ToContract).ToList();
-	    }
+		public static IEnumerable<EvaluationProgressResponse> ToContractList(this IEnumerable<EvaluationProgress> models)
+		{
+			return models.Select(ToContract).ToList();
+		}
 
-        public static EvaluationProgressResponse ToContract(this EvaluationProgress model)
-        {
-            return new EvaluationProgressResponse
-            {
-                Actor = model.Actor.ToActorContract(),
-                Name = model.Name,
-                Progress = model.Progress,
-            };
-        }
+		public static EvaluationProgressResponse ToContract(this EvaluationProgress model)
+		{
+			return new EvaluationProgressResponse {
+				Actor = model.Actor.ToActorContract(),
+				Name = model.Name,
+				Progress = model.Progress,
+			};
+		}
 
-        public static List<EvaluationProgressResponse> ToContractList(this ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> pendingNotifications)
-        {
-            if (pendingNotifications == null) return null;
+		public static List<EvaluationProgressResponse> ToContractList(this ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> pendingNotifications)
+		{
+			if (pendingNotifications == null)
+				return null;
 
-            var progressResponses = new List<EvaluationProgressResponse>();
+			var progressResponses = new List<EvaluationProgressResponse>();
 
-            foreach (var actorProgress in pendingNotifications)
-            {
-                foreach (var evaluationProgress in actorProgress.Value)
-                {
-                    progressResponses.Add(new EvaluationProgressResponse
-                    {
-                        Actor = new ActorResponse
-                            {
-                                // todo get name
-                                Id = actorProgress.Key
-                            },
+			foreach (var actorProgress in pendingNotifications)
+			{
+				foreach (var evaluationProgress in actorProgress.Value)
+				{
+					progressResponses.Add(new EvaluationProgressResponse {
+						Actor = new ActorResponse {
+							// todo get name
+							Id = actorProgress.Key
+						},
 
-                        Name = evaluationProgress.Key.Name,
+						Name = evaluationProgress.Key.Name,
 
-                        Progress = evaluationProgress.Value,
+						Progress = evaluationProgress.Value,
 
-                        Type = evaluationProgress.Key.EvaluationType
-                    });
-                }
-            }
+						Type = evaluationProgress.Key.EvaluationType
+					});
+				}
+			}
 
-            return progressResponses;
-	    }
-    }
+			return progressResponses;
+		}
+	}
 }

@@ -10,8 +10,6 @@ namespace PlayGen.SUGAR.Client
 	{
 		private WebRequest CreateRequest(HttpRequest request)
 		{
-			Console.WriteLine("ClientBase::CreateRequest");
-
 			var webRequest = WebRequest.Create(request.Url);
 			webRequest.Method = request.Method;
 			foreach (var header in request.Headers)
@@ -43,17 +41,10 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="payload"></param>
 		private void SendData(WebRequest request, byte[] payload)
 		{
-			Console.WriteLine("ClientBase::SendData");
-
 			request.ContentLength = payload.Length;
 			request.ContentType = "application/json";
-			Console.WriteLine("ClientBase::SendData [GetRequestStream]");
-
 			var dataStream = request.GetRequestStream();
-			Console.WriteLine("ClientBase::SendData [Write]");
 			dataStream.Write(payload, 0, payload.Length);
-			Console.WriteLine("ClientBase::SendData [CloseStream]");
-
 			dataStream.Close();
 		}
 

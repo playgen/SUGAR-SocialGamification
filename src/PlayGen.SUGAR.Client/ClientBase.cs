@@ -82,8 +82,6 @@ namespace PlayGen.SUGAR.Client
 		/// <returns></returns>
 		protected UriBuilder GetUriBuilder(string apiSuffix, params object[] param)
 		{
-			Console.WriteLine("ClientBase::GetUriBuilder");
-
 			if (!AreUriParamsValid(param))
 			{
 				throw new ClientException("Passed values must not be empty or null");
@@ -191,9 +189,7 @@ namespace PlayGen.SUGAR.Client
 		{
 			var request = CreateRequest(url, method, headers, payload);
 			var response = _httpHandler.HandleRequest(request);
-			Console.WriteLine("ClientBase::PostPut::ProcessResponse");
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
-			Console.WriteLine("ClientBase::PostPut::DeserializeResponse");
 
 			return UnwrapResponse<TResponse>(response);
 		}

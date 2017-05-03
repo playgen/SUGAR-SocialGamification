@@ -6,9 +6,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class RoleClaimController
 	{
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private readonly Data.EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
+		private readonly Data.EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
 
 		public RoleClaimController(Data.EntityFramework.Controllers.RoleClaimController roleClaimDbController)
 		{
@@ -19,7 +19,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			var roles = _roleClaimDbController.GetClaimsByRole(roleId);
 
-            Logger.Info($"{roles.Count} Roles for RoleId: {roleId}");
+			Logger.Info($"{roles.Count} Roles for RoleId: {roleId}");
 
 			return roles;
 		}
@@ -28,34 +28,34 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			var roles = _roleClaimDbController.GetClaimsByRoles(ids);
 
-            Logger.Info($"{roles.Count} Roles for Ids: {string.Join(", ", ids)}");
+			Logger.Info($"{roles.Count} Roles for Ids: {string.Join(", ", ids)}");
 
-            return roles;
+			return roles;
 		}
 
 		public List<Role> GetRolesByClaim(int id)
 		{
 			var claims = _roleClaimDbController.GetRolesByClaim(id);
 
-            Logger.Info($"{claims.Count} Claims for Id: {id}");
+			Logger.Info($"{claims.Count} Claims for Id: {id}");
 
-            return claims;
+			return claims;
 		}
 
 		public RoleClaim Create(RoleClaim newRoleClaim)
 		{
 			newRoleClaim = _roleClaimDbController.Create(newRoleClaim);
 
-            Logger.Info($"RoleId: {newRoleClaim?.RoleId}, ClaimId: {newRoleClaim?.ClaimId}");
+			Logger.Info($"RoleId: {newRoleClaim?.RoleId}, ClaimId: {newRoleClaim?.ClaimId}");
 
-            return newRoleClaim;
+			return newRoleClaim;
 		}
 
 		public void Delete(int roleId, int claimId)
 		{
 			_roleClaimDbController.Delete(roleId, claimId);
 
-            Logger.Info($"RoleId: {roleId}, ClaimId: {claimId}");
-        }
+			Logger.Info($"RoleId: {roleId}, ClaimId: {claimId}");
+		}
 	}
 }

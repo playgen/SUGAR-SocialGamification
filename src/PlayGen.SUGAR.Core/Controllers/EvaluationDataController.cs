@@ -8,407 +8,407 @@ using PlayGen.SUGAR.Data.EntityFramework;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-    public class EvaluationDataController
-    {
-        public static Action<EvaluationData> EvaluationDataAddedEvent;
+	public class EvaluationDataController
+	{
+		public static Action<EvaluationData> EvaluationDataAddedEvent;
 
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private readonly Data.EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController;
-        private readonly EvaluationDataCategory _category;
+		private readonly Data.EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController;
+		private readonly EvaluationDataCategory _category;
 
-        public EvaluationDataController(SUGARContextFactory contextFactory, EvaluationDataCategory category)
-        {
-            _category = category;
-            _evaluationDataDbController = new Data.EntityFramework.Controllers.EvaluationDataController(contextFactory, category);
-        }
+		public EvaluationDataController(SUGARContextFactory contextFactory, EvaluationDataCategory category)
+		{
+			_category = category;
+			_evaluationDataDbController = new Data.EntityFramework.Controllers.EvaluationDataController(contextFactory, category);
+		}
 
-        public void Add(EvaluationData[] datas)
-        {
-            var dataList = new List<EvaluationData>();
-            var i = 0;
-            var chunkSize = 1000;
+		public void Add(EvaluationData[] datas)
+		{
+			var dataList = new List<EvaluationData>();
+			var i = 0;
+			var chunkSize = 1000;
 
-            var uniqueAddedData = new Dictionary<string, EvaluationData>();
+			var uniqueAddedData = new Dictionary<string, EvaluationData>();
 
-            do
-            {
-                var newData = datas[i];
-                ValidateData(newData);
-                dataList.Add(newData);
-                uniqueAddedData[$"{newData.GameId}_{newData.Key}_{newData.Category}"] = newData;
-                
-                if (dataList.Count >= chunkSize || i == datas.Length - 1)
-                {
-                    _evaluationDataDbController.Create(dataList);
-                    dataList.Clear();
-                }
+			do
+			{
+				var newData = datas[i];
+				ValidateData(newData);
+				dataList.Add(newData);
+				uniqueAddedData[$"{newData.GameId}_{newData.Key}_{newData.Category}"] = newData;
 
-                i++;
+				if (dataList.Count >= chunkSize || i == datas.Length - 1)
+				{
+					_evaluationDataDbController.Create(dataList);
+					dataList.Clear();
+				}
 
-            } while (dataList.Count > 0 && i < datas.Length);
+				i++;
 
-            foreach (var addedData in uniqueAddedData.Values)
-            {
-                EvaluationDataAddedEvent?.Invoke(addedData);
-            }
+			} while (dataList.Count > 0 && i < datas.Length);
 
-            Logger.Info($"Added: {datas?.Length} Evaluation Datas.");
-        }
+			foreach (var addedData in uniqueAddedData.Values)
+			{
+				EvaluationDataAddedEvent?.Invoke(addedData);
+			}
 
-        public EvaluationData Add(EvaluationData newData)
-        {
-            ValidateData(newData);
+			Logger.Info($"Added: {datas?.Length} Evaluation Datas.");
+		}
 
-            if (ParseCheck(newData))
-            {
-                newData = _evaluationDataDbController.Create(newData);
+		public EvaluationData Add(EvaluationData newData)
+		{
+			ValidateData(newData);
 
-                Logger.Info($"{newData?.Id}");
+			if (ParseCheck(newData))
+			{
+				newData = _evaluationDataDbController.Create(newData);
 
-                EvaluationDataAddedEvent?.Invoke(newData);
+				Logger.Info($"{newData?.Id}");
 
-                return newData;
-            }
-            else
-            {
-                throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
-            }
-        }
+				EvaluationDataAddedEvent?.Invoke(newData);
 
-        public EvaluationData Update(EvaluationData data)
-        {
-            ValidateData(data);
+				return newData;
+			}
+			else
+			{
+				throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
+			}
+		}
 
-            data = _evaluationDataDbController.Update(data);
+		public EvaluationData Update(EvaluationData data)
+		{
+			ValidateData(data);
 
-            Logger.Info($"Updated: {data?.Id}");
+			data = _evaluationDataDbController.Update(data);
 
-            return data;
-        }
+			Logger.Info($"Updated: {data?.Id}");
 
-        public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
-            DateTime end = default(DateTime))
-        {
-            var keyExists = _evaluationDataDbController.KeyExists(gameId, actorId, key, start, end);
+			return data;
+		}
 
-            Logger.Debug(
-                $"Key Exists: {keyExists} for GameId: {gameId}, ActorId: {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
+		{
+			var keyExists = _evaluationDataDbController.KeyExists(gameId, actorId, key, start, end);
 
-            return keyExists;
-        }
+			Logger.Debug(
+				$"Key Exists: {keyExists} for GameId: {gameId}, ActorId: {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public List<EvaluationData> Get(ICollection<int> ids)
-        {
-            var datas = _evaluationDataDbController.Get(ids);
+			return keyExists;
+		}
 
-            Logger.Info($"{datas.Count} Evaluation Datas for Ids: {string.Join(", ", ids)}");
+		public List<EvaluationData> Get(ICollection<int> ids)
+		{
+			var datas = _evaluationDataDbController.Get(ids);
 
-            return datas;
-        }
+			Logger.Info($"{datas.Count} Evaluation Datas for Ids: {string.Join(", ", ids)}");
 
-        public List<EvaluationData> Get(int entityId, string[] keys = null)
-        {
-            var datas = _evaluationDataDbController.Get(entityId, keys);
+			return datas;
+		}
 
-            Logger.Info($"{datas?.Count} Evaluation Datas for EntityId {entityId}" +
-                        (keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
+		public List<EvaluationData> Get(int entityId, string[] keys = null)
+		{
+			var datas = _evaluationDataDbController.Get(entityId, keys);
 
-            return datas;
-        }
+			Logger.Info($"{datas?.Count} Evaluation Datas for EntityId {entityId}" +
+						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
-        public List<EvaluationData> Get(int? gameId = null, int? actorId = null, string[] keys = null)
-        {
-            var datas = _evaluationDataDbController.Get(gameId, actorId, keys);
+			return datas;
+		}
 
-            Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, ActorId {actorId}" +
-                        (keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
+		public List<EvaluationData> Get(int? gameId = null, int? actorId = null, string[] keys = null)
+		{
+			var datas = _evaluationDataDbController.Get(gameId, actorId, keys);
 
-            return datas;
-        }
+			Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, ActorId {actorId}" +
+						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
-        public List<EvaluationData> Get(int? gameId, int? entityId, int? actorId, string[] keys)
-        {
-            var datas = _evaluationDataDbController.Get(gameId, entityId, actorId, keys);
+			return datas;
+		}
 
-            Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
-                        (keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
+		public List<EvaluationData> Get(int? gameId, int? entityId, int? actorId, string[] keys)
+		{
+			var datas = _evaluationDataDbController.Get(gameId, entityId, actorId, keys);
 
-            return datas;
-        }
+			Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
+						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
-        public List<int?> GetGameActors(int? gameId)
-        {
-            var actors = _evaluationDataDbController.GetGameActors(gameId);
+			return datas;
+		}
 
-            Logger.Info($"{actors?.Count} Actors for GameId {gameId}");
+		public List<int?> GetGameActors(int? gameId)
+		{
+			var actors = _evaluationDataDbController.GetGameActors(gameId);
 
-            return actors;
-        }
+			Logger.Info($"{actors?.Count} Actors for GameId {gameId}");
 
-        public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int? gameId)
-        {
-            var datas = _evaluationDataDbController.GetGameKeys(gameId);
+			return actors;
+		}
 
-            Logger.Info($"{datas?.Count} Evaluation Data Keys for GameId {gameId}");
+		public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int? gameId)
+		{
+			var datas = _evaluationDataDbController.GetGameKeys(gameId);
 
-            return datas;
-        }
+			Logger.Info($"{datas?.Count} Evaluation Data Keys for GameId {gameId}");
 
-        public List<EvaluationData> GetActorData(int? actorId)
-        {
-            var datas = _evaluationDataDbController.GetActorData(actorId);
+			return datas;
+		}
 
-            Logger.Info($"{datas?.Count} Evaluation Data Keys for ActorId {actorId}");
+		public List<EvaluationData> GetActorData(int? actorId)
+		{
+			var datas = _evaluationDataDbController.GetActorData(actorId);
 
-            return datas;
-        }
+			Logger.Info($"{datas?.Count} Evaluation Data Keys for ActorId {actorId}");
 
-        public List<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
-            DateTime end = default(DateTime))
-        {
-            var longs = _evaluationDataDbController.AllLongs(gameId, actorId, key, start, end);
+			return datas;
+		}
 
-            Logger.Debug(
-                $"{longs?.Count} Values for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public List<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
+		{
+			var longs = _evaluationDataDbController.AllLongs(gameId, actorId, key, start, end);
 
-            return longs;
-        }
+			Logger.Debug(
+				$"{longs?.Count} Values for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public List<float> AllFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
-            DateTime end = default(DateTime))
-        {
-            var floats = _evaluationDataDbController.AllFloats(gameId, actorId, key, start, end);
+			return longs;
+		}
 
-            Logger.Debug(
-                $"{floats?.Count} Values for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public List<float> AllFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
+		{
+			var floats = _evaluationDataDbController.AllFloats(gameId, actorId, key, start, end);
 
-            return floats;
-        }
+			Logger.Debug(
+				$"{floats?.Count} Values for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public List<string> AllStrings(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
-            DateTime end = default(DateTime))
-        {
-            var strings = _evaluationDataDbController.AllStrings(gameId, actorId, key, start, end);
+			return floats;
+		}
 
-            Logger.Debug(
-                $"{strings?.Count} Values for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public List<string> AllStrings(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
+		{
+			var strings = _evaluationDataDbController.AllStrings(gameId, actorId, key, start, end);
 
-            return strings;
-        }
+			Logger.Debug(
+				$"{strings?.Count} Values for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public List<bool> AllBools(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
-            DateTime end = default(DateTime))
-        {
-            var bools = _evaluationDataDbController.AllBools(gameId, actorId, key, start, end);
+			return strings;
+		}
 
-            Logger.Debug(
-                $"{bools?.Count} Values for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public List<bool> AllBools(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
+		{
+			var bools = _evaluationDataDbController.AllBools(gameId, actorId, key, start, end);
 
-            return bools;
-        }
+			Logger.Debug(
+				$"{bools?.Count} Values for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public float SumFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
-            DateTime end = default(DateTime))
-        {
-            var sum = _evaluationDataDbController.SumFloats(gameId, actorId, key, start, end);
+			return bools;
+		}
 
-            Logger.Debug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public float SumFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
+		{
+			var sum = _evaluationDataDbController.SumFloats(gameId, actorId, key, start, end);
 
-            return sum;
-        }
+			Logger.Debug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public long SumLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
-            DateTime end = default(DateTime))
-        {
-            var sum = _evaluationDataDbController.SumLongs(gameId, actorId, key, start, end);
+			return sum;
+		}
 
-            Logger.Debug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public long SumLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
+		{
+			var sum = _evaluationDataDbController.SumLongs(gameId, actorId, key, start, end);
 
-            return sum;
-        }
+			Logger.Debug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public float GetHighestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var highest = _evaluationDataDbController.GetHighestFloat(gameId, actorId, key, start, end);
+			return sum;
+		}
 
-            Logger.Debug(
-                $"Highest: {highest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public float GetHighestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var highest = _evaluationDataDbController.GetHighestFloat(gameId, actorId, key, start, end);
 
-            return highest;
-        }
+			Logger.Debug(
+				$"Highest: {highest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public long GetHighestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var highest = _evaluationDataDbController.GetHighestLong(gameId, actorId, key, start, end);
+			return highest;
+		}
 
-            Logger.Debug(
-                $"Highest: {highest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public long GetHighestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var highest = _evaluationDataDbController.GetHighestLong(gameId, actorId, key, start, end);
 
-            return highest;
-        }
+			Logger.Debug(
+				$"Highest: {highest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
+			return highest;
+		}
 
-        public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var highest = _evaluationDataDbController.GetEvaluationDataByHighestFloat(gameId, actorId, key, start, end);
 
-            Logger.Debug(
-                highest != null
-                    ? $"HighestId: {highest.Id} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}"
-                    : $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var highest = _evaluationDataDbController.GetEvaluationDataByHighestFloat(gameId, actorId, key, start, end);
 
-            return highest;
-        }
+			Logger.Debug(
+				highest != null
+					? $"HighestId: {highest.Id} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}"
+					: $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var highest = _evaluationDataDbController.GetEvaluationDataByHighestLong(gameId, actorId, key, start, end);
+			return highest;
+		}
 
-            Logger.Debug(
-                highest != null
-                    ? $"HighestId: {highest.Id} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}"
-                    : $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var highest = _evaluationDataDbController.GetEvaluationDataByHighestLong(gameId, actorId, key, start, end);
 
-            return highest;
-        }
+			Logger.Debug(
+				highest != null
+					? $"HighestId: {highest.Id} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}"
+					: $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public float GetLowestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var lowest = _evaluationDataDbController.GetLowestFloat(gameId, actorId, key, start, end);
+			return highest;
+		}
 
-            Logger.Debug(
-                $"Lowest: {lowest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public float GetLowestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var lowest = _evaluationDataDbController.GetLowestFloat(gameId, actorId, key, start, end);
 
-            return lowest;
-        }
+			Logger.Debug(
+				$"Lowest: {lowest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public long GetLowestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var lowest = _evaluationDataDbController.GetLowestLong(gameId, actorId, key, start, end);
+			return lowest;
+		}
 
-            Logger.Debug(
-                $"Lowest: {lowest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public long GetLowestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var lowest = _evaluationDataDbController.GetLowestLong(gameId, actorId, key, start, end);
 
-            return lowest;
-        }
+			Logger.Debug(
+				$"Lowest: {lowest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public bool TryGetLatestLong(int? gameId, int? actorId, string key, out long latest,
-            DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var didGetLatest = _evaluationDataDbController.TryGetLatestLong(gameId, actorId, key, out latest, start, end);
+			return lowest;
+		}
 
-            Logger.Debug(
-                $"Latest {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public bool TryGetLatestLong(int? gameId, int? actorId, string key, out long latest,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var didGetLatest = _evaluationDataDbController.TryGetLatestLong(gameId, actorId, key, out latest, start, end);
 
-            return didGetLatest;
-        }
+			Logger.Debug(
+				$"Latest {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public bool TryGetLatestFloat(int? gameId, int? actorId, string key, out float latest,
-            DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var didGetLatest = _evaluationDataDbController.TryGetLatestFloat(gameId, actorId, key, out latest, start, end);
+			return didGetLatest;
+		}
 
-            Logger.Debug(
-                $"Latest: {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public bool TryGetLatestFloat(int? gameId, int? actorId, string key, out float latest,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var didGetLatest = _evaluationDataDbController.TryGetLatestFloat(gameId, actorId, key, out latest, start, end);
 
-            return didGetLatest;
-        }
+			Logger.Debug(
+				$"Latest: {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public bool TryGetLatestBool(int? gameId, int? actorId, string key, out bool latest,
-            DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var didGetLatest = _evaluationDataDbController.TryGetLatestBool(gameId, actorId, key, out latest, start, end);
+			return didGetLatest;
+		}
 
-            Logger.Debug(
-                $"Latest: {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public bool TryGetLatestBool(int? gameId, int? actorId, string key, out bool latest,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var didGetLatest = _evaluationDataDbController.TryGetLatestBool(gameId, actorId, key, out latest, start, end);
 
-            return didGetLatest;
-        }
+			Logger.Debug(
+				$"Latest: {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public bool TryGetLatestString(int? gameId, int? actorId, string key, out string latest,
-            DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var didGetLatest = _evaluationDataDbController.TryGetLatestString(gameId, actorId, key, out latest, start, end);
+			return didGetLatest;
+		}
 
-            Logger.Debug(
-                $"Latest: {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public bool TryGetLatestString(int? gameId, int? actorId, string key, out string latest,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var didGetLatest = _evaluationDataDbController.TryGetLatestString(gameId, actorId, key, out latest, start, end);
 
-            return didGetLatest;
-        }
+			Logger.Debug(
+				$"Latest: {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        public int CountKeys(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType,
-            DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var count = _evaluationDataDbController.CountKeys(gameId, actorId, key, EvaluationDataType, start, end);
+			return didGetLatest;
+		}
 
-            Logger.Debug(
-                $"Count: {count} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		public int CountKeys(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var count = _evaluationDataDbController.CountKeys(gameId, actorId, key, EvaluationDataType, start, end);
 
-            return count;
-        }
+			Logger.Debug(
+				$"Count: {count} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        // todo change to bool TryGet[name](out value) pattern
-        public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType,
-            DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var didGetEarliestKey = _evaluationDataDbController.TryGetEarliestKey(gameId, actorId, key, EvaluationDataType, start,
-                end);
+			return count;
+		}
 
-            Logger.Debug(
-                $"Earliest: {didGetEarliestKey} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		// todo change to bool TryGet[name](out value) pattern
+		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var didGetEarliestKey = _evaluationDataDbController.TryGetEarliestKey(gameId, actorId, key, EvaluationDataType, start,
+				end);
 
-            return didGetEarliestKey;
-        }
+			Logger.Debug(
+				$"Earliest: {didGetEarliestKey} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        // todo change to bool TryGet[name](out value) pattern
-        public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType,
-            DateTime start = default(DateTime), DateTime end = default(DateTime))
-        {
-            var didGetLatestKey = _evaluationDataDbController.TryGetLatestKey(gameId, actorId, key, EvaluationDataType, start, end);
+			return didGetEarliestKey;
+		}
 
-            Logger.Debug(
-                $"Earliest: {didGetLatestKey} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
+		// todo change to bool TryGet[name](out value) pattern
+		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var didGetLatestKey = _evaluationDataDbController.TryGetLatestKey(gameId, actorId, key, EvaluationDataType, start, end);
 
-            return didGetLatestKey;
-        }
+			Logger.Debug(
+				$"Earliest: {didGetLatestKey} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
-        protected bool ParseCheck(EvaluationData data)
-        {
-            switch (data.EvaluationDataType)
-            {
-                case EvaluationDataType.String:
-                    return true;
+			return didGetLatestKey;
+		}
 
-                case EvaluationDataType.Long:
-                    long tryLong;
-                    return long.TryParse(data.Value, out tryLong);
+		protected bool ParseCheck(EvaluationData data)
+		{
+			switch (data.EvaluationDataType)
+			{
+				case EvaluationDataType.String:
+					return true;
 
-                case EvaluationDataType.Float:
-                    float tryFloat;
-                    return float.TryParse(data.Value, out tryFloat);
+				case EvaluationDataType.Long:
+					long tryLong;
+					return long.TryParse(data.Value, out tryLong);
 
-                case EvaluationDataType.Boolean:
-                    bool tryBoolean;
-                    return bool.TryParse(data.Value, out tryBoolean);
+				case EvaluationDataType.Float:
+					float tryFloat;
+					return float.TryParse(data.Value, out tryFloat);
 
-                default:
-                    return false;
-            }
-        }
+				case EvaluationDataType.Boolean:
+					bool tryBoolean;
+					return bool.TryParse(data.Value, out tryBoolean);
 
-        protected void ValidateData(EvaluationData data)
-        {
-            if (data.Category != _category)
-            {
-                throw new InvalidDataException(
-                    $"Cannot save data with category: {data.Category} with controller for mismatched category: {_category}");
-            }
+				default:
+					return false;
+			}
+		}
 
-            if (!ParseCheck(data))
-            {
-                throw new ArgumentException($"Invalid Value {data.Value} for EvaluationDataType {data.EvaluationDataType}");
-            }
-        }
-    }
+		protected void ValidateData(EvaluationData data)
+		{
+			if (data.Category != _category)
+			{
+				throw new InvalidDataException(
+					$"Cannot save data with category: {data.Category} with controller for mismatched category: {_category}");
+			}
+
+			if (!ParseCheck(data))
+			{
+				throw new ArgumentException($"Invalid Value {data.Value} for EvaluationDataType {data.EvaluationDataType}");
+			}
+		}
+	}
 }

@@ -5,72 +5,72 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-    public class UserController : ActorController
-    {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+	public class UserController : ActorController
+	{
+		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private readonly Data.EntityFramework.Controllers.UserController _userController;
-        private readonly ActorRoleController _actorRoleController;
+		private readonly Data.EntityFramework.Controllers.UserController _userController;
+		private readonly ActorRoleController _actorRoleController;
 
-        public UserController(Data.EntityFramework.Controllers.UserController userController,
-                    Data.EntityFramework.Controllers.ActorController actorDbController,
-                    ActorRoleController actorRoleController) : base(actorDbController)
-        {
-            _userController = userController;
-            _actorRoleController = actorRoleController;
-        }
-        
-        public List<User> Get()
-        {
-            var users = _userController.Get();
+		public UserController(Data.EntityFramework.Controllers.UserController userController,
+					Data.EntityFramework.Controllers.ActorController actorDbController,
+					ActorRoleController actorRoleController) : base(actorDbController)
+		{
+			_userController = userController;
+			_actorRoleController = actorRoleController;
+		}
 
-            Logger.Info($"{users?.Count} Users");
+		public List<User> Get()
+		{
+			var users = _userController.Get();
 
-            return users;
-        }
+			Logger.Info($"{users?.Count} Users");
 
-        public User Get(int id)
-        {
-            var user = _userController.Get(id);
+			return users;
+		}
 
-            Logger.Info($"User: {user?.Id} for Id: {id}");
+		public new User Get(int id)
+		{
+			var user = _userController.Get(id);
 
-            return user;
-        }
+			Logger.Info($"User: {user?.Id} for Id: {id}");
 
-        public List<User> Search(string name, bool exactMatch)
-        {
-            var users = _userController.Search(name, exactMatch);
+			return user;
+		}
 
-            Logger.Info($"{users?.Count} Users for Name: {name}, ExactMatch: {exactMatch}");
+		public List<User> Search(string name, bool exactMatch)
+		{
+			var users = _userController.Search(name, exactMatch);
 
-            return users;
-        }
-        
-        public User Create(User newUser)
-        {
-            newUser = _userController.Create(newUser);
-            _actorRoleController.Create(ClaimScope.User.ToString(), newUser.Id, newUser.Id);
+			Logger.Info($"{users?.Count} Users for Name: {name}, ExactMatch: {exactMatch}");
 
-            Logger.Info($"{newUser.Id}");
+			return users;
+		}
 
-            return newUser;
-        }
-        
-        public void Update(User user)
-        {
-            _userController.Update(user);
+		public User Create(User newUser)
+		{
+			newUser = _userController.Create(newUser);
+			_actorRoleController.Create(ClaimScope.User.ToString(), newUser.Id, newUser.Id);
 
-            Logger.Info($"{user.Id}");
-        }
-        
-        public void Delete(int id)
-        {
-            TriggerDeletedEvent(id);
+			Logger.Info($"{newUser.Id}");
 
-            _userController.Delete(id);
+			return newUser;
+		}
 
-            Logger.Info($"{id}");
-        }
-    }
+		public void Update(User user)
+		{
+			_userController.Update(user);
+
+			Logger.Info($"{user.Id}");
+		}
+
+		public void Delete(int id)
+		{
+			TriggerDeletedEvent(id);
+
+			_userController.Delete(id);
+
+			Logger.Info($"{id}");
+		}
+	}
 }

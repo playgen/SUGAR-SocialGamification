@@ -8,153 +8,152 @@ using PlayGen.SUGAR.Core.Exceptions;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-    public class MatchController
-    {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+	public class MatchController
+	{
+		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private readonly Data.EntityFramework.Controllers.MatchController _matchDbController;
-        private readonly EvaluationDataController _evaluationDataController;
-        
-        public MatchController(SUGARContextFactory contextFactory, Data.EntityFramework.Controllers.MatchController matchDbController)
-        {
-            _matchDbController = matchDbController;
-            _evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.MatchData);
-        }
+		private readonly Data.EntityFramework.Controllers.MatchController _matchDbController;
+		private readonly EvaluationDataController _evaluationDataController;
 
-        public Match Create(int gameId, int creatorId)
-        {
-            var match = new Match
-            {
-                GameId = gameId,
-                CreatorId = creatorId,
-            };
+		public MatchController(SUGARContextFactory contextFactory, Data.EntityFramework.Controllers.MatchController matchDbController)
+		{
+			_matchDbController = matchDbController;
+			_evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.MatchData);
+		}
 
-            _matchDbController.Create(match);
+		public Match Create(int gameId, int creatorId)
+		{
+			var match = new Match {
+				GameId = gameId,
+				CreatorId = creatorId,
+			};
 
-            Logger.Info($"Match: {match.Id} created for Game: {gameId}, CreatorId: {creatorId}");
+			_matchDbController.Create(match);
 
-            return match;
-        }
+			Logger.Info($"Match: {match.Id} created for Game: {gameId}, CreatorId: {creatorId}");
 
-        public Match Start(int matchId)
-        {
-            var match = _matchDbController.Get(matchId);
-            match.Started = DateTime.UtcNow;
-            match = _matchDbController.Update(match);
+			return match;
+		}
 
-            Logger.Info($"Match: {match.Id} started");
+		public Match Start(int matchId)
+		{
+			var match = _matchDbController.Get(matchId);
+			match.Started = DateTime.UtcNow;
+			match = _matchDbController.Update(match);
 
-            return match;
-        }
+			Logger.Info($"Match: {match.Id} started");
 
-        public Match End(int matchId)
-        {
-            var match = _matchDbController.Get(matchId);
-            
-            if (match.Started == null)
-            {
-                throw new Exceptions.InvalidOperationException($"The match {matchId} hasn't had its Started time set. " +
-                                                               $"This must be set before setting the Ended time.");
-            }
+			return match;
+		}
 
-            match.Ended = DateTime.UtcNow;
-            match = _matchDbController.Update(match);
+		public Match End(int matchId)
+		{
+			var match = _matchDbController.Get(matchId);
 
-            Logger.Info($"Match: {match.Id} ended");
+			if (match.Started == null)
+			{
+				throw new Exceptions.InvalidOperationException($"The match {matchId} hasn't had its Started time set. " +
+															   $"This must be set before setting the Ended time.");
+			}
 
-            return match;
-        }
+			match.Ended = DateTime.UtcNow;
+			match = _matchDbController.Update(match);
 
-        public Match Get(int matchId)
-        {
-            var match = _matchDbController.Get(matchId);
+			Logger.Info($"Match: {match.Id} ended");
 
-            Logger.Info($"Found {match?.Id}");
+			return match;
+		}
 
-            return match;
-        }
+		public Match Get(int matchId)
+		{
+			var match = _matchDbController.Get(matchId);
 
-        public List<Match> GetByTime(DateTime? start, DateTime? end)
-        {
-            var results = _matchDbController.GetByTime(start, end);
+			Logger.Info($"Found {match?.Id}");
 
-            Logger.Info($"{results.Count} Matches for Start: {start}, End: {end}");
+			return match;
+		}
 
-            return results;
-        }
+		public List<Match> GetByTime(DateTime? start, DateTime? end)
+		{
+			var results = _matchDbController.GetByTime(start, end);
 
-        public List<Match> GetByGame(int gameId)
-        {
-            var results = _matchDbController.GetByGame(gameId);
+			Logger.Info($"{results.Count} Matches for Start: {start}, End: {end}");
 
-            Logger.Info($"{results.Count} Matches for GameId: {gameId}");
+			return results;
+		}
 
-            return results;
-        }
+		public List<Match> GetByGame(int gameId)
+		{
+			var results = _matchDbController.GetByGame(gameId);
 
-        public List<Match> GetByGame(int gameId, DateTime? start, DateTime? end)
-        {
-            var results = _matchDbController.GetByGame(gameId, start, end);
+			Logger.Info($"{results.Count} Matches for GameId: {gameId}");
 
-            Logger.Info($"{results.Count} Matches for GameId: {gameId}, Start: {start}, End: {end}");
+			return results;
+		}
 
-            return results;
-        }
+		public List<Match> GetByGame(int gameId, DateTime? start, DateTime? end)
+		{
+			var results = _matchDbController.GetByGame(gameId, start, end);
 
-        public List<Match> GetByCreator(int creatorId)
-        {
-            var results = _matchDbController.GetByCreator(creatorId);
+			Logger.Info($"{results.Count} Matches for GameId: {gameId}, Start: {start}, End: {end}");
 
-            Logger.Info($"{results.Count} Matches for Creator: {creatorId}");
+			return results;
+		}
 
-            return results;
-        }
+		public List<Match> GetByCreator(int creatorId)
+		{
+			var results = _matchDbController.GetByCreator(creatorId);
 
-        public List<Match> GetByCreator(int creatorId, DateTime? start, DateTime? end)
-        {
-            var results = _matchDbController.GetByCreator(creatorId, start, end);
+			Logger.Info($"{results.Count} Matches for Creator: {creatorId}");
 
-            Logger.Info($"{results.Count} Matches for CreatorId: {creatorId}, Start: {start}, End: {end}");
+			return results;
+		}
 
-            return results;
-        }
+		public List<Match> GetByCreator(int creatorId, DateTime? start, DateTime? end)
+		{
+			var results = _matchDbController.GetByCreator(creatorId, start, end);
 
-        public List<Match> GetByGameAndCreator(int gameId, int creatorId)
-        {
-            var results = _matchDbController.GetByGameAndCreator(gameId, creatorId);
+			Logger.Info($"{results.Count} Matches for CreatorId: {creatorId}, Start: {start}, End: {end}");
 
-            Logger.Info($"{results.Count} Matches for GameId: {gameId}, CreatorId: {creatorId}");
+			return results;
+		}
 
-            return results;
-        }
+		public List<Match> GetByGameAndCreator(int gameId, int creatorId)
+		{
+			var results = _matchDbController.GetByGameAndCreator(gameId, creatorId);
 
-        public List<Match> GetByGameAndCreator(int gameId, int creatorId, DateTime? start, DateTime? end)
-        {
-            var results = _matchDbController.GetByGameAndCreator(gameId, creatorId, start, end);
+			Logger.Info($"{results.Count} Matches for GameId: {gameId}, CreatorId: {creatorId}");
 
-            Logger.Info($"{results.Count} Matches for GameId: {gameId}, CreatorId: {creatorId}, Start: {start}, End: {end}");
+			return results;
+		}
 
-            return results;
-        }
+		public List<Match> GetByGameAndCreator(int gameId, int creatorId, DateTime? start, DateTime? end)
+		{
+			var results = _matchDbController.GetByGameAndCreator(gameId, creatorId, start, end);
 
-        public List<EvaluationData> GetData(int matchId, string[] keys = null)
-        {
-            return _evaluationDataController.Get(matchId, keys);
-        }
+			Logger.Info($"{results.Count} Matches for GameId: {gameId}, CreatorId: {creatorId}, Start: {start}, End: {end}");
 
-        public EvaluationData AddData(EvaluationData newData)
-        {
-            ValidateData(newData);
+			return results;
+		}
 
-            return _evaluationDataController.Add(newData);
-        }
+		public List<EvaluationData> GetData(int matchId, string[] keys = null)
+		{
+			return _evaluationDataController.Get(matchId, keys);
+		}
 
-        private static void ValidateData(EvaluationData data)
-        {
-            if (data.MatchId == null)
-            {
-                throw new InvalidDataException("Cannot save Match data with no EntityId. EntityId needs to be set to the match's Id.");
-            }
-        }
-    }
+		public EvaluationData AddData(EvaluationData newData)
+		{
+			ValidateData(newData);
+
+			return _evaluationDataController.Add(newData);
+		}
+
+		private static void ValidateData(EvaluationData data)
+		{
+			if (data.MatchId == null)
+			{
+				throw new InvalidDataException("Cannot save Match data with no EntityId. EntityId needs to be set to the match's Id.");
+			}
+		}
+	}
 }

@@ -6,12 +6,12 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-    [Collection("Project Fixture Collection")]
-    public class UserControllerTests
+	[Collection("Project Fixture Collection")]
+	public class UserControllerTests
 	{
 		#region Configuration
 
-	    private readonly UserController _userController = ControllerLocator.UserController;
+		private readonly UserController _userController = ControllerLocator.UserController;
 		#endregion
 
 		#region Tests
@@ -106,8 +106,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			Assert.Equal(1, matches);
 
-			var updateUser = new User
-			{
+			var updateUser = new User {
 				Id = newUser.Id,
 				Name = "UpdateExistingUserProof"
 			};
@@ -128,8 +127,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newUserDuplicate = CreateUser(userName + " Two");
 
-			var updateUser = new User
-			{
+			var updateUser = new User {
 				Id = newUserDuplicate.Id,
 				Name = newUser.Name
 			};
@@ -140,8 +138,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void UpdateNonExistingUser()
 		{
-			var user = new User
-			{
+			var user = new User {
 				Id = -1,
 				Name = "UpdateNonExistingUser"
 			};
@@ -176,8 +173,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#region Helpers
 		private User CreateUser(string name)
 		{
-			var user = new User
-			{
+			var user = new User {
 				Name = name,
 			};
 

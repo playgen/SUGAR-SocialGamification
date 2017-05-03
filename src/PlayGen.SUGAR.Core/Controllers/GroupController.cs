@@ -6,35 +6,35 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-    public class GroupController : ActorController
-    {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+	public class GroupController : ActorController
+	{
+		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private readonly Data.EntityFramework.Controllers.GroupController _groupDbController;
+		private readonly Data.EntityFramework.Controllers.GroupController _groupDbController;
 		private readonly ActorClaimController _actorClaimController;
 		private readonly ActorRoleController _actorRoleController;
-        private readonly GroupMemberController _groupMemberController;
+		private readonly GroupMemberController _groupMemberController;
 
-        public GroupController(Data.EntityFramework.Controllers.GroupController groupDbController,
-                    Data.EntityFramework.Controllers.ActorController actorDbController,
-                    ActorClaimController actorClaimController,
+		public GroupController(Data.EntityFramework.Controllers.GroupController groupDbController,
+					Data.EntityFramework.Controllers.ActorController actorDbController,
+					ActorClaimController actorClaimController,
 					ActorRoleController actorRoleController,
-                    GroupMemberController groupMemberController) : base(actorDbController)
-        {
-            _groupDbController = groupDbController;
+					GroupMemberController groupMemberController) : base(actorDbController)
+		{
+			_groupDbController = groupDbController;
 			_actorClaimController = actorClaimController;
 			_actorRoleController = actorRoleController;
-            _groupMemberController = groupMemberController;
-        }
-        
-        public List<Group> Get()
-        {
-            var groups = _groupDbController.Get();
+			_groupMemberController = groupMemberController;
+		}
 
-            Logger.Info($"{groups?.Count} Groups");
+		public List<Group> Get()
+		{
+			var groups = _groupDbController.Get();
 
-            return groups;
-        }
+			Logger.Info($"{groups?.Count} Groups");
+
+			return groups;
+		}
 
 		public List<Group> GetByPermissions(int actorId)
 		{
@@ -42,54 +42,54 @@ namespace PlayGen.SUGAR.Core.Controllers
 			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Group).Select(p => p.EntityId).ToList();
 			groups = groups.Where(g => permissions.Contains(g.Id)).ToList();
 
-            Logger.Info($"{groups?.Count} Groups");
+			Logger.Info($"{groups?.Count} Groups");
 
-            return groups;
+			return groups;
 		}
 
-		public Group Get(int id)
-        {
-            var group = _groupDbController.Get(id);
+		public new Group Get(int id)
+		{
+			var group = _groupDbController.Get(id);
 
-            Logger.Info($"Group: {group?.Id} for Id: {id}");
+			Logger.Info($"Group: {group?.Id} for Id: {id}");
 
-            return group;
-        }
+			return group;
+		}
 
-        public List<Group> Search(string name)
-        {
-            var groups = _groupDbController.Get(name);
+		public List<Group> Search(string name)
+		{
+			var groups = _groupDbController.Get(name);
 
-            Logger.Info($"{groups?.Count} Groups for Name: {name}");
+			Logger.Info($"{groups?.Count} Groups for Name: {name}");
 
-            return groups;
-        }
-        
-        public Group Create(Group newGroup, int creatorId)
-        {
-            newGroup = _groupDbController.Create(newGroup);
-            _actorRoleController.Create(ClaimScope.Group.ToString(), creatorId, newGroup.Id);
+			return groups;
+		}
+
+		public Group Create(Group newGroup, int creatorId)
+		{
+			newGroup = _groupDbController.Create(newGroup);
+			_actorRoleController.Create(ClaimScope.Group.ToString(), creatorId, newGroup.Id);
 			_groupMemberController.CreateMemberRequest(new UserToGroupRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
 
-            Logger.Info($"{newGroup?.Id} for CreatorId: {creatorId}");
+			Logger.Info($"{newGroup?.Id} for CreatorId: {creatorId}");
 
-            return newGroup;
-        }
-        
-        public void Update(Group group)
-        {
-            _groupDbController.Update(group);
+			return newGroup;
+		}
 
-            Logger.Info($"{group?.Id}");
-        }
-        
-        public void Delete(int id)
-        {
-            TriggerDeletedEvent(id);
+		public void Update(Group group)
+		{
+			_groupDbController.Update(group);
 
-            _groupDbController.Delete(id);
+			Logger.Info($"{group?.Id}");
+		}
 
-            Logger.Info($"{id}");
-        }
-    }
+		public void Delete(int id)
+		{
+			TriggerDeletedEvent(id);
+
+			_groupDbController.Delete(id);
+
+			Logger.Info($"{id}");
+		}
+	}
 }

@@ -6,8 +6,8 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-    [Collection("Project Fixture Collection")]
-    public class GameControllerTests
+	[Collection("Project Fixture Collection")]
+	public class GameControllerTests
 	{
 		#region Configuration
 		private readonly GameController _gameController = ControllerLocator.GameController;
@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var gameName = "CreateGame";
 
 			CreateGame(gameName);
-			
+
 			var games = _gameController.Search(gameName);
 
 			var matches = games.Count(g => g.Name == gameName);
@@ -34,10 +34,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var gameName = "CreateDuplicateGame";
 
 			CreateGame(gameName);
-			
+
 			Assert.Throws<DuplicateRecordException>(() => CreateGame(gameName));
 		}
-		
+
 		[Fact]
 		public void GetMultipleGames()
 		{
@@ -59,7 +59,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var games = _gameController.Search("GetMultipleGames");
 
 			var matchingGames = games.Select(g => gameNames.Contains(g.Name));
-			
+
 			Assert.Equal(gameNames.Length, matchingGames.Count());
 		}
 
@@ -105,8 +105,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			Assert.Equal(1, matches);
 
-			var updateGame = new Game
-			{
+			var updateGame = new Game {
 				Id = newGame.Id,
 				Name = "UpdateExistingGameProof"
 			};
@@ -127,8 +126,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newGameDuplicate = CreateGame(gameName + " Two");
 
-			var updateGame = new Game
-			{
+			var updateGame = new Game {
 				Id = newGameDuplicate.Id,
 				Name = newGame.Name
 			};
@@ -139,8 +137,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void UpdateNonExistingGame()
 		{
-			var game = new Game
-			{
+			var game = new Game {
 				Id = -1,
 				Name = "UpdateNonExistingGame"
 			};
@@ -175,8 +172,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#region Helpers
 		private Game CreateGame(string name)
 		{
-			var game = new Game
-			{
+			var game = new Game {
 				Name = name,
 			};
 

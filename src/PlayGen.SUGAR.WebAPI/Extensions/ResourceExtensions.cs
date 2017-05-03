@@ -6,7 +6,7 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
-	public  static class ResourceExtensions
+	public static class ResourceExtensions
 	{
 		public static ResourceResponse ToResourceContract(this EvaluationData evaluationData)
 		{
@@ -15,8 +15,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				return null;
 			}
 
-			return new ResourceResponse
-			{
+			return new ResourceResponse {
 				Id = evaluationData.Id,
 				ActorId = evaluationData.ActorId,
 				GameId = evaluationData.GameId,
@@ -32,8 +31,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static EvaluationData ToModel(this ResourceAddRequest resourceContract)
 		{
-			return new EvaluationData
-			{
+			return new EvaluationData {
 				ActorId = resourceContract.ActorId,
 				GameId = resourceContract.GameId,
 				Key = resourceContract.Key,

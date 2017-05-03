@@ -10,14 +10,14 @@ using PlayGen.SUGAR.Common.Shared;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-    [Collection("Project Fixture Collection")]
-    public class AchievementControllerTests
+	[Collection("Project Fixture Collection")]
+	public class AchievementControllerTests
 	{
 		#region Configuration
 		private readonly EvaluationController _evaluationController = ControllerLocator.EvaluationController;
 		private readonly GameController _gameController = ControllerLocator.GameController;
 		#endregion
-		
+
 		#region Tests
 		[Fact]
 		public void CreateAndGetAchievement()
@@ -106,9 +106,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var foundAchievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
 
 			Assert.NotNull(foundAchievement);
-            Assert.NotEqual(newAchievement.Name + "Updated", foundAchievement.Name);
+			Assert.NotEqual(newAchievement.Name + "Updated", foundAchievement.Name);
 
-            foundAchievement.Name = newAchievement.Name + "Updated";
+			foundAchievement.Name = newAchievement.Name + "Updated";
 
 			_evaluationController.Update(foundAchievement);
 
@@ -127,8 +127,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newAchievementDuplicate = Helpers.CreateAchievement(achievementName + " Two", newAchievement.GameId);
 
-			var update = new Achievement
-			{
+			var update = new Achievement {
 				Name = achievementName,
 				Token = newAchievementDuplicate.Token,
 				GameId = newAchievementDuplicate.GameId,
@@ -145,8 +144,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var achievementName = "UpdateNonExistingAchievement";
 
-			var achievement = new Achievement
-			{
+			var achievement = new Achievement {
 				Name = achievementName,
 				Token = achievementName,
 				GameId = -1,
@@ -183,4 +181,3 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#endregion
 	}
 }
- 

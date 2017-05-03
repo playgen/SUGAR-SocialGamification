@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<Description>Social Gamification Asset of the RAGE Ecosystem</Description>
+		<Copyright>PlayGen Ltd 2016</Copyright>
+		<AssemblyTitle>SUGAR Service</AssemblyTitle>
+		<VersionPrefix>1.1.0-rc1</VersionPrefix>
+		<TargetFramework>netcoreapp1.1</TargetFramework>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PreserveCompilationContext>true</PreserveCompilationContext>
+		<AssemblyName>PlayGen.SUGAR.WebAPI</AssemblyName>
+		<OutputType>Exe</OutputType>
+		<PackageId>PlayGen.SUGAR.WebAPI</PackageId>
+		<PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+		<RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Update="Views;Areas\**\Views;nlog.config">
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Data.EntityFramework\PlayGen.SUGAR.Data.EntityFramework.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Core\PlayGen.SUGAR.Core.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.ServerAuthentication\PlayGen.SUGAR.ServerAuthentication.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Authorization\PlayGen.SUGAR.Authorization.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="1.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Routing" Version="1.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.0.3" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.0.2" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication" Version="1.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="1.0.2" />
+		<PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-rtm-alpha3" />
+		<PackageReference Include="Swashbuckle" Version="6.0.0-beta901" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.0.2" />
+		<PackageReference Include="System.Security.Cryptography.OpenSsl" Version="4.3.0" />
+	</ItemGroup>
+
+</Project>

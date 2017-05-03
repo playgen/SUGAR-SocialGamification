@@ -9,9 +9,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class ActorRoleController
 	{
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
+		private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
 		private readonly Data.EntityFramework.Controllers.RoleController _roleController;
 
 		public ActorRoleController(Data.EntityFramework.Controllers.ActorRoleController actorRoleDbController,
@@ -43,18 +43,18 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId.Value, scope, true).Select(ar => ar.Role).ToList();
 
-            Logger.Info($"{roles?.Count} Roles for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
+			Logger.Info($"{roles?.Count} Roles for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
 
-            return roles;
+			return roles;
 		}
 
 		public List<Actor> GetRoleActors(int roleId, int? entityId)
 		{
 			var roles = _actorRoleDbController.GetRoleActors(roleId, entityId.Value);
 
-            Logger.Info($"{roles?.Count} Actors for RoleId: {roleId}, EntityId: {entityId}");
+			Logger.Info($"{roles?.Count} Actors for RoleId: {roleId}, EntityId: {entityId}");
 
-            return roles;
+			return roles;
 		}
 
 		public List<Role> GetControlled(int actorId)
@@ -67,37 +67,37 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 			var roles = controlledRoles.Select(cr => _roleController.Get(cr.EntityId.Value)).ToList();
 
-            Logger.Info($"{roles?.Count} Roles for ActorId: {actorId}");
+			Logger.Info($"{roles?.Count} Roles for ActorId: {actorId}");
 
-            return roles;
+			return roles;
 		}
 
 		public ActorRole Create(ActorRole newRole)
 		{
 			newRole = _actorRoleDbController.Create(newRole);
 
-            Logger.Info($"{newRole?.Id}");
+			Logger.Info($"{newRole?.Id}");
 
-            return newRole;
+			return newRole;
 		}
 
 		public void Create(string roleName, int actorId, int? entityId)
 		{
 			var role = _roleController.GetDefault(roleName);
 
-            Logger.Info($"RoleName: {roleName}, ActorId: {actorId}, EntityId: {entityId}");
+			Logger.Info($"RoleName: {roleName}, ActorId: {actorId}, EntityId: {entityId}");
 
-            if (role != null)
+			if (role != null)
 			{
 				Create(new ActorRole { ActorId = actorId, RoleId = role.Id, EntityId = entityId.Value });
 			}
-        }
+		}
 
 		public void Delete(int id)
 		{
 			_actorRoleDbController.Delete(id);
 
-            Logger.Info($"{id}");
-        }
+			Logger.Info($"{id}");
+		}
 	}
 }

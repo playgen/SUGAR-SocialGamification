@@ -7,8 +7,8 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-    [Collection("Project Fixture Collection")]
-    public class GroupMemberControllerTests
+	[Collection("Project Fixture Collection")]
+	public class GroupMemberControllerTests
 	{
 		#region Configuration
 		private readonly GroupRelationshipController _groupMemberController = ControllerLocator.GroupRelationshipController;
@@ -179,8 +179,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var requestor = CreateUser(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
 
-			var newMember = new UserToGroupRelationship
-			{
+			var newMember = new UserToGroupRelationship {
 				RequestorId = requestor.Id,
 				AcceptorId = acceptor.Id
 			};
@@ -260,8 +259,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var requestor = CreateGroup(groupMemberName + " Requestor");
 			var acceptor = CreateGroup(groupMemberName + " Acceptor");
 
-			var newMember = new UserToGroupRelationship
-			{
+			var newMember = new UserToGroupRelationship {
 				RequestorId = requestor.Id,
 				AcceptorId = acceptor.Id
 			};
@@ -273,8 +271,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#region Helpers
 		private User CreateUser(string name)
 		{
-			var user = new User
-			{
+			var user = new User {
 				Name = name,
 			};
 
@@ -285,8 +282,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		private Group CreateGroup(string name)
 		{
-			var group = new Group
-			{
+			var group = new Group {
 				Name = name,
 			};
 			_groupController.Create(group);
@@ -296,8 +292,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		private UserToGroupRelationship CreateGroupMember(int requestor, int acceptor)
 		{
-			var groupMember = new UserToGroupRelationship
-			{
+			var groupMember = new UserToGroupRelationship {
 				RequestorId = requestor,
 				AcceptorId = acceptor
 			};

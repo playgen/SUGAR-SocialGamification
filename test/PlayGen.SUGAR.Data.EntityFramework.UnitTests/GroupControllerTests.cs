@@ -6,8 +6,8 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-    [Collection("Project Fixture Collection")]
-    public class GroupControllerTests
+	[Collection("Project Fixture Collection")]
+	public class GroupControllerTests
 	{
 		#region Configuration
 		private readonly GroupController _groupController = ControllerLocator.GroupController;
@@ -105,8 +105,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			Assert.Equal(1, matches);
 
-			var updateGroup = new Group
-			{
+			var updateGroup = new Group {
 				Id = newGroup.Id,
 				Name = "UpdateExistingGroupProof"
 			};
@@ -127,8 +126,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newGroupDuplicate = CreateGroup(groupName + " Two");
 
-			var updateGroup = new Group
-			{
+			var updateGroup = new Group {
 				Id = newGroupDuplicate.Id,
 				Name = newGroup.Name
 			};
@@ -139,8 +137,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		[Fact]
 		public void UpdateNonExistingGroup()
 		{
-			var group = new Group
-			{
+			var group = new Group {
 				Id = -1,
 				Name = "UpdateNonExistingGroup"
 			};
@@ -175,8 +172,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#region Helpers
 		private Group CreateGroup(string name)
 		{
-			var group = new Group
-			{
+			var group = new Group {
 				Name = name,
 			};
 			_groupController.Create(group);

@@ -5,27 +5,26 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
-    public static class ClaimExtensions
-    {
-        public static ClaimResponse ToContract(this Claim claimModel)
-        {
-            if (claimModel == null)
-            {
-                return null;
-            }
+	public static class ClaimExtensions
+	{
+		public static ClaimResponse ToContract(this Claim claimModel)
+		{
+			if (claimModel == null)
+			{
+				return null;
+			}
 
-            return new ClaimResponse
-            {
-               Id = claimModel.Id,
-               Token = claimModel.Token,
-               Description = claimModel.Description,
-               ClaimScope = claimModel.ClaimScope
-            };
-        }
+			return new ClaimResponse {
+				Id = claimModel.Id,
+				Token = claimModel.Token,
+				Description = claimModel.Description,
+				ClaimScope = claimModel.ClaimScope
+			};
+		}
 
-        public static IEnumerable<ClaimResponse> ToContractList(this IEnumerable<Claim> claimModels)
-        {
-            return claimModels.Select(ToContract).ToList();
-        }
-    }
+		public static IEnumerable<ClaimResponse> ToContractList(this IEnumerable<Claim> claimModels)
+		{
+			return claimModels.Select(ToContract).ToList();
+		}
+	}
 }

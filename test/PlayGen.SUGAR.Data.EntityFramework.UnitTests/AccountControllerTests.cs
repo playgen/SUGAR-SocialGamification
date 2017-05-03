@@ -113,22 +113,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var user = CreateUser(name);
 
-			var account = new Account
-			{
+			var account = new Account {
 				Name = name,
 				Password = password,
 				UserId = user.Id,
 				User = user,
 				AccountSourceId = sourceId
 			};
-			
+
 			return _accountController.Create(account);
 		}
 
 		private AccountSource CreateAccountSource(string name)
 		{
-			var source = new AccountSource
-			{
+			var source = new AccountSource {
 				Description = name,
 				Token = name,
 				RequiresPassword = true,
@@ -139,8 +137,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		private User CreateUser(string name)
 		{
-			var user = new User()
-			{
+			var user = new User() {
 				Name = name,
 			};
 

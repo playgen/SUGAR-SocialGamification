@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
-    [Collection("Project Fixture Collection")]
-    public class UserFriendControllerTests
+	[Collection("Project Fixture Collection")]
+	public class UserFriendControllerTests
 	{
 		#region Configuration
 		private readonly UserRelationshipController _userRelationshipController = ControllerLocator.UserRelationshipController;
-	    private readonly UserController _userController = ControllerLocator.UserController;
+		private readonly UserController _userController = ControllerLocator.UserController;
 		#endregion
 
 		#region Tests
@@ -166,8 +166,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = new UserToUserRelationship
-			{
+			var newFriend = new UserToUserRelationship {
 				RequestorId = requestor.Id,
 				AcceptorId = acceptor.Id
 			};
@@ -239,8 +238,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = new UserToUserRelationship
-			{
+			var newFriend = new UserToUserRelationship {
 				RequestorId = requestor.Id,
 				AcceptorId = acceptor.Id
 			};
@@ -252,8 +250,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		#region Helpers
 		private User CreateUser(string name)
 		{
-			var user = new User
-			{
+			var user = new User {
 				Name = name,
 			};
 
@@ -264,8 +261,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 		private UserToUserRelationship CreateUserFriend(int requestor, int acceptor)
 		{
-			var userFriend = new UserToUserRelationship
-			{
+			var userFriend = new UserToUserRelationship {
 				RequestorId = requestor,
 				AcceptorId = acceptor
 			};

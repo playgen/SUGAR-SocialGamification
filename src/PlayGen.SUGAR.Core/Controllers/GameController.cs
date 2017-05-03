@@ -62,7 +62,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 			return games;
 		}
-		
+
 		public Game Create(Game newGame, int creatorId)
 		{
 			newGame = _gameDbController.Create(newGame);
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 			return newGame;
 		}
-		 
+
 		public void Update(Game game)
 		{
 			_gameDbController.Update(game);

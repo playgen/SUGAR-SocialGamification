@@ -4,64 +4,64 @@ using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
-    public class AccountSourceController
-    {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
-        private readonly Data.EntityFramework.Controllers.AccountSourceController _accountSourceDbController;
+	public class AccountSourceController
+	{
+		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private readonly Data.EntityFramework.Controllers.AccountSourceController _accountSourceDbController;
 
-        public AccountSourceController(Data.EntityFramework.Controllers.AccountSourceController accountSourceDbController)
-        {
-            _accountSourceDbController = accountSourceDbController;
-        }
+		public AccountSourceController(Data.EntityFramework.Controllers.AccountSourceController accountSourceDbController)
+		{
+			_accountSourceDbController = accountSourceDbController;
+		}
 
-        public List<AccountSource> Get()
-        {
-            var sources = _accountSourceDbController.Get();
+		public List<AccountSource> Get()
+		{
+			var sources = _accountSourceDbController.Get();
 
-            Logger.Info($"{sources?.Count} Sources.");
+			Logger.Info($"{sources?.Count} Sources.");
 
-            return sources;
-        }
+			return sources;
+		}
 
-        public AccountSource Get(int id)
-        {
-            var source = _accountSourceDbController.Get(id);
+		public AccountSource Get(int id)
+		{
+			var source = _accountSourceDbController.Get(id);
 
-            Logger.Info($"Source: {source?.Id} for Id: {id}");
+			Logger.Info($"Source: {source?.Id} for Id: {id}");
 
-            return source;
-        }
+			return source;
+		}
 
-        public AccountSource GetByToken(string token)
-        {
-            var source = _accountSourceDbController.Get(token);
+		public AccountSource GetByToken(string token)
+		{
+			var source = _accountSourceDbController.Get(token);
 
-            Logger.Info($"Source: {source?.Id} for Token: {token}");
+			Logger.Info($"Source: {source?.Id} for Token: {token}");
 
-            return source;
-        }
+			return source;
+		}
 
-        public AccountSource Create(AccountSource newSource)
-        {
-            newSource = _accountSourceDbController.Create(newSource);
+		public AccountSource Create(AccountSource newSource)
+		{
+			newSource = _accountSourceDbController.Create(newSource);
 
-            Logger.Info($"{newSource?.Id}");
+			Logger.Info($"{newSource?.Id}");
 
-            return newSource;
-        }
+			return newSource;
+		}
 
-        public void Update(AccountSource source)
-        {
-            _accountSourceDbController.Update(source);
+		public void Update(AccountSource source)
+		{
+			_accountSourceDbController.Update(source);
 
-            Logger.Info($"{source?.Id}");
-        }
+			Logger.Info($"{source?.Id}");
+		}
 
-        public void Delete(int id)
-        {
-            _accountSourceDbController.Delete(id);
+		public void Delete(int id)
+		{
+			_accountSourceDbController.Delete(id);
 
-            Logger.Info($"{id}");
-        }
-    }
+			Logger.Info($"{id}");
+		}
+	}
 }
