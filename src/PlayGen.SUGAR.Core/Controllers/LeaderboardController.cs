@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using NLog;
 using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;

@@ -1,6 +1,6 @@
 ﻿using PlayGen.SUGAR.Common.Shared;
 
-namespace PlayGen.SUGAR.Contracts.Shared
+namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
 	/// Encapsulates ActorData/GameData details from the server.

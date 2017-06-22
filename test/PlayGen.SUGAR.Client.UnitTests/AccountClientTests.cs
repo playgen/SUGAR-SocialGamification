@@ -1,4 +1,4 @@
-﻿using PlayGen.SUGAR.Contracts.Shared;
+﻿using PlayGen.SUGAR.Contracts;
 using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 

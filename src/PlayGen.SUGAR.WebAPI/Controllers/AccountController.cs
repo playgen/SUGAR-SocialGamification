@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.WebAPI.Extensions;
 using PlayGen.SUGAR.WebAPI.Attributes;
 

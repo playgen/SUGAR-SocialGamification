@@ -10,7 +10,7 @@ using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common.Shared.Extensions;
 using PlayGen.SUGAR.Common.Shared.Web;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
 {
@@ -33,7 +33,8 @@ namespace PlayGen.SUGAR.Client
 				//Formatting = Formatting.Indented,
 				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 				ContractResolver = new CamelCasePropertyNamesContractResolver(),
-				ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
+				ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+				TypeNameHandling = TypeNameHandling.Objects
 			};
 			SerializerSettings.Converters.Add(new StringEnumConverter());
 		}
@@ -125,11 +126,15 @@ namespace PlayGen.SUGAR.Client
 
 		private static string SerializePayload(object payload)
 		{
-			return payload == null ? string.Empty : JsonConvert.SerializeObject(payload, SerializerSettings);
+			Console.WriteLine(payload);
+			var debug = payload == null ? string.Empty : JsonConvert.SerializeObject(payload, SerializerSettings);
+			Console.WriteLine(debug);
+			return debug;
 		}
 
 		private HttpRequest CreateRequest(string url, string method, IDictionary<string, string> headers, object payload)
 		{
+			Console.WriteLine(payload);
 			var requestHeaders = headers == null ? new Dictionary<string, string>() : new Dictionary<string, string>(headers);
 
 			foreach (var keyValuePair in PersistentHeaders)
@@ -155,10 +160,12 @@ namespace PlayGen.SUGAR.Client
 		/// <returns></returns>
 		private TResponse UnwrapResponse<TResponse>(HttpResponse response)
 		{
+			Console.WriteLine("Response:" + response.Content);
 			var wrappedResponse = JsonConvert.DeserializeObject<ResponseWrapper<TResponse>>(response.Content, SerializerSettings);
+			Console.WriteLine("WrappedResponse:" + wrappedResponse);
 			var content = wrappedResponse.Response;
-
-			EvaluationNotifications.Enqueue(wrappedResponse.EvaluationsProgress.ToNotifications());
+			Console.WriteLine("Content:" + content);
+			EvaluationNotifications.Enqueue(wrappedResponse.EvaluationsProgress.ToNotifications() ?? new List<EvaluationNotification>());
 
 			return content;
 		}
@@ -190,8 +197,10 @@ namespace PlayGen.SUGAR.Client
 			var request = CreateRequest(url, method, headers, payload);
 			var response = _httpHandler.HandleRequest(request);
 			ProcessResponse(response, expectedStatusCodes ?? new [] { HttpStatusCode.OK });
-
-			return UnwrapResponse<TResponse>(response);
+			Console.WriteLine("Content: " + response.Content);
+			var unwrap = UnwrapResponse<TResponse>(response);
+			Console.WriteLine("Unwrap: " + unwrap);
+			return unwrap;
 		}
 
 		protected void PostPut(string url, string method, Dictionary<string, string> headers, object payload, IEnumerable<HttpStatusCode> expectedStatusCodes)

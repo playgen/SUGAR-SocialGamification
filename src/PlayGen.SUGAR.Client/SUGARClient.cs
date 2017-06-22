@@ -41,12 +41,15 @@ namespace PlayGen.SUGAR.Client
         public MatchClient Match                => _matchClient ?? (_matchClient = new MatchClient(_baseAddress, _httpHandler, _asyncRequestController, _evaluationNotifications));
 
         // todo possibly pass update event so async requests are either read in and handled there or this creates another thread to poll the async queue
-        public SUGARClient(string baseAddress, IHttpHandler httpHandler = null, int timeoutMilliseconds = 60 * 1000)
+        public SUGARClient(string baseAddress, IHttpHandler httpHandler = null, bool asyncEnabled = true, int timeoutMilliseconds = 60 * 1000)
 		{
 			_baseAddress = baseAddress;
 			_httpHandler = httpHandler ?? new DefaultHttpHandler();
-            _asyncRequestController = new AsyncRequestController();
-		    _asyncRequestController.SetTimeout(timeoutMilliseconds, Session.Heartbeat);
+            if (asyncEnabled)
+            {
+	            _asyncRequestController = new AsyncRequestController();
+	            _asyncRequestController.SetTimeout(timeoutMilliseconds, Session.Heartbeat);
+			}
     }
 
 	    public bool TryExecuteResponse()

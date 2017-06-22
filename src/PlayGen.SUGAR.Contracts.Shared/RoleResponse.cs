@@ -1,6 +1,6 @@
 ﻿using PlayGen.SUGAR.Common.Shared.Permissions;
 
-namespace PlayGen.SUGAR.Contracts.Shared
+namespace PlayGen.SUGAR.Contracts
 {
     /// <summary>
     /// Encapsulates role details from the server.

@@ -2,7 +2,7 @@
 using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 using NUnit.Framework;
 using System;
 using PlayGen.SUGAR.Client.EvaluationEvents;

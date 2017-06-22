@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Contracts.Shared
+﻿namespace PlayGen.SUGAR.Contracts
 {
     /// <summary>
     /// Encapsulates requirements for completing an achievement or skill.

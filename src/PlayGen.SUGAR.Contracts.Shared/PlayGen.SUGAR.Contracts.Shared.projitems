@@ -6,7 +6,7 @@
     <SharedGUID>eba79d21-610f-4a2e-b4c2-db3f5786f057</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>PlayGen.SUGAR.Contracts.Shared</Import_RootNamespace>
+    <Import_RootNamespace>PlayGen.SUGAR.Contracts</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AccountRequest.cs" />

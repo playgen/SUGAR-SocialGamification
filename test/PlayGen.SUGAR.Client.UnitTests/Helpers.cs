@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 using System.Linq;
 using System;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.Model;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 

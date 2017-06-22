@@ -1,5 +1,5 @@
 ﻿using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client.EvaluationEvents
 {

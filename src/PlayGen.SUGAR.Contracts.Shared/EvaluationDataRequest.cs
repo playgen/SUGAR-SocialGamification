@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using PlayGen.SUGAR.Common.Shared;
 
-namespace PlayGen.SUGAR.Contracts.Shared
+namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
 	/// Encapsulates ActorData/GameData details.

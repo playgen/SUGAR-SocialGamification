@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using PlayGen.SUGAR.Common.Shared.Web;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.ServerAuthentication.Extensions;
 using PlayGen.SUGAR.WebAPI.Extensions;

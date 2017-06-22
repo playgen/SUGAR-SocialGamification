@@ -16,6 +16,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="logs\**" />
+	  <Content Remove="logs\**" />
+	  <EmbeddedResource Remove="logs\**" />
+	  <None Remove="logs\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Update="Views;Areas\**\Views;nlog.config">
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</None>

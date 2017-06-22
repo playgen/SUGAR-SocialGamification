@@ -1,7 +1,7 @@
 ﻿using System;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
 {
@@ -25,6 +25,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		public AccountResponse Login(AccountRequest account)
 		{
+			Console.WriteLine(account.Name + " " + account.Password + " " + account.SourceToken);
 			var query = GetUriBuilder(ControllerPrefix + "/login").ToString();
 			return Post<AccountRequest, AccountResponse>(query, account);
 		}

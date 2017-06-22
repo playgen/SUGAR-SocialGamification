@@ -6,7 +6,7 @@ using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Common.Shared.Web;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {

@@ -1,7 +1,7 @@
 ﻿//using System.ComponentModel.DataAnnotations;
 //using System.Collections.Generic;
 
-//namespace PlayGen.SUGAR.Contracts.Shared
+//namespace PlayGen.SUGAR.Contracts
 //{
 //	public class EvaluationTestRequest
 //	{

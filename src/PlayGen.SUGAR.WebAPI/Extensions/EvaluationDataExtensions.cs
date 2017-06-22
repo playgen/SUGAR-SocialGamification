@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 using System.Linq;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
