@@ -1,9 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
-
 using Newtonsoft.Json;
-
-using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client.Unity
 {
@@ -11,7 +9,7 @@ namespace PlayGen.SUGAR.Client.Unity
 	{
 		public UnityWebGlHttpHandler()
 		{
-			MakeIL2CPPHappy();
+			var c = new ReferenceConverter(typeof(UnityWebGlHttpHandler));
 		}
 
 		public HttpResponse HandleRequest(HttpRequest request)
@@ -33,11 +31,5 @@ namespace PlayGen.SUGAR.Client.Unity
 
 		[DllImport("__Internal")]
 		private static extern string HttpRequest(string requestString);
-
-		public void MakeIL2CPPHappy()
-		{
-			var r = new ResponseWrapper<AccountResponse>();
-		}
-
 	}
 }

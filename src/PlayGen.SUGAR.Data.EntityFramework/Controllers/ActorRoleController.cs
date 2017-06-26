@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
-using Microsoft.EntityFrameworkCore;
-
-using PlayGen.SUGAR.Common.Permissions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -25,7 +24,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			}
 		}
 
-		public List<ActorRole> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope, bool includeClaims = false)
+		public List<ActorRole> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope,
+			bool includeClaims = false)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -35,13 +35,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 						.Include(r => r.Role)
 						.ThenInclude(r => r.RoleClaims)
 						.ThenInclude(rc => rc.Claim)
-						.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == -1) && ar.Role.ClaimScope == scope).ToList();
+						.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == -1) &&
+									ar.Role.ClaimScope == scope)
+						.ToList();
 					return roles;
 				}
 				else
 				{
 					var roles = context.ActorRoles
-					.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == -1) && ar.Role.ClaimScope == scope).ToList();
+						.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == -1) &&
+									ar.Role.ClaimScope == scope)
+						.ToList();
 					return roles;
 				}
 			}
@@ -57,12 +61,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 						.Include(r => r.Role)
 						.ThenInclude(r => r.RoleClaims)
 						.ThenInclude(rc => rc.Claim)
-						.Where(ar => ar.ActorId == actorId).ToList();
+						.Where(ar => ar.ActorId == actorId)
+						.ToList();
 					return roles;
 				}
 				else
 				{
-					var roles = context.ActorRoles.Where(ar => ar.ActorId == actorId).ToList();
+					var roles = context.ActorRoles.Where(ar => ar.ActorId == actorId)
+						.ToList();
 					return roles;
 				}
 			}
@@ -72,7 +78,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Actor).Distinct().ToList();
+				var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId.Value == entityId.Value)
+					.Select(ar => ar.Actor)
+					.Distinct()
+					.ToList();
 				return actors;
 			}
 		}

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.Model;
 using Xunit;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
@@ -9,12 +9,20 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	[Collection("Project Fixture Collection")]
 	public class UserControllerTests
 	{
-		#region Configuration
-
 		private readonly UserController _userController = ControllerLocator.UserController;
-		#endregion
 
-		#region Tests
+		private User CreateUser(string name)
+		{
+			var user = new User
+			{
+				Name = name
+			};
+
+			_userController.Create(user);
+
+			return user;
+		}
+
 		[Fact]
 		public void CreateAndGetUser()
 		{
@@ -40,6 +48,31 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
+		public void DeleteExistingUser()
+		{
+			var userName = "DeleteExistingUser";
+
+			var user = CreateUser(userName);
+
+			var users = _userController.Search(userName);
+			Assert.Equal(users.Count(), 1);
+			Assert.Equal(users.ElementAt(0)
+					.Name,
+				userName);
+
+			_userController.Delete(user.Id);
+			users = _userController.Search(userName);
+
+			Assert.Empty(users);
+		}
+
+		[Fact]
+		public void DeleteNonExistingUser()
+		{
+			_userController.Delete(-1);
+		}
+
+		[Fact]
 		public void GetMultipleUsersByName()
 		{
 			var userNames = new[]
@@ -47,13 +80,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				"GetMultipleUsersByName1",
 				"GetMultipleUsersByName2",
 				"GetMultipleUsersByName3",
-				"GetMultipleUsersByName4",
+				"GetMultipleUsersByName4"
 			};
 
 			foreach (var userName in userNames)
-			{
 				CreateUser(userName);
-			}
 
 			CreateUser("GetMultiple_UsersByName_DontGetThis");
 
@@ -73,6 +104,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
+		public void GetNonExistingUserById()
+		{
+			var user = _userController.Get(-1);
+
+			Assert.Null(user);
+		}
+
+		[Fact]
 		public void GetUserById()
 		{
 			var newUser = CreateUser("GetUserById");
@@ -86,11 +125,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
-		public void GetNonExistingUserById()
+		public void UpdateNonExistingUser()
 		{
-			var user = _userController.Get(-1);
+			var user = new User
+			{
+				Id = -1,
+				Name = "UpdateNonExistingUser"
+			};
 
-			Assert.Null(user);
+			Assert.Throws<MissingRecordException>(() => _userController.Update(user));
 		}
 
 		[Fact]
@@ -106,7 +149,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			Assert.Equal(1, matches);
 
-			var updateUser = new User {
+			var updateUser = new User
+			{
 				Id = newUser.Id,
 				Name = "UpdateExistingUserProof"
 			};
@@ -127,60 +171,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newUserDuplicate = CreateUser(userName + " Two");
 
-			var updateUser = new User {
+			var updateUser = new User
+			{
 				Id = newUserDuplicate.Id,
 				Name = newUser.Name
 			};
 
 			Assert.Throws<DuplicateRecordException>(() => _userController.Update(updateUser));
 		}
-
-		[Fact]
-		public void UpdateNonExistingUser()
-		{
-			var user = new User {
-				Id = -1,
-				Name = "UpdateNonExistingUser"
-			};
-
-			Assert.Throws<MissingRecordException>(() => _userController.Update(user));
-		}
-
-		[Fact]
-		public void DeleteExistingUser()
-		{
-			var userName = "DeleteExistingUser";
-
-			var user = CreateUser(userName);
-
-			var users = _userController.Search(userName);
-			Assert.Equal(users.Count(), 1);
-			Assert.Equal(users.ElementAt(0).Name, userName);
-
-			_userController.Delete(user.Id);
-			users = _userController.Search(userName);
-
-			Assert.Empty(users);
-		}
-
-		[Fact]
-		public void DeleteNonExistingUser()
-		{
-			_userController.Delete(-1);
-		}
-		#endregion
-
-		#region Helpers
-		private User CreateUser(string name)
-		{
-			var user = new User {
-				Name = name,
-			};
-
-			_userController.Create(user);
-
-			return user;
-		}
-		#endregion
 	}
 }

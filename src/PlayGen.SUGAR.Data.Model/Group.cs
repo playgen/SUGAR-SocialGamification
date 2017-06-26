@@ -9,6 +9,6 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public virtual List<UserToGroupRelationshipRequest> UserToGroupRelationshipRequests { get; set; }
 
-		public override Common.ActorType ActorType => Common.ActorType.Group;
+		public override ActorType ActorType => ActorType.Group;
 	}
 }

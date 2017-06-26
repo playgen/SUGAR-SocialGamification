@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Data.Model
 		public int? MatchId { get; set; }
 
 		public virtual Match Match { get; set; }
-		
+
 		public EvaluationDataCategory Category { get; set; }
 
 		public string Key { get; set; }

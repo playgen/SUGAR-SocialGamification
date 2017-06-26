@@ -1,19 +1,19 @@
 ﻿using System;
-using PlayGen.SUGAR.Data.Model;
+using System.Collections.Generic;
+using System.Linq;
 using NLog;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Data.EntityFramework;
-using System.Collections.Generic;
-using System.Linq;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class GameDataController
 	{
 		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private readonly ActorController _actorController;
 
 		private readonly EvaluationDataController _evaluationDataController;
-		private readonly ActorController _actorController;
 
 		public GameDataController(SUGARContextFactory contextFactory, ActorController actorController)
 		{
@@ -29,7 +29,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 		public List<Actor> GetGameActors(int? gameId)
 		{
 			var ids = _evaluationDataController.GetGameActors(gameId);
-			return ids.Where(a => a != null).Select(a => _actorController.Get(a.Value)).ToList();
+			return ids.Where(a => a != null)
+				.Select(a => _actorController.Get(a.Value))
+				.ToList();
 		}
 
 		public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int? gameId)
@@ -52,7 +54,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 			_evaluationDataController.Add(evaluationData);
 		}
 
-		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			return _evaluationDataController.GetEvaluationDataByHighestFloat(gameId, actorId, key, start, end);
 		}

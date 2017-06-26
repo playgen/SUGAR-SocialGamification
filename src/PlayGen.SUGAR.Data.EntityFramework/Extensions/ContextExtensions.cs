@@ -1,7 +1,7 @@
-﻿using PlayGen.SUGAR.Data.Model;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
@@ -12,10 +12,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			if (gameId != null && gameId != 0)
 			{
 				var game = context.Games.FirstOrDefault(a => a.Id == gameId.Value);
-				if (game != null && context.Entry(game).State == EntityState.Detached)
-				{
+				if (game != null && context.Entry(game)
+						.State == EntityState.Detached)
 					context.Games.Attach(game);
-				}
 			}
 		}
 
@@ -24,27 +23,24 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			if (actorId != null)
 			{
 				var actor = context.Actors.FirstOrDefault(a => a.Id == actorId.Value);
-				if (actor != null && context.Entry(actor).State == EntityState.Detached)
-				{
+				if (actor != null && context.Entry(actor)
+						.State == EntityState.Detached)
 					context.Actors.Attach(actor);
-				}
 			}
 		}
 
 		public static void HandleDetatchedActor(this SUGARContext context, Actor actor)
 		{
-			if (actor != null && context.Entry(actor).State == EntityState.Detached)
-			{
+			if (actor != null && context.Entry(actor)
+					.State == EntityState.Detached)
 				context.Actors.Attach(actor);
-			}
 		}
 
 		public static void HandleDetatchedGameData(this SUGARContext context, EvaluationData evaluationData)
 		{
-			if (evaluationData != null && context.Entry(evaluationData).State == EntityState.Detached)
-			{
+			if (evaluationData != null && context.Entry(evaluationData)
+					.State == EntityState.Detached)
 				context.EvaluationData.Attach(evaluationData);
-			}
 		}
 	}
 }

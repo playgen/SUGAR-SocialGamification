@@ -6,15 +6,13 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 	public static class AuthorizationHeaderExtensions
 	{
 		private const string ValuePrefix = "Bearer ";
-		
+
 		public static string GetAuthorization(this HttpRequest request)
 		{
 			string authorization = null;
 
 			if (request.Headers.ContainsKey(HeaderKeys.Authorization))
-			{
 				authorization = request.Headers[HeaderKeys.Authorization];
-			}
 
 			return authorization;
 		}
@@ -24,9 +22,7 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 			string authorization = null;
 
 			if (response.Headers.ContainsKey(HeaderKeys.Authorization))
-			{
 				authorization = response.Headers[HeaderKeys.Authorization];
-			}
 
 			return authorization;
 		}
@@ -51,45 +47,39 @@ namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 			response.Headers[HeaderKeys.Authorization] = ValuePrefix + token;
 		}
 
-        public static string GetAuthorizationToken(this HttpResponse response)
-        {
-            string token = null;
-
-            if (response.HasAuthorization())
-            {
-                token = response.Headers.GetAuthorizationToken();
-            }
-
-            return token;
-        }
-
-        public static string GetAuthorizationToken(this HttpRequest request)
+		public static string GetAuthorizationToken(this HttpResponse response)
 		{
 			string token = null;
 
-			if (request.HasAuthorization())
-			{
-                token = request.Headers.GetAuthorizationToken();
-			}
+			if (response.HasAuthorization())
+				token = response.Headers.GetAuthorizationToken();
 
 			return token;
 		}
 
-	    public static string GetAuthorizationToken(this IHeaderDictionary headers)
-	    {
-            string token = null;
+		public static string GetAuthorizationToken(this HttpRequest request)
+		{
+			string token = null;
 
-            if (headers.ContainsKey(HeaderKeys.Authorization))
-	        {
-	            var authorization = (string) headers[HeaderKeys.Authorization];
+			if (request.HasAuthorization())
+				token = request.Headers.GetAuthorizationToken();
 
-	            if (authorization.StartsWith(ValuePrefix))
-	            {
-	                token = authorization.Substring(ValuePrefix.Length);
-	            }
-	        }
+			return token;
+		}
 
-	        return token;
-	    }
+		public static string GetAuthorizationToken(this IHeaderDictionary headers)
+		{
+			string token = null;
+
+			if (headers.ContainsKey(HeaderKeys.Authorization))
+			{
+				var authorization = (string) headers[HeaderKeys.Authorization];
+
+				if (authorization.StartsWith(ValuePrefix))
+					token = authorization.Substring(ValuePrefix.Length);
+			}
+
+			return token;
+		}
 	}
 }

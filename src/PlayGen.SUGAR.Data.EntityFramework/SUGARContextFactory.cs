@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySQL.Data.EntityFrameworkCore.Extensions;
-
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework
@@ -23,9 +22,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 			var newlyCreated = context.Database.EnsureCreated();
 
 			if (newlyCreated)
-			{
 				context.Seed();
-			}
 
 			return context;
 		}

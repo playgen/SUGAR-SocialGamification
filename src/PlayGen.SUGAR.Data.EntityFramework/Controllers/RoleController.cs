@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
-
 using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -28,7 +26,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var roles = context.Roles.Where(r => r.ClaimScope == scope).ToList();
+				var roles = context.Roles.Where(r => r.ClaimScope == scope)
+					.ToList();
 				return roles;
 			}
 		}

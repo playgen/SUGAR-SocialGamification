@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
-using Microsoft.EntityFrameworkCore;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -43,13 +43,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-
 				var account = context.Accounts.Find(context, id);
 
 				if (account == null)
-				{
 					throw new MissingRecordException($"No account exsits with Id: {id}");
-				}
 
 				context.Accounts.Remove(account);
 				SaveChanges(context);

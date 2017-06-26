@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace PlayGen.SUGAR.Core.UnitTests
@@ -14,31 +13,31 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
 	public class ProjectFixture : IDisposable
 	{
+		private static bool _isInitialized;
+		private static bool _isDisposed;
 		private readonly Data.EntityFramework.UnitTests.ProjectFixture _dbProjectFixture;
-	    private static bool _isInitialized;
-	    private int _instanceCount;
-        private static bool _isDisposed;
+		private int _instanceCount;
 
-        public ProjectFixture()
-        {
-            //_instanceCount++;
+		public ProjectFixture()
+		{
+			//_instanceCount++;
 
-            //if (!_isInitialized)
-            {
-                _dbProjectFixture = new Data.EntityFramework.UnitTests.ProjectFixture();
-                _isInitialized = true;
-            }
-        }
+			//if (!_isInitialized)
+			{
+				_dbProjectFixture = new Data.EntityFramework.UnitTests.ProjectFixture();
+				_isInitialized = true;
+			}
+		}
 
 		public virtual void Dispose()
 		{
-		    //_instanceCount--;
+			//_instanceCount--;
 
-      //      if (!_isDisposed && _instanceCount == 0)
-		    {
-		        _dbProjectFixture.Dispose();
-		        _isDisposed = true;
-		    }
+			//      if (!_isDisposed && _instanceCount == 0)
+			{
+				_dbProjectFixture.Dispose();
+				_isDisposed = true;
+			}
 		}
 	}
 }

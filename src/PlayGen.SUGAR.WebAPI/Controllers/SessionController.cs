@@ -9,14 +9,14 @@ using PlayGen.SUGAR.WebAPI.Extensions;
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
 	/// <summary>
-	/// Web Controller that facilitates session specific operations.
+	///     Web Controller that facilitates session specific operations.
 	/// </summary>
 	[Route("api")]
 	public class SessionController : Controller
 	{
-		private readonly TokenController _tokenController;
 		private readonly Core.Controllers.AccountController _accountCoreController;
 		private readonly SessionTracker _sessionTracker;
+		private readonly TokenController _tokenController;
 
 		public SessionController(Core.Controllers.AccountController accountCoreController,
 			TokenController tokenController,
@@ -28,19 +28,18 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Logs in an account based on the name and password combination.
-		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// Example Usage: POST api/login
-		/// Example Usage: POST api/1/login
+		///     Logs in an account based on the name and password combination.
+		///     Returns a JsonWebToken used for authorization in any further calls to the API.
+		///     Example Usage: POST api/login
+		///     Example Usage: POST api/1/login
 		/// </summary>
 		/// <param name="gameId">Optional Id of the game the account is logging in for.</param>
-		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
-		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
+		/// <param name="accountRequest"><see cref="AccountRequest" /> object that contains the account details provided.</param>
+		/// <returns>A <see cref="AccountResponse" /> containing the Account details.</returns>
 		[HttpPost("login")]
 		[HttpPost("{gameId:int}/login")]
 		[ArgumentsNotNull]
-		public IActionResult Login([FromRoute]int? gameId, [FromBody]AccountRequest accountRequest)
+		public IActionResult Login([FromRoute] int? gameId, [FromBody] AccountRequest accountRequest)
 		{
 			// todo check if has permission to login for specified game
 			var account = accountRequest.ToModel();
@@ -55,18 +54,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Creates a new account and login that account.
-		/// 
-		/// Example Usage: POST api/createandlogin
-		/// Example Usage: POST api/1/createandlogin
+		///     Creates a new account and login that account.
+		///     Example Usage: POST api/createandlogin
+		///     Example Usage: POST api/1/createandlogin
 		/// </summary>
 		/// <param name="gameId">Optional Id of the game the account is logging in for.</param>
-		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
-		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
+		/// <param name="accountRequest"><see cref="AccountRequest" /> object that contains the account details provided.</param>
+		/// <returns>A <see cref="AccountResponse" /> containing the Account details.</returns>
 		[HttpPost("createandlogin")]
 		[HttpPost("{gameId:int}/createandlogin")]
 		[ArgumentsNotNull]
-		public IActionResult CreateAndLogin([FromRoute]int? gameId, [FromBody] AccountRequest accountRequest)
+		public IActionResult CreateAndLogin([FromRoute] int? gameId, [FromBody] AccountRequest accountRequest)
 		{
 			var account = accountRequest.ToModel();
 			_accountCoreController.Create(account, accountRequest.SourceToken);
@@ -76,9 +74,9 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Heartbeat method to keep the specific session alive.
-		/// Calling it within a server defined interval will notify the server that the
-		/// session is still active.
+		///     Heartbeat method to keep the specific session alive.
+		///     Calling it within a server defined interval will notify the server that the
+		///     session is still active.
 		/// </summary>
 		[HttpGet("heartbeat")]
 		[Authorize("Bearer")]
@@ -89,8 +87,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Logsout the currently logged in account, ending it's session and removing the 
-		/// authorization token.
+		///     Logsout the currently logged in account, ending it's session and removing the
+		///     authorization token.
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet("logout")]

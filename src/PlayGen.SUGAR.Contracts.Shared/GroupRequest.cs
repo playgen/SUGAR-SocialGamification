@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PlayGen.SUGAR.Contracts
+﻿namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
-	/// Encapsulates group details.
+	///     Encapsulates group details.
 	/// </summary>
 	/// <example>
-	/// JSON
-	/// {
-	/// Name : "Actor Name"
-	/// }
+	///     JSON
+	///     {
+	///     Name : "Actor Name"
+	///     }
 	/// </example>
 	public class GroupRequest : ActorRequest
-    {
-		
+	{
 	}
 }

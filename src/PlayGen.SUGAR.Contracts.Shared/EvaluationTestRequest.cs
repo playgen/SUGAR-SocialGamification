@@ -12,3 +12,4 @@
 //		public List<EvaluationDataRequest> GameDatas { get; set; }
 //	}
 //}
+

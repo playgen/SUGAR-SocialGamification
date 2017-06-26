@@ -1,7 +1,7 @@
 ﻿namespace PlayGen.SUGAR.Client
 {
-    public interface IHttpHandler
-    {
-	    HttpResponse HandleRequest(HttpRequest request);
+	public interface IHttpHandler
+	{
+		HttpResponse HandleRequest(HttpRequest request);
 	}
 }

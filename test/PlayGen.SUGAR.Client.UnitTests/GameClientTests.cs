@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts;
-using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var gameRequest = new GameRequest
 			{
-				Name = "CanCreateGame",
+				Name = "CanCreateGame"
 			};
 
 			var response = SUGARClient.Game.Create(gameRequest);
@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var gameRequest = new GameRequest
 			{
-				Name = "CannotCreateDuplicateGame",
+				Name = "CannotCreateDuplicateGame"
 			};
 
 			SUGARClient.Game.Create(gameRequest);
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateGameWithNoName()
 		{
-			var gameRequest = new GameRequest{};
+			var gameRequest = new GameRequest();
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Game.Create(gameRequest));
 		}
@@ -47,14 +47,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var gameRequestOne = new GameRequest
 			{
-				Name = "CanGetGamesByName 1",
+				Name = "CanGetGamesByName 1"
 			};
 
 			var responseOne = SUGARClient.Game.Create(gameRequestOne);
 
 			var gameRequestTwo = new GameRequest
 			{
-				Name = "CanGetGamesByName 2",
+				Name = "CanGetGamesByName 2"
 			};
 
 			var responseTwo = SUGARClient.Game.Create(gameRequestTwo);
@@ -83,7 +83,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var gameRequest = new GameRequest
 			{
-				Name = "CanGetGameById",
+				Name = "CanGetGameById"
 			};
 
 			var response = SUGARClient.Game.Create(gameRequest);
@@ -107,7 +107,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var gameRequest = new GameRequest
 			{
-				Name = "CanUpdateGame",
+				Name = "CanUpdateGame"
 			};
 
 			var response = SUGARClient.Game.Create(gameRequest);
@@ -166,14 +166,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var gameRequest = new GameRequest
 			{
-				Name = "CannotUpdateGameToNoName",
+				Name = "CannotUpdateGameToNoName"
 			};
 
 			var response = SUGARClient.Game.Create(gameRequest);
 
-			var updateRequest = new GameRequest
-			{
-			};
+			var updateRequest = new GameRequest();
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Game.Update(response.Id, updateRequest));
 		}
@@ -183,7 +181,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var gameRequest = new GameRequest
 			{
-				Name = "CanDeleteGame",
+				Name = "CanDeleteGame"
 			};
 
 			var response = SUGARClient.Game.Create(gameRequest);

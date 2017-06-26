@@ -2,8 +2,8 @@
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
-    [Collection("Project Fixture Collection")]
-    public class AchievementProgressControllerTests
+	[Collection("Project Fixture Collection")]
+	public class AchievementProgressControllerTests
 	{
 		/*
 		#region Configuration

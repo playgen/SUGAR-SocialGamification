@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Permissions;
 using System.Linq;
-
+using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
 
@@ -45,7 +44,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var claimList = claims as List<Claim> ?? claims.ToList();
+				var claimList = claims ?? claims.ToList();
 				context.Claims.AddRange(claimList);
 				SaveChanges(context);
 

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Data.Model;
+using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
+using Reward = PlayGen.SUGAR.Data.Model.Reward;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
@@ -8,14 +10,16 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 	{
 		public static User CreateUser(string name)
 		{
-			return ControllerLocator.UserController.Create(new User {
+			return ControllerLocator.UserController.Create(new User
+			{
 				Name = name
 			});
 		}
 
 		public static Game CreateGame(string name)
 		{
-			return ControllerLocator.GameController.Create(new Game {
+			return ControllerLocator.GameController.Create(new Game
+			{
 				Name = name
 			});
 		}
@@ -24,26 +28,28 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			if (gameId == null)
 			{
-				var game = new Game {
+				var game = new Game
+				{
 					Name = name
 				};
 				ControllerLocator.GameController.Create(game);
 				gameId = game.Id;
 			}
 
-			var achievement = new Achievement {
+			var achievement = new Achievement
+			{
 				Name = name,
 				Token = name,
 				GameId = gameId.Value,
 				ActorType = ActorType.User,
-				EvaluationCriterias = new List<Model.EvaluationCriteria>(),
-				Rewards = new List<Model.Reward>()
+				EvaluationCriterias = new List<EvaluationCriteria>(),
+				Rewards = new List<Reward>()
 			};
 			if (addCriteria)
 			{
-				var criteria = new List<Model.EvaluationCriteria>
+				var criteria = new List<EvaluationCriteria>
 				{
-					new Model.EvaluationCriteria
+					new EvaluationCriteria
 					{
 						EvaluationDataKey = "CreateAchievementKey",
 						EvaluationDataType = EvaluationDataType.String,

@@ -10,9 +10,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		public static ActorClaimResponse ToContract(this ActorClaim actorClaimModel)
 		{
 			if (actorClaimModel == null)
-			{
 				return null;
-			}
 
 			return new ActorClaimResponse
 			{
@@ -24,9 +22,12 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static IEnumerable<ActorClaimResponse> ToContractList(this IEnumerable<ActorClaim> actorClaimModels)
+		public static CollectionResponse ToCollectionContract(this IEnumerable<ActorClaim> models)
 		{
-			return actorClaimModels.Select(ToContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
+
 		}
 
 		public static ActorClaim ToModel(this ActorClaimRequest actorClaimContract)
@@ -38,6 +39,5 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 				EntityId = actorClaimContract.EntityId
 			};
 		}
-
 	}
 }

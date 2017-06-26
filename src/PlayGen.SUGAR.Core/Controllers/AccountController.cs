@@ -1,26 +1,26 @@
-﻿using PlayGen.SUGAR.Core.Exceptions;
-using PlayGen.SUGAR.Data.Model;
-using System.Linq;
+﻿using System.Linq;
 using NLog;
 using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Core.Exceptions;
 using PlayGen.SUGAR.Core.Utilities;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class AccountController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
 		private readonly AccountSourceController _accountSourceCoreController;
-		private readonly UserController _userCoreController;
 		private readonly ActorRoleController _actorRoleController;
+		private readonly UserController _userCoreController;
 
 		// todo only take in account db controller but use core user controller
 		public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
-					AccountSourceController accountSourceCoreController,
-					UserController userCoreController,
-					ActorRoleController actorRoleController)
+			AccountSourceController accountSourceCoreController,
+			UserController userCoreController,
+			ActorRoleController actorRoleController)
 		{
 			_accountDbController = accountDbController;
 			_accountSourceCoreController = accountSourceCoreController;
@@ -36,33 +36,24 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 			if (source != null)
 			{
-				var found = _accountDbController.Get(new[] { toVerify.Name }, source.Id).SingleOrDefault();
+				var found = _accountDbController.Get(new[] {toVerify.Name}, source.Id)
+					.SingleOrDefault();
 				if (found != null)
 				{
 					if (source.RequiresPassword)
-					{
 						if (PasswordEncryption.Verify(toVerify.Password, found.Password))
-						{
 							verified = found;
-						}
 						else
-						{
 							throw new InvalidAccountDetailsException("Invalid Login Details.");
-						}
-					}
 					else
-					{
 						verified = found;
-					}
 
 					Logger.Info($"Account: {toVerify?.Id} passed verification: {verified}");
 
 					return verified;
 				}
-				else if (source.AutoRegister)
-				{
+				if (source.AutoRegister)
 					return Create(toVerify, sourceToken);
-				}
 				throw new InvalidAccountDetailsException("Invalid Login Details.");
 			}
 			throw new InvalidAccountDetailsException("Invalid Login Details.");
@@ -72,21 +63,22 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			var source = _accountSourceCoreController.GetByToken(sourceToken);
 
-			if (string.IsNullOrWhiteSpace(toRegister.Name) || (source.RequiresPassword && string.IsNullOrWhiteSpace(toRegister.Password)))
-			{
+			if (string.IsNullOrWhiteSpace(toRegister.Name) || source.RequiresPassword &&
+				string.IsNullOrWhiteSpace(toRegister.Password))
 				throw new InvalidAccountDetailsException("Invalid username or password.");
-			}
 
-			var user = _userCoreController.Search(toRegister.Name, true).FirstOrDefault() ?? _userCoreController.Create(new User {
-				Name = toRegister.Name
-			});
+			var user = _userCoreController.Search(toRegister.Name, true)
+							.FirstOrDefault() ?? _userCoreController.Create(
+							new User
+							{
+								Name = toRegister.Name
+							});
 
 			if (source.RequiresPassword)
-			{
 				toRegister.Password = PasswordEncryption.Encrypt(toRegister.Password);
-			}
 
-			var registered = _accountDbController.Create(new Account {
+			var registered = _accountDbController.Create(new Account
+			{
 				Name = toRegister.Name,
 				Password = toRegister.Password,
 				AccountSourceId = source.Id,

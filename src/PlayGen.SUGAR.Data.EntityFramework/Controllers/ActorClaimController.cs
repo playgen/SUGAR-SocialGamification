@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
-using Microsoft.EntityFrameworkCore;
-
-using PlayGen.SUGAR.Common.Permissions;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -32,7 +31,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 				var claims = context.ActorClaims
 					.Where(ac => ac.ActorId == actorId && (ac.EntityId.Value == entityId.Value || ac.EntityId.Value == -1))
 					.Select(ac => ac.Claim)
-					.Where(c => c.ClaimScope == scope).ToList();
+					.Where(c => c.ClaimScope == scope)
+					.ToList();
 				return claims;
 			}
 		}
@@ -41,7 +41,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var claims = context.ActorClaims.Include(c => c.Claim).Where(ac => ac.ActorId == actorId).ToList();
+				var claims = context.ActorClaims.Include(c => c.Claim)
+					.Where(ac => ac.ActorId == actorId)
+					.ToList();
 				return claims;
 			}
 		}
@@ -50,7 +52,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var actors = context.ActorClaims.Where(ac => ac.ClaimId == claimId && ac.EntityId.Value == entityId.Value).Select(ac => ac.Actor).Distinct().ToList();
+				var actors = context.ActorClaims.Where(ac => ac.ClaimId == claimId && ac.EntityId.Value == entityId.Value)
+					.Select(ac => ac.Actor)
+					.Distinct()
+					.ToList();
 				return actors;
 			}
 		}

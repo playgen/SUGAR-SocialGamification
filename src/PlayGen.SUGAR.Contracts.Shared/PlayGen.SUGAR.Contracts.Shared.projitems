@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ActorRoleRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorRoleResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ClaimResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CollectionResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCreateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaUpdateRequest.cs" />
@@ -33,6 +34,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GroupRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GroupResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardStandingsRequest.cs" />

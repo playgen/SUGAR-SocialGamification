@@ -7,14 +7,14 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class UserController : ActorController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
-		private readonly Data.EntityFramework.Controllers.UserController _userController;
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		private readonly ActorRoleController _actorRoleController;
 
+		private readonly Data.EntityFramework.Controllers.UserController _userController;
+
 		public UserController(Data.EntityFramework.Controllers.UserController userController,
-					Data.EntityFramework.Controllers.ActorController actorDbController,
-					ActorRoleController actorRoleController) : base(actorDbController)
+			Data.EntityFramework.Controllers.ActorController actorDbController,
+			ActorRoleController actorRoleController) : base(actorDbController)
 		{
 			_userController = userController;
 			_actorRoleController = actorRoleController;

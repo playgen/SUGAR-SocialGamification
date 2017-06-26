@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using NLog;
+using PlayGen.SUGAR.Data.EntityFramework.Controllers;
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class UserFriendController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-		private readonly Data.EntityFramework.Controllers.UserRelationshipController _userRelationshipDbController;
+		private readonly UserRelationshipController _userRelationshipDbController;
 
-		public UserFriendController(Data.EntityFramework.Controllers.UserRelationshipController userRelationshipDbController)
+		public UserFriendController(UserRelationshipController userRelationshipDbController)
 		{
 			_userRelationshipDbController = userRelationshipDbController;
 		}

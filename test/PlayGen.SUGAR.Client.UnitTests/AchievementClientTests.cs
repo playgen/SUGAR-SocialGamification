@@ -1,127 +1,123 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
+using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
-using NUnit.Framework;
-using System;
-using PlayGen.SUGAR.Client.EvaluationEvents;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
 	public class AchievementClientTests : Evaluations
-    { 
-	    [Test]
-	    public void CanDisableNotifications()
-	    {
-            // Assign
-	        var key = "CanDisableNotifications";
+	{
+		[Test]
+		public void CanDisableNotifications()
+		{
+			// Assign
+			var key = "CanDisableNotifications";
 
-	        SUGARClient.Achievement.EnableNotifications(true);
+			SUGARClient.Achievement.EnableNotifications(true);
 
-            EvaluationNotification notification;
-	        while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
-	        {
-	        }
+			EvaluationNotification notification;
+			while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
+			{
+			}
 
-	        SUGARClient.Achievement.EnableNotifications(false);
+			SUGARClient.Achievement.EnableNotifications(false);
 
-            var achievement = CreateGenericEvaluation(key);
+			var achievement = CreateGenericEvaluation(key);
 
-	        CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
+			CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
 
-            // Act
-            var didGetnotification = SUGARClient.Achievement.TryGetPendingNotification(out notification);
+			// Act
+			var didGetnotification = SUGARClient.Achievement.TryGetPendingNotification(out notification);
 
-            // Assert
-            Assert.IsFalse(didGetnotification);
-            Assert.IsNull(notification);
-	    }
+			// Assert
+			Assert.IsFalse(didGetnotification);
+			Assert.IsNull(notification);
+		}
 
-        [Test]
-        public void CanGetNotifications()
-        {
-            // Assign
-            var key = "CanGetNotifications";
+		[Test]
+		public void CanGetNotifications()
+		{
+			// Assign
+			var key = "CanGetNotifications";
 
-            SUGARClient.Achievement.EnableNotifications(true);
-            var achievement = CreateGenericEvaluation(key);
+			SUGARClient.Achievement.EnableNotifications(true);
+			var achievement = CreateGenericEvaluation(key);
 
-            CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
+			CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
 
-            // Act
-            EvaluationNotification notification;
-            var didGetnotification = false;
-            EvaluationNotification gotNotification= null;
-            var didGetSpecificConfiguration = false;
+			// Act
+			EvaluationNotification notification;
+			var didGetnotification = false;
+			EvaluationNotification gotNotification = null;
+			var didGetSpecificConfiguration = false;
 
-            while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
-            {
-                didGetnotification = true;
-                gotNotification = notification; 
-                didGetSpecificConfiguration |= notification.Name == achievement.Name;
-            }
+			while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
+			{
+				didGetnotification = true;
+				gotNotification = notification;
+				didGetSpecificConfiguration |= notification.Name == achievement.Name;
+			}
 
-            // Assert
-            Assert.IsTrue(didGetnotification);
-            Assert.IsNotNull(gotNotification);
+			// Assert
+			Assert.IsTrue(didGetnotification);
+			Assert.IsNotNull(gotNotification);
 
-            Assert.IsTrue(didGetSpecificConfiguration);
-        }
+			Assert.IsTrue(didGetSpecificConfiguration);
+		}
 
-        [Test]
-        public void DontGetAlreadyRecievedNotifications()
-        {
-            // Assign
-            var key = "DontGetAlreadyRecievedNotifications";
+		[Test]
+		public void DontGetAlreadyRecievedNotifications()
+		{
+			// Assign
+			var key = "DontGetAlreadyRecievedNotifications";
 
-            SUGARClient.Achievement.EnableNotifications(true);
-            var achievement = CreateGenericEvaluation(key);
+			SUGARClient.Achievement.EnableNotifications(true);
+			var achievement = CreateGenericEvaluation(key);
 
-            CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
+			CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
 
-            EvaluationNotification notification;
-            while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
-            {
-            }
+			EvaluationNotification notification;
+			while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
+			{
+			}
 
-            CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
+			CompleteGenericEvaluation(achievement, LoggedInAccount.User.Id);
 
-            // Act
-            var didGetSpecificConfiguration = false;
-            while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
-            {
-                didGetSpecificConfiguration |= notification.Name == achievement.Name;
-            }
+			// Act
+			var didGetSpecificConfiguration = false;
+			while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
+				didGetSpecificConfiguration |= notification.Name == achievement.Name;
 
-            // Assert
-            Assert.IsFalse(didGetSpecificConfiguration);
-        }
+			// Assert
+			Assert.IsFalse(didGetSpecificConfiguration);
+		}
 
-        [Test]
+		[Test]
 		public void CanCreateAchievement()
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CanCreateAchievement",
 				ActorType = ActorType.User,
 				Token = "CanCreateAchievement",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
 					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanCreateAchievement",
+						EvaluationDataKey = "CanCreateAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
@@ -132,24 +128,23 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 		public void CanCreateGlobalAchievement()
 		{
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CanCreateGlobalAchievement",
 				ActorType = ActorType.User,
 				Token = "CanCreateGlobalAchievement",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanCreateGlobalAchievement",
+						EvaluationDataKey = "CanCreateGlobalAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
@@ -163,25 +158,24 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateDuplicateAchievement",
 				ActorType = ActorType.User,
 				Token = "CannotCreateDuplicateAchievement",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotCreateDuplicateAchievement",
+						EvaluationDataKey = "CannotCreateDuplicateAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			SUGARClient.Achievement.Create(achievementRequest);
@@ -194,24 +188,23 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				ActorType = ActorType.User,
 				Token = "CannotCreateAchievementWithNoName",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotCreateAchievementWithNoName",
+						EvaluationDataKey = "CannotCreateAchievementWithNoName",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Create(achievementRequest));
@@ -222,24 +215,23 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateAchievementWithNoToken",
 				ActorType = ActorType.User,
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotCreateAchievementWithNoToken",
+						EvaluationDataKey = "CannotCreateAchievementWithNoToken",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Create(achievementRequest));
@@ -250,12 +242,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateAchievementWithNoEvaluationCriteria",
 				ActorType = ActorType.User,
 				Token = "CannotCreateAchievementWithNoEvaluationCriteria",
-				GameId = game.Id,
+				GameId = game.Id
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Create(achievementRequest));
@@ -266,24 +258,23 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateAchievementWithNoEvaluationCriteriaKey",
 				ActorType = ActorType.User,
 				Token = "CannotCreateAchievementWithNoEvaluationCriteriaKey",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Create(achievementRequest));
@@ -294,23 +285,23 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateAchievementWithNoEvaluationCriteriaValue",
 				ActorType = ActorType.User,
 				Token = "CannotCreateAchievementWithNoEvaluationCriteriaValue",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotCreateAchievementWithNoEvaluationCriteriaValue",
+						EvaluationDataKey = "CannotCreateAchievementWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
-						Scope = CriteriaScope.Actor,
+						Scope = CriteriaScope.Actor
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Create(achievementRequest));
@@ -321,24 +312,24 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
 				ActorType = ActorType.User,
 				Token = "CannotCreateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotCreateAchievementWithNoEvaluationCriteriaValue",
+						EvaluationDataKey = "CannotCreateAchievementWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "A string"
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Create(achievementRequest));
@@ -349,48 +340,46 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "GameGet");
 
-			var achievementRequestOne = new EvaluationCreateRequest()
+			var achievementRequestOne = new EvaluationCreateRequest
 			{
 				Name = "CanGetAchievementsByGameOne",
 				ActorType = ActorType.User,
 				Token = "CanGetAchievementsByGameOne",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanGetAchievementsByGameOne",
+						EvaluationDataKey = "CanGetAchievementsByGameOne",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var responseOne = SUGARClient.Achievement.Create(achievementRequestOne);
 
-			var achievementRequestTwo = new EvaluationCreateRequest()
+			var achievementRequestTwo = new EvaluationCreateRequest
 			{
 				Name = "CanGetAchievementsByGameTwo",
 				ActorType = ActorType.User,
 				Token = "CanGetAchievementsByGameTwo",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanGetAchievementsByGameTwo",
+						EvaluationDataKey = "CanGetAchievementsByGameTwo",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var responseTwo = SUGARClient.Achievement.Create(achievementRequestTwo);
@@ -405,25 +394,24 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CanGetAchievementByKeys",
 				ActorType = ActorType.User,
 				Token = "CanGetAchievementByKeys",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanGetAchievementByKeys",
+						EvaluationDataKey = "CanGetAchievementByKeys",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
@@ -455,33 +443,33 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetAchievementByKeysThatContainSlashes()
 		{
-            // todo this test seems incorrect
+			// todo this test seems incorrect
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-            Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.GetById("Can/Get/Achievement/By/Keys/That/Contain/Slashes", game.Id));
+			Assert.Throws<ClientHttpException>(
+				() => SUGARClient.Achievement.GetById("Can/Get/Achievement/By/Keys/That/Contain/Slashes", game.Id));
 		}
 
 		[Test]
 		public void CanGetGlobalAchievementByToken()
 		{
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CanGetGlobalAchievementByToken",
 				ActorType = ActorType.User,
 				Token = "CanGetGlobalAchievementByToken",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanGetGlobalAchievementByToken",
+						EvaluationDataKey = "CanGetGlobalAchievementByToken",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
@@ -509,7 +497,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanGetGlobalAchievementByKeysThatContainSlashes()
 		{
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.GetGlobalById("Can/Get/Achievement/By/Keys/That/Contain/Slashes"));
+			Assert.Throws<ClientHttpException>(
+				() => SUGARClient.Achievement.GetGlobalById("Can/Get/Achievement/By/Keys/That/Contain/Slashes"));
 		}
 
 		[Test]
@@ -525,50 +514,49 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CanUpdateAchievement",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CanUpdateAchievement",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanUpdateAchievement",
+						EvaluationDataKey = "CanUpdateAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CanUpdateAchievement Updated",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CanUpdateAchievement",
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
-						EvaluationDataKey  ="CanUpdateAchievement",
+						Id = response.EvaluationCriterias[0]
+							.Id,
+						EvaluationDataKey = "CanUpdateAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			SUGARClient.Achievement.Update(updateRequest);
@@ -584,73 +572,71 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var achievementRequestOne = new EvaluationCreateRequest()
+			var achievementRequestOne = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateAchievementToDuplicateNameOne",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementToDuplicateNameOne",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotUpdateAchievementToDuplicateNameOne",
+						EvaluationDataKey = "CannotUpdateAchievementToDuplicateNameOne",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var responseOne = SUGARClient.Achievement.Create(achievementRequestOne);
 
-			var achievementRequestTwo = new EvaluationCreateRequest()
+			var achievementRequestTwo = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateAchievementToDuplicateNameTwo",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementToDuplicateNameTwo",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotUpdateAchievementToDuplicateNameTwo",
+						EvaluationDataKey = "CannotUpdateAchievementToDuplicateNameTwo",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var responseTwo = SUGARClient.Achievement.Create(achievementRequestTwo);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = responseTwo.Id,
+				Id = responseTwo.Id,
 				Name = "CannotUpdateAchievementToDuplicateNameOne",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementToDuplicateNameOne",
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = responseTwo.EvaluationCriterias[0].Id,
-                        EvaluationDataKey  ="CannotUpdateAchievementToDuplicateNameTwo",
+						Id = responseTwo.EvaluationCriterias[0]
+							.Id,
+						EvaluationDataKey = "CannotUpdateAchievementToDuplicateNameTwo",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Update(updateRequest));
@@ -661,27 +647,26 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = int.MaxValue,
+				Id = int.MaxValue,
 				Name = "CannotUpdateNonExistingAchievement",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateNonExistingAchievement",
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = int.MaxValue,
-						EvaluationDataKey  ="CannotUpdateNonExistingAchievement",
+						Id = int.MaxValue,
+						EvaluationDataKey = "CannotUpdateNonExistingAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Update(updateRequest));
@@ -692,49 +677,48 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateAchievemenWithNoName",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievemenWithNoName",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotUpdateAchievemenWithNoName",
+						EvaluationDataKey = "CannotUpdateAchievemenWithNoName",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievemenWithNoName",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
-                        EvaluationDataKey  ="CannotUpdateAchievemenWithNoName",
+						Id = response.EvaluationCriterias[0]
+							.Id,
+						EvaluationDataKey = "CannotUpdateAchievemenWithNoName",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Update(updateRequest));
@@ -745,49 +729,48 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateAchievementWithNoToken",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoToken",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotUpdateAchievementWithNoToken",
+						EvaluationDataKey = "CannotUpdateAchievementWithNoToken",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CannotUpdateAchievementWithNoToken",
 				ActorType = ActorType.User,
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
-                        EvaluationDataKey  ="CannotUpdateAchievementWithNoToken",
+						Id = response.EvaluationCriterias[0]
+							.Id,
+						EvaluationDataKey = "CannotUpdateAchievementWithNoToken",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Update(updateRequest));
@@ -804,30 +787,29 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoEvaluationCriteria",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteria",
+						EvaluationDataKey = "CannotUpdateAchievementWithNoEvaluationCriteria",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CannotUpdateAchievementWithNoEvaluationCriteria",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoEvaluationCriteria",
-				GameId = game.Id,
+				GameId = game.Id
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Update(updateRequest));
@@ -844,43 +826,42 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoEvaluationCriteriaKey",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteriaKey",
+						EvaluationDataKey = "CannotUpdateAchievementWithNoEvaluationCriteriaKey",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CannotUpdateAchievementWithNoEvaluationCriteriaKey",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoEvaluationCriteriaKey",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
-                        ComparisonType = ComparisonType.Equals,
+						Id = response.EvaluationCriterias[0]
+							.Id,
+						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Update(updateRequest));
@@ -891,48 +872,48 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateAchievementWithNoEvaluationCriteriaValue",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoEvaluationCriteriaValue",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteriaValue",
+						EvaluationDataKey = "CannotUpdateAchievementWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CannotUpdateAchievementWithNoEvaluationCriteriaValue",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoEvaluationCriteriaValue",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
-                        EvaluationDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteriaValue",
+						Id = response.EvaluationCriterias[0]
+							.Id,
+						EvaluationDataKey = "CannotUpdateAchievementWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
-						Scope = CriteriaScope.Actor,
+						Scope = CriteriaScope.Actor
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Update(updateRequest));
@@ -943,49 +924,49 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
+						EvaluationDataKey = "CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
-                        EvaluationDataKey  ="CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
+						Id = response.EvaluationCriterias[0]
+							.Id,
+						EvaluationDataKey = "CannotUpdateAchievementWithNoEvaluationCriteriaDataTypeMismatch",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "A string"
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Update(updateRequest));
@@ -996,28 +977,27 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Delete");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
-                Token = "CanDeleteAchievement",
-                GameId = game.Id,
-                Name = "CanDeleteAchievement",
+				Token = "CanDeleteAchievement",
+				GameId = game.Id,
+				Name = "CanDeleteAchievement",
 				ActorType = ActorType.User,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanDeleteAchievement",
+						EvaluationDataKey = "CanDeleteAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
-            var response = CreateEvaluation(achievementRequest);
+			var response = CreateEvaluation(achievementRequest);
 
 			var getAchievement = SUGARClient.Achievement.GetById(achievementRequest.Token, achievementRequest.GameId.Value);
 
@@ -1030,12 +1010,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			Assert.Null(getAchievement);
 		}
 
-        [Test]
+		[Test]
 		public void CannotDeleteNonExistingAchievement()
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Delete");
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.Delete("CannotDeleteNonExistingAchievement", game.Id));
+			Assert.Throws<ClientHttpException>(
+				() => SUGARClient.Achievement.Delete("CannotDeleteNonExistingAchievement", game.Id));
 		}
 
 		[Test]
@@ -1049,24 +1030,23 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanDeleteGlobalAchievement()
 		{
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CanDeleteGlobalAchievement",
 				ActorType = ActorType.User,
 				Token = "CanDeleteGlobalAchievement",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanDeleteGlobalAchievement",
+						EvaluationDataKey = "CanDeleteGlobalAchievement",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
@@ -1085,7 +1065,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotDeleteNonExistingGlobalAchievement()
 		{
-            Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.DeleteGlobal("CannotDeleteNonExistingGlobalAchievement"));
+			Assert.Throws<ClientHttpException>(
+				() => SUGARClient.Achievement.DeleteGlobal("CannotDeleteNonExistingGlobalAchievement"));
 		}
 
 		[Test]
@@ -1099,23 +1080,23 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CanGetGlobalAchievementProgress",
 				ActorType = ActorType.Undefined,
 				Token = "CanGetGlobalAchievementProgress",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanGetGlobalAchievementProgress",
+						EvaluationDataKey = "CanGetGlobalAchievementProgress",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
@@ -1126,9 +1107,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(response.Token, user.Id);
 			Assert.AreEqual(0, progressAchievement.Progress);
 
-			var gameData = new EvaluationDataRequest()
+			var gameData = new EvaluationDataRequest
 			{
-				Key  ="CanGetGlobalAchievementProgress",
+				Key = "CanGetGlobalAchievementProgress",
 				Value = "1",
 				CreatingActorId = user.Id,
 				EvaluationDataType = EvaluationDataType.Float
@@ -1145,7 +1126,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.GetGlobalAchievementProgress("CannotGetNotExistingGlobalAchievementProgress", user.Id));
+			Assert.Throws<ClientHttpException>(
+				() => SUGARClient.Achievement.GetGlobalAchievementProgress("CannotGetNotExistingGlobalAchievementProgress",
+					user.Id));
 		}
 
 		[Test]
@@ -1154,24 +1137,24 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "ProgressGet");
 
-			var achievementRequest = new EvaluationCreateRequest()
+			var achievementRequest = new EvaluationCreateRequest
 			{
 				Name = "CanGetAchievementProgress",
 				GameId = game.Id,
 				ActorType = ActorType.Undefined,
 				Token = "CanGetAchievementProgress",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
-						EvaluationDataKey  ="CanGetAchievementProgress",
+						EvaluationDataKey = "CanGetAchievementProgress",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Achievement.Create(achievementRequest);
@@ -1182,9 +1165,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var progressAchievement = SUGARClient.Achievement.GetAchievementProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(0, progressAchievement.Progress);
 
-			var gameData = new EvaluationDataRequest()
+			var gameData = new EvaluationDataRequest
 			{
-				Key  ="CanGetAchievementProgress",
+				Key = "CanGetAchievementProgress",
 				Value = "1",
 				CreatingActorId = user.Id,
 				GameId = game.Id,
@@ -1203,30 +1186,27 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "ProgressGet");
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.GetAchievementProgress("CannotGetNotExistingAchievementProgress", game.Id, user.Id));
+			Assert.Throws<ClientHttpException>(
+				() => SUGARClient.Achievement.GetAchievementProgress("CannotGetNotExistingAchievementProgress", game.Id, user.Id));
 		}
 
-        #region Helpers
-        protected override EvaluationResponse CreateEvaluation(EvaluationCreateRequest achievementRequest)
-        {
-            var getAchievement = SUGARClient.Achievement.GetById(achievementRequest.Token, achievementRequest.GameId ?? 0);
+		#region Helpers
 
-            if (getAchievement != null)
-            {
-                if (achievementRequest.GameId.HasValue)
-                {
-                    SUGARClient.Achievement.Delete(achievementRequest.Token, achievementRequest.GameId.Value);
-                }
-                else
-                {
-                    SUGARClient.Achievement.DeleteGlobal(achievementRequest.Token);
-                }
-            }
-            
-            var response = SUGARClient.Achievement.Create(achievementRequest);
-            
-            return response;
-        }
-        #endregion
-    }
+		protected override EvaluationResponse CreateEvaluation(EvaluationCreateRequest achievementRequest)
+		{
+			var getAchievement = SUGARClient.Achievement.GetById(achievementRequest.Token, achievementRequest.GameId ?? 0);
+
+			if (getAchievement != null)
+				if (achievementRequest.GameId.HasValue)
+					SUGARClient.Achievement.Delete(achievementRequest.Token, achievementRequest.GameId.Value);
+				else
+					SUGARClient.Achievement.DeleteGlobal(achievementRequest.Token);
+
+			var response = SUGARClient.Achievement.Create(achievementRequest);
+
+			return response;
+		}
+
+		#endregion
+	}
 }

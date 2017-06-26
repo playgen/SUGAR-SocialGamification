@@ -3,18 +3,18 @@
 namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
-	/// Encapsulates game details.
+	///     Encapsulates game details.
 	/// </summary>
 	/// <example>
-	/// JSON
-	/// {
-	/// Name : "Game Name"
-	/// }
+	///     JSON
+	///     {
+	///     Name : "Game Name"
+	///     }
 	/// </example>
 	public class GameRequest
-    {
+	{
 		/// <summary>
-		/// The display name for the game.
+		///     The display name for the game.
 		/// </summary>
 		[Required]
 		[StringLength(64)]

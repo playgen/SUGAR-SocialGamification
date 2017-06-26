@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NLog;
 using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Data.Model;
@@ -8,13 +7,13 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class RoleController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
-		private readonly Data.EntityFramework.Controllers.RoleController _roleDbController;
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		private readonly ActorRoleController _actorRoleController;
 
+		private readonly Data.EntityFramework.Controllers.RoleController _roleDbController;
+
 		public RoleController(Data.EntityFramework.Controllers.RoleController roleDbController,
-					ActorRoleController actorRoleController)
+			ActorRoleController actorRoleController)
 		{
 			_roleDbController = roleDbController;
 			_actorRoleController = actorRoleController;

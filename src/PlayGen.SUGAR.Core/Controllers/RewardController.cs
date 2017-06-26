@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class RewardController : CriteriaEvaluator
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		public RewardController(SUGARContextFactory contextFactory,
 			GroupMemberController groupMemberCoreController,
@@ -20,9 +20,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			var evaluationDataController = new EvaluationDataController(ContextFactory, reward.EvaluationDataCategory);
 
-			var evaluationData = new EvaluationData {
+			var evaluationData = new EvaluationData
+			{
 				Key = reward.EvaluationDataKey,
-				GameId = gameId,    //TODO: handle the case where a global achievement has been completed for a specific game
+				GameId = gameId, //TODO: handle the case where a global achievement has been completed for a specific game
 				ActorId = actorId,
 				Category = reward.EvaluationDataCategory,
 				EvaluationDataType = reward.EvaluationDataType,

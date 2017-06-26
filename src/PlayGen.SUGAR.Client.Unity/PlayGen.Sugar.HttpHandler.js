@@ -21,9 +21,9 @@
 
 				var headersObj = {};
 				xhr.getAllResponseHeaders()
-					.split('\n')
+					.split("\n")
 					.forEach(function(pair) {
-						var pairsplit = pair.split(': ');
+						var pairsplit = pair.split(": ");
 						if (pairsplit != "") {
 							headersObj[pairsplit[0]] = pairsplit[1];
 						}
@@ -37,6 +37,6 @@
 			} catch (exception) {
 				return JSON.stringify({ statusCode: 599 });
 			}
-		}
+		};
 	}
 )();

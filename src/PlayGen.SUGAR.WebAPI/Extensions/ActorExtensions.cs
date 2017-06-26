@@ -1,20 +1,24 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Contracts;
 using System.Linq;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class ActorExtensions
 	{
-		public static IEnumerable<ActorResponse> ToActorContractList(this IEnumerable<Actor> actorModels)
+		public static CollectionResponse ToCollectionContract(this IEnumerable<Actor> models)
 		{
-			return actorModels.Select(ToActorContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
+
 		}
 
-		public static ActorResponse ToActorContract(this Actor model)
+		public static ActorResponse ToContract(this Actor model)
 		{
-			return new ActorResponse {
+			return new ActorResponse
+			{
 				Id = model.Id,
 
 				Name = model.Name

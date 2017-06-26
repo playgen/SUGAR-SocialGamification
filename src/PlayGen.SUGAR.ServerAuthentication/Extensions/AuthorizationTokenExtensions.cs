@@ -6,110 +6,103 @@ using PlayGen.SUGAR.ServerAuthentication.Exceptions;
 
 namespace PlayGen.SUGAR.ServerAuthentication.Extensions
 {
-    public static class AuthorizationTokenExtensions
-    {
-        public static long GetClaimLong(this IHeaderDictionary headers, string type)
-        {
-            long value;
+	public static class AuthorizationTokenExtensions
+	{
+		public static long GetClaimLong(this IHeaderDictionary headers, string type)
+		{
+			long value;
 
-            if (TryGetClaim(headers, type, out value))
-            {
-                return value;
-            }
+			if (TryGetClaim(headers, type, out value))
+				return value;
 
-            throw new ClaimNotFoundException($"Couldn't find Claim: {type} of type {value.GetType()}");
-        }
+			throw new ClaimNotFoundException($"Couldn't find Claim: {type} of type {value.GetType()}");
+		}
 
-        public static int GetClaimInt(this IHeaderDictionary headers, string type)
-        {
-            int value;
+		public static int GetClaimInt(this IHeaderDictionary headers, string type)
+		{
+			int value;
 
-            if (TryGetClaim(headers, type, out value))
-            {
-                return value;
-            }
+			if (TryGetClaim(headers, type, out value))
+				return value;
 
-            throw new ClaimNotFoundException($"Couldn't find Claim: {type} of type {value.GetType()}");
-        }
+			throw new ClaimNotFoundException($"Couldn't find Claim: {type} of type {value.GetType()}");
+		}
 
-        public static DateTime GetClaimDateTime(this IHeaderDictionary headers, string type)
-        {
-            DateTime value;
+		public static DateTime GetClaimDateTime(this IHeaderDictionary headers, string type)
+		{
+			DateTime value;
 
-            if (TryGetClaim(headers, type, out value))
-            {
-                return value;
-            }
+			if (TryGetClaim(headers, type, out value))
+				return value;
 
-            throw new ClaimNotFoundException($"Couldn't find Claim: {type} of type {value.GetType()}");
-        }
+			throw new ClaimNotFoundException($"Couldn't find Claim: {type} of type {value.GetType()}");
+		}
 
-        public static bool TryGetClaim(this IHeaderDictionary headers, string type, out long value)
-        {
-            string claimValue;
-            value = default(long);
+		public static bool TryGetClaim(this IHeaderDictionary headers, string type, out long value)
+		{
+			string claimValue;
+			value = default(long);
 
-            if (TryGetClaim(headers, type, ClaimValueTypes.Integer, out claimValue))
-            {
-                value = long.Parse(claimValue);
-                return true;
-            }
+			if (TryGetClaim(headers, type, ClaimValueTypes.Integer, out claimValue))
+			{
+				value = long.Parse(claimValue);
+				return true;
+			}
 
-            return false;
-        }
+			return false;
+		}
 
-        public static bool TryGetClaim(this IHeaderDictionary headers, string type, out int value)
-        {
-            string claimValue;
-            value = default(int);
+		public static bool TryGetClaim(this IHeaderDictionary headers, string type, out int value)
+		{
+			string claimValue;
+			value = default(int);
 
-            if (TryGetClaim(headers, type, ClaimValueTypes.Integer, out claimValue))
-            {
-                value = int.Parse(claimValue);
-                return true;
-            }
+			if (TryGetClaim(headers, type, ClaimValueTypes.Integer, out claimValue))
+			{
+				value = int.Parse(claimValue);
+				return true;
+			}
 
-            return false;
-        }
+			return false;
+		}
 
-        public static bool TryGetClaim(this IHeaderDictionary headers, string type, out DateTime value)
-        {
-            string claimValue;
-            value = default(DateTime);
+		public static bool TryGetClaim(this IHeaderDictionary headers, string type, out DateTime value)
+		{
+			string claimValue;
+			value = default(DateTime);
 
-            if(TryGetClaim(headers, type, ClaimValueTypes.DateTime, out claimValue))
-            {
-                value = DateTime.Parse(claimValue);
-                return true;
-            }
+			if (TryGetClaim(headers, type, ClaimValueTypes.DateTime, out claimValue))
+			{
+				value = DateTime.Parse(claimValue);
+				return true;
+			}
 
-            return false;
-        }
+			return false;
+		}
 
-        private static bool TryGetClaim(this IHeaderDictionary headers, string type, string valueType, out string value)
-        {
-            value = null;
-            var didGetClaim = false;
+		private static bool TryGetClaim(this IHeaderDictionary headers, string type, string valueType, out string value)
+		{
+			value = null;
+			var didGetClaim = false;
 
-            var serializedToken = headers.GetAuthorizationToken();
+			var serializedToken = headers.GetAuthorizationToken();
 
-            if (string.IsNullOrWhiteSpace(serializedToken)) return false;
+			if (string.IsNullOrWhiteSpace(serializedToken))
+				return false;
 
-            var handler = new JwtSecurityTokenHandler();
-            
-            var token = handler.ReadJwtToken(serializedToken);
+			var handler = new JwtSecurityTokenHandler();
 
-            foreach (var claim in token.Claims)
-            {
-                if (claim.Type == type && claim.ValueType == valueType)
-                {
-                    value = claim.Value;
-                    didGetClaim = true;
-                    break;
-                }
-            }
+			var token = handler.ReadJwtToken(serializedToken);
 
-            return didGetClaim;
-        }
-    }
+			foreach (var claim in token.Claims)
+				if (claim.Type == type && claim.ValueType == valueType)
+				{
+					value = claim.Value;
+					didGetClaim = true;
+					break;
+				}
+
+			return didGetClaim;
+		}
+	}
 }

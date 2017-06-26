@@ -11,7 +11,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class ResourceController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly EvaluationDataController _evaluationDataController;
 
@@ -27,20 +27,19 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return results;
 		}
 
-		public EvaluationData Transfer(int? gameId, int? fromActorId, int? toActorId, string key, long transferQuantity, out EvaluationData fromResource)
+		public EvaluationData Transfer(int? gameId, int? fromActorId, int? toActorId, string key, long transferQuantity,
+			out EvaluationData fromResource)
 		{
 			fromResource = GetExistingResource(gameId, fromActorId, key);
 
 			string message;
 			if (!IsTransferValid(long.Parse(fromResource.Value), transferQuantity, out message))
-			{
 				throw new ArgumentException(message);
-			}
 
 			fromResource = AddQuantity(fromResource.Id, -transferQuantity);
 
 			EvaluationData toResource;
-			var foundResources = _evaluationDataController.Get(gameId, toActorId, new[] { fromResource.Key });
+			var foundResources = _evaluationDataController.Get(gameId, toActorId, new[] {fromResource.Key});
 
 			if (foundResources.Any())
 			{
@@ -49,30 +48,30 @@ namespace PlayGen.SUGAR.Core.Controllers
 			}
 			else
 			{
-				toResource = new EvaluationData {
+				toResource = new EvaluationData
+				{
 					GameId = gameId,
 					ActorId = toActorId,
 					Key = fromResource.Key,
 					Value = transferQuantity.ToString(),
 					Category = fromResource.Category,
-					EvaluationDataType = fromResource.EvaluationDataType,
+					EvaluationDataType = fromResource.EvaluationDataType
 				};
 				Create(toResource);
 			}
 
-			Logger.Info($"{fromResource?.Id} -> {toResource?.Id} for GameId: {gameId}, FromActorId: {fromActorId}, ToActorId: {toActorId}, Key: {key}, Quantity: {transferQuantity}");
+			Logger.Info(
+				$"{fromResource?.Id} -> {toResource?.Id} for GameId: {gameId}, FromActorId: {fromActorId}, ToActorId: {toActorId}, Key: {key}, Quantity: {transferQuantity}");
 
 			return toResource;
 		}
 
 		public void Create(EvaluationData data)
 		{
-			var existingEntries = _evaluationDataController.Get(data.GameId, data.ActorId, new[] { data.Key });
+			var existingEntries = _evaluationDataController.Get(data.GameId, data.ActorId, new[] {data.Key});
 
 			if (existingEntries.Any())
-			{
 				throw new DuplicateRecordException();
-			}
 
 			_evaluationDataController.Add(data);
 
@@ -81,7 +80,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public EvaluationData AddQuantity(int resourceId, long addAmount)
 		{
-			var resource = _evaluationDataController.Get(new[] { resourceId }).Single();
+			var resource = _evaluationDataController.Get(new[] {resourceId})
+				.Single();
 
 			var currentValue = long.Parse(resource.Value);
 			resource.Value = (currentValue + addAmount).ToString();
@@ -95,12 +95,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		private EvaluationData GetExistingResource(int? gameId, int? ownerId, string key)
 		{
-			var foundResources = _evaluationDataController.Get(gameId, ownerId, new[] { key });
+			var foundResources = _evaluationDataController.Get(gameId, ownerId, new[] {key});
 
 			if (!foundResources.Any())
-			{
 				throw new MissingRecordException("No resource with the specified ID was found.");
-			}
 
 			var found = foundResources.Single();
 
@@ -114,13 +112,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 			message = string.Empty;
 
 			if (current < transfer)
-			{
 				message = "The quantity to transfer cannot be greater than the quantity available to transfer.";
-			}
 			else if (transfer < 1)
-			{
 				message = "The quantity to transfer cannot be less than one.";
-			}
 
 			var result = message == string.Empty;
 

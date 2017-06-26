@@ -6,6 +6,6 @@
 
 		public string Name { get; set; }
 
-		public abstract Common.ActorType ActorType { get; }
+		public abstract ActorType ActorType { get; }
 	}
 }

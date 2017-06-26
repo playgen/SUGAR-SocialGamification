@@ -15,7 +15,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var claims = context.RoleClaims.Where(rc => id == rc.RoleId).Select(rc => rc.Claim).Distinct().ToList();
+				var claims = context.RoleClaims.Where(rc => id == rc.RoleId)
+					.Select(rc => rc.Claim)
+					.Distinct()
+					.ToList();
 				return claims;
 			}
 		}
@@ -24,7 +27,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var claims = context.RoleClaims.Where(rc => ids.Contains(rc.RoleId)).Select(rc => rc.Claim).Distinct().ToList();
+				var claims = context.RoleClaims.Where(rc => ids.Contains(rc.RoleId))
+					.Select(rc => rc.Claim)
+					.Distinct()
+					.ToList();
 				return claims;
 			}
 		}
@@ -33,7 +39,10 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var roles = context.RoleClaims.Where(rc => id == rc.ClaimId).Select(rc => rc.Role).Distinct().ToList();
+				var roles = context.RoleClaims.Where(rc => id == rc.ClaimId)
+					.Select(rc => rc.Role)
+					.Distinct()
+					.ToList();
 				return roles;
 			}
 		}

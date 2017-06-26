@@ -1,21 +1,23 @@
 ﻿using System;
-using NLog;
-using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
+using NLog;
 using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Core.Exceptions;
+using PlayGen.SUGAR.Data.EntityFramework;
+using PlayGen.SUGAR.Data.Model;
+using InvalidOperationException = PlayGen.SUGAR.Core.Exceptions.InvalidOperationException;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class MatchController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
-		private readonly Data.EntityFramework.Controllers.MatchController _matchDbController;
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		private readonly EvaluationDataController _evaluationDataController;
 
-		public MatchController(SUGARContextFactory contextFactory, Data.EntityFramework.Controllers.MatchController matchDbController)
+		private readonly Data.EntityFramework.Controllers.MatchController _matchDbController;
+
+		public MatchController(SUGARContextFactory contextFactory,
+			Data.EntityFramework.Controllers.MatchController matchDbController)
 		{
 			_matchDbController = matchDbController;
 			_evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.MatchData);
@@ -23,9 +25,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public Match Create(int gameId, int creatorId)
 		{
-			var match = new Match {
+			var match = new Match
+			{
 				GameId = gameId,
-				CreatorId = creatorId,
+				CreatorId = creatorId
 			};
 
 			_matchDbController.Create(match);
@@ -51,10 +54,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 			var match = _matchDbController.Get(matchId);
 
 			if (match.Started == null)
-			{
-				throw new Exceptions.InvalidOperationException($"The match {matchId} hasn't had its Started time set. " +
-															   $"This must be set before setting the Ended time.");
-			}
+				throw new InvalidOperationException($"The match {matchId} hasn't had its Started time set. " +
+													$"This must be set before setting the Ended time.");
 
 			match.Ended = DateTime.UtcNow;
 			match = _matchDbController.Update(match);
@@ -151,9 +152,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 		private static void ValidateData(EvaluationData data)
 		{
 			if (data.MatchId == null)
-			{
-				throw new InvalidDataException("Cannot save Match data with no EntityId. EntityId needs to be set to the match's Id.");
-			}
+				throw new InvalidDataException(
+					"Cannot save Match data with no EntityId. EntityId needs to be set to the match's Id.");
 		}
 	}
 }

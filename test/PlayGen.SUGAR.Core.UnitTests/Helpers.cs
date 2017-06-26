@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Core.Controllers;
-using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
+using PlayGen.SUGAR.Data.Model;
 using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
+using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
@@ -16,16 +16,12 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			var users = ControllerLocator.UserController.Search(name, true);
 
 			if (users.Any())
-			{
 				user = users.ElementAt(0);
-			}
 			else
-			{
 				user = ControllerLocator.UserController.Create(new User
 				{
-					Name = name,
+					Name = name
 				});
-			}
 
 			return user;
 		}
@@ -36,16 +32,13 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			var games = ControllerLocator.GameController.Search(name);
 
 			if (games.Any())
-			{
 				game = games.ElementAt(0);
-			}
 			else
-			{
 				game = ControllerLocator.GameController.Create(new Game
-				{
-					Name = name,
-				}, 1);
-			}
+					{
+						Name = name
+					},
+					1);
 
 			return game;
 		}
@@ -54,7 +47,6 @@ namespace PlayGen.SUGAR.Core.UnitTests
 		{
 			var evaluationCriterias = new List<EvaluationCriteria>();
 			for (var i = 0; i < evaluationCriteriaCount; i++)
-			{
 				evaluationCriterias.Add(new EvaluationCriteria
 				{
 					EvaluationDataKey = $"{key}_{i}",
@@ -64,9 +56,8 @@ namespace PlayGen.SUGAR.Core.UnitTests
 					Scope = CriteriaScope.Actor,
 					Value = "100"
 				});
-			}
 
-			return new Data.Model.Achievement
+			return new Achievement
 			{
 				// Arrange
 				Token = key,
@@ -81,59 +72,63 @@ namespace PlayGen.SUGAR.Core.UnitTests
 			};
 		}
 
-        public static List<EvaluationData> ComposeAchievementGameDatas(int actorId, Evaluation evaluation, string value = "50")
-        {
-            var gameDatas = new List<EvaluationData>();
+		public static List<EvaluationData> ComposeAchievementGameDatas(int actorId, Evaluation evaluation,
+			string value = "50")
+		{
+			var gameDatas = new List<EvaluationData>();
 
-            foreach (var criteria in evaluation.EvaluationCriterias)
-            {
-                gameDatas.Add(ComposeEvaluationData(actorId, criteria, evaluation.GameId, value));
-            }
+			foreach (var criteria in evaluation.EvaluationCriterias)
+				gameDatas.Add(ComposeEvaluationData(actorId, criteria, evaluation.GameId, value));
 
-            return gameDatas;
-        }
+			return gameDatas;
+		}
 
-        public static EvaluationData ComposeEvaluationData(int actorId, EvaluationCriteria evaluationCriteria, int? gameId = null, string value = "50")
+		public static EvaluationData ComposeEvaluationData(int actorId, EvaluationCriteria evaluationCriteria,
+			int? gameId = null, string value = "50")
 		{
 			return new EvaluationData
 			{
-                Key = evaluationCriteria.EvaluationDataKey,
-                EvaluationDataType = evaluationCriteria.EvaluationDataType,
+				Key = evaluationCriteria.EvaluationDataKey,
+				EvaluationDataType = evaluationCriteria.EvaluationDataType,
 
-                ActorId = actorId,
+				ActorId = actorId,
 				GameId = gameId,
 
-                Value = value
+				Value = value
 			};
 		}
 
 		public static Evaluation CreateGenericAchievement(string key, int? gameId = null)
 		{
-		    return ControllerLocator.EvaluationController.Create(ComposeGenericAchievement(key, gameId));
+			return ControllerLocator.EvaluationController.Create(ComposeGenericAchievement(key, gameId));
 		}
 
-        public static void CreateGenericAchievementGameData(Evaluation evaluation, int actorId, string value = "50")
-        {
-            var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, value);
-            
-            var evaluationDataController = new EvaluationDataController(DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].EvaluationDataCategory);
-            evaluationDataController.Add(gameDatas.ToArray());
-        }
-
-        public static void CompleteGenericAchievement(Evaluation evaluation, int actorId)
+		public static void CreateGenericAchievementGameData(Evaluation evaluation, int actorId, string value = "50")
 		{
-		    var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, "100");
+			var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, value);
 
-            var evaluationDataController = new EvaluationDataController(DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].EvaluationDataCategory);
-            evaluationDataController.Add(gameDatas.ToArray());
-        }
+			var evaluationDataController = new EvaluationDataController(DbControllerLocator.ContextFactory,
+				evaluation.EvaluationCriterias[0]
+					.EvaluationDataCategory);
+			evaluationDataController.Add(gameDatas.ToArray());
+		}
 
-	    public static Evaluation CreateAndCompleteGenericAchievement(string key, int actorId, int? gameId = null)
-	    {
-	        var evaluation = CreateGenericAchievement(key, gameId);
-	        CompleteGenericAchievement(evaluation, actorId);
+		public static void CompleteGenericAchievement(Evaluation evaluation, int actorId)
+		{
+			var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, "100");
 
-	        return evaluation;
-	    }
+			var evaluationDataController = new EvaluationDataController(DbControllerLocator.ContextFactory,
+				evaluation.EvaluationCriterias[0]
+					.EvaluationDataCategory);
+			evaluationDataController.Add(gameDatas.ToArray());
+		}
+
+		public static Evaluation CreateAndCompleteGenericAchievement(string key, int actorId, int? gameId = null)
+		{
+			var evaluation = CreateGenericAchievement(key, gameId);
+			CompleteGenericAchievement(evaluation, actorId);
+
+			return evaluation;
+		}
 	}
 }

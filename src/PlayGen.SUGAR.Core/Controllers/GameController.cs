@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Permissions;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using NLog;
+using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class GameController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-		public static event Action<int> GameDeletedEvent;
-
-		private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		private readonly ActorClaimController _actorClaimController;
 		private readonly ActorRoleController _actorRoleController;
 
+		private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
+
 		public GameController(Data.EntityFramework.Controllers.GameController gameDbController,
-					ActorClaimController actorClaimController,
-					ActorRoleController actorRoleController)
+			ActorClaimController actorClaimController,
+			ActorRoleController actorRoleController)
 		{
 			_gameDbController = gameDbController;
 			_actorClaimController = actorClaimController;
 			_actorRoleController = actorRoleController;
 		}
+
+		public static event Action<int> GameDeletedEvent;
 
 		public List<Game> Get()
 		{
@@ -37,8 +38,11 @@ namespace PlayGen.SUGAR.Core.Controllers
 		public List<Game> GetByPermissions(int actorId)
 		{
 			var games = Get();
-			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Game).Select(p => p.EntityId).ToList();
-			games = games.Where(g => permissions.Contains(g.Id)).ToList();
+			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Game)
+				.Select(p => p.EntityId)
+				.ToList();
+			games = games.Where(g => permissions.Contains(g.Id))
+				.ToList();
 
 			Logger.Info($"Got: {games?.Count} Games, for ActorId: {actorId}");
 

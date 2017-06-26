@@ -1,7 +1,9 @@
-﻿namespace PlayGen.SUGAR.Data.Model
+﻿using PlayGen.SUGAR.Common;
+
+namespace PlayGen.SUGAR.Data.Model
 {
 	public class Skill : Evaluation
-    {
-        public override Common.EvaluationType EvaluationType => Common.EvaluationType.Skill;
-    }
+	{
+		public override EvaluationType EvaluationType => EvaluationType.Skill;
+	}
 }

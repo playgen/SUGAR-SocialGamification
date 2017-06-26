@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-
-using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.Model;
 
@@ -13,11 +10,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		public static RoleResponse ToContract(this Role roleModel)
 		{
 			if (roleModel == null)
-			{
 				return null;
-			}
 
-			return new RoleResponse {
+			return new RoleResponse
+			{
 				Id = roleModel.Id,
 				Name = roleModel.Name,
 				Default = roleModel.Default,
@@ -25,19 +21,21 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static IEnumerable<RoleResponse> ToContractList(this IEnumerable<Role> roleModels)
+		public static CollectionResponse ToCollectionContract(this IEnumerable<Role> models)
 		{
-			return roleModels.Select(ToContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
 		}
 
 		public static Role ToModel(this RoleRequest roleContract)
 		{
-			return new Role {
+			return new Role
+			{
 				Name = roleContract.Name,
 				ClaimScope = roleContract.ClaimScope,
 				Default = false
 			};
 		}
-
 	}
 }

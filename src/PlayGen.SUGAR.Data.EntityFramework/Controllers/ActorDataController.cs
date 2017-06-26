@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using System.Linq;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -62,9 +62,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 					.Find(context, updatedData.Id);
 
 				if (existingData == null)
-				{
 					throw new MissingRecordException("Cannot find the object to update.");
-				}
 
 				existingData.Value = updatedData.Value;
 

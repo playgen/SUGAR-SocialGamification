@@ -1,47 +1,43 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using PlayGen.SUGAR.Common.Permissions;
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
+using PlayGen.SUGAR.Common.Permissions;
 
 namespace PlayGen.SUGAR.Authorization
 {
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-    public class AuthorizationAttribute : ActionFilterAttribute
-    {
-        public ClaimScope ClaimScope { get; set; }
+	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+	public class AuthorizationAttribute : ActionFilterAttribute
+	{
+		public AuthorizationAttribute(ClaimScope scope, string action, string type)
+		{
+			ClaimScope = scope;
+			Name = string.Concat(action, type);
+		}
 
-        public string Name { get; set; }
+		public ClaimScope ClaimScope { get; set; }
 
-        public AuthorizationAttribute(ClaimScope scope, string action, string type)
-        {
-            ClaimScope = scope;
-            Name = string.Concat(action, type);
-        }
+		public string Name { get; set; }
 
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            if (context.HttpContext.Items.Count > 0)
-            {
-                return;
-            }
-            var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
+		public override void OnActionExecuting(ActionExecutingContext context)
+		{
+			if (context.HttpContext.Items.Count > 0)
+				return;
+			var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
 
-            var customAtt = actionDescriptor?.MethodInfo.GetCustomAttributes(typeof(AuthorizationAttribute), false) as AuthorizationAttribute[];
-            if (customAtt != null && customAtt.Length > 0)
-            {
-                if (customAtt.Length == 1)
-                {
-                    context.HttpContext.Items.Add("Requirements", new AuthorizationRequirement(customAtt[0].ClaimScope, customAtt[0].Name));
-                }
-                else
-                {
-                    foreach (var att in customAtt)
-                    {
-                        context.HttpContext.Items.Add(att.ClaimScope + "Requirements", new AuthorizationRequirement(att.ClaimScope, att.Name));
-                    }
-                }
-            }
-        }
-    }
+			var customAtt =
+				actionDescriptor?.MethodInfo.GetCustomAttributes(typeof(AuthorizationAttribute), false) as AuthorizationAttribute[];
+			if (customAtt != null && customAtt.Length > 0)
+				if (customAtt.Length == 1)
+					context.HttpContext.Items.Add("Requirements",
+						new AuthorizationRequirement(customAtt[0]
+								.ClaimScope,
+							customAtt[0]
+								.Name));
+				else
+					foreach (var att in customAtt)
+						context.HttpContext.Items.Add(att.ClaimScope + "Requirements",
+							new AuthorizationRequirement(att.ClaimScope, att.Name));
+		}
+	}
 }

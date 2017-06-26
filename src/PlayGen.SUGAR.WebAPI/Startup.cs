@@ -4,24 +4,23 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NLog;
 using PlayGen.SUGAR.Core.Utilities;
 using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.WebAPI.Filters;
-using Microsoft.IdentityModel.Tokens;
 using PlayGen.SUGAR.ServerAuthentication.Filters;
+using PlayGen.SUGAR.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.WebAPI
 {
 	public partial class Startup
 	{
+		private const string TokenAudience = "User";
+		private const string TokenIssuer = "SUGAR";
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
-		const string TokenAudience = "User";
-		const string TokenIssuer = "SUGAR";
 		private SymmetricSecurityKey key;
 		private TokenAuthOptions tokenOptions;
 
@@ -31,6 +30,7 @@ namespace PlayGen.SUGAR.WebAPI
 			//AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
 			#region Logging
+
 			ConfigureNLog(env);
 
 			Logger.Debug("ContentRootPath: {0}", env.ContentRootPath);
@@ -40,15 +40,12 @@ namespace PlayGen.SUGAR.WebAPI
 
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
-				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+				.AddJsonFile("appsettings.json", true, true)
+				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
 
 
 			if (env.IsEnvironment("Development"))
-			{
-				// This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-				builder.AddApplicationInsightsSettings(developerMode: true);
-			}
+				builder.AddApplicationInsightsSettings(true);
 
 			builder.AddEnvironmentVariables();
 
@@ -68,24 +65,25 @@ namespace PlayGen.SUGAR.WebAPI
 			var timeoutCheckInterval = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TimeoutCheckInterval"]);
 			var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
 
-			services.AddScoped((_) => new PasswordEncryption());
+			services.AddScoped(_ => new PasswordEncryption());
 			services.AddApplicationInsightsTelemetry(Configuration);
 
 			// Add framework services.
 			services.AddMvc(options =>
-			{
-				options.Filters.Add(new ModelValidationFilter());
-				options.Filters.Add(new ExceptionFilter());
-				options.Filters.Add(typeof(WrapResponseFilter));
-				options.Filters.Add(typeof(TokenReissueFilter));
-				options.Filters.Add(typeof(SessionFilter));
-			})
-			.AddJsonOptions(json =>
-			{
-				json.SerializerSettings.Converters.Add(new StringEnumConverter());
-				json.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-				json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-			});
+				{
+					options.Filters.Add(new ModelValidationFilter());
+					options.Filters.Add(new ExceptionFilter());
+					options.Filters.Add(typeof(WrapResponseFilter));
+					options.Filters.Add(typeof(TokenReissueFilter));
+					options.Filters.Add(typeof(SessionFilter));
+				})
+				.AddJsonOptions(json =>
+				{
+					json.SerializerSettings.Converters.Add(new StringEnumConverter());
+					json.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+					json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+					json.SerializerSettings.TypeNameHandling = TypeNameHandling.Objects;
+				});
 
 			ConfigureDbContextFactory(services);
 			ConfigureDbControllers(services);

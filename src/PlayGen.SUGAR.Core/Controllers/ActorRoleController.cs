@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Permissions;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using NLog;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class ActorRoleController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
 		private readonly Data.EntityFramework.Controllers.RoleController _roleController;
 
 		public ActorRoleController(Data.EntityFramework.Controllers.ActorRoleController actorRoleDbController,
-					Data.EntityFramework.Controllers.RoleController roleController)
+			Data.EntityFramework.Controllers.RoleController roleController)
 		{
 			_actorRoleDbController = actorRoleDbController;
 			_roleController = roleController;
@@ -41,7 +41,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public List<Role> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope)
 		{
-			var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId.Value, scope, true).Select(ar => ar.Role).ToList();
+			var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId.Value, scope, true)
+				.Select(ar => ar.Role)
+				.ToList();
 
 			Logger.Info($"{roles?.Count} Roles for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
 
@@ -59,13 +61,14 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		public List<Role> GetControlled(int actorId)
 		{
-			var actorRoles = _actorRoleDbController.GetActorRoles(actorId, true).ToList();
-			var controlledRoles = actorRoles.Where(ar => ar.Role.ClaimScope == ClaimScope.Role).ToList();
+			var actorRoles = _actorRoleDbController.GetActorRoles(actorId, true)
+				.ToList();
+			var controlledRoles = actorRoles.Where(ar => ar.Role.ClaimScope == ClaimScope.Role)
+				.ToList();
 			if (controlledRoles.Any(ar => ar.EntityId.Value == -1))
-			{
 				return _roleController.Get();
-			}
-			var roles = controlledRoles.Select(cr => _roleController.Get(cr.EntityId.Value)).ToList();
+			var roles = controlledRoles.Select(cr => _roleController.Get(cr.EntityId.Value))
+				.ToList();
 
 			Logger.Info($"{roles?.Count} Roles for ActorId: {actorId}");
 
@@ -88,9 +91,12 @@ namespace PlayGen.SUGAR.Core.Controllers
 			Logger.Info($"RoleName: {roleName}, ActorId: {actorId}, EntityId: {entityId}");
 
 			if (role != null)
-			{
-				Create(new ActorRole { ActorId = actorId, RoleId = role.Id, EntityId = entityId.Value });
-			}
+				Create(new ActorRole
+				{
+					ActorId = actorId,
+					RoleId = role.Id,
+					EntityId = entityId.Value
+				});
 		}
 
 		public void Delete(int id)

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Contracts;
@@ -12,106 +11,130 @@ using PlayGen.SUGAR.WebAPI.Extensions;
 namespace PlayGen.SUGAR.WebAPI.Controllers
 {
 	/// <summary>
-	/// Web Controller that facilitates UserData specific operations.
+	///     Web Controller that facilitates UserData specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-    [Authorize("Bearer")]
-    [ValidateSession]
-    public class ResourceController : Controller
+	[Authorize("Bearer")]
+	[ValidateSession]
+	public class ResourceController : Controller
 	{
-        private readonly IAuthorizationService _authorizationService;
-        private readonly Core.Controllers.ResourceController _resourceController;
+		private readonly IAuthorizationService _authorizationService;
+		private readonly Core.Controllers.ResourceController _resourceController;
 
 		public ResourceController(Core.Controllers.ResourceController resourceController,
-                    IAuthorizationService authorizationService)
+			IAuthorizationService authorizationService)
 		{
 			_resourceController = resourceController;
-            _authorizationService = authorizationService;
-        }
+			_authorizationService = authorizationService;
+		}
 
 		/// <summary>
-		/// Find a list of all Resources filtered by the <param name="actorId"/>, <param name="gameId"/> and <param name="keys"/> provided.
-		/// 
-		/// Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
+		///     Find a list of all Resources filtered by the
+		///     <param name="actorId" />
+		///     ,
+		///     <param name="gameId" />
+		///     and
+		///     <param name="keys" />
+		///     provided.
+		///     Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
 		/// </summary>
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="keys">Optional array of Key names to filter results by.</param>
-		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
+		/// <returns>A list of <see cref="ResourceResponse" /> which match the search criteria.</returns>
 		[HttpGet]
-        //[ResponseType(typeof(IEnumerable<ResourceResponse>))]
-        public IActionResult Get(int? gameId, int? actorId, string[] keys)
+		//[ResponseType(typeof(IEnumerable<ResourceResponse>))]
+		public IActionResult Get(int? gameId, int? actorId, string[] keys)
 		{
-			var resource = _resourceController.Get(gameId, actorId, keys.Any() ? keys : null);
-			var resourceContract = resource.ToResourceContractList();
+			var resource = _resourceController.Get(gameId,
+				actorId,
+				keys.Any()
+					? keys
+					: null);
+			var resourceContract = ResourceExtensions.ToCollectionContract(resource);
 			return new ObjectResult(resourceContract);
 		}
 
 		/// <summary>
-		/// Creates or updates a Resource record.
-		/// 
-		/// Example Usage: POST api/resource
+		///     Creates or updates a Resource record.
+		///     Example Usage: POST api/resource
 		/// </summary>
-		/// <param name="resourceRequest"><see cref="ResourceAddRequest"/> object that holds the details of the ResourceData.</param>
-		/// <returns>A <see cref="ResourceResponse"/> containing the new Resource details.</returns>
+		/// <param name="resourceRequest"><see cref="ResourceAddRequest" /> object that holds the details of the ResourceData.</param>
+		/// <returns>A <see cref="ResourceResponse" /> containing the new Resource details.</returns>
 		[HttpPost]
 		//[ResponseType(typeof(ResourceResponse))]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Resource)]
-        public IActionResult AddOrUpdate([FromBody]ResourceAddRequest resourceRequest)
+		[Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Resource)]
+		public IActionResult AddOrUpdate([FromBody] ResourceAddRequest resourceRequest)
 		{
-            if (_authorizationService.AuthorizeAsync(User, resourceRequest.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var resource = resourceRequest.ToModel();
-                var resources = _resourceController.Get(resourceRequest.GameId, resourceRequest.ActorId, new[] { resourceRequest.Key });
-                if (resources.Any())
-                {
-                    var firstResource = resources.Single();
-                    _resourceController.AddQuantity(firstResource.Id, resourceRequest.Quantity);
-                }
-                else
-                {
+			if (_authorizationService.AuthorizeAsync(User,
+					resourceRequest.GameId,
+					(AuthorizationRequirement) HttpContext.Items["Requirements"])
+				.Result)
+			{
+				var resource = resourceRequest.ToModel();
+				var resources = _resourceController.Get(resourceRequest.GameId,
+					resourceRequest.ActorId,
+					new[] {resourceRequest.Key});
+				if (resources.Any())
+				{
+					var firstResource = resources.Single();
+					_resourceController.AddQuantity(firstResource.Id, resourceRequest.Quantity);
+				}
+				else
+				{
+					_resourceController.Create(resource);
+				}
 
-                    _resourceController.Create(resource);
-
-                }
-
-                var resourceContract = resource.ToResourceContract();
-                return new ObjectResult(resourceContract);
-            }
-            return Forbid();
-        }
+				var resourceContract = ResourceExtensions.ToContract(resource);
+				return new ObjectResult(resourceContract);
+			}
+			return Forbid();
+		}
 
 		/// <summary>
-		/// Transfers a quantity of a specific resource.
-		/// 
-		/// Example Usage: Post api/resource/transfer
+		///     Transfers a quantity of a specific resource.
+		///     Example Usage: Post api/resource/transfer
 		/// </summary>
-		/// <param name="transferRequest"><see cref="ResourceTransferRequest"/> object that holds the details of the resoruce transfer.</param>
-		/// <returns>A <see cref="ResourceTransferResponse"/> containing the modified resources.</returns>
+		/// <param name="transferRequest">
+		///     <see cref="ResourceTransferRequest" /> object that holds the details of the resoruce
+		///     transfer.
+		/// </param>
+		/// <returns>A <see cref="ResourceTransferResponse" /> containing the modified resources.</returns>
 		[HttpPost("transfer")]
 		//[ResponseType(typeof(ResourceTransferResponse))]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Resource)]
-        [Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.Resource)]
-        public IActionResult Transfer([FromBody] ResourceTransferRequest transferRequest)
+		[Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Resource)]
+		[Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.Resource)]
+		public IActionResult Transfer([FromBody] ResourceTransferRequest transferRequest)
 		{
-            if (_authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-                _authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)
-            {
-                EvaluationData fromResource;
+			if (_authorizationService.AuthorizeAsync(User,
+						transferRequest.SenderActorId,
+						(AuthorizationRequirement) HttpContext.Items["GroupRequirements"])
+					.Result ||
+				_authorizationService.AuthorizeAsync(User,
+						transferRequest.SenderActorId,
+						(AuthorizationRequirement) HttpContext.Items["UserRequirements"])
+					.Result)
+			{
+				EvaluationData fromResource;
 
-                var toResource = _resourceController.Transfer(transferRequest.GameId, transferRequest.SenderActorId, transferRequest.RecipientActorId, transferRequest.Key, transferRequest.Quantity, out fromResource);
+				var toResource = _resourceController.Transfer(transferRequest.GameId,
+					transferRequest.SenderActorId,
+					transferRequest.RecipientActorId,
+					transferRequest.Key,
+					transferRequest.Quantity,
+					out fromResource);
 
-                var resourceTransferRespone = new ResourceTransferResponse
-                {
-                    FromResource = fromResource.ToResourceContract(),
-                    ToResource = toResource.ToResourceContract(),
-                };
+				var resourceTransferRespone = new ResourceTransferResponse
+				{
+					FromResource = ResourceExtensions.ToContract(fromResource),
+					ToResource = ResourceExtensions.ToContract(toResource)
+				};
 
-                return new ObjectResult(resourceTransferRespone);
-            }
-            return Forbid();
-        }
+				return new ObjectResult(resourceTransferRespone);
+			}
+			return Forbid();
+		}
 	}
 }

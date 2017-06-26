@@ -5,14 +5,14 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class ActorController
 	{
-		public static event Action<int> ActorDeletedEvent;
-
 		private readonly Data.EntityFramework.Controllers.ActorController _actorDbController;
 
 		public ActorController(Data.EntityFramework.Controllers.ActorController actorDbController)
 		{
 			_actorDbController = actorDbController;
 		}
+
+		public static event Action<int> ActorDeletedEvent;
 
 		protected void TriggerDeletedEvent(int actorId)
 		{

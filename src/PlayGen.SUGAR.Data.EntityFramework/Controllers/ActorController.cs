@@ -45,7 +45,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var actors = context.Actors.Where(a => id.Contains(a.Id)).ToList();
+				var actors = context.Actors.Where(a => id.Contains(a.Id))
+					.ToList();
 
 				context.Actors.RemoveRange(actors);
 				SaveChanges(context);

@@ -1,20 +1,22 @@
-﻿namespace PlayGen.SUGAR.Contracts
+﻿using PlayGen.SUGAR.Common;
+
+namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
-	/// Encapsulates the reward given for completing an achievement or skill.
+	///     Encapsulates the reward given for completing an achievement or skill.
 	/// </summary>
 	/// <example>
-	/// JSON
-	/// {
-	/// Key : "Reward Key",
-	/// DataType : "Float",
-	/// Value : "10.5"
-	/// }
+	///     JSON
+	///     {
+	///     Key : "Reward Key",
+	///     DataType : "Float",
+	///     Value : "10.5"
+	///     }
 	/// </example>
-	public class RewardUpdateRequest : Common.Reward
+	public class RewardUpdateRequest : Reward
 	{
 		/// <summary>
-		/// The unqiue identifier for this type.
+		///     The unqiue identifier for this type.
 		/// </summary>
 		public int Id { get; set; }
 

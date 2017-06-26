@@ -7,181 +7,182 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
-    [Collection("Project Fixture Collection")]
-    public class SessionTrackerTests
-    {
-        private TimeSpan DefaultTimeoutCheckInterval => new TimeSpan(0, 10, 0);
+	[Collection("Project Fixture Collection")]
+	public class SessionTrackerTests
+	{
+		private TimeSpan DefaultTimeoutCheckInterval => new TimeSpan(0, 10, 0);
 
-        /// <summary>
-        /// Is game id/user combination added and retrievable on session started
-        /// </summary>
-        [Fact]
-        public void CanStartSession()
-        {
-            // Arrange
-            var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
-            var game = Helpers.GetOrCreateGame("CanStartSession");
+		/// <summary>
+		///     Is game id/user combination removed and not retrievable on session ended
+		/// </summary>
+		[Fact]
+		public void CanEndSession()
+		{
+			// Arrange
+			var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
+			var game = Helpers.GetOrCreateGame("CanEndSession");
 
-            var user = Helpers.GetOrCreateUser($"CanStartSession");
+			var user = Helpers.GetOrCreateUser($"CanEndSession");
+			var session = sessionTracker.StartSession(game.Id, user.Id);
 
-            // Act
-            var session = sessionTracker.StartSession(game.Id, user.Id);
+			// Act
+			sessionTracker.EndSession(session.Id);
 
-            // Assert
-            Assert.True(sessionTracker.IsActive(session.Id));
-        }
+			// Assert
+			Assert.False(sessionTracker.IsActive(session.Id));
+		}
 
-        /// <summary>
-        /// Is game id/user combination removed and not retrievable on session ended
-        /// </summary>
-        [Fact]
-        public void CanEndSession()
-        {
-            // Arrange
-            var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
-            var game = Helpers.GetOrCreateGame("CanEndSession");
+		/// <summary>
+		///     Make sure timed out sessions are removed while active ones are kept
+		/// </summary>
+		[Fact]
+		public void CanRemoveTimedOut()
+		{
+			// Arrange
+			var timeoutSeconds = 5;
+			var inactiveSessions = new List<Session>();
+			var activeSessions = new List<Session>();
 
-            var user = Helpers.GetOrCreateUser($"CanEndSession");
-            var session = sessionTracker.StartSession(game.Id, user.Id);
-            
-            // Act
-            sessionTracker.EndSession(session.Id);
+			var sessionTracker = new SessionTracker(new TimeSpan(0, 0, 0, timeoutSeconds), DefaultTimeoutCheckInterval);
+			var game = Helpers.GetOrCreateGame("CanRemoveTimedOut");
 
-            // Assert
-            Assert.False(sessionTracker.IsActive(session.Id));
-        }
-      
-        /// <summary>
-        /// Are the sessions removed for actors that have been removed via the core controller
-        /// </summary>
-        [Fact]
-        public void SessionRemovedOnActorRemoved()
-        {
-            // Arrange
-            var activeSessions = new List<Session>();
+			for (var i = 0; i < 5; i++)
+			{
+				var user = Helpers.GetOrCreateUser($"CanRemoveTimedOut_ShouldRemove_{i}");
+				var session = sessionTracker.StartSession(game.Id, user.Id);
+				inactiveSessions.Add(session);
+			}
 
-            var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
-            var game = Helpers.GetOrCreateGame("SessionRemovedOnActorRemoved");
+			Thread.Sleep(timeoutSeconds * 1000);
 
-            var removeUser = Helpers.GetOrCreateUser($"SessionRemovedOnActorRemoved_ShouldRemove");
-            var removeSession = sessionTracker.StartSession(game.Id, removeUser.Id);
+			for (var i = 0; i < 5; i++)
+			{
+				var user = Helpers.GetOrCreateUser($"CanRemoveTimedOut_ShouldNotRemove_{i}");
+				var session = sessionTracker.StartSession(game.Id, user.Id);
+				activeSessions.Add(session);
+			}
 
-            for (var i = 0; i < 5; i++)
-            {
-                var user = Helpers.GetOrCreateUser($"SessionRemovedOnActorRemoved_ShouldNotRemove_{i}");
-                var session = sessionTracker.StartSession(game.Id, user.Id);
-                activeSessions.Add(session);
-            }
+			// Act
+			sessionTracker
+				.GetType()
+				.GetMethod("RemoveTimedOut", BindingFlags.Instance | BindingFlags.NonPublic)
+				.Invoke(sessionTracker, null);
 
-            // Act
-            ControllerLocator.UserController.Delete(removeUser.Id);
+			// Assert
+			inactiveSessions.ForEach(s => Assert.False(sessionTracker.IsActive(s.Id)));
 
-            // Assert
-            Assert.False(sessionTracker.IsActive(removeSession.Id));
+			activeSessions.ForEach(s => Assert.True(sessionTracker.IsActive(s.Id)));
+		}
 
-            activeSessions.ForEach(s => Assert.True(sessionTracker.IsActive(s.Id)));
-        }
-        
-        /// <summary>
-        /// Are the sessions removed for actors in a game that has been removed via the core controller
-        /// </summary>
-        [Fact]
-        public void SessionRemovedOnGameRemoved()
-        {
-            // Arrange
-            var inactiveSessions = new List<Session>();
-            var activeSessions = new List<Session>();
+		/// <summary>
+		///     Is game id/user combination added and retrievable on session started
+		/// </summary>
+		[Fact]
+		public void CanStartSession()
+		{
+			// Arrange
+			var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
+			var game = Helpers.GetOrCreateGame("CanStartSession");
 
-            var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
-            var removeGame = Helpers.GetOrCreateGame("SessionRemovedOnGameRemoved_Remove");
-            var keepGame = Helpers.GetOrCreateGame("SessionRemovedOnGameRemoved_Keep");
+			var user = Helpers.GetOrCreateUser($"CanStartSession");
 
-            for (var i = 0; i < 5; i++)
-            {
-                var user = Helpers.GetOrCreateUser($"SessionRemovedOnGameRemoved_ShouldRemove_{i}");
-                var session = sessionTracker.StartSession(removeGame.Id, user.Id);
-                inactiveSessions.Add(session);
-            }
+			// Act
+			var session = sessionTracker.StartSession(game.Id, user.Id);
 
-            for (var i = 0; i < 5; i++)
-            {
-                var user = Helpers.GetOrCreateUser($"SessionRemovedOnGameRemoved_ShouldNotRemove_{i}");
-                var session = sessionTracker.StartSession(keepGame.Id, user.Id);
-                activeSessions.Add(session);
-            }
+			// Assert
+			Assert.True(sessionTracker.IsActive(session.Id));
+		}
 
-            // Act
-            ControllerLocator.GameController.Delete(removeGame.Id);
+		[Fact]
+		public void InactiveGetRemoved()
+		{
+			// Arrange
+			var timeoutMilliseconds = 100;
+			var game = Helpers.GetOrCreateGame("InactiveGetRemoved");
+			var sessions = new List<Session>();
+			var sessionTracker = new SessionTracker(new TimeSpan(0, 0, 0, 0, timeoutMilliseconds),
+				new TimeSpan(0, 0, 0, 0, timeoutMilliseconds));
 
-            // Assert
-            inactiveSessions.ForEach(s => Assert.False(sessionTracker.IsActive(s.Id)));
+			for (var i = 0; i < 100; i++)
+			{
+				var user = Helpers.GetOrCreateUser($"CanRemoveTimedOut_ShouldRemove_{i}");
+				var session = sessionTracker.StartSession(game.Id, user.Id);
+				sessions.Add(session);
+			}
 
-            activeSessions.ForEach(s => Assert.True(sessionTracker.IsActive(s.Id)));
-        }
+			// Act
+			Thread.Sleep(timeoutMilliseconds * 2);
 
-        /// <summary>
-        /// Make sure timed out sessions are removed while active ones are kept
-        /// </summary>
-        [Fact]
-        public void CanRemoveTimedOut()
-        {
-            // Arrange
-            var timeoutSeconds = 5;
-            var inactiveSessions = new List<Session>();
-            var activeSessions = new List<Session>();
+			// Assert
+			sessions.ForEach(s => Assert.False(sessionTracker.IsActive(s.Id)));
+		}
 
-            var sessionTracker = new SessionTracker(new TimeSpan(0, 0, 0, timeoutSeconds), DefaultTimeoutCheckInterval);
-            var game = Helpers.GetOrCreateGame("CanRemoveTimedOut");
+		/// <summary>
+		///     Are the sessions removed for actors that have been removed via the core controller
+		/// </summary>
+		[Fact]
+		public void SessionRemovedOnActorRemoved()
+		{
+			// Arrange
+			var activeSessions = new List<Session>();
 
-            for (var i = 0; i < 5; i++)
-            {
-                var user = Helpers.GetOrCreateUser($"CanRemoveTimedOut_ShouldRemove_{i}");
-                var session = sessionTracker.StartSession(game.Id, user.Id);
-                inactiveSessions.Add(session);
-            }
+			var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
+			var game = Helpers.GetOrCreateGame("SessionRemovedOnActorRemoved");
 
-            Thread.Sleep(timeoutSeconds * 1000);
+			var removeUser = Helpers.GetOrCreateUser($"SessionRemovedOnActorRemoved_ShouldRemove");
+			var removeSession = sessionTracker.StartSession(game.Id, removeUser.Id);
 
-            for (var i = 0; i < 5; i++)
-            {
-                var user = Helpers.GetOrCreateUser($"CanRemoveTimedOut_ShouldNotRemove_{i}");
-                var session = sessionTracker.StartSession(game.Id, user.Id);
-                activeSessions.Add(session);
-            }
+			for (var i = 0; i < 5; i++)
+			{
+				var user = Helpers.GetOrCreateUser($"SessionRemovedOnActorRemoved_ShouldNotRemove_{i}");
+				var session = sessionTracker.StartSession(game.Id, user.Id);
+				activeSessions.Add(session);
+			}
 
-            // Act
-            sessionTracker
-                .GetType()
-                .GetMethod("RemoveTimedOut", BindingFlags.Instance | BindingFlags.NonPublic)
-                .Invoke(sessionTracker, null);
+			// Act
+			ControllerLocator.UserController.Delete(removeUser.Id);
 
-            // Assert
-            inactiveSessions.ForEach(s => Assert.False(sessionTracker.IsActive(s.Id)));
+			// Assert
+			Assert.False(sessionTracker.IsActive(removeSession.Id));
 
-            activeSessions.ForEach(s => Assert.True(sessionTracker.IsActive(s.Id)));
-        }
+			activeSessions.ForEach(s => Assert.True(sessionTracker.IsActive(s.Id)));
+		}
 
-        [Fact]
-        public void InactiveGetRemoved()
-        {
-            // Arrange
-            var timeoutMilliseconds = 100;
-            var game = Helpers.GetOrCreateGame("InactiveGetRemoved");
-            var sessions = new List<Session>();
-            var sessionTracker = new SessionTracker(new TimeSpan(0, 0, 0, 0, timeoutMilliseconds), new TimeSpan(0, 0, 0, 0, timeoutMilliseconds));
+		/// <summary>
+		///     Are the sessions removed for actors in a game that has been removed via the core controller
+		/// </summary>
+		[Fact]
+		public void SessionRemovedOnGameRemoved()
+		{
+			// Arrange
+			var inactiveSessions = new List<Session>();
+			var activeSessions = new List<Session>();
 
-            for (var i = 0; i < 100; i++)
-            {
-                var user = Helpers.GetOrCreateUser($"CanRemoveTimedOut_ShouldRemove_{i}");
-                var session = sessionTracker.StartSession(game.Id, user.Id);
-                sessions.Add(session);
-            }
+			var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
+			var removeGame = Helpers.GetOrCreateGame("SessionRemovedOnGameRemoved_Remove");
+			var keepGame = Helpers.GetOrCreateGame("SessionRemovedOnGameRemoved_Keep");
 
-            // Act
-            Thread.Sleep(timeoutMilliseconds * 2);
+			for (var i = 0; i < 5; i++)
+			{
+				var user = Helpers.GetOrCreateUser($"SessionRemovedOnGameRemoved_ShouldRemove_{i}");
+				var session = sessionTracker.StartSession(removeGame.Id, user.Id);
+				inactiveSessions.Add(session);
+			}
 
-            // Assert
-            sessions.ForEach(s => Assert.False(sessionTracker.IsActive(s.Id)));
-        }
-    }
+			for (var i = 0; i < 5; i++)
+			{
+				var user = Helpers.GetOrCreateUser($"SessionRemovedOnGameRemoved_ShouldNotRemove_{i}");
+				var session = sessionTracker.StartSession(keepGame.Id, user.Id);
+				activeSessions.Add(session);
+			}
+
+			// Act
+			ControllerLocator.GameController.Delete(removeGame.Id);
+
+			// Assert
+			inactiveSessions.ForEach(s => Assert.False(sessionTracker.IsActive(s.Id)));
+
+			activeSessions.ForEach(s => Assert.True(sessionTracker.IsActive(s.Id)));
+		}
+	}
 }

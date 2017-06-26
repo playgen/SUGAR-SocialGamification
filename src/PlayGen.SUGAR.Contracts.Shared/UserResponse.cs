@@ -1,17 +1,16 @@
 ﻿namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
-	/// Encapsulates user details from the server.
+	///     Encapsulates user details from the server.
 	/// </summary>
 	/// <example>
-	/// JSON
-	/// {
-	/// Id : 1,
-	/// Name : "Actor Name"
-	/// }
+	///     JSON
+	///     {
+	///     Id : 1,
+	///     Name : "Actor Name"
+	///     }
 	/// </example>
-	public class UserResponse : ActorResponse
+	public class UserResponse : ActorResponse, IResponse
 	{
-		
 	}
 }

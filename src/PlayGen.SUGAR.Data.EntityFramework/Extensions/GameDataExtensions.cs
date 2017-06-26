@@ -13,30 +13,30 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return context.EvaluationData.Where(data => data.Category == category);
 		}
 
-		public static IQueryable<EvaluationData> FilterByIds(this IQueryable<EvaluationData> gameDataQueryable, ICollection<int> ids)
+		public static IQueryable<EvaluationData> FilterByIds(this IQueryable<EvaluationData> gameDataQueryable,
+			ICollection<int> ids)
 		{
 			return gameDataQueryable.Where(data => ids.Contains(data.Id));
 		}
 
-		public static IQueryable<EvaluationData> FilterByGameId(this IQueryable<EvaluationData> gameDataQueryable, int? gameId)
+		public static IQueryable<EvaluationData> FilterByGameId(this IQueryable<EvaluationData> gameDataQueryable,
+			int? gameId)
 		{
 			if (!gameId.HasValue || gameId.Value == 0)
-			{
 				return gameDataQueryable.Where(data => data.GameId == null || data.GameId == 0);
-			}
 			return gameDataQueryable.Where(data => data.GameId == gameId);
 		}
 
-		public static IQueryable<EvaluationData> FilterByMatchId(this IQueryable<EvaluationData> gameDataQueryable, int? entityId)
+		public static IQueryable<EvaluationData> FilterByMatchId(this IQueryable<EvaluationData> gameDataQueryable,
+			int? entityId)
 		{
 			if (!entityId.HasValue || entityId.Value == 0)
-			{
 				return gameDataQueryable.Where(data => data.MatchId == null || data.MatchId == 0);
-			}
 			return gameDataQueryable.Where(data => data.MatchId == entityId);
 		}
 
-		public static IQueryable<EvaluationData> FilterByActorId(this IQueryable<EvaluationData> gameDataQueryable, int? actorId)
+		public static IQueryable<EvaluationData> FilterByActorId(this IQueryable<EvaluationData> gameDataQueryable,
+			int? actorId)
 		{
 			return gameDataQueryable.Where(data => data.ActorId == actorId);
 		}
@@ -46,21 +46,22 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return gameDataQueryable.Where(data => data.Key.Equals(key));
 		}
 
-		public static IQueryable<EvaluationData> FilterByKeys(this IQueryable<EvaluationData> gameDataQueryable, ICollection<string> keys)
+		public static IQueryable<EvaluationData> FilterByKeys(this IQueryable<EvaluationData> gameDataQueryable,
+			ICollection<string> keys)
 		{
 			if (keys != null && keys.Any())
-			{
 				return gameDataQueryable.Where(data => keys.Contains(data.Key));
-			}
 			return gameDataQueryable;
 		}
 
-		public static IQueryable<EvaluationData> FilterByDataType(this IQueryable<EvaluationData> gameDataQueryable, EvaluationDataType type)
+		public static IQueryable<EvaluationData> FilterByDataType(this IQueryable<EvaluationData> gameDataQueryable,
+			EvaluationDataType type)
 		{
 			return gameDataQueryable.Where(data => data.EvaluationDataType == type);
 		}
 
-		public static IQueryable<EvaluationData> FilterByDateTimeRange(this IQueryable<EvaluationData> gameDataQueryable, DateTime start, DateTime end)
+		public static IQueryable<EvaluationData> FilterByDateTimeRange(this IQueryable<EvaluationData> gameDataQueryable,
+			DateTime start, DateTime end)
 		{
 			return gameDataQueryable.Where(data => data.DateModified >= start && data.DateModified <= end);
 		}

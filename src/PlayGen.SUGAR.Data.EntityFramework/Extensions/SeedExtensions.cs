@@ -1,5 +1,4 @@
 ﻿using System;
-
 using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Data.Model;
 
@@ -10,17 +9,15 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 	{
 		internal static void Seed(this SUGARContext context)
 		{
-			foreach (var claimScope in (ClaimScope[])Enum.GetValues(typeof(ClaimScope)))
-			{
+			foreach (var claimScope in (ClaimScope[]) Enum.GetValues(typeof(ClaimScope)))
 				context.Roles.Add(new Role
 				{
 					Name = claimScope.ToString(),
 					ClaimScope = claimScope,
 					Default = true
 				});
-			}
 
-			context.Accounts.Add(new Account()
+			context.Accounts.Add(new Account
 			{
 				Name = "admin",
 				Password = "$2a$12$SSIgQE0cQejeH0dM61JV/eScAiHwJo/I3Gg6xZFUc0gmwh0FnMFv.",
@@ -43,7 +40,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			//global (admin)
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Global + 1,
+				RoleId = (int) ClaimScope.Global + 1,
 				ActorId = 1,
 				EntityId = -1
 			});
@@ -51,7 +48,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			//global game control
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Game + 1,
+				RoleId = (int) ClaimScope.Game + 1,
 				ActorId = 1,
 				EntityId = -1
 			});
@@ -59,7 +56,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			//global group control
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Group + 1,
+				RoleId = (int) ClaimScope.Group + 1,
 				ActorId = 1,
 				EntityId = -1
 			});
@@ -67,7 +64,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			//user
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.User + 1,
+				RoleId = (int) ClaimScope.User + 1,
 				ActorId = 1,
 				EntityId = 1
 			});
@@ -75,7 +72,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			//global user control
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.User + 1,
+				RoleId = (int) ClaimScope.User + 1,
 				ActorId = 1,
 				EntityId = -1
 			});
@@ -83,7 +80,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			//account
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Account + 1,
+				RoleId = (int) ClaimScope.Account + 1,
 				ActorId = 1,
 				EntityId = 1
 			});
@@ -91,7 +88,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			//global account control
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Account + 1,
+				RoleId = (int) ClaimScope.Account + 1,
 				ActorId = 1,
 				EntityId = -1
 			});
@@ -99,7 +96,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			//global role control
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Role + 1,
+				RoleId = (int) ClaimScope.Role + 1,
 				ActorId = 1,
 				EntityId = -1
 			});

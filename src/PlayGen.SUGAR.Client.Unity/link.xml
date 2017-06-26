@@ -1,31 +1,31 @@
 ﻿<linker>
 	<assembly fullname="PlayGen.SUGAR.Client">
-		<type fullname="PlayGen.SUGAR.Contracts.AccountRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.AccountResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.ActorRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.ActorResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.EvaluationDataRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.EvaluationDataResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.EvaluationProgressResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.EvaluationResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.GameRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.GameResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.GroupRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.GroupResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.LeaderboardRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.LeaderboardResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.MatchResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.RelationshipRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.RelationshipResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.RelationshipStatusUpdate" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.ResourceAddRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.ResourceResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.ResourceTransferRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.ResourceTransferResponse" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.ResponseWrapper" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.UserRequest" preserve="all"/>
-		<type fullname="PlayGen.SUGAR.Contracts.UserResponse" preserve="all"/>
+		<type fullname="PlayGen.SUGAR.Contracts.AccountRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.AccountResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.ActorRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.ActorResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.EvaluationDataRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.EvaluationDataResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.EvaluationProgressResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.EvaluationResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.GameRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.GameResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.GroupRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.GroupResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.LeaderboardRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.LeaderboardResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.MatchResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.RelationshipRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.RelationshipResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.RelationshipStatusUpdate" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.ResourceAddRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.ResourceResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.ResourceTransferRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.ResourceTransferResponse" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.ResponseWrapper" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.UserRequest" preserve="all" />
+		<type fullname="PlayGen.SUGAR.Contracts.UserResponse" preserve="all" />
 	</assembly>
 </linker>

@@ -10,27 +10,28 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		public static GameResponse ToContract(this Game gameModel)
 		{
 			if (gameModel == null)
-			{
 				return null;
-			}
 
-			return new GameResponse {
+			return new GameResponse
+			{
 				Id = gameModel.Id,
 				Name = gameModel.Name
 			};
 		}
 
-		public static IEnumerable<GameResponse> ToContractList(this IEnumerable<Game> gameModels)
+		public static CollectionResponse ToCollectionContract(this IEnumerable<Game> models)
 		{
-			return gameModels.Select(ToContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
 		}
 
 		public static Game ToModel(this GameRequest gameContract)
 		{
-			return new Game {
+			return new Game
+			{
 				Name = gameContract.Name
 			};
 		}
-
 	}
 }

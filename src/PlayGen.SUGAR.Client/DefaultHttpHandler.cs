@@ -8,17 +8,6 @@ namespace PlayGen.SUGAR.Client
 {
 	public class DefaultHttpHandler : IHttpHandler
 	{
-		private WebRequest CreateRequest(HttpRequest request)
-		{
-			var webRequest = WebRequest.Create(request.Url);
-			webRequest.Method = request.Method;
-			foreach (var header in request.Headers)
-			{
-				webRequest.Headers.Add(header.Key, header.Value);
-			}
-			return webRequest;
-		}
-
 		public HttpResponse HandleRequest(HttpRequest request)
 		{
 			switch (request.Method.ToUpperInvariant())
@@ -34,8 +23,17 @@ namespace PlayGen.SUGAR.Client
 			}
 		}
 
+		private WebRequest CreateRequest(HttpRequest request)
+		{
+			var webRequest = WebRequest.Create(request.Url);
+			webRequest.Method = request.Method;
+			foreach (var header in request.Headers)
+				webRequest.Headers.Add(header.Key, header.Value);
+			return webRequest;
+		}
+
 		/// <summary>
-		/// Set the content stream and related properties of the specified WebRequest object with the byte array
+		///     Set the content stream and related properties of the specified WebRequest object with the byte array
 		/// </summary>
 		/// <param name="request"></param>
 		/// <param name="payload"></param>
@@ -50,7 +48,7 @@ namespace PlayGen.SUGAR.Client
 
 
 		/// <summary>
-		/// Create a WebRequest for the specified uri and HTTP verb
+		///     Create a WebRequest for the specified uri and HTTP verb
 		/// </summary>
 		/// <param name="request"></param>
 		/// <returns></returns>
@@ -67,21 +65,21 @@ namespace PlayGen.SUGAR.Client
 			HttpWebResponse webResponse;
 			try
 			{
-				webResponse = (HttpWebResponse)webRequest.GetResponse();
+				webResponse = (HttpWebResponse) webRequest.GetResponse();
 			}
 			catch (WebException ex)
 			{
-				webResponse = (HttpWebResponse)ex.Response;
+				webResponse = (HttpWebResponse) ex.Response;
 			}
 
-			var response = new HttpResponse()
+			var response = new HttpResponse
 			{
-				StatusCode = (int)webResponse.StatusCode,
-				Headers = webResponse.Headers.AllKeys.ToDictionary(k => k, v => webResponse.Headers[v]),
+				StatusCode = (int) webResponse.StatusCode,
+				Headers = webResponse.Headers.AllKeys.ToDictionary(k => k, v => webResponse.Headers[v])
 			};
 
 			var dataStream = webResponse.GetResponseStream();
-			if (dataStream != null)// && dataStream.Length > 0)
+			if (dataStream != null) // && dataStream.Length > 0)
 			{
 				var reader = new StreamReader(dataStream);
 				response.Content = reader.ReadToEnd();

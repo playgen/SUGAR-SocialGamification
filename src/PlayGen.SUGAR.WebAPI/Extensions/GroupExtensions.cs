@@ -10,26 +10,28 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		public static GroupResponse ToContract(this Group groupModel)
 		{
 			if (groupModel == null)
-			{
 				return null;
-			}
-			var groupContract = new GroupResponse {
+			var groupContract = new GroupResponse
+			{
 				Id = groupModel.Id,
 				Name = groupModel.Name,
-				MemberCount = groupModel.UserToGroupRelationships != null ? groupModel.UserToGroupRelationships.Count : 0
+				MemberCount = groupModel.UserToGroupRelationships?.Count ?? 0
 			};
 
 			return groupContract;
 		}
 
-		public static IEnumerable<GroupResponse> ToContractList(this IEnumerable<Group> groupModels)
+		public static CollectionResponse ToCollectionContract(this IEnumerable<Group> models)
 		{
-			return groupModels.Select(ToContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
 		}
 
 		public static Group ToGroupModel(this GroupRequest groupContract)
 		{
-			return new Group {
+			return new Group
+			{
 				Name = groupContract.Name
 			};
 		}

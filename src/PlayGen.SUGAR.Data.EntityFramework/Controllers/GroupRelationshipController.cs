@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -18,7 +18,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				var requestors = context.UserToGroupRelationshipRequests
 					.Where(r => r.AcceptorId == id)
-					.Select(u => u.Requestor).ToList();
+					.Select(u => u.Requestor)
+					.ToList();
 
 				return requestors;
 			}
@@ -30,7 +31,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				var acceptors = context.UserToGroupRelationshipRequests
 					.Where(r => r.RequestorId == id)
-					.Select(u => u.Acceptor).ToList();
+					.Select(u => u.Acceptor)
+					.ToList();
 
 				return acceptors;
 			}
@@ -42,7 +44,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				var requestors = context.UserToGroupRelationships
 					.Where(r => r.AcceptorId == id)
-					.Select(u => u.Requestor).ToList();
+					.Select(u => u.Requestor)
+					.ToList();
 
 				return requestors;
 			}
@@ -65,7 +68,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				var acceptors = context.UserToGroupRelationships
 					.Where(r => r.RequestorId == id)
-					.Select(u => u.Acceptor).ToList();
+					.Select(u => u.Acceptor)
+					.ToList();
 
 				return acceptors;
 			}
@@ -77,33 +81,25 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var hasConflicts = context.UserToGroupRelationships
-					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
-					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
+					.Any(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId
+							|| r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId);
 
 				if (!hasConflicts)
-				{
 					hasConflicts = context.UserToGroupRelationshipRequests
-						.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
-						|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
-				}
+						.Any(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId
+								|| r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId);
 
 				if (hasConflicts)
-				{
 					throw new DuplicateRecordException("A relationship with this user and group already exists.");
-				}
 
 				var requestorExists = context.Users.Any(u => u.Id == newRelation.RequestorId);
 				var acceptorExists = context.Groups.Any(g => g.Id == newRelation.AcceptorId);
 
 				if (!requestorExists)
-				{
 					throw new MissingRecordException("The requesting user does not exist.");
-				}
 
 				if (!acceptorExists)
-				{
 					throw new MissingRecordException("The targeted group does not exist.");
-				}
 
 				if (autoAccept)
 				{
@@ -154,8 +150,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var relation = context.UserToGroupRelationships
-					.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
-						|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
+					.Single(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId
+								|| r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId);
 
 				context.UserToGroupRelationships.Remove(relation);
 				SaveChanges(context);

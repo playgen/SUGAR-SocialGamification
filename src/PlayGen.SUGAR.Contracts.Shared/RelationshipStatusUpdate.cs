@@ -3,32 +3,32 @@
 namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
-	/// Encapsulates relationship details, including updated status of the relationship.
+	///     Encapsulates relationship details, including updated status of the relationship.
 	/// </summary>
 	/// <example>
-	/// JSON
-	/// {
-	/// RequestorId : 1,
-	/// AcceptorId : 2,
-	/// Accepted : true
-	/// }
+	///     JSON
+	///     {
+	///     RequestorId : 1,
+	///     AcceptorId : 2,
+	///     Accepted : true
+	///     }
 	/// </example>
 	public class RelationshipStatusUpdate
 	{
 		/// <summary>
-		/// The Id of the requesting actor.
+		///     The Id of the requesting actor.
 		/// </summary>
 		[Required]
 		public int RequestorId { get; set; }
 
 		/// <summary>
-		/// The Id of the receiving actor.
+		///     The Id of the receiving actor.
 		/// </summary>
 		[Required]
 		public int AcceptorId { get; set; }
 
 		/// <summary>
-		/// Whether the request was accepted or declined.
+		///     Whether the request was accepted or declined.
 		/// </summary>
 		[Required]
 		public bool Accepted { get; set; }

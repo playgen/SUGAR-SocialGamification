@@ -6,7 +6,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class AccountSourceController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		private readonly Data.EntityFramework.Controllers.AccountSourceController _accountSourceDbController;
 
 		public AccountSourceController(Data.EntityFramework.Controllers.AccountSourceController accountSourceDbController)

@@ -2,9 +2,9 @@
 
 namespace PlayGen.SUGAR.Contracts
 {
-	public class ResponseWrapper<TResponse>
+	public class ResponseWrapper
 	{
-		public TResponse Response { get; set; }
+		public IResponse Response { get; set; }
 
 		public List<EvaluationProgressResponse> EvaluationsProgress { get; set; }
 	}

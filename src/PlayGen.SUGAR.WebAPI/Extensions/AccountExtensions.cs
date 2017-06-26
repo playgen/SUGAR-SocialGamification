@@ -5,12 +5,11 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class AccountExtensions
 	{
+
 		public static AccountResponse ToContract(this Account model)
 		{
 			if (model == null)
-			{
 				return null;
-			}
 
 			return new AccountResponse
 			{
@@ -23,7 +22,7 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			return new Account
 			{
 				Name = contract.Name,
-				Password = contract.Password,
+				Password = contract.Password
 			};
 		}
 	}

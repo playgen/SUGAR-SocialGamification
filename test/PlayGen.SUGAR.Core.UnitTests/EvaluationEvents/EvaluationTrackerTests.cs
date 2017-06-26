@@ -1,277 +1,276 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Xunit;
 
 namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
 {
-    [Collection("Project Fixture Collection")]
-    public class EvaluationTrackerTests : EvaluationTestsBase
-    {
-        /// <summary>
-        /// Make sure:
-        /// - existing evaluations are mapped
-        /// - progress for user session is returned
-        /// </summary>
-        [Fact]
-        public void EvaluatesOnSessionStarted()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("EvaluatesOnSessionStarted");
-            var user = Helpers.GetOrCreateUser("EvaluatesOnSessionStarted");
+	[Collection("Project Fixture Collection")]
+	public class EvaluationTrackerTests : EvaluationTestsBase
+	{
+		/// <summary>
+		///     Adding multiple game data triggers evaluations
+		/// </summary>
+		[Fact]
+		public void DoesntGetAlreadyRecievedNotifications()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("DoesntGetAlreadyRecievedNotifications");
+			var user = Helpers.GetOrCreateUser("DoesntGetAlreadyRecievedNotifications");
 
-            var evaluation = Helpers.CreateAndCompleteGenericAchievement("EvaluatesOnSessionStarted", user.Id, game.Id);
+			SessionTracker.StartSession(game.Id, user.Id);
 
-            // Act
-            SessionTracker.StartSession(game.Id, user.Id);
+			var evaluation =
+				Helpers.CreateAndCompleteGenericAchievement("DoesntGetAlreadyRecievedNotifications", user.Id, game.Id);
+			var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-            // Assert
-            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			Helpers.CompleteGenericAchievement(evaluation, game.Id);
+			// Act
+			progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-            Assert.True(progress.ContainsKey(user.Id)); // should have evalauted for this user
-            Assert.True(progress[user.Id].Any(kvp => kvp.Key.Id == evaluation.Id));// Should have returned the progress for the evaluation
-            Assert.Equal(1, progress[user.Id].Single(kvp => kvp.Key.Id == evaluation.Id).Value);//Completed evaluation should have progress value of 1
-        }
+			// Assert
+			if (progress.ContainsKey(user.Id))
+				Assert.False(progress[user.Id]
+					.Any(p => p.Key.Id == evaluation.Id));
+		}
 
-        /// <summary>
-        /// Progress removed when session ended
-        /// </summary>
-        [Fact]
-        public void RemovesOnSessionEnded()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("RemovesOnSessionEnded");
-            var user = Helpers.GetOrCreateUser("RemovesOnSessionEnded");
+		/// <summary>
+		///     Adding game data triggers evaluations
+		/// </summary>
+		[Fact]
+		public void EvaluatesOnEvaluationDataAdded()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("EvaluatesOnEvaluationDataAdded");
+			var user = Helpers.GetOrCreateUser("EvaluatesOnEvaluationDataAdded");
 
-            Helpers.CreateAndCompleteGenericAchievement("RemovesOnSessionEnded", user.Id, game.Id);
+			SessionTracker.StartSession(game.Id, user.Id);
 
-            var session = SessionTracker.StartSession(game.Id, user.Id);
+			var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnEvaluationDataAdded", game.Id);
 
-            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
-            Assert.True(progress.ContainsKey(user.Id)); // should have evalauted for this user
+			var gameDatas = Helpers.ComposeAchievementGameDatas(user.Id, evaluation, "100");
 
-            // Act
-            SessionTracker.EndSession(session.Id);
+			// Act
+			gameDatas.ForEach(g => ControllerLocator.GameDataController.Add(g));
 
-            // Assert
-            progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
-            Assert.False(progress.ContainsKey(user.Id)); // Shouldn't have any progress for this user
-        }
+			// Assert
+			var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-        /// <summary>
-        /// No progress stored when there is no session for the user
-        /// </summary>
-        [Fact]
-        public void NoEvaluationWhenNoSession()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("NoEvaluationWhenNoSession");
-            var user = Helpers.GetOrCreateUser("NoEvaluationWhenNoSession");
+			Assert.True(progress.ContainsKey(user.Id)); // should have evalauted for this user
+			Assert.True(progress[user.Id]
+				.Any(kvp => kvp.Key.Id == evaluation.Id)); // Should have returned the progress for the evaluation
+		}
 
-            Helpers.CreateAndCompleteGenericAchievement("NoEvaluationWhenNoSession", user.Id, game.Id);
+		/// <summary>
+		///     Adding multiple game data triggers evaluations
+		/// </summary>
+		[Fact]
+		public void EvaluatesOnEvaluationDatasAdded()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("EvaluatesOnEvaluationDatasAdded");
+			var user = Helpers.GetOrCreateUser("EvaluatesOnEvaluationDatasAdded");
 
-            // Act
-            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			SessionTracker.StartSession(game.Id, user.Id);
 
-            // Assert
-            Assert.Equal(0, progress.Count);
-        }
+			var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnEvaluationDatasAdded", game.Id);
 
-        /// <summary>
-        /// Adding game data triggers evaluations
-        /// </summary>
-        [Fact]
-        public void EvaluatesOnEvaluationDataAdded()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("EvaluatesOnEvaluationDataAdded");
-            var user = Helpers.GetOrCreateUser("EvaluatesOnEvaluationDataAdded");
+			// Act
+			Helpers.CompleteGenericAchievement(evaluation, user.Id);
 
-            SessionTracker.StartSession(game.Id, user.Id);
+			// Assert
+			var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnEvaluationDataAdded", game.Id);
+			Assert.True(progress.ContainsKey(user.Id)); // should have evalauted for this user
+			Assert.True(progress[user.Id]
+				.Any(kvp => kvp.Key.Id == evaluation.Id)); // Should have returned the progress for the evaluation
+			Assert.Equal(1,
+				progress[user.Id]
+					.Single(kvp => kvp.Key.Id == evaluation.Id)
+					.Value); //Completed evaluation should have progress value of 1
+		}
 
-            var gameDatas = Helpers.ComposeAchievementGameDatas(user.Id, evaluation, "100");
+		/// <summary>
+		///     - add achievement
+		///     - add game data (that doesn't satisfy the completion condition)
+		///     - make sure progress isn't complete
+		///     - modify achievement to make sure it is completed with the current amount of data
+		///     - make sure progress is complete
+		/// </summary>
+		[Fact]
+		public void EvaluatesOnEvaluationUpdated()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("EvaluatesOnEvaluationUpdated");
+			var user = Helpers.GetOrCreateUser("EvaluatesOnEvaluationUpdated");
 
-            // Act
-            gameDatas.ForEach(g => ControllerLocator.GameDataController.Add(g));
+			SessionTracker.StartSession(game.Id, user.Id);
 
-            // Assert
-            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnEvaluationUpdated", game.Id);
+			Helpers.CreateGenericAchievementGameData(evaluation, user.Id);
 
-            Assert.True(progress.ContainsKey(user.Id)); // should have evalauted for this user
-            Assert.True(progress[user.Id].Any(kvp => kvp.Key.Id == evaluation.Id));// Should have returned the progress for the evaluation
-        }
+			var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			if (progress?.ContainsKey(user.Id) == true)
+				Assert.False(progress[user.Id]
+					.Any(kvp => kvp.Key.Id == evaluation.Id)); // Make sure the evaluation wasn't returned when it wasn't completed
 
-        /// <summary>
-        /// Adding multiple game data triggers evaluations
-        /// </summary>
-        [Fact]
-        public void EvaluatesOnEvaluationDatasAdded()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("EvaluatesOnEvaluationDatasAdded");
-            var user = Helpers.GetOrCreateUser("EvaluatesOnEvaluationDatasAdded");
+			// Act
+			foreach (var criteria in evaluation.EvaluationCriterias)
+				criteria.Value = $"{50}";
 
-            SessionTracker.StartSession(game.Id, user.Id);
+			ControllerLocator.EvaluationController.Update(evaluation);
 
-            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnEvaluationDatasAdded", game.Id);
+			// Assert
+			progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-            // Act
-            Helpers.CompleteGenericAchievement(evaluation, user.Id);
+			foreach (var actorProgress in progress.Values)
+				actorProgress.Values.ToList()
+					.ForEach(val => Assert.Equal(1, val));
+		}
 
-            // Assert
-            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+		/// <summary>
+		///     Make sure:
+		///     - existing evaluations are mapped
+		///     - progress for user session is returned
+		/// </summary>
+		[Fact]
+		public void EvaluatesOnSessionStarted()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("EvaluatesOnSessionStarted");
+			var user = Helpers.GetOrCreateUser("EvaluatesOnSessionStarted");
 
-            Assert.True(progress.ContainsKey(user.Id)); // should have evalauted for this user
-            Assert.True(progress[user.Id].Any(kvp => kvp.Key.Id == evaluation.Id));// Should have returned the progress for the evaluation
-            Assert.Equal(1, progress[user.Id].Single(kvp => kvp.Key.Id == evaluation.Id).Value);//Completed evaluation should have progress value of 1
-        }
+			var evaluation = Helpers.CreateAndCompleteGenericAchievement("EvaluatesOnSessionStarted", user.Id, game.Id);
 
-        /// <summary>
-        /// - add achievement
-        /// - add game data (that doesn't satisfy the completion condition)
-        /// - make sure progress isn't complete
-        /// - modify achievement to make sure it is completed with the current amount of data
-        /// - make sure progress is complete
-        /// </summary>
-        [Fact]
-        public void EvaluatesOnEvaluationUpdated()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("EvaluatesOnEvaluationUpdated");
-            var user = Helpers.GetOrCreateUser("EvaluatesOnEvaluationUpdated");
+			// Act
+			SessionTracker.StartSession(game.Id, user.Id);
 
-            SessionTracker.StartSession(game.Id, user.Id);
+			// Assert
+			var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-            var evaluation = Helpers.CreateGenericAchievement("EvaluatesOnEvaluationUpdated", game.Id);
-            Helpers.CreateGenericAchievementGameData(evaluation, user.Id);
+			Assert.True(progress.ContainsKey(user.Id)); // should have evalauted for this user
+			Assert.True(progress[user.Id]
+				.Any(kvp => kvp.Key.Id == evaluation.Id)); // Should have returned the progress for the evaluation
+			Assert.Equal(1,
+				progress[user.Id]
+					.Single(kvp => kvp.Key.Id == evaluation.Id)
+					.Value); //Completed evaluation should have progress value of 1
+		}
 
-            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
-            if (progress?.ContainsKey(user.Id) == true)
-            {
-                Assert.False(progress[user.Id].Any(kvp => kvp.Key.Id == evaluation.Id));    // Make sure the evaluation wasn't returned when it wasn't completed
-            }
+		/// <summary>
+		///     No progress stored when there is no session for the user
+		/// </summary>
+		[Fact]
+		public void NoEvaluationWhenNoSession()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("NoEvaluationWhenNoSession");
+			var user = Helpers.GetOrCreateUser("NoEvaluationWhenNoSession");
 
-            // Act
-            foreach (var criteria in evaluation.EvaluationCriterias)
-            {
-                criteria.Value = $"{50}";
-            }
+			Helpers.CreateAndCompleteGenericAchievement("NoEvaluationWhenNoSession", user.Id, game.Id);
 
-            ControllerLocator.EvaluationController.Update(evaluation);
+			// Act
+			var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-            // Assert
-            progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			// Assert
+			Assert.Equal(0, progress.Count);
+		}
 
-            foreach (var actorProgress in progress.Values)
-            {
-                actorProgress.Values.ToList().ForEach(val => Assert.Equal(1, val));
-            }
-        }
+		/// <summary>
+		///     No progress stored when there is no session for the user
+		/// </summary>
+		[Fact]
+		public void NoEvaluationWhenNotComplete()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("NoEvaluationWhenNotComplete");
+			var user = Helpers.GetOrCreateUser("NoEvaluationWhenNotComplete");
 
-        /// <summary>
-        /// No progress stored when there is no session for the user
-        /// </summary>
-        [Fact]
-        public void NoEvaluationWhenNotComplete()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("NoEvaluationWhenNotComplete");
-            var user = Helpers.GetOrCreateUser("NoEvaluationWhenNotComplete");
+			var evaluation = Helpers.CreateGenericAchievement("NoEvaluationWhenNotComplete", game.Id);
+			Helpers.CreateGenericAchievementGameData(evaluation, user.Id);
 
-            var evaluation = Helpers.CreateGenericAchievement("NoEvaluationWhenNotComplete", game.Id);
-            Helpers.CreateGenericAchievementGameData(evaluation, user.Id);
+			// Act
+			var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-            // Act
-            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			// Assert
+			if (progress.ContainsKey(user.Id))
+				Assert.False(progress[user.Id]
+					.Any(p => p.Key.Id == evaluation.Id));
+		}
 
-            // Assert
-            if (progress.ContainsKey(user.Id))
-            {
-                Assert.False(progress[user.Id].Any(p => p.Key.Id == evaluation.Id));
-            }
-        }
+		/// <summary>
+		///     Progress removed when session ended
+		/// </summary>
+		[Fact]
+		public void RemovesOnSessionEnded()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("RemovesOnSessionEnded");
+			var user = Helpers.GetOrCreateUser("RemovesOnSessionEnded");
 
-        /// <summary>
-        /// - add achievement and complete achievement
-        /// - remove achievement
-        /// - make sure no progress is recorded for achievement
-        /// </summary>
-        [Fact]
-        public void RemovesProgressOnEvaluationDeleted()
-        {
-            // Arange 
-            var game = Helpers.GetOrCreateGame("RemovesProgressOnEvaluationDeleted");
-            var user = Helpers.GetOrCreateUser("RemovesProgressOnEvaluationDeleted");
+			Helpers.CreateAndCompleteGenericAchievement("RemovesOnSessionEnded", user.Id, game.Id);
 
-            SessionTracker.StartSession(game.Id, user.Id);
+			var session = SessionTracker.StartSession(game.Id, user.Id);
 
-            var evaluation = Helpers.CreateAndCompleteGenericAchievement("RemovesProgressOnEvaluationDeleted", user.Id, game.Id);
+			var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			Assert.True(progress.ContainsKey(user.Id)); // should have evalauted for this user
 
-            // Act
-            ControllerLocator.EvaluationController.Delete(evaluation.Token, game.Id);
+			// Act
+			SessionTracker.EndSession(session.Id);
 
-            // Assert
-            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			// Assert
+			progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			Assert.False(progress.ContainsKey(user.Id)); // Shouldn't have any progress for this user
+		}
 
-            // Make sure that there are no instances of the evaluation in the progress
-            foreach(var actorProgress in progress)
-            {
-                Assert.False(actorProgress.Value.Any(kvp => kvp.Key.Id == evaluation.Id));
-            }
+		/// <summary>
+		///     - add achievement and complete achievement
+		///     - remove achievement
+		///     - make sure no progress is recorded for achievement
+		/// </summary>
+		[Fact]
+		public void RemovesProgressOnEvaluationDeleted()
+		{
+			// Arange 
+			var game = Helpers.GetOrCreateGame("RemovesProgressOnEvaluationDeleted");
+			var user = Helpers.GetOrCreateUser("RemovesProgressOnEvaluationDeleted");
 
-        }
+			SessionTracker.StartSession(game.Id, user.Id);
 
-        /// <summary>
-        /// Should remove this actors progress after it's been accessed
-        /// </summary>
-        [Fact]
-        public void RemovesProgressWhenGotten()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("RemovesProgressWhenGotten");
-            var user = Helpers.GetOrCreateUser("RemovesProgressWhenGotten");
+			var evaluation = Helpers.CreateAndCompleteGenericAchievement("RemovesProgressOnEvaluationDeleted", user.Id, game.Id);
 
-            SessionTracker.StartSession(game.Id, user.Id);
+			// Act
+			ControllerLocator.EvaluationController.Delete(evaluation.Token, game.Id);
 
-            var evaluation = Helpers.CreateAndCompleteGenericAchievement("RemovesProgressWhenGotten", user.Id, game.Id);
+			// Assert
+			var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-            // Act
-            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			// Make sure that there are no instances of the evaluation in the progress
+			foreach (var actorProgress in progress)
+				Assert.False(actorProgress.Value.Any(kvp => kvp.Key.Id == evaluation.Id));
+		}
 
-            // Assert
-            progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+		/// <summary>
+		///     Should remove this actors progress after it's been accessed
+		/// </summary>
+		[Fact]
+		public void RemovesProgressWhenGotten()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("RemovesProgressWhenGotten");
+			var user = Helpers.GetOrCreateUser("RemovesProgressWhenGotten");
 
-            if (progress.ContainsKey(user.Id))
-            {
-                Assert.False(progress[user.Id].Any(p => p.Key.Id == evaluation.Id));
-            }
-        }
+			SessionTracker.StartSession(game.Id, user.Id);
 
-        /// <summary>
-        /// Adding multiple game data triggers evaluations
-        /// </summary>
-        [Fact]
-        public void DoesntGetAlreadyRecievedNotifications()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("DoesntGetAlreadyRecievedNotifications");
-            var user = Helpers.GetOrCreateUser("DoesntGetAlreadyRecievedNotifications");
+			var evaluation = Helpers.CreateAndCompleteGenericAchievement("RemovesProgressWhenGotten", user.Id, game.Id);
 
-            SessionTracker.StartSession(game.Id, user.Id);
+			// Act
+			var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-            var evaluation = Helpers.CreateAndCompleteGenericAchievement("DoesntGetAlreadyRecievedNotifications", user.Id, game.Id);
-            var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
+			// Assert
+			progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
 
-            Helpers.CompleteGenericAchievement(evaluation, game.Id);
-            // Act
-            progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);
-
-            // Assert
-            if (progress.ContainsKey(user.Id))
-            {
-                Assert.False(progress[user.Id].Any(p => p.Key.Id == evaluation.Id));
-            }
-        }
-    }
+			if (progress.ContainsKey(user.Id))
+				Assert.False(progress[user.Id]
+					.Any(p => p.Key.Id == evaluation.Id));
+		}
+	}
 }

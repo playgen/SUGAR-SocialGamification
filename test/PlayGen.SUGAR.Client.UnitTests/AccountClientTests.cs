@@ -1,21 +1,22 @@
-﻿using PlayGen.SUGAR.Contracts;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
 	public class AccountClientTests : ClientTestsBase
 	{
 		#region Tests
-        [Test]
+
+		[Test]
 		public void CannotCreateDuplicate()
 		{
 			var accountRequest = new AccountRequest
 			{
 				Name = "CannotCreateDuplicate",
 				Password = "CannotCreateDuplicatePassword",
-                SourceToken = "SUGAR"
-            };
+				SourceToken = "SUGAR"
+			};
 
 			var registerResponse = SUGARClient.Account.Create(accountRequest);
 
@@ -28,6 +29,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var accountRequest = new AccountRequest();
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Account.Create(accountRequest));
 		}
+
 		#endregion
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
 using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
@@ -20,9 +19,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 		public static IQueryable<ActorData> FilterByGameId(this IQueryable<ActorData> actorDataQueryable, int? gameId)
 		{
 			if (!gameId.HasValue || gameId.Value == 0)
-			{
 				return actorDataQueryable.Where(gd => gd.GameId == null || gd.GameId == 0);
-			}
 			return actorDataQueryable.Where(gd => gd.GameId == gameId);
 		}
 
@@ -31,13 +28,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			return actorDataQueryable.Where(gd => gd.Key.Equals(key));
 		}
 
-		public static IQueryable<ActorData> FilterByKeys(this IQueryable<ActorData> actorDataQueryable, ICollection<string> keys)
+		public static IQueryable<ActorData> FilterByKeys(this IQueryable<ActorData> actorDataQueryable,
+			ICollection<string> keys)
 		{
 			var keyList = keys as List<string> ?? keys.ToList();
 			if (keys != null && keyList.Any())
-			{
 				return actorDataQueryable.Where(gd => keyList.Contains(gd.Key));
-			}
 			return actorDataQueryable;
 		}
 	}

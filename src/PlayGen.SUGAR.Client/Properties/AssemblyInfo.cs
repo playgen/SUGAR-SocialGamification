@@ -20,4 +20,3 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Social Gamification Asset for the RAGE Ecosystem")]
 [assembly: AssemblyCopyright("PlayGen Ltd 2016")]
 [assembly: AssemblyVersion("1.1.*")]
-

@@ -10,11 +10,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		public static ClaimResponse ToContract(this Claim claimModel)
 		{
 			if (claimModel == null)
-			{
 				return null;
-			}
 
-			return new ClaimResponse {
+			return new ClaimResponse
+			{
 				Id = claimModel.Id,
 				Token = claimModel.Token,
 				Description = claimModel.Description,
@@ -22,9 +21,11 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static IEnumerable<ClaimResponse> ToContractList(this IEnumerable<Claim> claimModels)
+		public static CollectionResponse ToCollectionContract(this IEnumerable<Claim> models)
 		{
-			return claimModels.Select(ToContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
 		}
 	}
 }

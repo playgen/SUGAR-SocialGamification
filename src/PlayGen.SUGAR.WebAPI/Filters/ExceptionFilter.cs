@@ -8,14 +8,13 @@ using PlayGen.SUGAR.WebAPI.Exceptions;
 namespace PlayGen.SUGAR.WebAPI.Filters
 {
 	/// <summary>
-	/// 
 	/// </summary>
 	public class ExceptionFilter : ExceptionFilterAttribute
 	{
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        /// <inheritdoc />
-        public override void OnException(ExceptionContext context)
+		/// <inheritdoc />
+		public override void OnException(ExceptionContext context)
 		{
 			var exception = context.Exception;
 			var handled = false;
@@ -30,26 +29,26 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 			if (exception is InvalidAccountDetailsException)
 			{
 				context.Result = new ObjectResult(exception.Message);
-				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+				context.HttpContext.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
 				handled = true;
 			}
 
 			if (exception is InvalidSessionException)
 			{
 				context.Result = new ObjectResult(exception.Message);
-				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+				context.HttpContext.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
 				handled = true;
 			}
 
 			if (!handled)
-			{ 
+			{
 				context.Result = new ObjectResult(context.Exception.Message);
-				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+				context.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
 			}
 
-            Logger.Error(exception.Message);
+			Logger.Error(exception.Message);
 
-            context.Exception = null;
+			context.Exception = null;
 			base.OnException(context);
 		}
 	}

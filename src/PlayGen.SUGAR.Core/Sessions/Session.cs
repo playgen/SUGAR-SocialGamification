@@ -2,24 +2,24 @@
 
 namespace PlayGen.SUGAR.Core.Sessions
 {
-    public class Session
-    {
-        public long Id { get; private set; }
+	public class Session
+	{
+		private static long _idCounter;
 
-        public int ActorId { get; private set; }
+		public Session(int? gameId, int actorId)
+		{
+			Id = ++_idCounter;
+			ActorId = actorId;
+			GameId = gameId;
+			LastActive = DateTime.UtcNow;
+		}
 
-        public int? GameId { get; private set; }
+		public long Id { get; }
 
-        public DateTime LastActive { get; internal set; }
+		public int ActorId { get; }
 
-        private static long _idCounter;
+		public int? GameId { get; }
 
-        public Session(int? gameId, int actorId)
-        {
-            Id = ++_idCounter;
-            ActorId = actorId;
-            GameId = gameId;
-            LastActive = DateTime.UtcNow;
-        }
-    }
+		public DateTime LastActive { get; internal set; }
+	}
 }

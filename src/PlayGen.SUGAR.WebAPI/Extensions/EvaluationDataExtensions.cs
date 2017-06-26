@@ -1,24 +1,26 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Contracts;
 using System.Linq;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class EvaluationDataExtensions
 	{
-		public static List<EvaluationDataResponse> ToContractList(this List<Data.Model.EvaluationData> models)
+		public static CollectionResponse ToCollectionContract(this List<EvaluationData> models)
 		{
-			return models.Select(ToContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
 		}
 
-		public static EvaluationDataResponse ToContract(this Data.Model.EvaluationData evaluationData)
+		public static EvaluationDataResponse ToContract(this EvaluationData evaluationData)
 		{
 			if (evaluationData == null)
-			{
 				return null;
-			}
 
-			return new EvaluationDataResponse {
+			return new EvaluationDataResponse
+			{
 				GameId = evaluationData.GameId,
 				MatchId = evaluationData.MatchId,
 				CreatingActorId = evaluationData.ActorId,

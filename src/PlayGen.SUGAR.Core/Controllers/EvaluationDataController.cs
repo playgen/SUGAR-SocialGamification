@@ -1,10 +1,10 @@
 ﻿using System;
-using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
 using NLog;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Core.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
@@ -12,15 +12,16 @@ namespace PlayGen.SUGAR.Core.Controllers
 	{
 		public static Action<EvaluationData> EvaluationDataAddedEvent;
 
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+		private readonly EvaluationDataCategory _category;
 
 		private readonly Data.EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController;
-		private readonly EvaluationDataCategory _category;
 
 		public EvaluationDataController(SUGARContextFactory contextFactory, EvaluationDataCategory category)
 		{
 			_category = category;
-			_evaluationDataDbController = new Data.EntityFramework.Controllers.EvaluationDataController(contextFactory, category);
+			_evaluationDataDbController =
+				new Data.EntityFramework.Controllers.EvaluationDataController(contextFactory, category);
 		}
 
 		public void Add(EvaluationData[] datas)
@@ -45,13 +46,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 				}
 
 				i++;
-
 			} while (dataList.Count > 0 && i < datas.Length);
 
 			foreach (var addedData in uniqueAddedData.Values)
-			{
 				EvaluationDataAddedEvent?.Invoke(addedData);
-			}
 
 			Logger.Info($"Added: {datas?.Length} Evaluation Datas.");
 		}
@@ -70,10 +68,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 				return newData;
 			}
-			else
-			{
-				throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
-			}
+			throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
 		}
 
 		public EvaluationData Update(EvaluationData data)
@@ -112,7 +107,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 			var datas = _evaluationDataDbController.Get(entityId, keys);
 
 			Logger.Info($"{datas?.Count} Evaluation Datas for EntityId {entityId}" +
-						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
+						(keys != null
+							? $", Keys: {string.Join(", ", keys)}"
+							: ""));
 
 			return datas;
 		}
@@ -122,7 +119,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 			var datas = _evaluationDataDbController.Get(gameId, actorId, keys);
 
 			Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, ActorId {actorId}" +
-						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
+						(keys != null
+							? $", Keys: {string.Join(", ", keys)}"
+							: ""));
 
 			return datas;
 		}
@@ -132,7 +131,9 @@ namespace PlayGen.SUGAR.Core.Controllers
 			var datas = _evaluationDataDbController.Get(gameId, entityId, actorId, keys);
 
 			Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
-						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
+						(keys != null
+							? $", Keys: {string.Join(", ", keys)}"
+							: ""));
 
 			return datas;
 		}
@@ -228,7 +229,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return sum;
 		}
 
-		public float GetHighestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public float GetHighestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
 		{
 			var highest = _evaluationDataDbController.GetHighestFloat(gameId, actorId, key, start, end);
 
@@ -238,7 +240,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return highest;
 		}
 
-		public long GetHighestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public long GetHighestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
 		{
 			var highest = _evaluationDataDbController.GetHighestLong(gameId, actorId, key, start, end);
 
@@ -249,7 +252,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 		}
 
 
-		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var highest = _evaluationDataDbController.GetEvaluationDataByHighestFloat(gameId, actorId, key, start, end);
 
@@ -261,7 +265,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return highest;
 		}
 
-		public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var highest = _evaluationDataDbController.GetEvaluationDataByHighestLong(gameId, actorId, key, start, end);
 
@@ -273,7 +278,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return highest;
 		}
 
-		public float GetLowestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public float GetLowestFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
 		{
 			var lowest = _evaluationDataDbController.GetLowestFloat(gameId, actorId, key, start, end);
 
@@ -283,7 +289,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 			return lowest;
 		}
 
-		public long GetLowestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public long GetLowestLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime),
+			DateTime end = default(DateTime))
 		{
 			var lowest = _evaluationDataDbController.GetLowestLong(gameId, actorId, key, start, end);
 
@@ -352,7 +359,11 @@ namespace PlayGen.SUGAR.Core.Controllers
 		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType,
 			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var didGetEarliestKey = _evaluationDataDbController.TryGetEarliestKey(gameId, actorId, key, EvaluationDataType, start,
+			var didGetEarliestKey = _evaluationDataDbController.TryGetEarliestKey(gameId,
+				actorId,
+				key,
+				EvaluationDataType,
+				start,
 				end);
 
 			Logger.Debug(
@@ -365,7 +376,8 @@ namespace PlayGen.SUGAR.Core.Controllers
 		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType,
 			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var didGetLatestKey = _evaluationDataDbController.TryGetLatestKey(gameId, actorId, key, EvaluationDataType, start, end);
+			var didGetLatestKey =
+				_evaluationDataDbController.TryGetLatestKey(gameId, actorId, key, EvaluationDataType, start, end);
 
 			Logger.Debug(
 				$"Earliest: {didGetLatestKey} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
@@ -400,15 +412,11 @@ namespace PlayGen.SUGAR.Core.Controllers
 		protected void ValidateData(EvaluationData data)
 		{
 			if (data.Category != _category)
-			{
 				throw new InvalidDataException(
 					$"Cannot save data with category: {data.Category} with controller for mismatched category: {_category}");
-			}
 
 			if (!ParseCheck(data))
-			{
 				throw new ArgumentException($"Invalid Value {data.Value} for EvaluationDataType {data.EvaluationDataType}");
-			}
 		}
 	}
 }

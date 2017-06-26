@@ -6,7 +6,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class RoleClaimController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly Data.EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
 

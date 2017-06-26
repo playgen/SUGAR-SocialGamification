@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -32,7 +32,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				var groups = context.Groups
 					.IncludeAll()
-					.Where(g => g.Name.ToLower().Contains(name.ToLower()))
+					.Where(g => g.Name.ToLower()
+						.Contains(name.ToLower()))
 					.ToList();
 
 				return groups;
@@ -76,7 +77,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				if (existing != null)
 				{
-					context.Entry(existing).State = EntityState.Modified;
+					context.Entry(existing)
+						.State = EntityState.Modified;
 					existing.Name = group.Name;
 					SaveChanges(context);
 				}

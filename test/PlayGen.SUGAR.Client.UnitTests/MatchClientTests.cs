@@ -7,284 +7,282 @@ using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
-    [TestFixture]
-    public class MatchClientTests : ClientTestsBase
-    {
-        private AccountResponse _account;
-        private GameResponse _game;
+	[TestFixture]
+	public class MatchClientTests : ClientTestsBase
+	{
+		private AccountResponse _account;
+		private GameResponse _game;
 
-        private void LoginUserForGame(string key = "MatchClientTests")
-        {
-            LoginAdmin();
+		private void LoginUserForGame(string key = "MatchClientTests")
+		{
+			LoginAdmin();
 
-            _game = Helpers.GetOrCreateGame(SUGARClient.Game, key);
+			_game = Helpers.GetOrCreateGame(SUGARClient.Game, key);
 
-            try
-            {
-                _account = SUGARClient.Session.Login(_game.Id, new AccountRequest
-                {
-                    Name = key,
-                    Password = key + "Password",
-                    SourceToken = "SUGAR"
-                });
-            }
-            catch (Exception e)
-            {
-                _account = SUGARClient.Session.CreateAndLogin(_game.Id, new AccountRequest
-                {
-                    Name = key,
-                    Password = key + "Password",
-                    SourceToken = "SUGAR"
-                });
-            }
-        }
-        
-        [Test]
-        public void CanStart()
-        {
-            // Arrange
-            LoginUserForGame();
+			try
+			{
+				_account = SUGARClient.Session.Login(_game.Id,
+					new AccountRequest
+					{
+						Name = key,
+						Password = key + "Password",
+						SourceToken = "SUGAR"
+					});
+			}
+			catch (Exception e)
+			{
+				_account = SUGARClient.Session.CreateAndLogin(_game.Id,
+					new AccountRequest
+					{
+						Name = key,
+						Password = key + "Password",
+						SourceToken = "SUGAR"
+					});
+			}
+		}
 
-            // Act
-            var match = SUGARClient.Match.CreateAndStart();
+		private List<MatchResponse> StartMatches(int count)
+		{
+			var matches = new List<MatchResponse>();
+			for (var i = 0; i < count; i++)
+			{
+				var match = SUGARClient.Match.CreateAndStart();
+				matches.Add(match);
+			}
 
-            // Assert
-            Assert.AreEqual(_game.Id, match.Game.Id);
-            Assert.AreEqual(_account.User.Id, match.Creator.Id);
-        }
+			return matches;
+		}
 
-        [Test]
-        public void CanEnd()
-        {
-            // Arrange
-            LoginUserForGame();
-            var match = SUGARClient.Match.CreateAndStart();
+		private List<MatchResponse> StartAndEndMatches(int count)
+		{
+			var matches = StartMatches(count);
+			matches = matches.Select(m => SUGARClient.Match.End(m.Id))
+				.ToList();
+			return matches;
+		}
 
-            // Act
-            match = SUGARClient.Match.End(match.Id);
+		[Test]
+		public void CanAddAndGetData()
+		{
+			// Arrange
+			LoginUserForGame("CanAddAndGetData");
 
-            // Assert
-            Assert.AreNotEqual(match.Ended, null);
-            Assert.Less(match.Started, match.Ended);
-        }
+			var match = SUGARClient.Match.CreateAndStart();
 
-        [Test]
-        public void CanGetByTime()
-        {
-            // Arrange
-            LoginUserForGame();
-            var shouldntGet = StartAndEndMatches(10);
+			var datas = new List<EvaluationDataResponse>();
 
-            var preTime = DateTime.UtcNow;
+			// Act
+			for (var i = 0; i < 10; i++)
+				datas.Add(SUGARClient.Match.AddData(new EvaluationDataRequest
+				{
+					MatchId = match.Id,
+					GameId = _game.Id,
+					CreatingActorId = _account.User.Id,
+					EvaluationDataType = EvaluationDataType.Long,
+					Key = "CanAddAndGetData",
+					Value = i.ToString()
+				}));
 
-            var shouldGet = StartAndEndMatches(10);
-            
-            var postTime = DateTime.UtcNow;
+			var got = SUGARClient.Match.GetData(match.Id);
 
-            shouldntGet.AddRange(StartAndEndMatches(10));
+			// Assert
+			datas.ForEach(a => Assert.True(got.Any(g => g.GameId == a.GameId
+														&& g.MatchId == a.MatchId
+														&& g.CreatingActorId == a.CreatingActorId
+														&& g.Key == a.Key
+														&& g.Value == a.Value)));
+		}
 
-            // Act
-            var got = SUGARClient.Match.GetByTime(preTime, postTime);
+		[Test]
+		public void CanEnd()
+		{
+			// Arrange
+			LoginUserForGame();
+			var match = SUGARClient.Match.CreateAndStart();
 
-            // Assert
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
-        }
+			// Act
+			match = SUGARClient.Match.End(match.Id);
 
-        [Test]
-        public void GetByGame()
-        {
-            // Arrange
-            LoginUserForGame("GetByGame_ShouldntGet");
-            var shouldntGet = StartMatches(10);
+			// Assert
+			Assert.AreNotEqual(match.Ended, null);
+			Assert.Less(match.Started, match.Ended);
+		}
 
-            LoginUserForGame("GetByGame_ShouldGet");
-            var shouldGet = StartMatches(10);
+		[Test]
+		public void CanGetByCreator()
+		{
+			// Arrange
+			LoginUserForGame("CanGetByCreator_ShouldntGet");
+			var shouldntGet = StartMatches(10);
 
-            // Act
-            var got = SUGARClient.Match.GetByGame(_game.Id);
+			LoginUserForGame("CanGetByCreator_ShouldGet");
+			var shouldGet = StartMatches(10);
 
-            // Assert
-            got.ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
-        }
+			// Act
+			var got = SUGARClient.Match.GetByCreator(_account.User.Id);
 
-        [Test]
-        public void GetByGameAndTime()
-        {
-            // Arrange
-            LoginUserForGame("GetByGameAndTime_ShouldntGet");
-            var shouldntGet = StartAndEndMatches(10);
+			// Assert
+			got.ToList().ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
+			shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
+			shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+		}
 
-            var pre = DateTime.UtcNow;
+		[Test]
+		public void CanGetByCreatorAndTime()
+		{
+			// Arrange
+			LoginUserForGame("CanGetByCreatorAndTime_ShouldntGet");
+			var shouldntGet = StartAndEndMatches(10);
 
-            shouldntGet.AddRange(StartAndEndMatches(10));
+			var pre = DateTime.UtcNow;
 
-            LoginUserForGame("GetByGameAndTime_ShouldGet");
-            var shouldGet = StartAndEndMatches(10);
+			shouldntGet.AddRange(StartAndEndMatches(10));
 
-            var post = DateTime.UtcNow;
+			LoginUserForGame("CanGetByCreatorAndTime_ShouldGet");
+			var shouldGet = StartAndEndMatches(10);
 
-            shouldntGet.AddRange(StartAndEndMatches(10));
+			var post = DateTime.UtcNow;
 
-            // Act
-            var got = SUGARClient.Match.GetByGame(_game.Id, pre, post);
+			shouldntGet.AddRange(StartAndEndMatches(10));
 
-            // Assert
-            got.ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
-        }
+			// Act
+			var got = SUGARClient.Match.GetByCreator(_account.User.Id, pre, post);
 
-        [Test]
-        public void CanGetByCreator()
-        {
-            // Arrange
-            LoginUserForGame("CanGetByCreator_ShouldntGet");
-            var shouldntGet = StartMatches(10);
+			// Assert
+			got.ToList().ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
+			shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
+			shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+		}
 
-            LoginUserForGame("CanGetByCreator_ShouldGet");
-            var shouldGet = StartMatches(10);
+		[Test]
+		public void CanGetByGameAndCreator()
+		{
+			// Arrange
+			LoginUserForGame("CanGetByGameAndCreator_ShouldntGet");
+			var shouldntGet = StartMatches(10);
 
-            // Act
-            var got = SUGARClient.Match.GetByCreator(_account.User.Id);
+			LoginUserForGame("CanGetByGameAndCreator_ShouldGet");
+			var shouldGet = StartMatches(10);
 
-            // Assert
-            got.ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
-        }
+			// Act
+			var got = SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id);
 
-        [Test]
-        public void CanGetByCreatorAndTime()
-        {
-            // Arrange
-            LoginUserForGame("CanGetByCreatorAndTime_ShouldntGet");
-            var shouldntGet = StartAndEndMatches(10);
+			// Assert
+			got.ToList().ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
+			got.ToList().ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
+			shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
+			shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+		}
 
-            var pre = DateTime.UtcNow;
+		[Test]
+		public void CanGetByGameAndCreatorAndTime()
+		{
+			// Arrange
+			LoginUserForGame("CanGetByGameAndCreatorAndTime_ShouldntGet");
+			var shouldntGet = StartAndEndMatches(10);
 
-            shouldntGet.AddRange(StartAndEndMatches(10));
+			var pre = DateTime.UtcNow;
 
-            LoginUserForGame("CanGetByCreatorAndTime_ShouldGet");
-            var shouldGet = StartAndEndMatches(10);
+			shouldntGet.AddRange(StartAndEndMatches(10));
 
-            var post = DateTime.UtcNow;
+			LoginUserForGame("CanGetByGameAndCreatorAndTime_ShouldGet");
+			var shouldGet = StartAndEndMatches(10);
 
-            shouldntGet.AddRange(StartAndEndMatches(10));
+			var post = DateTime.UtcNow;
 
-            // Act
-            var got = SUGARClient.Match.GetByCreator(_account.User.Id, pre, post);
+			shouldntGet.AddRange(StartAndEndMatches(10));
 
-            // Assert
-            got.ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
-        }
+			// Act
+			var got = SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id, pre, post);
 
-        [Test]
-        public void CanGetByGameAndCreator()
-        {
-            // Arrange
-            LoginUserForGame("CanGetByGameAndCreator_ShouldntGet");
-            var shouldntGet = StartMatches(10);
+			// Assert
+			got.ToList().ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
+			got.ToList().ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
+			shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
+			shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+		}
 
-            LoginUserForGame("CanGetByGameAndCreator_ShouldGet");
-            var shouldGet = StartMatches(10);
+		[Test]
+		public void CanGetByTime()
+		{
+			// Arrange
+			LoginUserForGame();
+			var shouldntGet = StartAndEndMatches(10);
 
-            // Act
-            var got = SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id);
+			var preTime = DateTime.UtcNow;
 
-            // Assert
-            got.ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
-            got.ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
-        }
+			var shouldGet = StartAndEndMatches(10);
 
-        [Test]
-        public void CanGetByGameAndCreatorAndTime()
-        {
-            // Arrange
-            LoginUserForGame("CanGetByGameAndCreatorAndTime_ShouldntGet");
-            var shouldntGet = StartAndEndMatches(10);
+			var postTime = DateTime.UtcNow;
 
-            var pre = DateTime.UtcNow;
+			shouldntGet.AddRange(StartAndEndMatches(10));
 
-            shouldntGet.AddRange(StartAndEndMatches(10));
+			// Act
+			var got = SUGARClient.Match.GetByTime(preTime, postTime);
 
-            LoginUserForGame("CanGetByGameAndCreatorAndTime_ShouldGet");
-            var shouldGet = StartAndEndMatches(10);
+			// Assert
+			shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
+			shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+		}
 
-            var post = DateTime.UtcNow;
+		[Test]
+		public void CanStart()
+		{
+			// Arrange
+			LoginUserForGame();
 
-            shouldntGet.AddRange(StartAndEndMatches(10));
+			// Act
+			var match = SUGARClient.Match.CreateAndStart();
 
-            // Act
-            var got = SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id, pre, post);
+			// Assert
+			Assert.AreEqual(_game.Id, match.Game.Id);
+			Assert.AreEqual(_account.User.Id, match.Creator.Id);
+		}
 
-            // Assert
-            got.ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
-            got.ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
-        }
+		[Test]
+		public void GetByGame()
+		{
+			// Arrange
+			LoginUserForGame("GetByGame_ShouldntGet");
+			var shouldntGet = StartMatches(10);
 
-        [Test]
-        public void CanAddAndGetData()
-        {
-            // Arrange
-            LoginUserForGame("CanAddAndGetData");
+			LoginUserForGame("GetByGame_ShouldGet");
+			var shouldGet = StartMatches(10);
 
-            var match = SUGARClient.Match.CreateAndStart();
+			// Act
+			var got = SUGARClient.Match.GetByGame(_game.Id);
 
-            var datas = new List<EvaluationDataResponse>();
+			// Assert
+			got.ToList().ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
+			shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
+			shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+		}
 
-            // Act
-            for (var i = 0; i < 10; i++)
-            {
-                datas.Add(SUGARClient.Match.AddData(new EvaluationDataRequest
-                {
-                    MatchId = match.Id,
-                    GameId = _game.Id,
-                    CreatingActorId = _account.User.Id,
-                    EvaluationDataType = EvaluationDataType.Long,
-                    Key = "CanAddAndGetData",
-                    Value = i.ToString()
-                }));
-            }
+		[Test]
+		public void GetByGameAndTime()
+		{
+			// Arrange
+			LoginUserForGame("GetByGameAndTime_ShouldntGet");
+			var shouldntGet = StartAndEndMatches(10);
 
-            var got = SUGARClient.Match.GetData(match.Id);
+			var pre = DateTime.UtcNow;
 
-            // Assert
-            datas.ForEach(a => Assert.True(got.Any(g => g.GameId == a.GameId
-                && g.MatchId == a.MatchId
-                && g.CreatingActorId == a.CreatingActorId
-                && g.Key == a.Key
-                && g.Value == a.Value)));
-        }
+			shouldntGet.AddRange(StartAndEndMatches(10));
 
-        #region Helpers
-        private List<MatchResponse> StartMatches(int count)
-        {
-            var matches = new List<MatchResponse>();
-            for (var i = 0; i < count; i++)
-            {
-                var match = SUGARClient.Match.CreateAndStart();
-                matches.Add(match);
-            }
+			LoginUserForGame("GetByGameAndTime_ShouldGet");
+			var shouldGet = StartAndEndMatches(10);
 
-            return matches;
-        }
+			var post = DateTime.UtcNow;
 
-        private List<MatchResponse> StartAndEndMatches(int count)
-        {
-            var matches = StartMatches(count);
-            matches = matches.Select(m => SUGARClient.Match.End(m.Id)).ToList();
-            return matches;
-        }
+			shouldntGet.AddRange(StartAndEndMatches(10));
 
-        #endregion
-    }
+			// Act
+			var got = SUGARClient.Match.GetByGame(_game.Id, pre, post);
+
+			// Assert
+			got.ToList().ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
+			shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
+			shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+		}
+	}
 }

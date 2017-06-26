@@ -4,14 +4,13 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace PlayGen.SUGAR.WebAPI.Filters
 {
 	/// <summary>
-	/// Checks if models are valid.
-	/// If a model is not valid, a Bad Request is returned as the result with details
-	/// on why the model state is invalid.
+	///     Checks if models are valid.
+	///     If a model is not valid, a Bad Request is returned as the result with details
+	///     on why the model state is invalid.
 	/// </summary>
 	public class ModelValidationFilter : IActionFilter
 	{
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="context"></param>
 		public void OnActionExecuting(ActionExecutingContext context)
@@ -20,25 +19,19 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 			{
 				var errorString = "";
 				foreach (var value in context.ModelState.Values)
+				foreach (var error in value.Errors)
 				{
-					foreach (var error in value.Errors)
-					{
-						if (!string.IsNullOrEmpty(error.ErrorMessage))
-						{
-							errorString += error.ErrorMessage;
-						} else
-						{
-							errorString += error.Exception.Message;
-						}
-						errorString += "\n";
-					}
+					if (!string.IsNullOrEmpty(error.ErrorMessage))
+						errorString += error.ErrorMessage;
+					else
+						errorString += error.Exception.Message;
+					errorString += "\n";
 				}
 				context.Result = new BadRequestObjectResult(errorString);
 			}
 		}
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="context"></param>
 		public void OnActionExecuted(ActionExecutedContext context)

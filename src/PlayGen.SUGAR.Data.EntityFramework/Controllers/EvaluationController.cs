@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
-using System;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -32,7 +31,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				var evaluations = context.Evaluations
 					.IncludeAll()
-					.Where(a => a.GameId == gameId).ToList();
+					.Where(a => a.GameId == gameId)
+					.ToList();
 
 				return evaluations;
 			}
@@ -55,13 +55,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				//TODO: refine duplicate text for actor type and game id
-				var hasConflicts = context.Evaluations.Any(a => (a.Name == evaluation.Name && a.GameId == evaluation.GameId)
-									|| (a.Token == evaluation.Token && a.GameId == evaluation.GameId));
+				var hasConflicts = context.Evaluations.Any(a => a.Name == evaluation.Name && a.GameId == evaluation.GameId
+																|| a.Token == evaluation.Token && a.GameId == evaluation.GameId);
 
 				if (hasConflicts)
-				{
-					throw new DuplicateRecordException($"An evaluation with the name {evaluation.Name} or token {evaluation.Token} for this game already exists.");
-				}
+					throw new DuplicateRecordException(
+						$"An evaluation with the name {evaluation.Name} or token {evaluation.Token} for this game already exists.");
 
 				context.Evaluations.Add(evaluation);
 				SaveChanges(context);

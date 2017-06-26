@@ -1,8 +1,8 @@
 ﻿using System.Linq;
+using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
-using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				CriteriaScope = CriteriaScope.Actor,
 				LeaderboardType = LeaderboardType.Highest
 			};
-			
+
 			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
 			var getResponse = SUGARClient.Leaderboard.GetGlobal(createRequest.Token);
 
@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var createRequest = new LeaderboardRequest
 			{
 				Token = "CanCreateAndGetGameLeaderboard",
-				GameId = game.Id,		
+				GameId = game.Id,
 				Name = "CanCreateAndGetGameLeaderboard",
 				Key = "CanCreateAndGetGameLeaderboard",
 				ActorType = ActorType.User,
@@ -250,11 +250,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "GameGet");
 
-			var leaderboardNames = new string[]
+			var leaderboardNames = new[]
 			{
 				"CanGetLeaderboardsByGame1",
 				"CanGetLeaderboardsByGame2",
-				"CanGetLeaderboardsByGame3",
+				"CanGetLeaderboardsByGame3"
 			};
 
 			foreach (var name in leaderboardNames)
@@ -758,7 +758,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var standingsResponse = SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
 
 			Assert.AreEqual(1, standingsResponse.Count());
-			Assert.AreEqual(user.Name, standingsResponse.First().ActorName);
+			Assert.AreEqual(user.Name,
+				standingsResponse.First()
+					.ActorName);
 		}
 
 		[Test]
@@ -804,7 +806,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var standingsResponse = SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
 
 			Assert.AreEqual(1, standingsResponse.Count());
-			Assert.AreEqual(user.Name, standingsResponse.First().ActorName);
+			Assert.AreEqual(user.Name,
+				standingsResponse.First()
+					.ActorName);
 		}
 
 		[Test]

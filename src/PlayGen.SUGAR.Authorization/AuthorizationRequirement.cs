@@ -3,16 +3,16 @@ using PlayGen.SUGAR.Common.Permissions;
 
 namespace PlayGen.SUGAR.Authorization
 {
-    public class AuthorizationRequirement : IAuthorizationRequirement
-    {
-        public ClaimScope ClaimScope { get; set; }
+	public class AuthorizationRequirement : IAuthorizationRequirement
+	{
+		public AuthorizationRequirement(ClaimScope scope, string name)
+		{
+			ClaimScope = scope;
+			Name = name;
+		}
 
-        public string Name { get; set; }
+		public ClaimScope ClaimScope { get; set; }
 
-        public AuthorizationRequirement(ClaimScope scope, string name)
-        {
-            ClaimScope = scope;
-            Name = name;
-        }
-    }
+		public string Name { get; set; }
+	}
 }

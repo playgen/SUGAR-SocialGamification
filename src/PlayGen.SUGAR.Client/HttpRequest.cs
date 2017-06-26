@@ -2,9 +2,9 @@
 
 namespace PlayGen.SUGAR.Client
 {
-    public class HttpRequest
-    {
-	    public string Url { get; set; }
+	public class HttpRequest
+	{
+		public string Url { get; set; }
 
 		public string Method { get; set; }
 

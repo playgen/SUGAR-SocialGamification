@@ -2,6 +2,7 @@
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Data.Model;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
+using Reward = PlayGen.SUGAR.Data.Model.Reward;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 {
@@ -28,7 +29,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 			builder.Entity<EvaluationCriteria>()
 				.ToTable("EvaluationCriterias");
 
-			builder.Entity<Model.Reward>()
+			builder.Entity<Reward>()
 				.ToTable("Rewards");
 
 			builder.Entity<SentEvaluationNotification>()
@@ -66,56 +67,126 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 		internal static void ConfigureCompositePrimaryKeys(this ModelBuilder builder)
 		{
 			builder.Entity<Leaderboard>()
-				.HasKey(a => new { a.Token, a.GameId });
+				.HasKey(a => new
+				{
+					a.Token,
+					a.GameId
+				});
 
 			builder.Entity<UserToUserRelationshipRequest>()
-				.HasKey(k => new { k.RequestorId, k.AcceptorId });
+				.HasKey(k => new
+				{
+					k.RequestorId,
+					k.AcceptorId
+				});
 
 			builder.Entity<UserToUserRelationship>()
-				.HasKey(k => new { k.RequestorId, k.AcceptorId });
+				.HasKey(k => new
+				{
+					k.RequestorId,
+					k.AcceptorId
+				});
 
 			builder.Entity<UserToGroupRelationshipRequest>()
-				.HasKey(k => new { k.RequestorId, k.AcceptorId });
+				.HasKey(k => new
+				{
+					k.RequestorId,
+					k.AcceptorId
+				});
 
 			builder.Entity<UserToGroupRelationship>()
-				.HasKey(k => new { k.RequestorId, k.AcceptorId });
+				.HasKey(k => new
+				{
+					k.RequestorId,
+					k.AcceptorId
+				});
 
 			builder.Entity<RoleClaim>()
-				.HasKey(k => new { k.RoleId, k.ClaimId });
+				.HasKey(k => new
+				{
+					k.RoleId,
+					k.ClaimId
+				});
 
 			builder.Entity<SentEvaluationNotification>()
-				.HasKey(k => new { k.GameId, k.ActorId, k.EvaluationId });
+				.HasKey(k => new
+				{
+					k.GameId,
+					k.ActorId,
+					k.EvaluationId
+				});
 		}
 
 		internal static void ConfigureIndexes(this ModelBuilder builder)
 		{
 			// Multiple columns
 			builder.Entity<EvaluationData>()
-				.HasIndex(g => new { g.Key, g.GameId, g.Category, CreatingActorId = g.ActorId, g.EvaluationDataType })
+				.HasIndex(g => new
+				{
+					g.Key,
+					g.GameId,
+					g.Category,
+					CreatingActorId = g.ActorId,
+					g.EvaluationDataType
+				})
 				.HasName("IX_EvaluationData_Key_Game_Category_Creator_Type");
 
 			builder.Entity<EvaluationData>()
-				.HasIndex(g => new { g.GameId, g.Category, CreatingActorId = g.ActorId, g.EvaluationDataType })
+				.HasIndex(g => new
+				{
+					g.GameId,
+					g.Category,
+					CreatingActorId = g.ActorId,
+					g.EvaluationDataType
+				})
 				.HasName("IX_EvaluationData_Game_Category_Creator_Type");
 
 			builder.Entity<EvaluationData>()
-				.HasIndex(g => new { g.GameId, g.Category, g.MatchId, g.EvaluationDataType })
-				.HasName("IX_EvaluationData_Game_Category_Match_Type"); ;
+				.HasIndex(g => new
+				{
+					g.GameId,
+					g.Category,
+					g.MatchId,
+					g.EvaluationDataType
+				})
+				.HasName("IX_EvaluationData_Game_Category_Match_Type");
+			;
 
 			builder.Entity<ActorData>()
-				.HasIndex(g => new { g.Key, g.GameId, g.ActorId, DataType = g.EvaluationDataType })
+				.HasIndex(g => new
+				{
+					g.Key,
+					g.GameId,
+					g.ActorId,
+					DataType = g.EvaluationDataType
+				})
 				.IsUnique();
 
 			builder.Entity<Evaluation>()
-				.HasIndex(e => new { e.Token, e.GameId, e.ActorType })
+				.HasIndex(e => new
+				{
+					e.Token,
+					e.GameId,
+					e.ActorType
+				})
 				.IsUnique();
 
 			builder.Entity<ActorRole>()
-				.HasIndex(a => new { a.ActorId, a.EntityId, a.RoleId })
+				.HasIndex(a => new
+				{
+					a.ActorId,
+					a.EntityId,
+					a.RoleId
+				})
 				.IsUnique();
 
 			builder.Entity<ActorClaim>()
-				.HasIndex(a => new { a.ActorId, a.EntityId, a.ClaimId })
+				.HasIndex(a => new
+				{
+					a.ActorId,
+					a.EntityId,
+					a.ClaimId
+				})
 				.IsUnique();
 
 			// Unique
@@ -132,21 +203,25 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
 				.IsUnique();
 
 			builder.Entity<Account>()
-				.HasIndex(a => new { a.Name, a.AccountSourceId })
+				.HasIndex(a => new
+				{
+					a.Name,
+					a.AccountSourceId
+				})
 				.IsUnique();
 		}
 
 		internal static void ConfigureHierarchy(this ModelBuilder builder)
 		{
 			builder.Entity<Actor>()
-			   .HasDiscriminator<ActorType>("Discriminator")
-			   .HasValue<Group>(ActorType.Group)
-			   .HasValue<User>(ActorType.User);
+				.HasDiscriminator<ActorType>("Discriminator")
+				.HasValue<Group>(ActorType.Group)
+				.HasValue<User>(ActorType.User);
 
 			builder.Entity<Evaluation>()
-			   .HasDiscriminator<EvaluationType>("Discriminator")
-			   .HasValue<Achievement>(EvaluationType.Achievement)
-			   .HasValue<Skill>(EvaluationType.Skill);
+				.HasDiscriminator<EvaluationType>("Discriminator")
+				.HasValue<Achievement>(EvaluationType.Achievement)
+				.HasValue<Skill>(EvaluationType.Skill);
 		}
 
 		internal static void ConfigureProperties(this ModelBuilder builder)

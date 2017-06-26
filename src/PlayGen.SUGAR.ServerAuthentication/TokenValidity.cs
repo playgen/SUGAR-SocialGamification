@@ -4,6 +4,6 @@
 	{
 		Invalid = 0,
 		Valid,
-		Expired,
+		Expired
 	}
 }

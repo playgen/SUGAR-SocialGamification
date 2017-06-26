@@ -1,180 +1,185 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
-using System.Linq;
-using PlayGen.SUGAR.Common;
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {
-    public class MatchControllerTests : IDisposable
-    {
-        private bool _isDisposed;
+	public class MatchControllerTests : IDisposable
+	{
+		public void Dispose()
+		{
+			if (_isDisposed)
+				return;
 
-        public void Dispose()
-        {
-            if (_isDisposed) return;
+			_isDisposed = true;
+		}
 
-            _isDisposed = true;
-        }
+		private bool _isDisposed;
 
-        [Fact]
-        public void CanStart()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("CanStart");
-            var user = Helpers.GetOrCreateUser("CanStart");
+		private List<Match> Create(int count, int gameId, int userId)
+		{
+			var matches = new List<Match>();
+			for (var i = 0; i < 10; i++)
+			{
+				var match = ControllerLocator.MatchController.Create(gameId, userId);
+				match = ControllerLocator.MatchController.Start(match.Id);
+				match = ControllerLocator.MatchController.End(match.Id);
+				matches.Add(match);
+			}
 
-            var preCreateTime = DateTime.UtcNow;
+			return matches;
+		}
 
-            // Act
-            var match = ControllerLocator.MatchController.Create(game.Id, user.Id);
-            match = ControllerLocator.MatchController.Start(match.Id);
+		[Fact]
+		public void CanAddAndGetData()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("CanAddAndGetData");
+			var user = Helpers.GetOrCreateUser("CanAddAndGetData");
+			var match = ControllerLocator.MatchController.Create(game.Id, user.Id);
 
-            // Assert
-            var postCreateTime = DateTime.UtcNow;
+			// Act
+			var datas = new List<EvaluationData>();
+			for (var i = 0; i < 10; i++)
+				datas.Add(ControllerLocator.MatchController.AddData(new EvaluationData
+				{
+					GameId = game.Id,
+					ActorId = user.Id,
+					MatchId = match.Id,
+					Category = EvaluationDataCategory.MatchData,
+					Key = "CanAddAndGetData",
+					Value = i.ToString(),
+					EvaluationDataType = EvaluationDataType.Long
+				}));
 
-            Assert.Equal(game.Id, match.GameId);
-            Assert.Equal(user.Id, match.CreatorId);
-            Assert.True(preCreateTime <= match.Started && match.Started <= postCreateTime);
-        }
+			var got = ControllerLocator.MatchController.GetData(match.Id);
 
-        [Fact]
-        public void CanEnd()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("CanEnd");
-            var user = Helpers.GetOrCreateUser("CanEnd");
+			// Assert
+			datas.ForEach(a => Assert.True(got.Any(g => g.GameId == a.GameId
+														&& g.MatchId == a.MatchId
+														&& g.ActorId == a.ActorId
+														&& g.Key == a.Key
+														&& g.Value == a.Value)));
+		}
 
-            var match = ControllerLocator.MatchController.Create(game.Id, user.Id);
-            match = ControllerLocator.MatchController.Start(match.Id);
+		[Fact]
+		public void CanEnd()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("CanEnd");
+			var user = Helpers.GetOrCreateUser("CanEnd");
 
-            // Act
-            match = ControllerLocator.MatchController.End(match.Id);
+			var match = ControllerLocator.MatchController.Create(game.Id, user.Id);
+			match = ControllerLocator.MatchController.Start(match.Id);
 
-            // Assert
-            Assert.NotEqual(default(DateTime), match.Ended);
-            Assert.NotNull(match.Ended);
-            Assert.True(match.Started <= match.Ended);
-        }
+			// Act
+			match = ControllerLocator.MatchController.End(match.Id);
 
-        [Fact]
-        public void CanGetByTime()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("CanGetByTime");
-            var user = Helpers.GetOrCreateUser("CanGetByTime");
+			// Assert
+			Assert.NotEqual(default(DateTime), match.Ended);
+			Assert.NotNull(match.Ended);
+			Assert.True(match.Started <= match.Ended);
+		}
 
-            var shouldntGet = Create(10, game.Id, user.Id);
+		[Fact]
+		public void CanGetByGame()
+		{
+			// Arrange
+			var shouldGetGame = Helpers.GetOrCreateGame("CanGetByGame_ShouldGet");
+			var shouldntGetGame = Helpers.GetOrCreateGame("CanGetByGame_ShouldNotGet");
+			var user = Helpers.GetOrCreateUser("CanGetByGame");
 
-            Thread.Sleep(1000);
-            var startTime = DateTime.UtcNow;
-            Thread.Sleep(1000);
+			var shouldntGet = Create(10, shouldntGetGame.Id, user.Id);
+			var shouldGet = Create(10, shouldGetGame.Id, user.Id);
 
-            var shouldGet = Create(10, game.Id, user.Id);
+			// Act
+			var got = ControllerLocator.MatchController.GetByGame(shouldGetGame.Id);
 
-            Thread.Sleep(1000);
-            var endTime = DateTime.UtcNow;
-            Thread.Sleep(1000);
+			// Assert
+			shouldGet.ForEach(
+				m => Assert.True(got.Any(g => g.Id == m.Id))); // Make sure all matches created during specified time were returned
+			shouldntGet.ForEach(
+				m => Assert.False(
+					got.Any(g => g.Id == m.Id))); // Make sure matches that weren't created during the specified time aren't returned
+		}
 
-            shouldntGet.AddRange(Create(10, game.Id, user.Id));
+		[Fact]
+		public void CanGetByTime()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("CanGetByTime");
+			var user = Helpers.GetOrCreateUser("CanGetByTime");
 
-            // Act
-            var got = ControllerLocator.MatchController.GetByTime(startTime, endTime);
+			var shouldntGet = Create(10, game.Id, user.Id);
 
-            // Assert
-            shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));    // Make sure all matches created during specified time were returned
-            shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));    // Make sure matches that weren't created during the specified time aren't returned
-        }
+			Thread.Sleep(1000);
+			var startTime = DateTime.UtcNow;
+			Thread.Sleep(1000);
 
-        [Fact]
-        public void CanGetByGame()
-        {
-            // Arrange
-            var shouldGetGame = Helpers.GetOrCreateGame("CanGetByGame_ShouldGet");
-            var shouldntGetGame = Helpers.GetOrCreateGame("CanGetByGame_ShouldNotGet");
-            var user = Helpers.GetOrCreateUser("CanGetByGame");
+			var shouldGet = Create(10, game.Id, user.Id);
 
-            var shouldntGet = Create(10, shouldntGetGame.Id, user.Id);
-            var shouldGet = Create(10, shouldGetGame.Id, user.Id);
+			Thread.Sleep(1000);
+			var endTime = DateTime.UtcNow;
+			Thread.Sleep(1000);
 
-            // Act
-            var got = ControllerLocator.MatchController.GetByGame(shouldGetGame.Id);
+			shouldntGet.AddRange(Create(10, game.Id, user.Id));
 
-            // Assert
-            shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));    // Make sure all matches created during specified time were returned
-            shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));    // Make sure matches that weren't created during the specified time aren't returned
-        }
+			// Act
+			var got = ControllerLocator.MatchController.GetByTime(startTime, endTime);
 
-        [Fact]
-        public void GetByCreator()
-        {
-            // Arrange
-            var shouldGetUser = Helpers.GetOrCreateUser("GetByCreator_ShouldGet");
-            var shouldntGetUser = Helpers.GetOrCreateUser("GetByCreator_ShouldNotGet");
-            var game = Helpers.GetOrCreateGame("CanGetByGame");
+			// Assert
+			shouldGet.ForEach(
+				m => Assert.True(got.Any(g => g.Id == m.Id))); // Make sure all matches created during specified time were returned
+			shouldntGet.ForEach(
+				m => Assert.False(
+					got.Any(g => g.Id == m.Id))); // Make sure matches that weren't created during the specified time aren't returned
+		}
 
-            var shouldntGet = Create(10, game.Id, shouldntGetUser.Id);
-            var shouldGet = Create(10, game.Id, shouldGetUser.Id);
+		[Fact]
+		public void CanStart()
+		{
+			// Arrange
+			var game = Helpers.GetOrCreateGame("CanStart");
+			var user = Helpers.GetOrCreateUser("CanStart");
 
-            // Act
-            var got = ControllerLocator.MatchController.GetByCreator(shouldGetUser.Id);
+			var preCreateTime = DateTime.UtcNow;
 
-            // Assert
-            shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));    // Make sure all matches created during specified time were returned
-            shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));    // Make sure matches that weren't created during the specified time aren't returned
-        }
+			// Act
+			var match = ControllerLocator.MatchController.Create(game.Id, user.Id);
+			match = ControllerLocator.MatchController.Start(match.Id);
 
-        [Fact]
-        public void CanAddAndGetData()
-        {
-            // Arrange
-            var game = Helpers.GetOrCreateGame("CanAddAndGetData");
-            var user = Helpers.GetOrCreateUser("CanAddAndGetData");
-            var match = ControllerLocator.MatchController.Create(game.Id, user.Id);
+			// Assert
+			var postCreateTime = DateTime.UtcNow;
 
-            // Act
-            var datas = new List<EvaluationData>();
-            for (var i = 0; i < 10; i++)
-            {
-                datas.Add(ControllerLocator.MatchController.AddData(new EvaluationData
-                {
-                    GameId = game.Id,
-                    ActorId = user.Id,
-                    MatchId = match.Id,
-                    Category = EvaluationDataCategory.MatchData,
-                    Key = "CanAddAndGetData",
-                    Value = i.ToString(),
-                    EvaluationDataType = EvaluationDataType.Long
-                }));
-            }
+			Assert.Equal(game.Id, match.GameId);
+			Assert.Equal(user.Id, match.CreatorId);
+			Assert.True(preCreateTime <= match.Started && match.Started <= postCreateTime);
+		}
 
-            var got = ControllerLocator.MatchController.GetData(match.Id);
+		[Fact]
+		public void GetByCreator()
+		{
+			// Arrange
+			var shouldGetUser = Helpers.GetOrCreateUser("GetByCreator_ShouldGet");
+			var shouldntGetUser = Helpers.GetOrCreateUser("GetByCreator_ShouldNotGet");
+			var game = Helpers.GetOrCreateGame("CanGetByGame");
 
-            // Assert
-            datas.ForEach(a => Assert.True(got.Any(g => g.GameId == a.GameId
-                && g.MatchId == a.MatchId
-                && g.ActorId == a.ActorId
-                && g.Key == a.Key
-                && g.Value == a.Value)));
-        }
+			var shouldntGet = Create(10, game.Id, shouldntGetUser.Id);
+			var shouldGet = Create(10, game.Id, shouldGetUser.Id);
 
-        #region Helpers
+			// Act
+			var got = ControllerLocator.MatchController.GetByCreator(shouldGetUser.Id);
 
-        private List<Match> Create(int count, int gameId, int userId)
-        {
-            var matches = new List<Match>();
-            for (var i = 0; i < 10; i++)
-            {
-                var match = ControllerLocator.MatchController.Create(gameId, userId);
-                match = ControllerLocator.MatchController.Start(match.Id);
-                match = ControllerLocator.MatchController.End(match.Id);
-                matches.Add(match);
-            }
-
-            return matches;
-        }
-        #endregion
-    }
+			// Assert
+			shouldGet.ForEach(
+				m => Assert.True(got.Any(g => g.Id == m.Id))); // Make sure all matches created during specified time were returned
+			shouldntGet.ForEach(
+				m => Assert.False(
+					got.Any(g => g.Id == m.Id))); // Make sure matches that weren't created during the specified time aren't returned
+		}
+	}
 }

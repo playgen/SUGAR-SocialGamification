@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using Xunit;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Data.EntityFramework.Controllers;
+using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.Model;
+using Xunit;
+using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
+using Reward = PlayGen.SUGAR.Data.Model.Reward;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 {
 	[Collection("Project Fixture Collection")]
 	public class AchievementControllerTests
 	{
-		#region Configuration
 		private readonly EvaluationController _evaluationController = ControllerLocator.EvaluationController;
 		private readonly GameController _gameController = ControllerLocator.GameController;
-		#endregion
 
-		#region Tests
 		[Fact]
 		public void CreateAndGetAchievement()
 		{
@@ -54,6 +52,29 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		}
 
 		[Fact]
+		public void DeleteExistingAchievement()
+		{
+			var achievementName = "DeleteExistingAchievement";
+
+			var achievement = Helpers.CreateAchievement(achievementName);
+
+			var achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId);
+			Assert.NotNull(achievementReturned);
+			Assert.Equal(achievementReturned.Name, achievementName);
+
+			_evaluationController.Delete(achievement.Token, achievement.GameId);
+			achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId);
+
+			Assert.Null(achievementReturned);
+		}
+
+		[Fact]
+		public void DeleteNonExistingGroupAchievement()
+		{
+			_evaluationController.Delete("DeleteNonExistingGroupAchievement", -1);
+		}
+
+		[Fact]
 		public void GetAchievementsByGame()
 		{
 			var baseAchievement = Helpers.CreateAchievement("GetAchievementsByBaseGame");
@@ -65,13 +86,11 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 				"GetAchievementsByGame1",
 				"GetAchievementsByGame2",
 				"GetAchievementsByGame3",
-				"GetAchievementsByGame4",
+				"GetAchievementsByGame4"
 			};
 
 			foreach (var name in names)
-			{
 				Helpers.CreateAchievement(name, gameId);
-			}
 
 			var achievements = _evaluationController.GetByGame(gameId);
 
@@ -127,7 +146,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 
 			var newAchievementDuplicate = Helpers.CreateAchievement(achievementName + " Two", newAchievement.GameId);
 
-			var update = new Achievement {
+			var update = new Achievement
+			{
 				Name = achievementName,
 				Token = newAchievementDuplicate.Token,
 				GameId = newAchievementDuplicate.GameId,
@@ -144,40 +164,17 @@ namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
 		{
 			var achievementName = "UpdateNonExistingAchievement";
 
-			var achievement = new Achievement {
+			var achievement = new Achievement
+			{
 				Name = achievementName,
 				Token = achievementName,
 				GameId = -1,
 				ActorType = ActorType.User,
-				EvaluationCriterias = new List<Model.EvaluationCriteria>(),
-				Rewards = new List<Model.Reward>()
+				EvaluationCriterias = new List<EvaluationCriteria>(),
+				Rewards = new List<Reward>()
 			};
 
 			Assert.Throws<DbUpdateConcurrencyException>(() => _evaluationController.Update(achievement));
 		}
-
-		[Fact]
-		public void DeleteExistingAchievement()
-		{
-			var achievementName = "DeleteExistingAchievement";
-
-			var achievement = Helpers.CreateAchievement(achievementName);
-
-			var achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId);
-			Assert.NotNull(achievementReturned);
-			Assert.Equal(achievementReturned.Name, achievementName);
-
-			_evaluationController.Delete(achievement.Token, achievement.GameId);
-			achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId);
-
-			Assert.Null(achievementReturned);
-		}
-
-		[Fact]
-		public void DeleteNonExistingGroupAchievement()
-		{
-			_evaluationController.Delete("DeleteNonExistingGroupAchievement", -1);
-		}
-		#endregion
 	}
 }

@@ -8,30 +8,32 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class ResourceExtensions
 	{
-		public static ResourceResponse ToResourceContract(this EvaluationData evaluationData)
+		public static ResourceResponse ToContract(this EvaluationData evaluationData)
 		{
 			if (evaluationData == null)
-			{
 				return null;
-			}
 
-			return new ResourceResponse {
+			return new ResourceResponse
+			{
 				Id = evaluationData.Id,
 				ActorId = evaluationData.ActorId,
 				GameId = evaluationData.GameId,
 				Key = evaluationData.Key,
-				Quantity = long.Parse(evaluationData.Value),
+				Quantity = long.Parse(evaluationData.Value)
 			};
 		}
 
-		public static IEnumerable<ResourceResponse> ToResourceContractList(this IEnumerable<EvaluationData> gameData)
+		public static CollectionResponse ToCollectionContract(this IEnumerable<EvaluationData> models)
 		{
-			return gameData.Select(ToResourceContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
 		}
 
 		public static EvaluationData ToModel(this ResourceAddRequest resourceContract)
 		{
-			return new EvaluationData {
+			return new EvaluationData
+			{
 				ActorId = resourceContract.ActorId,
 				GameId = resourceContract.GameId,
 				Key = resourceContract.Key,

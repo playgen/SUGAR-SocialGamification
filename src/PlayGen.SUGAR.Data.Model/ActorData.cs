@@ -1,4 +1,5 @@
 ﻿using System;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Data.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Data.Model
@@ -15,7 +16,7 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public string Value { get; set; }
 
-		public Common.EvaluationDataType EvaluationDataType { get; set; }
+		public EvaluationDataType EvaluationDataType { get; set; }
 
 		public DateTime DateCreated { get; set; }
 

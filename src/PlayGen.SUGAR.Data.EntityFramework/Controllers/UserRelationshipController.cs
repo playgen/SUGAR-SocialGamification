@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Data.Model;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 {
@@ -17,7 +17,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var requestors = context.UserToUserRelationshipRequests
-					.Where(r => r.AcceptorId == id).Select(u => u.Requestor).ToList();
+					.Where(r => r.AcceptorId == id)
+					.Select(u => u.Requestor)
+					.ToList();
 
 				return requestors;
 			}
@@ -28,7 +30,9 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var acceptors = context.UserToUserRelationshipRequests
-					.Where(r => r.RequestorId == id).Select(u => u.Acceptor).ToList();
+					.Where(r => r.RequestorId == id)
+					.Select(u => u.Acceptor)
+					.ToList();
 
 				return acceptors;
 			}
@@ -40,11 +44,13 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				var requestors = context.UserToUserRelationships
 					.Where(r => r.AcceptorId == id)
-					.Select(u => u.Requestor).ToList();
+					.Select(u => u.Requestor)
+					.ToList();
 
 				var acceptors = context.UserToUserRelationships
 					.Where(r => r.RequestorId == id)
-						.Select(u => u.Acceptor).ToList();
+					.Select(u => u.Acceptor)
+					.ToList();
 
 				requestors.AddRange(acceptors);
 
@@ -58,38 +64,28 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				if (newRelation.AcceptorId == newRelation.RequestorId)
-				{
 					throw new DuplicateRecordException("Two different users are needed to create a relationship.");
-				}
 
 				var hasConflicts = context.UserToUserRelationships
-					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
-					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
+					.Any(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId
+							|| r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId);
 
 				if (!hasConflicts)
-				{
 					hasConflicts = context.UserToUserRelationshipRequests
-					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
-					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
-				}
+						.Any(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId
+								|| r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId);
 
 				if (hasConflicts)
-				{
 					throw new DuplicateRecordException("A relationship with these users already exists.");
-				}
 
 				var requestorExists = context.Users.Any(u => u.Id == newRelation.RequestorId);
 				var acceptorExists = context.Users.Any(u => u.Id == newRelation.AcceptorId);
 
 				if (!requestorExists)
-				{
 					throw new MissingRecordException("The requesting user does not exist.");
-				}
 
 				if (!acceptorExists)
-				{
 					throw new MissingRecordException("The targeted user does not exist.");
-				}
 				if (autoAccept)
 				{
 					var relation = new UserToUserRelationship
@@ -119,7 +115,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			{
 				var relation = context.UserToUserRelationshipRequests
 					.Single(r => r.RequestorId == newRelation.RequestorId
-					&& r.AcceptorId == newRelation.AcceptorId);
+								&& r.AcceptorId == newRelation.AcceptorId);
 
 				if (accepted)
 				{
@@ -140,8 +136,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var relation = context.UserToUserRelationships
-					.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
-					|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
+					.Single(r => r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId
+								|| r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId);
 
 				context.UserToUserRelationships.Remove(relation);
 				SaveChanges(context);

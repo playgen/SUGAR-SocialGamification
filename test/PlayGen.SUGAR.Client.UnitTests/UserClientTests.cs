@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts;
-using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var userRequest = new UserRequest
 			{
-				Name = "CanCreateUser",
+				Name = "CanCreateUser"
 			};
 
 			var response = SUGARClient.User.Create(userRequest);
@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var userRequest = new UserRequest
 			{
-				Name = "CannotCreateDuplicateUser",
+				Name = "CannotCreateDuplicateUser"
 			};
 
 			SUGARClient.User.Create(userRequest);
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateUserWithNoName()
 		{
-			var userRequest = new UserRequest { };
+			var userRequest = new UserRequest();
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Create(userRequest));
 		}
@@ -47,14 +47,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var userRequestOne = new UserRequest
 			{
-				Name = "CanGetUsersByName 1",
+				Name = "CanGetUsersByName 1"
 			};
 
 			var responseOne = SUGARClient.User.Create(userRequestOne);
 
 			var userRequestTwo = new UserRequest
 			{
-				Name = "CanGetUsersByName 2",
+				Name = "CanGetUsersByName 2"
 			};
 
 			var responseTwo = SUGARClient.User.Create(userRequestTwo);
@@ -83,7 +83,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var userRequest = new UserRequest
 			{
-				Name = "CanGetUserById",
+				Name = "CanGetUserById"
 			};
 
 			var response = SUGARClient.User.Create(userRequest);
@@ -107,7 +107,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var userRequest = new UserRequest
 			{
-				Name = "CanUpdateUser",
+				Name = "CanUpdateUser"
 			};
 
 			var response = SUGARClient.User.Create(userRequest);
@@ -166,14 +166,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var userRequest = new UserRequest
 			{
-				Name = "CannotUpdateUserToNoName",
+				Name = "CannotUpdateUserToNoName"
 			};
 
 			var response = SUGARClient.User.Create(userRequest);
 
-			var updateRequest = new UserRequest
-			{
-			};
+			var updateRequest = new UserRequest();
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Update(response.Id, updateRequest));
 		}
@@ -183,7 +181,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var userRequest = new UserRequest
 			{
-				Name = "CanDeleteUser",
+				Name = "CanDeleteUser"
 			};
 
 			var response = SUGARClient.User.Create(userRequest);

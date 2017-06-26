@@ -2,18 +2,18 @@
 
 namespace PlayGen.SUGAR.Data.Model
 {
-    public class ActorRole
-    {
-        public int Id { get; set; }
+	public class ActorRole
+	{
+		public int Id { get; set; }
 
-        public int ActorId { get; set; }
+		public int ActorId { get; set; }
 
-        public Actor Actor { get; set; }
+		public Actor Actor { get; set; }
 
-        public int RoleId { get; set; }
+		public int RoleId { get; set; }
 
-        public Role Role { get; set; }
+		public Role Role { get; set; }
 
-        public int? EntityId { get; set; }
-    }
+		public int? EntityId { get; set; }
+	}
 }

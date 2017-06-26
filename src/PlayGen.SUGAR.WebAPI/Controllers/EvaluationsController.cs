@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Authorization;
 using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.WebAPI.Extensions;
 
@@ -11,10 +12,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 	public abstract class EvaluationsController : Controller
 	{
 		protected readonly IAuthorizationService _authorizationService;
-		protected readonly Core.Controllers.EvaluationController EvaluationCoreController;
 		private readonly EvaluationTracker _evaluationTracker;
+		protected readonly EvaluationController EvaluationCoreController;
 
-		protected EvaluationsController(Core.Controllers.EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
+		protected EvaluationsController(EvaluationController evaluationCoreController,
+			EvaluationTracker evaluationTracker, IAuthorizationService authorizationService)
 		{
 			EvaluationCoreController = evaluationCoreController;
 			_evaluationTracker = evaluationTracker;
@@ -23,7 +25,8 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 
 		protected IActionResult Get(string token, int? gameId)
 		{
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement) HttpContext.Items["Requirements"])
+				.Result)
 			{
 				var evaluation = EvaluationCoreController.Get(token, gameId);
 				var evaluationContract = evaluation.ToContract();
@@ -34,10 +37,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 
 		protected IActionResult Get(int? gameId)
 		{
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement) HttpContext.Items["Requirements"])
+				.Result)
 			{
 				var evaluation = EvaluationCoreController.GetByGame(gameId);
-				var evaluationContract = evaluation.ToContractList();
+				var evaluationContract = evaluation.ToCollectionContract();
 				return new ObjectResult(evaluationContract);
 			}
 			return Forbid();
@@ -47,7 +51,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			// todo: should this be taken from the progress cache?
 			var evaluationsProgress = EvaluationCoreController.GetGameProgress(gameId, actorId);
-			var evaluationsProgressResponses = evaluationsProgress.ToContractList();
+			var evaluationsProgressResponses = evaluationsProgress.ToCollectionContract();
 			return new ObjectResult(evaluationsProgressResponses);
 		}
 
@@ -56,15 +60,17 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 			// todo: should this be taken from the progress cache?
 			var evaluation = EvaluationCoreController.Get(token, gameId);
 			var progress = EvaluationCoreController.EvaluateProgress(evaluation, actorId);
-			return new ObjectResult(new EvaluationProgressResponse {
+			return new ObjectResult(new EvaluationProgressResponse
+			{
 				Name = evaluation.Name,
-				Progress = progress,
+				Progress = progress
 			});
 		}
 
 		protected IActionResult Delete(string token, int? gameId)
 		{
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement) HttpContext.Items["Requirements"])
+				.Result)
 			{
 				EvaluationCoreController.Delete(token, gameId);
 				return Ok();

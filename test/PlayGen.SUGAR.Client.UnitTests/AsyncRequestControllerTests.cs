@@ -28,7 +28,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var onErrorValues = new List<int>();
 
 			var asyncRequestController = DefaultAsyncRequestController;
-			var values = Enumerable.Range(0, 1000).ToList();
+			var values = Enumerable.Range(0, 1000)
+				.ToList();
 
 			// Act
 			values.ForEach(i =>
@@ -40,12 +41,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var responseCount = 0;
 			while (responseCount < values.Count)
-			{
 				if (asyncRequestController.TryExecuteResponse())
-				{
 					responseCount++;
-				}
-			}
 
 			// Assert
 			CollectionAssert.IsEmpty(onErrorValues);
@@ -60,7 +57,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var onErrorValues = new List<int>();
 
 			var asyncRequestController = DefaultAsyncRequestController;
-			var values = Enumerable.Range(0, 1000).ToList();
+			var values = Enumerable.Range(0, 1000)
+				.ToList();
 
 			// Act
 			values.ForEach(i =>
@@ -72,12 +70,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var responseCount = 0;
 			while (responseCount < values.Count)
-			{
 				if (asyncRequestController.TryExecuteResponse())
-				{
 					responseCount++;
-				}
-			}
 
 			// Assert
 			CollectionAssert.IsEmpty(onErrorValues);
@@ -92,7 +86,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var onSuccessValues = new List<int>();
 
 			var asyncRequestController = DefaultAsyncRequestController;
-			var values = Enumerable.Range(0, 1000).ToList();
+			var values = Enumerable.Range(0, 1000)
+				.ToList();
 
 			// Act
 			values.ForEach(i =>
@@ -108,12 +103,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var responseCount = 0;
 			while (responseCount < values.Count)
-			{
 				if (asyncRequestController.TryExecuteResponse())
-				{
 					responseCount++;
-				}
-			}
 
 			// Assert
 			CollectionAssert.IsEmpty(onSuccessValues);
@@ -135,12 +126,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var timeout = 1 * 1000;
 
 			while (!didTimeout && stopWatch.ElapsedMilliseconds < timeout)
-			{
 				if (asyncRequestController.TryExecuteResponse())
-				{
 					responseCount++;
-				}
-			}
 
 			// Assert
 			Assert.IsTrue(didTimeout);

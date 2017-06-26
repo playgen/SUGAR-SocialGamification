@@ -1,14 +1,14 @@
 ﻿using System;
-using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
 using NLog;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class ActorDataController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly Data.EntityFramework.Controllers.ActorDataController _actorDataDbController;
 
@@ -45,10 +45,7 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 				return newData;
 			}
-			else
-			{
-				throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
-			}
+			throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
 		}
 
 		public void Update(ActorData newData)

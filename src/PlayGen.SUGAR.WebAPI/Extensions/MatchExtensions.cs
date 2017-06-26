@@ -1,21 +1,24 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Contracts;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Data.Model;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class MatchExtensions
 	{
-		public static List<MatchResponse> ToContractList(this List<Match> models)
+		public static CollectionResponse ToCollectionContract(this List<Match> models)
 		{
-			return models?.Select(ToContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
 		}
 
 		public static MatchResponse ToContract(this Match model)
 		{
-			return new MatchResponse {
+			return new MatchResponse
+			{
 				Id = model.Id,
 				Game = model.Game?.ToContract(),
 				Creator = model.Creator?.ToContract(),
@@ -26,14 +29,15 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 
 		public static EvaluationData ToMatchDataModel(this EvaluationDataRequest contract)
 		{
-			return new EvaluationData {
+			return new EvaluationData
+			{
 				GameId = contract.GameId,
 				MatchId = contract.MatchId,
 				ActorId = contract.CreatingActorId,
 				Key = contract.Key,
 				Value = contract.Value,
 				EvaluationDataType = contract.EvaluationDataType,
-				Category = EvaluationDataCategory.MatchData,
+				Category = EvaluationDataCategory.MatchData
 			};
 		}
 	}

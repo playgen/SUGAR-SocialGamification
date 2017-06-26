@@ -7,14 +7,12 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class UserExtensions
 	{
-
 		public static UserResponse ToContract(this User userModel)
 		{
 			if (userModel == null)
-			{
 				return null;
-			}
-			var userContract = new UserResponse {
+			var userContract = new UserResponse
+			{
 				Id = userModel.Id,
 				Name = userModel.Name
 			};
@@ -22,14 +20,17 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			return userContract;
 		}
 
-		public static IEnumerable<UserResponse> ToContractList(this IEnumerable<User> userModels)
+		public static CollectionResponse ToCollectionContract(this IEnumerable<User> models)
 		{
-			return userModels.Select(ToContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
 		}
 
 		public static User ToUserModel(this UserRequest userContract)
 		{
-			return new User {
+			return new User
+			{
 				Name = userContract.Name
 			};
 		}

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts;
-using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var groupRequest = new GroupRequest
 			{
-				Name = "CanCreateGroup",
+				Name = "CanCreateGroup"
 			};
 
 			var response = SUGARClient.Group.Create(groupRequest);
@@ -26,7 +26,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var groupRequest = new GroupRequest
 			{
-				Name = "CannotCreateDuplicateGroup",
+				Name = "CannotCreateDuplicateGroup"
 			};
 
 			SUGARClient.Group.Create(groupRequest);
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CannotCreateGroupWithNoName()
 		{
-			var groupRequest = new GroupRequest { };
+			var groupRequest = new GroupRequest();
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Group.Create(groupRequest));
 		}
@@ -47,14 +47,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var groupRequestOne = new GroupRequest
 			{
-				Name = "CanGetGroupsByName 1",
+				Name = "CanGetGroupsByName 1"
 			};
 
 			var responseOne = SUGARClient.Group.Create(groupRequestOne);
 
 			var groupRequestTwo = new GroupRequest
 			{
-				Name = "CanGetGroupsByName 2",
+				Name = "CanGetGroupsByName 2"
 			};
 
 			var responseTwo = SUGARClient.Group.Create(groupRequestTwo);
@@ -83,7 +83,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var groupRequest = new GroupRequest
 			{
-				Name = "CanGetGroupById",
+				Name = "CanGetGroupById"
 			};
 
 			var response = SUGARClient.Group.Create(groupRequest);
@@ -107,7 +107,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var groupRequest = new GroupRequest
 			{
-				Name = "CanUpdateGroup",
+				Name = "CanUpdateGroup"
 			};
 
 			var response = SUGARClient.Group.Create(groupRequest);
@@ -166,14 +166,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var groupRequest = new GroupRequest
 			{
-				Name = "CannotUpdateGroupToNoName",
+				Name = "CannotUpdateGroupToNoName"
 			};
 
 			var response = SUGARClient.Group.Create(groupRequest);
 
-			var updateRequest = new GroupRequest
-			{
-			};
+			var updateRequest = new GroupRequest();
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Group.Update(response.Id, updateRequest));
 		}
@@ -183,7 +181,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var groupRequest = new GroupRequest
 			{
-				Name = "CanDeleteGroup",
+				Name = "CanDeleteGroup"
 			};
 
 			var response = SUGARClient.Group.Create(groupRequest);

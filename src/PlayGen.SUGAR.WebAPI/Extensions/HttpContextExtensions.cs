@@ -1,11 +1,11 @@
 ﻿using System;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using PlayGen.SUGAR.ServerAuthentication.Extensions;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.Abstractions;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using PlayGen.SUGAR.ServerAuthentication.Extensions;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {
@@ -16,43 +16,43 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			int sessionId;
 
 			if (!context.Request.Headers.TryGetClaim("SessionId", out sessionId))
-			{
 				throw new ArgumentException("Couldn't get claim \"SessionId\".");
-			}
 
 			return sessionId;
 		}
 
-		public static IEnumerable<T> GetCustomMethodAttributes<T>(this ActionDescriptor actionDescriptor) where T : Attribute
+		public static IEnumerable<T> GetCustomMethodAttributes<T>(this ActionDescriptor actionDescriptor)
+			where T : Attribute
 		{
 			var controllerActionDescriptor = actionDescriptor as ControllerActionDescriptor;
 			if (controllerActionDescriptor != null)
-			{
 				return controllerActionDescriptor.MethodInfo.GetCustomAttributes<T>(true);
-			}
 
 			return Enumerable.Empty<T>();
 		}
 
-		public static T GetCustomMethodAttribute<T>(this ActionDescriptor actionDescriptor) where T : Attribute
+		public static T GetCustomMethodAttribute<T>(this ActionDescriptor actionDescriptor)
+			where T : Attribute
 		{
-			return actionDescriptor.GetCustomMethodAttributes<T>().FirstOrDefault();
+			return actionDescriptor.GetCustomMethodAttributes<T>()
+				.FirstOrDefault();
 		}
 
-		public static IEnumerable<T> GetCustomClassAttributes<T>(this ActionDescriptor actionDescriptor) where T : Attribute
+		public static IEnumerable<T> GetCustomClassAttributes<T>(this ActionDescriptor actionDescriptor)
+			where T : Attribute
 		{
 			var controllerActionDescriptor = actionDescriptor as ControllerActionDescriptor;
 			if (controllerActionDescriptor != null)
-			{
 				return controllerActionDescriptor.ControllerTypeInfo.GetCustomAttributes<T>(true);
-			}
 
 			return Enumerable.Empty<T>();
 		}
 
-		public static T GetCustomClassAttribute<T>(this ActionDescriptor actionDescriptor) where T : Attribute
+		public static T GetCustomClassAttribute<T>(this ActionDescriptor actionDescriptor)
+			where T : Attribute
 		{
-			return actionDescriptor.GetCustomClassAttributes<T>().FirstOrDefault();
+			return actionDescriptor.GetCustomClassAttributes<T>()
+				.FirstOrDefault();
 		}
 	}
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-
 using Microsoft.EntityFrameworkCore;
-
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
 using PlayGen.SUGAR.Data.Model;
@@ -68,7 +64,8 @@ namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
 
 				if (existing != null)
 				{
-					context.Entry(existing).State = EntityState.Modified;
+					context.Entry(existing)
+						.State = EntityState.Modified;
 					existing.Description = source.Description;
 					existing.Token = source.Token;
 					existing.RequiresPassword = source.RequiresPassword;

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
-using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Data.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;
+using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Data.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Data.EntityFramework
 {
 	/// <summary>
-	/// Entity Framework Database Configuration
+	///     Entity Framework Database Configuration
 	/// </summary>
 	public class SUGARContext : DbContext
 	{
@@ -19,12 +19,12 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		{
 			_isSaveDisabled = disableSave;
 		}
-		
+
 		public DbSet<Account> Accounts { get; set; }
 		public DbSet<AccountSource> AccountSources { get; set; }
 
 		public DbSet<Game> Games { get; set; }
-		
+
 		public DbSet<Evaluation> Evaluations { get; set; }
 		public DbSet<SentEvaluationNotification> SentEvaluationNotifications { get; set; }
 		public DbSet<Achievement> Achievements { get; set; }
@@ -65,14 +65,14 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 		{
 			UpdateModificationHistory();
 
-			return _isSaveDisabled 
+			return _isSaveDisabled
 				? 0
 				: base.SaveChanges();
 		}
 
 		/// <summary>
-		/// User reflection to detect classes that implement the IModificationHistory interface
-		/// and set their DateCreated and DateModified DateTime fields accordingly.
+		///     User reflection to detect classes that implement the IModificationHistory interface
+		///     and set their DateCreated and DateModified DateTime fields accordingly.
 		/// </summary>
 		private void UpdateModificationHistory()
 		{
@@ -85,9 +85,7 @@ namespace PlayGen.SUGAR.Data.EntityFramework
 				history.DateModified = DateTime.Now;
 
 				if (history.DateCreated == default(DateTime))
-				{
 					history.DateCreated = DateTime.Now;
-				}
 			}
 		}
 	}

@@ -10,11 +10,10 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		public static AccountSourceResponse ToContract(this AccountSource sourceModel)
 		{
 			if (sourceModel == null)
-			{
 				return null;
-			}
 
-			return new AccountSourceResponse {
+			return new AccountSourceResponse
+			{
 				Id = sourceModel.Id,
 				Description = sourceModel.Description,
 				Token = sourceModel.Token,
@@ -23,20 +22,23 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static IEnumerable<AccountSourceResponse> ToContractList(this IEnumerable<AccountSource> sourceModels)
+		public static CollectionResponse ToCollectionContract(this IEnumerable<AccountSource> sourceModels)
 		{
-			return sourceModels.Select(ToContract).ToList();
+			return new CollectionResponse()
+			{
+				Items = sourceModels.Select(ToContract).ToArray(),
+			}; 
 		}
 
 		public static AccountSource ToModel(this AccountSourceRequest sourceContract)
 		{
-			return new AccountSource {
+			return new AccountSource
+			{
 				Description = sourceContract.Description,
 				Token = sourceContract.Token,
 				RequiresPassword = sourceContract.RequiresPassword,
 				AutoRegister = sourceContract.AutoRegister
 			};
 		}
-
 	}
 }

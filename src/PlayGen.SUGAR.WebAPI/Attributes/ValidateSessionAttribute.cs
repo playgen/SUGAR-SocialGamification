@@ -2,8 +2,8 @@
 
 namespace PlayGen.SUGAR.WebAPI.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class ValidateSessionAttribute : Attribute
-    {
-    }
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+	public class ValidateSessionAttribute : Attribute
+	{
+	}
 }

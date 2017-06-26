@@ -8,18 +8,18 @@ namespace PlayGen.SUGAR.Core.Controllers
 {
 	public class GroupController : ActorController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
-		private readonly Data.EntityFramework.Controllers.GroupController _groupDbController;
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		private readonly ActorClaimController _actorClaimController;
 		private readonly ActorRoleController _actorRoleController;
+
+		private readonly Data.EntityFramework.Controllers.GroupController _groupDbController;
 		private readonly GroupMemberController _groupMemberController;
 
 		public GroupController(Data.EntityFramework.Controllers.GroupController groupDbController,
-					Data.EntityFramework.Controllers.ActorController actorDbController,
-					ActorClaimController actorClaimController,
-					ActorRoleController actorRoleController,
-					GroupMemberController groupMemberController) : base(actorDbController)
+			Data.EntityFramework.Controllers.ActorController actorDbController,
+			ActorClaimController actorClaimController,
+			ActorRoleController actorRoleController,
+			GroupMemberController groupMemberController) : base(actorDbController)
 		{
 			_groupDbController = groupDbController;
 			_actorClaimController = actorClaimController;
@@ -39,8 +39,11 @@ namespace PlayGen.SUGAR.Core.Controllers
 		public List<Group> GetByPermissions(int actorId)
 		{
 			var groups = Get();
-			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Group).Select(p => p.EntityId).ToList();
-			groups = groups.Where(g => permissions.Contains(g.Id)).ToList();
+			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Group)
+				.Select(p => p.EntityId)
+				.ToList();
+			groups = groups.Where(g => permissions.Contains(g.Id))
+				.ToList();
 
 			Logger.Info($"{groups?.Count} Groups");
 
@@ -69,7 +72,13 @@ namespace PlayGen.SUGAR.Core.Controllers
 		{
 			newGroup = _groupDbController.Create(newGroup);
 			_actorRoleController.Create(ClaimScope.Group.ToString(), creatorId, newGroup.Id);
-			_groupMemberController.CreateMemberRequest(new UserToGroupRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
+			_groupMemberController.CreateMemberRequest(
+				new UserToGroupRelationship
+				{
+					RequestorId = creatorId,
+					AcceptorId = newGroup.Id
+				},
+				true);
 
 			Logger.Info($"{newGroup?.Id} for CreatorId: {creatorId}");
 

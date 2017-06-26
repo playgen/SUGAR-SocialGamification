@@ -8,14 +8,14 @@ namespace PlayGen.SUGAR.Core.Exceptions
 		{
 		}
 
-		public InvalidAccountDetailsException(string message) 
+		public InvalidAccountDetailsException(string message)
 			: base(message)
 		{
 		}
 
-		public InvalidAccountDetailsException(string message, Exception inner) 
+		public InvalidAccountDetailsException(string message, Exception inner)
 			: base(message, inner)
-		{   
+		{
 		}
 	}
 }

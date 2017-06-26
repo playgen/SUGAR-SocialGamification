@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
-using NUnit.Framework;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
@@ -14,15 +14,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CanCreateSkill",
 				ActorType = ActorType.User,
 				Token = "CanCreateSkill",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanCreateSkill",
 						ComparisonType = ComparisonType.Equals,
@@ -30,9 +30,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
@@ -43,14 +42,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 		public void CanCreateGlobalSkill()
 		{
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CanCreateGlobalSkill",
 				ActorType = ActorType.User,
 				Token = "CanCreateGlobalSkill",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanCreateGlobalSkill",
 						ComparisonType = ComparisonType.Equals,
@@ -58,9 +57,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
@@ -74,15 +72,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateDuplicateSkill",
 				ActorType = ActorType.User,
 				Token = "CannotCreateDuplicateSkill",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotCreateDuplicateSkill",
 						ComparisonType = ComparisonType.Equals,
@@ -90,9 +88,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			SUGARClient.Skill.Create(skillRequest);
@@ -105,14 +102,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				ActorType = ActorType.User,
 				Token = "CannotCreateSkillWithNoName",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotCreateSkillWithNoName",
 						ComparisonType = ComparisonType.Equals,
@@ -120,9 +117,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Create(skillRequest));
@@ -133,14 +129,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateSkillWithNoToken",
 				ActorType = ActorType.User,
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotCreateSkillWithNoToken",
 						ComparisonType = ComparisonType.Equals,
@@ -148,9 +144,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Create(skillRequest));
@@ -161,12 +156,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateSkillWithNoEvaluationCriteria",
 				ActorType = ActorType.User,
 				Token = "CannotCreateSkillWithNoEvaluationCriteria",
-				GameId = game.Id,
+				GameId = game.Id
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Create(skillRequest));
@@ -177,24 +172,23 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateSkillWithNoEvaluationCriteriaKey",
 				ActorType = ActorType.User,
 				Token = "CannotCreateSkillWithNoEvaluationCriteriaKey",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Create(skillRequest));
@@ -205,23 +199,23 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateSkillWithNoEvaluationCriteriaValue",
 				ActorType = ActorType.User,
 				Token = "CannotCreateSkillWithNoEvaluationCriteriaValue",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotCreateSkillWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
-						Scope = CriteriaScope.Actor,
+						Scope = CriteriaScope.Actor
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Create(skillRequest));
@@ -232,15 +226,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotCreateSkillWithNoEvaluationCriteriaDataTypeMismatch",
 				ActorType = ActorType.User,
 				Token = "CannotCreateSkillWithNoEvaluationCriteriaDataTypeMismatch",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotCreateSkillWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
@@ -249,7 +243,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						Scope = CriteriaScope.Actor,
 						Value = "A string"
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Create(skillRequest));
@@ -260,15 +254,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "GameGet");
 
-			var skillRequestOne = new EvaluationCreateRequest()
+			var skillRequestOne = new EvaluationCreateRequest
 			{
 				Name = "CanGetSkillsByGameOne",
 				ActorType = ActorType.User,
 				Token = "CanGetSkillsByGameOne",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanGetSkillsByGameOne",
 						ComparisonType = ComparisonType.Equals,
@@ -276,22 +270,21 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var responseOne = SUGARClient.Skill.Create(skillRequestOne);
 
-			var skillRequestTwo = new EvaluationCreateRequest()
+			var skillRequestTwo = new EvaluationCreateRequest
 			{
 				Name = "CanGetSkillsByGameTwo",
 				ActorType = ActorType.User,
 				Token = "CanGetSkillsByGameTwo",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanGetSkillsByGameTwo",
 						ComparisonType = ComparisonType.Equals,
@@ -299,9 +292,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var responseTwo = SUGARClient.Skill.Create(skillRequestTwo);
@@ -316,15 +308,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CanGetSkillByKeys",
 				ActorType = ActorType.User,
 				Token = "CanGetSkillByKeys",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanGetSkillByKeys",
 						ComparisonType = ComparisonType.Equals,
@@ -332,9 +324,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
@@ -362,18 +353,18 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			Assert.Throws<ClientException>(() => SUGARClient.Skill.GetById("", game.Id));
 		}
-        
+
 		[Test]
 		public void CanGetGlobalSkillByToken()
 		{
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CanGetGlobalSkillByToken",
 				ActorType = ActorType.User,
 				Token = "CanGetGlobalSkillByToken",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanGetGlobalSkillByToken",
 						ComparisonType = ComparisonType.Equals,
@@ -381,9 +372,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
@@ -407,7 +397,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			Assert.Throws<ClientException>(() => SUGARClient.Skill.GetGlobalById(""));
 		}
-        
+
 		[Test]
 		public void CannotGetBySkillsByNotExistingGameId()
 		{
@@ -421,15 +411,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CanUpdateSkill",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CanUpdateSkill",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanUpdateSkill",
 						ComparisonType = ComparisonType.Equals,
@@ -437,34 +427,33 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CanUpdateSkill Updated",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CanUpdateSkill",
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
+						Id = response.EvaluationCriterias[0]
+							.Id,
 						EvaluationDataKey = "CanUpdateSkill",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			SUGARClient.Skill.Update(updateRequest);
@@ -480,15 +469,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var skillRequestOne = new EvaluationCreateRequest()
+			var skillRequestOne = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateSkillToDuplicateNameOne",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillToDuplicateNameOne",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotUpdateSkillToDuplicateNameOne",
 						ComparisonType = ComparisonType.Equals,
@@ -496,22 +485,21 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var responseOne = SUGARClient.Skill.Create(skillRequestOne);
 
-			var skillRequestTwo = new EvaluationCreateRequest()
+			var skillRequestTwo = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateSkillToDuplicateNameTwo",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillToDuplicateNameTwo",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotUpdateSkillToDuplicateNameTwo",
 						ComparisonType = ComparisonType.Equals,
@@ -519,34 +507,33 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var responseTwo = SUGARClient.Skill.Create(skillRequestTwo);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = responseTwo.Id,
+				Id = responseTwo.Id,
 				Name = "CannotUpdateSkillToDuplicateNameOne",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillToDuplicateNameOne",
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = responseTwo.EvaluationCriterias[0].Id,
+						Id = responseTwo.EvaluationCriterias[0]
+							.Id,
 						EvaluationDataKey = "CannotUpdateSkillToDuplicateNameTwo",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Update(updateRequest));
@@ -557,27 +544,26 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = int.MaxValue,
+				Id = int.MaxValue,
 				Name = "CannotUpdateNonExistingSkill",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateNonExistingSkill",
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = int.MaxValue,
+						Id = int.MaxValue,
 						EvaluationDataKey = "CannotUpdateNonExistingSkill",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Update(updateRequest));
@@ -588,15 +574,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateAchievemenWithNoName",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievemenWithNoName",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotUpdateAchievemenWithNoName",
 						ComparisonType = ComparisonType.Equals,
@@ -604,33 +590,32 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateAchievemenWithNoName",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
+						Id = response.EvaluationCriterias[0]
+							.Id,
 						EvaluationDataKey = "CannotUpdateAchievemenWithNoName",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Update(updateRequest));
@@ -641,15 +626,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateSkillWithNoToken",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillWithNoToken",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotUpdateSkillWithNoToken",
 						ComparisonType = ComparisonType.Equals,
@@ -657,33 +642,32 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CannotUpdateSkillWithNoToken",
 				ActorType = ActorType.User,
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
+						Id = response.EvaluationCriterias[0]
+							.Id,
 						EvaluationDataKey = "CannotUpdateSkillWithNoToken",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Update(updateRequest));
@@ -694,15 +678,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateSkillWithNoEvaluationCriteria",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillWithNoEvaluationCriteria",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotUpdateSkillWithNoEvaluationCriteria",
 						ComparisonType = ComparisonType.Equals,
@@ -710,20 +694,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CannotUpdateSkillWithNoEvaluationCriteria",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillWithNoEvaluationCriteria",
-				GameId = game.Id,
+				GameId = game.Id
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Update(updateRequest));
@@ -734,15 +717,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateSkillWithNoEvaluationCriteriaKey",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillWithNoEvaluationCriteriaKey",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotUpdateSkillWithNoEvaluationCriteriaKey",
 						ComparisonType = ComparisonType.Equals,
@@ -750,33 +733,32 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CannotUpdateSkillWithNoEvaluationCriteriaKey",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillWithNoEvaluationCriteriaKey",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
+						Id = response.EvaluationCriterias[0]
+							.Id,
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Update(updateRequest));
@@ -787,15 +769,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateSkillWithNoEvaluationCriteriaValue",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillWithNoEvaluationCriteriaValue",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotUpdateSkillWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
@@ -803,32 +785,32 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CannotUpdateSkillWithNoEvaluationCriteriaValue",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillWithNoEvaluationCriteriaValue",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
+						Id = response.EvaluationCriterias[0]
+							.Id,
 						EvaluationDataKey = "CannotUpdateSkillWithNoEvaluationCriteriaValue",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
 						EvaluationDataType = EvaluationDataType.Float,
-						Scope = CriteriaScope.Actor,
+						Scope = CriteriaScope.Actor
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Update(updateRequest));
@@ -839,15 +821,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Update");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CannotUpdateSkillWithNoEvaluationCriteriaDataTypeMismatch",
 				GameId = game.Id,
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillWithNoEvaluationCriteriaDataTypeMismatch",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CannotUpdateSkillWithNoEvaluationCriteriaDataTypeMismatch",
 						ComparisonType = ComparisonType.Equals,
@@ -855,25 +837,25 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
 
-			var updateRequest = new EvaluationUpdateRequest()
+			var updateRequest = new EvaluationUpdateRequest
 			{
-                Id = response.Id,
+				Id = response.Id,
 				Name = "CannotUpdateSkillWithNoEvaluationCriteriaDataTypeMismatch",
 				ActorType = ActorType.User,
 				Token = "CannotUpdateSkillWithNoEvaluationCriteriaDataTypeMismatch",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaUpdateRequest>
 				{
-					new EvaluationCriteriaUpdateRequest()
+					new EvaluationCriteriaUpdateRequest
 					{
-                        Id = response.EvaluationCriterias[0].Id,
+						Id = response.EvaluationCriterias[0]
+							.Id,
 						EvaluationDataKey = "CannotUpdateSkillWithNoEvaluationCriteriaDataTypeMismatch",
 						ComparisonType = ComparisonType.Equals,
 						CriteriaQueryType = CriteriaQueryType.Any,
@@ -881,7 +863,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						Scope = CriteriaScope.Actor,
 						Value = "A string"
 					}
-				},
+				}
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.Update(updateRequest));
@@ -892,15 +874,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Delete");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CanDeleteSkill",
 				ActorType = ActorType.User,
 				Token = "CanDeleteSkill",
 				GameId = game.Id,
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanDeleteSkill",
 						ComparisonType = ComparisonType.Equals,
@@ -908,9 +890,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
@@ -945,14 +926,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		[Test]
 		public void CanDeleteGlobalSkill()
 		{
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CanDeleteGlobalSkill",
 				ActorType = ActorType.User,
 				Token = "CanDeleteGlobalSkill",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanDeleteGlobalSkill",
 						ComparisonType = ComparisonType.Equals,
@@ -960,9 +941,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						EvaluationDataType = EvaluationDataType.Float,
 						Scope = CriteriaScope.Actor,
 						Value = "1"
-
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
@@ -995,14 +975,14 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CanGetGlobalSkillProgress",
 				ActorType = ActorType.Undefined,
 				Token = "CanGetGlobalSkillProgress",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanGetGlobalSkillProgress",
 						ComparisonType = ComparisonType.Equals,
@@ -1011,7 +991,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
@@ -1022,7 +1002,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var progressSkill = SUGARClient.Skill.GetGlobalSkillProgress(response.Token, user.Id);
 			Assert.AreEqual(0, progressSkill.Progress);
 
-			var gameData = new EvaluationDataRequest()
+			var gameData = new EvaluationDataRequest
 			{
 				Key = "CanGetGlobalSkillProgress",
 				Value = "1",
@@ -1041,7 +1021,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.GetGlobalSkillProgress("CannotGetNotExistingGlobalSkillProgress", user.Id));
+			Assert.Throws<ClientHttpException>(
+				() => SUGARClient.Skill.GetGlobalSkillProgress("CannotGetNotExistingGlobalSkillProgress", user.Id));
 		}
 
 		[Test]
@@ -1050,15 +1031,15 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "ProgressGet");
 
-			var skillRequest = new EvaluationCreateRequest()
+			var skillRequest = new EvaluationCreateRequest
 			{
 				Name = "CanGetSkillProgress",
 				GameId = game.Id,
 				ActorType = ActorType.Undefined,
 				Token = "CanGetSkillProgress",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
 				{
-					new EvaluationCriteriaCreateRequest()
+					new EvaluationCriteriaCreateRequest
 					{
 						EvaluationDataKey = "CanGetSkillProgress",
 						ComparisonType = ComparisonType.Equals,
@@ -1067,7 +1048,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 						Scope = CriteriaScope.Actor,
 						Value = "1"
 					}
-				},
+				}
 			};
 
 			var response = SUGARClient.Skill.Create(skillRequest);
@@ -1078,7 +1059,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var progressSkill = SUGARClient.Skill.GetSkillProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(0, progressSkill.Progress);
 
-			var gameData = new EvaluationDataRequest()
+			var gameData = new EvaluationDataRequest
 			{
 				Key = "CanGetSkillProgress",
 				Value = "1",
@@ -1099,30 +1080,27 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, "ProgressGet");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "ProgressGet");
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Skill.GetSkillProgress("CannotGetNotExistingSkillProgress", game.Id, user.Id));
+			Assert.Throws<ClientHttpException>(
+				() => SUGARClient.Skill.GetSkillProgress("CannotGetNotExistingSkillProgress", game.Id, user.Id));
 		}
 
-        #region Helpers
-        protected override EvaluationResponse CreateEvaluation(EvaluationCreateRequest skillRequest)
-        {
-            var getSkill = SUGARClient.Skill.GetById(skillRequest.Token, skillRequest.GameId ?? 0);
+		#region Helpers
 
-            if (getSkill != null)
-            {
-                if (skillRequest.GameId.HasValue)
-                {
-                    SUGARClient.Skill.Delete(skillRequest.Token, skillRequest.GameId.Value);
-                }
-                else
-                {
-                    SUGARClient.Skill.DeleteGlobal(skillRequest.Token);
-                }
-            }
+		protected override EvaluationResponse CreateEvaluation(EvaluationCreateRequest skillRequest)
+		{
+			var getSkill = SUGARClient.Skill.GetById(skillRequest.Token, skillRequest.GameId ?? 0);
 
-            var response = SUGARClient.Skill.Create(skillRequest);
+			if (getSkill != null)
+				if (skillRequest.GameId.HasValue)
+					SUGARClient.Skill.Delete(skillRequest.Token, skillRequest.GameId.Value);
+				else
+					SUGARClient.Skill.DeleteGlobal(skillRequest.Token);
 
-            return response;
-        }
-        #endregion
-    }
+			var response = SUGARClient.Skill.Create(skillRequest);
+
+			return response;
+		}
+
+		#endregion
+	}
 }

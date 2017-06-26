@@ -7,29 +7,34 @@ using PlayGen.SUGAR.Contracts;
 namespace PlayGen.SUGAR.Client
 {
 	/// <summary>
-	/// Controller that facilitates User to Group relationship specific operations.
+	///     Controller that facilitates User to Group relationship specific operations.
 	/// </summary>
 	public class GroupMemberClient : ClientBase
 	{
 		private const string ControllerPrefix = "api/groupmember";
 
-		public GroupMemberClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
+		public GroupMemberClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController,
+			EvaluationNotifications evaluationNotifications)
 			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have relationship requests for this <param name="groupId"/>.
+		///     Get a list of all Users that have relationship requests for this
+		///     <param name="groupId" />
+		///     .
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/requests/{0}", groupId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/requests/{0}", groupId)
+				.ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
-		public void GetMemberRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		public void GetMemberRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess,
+			Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetMemberRequests(userId),
 				onSuccess,
@@ -37,13 +42,16 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Get a list of all Groups that have been sent relationship requests for this <param name="userId"/>.
+		///     Get a list of all Groups that have been sent relationship requests for this
+		///     <param name="userId" />
+		///     .
 		/// </summary>
 		/// <param name="userId">ID of the user.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetSentRequests(int userId)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/sentrequests/{0}", userId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/sentrequests/{0}", userId)
+				.ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -55,13 +63,16 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have relationships with this <param name="groupId"/>.
+		///     Get a list of all Users that have relationships with this
+		///     <param name="groupId" />
+		///     .
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetMembers(int groupId)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/members/{0}", groupId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/members/{0}", groupId)
+				.ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -73,13 +84,16 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Get a list of all Groups that have relationships with this <param name="userId"/>.
+		///     Get a list of all Groups that have relationships with this
+		///     <param name="userId" />
+		///     .
 		/// </summary>
 		/// <param name="userId">ID of the User.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
 		public IEnumerable<ActorResponse> GetUserGroups(int userId)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/usergroups/{0}", userId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/usergroups/{0}", userId)
+				.ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
@@ -91,18 +105,23 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Create a new relationship request between the User and Group.
-		/// Requires a relationship between the User and Group to not already exist.
+		///     Create a new relationship request between the User and Group.
+		///     Requires a relationship between the User and Group to not already exist.
 		/// </summary>
-		/// <param name="relationship"><see cref="RelationshipRequest"/> object that holds the details of the new relationship request.</param>
-		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
+		/// <param name="relationship">
+		///     <see cref="RelationshipRequest" /> object that holds the details of the new relationship
+		///     request.
+		/// </param>
+		/// <returns>A <see cref="RelationshipResponse" /> containing the new Relationship details.</returns>
 		public RelationshipResponse CreateMemberRequest(RelationshipRequest relationship)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "")
+				.ToString();
 			return Post<RelationshipRequest, RelationshipResponse>(query, relationship);
 		}
 
-		public void CreateMemberRequestAsync(RelationshipRequest relationship, Action<RelationshipResponse> onSuccess, Action<Exception> onError)
+		public void CreateMemberRequestAsync(RelationshipRequest relationship, Action<RelationshipResponse> onSuccess,
+			Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => CreateMemberRequest(relationship),
 				onSuccess,
@@ -110,17 +129,23 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Update an existing relationship request between <param name="relationship.UserId"/> and <param name="relationship.GroupId"/>.
-		/// Requires the relationship request to already exist between the User and Group.
+		///     Update an existing relationship request between
+		///     <param name="relationship.UserId" />
+		///     and
+		///     <param name="relationship.GroupId" />
+		///     .
+		///     Requires the relationship request to already exist between the User and Group.
 		/// </summary>
-		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
+		/// <param name="relationship"><see cref="RelationshipStatusUpdate" /> object that holds the details of the relationship.</param>
 		public void UpdateMemberRequest(RelationshipStatusUpdate relationship)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/request").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/request")
+				.ToString();
 			Put(query, relationship);
 		}
 
-		public void UpdateMemberRequestAsync(RelationshipStatusUpdate relationship, Action onSuccess, Action<Exception> onError)
+		public void UpdateMemberRequestAsync(RelationshipStatusUpdate relationship, Action onSuccess,
+			Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => UpdateMemberRequest(relationship),
 				onSuccess,
@@ -128,13 +153,18 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Update an existing relationship between <param name="relationship.UserId"/> and <param name="relationship.GroupId"/>.
-		/// Requires the relationship to already exist between the User and Group.
+		///     Update an existing relationship between
+		///     <param name="relationship.UserId" />
+		///     and
+		///     <param name="relationship.GroupId" />
+		///     .
+		///     Requires the relationship to already exist between the User and Group.
 		/// </summary>
-		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
+		/// <param name="relationship"><see cref="RelationshipStatusUpdate" /> object that holds the details of the relationship.</param>
 		public void UpdateMember(RelationshipStatusUpdate relationship)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "")
+				.ToString();
 			Put(query, relationship);
 		}
 

@@ -10,24 +10,26 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 		public static RoleClaimResponse ToContract(this RoleClaim roleClaimModel)
 		{
 			if (roleClaimModel == null)
-			{
 				return null;
-			}
 
-			return new RoleClaimResponse {
+			return new RoleClaimResponse
+			{
 				RoleId = roleClaimModel.RoleId,
 				ClaimId = roleClaimModel.ClaimId
 			};
 		}
 
-		public static IEnumerable<RoleClaimResponse> ToContractList(this IEnumerable<RoleClaim> roleClaimModels)
+		public static CollectionResponse ToCollectionContract(this IEnumerable<RoleClaim> models)
 		{
-			return roleClaimModels.Select(ToContract).ToList();
+			return new CollectionResponse() {
+				Items = models.Select(ToContract).ToArray(),
+			};
 		}
 
 		public static RoleClaim ToModel(this RoleClaimRequest roleClaimContract)
 		{
-			return new RoleClaim {
+			return new RoleClaim
+			{
 				RoleId = roleClaimContract.RoleId,
 				ClaimId = roleClaimContract.ClaimId
 			};

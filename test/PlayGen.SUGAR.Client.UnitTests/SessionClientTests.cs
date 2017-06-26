@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Reflection;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
@@ -10,211 +10,214 @@ using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client.UnitTests
 {
-    public class SessionClientTests : ClientTestsBase
-    {
-        [Test]
-        public void CanHeartbeatAndReissueToken()
-        {
-            // Arrange
-            var headers = (Dictionary<string, string>)
-                typeof(ClientBase)
-                .GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
-                .GetValue(SUGARClient.Session);
+	public class SessionClientTests : ClientTestsBase
+	{
+		[Test]
+		public void CanHeartbeatAndReissueToken()
+		{
+			// Arrange
+			var headers = (Dictionary<string, string>)
+				typeof(ClientBase)
+					.GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
+					.GetValue(SUGARClient.Session);
 
-            var originalToken = headers[HeaderKeys.Authorization];
-            
-            // Act
-            Thread.Sleep(1 * 1000);
-            SUGARClient.Session.Heartbeat();
+			var originalToken = headers[HeaderKeys.Authorization];
 
-            // Assert
-            var postHeartbeatToken = headers[HeaderKeys.Authorization];
-            Assert.AreNotEqual(originalToken, postHeartbeatToken);
-        }
+			// Act
+			Thread.Sleep(1 * 1000);
+			SUGARClient.Session.Heartbeat();
 
-        [Test]
-        public void NewTokenForUserLogin()
-        {
-            // Arrange
-            var headers = (Dictionary<string, string>)
-                typeof(ClientBase)
-                .GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
-                .GetValue(SUGARClient.Session);
+			// Assert
+			var postHeartbeatToken = headers[HeaderKeys.Authorization];
+			Assert.AreNotEqual(originalToken, postHeartbeatToken);
+		}
 
-            var originalToken = headers[HeaderKeys.Authorization];
+		[Test]
+		public void NewTokenForUserLogin()
+		{
+			// Arrange
+			var headers = (Dictionary<string, string>)
+				typeof(ClientBase)
+					.GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
+					.GetValue(SUGARClient.Session);
 
-            // Act
-            Helpers.Login(SUGARClient.Session, new AccountRequest
-            {
-                Name = "NewTokenForUserLogin",
-                Password = "NewTokenForUserLoginPassword",
-                SourceToken = "SUGAR"
-            });
+			var originalToken = headers[HeaderKeys.Authorization];
 
-            // Assert
-            var newToken = headers[HeaderKeys.Authorization];
-            Assert.AreNotEqual(originalToken, newToken);
-        }
+			// Act
+			Helpers.Login(SUGARClient.Session,
+				new AccountRequest
+				{
+					Name = "NewTokenForUserLogin",
+					Password = "NewTokenForUserLoginPassword",
+					SourceToken = "SUGAR"
+				});
 
-        [Test]
-        public void NewTokenForGameLogin()
-        {
-            // Arrange
-            var headers = (Dictionary<string, string>)
-                typeof(ClientBase)
-                .GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
-                .GetValue(SUGARClient.Session);
+			// Assert
+			var newToken = headers[HeaderKeys.Authorization];
+			Assert.AreNotEqual(originalToken, newToken);
+		}
 
-            var originalToken = headers[HeaderKeys.Authorization];
+		[Test]
+		public void NewTokenForGameLogin()
+		{
+			// Arrange
+			var headers = (Dictionary<string, string>)
+				typeof(ClientBase)
+					.GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
+					.GetValue(SUGARClient.Session);
 
-            var game = Helpers.GetOrCreateGame(SUGARClient.Game, "NewTokenForGameLogin_Original");
+			var originalToken = headers[HeaderKeys.Authorization];
 
-            Helpers.Login(SUGARClient.Session, game.Id, new AccountRequest
-            {
-                Name = "NewTokenForGameLogin",
-                Password = "NewTokenForGameLoginPassword",
-                SourceToken = "SUGAR"
-            });
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "NewTokenForGameLogin_Original");
 
-            LoginAdmin();
+			Helpers.Login(SUGARClient.Session,
+				game.Id,
+				new AccountRequest
+				{
+					Name = "NewTokenForGameLogin",
+					Password = "NewTokenForGameLoginPassword",
+					SourceToken = "SUGAR"
+				});
 
-            var newGame = Helpers.GetOrCreateGame(SUGARClient.Game, "NewTokenForGameLogin_New");
+			LoginAdmin();
 
-            // Act
-            Helpers.Login(SUGARClient.Session, newGame.Id, new AccountRequest
-            {
-                Name = "NewTokenForGameLogin",
-                Password = "NewTokenForGameLoginPassword",
-                SourceToken = "SUGAR"
-            });
+			var newGame = Helpers.GetOrCreateGame(SUGARClient.Game, "NewTokenForGameLogin_New");
 
-            // Assert
-            var newToken = headers[HeaderKeys.Authorization];
-            Assert.AreNotEqual(originalToken, newToken);
-        }
+			// Act
+			Helpers.Login(SUGARClient.Session,
+				newGame.Id,
+				new AccountRequest
+				{
+					Name = "NewTokenForGameLogin",
+					Password = "NewTokenForGameLoginPassword",
+					SourceToken = "SUGAR"
+				});
 
-        [Test]
-        public void CanCreateNewUserAndLogin()
-        {
-            var accountRequest = new AccountRequest
-            {
-                Name = "CanCreateNewUserAndLogin",
-                Password = "CanCreateNewUserAndLoginPassword",
-                SourceToken = "SUGAR",
-            };
+			// Assert
+			var newToken = headers[HeaderKeys.Authorization];
+			Assert.AreNotEqual(originalToken, newToken);
+		}
 
-            var registerResponse = SUGARClient.Session.CreateAndLogin(accountRequest);
+		[Test]
+		public void CanCreateNewUserAndLogin()
+		{
+			var accountRequest = new AccountRequest
+			{
+				Name = "CanCreateNewUserAndLogin",
+				Password = "CanCreateNewUserAndLoginPassword",
+				SourceToken = "SUGAR"
+			};
 
-            Assert.True(registerResponse.User.Id > 0);
-            Assert.AreEqual(accountRequest.Name, registerResponse.User.Name);
-        }
+			var registerResponse = SUGARClient.Session.CreateAndLogin(accountRequest);
 
-        [Test]
-        public void CanLoginUser()
-        {
-            var accountRequest = new AccountRequest
-            {
-                Name = "CanLoginUser",
-                Password = "CanLoginUserPassword",
-                SourceToken = "SUGAR"
-            };
+			Assert.True(registerResponse.User.Id > 0);
+			Assert.AreEqual(accountRequest.Name, registerResponse.User.Name);
+		}
 
-            SUGARClient.Account.Create(accountRequest);
+		[Test]
+		public void CanLoginUser()
+		{
+			var accountRequest = new AccountRequest
+			{
+				Name = "CanLoginUser",
+				Password = "CanLoginUserPassword",
+				SourceToken = "SUGAR"
+			};
 
-            var logged = SUGARClient.Session.Login(accountRequest);
+			SUGARClient.Account.Create(accountRequest);
 
-            Assert.True(logged.User.Id > 0);
-            Assert.AreEqual(accountRequest.Name, logged.User.Name);
-        }
+			var logged = SUGARClient.Session.Login(accountRequest);
 
-        [Test]
-        public void CanLoginUserAsync()
-        {
-            // Arrange
-            var accountRequest = new AccountRequest
-            {
-                Name = "CanLoginUserAsync",
-                Password = "CanLoginUserAsyncPassword",
-                SourceToken = "SUGAR"
-            };
+			Assert.True(logged.User.Id > 0);
+			Assert.AreEqual(accountRequest.Name, logged.User.Name);
+		}
 
-            var game = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLoginUserAsync");
+		[Test]
+		public void CanLoginUserAsync()
+		{
+			// Arrange
+			var accountRequest = new AccountRequest
+			{
+				Name = "CanLoginUserAsync",
+				Password = "CanLoginUserAsyncPassword",
+				SourceToken = "SUGAR"
+			};
 
-            SUGARClient.Account.Create(accountRequest);
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLoginUserAsync");
 
-            AccountResponse response = null;
-            Exception exception = null;
+			SUGARClient.Account.Create(accountRequest);
 
-            // Act
-            SUGARClient.Session.LoginAsync(game.Id,
-                accountRequest,
-                r => response = r,
-                e => exception = e);
+			AccountResponse response = null;
+			Exception exception = null;
 
-            // Assert
-            var executionCount = 0;
-            while (executionCount < 1)
-            {
-                if (SUGARClient.TryExecuteResponse())
-                {
-                    executionCount++;
-                }
-            }
+			// Act
+			SUGARClient.Session.LoginAsync(game.Id,
+				accountRequest,
+				r => response = r,
+				e => exception = e);
 
-            Assert.NotNull(response);
-            Assert.IsNull(exception);
-            StringAssert.AreEqualIgnoringCase(accountRequest.Name, response.User.Name);
-            Assert.GreaterOrEqual(response.User.Id, 1);
-        }
+			// Assert
+			var executionCount = 0;
+			while (executionCount < 1)
+				if (SUGARClient.TryExecuteResponse())
+					executionCount++;
 
-        [Test]
-        public void CannotLoginInvalidUser()
-        {
-            var accountRequest = new AccountRequest();
-            Assert.Throws<ClientHttpException>(() => SUGARClient.Session.Login(accountRequest));
-        }
+			Assert.NotNull(response);
+			Assert.IsNull(exception);
+			StringAssert.AreEqualIgnoringCase(accountRequest.Name, response.User.Name);
+			Assert.GreaterOrEqual(response.User.Id, 1);
+		}
 
-        [Test]
-        public void CanLogoutAndInvalidateSessionMethod()
-        {
-            // Arrange
-            SUGARClient.Session.CreateAndLogin(new AccountRequest
-            {
-                Name = "CanLogoutAndInvalidateSessionMethod",
-                Password = "CanLogoutAndInvalidateSessionMethodPassword",
-                SourceToken = "SUGAR",
-            });
+		[Test]
+		public void CannotLoginInvalidUser()
+		{
+			var accountRequest = new AccountRequest();
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Session.Login(accountRequest));
+		}
 
-            // Act
-            SUGARClient.Session.Logout();
+		[Test]
+		public void CanLogoutAndInvalidateSessionMethod()
+		{
+			// Arrange
+			SUGARClient.Session.CreateAndLogin(new AccountRequest
+			{
+				Name = "CanLogoutAndInvalidateSessionMethod",
+				Password = "CanLogoutAndInvalidateSessionMethodPassword",
+				SourceToken = "SUGAR"
+			});
 
-            // Assert
-            Assert.Throws<ClientHttpException>(SUGARClient.Session.Heartbeat);
-        }
+			// Act
+			SUGARClient.Session.Logout();
 
-        [Test]
-        public void CanLogoutAndInvalidateSessionClass()
-        {
-            // Arrange
-            SUGARClient.Session.CreateAndLogin(new AccountRequest
-            {
-                Name = "CanLogoutAndInvalidateSessionClass",
-                Password = "CanLogoutAndInvalidateSessionClassPassword",
-                SourceToken = "SUGAR",
-            });
+			// Assert
+			Assert.Throws<ClientHttpException>(SUGARClient.Session.Heartbeat);
+		}
 
-            // Act
-            SUGARClient.Session.Logout();
+		[Test]
+		public void CanLogoutAndInvalidateSessionClass()
+		{
+			// Arrange
+			SUGARClient.Session.CreateAndLogin(new AccountRequest
+			{
+				Name = "CanLogoutAndInvalidateSessionClass",
+				Password = "CanLogoutAndInvalidateSessionClassPassword",
+				SourceToken = "SUGAR"
+			});
 
-            // Assert
-            Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(new EvaluationDataRequest
-            {
-                CreatingActorId = Helpers.GetOrCreateUser(SUGARClient.User, "CanLogoutAndInvalidateSessionClass").Id,
-                GameId = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLogoutAndInvalidateSessionClass").Id,
-                Key = "CanLogoutAndInvalidateSessionClass",
-                EvaluationDataType = EvaluationDataType.String,
-                Value = "CanLogoutAndInvalidateSessionClass"
-            }));
-        }
-    }
+			// Act
+			SUGARClient.Session.Logout();
+
+			// Assert
+			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(new EvaluationDataRequest
+			{
+				CreatingActorId = Helpers.GetOrCreateUser(SUGARClient.User, "CanLogoutAndInvalidateSessionClass")
+					.Id,
+				GameId = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLogoutAndInvalidateSessionClass")
+					.Id,
+				Key = "CanLogoutAndInvalidateSessionClass",
+				EvaluationDataType = EvaluationDataType.String,
+				Value = "CanLogoutAndInvalidateSessionClass"
+			}));
+		}
+	}
 }
