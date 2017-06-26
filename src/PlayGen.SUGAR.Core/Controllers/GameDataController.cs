@@ -1,7 +1,7 @@
 ﻿using System;
 using PlayGen.SUGAR.Data.Model;
 using NLog;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Data.EntityFramework;
 using System.Collections.Generic;
 using System.Linq;

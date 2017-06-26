@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared.Extensions;
+using PlayGen.SUGAR.Common.Extensions;
 
 namespace PlayGen.SUGAR.Core.EvaluationEvents
 {

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
 using NUnit.Framework;
 

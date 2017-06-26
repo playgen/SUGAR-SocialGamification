@@ -1,4 +1,4 @@
-﻿using PlayGen.SUGAR.Common.Shared.Permissions;
+﻿using PlayGen.SUGAR.Common.Permissions;
 using System.ComponentModel.DataAnnotations;
 
 namespace PlayGen.SUGAR.Contracts

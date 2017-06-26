@@ -14,10 +14,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\PlayGen.SUGAR.Common_Core\PlayGen.SUGAR.Common_Core.csproj" />
     <ProjectReference Include="..\..\src\PlayGen.SUGAR.Data.EntityFramework\PlayGen.SUGAR.Data.EntityFramework.csproj" />
     <ProjectReference Include="..\..\src\PlayGen.SUGAR.Data.Model\PlayGen.SUGAR.Data.Model.csproj" />
     <ProjectReference Include="..\..\src\PlayGen.SUGAR.Core\PlayGen.SUGAR.Core.csproj" />
-    <ProjectReference Include="..\..\src\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

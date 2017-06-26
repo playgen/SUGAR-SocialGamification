@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Common.Shared.Permissions
+﻿namespace PlayGen.SUGAR.Common.Permissions
 {
     public enum ClaimScope
     {

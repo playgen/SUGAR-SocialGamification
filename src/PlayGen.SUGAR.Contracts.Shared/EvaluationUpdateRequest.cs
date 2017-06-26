@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 
 namespace PlayGen.SUGAR.Contracts
 {

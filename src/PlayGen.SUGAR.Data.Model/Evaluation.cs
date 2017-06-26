@@ -6,7 +6,7 @@ namespace PlayGen.SUGAR.Data.Model
     {
         public int Id { get; set; }
 
-        public abstract Common.Shared.EvaluationType EvaluationType { get; }
+        public abstract Common.EvaluationType EvaluationType { get; }
 
         public int? GameId { get; set; }
 
@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Data.Model
 
         public string Description { get; set; }
 
-        public Common.Shared.ActorType ActorType { get; set; }
+        public Common.ActorType ActorType { get; set; }
 
         public string Token { get; set; }
 

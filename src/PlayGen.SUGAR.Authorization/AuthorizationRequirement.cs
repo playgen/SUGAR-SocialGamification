@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.Common.Permissions;
 
 namespace PlayGen.SUGAR.Authorization
 {

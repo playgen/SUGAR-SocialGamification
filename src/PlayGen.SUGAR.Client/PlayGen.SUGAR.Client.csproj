@@ -86,8 +86,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="..\PlayGen.SUGAR.Contracts.Shared\PlayGen.SUGAR.Contracts.Shared.projitems" Label="Shared" />
-  <Import Project="..\PlayGen.SUGAR.Common.Shared\PlayGen.SUGAR.Common.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\PlayGen.SUGAR.Common_Net35\PlayGen.SUGAR.Common_Net35.csproj">
+      <Project>{fdb35ba6-1ed1-4848-9ed5-39a8710a3f7e}</Project>
+      <Name>PlayGen.SUGAR.Common_Net35</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PlayGen.SUGAR.Contracts_Net35\PlayGen.SUGAR.Contracts_Net35.csproj">
+      <Project>{1cbcfbdb-4a9b-4980-a523-9073ad0aa12b}</Project>
+      <Name>PlayGen.SUGAR.Contracts_Net35</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

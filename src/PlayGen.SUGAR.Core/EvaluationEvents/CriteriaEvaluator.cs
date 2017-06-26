@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Data.EntityFramework;
 using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;

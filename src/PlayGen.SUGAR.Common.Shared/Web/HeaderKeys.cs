@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Common.Shared.Web
+﻿namespace PlayGen.SUGAR.Common.Web
 {
     public static class HeaderKeys
     {

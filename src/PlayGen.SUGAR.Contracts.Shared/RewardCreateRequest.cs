@@ -11,7 +11,7 @@
     /// Value : "10.5"
     /// }
     /// </example>
-    public class RewardCreateRequest : Common.Shared.Reward
+    public class RewardCreateRequest : Common.Reward
     {
         // todo make all fields required for contract
     }

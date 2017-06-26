@@ -11,7 +11,7 @@
 	/// Value : "10.5"
 	/// }
 	/// </example>
-	public class RewardResponse : Common.Shared.Reward
+	public class RewardResponse : Common.Reward
 	{
 		/// <summary>
 		/// The unqiue identifier for this type.

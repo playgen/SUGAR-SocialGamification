@@ -10,14 +10,15 @@
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+		<RootNamespace>PlayGen.SUGAR.Contracts</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" />
+	  <ProjectReference Include="..\PlayGen.SUGAR.Common_Core\PlayGen.SUGAR.Common_Core.csproj" />
 	</ItemGroup>
 
 	<Import Project="..\PlayGen.SUGAR.Contracts.Shared\PlayGen.SUGAR.Contracts.Shared.projitems" Label="Shared" />

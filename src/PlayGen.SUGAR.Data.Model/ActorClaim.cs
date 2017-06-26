@@ -1,6 +1,6 @@
 ﻿using System;
 
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 
 namespace PlayGen.SUGAR.Data.Model
 {

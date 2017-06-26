@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.Common.Permissions;
 using System.Linq;
 
 using PlayGen.SUGAR.Data.EntityFramework.Extensions;

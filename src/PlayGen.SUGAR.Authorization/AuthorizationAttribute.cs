@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.Common.Permissions;
 using System.Reflection;
 
 namespace PlayGen.SUGAR.Authorization

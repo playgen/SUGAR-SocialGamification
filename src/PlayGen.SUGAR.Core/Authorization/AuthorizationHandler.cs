@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using PlayGen.SUGAR.Authorization;
 using System.Linq;
 
-using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Core.Controllers;
 
 namespace PlayGen.SUGAR.Core.Authorization

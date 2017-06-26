@@ -8,8 +8,8 @@ using Newtonsoft.Json.Serialization;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Common.Shared.Extensions;
-using PlayGen.SUGAR.Common.Shared.Web;
+using PlayGen.SUGAR.Common.Extensions;
+using PlayGen.SUGAR.Common.Web;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client

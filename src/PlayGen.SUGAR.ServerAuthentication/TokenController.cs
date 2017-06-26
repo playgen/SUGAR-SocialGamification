@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using PlayGen.SUGAR.Common.Shared.Extensions;
+using PlayGen.SUGAR.Common.Extensions;
 using PlayGen.SUGAR.Core.Sessions;
 using PlayGen.SUGAR.ServerAuthentication.Extensions;
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
 using NLog;

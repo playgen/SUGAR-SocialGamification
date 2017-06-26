@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 
 namespace PlayGen.SUGAR.Data.Model
 {
@@ -17,6 +17,6 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public virtual List<UserToUserRelationshipRequest> RequestAcceptors { get; set; }
 
-		public override Common.Shared.ActorType ActorType => Common.Shared.ActorType.User;
+		public override ActorType ActorType => ActorType.User;
 	}
 }

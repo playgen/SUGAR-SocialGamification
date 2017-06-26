@@ -2,7 +2,7 @@
 using System.Linq;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Core.Controllers;
 
 using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;

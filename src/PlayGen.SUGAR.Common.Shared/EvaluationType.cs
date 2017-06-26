@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PlayGen.SUGAR.Common.Shared
+namespace PlayGen.SUGAR.Common
 {
     /// <summary>
     /// Enum for selecting the category of evaluation being stored or looked for.

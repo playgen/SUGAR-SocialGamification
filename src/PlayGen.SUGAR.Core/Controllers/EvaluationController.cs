@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using NLog;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Core.EvaluationEvents;
 using PlayGen.SUGAR.Data.EntityFramework;
 using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Common.Shared.Extensions;
+using PlayGen.SUGAR.Common.Extensions;
 
 namespace PlayGen.SUGAR.Core.Controllers
 {

@@ -2,6 +2,6 @@
 {
 	public class Achievement : Evaluation
 	{
-		public override Common.Shared.EvaluationType EvaluationType => Common.Shared.EvaluationType.Achievement;
+		public override Common.EvaluationType EvaluationType => Common.EvaluationType.Achievement;
 	}
 }

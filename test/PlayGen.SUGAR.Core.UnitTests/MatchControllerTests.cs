@@ -4,7 +4,7 @@ using System.Threading;
 using PlayGen.SUGAR.Data.Model;
 using Xunit;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 
 namespace PlayGen.SUGAR.Core.UnitTests
 {

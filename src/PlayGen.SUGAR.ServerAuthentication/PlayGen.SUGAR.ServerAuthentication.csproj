@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
+    <ProjectReference Include="..\PlayGen.SUGAR.Common_Core\PlayGen.SUGAR.Common_Core.csproj" />
     <ProjectReference Include="..\PlayGen.SUGAR.Core\PlayGen.SUGAR.Core.csproj" />
   </ItemGroup>
 

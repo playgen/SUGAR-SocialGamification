@@ -2,7 +2,7 @@
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.Model;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 
 namespace PlayGen.SUGAR.WebAPI.Extensions
 {

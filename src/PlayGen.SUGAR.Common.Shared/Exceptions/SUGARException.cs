@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlayGen.SUGAR.Common.Shared.Exceptions
+namespace PlayGen.SUGAR.Common.Exceptions
 {
     public abstract class SUGARException : Exception
     {

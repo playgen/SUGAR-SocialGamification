@@ -14,7 +14,7 @@
 	/// Value : "GameData Key Value"
 	/// }
 	/// </example>
-	public class EvaluationCriteriaUpdateRequest : Common.Shared.EvaluationCriteria
+	public class EvaluationCriteriaUpdateRequest : Common.EvaluationCriteria
 	{
 		/// <summary>
 		/// The unqiue identifier for this type.

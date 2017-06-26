@@ -29,12 +29,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Common_Core\PlayGen.SUGAR.Common_Core.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Contracts_Core\PlayGen.SUGAR.Contracts_Core.csproj" />
 		<ProjectReference Include="..\PlayGen.SUGAR.Data.EntityFramework\PlayGen.SUGAR.Data.EntityFramework.csproj" />
 		<ProjectReference Include="..\PlayGen.SUGAR.Core\PlayGen.SUGAR.Core.csproj" />
 		<ProjectReference Include="..\PlayGen.SUGAR.ServerAuthentication\PlayGen.SUGAR.ServerAuthentication.csproj" />
 		<ProjectReference Include="..\PlayGen.SUGAR.Authorization\PlayGen.SUGAR.Authorization.csproj" />
-		<ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

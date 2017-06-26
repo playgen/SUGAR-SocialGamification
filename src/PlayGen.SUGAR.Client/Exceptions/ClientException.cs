@@ -1,5 +1,5 @@
 ﻿using System;
-using PlayGen.SUGAR.Common.Shared.Exceptions;
+using PlayGen.SUGAR.Common.Exceptions;
 
 namespace PlayGen.SUGAR.Client.Exceptions
 {

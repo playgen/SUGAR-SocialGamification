@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Linq;
 using PlayGen.SUGAR.Authorization;
-using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Core.Controllers;
 using PlayGen.SUGAR.Data.Model;
 

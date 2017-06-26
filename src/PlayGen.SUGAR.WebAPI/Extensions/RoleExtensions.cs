@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using PlayGen.SUGAR.Common.Shared.Permissions;
+using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Data.Model;
 

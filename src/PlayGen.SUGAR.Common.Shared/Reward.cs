@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PlayGen.SUGAR.Common.Shared
+namespace PlayGen.SUGAR.Common
 {
 	/// <summary>
 	/// Encapsulates the reward given for completing an achievement or skill.

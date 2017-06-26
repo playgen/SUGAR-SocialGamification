@@ -14,7 +14,7 @@
     /// Value : "GameData Key Value"
     /// }
     /// </example>
-    public class EvaluationCriteriaResponse : Common.Shared.EvaluationCriteria
+    public class EvaluationCriteriaResponse : Common.EvaluationCriteria
     {
         public int Id { get; set; }
 
