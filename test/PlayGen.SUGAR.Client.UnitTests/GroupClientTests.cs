@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var getGroups = SUGARClient.Group.Get("CanGetGroupsByName");
 
-			Assert.AreEqual(2, getGroups.Count());
+			Assert.AreEqual(2, getGroups.Items.Count());
 		}
 
 		[Test]
@@ -69,7 +69,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var getGroups = SUGARClient.Group.Get("CannotGetNotExistingGroupByName");
 
-			Assert.IsEmpty(getGroups);
+			Assert.IsEmpty(getGroups.Items);
 		}
 
 		[Test]

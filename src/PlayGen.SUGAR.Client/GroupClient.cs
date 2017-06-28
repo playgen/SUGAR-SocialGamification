@@ -24,11 +24,10 @@ namespace PlayGen.SUGAR.Client
 		///     Get a list of all Groups.
 		/// </summary>
 		/// <returns>A list of <see cref="GroupResponse" /> that hold Group details.</returns>
-		public IEnumerable<GroupResponse> Get()
+		public GroupsResponse Get()
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/list")
-				.ToString();
-			return Get<IEnumerable<GroupResponse>>(query);
+			var query = GetUriBuilder(ControllerPrefix + "/list").ToString();
+			return Get<GroupsResponse>(query);
 		}
 
 		/// <summary>
@@ -38,14 +37,14 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="name">Group name.</param>
 		/// <returns>A list of <see cref="GroupResponse" /> which match the search criteria.</returns>
-		public IEnumerable<GroupResponse> Get(string name)
+		public GroupsResponse Get(string name)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/find/{0}", name)
 				.ToString();
-			return Get<IEnumerable<GroupResponse>>(query);
+			return Get<GroupsResponse>(query);
 		}
 
-		public void GetAsync(string name, Action<IEnumerable<GroupResponse>> onSuccess, Action<Exception> onError)
+		public void GetAsync(string name, Action<GroupsResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Get(name),
 				onSuccess,

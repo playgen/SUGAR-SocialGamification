@@ -7,11 +7,6 @@ namespace PlayGen.SUGAR.Client.Unity
 {
 	public class UnityWebGlHttpHandler : IHttpHandler
 	{
-		public UnityWebGlHttpHandler()
-		{
-			var c = new ReferenceConverter(typeof(UnityWebGlHttpHandler));
-		}
-
 		public HttpResponse HandleRequest(HttpRequest request)
 		{
 			switch (request.Method.ToUpperInvariant())
@@ -22,7 +17,10 @@ namespace PlayGen.SUGAR.Client.Unity
 				case "PUT":
 					var requestString = JsonConvert.SerializeObject(request, ClientBase.SerializerSettings);
 					var responseString = HttpRequest(requestString);
-					return JsonConvert.DeserializeObject<HttpResponse>(responseString, ClientBase.SerializerSettings);
+					Console.WriteLine("UnityWebGlHttpHandler::HandleRequest[Pre-Deserialize");
+					var obj = JsonConvert.DeserializeObject<HttpResponse>(responseString, ClientBase.SerializerSettings);
+					Console.WriteLine("UnityWebGlHttpHandler::HandleRequest[Post-Deserialize");
+					return obj;
 
 				default:
 					throw new NotImplementedException($"Request method '{request.Method}' not supported");

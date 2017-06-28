@@ -5,7 +5,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	///     Encapsulates a match entity's details from the database.
 	/// </summary>
-	public class MatchResponse : IResponse
+	public class MatchResponse : Response
 	{
 		/// <summary>
 		///     Unique Id of the match

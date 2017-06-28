@@ -1,6 +1,6 @@
 ﻿namespace PlayGen.SUGAR.Contracts
 {
-	public interface IResponse
+	public class Response
 	{
 	}
 }

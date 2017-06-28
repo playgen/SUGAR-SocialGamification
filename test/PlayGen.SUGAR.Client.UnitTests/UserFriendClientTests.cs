@@ -26,11 +26,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.AreEqual(1, sent.Items.Count());
 
 			var received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.AreEqual(1, received.Items.Count());
 		}
 
 		[Test]
@@ -53,11 +53,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.AreEqual(1, sent.Items.Count());
 
 			var received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.AreEqual(1, received.Items.Count());
 		}
 
 		[Test]
@@ -160,11 +160,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.AreEqual(1, sent.Items.Count());
 
 			var received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.AreEqual(1, received.Items.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
@@ -177,19 +177,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(0, sent.Count());
+			Assert.AreEqual(0, sent.Items.Count());
 
 			received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(0, received.Count());
+			Assert.AreEqual(0, received.Items.Count());
 
 			sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.AreEqual(1, sent.Items.Count());
 
 			received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.AreEqual(1, received.Items.Count());
 		}
 
 		[Test]
@@ -208,11 +208,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.AreEqual(1, sent.Items.Count());
 
 			var received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.AreEqual(1, received.Items.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
@@ -225,19 +225,19 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(0, sent.Count());
+			Assert.AreEqual(0, sent.Items.Count());
 
 			received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(0, received.Count());
+			Assert.AreEqual(0, received.Items.Count());
 
 			sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
 
-			Assert.AreEqual(0, sent.Count());
+			Assert.AreEqual(0, sent.Items.Count());
 
 			received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(0, received.Count());
+			Assert.AreEqual(0, received.Items.Count());
 		}
 
 		[Test]
@@ -295,11 +295,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.AreEqual(1, sent.Items.Count());
 
 			var received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.AreEqual(1, received.Items.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
@@ -311,11 +311,11 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
 
-			Assert.AreEqual(0, sent.Count());
+			Assert.AreEqual(0, sent.Items.Count());
 
 			received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(0, received.Count());
+			Assert.AreEqual(0, received.Items.Count());
 		}
 
 		[Test]
@@ -359,9 +359,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var requests = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(5, requests.Count());
+			Assert.AreEqual(5, requests.Items.Count());
 
-			var requestCheck = requests.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
+			var requestCheck = requests.Items.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
 
 			Assert.AreEqual(5, requestCheck.Count());
 		}
@@ -392,9 +392,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var requests = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(5, requests.Count());
+			Assert.AreEqual(5, requests.Items.Count());
 
-			var requestCheck = requests.Where(r => acceptorNames.Any(an => r.Name.Contains(an)));
+			var requestCheck = requests.Items.Where(r => acceptorNames.Any(an => r.Name.Contains(an)));
 
 			Assert.AreEqual(5, requestCheck.Count());
 		}
@@ -426,9 +426,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var members = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(5, members.Count());
+			Assert.AreEqual(5, members.Items.Count());
 
-			var memberCheck = members.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
+			var memberCheck = members.Items.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
 
 			Assert.AreEqual(5, memberCheck.Count());
 		}

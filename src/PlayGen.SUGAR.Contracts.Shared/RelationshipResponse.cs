@@ -10,7 +10,7 @@
 	///     AcceptorId : 2
 	///     }
 	/// </example>
-	public class RelationshipResponse : IResponse
+	public class RelationshipResponse : Response
 	{
 		/// <summary>
 		///     The Id of the requesting actor.

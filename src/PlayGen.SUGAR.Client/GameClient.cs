@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
@@ -23,11 +24,11 @@ namespace PlayGen.SUGAR.Client
 		///     Get a list of all Games.
 		/// </summary>
 		/// <returns>A list of <see cref="GameResponse" /> that hold Games details.</returns>
-		public IEnumerable<GameResponse> Get()
+		public GamesResponse Get()
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/list")
 				.ToString();
-			return Get<IEnumerable<GameResponse>>(query);
+			return Get<GamesResponse>(query);
 		}
 
 		/// <summary>
@@ -37,12 +38,14 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="name">Game name</param>
 		/// <returns>A list of <see cref="GameResponse" /> which match the search criteria.</returns>
-		public IEnumerable<GameResponse> Get(string name)
+		public GamesResponse Get(string name)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/find/{0}", name)
 				.ToString();
 
-			return Get<IEnumerable<GameResponse>>(query);
+			var response = Get<GamesResponse>(query);
+			Console.WriteLine("GameClient::Get(Find/{name})[return]");
+			return response;
 		}
 
 		/// <summary>

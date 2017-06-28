@@ -12,7 +12,7 @@
 	///     }
 	///     }
 	/// </example>
-	public class AccountResponse : IResponse
+	public class AccountResponse : Response
 	{
 		/// <summary>
 		///     ActorResponse object containing the user details.

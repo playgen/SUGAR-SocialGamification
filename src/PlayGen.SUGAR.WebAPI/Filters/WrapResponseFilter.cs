@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.WebAPI.Filters
 
 			var wrappedResponse = new ResponseWrapper
 			{
-				Response = objectResult.Value as IResponse,
+				Response = objectResult.Value as Response,
 				EvaluationsProgress = GetPendingEvents(context.HttpContext.Request)
 			};
 

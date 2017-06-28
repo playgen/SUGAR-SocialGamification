@@ -12,7 +12,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)AccountRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountSourceRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AccountSourcesResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountSourceResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorClaimsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorRolesResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ActorsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ClaimsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriasResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationDatasResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationsProgressResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EvaluationsResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorClaimRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorClaimResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorRequest.cs" />
@@ -20,7 +29,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ActorRoleRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ActorRoleResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ClaimResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CollectionResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCreateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationCriteriaUpdateRequest.cs" />
@@ -32,9 +40,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationUpdateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GamesResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GroupRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GroupResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GroupsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LeaderboardsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LeaderboardsStandingsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MatchesResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ResourcesResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Response.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LeaderboardStandingsRequest.cs" />
@@ -48,16 +62,20 @@
     <Compile Include="$(MSBuildThisFileDirectory)ResourceTransferRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResourceTransferResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResponseWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RewardsResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RewardUpdateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RewardResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RewardCreateRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RoleClaimRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RoleClaimResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RoleClaimsResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RoleRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RoleResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationDataRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EvaluationDataResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RolesResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UserRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UserResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UsersResponse.cs" />
   </ItemGroup>
 </Project>

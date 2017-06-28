@@ -15,8 +15,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var users = userClient.Get(name, true);
 			ActorResponse user;
 
-			if (users.Any())
-				user = users.Single();
+			if (users.Items.Any())
+				user = users.Items.Single();
 			else
 				user = userClient.Create(new UserRequest
 				{
@@ -34,8 +34,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var groups = groupClient.Get(name);
 			ActorResponse group;
 
-			if (groups.Any())
-				group = groups.Single();
+			if (groups.Items.Any())
+				group = groups.Items.Single();
 			else
 				group = groupClient.Create(new GroupRequest
 				{
@@ -52,8 +52,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var games = gameClient.Get(name);
 			GameResponse game;
 
-			if (games.Any())
-				game = games.Single();
+			if (games.Items.Any())
+				game = games.Items.Single();
 			else
 				game = gameClient.Create(new GameRequest
 				{

@@ -7,9 +7,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class EvaluationDataExtensions
 	{
-		public static CollectionResponse ToCollectionContract(this List<EvaluationData> models)
+		public static EvaluationDatasResponse ToCollectionContract(this List<EvaluationData> models)
 		{
-			return new CollectionResponse() {
+			return new EvaluationDatasResponse() {
 				Items = models.Select(ToContract).ToArray(),
 			};
 		}

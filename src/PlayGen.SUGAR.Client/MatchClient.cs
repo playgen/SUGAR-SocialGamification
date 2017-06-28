@@ -72,11 +72,11 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="start"></param>
 		/// <param name="end"></param>
 		/// <returns>A list of <see cref="MatchResponse" /></returns>
-		public IEnumerable<MatchResponse> GetByTime(DateTime? start, DateTime? end)
+		public MatchesResponse GetByTime(DateTime? start, DateTime? end)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}", start, end)
 				.ToString();
-			return Get<IEnumerable<MatchResponse>>(query);
+			return Get<MatchesResponse>(query);
 		}
 
 		/// <summary>
@@ -84,11 +84,11 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId"></param>
 		/// <returns>A list of <see cref="MatchResponse" /></returns>
-		public IEnumerable<MatchResponse> GetByGame(int gameId)
+		public MatchesResponse GetByGame(int gameId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/game/{0}", gameId)
 				.ToString();
-			return Get<IEnumerable<MatchResponse>>(query);
+			return Get<MatchesResponse>(query);
 		}
 
 		/// <summary>
@@ -98,11 +98,11 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="start"></param>
 		/// <param name="end"></param>
 		/// <returns>A list of <see cref="MatchResponse" /></returns>
-		public IEnumerable<MatchResponse> GetByGame(int gameId, DateTime? start, DateTime? end)
+		public MatchesResponse GetByGame(int gameId, DateTime? start, DateTime? end)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/{1}/{2}", gameId, start, end)
 				.ToString();
-			return Get<IEnumerable<MatchResponse>>(query);
+			return Get<MatchesResponse>(query);
 		}
 
 		/// <summary>
@@ -110,11 +110,11 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="creatorId"></param>
 		/// <returns>A list of <see cref="MatchResponse" /></returns>
-		public IEnumerable<MatchResponse> GetByCreator(int creatorId)
+		public MatchesResponse GetByCreator(int creatorId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/creator/{0}", creatorId)
 				.ToString();
-			return Get<IEnumerable<MatchResponse>>(query);
+			return Get<MatchesResponse>(query);
 		}
 
 		/// <summary>
@@ -124,11 +124,11 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="start"></param>
 		/// <param name="end"></param>
 		/// <returns>A list of <see cref="MatchResponse" /></returns>
-		public IEnumerable<MatchResponse> GetByCreator(int creatorId, DateTime? start, DateTime? end)
+		public MatchesResponse GetByCreator(int creatorId, DateTime? start, DateTime? end)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/creator/{0}/{1}/{2}", creatorId, start, end)
 				.ToString();
-			return Get<IEnumerable<MatchResponse>>(query);
+			return Get<MatchesResponse>(query);
 		}
 
 		/// <summary>
@@ -137,11 +137,11 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="gameId"></param>
 		/// <param name="creatorId"></param>
 		/// <returns>A list of <see cref="MatchResponse" /></returns>
-		public IEnumerable<MatchResponse> GetByGameAndCreator(int gameId, int creatorId)
+		public MatchesResponse GetByGameAndCreator(int gameId, int creatorId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/creator/{1}", gameId, creatorId)
 				.ToString();
-			return Get<IEnumerable<MatchResponse>>(query);
+			return Get<MatchesResponse>(query);
 		}
 
 		/// <summary>
@@ -152,11 +152,11 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="start"></param>
 		/// <param name="end"></param>
 		/// <returns>A list of <see cref="MatchResponse" /></returns>
-		public IEnumerable<MatchResponse> GetByGameAndCreator(int gameId, int creatorId, DateTime? start, DateTime? end)
+		public MatchesResponse GetByGameAndCreator(int gameId, int creatorId, DateTime? start, DateTime? end)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/creator/{1}/{2}/{3}", gameId, creatorId, start, end)
 				.ToString();
-			return Get<IEnumerable<MatchResponse>>(query);
+			return Get<MatchesResponse>(query);
 		}
 
 		/// <summary>
@@ -177,13 +177,13 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="matchId">ID of the match.</param>
 		/// <param name="keys">Array of Key names.</param>
 		/// <returns>A list of <see cref="EvaluationDataResponse" /> which match the search criteria.</returns>
-		public IEnumerable<EvaluationDataResponse> GetData(int matchId, string[] keys = null)
+		public EvaluationDatasResponse GetData(int matchId, string[] keys = null)
 		{
 			var query = GetUriBuilder(ControllerPrefix)
 				.AppendQueryParameter(matchId, "matchId={0}")
 				.AppendQueryParameters(keys, "keys={1}")
 				.ToString();
-			return Get<IEnumerable<EvaluationDataResponse>>(query);
+			return Get<EvaluationDatasResponse>(query);
 		}
 	}
 }

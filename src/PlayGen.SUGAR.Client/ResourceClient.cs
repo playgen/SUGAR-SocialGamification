@@ -33,17 +33,21 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="keys">Array of Key names.</param>
 		/// <returns>A list of <see cref="ResourceResponse" /> which match the search criteria.</returns>
-		public IEnumerable<ResourceResponse> Get(int? gameId, int? actorId, string[] keys)
+		public ResourcesResponse Get(int? gameId, int? actorId, string[] keys)
 		{
+			Console.WriteLine("ResourceClient::Get[" + gameId + "," + actorId + "," + (keys?.Length ?? 0) + "]");
+
 			var query = GetUriBuilder(ControllerPrefix)
 				.AppendQueryParameter(gameId, "gameId={0}")
 				.AppendQueryParameter(actorId, "actorId={0}")
 				.AppendQueryParameters(keys, "keys={0}")
 				.ToString();
-			return Get<IEnumerable<ResourceResponse>>(query);
+
+			Console.WriteLine("ResourceClient::Get[return]");
+			return Get<ResourcesResponse>(query);
 		}
 
-		public void GetAsync(int? gameId, int? actorId, string[] keys, Action<IEnumerable<ResourceResponse>> onSuccess,
+		public void GetAsync(int? gameId, int? actorId, string[] keys, Action<ResourcesResponse> onSuccess,
 			Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Get(gameId, actorId, keys),

@@ -10,7 +10,7 @@
 	///     Name : "Game Name"
 	///     }
 	/// </example>
-	public class GameResponse : IResponse
+	public class GameResponse : Response
 	{
 		/// <summary>
 		///     The unqiue identifier for the game.

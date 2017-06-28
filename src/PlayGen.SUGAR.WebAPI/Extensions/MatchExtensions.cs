@@ -8,9 +8,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class MatchExtensions
 	{
-		public static CollectionResponse ToCollectionContract(this List<Match> models)
+		public static MatchesResponse ToCollectionContract(this List<Match> models)
 		{
-			return new CollectionResponse() {
+			return new MatchesResponse() {
 				Items = models.Select(ToContract).ToArray(),
 			};
 		}

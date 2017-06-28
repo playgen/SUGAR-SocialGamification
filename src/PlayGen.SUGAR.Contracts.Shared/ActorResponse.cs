@@ -10,7 +10,7 @@
 	///     Name : "Actor Name"
 	///     }
 	/// </example>
-	public class ActorResponse : IResponse
+	public class ActorResponse : Response
 	{
 		/// <summary>
 		///     The unqiue identifier for the user/group.

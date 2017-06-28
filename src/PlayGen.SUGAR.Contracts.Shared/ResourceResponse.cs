@@ -3,7 +3,7 @@
 	/// <summary>
 	///     Encapsulates resource details from the server.
 	/// </summary>
-	public class ResourceResponse : IResponse
+	public class ResourceResponse : Response
 	{
 		/// <summary>
 		///     The id of the Resource.

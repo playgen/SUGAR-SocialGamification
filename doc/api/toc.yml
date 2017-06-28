@@ -85,154 +85,157 @@
   items:
   - uid: PlayGen.SUGAR.Client.Unity.UnityWebGlHttpHandler
     name: UnityWebGlHttpHandler
-- uid: PlayGen.SUGAR.Common.Shared
-  name: PlayGen.SUGAR.Common.Shared
+- uid: PlayGen.SUGAR.Common
+  name: PlayGen.SUGAR.Common
   items:
-  - uid: PlayGen.SUGAR.Common.Shared.Actor
+  - uid: PlayGen.SUGAR.Common.Actor
     name: Actor
-  - uid: PlayGen.SUGAR.Common.Shared.ActorType
+  - uid: PlayGen.SUGAR.Common.ActorType
     name: ActorType
-  - uid: PlayGen.SUGAR.Common.Shared.ComparisonType
+  - uid: PlayGen.SUGAR.Common.ComparisonType
     name: ComparisonType
-  - uid: PlayGen.SUGAR.Common.Shared.CriteriaQueryType
+  - uid: PlayGen.SUGAR.Common.CriteriaQueryType
     name: CriteriaQueryType
-  - uid: PlayGen.SUGAR.Common.Shared.CriteriaScope
+  - uid: PlayGen.SUGAR.Common.CriteriaScope
     name: CriteriaScope
-  - uid: PlayGen.SUGAR.Common.Shared.EvaluationCriteria
+  - uid: PlayGen.SUGAR.Common.EvaluationCriteria
     name: EvaluationCriteria
-  - uid: PlayGen.SUGAR.Common.Shared.EvaluationDataCategory
+  - uid: PlayGen.SUGAR.Common.EvaluationDataCategory
     name: EvaluationDataCategory
-  - uid: PlayGen.SUGAR.Common.Shared.EvaluationDataType
+  - uid: PlayGen.SUGAR.Common.EvaluationDataType
     name: EvaluationDataType
-  - uid: PlayGen.SUGAR.Common.Shared.EvaluationProgress
+  - uid: PlayGen.SUGAR.Common.EvaluationProgress
     name: EvaluationProgress
-  - uid: PlayGen.SUGAR.Common.Shared.EvaluationType
+  - uid: PlayGen.SUGAR.Common.EvaluationType
     name: EvaluationType
-  - uid: PlayGen.SUGAR.Common.Shared.LeaderboardFilterType
+  - uid: PlayGen.SUGAR.Common.LeaderboardFilterType
     name: LeaderboardFilterType
-  - uid: PlayGen.SUGAR.Common.Shared.LeaderboardType
+  - uid: PlayGen.SUGAR.Common.LeaderboardType
     name: LeaderboardType
-  - uid: PlayGen.SUGAR.Common.Shared.Reward
+  - uid: PlayGen.SUGAR.Common.Reward
     name: Reward
-- uid: PlayGen.SUGAR.Common.Shared.Exceptions
-  name: PlayGen.SUGAR.Common.Shared.Exceptions
+- uid: PlayGen.SUGAR.Common.Exceptions
+  name: PlayGen.SUGAR.Common.Exceptions
   items:
-  - uid: PlayGen.SUGAR.Common.Shared.Exceptions.SUGARException
+  - uid: PlayGen.SUGAR.Common.Exceptions.SUGARException
     name: SUGARException
-- uid: PlayGen.SUGAR.Common.Shared.Extensions
-  name: PlayGen.SUGAR.Common.Shared.Extensions
+- uid: PlayGen.SUGAR.Common.Extensions
+  name: PlayGen.SUGAR.Common.Extensions
   items:
-  - uid: PlayGen.SUGAR.Common.Shared.Extensions.DateTimeExtensions
+  - uid: PlayGen.SUGAR.Common.Extensions.DateTimeExtensions
     name: DateTimeExtensions
-  - uid: PlayGen.SUGAR.Common.Shared.Extensions.EvaluationExtensions
+  - uid: PlayGen.SUGAR.Common.Extensions.EvaluationExtensions
     name: EvaluationExtensions
-  - uid: PlayGen.SUGAR.Common.Shared.Extensions.NullableIntExtensions
+  - uid: PlayGen.SUGAR.Common.Extensions.NullableIntExtensions
     name: NullableIntExtensions
-- uid: PlayGen.SUGAR.Common.Shared.Permissions
-  name: PlayGen.SUGAR.Common.Shared.Permissions
+- uid: PlayGen.SUGAR.Common.Permissions
+  name: PlayGen.SUGAR.Common.Permissions
   items:
-  - uid: PlayGen.SUGAR.Common.Shared.Permissions.ClaimScope
+  - uid: PlayGen.SUGAR.Common.Permissions.ClaimScope
     name: ClaimScope
-- uid: PlayGen.SUGAR.Common.Shared.Web
-  name: PlayGen.SUGAR.Common.Shared.Web
+- uid: PlayGen.SUGAR.Common.Web
+  name: PlayGen.SUGAR.Common.Web
   items:
-  - uid: PlayGen.SUGAR.Common.Shared.Web.HeaderKeys
+  - uid: PlayGen.SUGAR.Common.Web.HeaderKeys
     name: HeaderKeys
-- uid: PlayGen.SUGAR.Contracts.Shared
-  name: PlayGen.SUGAR.Contracts.Shared
+- uid: PlayGen.SUGAR.Contracts
+  name: PlayGen.SUGAR.Contracts
   items:
-  - uid: PlayGen.SUGAR.Contracts.Shared.AccountRequest
+  - uid: PlayGen.SUGAR.Contracts.AccountRequest
     name: AccountRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.AccountResponse
+  - uid: PlayGen.SUGAR.Contracts.AccountResponse
     name: AccountResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.AccountSourceRequest
+  - uid: PlayGen.SUGAR.Contracts.AccountSourceRequest
     name: AccountSourceRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.AccountSourceResponse
+  - uid: PlayGen.SUGAR.Contracts.AccountSourceResponse
     name: AccountSourceResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.ActorClaimRequest
+  - uid: PlayGen.SUGAR.Contracts.ActorClaimRequest
     name: ActorClaimRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.ActorClaimResponse
+  - uid: PlayGen.SUGAR.Contracts.ActorClaimResponse
     name: ActorClaimResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.ActorRequest
+  - uid: PlayGen.SUGAR.Contracts.ActorRequest
     name: ActorRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.ActorResponse
+  - uid: PlayGen.SUGAR.Contracts.ActorResponse
     name: ActorResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.ActorRoleRequest
+  - uid: PlayGen.SUGAR.Contracts.ActorRoleRequest
     name: ActorRoleRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.ActorRoleResponse
+  - uid: PlayGen.SUGAR.Contracts.ActorRoleResponse
     name: ActorRoleResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.ClaimResponse
+  - uid: PlayGen.SUGAR.Contracts.ClaimResponse
     name: ClaimResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest
+  - uid: PlayGen.SUGAR.Contracts.CollectionResponse
+    name: CollectionResponse
+  - uid: PlayGen.SUGAR.Contracts.EvaluationCreateRequest
     name: EvaluationCreateRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationCriteriaCreateRequest
+  - uid: PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest
     name: EvaluationCriteriaCreateRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationCriteriaResponse
+  - uid: PlayGen.SUGAR.Contracts.EvaluationCriteriaResponse
     name: EvaluationCriteriaResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationCriteriaUpdateRequest
+  - uid: PlayGen.SUGAR.Contracts.EvaluationCriteriaUpdateRequest
     name: EvaluationCriteriaUpdateRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationDataRequest
+  - uid: PlayGen.SUGAR.Contracts.EvaluationDataRequest
     name: EvaluationDataRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationDataResponse
+  - uid: PlayGen.SUGAR.Contracts.EvaluationDataResponse
     name: EvaluationDataResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse
+  - uid: PlayGen.SUGAR.Contracts.EvaluationProgressResponse
     name: EvaluationProgressResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationResponse
+  - uid: PlayGen.SUGAR.Contracts.EvaluationResponse
     name: EvaluationResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.EvaluationUpdateRequest
+  - uid: PlayGen.SUGAR.Contracts.EvaluationUpdateRequest
     name: EvaluationUpdateRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.GameRequest
+  - uid: PlayGen.SUGAR.Contracts.GameRequest
     name: GameRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.GameResponse
+  - uid: PlayGen.SUGAR.Contracts.GameResponse
     name: GameResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.GroupRequest
+  - uid: PlayGen.SUGAR.Contracts.GroupRequest
     name: GroupRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.GroupResponse
+  - uid: PlayGen.SUGAR.Contracts.GroupResponse
     name: GroupResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest
+  - uid: PlayGen.SUGAR.Contracts.IResponse
+    name: IResponse
+  - uid: PlayGen.SUGAR.Contracts.LeaderboardRequest
     name: LeaderboardRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.LeaderboardResponse
+  - uid: PlayGen.SUGAR.Contracts.LeaderboardResponse
     name: LeaderboardResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest
+  - uid: PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest
     name: LeaderboardStandingsRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsResponse
+  - uid: PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse
     name: LeaderboardStandingsResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.MatchResponse
+  - uid: PlayGen.SUGAR.Contracts.MatchResponse
     name: MatchResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.RelationshipRequest
+  - uid: PlayGen.SUGAR.Contracts.RelationshipRequest
     name: RelationshipRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.RelationshipResponse
+  - uid: PlayGen.SUGAR.Contracts.RelationshipResponse
     name: RelationshipResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate
+  - uid: PlayGen.SUGAR.Contracts.RelationshipStatusUpdate
     name: RelationshipStatusUpdate
-  - uid: PlayGen.SUGAR.Contracts.Shared.ResourceAddRequest
+  - uid: PlayGen.SUGAR.Contracts.ResourceAddRequest
     name: ResourceAddRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.ResourceResponse
+  - uid: PlayGen.SUGAR.Contracts.ResourceResponse
     name: ResourceResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.ResourceTransferRequest
+  - uid: PlayGen.SUGAR.Contracts.ResourceTransferRequest
     name: ResourceTransferRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.ResourceTransferResponse
+  - uid: PlayGen.SUGAR.Contracts.ResourceTransferResponse
     name: ResourceTransferResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.ResponseWrapper`1
-    name: ResponseWrapper<TResponse>
-    name.vb: ResponseWrapper(Of TResponse)
-  - uid: PlayGen.SUGAR.Contracts.Shared.RewardCreateRequest
+  - uid: PlayGen.SUGAR.Contracts.ResponseWrapper
+    name: ResponseWrapper
+  - uid: PlayGen.SUGAR.Contracts.RewardCreateRequest
     name: RewardCreateRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.RewardResponse
+  - uid: PlayGen.SUGAR.Contracts.RewardResponse
     name: RewardResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.RewardUpdateRequest
+  - uid: PlayGen.SUGAR.Contracts.RewardUpdateRequest
     name: RewardUpdateRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.RoleClaimRequest
+  - uid: PlayGen.SUGAR.Contracts.RoleClaimRequest
     name: RoleClaimRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.RoleClaimResponse
+  - uid: PlayGen.SUGAR.Contracts.RoleClaimResponse
     name: RoleClaimResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.RoleRequest
+  - uid: PlayGen.SUGAR.Contracts.RoleRequest
     name: RoleRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.RoleResponse
+  - uid: PlayGen.SUGAR.Contracts.RoleResponse
     name: RoleResponse
-  - uid: PlayGen.SUGAR.Contracts.Shared.UserRequest
+  - uid: PlayGen.SUGAR.Contracts.UserRequest
     name: UserRequest
-  - uid: PlayGen.SUGAR.Contracts.Shared.UserResponse
+  - uid: PlayGen.SUGAR.Contracts.UserResponse
     name: UserResponse
 - uid: PlayGen.SUGAR.Core.Authorization
   name: PlayGen.SUGAR.Core.Authorization

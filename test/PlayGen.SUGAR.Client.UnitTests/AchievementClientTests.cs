@@ -386,7 +386,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var getAchievement = SUGARClient.Achievement.GetByGame(game.Id);
 
-			Assert.AreEqual(2, getAchievement.Count());
+			Assert.AreEqual(2, getAchievement.Items.Count());
 		}
 
 		[Test]
@@ -506,7 +506,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var getAchievements = SUGARClient.Achievement.GetByGame(-1);
 
-			Assert.IsEmpty(getAchievements);
+			Assert.IsEmpty(getAchievements.Items);
 		}
 
 		[Test]
@@ -1102,7 +1102,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			var progressGame = SUGARClient.Achievement.GetGlobalProgress(user.Id);
-			Assert.GreaterOrEqual(progressGame.Count(), 1);
+			Assert.GreaterOrEqual(progressGame.Items.Count(), 1);
 
 			var progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(response.Token, user.Id);
 			Assert.AreEqual(0, progressAchievement.Progress);
@@ -1160,7 +1160,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var response = SUGARClient.Achievement.Create(achievementRequest);
 
 			var progressGame = SUGARClient.Achievement.GetGameProgress(game.Id, user.Id);
-			Assert.AreEqual(1, progressGame.Count());
+			Assert.AreEqual(1, progressGame.Items.Count());
 
 			var progressAchievement = SUGARClient.Achievement.GetAchievementProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(0, progressAchievement.Progress);

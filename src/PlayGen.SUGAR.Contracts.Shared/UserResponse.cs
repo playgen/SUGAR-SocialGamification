@@ -10,7 +10,7 @@
 	///     Name : "Actor Name"
 	///     }
 	/// </example>
-	public class UserResponse : ActorResponse, IResponse
+	public class UserResponse : ActorResponse
 	{
 	}
 }

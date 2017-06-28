@@ -7,9 +7,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 {
 	public static class ActorExtensions
 	{
-		public static CollectionResponse ToCollectionContract(this IEnumerable<Actor> models)
+		public static ActorsResponse ToCollectionContract(this IEnumerable<Actor> models)
 		{
-			return new CollectionResponse() {
+			return new ActorsResponse() {
 				Items = models.Select(ToContract).ToArray(),
 			};
 

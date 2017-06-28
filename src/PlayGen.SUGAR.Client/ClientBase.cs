@@ -145,14 +145,16 @@ namespace PlayGen.SUGAR.Client
 		private TResponse UnwrapResponse<TResponse>(HttpResponse response)
 			where TResponse : class
 		{
+			Console.WriteLine("ClientBase::UnwrapResponse");
 			var wrappedResponse = JsonConvert.DeserializeObject<ResponseWrapper>(response.Content, SerializerSettings);
 			var content = wrappedResponse.Response;
 
-			EvaluationNotifications.Enqueue(wrappedResponse.EvaluationsProgress.ToNotifications() ??
-											new List<EvaluationNotification>());
-			return content is CollectionResponse
-				? ((CollectionResponse) content).Items as TResponse
-				: content as TResponse;
+			EvaluationNotifications.Enqueue(wrappedResponse.EvaluationsProgress.ToNotifications() ?? new List<EvaluationNotification>());
+
+			Console.WriteLine("ClientBase::UnwrapResponse[TestResponse]");
+			var r = content as TResponse;
+			Console.WriteLine("Response cast as TResponse : " + (r != null));
+			return r;
 		}
 
 		/// <summary>
@@ -163,6 +165,7 @@ namespace PlayGen.SUGAR.Client
 		/// <exception cref="Exception">HTTP Status Code not equal to 200 (OK)</exception>
 		private void ProcessResponse(HttpResponse response, IEnumerable<HttpStatusCode> expectedStatusCodes)
 		{
+			Console.WriteLine("ClientBase::ProcessResponse");
 			if (!expectedStatusCodes.Contains((HttpStatusCode) response.StatusCode))
 			{
 				var error = "API ERROR. Status Code: " + response.StatusCode + ".";
@@ -173,7 +176,9 @@ namespace PlayGen.SUGAR.Client
 
 			//TODO: check if this has changed
 			if (response.Headers.ContainsKey(HeaderKeys.Authorization))
+			{
 				PersistentHeaders[HeaderKeys.Authorization] = response.Headers[HeaderKeys.Authorization];
+			}
 		}
 
 		#region PostPut

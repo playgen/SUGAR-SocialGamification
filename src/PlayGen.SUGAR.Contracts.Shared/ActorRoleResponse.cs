@@ -12,7 +12,7 @@
 	///     EntityId : 1
 	///     }
 	/// </example>
-	public class ActorRoleResponse : IResponse
+	public class ActorRoleResponse : Response
 	{
 		/// <summary>
 		///     The unqiue identifier for the actorrole.

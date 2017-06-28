@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Contracts
 	///     Progress : 0
 	///     }
 	/// </example>
-	public class EvaluationProgressResponse : IResponse
+	public class EvaluationProgressResponse : Response
 	{
 		/// <summary>
 		///     The details of the actor whose progress was being checked.

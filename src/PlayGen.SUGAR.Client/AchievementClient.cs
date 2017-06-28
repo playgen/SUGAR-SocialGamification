@@ -30,10 +30,8 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns <see cref="EvaluationResponse" /> that holds Achievement details</returns>
 		public EvaluationResponse GetGlobalById(string token)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/global", token)
-				.ToString();
-			return Get<EvaluationResponse>(query,
-				new[] {HttpStatusCode.OK, HttpStatusCode.NoContent});
+			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/global", token).ToString();
+			return Get<EvaluationResponse>(query, new[] {HttpStatusCode.OK, HttpStatusCode.NoContent});
 		}
 
 		/// <summary>
@@ -48,8 +46,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>Returns <see cref="EvaluationResponse" /> that holds Achievement details</returns>
 		public EvaluationResponse GetById(string token, int gameId)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/{1}", token, gameId)
-				.ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/{1}", token, gameId).ToString();
 			return Get<EvaluationResponse>(query, new[] {HttpStatusCode.OK, HttpStatusCode.NoContent});
 		}
 
@@ -57,11 +54,11 @@ namespace PlayGen.SUGAR.Client
 		///     Get all global achievements, ie. achievements that are not associated with a specific game
 		/// </summary>
 		/// <returns>Returns multiple <see cref="EvaluationResponse" /> that hold Achievement details</returns>
-		public IEnumerable<EvaluationResponse> GetAllGlobal()
+		public EvaluationsResponse GetAllGlobal()
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/global/list")
 				.ToString();
-			return Get<IEnumerable<EvaluationResponse>>(query);
+			return Get<EvaluationsResponse>(query);
 		}
 
 		/// <summary>
@@ -71,11 +68,11 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">game ID</param>
 		/// <returns>Returns multiple <see cref="EvaluationResponse" /> that hold Achievement details</returns>
-		public IEnumerable<EvaluationResponse> GetByGame(int gameId)
+		public EvaluationsResponse GetByGame(int gameId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/list", gameId)
 				.ToString();
-			return Get<IEnumerable<EvaluationResponse>>(query);
+			return Get<EvaluationsResponse>(query);
 		}
 
 		/// <summary>
@@ -85,11 +82,11 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="actorId">ID of Group/User</param>
 		/// <returns>Returns multiple <see cref="EvaluationProgressResponse" /> that hold Achievement progress details</returns>
-		public IEnumerable<EvaluationProgressResponse> GetGlobalProgress(int actorId)
+		public EvaluationsProgressResponse GetGlobalProgress(int actorId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/global/evaluate/{0}", actorId)
 				.ToString();
-			return Get<IEnumerable<EvaluationProgressResponse>>(query);
+			return Get<EvaluationsProgressResponse>(query);
 		}
 
 		/// <summary>
@@ -102,14 +99,14 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="gameId">ID of Game</param>
 		/// <param name="actorId">ID of Group/User</param>
 		/// <returns>Returns multiple <see cref="EvaluationProgressResponse" /> that hold current progress toward achievement.</returns>
-		public IEnumerable<EvaluationProgressResponse> GetGameProgress(int gameId, int actorId)
+		public EvaluationsProgressResponse GetGameProgress(int gameId, int actorId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/evaluate/{1}", gameId, actorId)
 				.ToString();
-			return Get<IEnumerable<EvaluationProgressResponse>>(query);
+			return Get<EvaluationsProgressResponse>(query);
 		}
 
-		public void GetGameProgressAsync(int gameId, int actorId, Action<IEnumerable<EvaluationProgressResponse>> onSuccess,
+		public void GetGameProgressAsync(int gameId, int actorId, Action<EvaluationsProgressResponse> onSuccess,
 			Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetGameProgress(gameId, actorId),

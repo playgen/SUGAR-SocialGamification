@@ -106,7 +106,7 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
 		{
 			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardToken, leaderboardDetails.GameId);
 			var standings = _leaderboardEvaluationController.GetStandingsList(leaderboard, leaderboardDetails);
-			var collectionContract = new CollectionResponse()
+			var collectionContract = new LeaderboardsStandingsResponse()
 			{
 				Items = standings.ToArray(),
 			};

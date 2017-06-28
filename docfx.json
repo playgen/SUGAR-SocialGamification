@@ -3,7 +3,10 @@
 		"src": [
 			{
 				"files": [ "**/*.csproj", "**/project.json" ],
-				"exclude": [ "**/bin/**", "**/obj/**", "**PlayGen.SUGAR.Client.UnityWebGL**" ],
+				"exclude": [ "**/bin/**", 
+					"**/obj/**", 
+					"**PlayGen.SUGAR.Client.UnityWebGL**",
+					"**_Core.**" ],
 				"cwd": "src"
 			}
 		],

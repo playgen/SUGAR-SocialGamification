@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var getGames = SUGARClient.Game.Get("CanGetGamesByName");
 
-			Assert.AreEqual(2, getGames.Count());
+			Assert.AreEqual(2, getGames.Items.Count());
 		}
 
 		[Test]
@@ -69,7 +69,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var getGames = SUGARClient.Game.Get("CannotGetNotExistingGameByName");
 
-			Assert.IsEmpty(getGames);
+			Assert.IsEmpty(getGames.Items);
 		}
 
 		[Test]

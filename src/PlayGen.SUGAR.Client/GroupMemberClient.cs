@@ -13,8 +13,7 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/groupmember";
 
-		public GroupMemberClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController,
-			EvaluationNotifications evaluationNotifications)
+		public GroupMemberClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
 			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}
@@ -26,14 +25,14 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> GetMemberRequests(int groupId)
+		public ActorsResponse GetMemberRequests(int groupId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/requests/{0}", groupId)
 				.ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			return Get<ActorsResponse>(query);
 		}
 
-		public void GetMemberRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess,
+		public void GetMemberRequestsAsync(int userId, Action<ActorsResponse> onSuccess,
 			Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetMemberRequests(userId),
@@ -48,14 +47,14 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> GetSentRequests(int userId)
+		public ActorsResponse GetSentRequests(int userId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/sentrequests/{0}", userId)
 				.ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			return Get<ActorsResponse>(query);
 		}
 
-		public void GetSentRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		public void GetSentRequestsAsync(int userId, Action<ActorsResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetSentRequests(userId),
 				onSuccess,
@@ -69,14 +68,13 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> GetMembers(int groupId)
+		public ActorsResponse GetMembers(int groupId)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/members/{0}", groupId)
-				.ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			var query = GetUriBuilder(ControllerPrefix + "/members/{0}", groupId).ToString();
+			return Get<ActorsResponse>(query);
 		}
 
-		public void GetMembersAsync(int groupId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		public void GetMembersAsync(int groupId, Action<ActorsResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetMembers(groupId),
 				onSuccess,
@@ -90,14 +88,13 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="userId">ID of the User.</param>
 		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> GetUserGroups(int userId)
+		public ActorsResponse GetUserGroups(int userId)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/usergroups/{0}", userId)
-				.ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			var query = GetUriBuilder(ControllerPrefix + "/usergroups/{0}", userId).ToString();
+			return Get<ActorsResponse>(query);
 		}
 
-		public void GetUserGroupsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		public void GetUserGroupsAsync(int userId, Action<ActorsResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetUserGroups(userId),
 				onSuccess,

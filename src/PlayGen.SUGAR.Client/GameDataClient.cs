@@ -34,14 +34,14 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="key">Array of Key names.</param>
 		/// <returns>A list of <see cref="EvaluationDataResponse" /> which match the search criteria.</returns>
-		public IEnumerable<EvaluationDataResponse> Get(int? actorId, int? gameId, string[] key)
+		public EvaluationDatasResponse Get(int? actorId, int? gameId, string[] key)
 		{
 			var query = GetUriBuilder(ControllerPrefix)
 				.AppendQueryParameter(actorId, "actorId={0}")
 				.AppendQueryParameter(gameId, "gameId={0}")
 				.AppendQueryParameters(key, "key={0}")
 				.ToString();
-			return Get<IEnumerable<EvaluationDataResponse>>(query);
+			return Get<EvaluationDatasResponse>(query);
 		}
 
 		/// <summary>
@@ -60,8 +60,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="key">Array of Key names.</param>
 		/// <param name="dataType">Data type of value</param>
 		/// <returns>A list of <see cref="EvaluationDataResponse" /> which match the search criteria.</returns>
-		public IEnumerable<EvaluationDataResponse> GetHighest(int? actorId, int? gameId, string[] key,
-			EvaluationDataType dataType)
+		public EvaluationDatasResponse GetHighest(int? actorId, int? gameId, string[] key, EvaluationDataType dataType)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/highest")
 				.AppendQueryParameter(actorId, "actorId={0}")
@@ -69,7 +68,7 @@ namespace PlayGen.SUGAR.Client
 				.AppendQueryParameters(key, "key={0}")
 				.AppendQueryParameter(dataType, "dataType={0}")
 				.ToString();
-			return Get<IEnumerable<EvaluationDataResponse>>(query);
+			return Get<EvaluationDatasResponse>(query);
 		}
 
 		/// <summary>

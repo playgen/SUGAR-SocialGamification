@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Contracts
 	///     EvaluationDataType : "Long"
 	///     }
 	/// </example>
-	public class EvaluationDataResponse : IResponse
+	public class EvaluationDataResponse : Response
 	{
 		/// <summary>
 		///     The id of the Game which this ActorData/GameData relates to.

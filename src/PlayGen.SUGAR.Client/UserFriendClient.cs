@@ -26,14 +26,14 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="userId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> GetFriendRequests(int userId)
+		public ActorsResponse GetFriendRequests(int userId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/requests/{0}", userId)
 				.ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			return Get<ActorsResponse>(query);
 		}
 
-		public void GetFriendRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess,
+		public void GetFriendRequestsAsync(int userId, Action<ActorsResponse> onSuccess,
 			Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetFriendRequests(userId),
@@ -48,14 +48,14 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> GetSentRequests(int userId)
+		public ActorsResponse GetSentRequests(int userId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/sentrequests/{0}", userId)
 				.ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			return Get<ActorsResponse>(query);
 		}
 
-		public void GetSentRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		public void GetSentRequestsAsync(int userId, Action<ActorsResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetSentRequests(userId),
 				onSuccess,
@@ -69,14 +69,14 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="userId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse" /> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> GetFriends(int userId)
+		public ActorsResponse GetFriends(int userId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/friends/{0}", userId)
 				.ToString();
-			return Get<IEnumerable<ActorResponse>>(query);
+			return Get<ActorsResponse>(query);
 		}
 
-		public void GetFriendsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		public void GetFriendsAsync(int userId, Action<ActorsResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetFriends(userId),
 				onSuccess,

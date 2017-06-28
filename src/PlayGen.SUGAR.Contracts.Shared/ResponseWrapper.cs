@@ -4,7 +4,7 @@ namespace PlayGen.SUGAR.Contracts
 {
 	public class ResponseWrapper
 	{
-		public IResponse Response { get; set; }
+		public Response Response;
 
 		public List<EvaluationProgressResponse> EvaluationsProgress { get; set; }
 	}

@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Contracts
 	///     Name : "Role Name"
 	///     }
 	/// </example>
-	public class RoleResponse : IResponse
+	public class RoleResponse : Response
 	{
 		/// <summary>
 		///     The unqiue identifier for the role.

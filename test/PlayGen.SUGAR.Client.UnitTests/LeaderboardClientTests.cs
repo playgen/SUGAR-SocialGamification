@@ -276,9 +276,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var getResponse = SUGARClient.Leaderboard.Get(game.Id);
 
-			Assert.AreEqual(3, getResponse.Count());
+			Assert.AreEqual(3, getResponse.Items.Count());
 
-			var getCheck = getResponse.Where(g => leaderboardNames.Any(ln => g.Name.Contains(ln)));
+			var getCheck = getResponse.Items.Where(g => leaderboardNames.Any(ln => g.Name.Contains(ln)));
 
 			Assert.AreEqual(3, getCheck.Count());
 		}
@@ -288,7 +288,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var getResponse = SUGARClient.Leaderboard.Get(-1);
 
-			Assert.IsEmpty(getResponse);
+			Assert.IsEmpty(getResponse.Items);
 		}
 
 		[Test]
@@ -757,9 +757,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var standingsResponse = SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
 
-			Assert.AreEqual(1, standingsResponse.Count());
+			Assert.AreEqual(1, standingsResponse.Items.Count());
 			Assert.AreEqual(user.Name,
-				standingsResponse.First()
+				standingsResponse.Items.First()
 					.ActorName);
 		}
 
@@ -805,9 +805,9 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var standingsResponse = SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
 
-			Assert.AreEqual(1, standingsResponse.Count());
+			Assert.AreEqual(1, standingsResponse.Items.Count());
 			Assert.AreEqual(user.Name,
-				standingsResponse.First()
+				standingsResponse.Items.First()
 					.ActorName);
 		}
 

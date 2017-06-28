@@ -22,9 +22,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static CollectionResponse ToCollectionContract(this IEnumerable<AccountSource> sourceModels)
+		public static AccountSourcesResponse ToCollectionContract(this IEnumerable<AccountSource> sourceModels)
 		{
-			return new CollectionResponse()
+			return new AccountSourcesResponse()
 			{
 				Items = sourceModels.Select(ToContract).ToArray(),
 			}; 

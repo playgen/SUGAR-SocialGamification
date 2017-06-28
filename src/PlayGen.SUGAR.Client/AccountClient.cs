@@ -27,8 +27,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse" /> containing the new Account details.</returns>
 		public AccountResponse Create(AccountRequest accountRequest)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/create")
-				.ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/create").ToString();
 			return Post<AccountRequest, AccountResponse>(query, accountRequest);
 		}
 
@@ -41,13 +40,11 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse" /> containing the new Account details.</returns>
 		public AccountResponse Create(int gameId, AccountRequest accountRequest)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}/create", gameId)
-				.ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/create", gameId).ToString();
 			return Post<AccountRequest, AccountResponse>(query, accountRequest);
 		}
 
-		public void CreateAsync(int gameId, AccountRequest accountRequest, Action<AccountResponse> onSuccess,
-			Action<Exception> onError)
+		public void CreateAsync(int gameId, AccountRequest accountRequest, Action<AccountResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Create(gameId, accountRequest),
 				onSuccess,
@@ -64,8 +61,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse" /> containing the new Account details.</returns>
 		public AccountResponse CreateWithExisting(int userId, AccountRequest newAccount)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/createwithid/{0}", userId)
-				.ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/createwithid/{0}", userId).ToString();
 			return Post<AccountRequest, AccountResponse>(query, newAccount);
 		}
 
@@ -75,8 +71,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="id">Account ID.</param>
 		public void Delete(int id)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}", id)
-				.ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}", id).ToString();
 			Delete(query);
 		}
 	}

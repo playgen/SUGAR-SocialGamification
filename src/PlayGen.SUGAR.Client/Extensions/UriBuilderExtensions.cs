@@ -14,6 +14,7 @@ namespace PlayGen.SUGAR.Client.Extensions
 		public static UriBuilder AppendQueryParameters<T>(this UriBuilder uri, T[] objects, string formatString)
 		{
 			if (objects != null)
+			{
 				foreach (var obj in objects)
 				{
 					var queryToAppend = string.Format(formatString, obj);
@@ -22,6 +23,7 @@ namespace PlayGen.SUGAR.Client.Extensions
 					else
 						uri.Query = queryToAppend;
 				}
+			}
 			return uri;
 		}
 

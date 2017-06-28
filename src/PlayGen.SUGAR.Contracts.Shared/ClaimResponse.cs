@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Contracts
 	///     ClaimScope : "Game"
 	///     }
 	/// </example>
-	public class ClaimResponse : IResponse
+	public class ClaimResponse : Response
 	{
 		/// <summary>
 		///     The ID of the claim.

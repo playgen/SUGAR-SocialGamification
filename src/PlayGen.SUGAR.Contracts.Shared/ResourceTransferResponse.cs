@@ -3,7 +3,7 @@
 	/// <summary>
 	///     Encapsulates Resource Transfer details from the server.
 	/// </summary>
-	public class ResourceTransferResponse : IResponse
+	public class ResourceTransferResponse : Response
 	{
 		/// <summary>
 		///     The new details of the Resource being transferred from.

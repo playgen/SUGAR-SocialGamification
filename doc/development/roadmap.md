@@ -52,6 +52,10 @@ Integration with achievement systems on popular app stores and game distribution
 
 See [Groups] (/features/group.md)
 
+### Modular Evaluators
+
+Providing an API to allow developers to create evaluator implementations that can be loaded at runtime via configuration and query the game data storage and/or generate rewards.
+
 ## Tech
 
 ### Standalone API
@@ -63,5 +67,3 @@ Implement state machine and game logic decisions using GameData evaluation
 ### WebSockets
 
 Add push messaging and event/message aggregation to API.
-
-### ???

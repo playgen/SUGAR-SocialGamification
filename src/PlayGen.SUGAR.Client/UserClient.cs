@@ -24,11 +24,11 @@ namespace PlayGen.SUGAR.Client
 		///     Get a list of all Users.
 		/// </summary>
 		/// <returns>A list of <see cref="UserResponse" /> that hold User details.</returns>
-		public IEnumerable<UserResponse> Get()
+		public UsersResponse Get()
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/list")
 				.ToString();
-			return Get<IEnumerable<UserResponse>>(query);
+			return Get<UsersResponse>(query);
 		}
 
 		/// <summary>
@@ -39,14 +39,14 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="name">Array of User names.</param>
 		/// <param name="exactMatch">Match the name exactly.</param>
 		/// <returns>A list of <see cref="UserResponse" /> which match the search criteria.</returns>
-		public IEnumerable<UserResponse> Get(string name, bool exactMatch = false)
+		public UsersResponse Get(string name, bool exactMatch = false)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/{1}", name, exactMatch)
 				.ToString();
-			return Get<IEnumerable<UserResponse>>(query);
+			return Get<UsersResponse>(query);
 		}
 
-		public void GetAsync(string name, Action<IEnumerable<UserResponse>> onSuccess, Action<Exception> onError)
+		public void GetAsync(string name, Action<UsersResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Get(name),
 				onSuccess,

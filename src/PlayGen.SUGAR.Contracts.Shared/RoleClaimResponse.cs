@@ -10,7 +10,7 @@
 	///     ClaimId : 1
 	///     }
 	/// </example>
-	public class RoleClaimResponse : IResponse
+	public class RoleClaimResponse : Response
 	{
 		/// <summary>
 		///     The ID of the role related to this roleclaim.

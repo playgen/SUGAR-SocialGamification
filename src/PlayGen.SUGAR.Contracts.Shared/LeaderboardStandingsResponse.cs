@@ -12,7 +12,7 @@
 	///     Ranking : 1
 	///     }
 	/// </example>
-	public class LeaderboardStandingsResponse : IResponse
+	public class LeaderboardStandingsResponse : Response
 	{
 		/// <summary>
 		///     The Id of the Actor.

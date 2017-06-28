@@ -24,11 +24,11 @@ namespace PlayGen.SUGAR.Client
 		///     Get all global leaderboards, ie. leaderboards that are not associated with a specific game
 		/// </summary>
 		/// <returns>Returns multiple <see cref="LeaderboardResponse" /> that hold Leaderboard details</returns>
-		public IEnumerable<LeaderboardResponse> GetGlobal()
+		public LeaderboardsResponse GetGlobal()
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/global/list")
 				.ToString();
-			return Get<IEnumerable<LeaderboardResponse>>(query);
+			return Get<LeaderboardsResponse>(query);
 		}
 
 		/// <summary>
@@ -38,14 +38,14 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="LeaderboardResponse" /> that hold Leaderboard details</returns>
-		public IEnumerable<LeaderboardResponse> Get(int gameId)
+		public LeaderboardsResponse Get(int gameId)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/list", gameId)
 				.ToString();
-			return Get<IEnumerable<LeaderboardResponse>>(query);
+			return Get<LeaderboardsResponse>(query);
 		}
 
-		public void GetAsync(int gameId, Action<IEnumerable<LeaderboardResponse>> onSuccess, Action<Exception> onError)
+		public void GetAsync(int gameId, Action<LeaderboardsResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Get(gameId),
 				onSuccess,
@@ -106,16 +106,16 @@ namespace PlayGen.SUGAR.Client
 		///     wanted from the Leaderboard.
 		/// </param>
 		/// <returns>Returns multiple <see cref="LeaderboardStandingsResponse" /> that hold actor positions in the leaderboard.</returns>
-		public IEnumerable<LeaderboardStandingsResponse> CreateGetLeaderboardStandings(
+		public LeaderboardsStandingsResponse CreateGetLeaderboardStandings(
 			LeaderboardStandingsRequest leaderboardDetails)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/standings")
 				.ToString();
-			return Post<LeaderboardStandingsRequest, IEnumerable<LeaderboardStandingsResponse>>(query, leaderboardDetails);
+			return Post<LeaderboardStandingsRequest, LeaderboardsStandingsResponse>(query, leaderboardDetails);
 		}
 
 		public void CreateGetLeaderboardStandingsAsync(LeaderboardStandingsRequest leaderboardDetails,
-			Action<IEnumerable<LeaderboardStandingsResponse>> onSuccess, Action<Exception> onError)
+			Action<LeaderboardsStandingsResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => CreateGetLeaderboardStandings(leaderboardDetails),
 				onSuccess,

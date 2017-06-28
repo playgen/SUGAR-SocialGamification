@@ -13,7 +13,7 @@
 	///     }
 	///     }
 	/// </example>
-	public class AccountSourceResponse : IResponse
+	public class AccountSourceResponse : Response
 	{
 		/// <summary>
 		///     The unqiue identifier for the game.

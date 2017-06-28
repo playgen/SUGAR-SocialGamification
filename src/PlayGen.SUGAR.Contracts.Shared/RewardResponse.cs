@@ -1,4 +1,5 @@
-﻿using PlayGen.SUGAR.Common;
+﻿using System.ComponentModel.DataAnnotations;
+using PlayGen.SUGAR.Common;
 
 namespace PlayGen.SUGAR.Contracts
 {
@@ -13,14 +14,37 @@ namespace PlayGen.SUGAR.Contracts
 	///     Value : "10.5"
 	///     }
 	/// </example>
-	public class RewardResponse : Reward, IResponse
+	public class RewardResponse : Response
 	{
 		/// <summary>
 		///     The unqiue identifier for this type.
 		/// </summary>
 		public int Id { get; set; }
 
+		/// <summary>
+		///     The key which will be stored in EvaluationData.
+		/// </summary>
+		[Required]
+		[StringLength(64)]
+		public string EvaluationDataKey { get; set; }
 
-		// todo make all fields required for contract
+		/// <summary>
+		///     EvaluationDataCategory of the value for this EvaluationData.
+		/// </summary>
+		[Required]
+		public EvaluationDataCategory EvaluationDataCategory { get; set; }
+
+		/// <summary>
+		///     EvaluationDataType of the value for this EvaluationData.
+		/// </summary>
+		[Required]
+		public EvaluationDataType EvaluationDataType { get; set; }
+
+		/// <summary>
+		///     The value of the EvaluationData.
+		/// </summary>
+		[Required]
+		[StringLength(64)]
+		public string Value { get; set; }
 	}
 }

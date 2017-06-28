@@ -300,7 +300,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var getSkill = SUGARClient.Skill.GetByGame(game.Id);
 
-			Assert.AreEqual(2, getSkill.Count());
+			Assert.AreEqual(2, getSkill.Items.Count());
 		}
 
 		[Test]
@@ -403,7 +403,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 		{
 			var getSkills = SUGARClient.Skill.GetByGame(-1);
 
-			Assert.IsEmpty(getSkills);
+			Assert.IsEmpty(getSkills.Items);
 		}
 
 		[Test]
@@ -997,7 +997,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var response = SUGARClient.Skill.Create(skillRequest);
 
 			var progressGame = SUGARClient.Skill.GetGlobalProgress(user.Id);
-			Assert.GreaterOrEqual(progressGame.Count(), 1);
+			Assert.GreaterOrEqual(progressGame.Items.Count(), 1);
 
 			var progressSkill = SUGARClient.Skill.GetGlobalSkillProgress(response.Token, user.Id);
 			Assert.AreEqual(0, progressSkill.Progress);
@@ -1054,7 +1054,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var response = SUGARClient.Skill.Create(skillRequest);
 
 			var progressGame = SUGARClient.Skill.GetGameProgress(game.Id, user.Id);
-			Assert.AreEqual(1, progressGame.Count());
+			Assert.AreEqual(1, progressGame.Items.Count());
 
 			var progressSkill = SUGARClient.Skill.GetSkillProgress(response.Token, game.Id, user.Id);
 			Assert.AreEqual(0, progressSkill.Progress);

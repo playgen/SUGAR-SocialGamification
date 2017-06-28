@@ -4,8 +4,8 @@ using System.Text;
 
 namespace PlayGen.SUGAR.Contracts
 {
-	public class CollectionResponse : IResponse
+	public class EvaluationsResponse : Response
 	{
-		public IResponse[] Items { get; set; } 
+		public EvaluationResponse[] Items { get; set; }
 	}
 }

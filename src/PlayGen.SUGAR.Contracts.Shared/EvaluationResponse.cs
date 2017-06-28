@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.Contracts
 	///     }]
 	///     }
 	/// </example>
-	public class EvaluationResponse : IResponse
+	public class EvaluationResponse : Response
 	{
 		/// <summary>
 		///     The unqiue identifier for the achievement/skill.

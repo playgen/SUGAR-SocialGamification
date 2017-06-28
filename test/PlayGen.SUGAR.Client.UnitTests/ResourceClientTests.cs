@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			var updatedResource = SUGARClient.Resource.Get(createdResource.GameId,
 					createdResource.ActorId,
 					new[] {createdResource.Key})
-				.Single();
+				.Items.Single();
 
 			Assert.AreEqual(createdQuantity + updatedQuantity, updatedResource.Quantity);
 			Assert.AreEqual(createdResource.Id, updatedResource.Id);
@@ -255,12 +255,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = SUGARClient.Resource.Get(game.Id, user.Id, new[] {"CanGetResource"});
 
-			Assert.AreEqual(1, get.Count());
+			Assert.AreEqual(1, get.Items.Count());
 			Assert.AreEqual(resourceRequest.Key,
-				get.First()
+				get.Items.First()
 					.Key);
 			Assert.AreEqual(resourceRequest.Quantity,
-				get.First()
+				get.Items.First()
 					.Quantity);
 		}
 
@@ -280,12 +280,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = SUGARClient.Resource.Get(game.Id, null, new[] {"CanGetResourceWithoutActorId"});
 
-			Assert.AreEqual(1, get.Count());
+			Assert.AreEqual(1, get.Items.Count());
 			Assert.AreEqual(resourceRequest.Key,
-				get.First()
+				get.Items.First()
 					.Key);
 			Assert.AreEqual(resourceRequest.Quantity,
-				get.First()
+				get.Items.First()
 					.Quantity);
 		}
 
@@ -305,12 +305,12 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var get = SUGARClient.Resource.Get(null, user.Id, new[] {"CanGetResourceWithoutGameId"});
 
-			Assert.AreEqual(1, get.Count());
+			Assert.AreEqual(1, get.Items.Count());
 			Assert.AreEqual(resourceRequest.Key,
-				get.First()
+				get.Items.First()
 					.Key);
 			Assert.AreEqual(resourceRequest.Quantity,
-				get.First()
+				get.Items.First()
 					.Quantity);
 		}
 
@@ -352,8 +352,8 @@ namespace PlayGen.SUGAR.Client.UnitTests
 				user.Id,
 				new[] {"CanGetResourceByMultipleKeys1", "CanGetResourceByMultipleKeys2", "CanGetResourceByMultipleKeys3"});
 
-			Assert.AreEqual(3, get.Count());
-			foreach (var r in get)
+			Assert.AreEqual(3, get.Items.Count());
+			foreach (var r in get.Items)
 				Assert.AreEqual(100, r.Quantity);
 		}
 	}

@@ -23,9 +23,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static CollectionResponse ToCollectionContract(this List<EvaluationCriteria> models)
+		public static EvaluationCriteriasResponse ToCollectionContract(this List<EvaluationCriteria> models)
 		{
-			return new CollectionResponse() {
+			return new EvaluationCriteriasResponse() {
 				Items = models.Select(ToContract).ToArray(),
 			};
 		}

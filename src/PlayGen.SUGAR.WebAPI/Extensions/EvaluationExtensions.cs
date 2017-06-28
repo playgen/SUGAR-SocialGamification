@@ -28,9 +28,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static CollectionResponse ToCollectionContract(this IEnumerable<Evaluation> models)
+		public static EvaluationsResponse ToCollectionContract(this IEnumerable<Evaluation> models)
 		{
-			return new CollectionResponse() {
+			return new EvaluationsResponse() {
 				Items = models.Select(ToContract).ToArray(),
 			};
 		}
@@ -62,9 +62,9 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static CollectionResponse ToCollectionContract(this IEnumerable<EvaluationProgress> models)
+		public static EvaluationsProgressResponse ToCollectionContract(this IEnumerable<EvaluationProgress> models)
 		{
-			return new CollectionResponse() {
+			return new EvaluationsProgressResponse() {
 				Items = models.Select(ToContract).ToArray(),
 			};
 		}

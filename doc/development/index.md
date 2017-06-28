@@ -4,7 +4,7 @@ uid: installation
 
 # Development and Deployment
 
-SUGAR is currently in active development and subject to change. We are committed to delivering a feature complete version of the components by the end of 2017. 
+SUGAR is currently in active development and subject to change. We are committed to delivering a feature complete version of the components by early 2018. 
 
 For upcoming features and development direction see the <xref:roadmap>
 
@@ -20,44 +20,29 @@ All source code is provided under the [Apache License, Version 2.0](http://www.a
 
 ## API Service
 
-The SUGAR API Service is build using [ASP.NET Core](https://docs.asp.net/en/latest/intro.html) (MVC/WebAPI) as a [.NET Core](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/) project. 
+The SUGAR API Service is build using [ASP.NET Core](https://docs.asp.net/en/latest/intro.html) (MVC/WebAPI) as a [.NET Core](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/) project and is compatible with the cross-platform NetStandard runtimes. Deployment has been tested on both Windows and Linux hosts.
 
-Currently the service is built for the [.NETFramework 4.6](https://docs.microsoft.com/en-us/dotnet/articles/core/packages#frameworks) target so will only run on Windows systems, however this will soon be made compatible with the cross-platform NetStandard runtimes.
+Building the WebAPI project produces a .NET assembly that exposes a self hosted web server using [Microsoft Kestrel](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel).
 
-Building the WebAPI project produces a Windows executable that can be executed directly to run the service in a console mode for debugging, or alternatively the service can be hosted in IIS or IIS express. In future releases the service will be made available as a [Docker image](https://www.docker.com/) for easy deployment.
+### Docker
 
-### Database
+SUGAR Has been containerized with [Docker](https://www.docker.com/) for ease of deployment. The service has a dependency on a MySQL compatible database and deployment of this component has been automated with [Docker compose](https://docs.docker.com/compose/).
 
-The service currently uses MySQL for it's data storage, we reccomend using the [MariaDB](https://mariadb.org/) release if you are hosting your own database instance.
+To build and run the service using Docker, clone the repository into the current working directory and execute
 
-In the near future the <xref:gameData> key/value storage will most likely be migrated to a NoSQL data store, however no decision on this technology has been taken yet.
+```
+docker-compose build
+docker-compose up -d
+```
+
+The SUGAR service should be exposed on the 'sugar' container port 5000. We reccomend using an nginx reverse proxy configuration to expose this to the network
 
 ### Development Dependencies
 
-* [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx) with [Update 3](https://go.microsoft.com/fwlink/?LinkId=691129)
-* [.NET Core SDK](https://www.microsoft.com/net/download#core) for your platform
-* The API documentation is generated with [DocFX](https://dotnet.github.io/docfx/tutorial/docfx_getting_started.html#4-use-docfx-under-dnx); currently the DNX version of this must be used for .NET Core projects
+* [Visual Studio 2017](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx) 
+* The API documentation is generated with [DocFX](https://dotnet.github.io/docfx/tutorial/docfx_getting_started.html#4-use-docfx-under-dnx)
 
 * Building the entire solution including client assemblies has additional requirements for compatibility with [Unity3D](http://unity3d.com/) [See Below](xref:installation#api-client)
-
-### IIS Hosting
-
-* The server requires the [.NET Core Windows (Server Hosting)](https://www.microsoft.com/net/download#core) runtime
-* [URL Rewrite](http://www.iis.net/downloads/microsoft/url-rewrite) is reccomended to redirect HTTP requests to a HTTPS endpoint, using a web.config rewrite rule as below
-
-```xml
-<rewrite>
-    <rules>
-        <rule name="HTTPS-Upgrade" enabled="true" stopProcessing="true">
-            <match url="(.*)" />
-            <conditions>
-                <add input="{HTTPS}" pattern="^OFF$" />
-            </conditions>
-            <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" />
-        </rule>
-    </rules>
-</rewrite>
-```
 
 ## API Client
 
@@ -65,15 +50,12 @@ The API client provides a C# interface to the [RESTful API](../restapi/restapi.s
 
 ### Development Dependencies
 
-#### JSON Serialization
-
-.NET MVC Uses the tried and tested [JSON.NET](http://www.newtonsoft.com/json) library from Newtonsoft. For API consistency the C# client uses JSON.net for explicit serialization operations, however the generally released version of this library utilises System.Reflection operations that are not available in Unity's WebGL environment. 
-
-This issue has been addressed by SaladLab who have produced a lightweight version of the JSON.Net library specifically for use in Unity projects (https://github.com/SaladLab/Json.Net.Unity3D). We have decided to use this library for the C# client regardless of the target platform as it provided all required functionality. 
-
-SaladLab only currently provide this in the unitypackage format, we have packaged this for NuGet which can currently be downloaded [here](../files/Json.Net.Unity3D.9.0.1.nupkg), however this will be published to the nuget.org package feed in the near future. For details on how to configure a local filesystem based NuGeT package feed see [here](https://docs.nuget.org/create/hosting-your-own-nuget-feeds).
-
 ### Unity
+
+> [!IMPORTANT]
+> As of Unity 5.6 the WebGL build process has been altered significantly and there are currently open issues regarding the IL2CPP to JavaScript compilation process affecting the type system of classes defined in external assemblies. 
+>
+> We are working on identifying a workaround but in the meantime the SUGAR client assembly is not compatible with WebGL builds.
 
 Unity uses Mono in place of Microsoft's .NET implementation and provides .NET 3.5 compatibility, because of this there a number or limitations on different platforms and those that we are currently aware of are detailed below:
 
@@ -81,7 +63,9 @@ Unity uses Mono in place of Microsoft's .NET implementation and provides .NET 3.
 
 In Unity WebGL builds the socket operations performed by the [System.Net.WebClient](https://msdn.microsoft.com/en-us/library/system.net.webclient(v=vs.90).aspx) are not available and an alternative method must be used to perform HTTP operations. This has been solved in the <xref:PlayGen.SUGAR.Client> by delegating the HTTP operations to a platform specific implementation. Unity WebGL applications can use the browsers native [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) via external calls to a JavaScript library embedded in the project.
 
-* TODO: JSLib installation instructions
+To use this solution within a Unity WebGL build the following file should be included in the project plugins directory and selected only for WebGL platforms.
+
+[UnityWebGLHttpHandler.jslib](https://github.com/playgen/SUGAR-SocialGamification/blob/master/src/PlayGen.SUGAR.Client.Unity/UnityWebGLHttpHandler.jslib)
 
 #### HTTPS 
 
