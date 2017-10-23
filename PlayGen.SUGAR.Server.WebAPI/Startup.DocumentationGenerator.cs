@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			get
 			{
 				var app = PlatformServices.Default.Application;
-				return Path.Combine(app.ApplicationBasePath, @"PlayGen.SUGAR.Contracts.xml");
+				return Path.Combine(app.ApplicationBasePath, "PlayGen.SUGAR.Contracts.xml");
 			}
 		}
 	}
