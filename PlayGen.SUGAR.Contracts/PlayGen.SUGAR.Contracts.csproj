@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netcoreapp1.1;net35</TargetFrameworks>
+	</PropertyGroup>
+
+	<Choose>
+		<When Condition=" '$(TargetFramework)' == 'net35' ">
+			<ItemGroup>
+				<Reference Include="System.ComponentModel.DataAnnotations" />
+			</ItemGroup>
+		</When>
+	</Choose>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
+	</ItemGroup>
+
+</Project>
