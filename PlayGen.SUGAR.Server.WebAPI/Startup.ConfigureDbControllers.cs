@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.ServerAuthentication;
+using PlayGen.SUGAR.Server.Authentication;
+using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 
-namespace PlayGen.SUGAR.WebAPI
+namespace PlayGen.SUGAR.Server.WebAPI
 {
     public partial class Startup
     {

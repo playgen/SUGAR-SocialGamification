@@ -2,11 +2,11 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Core.Controllers;
 using System.Threading;
 using NLog;
+using PlayGen.SUGAR.Server.Core.Controllers;
 
-namespace PlayGen.SUGAR.Core.Sessions
+namespace PlayGen.SUGAR.Server.Core.Sessions
 {
     public class SessionTracker : IDisposable
     {

@@ -1,8 +1,7 @@
 ﻿using System;
+using PlayGen.SUGAR.Common;
 
-using PlayGen.SUGAR.Common.Shared;
-
-namespace PlayGen.SUGAR.Data.Model
+namespace PlayGen.SUGAR.Server.Model
 {
 	public class ActorClaim : IEquatable<ActorClaim>
 	{

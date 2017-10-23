@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Core.Controllers;
-using PlayGen.SUGAR.Data.EntityFramework;
-using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Core.Controllers;
+using PlayGen.SUGAR.Server.EntityFramework;
+using EvaluationCriteria = PlayGen.SUGAR.Server.Model.EvaluationCriteria;
 
-namespace PlayGen.SUGAR.Core.EvaluationEvents
+namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 {
 	/// <summary>
 	/// Evaluates evaluation criteria.

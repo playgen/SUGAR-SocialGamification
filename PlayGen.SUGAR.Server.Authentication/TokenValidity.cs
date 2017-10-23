@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.ServerAuthentication
+﻿namespace PlayGen.SUGAR.Server.Authentication
 {
 	public enum TokenValidity
 	{

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using PlayGen.SUGAR.Common.Shared.Web;
+using PlayGen.SUGAR.Common.Web;
 
-namespace PlayGen.SUGAR.ServerAuthentication.Extensions
+namespace PlayGen.SUGAR.Server.Authentication.Extensions
 {
 	public static class AuthorizationHeaderExtensions
 	{

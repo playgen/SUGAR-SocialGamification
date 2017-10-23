@@ -1,6 +1,6 @@
-﻿namespace PlayGen.SUGAR.Data.Model
+﻿namespace PlayGen.SUGAR.Server.Model
 {
-    public class EvaluationCriteria : Common.Shared.EvaluationCriteria
+    public class EvaluationCriteria : Common.EvaluationCriteria
     {
         public int Id { get; set; }
     }

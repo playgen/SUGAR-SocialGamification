@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PlayGen.SUGAR.ServerAuthentication.Helpers
+namespace PlayGen.SUGAR.Server.Authentication.Helpers
 {
 	class JWTSerializationAdapter : JsonSerializer
 	{

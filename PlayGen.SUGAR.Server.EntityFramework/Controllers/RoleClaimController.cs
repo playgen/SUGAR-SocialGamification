@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
+namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
 	public class RoleClaimController : DbController
 	{

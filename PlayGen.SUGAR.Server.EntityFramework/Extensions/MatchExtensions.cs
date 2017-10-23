@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
+namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 {
 	public static class MatchExtensions
 	{

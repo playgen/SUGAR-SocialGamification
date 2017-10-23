@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Common.Shared.Extensions
+﻿namespace PlayGen.SUGAR.Common.Extensions
 {
     public static class NullableIntExtensions
     {

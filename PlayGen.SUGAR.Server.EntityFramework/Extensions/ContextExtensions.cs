@@ -1,9 +1,9 @@
-﻿using PlayGen.SUGAR.Data.Model;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
+namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 {
 	public static class ContextExtensions
 	{

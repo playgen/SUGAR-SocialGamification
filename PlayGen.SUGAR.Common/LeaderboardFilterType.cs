@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Common.Shared
+﻿namespace PlayGen.SUGAR.Common
 {
 	/// <summary>
 	/// Enum for selecting subsection of users for current standings of a leaderboard.

@@ -1,6 +1,6 @@
-﻿using PlayGen.SUGAR.Common.Shared.Exceptions;
+﻿using PlayGen.SUGAR.Common.Exceptions;
 
-namespace PlayGen.SUGAR.ServerAuthentication.Exceptions
+namespace PlayGen.SUGAR.Server.Authentication.Exceptions
 {
     public class ClaimNotFoundException : SUGARException
     {

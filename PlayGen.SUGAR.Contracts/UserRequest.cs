@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PlayGen.SUGAR.Contracts.Shared
+﻿namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
 	/// Encapsulates user details.

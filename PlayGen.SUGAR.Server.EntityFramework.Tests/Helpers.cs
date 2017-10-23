@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
+namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
 	public static class Helpers
 	{

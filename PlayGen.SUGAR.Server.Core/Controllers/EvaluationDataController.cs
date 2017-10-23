@@ -1,12 +1,12 @@
 ﻿using System;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
 using NLog;
-using PlayGen.SUGAR.Core.Exceptions;
-using PlayGen.SUGAR.Data.EntityFramework;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Core.Exceptions;
+using PlayGen.SUGAR.Server.EntityFramework;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class EvaluationDataController
 	{
@@ -14,13 +14,13 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-		private readonly Data.EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController;
+		private readonly EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController;
 		private readonly EvaluationDataCategory _category;
 
 		public EvaluationDataController(SUGARContextFactory contextFactory, EvaluationDataCategory category)
 		{
 			_category = category;
-			_evaluationDataDbController = new Data.EntityFramework.Controllers.EvaluationDataController(contextFactory, category);
+			_evaluationDataDbController = new EntityFramework.Controllers.EvaluationDataController(contextFactory, category);
 		}
 
 		public void Add(EvaluationData[] datas)

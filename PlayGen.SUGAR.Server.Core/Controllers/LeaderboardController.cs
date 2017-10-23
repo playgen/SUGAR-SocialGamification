@@ -2,33 +2,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using NLog;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Core.EvaluationEvents;
-using PlayGen.SUGAR.Data.EntityFramework;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Common.Shared.Extensions;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Extensions;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Core.EvaluationEvents;
+using PlayGen.SUGAR.Server.EntityFramework;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class LeaderboardController : CriteriaEvaluator
 	{
 		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-		protected readonly Data.EntityFramework.Controllers.ActorController ActorController;
-		protected readonly Data.EntityFramework.Controllers.GroupController GroupController;
-		protected readonly Data.EntityFramework.Controllers.UserController UserController;
+		protected readonly EntityFramework.Controllers.ActorController ActorController;
+		protected readonly EntityFramework.Controllers.GroupController GroupController;
+		protected readonly EntityFramework.Controllers.UserController UserController;
 
 		// todo replace db controller usage with core controller usage (all cases except for leaderbaordDbController)
 		public LeaderboardController(GroupMemberController groupMemberCoreController,
 			UserFriendController userFriendCoreController,
-			Data.EntityFramework.Controllers.ActorController actorController,
-			Data.EntityFramework.Controllers.GroupController groupController,
-			Data.EntityFramework.Controllers.UserController userController,
+			EntityFramework.Controllers.ActorController actorController,
+			EntityFramework.Controllers.GroupController groupController,
+			EntityFramework.Controllers.UserController userController,
 			SUGARContextFactory contextFactory)
 			: base(contextFactory, groupMemberCoreController, userFriendCoreController)
 		{

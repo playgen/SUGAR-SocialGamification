@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-
 using Microsoft.EntityFrameworkCore;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Server.EntityFramework.Extensions;
+using PlayGen.SUGAR.Server.Model;
 
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using PlayGen.SUGAR.Data.EntityFramework.Extensions;
-using PlayGen.SUGAR.Data.Model;
-
-namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
+namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
 	public class AccountSourceController : DbController
 	{

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Xunit;
 
-namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
+namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
 {
     [Collection("Project Fixture Collection")]
     public class EvaluationTrackerTests : EvaluationTestsBase

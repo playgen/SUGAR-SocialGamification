@@ -1,11 +1,11 @@
 ﻿using System;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using PlayGen.SUGAR.Data.Model;
-using Xunit;
 using System.Linq;
+using PlayGen.SUGAR.Server.EntityFramework.Controllers;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Server.Model;
+using Xunit;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
+namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
 	[Collection("Project Fixture Collection")]
 	public class UserFriendControllerTests

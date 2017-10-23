@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using NLog;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Core.EvaluationEvents;
-using PlayGen.SUGAR.Data.EntityFramework;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Common.Shared.Extensions;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Extensions;
+using PlayGen.SUGAR.Server.Core.EvaluationEvents;
+using PlayGen.SUGAR.Server.EntityFramework;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class EvaluationController : CriteriaEvaluator
 	{
@@ -21,10 +21,10 @@ namespace PlayGen.SUGAR.Core.Controllers
 
 		private readonly RewardController _rewardController;
 		private readonly ActorController _actorController;
-		private readonly Data.EntityFramework.Controllers.EvaluationController _evaluationDbController;
+		private readonly EntityFramework.Controllers.EvaluationController _evaluationDbController;
 
 		// todo change all db controller usages to core controller usages except for evaluation db controller
-		public EvaluationController(Data.EntityFramework.Controllers.EvaluationController evaluationDbController,
+		public EvaluationController(EntityFramework.Controllers.EvaluationController evaluationDbController,
 			GroupMemberController groupMemberCoreController,
 			UserFriendController userFriendCoreController,
 			ActorController actorController,

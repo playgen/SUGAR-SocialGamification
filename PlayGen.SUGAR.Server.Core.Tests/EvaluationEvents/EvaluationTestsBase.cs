@@ -1,8 +1,8 @@
 ﻿using System;
-using PlayGen.SUGAR.Core.EvaluationEvents;
-using PlayGen.SUGAR.Core.Sessions;
+using PlayGen.SUGAR.Server.Core.EvaluationEvents;
+using PlayGen.SUGAR.Server.Core.Sessions;
 
-namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
+namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
 {
     public abstract class EvaluationTestsBase : IDisposable
     {

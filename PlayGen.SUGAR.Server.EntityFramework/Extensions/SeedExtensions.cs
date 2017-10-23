@@ -1,9 +1,8 @@
 ﻿using System;
+using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Server.Model;
 
-using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Data.Model;
-
-namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
+namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 {
 	// ReSharper disable once InconsistentNaming
 	internal static class SUGARContextSeedExtensions

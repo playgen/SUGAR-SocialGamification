@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
-using PlayGen.SUGAR.Data.Model;
-using Xunit;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared;
+using System.Threading;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Model;
+using Xunit;
 
-namespace PlayGen.SUGAR.Core.UnitTests
+namespace PlayGen.SUGAR.Server.Core.Tests
 {
     public class MatchControllerTests : IDisposable
     {

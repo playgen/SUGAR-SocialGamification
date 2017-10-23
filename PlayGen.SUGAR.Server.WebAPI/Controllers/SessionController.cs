@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Core.Sessions;
-using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.WebAPI.Attributes;
-using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Authentication;
+using PlayGen.SUGAR.Server.Core.Sessions;
+using PlayGen.SUGAR.Server.WebAPI.Attributes;
+using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
-namespace PlayGen.SUGAR.WebAPI.Controllers
+namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 {
 	/// <summary>
 	/// Web Controller that facilitates session specific operations.

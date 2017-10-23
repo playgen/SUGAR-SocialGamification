@@ -1,15 +1,16 @@
-﻿using PlayGen.SUGAR.Data.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NLog;
+using PlayGen.SUGAR.Server.EntityFramework.Controllers;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class GroupMemberController
 	{
 		private static Logger Logger = LogManager.GetCurrentClassLogger();
-		private readonly Data.EntityFramework.Controllers.GroupRelationshipController _groupRelationshipDbController;
+		private readonly GroupRelationshipController _groupRelationshipDbController;
 
-		public GroupMemberController(Data.EntityFramework.Controllers.GroupRelationshipController groupRelationshipDbController)
+		public GroupMemberController(GroupRelationshipController groupRelationshipDbController)
 		{
 			_groupRelationshipDbController = groupRelationshipDbController;
 		}

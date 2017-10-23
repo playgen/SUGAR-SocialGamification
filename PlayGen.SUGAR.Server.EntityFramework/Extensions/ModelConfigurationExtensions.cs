@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Data.Model;
-using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Model;
+using EvaluationCriteria = PlayGen.SUGAR.Server.Model.EvaluationCriteria;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
+namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 {
 	internal static class ModelConfigurationExtensions
 	{

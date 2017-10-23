@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.WebAPI.Extensions
+namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
 	public static class ActorDataExtensions
 	{
-		public static EvaluationDataResponse ToContract(this Data.Model.ActorData actorData)
+		public static EvaluationDataResponse ToContract(this ActorData actorData)
 		{
 			if (actorData == null)
 			{
@@ -23,14 +24,14 @@ namespace PlayGen.SUGAR.WebAPI.Extensions
 			};
 		}
 
-		public static IEnumerable<EvaluationDataResponse> ToContractList(this IEnumerable<Data.Model.ActorData> actorDatas)
+		public static IEnumerable<EvaluationDataResponse> ToContractList(this IEnumerable<ActorData> actorDatas)
 		{
 			return actorDatas.Select(ToContract).ToList();
 		}
 
-		public static Data.Model.ActorData ToActorDataModel(this EvaluationDataRequest dataContract)
+		public static ActorData ToActorDataModel(this EvaluationDataRequest dataContract)
 		{
-			return new Data.Model.ActorData
+			return new ActorData
 			{
 				ActorId = dataContract.CreatingActorId,
 				GameId = dataContract.GameId,

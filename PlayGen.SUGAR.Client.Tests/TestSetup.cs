@@ -1,4 +1,5 @@
 ﻿//#define DEBUG_SERVER
+
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -6,9 +7,9 @@ using System.Net;
 using MySql.Data.MySqlClient;
 using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Contracts;
 
-namespace PlayGen.SUGAR.Client.UnitTests
+namespace PlayGen.SUGAR.Client.Tests
 {
     [SetUpFixture]
     public class TestSetup
@@ -74,7 +75,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             }
             catch (ClientHttpException e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine((string) e.Message);
             }
             catch (WebException e)
             {

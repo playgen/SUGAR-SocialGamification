@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 
-namespace PlayGen.SUGAR.WebAPI
+namespace PlayGen.SUGAR.Server.WebAPI
 {
     public partial class Startup
     {

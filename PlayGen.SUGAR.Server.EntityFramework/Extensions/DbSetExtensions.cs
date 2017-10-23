@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-
 using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
+namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 {
 	/// <summary>
 	/// Functionality missing from EF.Core that was available in EF 6

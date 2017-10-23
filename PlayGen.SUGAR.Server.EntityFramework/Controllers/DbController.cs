@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
+namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
 	public abstract class DbController
 	{

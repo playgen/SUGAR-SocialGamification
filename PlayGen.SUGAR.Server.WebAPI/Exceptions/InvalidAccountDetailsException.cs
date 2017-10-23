@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlayGen.SUGAR.WebAPI.Exceptions
+namespace PlayGen.SUGAR.Server.WebAPI.Exceptions
 {
 	public class InvalidAccountDetailsException : Exception
 	{

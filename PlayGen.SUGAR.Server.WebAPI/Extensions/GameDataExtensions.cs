@@ -1,13 +1,14 @@
-﻿using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts.Shared;
+﻿using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.WebAPI.Extensions
+namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
 	public static class GameDataExtensions
 	{
-		public static Data.Model.EvaluationData ToGameDataModel(this EvaluationDataRequest contract)
+		public static EvaluationData ToGameDataModel(this EvaluationDataRequest contract)
 		{
-			return new Data.Model.EvaluationData {
+			return new EvaluationData {
 				GameId = contract.GameId,
 				MatchId = contract.MatchId,
 				ActorId = contract.CreatingActorId,

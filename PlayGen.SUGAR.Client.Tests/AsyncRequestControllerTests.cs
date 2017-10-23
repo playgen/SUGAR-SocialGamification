@@ -5,7 +5,7 @@ using System.Linq;
 using NUnit.Framework;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 
-namespace PlayGen.SUGAR.Client.UnitTests
+namespace PlayGen.SUGAR.Client.Tests
 {
 	public class AsyncRequestControllerTests
 	{

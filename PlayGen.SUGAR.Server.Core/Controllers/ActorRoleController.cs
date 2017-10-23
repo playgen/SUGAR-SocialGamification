@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using NLog;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ActorRoleController
 	{
 		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-		private readonly Data.EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
-		private readonly Data.EntityFramework.Controllers.RoleController _roleController;
+		private readonly EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
+		private readonly EntityFramework.Controllers.RoleController _roleController;
 
-		public ActorRoleController(Data.EntityFramework.Controllers.ActorRoleController actorRoleDbController,
-					Data.EntityFramework.Controllers.RoleController roleController)
+		public ActorRoleController(EntityFramework.Controllers.ActorRoleController actorRoleDbController,
+					EntityFramework.Controllers.RoleController roleController)
 		{
 			_actorRoleDbController = actorRoleDbController;
 			_roleController = roleController;

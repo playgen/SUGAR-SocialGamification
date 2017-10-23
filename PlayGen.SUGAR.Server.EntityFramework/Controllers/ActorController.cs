@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Data.EntityFramework.Extensions;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
+namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
 	public class ActorController : DbController
 	{

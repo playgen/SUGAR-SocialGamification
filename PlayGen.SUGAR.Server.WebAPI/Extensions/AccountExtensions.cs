@@ -1,7 +1,7 @@
-﻿using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Data.Model;
+﻿using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.WebAPI.Extensions
+namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
 	public static class AccountExtensions
 	{

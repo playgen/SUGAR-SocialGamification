@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Common.Permissions;
 
-using PlayGen.SUGAR.Common.Shared.Permissions;
-
-namespace PlayGen.SUGAR.Data.Model
+namespace PlayGen.SUGAR.Server.Model
 {
     public class Role
     {

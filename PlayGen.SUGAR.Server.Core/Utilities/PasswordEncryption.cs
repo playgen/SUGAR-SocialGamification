@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Core.Utilities
+﻿namespace PlayGen.SUGAR.Server.Core.Utilities
 {
 	public class PasswordEncryption
 	{

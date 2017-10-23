@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlayGen.SUGAR.Core.Sessions
+namespace PlayGen.SUGAR.Server.Core.Sessions
 {
     public class Session
     {

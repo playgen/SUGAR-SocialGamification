@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-using PlayGen.SUGAR.Core.Sessions;
+using PlayGen.SUGAR.Server.Core.Sessions;
 
-namespace PlayGen.SUGAR.WebAPI
+namespace PlayGen.SUGAR.Server.WebAPI
 {
     public partial class Startup
     {

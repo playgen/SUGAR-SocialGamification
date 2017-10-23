@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using PlayGen.SUGAR.Authorization;
-using PlayGen.SUGAR.Core.Controllers;
-using System.Linq;
+using PlayGen.SUGAR.Server.Authorization;
+using PlayGen.SUGAR.Server.Core.Controllers;
 
-namespace PlayGen.SUGAR.Core.Authorization
+namespace PlayGen.SUGAR.Server.Core.Authorization
 {
     internal class AuthorizationHandlerHelper
     {

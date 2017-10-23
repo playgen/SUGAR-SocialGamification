@@ -1,6 +1,6 @@
-﻿using PlayGen.SUGAR.Data.EntityFramework.Controllers;
+﻿using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
+namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
 	public abstract class ControllerLocator
 	{

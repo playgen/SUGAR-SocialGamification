@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using PlayGen.SUGAR.ServerAuthentication.Extensions;
+using PlayGen.SUGAR.Server.Authentication.Extensions;
 
-namespace PlayGen.SUGAR.ServerAuthentication.Filters
+namespace PlayGen.SUGAR.Server.Authentication.Filters
 {
     public class TokenReissueFilter : IActionFilter
     {

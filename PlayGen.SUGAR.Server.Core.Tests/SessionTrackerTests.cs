@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
-using PlayGen.SUGAR.Core.Sessions;
+using PlayGen.SUGAR.Server.Core.Sessions;
 using Xunit;
 
-namespace PlayGen.SUGAR.Core.UnitTests
+namespace PlayGen.SUGAR.Server.Core.Tests
 {
     [Collection("Project Fixture Collection")]
     public class SessionTrackerTests

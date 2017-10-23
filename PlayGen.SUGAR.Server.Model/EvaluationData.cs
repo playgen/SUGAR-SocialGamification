@@ -1,8 +1,8 @@
 ﻿using System;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Data.Model.Interfaces;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Model.Interfaces;
 
-namespace PlayGen.SUGAR.Data.Model
+namespace PlayGen.SUGAR.Server.Model
 {
 	public class EvaluationData : IModificationHistory
 	{

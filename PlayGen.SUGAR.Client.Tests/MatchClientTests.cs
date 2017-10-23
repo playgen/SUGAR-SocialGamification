@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Contracts;
 
-namespace PlayGen.SUGAR.Client.UnitTests
+namespace PlayGen.SUGAR.Client.Tests
 {
     [TestFixture]
     public class MatchClientTests : ClientTestsBase
@@ -65,7 +65,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
             // Assert
             Assert.AreNotEqual(match.Ended, null);
-            Assert.Less(match.Started, match.Ended);
+            Assert.Less((IComparable) match.Started, match.Ended);
         }
 
         [Test]

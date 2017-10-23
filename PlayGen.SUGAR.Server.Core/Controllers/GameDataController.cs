@@ -1,12 +1,12 @@
 ﻿using System;
-using PlayGen.SUGAR.Data.Model;
-using NLog;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Data.EntityFramework;
 using System.Collections.Generic;
 using System.Linq;
+using NLog;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.EntityFramework;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class GameDataController
 	{

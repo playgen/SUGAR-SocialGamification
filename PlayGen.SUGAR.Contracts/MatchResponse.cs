@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlayGen.SUGAR.Contracts.Shared
+namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
 	/// Encapsulates a match entity's details from the database.

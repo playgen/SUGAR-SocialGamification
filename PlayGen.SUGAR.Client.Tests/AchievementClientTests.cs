@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts.Shared;
 using NUnit.Framework;
-using System;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Contracts;
 
-namespace PlayGen.SUGAR.Client.UnitTests
+namespace PlayGen.SUGAR.Client.Tests
 {
 	public class AchievementClientTests : Evaluations
     { 
@@ -1137,7 +1136,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 			SUGARClient.GameData.Add(gameData);
 
 			progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(response.Token, user.Id);
-			Assert.GreaterOrEqual(progressAchievement.Progress, 1);
+			Assert.GreaterOrEqual((float) progressAchievement.Progress, 1);
 		}
 
 		[Test]

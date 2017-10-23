@@ -1,4 +1,6 @@
-﻿namespace PlayGen.SUGAR.Contracts.Shared
+﻿using PlayGen.SUGAR.Common;
+
+namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
 	/// Encapsulates requirements for completing an achievement or skill.
@@ -14,7 +16,7 @@
 	/// Value : "GameData Key Value"
 	/// }
 	/// </example>
-	public class EvaluationCriteriaUpdateRequest : Common.Shared.EvaluationCriteria
+	public class EvaluationCriteriaUpdateRequest : EvaluationCriteria
 	{
 		/// <summary>
 		/// The unqiue identifier for this type.

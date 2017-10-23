@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using PlayGen.SUGAR.Core.Authorization;
-using PlayGen.SUGAR.ServerAuthentication;
+using PlayGen.SUGAR.Server.Authentication;
+using PlayGen.SUGAR.Server.Core.Authorization;
 
-namespace PlayGen.SUGAR.WebAPI
+namespace PlayGen.SUGAR.Server.WebAPI
 {
     public partial class Startup
     {

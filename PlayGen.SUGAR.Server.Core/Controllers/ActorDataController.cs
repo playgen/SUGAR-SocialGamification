@@ -1,18 +1,18 @@
 ﻿using System;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
 using NLog;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ActorDataController
 	{
 		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-		private readonly Data.EntityFramework.Controllers.ActorDataController _actorDataDbController;
+		private readonly EntityFramework.Controllers.ActorDataController _actorDataDbController;
 
-		public ActorDataController(Data.EntityFramework.Controllers.ActorDataController actorDataDbController)
+		public ActorDataController(EntityFramework.Controllers.ActorDataController actorDataDbController)
 		{
 			_actorDataDbController = actorDataDbController;
 		}

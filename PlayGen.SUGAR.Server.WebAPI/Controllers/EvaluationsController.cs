@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PlayGen.SUGAR.Authorization;
-using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Core.EvaluationEvents;
-using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Authorization;
+using PlayGen.SUGAR.Server.Core.EvaluationEvents;
+using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
-namespace PlayGen.SUGAR.WebAPI.Controllers
+namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 {
 	// todo replace the skill and achievement controllers with this one and just specify 2 api routes for this class?
 	public abstract class EvaluationsController : Controller

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
-namespace PlayGen.SUGAR.WebAPI
+
+namespace PlayGen.SUGAR.Server.WebAPI
 {
 	public class Program
 	{

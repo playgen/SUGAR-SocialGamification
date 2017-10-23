@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Data.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Data.EntityFramework.Extensions;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.EntityFramework.Extensions;
+using PlayGen.SUGAR.Server.Model;
+using PlayGen.SUGAR.Server.Model.Interfaces;
 
-namespace PlayGen.SUGAR.Data.EntityFramework
+namespace PlayGen.SUGAR.Server.EntityFramework
 {
 	/// <summary>
 	/// Entity Framework Database Configuration

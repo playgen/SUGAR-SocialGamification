@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NLog;
-using PlayGen.SUGAR.Core.Utilities;
-using PlayGen.SUGAR.ServerAuthentication;
-using PlayGen.SUGAR.WebAPI.Filters;
-using Microsoft.IdentityModel.Tokens;
-using PlayGen.SUGAR.ServerAuthentication.Filters;
+using PlayGen.SUGAR.Server.Authentication;
+using PlayGen.SUGAR.Server.Authentication.Filters;
+using PlayGen.SUGAR.Server.Core.Utilities;
+using PlayGen.SUGAR.Server.WebAPI.Filters;
 
-namespace PlayGen.SUGAR.WebAPI
+namespace PlayGen.SUGAR.Server.WebAPI
 {
 	public partial class Startup
 	{

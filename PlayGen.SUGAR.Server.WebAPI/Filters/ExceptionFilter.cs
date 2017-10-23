@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using NLog;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using PlayGen.SUGAR.WebAPI.Exceptions;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Server.WebAPI.Exceptions;
 
-namespace PlayGen.SUGAR.WebAPI.Filters
+namespace PlayGen.SUGAR.Server.WebAPI.Filters
 {
 	/// <summary>
 	/// 

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Common.Shared.Extensions;
+﻿using System.Collections.Concurrent;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.EvaluationEvents
+namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 {
     /// <summary>
     /// Check newly evaluated progress and store notifications for values of any significance

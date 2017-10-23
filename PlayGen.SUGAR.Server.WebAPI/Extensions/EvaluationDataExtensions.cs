@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Contracts.Shared;
 using System.Linq;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.WebAPI.Extensions
+namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
 	public static class EvaluationDataExtensions
 	{
-		public static List<EvaluationDataResponse> ToContractList(this List<Data.Model.EvaluationData> models)
+		public static List<EvaluationDataResponse> ToContractList(this List<EvaluationData> models)
 		{
 			return models.Select(ToContract).ToList();
 		}
 
-		public static EvaluationDataResponse ToContract(this Data.Model.EvaluationData evaluationData)
+		public static EvaluationDataResponse ToContract(this EvaluationData evaluationData)
 		{
 			if (evaluationData == null)
 			{

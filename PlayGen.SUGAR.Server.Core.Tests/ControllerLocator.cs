@@ -1,8 +1,8 @@
-﻿using PlayGen.SUGAR.Core.Authorization;
-using PlayGen.SUGAR.Core.Controllers;
-using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
+﻿using PlayGen.SUGAR.Server.Core.Authorization;
+using PlayGen.SUGAR.Server.Core.Controllers;
+using DbControllerLocator = PlayGen.SUGAR.Server.EntityFramework.Tests.ControllerLocator;
 
-namespace PlayGen.SUGAR.Core.UnitTests
+namespace PlayGen.SUGAR.Server.Core.Tests
 {
     public abstract class ControllerLocator
     {

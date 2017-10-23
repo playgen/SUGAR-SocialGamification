@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Core.Controllers;
-using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Core.Controllers;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.UnitTests
+namespace PlayGen.SUGAR.Server.Core.Tests
 {
     public class TestDataFixture : IDisposable
     {
@@ -87,7 +87,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
         private static EvaluationData CreateData(Game game, User user, DataParam data)
         {
-            var gameData = new Data.Model.EvaluationData
+            var gameData = new EvaluationData
             {
                 ActorId = user.Id,
                 GameId = game.Id,

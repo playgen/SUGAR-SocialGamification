@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Authorization
+﻿namespace PlayGen.SUGAR.Server.Authorization
 {
     public class AuthorizationOperation
     {

@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Common.Shared
+﻿namespace PlayGen.SUGAR.Common
 {
 	/// <summary>
 	/// Enum for selecting the type of data being stored or looked for.

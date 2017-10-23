@@ -1,7 +1,6 @@
-﻿using PlayGen.SUGAR.Common.Shared.Permissions;
-using System.ComponentModel.DataAnnotations;
+﻿using PlayGen.SUGAR.Common.Permissions;
 
-namespace PlayGen.SUGAR.Contracts.Shared
+namespace PlayGen.SUGAR.Contracts
 {
     /// <summary>
     /// Encapsulates role details.

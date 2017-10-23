@@ -1,10 +1,10 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using PlayGen.SUGAR.Common.Shared.Permissions;
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
+using PlayGen.SUGAR.Common.Permissions;
 
-namespace PlayGen.SUGAR.Authorization
+namespace PlayGen.SUGAR.Server.Authorization
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class AuthorizationAttribute : ActionFilterAttribute

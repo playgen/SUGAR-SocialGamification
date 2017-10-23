@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace PlayGen.SUGAR.Core.UnitTests
+namespace PlayGen.SUGAR.Server.Core.Tests
 {
     [Collection("Project Fixture Collection")]
     public class AchievementProgressControllerTests

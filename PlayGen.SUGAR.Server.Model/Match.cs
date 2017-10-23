@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PlayGen.SUGAR.Data.Model
+namespace PlayGen.SUGAR.Server.Model
 {
     public class Match
     {

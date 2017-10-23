@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using PlayGen.SUGAR.Server.Model;
 
-using PlayGen.SUGAR.Data.Model;
-
-namespace PlayGen.SUGAR.Data.EntityFramework.Extensions
+namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 {
 	public static class ActorDataExtensions
 	{

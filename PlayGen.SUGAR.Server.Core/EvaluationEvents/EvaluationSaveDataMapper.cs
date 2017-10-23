@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Concurrent;
-using PlayGen.SUGAR.Data.Model;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Common.Shared.Extensions;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Extensions;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.EvaluationEvents
+namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 {
     /// <summary>
     /// Mappings of game data keys to evaluations with criteria that make use of the specific keys.

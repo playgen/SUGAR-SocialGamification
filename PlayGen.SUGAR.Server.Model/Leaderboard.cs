@@ -1,6 +1,6 @@
-﻿using PlayGen.SUGAR.Common.Shared;
+﻿using PlayGen.SUGAR.Common;
 
-namespace PlayGen.SUGAR.Data.Model
+namespace PlayGen.SUGAR.Server.Model
 {
 	public class Leaderboard
 	{

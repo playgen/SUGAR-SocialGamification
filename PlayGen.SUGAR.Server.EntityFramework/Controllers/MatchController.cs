@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Data.EntityFramework.Extensions;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using PlayGen.SUGAR.Server.EntityFramework.Extensions;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
+namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
 	public class MatchController : DbController
 	{

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Common;
 
-namespace PlayGen.SUGAR.Data.Model
+namespace PlayGen.SUGAR.Server.Model
 {
     public abstract class Evaluation
     {
         public int Id { get; set; }
 
-        public abstract Common.Shared.EvaluationType EvaluationType { get; }
+        public abstract EvaluationType EvaluationType { get; }
 
         public int? GameId { get; set; }
 
@@ -14,7 +15,7 @@ namespace PlayGen.SUGAR.Data.Model
 
         public string Description { get; set; }
 
-        public Common.Shared.ActorType ActorType { get; set; }
+        public ActorType ActorType { get; set; }
 
         public string Token { get; set; }
 

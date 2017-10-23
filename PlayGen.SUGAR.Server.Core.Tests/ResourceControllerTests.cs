@@ -1,21 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using PlayGen.SUGAR.Data.Model;
+﻿using System.Linq;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Core.Controllers;
+using PlayGen.SUGAR.Server.Model;
 using Xunit;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Core.Controllers;
+using DbControllerLocator = PlayGen.SUGAR.Server.EntityFramework.Tests.ControllerLocator;
+using GameController = PlayGen.SUGAR.Server.EntityFramework.Controllers.GameController;
+using UserController = PlayGen.SUGAR.Server.EntityFramework.Controllers.UserController;
 
-using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
-
-namespace PlayGen.SUGAR.Core.UnitTests
+namespace PlayGen.SUGAR.Server.Core.Tests
 {
     [Collection("Project Fixture Collection")]
     public class ResourceControllerTests
     {
         #region Configuration
         private readonly ResourceController _resourceController = ControllerLocator.ResourceController;
-        private readonly Data.EntityFramework.Controllers.UserController _userController = DbControllerLocator.UserController;
-        private readonly Data.EntityFramework.Controllers.GameController _gameController = DbControllerLocator.GameController;
+        private readonly UserController _userController = DbControllerLocator.UserController;
+        private readonly GameController _gameController = DbControllerLocator.GameController;
         #endregion
 
         #region Tests

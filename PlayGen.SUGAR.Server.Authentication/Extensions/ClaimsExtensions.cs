@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace PlayGen.SUGAR.ServerAuthentication.Extensions
+namespace PlayGen.SUGAR.Server.Authentication.Extensions
 {
     public static class ClaimsExtensions
     {

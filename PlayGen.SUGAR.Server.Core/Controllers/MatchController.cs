@@ -1,21 +1,21 @@
 ﻿using System;
-using NLog;
-using PlayGen.SUGAR.Data.Model;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Data.EntityFramework;
-using PlayGen.SUGAR.Core.Exceptions;
+using NLog;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Core.Exceptions;
+using PlayGen.SUGAR.Server.EntityFramework;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class MatchController
 	{
 		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-		private readonly Data.EntityFramework.Controllers.MatchController _matchDbController;
+		private readonly EntityFramework.Controllers.MatchController _matchDbController;
 		private readonly EvaluationDataController _evaluationDataController;
 
-		public MatchController(SUGARContextFactory contextFactory, Data.EntityFramework.Controllers.MatchController matchDbController)
+		public MatchController(SUGARContextFactory contextFactory, EntityFramework.Controllers.MatchController matchDbController)
 		{
 			_matchDbController = matchDbController;
 			_evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.MatchData);

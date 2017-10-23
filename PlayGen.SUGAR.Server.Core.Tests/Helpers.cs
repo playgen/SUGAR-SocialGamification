@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Core.Controllers;
-using EvaluationCriteria = PlayGen.SUGAR.Data.Model.EvaluationCriteria;
-using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Core.Controllers;
+using PlayGen.SUGAR.Server.Model;
+using EvaluationCriteria = PlayGen.SUGAR.Server.Model.EvaluationCriteria;
+using DbControllerLocator = PlayGen.SUGAR.Server.EntityFramework.Tests.ControllerLocator;
 
-namespace PlayGen.SUGAR.Core.UnitTests
+namespace PlayGen.SUGAR.Server.Core.Tests
 {
 	public static class Helpers
 	{
@@ -66,7 +66,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 				});
 			}
 
-			return new Data.Model.Achievement
+			return new Achievement
 			{
 				// Arrange
 				Token = key,

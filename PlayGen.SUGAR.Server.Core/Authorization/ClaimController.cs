@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
-using PlayGen.SUGAR.Authorization;
-using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Core.Controllers;
-using PlayGen.SUGAR.Data.Model;
+using System.Reflection;
+using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Server.Authorization;
+using PlayGen.SUGAR.Server.EntityFramework.Controllers;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Authorization
+namespace PlayGen.SUGAR.Server.Core.Authorization
 {
     public class ClaimController
     {
-        private readonly Data.EntityFramework.Controllers.ClaimController _claimDbController;
-        private readonly Data.EntityFramework.Controllers.RoleController _roleDbController;
-        private readonly Data.EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
+        private readonly EntityFramework.Controllers.ClaimController _claimDbController;
+        private readonly RoleController _roleDbController;
+        private readonly RoleClaimController _roleClaimDbController;
 
-        public ClaimController(Data.EntityFramework.Controllers.ClaimController claimDbController,
-                    Data.EntityFramework.Controllers.RoleController roleDbController,
-                    Data.EntityFramework.Controllers.RoleClaimController roleClaimDbController)
+        public ClaimController(EntityFramework.Controllers.ClaimController claimDbController,
+                    RoleController roleDbController,
+                    RoleClaimController roleClaimDbController)
         {
             _claimDbController = claimDbController;
             _roleDbController = roleDbController;

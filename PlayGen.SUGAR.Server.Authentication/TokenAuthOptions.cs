@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.IdentityModel.Tokens;
 
-namespace PlayGen.SUGAR.ServerAuthentication
+namespace PlayGen.SUGAR.Server.Authentication
 {
     public class TokenAuthOptions
     {

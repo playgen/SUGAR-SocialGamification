@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Xunit;
 
-namespace PlayGen.SUGAR.Core.UnitTests
+namespace PlayGen.SUGAR.Server.Core.Tests
 {
 	[CollectionDefinition("Project Fixture Collection")]
 	public class ProjectFixtureCollection : ICollectionFixture<ProjectFixture>
@@ -14,7 +13,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
 	public class ProjectFixture : IDisposable
 	{
-		private readonly Data.EntityFramework.UnitTests.ProjectFixture _dbProjectFixture;
+		private readonly EntityFramework.Tests.ProjectFixture _dbProjectFixture;
 	    private static bool _isInitialized;
 	    private int _instanceCount;
         private static bool _isDisposed;
@@ -25,7 +24,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
             //if (!_isInitialized)
             {
-                _dbProjectFixture = new Data.EntityFramework.UnitTests.ProjectFixture();
+                _dbProjectFixture = new EntityFramework.Tests.ProjectFixture();
                 _isInitialized = true;
             }
         }

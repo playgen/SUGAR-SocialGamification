@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Filters;
-using PlayGen.SUGAR.Core.Sessions;
-using PlayGen.SUGAR.ServerAuthentication.Extensions;
-using PlayGen.SUGAR.WebAPI.Attributes;
-using PlayGen.SUGAR.WebAPI.Exceptions;
-using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.Server.Authentication.Extensions;
+using PlayGen.SUGAR.Server.Core.Sessions;
+using PlayGen.SUGAR.Server.WebAPI.Attributes;
+using PlayGen.SUGAR.Server.WebAPI.Exceptions;
+using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
-namespace PlayGen.SUGAR.WebAPI.Filters
+namespace PlayGen.SUGAR.Server.WebAPI.Filters
 {
     public class SessionFilter : IActionFilter
     {

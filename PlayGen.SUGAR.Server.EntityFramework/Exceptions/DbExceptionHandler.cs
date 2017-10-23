@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.Exceptions
+namespace PlayGen.SUGAR.Server.EntityFramework.Exceptions
 {
 	public class DbExceptionHandler
 	{

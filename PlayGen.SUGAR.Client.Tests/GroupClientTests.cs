@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Contracts.Shared;
 using NUnit.Framework;
+using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Contracts;
 
-namespace PlayGen.SUGAR.Client.UnitTests
+namespace PlayGen.SUGAR.Client.Tests
 {
 	public class GroupClientTests : ClientTestsBase
 	{
@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = SUGARClient.Group.Create(groupRequest);
 
-			var getGroup = SUGARClient.Group.Get(response.Id);
+			var getGroup = SUGARClient.Group.Get((int) response.Id);
 
 			Assert.AreEqual(response.Name, getGroup.Name);
 			Assert.AreEqual(groupRequest.Name, getGroup.Name);
@@ -119,7 +119,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			SUGARClient.Group.Update(response.Id, updateRequest);
 
-			var getGroup = SUGARClient.Group.Get(response.Id);
+			var getGroup = SUGARClient.Group.Get((int) response.Id);
 
 			Assert.AreNotEqual(response.Name, updateRequest.Name);
 			Assert.AreEqual("CanUpdateGroup Updated", getGroup.Name);
@@ -188,13 +188,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = SUGARClient.Group.Create(groupRequest);
 
-			var getGroup = SUGARClient.Group.Get(response.Id);
+			var getGroup = SUGARClient.Group.Get((int) response.Id);
 
 			Assert.NotNull(getGroup);
 
 			SUGARClient.Group.Delete(response.Id);
 
-			getGroup = SUGARClient.Group.Get(response.Id);
+			getGroup = SUGARClient.Group.Get((int) response.Id);
 
 			Assert.Null(getGroup);
 		}

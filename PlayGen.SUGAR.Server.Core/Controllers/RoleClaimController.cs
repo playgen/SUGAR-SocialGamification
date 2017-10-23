@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using NLog;
-using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class RoleClaimController
 	{
 		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-		private readonly Data.EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
+		private readonly EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
 
-		public RoleClaimController(Data.EntityFramework.Controllers.RoleClaimController roleClaimDbController)
+		public RoleClaimController(EntityFramework.Controllers.RoleClaimController roleClaimDbController)
 		{
 			_roleClaimDbController = roleClaimDbController;
 		}

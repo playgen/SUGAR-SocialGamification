@@ -1,9 +1,9 @@
 ﻿using NLog;
-using PlayGen.SUGAR.Core.EvaluationEvents;
-using PlayGen.SUGAR.Data.EntityFramework;
-using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Server.Core.EvaluationEvents;
+using PlayGen.SUGAR.Server.EntityFramework;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class RewardController : CriteriaEvaluator
 	{

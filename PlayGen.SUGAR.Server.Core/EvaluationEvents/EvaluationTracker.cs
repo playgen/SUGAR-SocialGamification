@@ -1,14 +1,15 @@
 ﻿// todo v2.0: support group evaluations
 // todo store by sessionId instead of actor.Id?
+
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Core.Controllers;
-using PlayGen.SUGAR.Core.Sessions;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+using PlayGen.SUGAR.Server.Core.Controllers;
+using PlayGen.SUGAR.Server.Core.Sessions;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.EvaluationEvents
+namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 {
     public class EvaluationTracker : IDisposable
     {

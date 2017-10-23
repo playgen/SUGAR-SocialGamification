@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySQL.Data.EntityFrameworkCore.Extensions;
+using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 
-using PlayGen.SUGAR.Data.EntityFramework.Extensions;
-
-namespace PlayGen.SUGAR.Data.EntityFramework
+namespace PlayGen.SUGAR.Server.EntityFramework
 {
 	public class SUGARContextFactory
 	{

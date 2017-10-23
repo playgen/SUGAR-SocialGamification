@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using PlayGen.SUGAR.Core.EvaluationEvents;
-using PlayGen.SUGAR.Core.Sessions;
+﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Server.Core.EvaluationEvents;
+using PlayGen.SUGAR.Server.Core.Sessions;
+using PlayGen.SUGAR.Server.Model;
 using Xunit;
-using PlayGen.SUGAR.Data.Model;
 
-namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
+namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
 {
     [Collection("Project Fixture Collection")]
     public class ProgressEvaluatorTests

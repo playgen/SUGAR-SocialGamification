@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
+using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Server.EntityFramework.Extensions;
+using PlayGen.SUGAR.Server.Model;
 
-using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Data.EntityFramework.Extensions;
-
-namespace PlayGen.SUGAR.Data.EntityFramework.Controllers
+namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
 	public class RoleController : DbController
 	{

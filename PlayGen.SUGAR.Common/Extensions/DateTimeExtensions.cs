@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace PlayGen.SUGAR.Common.Shared.Extensions
+namespace PlayGen.SUGAR.Common.Extensions
 {
     public static class DateTimeExtensions
     {

@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Common.Shared
+﻿namespace PlayGen.SUGAR.Common
 {
     public abstract class Actor
     {
@@ -6,6 +6,6 @@
 
         public string Name { get; set; }
 
-        public abstract Common.Shared.ActorType ActorType { get; }
+        public abstract ActorType ActorType { get; }
     }
 }

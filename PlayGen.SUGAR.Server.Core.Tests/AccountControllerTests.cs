@@ -1,12 +1,9 @@
-﻿using PlayGen.SUGAR.Core.Controllers;
-using PlayGen.SUGAR.Data.EntityFramework;
-using PlayGen.SUGAR.Data.Model;
+﻿using PlayGen.SUGAR.Server.Core.Controllers;
+using PlayGen.SUGAR.Server.Model;
 using Xunit;
 
-using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
 
-
-namespace PlayGen.SUGAR.Core.UnitTests
+namespace PlayGen.SUGAR.Server.Core.Tests
 {
     [Collection("Project Fixture Collection")]
     public class AccountControllerTests

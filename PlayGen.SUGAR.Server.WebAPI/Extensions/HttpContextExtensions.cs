@@ -1,13 +1,13 @@
 ﻿using System;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using PlayGen.SUGAR.ServerAuthentication.Extensions;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.Abstractions;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using PlayGen.SUGAR.Server.Authentication.Extensions;
 
-namespace PlayGen.SUGAR.WebAPI.Extensions
+namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
 	public static class HttpContextExtensions
 	{

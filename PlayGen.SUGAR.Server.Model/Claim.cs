@@ -1,7 +1,7 @@
-﻿using PlayGen.SUGAR.Common.Shared.Permissions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PlayGen.SUGAR.Common.Permissions;
 
-namespace PlayGen.SUGAR.Data.Model
+namespace PlayGen.SUGAR.Server.Model
 {
     public class Claim
     {

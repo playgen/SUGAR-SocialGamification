@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PlayGen.SUGAR.Authorization;
-using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Core.Controllers;
-using PlayGen.SUGAR.WebAPI.Attributes;
-using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Authorization;
+using PlayGen.SUGAR.Server.EntityFramework.Controllers;
+using PlayGen.SUGAR.Server.WebAPI.Attributes;
+using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
-namespace PlayGen.SUGAR.WebAPI.Controllers
+namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 {
 	/// <summary>
 	/// Web Controller that facilitates Leaderboard specific operations.
@@ -18,11 +18,11 @@ namespace PlayGen.SUGAR.WebAPI.Controllers
     public class LeaderboardsController : Controller
 	{
         private readonly IAuthorizationService _authorizationService;
-        private readonly Data.EntityFramework.Controllers.LeaderboardController _leaderboardController;
-		private readonly LeaderboardController _leaderboardEvaluationController;
+        private readonly LeaderboardController _leaderboardController;
+		private readonly Core.Controllers.LeaderboardController _leaderboardEvaluationController;
 
-		public LeaderboardsController(Data.EntityFramework.Controllers.LeaderboardController leaderboardController,
-			LeaderboardController leaderboardEvaluationController,
+		public LeaderboardsController(LeaderboardController leaderboardController,
+			Core.Controllers.LeaderboardController leaderboardEvaluationController,
             IAuthorizationService authorizationService)
 		{
 			_leaderboardController = leaderboardController;

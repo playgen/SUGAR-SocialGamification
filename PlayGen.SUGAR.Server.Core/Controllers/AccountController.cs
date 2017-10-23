@@ -1,23 +1,23 @@
-﻿using PlayGen.SUGAR.Core.Exceptions;
-using PlayGen.SUGAR.Data.Model;
-using System.Linq;
+﻿using System.Linq;
 using NLog;
-using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Core.Utilities;
+using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Server.Core.Exceptions;
+using PlayGen.SUGAR.Server.Core.Utilities;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class AccountController
 	{
 		private static Logger Logger = LogManager.GetCurrentClassLogger();
 
-		private readonly Data.EntityFramework.Controllers.AccountController _accountDbController;
+		private readonly EntityFramework.Controllers.AccountController _accountDbController;
 		private readonly AccountSourceController _accountSourceCoreController;
 		private readonly UserController _userCoreController;
 		private readonly ActorRoleController _actorRoleController;
 
 		// todo only take in account db controller but use core user controller
-		public AccountController(Data.EntityFramework.Controllers.AccountController accountDbController,
+		public AccountController(EntityFramework.Controllers.AccountController accountDbController,
 					AccountSourceController accountSourceCoreController,
 					UserController userCoreController,
 					ActorRoleController actorRoleController)

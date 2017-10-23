@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.EntityFramework.Exceptions;
-using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.Core.Controllers;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.EntityFramework.Controllers;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
+using PlayGen.SUGAR.Server.Model;
 using Xunit;
+using DbControllerLocator = PlayGen.SUGAR.Server.EntityFramework.Tests.ControllerLocator;
 
-using DbControllerLocator = PlayGen.SUGAR.Data.EntityFramework.UnitTests.ControllerLocator;
-
-namespace PlayGen.SUGAR.Core.UnitTests
+namespace PlayGen.SUGAR.Server.Core.Tests
 {
     // todo Change to user core controllers
     [Collection("Project Fixture Collection")]
@@ -21,11 +19,11 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
         private readonly Controllers.LeaderboardController _leaderboardCoreController = ControllerLocator.LeaderboardController;
 
-        private readonly Data.EntityFramework.Controllers.LeaderboardController _leaderboardDbController = DbControllerLocator.LeaderboardController;
-        private readonly Data.EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController = DbControllerLocator.EvaluationDataController;
-        private readonly Data.EntityFramework.Controllers.UserController _userDbController = DbControllerLocator.UserController;
-        private readonly Data.EntityFramework.Controllers.GroupController _groupDbController = DbControllerLocator.GroupController;
-        private readonly Data.EntityFramework.Controllers.GroupRelationshipController _groupRelationshipDbController = DbControllerLocator.GroupRelationshipController;
+        private readonly LeaderboardController _leaderboardDbController = DbControllerLocator.LeaderboardController;
+        private readonly EvaluationDataController _evaluationDataDbController = DbControllerLocator.EvaluationDataController;
+        private readonly UserController _userDbController = DbControllerLocator.UserController;
+        private readonly GroupController _groupDbController = DbControllerLocator.GroupController;
+        private readonly GroupRelationshipController _groupRelationshipDbController = DbControllerLocator.GroupRelationshipController;
         #endregion
 
         #region Tests
@@ -728,7 +726,7 @@ namespace PlayGen.SUGAR.Core.UnitTests
 
         private void CreateEvaluationData(IEnumerable<User> users, string key, EvaluationDataType type, int gameId = 0, bool singular = false)
         {
-            List<Data.Model.EvaluationData> usersData = new List<Data.Model.EvaluationData>();
+            List<EvaluationData> usersData = new List<EvaluationData>();
 
             foreach (var user in users)
             {
@@ -740,10 +738,10 @@ namespace PlayGen.SUGAR.Core.UnitTests
         {
             var random = new Random(userId);
 
-            List<Data.Model.EvaluationData> data = new List<Data.Model.EvaluationData>();
+            List<EvaluationData> data = new List<EvaluationData>();
             for (var j = random.Next(1, 10); j > 0; j--)
             {
-                var gameData = new Data.Model.EvaluationData
+                var gameData = new EvaluationData
                 {
                     ActorId = userId,
                     GameId = gameId,
@@ -776,10 +774,10 @@ namespace PlayGen.SUGAR.Core.UnitTests
         {
             for (int i = 1; i <= TestDataFixture.UserCount; i++)
             {
-                List<Data.Model.EvaluationData> data = new List<Data.Model.EvaluationData>();
+                List<EvaluationData> data = new List<EvaluationData>();
                 for (int j = i; j > 0; j--)
                 {
-                    var gameData = new Data.Model.EvaluationData
+                    var gameData = new EvaluationData
                     {
                         ActorId = i,
                         GameId = gameId,

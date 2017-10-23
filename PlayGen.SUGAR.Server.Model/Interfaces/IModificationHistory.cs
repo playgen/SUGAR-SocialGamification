@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlayGen.SUGAR.Data.Model.Interfaces
+namespace PlayGen.SUGAR.Server.Model.Interfaces
 {
 	public interface IModificationHistory
 	{

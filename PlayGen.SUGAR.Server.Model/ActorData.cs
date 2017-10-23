@@ -1,7 +1,8 @@
 ﻿using System;
-using PlayGen.SUGAR.Data.Model.Interfaces;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Model.Interfaces;
 
-namespace PlayGen.SUGAR.Data.Model
+namespace PlayGen.SUGAR.Server.Model
 {
 	public class ActorData : IModificationHistory
 	{
@@ -15,7 +16,7 @@ namespace PlayGen.SUGAR.Data.Model
 
 		public string Value { get; set; }
 
-		public Common.Shared.EvaluationDataType EvaluationDataType { get; set; }
+		public EvaluationDataType EvaluationDataType { get; set; }
 
 		public DateTime DateCreated { get; set; }
 

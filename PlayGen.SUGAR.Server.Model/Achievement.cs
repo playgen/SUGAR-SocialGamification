@@ -1,7 +1,9 @@
-﻿namespace PlayGen.SUGAR.Data.Model
+﻿using PlayGen.SUGAR.Common;
+
+namespace PlayGen.SUGAR.Server.Model
 {
 	public class Achievement : Evaluation
 	{
-		public override Common.Shared.EvaluationType EvaluationType => Common.Shared.EvaluationType.Achievement;
+		public override EvaluationType EvaluationType => EvaluationType.Achievement;
 	}
 }

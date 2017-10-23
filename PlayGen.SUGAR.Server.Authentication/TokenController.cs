@@ -1,15 +1,14 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using PlayGen.SUGAR.Common.Shared.Extensions;
-using PlayGen.SUGAR.Core.Sessions;
-using PlayGen.SUGAR.ServerAuthentication.Extensions;
+using PlayGen.SUGAR.Common.Extensions;
+using PlayGen.SUGAR.Server.Authentication.Extensions;
+using PlayGen.SUGAR.Server.Core.Sessions;
 
-namespace PlayGen.SUGAR.ServerAuthentication
+namespace PlayGen.SUGAR.Server.Authentication
 {
 	public class TokenController
 	{

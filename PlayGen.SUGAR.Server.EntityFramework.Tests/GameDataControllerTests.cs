@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Data.EntityFramework.Controllers;
-using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Server.EntityFramework.Controllers;
+using PlayGen.SUGAR.Server.Model;
 using Xunit;
 
-namespace PlayGen.SUGAR.Data.EntityFramework.UnitTests
+namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
 	[Collection("Project Fixture Collection")]
 	public class EvaluationDataControllerTests

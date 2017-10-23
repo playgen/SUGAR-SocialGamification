@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-using PlayGen.SUGAR.Core.EvaluationEvents;
-using PlayGen.SUGAR.Data.Model;
+using PlayGen.SUGAR.Server.Core.EvaluationEvents;
+using PlayGen.SUGAR.Server.Model;
 using Xunit;
 
-namespace PlayGen.SUGAR.Core.UnitTests.EvaluationEvents
+namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
 {
     [Collection("Project Fixture Collection")]
     public class EvaluationGameDataMapperEvaluationTests : EvaluationTestsBase

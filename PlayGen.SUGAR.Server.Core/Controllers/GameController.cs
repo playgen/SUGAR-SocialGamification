@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Data.Model;
 using System.Linq;
 using NLog;
+using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Server.Model;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class GameController
 	{
 		private static Logger Logger = LogManager.GetCurrentClassLogger();
 		public static event Action<int> GameDeletedEvent;
 
-		private readonly Data.EntityFramework.Controllers.GameController _gameDbController;
+		private readonly EntityFramework.Controllers.GameController _gameDbController;
 		private readonly ActorClaimController _actorClaimController;
 		private readonly ActorRoleController _actorRoleController;
 
-		public GameController(Data.EntityFramework.Controllers.GameController gameDbController,
+		public GameController(EntityFramework.Controllers.GameController gameDbController,
 					ActorClaimController actorClaimController,
 					ActorRoleController actorRoleController)
 		{

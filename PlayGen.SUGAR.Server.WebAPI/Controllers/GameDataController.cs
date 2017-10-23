@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PlayGen.SUGAR.Authorization;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Data.Model;
-using PlayGen.SUGAR.WebAPI.Attributes;
-using PlayGen.SUGAR.WebAPI.Extensions;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Authorization;
+using PlayGen.SUGAR.Server.Model;
+using PlayGen.SUGAR.Server.WebAPI.Attributes;
+using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
-namespace PlayGen.SUGAR.WebAPI.Controllers
+namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 {
 	/// <summary>
 	/// Web Controller that facilitates GameData specific operations.

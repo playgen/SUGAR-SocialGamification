@@ -2,9 +2,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using PlayGen.SUGAR.ServerAuthentication.Exceptions;
+using PlayGen.SUGAR.Server.Authentication.Exceptions;
 
-namespace PlayGen.SUGAR.ServerAuthentication.Extensions
+namespace PlayGen.SUGAR.Server.Authentication.Extensions
 {
     public static class AuthorizationTokenExtensions
     {

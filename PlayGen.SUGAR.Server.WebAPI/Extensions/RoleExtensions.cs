@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Model;
 
-using PlayGen.SUGAR.Common.Shared.Permissions;
-using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Data.Model;
-
-namespace PlayGen.SUGAR.WebAPI.Extensions
+namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
 	public static class RoleExtensions
 	{

@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Reflection;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Common.Shared.Web;
-using PlayGen.SUGAR.Contracts.Shared;
+using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Web;
+using PlayGen.SUGAR.Contracts;
 
-namespace PlayGen.SUGAR.Client.UnitTests
+namespace PlayGen.SUGAR.Client.Tests
 {
     public class SessionClientTests : ClientTestsBase
     {
@@ -164,7 +164,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
             Assert.NotNull(response);
             Assert.IsNull(exception);
             StringAssert.AreEqualIgnoringCase(accountRequest.Name, response.User.Name);
-            Assert.GreaterOrEqual(response.User.Id, 1);
+            Assert.GreaterOrEqual((int) response.User.Id, 1);
         }
 
         [Test]

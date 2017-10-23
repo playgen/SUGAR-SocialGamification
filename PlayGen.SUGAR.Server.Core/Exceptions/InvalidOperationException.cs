@@ -1,7 +1,7 @@
 ﻿using System;
-using PlayGen.SUGAR.Common.Shared.Exceptions;
+using PlayGen.SUGAR.Common.Exceptions;
 
-namespace PlayGen.SUGAR.Core.Exceptions
+namespace PlayGen.SUGAR.Server.Core.Exceptions
 {
     public class InvalidOperationException : SUGARException
     {

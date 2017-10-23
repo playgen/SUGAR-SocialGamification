@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Contracts.Shared;
 using NUnit.Framework;
+using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Contracts;
 
-namespace PlayGen.SUGAR.Client.UnitTests
+namespace PlayGen.SUGAR.Client.Tests
 {
 	public class UserClientTests : ClientTestsBase
 	{
@@ -88,7 +88,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = SUGARClient.User.Create(userRequest);
 
-			var getUser = SUGARClient.User.Get(response.Id);
+			var getUser = SUGARClient.User.Get((int) response.Id);
 
 			Assert.AreEqual(response.Name, getUser.Name);
 			Assert.AreEqual(userRequest.Name, getUser.Name);
@@ -119,7 +119,7 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			SUGARClient.User.Update(response.Id, updateRequest);
 
-			var getUser = SUGARClient.User.Get(response.Id);
+			var getUser = SUGARClient.User.Get((int) response.Id);
 
 			Assert.AreNotEqual(response.Name, updateRequest.Name);
 			Assert.AreEqual("CanUpdateUser Updated", getUser.Name);
@@ -188,13 +188,13 @@ namespace PlayGen.SUGAR.Client.UnitTests
 
 			var response = SUGARClient.User.Create(userRequest);
 
-			var getUser = SUGARClient.User.Get(response.Id);
+			var getUser = SUGARClient.User.Get((int) response.Id);
 
 			Assert.NotNull(getUser);
 
 			SUGARClient.User.Delete(response.Id);
 
-			getUser = SUGARClient.User.Get(response.Id);
+			getUser = SUGARClient.User.Get((int) response.Id);
 
 			Assert.Null(getUser);
 		}

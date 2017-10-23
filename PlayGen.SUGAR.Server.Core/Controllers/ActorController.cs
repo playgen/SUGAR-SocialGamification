@@ -1,15 +1,15 @@
 ﻿using System;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 
-namespace PlayGen.SUGAR.Core.Controllers
+namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ActorController
 	{
 		public static event Action<int> ActorDeletedEvent;
 
-		private readonly Data.EntityFramework.Controllers.ActorController _actorDbController;
+		private readonly EntityFramework.Controllers.ActorController _actorDbController;
 
-		public ActorController(Data.EntityFramework.Controllers.ActorController actorDbController)
+		public ActorController(EntityFramework.Controllers.ActorController actorDbController)
 		{
 			_actorDbController = actorDbController;
 		}

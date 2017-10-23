@@ -1,9 +1,9 @@
-﻿using System.Diagnostics;
-using PlayGen.SUGAR.Contracts.Shared;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
-using System;
+using PlayGen.SUGAR.Contracts;
 
-namespace PlayGen.SUGAR.Client.UnitTests
+namespace PlayGen.SUGAR.Client.Tests
 {
     public static class Helpers
     {
