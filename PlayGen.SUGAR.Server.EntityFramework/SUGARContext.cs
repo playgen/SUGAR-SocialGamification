@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 	{
 		private readonly bool _isSaveDisabled;
 
-		internal SUGARContext(DbContextOptions<SUGARContext> options, bool disableSave = false) : base(options)
+		public SUGARContext(DbContextOptions<SUGARContext> options, bool disableSave = false) : base(options)
 		{
 			_isSaveDisabled = disableSave;
 		}

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	[Collection(nameof(DeleteDatabaseFixture))]
+	[Collection(nameof(ClearDatabaseFixture))]
 	public abstract class ClientTestBase : IDisposable
 	{
 		protected readonly SUGARClient SUGARClient;
@@ -25,10 +25,21 @@ namespace PlayGen.SUGAR.Client.Tests
 			var testHttpHandler = new HttpClientHandler(client);
 			
 			SUGARClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler);
+
+			LoginAdmin();
 		}
 
 		public void Dispose()
 		{
+			try
+			{
+				SUGARClient.Session.Logout();
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+
 			Server.Dispose();
 		}
 

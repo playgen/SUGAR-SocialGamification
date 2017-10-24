@@ -6,7 +6,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-	[Collection(nameof(DeleteDatabaseFixture))]
+	[Collection(nameof(ClearDatabaseFixture))]
 	public abstract class CoreTestBase
     {
     }
