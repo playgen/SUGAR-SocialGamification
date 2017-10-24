@@ -1,106 +1,109 @@
 ﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 {
 	// ReSharper disable once InconsistentNaming
-	internal static class SUGARContextSeedExtensions
+	public static class SUGARContextSeedExtensions
 	{
-		internal static void Seed(this SUGARContext context)
+		public static void Seed(this SUGARContext context)
 		{
+			var roles = new Dictionary<ClaimScope, Role>();
+
 			foreach (var claimScope in (ClaimScope[])Enum.GetValues(typeof(ClaimScope)))
 			{
-				context.Roles.Add(new Role
+				var addedClaimScope = context.Roles.Add(new Role
 				{
 					Name = claimScope.ToString(),
 					ClaimScope = claimScope,
 					Default = true
-				});
+				}).Entity;
+
+				roles.Add(claimScope, addedClaimScope);
 			}
 
-			context.Accounts.Add(new Account()
+			var adminUser = context.Users.Add(new User
+			{
+				Name = "admin"
+			}).Entity;
+
+			var adminAccount = context.Accounts.Add(new Account
 			{
 				Name = "admin",
 				Password = "$2a$12$SSIgQE0cQejeH0dM61JV/eScAiHwJo/I3Gg6xZFUc0gmwh0FnMFv.",
-				Id = 1,
 				AccountSource = new AccountSource
 				{
 					Description = "SUGAR",
 					Token = "SUGAR",
 					RequiresPassword = true
 				},
-				AccountSourceId = 1,
-				User = new User
-				{
-					Id = 1,
-					Name = "admin"
-				},
-				UserId = 1
-			});
+				User = adminUser
+			}).Entity;
 
 			//global (admin)
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Global + 1,
-				ActorId = 1,
-				EntityId = -1
+				Role = roles[ClaimScope.Global],
+				Actor = adminUser,
+				EntityId = Platform.EntityId
 			});
 
 			//global game control
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Game + 1,
-				ActorId = 1,
-				EntityId = -1
+				Role = roles[ClaimScope.Game],
+				Actor = adminUser,
+				EntityId = Platform.EntityId
 			});
 
 			//global group control
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Group + 1,
-				ActorId = 1,
-				EntityId = -1
+				Role = roles[ClaimScope.Group],
+				Actor = adminUser,
+				EntityId = Platform.EntityId
 			});
 
-			//user
+			// admin user
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.User + 1,
-				ActorId = 1,
-				EntityId = 1
+				Role = roles[ClaimScope.User],
+				Actor = adminUser,
+				EntityId = adminUser.Id
 			});
 
 			//global user control
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.User + 1,
-				ActorId = 1,
-				EntityId = -1
+				Role = roles[ClaimScope.User],
+				Actor = adminUser,
+				EntityId = Platform.EntityId
 			});
 
-			//account
+			// admin account
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Account + 1,
-				ActorId = 1,
-				EntityId = 1
+				Role = roles[ClaimScope.Account],
+				Actor = adminUser,
+				EntityId = adminUser.Id
 			});
 
 			//global account control
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Account + 1,
-				ActorId = 1,
-				EntityId = -1
+				Role = roles[ClaimScope.Account],
+				Actor = adminUser,
+				EntityId = Platform.EntityId
 			});
 
 			//global role control
 			context.ActorRoles.Add(new ActorRole
 			{
-				RoleId = (int)ClaimScope.Role + 1,
-				ActorId = 1,
-				EntityId = -1
+				Role = roles[ClaimScope.Role],
+				Actor = adminUser,
+				EntityId = Platform.EntityId
 			});
 
 			context.SaveChanges();
