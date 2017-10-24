@@ -7,10 +7,8 @@ namespace PlayGen.SUGAR.Client.Tests
 {
     public static class Helpers
     {
-        public static ActorResponse GetOrCreateUser(UserClient userClient, string suffix = null)
+        public static ActorResponse GetOrCreateUser(UserClient userClient, string name)
         {
-            var name = GetCallingClassName() + (suffix ?? $"_{suffix}") + "_User";// "_User" suffix as temporary fix while lack of TPH in EF.Core means types inheriting from Actor cannot have the same "Name" value.
-
             var users = userClient.Get(name, true);
             ActorResponse user;
 
@@ -29,10 +27,8 @@ namespace PlayGen.SUGAR.Client.Tests
             return user;
         }
 
-        public static ActorResponse GetOrCreateGroup(GroupClient groupClient, string suffix = null)
+        public static ActorResponse GetOrCreateGroup(GroupClient groupClient, string name)
         {
-            var name = GetCallingClassName() + (suffix ?? $"_{suffix}") + "_Group"; // "_Group" suffix as temporary fix while lack of TPH in EF.Core means types inheriting from Actor cannot have the same "Name" value.
-
             var groups = groupClient.Get(name);
             ActorResponse group;
 
@@ -51,10 +47,8 @@ namespace PlayGen.SUGAR.Client.Tests
             return group;
         }
 
-        public static GameResponse GetOrCreateGame(GameClient gameClient, string suffix = null)
+        public static GameResponse GetOrCreateGame(GameClient gameClient, string name)
         {
-            var name = GetCallingClassName() + suffix ?? $"_{suffix}";
-
             var games = gameClient.Get(name);
             GameResponse game;
 
@@ -71,13 +65,6 @@ namespace PlayGen.SUGAR.Client.Tests
             }
 
             return game;
-        }
-
-        private static string GetCallingClassName()
-        {
-            var method = new StackTrace().GetFrame(2).GetMethod();
-            var className = method.ReflectedType.Name;
-            return className;
         }
 
         public static void Login(SessionClient sessionClient, int gameId, AccountRequest accountRequest)

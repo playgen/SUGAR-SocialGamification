@@ -1,13 +1,12 @@
-﻿using NUnit.Framework;
-using PlayGen.SUGAR.Client.Exceptions;
+﻿using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts;
+using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class AccountClientTests : ClientTestsBase
+	public class AccountTests : ClientTestBase
 	{
-		#region Tests
-        [Test]
+		[Fact]
 		public void CannotCreateDuplicate()
 		{
 			var accountRequest = new AccountRequest
@@ -18,16 +17,15 @@ namespace PlayGen.SUGAR.Client.Tests
             };
 
 			var registerResponse = SUGARClient.Account.Create(accountRequest);
-
+			
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Account.Create(accountRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Account.Create(accountRequest));
 		}
-		#endregion
 	}
 }

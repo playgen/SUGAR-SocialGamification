@@ -1,17 +1,17 @@
 ﻿using System.Linq;
-using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
+using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class GameDataTests : ClientTestsBase
+	public class GameDataTest : ClientTestBase
 	{
-		[Test]
+		[Fact]
 		public void CanCreate()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(GameDataTest)}_Create");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
 
 			var EvaluationDataRequest = new EvaluationDataRequest
@@ -25,17 +25,17 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var response = SUGARClient.GameData.Add(EvaluationDataRequest);
 
-			Assert.AreEqual(EvaluationDataRequest.CreatingActorId, response.CreatingActorId);
-			Assert.AreEqual(EvaluationDataRequest.GameId, response.GameId);
-			Assert.AreEqual(EvaluationDataRequest.Key, response.Key);
-			Assert.AreEqual(EvaluationDataRequest.Value, response.Value);
-			Assert.AreEqual(EvaluationDataRequest.EvaluationDataType, response.EvaluationDataType);
+			Assert.Equal(EvaluationDataRequest.CreatingActorId, response.CreatingActorId);
+			Assert.Equal(EvaluationDataRequest.GameId, response.GameId);
+			Assert.Equal(EvaluationDataRequest.Key, response.Key);
+			Assert.Equal(EvaluationDataRequest.Value, response.Value);
+			Assert.Equal(EvaluationDataRequest.EvaluationDataType, response.EvaluationDataType);
 		}
 
-		[Test]
+		[Fact]
 		public void CanCreateWithoutGameId()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(GameDataTest)}_Create");
 
 			var EvaluationDataRequest = new EvaluationDataRequest
 			{
@@ -47,17 +47,17 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var response = SUGARClient.GameData.Add(EvaluationDataRequest);
 
-			Assert.AreEqual(EvaluationDataRequest.CreatingActorId, response.CreatingActorId);
-			Assert.AreEqual(EvaluationDataRequest.GameId, response.GameId);
-			Assert.AreEqual(EvaluationDataRequest.Key, response.Key);
-			Assert.AreEqual(EvaluationDataRequest.Value, response.Value);
-			Assert.AreEqual(EvaluationDataRequest.EvaluationDataType, response.EvaluationDataType);
+			Assert.Equal(EvaluationDataRequest.CreatingActorId, response.CreatingActorId);
+			Assert.Equal(EvaluationDataRequest.GameId, response.GameId);
+			Assert.Equal(EvaluationDataRequest.Key, response.Key);
+			Assert.Equal(EvaluationDataRequest.Value, response.Value);
+			Assert.Equal(EvaluationDataRequest.EvaluationDataType, response.EvaluationDataType);
 		}
 
-		[Test]
+		[Fact]
 		public void CanCreateWithoutActorId()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(GameDataTest)}_Create");
 
 			var EvaluationDataRequest = new EvaluationDataRequest
 			{
@@ -69,18 +69,18 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var response = SUGARClient.GameData.Add(EvaluationDataRequest);
 
-			Assert.AreEqual(EvaluationDataRequest.CreatingActorId, response.CreatingActorId);
-			Assert.AreEqual(EvaluationDataRequest.GameId, response.GameId);
-			Assert.AreEqual(EvaluationDataRequest.Key, response.Key);
-			Assert.AreEqual(EvaluationDataRequest.Value, response.Value);
-			Assert.AreEqual(EvaluationDataRequest.EvaluationDataType, response.EvaluationDataType);
+			Assert.Equal(EvaluationDataRequest.CreatingActorId, response.CreatingActorId);
+			Assert.Equal(EvaluationDataRequest.GameId, response.GameId);
+			Assert.Equal(EvaluationDataRequest.Key, response.Key);
+			Assert.Equal(EvaluationDataRequest.Value, response.Value);
+			Assert.Equal(EvaluationDataRequest.EvaluationDataType, response.EvaluationDataType);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateWithoutKey()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(GameDataTest)}_Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(GameDataTest)}_Create");
 
 			var EvaluationDataRequest = new EvaluationDataRequest
 			{
@@ -93,11 +93,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(EvaluationDataRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateWithoutValue()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(GameDataTest)}_Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(GameDataTest)}_Create");
 
 			var EvaluationDataRequest = new EvaluationDataRequest
 			{
@@ -110,11 +110,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(EvaluationDataRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateWithMismatchedData()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Create");
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Create");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(GameDataTest)}_Create");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(GameDataTest)}_Create");
 
 			var EvaluationDataRequest = new EvaluationDataRequest
 			{
@@ -150,11 +150,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(EvaluationDataRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetGameData()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, "CanGetGameData");
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "CanGetGameData");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(GameDataTest)}_CanGetGameData");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(GameDataTest)}_CanGetGameData");
 
 			var EvaluationDataRequest = new EvaluationDataRequest
 			{
@@ -169,18 +169,18 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var get = SUGARClient.GameData.Get(user.Id, game.Id, new [] { "CanGetGameData" });
 
-			Assert.AreEqual(1, get.Count());
-			Assert.AreEqual(get.First().CreatingActorId, response.CreatingActorId);
-			Assert.AreEqual(get.First().GameId, response.GameId);
-			Assert.AreEqual(get.First().Key, response.Key);
-			Assert.AreEqual(get.First().Value, response.Value);
-			Assert.AreEqual(get.First().EvaluationDataType, response.EvaluationDataType);
+			Assert.Equal(1, get.Count());
+			Assert.Equal(get.First().CreatingActorId, response.CreatingActorId);
+			Assert.Equal(get.First().GameId, response.GameId);
+			Assert.Equal(get.First().Key, response.Key);
+			Assert.Equal(get.First().Value, response.Value);
+			Assert.Equal(get.First().EvaluationDataType, response.EvaluationDataType);
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetGameDataWithoutActorId()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(GameDataTest)}_Get");
 
 			var EvaluationDataRequest = new EvaluationDataRequest
 			{
@@ -194,18 +194,18 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var get = SUGARClient.GameData.Get(null, game.Id, new string[] { "CanGetGameDataWithoutActorId" });
 
-			Assert.AreEqual(1, get.Count());
-			Assert.AreEqual(get.First().CreatingActorId, response.CreatingActorId);
-			Assert.AreEqual(get.First().GameId, response.GameId);
-			Assert.AreEqual(get.First().Key, response.Key);
-			Assert.AreEqual(get.First().Value, response.Value);
-			Assert.AreEqual(get.First().EvaluationDataType, response.EvaluationDataType);
+			Assert.Equal(1, get.Count());
+			Assert.Equal(get.First().CreatingActorId, response.CreatingActorId);
+			Assert.Equal(get.First().GameId, response.GameId);
+			Assert.Equal(get.First().Key, response.Key);
+			Assert.Equal(get.First().Value, response.Value);
+			Assert.Equal(get.First().EvaluationDataType, response.EvaluationDataType);
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetGameDataWithoutGameId()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Get");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(GameDataTest)}_Get");
 
 			var EvaluationDataRequest = new EvaluationDataRequest
 			{
@@ -219,19 +219,19 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var get = SUGARClient.GameData.Get(user.Id, null, new string[] { "CanGetGameDataWithoutGameId" });
 
-			Assert.AreEqual(1, get.Count());
-			Assert.AreEqual(get.First().CreatingActorId, response.CreatingActorId);
-			Assert.AreEqual(get.First().GameId, response.GameId);
-			Assert.AreEqual(get.First().Key, response.Key);
-			Assert.AreEqual(get.First().Value, response.Value);
-			Assert.AreEqual(get.First().EvaluationDataType, response.EvaluationDataType);
+			Assert.Equal(1, get.Count());
+			Assert.Equal(get.First().CreatingActorId, response.CreatingActorId);
+			Assert.Equal(get.First().GameId, response.GameId);
+			Assert.Equal(get.First().Key, response.Key);
+			Assert.Equal(get.First().Value, response.Value);
+			Assert.Equal(get.First().EvaluationDataType, response.EvaluationDataType);
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetGameDataByMultipleKeys()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, "Get");
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, "Get");
+			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(GameDataTest)}_Get");
+			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(GameDataTest)}_Get");
 
 			var EvaluationDataRequestOne = new EvaluationDataRequest
 			{
@@ -266,10 +266,10 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var get = SUGARClient.GameData.Get(user.Id, game.Id, new string[] { "CanGetGameDatByMultipleKeys1", "CanGetGameDatByMultipleKeys2", "CanGetGameDatByMultipleKeys3" });
 
-			Assert.AreEqual(3, get.Count());
+			Assert.Equal(3, get.Count());
 			foreach (var g in get)
 			{
-				Assert.AreEqual("Test Value", g.Value);
+				Assert.Equal("Test Value", g.Value);
 			}
 		}
 	}

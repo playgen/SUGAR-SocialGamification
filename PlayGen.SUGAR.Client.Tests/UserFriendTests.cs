@@ -1,17 +1,17 @@
 ﻿using System.Linq;
-using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts;
+using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class UserFriendClientTests : ClientTestsBase
+	public class UserFriendTests : ClientTestBase
 	{
-		[Test]
+		[Fact]
 		public void CanCreateRequest()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "CanCreateRequestR");
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "CanCreateRequestA");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanCreateRequestR");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanCreateRequestA");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -21,23 +21,23 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var relationshipResponse = SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
-			Assert.AreEqual(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
-			Assert.AreEqual(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
+			Assert.Equal(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
+			Assert.Equal(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
 
 			var sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.Equal(1, sent.Count());
 
 			var received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.Equal(1, received.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void CanCreateAutoAcceptedRequest()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "CanCreateAutoAcceptedRequestR");
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "CanCreateAutoAcceptedRequestA");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanCreateAutoAcceptedRequestR");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanCreateAutoAcceptedRequestA");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -48,23 +48,23 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var relationshipResponse = SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
-			Assert.AreEqual(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
-			Assert.AreEqual(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
+			Assert.Equal(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
+			Assert.Equal(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
 
 			var sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.Equal(1, sent.Count());
 
 			var received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.Equal(1, received.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateDuplicateRequest()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "CannotCreateDuplicateRequestR");
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "CannotCreateDuplicateRequestA");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CannotCreateDuplicateRequestR");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CannotCreateDuplicateRequestA");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -77,11 +77,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateDuplicateRequestOfAccepted()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "DuplicateRequestOfAcceptedR");
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "DuplicateRequestOfAcceptedA");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_DuplicateRequestOfAcceptedR");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_DuplicateRequestOfAcceptedA");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -97,11 +97,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateDuplicateAutoAcceptedRequest()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "DuplicateAutoAcceptedRequestR");
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "DuplicateAutoAcceptedRequestA");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_DuplicateAutoAcceptedRequestR");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_DuplicateAutoAcceptedRequestA");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -116,10 +116,10 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateRequestWithNonExistingUser()
 		{
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "CannotCreateRequestWithNonExistingUser");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CannotCreateRequestWithNonExistingUser");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -130,10 +130,10 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateRequestWithNonExistingGroup()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "RequestWithNonExistingGroup");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_RequestWithNonExistingGroup");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -144,11 +144,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CanAcceptRequest()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "CanAcceptRequestR");
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "CanAcceptRequestA");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanAcceptRequestR");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanAcceptRequestA");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -160,11 +160,11 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.Equal(1, sent.Count());
 
 			var received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.Equal(1, received.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
 			{
@@ -177,28 +177,28 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(0, sent.Count());
+			Assert.Equal(0, sent.Count());
 
 			received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(0, received.Count());
+			Assert.Equal(0, received.Count());
 
 			sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.Equal(1, sent.Count());
 
 			received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.Equal(1, received.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void CanRejectRequest()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "CanRejectRequestR");
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "CanRejectRequestA");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanRejectRequestR");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanRejectRequestA");
 
-			var relationshipRequest = new RelationshipRequest()
+			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = requestor.Id,
 				AcceptorId = acceptor.Id
@@ -208,11 +208,11 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.Equal(1, sent.Count());
 
 			var received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.Equal(1, received.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
 			{
@@ -225,22 +225,22 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(0, sent.Count());
+			Assert.Equal(0, sent.Count());
 
 			received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(0, received.Count());
+			Assert.Equal(0, received.Count());
 
 			sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
 
-			Assert.AreEqual(0, sent.Count());
+			Assert.Equal(0, sent.Count());
 
 			received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(0, received.Count());
+			Assert.Equal(0, received.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateAlreadyAcceptedRequest()
 		{
 			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "CannotUpdateAlreadyAcceptedRequestR");
@@ -265,7 +265,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateNotExistingRequest()
 		{
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
@@ -278,11 +278,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate));
 		}
 
-		[Test]
+		[Fact]
 		public void CanUpdateRelationship()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "CanUpdateRelationshipR");
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "CanUpdateRelationshipA");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanUpdateRelationshipR");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanUpdateRelationshipA");
 
 			var relationshipRequest = new RelationshipRequest()
 			{
@@ -295,11 +295,11 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
 
-			Assert.AreEqual(1, sent.Count());
+			Assert.Equal(1, sent.Count());
 
 			var received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(1, received.Count());
+			Assert.Equal(1, received.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
 			{
@@ -311,18 +311,18 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
 
-			Assert.AreEqual(0, sent.Count());
+			Assert.Equal(0, sent.Count());
 
 			received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(0, received.Count());
+			Assert.Equal(0, received.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateNotExistingRelationship()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "CannotUpdateNotExistingRelationshipR");
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "CannotUpdateNotExistingRelationshipA");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CannotUpdateNotExistingRelationshipR");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CannotUpdateNotExistingRelationshipA");
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate()
 			{
@@ -333,10 +333,10 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.UpdateFriend(relationshipStatusUpdate));
 		}
 		
-		[Test]
+		[Fact]
 		public void CanGetFriendRequests()
 		{
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "CanGetFriendRequestsA");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanGetFriendRequestsA");
 			var requestorNames = new string[] {
 				"CanGetFriendRequests1",
 				"CanGetFriendRequests2",
@@ -347,7 +347,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			foreach (var name in requestorNames)
 			{
-				var requestor = Helpers.GetOrCreateUser(SUGARClient.User, name);
+				var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_{name}");
 				var relationshipRequest = new RelationshipRequest()
 				{
 					RequestorId = requestor.Id,
@@ -358,17 +358,17 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var requests = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
 
-			Assert.AreEqual(5, requests.Count());
+			Assert.Equal(5, requests.Count());
 
 			var requestCheck = requests.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
 
-			Assert.AreEqual(5, requestCheck.Count());
+			Assert.Equal(5, requestCheck.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetSentRequests()
 		{
-			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, "CanGetSentRequestsR");
+			var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanGetSentRequestsR");
 			var acceptorNames = new string[] {
 				"CanGetSentRequests1",
 				"CanGetSentRequests2",
@@ -379,7 +379,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			foreach (var name in acceptorNames)
 			{
-				var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, name);
+				var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_{name}");
 				var relationshipRequest = new RelationshipRequest()
 				{
 					RequestorId = requestor.Id,
@@ -390,17 +390,17 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var requests = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
 
-			Assert.AreEqual(5, requests.Count());
+			Assert.Equal(5, requests.Count());
 
 			var requestCheck = requests.Where(r => acceptorNames.Any(an => r.Name.Contains(an)));
 
-			Assert.AreEqual(5, requestCheck.Count());
+			Assert.Equal(5, requestCheck.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetFriends()
 		{
-			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, "CanGetFriendsA");
+			var acceptor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_CanGetFriendsA");
 			var requestorNames = new string[] {
 				"CanGetFriends1",
 				"CanGetFriends2",
@@ -411,7 +411,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			foreach (var name in requestorNames)
 			{
-				var requestor = Helpers.GetOrCreateUser(SUGARClient.User, name);
+				var requestor = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(UserFriendTests)}_{name}");
 				var relationshipRequest = new RelationshipRequest()
 				{
 					RequestorId = requestor.Id,
@@ -423,11 +423,11 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var members = SUGARClient.UserFriend.GetFriends(acceptor.Id);
 
-			Assert.AreEqual(5, members.Count());
+			Assert.Equal(5, members.Count());
 
 			var memberCheck = members.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
 
-			Assert.AreEqual(5, memberCheck.Count());
+			Assert.Equal(5, memberCheck.Count());
 		}
 	}
 }

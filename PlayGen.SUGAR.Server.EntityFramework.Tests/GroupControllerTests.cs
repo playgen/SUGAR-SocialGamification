@@ -6,8 +6,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
-	[Collection("Project Fixture Collection")]
-	public class GroupControllerTests
+	public class GroupControllerTests : EntityFrameworkTestBase
 	{
 		#region Configuration
 		private readonly GroupController _groupController = ControllerLocator.GroupController;

@@ -1,18 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp1.1</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MySql.Data.Entity" Version="6.9.8" />
-    <PackageReference Include="NUnit" Version="3.8.1" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.8.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="1.1.1" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+		<PackageReference Include="xunit" Version="2.2.0" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PlayGen.SUGAR.Client\PlayGen.SUGAR.Client.csproj" />
-    <ProjectReference Include="..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PlayGen.SUGAR.Client\PlayGen.SUGAR.Client.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Server.EntityFramework.Tests\PlayGen.SUGAR.Server.EntityFramework.Tests.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Server.WebAPI\PlayGen.SUGAR.Server.WebAPI.csproj" />
+	</ItemGroup>
 
 </Project>

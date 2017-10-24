@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 
@@ -7,23 +8,29 @@ namespace PlayGen.SUGAR.Server.WebAPI
 {
 	public partial class Startup
 	{
-		private void ConfigureDocumentationGeneratorServices(IServiceCollection services)
+		private void ConfigureDocumentationGeneratorServices(IServiceCollection services, IHostingEnvironment env)
 		{
-			services.AddSwaggerGen();
-
-			services.ConfigureSwaggerGen(options =>
+			if (!env.IsEnvironment("Tests"))
 			{
-				options.DescribeAllEnumsAsStrings();
+				services.AddSwaggerGen();
 
-				options.IncludeXmlComments(APIXmlCommentsPath);
-				options.IncludeXmlComments(ContractsXmlCommentsPath);
-			});
+				services.ConfigureSwaggerGen(options =>
+				{
+					options.DescribeAllEnumsAsStrings();
+
+					options.IncludeXmlComments(APIXmlCommentsPath);
+					options.IncludeXmlComments(ContractsXmlCommentsPath);
+				});
+			}
 		}
 
-		private void ConfigureDocumentationGenerator(IApplicationBuilder app)
+		private void ConfigureDocumentationGenerator(IApplicationBuilder app, IHostingEnvironment env)
 		{
-			app.UseSwagger();
-			app.UseSwaggerUi();
+			if (!env.IsEnvironment("Tests"))
+			{ 
+				app.UseSwagger();
+				app.UseSwaggerUi();
+			}
 		}
 
 		private string APIXmlCommentsPath

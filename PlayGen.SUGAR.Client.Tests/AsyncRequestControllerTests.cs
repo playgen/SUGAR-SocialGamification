@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NUnit.Framework;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
+using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class AsyncRequestControllerTests
+	public class AsyncRequestControllerTests : ClientTestBase
 	{
 		private AsyncRequestController DefaultAsyncRequestController
 		{
@@ -19,8 +19,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				return controller;
 			}
 		}
-
-		[Test]
+		
+		[Fact]
 		public void ValueRequestsTriggerOnSuccessCallbacks()
 		{
 			// Arrange
@@ -48,11 +48,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			}
 
 			// Assert
-			CollectionAssert.IsEmpty(onErrorValues);
-			CollectionAssert.AreEqual(values, onSuccessValues);
+			Assert.Empty(onErrorValues);
+			Assert.Equal(values, onSuccessValues);
 		}
 
-		[Test]
+		[Fact]
 		public void VoidRequestsTriggerOnSuccessCallbacks()
 		{
 			// Arrange
@@ -80,11 +80,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			}
 
 			// Assert
-			CollectionAssert.IsEmpty(onErrorValues);
-			CollectionAssert.AreEqual(values, onSuccessVoids);
+			Assert.Empty(onErrorValues);
+			Assert.Equal(values, onSuccessVoids);
 		}
 
-		[Test]
+		[Fact]
 		public void ErrorsTriggerOnErrorCallbacks()
 		{
 			// Arrange
@@ -116,11 +116,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			}
 
 			// Assert
-			CollectionAssert.IsEmpty(onSuccessValues);
-			CollectionAssert.AreEqual(values, onErrorValues);
+			Assert.Empty(onSuccessValues);
+			Assert.Equal(values, onErrorValues);
 		}
 
-		[Test]
+		[Fact]
 		public void DoesTimeoutAction()
 		{
 			// Arrange
@@ -143,7 +143,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			}
 
 			// Assert
-			Assert.IsTrue(didTimeout);
+			Assert.True(didTimeout);
 		}
 	}
 }

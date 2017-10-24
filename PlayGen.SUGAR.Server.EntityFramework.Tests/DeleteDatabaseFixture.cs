@@ -5,21 +5,9 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
-	public class ProjectFixture : IDisposable
+	public class DeleteDatabaseFixture
 	{
-		public ProjectFixture()
-		{
-			DeleteDatabase();
-
-			// ... put any initialization code here
-		}
-
-		public void Dispose()
-		{
-			// ... put any cleanup code here
-		}
-
-		private void DeleteDatabase()
+		public DeleteDatabaseFixture()
 		{
 			using (var context = ControllerLocator.ContextFactory.Create())
 			{
@@ -28,8 +16,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		}
 	}
 
-	[CollectionDefinition("Project Fixture Collection")]
-	public class ProjectFixtureCollection : ICollectionFixture<ProjectFixture>
+	[CollectionDefinition(nameof(DeleteDatabaseFixture))]
+	public class DeleteDatabaseFixtureCollection : ICollectionFixture<DeleteDatabaseFixture>
 	{
 		// This class has no code, and is never created. Its purpose is simply
 		// to be the place to apply [CollectionDefinition] and all the

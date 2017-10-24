@@ -1,15 +1,15 @@
-﻿using PlayGen.SUGAR.Server.EntityFramework.Controllers;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
+using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
 	public abstract class ControllerLocator
 	{
-		// Pooling needs to be set to false due to a MySQL bug that reports "Nested transactions are not supported"
-		// See: 
-		// http://stackoverflow.com/questions/26320679/asp-net-web-forms-and-mysql-entity-framework-nested-transactions-are-not-suppo
-		// http://bugs.mysql.com/bug.php?id=71502
-		public const string ConnectionString = "Server=localhost;Port=3306;Database=sugarunittests;Uid=root;Pwd=t0pSECr3t;Convert Zero Datetime=true;Allow Zero Datetime=true;Pooling=false";
-		public static readonly SUGARContextFactory ContextFactory = new SUGARContextFactory(ConnectionString);
+		public static readonly SUGARContextFactory ContextFactory;
 
 		private static AccountController _accountController;
 		private static AccountSourceController _accountSourceController;
@@ -79,5 +79,24 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 		public static MatchController MatchController
 			=> _matchController ?? (_matchController = new MatchController(ContextFactory));
+
+		static ControllerLocator()
+		{
+			const string environmentName = "Tests";
+
+			var type = typeof(ControllerLocator);
+			var assembly = type.GetTypeInfo().Assembly;
+			var uriBuilder = new UriBuilder(assembly.CodeBase);
+			var assemblyDir = Path.GetDirectoryName(Uri.UnescapeDataString(uriBuilder.Path));
+
+			var builder = new ConfigurationBuilder()
+				.SetBasePath(assemblyDir)
+				.AddJsonFile($"appsettings.{environmentName}.json", true);
+
+			var config = builder.Build();
+
+			var connectionString = config.GetConnectionString("DefaultConnection");
+			ContextFactory = new SUGARContextFactory(connectionString);
+		}
 	}
 }

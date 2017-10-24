@@ -4,7 +4,7 @@ using PlayGen.SUGAR.Server.Core.Sessions;
 
 namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
 {
-    public abstract class EvaluationTestsBase : IDisposable
+    public abstract class EvaluationTestsBase : CoreTestBase
     {
         protected readonly EvaluationTracker EvaluationTracker;
         protected readonly ProgressEvaluator ProgressEvaluator;
@@ -14,10 +14,6 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
         {
             ProgressEvaluator = new ProgressEvaluator(ControllerLocator.EvaluationController);
             EvaluationTracker = new EvaluationTracker(ProgressEvaluator, ControllerLocator.EvaluationController, SessionTracker);
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

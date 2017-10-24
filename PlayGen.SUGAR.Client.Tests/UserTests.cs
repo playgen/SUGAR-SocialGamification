@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts;
+using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class UserClientTests : ClientTestsBase
+	public class UserTests : ClientTestBase
 	{
-		[Test]
+		[Fact]
 		public void CanCreateUser()
 		{
 			var userRequest = new UserRequest
@@ -17,11 +17,11 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var response = SUGARClient.User.Create(userRequest);
 
-			Assert.AreEqual(userRequest.Name, response.Name);
+			Assert.Equal(userRequest.Name, response.Name);
 			Assert.True(response.Id > 0);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateDuplicateUser()
 		{
 			var userRequest = new UserRequest
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Create(userRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotCreateUserWithNoName()
 		{
 			var userRequest = new UserRequest { };
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Create(userRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetUsersByName()
 		{
 			var userRequestOne = new UserRequest
@@ -61,24 +61,24 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var getUsers = SUGARClient.User.Get("CanGetUsersByName");
 
-			Assert.AreEqual(2, getUsers.Count());
+			Assert.Equal(2, getUsers.Count());
 		}
 
-		[Test]
+		[Fact]
 		public void CannotGetNotExistingUserByName()
 		{
 			var getUsers = SUGARClient.User.Get("CannotGetNotExistingUserByName");
 
-			Assert.IsEmpty(getUsers);
+			Assert.Empty(getUsers);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotGetUserByEmptyName()
 		{
 			Assert.Throws<ClientException>(() => SUGARClient.User.Get(""));
 		}
 
-		[Test]
+		[Fact]
 		public void CanGetUserById()
 		{
 			var userRequest = new UserRequest
@@ -90,11 +90,11 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var getUser = SUGARClient.User.Get((int) response.Id);
 
-			Assert.AreEqual(response.Name, getUser.Name);
-			Assert.AreEqual(userRequest.Name, getUser.Name);
+			Assert.Equal(response.Name, getUser.Name);
+			Assert.Equal(userRequest.Name, getUser.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotGetNotExistingUserById()
 		{
 			var getUser = SUGARClient.User.Get(-1);
@@ -102,7 +102,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Null(getUser);
 		}
 
-		[Test]
+		[Fact]
 		public void CanUpdateUser()
 		{
 			var userRequest = new UserRequest
@@ -121,11 +121,11 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var getUser = SUGARClient.User.Get((int) response.Id);
 
-			Assert.AreNotEqual(response.Name, updateRequest.Name);
-			Assert.AreEqual("CanUpdateUser Updated", getUser.Name);
+			Assert.NotEqual(response.Name, updateRequest.Name);
+			Assert.Equal("CanUpdateUser Updated", getUser.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateUserToDuplicateName()
 		{
 			var userRequestOne = new UserRequest
@@ -150,7 +150,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Update(responseTwo.Id, updateUser));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateNonExistingUser()
 		{
 			var updateUser = new UserRequest
@@ -161,7 +161,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Update(-1, updateUser));
 		}
 
-		[Test]
+		[Fact]
 		public void CannotUpdateUserToNoName()
 		{
 			var userRequest = new UserRequest
@@ -178,7 +178,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Update(response.Id, updateRequest));
 		}
 
-		[Test]
+		[Fact]
 		public void CanDeleteUser()
 		{
 			var userRequest = new UserRequest
@@ -199,7 +199,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Null(getUser);
 		}
 
-		[Test]
+		[Fact]
 		public void CannotDeleteNonExistingUser()
 		{
 			SUGARClient.User.Delete(-1);

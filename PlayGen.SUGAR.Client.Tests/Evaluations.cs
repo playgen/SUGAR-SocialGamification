@@ -4,11 +4,11 @@ using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-    public abstract class Evaluations : ClientTestsBase
+    public abstract class Evaluations : ClientTestBase
     {
         protected abstract EvaluationResponse CreateEvaluation(EvaluationCreateRequest achievementRequest);
 
-        protected EvaluationResponse CreateGenericEvaluation(string key)
+		protected EvaluationResponse CreateGenericEvaluation(string key)
         {
             return CreateEvaluation(new EvaluationCreateRequest
             {
@@ -40,5 +40,5 @@ namespace PlayGen.SUGAR.Client.Tests
                 Key = evaluation.EvaluationCriterias[0].EvaluationDataKey
             });
         }
-    }
+	}
 }

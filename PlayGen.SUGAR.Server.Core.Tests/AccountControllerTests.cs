@@ -5,8 +5,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-    [Collection("Project Fixture Collection")]
-    public class AccountControllerTests
+    public class AccountControllerTests : CoreTestBase
     {
         #region Configuration
         private readonly AccountController _accountController = ControllerLocator.AccountController;

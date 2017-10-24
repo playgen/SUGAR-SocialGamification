@@ -12,8 +12,7 @@ using DbControllerLocator = PlayGen.SUGAR.Server.EntityFramework.Tests.Controlle
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
     // todo Change to user core controllers
-    [Collection("Project Fixture Collection")]
-    public class LeaderboardControllerTests : IClassFixture<TestDataFixture>
+    public class LeaderboardControllerTests : CoreTestBase, IClassFixture<TestDataFixture>
     {
         #region Configuration
 

@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
+using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-    [TestFixture]
-    public class MatchClientTests : ClientTestsBase
+    public class MatchTests : ClientTestBase
     {
         private AccountResponse _account;
         private GameResponse _game;
 
-        private void LoginUserForGame(string key = "MatchClientTests")
+		private void LoginUserForGame(string key = "MatchTest")
         {
-            LoginAdmin();
+            _game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(MatchTests)}_{key}");
 
-            _game = Helpers.GetOrCreateGame(SUGARClient.Game, key);
 
-            try
+			try
             {
                 _account = SUGARClient.Session.Login(_game.Id, new AccountRequest
                 {
@@ -39,7 +37,7 @@ namespace PlayGen.SUGAR.Client.Tests
             }
         }
         
-        [Test]
+        [Fact]
         public void CanStart()
         {
             // Arrange
@@ -49,11 +47,11 @@ namespace PlayGen.SUGAR.Client.Tests
             var match = SUGARClient.Match.CreateAndStart();
 
             // Assert
-            Assert.AreEqual(_game.Id, match.Game.Id);
-            Assert.AreEqual(_account.User.Id, match.Creator.Id);
+            Assert.Equal(_game.Id, match.Game.Id);
+            Assert.Equal(_account.User.Id, match.Creator.Id);
         }
 
-        [Test]
+        [Fact]
         public void CanEnd()
         {
             // Arrange
@@ -64,11 +62,11 @@ namespace PlayGen.SUGAR.Client.Tests
             match = SUGARClient.Match.End(match.Id);
 
             // Assert
-            Assert.AreNotEqual(match.Ended, null);
-            Assert.Less((IComparable) match.Started, match.Ended);
+            Assert.NotEqual(match.Ended, null);
+            Assert.True(match.Started < match.Ended);
         }
 
-        [Test]
+        [Fact]
         public void CanGetByTime()
         {
             // Arrange
@@ -87,11 +85,11 @@ namespace PlayGen.SUGAR.Client.Tests
             var got = SUGARClient.Match.GetByTime(preTime, postTime);
 
             // Assert
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+            shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));
+            shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));
         }
 
-        [Test]
+        [Fact]
         public void GetByGame()
         {
             // Arrange
@@ -105,12 +103,12 @@ namespace PlayGen.SUGAR.Client.Tests
             var got = SUGARClient.Match.GetByGame(_game.Id);
 
             // Assert
-            got.ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+            got.ForEach(m => Assert.Equal(_game.Id, m.Game.Id));
+            shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));
+            shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));
         }
 
-        [Test]
+        [Fact]
         public void GetByGameAndTime()
         {
             // Arrange
@@ -132,12 +130,12 @@ namespace PlayGen.SUGAR.Client.Tests
             var got = SUGARClient.Match.GetByGame(_game.Id, pre, post);
 
             // Assert
-            got.ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+            got.ForEach(m => Assert.Equal(_game.Id, m.Game.Id));
+            shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));
+            shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));
         }
 
-        [Test]
+        [Fact]
         public void CanGetByCreator()
         {
             // Arrange
@@ -151,12 +149,12 @@ namespace PlayGen.SUGAR.Client.Tests
             var got = SUGARClient.Match.GetByCreator(_account.User.Id);
 
             // Assert
-            got.ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+            got.ForEach(m => Assert.Equal(_account.User.Id, m.Creator.Id));
+            shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));
+            shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));
         }
 
-        [Test]
+        [Fact]
         public void CanGetByCreatorAndTime()
         {
             // Arrange
@@ -178,12 +176,12 @@ namespace PlayGen.SUGAR.Client.Tests
             var got = SUGARClient.Match.GetByCreator(_account.User.Id, pre, post);
 
             // Assert
-            got.ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+            got.ForEach(m => Assert.Equal(_account.User.Id, m.Creator.Id));
+            shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));
+            shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));
         }
 
-        [Test]
+        [Fact]
         public void CanGetByGameAndCreator()
         {
             // Arrange
@@ -197,13 +195,13 @@ namespace PlayGen.SUGAR.Client.Tests
             var got = SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id);
 
             // Assert
-            got.ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
-            got.ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+            got.ForEach(m => Assert.Equal(_game.Id, m.Game.Id));
+            got.ForEach(m => Assert.Equal(_account.User.Id, m.Creator.Id));
+            shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));
+            shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));
         }
 
-        [Test]
+        [Fact]
         public void CanGetByGameAndCreatorAndTime()
         {
             // Arrange
@@ -225,13 +223,13 @@ namespace PlayGen.SUGAR.Client.Tests
             var got = SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id, pre, post);
 
             // Assert
-            got.ForEach(m => Assert.AreEqual(_game.Id, m.Game.Id));
-            got.ForEach(m => Assert.AreEqual(_account.User.Id, m.Creator.Id));
-            shouldGet.ForEach(m => Assert.IsTrue(got.Any(g => g.Id == m.Id)));
-            shouldntGet.ForEach(m => Assert.IsFalse(got.Any(g => g.Id == m.Id)));
+            got.ForEach(m => Assert.Equal(_game.Id, m.Game.Id));
+            got.ForEach(m => Assert.Equal(_account.User.Id, m.Creator.Id));
+            shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));
+            shouldntGet.ForEach(m => Assert.False(got.Any(g => g.Id == m.Id)));
         }
 
-        [Test]
+        [Fact]
         public void CanAddAndGetData()
         {
             // Arrange
@@ -286,5 +284,5 @@ namespace PlayGen.SUGAR.Client.Tests
         }
 
         #endregion
-    }
+	}
 }

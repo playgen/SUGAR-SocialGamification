@@ -8,13 +8,13 @@ namespace PlayGen.SUGAR.Client
 {
 	public class DefaultHttpHandler : IHttpHandler
 	{
-		private WebRequest CreateRequest(HttpRequest request)
+		protected WebRequest CreateRequest(HttpRequest request)
 		{
 			var webRequest = WebRequest.Create(request.Url);
 			webRequest.Method = request.Method;
 			foreach (var header in request.Headers)
 			{
-				webRequest.Headers.Add(header.Key, header.Value);
+				webRequest.Headers[header.Key] = header.Value;
 			}
 			return webRequest;
 		}
@@ -39,13 +39,19 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="request"></param>
 		/// <param name="payload"></param>
-		private void SendData(WebRequest request, byte[] payload)
+		protected void SendData(WebRequest request, byte[] payload)
 		{
+#if NET35
 			request.ContentLength = payload.Length;
+#endif
 			request.ContentType = "application/json";
+#if NET35
 			var dataStream = request.GetRequestStream();
+#else
+			var dataStream = request.GetRequestStreamAsync().Result;
+#endif
 			dataStream.Write(payload, 0, payload.Length);
-			dataStream.Close();
+			dataStream.Dispose();
 		}
 
 
@@ -67,7 +73,11 @@ namespace PlayGen.SUGAR.Client
 			HttpWebResponse webResponse;
 			try
 			{
+#if NET35
 				webResponse = (HttpWebResponse)webRequest.GetResponse();
+#else
+				webResponse = (HttpWebResponse)webRequest.GetResponseAsync().Result;
+#endif
 			}
 			catch (WebException ex)
 			{

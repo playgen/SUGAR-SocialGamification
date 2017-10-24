@@ -19,15 +19,17 @@ namespace PlayGen.SUGAR.Server.WebAPI
 	public partial class Startup
 	{
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+		private readonly IHostingEnvironment _environment;
 
 		const string TokenAudience = "User";
 		const string TokenIssuer = "SUGAR";
 		private SymmetricSecurityKey key;
 		private TokenAuthOptions tokenOptions;
-
+		
 
 		public Startup(IHostingEnvironment env)
 		{
+			_environment = env;
 			//AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
 			#region Logging
@@ -92,7 +94,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			ConfigureCoreControllers(services);
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
-			ConfigureDocumentationGeneratorServices(services);
+			ConfigureDocumentationGeneratorServices(services, _environment);
 			ConfigureAuthorization(services, validityTimeout);
 			ConfigureEvaluationEvents(services);
 			ConfigureSessionTracking(services, validityTimeout, timeoutCheckInterval);
@@ -109,7 +111,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			app.UseApplicationInsightsExceptionTelemetry();
 			app.UseMvc();
 
-			ConfigureDocumentationGenerator(app);
+			ConfigureDocumentationGenerator(app, env);
 		}
 	}
 }

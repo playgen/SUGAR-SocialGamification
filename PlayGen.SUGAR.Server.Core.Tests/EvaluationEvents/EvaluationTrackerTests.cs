@@ -3,7 +3,6 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
 {
-    [Collection("Project Fixture Collection")]
     public class EvaluationTrackerTests : EvaluationTestsBase
     {
         /// <summary>

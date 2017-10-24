@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Threading;
+using System.Threading.Tasks;
 using PlayGen.SUGAR.Server.Core.Sessions;
 using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-    [Collection("Project Fixture Collection")]
-    public class SessionTrackerTests
+    public class SessionTrackerTests : CoreTestBase
     {
         private TimeSpan DefaultTimeoutCheckInterval => new TimeSpan(0, 10, 0);
 
@@ -123,7 +122,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         /// Make sure timed out sessions are removed while active ones are kept
         /// </summary>
         [Fact]
-        public void CanRemoveTimedOut()
+        public async Task CanRemoveTimedOut()
         {
             // Arrange
             var timeoutSeconds = 5;
@@ -140,8 +139,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
                 inactiveSessions.Add(session);
             }
 
-            Thread.Sleep(timeoutSeconds * 1000);
-
+			await Task.Delay(timeoutSeconds * 1000);
+			
             for (var i = 0; i < 5; i++)
             {
                 var user = Helpers.GetOrCreateUser($"CanRemoveTimedOut_ShouldNotRemove_{i}");
@@ -162,7 +161,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         }
 
         [Fact]
-        public void InactiveGetRemoved()
+        public async Task InactiveGetRemoved()
         {
             // Arrange
             var timeoutMilliseconds = 100;
@@ -178,7 +177,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             }
 
             // Act
-            Thread.Sleep(timeoutMilliseconds * 2);
+			await Task.Delay(timeoutMilliseconds * 2);
 
             // Assert
             sessions.ForEach(s => Assert.False(sessionTracker.IsActive(s.Id)));

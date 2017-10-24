@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Model;
 using Xunit;
@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         }
 
         [Fact]
-        public void CanGetByTime()
+        public async Task CanGetByTime()
         {
             // Arrange
             var game = Helpers.GetOrCreateGame("CanGetByTime");
@@ -68,17 +68,17 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
             var shouldntGet = Create(10, game.Id, user.Id);
 
-            Thread.Sleep(1000);
+			await Task.Delay(1000);
             var startTime = DateTime.UtcNow;
-            Thread.Sleep(1000);
+			await Task.Delay(1000);
 
-            var shouldGet = Create(10, game.Id, user.Id);
+			var shouldGet = Create(10, game.Id, user.Id);
 
-            Thread.Sleep(1000);
-            var endTime = DateTime.UtcNow;
-            Thread.Sleep(1000);
+			await Task.Delay(1000);
+			var endTime = DateTime.UtcNow;
+			await Task.Delay(1000);
 
-            shouldntGet.AddRange(Create(10, game.Id, user.Id));
+			shouldntGet.AddRange(Create(10, game.Id, user.Id));
 
             // Act
             var got = ControllerLocator.MatchController.GetByTime(startTime, endTime);

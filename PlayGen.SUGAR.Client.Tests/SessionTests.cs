@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
-using NUnit.Framework;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Web;
 using PlayGen.SUGAR.Contracts;
+using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-    public class SessionClientTests : ClientTestsBase
+    public class SessionTests : ClientTestBase
     {
-        [Test]
+		[Fact]
         public void CanHeartbeatAndReissueToken()
         {
             // Arrange
@@ -29,10 +29,10 @@ namespace PlayGen.SUGAR.Client.Tests
 
             // Assert
             var postHeartbeatToken = headers[HeaderKeys.Authorization];
-            Assert.AreNotEqual(originalToken, postHeartbeatToken);
+            Assert.NotEqual(originalToken, postHeartbeatToken);
         }
 
-        [Test]
+        [Fact]
         public void NewTokenForUserLogin()
         {
             // Arrange
@@ -53,10 +53,10 @@ namespace PlayGen.SUGAR.Client.Tests
 
             // Assert
             var newToken = headers[HeaderKeys.Authorization];
-            Assert.AreNotEqual(originalToken, newToken);
+            Assert.NotEqual(originalToken, newToken);
         }
 
-        [Test]
+        [Fact]
         public void NewTokenForGameLogin()
         {
             // Arrange
@@ -67,7 +67,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
             var originalToken = headers[HeaderKeys.Authorization];
 
-            var game = Helpers.GetOrCreateGame(SUGARClient.Game, "NewTokenForGameLogin_Original");
+            var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(SessionTests)}_NewTokenForGameLogin_Original");
 
             Helpers.Login(SUGARClient.Session, game.Id, new AccountRequest
             {
@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
             LoginAdmin();
 
-            var newGame = Helpers.GetOrCreateGame(SUGARClient.Game, "NewTokenForGameLogin_New");
+            var newGame = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(SessionTests)}_NewTokenForGameLogin_New");
 
             // Act
             Helpers.Login(SUGARClient.Session, newGame.Id, new AccountRequest
@@ -90,10 +90,10 @@ namespace PlayGen.SUGAR.Client.Tests
 
             // Assert
             var newToken = headers[HeaderKeys.Authorization];
-            Assert.AreNotEqual(originalToken, newToken);
+            Assert.NotEqual(originalToken, newToken);
         }
 
-        [Test]
+        [Fact]
         public void CanCreateNewUserAndLogin()
         {
             var accountRequest = new AccountRequest
@@ -106,10 +106,10 @@ namespace PlayGen.SUGAR.Client.Tests
             var registerResponse = SUGARClient.Session.CreateAndLogin(accountRequest);
 
             Assert.True(registerResponse.User.Id > 0);
-            Assert.AreEqual(accountRequest.Name, registerResponse.User.Name);
+            Assert.Equal(accountRequest.Name, registerResponse.User.Name);
         }
 
-        [Test]
+        [Fact]
         public void CanLoginUser()
         {
             var accountRequest = new AccountRequest
@@ -124,10 +124,10 @@ namespace PlayGen.SUGAR.Client.Tests
             var logged = SUGARClient.Session.Login(accountRequest);
 
             Assert.True(logged.User.Id > 0);
-            Assert.AreEqual(accountRequest.Name, logged.User.Name);
+            Assert.Equal(accountRequest.Name, logged.User.Name);
         }
 
-        [Test]
+        [Fact]
         public void CanLoginUserAsync()
         {
             // Arrange
@@ -138,7 +138,7 @@ namespace PlayGen.SUGAR.Client.Tests
                 SourceToken = "SUGAR"
             };
 
-            var game = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLoginUserAsync");
+            var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(SessionTests)}_CanLoginUserAsync");
 
             SUGARClient.Account.Create(accountRequest);
 
@@ -162,19 +162,19 @@ namespace PlayGen.SUGAR.Client.Tests
             }
 
             Assert.NotNull(response);
-            Assert.IsNull(exception);
-            StringAssert.AreEqualIgnoringCase(accountRequest.Name, response.User.Name);
-            Assert.GreaterOrEqual((int) response.User.Id, 1);
+            Assert.Null(exception);
+            Assert.Equal(accountRequest.Name.ToLower(), response.User.Name.ToLower());
+            Assert.True(response.User.Id >= 1);
         }
 
-        [Test]
+        [Fact]
         public void CannotLoginInvalidUser()
         {
             var accountRequest = new AccountRequest();
             Assert.Throws<ClientHttpException>(() => SUGARClient.Session.Login(accountRequest));
         }
 
-        [Test]
+        [Fact]
         public void CanLogoutAndInvalidateSessionMethod()
         {
             // Arrange
@@ -189,10 +189,10 @@ namespace PlayGen.SUGAR.Client.Tests
             SUGARClient.Session.Logout();
 
             // Assert
-            Assert.Throws<ClientHttpException>(SUGARClient.Session.Heartbeat);
+            Assert.Throws<ClientHttpException>(() => SUGARClient.Session.Heartbeat());
         }
 
-        [Test]
+        [Fact]
         public void CanLogoutAndInvalidateSessionClass()
         {
             // Arrange
@@ -209,12 +209,12 @@ namespace PlayGen.SUGAR.Client.Tests
             // Assert
             Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(new EvaluationDataRequest
             {
-                CreatingActorId = Helpers.GetOrCreateUser(SUGARClient.User, "CanLogoutAndInvalidateSessionClass").Id,
-                GameId = Helpers.GetOrCreateGame(SUGARClient.Game, "CanLogoutAndInvalidateSessionClass").Id,
+                CreatingActorId = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(SessionTests)}_CanLogoutAndInvalidateSessionClass").Id,
+                GameId = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(SessionTests)}_CanLogoutAndInvalidateSessionClass").Id,
                 Key = "CanLogoutAndInvalidateSessionClass",
                 EvaluationDataType = EvaluationDataType.String,
                 Value = "CanLogoutAndInvalidateSessionClass"
             }));
         }
-    }
+	}
 }
