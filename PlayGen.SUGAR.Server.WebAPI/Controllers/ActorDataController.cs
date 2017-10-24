@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Permissions;
@@ -38,12 +39,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A list of <see cref="EvaluationDataResponse"/> which match the search criteria.</returns>
 		[HttpGet]
 		//[ResponseType(typeof(IEnumerable<EvaluationDataResponse>))]
-		[Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.ActorData)]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.ActorData)]
-		public IActionResult Get(int? actorId, int? gameId, string[] key)
+		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.ActorData)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorData)]
+		public async Task<IActionResult> Get(int? actorId, int? gameId, string[] key)
 		{
-			if (_authorizationService.AuthorizeAsync(User, actorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, actorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, actorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, actorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
 			{
 				var data = _actorDataCoreController.Get(gameId, actorId, key);
 				var dataContract = data.ToContractList();
@@ -62,12 +63,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(EvaluationDataResponse))]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.ActorData)]
-		[Authorization(ClaimScope.User, AuthorizationOperation.Create, AuthorizationOperation.ActorData)]
-		public IActionResult Add([FromBody]EvaluationDataRequest newData)
+		[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.ActorData)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.ActorData)]
+		public async Task<IActionResult> Add([FromBody]EvaluationDataRequest newData)
 		{
-			if (_authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
 			{
 				var data = newData.ToActorDataModel();
 				var exists = _actorDataCoreController.KeyExists(data.GameId, data.ActorId, data.Key);

@@ -34,13 +34,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 						.Include(r => r.Role)
 						.ThenInclude(r => r.RoleClaims)
 						.ThenInclude(rc => rc.Claim)
-						.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == -1) && ar.Role.ClaimScope == scope).ToList();
+						.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == Platform.EntityId) && ar.Role.ClaimScope == scope).ToList();
 					return roles;
 				}
 				else
 				{
 					var roles = context.ActorRoles
-					.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == -1) && ar.Role.ClaimScope == scope).ToList();
+					.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == Platform.EntityId) && ar.Role.ClaimScope == scope).ToList();
 					return roles;
 				}
 			}

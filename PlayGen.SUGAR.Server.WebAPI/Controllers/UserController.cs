@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Contracts;
@@ -12,19 +13,19 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// Web Controller that facilitates User specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-    [Authorize("Bearer")]
-    [ValidateSession]
-    public class UserController : Controller
+	[Authorize("Bearer")]
+	[ValidateSession]
+	public class UserController : Controller
 	{
-        private readonly IAuthorizationService _authorizationService;
-        private readonly Core.Controllers.UserController _userCoreController;
+		private readonly IAuthorizationService _authorizationService;
+		private readonly Core.Controllers.UserController _userCoreController;
 
 		public UserController(Core.Controllers.UserController userCoreController,
-                    IAuthorizationService authorizationService)
+					IAuthorizationService authorizationService)
 		{
 			_userCoreController = userCoreController;
-            _authorizationService = authorizationService;
-        }
+			_authorizationService = authorizationService;
+		}
 
 		/// <summary>
 		/// Get a list of all Users.
@@ -33,18 +34,18 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <returns>A list of <see cref="UserResponse"/> that hold User details.</returns>
 		[HttpGet("list")]
-        //[ResponseType(typeof(IEnumerable<UserResponse>))]
-        [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.User)]
-        public IActionResult Get()
+		//[ResponseType(typeof(IEnumerable<UserResponse>))]
+		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.User)]
+		public async Task<IActionResult> Get()
 		{
-            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var users = _userCoreController.Get();
-                var actorContract = users.ToContractList();
-                return new ObjectResult(actorContract);
-            }
-            return Forbid();
-        }
+			if (await _authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
+			{
+				var users = _userCoreController.Get();
+				var actorContract = users.ToContractList();
+				return new ObjectResult(actorContract);
+			}
+			return Forbid();
+		}
 
 		/// <summary>
 		/// Get a list of Users that match <param name="name"/> provided.
@@ -91,18 +92,18 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(UserResponse))]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.User)]
-        public IActionResult Create([FromBody]UserRequest actor)
+		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.User)]
+		public async Task<IActionResult> Create([FromBody]UserRequest actor)
 		{
-            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var user = actor.ToUserModel();
-                _userCoreController.Create(user);
-                var actorContract = user.ToContract();
-                return new ObjectResult(actorContract);
-            }
-            return Forbid();
-        }
+			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
+			{
+				var user = actor.ToUserModel();
+				_userCoreController.Create(user);
+				var actorContract = user.ToContract();
+				return new ObjectResult(actorContract);
+			}
+			return Forbid();
+		}
 
 		/// <summary>
 		/// Update an existing User.
@@ -113,17 +114,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="user"><see cref="UserRequest"/> object that holds the details of the User.</param>
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.User)]
-        public IActionResult Update([FromRoute] int id, [FromBody] UserRequest user)
+		[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.User)]
+		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UserRequest user)
 		{
-            if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var userModel = user.ToUserModel();
-                userModel.Id = id;
-                _userCoreController.Update(userModel);
-                return Ok();
-            }
-            return Forbid();
+			if (await _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
+			{
+				var userModel = user.ToUserModel();
+				userModel.Id = id;
+				_userCoreController.Update(userModel);
+				return Ok();
+			}
+			return Forbid();
 		}
 
 		/// <summary>
@@ -133,15 +134,15 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">User ID.</param>
 		[HttpDelete("{id:int}")]
-        [Authorization(ClaimScope.Global, AuthorizationOperation.Delete, AuthorizationOperation.User)]
-        public IActionResult Delete([FromRoute]int id)
+		[Authorization(ClaimScope.Global, AuthorizationAction.Delete, AuthorizationEntity.User)]
+		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                _userCoreController.Delete(id);
-                return Ok();
-            }
-            return Forbid();
+			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
+			{
+				_userCoreController.Delete(id);
+				return Ok();
+			}
+			return Forbid();
 		}
 	}
 }

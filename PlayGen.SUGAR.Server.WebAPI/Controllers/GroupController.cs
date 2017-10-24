@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Contracts;
@@ -85,10 +86,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(GroupResponse))]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.Group)]
-		public IActionResult Create([FromBody]GroupRequest actor)
+		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Group)]
+		public async Task<IActionResult> Create([FromBody]GroupRequest actor)
 		{
-			if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
 			{
 				var group = actor.ToGroupModel();
 				_groupCoreController.Create(group, int.Parse(User.Identity.Name));
@@ -107,11 +108,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="group"><see cref="GroupRequest"/> object that holds the details of the Group.</param>
 		[HttpPut("update/{id:int}")]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Group)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Group)]
 		// todo refactor to use groupupdaterequest that contains an Id property and have a separate groupcreaterequest that doen't have the Id
-		public IActionResult Update([FromRoute] int id, [FromBody] GroupRequest group)
+		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] GroupRequest group)
 		{
-			if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]))
 			{
 				var groupModel = group.ToGroupModel();
 				groupModel.Id = id;
@@ -128,10 +129,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">Group ID.</param>
 		[HttpDelete("{id:int}")]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Delete, AuthorizationOperation.Group)]
-		public IActionResult Delete([FromRoute]int id)
+		[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.Group)]
+		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]))
 			{
 				_groupCoreController.Delete(id);
 				return Ok();

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
-	[Collection(nameof(DeleteDatabaseFixture))]
+	[Collection(nameof(ClearDatabaseFixture))]
 	public abstract class EntityFrameworkTestBase
     {
     }

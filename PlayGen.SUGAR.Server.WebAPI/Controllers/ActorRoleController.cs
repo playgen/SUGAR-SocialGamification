@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Permissions;
@@ -45,14 +46,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
         /// <returns>A list of <see cref="ActorResponse"/> that hold Actor details.</returns>
         [HttpGet("role/{roleId:int}/entity/{entityId:int}")]
         //[ResponseType(typeof(IEnumerable<ActorRoleResponse>))]
-        [Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
-        [Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
-        public IActionResult GetRoleActors([FromRoute]int roleId, [FromRoute]int entityId)
+        [Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
+        [Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
+        [Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
+        public async Task<IActionResult> GetRoleActors([FromRoute]int roleId, [FromRoute]int entityId)
         {
-            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
-               _authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-                _authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+            if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]) ||
+               await _authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+                await _authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
             {
                 var actors = _actorRoleCoreController.GetRoleActors(roleId, entityId);
                 var actorContract = actors.ToActorContractList();
@@ -69,15 +70,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A list of <see cref="RoleResponse"/> that hold Role details.</returns>
 		[HttpGet("actor/{actorId:int}/entity/{entityId:int}/claimscope/{scopeName}")]
 		//[ResponseType(typeof(IEnumerable<ActorRoleResponse>))]
-		[Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.ActorRole)]
-		public IActionResult GetActorEntityRoles([FromRoute]int actorId, [FromRoute]int entityId, [FromRoute]string scopeName)
+		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
+		public async Task<IActionResult> GetActorEntityRoles([FromRoute]int actorId, [FromRoute]int entityId, [FromRoute]string scopeName)
 		{
-			ClaimScope claimScope;
-			if (Enum.TryParse(scopeName, true, out claimScope))
+			if (Enum.TryParse(scopeName, true, out ClaimScope claimScope))
 			{
-				if (_authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items[claimScope + "Requirements"]).Result)
+				if (await _authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(claimScope)]))
 				{
 					var roles = _actorRoleCoreController.GetActorRolesForEntity(actorId, entityId, claimScope).Distinct().ToList();
 					var roleContract = roles.ToContractList();
@@ -113,14 +113,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
         [HttpPost]
         //[ResponseType(typeof(ActorRoleResponse))]
         [ArgumentsNotNull]
-        [Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.ActorRole)]
-        [Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.ActorRole)]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.ActorRole)]
-        public IActionResult Create([FromBody]ActorRoleRequest newRole)
+        [Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.ActorRole)]
+        [Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.ActorRole)]
+        [Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.ActorRole)]
+        public async Task<IActionResult> Create([FromBody]ActorRoleRequest newRole)
         {
-            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
-                _authorizationService.AuthorizeAsync(User, newRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-                _authorizationService.AuthorizeAsync(User, newRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+            if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]) ||
+                await _authorizationService.AuthorizeAsync(User, newRole.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+                await _authorizationService.AuthorizeAsync(User, newRole.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
             {
 				var claimScope = _roleController.GetById(newRole.RoleId).ClaimScope;
 				var creatorClaims = _actorClaimController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newRole.EntityId, claimScope).Select(c => c.Id).ToList();
@@ -143,15 +143,15 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
         /// </summary>
         /// <param name="id">ActorRole ID.</param>
         [HttpDelete("{id:int}")]
-        [Authorization(ClaimScope.Global, AuthorizationOperation.Delete, AuthorizationOperation.ActorRole)]
-        [Authorization(ClaimScope.Group, AuthorizationOperation.Delete, AuthorizationOperation.ActorRole)]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.ActorRole)]
-        public IActionResult Delete([FromRoute]int id)
+        [Authorization(ClaimScope.Global, AuthorizationAction.Delete, AuthorizationEntity.ActorRole)]
+        [Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.ActorRole)]
+        [Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.ActorRole)]
+        public async Task<IActionResult> Delete([FromRoute]int id)
         {
             var actorRole = _actorRoleCoreController.Get(id);
-            if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
-                _authorizationService.AuthorizeAsync(User, actorRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-                _authorizationService.AuthorizeAsync(User, actorRole.EntityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+            if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]) ||
+                await _authorizationService.AuthorizeAsync(User, actorRole.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+                await _authorizationService.AuthorizeAsync(User, actorRole.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
             {
 				var role = _roleController.GetById(actorRole.RoleId);
 				if (role.Default)

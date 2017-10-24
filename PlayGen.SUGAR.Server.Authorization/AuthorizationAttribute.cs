@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -13,35 +14,33 @@ namespace PlayGen.SUGAR.Server.Authorization
 
         public string Name { get; set; }
 
-        public AuthorizationAttribute(ClaimScope scope, string action, string type)
+        public AuthorizationAttribute(ClaimScope claimScope, AuthorizationAction action, AuthorizationEntity entityType)
         {
-            ClaimScope = scope;
-            Name = string.Concat(action, type);
+            ClaimScope = claimScope;
+			Name = $"{action}-{entityType}";
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            if (context.HttpContext.Items.Count > 0)
+            if (context.HttpContext.Items.Any())
             {
                 return;
             }
+
             var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
 
-            var customAtt = actionDescriptor?.MethodInfo.GetCustomAttributes(typeof(AuthorizationAttribute), false) as AuthorizationAttribute[];
-            if (customAtt != null && customAtt.Length > 0)
+			if (actionDescriptor?.MethodInfo.GetCustomAttributes(typeof(AuthorizationAttribute), false) is AuthorizationAttribute[] customAtt)
             {
-                if (customAtt.Length == 1)
+                foreach (var att in customAtt)
                 {
-                    context.HttpContext.Items.Add("Requirements", new AuthorizationRequirement(customAtt[0].ClaimScope, customAtt[0].Name));
-                }
-                else
-                {
-                    foreach (var att in customAtt)
-                    {
-                        context.HttpContext.Items.Add(att.ClaimScope + "Requirements", new AuthorizationRequirement(att.ClaimScope, att.Name));
-                    }
+                    context.HttpContext.Items.Add(Key(att.ClaimScope), new AuthorizationRequirement(att.ClaimScope, att.Name));
                 }
             }
         }
+
+		public static string Key(ClaimScope scope)
+		{
+			return $"{scope}-Requirements";
+		}
     }
 }

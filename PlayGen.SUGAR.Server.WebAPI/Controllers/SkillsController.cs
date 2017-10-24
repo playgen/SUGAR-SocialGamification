@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Contracts;
@@ -34,10 +35,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("find/{token}/{gameId:int}")]
 		[HttpGet("find/{token}/global")]
 		//[ResponseType(typeof(EvaluationResponse))]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
-		public new IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
+		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
+		public Task<IActionResult> Get([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			return base.Get(token, gameId);
+			return Get(token, gameId, ClaimScope.Game);
 		}
 
 		/// <summary>
@@ -51,10 +52,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
 		//[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.Achievement)]
-		public new IActionResult Get([FromRoute]int? gameId)
+		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
+		public Task<IActionResult> Get([FromRoute]int? gameId)
 		{
-			return base.Get(gameId);
+			return Get(gameId, ClaimScope.Game);
 		}
 
 		/// <summary>
@@ -91,7 +92,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		//[ResponseType(typeof(EvaluationProgressResponse))]
 		public IActionResult GetSkillProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
-			return base.GetEvaluationProgress(token, gameId, actorId);
+			return GetEvaluationProgress(token, gameId, actorId);
 		}
 
 		/// <summary>
@@ -105,10 +106,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpPost("create")]
 		//[ResponseType(typeof(EvaluationResponse))]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Achievement)]
-		public IActionResult Create([FromBody] EvaluationCreateRequest newSkill)
+		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Achievement)]
+		public async Task<IActionResult> Create([FromBody] EvaluationCreateRequest newSkill)
 		{
-			if (_authorizationService.AuthorizeAsync(User, newSkill.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, newSkill.GameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
 			{
 				var skill = newSkill.ToSkillModel();
 				skill = (Skill)EvaluationCoreController.Create(skill);
@@ -126,10 +127,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="skill"><see cref="EvaluationCreateRequest"/> object that holds the details of the Skill.</param>
 		[HttpPut("update")]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Achievement)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Achievement)]
 		public IActionResult Update([FromBody] EvaluationUpdateRequest skill)
 		{
-			if (_authorizationService.AuthorizeAsync(User, skill.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (_authorizationService.AuthorizeAsync(User, skill.GameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]) != null)
 			{
 				var skillModel = skill.ToSkillModel();
 				EvaluationCoreController.Update(skillModel);
@@ -147,10 +148,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="gameId">ID of the Game the Skill is for</param>
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.Achievement)]
-		public new IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
+		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Achievement)]
+		public Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			return base.Delete(token, gameId);
+			return Delete(token, gameId, ClaimScope.Game);
 		}
 	}
 }

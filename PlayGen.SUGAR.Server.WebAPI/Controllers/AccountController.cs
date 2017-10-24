@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Contracts;
@@ -52,11 +53,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="id">Account ID.</param>
 		[HttpDelete("{id:int}")]
 		[Authorize("Bearer")]
-		[Authorization(ClaimScope.Account, AuthorizationOperation.Delete, AuthorizationOperation.Account)]
+		[Authorization(ClaimScope.Account, AuthorizationAction.Delete, AuthorizationEntity.Account)]
 		[ValidateSession]
-		public IActionResult Delete([FromRoute]int id)
+		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, id, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Account)]))
 			{
 				_accountCoreController.Delete(id);
 				return Ok();

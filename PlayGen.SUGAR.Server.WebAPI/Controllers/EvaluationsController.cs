@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 {
 	// todo replace the skill and achievement controllers with this one and just specify 2 api routes for this class?
@@ -21,9 +25,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			_authorizationService = authorizationService;
 		}
 
-		protected IActionResult Get(string token, int? gameId)
+		protected async Task<IActionResult> Get(string token, int? gameId, ClaimScope scope)
 		{
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(
+				User, 
+				gameId, 
+				(IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(scope)]))
 			{
 				var evaluation = EvaluationCoreController.Get(token, gameId);
 				var evaluationContract = evaluation.ToContract();
@@ -32,9 +39,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			return Forbid();
 		}
 
-		protected IActionResult Get(int? gameId)
+		protected async Task<IActionResult> Get(int? gameId, ClaimScope scope)
 		{
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(
+				User, 
+				gameId, 
+				(IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(scope)]))
 			{
 				var evaluation = EvaluationCoreController.GetByGame(gameId);
 				var evaluationContract = evaluation.ToContractList();
@@ -62,9 +72,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			});
 		}
 
-		protected IActionResult Delete(string token, int? gameId)
+		protected async Task<IActionResult> Delete(string token, int? gameId, ClaimScope scope)
 		{
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(
+				User, 
+				gameId, 
+				(IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(scope)]))
 			{
 				EvaluationCoreController.Delete(token, gameId);
 				return Ok();
@@ -73,3 +86,4 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 	}
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

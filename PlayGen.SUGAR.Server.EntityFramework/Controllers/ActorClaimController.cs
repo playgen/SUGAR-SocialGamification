@@ -29,7 +29,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var claims = context.ActorClaims
-					.Where(ac => ac.ActorId == actorId && (ac.EntityId.Value == entityId.Value || ac.EntityId.Value == -1))
+					.Where(ac => ac.ActorId == actorId && (ac.EntityId.Value == entityId.Value || ac.EntityId.Value == Platform.EntityId))
 					.Select(ac => ac.Claim)
 					.Where(c => c.ClaimScope == scope).ToList();
 				return claims;

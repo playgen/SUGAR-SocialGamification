@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var claim = context.Claims.FirstOrDefault(c => c.ClaimScope == scope && c.Token == name);
+				var claim = context.Claims.FirstOrDefault(c => c.ClaimScope == scope && c.Name == name);
 				return claim;
 			}
 		}

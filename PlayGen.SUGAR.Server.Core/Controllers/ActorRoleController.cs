@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var actorRoles = _actorRoleDbController.GetActorRoles(actorId, true).ToList();
 			var controlledRoles = actorRoles.Where(ar => ar.Role.ClaimScope == ClaimScope.Role).ToList();
-			if (controlledRoles.Any(ar => ar.EntityId.Value == -1))
+			if (controlledRoles.Any(ar => ar.EntityId.Value == Platform.EntityId))
 			{
 				return _roleController.Get();
 			}

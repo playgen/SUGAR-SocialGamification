@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Permissions;
 using PlayGen.SUGAR.Contracts;
@@ -13,22 +14,22 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// Web Controller that facilitates Leaderboard specific operations.
 	/// </summary>
 	[Route("api/[controller]")]
-    [Authorize("Bearer")]
-    [ValidateSession]
-    public class LeaderboardsController : Controller
+	[Authorize("Bearer")]
+	[ValidateSession]
+	public class LeaderboardsController : Controller
 	{
-        private readonly IAuthorizationService _authorizationService;
-        private readonly LeaderboardController _leaderboardController;
+		private readonly IAuthorizationService _authorizationService;
+		private readonly LeaderboardController _leaderboardController;
 		private readonly Core.Controllers.LeaderboardController _leaderboardEvaluationController;
 
 		public LeaderboardsController(LeaderboardController leaderboardController,
 			Core.Controllers.LeaderboardController leaderboardEvaluationController,
-            IAuthorizationService authorizationService)
+			IAuthorizationService authorizationService)
 		{
 			_leaderboardController = leaderboardController;
 			_leaderboardEvaluationController = leaderboardEvaluationController;
-            _authorizationService = authorizationService;
-        }
+			_authorizationService = authorizationService;
+		}
 
 		/// <summary>
 		/// Find a list of leaderboards that match <param name="gameId"/>.
@@ -77,18 +78,18 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpPost("create")]
 		//[ResponseType(typeof(LeaderboardResponse))]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Leaderboard)]
-        public IActionResult Create([FromBody] LeaderboardRequest newLeaderboard)
+		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Leaderboard)]
+		public async Task<IActionResult> Create([FromBody] LeaderboardRequest newLeaderboard)
 		{
-            if (_authorizationService.AuthorizeAsync(User, newLeaderboard.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var leaderboard = newLeaderboard.ToModel();
-                _leaderboardController.Create(leaderboard);
-                var leaderboardContract = leaderboard.ToContract();
-                return new ObjectResult(leaderboardContract);
-            }
-            return Forbid();
-        }
+			if (await _authorizationService.AuthorizeAsync(User, newLeaderboard.GameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
+			{
+				var leaderboard = newLeaderboard.ToModel();
+				_leaderboardController.Create(leaderboard);
+				var leaderboardContract = leaderboard.ToContract();
+				return new ObjectResult(leaderboardContract);
+			}
+			return Forbid();
+		}
 
 		/// <summary>
 		/// Get the standings for a Leaderboard using a <see cref="LeaderboardStandingsRequest"/>.
@@ -114,17 +115,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="leaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the Leaderboard.</param>
 		[HttpPut("update")]
 		[ArgumentsNotNull]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Leaderboard)]
-        public IActionResult Update([FromBody] LeaderboardRequest leaderboard)
+		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Leaderboard)]
+		public async Task<IActionResult> Update([FromBody] LeaderboardRequest leaderboard)
 		{
-            if (_authorizationService.AuthorizeAsync(User, leaderboard.GameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                var leaderboardModel = leaderboard.ToModel();
-                _leaderboardController.Update(leaderboardModel);
-                return Ok();
-            }
-            return Forbid();
-        }
+			if (await _authorizationService.AuthorizeAsync(User, leaderboard.GameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
+			{
+				var leaderboardModel = leaderboard.ToModel();
+				_leaderboardController.Update(leaderboardModel);
+				return Ok();
+			}
+			return Forbid();
+		}
 
 		/// <summary>
 		/// Delete Leaderboard with the <param name="token"/> and <param name="gameId"/> provided.
@@ -135,15 +136,15 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="gameId">ID of the Game the Leaderboard is for</param>
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
-        [Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.Leaderboard)]
-        public IActionResult Delete([FromRoute]string token, [FromRoute]int? gameId)
+		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Leaderboard)]
+		public async Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-            if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
-            {
-                _leaderboardController.Delete(token, gameId);
-                return Ok();
-            }
-            return Forbid();
-        }
+			if (await _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
+			{
+				_leaderboardController.Delete(token, gameId);
+				return Ok();
+			}
+			return Forbid();
+		}
 	}
 }

@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 
 			return new ClaimResponse {
 				Id = claimModel.Id,
-				Token = claimModel.Token,
+				Token = claimModel.Name,
 				Description = claimModel.Description,
 				ClaimScope = claimModel.ClaimScope
 			};

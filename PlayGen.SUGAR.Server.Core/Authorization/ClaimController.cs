@@ -39,15 +39,15 @@ namespace PlayGen.SUGAR.Server.Core.Authorization
                     {
                         foreach (var op in operation)
                         {
-                            if (!currentOperations.Any(co => co.Token == op.Name && co.ClaimScope == op.ClaimScope))
+                            if (!currentOperations.Any(co => co.Name == op.Name && co.ClaimScope == op.ClaimScope))
                             {
-                                currentOperations.Add(new Claim { ClaimScope = op.ClaimScope, Token = op.Name });
+                                currentOperations.Add(new Claim { ClaimScope = op.ClaimScope, Name = op.Name });
                             }
                         }
                     }
                 }
             }
-            var newOperations = currentOperations.Where(o => !dbOperations.Any(db => db.Token == o.Token && db.ClaimScope == o.ClaimScope)).ToList();
+            var newOperations = currentOperations.Where(o => !dbOperations.Any(db => db.Name == o.Name && db.ClaimScope == o.ClaimScope)).ToList();
             newOperations = _claimDbController.Create(newOperations).ToList();
 
             var roles = _roleDbController.Get().Where(r => r.Default).ToList();

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Permissions;
@@ -14,8 +15,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
-    [ValidateSession]
-    public class ActorClaimController : Controller
+	[ValidateSession]
+	public class ActorClaimController : Controller
 	{
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.ActorClaimController _actorClaimCoreController;
@@ -38,14 +39,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A list of <see cref="ActorResponse"/> that hold ActorClaim details.</returns>
 		[HttpGet("claim/{claimId:int}/entity/{entityId:int}")]
 		//[ResponseType(typeof(IEnumerable<ActorClaimResponse>))]
-		[Authorization(ClaimScope.Global, AuthorizationOperation.Get, AuthorizationOperation.ActorClaim)]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.ActorClaim)]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Get, AuthorizationOperation.ActorClaim)]
-		public IActionResult GetClaimActors([FromRoute]int claimId, [FromRoute]int entityId)
+		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
+		public async Task<IActionResult> GetClaimActors([FromRoute]int claimId, [FromRoute]int entityId)
 		{
-			if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
-			   _authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, entityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]) ||
+				await _authorizationService.AuthorizeAsync(User, entityId, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) || 				
+				await _authorizationService.AuthorizeAsync(User, entityId, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
 			{
 				var actors = _actorClaimCoreController.GetClaimActors(claimId, entityId);
 				var actorContract = actors.ToActorContractList();
@@ -62,12 +63,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A list of <see cref="ActorClaimResponse"/> that hold ActorClaim details.</returns>
 		[HttpGet("actor/{id:int}")]
 		//[ResponseType(typeof(IEnumerable<ActorClaimResponse>))]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Get, AuthorizationOperation.ActorClaim)]
-		[Authorization(ClaimScope.User, AuthorizationOperation.Get, AuthorizationOperation.ActorClaim)]
-		public IActionResult GetActorClaims([FromRoute]int id)
+		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
+		public async Task<IActionResult> GetActorClaims([FromRoute]int id)
 		{
-			if (_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, id, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, id, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
 			{
 				var claims = _actorClaimCoreController.GetActorClaims(id);
 				var claimsContract = claims.ToContractList();
@@ -86,14 +87,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpPost]
 		//[ResponseType(typeof(ActorClaimResponse))]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.ActorClaim)]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.ActorClaim)]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.ActorClaim)]
-		public IActionResult Create([FromBody]ActorClaimRequest newClaim)
+		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.ActorClaim)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.ActorClaim)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.ActorClaim)]
+		public async Task<IActionResult> Create([FromBody]ActorClaimRequest newClaim)
 		{
-			if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, newClaim.EntityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, newClaim.EntityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]) ||
+				await _authorizationService.AuthorizeAsync(User, newClaim.EntityId, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, newClaim.EntityId, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
 			{
 				var claimScope = _claimCoreController.Get(newClaim.ClaimId).ClaimScope;
 				var creatorClaims = _actorClaimCoreController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newClaim.EntityId, claimScope);
@@ -115,15 +116,15 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <param name="id">ActorClaim ID.</param>
 		[HttpDelete("{id:int}")]
-		[Authorization(ClaimScope.Global, AuthorizationOperation.Delete, AuthorizationOperation.ActorClaim)]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Delete, AuthorizationOperation.ActorClaim)]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Delete, AuthorizationOperation.ActorClaim)]
-		public IActionResult Delete([FromRoute]int id)
+		[Authorization(ClaimScope.Global, AuthorizationAction.Delete, AuthorizationEntity.ActorClaim)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.ActorClaim)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.ActorClaim)]
+		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
 			var actorClaim = _actorClaimCoreController.Get(id);
-			if (_authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items["GlobalRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, actorClaim.EntityId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, actorClaim.EntityId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]) ||
+				await _authorizationService.AuthorizeAsync(User, actorClaim.EntityId, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, actorClaim.EntityId, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
 			{
 				var claimCount = _actorClaimCoreController.GetClaimActors(actorClaim.ClaimId, actorClaim.EntityId.Value).Count();
 				if (claimCount > 1)

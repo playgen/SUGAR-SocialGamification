@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Permissions;
@@ -36,12 +37,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="gameId"></param>
 		/// <returns>The newly created <see cref="MatchResponse"/></returns>
 		[HttpGet("create/{gameId:int}")]
-		[Authorization(ClaimScope.Global, AuthorizationOperation.Create, AuthorizationOperation.Match)]
-		public IActionResult Create(int gameId)
+		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Match)]
+		public async Task<IActionResult> Create(int gameId)
 		{
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
 			{
 				var match = _matchCoreController.Create(gameId, userId);
 				var contract = match.ToContract();
@@ -57,17 +58,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <returns>The newly created <see cref="MatchResponse"/></returns>
 		[HttpGet("create")]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Match)]
-		[Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.Match)]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Match)]
-		public IActionResult Create()
+		[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Match)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.Match)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Match)]
+		public async Task<IActionResult> Create()
 		{
 			var userId = HttpContext.Request.Headers.GetUserId();
 			var gameId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]) ||
+				await _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
 			{
 				var match = _matchCoreController.Create(gameId, userId);
 				var contract = match.ToContract();
@@ -83,17 +84,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <returns>The newly created <see cref="MatchResponse"/></returns>
 		[HttpGet("createandstart")]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.Match)]
-		[Authorization(ClaimScope.User, AuthorizationOperation.Create, AuthorizationOperation.Match)]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Match)]
-		public IActionResult CreateAndStart()
+		[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.Match)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.Match)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Match)]
+		public async Task<IActionResult> CreateAndStart()
 		{
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result || 
-                _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]) ||
+				await _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
 			{
 				var match = _matchCoreController.Create(gameId, userId);
 				match = _matchCoreController.Start(match.Id);
@@ -111,17 +112,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="matchId"></param>
 		/// <returns><see cref="MatchResponse"/></returns>
 		[HttpGet("{matchId:int}/start")]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Match)]
-		[Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.Match)]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Match)]
-		public IActionResult Start(int matchId)
+		[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Match)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.Match)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Match)]
+		public async Task<IActionResult> Start(int matchId)
 		{
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]) ||
+				await _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
 			{
 				var match = _matchCoreController.Start(matchId);
 				var contract = match.ToContract();
@@ -138,17 +139,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="matchId"></param>
 		/// <returns><see cref="MatchResponse"/></returns>
 		[HttpGet("{matchId:int}/end")]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Update, AuthorizationOperation.Match)]
-		[Authorization(ClaimScope.User, AuthorizationOperation.Update, AuthorizationOperation.Match)]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Update, AuthorizationOperation.Match)]
-		public IActionResult End([FromRoute]int matchId)
+		[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Match)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.Match)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Match)]
+		public async Task<IActionResult> End([FromRoute]int matchId)
 		{
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]) ||
+				await _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
 			{
 				var match = _matchCoreController.End(matchId);
 				var contract = match.ToContract();
@@ -166,12 +167,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns><see cref="MatchResponse"/></returns>
 		[HttpGet("{gameId:int}/{matchId:int}/end")]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Global, AuthorizationOperation.Update, AuthorizationOperation.Match)]
-		public IActionResult End([FromRoute]int gameId, [FromRoute]int matchId)
+		[Authorization(ClaimScope.Global, AuthorizationAction.Update, AuthorizationEntity.Match)]
+		public async Task<IActionResult> End([FromRoute]int gameId, [FromRoute]int matchId)
 		{
 			var userId = HttpContext.Request.Headers.GetUserId();
 
-			if (_authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items["Requirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, gameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
 			{
 				var match = _matchCoreController.End(matchId);
 				var contract = match.ToContract();
@@ -315,14 +316,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A <see cref="EvaluationDataResponse"/> containing the new Match Data details.</returns>
 		[HttpPost]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Group, AuthorizationOperation.Create, AuthorizationOperation.Match)]
-		[Authorization(ClaimScope.User, AuthorizationOperation.Create, AuthorizationOperation.Match)]
-		[Authorization(ClaimScope.Game, AuthorizationOperation.Create, AuthorizationOperation.Match)]
-		public IActionResult Add([FromBody]EvaluationDataRequest newData)
+		[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.Match)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.Match)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Match)]
+		public async Task<IActionResult> Add([FromBody]EvaluationDataRequest newData)
 		{
-			if (_authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items["GroupRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items["UserRequirements"]).Result ||
-				_authorizationService.AuthorizeAsync(User, newData.GameId, (AuthorizationRequirement)HttpContext.Items["GameRequirements"]).Result)
+			if (await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]) ||
+				await _authorizationService.AuthorizeAsync(User, newData.GameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
 			{
 				var data = newData.ToMatchDataModel();
 				_matchCoreController.AddData(data);
