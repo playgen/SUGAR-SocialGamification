@@ -1,4 +1,4 @@
-﻿namespace PlayGen.SUGAR.Server.Authorization
+﻿namespace PlayGen.SUGAR.Common.Authorization
 {
     public enum AuthorizationEntity
     {

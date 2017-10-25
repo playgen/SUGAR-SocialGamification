@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Authorization;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.Model;

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Common.Authorization;
 
 namespace PlayGen.SUGAR.Server.Model
 {

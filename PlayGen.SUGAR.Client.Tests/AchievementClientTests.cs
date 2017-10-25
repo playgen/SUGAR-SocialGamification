@@ -1230,5 +1230,5 @@ namespace PlayGen.SUGAR.Client.Tests
             return response;
         }
         #endregion
-    }
+	}
 }

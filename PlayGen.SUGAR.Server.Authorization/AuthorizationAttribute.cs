@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
-using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Common.Authorization;
 
 namespace PlayGen.SUGAR.Server.Authorization
 {
@@ -14,10 +14,10 @@ namespace PlayGen.SUGAR.Server.Authorization
 
         public string Name { get; set; }
 
-        public AuthorizationAttribute(ClaimScope claimScope, AuthorizationAction action, AuthorizationEntity entityType)
+        public AuthorizationAttribute(ClaimScope claimScope, AuthorizationAction action, AuthorizationEntity entity)
         {
             ClaimScope = claimScope;
-			Name = $"{action}-{entityType}";
+			Name = AuthorizationName.Generate(action, entity);
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)

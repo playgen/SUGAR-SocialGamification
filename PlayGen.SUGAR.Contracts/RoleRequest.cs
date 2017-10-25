@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Common.Authorization;
 
 namespace PlayGen.SUGAR.Contracts
 {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Authorization;
 using PlayGen.SUGAR.Server.Core.Controllers;
 

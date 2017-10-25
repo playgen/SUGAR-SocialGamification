@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using NLog;
-using PlayGen.SUGAR.Common.Permissions;
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers

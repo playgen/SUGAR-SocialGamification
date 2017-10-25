@@ -145,5 +145,5 @@ namespace PlayGen.SUGAR.Client.Tests
 			// Assert
 			Assert.True(didTimeout);
 		}
-	}
+		}
 }
