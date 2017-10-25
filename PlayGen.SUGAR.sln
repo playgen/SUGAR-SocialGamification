@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Contracts", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Client", "PlayGen.SUGAR.Client\PlayGen.SUGAR.Client.csproj", "{4D11C0C8-2B34-4075-B3CB-6F146C028C13}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Client.Unity", "PlayGen.SUGAR.Client.Unity\PlayGen.SUGAR.Client.Unity.csproj", "{CFF56D73-E7B1-4BB9-894B-ED92209286C1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Server.Model", "PlayGen.SUGAR.Server.Model\PlayGen.SUGAR.Server.Model.csproj", "{9F32B0C5-F10A-49E8-809C-C98447E92CD3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Server.EntityFramework", "PlayGen.SUGAR.Server.EntityFramework\PlayGen.SUGAR.Server.EntityFramework.csproj", "{02587103-A813-41E6-B50A-F45722757E8D}"
@@ -51,10 +49,6 @@ Global
 		{4D11C0C8-2B34-4075-B3CB-6F146C028C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D11C0C8-2B34-4075-B3CB-6F146C028C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D11C0C8-2B34-4075-B3CB-6F146C028C13}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CFF56D73-E7B1-4BB9-894B-ED92209286C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFF56D73-E7B1-4BB9-894B-ED92209286C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFF56D73-E7B1-4BB9-894B-ED92209286C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFF56D73-E7B1-4BB9-894B-ED92209286C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F32B0C5-F10A-49E8-809C-C98447E92CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9F32B0C5-F10A-49E8-809C-C98447E92CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F32B0C5-F10A-49E8-809C-C98447E92CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU

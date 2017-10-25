@@ -7,7 +7,9 @@
 	<Choose>
 		<When Condition=" '$(TargetFramework)' == 'net35' ">
 			<ItemGroup>
-				<Reference Include="System.ComponentModel.DataAnnotations" />
+				<Reference Include="System.ComponentModel.DataAnnotations">
+				  <Private>true</Private>
+				</Reference>
 			</ItemGroup>
 		</When>
 	</Choose>

@@ -18,7 +18,9 @@
 	</Choose>
 	
 	<ItemGroup>
-		<ProjectReference Include="..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj">
+		  <Private>true</Private>
+		</ProjectReference>
 	</ItemGroup>
 
 </Project>
