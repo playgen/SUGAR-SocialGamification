@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp1.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Server.Model\PlayGen.SUGAR.Server.Model.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="1.0.3" />
+		<PackageReference Include="MySql.Data.EntityFrameworkCore" Version="7.0.6-IR31" />
+	</ItemGroup>
+
+</Project>

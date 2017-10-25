@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFrameworks>netcoreapp1.1</TargetFrameworks>
+		<AssemblyName>PlayGen.SUGAR.Server.WebAPI</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DocumentationFile>bin\Debug\netcoreapp1.1\PlayGen.SUGAR.Server.WebAPI.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Routing" Version="1.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.0.3" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.0.2" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication" Version="1.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="1.0.2" />
+		<PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-rtm-alpha3" />
+		<PackageReference Include="Swashbuckle" Version="6.0.0-beta901" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.0.2" />
+		<PackageReference Include="System.Security.Cryptography.OpenSsl" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Server.Authentication\PlayGen.SUGAR.Server.Authentication.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Server.Authorization\PlayGen.SUGAR.Server.Authorization.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Server.Core\PlayGen.SUGAR.Server.Core.csproj" />
+		<ProjectReference Include="..\PlayGen.SUGAR.Server.EntityFramework\PlayGen.SUGAR.Server.EntityFramework.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="appsettings.Development.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="appsettings.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="appsettings.Tests.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="NLog.config">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="delay-startup.sh">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+</Project>

@@ -2,8 +2,8 @@
 	"metadata": [{
 		"src": [
 			{
-				"files": [ "**/*.csproj", "**/project.json" ],
-				"exclude": [ "**/bin/**", "**/obj/**", "**PlayGen.SUGAR.Client.UnityWebGL**" ],
+				"files": [ "**/*.csproj" ],
+				"exclude": [ "**/bin/**", "**/obj/**" ],
 				"cwd": "src"
 			}
 		],

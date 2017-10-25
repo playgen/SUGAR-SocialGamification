@@ -7,7 +7,7 @@ WORKDIR app/
 
 RUN ["dotnet", "restore"]
 
-WORKDIR src/PlayGen.SUGAR.WebAPI/
+WORKDIR PlayGen.SUGAR.Server.WebAPI/
 RUN ["dotnet", "publish", "-c", "Release", "-o", "out"]
 
-ENTRYPOINT ["./delay-startup.sh", "dotnet", "out/PlayGen.SUGAR.WebAPI.dll"]
+ENTRYPOINT ["./delay-startup.sh", "dotnet", "out/PlayGen.SUGAR.Server.WebAPI.dll"]

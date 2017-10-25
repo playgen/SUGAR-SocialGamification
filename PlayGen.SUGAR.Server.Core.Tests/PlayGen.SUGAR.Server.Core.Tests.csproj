@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+	<PackageReference Include="xunit" Version="2.2.0" />
+	<PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PlayGen.SUGAR.Server.Core\PlayGen.SUGAR.Server.Core.csproj" />
+    <ProjectReference Include="..\PlayGen.SUGAR.Server.EntityFramework.Tests\PlayGen.SUGAR.Server.EntityFramework.Tests.csproj" />
+    <ProjectReference Include="..\PlayGen.SUGAR.Server.EntityFramework\PlayGen.SUGAR.Server.EntityFramework.csproj" />
+    <ProjectReference Include="..\PlayGen.SUGAR.Server.Model\PlayGen.SUGAR.Server.Model.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netcoreapp1.1;net35</TargetFrameworks>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp1.1|AnyCPU'">
+	  <DocumentationFile>bin\Debug\netcoreapp1.1\PlayGen.SUGAR.Contracts.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<Choose>
+		<When Condition=" '$(TargetFramework)' == 'net35' ">
+			<ItemGroup>
+				<Reference Include="System.ComponentModel.DataAnnotations">
+				  <Private>true</Private>
+				</Reference>
+			</ItemGroup>
+		</When>
+	</Choose>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj">
+	    <Private>true</Private>
+	  </ProjectReference>
+	</ItemGroup>
+
+</Project>

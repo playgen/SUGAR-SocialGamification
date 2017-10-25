@@ -21,3 +21,5 @@ services:
             - 5000
         environment:
             ASPNETCORE_URLS: "http://0.0.0.0:5000"
+        volumes:
+            - /other/docker/sugar/logs:/app/PlayGen.SUGAR.Server.WebAPI/logs
