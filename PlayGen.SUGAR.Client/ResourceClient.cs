@@ -80,8 +80,8 @@ namespace PlayGen.SUGAR.Client
 				onError);
 		}
 
-		
-		public ResourceAddResponse Add(ResourceAddRequest data)
+
+				public ResourceAddResponse Add(ResourceAddRequest data)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/add").ToString();
 			return Post<ResourceAddRequest, ResourceAddResponse>(query, data);
