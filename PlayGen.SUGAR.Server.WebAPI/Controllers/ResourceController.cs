@@ -111,5 +111,33 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			}
 			return Forbid();
 		}
+
+		/// <summary>
+		/// Adds a quantity of a specific resource.
+		/// 
+		/// Example Usage: Post api/resource/add
+		/// </summary>
+		/// <param name="addRequest"><see cref="ResourceAddRequest"/> object that holds the details of the resoruce transfer.</param>
+		/// <returns>A <see cref="ResourceAddResponse"/> containing the modified resources.</returns>
+		[HttpPost("add")]
+		//[ResponseType(typeof(ResourceTransferResponse))]
+		[ArgumentsNotNull]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Resource)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.Resource)]
+		public async Task<IActionResult> AddResource([FromBody] ResourceAddRequest addRequest)
+		{
+			if (await _authorizationService.AuthorizeAsync(User, addRequest.ActorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
+				await _authorizationService.AuthorizeAsync(User, addRequest.ActorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
+			{
+				var toResource = _resourceController.AddResource(addRequest.GameId, addRequest.ActorId, addRequest.Key, addRequest.Quantity);
+					
+				var resourceAddResponse = new ResourceAddResponse {
+					Resource = toResource.ToResourceContract(),
+				};
+
+				return new ObjectResult(resourceAddResponse);
+			}
+			return Forbid();
+		}
 	}
 }
