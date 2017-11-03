@@ -19,6 +19,11 @@ namespace PlayGen.SUGAR.Client
 		{
 		}
 
+		public ResourceResponse DemoAddResource()
+		{
+			return new ResourceResponse();
+		}
+
 		/// <summary>
 		/// Find a list of all Resources that match the <param name="gameId"/>, <param name="actorId"/> and <param name="keys"/> provided.
 		/// </summary>
