@@ -9,6 +9,7 @@ using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.Model;
 using PlayGen.SUGAR.Server.WebAPI.Attributes;
 using PlayGen.SUGAR.Server.WebAPI.Extensions;
+using System.Diagnostics;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 {

@@ -79,9 +79,13 @@ namespace PlayGen.SUGAR.Client
 				onSuccess,
 				onError);
 		}
-
-
-				public ResourceAddResponse Add(ResourceAddRequest data)
+		
+		/// <summary>
+		/// Adds a quantity of a specific resource.
+		/// </summary>
+		/// <param name="data"></param>
+		/// <returns>A <see cref="ResourceTransferResponse"/> containing the modified resource.</returns>
+		public ResourceAddResponse Add(ResourceAddRequest data)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/add").ToString();
 			return Post<ResourceAddRequest, ResourceAddResponse>(query, data);

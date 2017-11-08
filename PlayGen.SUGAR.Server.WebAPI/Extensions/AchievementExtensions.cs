@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				EvaluationCriterias = achievementContract.EvaluationCriterias.ToModelList(),
 				Rewards = achievementContract.Rewards.ToModelList(),
 			};
-
+			
 			return achievementModel;
 		}
 

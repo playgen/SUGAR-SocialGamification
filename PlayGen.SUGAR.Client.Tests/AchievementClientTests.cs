@@ -105,8 +105,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(AchievementClientTests)}_Create");
 
-			var achievementRequest = new EvaluationCreateRequest()
-			{
+			var achievementRequest = new EvaluationCreateRequest() {
 				Name = "CanCreateAchievement",
 				ActorType = ActorType.User,
 				Token = "CanCreateAchievement",

@@ -127,7 +127,8 @@ namespace PlayGen.SUGAR.Client
 		public EvaluationResponse Create(EvaluationCreateRequest newAchievement)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/create").ToString();
-			return Post<EvaluationCreateRequest, EvaluationResponse>(query, newAchievement);
+			EvaluationResponse response = Post<EvaluationCreateRequest, EvaluationResponse>(query, newAchievement);
+			return response;
 		}
 
 		/// <summary>
