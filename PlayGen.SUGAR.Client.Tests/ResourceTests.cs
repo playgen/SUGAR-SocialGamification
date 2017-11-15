@@ -350,7 +350,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(ResourceTests)}_Create");
 
-			var resourceRequest = new ResourceAddRequest {
+			var resourceRequest = new ResourceChangeRequest {
 				ActorId = user.Id,
 				Key = "CanCreateWithoutGameId",
 				Quantity = 100,
@@ -368,14 +368,14 @@ namespace PlayGen.SUGAR.Client.Tests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(ResourceTests)}_Create");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(ResourceTests)}_Get");
 
-			var resourceRequest = new ResourceAddRequest {
+			var resourceRequest = new ResourceChangeRequest {
 				ActorId = user.Id,
 				GameId = game.Id,
 				Key = "Multiple",
 				Quantity = 100,
 			};
 
-			var resourceRequestTwo = new ResourceAddRequest {
+			var resourceRequestTwo = new ResourceChangeRequest {
 				ActorId = user.Id,
 				GameId = game.Id,
 				Key = "Multiple",
@@ -396,14 +396,14 @@ namespace PlayGen.SUGAR.Client.Tests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(ResourceTests)}_Create");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(ResourceTests)}_Get");
 
-			var resourceRequest = new ResourceAddRequest {
+			var resourceRequest = new ResourceChangeRequest {
 				ActorId = user.Id,
 				GameId = game.Id,
 				Key = "Multiple",
 				Quantity = 100,
 			};
 
-			var resourceRequestTwo = new ResourceAddRequest {
+			var resourceRequestTwo = new ResourceChangeRequest {
 				ActorId = user.Id,
 				GameId = game.Id,
 				Key = "Multiple",
@@ -424,14 +424,14 @@ namespace PlayGen.SUGAR.Client.Tests
 			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(ResourceTests)}_Create");
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(ResourceTests)}_Get");
 
-			var resourceRequest = new ResourceAddRequest {
+			var resourceRequest = new ResourceChangeRequest {
 				ActorId = user.Id,
 				GameId = game.Id,
 				Key = "Multiple",
 				Quantity = 30,
 			};
 
-			var resourceRequestTwo = new ResourceAddRequest {
+			var resourceRequestTwo = new ResourceChangeRequest {
 				ActorId = user.Id,
 				GameId = game.Id,
 				Key = "Multiple",
@@ -452,7 +452,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var user = new ActorResponse();
 			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(ResourceTests)}_Get");
 
-			var resourceRequest = new ResourceAddRequest {
+			var resourceRequest = new ResourceChangeRequest {
 				ActorId = user.Id,
 				Key = "CanCreateWithoutGameId",
 				GameId = game.Id,

@@ -104,6 +104,46 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return resource;
 		}
 
+
+		public EvaluationData SetResource(int? gameId, int? ActorId, string key, long Quantity)
+		{
+
+			EvaluationData resource;
+			var foundResources = _evaluationDataController.Get(gameId, ActorId, new[] { key });
+
+			if (foundResources.Any())
+			{
+				resource = foundResources.Single();
+				if (Quantity < 0.0)
+				{
+					Quantity = 0;
+				}
+				resource = SetQuantity(resource.Id, Quantity);
+			}
+			else
+			{
+				if (Quantity < 0.0)
+				{
+					Quantity = (long)0;
+				}
+				resource = new EvaluationData {
+					GameId = gameId,
+					ActorId = ActorId,
+					Key = key,
+					Value = Quantity.ToString(),
+					Category = EvaluationDataCategory.Resource,
+					//At the moment hard coded to just be longs. Need to think about if boolean and string would make sense
+					//for a resource. Floats definitely should be implemented
+					EvaluationDataType = EvaluationDataType.Long,
+				};
+				Create(resource);
+			}
+
+			Logger.Info($"{resource?.Id} for GameId: {gameId}, ActorId: {ActorId}, Key: {key}, Quantity: {Quantity}");
+
+			return resource;
+		}
+
 		public void Create(EvaluationData data)
 		{
 			var existingEntries = _evaluationDataController.Get(data.GameId, data.ActorId, new[] { data.Key });
@@ -128,6 +168,18 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_evaluationDataController.Update(resource);
 
 			Logger.Info($"{resource?.Id} with Amount: {addAmount}");
+
+			return resource;
+		}
+		public EvaluationData SetQuantity(int resourceId, long Amount)
+		{
+			var resource = _evaluationDataController.Get(new[] { resourceId }).Single();
+
+			resource.Value = Amount.ToString();
+
+			_evaluationDataController.Update(resource);
+
+			Logger.Info($"{resource?.Id} with Amount: {Amount}");
 
 			return resource;
 		}

@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Client
 			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}
-		
+
 
 		/// <summary>
 		/// Find a list of all Resources that match the <param name="gameId"/>, <param name="actorId"/> and <param name="keys"/> provided.
@@ -79,21 +79,39 @@ namespace PlayGen.SUGAR.Client
 				onSuccess,
 				onError);
 		}
-		
+
 		/// <summary>
 		/// Adds a quantity of a specific resource.
 		/// </summary>
 		/// <param name="data"></param>
-		/// <returns>A <see cref="ResourceTransferResponse"/> containing the modified resource.</returns>
-		public ResourceAddResponse Add(ResourceAddRequest data)
+		/// <returns>A <see cref="ResourceChangeResponse"/> containing the modified resource.</returns>
+		public ResourceChangeResponse Add(ResourceChangeRequest data)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/add").ToString();
-			return Post<ResourceAddRequest, ResourceAddResponse>(query, data);
+			return Post<ResourceChangeRequest, ResourceChangeResponse>(query, data);
 		}
 
-		public void AddAsync(ResourceAddRequest data, Action<ResourceAddResponse> onSuccess, Action<Exception> onError)
+		public void AddAsync(ResourceChangeRequest data, Action<ResourceChangeResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Add(data),
+				onSuccess,
+				onError);
+		}
+
+		/// <summary>
+		/// Adds a quantity of a specific resource.
+		/// </summary>
+		/// <param name="data"></param>
+		/// <returns>A <see cref="ResourceChangeResponse"/> containing the modified resource.</returns>
+		public ResourceChangeResponse Set(ResourceChangeRequest data)
+		{
+			var query = GetUriBuilder(ControllerPrefix + "/set").ToString();
+			return Post<ResourceChangeRequest, ResourceChangeResponse>(query, data);
+		}
+
+		public void SetAsync(ResourceChangeRequest data, Action<ResourceChangeResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => Set(data),
 				onSuccess,
 				onError);
 		}
