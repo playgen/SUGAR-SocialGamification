@@ -41,6 +41,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				},
 				User = adminUser
 			}).Entity;
+			context.SaveChanges();
+
 
 			#region Actor Roles
 			//global (admin)
@@ -108,40 +110,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			});
 			#endregion
 
-			#region Claims
-			var claims = new List<Claim>();
-
-			foreach (ClaimScope claimScope in Enum.GetValues(typeof(ClaimScope)))
-			{
-				foreach (AuthorizationAction authorizationAction in Enum.GetValues(typeof(AuthorizationAction)))
-				{
-					foreach (AuthorizationEntity authorizationEntity in Enum.GetValues(typeof(AuthorizationEntity)))
-					{
-						var claim = context.Claims.Add(new Claim
-						{
-							ClaimScope = claimScope,
-							Description = "Auto Generated Claim",
-							Name = AuthorizationName.Generate(authorizationAction, authorizationEntity)
-						}).Entity;
-
-						claims.Add(claim);
-					}
-				}
-			}
-			#endregion
-
-			#region Admin Claims
-
-			claims.ForEach(claim =>
-			{
-				context.ActorClaims.Add(new ActorClaim
-				{
-					Actor = adminUser,
-					Claim = claim,
-					EntityId = Platform.EntityId
-				});
-			});
-			#endregion
 			context.SaveChanges();
 		}
 	}
