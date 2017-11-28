@@ -207,6 +207,17 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return min;
 		}
 
+		public bool TryGetLatest<T>(int? gameId, int? actorId, string key, out T latest, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory,
+			DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var didGetLatest = _evaluationDataDbController.TryGetLatest<T>(gameId, actorId, key, out latest, evaluationDataType, evaluationDataCategory, start, end);
+
+			Logger.Debug(
+				$"Latest {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
+
+			return didGetLatest;
+		}
+
 		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var highest = _evaluationDataDbController.GetEvaluationDataByHighestFloat(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
@@ -229,50 +240,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					: $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return highest;
-		}
-
-		public bool TryGetLatestLong(int? gameId, int? actorId, string key, out long latest, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory,
-			DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var didGetLatest = _evaluationDataDbController.TryGetLatestLong(gameId, actorId, key, out latest, evaluationDataType, evaluationDataCategory, start, end);
-
-			Logger.Debug(
-				$"Latest {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
-
-			return didGetLatest;
-		}
-
-		public bool TryGetLatestFloat(int? gameId, int? actorId, string key, out float latest, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory,
-			DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var didGetLatest = _evaluationDataDbController.TryGetLatestFloat(gameId, actorId, key, out latest, evaluationDataType, evaluationDataCategory, start, end);
-
-			Logger.Debug(
-				$"Latest: {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
-
-			return didGetLatest;
-		}
-
-		public bool TryGetLatestBool(int? gameId, int? actorId, string key, out bool latest, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory,
-			DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var didGetLatest = _evaluationDataDbController.TryGetLatestBool(gameId, actorId, key, out latest, evaluationDataType, evaluationDataCategory, start, end);
-
-			Logger.Debug(
-				$"Latest: {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
-
-			return didGetLatest;
-		}
-
-		public bool TryGetLatestString(int? gameId, int? actorId, string key, out string latest, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory,
-			DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var didGetLatest = _evaluationDataDbController.TryGetLatestString(gameId, actorId, key, out latest, evaluationDataType, evaluationDataCategory, start, end);
-
-			Logger.Debug(
-				$"Latest: {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
-
-			return didGetLatest;
 		}
 
 		public int CountKeys(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory,

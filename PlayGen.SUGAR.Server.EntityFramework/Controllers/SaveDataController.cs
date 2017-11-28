@@ -5,6 +5,7 @@ using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
+using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
@@ -154,6 +155,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			return min != null ? (T)Convert.ChangeType(min, typeof(T)) : default(T);
 		}
 
+		public bool TryGetLatest<T>(int? gameId, int? actorId, string key, out T latestLong, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var latest = All<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).FirstOrDefault();
+			latestLong = latest != null ? latest : default(T);
+			return latest != null;
+		}
+
 		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
@@ -164,38 +172,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
 				.First();
-		}
-
-		public bool TryGetLatestLong(int? gameId, int? actorId, string key, out long latestLong, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.FirstOrDefault();
-			latestLong = data != null ? long.Parse(data.Value) : default(long);
-			return data != null;
-		}
-
-		public bool TryGetLatestFloat(int? gameId, int? actorId, string key, out float latestFloat, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.FirstOrDefault();
-			latestFloat = data != null ? float.Parse(data.Value) : default(float);
-			return data != null;
-		}
-
-		public bool TryGetLatestBool(int? gameId, int? actorId, string key, out bool latestBool, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.FirstOrDefault();
-			latestBool = data != null ? bool.Parse(data.Value) : default(bool);
-			return data != null;
-		}
-
-		public bool TryGetLatestString(int? gameId, int? actorId, string key, out string latestString, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.FirstOrDefault();
-			latestString = data?.Value;
-			return data != null;
 		}
 
 		public int CountKeys(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
