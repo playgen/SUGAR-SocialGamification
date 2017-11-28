@@ -5,7 +5,6 @@ using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
-using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
