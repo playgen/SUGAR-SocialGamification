@@ -125,47 +125,33 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<long> AllLongs(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<T> All<T>(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType,
+			EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.Select(s => long.Parse(s.Value)).ToList();
+				.Select(s => (T)Convert.ChangeType(s.Value, typeof(T))).ToList();
 		}
 
-		public List<float> AllFloats(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public T Sum<T>(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType,
+			EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.Select(s => float.Parse(s.Value)).ToList();
+
+			var total = All<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).Sum(s => (dynamic) s);
+			return (T) Convert.ChangeType(total, typeof(T));
 		}
 
-		public List<string> AllStrings(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public T Max<T>(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType,
+			EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.Select(s => s.Value).ToList();
-			
+			var max = All<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).Max(s => (dynamic)s);
+			return max != null ? (T)Convert.ChangeType(max, typeof(T)) : default (T);
 		}
 
-		public List<bool> AllBools(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public T Min<T>(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType,
+			EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.Select(s => bool.Parse(s.Value)).ToList();
-		}
-
-		public float SumFloats(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.Sum(s => float.Parse(s.Value));
-		}
-
-		public long SumLongs(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.Sum(s => long.Parse(s.Value));
-		}
-
-		public float GetHighestFloat(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
-			return data.Count > 0 ? data.Max(s => float.Parse(s.Value)) : default(float);
+			var min = All<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).Min(s => (dynamic)s);
+			return min != null ? (T)Convert.ChangeType(min, typeof(T)) : default(T);
 		}
 
 		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
@@ -174,28 +160,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				.First();
 		}
 
-		public long GetHighestLong(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
-			return data.Count > 0 ? data.Max(s => long.Parse(s.Value)) : default(int);
-		}
-
 		public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
 				.First();
-		}
-
-		public float GetLowestFloat(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.Min(s => float.Parse(s.Value));
-		}
-
-		public long GetLowestLong(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.Min(s => long.Parse(s.Value));
 		}
 
 		public bool TryGetLatestLong(int? gameId, int? actorId, string key, out long latestLong, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))

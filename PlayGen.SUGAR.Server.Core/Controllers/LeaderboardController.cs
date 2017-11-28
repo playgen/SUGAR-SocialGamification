@@ -207,7 +207,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					results = actors.Select(r => new LeaderboardStandingsResponse {
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = evaluationDataController.GetHighestLongs(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.Max<long>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -215,7 +215,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					results = actors.Select(r => new LeaderboardStandingsResponse {
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = evaluationDataController.GetHighestFloats(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.Max<float>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -240,7 +240,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					results = actors.Select(r => new LeaderboardStandingsResponse {
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = evaluationDataController.GetLowestLongs(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.Min<long>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -248,7 +248,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					results = actors.Select(r => new LeaderboardStandingsResponse {
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = evaluationDataController.GetLowestFloats(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.Min<float>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -273,7 +273,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					results = actors.Select(r => new LeaderboardStandingsResponse {
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = evaluationDataController.SumLongs(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.Sum<long>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
@@ -281,7 +281,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					results = actors.Select(r => new LeaderboardStandingsResponse {
 						ActorId = r.Id,
 						ActorName = r.Name,
-						Value = evaluationDataController.SumFloats(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
+						Value = evaluationDataController.Sum<float>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
 					}).ToList();
 					break;
 
