@@ -20,8 +20,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.UserFriendController _userFriendCoreController;
 
-		public UserFriendController(Core.Controllers.UserFriendController userFriendCoreController,
-					IAuthorizationService authorizationService)
+		public UserFriendController(Core.Controllers.UserFriendController userFriendCoreController, IAuthorizationService authorizationService)
 		{
 			_userFriendCoreController = userFriendCoreController;
 			_authorizationService = authorizationService;
@@ -35,11 +34,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="userId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("requests/{userId:int}")]
-		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.UserFriendRequest)]
 		public async Task<IActionResult> GetFriendRequests([FromRoute]int userId)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
+			if (await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.User)))
 			{
 				var actor = _userFriendCoreController.GetFriendRequests(userId);
 				var actorContract = actor.ToActorContractList();
@@ -56,11 +54,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("sentrequests/{userId:int}")]
-		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.UserFriendRequest)]
 		public async Task<IActionResult> GetSentRequests([FromRoute]int userId)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, userId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
+			if (await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.User)))
 			{
 				var actor = _userFriendCoreController.GetSentRequests(userId);
 				var actorContract = actor.ToActorContractList();
@@ -77,7 +74,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("friends/{userId:int}")]
-		//[ResponseType(typeof(IEnumerable<ActorResponse>))]
 		public IActionResult GetFriends([FromRoute]int userId)
 		{
 			var actor = _userFriendCoreController.GetFriends(userId);
@@ -94,13 +90,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipRequest"/> object that holds the details of the new relationship request.</param>
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
 		[HttpPost]
-		//[ResponseType(typeof(RelationshipResponse))]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.UserFriendRequest)]
 		public async Task<IActionResult> CreateFriendRequest([FromBody]RelationshipRequest relationship)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]) ||
-				await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
+			if (await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.User)) ||
+				await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.User)))
 			{
 				var request = relationship.ToGroupModel();
 				_userFriendCoreController.CreateFriendRequest(relationship.ToUserModel(), relationship.AutoAccept);
@@ -122,8 +117,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.UserFriendRequest)]
 		public async Task<IActionResult> UpdateFriendRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]) ||
-				await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
+			if (await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.User)) ||
+				await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.User)))
 			{
 				var relation = new RelationshipRequest
 				{
@@ -148,8 +143,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.User, AuthorizationAction.Delete, AuthorizationEntity.UserFriend)]
 		public async Task<IActionResult> UpdateFriend([FromBody] RelationshipStatusUpdate relationship)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]) ||
-				await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
+			if (await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.User)) ||
+				await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.User)))
 			{
 				var relation = new RelationshipRequest
 				{

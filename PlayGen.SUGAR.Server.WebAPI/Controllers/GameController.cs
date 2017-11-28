@@ -20,8 +20,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.GameController _gameCoreController;
 
-		public GameController(Core.Controllers.GameController gameCoreController,
-					IAuthorizationService authorizationService)
+		public GameController(Core.Controllers.GameController gameCoreController, IAuthorizationService authorizationService)
 		{
 			_gameCoreController = gameCoreController;
 			_authorizationService = authorizationService;
@@ -34,8 +33,21 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <returns>A list of <see cref="GameResponse"/> that hold Game details.</returns>
 		[HttpGet("list")]
-		//[ResponseType(typeof(IEnumerable<GameResponse>))]
 		public IActionResult Get()
+		{
+			var games = _gameCoreController.Get();
+			var gameContract = games.ToContractList();
+			return new ObjectResult(gameContract);
+		}
+
+		/// <summary>
+		/// Get a list of all Games this Actor has control over.
+		/// 
+		/// Example Usage: GET api/game/controlled
+		/// </summary>
+		/// <returns>A list of <see cref="GameResponse"/> that hold Game details.</returns>
+		[HttpGet("controlled")]
+		public IActionResult GetControlled()
 		{
 			var games = _gameCoreController.GetByPermissions(int.Parse(User.Identity.Name));
 			var gameContract = games.ToContractList();
@@ -50,7 +62,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="name">Game name</param>
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
-		//[ResponseType(typeof(IEnumerable<GameResponse>))]
 		public IActionResult Get([FromRoute]string name)
 		{
 			var games = _gameCoreController.Search(name);
@@ -66,7 +77,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="id">Game id</param>
 		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
 		[HttpGet("findbyid/{id:int}", Name = "GetByGameId")]
-		//[ResponseType(typeof(GameResponse))]
 		public IActionResult GetById([FromRoute]int id)
 		{  
 			var game = _gameCoreController.Get(id);
@@ -83,12 +93,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="newGame"><see cref="GameRequest"/> object that contains the details of the new Game.</param>
 		/// <returns>A <see cref="GameResponse"/> containing the new Game details.</returns>
 		[HttpPost]
-		//[ResponseType(typeof(GameResponse))]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Game)]
 		public async Task<IActionResult> Create([FromBody]GameRequest newGame)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
+			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
 			{
 				var game = newGame.ToModel();
 				_gameCoreController.Create(game, int.Parse(User.Identity.Name));
@@ -111,7 +120,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		// todo refactor game request into GameUpdateRequest (which requires the Id) and GameCreateRequest (which has no required Id field) - and remove the Id param from the definition below
 		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] GameRequest game)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
+			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
 				var gameModel = game.ToModel();
 				gameModel.Id = id;
@@ -131,7 +140,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Game)]
 		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
+			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
 				_gameCoreController.Delete(id);
 				return Ok();

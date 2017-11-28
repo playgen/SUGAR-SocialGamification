@@ -26,10 +26,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="evaluationCoreController"></param>
 		/// <param name="evaluationTracker"></param>
 		/// <param name="authorizationService"></param>
-		public AchievementsController(EvaluationController evaluationCoreController,
-			EvaluationTracker evaluationTracker,
-			IAuthorizationService authorizationService)
-			: base(evaluationCoreController, evaluationTracker, authorizationService)
+		public AchievementsController(EvaluationController evaluationCoreController, EvaluationTracker evaluationTracker, IAuthorizationService authorizationService) : base(evaluationCoreController, evaluationTracker, authorizationService)
 		{
 		}
 
@@ -38,20 +35,15 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// 
 		/// Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1
 		/// </summary>
-		/// <param>Token of Achievement
-		///     <name>token</name>
-		/// </param>
-		/// <param>ID of the Game the Achievement is for
-		///     <name>gameId</name>
-		/// </param>
+		/// <param name="token">Token of Achievement</param>
+		/// <param name="gameId">ID of the Game the Achievement is for</param>
 		/// <returns>Returns <see cref="EvaluationResponse"/> that holds Achievement details</returns>
 		[HttpGet("find/{token}/{gameId:int}")]
 		[HttpGet("find/{token}/global")]
-		//[ResponseType(typeof(EvaluationResponse))]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
-		public Task<IActionResult> Get([FromRoute]string token, [FromRoute]int? gameId)
+		public new Task<IActionResult> Get([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			return Get(token, gameId, ClaimScope.Game);
+			return base.Get(token, gameId);
 		}
 
 		/// <summary>
@@ -64,11 +56,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Achievement details</returns>
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
-		//[ResponseType(typeof(IEnumerable<EvaluationResponse>))]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
-		public Task<IActionResult> Get([FromRoute]int? gameId)
+		public new Task<IActionResult> Get([FromRoute]int? gameId)
 		{
-			return Get(gameId, ClaimScope.Game);
+			return base.Get(gameId);
 		}
 
 		/// <summary>
@@ -83,7 +74,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("global/evaluate")]
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("global/evaluate/{actorId:int}")]
-		//[ResponseType(typeof(IEnumerable<EvaluationProgressResponse>))]
 		public new IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
 		{
 			return base.GetGameProgress(gameId, actorId);
@@ -102,7 +92,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("{token}/global/evaluate")]
 		[HttpGet("{token}/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("{token}/global/evaluate/{actorId:int}")]
-		//[ResponseType(typeof(EvaluationProgressResponse))]
 		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
 		{
 			return GetEvaluationProgress(token, gameId, actorId);
@@ -110,21 +99,18 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new Achievement.
-		/// Requires <see cref="EvaluationRequest.Name"/> to be unique to that <see cref="EvaluationRequest.GameId"/>.
+		/// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
 		/// 
 		/// Example Usage: POST api/achievements/create
 		/// </summary>
-		/// <param name="newAchievement"><see cref="EvaluationRequest"/> object that holds the details of the new Achievement.</param>
+		/// <param name="newAchievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Achievement.</param>
 		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
 		[HttpPost("create")]
-		//[ResponseType(typeof(EvaluationResponse))]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Achievement)]
 		public async Task<IActionResult> Create([FromBody] EvaluationCreateRequest newAchievement)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, 
-				null, // TODO find out why in just this one case, this value is null
-				(IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
+			if (await _authorizationService.AuthorizeAsync(User, newAchievement.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
 				var achievement = newAchievement.ToAchievementModel();
 				achievement = (Achievement)EvaluationCoreController.Create(achievement);
@@ -145,7 +131,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Achievement)]
 		public async Task<IActionResult> Update([FromBody] EvaluationUpdateRequest achievement)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, achievement.GameId, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
+			if (await _authorizationService.AuthorizeAsync(User, achievement.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
 				var achievementModel = achievement.ToAchievementModel();
 				EvaluationCoreController.Update(achievementModel);
@@ -164,9 +150,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Achievement)]
-		public Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int? gameId)
+		public new Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			return Delete(token, gameId, ClaimScope.Game);
+			return base.Delete(token, gameId);
 		}
 	}
 }

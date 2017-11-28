@@ -25,11 +25,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		private readonly Core.Controllers.RoleController _roleController;
 		private readonly Core.Controllers.ActorClaimController _actorClaimController;
 
-		public RoleClaimController(Core.Controllers.RoleClaimController roleClaimCoreController,
-					ClaimController claimController,
-					Core.Controllers.RoleController roleController,
-					Core.Controllers.ActorClaimController actorClaimController,
-					IAuthorizationService authorizationService)
+		public RoleClaimController(Core.Controllers.RoleClaimController roleClaimCoreController, ClaimController claimController, Core.Controllers.RoleController roleController, Core.Controllers.ActorClaimController actorClaimController, IAuthorizationService authorizationService)
 		{
 			_roleClaimCoreController = roleClaimCoreController;
 			_claimController = claimController;
@@ -44,11 +40,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <returns>A list of <see cref="ClaimResponse"/> that hold Claim details.</returns>
 		[HttpGet("role/{id:int}")]
-		//[ResponseType(typeof(IEnumerable<ClaimResponse>))]
 		[Authorization(ClaimScope.Role, AuthorizationAction.Get, AuthorizationEntity.RoleClaim)]
 		public async Task<IActionResult> GetRoleClaims([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Role)]))
+			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Role)))
 			{
 				var roles = _roleClaimCoreController.GetClaimsByRole(id);
 				var roleContract = roles.ToContractList();
@@ -65,12 +60,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="newRoleClaim"><see cref="RoleClaimRequest"/> object that contains the details of the new RoleClaim.</param>
 		/// <returns>A <see cref="RoleClaimResponse"/> containing the new RoleClaim details.</returns>
 		[HttpPost]
-		//[ResponseType(typeof(RoleClaimResponse))]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Role, AuthorizationAction.Create, AuthorizationEntity.RoleClaim)]
 		public async Task<IActionResult> Create([FromBody]RoleClaimRequest newRoleClaim)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, newRoleClaim.RoleId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Role)]))
+			if (await _authorizationService.AuthorizeAsync(User, newRoleClaim.RoleId, HttpContext.ScopeItems(ClaimScope.Role)))
 			{
 				var role = _roleController.GetById(newRoleClaim.RoleId);
 				if (!role.Default)
@@ -103,7 +97,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Role, AuthorizationAction.Delete, AuthorizationEntity.RoleClaim)]
 		public async Task<IActionResult> Delete([FromRoute]int roleId, [FromRoute]int claimId)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, roleId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Role)]))
+			if (await _authorizationService.AuthorizeAsync(User, roleId, HttpContext.ScopeItems(ClaimScope.Role)))
 			{
 				var role = _roleController.GetById(roleId);
 				if (!role.Default)

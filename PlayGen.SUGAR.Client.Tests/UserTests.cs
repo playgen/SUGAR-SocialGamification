@@ -8,41 +8,6 @@ namespace PlayGen.SUGAR.Client.Tests
 	public class UserTests : ClientTestBase
 	{
 		[Fact]
-		public void CanCreateUser()
-		{
-			var userRequest = new UserRequest
-			{
-				Name = "CanCreateUser",
-			};
-
-			var response = SUGARClient.User.Create(userRequest);
-
-			Assert.Equal(userRequest.Name, response.Name);
-			Assert.True(response.Id > 0);
-		}
-
-		[Fact]
-		public void CannotCreateDuplicateUser()
-		{
-			var userRequest = new UserRequest
-			{
-				Name = "CannotCreateDuplicateUser",
-			};
-
-			SUGARClient.User.Create(userRequest);
-
-			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Create(userRequest));
-		}
-
-		[Fact]
-		public void CannotCreateUserWithNoName()
-		{
-			var userRequest = new UserRequest { };
-
-			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Create(userRequest));
-		}
-
-		[Fact]
 		public void CanGetUsersByName()
 		{
 			var userRequestOne = new UserRequest
@@ -176,33 +141,6 @@ namespace PlayGen.SUGAR.Client.Tests
 			};
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Update(response.Id, updateRequest));
-		}
-
-		[Fact]
-		public void CanDeleteUser()
-		{
-			var userRequest = new UserRequest
-			{
-				Name = "CanDeleteUser",
-			};
-
-			var response = SUGARClient.User.Create(userRequest);
-
-			var getUser = SUGARClient.User.Get((int) response.Id);
-
-			Assert.NotNull(getUser);
-
-			SUGARClient.User.Delete(response.Id);
-
-			getUser = SUGARClient.User.Get((int) response.Id);
-
-			Assert.Null(getUser);
-		}
-
-		[Fact]
-		public void CannotDeleteNonExistingUser()
-		{
-			SUGARClient.User.Delete(-1);
 		}
 	}
 }

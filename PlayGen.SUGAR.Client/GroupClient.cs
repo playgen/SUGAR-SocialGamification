@@ -28,6 +28,30 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<GroupResponse>>(query);
 		}
 
+		public void GetAsync(Action<IEnumerable<GroupResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(Get,
+				onSuccess,
+				onError);
+		}
+
+		/// <summary>
+		/// Get a list of all Groups this Actor has control over.
+		/// </summary>
+		/// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
+		public IEnumerable<GroupResponse> GetControlled()
+		{
+			var query = GetUriBuilder(ControllerPrefix + "/controlled").ToString();
+			return Get<IEnumerable<GroupResponse>>(query);
+		}
+
+		public void GetControlledAsync(Action<IEnumerable<GroupResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(GetControlled,
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Get a list of Groups that match <param name="name"/> provided.
 		/// </summary>
@@ -57,16 +81,30 @@ namespace PlayGen.SUGAR.Client
 			return Get<GroupResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
-        /// <summary>
-        /// Create a new Group.
-        /// Requires the <see cref="GroupRequest"/>'s Name to be unique for Groups.
-        /// </summary>
-        /// <param name="actor"><see cref="GroupRequest"/> object that holds the details of the new Group.</param>
-        /// <returns>A <see cref="GroupResponse"/> containing the new Group details.</returns>
-        public GroupResponse Create(GroupRequest actor)
+		public void GetAsync(int id, Action<GroupResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => Get(id),
+				onSuccess,
+				onError);
+		}
+
+		/// <summary>
+		/// Create a new Group.
+		/// Requires the <see cref="GroupRequest"/>'s Name to be unique for Groups.
+		/// </summary>
+		/// <param name="actor"><see cref="GroupRequest"/> object that holds the details of the new Group.</param>
+		/// <returns>A <see cref="GroupResponse"/> containing the new Group details.</returns>
+		public GroupResponse Create(GroupRequest actor)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "").ToString();
 			return Post<GroupRequest, GroupResponse>(query, actor);
+		}
+
+		public void CreateAsync(GroupRequest actor, Action<GroupResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => Create(actor),
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>
@@ -80,6 +118,13 @@ namespace PlayGen.SUGAR.Client
 			Put(query, group);
 		}
 
+		public void UpdateAsync(int id, GroupRequest group, Action onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => Update(id, group),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Delete group with the <param name="id"/> provided.
 		/// </summary>
@@ -88,6 +133,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/{0}", id).ToString();
 			Delete(query);
+		}
+
+		public void DeleteAsync(int id, Action onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => Delete(id),
+				onSuccess,
+				onError);
 		}
 	}
 }

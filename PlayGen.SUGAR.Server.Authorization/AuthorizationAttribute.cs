@@ -7,40 +7,35 @@ using PlayGen.SUGAR.Common.Authorization;
 
 namespace PlayGen.SUGAR.Server.Authorization
 {
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-    public class AuthorizationAttribute : ActionFilterAttribute
-    {
-        public ClaimScope ClaimScope { get; set; }
+	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+	public class AuthorizationAttribute : ActionFilterAttribute
+	{
+		public ClaimScope ClaimScope { get; set; }
 
-        public string Name { get; set; }
+		public string Name { get; set; }
 
-        public AuthorizationAttribute(ClaimScope claimScope, AuthorizationAction action, AuthorizationEntity entity)
-        {
-            ClaimScope = claimScope;
+		public AuthorizationAttribute(ClaimScope claimScope, AuthorizationAction action, AuthorizationEntity entity)
+		{
+			ClaimScope = claimScope;
 			Name = AuthorizationName.Generate(action, entity);
-        }
+		}
 
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            if (context.HttpContext.Items.Any())
-            {
-                return;
-            }
+		public override void OnActionExecuting(ActionExecutingContext context)
+		{
+			if (context.HttpContext.Items.Any())
+			{
+				return;
+			}
 
-            var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
+			var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
 
 			if (actionDescriptor?.MethodInfo.GetCustomAttributes(typeof(AuthorizationAttribute), false) is AuthorizationAttribute[] customAtt)
-            {
-                foreach (var att in customAtt)
-                {
-                    context.HttpContext.Items.Add(Key(att.ClaimScope), new AuthorizationRequirement(att.ClaimScope, att.Name));
-                }
-            }
-        }
-
-		public static string Key(ClaimScope scope)
-		{
-			return $"{scope}-Requirements";
+			{
+				foreach (var att in customAtt)
+				{
+					context.HttpContext.Items.Add(att.ClaimScope.Key(), new AuthorizationRequirement(att.ClaimScope, att.Name));
+				}
+			}
 		}
-    }
+	}
 }
