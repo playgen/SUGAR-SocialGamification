@@ -24,16 +24,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			_category = category;
 		}
 
-		public bool KeyExists(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool KeyExists(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
 			using (var context = ContextFactory.Create())
 			{
 				return context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDateTimeRange(start, end)
+					.FilterBy(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
 					.Any();
 			}
 		}
@@ -42,10 +38,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var data = context.GetCategoryData(_category)
+				return context.GetCategoryData(_category)
 					.FilterByIds(ids)
 					.ToList();
-				return data;
 			}
 		}
 
@@ -53,12 +48,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var data = context.GetCategoryData(_category)
+				return context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByActorId(actorId)
 					.FilterByKeys(keys)
 					.ToList();
-				return data;
 			}
 		}
 
@@ -66,11 +60,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var data = context.GetCategoryData(_category)
+				return context.GetCategoryData(_category)
 					.FilterByMatchId(entityId)
 					.FilterByKeys(keys)
 					.ToList();
-				return data;
 			}
 		}
 
@@ -78,13 +71,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var data = context.GetCategoryData(_category)
+				return context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByMatchId(entityId)
 					.FilterByActorId(actorId)
 					.FilterByKeys(keys)
 					.ToList();
-				return data;
 			}
 		}
 
@@ -92,13 +84,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
         {
             using (var context = ContextFactory.Create())
             {
-                var actors = context.GetCategoryData(_category)
+                return context.GetCategoryData(_category)
                     .FilterByGameId(gameId)
                     .ToList()
                     .Select(d => d.ActorId)
                     .Distinct()
                     .ToList();
-                return actors;
             }
         }
 
@@ -106,13 +97,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
         {
             using (var context = ContextFactory.Create())
             {
-                var data = context.GetCategoryData(_category)
+                return context.GetCategoryData(_category)
                     .FilterByGameId(gameId)
                     .ToList()
                     .Select(d => new KeyValuePair<string, EvaluationDataType>(d.Key, d.EvaluationDataType))
                     .Distinct()
                     .ToList();
-                return data;
             }
         }
 
@@ -120,410 +110,145 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
         {
             using (var context = ContextFactory.Create())
             {
-                var data = context.GetCategoryData(_category)
+                return context.GetCategoryData(_category)
                     .FilterByActorId(actorId)
                     .ToList();
-                return data;
             }
         }
 
-        public List<long> AllLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		private List<EvaluationData> GetContextEvaluationData(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
 			using (var context = ContextFactory.Create())
 			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Long)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				var list = data.Select(s => long.Parse(s.Value)).ToList();
-				return list;
+				return context.EvaluationData
+					.FilterBy(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 			}
 		}
 
-		public List<float> AllFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<long> AllLongs(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Float)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				var list = data.Select(s => float.Parse(s.Value)).ToList();
-				return list;
-			}
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.Select(s => long.Parse(s.Value)).ToList();
 		}
 
-		public List<string> AllStrings(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<float> AllFloats(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.String)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				var list = data.Select(s => s.Value).ToList();
-				return list;
-			}
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.Select(s => float.Parse(s.Value)).ToList();
 		}
 
-		public List<bool> AllBools(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<string> AllStrings(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Boolean)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				var list = data.Select(s => bool.Parse(s.Value)).ToList();
-				return list;
-			}
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.Select(s => s.Value).ToList();
+			
 		}
 
-		public float SumFloats(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<bool> AllBools(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Float)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				var sum = data.Sum(s => float.Parse(s.Value));
-				return sum;
-			}
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.Select(s => bool.Parse(s.Value)).ToList();
 		}
 
-		public long SumLongs(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public float SumFloats(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Long)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				var sum = data.Sum(s => long.Parse(s.Value));
-				return sum;
-			}
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.Sum(s => float.Parse(s.Value));
 		}
 
-		public float GetHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public long SumLongs(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Float)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				if (data.Count == 0)
-				{
-					return 0;
-				}
-
-				var sum = data.Max(s => float.Parse(s.Value));
-				return sum;
-			}
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.Sum(s => long.Parse(s.Value));
 		}
 
-		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public float GetHighestFloat(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Float)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				if (data.Count == 0)
-				{
-					return null;
-				}
-
-				var max = data.OrderByDescending(gameData => float.Parse(gameData.Value)).First();
-				return max;
-			}
+			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			return data.Count > 0 ? data.Max(s => float.Parse(s.Value)) : default(float);
 		}
 
-		public long GetHighestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Long)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				if (data.Count == 0)
-				{
-					return 0;
-				}
-
-				var sum = data.Max(s => long.Parse(s.Value));
-				return sum;
-			}
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.First();
 		}
 
-		public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public long GetHighestLong(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Long)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				if (data.Count == 0)
-				{
-					return null;
-				}
-
-				var max = data.OrderByDescending(gameData => float.Parse(gameData.Value)).First();
-				return max;
-			}
+			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			return data.Count > 0 ? data.Max(s => long.Parse(s.Value)) : default(int);
 		}
 
-
-		public float GetLowestFloat(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Float)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				if (data.Count == 0)
-				{
-					return 0;
-				}
-
-				var sum = data.Min(s => float.Parse(s.Value));
-				return sum;
-			}
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.First();
 		}
 
-		public long GetLowestLong(int? gameId, int? actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public float GetLowestFloat(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Long)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
-
-				if (data.Count == 0)
-				{
-					return 0;
-				}
-
-				var sum = data.Min(s => long.Parse(s.Value));
-				return sum;
-			}
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.Min(s => float.Parse(s.Value));
 		}
 
-		public bool TryGetLatestLong(int? gameId, int? actorId, string key, out long latestLong, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public long GetLowestLong(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Long)
-					.FilterByDateTimeRange(start, end)
-					.LatestOrDefault();
-
-				if (data == null)
-				{
-					latestLong = default(long);
-					return false;
-				}
-
-				latestLong = long.Parse(data.Value);
-				return true;
-			}
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.Min(s => long.Parse(s.Value));
 		}
 
-		public bool TryGetLatestFloat(int? gameId, int? actorId, string key, out float latestFloat, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetLatestLong(int? gameId, int? actorId, string key, out long latestLong, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Float)
-					.FilterByDateTimeRange(start, end)
-					.LatestOrDefault();
-
-				if (data == null)
-				{
-					latestFloat = default(float);
-					return false;
-				}
-
-				latestFloat = float.Parse(data.Value);
-				return true;
-			}
+			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.FirstOrDefault();
+			latestLong = data != null ? long.Parse(data.Value) : default(long);
+			return data != null;
 		}
 
-		public bool TryGetLatestBool(int? gameId, int? actorId, string key, out bool latestBool, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetLatestFloat(int? gameId, int? actorId, string key, out float latestFloat, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.Boolean)
-					.FilterByDateTimeRange(start, end)
-					.LatestOrDefault();
-
-				if (data == null)
-				{
-					latestBool = default(bool);
-					return false;
-				}
-
-				latestBool = bool.Parse(data.Value);
-				return true;
-			}
+			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.FirstOrDefault();
+			latestFloat = data != null ? float.Parse(data.Value) : default(float);
+			return data != null;
 		}
 
-		public bool TryGetLatestString(int? gameId, int? actorId, string key, out string latestString, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetLatestBool(int? gameId, int? actorId, string key, out bool latestBool, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType.String)
-					.FilterByDateTimeRange(start, end)
-					.LatestOrDefault();
-
-				if (data == null)
-				{
-					latestString = default(string);
-					return false;
-				}
-
-				latestString = data.Value;
-				return true;
-			}
+			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.FirstOrDefault();
+			latestBool = data != null ? bool.Parse(data.Value) : default(bool);
+			return data != null;
 		}
 
-		public int CountKeys(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetLatestString(int? gameId, int? actorId, string key, out string latestString, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType)
-					.FilterByDateTimeRange(start, end)
-					.Count();
+			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.FirstOrDefault();
+			latestString = data?.Value;
+			return data != null;
+		}
 
-				return data;
-			}
+		public int CountKeys(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.Count;
 		}
 
 		// todo change to bool TryGet[name](out value) pattern
-		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType)
-					.FilterByDateTimeRange(start, end)
-					.FirstOrDefault();
-
-				var dataDateTime = data?.DateCreated ?? default(DateTime);
-
-				return dataDateTime;
-			}
+			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.FirstOrDefault();
+			return data?.DateCreated ?? default(DateTime);
 		}
 
-		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, EvaluationDataType EvaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			end = EndSet(end);
-			using (var context = ContextFactory.Create())
-			{
-				var data = context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(EvaluationDataType)
-					.FilterByDateTimeRange(start, end)
-					.LatestOrDefault();
-
-				var dataDateTime = data?.DateModified ?? default(DateTime);
-
-				return dataDateTime;
-			}
+			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+				.FirstOrDefault();
+			return data?.DateModified ?? default(DateTime);
 		}
 
 		public EvaluationData Create(EvaluationData data)
