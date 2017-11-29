@@ -1,21 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Contracts;
 using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class AchievementClientTests : Evaluations
+	public class AchievementClientTests : EvaluationClientTests
 	{ 
 		[Fact]
 		public void CanDisableNotifications()
 		{
 			// Assign
-			var loggedInAccount = LoginAdmin();
-			var key = "CanDisableNotifications";
+			var key = "Achievement_CanDisableNotifications";
+			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			SUGARClient.Achievement.EnableNotifications(true);
 
@@ -26,9 +23,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			SUGARClient.Achievement.EnableNotifications(false);
 
-			var achievement = CreateGenericEvaluation(key);
-
-			CompleteGenericEvaluation(achievement, loggedInAccount.User.Id);
+			CompleteGenericEvaluation(key, loggedInAccount.User.Id, game.Id);
 
 			// Act
 			var didGetnotification = SUGARClient.Achievement.TryGetPendingNotification(out notification);
@@ -42,13 +37,12 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetNotifications()
 		{
 			// Assign
-			var loggedInAccount = LoginAdmin();
-			var key = "CanGetNotifications";
+			var key = "Achievement_CanGetNotifications";
+			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			SUGARClient.Achievement.EnableNotifications(true);
-			var achievement = CreateGenericEvaluation(key);
 
-			CompleteGenericEvaluation(achievement, loggedInAccount.User.Id);
+			CompleteGenericEvaluation(key, loggedInAccount.User.Id, game.Id);
 
 			// Act
 			EvaluationNotification notification;
@@ -60,7 +54,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			{
 				didGetnotification = true;
 				gotNotification = notification; 
-				didGetSpecificConfiguration |= notification.Name == achievement.Name;
+				didGetSpecificConfiguration |= notification.Name == key;
 			}
 
 			// Assert
@@ -74,26 +68,25 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void DontGetAlreadyRecievedNotifications()
 		{
 			// Assign
-			var loggedInAccount = LoginAdmin();
-			var key = "DontGetAlreadyRecievedNotifications";
+			var key = "Achievement_DontGetAlreadyRecievedNotifications";
+			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			SUGARClient.Achievement.EnableNotifications(true);
-			var achievement = CreateGenericEvaluation(key);
 
-			CompleteGenericEvaluation(achievement, loggedInAccount.User.Id);
+			CompleteGenericEvaluation(key, loggedInAccount.User.Id, game.Id);
 
 			EvaluationNotification notification;
 			while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
 			{
 			}
 
-			CompleteGenericEvaluation(achievement, loggedInAccount.User.Id);
+			CompleteGenericEvaluation(key, loggedInAccount.User.Id, game.Id);
 
 			// Act
 			var didGetSpecificConfiguration = false;
 			while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
 			{
-				didGetSpecificConfiguration |= notification.Name == achievement.Name;
+				didGetSpecificConfiguration |= notification.Name == key;
 			}
 
 			// Assert
@@ -103,136 +96,55 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CanGetGlobalAchievementProgress()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(AchievementClientTests)}_ProgressGet");
+			var key = "Achievement_CanGetGlobalAchievementProgress";
+			Helpers.Login(SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
-			var achievementRequest = new EvaluationCreateRequest()
-			{
-				Name = "CanGetGlobalAchievementProgress",
-				ActorType = ActorType.Undefined,
-				Token = "CanGetGlobalAchievementProgress",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
-				{
-					new EvaluationCriteriaCreateRequest()
-					{
-						EvaluationDataKey  ="CanGetGlobalAchievementProgress",
-						ComparisonType = ComparisonType.Equals,
-						CriteriaQueryType = CriteriaQueryType.Any,
-						EvaluationDataType = EvaluationDataType.Float,
-						Scope = CriteriaScope.Actor,
-						Value = "1"
-					}
-				},
-			};
-
-			var response = SUGARClient.Achievement.Create(achievementRequest);
-
-			var progressGame = SUGARClient.Achievement.GetGlobalProgress(user.Id);
+			var progressGame = SUGARClient.Achievement.GetGlobalProgress(loggedInAccount.User.Id);
 			Assert.NotEmpty(progressGame);
 
-			var progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(response.Token, user.Id);
+			var progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id);
 			Assert.Equal(0, progressAchievement.Progress);
 
-			var gameData = new EvaluationDataRequest()
-			{
-				Key  ="CanGetGlobalAchievementProgress",
-				Value = "1",
-				CreatingActorId = user.Id,
-				EvaluationDataType = EvaluationDataType.Float
-			};
+			CompleteGenericEvaluation(key, loggedInAccount.User.Id);
 
-			SUGARClient.GameData.Add(gameData);
-
-			progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(response.Token, user.Id);
+			progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id);
 			Assert.True(progressAchievement.Progress >= 1);
 		}
 
 		[Fact]
 		public void CannotGetNotExistingGlobalAchievementProgress()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(AchievementClientTests)}_ProgressGet");
+			var key = "Achievement_CannotGetNotExistingGlobalAchievementProgress";
+			Helpers.Login(SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.GetGlobalAchievementProgress("CannotGetNotExistingGlobalAchievementProgress", user.Id));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id));
 		}
 
 		[Fact]
 		public void CanGetAchievementProgress()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(AchievementClientTests)}_ProgressGet");
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(AchievementClientTests)}_ProgressGet");
+			var key = "Achievement_CanGetAchievementProgress";
+			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			var achievementRequest = new EvaluationCreateRequest()
-			{
-				Name = "CanGetAchievementProgress",
-				GameId = game.Id,
-				ActorType = ActorType.Undefined,
-				Token = "CanGetAchievementProgress",
-				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
-				{
-					new EvaluationCriteriaCreateRequest()
-					{
-						EvaluationDataKey  ="CanGetAchievementProgress",
-						ComparisonType = ComparisonType.Equals,
-						CriteriaQueryType = CriteriaQueryType.Any,
-						EvaluationDataType = EvaluationDataType.Float,
-						Scope = CriteriaScope.Actor,
-						Value = "1"
-					}
-				},
-			};
-
-			var response = SUGARClient.Achievement.Create(achievementRequest);
-
-			var progressGame = SUGARClient.Achievement.GetGameProgress(game.Id, user.Id);
+			var progressGame = SUGARClient.Achievement.GetGameProgress(game.Id, loggedInAccount.User.Id);
 			Assert.Equal(1, progressGame.Count());
 
-			var progressAchievement = SUGARClient.Achievement.GetAchievementProgress(response.Token, game.Id, user.Id);
+			var progressAchievement = SUGARClient.Achievement.GetAchievementProgress(key, game.Id, loggedInAccount.User.Id);
 			Assert.Equal(0, progressAchievement.Progress);
 
-			var gameData = new EvaluationDataRequest()
-			{
-				Key  ="CanGetAchievementProgress",
-				Value = "1",
-				CreatingActorId = user.Id,
-				GameId = game.Id,
-				EvaluationDataType = EvaluationDataType.Float
-			};
+			CompleteGenericEvaluation(key, loggedInAccount.User.Id, game.Id);
 
-			SUGARClient.GameData.Add(gameData);
-
-			progressAchievement = SUGARClient.Achievement.GetAchievementProgress(response.Token, game.Id, user.Id);
+			progressAchievement = SUGARClient.Achievement.GetAchievementProgress(key, game.Id, loggedInAccount.User.Id);
 			Assert.Equal(1, progressAchievement.Progress);
 		}
 
 		[Fact]
 		public void CannotGetNotExistingAchievementProgress()
 		{
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(AchievementClientTests)}_ProgressGet");
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(AchievementClientTests)}_ProgressGet");
+			var key = "Achievement_CannotGetNotExistingAchievementProgress";
+			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.GetAchievementProgress("CannotGetNotExistingAchievementProgress", game.Id, user.Id));
+			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.GetAchievementProgress(key, game.Id, loggedInAccount.User.Id));
 		}
-
-		#region Helpers
-		protected override EvaluationResponse CreateEvaluation(EvaluationCreateRequest achievementRequest)
-		{
-			var getAchievement = SUGARClient.Achievement.GetById(achievementRequest.Token, achievementRequest.GameId ?? 0);
-
-			if (getAchievement != null)
-			{
-				if (achievementRequest.GameId.HasValue)
-				{
-					SUGARClient.Achievement.Delete(achievementRequest.Token, achievementRequest.GameId.Value);
-				}
-				else
-				{
-					SUGARClient.Achievement.DeleteGlobal(achievementRequest.Token);
-				}
-			}
-			
-			var response = SUGARClient.Achievement.Create(achievementRequest);
-			
-			return response;
-		}
-		#endregion
 	}
 }

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class MatchTests : ClientTestBase
+	public class MatchClientTests : ClientTestBase
 	{
 		private AccountResponse _account;
 		private GameResponse _game;
@@ -241,7 +241,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		#region Helpers
 		private void LoginUserForGame(string key = "MatchTest")
 		{
-			_game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(MatchTests)}_{key}");
+			_game = Helpers.GetGame(SUGARClient.Game, $"{nameof(MatchClientTests)}_{key}");
 
 			try
 			{
@@ -252,7 +252,7 @@ namespace PlayGen.SUGAR.Client.Tests
 					SourceToken = "SUGAR"
 				});
 			}
-			catch (Exception e)
+			catch
 			{
 				_account = SUGARClient.Session.CreateAndLogin(_game.Id, new AccountRequest
 				{

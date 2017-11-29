@@ -1,5 +1,4 @@
-﻿using System;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
+﻿using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 
 namespace PlayGen.SUGAR.Client

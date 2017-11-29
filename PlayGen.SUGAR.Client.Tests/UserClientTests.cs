@@ -5,24 +5,24 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class UserTests : ClientTestBase
+	public class UserClientTests : ClientTestBase
 	{
 		[Fact]
 		public void CanGetUsersByName()
 		{
 			var userRequestOne = new UserRequest
 			{
-				Name = "CanGetUsersByName 1",
+				Name = "CanGetUsersByName 1"
 			};
 
-			var responseOne = SUGARClient.User.Create(userRequestOne);
+			SUGARClient.User.Create(userRequestOne);
 
 			var userRequestTwo = new UserRequest
 			{
-				Name = "CanGetUsersByName 2",
+				Name = "CanGetUsersByName 2"
 			};
 
-			var responseTwo = SUGARClient.User.Create(userRequestTwo);
+			SUGARClient.User.Create(userRequestTwo);
 
 			var getUsers = SUGARClient.User.Get("CanGetUsersByName");
 
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var userRequest = new UserRequest
 			{
-				Name = "CanGetUserById",
+				Name = "CanGetUserById"
 			};
 
 			var response = SUGARClient.User.Create(userRequest);
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var userRequest = new UserRequest
 			{
-				Name = "CanUpdateUser",
+				Name = "CanUpdateUser"
 			};
 
 			var response = SUGARClient.User.Create(userRequest);
@@ -98,7 +98,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				Name = "CannotUpdateUserToDuplicateName 1"
 			};
 
-			var responseOne = SUGARClient.User.Create(userRequestOne);
+			SUGARClient.User.Create(userRequestOne);
 
 			var userRequestTwo = new UserRequest
 			{
@@ -131,14 +131,12 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var userRequest = new UserRequest
 			{
-				Name = "CannotUpdateUserToNoName",
+				Name = "CannotUpdateUserToNoName"
 			};
 
 			var response = SUGARClient.User.Create(userRequest);
 
-			var updateRequest = new UserRequest
-			{
-			};
+			var updateRequest = new UserRequest();
 
 			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Update(response.Id, updateRequest));
 		}

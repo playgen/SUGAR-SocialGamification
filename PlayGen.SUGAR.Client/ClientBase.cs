@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Client
 
 		static ClientBase()
 		{
-			SerializerSettings = new JsonSerializerSettings()
+			SerializerSettings = new JsonSerializerSettings
 			{
 				//Formatting = Formatting.Indented,
 				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Client
 
 		protected ClientBase(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
 		{
-			if (!(Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute)))
+			if (!Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute))
 			{
 				throw new ClientException("Base address is not an absolute or valid URI");
 			}
@@ -54,7 +54,7 @@ namespace PlayGen.SUGAR.Client
 		{
 			if (enable)
 			{
-				PersistentHeaders[HeaderKeys.EvaluationNotifications] = $"{enable}";
+				PersistentHeaders[HeaderKeys.EvaluationNotifications] = $"{true}";
 			}
 			else
 			{
@@ -137,7 +137,7 @@ namespace PlayGen.SUGAR.Client
 				requestHeaders[keyValuePair.Key] = keyValuePair.Value;
 			}
 
-			return new HttpRequest()
+			return new HttpRequest
 			{
 				Url = url,
 				Method = method,

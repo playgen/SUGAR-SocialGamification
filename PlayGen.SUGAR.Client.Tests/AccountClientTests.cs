@@ -4,7 +4,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class AccountTests : ClientTestBase
+	public class AccountClientTests : ClientTestBase
 	{
 		[Fact]
 		public void CannotCreateDuplicate()
@@ -13,10 +13,10 @@ namespace PlayGen.SUGAR.Client.Tests
 			{
 				Name = "CannotCreateDuplicate",
 				Password = "CannotCreateDuplicatePassword",
-                SourceToken = "SUGAR"
-            };
+				SourceToken = "SUGAR"
+			};
 
-			var registerResponse = SUGARClient.Account.Create(accountRequest);
+			SUGARClient.Account.Create(accountRequest);
 			
 			Assert.Throws<ClientHttpException>(() => SUGARClient.Account.Create(accountRequest));
 		}

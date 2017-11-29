@@ -25,8 +25,6 @@ namespace PlayGen.SUGAR.Client.Tests
 			var testHttpHandler = new HttpClientHandler(client);
 			
 			SUGARClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler);
-
-			LoginAdmin();
 		}
 
 		public void Dispose()
@@ -41,29 +39,6 @@ namespace PlayGen.SUGAR.Client.Tests
 			}
 
 			Server.Dispose();
-		}
-
-		public AccountResponse LoginAdmin()
-		{
-			AccountResponse response;
-
-			var accountRequest = new AccountRequest
-			{
-				Name = "admin",
-				Password = "admin",
-				SourceToken = "SUGAR",
-			};
-
-			try
-			{
-				response = SUGARClient.Session.Login(accountRequest);
-			}
-			catch(Exception ex)
-			{
-				response = SUGARClient.Session.CreateAndLogin(accountRequest);
-			}
-
-			return response;
 		}
 	}
 }

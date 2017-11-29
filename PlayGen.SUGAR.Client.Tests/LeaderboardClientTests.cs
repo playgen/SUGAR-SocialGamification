@@ -6,18 +6,18 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class LeaderboardTests : ClientTestBase
+	public class LeaderboardClientTests : ClientTestBase
 	{
 		[Fact]
 		public void CanGetLeaderboardsByGame()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(LeaderboardTests)}_GameGet");
+			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_GameGet");
 
-			var leaderboardNames = new string[]
+			var leaderboardNames = new[]
 			{
 				"CanGetLeaderboardsByGame1",
 				"CanGetLeaderboardsByGame2",
-				"CanGetLeaderboardsByGame3",
+				"CanGetLeaderboardsByGame3"
 			};
 
 			foreach (var name in leaderboardNames)
@@ -34,7 +34,7 @@ namespace PlayGen.SUGAR.Client.Tests
 					LeaderboardType = LeaderboardType.Highest
 				};
 
-				var createResponse = SUGARClient.Leaderboard.Create(createRequest);
+				SUGARClient.Leaderboard.Create(createRequest);
 			}
 
 			var getResponse = SUGARClient.Leaderboard.Get(game.Id);
@@ -65,7 +65,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetLeaderboardWithEmptyToken()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(LeaderboardTests)}_Get");
+			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Get");
 
 			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Get("", game.Id));
 		}
@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
 
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(LeaderboardTests)}_Standings");
+			var user = Helpers.GetUser(SUGARClient.User, $"{nameof(LeaderboardClientTests)}_Standings");
 			var gameData = new EvaluationDataRequest
 			{
 				Key = createRequest.Key,
@@ -128,7 +128,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CanGetLeaderboardStandings()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(LeaderboardTests)}_Standings");
+			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -144,7 +144,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
 
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(LeaderboardTests)}_Standings");
+			var user = Helpers.GetUser(SUGARClient.User, $"{nameof(LeaderboardClientTests)}_Standings");
 			var gameData = new EvaluationDataRequest
 			{
 				Key = createRequest.Key,
@@ -174,7 +174,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetNotExistingLeaderboardStandings()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(LeaderboardTests)}_Standings");
+			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -191,7 +191,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetLeaderboardStandingsWithIncorrectActorType()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(LeaderboardTests)}_Standings");
+			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -205,7 +205,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			var group = Helpers.GetOrCreateGroup(SUGARClient.Group, $"{nameof(LeaderboardTests)}_Standings");
+			var group = Helpers.GetGroup(SUGARClient.Group, $"{nameof(LeaderboardClientTests)}_Standings");
 			var gameData = new EvaluationDataRequest
 			{
 				Key = createRequest.Key,
@@ -235,7 +235,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetLeaderboardStandingsWithZeroPageLimit()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(LeaderboardTests)}_Standings");
+			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -266,7 +266,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetNearLeaderboardStandingsWithoutActorId()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(LeaderboardTests)}_Standings");
+			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -297,7 +297,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetFriendsLeaderboardStandingsWithoutActorId()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(LeaderboardTests)}_Standings");
+			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -328,7 +328,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetGroupMemberLeaderboardStandingsWithoutActorId()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(LeaderboardTests)}_Standings");
+			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -359,7 +359,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType()
 		{
-			var game = Helpers.GetOrCreateGame(SUGARClient.Game, $"{nameof(LeaderboardTests)}_Standings");
+			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
 
 			var createRequest = new LeaderboardRequest
 			{
@@ -373,7 +373,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				LeaderboardType = LeaderboardType.Highest
 			};
 
-			var user = Helpers.GetOrCreateUser(SUGARClient.User, $"{nameof(LeaderboardTests)}_Standings");
+			var user = Helpers.GetUser(SUGARClient.User, $"{nameof(LeaderboardClientTests)}_Standings");
 			var gameData = new EvaluationDataRequest
 			{
 				Key = createRequest.Key,
