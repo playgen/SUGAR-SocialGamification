@@ -38,9 +38,6 @@ namespace PlayGen.SUGAR.Server.WebAPI
             services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithoutEntity>();
 
             services.AddScoped<ClaimController>();
-            var container = services.BuildServiceProvider();
-            var claimController = container.GetService<ClaimController>();
-            claimController.GetAuthorizationClaims();
         }
     }
 }

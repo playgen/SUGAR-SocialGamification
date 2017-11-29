@@ -70,6 +70,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			var timeoutCheckInterval = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TimeoutCheckInterval"]);
 			var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
 
+			services.AddSingleton(_environment);
 			services.AddScoped((_) => new PasswordEncryption());
 			services.AddApplicationInsightsTelemetry(Configuration);
 
