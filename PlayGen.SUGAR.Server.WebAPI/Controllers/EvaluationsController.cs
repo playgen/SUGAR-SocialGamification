@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
@@ -23,6 +24,20 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			EvaluationCoreController = evaluationCoreController;
 			_evaluationTracker = evaluationTracker;
 			_authorizationService = authorizationService;
+		}
+
+		protected async Task<IActionResult> Get(int? gameId, ClaimScope scope, EvaluationType evaluationType)
+		{
+			if (await _authorizationService.AuthorizeAsync(
+				User,
+				gameId,
+				(IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(scope)]))
+			{
+				var evaluation = EvaluationCoreController.GetEvaluation(gameId, evaluationType);
+				var evaluationContract = evaluation.ToContractList();
+				return new ObjectResult(evaluationContract);
+			}
+			return Forbid();
 		}
 
 		protected async Task<IActionResult> Get(string token, int? gameId, ClaimScope scope)

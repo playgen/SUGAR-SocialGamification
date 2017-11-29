@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
@@ -68,7 +69,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
 		public Task<IActionResult> Get([FromRoute]int? gameId)
 		{
-			return Get(gameId, ClaimScope.Game);
+			return Get(gameId, ClaimScope.Game, EvaluationType.Achievement);
 		}
 
 		/// <summary>
