@@ -11,7 +11,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
         public void CreateAndGetRelated()
         {
             // Arrange
-            var gameDataMapper = new EvaluationEvaluationDataMapper();
+            var gameDataMapper = new EvaluationDataMapper();
             var count = 10;
             var shouldGetEvaluations = new List<Evaluation>(count);
             var shouldntGetEvaluations = new List<Evaluation>(count);
@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
         public void RemovesEvaluationsGameDataMapping()
         {
             // Arrange
-            var gameDataMapper = new EvaluationEvaluationDataMapper();
+            var gameDataMapper = new EvaluationDataMapper();
             var count = 10;
             var removeEvaluation = Helpers.ComposeGenericAchievement($"RemovesEvaluationsGameDataMapping");
 

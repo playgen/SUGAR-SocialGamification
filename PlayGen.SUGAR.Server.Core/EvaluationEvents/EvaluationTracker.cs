@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 {
     public class EvaluationTracker : IDisposable
     {
-        private readonly EvaluationEvaluationDataMapper _EvaluationDataToEvaluationMapper = new EvaluationEvaluationDataMapper();
+        private readonly EvaluationDataMapper _EvaluationDataToEvaluationMapper = new EvaluationDataMapper();
         private readonly ConcurrentProgressCache _concurrentProgressCache = new ConcurrentProgressCache();
         private readonly ProgressNotificationCache _progressNotificationCache = new ProgressNotificationCache();
 

@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
     /// <summary>
     /// Mappings of game data keys to evaluations with criteria that make use of the specific keys.
     /// </summary>
-    public class EvaluationEvaluationDataMapper
+    public class EvaluationDataMapper
     {
         // <EvaluationData key, <evaluationId, evaluation>>
         private readonly ConcurrentDictionary<string, ConcurrentDictionary<int, Evaluation>> _mappings = new ConcurrentDictionary<string, ConcurrentDictionary<int, Evaluation>>();
