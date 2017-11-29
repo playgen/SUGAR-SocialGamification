@@ -64,6 +64,15 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return evaluation;
 		}
 
+		public List<Evaluation> GetEvaluation(int? gameId, EvaluationType evaluationType)
+		{
+			var evaluations = _evaluationDbController.GetByEvaluationType(gameId, evaluationType);
+
+			Logger.Info($"{evaluations?.Count} Evaluations for GameId: {gameId}, EvaluationType: {evaluationType}");
+
+			return evaluations;
+		}
+
 		public List<EvaluationProgress> GetGameProgress(int gameId, int? actorId)
 		{
 			var evaluations = _evaluationDbController.GetByGame(gameId);

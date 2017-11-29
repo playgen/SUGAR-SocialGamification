@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
@@ -32,6 +33,20 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				var evaluations = context.Evaluations
 					.IncludeAll()
 					.Where(a => a.GameId == gameId).ToList();
+
+				return evaluations;
+			}
+		}
+
+		public List<Evaluation> GetByEvaluationType(int? gameId, EvaluationType evaluationType)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				gameId = gameId ?? 0;
+
+				var evaluations = context.Evaluations
+					.IncludeAll()
+					.Where(a => a.GameId == gameId && a.EvaluationType == evaluationType).ToList();
 
 				return evaluations;
 			}
