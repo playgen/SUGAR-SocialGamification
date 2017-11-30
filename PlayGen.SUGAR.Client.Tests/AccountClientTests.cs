@@ -16,16 +16,21 @@ namespace PlayGen.SUGAR.Client.Tests
 				SourceToken = "SUGAR"
 			};
 
-			SUGARClient.Account.Create(accountRequest);
+			Fixture.SUGARClient.Account.Create(accountRequest);
 			
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Account.Create(accountRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Account.Create(accountRequest));
 		}
 
 		[Fact]
 		public void CannotCreateInvalidUser()
 		{
 			var accountRequest = new AccountRequest();
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Account.Create(accountRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Account.Create(accountRequest));
+		}
+
+		public AccountClientTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
 		}
 	}
 }

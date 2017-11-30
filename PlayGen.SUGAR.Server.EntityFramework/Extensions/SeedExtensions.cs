@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			CreateAchievement(context, CreateGame(context, "Achievement_CanDisableNotifications").Id, "Achievement_CanDisableNotifications");
 			CreateAchievement(context, CreateGame(context, "Achievement_CanGetNotifications").Id, "Achievement_CanGetNotifications");
 			CreateAchievement(context, CreateGame(context, "Achievement_DontGetAlreadyRecievedNotifications").Id, "Achievement_DontGetAlreadyRecievedNotifications");
-			CreateAchievement(context, globalGame.Id, "Achievement_CanGetGlobalAchievementProgress");
+			CreateAchievement(context,  0, "Achievement_CanGetGlobalAchievementProgress");
 			CreateAchievement(context, CreateGame(context, "Achievement_CanGetAchievementProgress").Id, "Achievement_CanGetAchievementProgress");
 			CreateGame(context, "Achievement_CannotGetNotExistingAchievementProgress");
 			#endregion
@@ -81,11 +81,44 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			CreateGame(context, "GameData_CanGetGameDataByMultipleKeys");
 			#endregion
 
+			#region Leaderboard Client Tests
+			var leaderboardCanGetLeaderboardsByGame = CreateGame(context, "Leaderboard_CanGetLeaderboardsByGame");
+			CreateLeaderboard(context, leaderboardCanGetLeaderboardsByGame.Id, leaderboardCanGetLeaderboardsByGame.Name + "1");
+			CreateLeaderboard(context, leaderboardCanGetLeaderboardsByGame.Id, leaderboardCanGetLeaderboardsByGame.Name + "2");
+			CreateLeaderboard(context, leaderboardCanGetLeaderboardsByGame.Id, leaderboardCanGetLeaderboardsByGame.Name + "3");
+			CreateGame(context, "Leaderboard_CannotGetLeaderboardWithEmptyToken");
+			CreateLeaderboard(context, 0, "Leaderboard_CanGetGlobalLeaderboardStandings");
+			var leaderboardCanGetLeaderboardStandings = CreateGame(context, "Leaderboard_CanGetLeaderboardStandings");
+			CreateLeaderboard(context, leaderboardCanGetLeaderboardStandings.Id, leaderboardCanGetLeaderboardStandings.Name);
+			CreateGame(context, "Leaderboard_CannotGetNotExistingLeaderboardStandings");
+			var leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType = CreateGame(context, "Leaderboard_CannotGetStandingsWithIncorrectActorType");
+			CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Id, leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Name, ActorType.Group);
+			var leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit = CreateGame(context, "Leaderboard_CannotGetLeaderboardStandingsWithZeroPageLimit");
+			CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit.Id, leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit.Name);
+			var leaderboardCannotGetNearLeaderboardStandingsWithoutActorId = CreateGame(context, "Leaderboard_CannotGetNearLeaderboardStandingsWithoutActorId");
+			CreateLeaderboard(context, leaderboardCannotGetNearLeaderboardStandingsWithoutActorId.Id, leaderboardCannotGetNearLeaderboardStandingsWithoutActorId.Name);
+			var leaderboardCannotGetFriendsLeaderboardStandingsWithoutActorId = CreateGame(context, "Leaderboard_CannotGetFriendsLeaderboardStandingsWithoutActorId");
+			CreateLeaderboard(context, leaderboardCannotGetFriendsLeaderboardStandingsWithoutActorId.Id, leaderboardCannotGetFriendsLeaderboardStandingsWithoutActorId.Name);
+			var leaderboardCannotGetGroupMembersLeaderboardStandingsWithoutActorId = CreateGame(context, "Leaderboard_CannotGetGroupMemberWithoutActorId");
+			CreateLeaderboard(context, leaderboardCannotGetGroupMembersLeaderboardStandingsWithoutActorId.Id, leaderboardCannotGetGroupMembersLeaderboardStandingsWithoutActorId.Name, ActorType.Group);
+			var leaderboardCannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType = CreateGame(context, "Leaderboard_CannotGetGroupMembersWithIncorrectActorType");
+			CreateLeaderboard(context, leaderboardCannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType.Id, leaderboardCannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType.Name);
+			#endregion
+
+			#region Resource Client Tests
+			CreateGame(context, "Resource_CanCreate");
+			CreateGame(context, "Resource_CannotCreateWithoutActorId");
+			CreateGame(context, "Resource_CanUpdateExisting");
+			CreateGame(context, "Resource_CanGetResource");
+			CreateGame(context, "Resource_CannotGetResourceWithoutActorId");
+			CreateGame(context, "Resource_CanGetResourceByMultipleKeys");
+			#endregion
+
 			#region Skill Client Tests
 			CreateSkill(context, CreateGame(context, "Skill_CanDisableNotifications").Id, "Skill_CanDisableNotifications");
 			CreateSkill(context, CreateGame(context, "Skill_CanGetNotifications").Id, "Skill_CanGetNotifications");
 			CreateSkill(context, CreateGame(context, "Skill_DontGetAlreadyRecievedNotifications").Id, "Skill_DontGetAlreadyRecievedNotifications");
-			CreateSkill(context, globalGame.Id, "Skill_CanGetGlobalSkillProgress");
+			CreateSkill(context, 0, "Skill_CanGetGlobalSkillProgress");
 			CreateSkill(context, CreateGame(context, "Skill_CanGetSkillProgress").Id, "Skill_CanGetSkillProgress");
 			CreateGame(context, "Skill_CannotGetNotExistingSkillProgress");
 			#endregion
@@ -208,6 +241,24 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			}).Entity;
 			context.SaveChanges();
 			return skill;
+		}
+
+		private static Leaderboard CreateLeaderboard(SUGARContext context, int gameId, string key, ActorType type = ActorType.User)
+		{
+			var leaderboard = context.Leaderboards.Add(new Leaderboard
+			{
+				Token = key,
+				GameId = gameId,
+				Name = key,
+				EvaluationDataKey = key,
+				EvaluationDataCategory = EvaluationDataCategory.GameData,
+				ActorType = type,
+				EvaluationDataType = EvaluationDataType.Long,
+				CriteriaScope = CriteriaScope.Actor,
+				LeaderboardType = LeaderboardType.Highest
+			}).Entity;
+			context.SaveChanges();
+			return leaderboard;
 		}
 	}
 }

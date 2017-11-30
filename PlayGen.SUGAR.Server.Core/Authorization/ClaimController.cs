@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Server.Core.Authorization
             var dbOperations = _claimDbController.Get();
             var currentOperations = new List<Claim>();
 
-            var assembly = Assembly.GetEntryAssembly();
+            var assembly = Assembly.Load(new AssemblyName("PlayGen.SUGAR.Server.WebAPI"));
             foreach (var type in assembly.GetTypes())
             {
                 var flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;

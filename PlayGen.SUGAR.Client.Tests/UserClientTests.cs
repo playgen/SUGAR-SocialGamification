@@ -10,21 +10,12 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CanGetUsersByName()
 		{
-			var userRequestOne = new UserRequest
-			{
-				Name = "CanGetUsersByName 1"
-			};
+			var key = "User_CanGetUsersByName";
+			CreateUser(key + "_Extra1");
+			CreateUser(key + "_Extra2");
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
-			SUGARClient.User.Create(userRequestOne);
-
-			var userRequestTwo = new UserRequest
-			{
-				Name = "CanGetUsersByName 2"
-			};
-
-			SUGARClient.User.Create(userRequestTwo);
-
-			var getUsers = SUGARClient.User.Get("CanGetUsersByName");
+			var getUsers = Fixture.SUGARClient.User.Get(key + "_Extra");
 
 			Assert.Equal(2, getUsers.Count());
 		}
@@ -32,7 +23,10 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetNotExistingUserByName()
 		{
-			var getUsers = SUGARClient.User.Get("CannotGetNotExistingUserByName");
+			var key = "User_CannotGetNotExistingUserByName";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
+			var getUsers = Fixture.SUGARClient.User.Get(key + "_Extra");
 
 			Assert.Empty(getUsers);
 		}
@@ -40,29 +34,30 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetUserByEmptyName()
 		{
-			Assert.Throws<ClientException>(() => SUGARClient.User.Get(""));
+			var key = "User_CannotGetUserByEmptyName";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
+			Assert.Throws<ClientException>(() => Fixture.SUGARClient.User.Get(string.Empty));
 		}
 
 		[Fact]
 		public void CanGetUserById()
 		{
-			var userRequest = new UserRequest
-			{
-				Name = "CanGetUserById"
-			};
+			var key = "User_CanGetUserById";
+			var newUser = CreateUser(key + "_Extra1");
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
-			var response = SUGARClient.User.Create(userRequest);
+			var getUser = Fixture.SUGARClient.User.Get(newUser.Id);
 
-			var getUser = SUGARClient.User.Get((int) response.Id);
-
-			Assert.Equal(response.Name, getUser.Name);
-			Assert.Equal(userRequest.Name, getUser.Name);
+			Assert.Equal(newUser.Name, getUser.Name);
 		}
 
 		[Fact]
 		public void CannotGetNotExistingUserById()
 		{
-			var getUser = SUGARClient.User.Get(-1);
+			var key = "User_CannotGetNotExistingUserById";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			var getUser = Fixture.SUGARClient.User.Get(-1);
 
 			Assert.Null(getUser);
 		}
@@ -70,75 +65,73 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CanUpdateUser()
 		{
-			var userRequest = new UserRequest
-			{
-				Name = "CanUpdateUser"
-			};
-
-			var response = SUGARClient.User.Create(userRequest);
+			var key = "User_CanUpdateUser";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var updateRequest = new UserRequest
 			{
-				Name = "CanUpdateUser Updated"
+				Name = loggedInAccount.User.Name + "_Updated"
 			};
 
-			SUGARClient.User.Update(response.Id, updateRequest);
+			Fixture.SUGARClient.User.Update(loggedInAccount.User.Id, updateRequest);
 
-			var getUser = SUGARClient.User.Get((int) response.Id);
+			var getUser = Fixture.SUGARClient.User.Get(loggedInAccount.User.Id);
 
-			Assert.NotEqual(response.Name, updateRequest.Name);
-			Assert.Equal("CanUpdateUser Updated", getUser.Name);
+			Assert.NotEqual(key, updateRequest.Name);
+			Assert.Equal(loggedInAccount.User.Name + "_Updated", getUser.Name);
 		}
 
 		[Fact]
 		public void CannotUpdateUserToDuplicateName()
 		{
-			var userRequestOne = new UserRequest
-			{
-				Name = "CannotUpdateUserToDuplicateName 1"
-			};
-
-			SUGARClient.User.Create(userRequestOne);
-
-			var userRequestTwo = new UserRequest
-			{
-				Name = "CannotUpdateUserToDuplicateName 2"
-			};
-
-			var responseTwo = SUGARClient.User.Create(userRequestTwo);
+			var key = "User_CannotUpdateUserToDuplicateName";
+			var extra = CreateUser(key + "_Extra");
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var updateUser = new UserRequest
 			{
-				Name = userRequestOne.Name
+				Name = extra.Name
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Update(responseTwo.Id, updateUser));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.User.Update(loggedInAccount.User.Id, updateUser));
 		}
 
 		[Fact]
 		public void CannotUpdateNonExistingUser()
 		{
+			var key = "User_CannotUpdateNonExistingUser";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
 			var updateUser = new UserRequest
 			{
-				Name = "CannotUpdateNonExistingUser"
+				Name = key + "_Updated"
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Update(-1, updateUser));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.User.Update(-1, updateUser));
 		}
 
 		[Fact]
 		public void CannotUpdateUserToNoName()
 		{
-			var userRequest = new UserRequest
-			{
-				Name = "CannotUpdateUserToNoName"
-			};
-
-			var response = SUGARClient.User.Create(userRequest);
+			var key = "User_CannotUpdateUserToNoName";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var updateRequest = new UserRequest();
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.User.Update(response.Id, updateRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.User.Update(loggedInAccount.User.Id, updateRequest));
+		}
+
+		#region Helpers
+		private UserResponse CreateUser(string key)
+		{
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var friendAccount);
+			return friendAccount.User;
+		}
+		#endregion
+
+		public UserClientTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
 		}
 	}
 }

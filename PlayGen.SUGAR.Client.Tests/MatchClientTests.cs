@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Client.Tests
 {
 	public class MatchClientTests : ClientTestBase
 	{
-		private AccountResponse _account;
+		/*private AccountResponse _account;
 		private GameResponse _game;
 		
 		[Fact]
@@ -19,7 +19,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			LoginUserForGame();
 
 			// Act
-			var match = SUGARClient.Match.CreateAndStart();
+			var match = Fixture.SUGARClient.Match.CreateAndStart();
 
 			// Assert
 			Assert.Equal(_game.Id, match.Game.Id);
@@ -31,10 +31,10 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			// Arrange
 			LoginUserForGame();
-			var match = SUGARClient.Match.CreateAndStart();
+			var match = Fixture.SUGARClient.Match.CreateAndStart();
 
 			// Act
-			match = SUGARClient.Match.End(match.Id);
+			match = Fixture.SUGARClient.Match.End(match.Id);
 
 			// Assert
 			Assert.NotEqual(match.Ended, null);
@@ -57,7 +57,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			shouldntGet.AddRange(StartAndEndMatches(10));
 
 			// Act
-			var got = SUGARClient.Match.GetByTime(preTime, postTime);
+			var got = Fixture.SUGARClient.Match.GetByTime(preTime, postTime);
 
 			// Assert
 			shouldGet.ForEach(m => Assert.True(got.Any(g => g.Id == m.Id)));
@@ -75,7 +75,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var shouldGet = StartMatches(10);
 
 			// Act
-			var got = SUGARClient.Match.GetByGame(_game.Id);
+			var got = Fixture.SUGARClient.Match.GetByGame(_game.Id);
 
 			// Assert
 			got.ForEach(m => Assert.Equal(_game.Id, m.Game.Id));
@@ -102,7 +102,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			shouldntGet.AddRange(StartAndEndMatches(10));
 
 			// Act
-			var got = SUGARClient.Match.GetByGame(_game.Id, pre, post);
+			var got = Fixture.SUGARClient.Match.GetByGame(_game.Id, pre, post);
 
 			// Assert
 			got.ForEach(m => Assert.Equal(_game.Id, m.Game.Id));
@@ -121,7 +121,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var shouldGet = StartMatches(10);
 
 			// Act
-			var got = SUGARClient.Match.GetByCreator(_account.User.Id);
+			var got = Fixture.SUGARClient.Match.GetByCreator(_account.User.Id);
 
 			// Assert
 			got.ForEach(m => Assert.Equal(_account.User.Id, m.Creator.Id));
@@ -148,7 +148,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			shouldntGet.AddRange(StartAndEndMatches(10));
 
 			// Act
-			var got = SUGARClient.Match.GetByCreator(_account.User.Id, pre, post);
+			var got = Fixture.SUGARClient.Match.GetByCreator(_account.User.Id, pre, post);
 
 			// Assert
 			got.ForEach(m => Assert.Equal(_account.User.Id, m.Creator.Id));
@@ -167,7 +167,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var shouldGet = StartMatches(10);
 
 			// Act
-			var got = SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id);
+			var got = Fixture.SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id);
 
 			// Assert
 			got.ForEach(m => Assert.Equal(_game.Id, m.Game.Id));
@@ -195,7 +195,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			shouldntGet.AddRange(StartAndEndMatches(10));
 
 			// Act
-			var got = SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id, pre, post);
+			var got = Fixture.SUGARClient.Match.GetByGameAndCreator(_game.Id, _account.User.Id, pre, post);
 
 			// Assert
 			got.ForEach(m => Assert.Equal(_game.Id, m.Game.Id));
@@ -210,14 +210,14 @@ namespace PlayGen.SUGAR.Client.Tests
 			// Arrange
 			LoginUserForGame("CanAddAndGetData");
 
-			var match = SUGARClient.Match.CreateAndStart();
+			var match = Fixture.SUGARClient.Match.CreateAndStart();
 
 			var datas = new List<EvaluationDataResponse>();
 
 			// Act
 			for (var i = 0; i < 10; i++)
 			{
-				datas.Add(SUGARClient.Match.AddData(new EvaluationDataRequest
+				datas.Add(Fixture.SUGARClient.Match.AddData(new EvaluationDataRequest
 				{
 					MatchId = match.Id,
 					GameId = _game.Id,
@@ -228,7 +228,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				}));
 			}
 
-			var got = SUGARClient.Match.GetData(match.Id);
+			var got = Fixture.SUGARClient.Match.GetData(match.Id);
 
 			// Assert
 			datas.ForEach(a => Assert.True(got.Any(g => g.GameId == a.GameId
@@ -241,11 +241,11 @@ namespace PlayGen.SUGAR.Client.Tests
 		#region Helpers
 		private void LoginUserForGame(string key = "MatchTest")
 		{
-			_game = Helpers.GetGame(SUGARClient.Game, $"{nameof(MatchClientTests)}_{key}");
+			_game = Helpers.GetGame(Fixture.SUGARClient.Game, $"{nameof(MatchClientTests)}_{key}");
 
 			try
 			{
-				_account = SUGARClient.Session.Login(_game.Id, new AccountRequest
+				_account = Fixture.SUGARClient.Session.Login(_game.Id, new AccountRequest
 				{
 					Name = key,
 					Password = key + "Password",
@@ -254,7 +254,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			}
 			catch
 			{
-				_account = SUGARClient.Session.CreateAndLogin(_game.Id, new AccountRequest
+				_account = Fixture.SUGARClient.Session.CreateAndLogin(_game.Id, new AccountRequest
 				{
 					Name = key,
 					Password = key + "Password",
@@ -268,7 +268,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var matches = new List<MatchResponse>();
 			for (var i = 0; i < count; i++)
 			{
-				var match = SUGARClient.Match.CreateAndStart();
+				var match = Fixture.SUGARClient.Match.CreateAndStart();
 				matches.Add(match);
 			}
 
@@ -278,10 +278,14 @@ namespace PlayGen.SUGAR.Client.Tests
 		private List<MatchResponse> StartAndEndMatches(int count)
 		{
 			var matches = StartMatches(count);
-			matches = matches.Select(m => SUGARClient.Match.End(m.Id)).ToList();
+			matches = matches.Select(m => Fixture.SUGARClient.Match.End(m.Id)).ToList();
 			return matches;
 		}
 
-		#endregion
+		#endregion*/
+		public MatchClientTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
+		}
 	}
 }

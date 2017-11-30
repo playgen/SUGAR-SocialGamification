@@ -12,21 +12,21 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			// Assign
 			var key = "Achievement_CanDisableNotifications";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			SUGARClient.Achievement.EnableNotifications(true);
+			Fixture.SUGARClient.Achievement.EnableNotifications(true);
 
 			EvaluationNotification notification;
-			while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
+			while (Fixture.SUGARClient.Achievement.TryGetPendingNotification(out notification))
 			{
 			}
 
-			SUGARClient.Achievement.EnableNotifications(false);
+			Fixture.SUGARClient.Achievement.EnableNotifications(false);
 
 			CompleteGenericEvaluation(key, loggedInAccount.User.Id, game.Id);
 
 			// Act
-			var didGetnotification = SUGARClient.Achievement.TryGetPendingNotification(out notification);
+			var didGetnotification = Fixture.SUGARClient.Achievement.TryGetPendingNotification(out notification);
 
 			// Assert
 			Assert.False(didGetnotification);
@@ -38,9 +38,9 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			// Assign
 			var key = "Achievement_CanGetNotifications";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			SUGARClient.Achievement.EnableNotifications(true);
+			Fixture.SUGARClient.Achievement.EnableNotifications(true);
 
 			CompleteGenericEvaluation(key, loggedInAccount.User.Id, game.Id);
 
@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			EvaluationNotification gotNotification= null;
 			var didGetSpecificConfiguration = false;
 
-			while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
+			while (Fixture.SUGARClient.Achievement.TryGetPendingNotification(out notification))
 			{
 				didGetnotification = true;
 				gotNotification = notification; 
@@ -69,14 +69,14 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			// Assign
 			var key = "Achievement_DontGetAlreadyRecievedNotifications";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			SUGARClient.Achievement.EnableNotifications(true);
+			Fixture.SUGARClient.Achievement.EnableNotifications(true);
 
 			CompleteGenericEvaluation(key, loggedInAccount.User.Id, game.Id);
 
 			EvaluationNotification notification;
-			while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
+			while (Fixture.SUGARClient.Achievement.TryGetPendingNotification(out notification))
 			{
 			}
 
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			// Act
 			var didGetSpecificConfiguration = false;
-			while (SUGARClient.Achievement.TryGetPendingNotification(out notification))
+			while (Fixture.SUGARClient.Achievement.TryGetPendingNotification(out notification))
 			{
 				didGetSpecificConfiguration |= notification.Name == key;
 			}
@@ -97,17 +97,17 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetGlobalAchievementProgress()
 		{
 			var key = "Achievement_CanGetGlobalAchievementProgress";
-			Helpers.Login(SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
-			var progressGame = SUGARClient.Achievement.GetGlobalProgress(loggedInAccount.User.Id);
+			var progressGame = Fixture.SUGARClient.Achievement.GetGlobalProgress(loggedInAccount.User.Id);
 			Assert.NotEmpty(progressGame);
 
-			var progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id);
+			var progressAchievement = Fixture.SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id);
 			Assert.Equal(0, progressAchievement.Progress);
 
 			CompleteGenericEvaluation(key, loggedInAccount.User.Id);
 
-			progressAchievement = SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id);
+			progressAchievement = Fixture.SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id);
 			Assert.True(progressAchievement.Progress >= 1);
 		}
 
@@ -115,26 +115,26 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingGlobalAchievementProgress()
 		{
 			var key = "Achievement_CannotGetNotExistingGlobalAchievementProgress";
-			Helpers.Login(SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id));
 		}
 
 		[Fact]
 		public void CanGetAchievementProgress()
 		{
 			var key = "Achievement_CanGetAchievementProgress";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			var progressGame = SUGARClient.Achievement.GetGameProgress(game.Id, loggedInAccount.User.Id);
+			var progressGame = Fixture.SUGARClient.Achievement.GetGameProgress(game.Id, loggedInAccount.User.Id);
 			Assert.Equal(1, progressGame.Count());
 
-			var progressAchievement = SUGARClient.Achievement.GetAchievementProgress(key, game.Id, loggedInAccount.User.Id);
+			var progressAchievement = Fixture.SUGARClient.Achievement.GetAchievementProgress(key, game.Id, loggedInAccount.User.Id);
 			Assert.Equal(0, progressAchievement.Progress);
 
 			CompleteGenericEvaluation(key, loggedInAccount.User.Id, game.Id);
 
-			progressAchievement = SUGARClient.Achievement.GetAchievementProgress(key, game.Id, loggedInAccount.User.Id);
+			progressAchievement = Fixture.SUGARClient.Achievement.GetAchievementProgress(key, game.Id, loggedInAccount.User.Id);
 			Assert.Equal(1, progressAchievement.Progress);
 		}
 
@@ -142,9 +142,14 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingAchievementProgress()
 		{
 			var key = "Achievement_CannotGetNotExistingAchievementProgress";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Achievement.GetAchievementProgress(key, game.Id, loggedInAccount.User.Id));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Achievement.GetAchievementProgress(key, game.Id, loggedInAccount.User.Id));
+		}
+
+		public AchievementClientTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
 		}
 	}
 }

@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanCreate()
 		{
 			var key = "GameData_CanCreate";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			var response = SUGARClient.GameData.Add(evaluationDataRequest);
+			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
 
 			Assert.Equal(evaluationDataRequest.CreatingActorId, response.CreatingActorId);
 			Assert.Equal(evaluationDataRequest.GameId, response.GameId);
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanCreateWithoutGameId()
 		{
 			var key = "GameData_CanCreateWithoutGameId";
-			Helpers.Login(SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			var response = SUGARClient.GameData.Add(evaluationDataRequest);
+			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
 
 			Assert.Equal(evaluationDataRequest.CreatingActorId, response.CreatingActorId);
 			Assert.Equal(evaluationDataRequest.GameId, response.GameId);
@@ -59,7 +59,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotCreateWithoutActorId()
 		{
 			var key = "GameData_CannotCreateWithoutActorId";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -69,14 +69,14 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(evaluationDataRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 		}
 
 		[Fact]
 		public void CannotCreateWithoutKey()
 		{
 			var key = "GameData_CannotCreateWithoutKey";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -86,14 +86,14 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(evaluationDataRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 		}
 
 		[Fact]
 		public void CannotCreateWithoutValue()
 		{
 			var key = "GameData_CannotCreateWithoutValue";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -103,14 +103,14 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(evaluationDataRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 		}
 
 		[Fact]
 		public void CannotCreateWithMismatchedData()
 		{
 			var key = "GameData_CannotCreateWithMismatchedData";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -121,36 +121,36 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.Float
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(evaluationDataRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 
 			evaluationDataRequest.EvaluationDataType = EvaluationDataType.Long;
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(evaluationDataRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 
 			evaluationDataRequest.EvaluationDataType = EvaluationDataType.Boolean;
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(evaluationDataRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 
 			evaluationDataRequest.EvaluationDataType = EvaluationDataType.Float;
 			evaluationDataRequest.Value = "True";
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(evaluationDataRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 
 			evaluationDataRequest.EvaluationDataType = EvaluationDataType.Long;
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(evaluationDataRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 
 			evaluationDataRequest.EvaluationDataType = EvaluationDataType.Boolean;
 			evaluationDataRequest.Value = "2";
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Add(evaluationDataRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 		}
 
 		[Fact]
 		public void CanGetGameData()
 		{
 			var key = "GameData_CanGetGameData";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -161,9 +161,9 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			var response = SUGARClient.GameData.Add(evaluationDataRequest);
+			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
 
-			var get = SUGARClient.GameData.Get(loggedInAccount.User.Id, game.Id, new [] { key });
+			var get = Fixture.SUGARClient.GameData.Get(loggedInAccount.User.Id, game.Id, new [] { key });
 
 			Assert.Equal(1, get.Count());
 			Assert.Equal(get.First().CreatingActorId, response.CreatingActorId);
@@ -177,7 +177,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetGameDataWithoutActorId()
 		{
 			var key = "GameData_CannotGetGameDataWithoutActorId";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -188,16 +188,16 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			var response = SUGARClient.GameData.Add(evaluationDataRequest);
+			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.GameData.Get(0, game.Id, new[] { key }));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Get(0, game.Id, new[] { key }));
 		}
 
 		[Fact]
 		public void CanGetGameDataWithoutGameId()
 		{
 			var key = "GameData_CanGetGameDataWithoutGameId";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -207,9 +207,9 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			var response = SUGARClient.GameData.Add(evaluationDataRequest);
+			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
 
-			var get = SUGARClient.GameData.Get(loggedInAccount.User.Id, null, new[] { key });
+			var get = Fixture.SUGARClient.GameData.Get(loggedInAccount.User.Id, null, new[] { key });
 
 			Assert.Equal(1, get.Count());
 			Assert.Equal(get.First().CreatingActorId, response.CreatingActorId);
@@ -223,7 +223,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetGameDataByMultipleKeys()
 		{
 			var key = "GameData_CanGetGameDataByMultipleKeys";
-			Helpers.Login(SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequestOne = new EvaluationDataRequest
 			{
@@ -252,17 +252,22 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			SUGARClient.GameData.Add(evaluationDataRequestOne);
-			SUGARClient.GameData.Add(evaluationDataRequestTwo);
-			SUGARClient.GameData.Add(evaluationDataRequestThree);
+			Fixture.SUGARClient.GameData.Add(evaluationDataRequestOne);
+			Fixture.SUGARClient.GameData.Add(evaluationDataRequestTwo);
+			Fixture.SUGARClient.GameData.Add(evaluationDataRequestThree);
 
-			var get = SUGARClient.GameData.Get(loggedInAccount.User.Id, game.Id, new[] { evaluationDataRequestOne.Key, evaluationDataRequestTwo.Key, evaluationDataRequestThree.Key });
+			var get = Fixture.SUGARClient.GameData.Get(loggedInAccount.User.Id, game.Id, new[] { evaluationDataRequestOne.Key, evaluationDataRequestTwo.Key, evaluationDataRequestThree.Key });
 
 			Assert.Equal(3, get.Count());
 			foreach (var g in get)
 			{
 				Assert.Equal("Test Value", g.Value);
 			}
+		}
+
+		public GameDataClientTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
 		}
 	}
 }

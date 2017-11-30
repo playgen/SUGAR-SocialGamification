@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Client.Tests
 	{
 		protected void CompleteGenericEvaluation(string key, int userId, int gameId = 0)
 		{
-			SUGARClient.GameData.Add(new EvaluationDataRequest
+			Fixture.SUGARClient.GameData.Add(new EvaluationDataRequest
 			{
 				CreatingActorId = userId,
 				EvaluationDataType = EvaluationDataType.Long,
@@ -15,6 +15,11 @@ namespace PlayGen.SUGAR.Client.Tests
 				Key = key,
 				GameId = gameId
 			});
+		}
+
+		public EvaluationClientTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
 		}
 	}
 }

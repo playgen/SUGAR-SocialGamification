@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var accountRequest = new AccountRequest
 			{
 				Name = userKey,
-				Password = userKey + "Password",
+				Password = "ThisIsTheTestingPassword",
 				SourceToken = "SUGAR"
 			};
 			//gameId is 1 so that user is able to log in to get actual gameId (can in theory be anything)
@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			if (games.Any())
 			{
-				game = games.Single();
+				game = games.Single(g => g.Name == gameName);
 				user = client.Session.Login(game.Id, accountRequest);
 			}
 			else

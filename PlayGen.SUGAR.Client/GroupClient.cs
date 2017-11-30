@@ -96,7 +96,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="GroupResponse"/> containing the new Group details.</returns>
 		public GroupResponse Create(GroupRequest actor)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "").ToString();
+			var query = GetUriBuilder(ControllerPrefix).ToString();
 			return Post<GroupRequest, GroupResponse>(query, actor);
 		}
 

@@ -146,5 +146,10 @@ namespace PlayGen.SUGAR.Client.Tests
 			// Assert
 			Assert.True(didTimeout);
 		}
+
+		public AsyncRequestControllerTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
 		}
+	}
 }

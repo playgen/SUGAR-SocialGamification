@@ -10,25 +10,28 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CanCreateRequest()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanCreateRequestR");
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanCreateRequestA");
+			var key = "UserFriend_CanCreateRequest";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
-										{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id
 			};
 
-			var relationshipResponse = SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+			var relationshipResponse = Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
 			Assert.Equal(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
 			Assert.Equal(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
 
-			var sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
+			var sent = Fixture.SUGARClient.UserFriend.GetSentRequests(loggedInAccount.User.Id);
 
 			Assert.Equal(1, sent.Count());
 
-			var received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
+			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out game, out var friendAccount);
+
+			var received = Fixture.SUGARClient.UserFriend.GetFriendRequests(friend.Id);
 
 			Assert.Equal(1, received.Count());
 		}
@@ -36,26 +39,27 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CanCreateAutoAcceptedRequest()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanCreateAutoAcceptedRequestR");
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanCreateAutoAcceptedRequestA");
+			var key = "UserFriend_CanCreateAutoAcceptedRequest";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
-										{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id,
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id,
 				AutoAccept = true
 			};
 
-			var relationshipResponse = SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+			var relationshipResponse = Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
 			Assert.Equal(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
 			Assert.Equal(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
 
-			var sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
+			var sent = Fixture.SUGARClient.UserFriend.GetFriends(loggedInAccount.User.Id);
 
 			Assert.Equal(1, sent.Count());
 
-			var received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
+			var received = Fixture.SUGARClient.UserFriend.GetFriends(friend.Id);
 
 			Assert.Equal(1, received.Count());
 		}
@@ -63,257 +67,280 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotCreateDuplicateRequest()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CannotCreateDuplicateRequestR");
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CannotCreateDuplicateRequestA");
+			var key = "UserFriend_CannotCreateDuplicateRequest";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
-										{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id
 			};
 
-			SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
 		[Fact]
 		public void CannotCreateDuplicateRequestOfAccepted()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_DuplicateRequestOfAcceptedR");
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_DuplicateRequestOfAcceptedA");
+			var key = "UserFriend_CannotCreateDuplicateRequestOfAccepted";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
-										{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id,
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id,
 				AutoAccept = true
 			};
 
-			SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
 			relationshipRequest.AutoAccept = false;
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
 		[Fact]
 		public void CannotCreateDuplicateAutoAcceptedRequest()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_DuplicateAutoAcceptedRequestR");
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_DuplicateAutoAcceptedRequestA");
+			var key = "UserFriend_CannotCreateDuplicateAutoAcceptedRequest";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
-										{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id
 			};
 
-			SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
 			relationshipRequest.AutoAccept = true;
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
 		[Fact]
 		public void CannotCreateRequestWithNonExistingUser()
 		{
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CannotCreateRequestWithNonExistingUser");
+			var key = "UserFriend_CannotCreateRequestWithNonExistingUser";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
-										{
+			{
 				RequestorId = -1,
-				AcceptorId = acceptor.Id
+				AcceptorId = friend.Id
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
 		[Fact]
-		public void CannotCreateRequestWithNonExistingGroup()
+		public void CannotCreateRequestWithNonExistingFriend()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_RequestWithNonExistingGroup");
+			var key = "UserFriend_CannotCreateRequestWithNonExistingFriend";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
-										{
-				RequestorId = requestor.Id,
+			{
+				RequestorId = loggedInAccount.User.Id,
 				AcceptorId = -1
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest));
 		}
 
 		[Fact]
 		public void CanAcceptRequest()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanAcceptRequestR");
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanAcceptRequestA");
+			var key = "UserFriend_CanAcceptRequest";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
-										{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id
 			};
 
-			SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
-			var sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
+			var sent = Fixture.SUGARClient.UserFriend.GetSentRequests(loggedInAccount.User.Id);
 
 			Assert.Equal(1, sent.Count());
 
-			var received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
+			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out game, out var friendAccount);
+
+			var received = Fixture.SUGARClient.UserFriend.GetFriendRequests(friend.Id);
 
 			Assert.Equal(1, received.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
-												{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id,
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id,
 				Accepted = true
 			};
 
-			SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate);
+			Fixture.SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate);
 
-			sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
-
-			Assert.Equal(0, sent.Count());
-
-			received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
+			received = Fixture.SUGARClient.UserFriend.GetFriendRequests(friend.Id);
 
 			Assert.Equal(0, received.Count());
 
-			sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
-
-			Assert.Equal(1, sent.Count());
-
-			received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
+			received = Fixture.SUGARClient.UserFriend.GetFriends(friend.Id);
 
 			Assert.Equal(1, received.Count());
+
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out game, out loggedInAccount);
+
+			sent = Fixture.SUGARClient.UserFriend.GetSentRequests(loggedInAccount.User.Id);
+
+			Assert.Equal(0, sent.Count());
+
+			sent = Fixture.SUGARClient.UserFriend.GetFriends(loggedInAccount.User.Id);
+
+			Assert.Equal(1, sent.Count());
 		}
 
 		[Fact]
 		public void CanRejectRequest()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanRejectRequestR");
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanRejectRequestA");
+			var key = "UserFriend_CanRejectRequest";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
 			{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id
 			};
 
-			SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
-			var sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
+			var sent = Fixture.SUGARClient.UserFriend.GetSentRequests(loggedInAccount.User.Id);
 
 			Assert.Equal(1, sent.Count());
 
-			var received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
+			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out game, out var friendAccount);
+
+			var received = Fixture.SUGARClient.UserFriend.GetFriendRequests(friend.Id);
 
 			Assert.Equal(1, received.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
-												{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id,
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id,
 				Accepted = false
 			};
 
-			SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate);
+			Fixture.SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate);
 
-			sent = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
-
-			Assert.Equal(0, sent.Count());
-
-			received = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
+			received = Fixture.SUGARClient.UserFriend.GetFriendRequests(friend.Id);
 
 			Assert.Equal(0, received.Count());
 
-			sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
+			received = Fixture.SUGARClient.UserFriend.GetFriends(friend.Id);
+
+			Assert.Equal(0, received.Count());
+
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out game, out loggedInAccount);
+
+			sent = Fixture.SUGARClient.UserFriend.GetSentRequests(loggedInAccount.User.Id);
 
 			Assert.Equal(0, sent.Count());
 
-			received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
+			sent = Fixture.SUGARClient.UserFriend.GetFriends(loggedInAccount.User.Id);
 
-			Assert.Equal(0, received.Count());
+			Assert.Equal(0, sent.Count());
 		}
 
 		[Fact]
 		public void CannotUpdateAlreadyAcceptedRequest()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, "CannotUpdateAlreadyAcceptedRequestR");
-			var acceptor = Helpers.GetUser(SUGARClient.User, "CannotUpdateAlreadyAcceptedRequestA");
+			var key = "UserFriend_CannotUpdateAlreadyAcceptedRequest";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
-										{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id,
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id,
 				AutoAccept = true
 			};
 
-			SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+
+			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out game, out var friendAccount);
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
-												{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id,
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id,
 				Accepted = true
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate));
 		}
 
 		[Fact]
 		public void CannotUpdateNotExistingRequest()
 		{
+			var key = "UserFriend_CannotUpdateNotExistingRequest";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
-												{
+			{
 				RequestorId = -1,
 				AcceptorId = -1,
 				Accepted = true
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.UserFriend.UpdateFriendRequest(relationshipStatusUpdate));
 		}
 
 		[Fact]
 		public void CanUpdateRelationship()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanUpdateRelationshipR");
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanUpdateRelationshipA");
+			var key = "UserFriend_CanUpdateRelationship";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipRequest = new RelationshipRequest
-										{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id,
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id,
 				AutoAccept = true
 			};
 
-			SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
-			var sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
+			var sent = Fixture.SUGARClient.UserFriend.GetFriends(loggedInAccount.User.Id);
 
 			Assert.Equal(1, sent.Count());
 
-			var received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
+			var received = Fixture.SUGARClient.UserFriend.GetFriends(friend.Id);
 
 			Assert.Equal(1, received.Count());
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
-												{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id
 			};
 
-			SUGARClient.UserFriend.UpdateFriend(relationshipStatusUpdate);
+			Fixture.SUGARClient.UserFriend.UpdateFriend(relationshipStatusUpdate);
 
-			sent = SUGARClient.UserFriend.GetFriends(requestor.Id);
+			sent = Fixture.SUGARClient.UserFriend.GetFriends(loggedInAccount.User.Id);
 
 			Assert.Equal(0, sent.Count());
 
-			received = SUGARClient.UserFriend.GetFriends(acceptor.Id);
+			received = Fixture.SUGARClient.UserFriend.GetFriends(friend.Id);
 
 			Assert.Equal(0, received.Count());
 		}
@@ -321,42 +348,48 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotUpdateNotExistingRelationship()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CannotUpdateNotExistingRelationshipR");
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CannotUpdateNotExistingRelationshipA");
+			var key = "UserFriend_CannotUpdateNotExistingRelationship";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
-												{
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = friend.Id
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.UserFriend.UpdateFriend(relationshipStatusUpdate));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.UserFriend.UpdateFriend(relationshipStatusUpdate));
 		}
-		
+
 		[Fact]
 		public void CanGetFriendRequests()
 		{
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanGetFriendRequestsA");
+			var key = "UserFriend_CanGetFriendRequests";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
 			var requestorNames = new[] {
-				"CanGetFriendRequests1",
-				"CanGetFriendRequests2",
-				"CanGetFriendRequests3",
-				"CanGetFriendRequests4",
-				"CanGetFriendRequests5"
+				key + "1",
+				key + "2",
+				key + "3",
+				key + "4",
+				key + "5"
 			};
 
 			foreach (var name in requestorNames)
 			{
-				var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_{name}");
+				Helpers.Login(Fixture.SUGARClient, "Global", name, out game, out var requestAccount);
 				var relationshipRequest = new RelationshipRequest
-											{
-					RequestorId = requestor.Id,
-					AcceptorId = acceptor.Id
+				{
+					RequestorId = requestAccount.User.Id,
+					AcceptorId = friend.Id
 				};
-				SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+				Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 			}
 
-			var requests = SUGARClient.UserFriend.GetFriendRequests(acceptor.Id);
+			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out game, out var friendAccount);
+
+			var requests = Fixture.SUGARClient.UserFriend.GetFriendRequests(friend.Id);
 
 			Assert.Equal(5, requests.Count());
 
@@ -368,31 +401,33 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CanGetSentRequests()
 		{
-			var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanGetSentRequestsR");
+			var key = "UserFriend_CanGetSentRequests";
 			var acceptorNames = new[] {
-				"CanGetSentRequests1",
-				"CanGetSentRequests2",
-				"CanGetSentRequests3",
-				"CanGetSentRequests4",
-				"CanGetSentRequests5"
+				key + "1",
+				key + "2",
+				key + "3",
+				key + "4",
+				key + "5"
 			};
-
 			foreach (var name in acceptorNames)
 			{
-				var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_{name}");
+				var friend = CreateUser(name);
+				Helpers.Login(Fixture.SUGARClient, "Global", key, out var gameLoop, out var loggedInAccountLoop);
 				var relationshipRequest = new RelationshipRequest
-											{
-					RequestorId = requestor.Id,
-					AcceptorId = acceptor.Id
+				{
+					RequestorId = loggedInAccountLoop.User.Id,
+					AcceptorId = friend.Id
 				};
-				SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+				Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 			}
 
-			var requests = SUGARClient.UserFriend.GetSentRequests(requestor.Id);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
+			var requests = Fixture.SUGARClient.UserFriend.GetSentRequests(loggedInAccount.User.Id);
 
 			Assert.Equal(5, requests.Count());
 
-			var requestCheck = requests.Where(r => acceptorNames.Any(an => r.Name.Contains(an)));
+			var requestCheck = requests.Where(r => acceptorNames.Any(rn => r.Name.Contains(rn)));
 
 			Assert.Equal(5, requestCheck.Count());
 		}
@@ -400,34 +435,85 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CanGetFriends()
 		{
-			var acceptor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_CanGetFriendsA");
+			var key = "UserFriend_CanGetFriends";
+			var friend = CreateUser(key);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
 			var requestorNames = new[] {
-				"CanGetFriends1",
-				"CanGetFriends2",
-				"CanGetFriends3",
-				"CanGetFriends4",
-				"CanGetFriends5"
+				key + "1",
+				key + "2",
+				key + "3",
+				key + "4",
+				key + "5"
 			};
 
 			foreach (var name in requestorNames)
 			{
-				var requestor = Helpers.GetUser(SUGARClient.User, $"{nameof(UserFriendClientTests)}_{name}");
+				Helpers.Login(Fixture.SUGARClient, "Global", name, out game, out var requestAccount);
 				var relationshipRequest = new RelationshipRequest
-											{
-					RequestorId = requestor.Id,
-					AcceptorId = acceptor.Id,
+				{
+					RequestorId = requestAccount.User.Id,
+					AcceptorId = friend.Id,
 					AutoAccept = true
 				};
-				SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+				Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 			}
 
-			var members = SUGARClient.UserFriend.GetFriends(acceptor.Id);
+			var Friends = Fixture.SUGARClient.UserFriend.GetFriends(friend.Id);
 
-			Assert.Equal(5, members.Count());
+			Assert.Equal(5, Friends.Count());
 
-			var memberCheck = members.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
+			var FriendCheck = Friends.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
 
-			Assert.Equal(5, memberCheck.Count());
+			Assert.Equal(5, FriendCheck.Count());
+		}
+
+		[Fact]
+		public void CanGetUserfriends()
+		{
+			var key = "UserFriend_CanGetUserfriends";
+			var acceptorNames = new[] {
+				key + "1",
+				key + "2",
+				key + "3",
+				key + "4",
+				key + "5"
+			};
+			foreach (var name in acceptorNames)
+			{
+				var friend = CreateUser(name);
+				Helpers.Login(Fixture.SUGARClient, "Global", key, out var gameLoop, out var loggedInAccountLoop);
+				var relationshipRequest = new RelationshipRequest
+				{
+					RequestorId = loggedInAccountLoop.User.Id,
+					AcceptorId = friend.Id,
+					AutoAccept = true
+				};
+				Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
+			}
+
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
+			var userfriends = Fixture.SUGARClient.UserFriend.GetFriends(loggedInAccount.User.Id);
+
+			Assert.Equal(5, userfriends.Count());
+
+			var friendCheck = userfriends.Where(r => acceptorNames.Any(an => r.Name.Contains(an)));
+
+			Assert.Equal(5, friendCheck.Count());
+		}
+
+		#region Helpers
+		private UserResponse CreateUser(string key)
+		{
+			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out var game, out var friendAccount);
+			return friendAccount.User;
+		}
+		#endregion
+
+		public UserFriendClientTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
 		}
 	}
 }

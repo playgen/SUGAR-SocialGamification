@@ -11,37 +11,14 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CanGetLeaderboardsByGame()
 		{
-			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_GameGet");
+			var key = "Leaderboard_CanGetLeaderboardsByGame";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			var leaderboardNames = new[]
-			{
-				"CanGetLeaderboardsByGame1",
-				"CanGetLeaderboardsByGame2",
-				"CanGetLeaderboardsByGame3"
-			};
-
-			foreach (var name in leaderboardNames)
-			{
-				var createRequest = new LeaderboardRequest
-				{
-					Token = name,
-					GameId = game.Id,
-					Name = name,
-					Key = name,
-					ActorType = ActorType.User,
-					EvaluationDataType = EvaluationDataType.Long,
-					CriteriaScope = CriteriaScope.Actor,
-					LeaderboardType = LeaderboardType.Highest
-				};
-
-				SUGARClient.Leaderboard.Create(createRequest);
-			}
-
-			var getResponse = SUGARClient.Leaderboard.Get(game.Id);
+			var getResponse = Fixture.SUGARClient.Leaderboard.Get(game.Id);
 
 			Assert.Equal(3, getResponse.Count());
 
-			var getCheck = getResponse.Where(g => leaderboardNames.Any(ln => g.Name.Contains(ln)));
+			var getCheck = getResponse.Where(g => g.Name.Contains(key));
 
 			Assert.Equal(3, getCheck.Count());
 		}
@@ -49,7 +26,10 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetLeaderboardsByNotExistingGame()
 		{
-			var getResponse = SUGARClient.Leaderboard.Get(-1);
+			var key = "Leaderboard_CannotGetLeaderboardsByNotExistingGame";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
+			var getResponse = Fixture.SUGARClient.Leaderboard.Get(-1);
 
 			Assert.Empty(getResponse);
 		}
@@ -57,7 +37,10 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetNotExistingLeaderboard()
 		{
-			var getResponse = SUGARClient.Leaderboard.Get("CannotGetNotExistingLeaderboard", -1);
+			var key = "Leaderboard_CannotGetNotExistingLeaderboard";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
+			var getResponse = Fixture.SUGARClient.Leaderboard.Get(key, -1);
 
 			Assert.Null(getResponse);
 		}
@@ -65,15 +48,19 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetLeaderboardWithEmptyToken()
 		{
-			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Get");
+			var key = "Leaderboard_CannotGetLeaderboardWithEmptyToken";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.Get("", game.Id));
+			Assert.Throws<ClientException>(() => Fixture.SUGARClient.Leaderboard.Get(string.Empty, game.Id));
 		}
 
 		[Fact]
 		public void CannotGetNotExistingGlobalLeaderboard()
 		{
-			var getResponse = SUGARClient.Leaderboard.GetGlobal("CannotGetNotExistingGlobalLeaderboard");
+			var key = "Leaderboard_CannotGetNotExistingLeaderboard";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
+			var getResponse = Fixture.SUGARClient.Leaderboard.GetGlobal(key);
 
 			Assert.Null(getResponse);
 		}
@@ -81,323 +68,227 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CannotGetGlobalLeaderboardWithEmptyToken()
 		{
-			Assert.Throws<ClientException>(() => SUGARClient.Leaderboard.GetGlobal(""));
+			var key = "Leaderboard_CannotGetGlobalLeaderboardWithEmptyToken";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+
+			Assert.Throws<ClientException>(() => Fixture.SUGARClient.Leaderboard.GetGlobal(string.Empty));
 		}
 
 		[Fact]
 		public void CanGetGlobalLeaderboardStandings()
 		{
-			var createRequest = new LeaderboardRequest
-			{
-				Token = "CanGetGlobalLeaderboardStandings",
-				Name = "CanGetGlobalLeaderboardStandings",
-				Key = "CanGetGlobalLeaderboardStandings",
-				ActorType = ActorType.User,
-				EvaluationDataType = EvaluationDataType.Long,
-				CriteriaScope = CriteriaScope.Actor,
-				LeaderboardType = LeaderboardType.Highest
-			};
+			var key = "Leaderboard_CanGetGlobalLeaderboardStandings";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
-			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
-
-			var user = Helpers.GetUser(SUGARClient.User, $"{nameof(LeaderboardClientTests)}_Standings");
 			var gameData = new EvaluationDataRequest
 			{
-				Key = createRequest.Key,
-				EvaluationDataType = createRequest.EvaluationDataType,
-				CreatingActorId = user.Id,
+				Key = key,
+				EvaluationDataType = EvaluationDataType.Long,
+				CreatingActorId = loggedInAccount.User.Id,
 				Value = "5"
 			};
 
-			SUGARClient.GameData.Add(gameData);
+			Fixture.SUGARClient.GameData.Add(gameData);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
-				LeaderboardToken = createResponse.Token,
+				LeaderboardToken = key,
 				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 10,
 				PageOffset = 0
 			};
 
-			var standingsResponse = SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
+			var standingsResponse = Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
 
 			Assert.Equal(1, standingsResponse.Count());
-			Assert.Equal(user.Name, standingsResponse.First().ActorName);
+			Assert.Equal(loggedInAccount.User.Name, standingsResponse.First().ActorName);
 		}
 
 		[Fact]
 		public void CanGetLeaderboardStandings()
 		{
-			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
+			var key = "Leaderboard_CanGetLeaderboardStandings";
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
-			var createRequest = new LeaderboardRequest
-			{
-				Token = "CanGetLeaderboardStandings",
-				GameId = game.Id,
-				Name = "CanGetLeaderboardStandings",
-				Key = "CanGetLeaderboardStandings",
-				ActorType = ActorType.User,
-				EvaluationDataType = EvaluationDataType.Long,
-				CriteriaScope = CriteriaScope.Actor,
-				LeaderboardType = LeaderboardType.Highest
-			};
-
-			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
-
-			var user = Helpers.GetUser(SUGARClient.User, $"{nameof(LeaderboardClientTests)}_Standings");
 			var gameData = new EvaluationDataRequest
 			{
-				Key = createRequest.Key,
-				EvaluationDataType = createRequest.EvaluationDataType,
-				CreatingActorId = user.Id,
-				GameId = game.Id,
-				Value = "5"
+				Key = key,
+				EvaluationDataType = EvaluationDataType.Long,
+				CreatingActorId = loggedInAccount.User.Id,
+				Value = "5",
+				GameId = game.Id
 			};
 
-			SUGARClient.GameData.Add(gameData);
+			Fixture.SUGARClient.GameData.Add(gameData);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
-				LeaderboardToken = createResponse.Token,
-				GameId = game.Id,
+				LeaderboardToken = key,
 				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 10,
-				PageOffset = 0
+				PageOffset = 0,
+				GameId = game.Id
 			};
 
-			var standingsResponse = SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
+			var standingsResponse = Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
 
 			Assert.Equal(1, standingsResponse.Count());
-			Assert.Equal(user.Name, standingsResponse.First().ActorName);
+			Assert.Equal(loggedInAccount.User.Name, standingsResponse.First().ActorName);
 		}
 
 		[Fact]
 		public void CannotGetNotExistingLeaderboardStandings()
 		{
-			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
+			var key = "Leaderboard_CannotGetNotExistingLeaderboardStandings";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
-				LeaderboardToken = "CannotGetNotExistingLeaderboardStandings",
+				LeaderboardToken = key,
 				GameId = game.Id,
 				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 10,
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Fact]
 		public void CannotGetLeaderboardStandingsWithIncorrectActorType()
 		{
-			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
+			var key = "Leaderboard_CannotGetStandingsWithIncorrectActorType";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			var createRequest = new LeaderboardRequest
-			{
-				Token = "CannotGetLeaderboardStandingsWithIncorrectActorType",
-				GameId = game.Id,
-				Name = "CannotGetLeaderboardStandingsWithIncorrectActorType",
-				Key = "CannotGetLeaderboardStandingsWithIncorrectActorType",
-				ActorType = ActorType.User,
-				EvaluationDataType = EvaluationDataType.Long,
-				CriteriaScope = CriteriaScope.Actor,
-				LeaderboardType = LeaderboardType.Highest
-			};
-
-			var group = Helpers.GetGroup(SUGARClient.Group, $"{nameof(LeaderboardClientTests)}_Standings");
 			var gameData = new EvaluationDataRequest
 			{
-				Key = createRequest.Key,
-				EvaluationDataType = createRequest.EvaluationDataType,
-				CreatingActorId = group.Id,
-				GameId = game.Id,
-				Value = "5"
+				Key = key,
+				EvaluationDataType = EvaluationDataType.Long,
+				CreatingActorId = loggedInAccount.User.Id,
+				Value = "5",
+				GameId = game.Id
 			};
 
-			SUGARClient.GameData.Add(gameData);
-
-			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
+			Fixture.SUGARClient.GameData.Add(gameData);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
-				LeaderboardToken = createResponse.Token,
+				LeaderboardToken = key,
 				GameId = game.Id,
-				ActorId = group.Id,
-				LeaderboardFilterType = LeaderboardFilterType.Near,
+				ActorId = loggedInAccount.User.Id,
+				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 10,
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Fact]
 		public void CannotGetLeaderboardStandingsWithZeroPageLimit()
 		{
-			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
-
-			var createRequest = new LeaderboardRequest
-			{
-				Token = "CannotGetLeaderboardStandingsWithZeroPageLimit",
-				GameId = game.Id,
-				Name = "CannotGetLeaderboardStandingsWithZeroPageLimit",
-				Key = "CannotGetLeaderboardStandingsWithZeroPageLimit",
-				ActorType = ActorType.User,
-				EvaluationDataType = EvaluationDataType.Long,
-				CriteriaScope = CriteriaScope.Actor,
-				LeaderboardType = LeaderboardType.Highest
-			};
-
-			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
+			var key = "Leaderboard_CannotGetLeaderboardStandingsWithZeroPageLimit";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
-				LeaderboardToken = createResponse.Token,
+				LeaderboardToken = key,
 				GameId = game.Id,
 				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 0,
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Fact]
 		public void CannotGetNearLeaderboardStandingsWithoutActorId()
 		{
-			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
-
-			var createRequest = new LeaderboardRequest
-			{
-				Token = "CannotGetNearLeaderboardStandingsWithoutActorId",
-				GameId = game.Id,
-				Name = "CannotGetNearLeaderboardStandingsWithoutActorId",
-				Key = "CannotGetNearLeaderboardStandingsWithoutActorId",
-				ActorType = ActorType.User,
-				EvaluationDataType = EvaluationDataType.Long,
-				CriteriaScope = CriteriaScope.Actor,
-				LeaderboardType = LeaderboardType.Highest
-			};
-
-			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
+			var key = "Leaderboard_CannotGetNearLeaderboardStandingsWithoutActorId";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
-				LeaderboardToken = createResponse.Token,
+				LeaderboardToken = key,
 				GameId = game.Id,
 				LeaderboardFilterType = LeaderboardFilterType.Near,
 				PageLimit = 10,
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Fact]
 		public void CannotGetFriendsLeaderboardStandingsWithoutActorId()
 		{
-			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
-
-			var createRequest = new LeaderboardRequest
-			{
-				Token = "CannotGetFriendsLeaderboardStandingsWithoutActorId",
-				GameId = game.Id,
-				Name = "CannotGetFriendsLeaderboardStandingsWithoutActorId",
-				Key = "CannotGetFriendsLeaderboardStandingsWithoutActorId",
-				ActorType = ActorType.User,
-				EvaluationDataType = EvaluationDataType.Long,
-				CriteriaScope = CriteriaScope.Actor,
-				LeaderboardType = LeaderboardType.Highest
-			};
-
-			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
+			var key = "Leaderboard_CannotGetFriendsLeaderboardStandingsWithoutActorId";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
-				LeaderboardToken = createResponse.Token,
+				LeaderboardToken = key,
 				GameId = game.Id,
 				LeaderboardFilterType = LeaderboardFilterType.Friends,
 				PageLimit = 10,
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Fact]
 		public void CannotGetGroupMemberLeaderboardStandingsWithoutActorId()
 		{
-			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
-
-			var createRequest = new LeaderboardRequest
-			{
-				Token = "CannotGetGroupMemberLeaderboardStandingsWithoutActorId",
-				GameId = game.Id,
-				Name = "CannotGetGroupMemberLeaderboardStandingsWithoutActorId",
-				Key = "CannotGetGroupMemberLeaderboardStandingsWithoutActorId",
-				ActorType = ActorType.User,
-				EvaluationDataType = EvaluationDataType.Long,
-				CriteriaScope = CriteriaScope.Actor,
-				LeaderboardType = LeaderboardType.Highest
-			};
-
-			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
+			var key = "Leaderboard_CannotGetGroupMemberWithoutActorId";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
-				LeaderboardToken = createResponse.Token,
+				LeaderboardToken = key,
 				GameId = game.Id,
 				LeaderboardFilterType = LeaderboardFilterType.GroupMembers,
 				PageLimit = 10,
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
 		}
 
 		[Fact]
 		public void CannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType()
 		{
-			var game = Helpers.GetGame(SUGARClient.Game, $"{nameof(LeaderboardClientTests)}_Standings");
+			var key = "Leaderboard_CannotGetGroupMembersWithIncorrectActorType";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
-			var createRequest = new LeaderboardRequest
-			{
-				Token = "CannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType",
-				GameId = game.Id,
-				Name = "CannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType",
-				Key = "CannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType",
-				ActorType = ActorType.User,
-				EvaluationDataType = EvaluationDataType.Long,
-				CriteriaScope = CriteriaScope.Actor,
-				LeaderboardType = LeaderboardType.Highest
-			};
-
-			var user = Helpers.GetUser(SUGARClient.User, $"{nameof(LeaderboardClientTests)}_Standings");
 			var gameData = new EvaluationDataRequest
 			{
-				Key = createRequest.Key,
-				EvaluationDataType = createRequest.EvaluationDataType,
-				CreatingActorId = user.Id,
-				GameId = game.Id,
-				Value = "5"
+				Key = key,
+				EvaluationDataType = EvaluationDataType.Long,
+				CreatingActorId = loggedInAccount.User.Id,
+				Value = "5",
+				GameId = game.Id
 			};
 
-			SUGARClient.GameData.Add(gameData);
-
-			var createResponse = SUGARClient.Leaderboard.Create(createRequest);
+			Fixture.SUGARClient.GameData.Add(gameData);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
-				LeaderboardToken = createResponse.Token,
+				LeaderboardToken = key,
 				GameId = game.Id,
-				ActorId = user.Id,
+				ActorId = loggedInAccount.User.Id,
 				LeaderboardFilterType = LeaderboardFilterType.GroupMembers,
 				PageLimit = 10,
 				PageOffset = 0
 			};
 
-			Assert.Throws<ClientHttpException>(() => SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest));
+		}
+
+		public LeaderboardClientTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
 		}
 	}
 }

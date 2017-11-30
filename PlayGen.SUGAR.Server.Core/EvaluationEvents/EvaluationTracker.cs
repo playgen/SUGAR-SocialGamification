@@ -37,8 +37,6 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
             EvaluationController.EvaluationCreatedEvent += OnEvaluationCreated;
             EvaluationController.EvaluationUpdatedEvent += OnEvaluationUpdated;
             EvaluationController.EvaluationDeletedEvent += OnEvaluationDeleted;
-
-            MapExistingEvaluations();
         }
 
         ~EvaluationTracker()
@@ -117,7 +115,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
             _progressNotificationCache.Remove(evaluation.Id);
         }
 
-        private void MapExistingEvaluations()
+        public void MapExistingEvaluations()
         {
             var evaluations = _evaluationController.Get();
             _EvaluationDataToEvaluationMapper.CreateMappings(evaluations);
