@@ -60,20 +60,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			ValidateData(newData);
 
-			if (ParseCheck(newData))
-			{
-				newData = _evaluationDataDbController.Create(newData);
+			newData = _evaluationDataDbController.Create(newData);
 
-				Logger.Info($"{newData?.Id}");
+			Logger.Info($"{newData?.Id}");
 
-				EvaluationDataAddedEvent?.Invoke(newData);
+			EvaluationDataAddedEvent?.Invoke(newData);
 
-				return newData;
-			}
-			else
-			{
-				throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
-			}
+			return newData;
 		}
 
 		public EvaluationData Update(EvaluationData data)
@@ -278,7 +271,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return didGetLatestKey;
 		}
 
-		protected bool ParseCheck(EvaluationData data)
+		protected static bool ParseCheck(EvaluationData data)
 		{
 			switch (data.EvaluationDataType)
 			{
@@ -286,16 +279,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					return true;
 
 				case EvaluationDataType.Long:
-					long tryLong;
-					return long.TryParse(data.Value, out tryLong);
+					return long.TryParse(data.Value, out _);
 
 				case EvaluationDataType.Float:
-					float tryFloat;
-					return float.TryParse(data.Value, out tryFloat);
+					return float.TryParse(data.Value, out _);
 
 				case EvaluationDataType.Boolean:
-					bool tryBoolean;
-					return bool.TryParse(data.Value, out tryBoolean);
+					return bool.TryParse(data.Value, out _);
 
 				default:
 					return false;
@@ -310,10 +300,26 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					$"Cannot save data with category: {data.Category} with controller for mismatched category: {_category}");
 			}
 
-			if (!ParseCheck(data))
+			if (!IsValid(data, out var failure))
 			{
-				throw new ArgumentException($"Invalid Value {data.Value} for EvaluationDataType {data.EvaluationDataType}");
+				throw new ArgumentException(failure);
 			}
+		}
+
+		public static bool IsValid(EvaluationData data, out string failure)
+		{
+			failure = null;
+
+			if (!RegexUtil.IsAlphaNumericUnderscoreNotEmpty(data.Key))
+			{
+				failure = $"Invalid Key {data.Key}. Keys must be non-empty strings containing only alpha-numeric characters and underscores.";
+			} 
+			else if (!ParseCheck(data))
+			{
+				failure = $"Invalid Value {data.Value} for EvaluationDataType {data.EvaluationDataType}";
+			}
+
+			return failure == null;
 		}
 	}
 }

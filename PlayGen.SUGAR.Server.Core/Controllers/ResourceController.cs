@@ -86,7 +86,8 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				{
 					Quantity = (long) 0;
 				}
-				resource = new EvaluationData {
+				resource = new EvaluationData
+				{
 					GameId = gameId,
 					ActorId = ActorId,
 					Key = key,
@@ -106,7 +107,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public void Create(EvaluationData data)
 		{
-			var existingEntries = _evaluationDataController.Get(data.GameId, data.ActorId, new[] { data.Key });
+			if (!EvaluationDataController.IsValid(data, out var failure))
+			{
+				throw new ArgumentException(failure);
+			}
+			
+			var existingEntries = _evaluationDataController.Get(data.GameId, data.ActorId, new[] {data.Key});
 
 			if (existingEntries.Any())
 			{

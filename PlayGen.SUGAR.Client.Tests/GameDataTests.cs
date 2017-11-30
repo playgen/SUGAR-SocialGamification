@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
@@ -271,6 +272,52 @@ namespace PlayGen.SUGAR.Client.Tests
 			{
 				Assert.Equal("Test Value", g.Value);
 			}
+		}
+
+		[Theory]
+		[InlineData("a")]
+		[InlineData("My_key0")]
+		[InlineData("1mykey")]
+		[InlineData("_key")]
+		[InlineData("_")]
+		[InlineData("9291")]
+		public void CanCreateWithValidKey(string key)
+		{
+			// Arrange
+			var controller = SUGARClient.GameData;
+
+			// Act
+			var data = controller.Add(new EvaluationDataRequest
+			{
+				Key = key,
+
+				Value = "TestValue",
+
+				EvaluationDataType = EvaluationDataType.String
+			});
+
+			// Assert
+			Assert.NotNull(data);
+		}
+
+		[Theory]
+		[InlineData("")]
+		[InlineData("$")]
+		[InlineData("dj_+das")]
+		public void CantCreateWithInValidKey(string key)
+		{
+			// Arrange
+			var controller = SUGARClient.GameData;
+
+			// Act Assert
+			Assert.Throws<ArgumentException>(() => controller.Add(new EvaluationDataRequest
+			{
+				Key = key,
+
+				Value = "TestValue",
+
+				EvaluationDataType = EvaluationDataType.String
+			}));
 		}
 	}
 }
