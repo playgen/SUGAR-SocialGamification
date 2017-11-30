@@ -2,9 +2,9 @@
 {
     public enum AuthorizationAction
     {
-        Create,
-        Get,
-        Update,
-        Delete
-    }
+        Create = 0,
+        Get = 1,
+        Update = 2,
+        Delete = 3
+	}
 }
