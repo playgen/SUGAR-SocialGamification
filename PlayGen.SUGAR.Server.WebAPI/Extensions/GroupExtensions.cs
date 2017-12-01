@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			var groupContract = new GroupResponse {
 				Id = groupModel.Id,
 				Name = groupModel.Name,
-				MemberCount = groupModel.UserToGroupRelationships != null ? groupModel.UserToGroupRelationships.Count : 0
+				MemberCount = groupModel.UserToGroupRelationships?.Count ?? 0
 			};
 
 			return groupContract;

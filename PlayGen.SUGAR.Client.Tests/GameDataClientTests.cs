@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanCreateWithoutGameId()
 		{
 			var key = "GameData_CanCreateWithoutGameId";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotCreateWithoutActorId()
 		{
 			var key = "GameData_CannotCreateWithoutActorId";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -189,7 +189,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+			Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Get(0, game.Id, new[] { key }));
 		}
@@ -198,7 +198,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetGameDataWithoutGameId()
 		{
 			var key = "GameData_CanGetGameDataWithoutGameId";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var _, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
@@ -276,7 +276,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanCreateWithValidKey(string dataKey)
 		{
 			var key = "GameData_CanCreateWithValidKey";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			// Act
 			var evaluationDataRequest = new EvaluationDataRequest
@@ -300,7 +300,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CantCreateWithInValidKey(string dataKey)
 		{
 			var key = "GameData_CantCreateWithInValidKey";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{

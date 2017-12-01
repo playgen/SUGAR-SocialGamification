@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				Key = contract.Key,
 				Value = contract.Value,
 				EvaluationDataType = contract.EvaluationDataType,
-				Category = EvaluationDataCategory.GameData,
+				Category = EvaluationDataCategory.GameData
 			};
 		}
 	}

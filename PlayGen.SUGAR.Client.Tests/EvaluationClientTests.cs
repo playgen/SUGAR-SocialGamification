@@ -17,7 +17,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			});
 		}
 
-		public EvaluationClientTests(ClientTestsFixture fixture)
+		protected EvaluationClientTests(ClientTestsFixture fixture)
 			: base(fixture)
 		{
 		}

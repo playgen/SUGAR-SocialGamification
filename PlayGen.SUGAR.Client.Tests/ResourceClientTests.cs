@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Contracts;
 using Xunit;
@@ -32,7 +31,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanCreateWithoutGameId()
 		{
 			var key = "Resource_CanCreateWithoutGameId";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			var resourceRequest = new ResourceAddRequest
 			{
@@ -51,7 +50,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotCreateWithoutActorId()
 		{
 			var key = "Resource_CannotCreateWithoutActorId";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
 
 			var resourceRequest = new ResourceAddRequest
 			{
@@ -103,7 +102,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "Resource_CanTransferCreateResourceFromUserToUser";
 			var recipient = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			var fromResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
@@ -142,7 +141,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				Quantity = 150
 			});
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			var fromResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
@@ -175,7 +174,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "Resource_CannotTransferNonExistingResource";
 			var recipient = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Resource.Transfer(new ResourceTransferRequest
 			{
@@ -194,9 +193,9 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "Resource_CannotTransferWithLessThan1Quantity";
 			var recipient = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
-			var fromResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
+			Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
 				ActorId = loggedInAccount.User.Id,
 				Key = (key + transferQuantity).Replace('-', '_'),
@@ -217,7 +216,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "Resource_CannotTransferWithOutOfRangeQuantity";
 			var recipient = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			var fromResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
@@ -264,7 +263,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetResourceWithoutActorId()
 		{
 			var key = "Resource_CannotGetResourceWithoutActorId";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Resource.Get(game.Id, null, new[] { key }));
 		}
@@ -273,7 +272,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetResourceWithoutGameId()
 		{
 			var key = "Resource_CanGetResourceWithoutGameId";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			var resourceRequest = new ResourceAddRequest
 			{
@@ -337,7 +336,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		#region Helpers
 		private GroupResponse CreateGroup(string key)
 		{
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Creator", out var game, out var creatorAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Creator", out var _, out var _);
 
 			var groupRequest = new GroupRequest
 			{
@@ -349,7 +348,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 		private UserResponse CreateUser(string key)
 		{
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_User", out var game, out var friendAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key + "_User", out var _, out var friendAccount);
 			return friendAccount.User;
 		}
 		#endregion

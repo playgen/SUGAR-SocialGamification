@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetGamesByName()
 		{
 			var key = "Game_CanGetGamesByName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
 
 			var getGames = Fixture.SUGARClient.Game.Get(key);
 
@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingGameByName()
 		{
 			var key = "Game_CannotGetNotExistingGameByName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
 
 			var getGames = Fixture.SUGARClient.Game.Get(key);
 
@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetGameByEmptyName()
 		{
 			var key = "Game_CannotGetGameByEmptyName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
 
 			Assert.Throws<ClientException>(() => Fixture.SUGARClient.Game.Get(string.Empty));
 		}
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetGameById()
 		{
 			var key = "Game_CanGetGameById";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
 
 			var getGame = Fixture.SUGARClient.Game.Get(game.Id);
 
@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingGameById()
 		{
 			var key = "Game_CannotGetNotExistingGameById";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
 
 			var getGame = Fixture.SUGARClient.Game.Get(-1);
 

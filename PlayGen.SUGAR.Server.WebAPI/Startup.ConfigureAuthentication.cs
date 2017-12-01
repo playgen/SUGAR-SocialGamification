@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
                     // when validating the lifetime. As we're creating the tokens locally and validating them on the same 
                     // machines which should have synchronised time, this can be set to zero. Where external tokens are
                     // used, some leeway here could be useful.
-                    ClockSkew = TimeSpan.FromMinutes(0),
+                    ClockSkew = TimeSpan.FromMinutes(0)
                 }
             });
         }

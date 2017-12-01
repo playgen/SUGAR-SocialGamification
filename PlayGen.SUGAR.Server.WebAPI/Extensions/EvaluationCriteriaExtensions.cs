@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				CriteriaQueryType = completionCriteria.CriteriaQueryType,
 				ComparisonType = completionCriteria.ComparisonType,
 				Scope = completionCriteria.Scope,
-				Value = completionCriteria.Value,
+				Value = completionCriteria.Value
 			};
 		}
 
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				CriteriaQueryType = completionCriteria.CriteriaQueryType,
 				ComparisonType = completionCriteria.ComparisonType,
 				Scope = completionCriteria.Scope,
-				Value = completionCriteria.Value,
+				Value = completionCriteria.Value
 			};
 		}
 
@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				CriteriaQueryType = completionCriteria.CriteriaQueryType,
 				ComparisonType = completionCriteria.ComparisonType,
 				Scope = completionCriteria.Scope,
-				Value = completionCriteria.Value,
+				Value = completionCriteria.Value
 			};
 		}
 

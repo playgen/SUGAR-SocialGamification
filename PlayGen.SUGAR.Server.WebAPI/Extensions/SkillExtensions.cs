@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				ActorType = model.ActorType,
 				Token = model.Token,
 				EvaluationCriterias = model.EvaluationCriterias.ToContractList(),
-				Rewards = model.Rewards.ToContractList(),
+				Rewards = model.Rewards.ToContractList()
 			};
 		}
 
@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				ActorType = skillContract.ActorType,
 				Token = skillContract.Token,
 				EvaluationCriterias = skillContract.EvaluationCriterias.ToModelList(),
-				Rewards = skillContract.Rewards.ToModelList(),
+				Rewards = skillContract.Rewards.ToModelList()
 			};
 
 			return skillModel;
@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				ActorType = skillContract.ActorType,
 				Token = skillContract.Token,
 				EvaluationCriterias = skillContract.EvaluationCriterias.ToModelList(),
-				Rewards = skillContract.Rewards.ToModelList(),
+				Rewards = skillContract.Rewards.ToModelList()
 			};
 
 			return skillModel;

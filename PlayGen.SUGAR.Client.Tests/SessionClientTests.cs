@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanHeartbeatAndReissueToken()
 		{
 			var key = "Session_CanHeartbeatAndReissueToken";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
 
 			// Arrange
 			var headers = (Dictionary<string, string>)
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanCreateNewUserAndLogin()
 		{
 			var key = "Session_CanCreateNewUserAndLogin";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var _);
 
 			var accountRequest = new AccountRequest
 			{
@@ -80,7 +80,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanLoginUser()
 		{
 			var key = "Session_CanLoginUser";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var _);
 
 			var accountRequest = new AccountRequest
 			{
@@ -99,7 +99,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanLoginUserAsync()
 		{
 			var key = "Session_CanLoginUserAsync";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var _);
 
 			var accountRequest = new AccountRequest
 			{
@@ -137,7 +137,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotLoginInvalidUser()
 		{
 			var key = "Session_CannotLoginInvalidUser";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var _);
 
 			var accountRequest = new AccountRequest();
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Session.Login(game.Id, accountRequest));
@@ -147,7 +147,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanLogoutAndInvalidateSessionMethod()
 		{
 			var key = "Session_CanLogoutAndInvalidateSessionMethod";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
 
 			// Act
 			Fixture.SUGARClient.Session.Logout();

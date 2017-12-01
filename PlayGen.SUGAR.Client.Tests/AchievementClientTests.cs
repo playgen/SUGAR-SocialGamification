@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetGlobalAchievementProgress()
 		{
 			var key = "Achievement_CanGetGlobalAchievementProgress";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			var progressGame = Fixture.SUGARClient.Achievement.GetGlobalProgress(loggedInAccount.User.Id);
 			Assert.NotEmpty(progressGame);
@@ -115,7 +115,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingGlobalAchievementProgress()
 		{
 			var key = "Achievement_CannotGetNotExistingGlobalAchievementProgress";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id));
 		}

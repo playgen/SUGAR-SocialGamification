@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Client
 		{
 			if (data.Key == null)
 			{
-				throw new ArgumentException($"No Key provided. Keys must be non-empty strings containing only alpha-numeric characters and underscores.");
+				throw new ArgumentException("No Key provided. Keys must be non-empty strings containing only alpha-numeric characters and underscores.");
 			}
 			if (!RegexUtil.IsAlphaNumericUnderscoreNotEmpty(data.Key))
 			{

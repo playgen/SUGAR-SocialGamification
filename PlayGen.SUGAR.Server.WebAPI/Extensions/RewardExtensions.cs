@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				Id = reward.Id,
 				EvaluationDataKey = reward.EvaluationDataKey,
 				EvaluationDataType = reward.EvaluationDataType,
-				Value = reward.Value,
+				Value = reward.Value
 			};
 		}
 
@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			return new Reward {
 				EvaluationDataKey = contract.EvaluationDataKey,
 				EvaluationDataType = contract.EvaluationDataType,
-				Value = contract.Value,
+				Value = contract.Value
 			};
 		}
 
@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				Id = contract.Id,
 				EvaluationDataKey = contract.EvaluationDataKey,
 				EvaluationDataType = contract.EvaluationDataType,
-				Value = contract.Value,
+				Value = contract.Value
 			};
 		}
 	}

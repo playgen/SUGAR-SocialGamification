@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
-		public new Task<IActionResult> Get([FromRoute]int? gameId)
+		public Task<IActionResult> Get([FromRoute]int? gameId)
 		{
 			return Get(gameId, EvaluationType.Skill);
 		}

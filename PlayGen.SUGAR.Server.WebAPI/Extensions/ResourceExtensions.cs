@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				ActorId = evaluationData.ActorId,
 				GameId = evaluationData.GameId,
 				Key = evaluationData.Key,
-				Quantity = long.Parse(evaluationData.Value),
+				Quantity = long.Parse(evaluationData.Value)
 			};
 		}
 
