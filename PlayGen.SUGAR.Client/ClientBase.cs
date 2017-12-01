@@ -8,6 +8,7 @@ using Newtonsoft.Json.Serialization;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Extensions;
 using PlayGen.SUGAR.Common.Web;
 using PlayGen.SUGAR.Contracts;
@@ -16,7 +17,10 @@ namespace PlayGen.SUGAR.Client
 {
 	public abstract class ClientBase
 	{
-		private static readonly Dictionary<string, string> PersistentHeaders = new Dictionary<string, string>();
+		private static readonly Dictionary<string, string> PersistentHeaders = new Dictionary<string, string>
+		{
+			{"APIVersion", APIVersion.Version}
+		};
 
 		private readonly string _baseAddress;
 		private readonly IHttpHandler _httpHandler;

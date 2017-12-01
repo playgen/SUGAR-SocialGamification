@@ -21,12 +21,17 @@ namespace PlayGen.SUGAR.Client.Tests
 				.UseEnvironment(environment);
 			
 			Server = new TestServer(builder);
-			var client = Server.CreateClient();
-			var testHttpHandler = new HttpClientHandler(client);
-			
-			SUGARClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler);
+			SUGARClient = CreateSugarClient();
 
 			LoginAdmin();
+		}
+
+		protected SUGARClient CreateSugarClient()
+		{
+			var client = Server.CreateClient();
+			var testHttpHandler = new HttpClientHandler(client);
+			var sugarClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler);
+			return sugarClient;
 		}
 
 		public void Dispose()

@@ -81,6 +81,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 				options.Filters.Add(typeof(WrapResponseFilter));
 				options.Filters.Add(typeof(TokenReissueFilter));
 				options.Filters.Add(typeof(SessionFilter));
+				options.Filters.Add(typeof(APIVersionFilterFilter));
 			})
 			.AddJsonOptions(json =>
 			{
