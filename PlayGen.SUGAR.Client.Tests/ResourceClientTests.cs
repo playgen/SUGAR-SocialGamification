@@ -199,7 +199,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var fromResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
 				ActorId = loggedInAccount.User.Id,
-				Key = key + transferQuantity,
+				Key = (key + transferQuantity).Replace('-', '_'),
 				Quantity = 300
 			});		
 

@@ -15,12 +15,12 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 	{
 		protected readonly GroupMemberController GroupMemberCoreController;
 		protected readonly UserFriendController UserFriendCoreController;
-	    protected readonly SUGARContextFactory ContextFactory;
+		protected readonly SUGARContextFactory ContextFactory;
 
 		// todo change all db controller usage to core controller usage
 		public CriteriaEvaluator(SUGARContextFactory contextFactory, GroupMemberController groupMemberCoreController, UserFriendController userFriendCoreController)
 		{
-		    ContextFactory = contextFactory;
+			ContextFactory = contextFactory;
 			GroupMemberCoreController = groupMemberCoreController;
 			UserFriendCoreController = userFriendCoreController;
 		}
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateLong(int? gameId, int? actorId, EvaluationCriteria completionCriteria)
 		{
-            var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
 
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					long latest;
 					if (!evaluationDataController.TryGetLatest(gameId, actorId, completionCriteria.EvaluationDataKey, out latest, EvaluationDataType.Long, completionCriteria.EvaluationDataCategory))
 					{
-                        return 0;
+						return 0;
 					}
 
 					return CompareValues(latest, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
@@ -111,9 +111,9 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateFloat(int? gameId, int? actorId, EvaluationCriteria completionCriteria)
 		{
-            var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
 
-            switch (completionCriteria.CriteriaQueryType)
+			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
 					var any = evaluationDataController.All<float>(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.Float, completionCriteria.EvaluationDataCategory).ToList();
@@ -127,8 +127,8 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					float latest;
 					if (!evaluationDataController.TryGetLatest(gameId, actorId, completionCriteria.EvaluationDataKey, out latest, EvaluationDataType.Float, completionCriteria.EvaluationDataCategory))
 					{
-                        return 0;
-                    }
+						return 0;
+					}
 
 					return CompareValues(latest, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
 				default:
@@ -138,9 +138,9 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateString(int? gameId, int? actorId, EvaluationCriteria completionCriteria)
 		{
-            var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
 
-            switch (completionCriteria.CriteriaQueryType)
+			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
 					var any = evaluationDataController.All<string>(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.String, completionCriteria.EvaluationDataCategory).ToList();
@@ -150,8 +150,8 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					string latest;
 					if (!evaluationDataController.TryGetLatest(gameId, actorId, completionCriteria.EvaluationDataKey, out latest, EvaluationDataType.String, completionCriteria.EvaluationDataCategory))
 					{
-                        return 0;
-                    }
+						return 0;
+					}
 
 					return CompareValues(latest, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
 				default:
@@ -161,9 +161,9 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateBool(int? gameId, int? actorId, EvaluationCriteria completionCriteria)
 		{
-            var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
 
-            switch (completionCriteria.CriteriaQueryType)
+			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
 					var any = evaluationDataController.All<bool>(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.Boolean, completionCriteria.EvaluationDataCategory).ToList();
@@ -173,8 +173,8 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					bool latest;
 					if (!evaluationDataController.TryGetLatest(gameId, actorId, completionCriteria.EvaluationDataKey, out latest, EvaluationDataType.Boolean, completionCriteria.EvaluationDataCategory))
 					{
-                        return 0;
-                    }
+						return 0;
+					}
 
 					return CompareValues(latest, bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
 				default:
@@ -184,9 +184,9 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateManyLong(int? gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
 		{
-            var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
 
-		    switch (completionCriteria.CriteriaQueryType)
+			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
 					return actors.Sum(a => EvaluateLong(gameId, a.Id, completionCriteria)) / actors.Count;
@@ -203,9 +203,9 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateManyFloat(int? gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
 		{
-            var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
-            
-            switch (completionCriteria.CriteriaQueryType)
+			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			
+			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
 					return actors.Sum(a => EvaluateFloat(gameId, a.Id, completionCriteria)) / actors.Count;
@@ -222,20 +222,20 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateManyString(int? gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
 		{
-            return actors.Sum(a => EvaluateString(gameId, a.Id, completionCriteria)) / actors.Count;
+			return actors.Sum(a => EvaluateString(gameId, a.Id, completionCriteria)) / actors.Count;
 		}
 
 		protected float EvaluateManyBool(int? gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
 		{
-            return actors.Sum(a => EvaluateBool(gameId, a.Id, completionCriteria)) / actors.Count;
+			return actors.Sum(a => EvaluateBool(gameId, a.Id, completionCriteria)) / actors.Count;
 		}
 
 		protected static float CompareValues<T>(T value, T expected, ComparisonType comparisonType, EvaluationDataType dataType) where T : IComparable
 		{
 			var comparisonResult = value.CompareTo(expected);
 
-		    float expectedNum;
-		    switch (comparisonType)
+			float expectedNum;
+			switch (comparisonType)
 			{
 				case ComparisonType.Equals:
 					return comparisonResult == 0 ? 1 : 0;
@@ -248,38 +248,38 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					{
 						return 1;
 					}
-			        if (!(comparisonResult > 0) && (dataType == EvaluationDataType.String || dataType == EvaluationDataType.Boolean))
-			        {
-			            return 0;
-			        }
-			        if ((float.TryParse(expected.ToString(), out expectedNum))) {
-			            if (dataType == EvaluationDataType.Long)
-			            {
-			                expectedNum += 1;
-			            } else
-			            {
-			                expectedNum += 0.000001f;
-			            }
-			            return (float.Parse(value.ToString()) / expectedNum);
-			        }
-			        return 0;
+					if (!(comparisonResult > 0) && (dataType == EvaluationDataType.String || dataType == EvaluationDataType.Boolean))
+					{
+						return 0;
+					}
+					if ((float.TryParse(expected.ToString(), out expectedNum))) {
+						if (dataType == EvaluationDataType.Long)
+						{
+							expectedNum += 1;
+						} else
+						{
+							expectedNum += 0.000001f;
+						}
+						return (float.Parse(value.ToString()) / expectedNum);
+					}
+					return 0;
 
-			    case ComparisonType.GreaterOrEqual:
+				case ComparisonType.GreaterOrEqual:
 					if (comparisonResult >= 0)
 					{
 						return 1;
 					}
-			        if (!(comparisonResult >= 0) && (dataType == EvaluationDataType.String || dataType == EvaluationDataType.Boolean))
-			        {
-			            return 0;
-			        }
-			        if ((float.TryParse(expected.ToString(), out expectedNum)))
-			        {
-			            return (float.Parse(value.ToString()) / expectedNum);
-			        }
-			        return 0;
+					if (!(comparisonResult >= 0) && (dataType == EvaluationDataType.String || dataType == EvaluationDataType.Boolean))
+					{
+						return 0;
+					}
+					if ((float.TryParse(expected.ToString(), out expectedNum)))
+					{
+						return (float.Parse(value.ToString()) / expectedNum);
+					}
+					return 0;
 
-			    case ComparisonType.Less:
+				case ComparisonType.Less:
 					return comparisonResult < 0 ? 1 : 0;
 
 				case ComparisonType.LessOrEqual:

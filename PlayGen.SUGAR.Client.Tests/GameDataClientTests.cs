@@ -87,7 +87,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
+			Assert.Throws<ArgumentException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 		}
 
 		[Fact]
@@ -276,7 +276,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanCreateWithValidKey(string dataKey)
 		{
 			var key = "GameData_CanCreateWithValidKey";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			// Act
 			var evaluationDataRequest = new EvaluationDataRequest
@@ -300,7 +300,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CantCreateWithInValidKey(string dataKey)
 		{
 			var key = "GameData_CantCreateWithInValidKey";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
 
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
