@@ -163,6 +163,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				.Property(p => p.Description)
 				.HasMaxLength(256);
 
+			builder.Entity<Actor>()
+				.Property(p => p.Description)
+				.HasMaxLength(1023);
+
 			// Set precision of data
 			//modelBuilder.Entity<EvaluationData>()
 			//	.Property(g => g.DateCreated)

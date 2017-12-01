@@ -8,6 +8,7 @@
 	/// {
 	/// Id : 1,
 	/// Name : "Actor Name"
+	/// Description: "Description of Actor"
 	/// }
 	/// </example>
 	public class ActorResponse
@@ -21,6 +22,11 @@
 		/// The display name of the user/group.
 		/// </summary>
 		public string Name { get; set; }
+
+		/// <summary>
+		/// The description/biography of the user/group.
+		/// </summary>
+		public string Description { get; set; }
 
 		public ActorResponse()
 		{
