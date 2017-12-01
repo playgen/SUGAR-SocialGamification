@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetLeaderboardStandings()
 		{
 			var key = "Leaderboard_CanGetLeaderboardStandings";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
 
 			var gameData = new EvaluationDataRequest
 			{
@@ -176,7 +176,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				LeaderboardToken = key,
 				GameId = game.Id,
 				ActorId = loggedInAccount.User.Id,
-				LeaderboardFilterType = LeaderboardFilterType.Top,
+				LeaderboardFilterType = LeaderboardFilterType.Near,
 				PageLimit = 10,
 				PageOffset = 0
 			};
