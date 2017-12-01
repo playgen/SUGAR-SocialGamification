@@ -1,3 +1,0 @@
-docfx docfx.json
-
-PAUSE

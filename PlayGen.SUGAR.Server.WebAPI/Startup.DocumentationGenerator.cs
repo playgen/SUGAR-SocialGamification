@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,8 +38,8 @@ namespace PlayGen.SUGAR.Server.WebAPI
 		{
 			get
 			{
-				var app = PlatformServices.Default.Application;
-				return Path.Combine(app.ApplicationBasePath, app.ApplicationName + ".xml");
+				var assemblyLocation = Assembly.Load(new AssemblyName("PlayGen.SUGAR.Server.WebAPI")).Location;
+				return Path.ChangeExtension(assemblyLocation, ".xml");
 			}
 		}
 
@@ -46,8 +47,8 @@ namespace PlayGen.SUGAR.Server.WebAPI
 		{
 			get
 			{
-				var app = PlatformServices.Default.Application;
-				return Path.Combine(app.ApplicationBasePath, "PlayGen.SUGAR.Contracts.xml");
+				var assemblyLocation = Assembly.Load(new AssemblyName("PlayGen.SUGAR.Contracts")).Location;
+				return Path.ChangeExtension(assemblyLocation, ".xml");
 			}
 		}
 	}

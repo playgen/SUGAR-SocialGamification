@@ -68,7 +68,7 @@
 		"fileMetadataFiles": [],
 		"template": [
 			"default",
-			"doc/template"
+			"template"
 		],
 		"globalMetadata": {
 			"_appTitle": "SUGAR",

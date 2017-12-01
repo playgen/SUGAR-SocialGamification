@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PlayGen.SUGAR.Documentation.Swagger": {
+      "commandName": "Project",
+      "commandLineArgs": "restapi.swagger2.json"
+    }
+  }
+}

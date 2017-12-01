@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayGen.SUGAR.Documentation.Swagger", "PlayGen.SUGAR.Documentation.Swagger\PlayGen.SUGAR.Documentation.Swagger.csproj", "{A8BF0F6F-FCBC-4B65-BEB0-F4FDE7F9D358}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Server.WebAPI", "..\..\..\PlayGen.SUGAR.Server.WebAPI\PlayGen.SUGAR.Server.WebAPI.csproj", "{859C8E3F-BD8C-45BC-BF95-838DEC8A1F08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencies", "dependencies", "{8EEDA9A2-8F93-4A8D-B0D4-9ABA3529EF48}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Common", "..\..\..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj", "{9CC25D35-4EC7-4541-8377-60204ED41EE7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Server.EntityFramework", "..\..\..\PlayGen.SUGAR.Server.EntityFramework\PlayGen.SUGAR.Server.EntityFramework.csproj", "{77628AC5-7422-4F10-8E44-6F3530351CC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Contracts", "..\..\..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj", "{F627E4C9-35CC-4B62-8415-345BC49D5882}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Server.Core", "..\..\..\PlayGen.SUGAR.Server.Core\PlayGen.SUGAR.Server.Core.csproj", "{7D606630-1853-4814-9241-40CF5AB0DDF3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Server.Authentication", "..\..\..\PlayGen.SUGAR.Server.Authentication\PlayGen.SUGAR.Server.Authentication.csproj", "{2F1FA3C5-7A3C-4003-9AE9-005AF9841867}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Server.Authorization", "..\..\..\PlayGen.SUGAR.Server.Authorization\PlayGen.SUGAR.Server.Authorization.csproj", "{53255346-BC24-494A-BD6C-D7CC48FEEED2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGen.SUGAR.Server.Model", "..\..\..\PlayGen.SUGAR.Server.Model\PlayGen.SUGAR.Server.Model.csproj", "{8885BB43-6678-49A5-A175-CF8315C6C9AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8BF0F6F-FCBC-4B65-BEB0-F4FDE7F9D358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BF0F6F-FCBC-4B65-BEB0-F4FDE7F9D358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BF0F6F-FCBC-4B65-BEB0-F4FDE7F9D358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BF0F6F-FCBC-4B65-BEB0-F4FDE7F9D358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{859C8E3F-BD8C-45BC-BF95-838DEC8A1F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{859C8E3F-BD8C-45BC-BF95-838DEC8A1F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{859C8E3F-BD8C-45BC-BF95-838DEC8A1F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{859C8E3F-BD8C-45BC-BF95-838DEC8A1F08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC25D35-4EC7-4541-8377-60204ED41EE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC25D35-4EC7-4541-8377-60204ED41EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC25D35-4EC7-4541-8377-60204ED41EE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC25D35-4EC7-4541-8377-60204ED41EE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77628AC5-7422-4F10-8E44-6F3530351CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77628AC5-7422-4F10-8E44-6F3530351CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77628AC5-7422-4F10-8E44-6F3530351CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77628AC5-7422-4F10-8E44-6F3530351CC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F627E4C9-35CC-4B62-8415-345BC49D5882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F627E4C9-35CC-4B62-8415-345BC49D5882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F627E4C9-35CC-4B62-8415-345BC49D5882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F627E4C9-35CC-4B62-8415-345BC49D5882}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D606630-1853-4814-9241-40CF5AB0DDF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D606630-1853-4814-9241-40CF5AB0DDF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D606630-1853-4814-9241-40CF5AB0DDF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D606630-1853-4814-9241-40CF5AB0DDF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F1FA3C5-7A3C-4003-9AE9-005AF9841867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F1FA3C5-7A3C-4003-9AE9-005AF9841867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F1FA3C5-7A3C-4003-9AE9-005AF9841867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F1FA3C5-7A3C-4003-9AE9-005AF9841867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53255346-BC24-494A-BD6C-D7CC48FEEED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53255346-BC24-494A-BD6C-D7CC48FEEED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53255346-BC24-494A-BD6C-D7CC48FEEED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53255346-BC24-494A-BD6C-D7CC48FEEED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8885BB43-6678-49A5-A175-CF8315C6C9AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8885BB43-6678-49A5-A175-CF8315C6C9AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8885BB43-6678-49A5-A175-CF8315C6C9AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8885BB43-6678-49A5-A175-CF8315C6C9AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{859C8E3F-BD8C-45BC-BF95-838DEC8A1F08} = {8EEDA9A2-8F93-4A8D-B0D4-9ABA3529EF48}
+		{9CC25D35-4EC7-4541-8377-60204ED41EE7} = {8EEDA9A2-8F93-4A8D-B0D4-9ABA3529EF48}
+		{77628AC5-7422-4F10-8E44-6F3530351CC6} = {8EEDA9A2-8F93-4A8D-B0D4-9ABA3529EF48}
+		{F627E4C9-35CC-4B62-8415-345BC49D5882} = {8EEDA9A2-8F93-4A8D-B0D4-9ABA3529EF48}
+		{7D606630-1853-4814-9241-40CF5AB0DDF3} = {8EEDA9A2-8F93-4A8D-B0D4-9ABA3529EF48}
+		{2F1FA3C5-7A3C-4003-9AE9-005AF9841867} = {8EEDA9A2-8F93-4A8D-B0D4-9ABA3529EF48}
+		{53255346-BC24-494A-BD6C-D7CC48FEEED2} = {8EEDA9A2-8F93-4A8D-B0D4-9ABA3529EF48}
+		{8885BB43-6678-49A5-A175-CF8315C6C9AD} = {8EEDA9A2-8F93-4A8D-B0D4-9ABA3529EF48}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33AED43B-038A-4E9F-A574-D4B204CE01B6}
+	EndGlobalSection
+EndGlobal
