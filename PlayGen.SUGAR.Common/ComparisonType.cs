@@ -12,22 +12,22 @@
 		/// <summary>
 		/// Current and target are not equal in value.
 		/// </summary>
-		NotEqual,
+		NotEqual = 1,
 		/// <summary>
 		/// Current is greater in value than the target.
 		/// </summary>
-		Greater,
+		Greater = 2,
 		/// <summary>
 		/// Current is greater than or equal to the value of the target.
 		/// </summary>
-		GreaterOrEqual,
+		GreaterOrEqual = 3,
 		/// <summary>
 		/// Current is less than the value of the target.
 		/// </summary>
-		Less,
+		Less = 4,
 		/// <summary>
 		/// Current is less than or equal to the value of the target.
 		/// </summary>
-		LessOrEqual
+		LessOrEqual = 5
 	}
 }

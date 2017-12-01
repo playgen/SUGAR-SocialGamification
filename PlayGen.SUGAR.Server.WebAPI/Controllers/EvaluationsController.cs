@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
@@ -24,23 +25,23 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			_authorizationService = authorizationService;
 		}
 
+		protected async Task<IActionResult> Get(int? gameId, EvaluationType evaluationType)
+		{
+			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			{
+				var evaluation = EvaluationCoreController.GetEvaluation(gameId, evaluationType);
+				var evaluationContract = evaluation.ToContractList();
+				return new ObjectResult(evaluationContract);
+			}
+			return Forbid();
+		}
+
 		protected async Task<IActionResult> Get(string token, int? gameId)
 		{
 			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
 				var evaluation = EvaluationCoreController.Get(token, gameId);
 				var evaluationContract = evaluation.ToContract();
-				return new ObjectResult(evaluationContract);
-			}
-			return Forbid();
-		}
-
-		protected async Task<IActionResult> Get(int? gameId)
-		{
-			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
-			{
-				var evaluation = EvaluationCoreController.GetByGame(gameId);
-				var evaluationContract = evaluation.ToContractList();
 				return new ObjectResult(evaluationContract);
 			}
 			return Forbid();

@@ -95,6 +95,11 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="EvaluationDataResponse"/> containing the new GameData details.</returns>
 		public EvaluationDataResponse Add(EvaluationDataRequest data)
 		{
+			if (!RegexUtil.IsAlphaNumericUnderscoreNotEmpty(data.Key))
+			{
+				throw new ArgumentException($"Invalid Key {data.Key}. Keys must be non-empty strings containing only alpha-numeric characters and underscores.");
+			}
+
 			var query = GetUriBuilder(ControllerPrefix).ToString();
 			return Post<EvaluationDataRequest, EvaluationDataResponse>(query, data);
 		}

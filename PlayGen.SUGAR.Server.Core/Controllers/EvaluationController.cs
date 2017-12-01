@@ -64,6 +64,15 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return evaluation;
 		}
 
+		public List<Evaluation> GetEvaluation(int? gameId, EvaluationType evaluationType)
+		{
+			var evaluations = _evaluationDbController.GetByEvaluationType(gameId, evaluationType);
+
+			Logger.Info($"{evaluations?.Count} Evaluations for GameId: {gameId}, EvaluationType: {evaluationType}");
+
+			return evaluations;
+		}
+
 		public List<EvaluationProgress> GetGameProgress(int gameId, int? actorId)
 		{
 			var evaluations = _evaluationDbController.GetByGame(gameId);
@@ -185,7 +194,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			if (!completed)
 			{
-				completedProgress = IsCriteriaSatisified(evaluation.GameId, actorId, evaluation.EvaluationCriterias, evaluation.ActorType);
+				completedProgress = IsCriteriaSatisified(evaluation.GameId, actorId, evaluation.EvaluationCriterias, evaluation.ActorType, evaluation.EvaluationType);
 				if (completedProgress >= 1)
 				{
 					SetCompleted(evaluation, actorId);
@@ -202,7 +211,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var evaluationDataCoreController = new EvaluationDataController(ContextFactory, evaluation.EvaluationType.ToEvaluationDataCategory());
 
 			var key = evaluation.Token;
-			var completed = evaluationDataCoreController.KeyExists(evaluation.GameId, actorId, key);
+			var category = evaluation.EvaluationType == EvaluationType.Achievement
+				? EvaluationDataCategory.Achievement
+				: EvaluationDataCategory.Skill;
+			var completed = evaluationDataCoreController.KeyExists(evaluation.GameId, actorId, key, null, category);
 
 			Logger.Debug($"Got: IsCompleted: {completed} for Evaluation.Id: {evaluation?.Id}, ActorId: {actorId}");
 

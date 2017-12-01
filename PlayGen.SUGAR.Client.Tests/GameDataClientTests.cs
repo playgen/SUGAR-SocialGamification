@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
@@ -263,6 +264,54 @@ namespace PlayGen.SUGAR.Client.Tests
 			{
 				Assert.Equal("Test Value", g.Value);
 			}
+		}
+
+		[Theory]
+		[InlineData("a")]
+		[InlineData("My_key0")]
+		[InlineData("1mykey")]
+		[InlineData("_key")]
+		[InlineData("_")]
+		[InlineData("9291")]
+		public void CanCreateWithValidKey(string dataKey)
+		{
+			var key = "GameData_CanCreateWithValidKey";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+
+			// Act
+			var evaluationDataRequest = new EvaluationDataRequest
+			{
+				Key = dataKey,
+				Value = "TestValue",
+				EvaluationDataType = EvaluationDataType.String,
+				CreatingActorId = loggedInAccount.User.Id
+			};
+
+			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+
+			// Assert
+			Assert.NotNull(response);
+		}
+
+		[Theory]
+		[InlineData("")]
+		[InlineData("$")]
+		[InlineData("dj_+das")]
+		public void CantCreateWithInValidKey(string dataKey)
+		{
+			var key = "GameData_CantCreateWithInValidKey";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+
+			var evaluationDataRequest = new EvaluationDataRequest
+			{
+				Key = dataKey,
+				Value = "TestValue",
+				EvaluationDataType = EvaluationDataType.String,
+				CreatingActorId = loggedInAccount.User.Id
+			};
+
+			// Act Assert
+			Assert.Throws<ArgumentException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 		}
 
 		public GameDataClientTests(ClientTestsFixture fixture)

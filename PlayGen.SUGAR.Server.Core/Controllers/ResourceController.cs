@@ -67,7 +67,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public void Create(EvaluationData data)
 		{
-			var existingEntries = _evaluationDataController.Get(data.GameId, data.ActorId, new[] { data.Key });
+			if (!EvaluationDataController.IsValid(data, out var failure))
+			{
+				throw new ArgumentException(failure);
+			}
+			
+			var existingEntries = _evaluationDataController.Get(data.GameId, data.ActorId, new[] {data.Key});
 
 			if (existingEntries.Any())
 			{
