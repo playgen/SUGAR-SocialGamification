@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
-using PlayGen.SUGAR.Server.Model;
 using PlayGen.SUGAR.Server.WebAPI.Attributes;
 using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
@@ -22,8 +21,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.ResourceController _resourceController;
 
-		public ResourceController(Core.Controllers.ResourceController resourceController,
-					IAuthorizationService authorizationService)
+		public ResourceController(Core.Controllers.ResourceController resourceController, IAuthorizationService authorizationService)
 		{
 			_resourceController = resourceController;
 			_authorizationService = authorizationService;
@@ -39,12 +37,20 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="keys">Optional array of Key names to filter results by.</param>
 		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
 		[HttpGet]
-		//[ResponseType(typeof(IEnumerable<ResourceResponse>))]
-		public IActionResult Get(int? gameId, int? actorId, string[] keys)
+		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.Resource)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.Resource)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Resource)]
+		public async Task<IActionResult> Get(int? gameId, int? actorId, string[] keys)
 		{
-			var resource = _resourceController.Get(gameId, actorId, keys.Any() ? keys : null);
-			var resourceContract = resource.ToResourceContractList();
-			return new ObjectResult(resourceContract);
+			if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
+				await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User)) ||
+				await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			{
+				var resource = _resourceController.Get(gameId, actorId, keys.Any() ? keys : null);
+				var resourceContract = resource.ToResourceContractList();
+				return new ObjectResult(resourceContract);
+			}
+			return Forbid();
 		}
 
 		/// <summary>
@@ -55,12 +61,15 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="resourceRequest"><see cref="ResourceAddRequest"/> object that holds the details of the ResourceData.</param>
 		/// <returns>A <see cref="ResourceResponse"/> containing the new Resource details.</returns>
 		[HttpPost]
-		//[ResponseType(typeof(ResourceResponse))]
 		[ArgumentsNotNull]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.Resource)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.Resource)]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Resource)]
 		public async Task<IActionResult> AddOrUpdate([FromBody]ResourceAddRequest resourceRequest)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, resourceRequest.GameId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Game)]))
+			if (await _authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
+				await _authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, HttpContext.ScopeItems(ClaimScope.User)) ||
+				await _authorizationService.AuthorizeAsync(User, resourceRequest.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
 				var resource = resourceRequest.ToModel();
 				var resources = _resourceController.Get(resourceRequest.GameId, resourceRequest.ActorId, new[] { resourceRequest.Key });
@@ -71,9 +80,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 				}
 				else
 				{
-
 					_resourceController.Create(resource);
-
 				}
 
 				var resourceContract = resource.ToResourceContract();
@@ -90,52 +97,25 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="transferRequest"><see cref="ResourceTransferRequest"/> object that holds the details of the resoruce transfer.</param>
 		/// <returns>A <see cref="ResourceTransferResponse"/> containing the modified resources.</returns>
 		[HttpPost("transfer")]
-		//[ResponseType(typeof(ResourceTransferResponse))]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Resource)]
 		[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.Resource)]
+		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Resource)]
 		public async Task<IActionResult> Transfer([FromBody] ResourceTransferRequest transferRequest)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
-				await _authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
+			if (await _authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
+				await _authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, HttpContext.ScopeItems(ClaimScope.User)) ||
+				await _authorizationService.AuthorizeAsync(User, transferRequest.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
 				var toResource = _resourceController.Transfer(transferRequest.GameId, transferRequest.SenderActorId, transferRequest.RecipientActorId, transferRequest.Key, transferRequest.Quantity, out var fromResource);
 
 				var resourceTransferRespone = new ResourceTransferResponse
 				{
 					FromResource = fromResource.ToResourceContract(),
-					ToResource = toResource.ToResourceContract(),
+					ToResource = toResource.ToResourceContract()
 				};
 
 				return new ObjectResult(resourceTransferRespone);
-			}
-			return Forbid();
-		}
-
-		/// <summary>
-		/// Adds a quantity of a specific resource.
-		/// 
-		/// Example Usage: Post api/resource/add
-		/// </summary>
-		/// <param name="addRequest"><see cref="ResourceAddRequest"/> object that holds the details of the resoruce transfer.</param>
-		/// <returns>A <see cref="ResourceAddResponse"/> containing the modified resources.</returns>
-		[HttpPost("add")]
-		//[ResponseType(typeof(ResourceTransferResponse))]
-		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Resource)]
-		[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.Resource)]
-		public async Task<IActionResult> AddResource([FromBody] ResourceAddRequest addRequest)
-		{
-			if (await _authorizationService.AuthorizeAsync(User, addRequest.ActorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]) ||
-				await _authorizationService.AuthorizeAsync(User, addRequest.ActorId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
-			{
-				var toResource = _resourceController.AddResource(addRequest.GameId, addRequest.ActorId, addRequest.Key, addRequest.Quantity);
-					
-				var resourceAddResponse = new ResourceAddResponse {
-					Resource = toResource.ToResourceContract(),
-				};
-
-				return new ObjectResult(resourceAddResponse);
 			}
 			return Forbid();
 		}

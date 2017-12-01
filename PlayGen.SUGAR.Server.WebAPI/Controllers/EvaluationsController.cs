@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common;
@@ -26,12 +25,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			_authorizationService = authorizationService;
 		}
 
-		protected async Task<IActionResult> Get(int? gameId, ClaimScope scope, EvaluationType evaluationType)
+		protected async Task<IActionResult> Get(int? gameId, EvaluationType evaluationType)
 		{
-			if (await _authorizationService.AuthorizeAsync(
-				User,
-				gameId,
-				(IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(scope)]))
+			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
 				var evaluation = EvaluationCoreController.GetEvaluation(gameId, evaluationType);
 				var evaluationContract = evaluation.ToContractList();
@@ -40,29 +36,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			return Forbid();
 		}
 
-		protected async Task<IActionResult> Get(string token, int? gameId, ClaimScope scope)
+		protected async Task<IActionResult> Get(string token, int? gameId)
 		{
-			if (await _authorizationService.AuthorizeAsync(
-				User, 
-				gameId, 
-				(IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(scope)]))
+			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
 				var evaluation = EvaluationCoreController.Get(token, gameId);
 				var evaluationContract = evaluation.ToContract();
-				return new ObjectResult(evaluationContract);
-			}
-			return Forbid();
-		}
-
-		protected async Task<IActionResult> Get(int? gameId, ClaimScope scope)
-		{
-			if (await _authorizationService.AuthorizeAsync(
-				User, 
-				gameId, 
-				(IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(scope)]))
-			{
-				var evaluation = EvaluationCoreController.GetByGame(gameId);
-				var evaluationContract = evaluation.ToContractList();
 				return new ObjectResult(evaluationContract);
 			}
 			return Forbid();
@@ -83,16 +62,13 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			var progress = EvaluationCoreController.EvaluateProgress(evaluation, actorId);
 			return new ObjectResult(new EvaluationProgressResponse {
 				Name = evaluation.Name,
-				Progress = progress,
+				Progress = progress
 			});
 		}
 
-		protected async Task<IActionResult> Delete(string token, int? gameId, ClaimScope scope)
+		protected async Task<IActionResult> Delete(string token, int? gameId)
 		{
-			if (await _authorizationService.AuthorizeAsync(
-				User, 
-				gameId, 
-				(IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(scope)]))
+			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
 				EvaluationCoreController.Delete(token, gameId);
 				return Ok();

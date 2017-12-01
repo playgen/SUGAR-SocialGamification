@@ -214,9 +214,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var category = evaluation.EvaluationType == EvaluationType.Achievement
 				? EvaluationDataCategory.Achievement
 				: EvaluationDataCategory.Skill;
-			var completed = evaluationDataCoreController.KeyExists(evaluation.GameId, actorId, key, null, category);
+			var completed = evaluationDataCoreController.KeyExists(evaluation.GameId, actorId, key, EvaluationDataType.String, category);
 
-			Logger.Debug($"Got: IsCompleted: {completed} for Evaluation.Id: {evaluation?.Id}, ActorId: {actorId}");
+			Logger.Debug($"Got: IsCompleted: {completed} for Evaluation.Id: {evaluation.Id}, ActorId: {actorId}");
 
 			return completed;
 		}

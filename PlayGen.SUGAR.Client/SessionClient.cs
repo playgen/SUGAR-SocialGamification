@@ -18,18 +18,6 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Logs in an account into the system based on the name and password combination.
-		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// </summary>
-		/// <param name="account"><see cref="AccountRequest"/> object that contains the account details provided.</param>
-		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
-		public AccountResponse Login(AccountRequest account)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/login").ToString();
-			return Post<AccountRequest, AccountResponse>(query, account);
-		}
-
-		/// <summary>
 		/// Logs in an account into a game based on the name and password combination.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
 		/// </summary>
@@ -38,7 +26,7 @@ namespace PlayGen.SUGAR.Client
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		public AccountResponse Login(int gameId, AccountRequest account)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}/login", gameId).ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/logingame", gameId).ToString();
 			return Post<AccountRequest, AccountResponse>(query, account);
 		}
 
@@ -50,23 +38,30 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		// todo comment
-		public AccountResponse CreateAndLogin(AccountRequest accountRequest)
+		public AccountResponse CreateAndLogin(int gameId, AccountRequest accountRequest)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/createandlogin").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "/{0}/createandlogingame", gameId).ToString();
 			return Post<AccountRequest, AccountResponse>(query, accountRequest);
 		}
 
-		// todo comment
-		public AccountResponse CreateAndLogin(int gameId, AccountRequest accountRequest)
+		public void CreateAndLoginAsync(int gameId, AccountRequest account, Action<AccountResponse> onSuccess, Action<Exception> onError)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}/createandlogin", gameId).ToString();
-			return Post<AccountRequest, AccountResponse>(query, accountRequest);
+			AsyncRequestController.EnqueueRequest(() => CreateAndLogin(gameId, account),
+				onSuccess,
+				onError);
 		}
 
 		public void Heartbeat()
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/heartbeat").ToString();
 			Get(query);
+		}
+
+		public void HeartbeatAsync(Action onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(Heartbeat,
+				onSuccess,
+				onError);
 		}
 
 		// todo comment
@@ -76,6 +71,13 @@ namespace PlayGen.SUGAR.Client
 			Get(query);
 
 			ClearSessionData();
+		}
+
+		public void LogoutAsync(Action onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(Logout,
+				onSuccess,
+				onError);
 		}
 	}
 }

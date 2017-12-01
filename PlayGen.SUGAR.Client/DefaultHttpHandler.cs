@@ -84,10 +84,10 @@ namespace PlayGen.SUGAR.Client
 				webResponse = (HttpWebResponse)ex.Response;
 			}
 
-			var response = new HttpResponse()
+			var response = new HttpResponse
 			{
 				StatusCode = (int)webResponse.StatusCode,
-				Headers = webResponse.Headers.AllKeys.ToDictionary(k => k, v => webResponse.Headers[v]),
+				Headers = webResponse.Headers.AllKeys.ToDictionary(k => k, v => webResponse.Headers[v])
 			};
 
 			var dataStream = webResponse.GetResponseStream();

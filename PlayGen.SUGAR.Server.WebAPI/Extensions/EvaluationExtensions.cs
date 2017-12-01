@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				ActorType = model.ActorType,
 				Token = model.Token,
 				EvaluationCriterias = model.EvaluationCriterias.ToContractList(),
-				Rewards = model.Rewards.ToContractList(),
+				Rewards = model.Rewards.ToContractList()
 			};
 		}
 
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				CriteriaQueryType = contract.CriteriaQueryType,
 				EvaluationDataType = contract.EvaluationDataType,
 				Scope = contract.Scope,
-				Value = contract.Value,
+				Value = contract.Value
 			};
 		}
 
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				CriteriaQueryType = contract.CriteriaQueryType,
 				EvaluationDataType = contract.EvaluationDataType,
 				Scope = contract.Scope,
-				Value = contract.Value,
+				Value = contract.Value
 			};
 		}
 
@@ -69,7 +69,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			return new EvaluationProgressResponse {
 				Actor = model.Actor.ToActorContract(),
 				Name = model.Name,
-				Progress = model.Progress,
+				Progress = model.Progress
 			};
 		}
 

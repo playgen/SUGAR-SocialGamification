@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public List<Actor> GetRoleActors(int roleId, int? entityId)
 		{
-			var roles = _actorRoleDbController.GetRoleActors(roleId, entityId.Value);
+			var roles = _actorRoleDbController.GetRoleActors(roleId, entityId);
 
 			Logger.Info($"{roles?.Count} Actors for RoleId: {roleId}, EntityId: {entityId}");
 

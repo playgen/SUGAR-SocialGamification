@@ -20,8 +20,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.UserController _userCoreController;
 
-		public UserController(Core.Controllers.UserController userCoreController,
-					IAuthorizationService authorizationService)
+		public UserController(Core.Controllers.UserController userCoreController, IAuthorizationService authorizationService)
 		{
 			_userCoreController = userCoreController;
 			_authorizationService = authorizationService;
@@ -34,11 +33,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <returns>A list of <see cref="UserResponse"/> that hold User details.</returns>
 		[HttpGet("list")]
-		//[ResponseType(typeof(IEnumerable<UserResponse>))]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.User)]
 		public async Task<IActionResult> Get()
 		{
-			if (await _authorizationService.AuthorizeAsync(User, -1, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
+			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
 			{
 				var users = _userCoreController.Get();
 				var actorContract = users.ToContractList();
@@ -57,7 +55,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A list of <see cref="UserResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
 		[HttpGet("find/{name}/{exactMatch:bool}")]
-		//[ResponseType(typeof(IEnumerable<UserResponse>))]
 		public IActionResult Get([FromRoute]string name, bool exactMatch = false)
 		{
 			var users = _userCoreController.Search(name, exactMatch);
@@ -90,12 +87,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="actor"><see cref="UserRequest"/> object that holds the details of the new User.</param>
 		/// <returns>A <see cref="UserResponse"/> containing the new User details.</returns>
 		[HttpPost]
-		//[ResponseType(typeof(UserResponse))]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.User)]
 		public async Task<IActionResult> Create([FromBody]UserRequest actor)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
+			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
 			{
 				var user = actor.ToUserModel();
 				_userCoreController.Create(user);
@@ -117,7 +113,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.User)]
 		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UserRequest user)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.User)]))
+			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.User)))
 			{
 				var userModel = user.ToUserModel();
 				userModel.Id = id;
@@ -137,7 +133,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Delete, AuthorizationEntity.User)]
 		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
+			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
 			{
 				_userCoreController.Delete(id);
 				return Ok();

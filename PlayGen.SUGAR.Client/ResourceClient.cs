@@ -18,7 +18,6 @@ namespace PlayGen.SUGAR.Client
 			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
 		{
 		}
-		
 
 		/// <summary>
 		/// Find a list of all Resources that match the <param name="gameId"/>, <param name="actorId"/> and <param name="keys"/> provided.
@@ -76,20 +75,6 @@ namespace PlayGen.SUGAR.Client
 		public void TransferAsync(ResourceTransferRequest data, Action<ResourceTransferResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Transfer(data),
-				onSuccess,
-				onError);
-		}
-
-
-				public ResourceAddResponse Add(ResourceAddRequest data)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/add").ToString();
-			return Post<ResourceAddRequest, ResourceAddResponse>(query, data);
-		}
-
-		public void AddAsync(ResourceAddRequest data, Action<ResourceAddResponse> onSuccess, Action<Exception> onError)
-		{
-			AsyncRequestController.EnqueueRequest(() => Add(data),
 				onSuccess,
 				onError);
 		}

@@ -55,6 +55,24 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
+		/// Get a count of users that have a relationship with this <param name="groupId"/>.
+		/// </summary>
+		/// <param name="groupId">ID of the group.</param>
+		/// <returns>A count of members in the group that matches the search criteria.</returns>
+		public int GetMemberCount(int groupId)
+		{
+			var query = GetUriBuilder(ControllerPrefix + "/membercount/{0}", groupId).ToString();
+			return Get<int>(query);
+		}
+
+		public void GetMemberCountAsync(int groupId, Action<int> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetMemberCount(groupId),
+				onSuccess,
+				onError);
+		}
+
+		/// <summary>
 		/// Get a list of all Users that have relationships with this <param name="groupId"/>.
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>

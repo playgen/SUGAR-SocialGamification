@@ -16,12 +16,12 @@ namespace PlayGen.SUGAR.Server.WebAPI
             var keyBytes = Encoding.ASCII.GetBytes(Configuration["APIKey"]);
             key = new SymmetricSecurityKey(keyBytes);
 
-            tokenOptions = new TokenAuthOptions()
-            {
+            tokenOptions = new TokenAuthOptions
+								{
                 Audience = TokenAudience,
                 Issuer = TokenIssuer,
                 SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
-                ValidityTimeout = validityTimeout,
+                ValidityTimeout = validityTimeout
             };
 
             services.AddSingleton(tokenOptions);
@@ -38,9 +38,6 @@ namespace PlayGen.SUGAR.Server.WebAPI
             services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithoutEntity>();
 
             services.AddScoped<ClaimController>();
-            var container = services.BuildServiceProvider();
-            var claimController = container.GetService<ClaimController>();
-            claimController.GetAuthorizationClaims();
         }
     }
 }

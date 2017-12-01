@@ -21,8 +21,9 @@ namespace PlayGen.SUGAR.Server.WebAPI
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		private readonly IHostingEnvironment _environment;
 
-		const string TokenAudience = "User";
-		const string TokenIssuer = "SUGAR";
+		private const string TokenAudience = "User";
+
+		private const string TokenIssuer = "SUGAR";
 		private SymmetricSecurityKey key;
 		private TokenAuthOptions tokenOptions;
 		
@@ -42,14 +43,14 @@ namespace PlayGen.SUGAR.Server.WebAPI
 
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
-				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+				.AddJsonFile("appsettings.json", true, true)
+				.AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
 
 
 			if (env.IsEnvironment("Development"))
 			{
 				// This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-				builder.AddApplicationInsightsSettings(developerMode: true);
+				builder.AddApplicationInsightsSettings(true);
 			}
 
 			builder.AddEnvironmentVariables();
@@ -70,7 +71,8 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			var timeoutCheckInterval = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TimeoutCheckInterval"]);
 			var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
 
-			services.AddScoped((_) => new PasswordEncryption());
+			services.AddSingleton(_environment);
+			services.AddScoped(_ => new PasswordEncryption());
 			services.AddApplicationInsightsTelemetry(Configuration);
 
 			// Add framework services.

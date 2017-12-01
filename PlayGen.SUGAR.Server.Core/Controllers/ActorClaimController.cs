@@ -79,9 +79,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public List<Actor> GetClaimActors(int claimId, int? entityId)
 		{
-			var claimActors = _actorClaimDbController.GetClaimActors(claimId, entityId.Value);
+			var claimActors = _actorClaimDbController.GetClaimActors(claimId, entityId);
 			var claimRoles = _roleClaimController.GetRolesByClaim(claimId).Select(cr => cr.Id);
-			var roleActors = claimRoles.SelectMany(cr => _actorRoleController.GetRoleActors(cr, entityId.Value)).Distinct();
+			var roleActors = claimRoles.SelectMany(cr => _actorRoleController.GetRoleActors(cr, entityId)).Distinct();
 
 			var results = claimActors.Concat(roleActors).Distinct().ToList();
 
