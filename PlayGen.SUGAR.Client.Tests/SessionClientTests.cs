@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			// Arrange
 			var headers = (Dictionary<string, string>)
 				typeof(ClientBase)
-				.GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
+				.GetField("_persistentHeaders", BindingFlags.NonPublic | BindingFlags.Instance)
 				.GetValue(Fixture.SUGARClient.Session);
 
 			var originalToken = headers[HeaderKeys.Authorization];
@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			// Arrange
 			var headers = (Dictionary<string, string>)
 				typeof(ClientBase)
-				.GetField("PersistentHeaders", BindingFlags.Static | BindingFlags.NonPublic)
+				.GetField("_persistentHeaders", BindingFlags.NonPublic | BindingFlags.Instance)
 				.GetValue(Fixture.SUGARClient.Session);
 
 			var originalToken = headers[HeaderKeys.Authorization];

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using PlayGen.SUGAR.Server.WebAPI;
@@ -21,10 +22,15 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Program.SetUp(Server.Host);
 
+			SUGARClient = CreateSugarClient();
+		}
+
+		public SUGARClient CreateSugarClient(Dictionary<string, string> persistentHeaders = null)
+		{
 			var client = Server.CreateClient();
 			var testHttpHandler = new HttpClientHandler(client);
-
-			SUGARClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler);
+			var sugarClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler, persistentHeaders);
+			return sugarClient;
 		}
 
 		public void Dispose()

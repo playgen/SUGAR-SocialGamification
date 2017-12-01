@@ -9,7 +9,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-    public class APIVersionTests : ClientTestBase
+	public class APIVersionTests : ClientTestBase
 	{
 		[Fact]
 		public void CanAccessWithMatchingAPIVersion()
@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			};
 
 			// Act
-			var accountResponse = SUGARClient.Account.Create(accountRequest);
+			var accountResponse = Fixture.SUGARClient.Account.Create(accountRequest);
 
 			// Asssert
 			Assert.NotNull(accountResponse);
@@ -40,13 +40,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				SourceToken = "SUGAR"
 			};
 
-			var sugarClient = CreateSugarClient();
-
-			var type = typeof(ClientBase);
-			var fieldInfo = type.GetField("PersistentHeaders", BindingFlags.NonPublic | BindingFlags.Static);
-			var persistentHeaders = (Dictionary<string, string>)fieldInfo.GetValue(SUGARClient.Account);
-
-			persistentHeaders["APIVersion"] = "0.0.0";
+			var sugarClient = Fixture.CreateSugarClient(new Dictionary<string, string> { { "APIVersion", "0.0.0" } });
 
 			// Act & Assert
 			Assert.Throws<ClientHttpException>(() => sugarClient.Account.Create(accountRequest));
@@ -67,19 +61,17 @@ namespace PlayGen.SUGAR.Client.Tests
 				SourceToken = "SUGAR"
 			};
 
-			var sugarClient = CreateSugarClient();
-
-			var type = typeof(ClientBase);
-			var fieldInfo = type.GetField("PersistentHeaders", BindingFlags.NonPublic | BindingFlags.Static);
-			var persistentHeaders = (Dictionary<string, string>)fieldInfo.GetValue(SUGARClient.Account);
-
-			persistentHeaders["APIVersion"] = $"{APIVersion.Major}.{minor}.{build}";
+			var sugarClient = Fixture.CreateSugarClient(new Dictionary<string, string> { { "APIVersion", $"{APIVersion.Major}.{minor}.{build}" } });
 
 			// Act
 			var response = sugarClient.Account.Create(accountRequest);
 
 			// Assert
 			Assert.NotNull(response);
+		}
+
+		public APIVersionTests(ClientTestsFixture fixture) : base(fixture)
+		{
 		}
 	}
 }

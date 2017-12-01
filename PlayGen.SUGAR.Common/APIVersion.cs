@@ -26,14 +26,14 @@ namespace PlayGen.SUGAR.Common
 
 		public static string Version => $"{Major}.{Minor}.{Build}";
 
-		public static bool IsCompatible(int major)
+		public static bool IsCompatible(int checkMajor)
 		{
-			return Major == major;
+			return Major == checkMajor;
 		}
 
-		public static bool IsCompatible(string version)
+		public static bool IsCompatible(string checkVersion)
 		{
-			return Version.Split('.').First() == version.Split('.').First();
+			return int.TryParse(checkVersion.Split('.').First(), out var checkVersionMajor) && IsCompatible(checkVersionMajor);
 		}
 	}
 }

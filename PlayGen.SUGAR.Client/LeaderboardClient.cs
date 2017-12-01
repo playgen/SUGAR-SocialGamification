@@ -13,11 +13,16 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/leaderboards";
 
-		public LeaderboardClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
+		public LeaderboardClient(
+			string baseAddress,
+			IHttpHandler httpHandler,
+			Dictionary<string, string> persistentHeaders,
+			AsyncRequestController asyncRequestController,
+			EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
 		{
 		}
-		
+
 		/// <summary>
 		/// Get all global leaderboards, ie. leaderboards that are not associated with a specific game
 		/// </summary>

@@ -13,8 +13,13 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/game";
 
-		public GameClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
+		public GameClient(
+			string baseAddress,
+			IHttpHandler httpHandler,
+			Dictionary<string, string> persistentHeaders,
+			AsyncRequestController asyncRequestController,
+			EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
 		{
 		}
 
