@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using NLog;
@@ -15,6 +16,8 @@ using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public class LeaderboardController : CriteriaEvaluator
 	{
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -56,7 +59,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		protected List<LeaderboardStandingsResponse> GatherStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
 		{
-			var actors = GetActors(request.LeaderboardFilterType, leaderboard.ActorType, request.ActorId);
+			var actors = GetActors(request.LeaderboardFilterType.Value, leaderboard.ActorType, request.ActorId);
 
 			var evaluationDataController = new EvaluationDataController(ContextFactory, leaderboard.EvaluationDataCategory);
 
@@ -92,7 +95,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					return null;
 			}
 
-			var results = FilterResults(typeResults, request.PageLimit, request.PageOffset, request.LeaderboardFilterType, request.ActorId);
+			var results = FilterResults(typeResults, request.PageLimit.Value, request.PageOffset.Value, request.LeaderboardFilterType.Value, request.ActorId);
 
 			Logger.Info($"{results?.Count} Standings for Leaderboard: {leaderboard.Token}");
 

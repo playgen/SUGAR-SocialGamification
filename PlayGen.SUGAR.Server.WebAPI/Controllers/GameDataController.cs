@@ -42,15 +42,18 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.GameData)]
-		public async Task<IActionResult> Get(int actorId, int gameId, string[] key)
+		public async Task<IActionResult> Get(int? actorId, int? gameId, string[] key)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
+			if (gameId.HasValue && actorId.HasValue)
+			{
+				if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
 				await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User)) ||
 				await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
-			{
-				var data = _gameDataCoreController.Get(gameId, actorId, key);
-				var dataContract = data.ToContractList();
-				return new ObjectResult(dataContract);
+				{
+					var data = _gameDataCoreController.Get(gameId.Value, actorId.Value, key);
+					var dataContract = data.ToContractList();
+					return new ObjectResult(dataContract);
+				}
 			}
 			return Forbid();
 		}
@@ -104,39 +107,42 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.GameData)]
-		public async Task<IActionResult> GetHighest(int actorId, int gameId, string[] key, EvaluationDataType dataType)
+		public async Task<IActionResult> GetHighest(int? actorId, int? gameId, string[] key, EvaluationDataType dataType)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
+			if (gameId.HasValue && actorId.HasValue)
+			{
+				if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
 				 await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User)) ||
 				 await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
-			{
-				var dataList = new List<EvaluationData>();
-				switch (dataType)
 				{
-					case EvaluationDataType.Float:
-						foreach (var dataKey in key)
-						{
-							var gameData = _gameDataCoreController.GetEvaluationDataByHighestFloat(gameId, actorId, dataKey);
-							if (gameData != null)
+					var dataList = new List<EvaluationData>();
+					switch (dataType)
+					{
+						case EvaluationDataType.Float:
+							foreach (var dataKey in key)
 							{
-								dataList.Add(gameData);
+								var gameData = _gameDataCoreController.GetEvaluationDataByHighestFloat(gameId.Value, actorId.Value, dataKey);
+								if (gameData != null)
+								{
+									dataList.Add(gameData);
+								}
 							}
-						}
-						break;
-					case EvaluationDataType.Long:
-						foreach (var dataKey in key)
-						{
-							var gameData = _gameDataCoreController.GetEvaluationDataByHighestLong(gameId, actorId, dataKey);
-							if (gameData != null)
+							break;
+						case EvaluationDataType.Long:
+							foreach (var dataKey in key)
 							{
-								dataList.Add(gameData);
+								var gameData = _gameDataCoreController.GetEvaluationDataByHighestLong(gameId.Value, actorId.Value, dataKey);
+								if (gameData != null)
+								{
+									dataList.Add(gameData);
+								}
 							}
-						}
-						break;
+							break;
 
+					}
+					var dataContract = dataList.ToContractList();
+					return new ObjectResult(dataContract);
 				}
-				var dataContract = dataList.ToContractList();
-				return new ObjectResult(dataContract);
 			}
 			return Forbid();
 		}

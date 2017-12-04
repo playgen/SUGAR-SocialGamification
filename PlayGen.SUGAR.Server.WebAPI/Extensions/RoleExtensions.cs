@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class RoleExtensions
 	{
 		public static RoleResponse ToContract(this Role roleModel)
@@ -31,7 +34,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		{
 			return new Role {
 				Name = roleContract.Name,
-				ClaimScope = roleContract.ClaimScope,
+				ClaimScope = roleContract.ClaimScope.Value,
 				Default = false
 			};
 		}

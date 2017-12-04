@@ -12,11 +12,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			{
 				return matches.Where(m => m.Started == null && m.Ended == null);
 			}
-			if (end == null)
-			{
-				return matches.Where(m => m.Started != null && start <= m.Started && m.Ended == null);
-			}
-			return matches.Where(m => m.Started != null && start <= m.Started && m.Ended != null && m.Ended <= end);
+			return end == null ? matches.Where(m => m.Started != null && start <= m.Started && m.Ended == null) : matches.Where(m => m.Started != null && start <= m.Started && m.Ended != null && m.Ended <= end);
 		}
 	}
 }

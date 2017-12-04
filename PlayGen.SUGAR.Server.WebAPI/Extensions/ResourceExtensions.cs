@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
@@ -6,6 +7,8 @@ using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class ResourceExtensions
 	{
 		public static ResourceResponse ToResourceContract(this EvaluationData evaluationData)
@@ -32,8 +35,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static EvaluationData ToModel(this ResourceAddRequest resourceContract)
 		{
 			return new EvaluationData {
-				ActorId = resourceContract.ActorId,
-				GameId = resourceContract.GameId,
+				ActorId = resourceContract.ActorId.Value,
+				GameId = resourceContract.GameId.Value,
 				Key = resourceContract.Key,
 				Value = resourceContract.Quantity.ToString(),
 				EvaluationDataType = EvaluationDataType.Long,

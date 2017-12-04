@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Contracts
 		/// The ID of the Game which this achievement/skill should belong to.
 		/// </summary>
 		[Required]
-		public int GameId { get; set; }
+		public int? GameId { get; set; }
 
 		/// <summary>
 		/// The display name for the achievement/skill.
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Contracts
 		/// The type of actor which this achievement/skill is intended to be completed by.
 		/// </summary>
 		[Required]
-		public ActorType ActorType { get; set; }
+		public ActorType? ActorType { get; set; }
 
 		/// <summary>
 		/// A list of criteria which will be checked in order to see if an actor has completed the achievement/skill.

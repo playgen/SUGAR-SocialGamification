@@ -28,15 +28,17 @@ namespace PlayGen.SUGAR.Contracts
         [StringLength(128)]
         public string Token { get; set; }
 
-        /// <summary>
-        /// Whether the user needs to pass a password when logging in via this source
-        /// </summary>
-        public bool RequiresPassword { get; set; }
+		/// <summary>
+		/// Whether the user needs to pass a password when logging in via this source
+		/// </summary>
+		[Required]
+		public bool? RequiresPassword { get; set; }
 
-        /// <summary>
-        /// Whether an account is created if one does not already exist for this source
-        /// </summary>
-        public bool AutoRegister { get; set; }
+		/// <summary>
+		/// Whether an account is created if one does not already exist for this source
+		/// </summary>
+		[Required]
+		public bool? AutoRegister { get; set; }
     }
 }
 

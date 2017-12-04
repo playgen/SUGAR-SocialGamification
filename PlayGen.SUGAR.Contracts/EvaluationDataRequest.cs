@@ -22,13 +22,13 @@ namespace PlayGen.SUGAR.Contracts
 		/// The id of the Actor which this ActorData/GameData is being ensigned to.
 		/// </summary>
 		[Required]
-		public int CreatingActorId { get; set; }
+		public int? CreatingActorId { get; set; }
 
 		/// <summary>
 		/// The id of the Game which this ActorData/GameData relates to.
 		/// </summary>
 		[Required]
-		public int GameId { get; set; }
+		public int? GameId { get; set; }
 
         /// <summary>
         /// Id of the match this data is related to.
@@ -53,6 +53,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// The type of data which is being stored.
 		/// </summary>
 		[Required]
-		public EvaluationDataType EvaluationDataType { get; set; }
+		public EvaluationDataType? EvaluationDataType { get; set; }
 	}
 }

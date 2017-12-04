@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using Xunit;
 
@@ -85,7 +86,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				Key = key,
 				EvaluationDataType = EvaluationDataType.Long,
 				CreatingActorId = loggedInAccount.User.Id,
-				Value = "5"
+				Value = "5",
+				GameId = Platform.GlobalId
 			};
 
 			Fixture.SUGARClient.GameData.Add(gameData);
@@ -95,7 +97,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				LeaderboardToken = key,
 				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 10,
-				PageOffset = 0
+				PageOffset = 0, 
+				GameId = Platform.GlobalId
 			};
 
 			var standingsResponse = Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);

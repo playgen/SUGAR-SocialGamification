@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 {
     public class APIVersionFilterFilter : IActionFilter
     {
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		public void OnActionExecuting(ActionExecutingContext context)
         {
@@ -15,8 +15,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 			{
 				if (!APIVersion.IsCompatible(requestApiVersion))
 				{
-					throw new IncompatibleAPIVersionException($"Server and Client API Major versions do not match." +
-															$" This is likley to cause unpredictable behaviour." +
+					throw new IncompatibleAPIVersionException("Server and Client API Major versions do not match." +
+															" This is likley to cause unpredictable behaviour." +
 															$" \nServer API Version: {requestApiVersion}" +
 															$" \nClient API Version: {requestApiVersion}");
 				}

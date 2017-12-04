@@ -11,13 +11,13 @@ namespace PlayGen.SUGAR.Contracts
 		/// The id of the Actor which this Resource is being ensigned to.
 		/// </summary>
 		[Required]
-		public int ActorId { get; set; }
+		public int? ActorId { get; set; }
 
 		/// <summary>
 		/// The id of the Game which this Resource relates to.
 		/// </summary>
 		[Required]
-		public int GameId { get; set; }
+		public int? GameId { get; set; }
 
 		/// <summary>
 		/// The identifier/name of the Resource.
@@ -30,6 +30,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// The value of the Resource.
 		/// </summary>
 		[Required]
-		public long Quantity { get; set; }
+		public long? Quantity { get; set; }
 	}
 }

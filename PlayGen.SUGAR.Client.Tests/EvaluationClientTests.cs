@@ -5,7 +5,7 @@ namespace PlayGen.SUGAR.Client.Tests
 {
 	public abstract class EvaluationClientTests : ClientTestBase
 	{
-		protected void CompleteGenericEvaluation(string key, int userId, int gameId = 0)
+		protected void CompleteGenericEvaluation(string key, int userId, int gameId)
 		{
 			Fixture.SUGARClient.GameData.Add(new EvaluationDataRequest
 			{

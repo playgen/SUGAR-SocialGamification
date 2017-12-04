@@ -17,7 +17,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = friend.Id
+				AcceptorId = friend.Id,
+				AutoAccept = false
 			};
 
 			var relationshipResponse = Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
@@ -74,7 +75,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = friend.Id
+				AcceptorId = friend.Id,
+				AutoAccept = false
 			};
 
 			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
@@ -113,7 +115,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = friend.Id
+				AcceptorId = friend.Id,
+				AutoAccept = false
 			};
 
 			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
@@ -164,7 +167,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = friend.Id
+				AcceptorId = friend.Id,
+				AutoAccept = false
 			};
 
 			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
@@ -217,7 +221,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = friend.Id
+				AcceptorId = friend.Id,
+				AutoAccept = false
 			};
 
 			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
@@ -331,7 +336,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = friend.Id
+				AcceptorId = friend.Id,
+				Accepted = false
 			};
 
 			Fixture.SUGARClient.UserFriend.UpdateFriend(relationshipStatusUpdate);
@@ -382,7 +388,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = requestAccount.User.Id,
-					AcceptorId = friend.Id
+					AcceptorId = friend.Id,
+					AutoAccept = false
 				};
 				Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 			}
@@ -416,7 +423,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = loggedInAccountLoop.User.Id,
-					AcceptorId = friend.Id
+					AcceptorId = friend.Id,
+					AutoAccept = false
 				};
 				Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 			}

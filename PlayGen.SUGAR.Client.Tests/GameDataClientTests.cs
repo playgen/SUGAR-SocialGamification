@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		}
 
 		[Fact]
-		public void CanCreateWithoutGameId()
+		public void CannotCreateWithoutGameId()
 		{
 			var key = "GameData_CanCreateWithoutGameId";
 			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
@@ -48,13 +48,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
-
-			Assert.Equal(evaluationDataRequest.CreatingActorId, response.CreatingActorId);
-			Assert.Equal(evaluationDataRequest.GameId, response.GameId);
-			Assert.Equal(evaluationDataRequest.Key, response.Key);
-			Assert.Equal(evaluationDataRequest.Value, response.Value);
-			Assert.Equal(evaluationDataRequest.EvaluationDataType, response.EvaluationDataType);
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 		}
 
 		[Fact]
@@ -192,11 +186,11 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
 
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Get(0, game.Id, new[] { key }));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Get(Platform.GlobalId, game.Id, new[] { key }));
 		}
 
 		[Fact]
-		public void CanGetGameDataWithoutGameId()
+		public void CanGetGlobalGameData()
 		{
 			var key = "GameData_CanGetGameDataWithoutGameId";
 			Helpers.Login(Fixture.SUGARClient, key, key, out var _, out var loggedInAccount);
@@ -204,6 +198,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
 				CreatingActorId = loggedInAccount.User.Id,
+				GameId = Platform.GlobalId,
 				Key = key,
 				Value = "Test Value",
 				EvaluationDataType = EvaluationDataType.String
@@ -283,6 +278,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
 				Key = dataKey,
+				GameId = Platform.GlobalId,
 				Value = "TestValue",
 				EvaluationDataType = EvaluationDataType.String,
 				CreatingActorId = loggedInAccount.User.Id

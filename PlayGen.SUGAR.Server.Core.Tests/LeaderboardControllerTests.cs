@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
@@ -11,8 +12,10 @@ using DbControllerLocator = PlayGen.SUGAR.Server.EntityFramework.Tests.Controlle
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-    // todo Change to user core controllers
-    public class LeaderboardControllerTests : CoreTestBase, IClassFixture<TestDataFixture>
+	// todo Change to user core controllers
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
+	public class LeaderboardControllerTests : CoreTestBase, IClassFixture<TestDataFixture>
     {
         #region Configuration
 
@@ -329,7 +332,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             {
                 Random random = new Random();
                 int randomId = random.Next(1, TestDataFixture.UserCount + 1);
-                Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
+                Assert.Equal(randomId, standings[filter.PageLimit.Value - randomId].ActorId);
             }
         }
 
@@ -350,7 +353,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             {
                 Random random = new Random();
                 int randomId = random.Next(1, TestDataFixture.UserCount + 1);
-                Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
+                Assert.Equal(randomId, standings[filter.PageLimit.Value - randomId].ActorId);
             }
         }
 
@@ -371,7 +374,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             {
                 Random random = new Random();
                 int randomId = random.Next(1, TestDataFixture.UserCount + 1);
-                Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
+                Assert.Equal(randomId, standings[filter.PageLimit.Value - randomId].ActorId);
             }
         }
 
@@ -392,7 +395,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             {
                 Random random = new Random();
                 int randomId = random.Next(1, TestDataFixture.UserCount + 1);
-                Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
+                Assert.Equal(randomId, standings[filter.PageLimit.Value - randomId].ActorId);
             }
         }
 
@@ -455,7 +458,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             {
                 Random random = new Random();
                 int randomId = random.Next(1, TestDataFixture.UserCount + 1);
-                Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
+                Assert.Equal(randomId, standings[filter.PageLimit.Value - randomId].ActorId);
             }
         }
 
@@ -476,7 +479,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             {
                 Random random = new Random();
                 int randomId = random.Next(1, TestDataFixture.UserCount + 1);
-                Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
+                Assert.Equal(randomId, standings[filter.PageLimit.Value - randomId].ActorId);
             }
         }
 
@@ -582,7 +585,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
             for (int i = 0; i < filter.PageLimit; i++)
             {
-                int offset = ((filter.ActorId.Value - 1) / (TestDataFixture.UserCount / filter.PageLimit)) * filter.PageLimit;
+                int offset = ((filter.ActorId.Value - 1) / (TestDataFixture.UserCount / filter.PageLimit.Value)) * filter.PageLimit.Value;
                 Assert.Equal(offset + i + 1, standings[i].ActorId);
             }
         }

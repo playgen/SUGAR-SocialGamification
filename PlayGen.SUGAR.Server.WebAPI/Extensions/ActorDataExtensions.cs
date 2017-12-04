@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class ActorDataExtensions
 	{
 		public static EvaluationDataResponse ToContract(this ActorData actorData)
@@ -33,11 +36,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		{
 			return new ActorData
 			{
-				ActorId = dataContract.CreatingActorId,
-				GameId = dataContract.GameId,
+				ActorId = dataContract.CreatingActorId.Value,
+				GameId = dataContract.GameId.Value,
 				Key = dataContract.Key,
 				Value = dataContract.Value,
-				EvaluationDataType = dataContract.EvaluationDataType
+				EvaluationDataType = dataContract.EvaluationDataType.Value
 			};
 		}
 	}

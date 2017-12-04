@@ -39,14 +39,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.ActorData)]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorData)]
-		public async Task<IActionResult> Get(int actorId, int gameId, string[] key)
+		public async Task<IActionResult> Get(int? actorId, int? gameId, string[] key)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User)))
+			if (gameId.HasValue && actorId.HasValue)
 			{
-				var data = _actorDataCoreController.Get(gameId, actorId, key);
-				var dataContract = data.ToContractList();
-				return new ObjectResult(dataContract);
+				if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
+				await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User)))
+				{
+					var data = _actorDataCoreController.Get(gameId.Value, actorId.Value, key);
+					var dataContract = data.ToContractList();
+					return new ObjectResult(dataContract);
+				}
 			}
 			return Forbid();
 		}
