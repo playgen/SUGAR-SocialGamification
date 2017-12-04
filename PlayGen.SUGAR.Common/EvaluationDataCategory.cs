@@ -6,6 +6,6 @@
 		Resource = 1,
 		Skill = 2,
 		Achievement = 3,
-		MatchData = 4,
+		MatchData = 4
 	}
 }

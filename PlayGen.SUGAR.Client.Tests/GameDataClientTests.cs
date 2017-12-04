@@ -2,6 +2,7 @@
 using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using Xunit;
 
@@ -210,7 +211,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
 
-			var get = Fixture.SUGARClient.GameData.Get(loggedInAccount.User.Id, null, new[] { key });
+			var get = Fixture.SUGARClient.GameData.Get(loggedInAccount.User.Id, Platform.GlobalId, new[] { key });
 
 			Assert.Equal(1, get.Count());
 			Assert.Equal(get.First().CreatingActorId, response.CreatingActorId);

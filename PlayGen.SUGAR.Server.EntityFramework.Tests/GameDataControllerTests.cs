@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.Model;
 using Xunit;
@@ -38,7 +40,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.ActorId, new List<string> { newEvaluationData.Key });
 
-			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == null && g.ActorId == newEvaluationData.ActorId);
+			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == Platform.GlobalId && g.ActorId == newEvaluationData.ActorId);
 
 			Assert.Equal(1, matches);
 		}
@@ -113,7 +115,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userDataName = "GetUserEvaluationDatasWithNonExistingUser";
 
-			var newEvaluationData = CreateEvaluationData(userDataName);
+			var newEvaluationData = CreateEvaluationData(userDataName, Platform.GlobalId, Platform.GlobalId);
 
 			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, -1, new List<string> { userDataName });
 
@@ -145,8 +147,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var userData = new Model.EvaluationData {
 				Key = key,
-				GameId = gameId,
-				ActorId = userId,
+				GameId = gameId ?? Platform.GlobalId,
+				ActorId = userId ?? Platform.GlobalId,
 				Value = key + " value",
 				EvaluationDataType = 0
 			};

@@ -39,9 +39,10 @@ namespace PlayGen.SUGAR.Contracts
 		public string Token { get; set; }
 
 		/// <summary>
-		/// The ID of the Game which this achievement/skill should belong to. Can be left null to make the achievement/skill system-wide.
+		/// The ID of the Game which this achievement/skill should belong to.
 		/// </summary>
-		public int? GameId { get; set; }
+		[Required]
+		public int GameId { get; set; }
 
 		/// <summary>
 		/// The display name for the achievement/skill.

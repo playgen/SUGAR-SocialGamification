@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Server.Core.Sessions
 {
     public class SessionTracker : IDisposable
     {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public event Action<Session> SessionStartedEvent;
         public event Action<Session> SessionEndedEvent;
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Server.Core.Sessions
             _isDisposed = true;
         }
 
-        public Session StartSession(int? gameId, int actorId)
+        public Session StartSession(int gameId, int actorId)
         {
             var session = new Session(gameId, actorId);
 
@@ -85,7 +85,7 @@ namespace PlayGen.SUGAR.Server.Core.Sessions
             return _sessions.Values.Where(s => s.ActorId == actorId).ToList();
         }
 
-        public List<Session> GetByGames(List<int?> gameIds)
+        public List<Session> GetByGames(List<int> gameIds)
         {
             return _sessions.Values.Where(s => gameIds.Contains(s.GameId)).ToList();
         }

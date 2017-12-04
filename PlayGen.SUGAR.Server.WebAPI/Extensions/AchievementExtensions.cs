@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			var achievementModel = new Achievement {
 				Name = achievementContract.Name,
 				Description = achievementContract.Description,
-				GameId = achievementContract.GameId ?? 0,
+				GameId = achievementContract.GameId,
 				ActorType = achievementContract.ActorType,
 				Token = achievementContract.Token,
 				EvaluationCriterias = achievementContract.EvaluationCriterias.ToModelList(),
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				Id = achievementContract.Id,
 				Name = achievementContract.Name,
 				Description = achievementContract.Description,
-				GameId = achievementContract.GameId ?? 0,
+				GameId = achievementContract.GameId,
 				ActorType = achievementContract.ActorType,
 				Token = achievementContract.Token,
 				EvaluationCriterias = achievementContract.EvaluationCriterias.ToModelList(),

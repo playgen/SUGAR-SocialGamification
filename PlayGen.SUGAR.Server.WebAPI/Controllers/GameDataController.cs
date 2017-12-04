@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.GameData)]
-		public async Task<IActionResult> Get(int? actorId, int? gameId, string[] key)
+		public async Task<IActionResult> Get(int actorId, int gameId, string[] key)
 		{
 			if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
 				await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User)) ||
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="id">ID of a Game.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("gameactors/{id:int}")]
-		public IActionResult GetGameActors(int? id)
+		public IActionResult GetGameActors(int id)
 		{
 			var data = _gameDataCoreController.GetGameActors(id);
 			var dataContract = data.ToActorContractList();
@@ -79,7 +79,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A list of GameData keys and their EvaluationDataType that has data saved for the provided game ID</returns>
 		[HttpGet("gamekeys/{id:int}")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.GameData)]
-		public async Task<IActionResult> GetGameKeys(int? id)
+		public async Task<IActionResult> GetGameKeys(int id)
 		{
 			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
@@ -104,7 +104,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.GameData)]
-		public async Task<IActionResult> GetHighest(int? actorId, int? gameId, string[] key, EvaluationDataType dataType)
+		public async Task<IActionResult> GetHighest(int actorId, int gameId, string[] key, EvaluationDataType dataType)
 		{
 			if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
 				 await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User)) ||

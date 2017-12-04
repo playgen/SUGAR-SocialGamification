@@ -13,6 +13,6 @@
         /// <summary>
         /// Skill evaluation type
         /// </summary>
-        Skill = 1,
+        Skill = 1
     }
 }

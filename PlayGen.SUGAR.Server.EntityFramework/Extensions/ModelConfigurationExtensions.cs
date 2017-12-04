@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 
 			builder.Entity<EvaluationData>()
 				.HasIndex(g => new { g.GameId, g.Category, g.MatchId, g.EvaluationDataType })
-				.HasName("IX_EvaluationData_Game_Category_Match_Type"); ;
+				.HasName("IX_EvaluationData_Game_Category_Match_Type");
 
 			builder.Entity<ActorData>()
 				.HasIndex(g => new { g.Key, g.GameId, g.ActorId, DataType = g.EvaluationDataType })

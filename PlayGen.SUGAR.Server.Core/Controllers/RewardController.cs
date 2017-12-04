@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class RewardController : CriteriaEvaluator
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		public RewardController(SUGARContextFactory contextFactory,
 			GroupMemberController groupMemberCoreController,
@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 		}
 
-		public bool AddReward(int? actorId, int? gameId, Reward reward)
+		public bool AddReward(int actorId, int gameId, Reward reward)
 		{
 			var evaluationDataController = new EvaluationDataController(ContextFactory, reward.EvaluationDataCategory);
 
@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			evaluationDataController.Add(evaluationData);
 
-			Logger.Info($"Game Data: {evaluationData?.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward?.Id}");
+			Logger.Info($"Game Data: {evaluationData.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward.Id}");
 
 			return true;
 		}

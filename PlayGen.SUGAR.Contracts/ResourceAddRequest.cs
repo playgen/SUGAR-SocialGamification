@@ -8,14 +8,16 @@ namespace PlayGen.SUGAR.Contracts
 	public class ResourceAddRequest
 	{
 		/// <summary>
-		/// The id of the Actor which this Resource is being ensigned to. Can be left null to ensign to the system/game.
+		/// The id of the Actor which this Resource is being ensigned to.
 		/// </summary>
-		public int? ActorId { get; set; }
+		[Required]
+		public int ActorId { get; set; }
 
 		/// <summary>
-		/// The id of the Game which this Resource relates to. Can be left null to relate the Resource to the wider system.
+		/// The id of the Game which this Resource relates to.
 		/// </summary>
-		public int? GameId { get; set; }
+		[Required]
+		public int GameId { get; set; }
 
 		/// <summary>
 		/// The identifier/name of the Resource.

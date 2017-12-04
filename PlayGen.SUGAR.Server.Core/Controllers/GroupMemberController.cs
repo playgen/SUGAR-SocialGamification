@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class GroupMemberController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		private readonly GroupRelationshipController _groupRelationshipDbController;
 
 		public GroupMemberController(GroupRelationshipController groupRelationshipDbController)

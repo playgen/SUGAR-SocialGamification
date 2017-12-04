@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Core.Controllers;
 using PlayGen.SUGAR.Server.Model;
 using Xunit;
@@ -24,7 +25,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         {
             var newResource = CreateResource("CanGetExistingResourceByKey");
 
-            var gotResources = _resourceController.Get(keys: new [] { newResource.Key });
+            var gotResources = _resourceController.Get(Platform.GlobalId, Platform.GlobalId, new[] { newResource.Key });
 
             Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
         }
@@ -34,7 +35,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         {
             var newResource = CreateResource("CanGetExistingResourceActorId", createNewUser: true);
 
-            var gotResources = _resourceController.Get(actorId: newResource.ActorId);
+            var gotResources = _resourceController.Get(Platform.GlobalId, newResource.ActorId);
 
             Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
         }
@@ -44,7 +45,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         {
             var newResource = CreateResource("CanGetExistingResourceGameId", createNewGame: true);
 
-            var gotResources = _resourceController.Get(gameId: newResource.GameId);
+            var gotResources = _resourceController.Get(newResource.GameId, Platform.GlobalId);
 
             Assert.True(gotResources.Count(r => IsMatch(r, newResource)) == 1);
         }
@@ -131,8 +132,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
             var resource = new EvaluationData
             {
-                GameId = gameId,
-                ActorId = actorId,
+                GameId = gameId ?? Platform.GlobalId,
+                ActorId = actorId ?? Platform.GlobalId,
                 Key = key,
                 Value = "100",
                 EvaluationDataType = EvaluationDataType.Long,

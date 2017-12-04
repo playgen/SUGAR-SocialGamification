@@ -27,9 +27,10 @@ namespace PlayGen.SUGAR.Contracts
         [Required]
         public int RoleId { get; set; }
 
-        /// <summary>
-        /// The ID of the entity (game, actor etc) related to this actorrole.
-        /// </summary>
-        public int? EntityId { get; set; }
+		/// <summary>
+		/// The ID of the entity (game, actor etc) related to this actorrole.
+		/// </summary>
+		[Required]
+		public int EntityId { get; set; }
     }
 }

@@ -26,34 +26,34 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 
 			#region Actor Roles
 			//global (admin)
-			CreateActorRole(context, roles[ClaimScope.Global], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.Global], adminUser, Platform.AllId);
 
 			//global game control
-			CreateActorRole(context, roles[ClaimScope.Game], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.Game], adminUser, Platform.AllId);
 
 			//global group control
-			CreateActorRole(context, roles[ClaimScope.Group], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.Group], adminUser, Platform.AllId);
 
 			// admin user
 			CreateActorRole(context, roles[ClaimScope.User], adminUser, adminUser.Id);
 
 			//global user control
-			CreateActorRole(context, roles[ClaimScope.User], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.User], adminUser, Platform.AllId);
 
 			// admin account
 			CreateActorRole(context, roles[ClaimScope.Account], adminUser, adminAccount.Id);
 
 			//global account control
-			CreateActorRole(context, roles[ClaimScope.Account], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.Account], adminUser, Platform.AllId);
 
 			//global role control
-			CreateActorRole(context, roles[ClaimScope.Role], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.Role], adminUser, Platform.AllId);
 			#endregion
 		}
 
 		public static void SeedTesting(this SUGARContext context)
 		{
-			var globalGame = CreateGame(context, "Global");
+			CreateGame(context, "Global");
 			#region Achievement Client Tests
 			CreateAchievement(context, CreateGame(context, "Achievement_CanDisableNotifications").Id, "Achievement_CanDisableNotifications");
 			CreateAchievement(context, CreateGame(context, "Achievement_CanGetNotifications").Id, "Achievement_CanGetNotifications");
@@ -163,9 +163,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 		{
 			var accountSource = context.AccountSources.Add(new AccountSource
 			{
-				Description = "SUGAR",
-				Token = "SUGAR",
-				RequiresPassword = true
+				Description = description,
+				Token = token,
+				RequiresPassword = requiresPass
 			}).Entity;
 			context.SaveChanges();
 			return accountSource;

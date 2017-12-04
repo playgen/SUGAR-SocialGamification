@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			_authorizationService = authorizationService;
 		}
 
-		protected async Task<IActionResult> Get(int? gameId, EvaluationType evaluationType)
+		protected async Task<IActionResult> Get(int gameId, EvaluationType evaluationType)
 		{
 			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			return Forbid();
 		}
 
-		protected async Task<IActionResult> Get(string token, int? gameId)
+		protected async Task<IActionResult> Get(string token, int gameId)
 		{
 			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{
@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			return Forbid();
 		}
 
-		protected IActionResult GetGameProgress(int gameId, int? actorId)
+		protected IActionResult GetGameProgress(int gameId, int actorId)
 		{
 			// todo: should this be taken from the progress cache?
 			var evaluationsProgress = EvaluationCoreController.GetGameProgress(gameId, actorId);
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			return new ObjectResult(evaluationsProgressResponses);
 		}
 
-		protected IActionResult GetEvaluationProgress(string token, int? gameId, int? actorId)
+		protected IActionResult GetEvaluationProgress(string token, int gameId, int actorId)
 		{
 			// todo: should this be taken from the progress cache?
 			var evaluation = EvaluationCoreController.Get(token, gameId);
@@ -66,7 +66,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			});
 		}
 
-		protected async Task<IActionResult> Delete(string token, int? gameId)
+		protected async Task<IActionResult> Delete(string token, int gameId)
 		{
 			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{

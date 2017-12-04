@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ActorClaimController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly EntityFramework.Controllers.ActorClaimController _actorClaimDbController;
 		private readonly ActorRoleController _actorRoleController;
@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			var results = claims.Concat(roleClaims).Concat(groupClaims).Distinct().ToList();
 
-			Logger.Info($"{results?.Count} Claims for ActorId: {actorId}");
+			Logger.Info($"{results.Count} Claims for ActorId: {actorId}");
 
 			return results;
 		}
@@ -59,25 +59,25 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var claims = GetActorClaims(actorId).ToList();
 			claims = claims.Where(c => c.Claim.ClaimScope == scope).ToList();
 
-			Logger.Info($"{claims?.Count} Actor Claims for ActorId: {actorId}, {nameof(ClaimScope)}: {scope}");
+			Logger.Info($"{claims.Count} Actor Claims for ActorId: {actorId}, {nameof(ClaimScope)}: {scope}");
 
 			return claims;
 		}
 
-		public List<Claim> GetActorClaimsForEntity(int actorId, int? entityId, ClaimScope scope)
+		public List<Claim> GetActorClaimsForEntity(int actorId, int entityId, ClaimScope scope)
 		{
-			var claims = _actorClaimDbController.GetActorClaimsForEntity(actorId, entityId.Value, scope).ToList();
+			var claims = _actorClaimDbController.GetActorClaimsForEntity(actorId, entityId, scope).ToList();
 			var groups = _groupMemberController.GetUserGroups(actorId).ToList();
-			var groupClaims = groups.SelectMany(g => GetActorClaimsForEntity(g.Id, entityId.Value, scope)).Distinct().ToList();
-			var roleClaims = _actorRoleController.GetActorRolesForEntity(actorId, entityId.Value, scope).SelectMany(r => r.RoleClaims).Select(rc => rc.Claim).ToList();
+			var groupClaims = groups.SelectMany(g => GetActorClaimsForEntity(g.Id, entityId, scope)).Distinct().ToList();
+			var roleClaims = _actorRoleController.GetActorRolesForEntity(actorId, entityId, scope).SelectMany(r => r.RoleClaims).Select(rc => rc.Claim).ToList();
 			var totalClaims = claims.Concat(roleClaims).Concat(groupClaims).Distinct().ToList();
 
-			Logger.Info($"{totalClaims?.Count} Claims for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
+			Logger.Info($"{totalClaims.Count} Claims for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
 
 			return totalClaims;
 		}
 
-		public List<Actor> GetClaimActors(int claimId, int? entityId)
+		public List<Actor> GetClaimActors(int claimId, int entityId)
 		{
 			var claimActors = _actorClaimDbController.GetClaimActors(claimId, entityId);
 			var claimRoles = _roleClaimController.GetRolesByClaim(claimId).Select(cr => cr.Id);
@@ -85,7 +85,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			var results = claimActors.Concat(roleActors).Distinct().ToList();
 
-			Logger.Info($"{results?.Count} Actors for ClaimId: {claimId}, EntityId: {entityId}");
+			Logger.Info($"{results.Count} Actors for ClaimId: {claimId}, EntityId: {entityId}");
 
 			return results;
 		}

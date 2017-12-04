@@ -15,7 +15,7 @@ namespace PlayGen.SUGAR.Server.Model
 
 		public Claim Claim { get; set; }
 
-		public int? EntityId { get; set; }
+		public int EntityId { get; set; }
 
 		public bool Equals(ActorClaim other)
 		{

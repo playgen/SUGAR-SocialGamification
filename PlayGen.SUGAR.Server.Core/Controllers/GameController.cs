@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class GameController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		public static event Action<int> GameDeletedEvent;
 
 		private readonly EntityFramework.Controllers.GameController _gameDbController;
@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Game).Select(p => p.EntityId).ToList();
 			games = games.Where(g => permissions.Contains(g.Id)).ToList();
 
-			Logger.Info($"Got: {games?.Count} Games, for ActorId: {actorId}");
+			Logger.Info($"Got: {games.Count} Games, for ActorId: {actorId}");
 
 			return games;
 		}
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			newGame = _gameDbController.Create(newGame);
 			_actorRoleController.Create(ClaimScope.Game.ToString(), creatorId, newGame.Id);
 
-			Logger.Info($"Created: Game: {newGame?.Id}, for CreatorId: {creatorId}");
+			Logger.Info($"Created: Game: {newGame.Id}, for CreatorId: {creatorId}");
 
 			return newGame;
 		}

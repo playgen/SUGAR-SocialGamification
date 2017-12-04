@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.Resource)]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.Resource)]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Resource)]
-		public async Task<IActionResult> Get(int? gameId, int? actorId, string[] keys)
+		public async Task<IActionResult> Get(int gameId, int actorId, string[] keys)
 		{
 			if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
 				await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User)) ||

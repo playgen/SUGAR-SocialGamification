@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="key">Array of Key names.</param>
 		/// <returns>A list of <see cref="EvaluationDataResponse"/> which match the search criteria.</returns>
-		public IEnumerable<EvaluationDataResponse> Get(int actorId, int? gameId, string[] key)
+		public IEnumerable<EvaluationDataResponse> Get(int actorId, int gameId, string[] key)
 		{
 			var query = GetUriBuilder(ControllerPrefix)
 				.AppendQueryParameter(actorId, "actorId={0}")
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<EvaluationDataResponse>>(query);
 		}
 
-		public void GetAsync(int actorId, int? gameId, string[] key, Action<IEnumerable<EvaluationDataResponse>> onSuccess, Action<Exception> onError)
+		public void GetAsync(int actorId, int gameId, string[] key, Action<IEnumerable<EvaluationDataResponse>> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Get(actorId, gameId, key),
 				onSuccess,
@@ -49,13 +49,13 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="id">ID of a Game.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ActorResponse> GetGameActors(int? id)
+		public IEnumerable<ActorResponse> GetGameActors(int id)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/gameactors/{0}", id).ToString();
 			return Get<IEnumerable<ActorResponse>>(query);
 		}
 
-		public void GetGameActorsAsync(int? id, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
+		public void GetGameActorsAsync(int id, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetGameActors(id),
 				onSuccess,
@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="key">Array of Key names.</param>
 		/// <param name="dataType">Data type of value</param>
 		/// <returns>A list of <see cref="EvaluationDataResponse"/> which match the search criteria.</returns>
-		public IEnumerable<EvaluationDataResponse> GetHighest(int actorId, int? gameId, string[] key, EvaluationDataType dataType)
+		public IEnumerable<EvaluationDataResponse> GetHighest(int actorId, int gameId, string[] key, EvaluationDataType dataType)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/highest")
 				.AppendQueryParameter(actorId, "actorId={0}")
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<EvaluationDataResponse>>(query);
 		}
 
-		public void GetHighestAsync(int actorId, int? gameId, string[] key, EvaluationDataType dataType, Action<IEnumerable<EvaluationDataResponse>> onSuccess, Action<Exception> onError)
+		public void GetHighestAsync(int actorId, int gameId, string[] key, EvaluationDataType dataType, Action<IEnumerable<EvaluationDataResponse>> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetHighest(actorId, gameId, key, dataType),
 				onSuccess,

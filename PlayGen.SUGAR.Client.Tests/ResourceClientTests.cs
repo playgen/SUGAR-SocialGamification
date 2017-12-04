@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using Xunit;
 
@@ -265,7 +266,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var key = "Resource_CannotGetResourceWithoutActorId";
 			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
 
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Resource.Get(game.Id, null, new[] { key }));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Resource.Get(game.Id, Platform.GlobalId, new[] { key }));
 		}
 
 		[Fact]
@@ -283,7 +284,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Fixture.SUGARClient.Resource.AddOrUpdate(resourceRequest);
 
-			var get = Fixture.SUGARClient.Resource.Get(null, loggedInAccount.User.Id, new[] { key });
+			var get = Fixture.SUGARClient.Resource.Get(Platform.GlobalId, loggedInAccount.User.Id, new[] { key });
 
 			Assert.Equal(1, get.Count());
 			Assert.Equal(resourceRequest.Key, get.First().Key);

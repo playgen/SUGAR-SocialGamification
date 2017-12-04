@@ -29,9 +29,10 @@ namespace PlayGen.SUGAR.Contracts
 		public string LeaderboardToken { get; set; }
 
 		/// <summary>
-		/// The Id of the Game the leaderboard. Can be left null for system-wide leaderboards.
+		/// The Id of the Game the leaderboard.
 		/// </summary>
-		public int? GameId { get; set; }
+		[Required]
+		public int GameId { get; set; }
 
 		/// <summary>
 		/// The Id of an Actor. Required for getting standings for Near, Friends (user only) and Group Members (group only)

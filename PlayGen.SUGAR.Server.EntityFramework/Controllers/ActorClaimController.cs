@@ -24,12 +24,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<Claim> GetActorClaimsForEntity(int actorId, int? entityId, ClaimScope scope)
+		public List<Claim> GetActorClaimsForEntity(int actorId, int entityId, ClaimScope scope)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				var claims = context.ActorClaims
-					.Where(ac => ac.ActorId == actorId && (ac.EntityId.Value == entityId.Value || ac.EntityId.Value == Platform.EntityId))
+					.Where(ac => ac.ActorId == actorId && (ac.EntityId == entityId || ac.EntityId == Platform.AllId))
 					.Select(ac => ac.Claim)
 					.Where(c => c.ClaimScope == scope).ToList();
 				return claims;
@@ -45,11 +45,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<Actor> GetClaimActors(int claimId, int? entityId)
+		public List<Actor> GetClaimActors(int claimId, int entityId)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var actors = context.ActorClaims.Where(ac => ac.ClaimId == claimId && ac.EntityId.Value == entityId.Value).Select(ac => ac.Actor).Distinct().ToList();
+				var actors = context.ActorClaims.Where(ac => ac.ClaimId == claimId && ac.EntityId == entityId).Select(ac => ac.Actor).Distinct().ToList();
 				return actors;
 			}
 		}

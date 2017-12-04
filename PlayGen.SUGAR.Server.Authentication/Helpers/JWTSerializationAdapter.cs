@@ -2,7 +2,7 @@
 
 namespace PlayGen.SUGAR.Server.Authentication.Helpers
 {
-	class JWTSerializationAdapter : JsonSerializer
+	public class JWTSerializationAdapter : JsonSerializer
 	{
 		public T Deserialize<T>(string json)
 		{

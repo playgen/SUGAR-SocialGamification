@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			var role = _roleController.GetById(roleId);
 			if (role.ClaimScope == ClaimScope.Global)
 			{
-				entityId = Platform.EntityId;
+				entityId = Platform.AllId;
 			}
 			if (!await _authorizationService.AuthorizeAsync(User, entityId, HttpContext.ScopeItems(role.ClaimScope)))
 			{
@@ -116,7 +116,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			var newRoleInfo = _roleController.GetById(newRole.RoleId);
 			if (newRoleInfo.ClaimScope == ClaimScope.Global)
 			{
-				newRole.EntityId = Platform.EntityId;
+				newRole.EntityId = Platform.AllId;
 			}
 			if (await _authorizationService.AuthorizeAsync(User, newRole.EntityId, HttpContext.ScopeItems(newRoleInfo.ClaimScope)))
 			{

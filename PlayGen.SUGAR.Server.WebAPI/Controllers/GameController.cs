@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Game)]
 		public async Task<IActionResult> Create([FromBody]GameRequest newGame)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
+			if (await _authorizationService.AuthorizeAsync(User, Platform.AllId, HttpContext.ScopeItems(ClaimScope.Global)))
 			{
 				var game = newGame.ToModel();
 				_gameCoreController.Create(game, int.Parse(User.Identity.Name));

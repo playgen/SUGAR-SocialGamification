@@ -8,19 +8,22 @@ namespace PlayGen.SUGAR.Contracts
 	public class ResourceTransferRequest 
 	{
 		/// <summary>
-		/// The Id of the Actor who will send this Resource. Can be left null to only give/take from the current owner.
+		/// The Id of the Actor who will send this Resource.
 		/// </summary>
-		public int? SenderActorId { get; set; }
+		[Required]
+		public int SenderActorId { get; set; }
 
 		/// <summary>
-		/// The Id of the Actor who will receive this Resource. Can be left null to only give/take from the current owner.
+		/// The Id of the Actor who will receive this Resource.
 		/// </summary>
-		public int? RecipientActorId { get; set; }
+		[Required]
+		public int RecipientActorId { get; set; }
 
 		/// <summary>
-		/// The Id of the Game which this Resource belongs to. Left null for system-wise resources.
+		/// The Id of the Game which this Resource belongs to.
 		/// </summary>
-		public int? GameId { get; set; }
+		[Required]
+		public int GameId { get; set; }
 
 		/// <summary>
 		/// The amount of the Resource being transferred.

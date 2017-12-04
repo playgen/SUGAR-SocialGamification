@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static Leaderboard ToModel(this LeaderboardRequest leaderboardContract)
 		{
 			return new Leaderboard {
-				GameId = leaderboardContract.GameId ?? 0,
+				GameId = leaderboardContract.GameId,
 				Name = leaderboardContract.Name,
 				Token = leaderboardContract.Token,
 				EvaluationDataCategory = leaderboardContract.EvaluationDataCategory,

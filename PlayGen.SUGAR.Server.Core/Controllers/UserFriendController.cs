@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class UserFriendController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly UserRelationshipController _userRelationshipDbController;
 

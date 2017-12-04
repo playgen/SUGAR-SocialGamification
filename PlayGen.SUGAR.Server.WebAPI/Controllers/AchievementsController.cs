@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("find/{token}/{gameId:int}")]
 		[HttpGet("find/{token}/global")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
-		public new Task<IActionResult> Get([FromRoute]string token, [FromRoute]int? gameId)
+		public new Task<IActionResult> Get([FromRoute]string token, [FromRoute]int gameId)
 		{
 			return base.Get(token, gameId);
 		}
@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
-		public Task<IActionResult> Get([FromRoute]int? gameId)
+		public Task<IActionResult> Get([FromRoute]int gameId)
 		{
 			return Get(gameId, EvaluationType.Achievement);
 		}
@@ -71,11 +71,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="gameId">ID of Game</param>
 		/// <param name="actorId">ID of Group/User</param>
 		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
-		[HttpGet("game/{gameId:int}/evaluate")]
-		[HttpGet("global/evaluate")]
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("global/evaluate/{actorId:int}")]
-		public new IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int? actorId)
+		public new IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int actorId)
 		{
 			return base.GetGameProgress(gameId, actorId);
 		}
@@ -89,11 +87,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="gameId">ID of the Game the Achievement is for</param>
 		/// <param name="actorId">ID of Group/User</param>
 		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
-		[HttpGet("{token}/{gameId:int}/evaluate")]
-		[HttpGet("{token}/global/evaluate")]
 		[HttpGet("{token}/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("{token}/global/evaluate/{actorId:int}")]
-		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int? gameId, [FromRoute]int? actorId)
+		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int gameId, [FromRoute]int actorId)
 		{
 			return GetEvaluationProgress(token, gameId, actorId);
 		}
@@ -151,7 +147,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Achievement)]
-		public new Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int? gameId)
+		public new Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int gameId)
 		{
 			return base.Delete(token, gameId);
 		}

@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			var claim = _claimCoreController.Get(claimId);
 			if (claim.ClaimScope == ClaimScope.Global)
 			{
-				entityId = Platform.EntityId;
+				entityId = Platform.AllId;
 			}
 			if (await _authorizationService.AuthorizeAsync(User, entityId, HttpContext.ScopeItems(claim.ClaimScope)))
 			{
@@ -93,7 +93,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			var newClaimInfo = _claimCoreController.Get(newClaim.ClaimId);
 			if (newClaimInfo.ClaimScope == ClaimScope.Global)
 			{
-				newClaim.EntityId = Platform.EntityId;
+				newClaim.EntityId = Platform.AllId;
 			}
 			if (await _authorizationService.AuthorizeAsync(User, newClaim.EntityId, HttpContext.ScopeItems(newClaimInfo.ClaimScope)))
 			{

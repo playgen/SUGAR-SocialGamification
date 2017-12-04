@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class MatchController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly EntityFramework.Controllers.MatchController _matchDbController;
 		private readonly EvaluationDataController _evaluationDataController;
@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var match = new Match {
 				GameId = gameId,
-				CreatorId = creatorId,
+				CreatorId = creatorId
 			};
 
 			_matchDbController.Create(match);
@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			if (match.Started == null)
 			{
 				throw new Exceptions.InvalidOperationException($"The match {matchId} hasn't had its Started time set. " +
-															   $"This must be set before setting the Ended time.");
+															   "This must be set before setting the Ended time.");
 			}
 
 			match.Ended = DateTime.UtcNow;

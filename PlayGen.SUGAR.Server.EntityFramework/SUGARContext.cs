@@ -82,11 +82,14 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 
 			foreach (var history in histories)
 			{
-				history.DateModified = DateTime.Now;
-
-				if (history.DateCreated == default(DateTime))
+				if (history != null)
 				{
-					history.DateCreated = DateTime.Now;
+					history.DateModified = DateTime.Now;
+
+					if (history.DateCreated == default(DateTime))
+					{
+						history.DateCreated = DateTime.Now;
+					}
 				}
 			}
 		}

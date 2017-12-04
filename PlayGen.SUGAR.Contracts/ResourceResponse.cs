@@ -1,4 +1,6 @@
-﻿namespace PlayGen.SUGAR.Contracts
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
 	/// Encapsulates resource details from the server.
@@ -13,12 +15,14 @@
 		/// <summary>
 		/// The id of the Actor which this Resource relates to.
 		/// </summary>
-		public int? ActorId { get; set; }
+		[Required]
+		public int ActorId { get; set; }
 
 		/// <summary>
 		/// The id of the Game which this Resource relates to.
 		/// </summary>
-		public int? GameId { get; set; }
+		[Required]
+		public int GameId { get; set; }
 
 		/// <summary>
 		/// The identifier/name of the Resource.

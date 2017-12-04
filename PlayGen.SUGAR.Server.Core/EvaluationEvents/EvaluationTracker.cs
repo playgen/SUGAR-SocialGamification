@@ -5,6 +5,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Core.Controllers;
 using PlayGen.SUGAR.Server.Core.Sessions;
 using PlayGen.SUGAR.Server.Model;
@@ -59,7 +61,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
         }
 
         // <actorId, <evaluation, progress>>
-        public ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> GetPendingNotifications(int? gameId, int actorId)
+        public ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> GetPendingNotifications(int gameId, int actorId)
         {
             return _progressNotificationCache.Get(gameId, actorId);
         }
@@ -121,45 +123,42 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
             _EvaluationDataToEvaluationMapper.CreateMappings(evaluations);
         }
 
-        private List<Evaluation> GetEvaluations(int? gameId)
+        private List<Evaluation> GetEvaluations(int gameId)
         {
             var evaluations = _evaluationController.GetByGame(gameId).ToList();
 
-            if (gameId != null)
-            {
-                evaluations.AddRange(_evaluationController.GetByGame(null));
-            }
+			evaluations.AddRange(_evaluationController.GetByGame(Platform.GlobalId));
 
-            return evaluations;
+			return evaluations;
         }
 
-        private List<int?> GetGameIdsFromEvaluations(ICollection<Evaluation> evaluations)
+        private List<int> GetGameIdsFromEvaluations(ICollection<Evaluation> evaluations)
         {
             var hasGlobal = false;
             var gameIds = evaluations.Select(e =>
             {
-                hasGlobal |= e.GameId == null;
+                hasGlobal |= e.GameId == Platform.GlobalId;
                 return e.GameId;
             }).Distinct().ToList();
 
             if (!hasGlobal)
             {
-                gameIds.Add(null);
+                gameIds.Add(Platform.GlobalId);
             }
 
             return gameIds;
         }
 
-        private List<int?> GetGameIdsFromEvaluation(Evaluation evaluation)
+        private List<int> GetGameIdsFromEvaluation(Evaluation evaluation)
         {
-            var gameIds = new List<int?>()
+            var gameIds = new List<int>
             {
                 evaluation.GameId
             };
 
-            if (evaluation.GameId != null)
+            if (evaluation.GameId != Platform.GlobalId)
             {
-                gameIds.Add(null);
+                gameIds.Add(Platform.GlobalId);
             }
 
             return gameIds;

@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class RoleController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly EntityFramework.Controllers.RoleController _roleDbController;
 		private readonly ActorRoleController _actorRoleController;
@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			newRole = _roleDbController.Create(newRole);
 			_actorRoleController.Create(ClaimScope.Role.ToString(), creatorId, newRole.Id);
 
-			Logger.Info($"Role: {newRole?.Id} for CreatorId: {creatorId}");
+			Logger.Info($"Role: {newRole.Id} for CreatorId: {creatorId}");
 
 			return newRole;
 		}

@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
-		public IActionResult Get([FromRoute]int? gameId)
+		public IActionResult Get([FromRoute]int gameId)
 		{
 			var leaderboard = _leaderboardController.GetByGame(gameId);
 			var leaderboardContract = leaderboard.ToContractList();
@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>Returns a single <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
 		[HttpGet("{token}/global")]
 		[HttpGet("{token}/{gameId:int}")]
-		public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
+		public IActionResult Get([FromRoute]string token, [FromRoute]int gameId)
 		{
 			var leaderboard = _leaderboardController.Get(token, gameId);
 			var leaderboardContract = leaderboard.ToContract();
@@ -131,7 +131,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Leaderboard)]
-		public async Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int? gameId)
+		public async Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int gameId)
 		{
 			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
 			{

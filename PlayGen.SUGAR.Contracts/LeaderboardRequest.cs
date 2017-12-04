@@ -29,10 +29,10 @@ namespace PlayGen.SUGAR.Contracts
 		public string Token { get; set; }
 
 		/// <summary>
-		/// The Id of the Game which this leaderboards belongs to. Can be left null to relate this leaderboard to the system rather than a game.
-		/// This Id is also used when gathering GameData using the Key provided.
+		/// The Id of the Game which this leaderboards belongs to. This Id is also used when gathering GameData using the Key provided.
 		/// </summary>
-		public int? GameId { get; set; }
+		[Required]
+		public int GameId { get; set; }
 
 		/// <summary>
 		/// The display name of the leaderboard.

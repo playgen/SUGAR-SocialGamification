@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			var skillModel = new Skill {
 				Name = skillContract.Name,
 				Description = skillContract.Description,
-				GameId = skillContract.GameId ?? 0,
+				GameId = skillContract.GameId,
 				ActorType = skillContract.ActorType,
 				Token = skillContract.Token,
 				EvaluationCriterias = skillContract.EvaluationCriterias.ToModelList(),
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				Id = skillContract.Id,
 				Name = skillContract.Name,
 				Description = skillContract.Description,
-				GameId = skillContract.GameId ?? 0,
+				GameId = skillContract.GameId,
 				ActorType = skillContract.ActorType,
 				Token = skillContract.Token,
 				EvaluationCriterias = skillContract.EvaluationCriterias.ToModelList(),

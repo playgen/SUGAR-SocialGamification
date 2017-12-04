@@ -11,7 +11,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ResourceController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly EvaluationDataController _evaluationDataController;
 
@@ -20,14 +20,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.Resource);
 		}
 
-		public List<EvaluationData> Get(int? gameId = null, int? actorId = null, string[] keys = null)
+		public List<EvaluationData> Get(int gameId, int actorId, string[] keys = null)
 		{
 			var results = _evaluationDataController.Get(gameId, actorId, keys);
 
 			return results;
 		}
 
-		public EvaluationData Transfer(int? gameId, int? fromActorId, int? toActorId, string key, long transferQuantity, out EvaluationData fromResource)
+		public EvaluationData Transfer(int gameId, int fromActorId, int toActorId, string key, long transferQuantity, out EvaluationData fromResource)
 		{
 			fromResource = GetExistingResource(gameId, fromActorId, key);
 
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					Key = fromResource.Key,
 					Value = transferQuantity.ToString(),
 					Category = fromResource.Category,
-					EvaluationDataType = fromResource.EvaluationDataType,
+					EvaluationDataType = fromResource.EvaluationDataType
 				};
 				Create(toResource);
 			}
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_evaluationDataController.Add(data);
 
-			Logger.Info($"{data?.Id}");
+			Logger.Info($"{data.Id}");
 		}
 
 		public EvaluationData AddQuantity(int resourceId, long addAmount)
@@ -93,12 +93,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_evaluationDataController.Update(resource);
 
-			Logger.Info($"{resource?.Id} with Amount: {addAmount}");
+			Logger.Info($"{resource.Id} with Amount: {addAmount}");
 
 			return resource;
 		}
 
-		private EvaluationData GetExistingResource(int? gameId, int? ownerId, string key)
+		private EvaluationData GetExistingResource(int gameId, int ownerId, string key)
 		{
 			var foundResources = _evaluationDataController.Get(gameId, ownerId, new[] { key });
 

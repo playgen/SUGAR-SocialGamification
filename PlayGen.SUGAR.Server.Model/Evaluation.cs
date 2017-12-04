@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Server.Model
 
         public abstract EvaluationType EvaluationType { get; }
 
-        public int? GameId { get; set; }
+        public int GameId { get; set; }
 
         public string Name { get; set; }
 

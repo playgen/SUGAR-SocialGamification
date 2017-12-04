@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ActorRoleController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		private readonly EntityFramework.Controllers.ActorRoleController _actorRoleDbController;
 		private readonly EntityFramework.Controllers.RoleController _roleController;
@@ -39,16 +39,16 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return roles;
 		}
 
-		public List<Role> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope)
+		public List<Role> GetActorRolesForEntity(int actorId, int entityId, ClaimScope scope)
 		{
-			var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId.Value, scope, true).Select(ar => ar.Role).ToList();
+			var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId, scope, true).Select(ar => ar.Role).ToList();
 
-			Logger.Info($"{roles?.Count} Roles for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
+			Logger.Info($"{roles.Count} Roles for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
 
 			return roles;
 		}
 
-		public List<Actor> GetRoleActors(int roleId, int? entityId)
+		public List<Actor> GetRoleActors(int roleId, int entityId)
 		{
 			var roles = _actorRoleDbController.GetRoleActors(roleId, entityId);
 
@@ -61,13 +61,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var actorRoles = _actorRoleDbController.GetActorRoles(actorId, true).ToList();
 			var controlledRoles = actorRoles.Where(ar => ar.Role.ClaimScope == ClaimScope.Role).ToList();
-			if (controlledRoles.Any(ar => ar.EntityId.Value == Platform.EntityId))
+			if (controlledRoles.Any(ar => ar.EntityId == Platform.AllId))
 			{
 				return _roleController.Get();
 			}
-			var roles = controlledRoles.Select(cr => _roleController.Get(cr.EntityId.Value)).ToList();
+			var roles = controlledRoles.Select(cr => _roleController.Get(cr.EntityId)).ToList();
 
-			Logger.Info($"{roles?.Count} Roles for ActorId: {actorId}");
+			Logger.Info($"{roles.Count} Roles for ActorId: {actorId}");
 
 			return roles;
 		}
@@ -81,7 +81,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return newRole;
 		}
 
-		public void Create(string roleName, int actorId, int? entityId)
+		public void Create(string roleName, int actorId, int entityId)
 		{
 			var role = _roleController.GetDefault(roleName);
 
@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			if (role != null)
 			{
-				Create(new ActorRole { ActorId = actorId, RoleId = role.Id, EntityId = entityId.Value });
+				Create(new ActorRole { ActorId = actorId, RoleId = role.Id, EntityId = entityId });
 			}
 		}
 

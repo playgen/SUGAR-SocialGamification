@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.Role)]
 		public async Task<IActionResult> Get()
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
+			if (await _authorizationService.AuthorizeAsync(User, Platform.AllId, HttpContext.ScopeItems(ClaimScope.Global)))
 			{
 				var roles = _roleCoreController.Get();
 				var roleContract = roles.ToContractList();
