@@ -17,6 +17,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			using (var context = new SUGARContext(optionsBuilder.Options))
 			{
 				context.Database.EnsureDeleted();
+				context.Database.EnsureCreated();
 			}
 		}
 	}
