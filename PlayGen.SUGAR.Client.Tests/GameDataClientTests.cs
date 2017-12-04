@@ -103,6 +103,23 @@ namespace PlayGen.SUGAR.Client.Tests
 		}
 
 		[Fact]
+		public void CannotCreateWithoutEvaluationDataType()
+		{
+			var key = "GameData_CannotCreateWithoutEvaluationDataType";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+
+			var evaluationDataRequest = new EvaluationDataRequest
+			{
+				CreatingActorId = loggedInAccount.User.Id,
+				GameId = game.Id,
+				Key = key,
+				Value = "Test Value"
+			};
+
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
+		}
+
+		[Fact]
 		public void CannotCreateWithMismatchedData()
 		{
 			var key = "GameData_CannotCreateWithMismatchedData";

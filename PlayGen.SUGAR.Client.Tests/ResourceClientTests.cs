@@ -61,6 +61,38 @@ namespace PlayGen.SUGAR.Client.Tests
 		}
 
 		[Fact]
+		public void CannotCreateWithoutQuantity()
+		{
+			var key = "Resource_CannotCreateWithoutQuantity";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+
+			var resourceRequest = new ResourceAddRequest
+			{
+				ActorId = loggedInAccount.User.Id,
+				GameId = game.Id,
+				Key = key
+			};
+
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Resource.AddOrUpdate(resourceRequest));
+		}
+
+		[Fact]
+		public void CannotCreateWithoutKey()
+		{
+			var key = "Resource_CannotCreateWithoutKey";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+
+			var resourceRequest = new ResourceAddRequest
+			{
+				ActorId = loggedInAccount.User.Id,
+				GameId = game.Id,
+				Quantity = 100
+			};
+
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Resource.AddOrUpdate(resourceRequest));
+		}
+
+		[Fact]
 		public void CanUpdateExisting()
 		{
 			var key = "Resource_CanUpdateExisting";

@@ -74,6 +74,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			CreateGame(context, "GameData_CannotCreateWithoutActorId");
 			CreateGame(context, "GameData_CannotCreateWithoutKey");
 			CreateGame(context, "GameData_CannotCreateWithoutValue");
+			CreateGame(context, "GameData_CannotCreateWithoutEvaluationDataType");
 			CreateGame(context, "GameData_CannotCreateWithMismatchedData");
 			CreateGame(context, "GameData_CanGetGameData");
 			CreateGame(context, "GameData_CannotGetGameDataWithoutActorId");
@@ -91,6 +92,17 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			var leaderboardCanGetLeaderboardStandings = CreateGame(context, "Leaderboard_CanGetLeaderboardStandings");
 			CreateLeaderboard(context, leaderboardCanGetLeaderboardStandings.Id, leaderboardCanGetLeaderboardStandings.Name);
 			CreateGame(context, "Leaderboard_CannotGetNotExistingLeaderboardStandings");
+			var leaderboardCannotGetLeaderboardStandingsWithoutToken = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutToken");
+			CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutToken.Id, leaderboardCannotGetLeaderboardStandingsWithoutToken.Name);
+			var leaderboardCannotGetLeaderboardStandingsWithoutGameId = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutGameId");
+			CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutGameId.Id, leaderboardCannotGetLeaderboardStandingsWithoutGameId.Name);
+			var leaderboardCannotGetLeaderboardStandingsWithoutFilterType = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutFilterType");
+			CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutFilterType.Id, leaderboardCannotGetLeaderboardStandingsWithoutFilterType.Name);
+			var leaderboardCannotGetLeaderboardStandingsWithoutLimit = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutLimit");
+			CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutLimit.Id, leaderboardCannotGetLeaderboardStandingsWithoutLimit.Name);
+			var leaderboardCannotGetLeaderboardStandingsWithoutOffset = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutOffset");
+			CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutOffset.Id, leaderboardCannotGetLeaderboardStandingsWithoutOffset.Name);
+
 			var leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType = CreateGame(context, "Leaderboard_CannotGetStandingsWithIncorrectActorType");
 			CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Id, leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Name, ActorType.Group);
 			var leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit = CreateGame(context, "Leaderboard_CannotGetLeaderboardStandingsWithZeroPageLimit");
@@ -108,6 +120,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			#region Resource Client Tests
 			CreateGame(context, "Resource_CanCreate");
 			CreateGame(context, "Resource_CannotCreateWithoutActorId");
+			CreateGame(context, "Resource_CannotCreateWithoutQuantity");
+			CreateGame(context, "Resource_CannotCreateWithoutKey");
 			CreateGame(context, "Resource_CanUpdateExisting");
 			CreateGame(context, "Resource_CanGetResource");
 			CreateGame(context, "Resource_CannotGetResourceWithoutActorId");

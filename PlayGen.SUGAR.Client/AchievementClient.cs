@@ -34,7 +34,14 @@ namespace PlayGen.SUGAR.Client
 			var query = GetUriBuilder(ControllerPrefix + "/global/evaluate/{0}", actorId).ToString();
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
 		}
-	
+
+		public void GetGlobalProgressAsync(int actorId, Action<IEnumerable<EvaluationProgressResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetGlobalProgress(actorId),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
 		/// </summary>
@@ -66,6 +73,13 @@ namespace PlayGen.SUGAR.Client
 			return Get<EvaluationProgressResponse>(query);
 		}
 
+		public void GetGlobalAchievementProgressAsync(string token, int actorId, Action<EvaluationProgressResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetGlobalAchievementProgress(token, actorId),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Find the current progress for an Achievement for <param name="actorId"/>.
 		/// </summary>
@@ -77,6 +91,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}/evaluate/{2}", token, gameId, actorId).ToString();
 			return Get<EvaluationProgressResponse>(query);
+		}
+
+		public void GetAchievementProgressAsync(string token, int gameId, int actorId, Action<EvaluationProgressResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetAchievementProgress(token, gameId, actorId),
+				onSuccess,
+				onError);
 		}
 
 		#region Evaluation Notifications
