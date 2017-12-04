@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Achievement)]
 		public async Task<IActionResult> Create([FromBody] EvaluationCreateRequest newAchievement)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, newAchievement.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, newAchievement.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var achievement = newAchievement.ToAchievementModel();
 				achievement = (Achievement)EvaluationCoreController.Create(achievement);
@@ -132,7 +132,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Achievement)]
 		public async Task<IActionResult> Update([FromBody] EvaluationUpdateRequest achievement)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, achievement.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, achievement.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var achievementModel = achievement.ToAchievementModel();
 				EvaluationCoreController.Update(achievementModel);

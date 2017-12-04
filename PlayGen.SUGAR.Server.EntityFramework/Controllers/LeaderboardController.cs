@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				gameId = gameId ?? 0;
 
-				var leaderboard = context.Leaderboards.Find(context, token, gameId);
+				var leaderboard = context.Leaderboards.Find(token, gameId);
 				return leaderboard;
 			}
 		}
@@ -67,7 +67,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var existing = context.Leaderboards.Find(context, leaderboard.Token, leaderboard.GameId);
+				var existing = context.Leaderboards.Find(leaderboard.Token, leaderboard.GameId);
 
 				if (existing != null)
 				{
@@ -117,7 +117,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				gameId = gameId ?? 0;
 
-				var leaderboard = context.Leaderboards.Find(context, token, gameId);
+				var leaderboard = context.Leaderboards.Find(token, gameId);
 				if (leaderboard != null)
 				{
 					context.Leaderboards.Remove(leaderboard);

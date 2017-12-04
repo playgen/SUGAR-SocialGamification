@@ -7,9 +7,8 @@ namespace PlayGen.SUGAR.Server.WebAPI
     {
         private void ConfigureEvaluationEvents(IServiceCollection services)
         {
-            services.AddScoped<ProgressEvaluator>();
-            services.AddScoped<CriteriaEvaluator>();
-
+            services.AddSingleton<ProgressEvaluator>();
+            services.AddSingleton<CriteriaEvaluator>();
             services.AddSingleton<EvaluationTracker>();
         }
     }

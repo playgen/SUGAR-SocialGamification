@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[ValidateSession]
 		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Account)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Account))).Succeeded)
 			{
 				_accountCoreController.Delete(id);
 				return Ok();

@@ -76,7 +76,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Leaderboard)]
 		public async Task<IActionResult> Create([FromBody] LeaderboardRequest newLeaderboard)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, newLeaderboard.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, newLeaderboard.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var leaderboard = newLeaderboard.ToModel();
 				_leaderboardController.Create(leaderboard);
@@ -112,7 +112,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Leaderboard)]
 		public async Task<IActionResult> Update([FromBody] LeaderboardRequest leaderboard)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, leaderboard.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, leaderboard.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var leaderboardModel = leaderboard.ToModel();
 				_leaderboardController.Update(leaderboardModel);
@@ -133,7 +133,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Leaderboard)]
 		public async Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int? gameId)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				_leaderboardController.Delete(token, gameId);
 				return Ok();

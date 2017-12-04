@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Extensions;
 using PlayGen.SUGAR.Contracts;
@@ -16,21 +16,25 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class LeaderboardController : CriteriaEvaluator
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
 		protected readonly EntityFramework.Controllers.ActorController ActorController;
 		protected readonly EntityFramework.Controllers.GroupController GroupController;
 		protected readonly EntityFramework.Controllers.UserController UserController;
 
+		private readonly ILogger _logger;
+
 		// todo replace db controller usage with core controller usage (all cases except for leaderbaordDbController)
-		public LeaderboardController(GroupMemberController groupMemberCoreController,
+		public LeaderboardController(
+			ILogger<LeaderboardController> logger,
+			ILogger<EvaluationDataController> evaluationDataLogger,
+			GroupMemberController groupMemberCoreController,
 			UserFriendController userFriendCoreController,
 			EntityFramework.Controllers.ActorController actorController,
 			EntityFramework.Controllers.GroupController groupController,
 			EntityFramework.Controllers.UserController userController,
 			SUGARContextFactory contextFactory)
-			: base(contextFactory, groupMemberCoreController, userFriendCoreController)
+			: base(evaluationDataLogger, contextFactory, groupMemberCoreController, userFriendCoreController)
 		{
+			_logger = logger;
 			ActorController = actorController;
 			GroupController = groupController;
 			UserController = userController;
@@ -48,7 +52,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			}
 			var standings = GatherStandings(leaderboard, request);
 
-			Logger.Info($"{standings?.Count} Standings for Leaderboard: {leaderboard?.Token}");
+			_logger.LogInformation($"{standings?.Count} Standings for Leaderboard: {leaderboard?.Token}");
 
 			return standings;
 		}
@@ -57,7 +61,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var actors = GetActors(request.LeaderboardFilterType, leaderboard.ActorType, request.ActorId);
 
-			var evaluationDataController = new EvaluationDataController(ContextFactory, leaderboard.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, leaderboard.EvaluationDataCategory);
 
 			List<LeaderboardStandingsResponse> typeResults;
 
@@ -93,7 +97,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			var results = FilterResults(typeResults, request.PageLimit, request.PageOffset, request.LeaderboardFilterType, request.ActorId);
 
-			Logger.Info($"{results?.Count} Standings for Leaderboard: {leaderboard?.Token}");
+			_logger.LogInformation($"{results?.Count} Standings for Leaderboard: {leaderboard?.Token}");
 
 			return results;
 		}
@@ -178,7 +182,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					break;
 			}
 
-			Logger.Debug($"{actors?.Count} Actors for Filter: {filter}, ActorType: {actorType}, ActorId: {actorId}");
+			_logger.LogDebug($"{actors?.Count} Actors for Filter: {filter}, ActorType: {actorType}, ActorId: {actorId}");
 
 			return actors;
 		}
@@ -226,7 +230,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			results = results.OrderByDescending(r => r.Value)
 						.Where(r => float.Parse(r.Value) > 0).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
+			_logger.LogDebug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}
@@ -259,7 +263,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			results = results.OrderBy(r => float.Parse(r.Value))
 						.Where(r => float.Parse(r.Value) > 0).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
+			_logger.LogDebug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}
@@ -292,7 +296,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			results = results.OrderByDescending(r => float.Parse(r.Value))
 						.Where(r => float.Parse(r.Value) > 0).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
+			_logger.LogDebug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}
@@ -325,7 +329,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			results = results.OrderByDescending(r => float.Parse(r.Value))
 						.Where(r => float.Parse(r.Value) > 0).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
+			_logger.LogDebug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}
@@ -358,7 +362,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			results = results.OrderBy(r => r.Value)
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime)).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
+			_logger.LogDebug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}
@@ -391,7 +395,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			results = results.OrderByDescending(r => r.Value)
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime)).ToList();
 
-			Logger.Debug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
+			_logger.LogDebug($"{results?.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
 		}

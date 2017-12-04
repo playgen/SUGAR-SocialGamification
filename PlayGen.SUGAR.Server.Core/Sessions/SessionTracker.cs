@@ -3,26 +3,29 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Server.Core.Controllers;
 
 namespace PlayGen.SUGAR.Server.Core.Sessions
 {
     public class SessionTracker : IDisposable
     {
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
-
         public event Action<Session> SessionStartedEvent;
         public event Action<Session> SessionEndedEvent;
 
-        private readonly ConcurrentDictionary<long, Session> _sessions = new ConcurrentDictionary<long, Session>();
-        private readonly TimeSpan _sessionTimeout;
+		private readonly ConcurrentDictionary<long, Session> _sessions = new ConcurrentDictionary<long, Session>();
+		private readonly ILogger _logger;
+		private readonly TimeSpan _sessionTimeout;
         private readonly Timer _timer;
 
         private bool _isDisposed;
 
-        public SessionTracker(TimeSpan sessionTimeout, TimeSpan timeoutCheckInterval)
-        {
+        public SessionTracker(
+			ILogger<SessionTracker> logger,
+			TimeSpan sessionTimeout, 
+			TimeSpan timeoutCheckInterval)
+		{
+			_logger = logger;
             _sessionTimeout = sessionTimeout;
             ActorController.ActorDeletedEvent += OnActorDeleted;
             GameController.GameDeletedEvent += OnGameDeleted;
@@ -60,7 +63,7 @@ namespace PlayGen.SUGAR.Server.Core.Sessions
 
             SessionStartedEvent?.Invoke(session);
 
-            Logger.Info($"SessionId: {session.Id} for GameId: {gameId}, ActorId: {actorId}");
+            _logger.LogInformation($"SessionId: {session.Id} for GameId: {gameId}, ActorId: {actorId}");
 
             return session;
         }
@@ -72,7 +75,7 @@ namespace PlayGen.SUGAR.Server.Core.Sessions
 
             SessionEndedEvent?.Invoke(session);
 
-            Logger.Info($"SessionId: {session.Id}");
+            _logger.LogInformation($"SessionId: {session.Id}");
         }
 
         public bool IsActive(long sessionId)
@@ -98,7 +101,7 @@ namespace PlayGen.SUGAR.Server.Core.Sessions
                 .Where(kvp => kvp.Value.LastActive < activityThreshold)
                 .Select(kvp => kvp.Key).ToList();
 
-            Logger.Info($"Timedout: {string.Join(", ", sessionIds)}");
+            _logger.LogInformation($"Timedout: {string.Join(", ", sessionIds)}");
 
             sessionIds.ForEach(EndSession);
         }

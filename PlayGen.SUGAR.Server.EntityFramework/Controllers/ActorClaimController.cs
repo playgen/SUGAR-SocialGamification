@@ -19,7 +19,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var claim = context.ActorClaims.Find(context, id);
+				var claim = context.ActorClaims.Find(id);
 				return claim;
 			}
 		}
@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				context.ActorClaims.Add(actorClaim);
 				SaveChanges(context);
-				actorClaim.Claim = context.Claims.Find(context, actorClaim.ClaimId);
+				actorClaim.Claim = context.Claims.Find(actorClaim.ClaimId);
 
 				return actorClaim;
 			}

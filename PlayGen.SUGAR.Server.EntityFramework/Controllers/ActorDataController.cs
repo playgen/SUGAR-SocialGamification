@@ -59,7 +59,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				// context.SaveChanges();
 
 				var existingData = context.ActorData
-					.Find(context, updatedData.Id);
+					.Find(updatedData.Id);
 
 				if (existingData == null)
 				{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using PlayGen.SUGAR.Server.WebAPI;
@@ -14,13 +15,13 @@ namespace PlayGen.SUGAR.Client.Tests
 
 		public ClientTestsFixture()
 		{
-			var builder = new WebHostBuilder()
+			var builder = WebHost.CreateDefaultBuilder()
 				.UseStartup<Startup>()
 				.UseEnvironment("Tests");
 
 			Server = new TestServer(builder);
 
-			Program.SetUp(Server.Host);
+			Program.Setup(Server.Host);
 
 			SUGARClient = CreateSugarClient();
 		}

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Model;
 
@@ -8,12 +8,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ActorDataController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.ActorDataController _actorDataDbController;
 
-		public ActorDataController(EntityFramework.Controllers.ActorDataController actorDataDbController)
+		public ActorDataController(
+			ILogger<ActorDataController> logger,
+			EntityFramework.Controllers.ActorDataController actorDataDbController)
 		{
+			_logger = logger;
 			_actorDataDbController = actorDataDbController;
 		}
 
@@ -21,7 +23,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var datas = _actorDataDbController.Get(gameId, actorId, keys);
 
-			Logger.Info($"{datas?.Count} Actor Datas for GameId: {gameId}, ActorId: {actorId}, Keys: {string.Join(", ", keys)}");
+			_logger.LogInformation($"{datas?.Count} Actor Datas for GameId: {gameId}, ActorId: {actorId}, Keys: {string.Join(", ", keys)}");
 
 			return datas;
 		}
@@ -30,7 +32,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var keyExists = _actorDataDbController.KeyExists(gameId, actorId, key);
 
-			Logger.Info($"Key Exists: {keyExists} for GameId: {gameId}, ActorId: {actorId}, Key: {key}");
+			_logger.LogInformation($"Key Exists: {keyExists} for GameId: {gameId}, ActorId: {actorId}, Key: {key}");
 
 			return keyExists;
 		}
@@ -41,7 +43,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				newData = _actorDataDbController.Create(newData);
 
-				Logger.Info($"{newData?.Id}");
+				_logger.LogInformation($"{newData?.Id}");
 
 				return newData;
 			}
@@ -55,7 +57,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_actorDataDbController.Update(newData);
 
-			Logger.Info($"{newData?.Id}");
+			_logger.LogInformation($"{newData?.Id}");
 		}
 
 		protected bool ParseCheck(ActorData data)

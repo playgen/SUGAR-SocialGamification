@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Model;
 
@@ -7,14 +7,16 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class RoleController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.RoleController _roleDbController;
 		private readonly ActorRoleController _actorRoleController;
 
-		public RoleController(EntityFramework.Controllers.RoleController roleDbController,
-					ActorRoleController actorRoleController)
+		public RoleController(
+			ILogger<RoleController> logger,
+			EntityFramework.Controllers.RoleController roleDbController,
+			ActorRoleController actorRoleController)
 		{
+			_logger = logger;
 			_roleDbController = roleDbController;
 			_actorRoleController = actorRoleController;
 		}
@@ -23,7 +25,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var roles = _roleDbController.Get();
 
-			Logger.Info($"{roles.Count} Roles");
+			_logger.LogInformation($"{roles.Count} Roles");
 
 			return roles;
 		}
@@ -32,7 +34,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var role = _roleDbController.Get(id);
 
-			Logger.Info($"Role: {role?.Id} for Id: {id}");
+			_logger.LogInformation($"Role: {role?.Id} for Id: {id}");
 
 			return role;
 		}
@@ -41,7 +43,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var roles = _roleDbController.Get(scope);
 
-			Logger.Info($"{roles?.Count} Roles for {nameof(ClaimScope)}: {scope}");
+			_logger.LogInformation($"{roles?.Count} Roles for {nameof(ClaimScope)}: {scope}");
 
 			return roles;
 		}
@@ -50,7 +52,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var role = _roleDbController.GetDefault(scope.ToString());
 
-			Logger.Info($"{role?.Id} Role ID for {nameof(ClaimScope)}: {scope}");
+			_logger.LogInformation($"{role?.Id} Role ID for {nameof(ClaimScope)}: {scope}");
 
 			return role;
 		}
@@ -60,7 +62,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			newRole = _roleDbController.Create(newRole);
 			_actorRoleController.Create(ClaimScope.Role.ToString(), creatorId, newRole.Id);
 
-			Logger.Info($"Role: {newRole?.Id} for CreatorId: {creatorId}");
+			_logger.LogInformation($"Role: {newRole?.Id} for CreatorId: {creatorId}");
 
 			return newRole;
 		}
@@ -69,7 +71,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_roleDbController.Delete(id);
 
-			Logger.Info($"{id}");
+			_logger.LogInformation($"{id}");
 		}
 	}
 }

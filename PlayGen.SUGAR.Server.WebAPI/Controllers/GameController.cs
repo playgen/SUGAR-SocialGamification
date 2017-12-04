@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Game)]
 		public async Task<IActionResult> Create([FromBody]GameRequest newGame)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var game = newGame.ToModel();
 				_gameCoreController.Create(game, int.Parse(User.Identity.Name));
@@ -120,7 +120,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		// todo refactor game request into GameUpdateRequest (which requires the Id) and GameCreateRequest (which has no required Id field) - and remove the Id param from the definition below
 		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] GameRequest game)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var gameModel = game.ToModel();
 				gameModel.Id = id;
@@ -140,7 +140,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Game)]
 		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				_gameCoreController.Delete(id);
 				return Ok();

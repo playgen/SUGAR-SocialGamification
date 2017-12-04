@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var role = context.Roles.Find(context, id);
+				var role = context.Roles.Find(id);
 				return role;
 			}
 		}

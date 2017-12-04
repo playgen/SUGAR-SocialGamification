@@ -23,7 +23,8 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
         private bool _isDisposed;
 
-        public EvaluationTracker(ProgressEvaluator progressEvaluator,
+        public EvaluationTracker(
+			ProgressEvaluator progressEvaluator,
             EvaluationController evaluationController,
             SessionTracker sessionTracker)
         {

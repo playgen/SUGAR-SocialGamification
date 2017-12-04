@@ -105,7 +105,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Achievement)]
 		public async Task<IActionResult> Create([FromBody] EvaluationCreateRequest newSkill)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, newSkill.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, newSkill.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var skill = newSkill.ToSkillModel();
 				skill = (Skill)EvaluationCoreController.Create(skill);
@@ -126,7 +126,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Achievement)]
 		public async Task<IActionResult> Update([FromBody] EvaluationUpdateRequest skill)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, skill.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, skill.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var skillModel = skill.ToSkillModel();
 				EvaluationCoreController.Update(skillModel);

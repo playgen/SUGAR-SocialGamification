@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.User)]
 		public async Task<IActionResult> Get()
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var users = _userCoreController.Get();
 				var actorContract = users.ToContractList();
@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.User)]
 		public async Task<IActionResult> Create([FromBody]UserRequest actor)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var user = actor.ToUserModel();
 				_userCoreController.Create(user);
@@ -113,7 +113,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.User)]
 		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UserRequest user)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.User)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.User))).Succeeded)
 			{
 				var userModel = user.ToUserModel();
 				userModel.Id = id;
@@ -133,7 +133,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Delete, AuthorizationEntity.User)]
 		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				_userCoreController.Delete(id);
 				return Ok();

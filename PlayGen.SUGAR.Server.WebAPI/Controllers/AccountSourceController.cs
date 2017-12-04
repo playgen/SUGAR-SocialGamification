@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.AccountSource)]
 		public async Task<IActionResult> Get()
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var accountSources = _accountSourceCoreController.Get();
 				var accountSourceContract = accountSources.ToContractList();
@@ -62,7 +62,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.AccountSource)]
 		public async Task<IActionResult> GetById([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var accountSource = _accountSourceCoreController.Get(id);
 				var accountSourceContract = accountSource.ToContract();
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.AccountSource)]
 		public async Task<IActionResult> Create([FromBody]AccountSourceRequest newAccountSource)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var accountSource = newAccountSource.ToModel();
 				_accountSourceCoreController.Create(accountSource);
@@ -107,7 +107,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		// todo refactor accountSource request into AccountSourceUpdateRequest (which requires the Id) and AccountSourceCreateRequest (which has no required Id field) - and remove the Id param from the definition below
 		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] AccountSourceRequest accountSource)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var accountSourceModel = accountSource.ToModel();
 				accountSourceModel.Id = id;
@@ -127,7 +127,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Delete, AuthorizationEntity.AccountSource)]
 		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				_accountSourceCoreController.Delete(id);
 				return Ok();

@@ -7,25 +7,25 @@ namespace PlayGen.SUGAR.Server.WebAPI
 	{
 		private void ConfigureCoreControllers(IServiceCollection services)
 		{
-			services.AddScoped<AccountController>();
-			services.AddScoped<AccountSourceController>();
-			services.AddScoped<ActorClaimController>();
-			services.AddScoped<ActorDataController>();
-		    services.AddScoped<ActorController>();
-			services.AddScoped<ActorRoleController>();
-			services.AddScoped<EvaluationController>();
-			services.AddScoped<GameController>();
-            services.AddScoped<GameDataController>();
-            services.AddScoped<GroupController>();
-			services.AddScoped<GroupMemberController>();
-			services.AddScoped<LeaderboardController>();
-			services.AddScoped<ResourceController>();
-			services.AddScoped<RewardController>();
-			services.AddScoped<RoleController>();
-			services.AddScoped<RoleClaimController>();
-			services.AddScoped<UserController>();
-			services.AddScoped<UserFriendController>();
-		    services.AddScoped<MatchController>();
+			services.AddSingleton<AccountController>();
+			services.AddSingleton<AccountSourceController>();
+			services.AddSingleton<ActorClaimController>();
+			services.AddSingleton<ActorDataController>();
+		    services.AddSingleton<ActorController>();
+			services.AddSingleton<ActorRoleController>();
+			services.AddSingleton<EvaluationController>();
+			services.AddSingleton<GameController>();
+            services.AddSingleton<GameDataController>();
+            services.AddSingleton<GroupController>();
+			services.AddSingleton<GroupMemberController>();
+			services.AddSingleton<LeaderboardController>();
+			services.AddSingleton<ResourceController>();
+			services.AddSingleton<RewardController>();
+			services.AddSingleton<RoleController>();
+			services.AddSingleton<RoleClaimController>();
+			services.AddSingleton<UserController>();
+			services.AddSingleton<UserFriendController>();
+		    services.AddSingleton<MatchController>();
 		}
 	}
 }

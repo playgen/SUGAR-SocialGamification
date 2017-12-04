@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
@@ -11,13 +11,16 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ResourceController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EvaluationDataController _evaluationDataController;
 
-		public ResourceController(SUGARContextFactory contextFactory)
+		public ResourceController(
+			ILogger<ResourceController> logger,
+			ILogger<EvaluationDataController> evaluationDataLogger,
+			SUGARContextFactory contextFactory)
 		{
-			_evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.Resource);
+			_logger = logger;
+			_evaluationDataController = new EvaluationDataController(evaluationDataLogger, contextFactory, EvaluationDataCategory.Resource);
 		}
 
 		public List<EvaluationData> Get(int? gameId = null, int? actorId = null, string[] keys = null)
@@ -60,7 +63,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				Create(toResource);
 			}
 
-			Logger.Info($"{fromResource?.Id} -> {toResource?.Id} for GameId: {gameId}, FromActorId: {fromActorId}, ToActorId: {toActorId}, Key: {key}, Quantity: {transferQuantity}");
+			_logger.LogInformation($"{fromResource?.Id} -> {toResource?.Id} for GameId: {gameId}, FromActorId: {fromActorId}, ToActorId: {toActorId}, Key: {key}, Quantity: {transferQuantity}");
 
 			return toResource;
 		}
@@ -81,7 +84,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_evaluationDataController.Add(data);
 
-			Logger.Info($"{data?.Id}");
+			_logger.LogInformation($"{data?.Id}");
 		}
 
 		public EvaluationData AddQuantity(int resourceId, long addAmount)
@@ -93,7 +96,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_evaluationDataController.Update(resource);
 
-			Logger.Info($"{resource?.Id} with Amount: {addAmount}");
+			_logger.LogInformation($"{resource?.Id} with Amount: {addAmount}");
 
 			return resource;
 		}
@@ -109,12 +112,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			var found = foundResources.Single();
 
-			Logger.Info($"{found?.Id}");
+			_logger.LogInformation($"{found?.Id}");
 
 			return found;
 		}
 
-		private static bool IsTransferValid(long current, long transfer, out string message)
+		private bool IsTransferValid(long current, long transfer, out string message)
 		{
 			message = string.Empty;
 
@@ -129,7 +132,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			var result = message == string.Empty;
 
-			Logger.Debug($"{result} with Message: \"{message}\" for Current: {current}, Transfer {transfer}");
+			_logger.LogDebug($"{result} with Message: \"{message}\" for Current: {current}, Transfer {transfer}");
 
 			return result;
 		}

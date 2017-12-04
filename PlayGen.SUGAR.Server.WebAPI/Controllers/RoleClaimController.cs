@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Role, AuthorizationAction.Get, AuthorizationEntity.RoleClaim)]
 		public async Task<IActionResult> GetRoleClaims([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Role)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Role))).Succeeded)
 			{
 				var roles = _roleClaimCoreController.GetClaimsByRole(id);
 				var roleContract = roles.ToContractList();
@@ -64,7 +64,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Role, AuthorizationAction.Create, AuthorizationEntity.RoleClaim)]
 		public async Task<IActionResult> Create([FromBody]RoleClaimRequest newRoleClaim)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, newRoleClaim.RoleId, HttpContext.ScopeItems(ClaimScope.Role)))
+			if ((await _authorizationService.AuthorizeAsync(User, newRoleClaim.RoleId, HttpContext.ScopeItems(ClaimScope.Role))).Succeeded)
 			{
 				var role = _roleController.GetById(newRoleClaim.RoleId);
 				if (!role.Default)
@@ -97,7 +97,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Role, AuthorizationAction.Delete, AuthorizationEntity.RoleClaim)]
 		public async Task<IActionResult> Delete([FromRoute]int roleId, [FromRoute]int claimId)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, roleId, HttpContext.ScopeItems(ClaimScope.Role)))
+			if ((await _authorizationService.AuthorizeAsync(User, roleId, HttpContext.ScopeItems(ClaimScope.Role))).Succeeded)
 			{
 				var role = _roleController.GetById(roleId);
 				if (!role.Default)

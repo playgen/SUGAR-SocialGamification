@@ -41,8 +41,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorData)]
 		public async Task<IActionResult> Get(int? actorId, int? gameId, string[] key)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User)))
+			if ((await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded)
 			{
 				var data = _actorDataCoreController.Get(gameId, actorId, key);
 				var dataContract = data.ToContractList();
@@ -64,8 +64,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.ActorData)]
 		public async Task<IActionResult> Add([FromBody]EvaluationDataRequest newData)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, HttpContext.ScopeItems(ClaimScope.User)))
+			if ((await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded)
 			{
 				var data = newData.ToActorDataModel();
 				var exists = _actorDataCoreController.KeyExists(data.GameId, data.ActorId, data.Key);

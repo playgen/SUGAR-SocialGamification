@@ -226,7 +226,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				// context.SaveChanges();
 
 				var existingData = context.EvaluationData
-					.Find(context, updatedData.Id);
+					.Find(updatedData.Id);
 
 				if (existingData == null)
 				{
