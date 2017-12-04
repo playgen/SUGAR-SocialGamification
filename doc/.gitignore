@@ -9,5 +9,5 @@
 _site
 
 # Auto Generated
-api/PlayGen.*.yml
+api/
 restapi/restapi.swagger2.json
