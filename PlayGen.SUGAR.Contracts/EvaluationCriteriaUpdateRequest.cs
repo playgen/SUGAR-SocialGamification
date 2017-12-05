@@ -24,7 +24,5 @@ namespace PlayGen.SUGAR.Contracts
 		/// </summary>
 		[Required]
 		public int? Id { get; set; }
-
-		// todo make all fields required for contracts
 	}
 }

@@ -55,16 +55,5 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_evaluationDataController.Add(evaluationData);
 		}
-
-		public EvaluationData GetEvaluationDataByHighestFloat(int gameId, int actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return _evaluationDataController.GetEvaluationDataByHighestFloat(gameId, actorId, key, EvaluationDataType.Float, EvaluationDataCategory.GameData, start, end);
-		}
-
-		public EvaluationData GetEvaluationDataByHighestLong(int gameId, int actorId, string key,
-			DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return _evaluationDataController.GetEvaluationDataByHighestLong(gameId, actorId, key, EvaluationDataType.Float, EvaluationDataCategory.GameData, start, end);
-		}
 	}
 }

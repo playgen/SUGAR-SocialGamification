@@ -18,13 +18,13 @@ namespace PlayGen.SUGAR.Common
 		/// EvaluationDataCategory of the value for this EvaluationData.
 		/// </summary>
 		[Required]
-		public EvaluationDataCategory EvaluationDataCategory { get; set; }
+		public EvaluationDataCategory? EvaluationDataCategory { get; set; }
 
 		/// <summary>
 		/// EvaluationDataType of the value for this EvaluationData.
 		/// </summary>
 		[Required]
-		public EvaluationDataType EvaluationDataType { get; set; }
+		public EvaluationDataType? EvaluationDataType { get; set; }
 
 		/// <summary>
 		/// The value of the EvaluationData.

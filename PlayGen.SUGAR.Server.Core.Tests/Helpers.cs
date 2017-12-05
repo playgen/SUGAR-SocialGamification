@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.Extensions.Logging.Abstractions;
 using PlayGen.SUGAR.Common;
@@ -9,6 +10,8 @@ using DbControllerLocator = PlayGen.SUGAR.Server.EntityFramework.Tests.Controlle
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class Helpers
 	{
 		public static User GetOrCreateUser(string name)
@@ -99,7 +102,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			return new EvaluationData
 			{
                 Key = evaluationCriteria.EvaluationDataKey,
-                EvaluationDataType = evaluationCriteria.EvaluationDataType,
+                EvaluationDataType = evaluationCriteria.EvaluationDataType.Value,
 
                 ActorId = actorId,
 				GameId = gameId,
@@ -117,7 +120,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         {
             var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, value);
             
-            var evaluationDataController = new EvaluationDataController(new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].EvaluationDataCategory);
+            var evaluationDataController = new EvaluationDataController(new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].EvaluationDataCategory.Value);
             evaluationDataController.Add(gameDatas.ToArray());
         }
 
@@ -125,7 +128,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		{
 		    var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, "100");
 
-            var evaluationDataController = new EvaluationDataController(new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].EvaluationDataCategory);
+            var evaluationDataController = new EvaluationDataController(new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].EvaluationDataCategory.Value);
             evaluationDataController.Add(gameDatas.ToArray());
         }
 

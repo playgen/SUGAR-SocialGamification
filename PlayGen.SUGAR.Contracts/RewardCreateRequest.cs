@@ -15,6 +15,5 @@ namespace PlayGen.SUGAR.Contracts
     /// </example>
     public class RewardCreateRequest : Reward
     {
-        // todo make all fields required for contract
     }
 }

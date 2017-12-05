@@ -212,19 +212,25 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			switch (evaluationDataType)
 			{
 				case EvaluationDataType.Long:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
-						ActorId = r.Id,
-						ActorName = r.Name,
-						Value = evaluationDataController.Max<long>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
-					}).ToList();
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMax<long>(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+						.Where(a => a.Value != null)
+						.Select(a => new LeaderboardStandingsResponse
+						{
+							ActorId = a.Actor.Id,
+							ActorName = a.Actor.Name,
+							Value = a.Value.ToString()
+						}).ToList();
 					break;
 
 				case EvaluationDataType.Float:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
-						ActorId = r.Id,
-						ActorName = r.Name,
-						Value = evaluationDataController.Max<float>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString(CultureInfo.InvariantCulture)
-					}).ToList();
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMax<float>(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+						.Where(a => a.Value != null)
+						.Select(a => new LeaderboardStandingsResponse
+						{
+							ActorId = a.Actor.Id,
+							ActorName = a.Actor.Name,
+							Value = a.Value.ToString()
+						}).ToList();
 					break;
 
 				default:
@@ -245,19 +251,25 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			switch (evaluationDataType)
 			{
 				case EvaluationDataType.Long:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
-						ActorId = r.Id,
-						ActorName = r.Name,
-						Value = evaluationDataController.Min<long>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
-					}).ToList();
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMin<long>(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+						.Where(a => a.Value != null)
+						.Select(a => new LeaderboardStandingsResponse
+						{
+							ActorId = a.Actor.Id,
+							ActorName = a.Actor.Name,
+							Value = a.Value.ToString()
+						}).ToList();
 					break;
 
 				case EvaluationDataType.Float:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
-						ActorId = r.Id,
-						ActorName = r.Name,
-						Value = evaluationDataController.Min<float>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString(CultureInfo.InvariantCulture)
-					}).ToList();
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMin<float>(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+						.Where(a => a.Value != null)
+						.Select(a => new LeaderboardStandingsResponse
+						{
+							ActorId = a.Actor.Id,
+							ActorName = a.Actor.Name,
+							Value = a.Value.ToString()
+						}).ToList();
 					break;
 
 				default:
@@ -278,19 +290,25 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			switch (evaluationDataType)
 			{
 				case EvaluationDataType.Long:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
-						ActorId = r.Id,
-						ActorName = r.Name,
-						Value = evaluationDataController.Sum<long>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString()
-					}).ToList();
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetSum<long>(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+						.Where(a => a.Value != null)
+						.Select(a => new LeaderboardStandingsResponse
+						{
+							ActorId = a.Actor.Id,
+							ActorName = a.Actor.Name,
+							Value = a.Value.ToString()
+						}).ToList();
 					break;
 
 				case EvaluationDataType.Float:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
-						ActorId = r.Id,
-						ActorName = r.Name,
-						Value = evaluationDataController.Sum<float>(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).ToString(CultureInfo.InvariantCulture)
-					}).ToList();
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetSum<float>(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+						.Where(a => a.Value != null)
+						.Select(a => new LeaderboardStandingsResponse
+						{
+							ActorId = a.Actor.Id,
+							ActorName = a.Actor.Name,
+							Value = a.Value.ToString()
+						}).ToList();
 					break;
 
 				default:
@@ -344,19 +362,25 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			switch (evaluationDataType)
 			{
 				case EvaluationDataType.String:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
-						ActorId = r.Id,
-						ActorName = r.Name,
-						Value = evaluationDataController.TryGetEarliestKey(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).SerializeToString()
-					}).ToList();
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetEarliest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+						.Where(a => a.Value != null)
+						.Select(a => new LeaderboardStandingsResponse
+						{
+							ActorId = a.Actor.Id,
+							ActorName = a.Actor.Name,
+							Value = a.Value.DateCreated.SerializeToString()
+						}).ToList();
 					break;
 
 				case EvaluationDataType.Boolean:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
-						ActorId = r.Id,
-						ActorName = r.Name,
-						Value = evaluationDataController.TryGetEarliestKey(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).SerializeToString()
-					}).ToList();
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetEarliest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+						.Where(a => a.Value != null)
+						.Select(a => new LeaderboardStandingsResponse
+						{
+							ActorId = a.Actor.Id,
+							ActorName = a.Actor.Name,
+							Value = a.Value.DateCreated.SerializeToString()
+						}).ToList();
 					break;
 
 				default:
@@ -377,19 +401,25 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			switch (evaluationDataType)
 			{
 				case EvaluationDataType.String:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
-						ActorId = r.Id,
-						ActorName = r.Name,
-						Value = evaluationDataController.TryGetLatestKey(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).SerializeToString()
-					}).ToList();
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetLatest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+						.Where(a => a.Value != null)
+						.Select(a => new LeaderboardStandingsResponse
+						{
+							ActorId = a.Actor.Id,
+							ActorName = a.Actor.Name,
+							Value = a.Value.DateCreated.SerializeToString()
+						}).ToList();
 					break;
 
 				case EvaluationDataType.Boolean:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
-						ActorId = r.Id,
-						ActorName = r.Name,
-						Value = evaluationDataController.TryGetLatestKey(gameId, r.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).SerializeToString()
-					}).ToList();
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetLatest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+						.Where(a => a.Value != null)
+						.Select(a => new LeaderboardStandingsResponse
+						{
+							ActorId = a.Actor.Id,
+							ActorName = a.Actor.Name,
+							Value = a.Value.DateCreated.SerializeToString()
+						}).ToList();
 					break;
 
 				default:

@@ -120,78 +120,85 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				return context.EvaluationData
-					.FilterBy(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+				return context.EvaluationData.FilterBy(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 			}
 		}
 
-		public List<T> All<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType,
-			EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<EvaluationData> List(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.Select(s => (T)Convert.ChangeType(s.Value, typeof(T))).ToList();
+			var list = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).ToList();
+			return list;
 		}
 
-		public T Sum<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType,
-			EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetSum<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+			where T : struct
 		{
-			var total = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).ToList();
-			var sum = total.Sum(s => Convert.ToDouble(s.Value));
-			return (T) Convert.ChangeType(sum, typeof(T));
+			var list = List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			if (list.Count > 0)
+			{
+				var sum = list.Sum(s => Convert.ToDouble(s.Value));
+				value = (T)Convert.ChangeType(sum, typeof(T));
+				return true;
+			}
+			value = null;
+			return false;
 		}
 
-		public T Max<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType,
-			EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetMax<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+			where T : struct
 		{
-			var max = All<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).Max(s => (dynamic)s);
-			return max != null ? (T)Convert.ChangeType(max, typeof(T)) : default (T);
+			var list = List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			if (list.Count > 0)
+			{
+				var max = list.Max(s => Convert.ToDouble(s.Value));
+				value = (T)Convert.ChangeType(max, typeof(T));
+				return true;
+			}
+			value = null;
+			return false;
 		}
 
-		public T Min<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType,
-			EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetMin<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+			where T : struct
 		{
-			var min = All<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).Min(s => (dynamic)s);
-			return min != null ? (T)Convert.ChangeType(min, typeof(T)) : default(T);
+			var list = List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			if (list.Count > 0)
+			{
+				var min = list.Min(s => Convert.ToDouble(s.Value));
+				value = (T)Convert.ChangeType(min, typeof(T));
+				return true;
+			}
+			value = null;
+			return false;
 		}
 
-		public bool TryGetLatest<T>(int gameId, int actorId, string key, out T latestLong, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetLatest(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var latest = All<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).FirstOrDefault();
-			latestLong = latest != null ? latest : default(T);
-			return latest != null;
+			var list = List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			if (list.Count > 0)
+			{
+				value = list.OrderByDescending(s => s.DateModified).First();
+				return true;
+			}
+			value = null;
+			return false;
 		}
 
-		public EvaluationData GetEvaluationDataByHighestFloat(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetEarliest(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.First();
-		}
-
-		public EvaluationData GetEvaluationDataByHighestLong(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.First();
+			var list = List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			if (list.Count > 0)
+			{
+				value = list.OrderBy(s => s.DateCreated).First();
+				return true;
+			}
+			value = null;
+			return false;
 		}
 
 		public int CountKeys(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			return GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.Count;
-		}
-
-		// todo change to bool TryGet[name](out value) pattern
-		public DateTime TryGetEarliestKey(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.FirstOrDefault();
-			return data?.DateCreated ?? default(DateTime);
-		}
-
-		public DateTime TryGetLatestKey(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var data = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
-				.FirstOrDefault();
-			return data?.DateModified ?? default(DateTime);
+			return List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).Count;
 		}
 
 		public EvaluationData Create(EvaluationData data)
@@ -239,11 +246,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 
 				return existingData;
 			}
-		}
-
-		protected DateTime EndSet(DateTime end)
-		{
-			return end == default(DateTime) ? DateTime.Now : end;
 		}
 	}
 }

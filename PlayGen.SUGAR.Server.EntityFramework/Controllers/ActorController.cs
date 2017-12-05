@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {

@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 		public static IQueryable<EvaluationData> FilterByGameId(this IQueryable<EvaluationData> gameDataQueryable,
 			int gameId)
 		{
-			return gameId == 0 ? gameDataQueryable.Where(data => data.GameId == 0) : gameDataQueryable.Where(data => data.GameId == gameId);
+			return gameDataQueryable.Where(data => data.GameId == gameId);
 		}
 
 		public static IQueryable<EvaluationData> FilterByMatchId(this IQueryable<EvaluationData> gameDataQueryable,
@@ -74,13 +74,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			return gameDataQueryable.Where(data => data.DateModified >= start && data.DateModified <= end);
 		}
 
-		public static EvaluationData LatestOrDefault(this IQueryable<EvaluationData> gameDataQueryable)
-		{
-			return gameDataQueryable
-				.OrderByDescending(s => s.DateModified)
-				.FirstOrDefault();
-		}
-
 		public static List<EvaluationData> FilterBy(this IQueryable<EvaluationData> gameDataQueryable, int gameId,
 			int actorId, string key, EvaluationDataType evaluationDataType,
 			EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
@@ -93,7 +86,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				.FilterByDataType(evaluationDataType)
 				.FilterByDataCategory(evaluationDataCategory)
 				.FilterByDateTimeRange(start, end)
-				.OrderByDescending(s => s.Value)
 				.ToList();
 		}
 	}

@@ -220,8 +220,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 					{
 						ComparisonType = ComparisonType.GreaterOrEqual,
 						CriteriaQueryType = CriteriaQueryType.Sum,
+						EvaluationDataCategory = EvaluationDataCategory.GameData,
 						EvaluationDataType = EvaluationDataType.Long,
 						EvaluationDataKey = key,
+						Scope = CriteriaScope.Actor,
 						Value = $"{100}"
 					}
 				},
@@ -245,8 +247,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 					{
 						ComparisonType = ComparisonType.GreaterOrEqual,
 						CriteriaQueryType = CriteriaQueryType.Sum,
+						EvaluationDataCategory = EvaluationDataCategory.GameData,
 						EvaluationDataType = EvaluationDataType.Long,
 						EvaluationDataKey = key,
+						Scope = CriteriaScope.Actor,
 						Value = $"{100}"
 					}
 				},

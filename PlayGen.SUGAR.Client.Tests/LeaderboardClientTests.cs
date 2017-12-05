@@ -178,7 +178,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetLeaderboardStandingsWithoutGameId()
 		{
 			var key = "Leaderboard_CannotGetStandingsWithoutGameId";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.Login(Fixture.SUGARClient, key, key, out var _, out var _);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{

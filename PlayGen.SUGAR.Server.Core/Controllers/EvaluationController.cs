@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
@@ -11,6 +12,8 @@ using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public class EvaluationController : CriteriaEvaluator
 	{
 		public static Action<Evaluation> EvaluationCreatedEvent;
@@ -22,7 +25,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		private readonly ActorController _actorController;
 		private readonly EntityFramework.Controllers.EvaluationController _evaluationDbController;
 
-		// todo change all db controller usages to core controller usages except for evaluation db controller
 		public EvaluationController(
 			ILogger<EvaluationController> logger,
 			ILogger<EvaluationDataController> evaluationDataLogger,
@@ -112,7 +114,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			foreach (var ec in evaluation.EvaluationCriterias)
 			{
-				if (!DataTypeValueValidation(ec.EvaluationDataType, ec.Value))
+				if (!DataTypeValueValidation(ec.EvaluationDataType.Value, ec.Value))
 				{
 					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.EvaluationDataType}");
 				}
@@ -130,7 +132,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			foreach (var ec in evaluation.EvaluationCriterias)
 			{
-				if (!DataTypeValueValidation(ec.EvaluationDataType, ec.Value))
+				if (!DataTypeValueValidation(ec.EvaluationDataType.Value, ec.Value))
 				{
 					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.EvaluationDataType}");
 				}
@@ -228,7 +230,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var evaluationData = new EvaluationData {
 				Category = evaluation.EvaluationType.ToEvaluationDataCategory(),
 				Key = evaluation.Token,
-				GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game
+				GameId = evaluation.GameId,
 				ActorId = actorId,
 				EvaluationDataType = EvaluationDataType.String,
 				Value = null

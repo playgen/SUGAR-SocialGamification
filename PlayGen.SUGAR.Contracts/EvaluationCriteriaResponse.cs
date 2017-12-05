@@ -19,7 +19,5 @@ namespace PlayGen.SUGAR.Contracts
     public class EvaluationCriteriaResponse : EvaluationCriteria
     {
         public int Id { get; set; }
-
-        // todo make all fields required for contracts
     }
 }

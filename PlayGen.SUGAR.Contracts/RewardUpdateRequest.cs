@@ -19,7 +19,5 @@ namespace PlayGen.SUGAR.Contracts
 		/// The unqiue identifier for this type.
 		/// </summary>
 		public int? Id { get; set; }
-
-		// todo make all fields required for contract
 	}
 }
