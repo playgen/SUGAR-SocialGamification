@@ -6,6 +6,9 @@ namespace PlayGen.SUGAR.Client.Tests
 {
 	public static class Helpers
 	{
+		private const int GlobalGameId = 1;
+		private const string SugarSourceToken = "SUGAR";
+
 		public static GameResponse GetGame(GameClient gameClient, string name)
 		{
 			var games = gameClient.Get(name);
@@ -16,7 +19,18 @@ namespace PlayGen.SUGAR.Client.Tests
 			}
 			throw new Exception("This game has not been set up in seeding.");
 		}
+		
+		public static AccountResponse CreateAndLoginGlobal(SUGARClient client, string userName)
+		{
+			return client.Session.CreateAndLogin(GlobalGameId, new AccountRequest
+			{
+				Name = userName,
+				Password = $"{userName}Password",
+				SourceToken = SugarSourceToken
+			});
+		}
 
+		[Obsolete("Use one of the more specific helper methods to avoid making unnecessary requests.")]
 		public static void Login(SUGARClient client, string gameName, string userKey, out GameResponse game, out AccountResponse user)
 		{
 			var accountRequest = new AccountRequest

@@ -77,7 +77,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public void Update(User user)
+		public User Update(User user)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -89,7 +89,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				{
 					context.Entry(existing).State = EntityState.Modified;
 					existing.Name = user.Name;
+					existing.Description = user.Description;
 					SaveChanges(context);
+					return existing;
 				}
 				else
 				{

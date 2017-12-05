@@ -132,27 +132,28 @@ namespace PlayGen.SUGAR.Client.Tests
 		#endregion
 
 		[Theory]
-		[InlineData("")]
+		[InlineData(null)]
 		[InlineData("Short Description")]
 		[InlineData("Medium Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sodales nisl quis neque tempus bibendum. Nunc ut sem vel metus venenatis euismod sed id enim. Sed faucibus erat eget sapien fringilla, id malesuada nunc convallis. Nam dapibus cursus accumsan. Sed in fermentum libero. Proin quis felis turpis. Etiam feugiat scelerisque metus id pretium. Morbi lacus purus, ornare eget libero nec, fringilla laoreet dui. Suspendisse dictum a turpis eu vulputate. Vestibulum ante ipsum primis in cras amet.")]
 		[InlineData("Max Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in venenatis augue, quis hendrerit justo. Praesent malesuada leo vel nisl aliquet, id efficitur nibh tincidunt. Donec laoreet orci vel sollicitudin rutrum. Maecenas lacinia libero nec finibus porttitor. Donec tempus tincidunt felis in viverra. Aliquam eleifend ex sem, at porta sapien malesuada ac. Praesent auctor ligula dictum odio gravida tempor. Fusce malesuada malesuada magna non pretium. Mauris lobortis accumsan porttitor. Donec commodo risus at neque porttitor volutpat. Phasellus et ullamcorper libero, vel euismod massa. Vivamus ullamcorper nibh a dolor accumsan tempor. Curabitur laoreet accumsan nisi non porttitor. Donec tincidunt sapien eu ligula consequat fringilla sed eu augue. Nulla sed convallis lacus, eu venenatis urna. Duis eu purus tempor dolor porttitor tincidunt eu quis libero. Nunc sit amet aliquet eros.Sed sed vestibulum nulla.Phasellus suscipit arcu vel neque egestas, eget rutrum est sollicitudin.Curabitur amet.")]
 		public void CanCreateWithValidDescription(string description)
 		{
 			// Arrange 
-			var request = new UserRequest
-			{
-				Name = $"CanCreateWithValidDescription_{Guid.NewGuid()}",
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, $"CanCreateValid_{Guid.NewGuid()}");
 
+			var userRequest = new UserRequest
+			{
+				Name = loggedInAccount.User.Name,
 				Description = description
 			};
 
 			// Act
-			var response = Fixture.SUGARClient.User.Create(request);
+			var userResponse = Fixture.SUGARClient.User.Update(loggedInAccount.User.Id, userRequest);
 
 			// Assert
-			Assert.NotNull(response);
-			Assert.Equal(request.Name, response.Name);
-			Assert.Equal(request.Description, response.Description);
+			Assert.NotNull(userResponse);
+			Assert.Equal(userRequest.Name, userResponse.Name);
+			Assert.Equal(userRequest.Description, userResponse.Description);
 		}
 
 		[Theory]
@@ -160,15 +161,17 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CantCreateWithInvalidDescription(string description)
 		{
 			// Arrange 
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, $"CantCreateInvalid_{Guid.NewGuid()}");
+			
 			var userRequest = new UserRequest
 			{
-				Name = $"CanCreateWithValidDescription_{Guid.NewGuid()}",
+				Name = loggedInAccount.User.Name,
 
 				Description = description
 			};
 
 			// Act Assert
-			Assert.Throws<SUGARException>(() => Fixture.SUGARClient.User.Create(userRequest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.User.Update(loggedInAccount.User.Id, userRequest));
 		}
 
 		public UserClientTests(ClientTestsFixture fixture)

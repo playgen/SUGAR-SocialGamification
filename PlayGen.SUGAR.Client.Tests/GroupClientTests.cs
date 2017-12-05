@@ -255,9 +255,11 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanCreateWithValidDescription(string description)
 		{
 			// Arrange 
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, $"CanCreateValid_{Guid.NewGuid()}");
+
 			var request = new GroupRequest
 			{
-				Name = $"CanCreateWithValidDescription_{Guid.NewGuid()}",
+				Name = $"{loggedInAccount.User.Name}_Group",
 
 				Description = description
 			};
@@ -276,15 +278,17 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CantCreateWithInvalidDescription(string description)
 		{
 			// Arrange 
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, $"CantCreateInvalid_{Guid.NewGuid()}");
+
 			var request = new GroupRequest
 			{
-				Name = $"CanCreateWithValidDescription_{Guid.NewGuid()}",
+				Name = $"{loggedInAccount.User.Name}_Group",
 
 				Description = description
 			};
 
 			// Act Assert
-			Assert.Throws<SUGARException>(() => Fixture.SUGARClient.Group.Create(request));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Group.Create(request));
 		}
 
 		public GroupClientTests(ClientTestsFixture fixture)

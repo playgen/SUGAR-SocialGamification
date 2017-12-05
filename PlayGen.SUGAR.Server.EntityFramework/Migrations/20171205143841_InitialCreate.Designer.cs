@@ -14,7 +14,7 @@ using System;
 namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 {
     [DbContext(typeof(SUGARContext))]
-    [Migration("20171205122513_InitialCreate")]
+    [Migration("20171205143841_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,6 +28,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1023);
 
                     b.Property<string>("Discriminator")
                         .IsRequired();
@@ -97,7 +100,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.Property<int>("ClaimId");
 
-                    b.Property<int?>("EntityId");
+                    b.Property<int>("EntityId");
 
                     b.HasKey("Id");
 
@@ -114,7 +117,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ActorId");
+                    b.Property<int>("ActorId");
 
                     b.Property<DateTime>("DateCreated");
 
@@ -122,7 +125,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.Property<int>("EvaluationDataType");
 
-                    b.Property<int?>("GameId");
+                    b.Property<int>("GameId");
 
                     b.Property<string>("Key");
 
@@ -143,7 +146,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.Property<int>("ActorId");
 
-                    b.Property<int?>("EntityId");
+                    b.Property<int>("EntityId");
 
                     b.Property<int>("RoleId");
 
@@ -186,7 +189,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
-                    b.Property<int?>("GameId");
+                    b.Property<int>("GameId");
 
                     b.Property<string>("Name");
 
@@ -239,7 +242,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ActorId");
+                    b.Property<int>("ActorId");
 
                     b.Property<int>("Category");
 
@@ -249,7 +252,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.Property<int>("EvaluationDataType");
 
-                    b.Property<int?>("GameId");
+                    b.Property<int>("GameId");
 
                     b.Property<string>("Key");
 

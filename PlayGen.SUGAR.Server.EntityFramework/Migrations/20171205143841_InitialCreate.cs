@@ -33,11 +33,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ActorId = table.Column<int>(nullable: true),
+                    ActorId = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
                     EvaluationDataType = table.Column<int>(nullable: false),
-                    GameId = table.Column<int>(nullable: true),
+                    GameId = table.Column<int>(nullable: false),
                     Key = table.Column<string>(nullable: true),
                     Value = table.Column<string>(nullable: true)
                 },
@@ -52,6 +52,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(maxLength: 1023, nullable: true),
                     Discriminator = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
@@ -84,7 +85,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     ActorType = table.Column<int>(nullable: false),
                     Description = table.Column<string>(maxLength: 256, nullable: true),
                     Discriminator = table.Column<string>(nullable: false),
-                    GameId = table.Column<int>(nullable: true),
+                    GameId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Token = table.Column<string>(nullable: true)
                 },
@@ -286,7 +287,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ActorId = table.Column<int>(nullable: false),
                     ClaimId = table.Column<int>(nullable: false),
-                    EntityId = table.Column<int>(nullable: true)
+                    EntityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -389,7 +390,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ActorId = table.Column<int>(nullable: false),
-                    EntityId = table.Column<int>(nullable: true),
+                    EntityId = table.Column<int>(nullable: false),
                     RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -439,12 +440,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ActorId = table.Column<int>(nullable: true),
+                    ActorId = table.Column<int>(nullable: false),
                     Category = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
                     EvaluationDataType = table.Column<int>(nullable: false),
-                    GameId = table.Column<int>(nullable: true),
+                    GameId = table.Column<int>(nullable: false),
                     Key = table.Column<string>(nullable: true),
                     MatchId = table.Column<int>(nullable: true),
                     Value = table.Column<string>(nullable: true)
