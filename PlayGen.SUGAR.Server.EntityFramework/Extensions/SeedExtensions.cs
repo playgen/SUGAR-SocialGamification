@@ -25,33 +25,33 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			var adminAccountSource = context.AccountSources.FirstOrDefault(a => a.Token == "SUGAR") ?? CreateAccountSource(context, "SUGAR", "SUGAR", true);
 
 			var adminAccount = CreateAccount(context, "admin", "$2a$12$SSIgQE0cQejeH0dM61JV/eScAiHwJo/I3Gg6xZFUc0gmwh0FnMFv.", adminAccountSource, adminUser);
-			
+
 			#region Actor Roles
 			if (!context.ActorRoles.Any())
 			{
 				//global (admin)
-			CreateActorRole(context, roles[ClaimScope.Global], adminUser, Platform.AllId);
+				CreateActorRole(context, roles[ClaimScope.Global], adminUser, Platform.AllId);
 
 				//global game control
-			CreateActorRole(context, roles[ClaimScope.Game], adminUser, Platform.AllId);
+				CreateActorRole(context, roles[ClaimScope.Game], adminUser, Platform.AllId);
 
 				//global group control
-			CreateActorRole(context, roles[ClaimScope.Group], adminUser, Platform.AllId);
+				CreateActorRole(context, roles[ClaimScope.Group], adminUser, Platform.AllId);
 
 				// admin user
 				CreateActorRole(context, roles[ClaimScope.User], adminUser, adminUser.Id);
 
 				//global user control
-			CreateActorRole(context, roles[ClaimScope.User], adminUser, Platform.AllId);
+				CreateActorRole(context, roles[ClaimScope.User], adminUser, Platform.AllId);
 
 				// admin account
 				CreateActorRole(context, roles[ClaimScope.Account], adminUser, adminAccount.Id);
 
 				//global account control
-			CreateActorRole(context, roles[ClaimScope.Account], adminUser, Platform.AllId);
+				CreateActorRole(context, roles[ClaimScope.Account], adminUser, Platform.AllId);
 
 				//global role control
-			CreateActorRole(context, roles[ClaimScope.Role], adminUser, Platform.AllId);
+				CreateActorRole(context, roles[ClaimScope.Role], adminUser, Platform.AllId);
 			}
 			#endregion
 		}
@@ -61,13 +61,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			if (!context.Games.Any())
 			{
 				CreateGame(context, "Global");
-			
+
 				#region Game Client Tests
 				CreateGame(context, "Game_CanGetGamesByName 1");
 				CreateGame(context, "Game_CanGetGamesByName 2");
 				CreateGame(context, "Game_CanGetGameById");
 				#endregion
-			
+
 				#region GameData Client Tests
 				CreateGame(context, "GameData_CanCreate");
 				CreateGame(context, "GameData_CannotCreateWithoutActorId");
@@ -96,8 +96,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			#region Achievement Client Tests
 			if (!context.Achievements.Any())
 			{
-				var globalGame = CreateGame(context, "Global");
-
 				CreateAchievement(context, CreateGame(context, "Achievement_CanDisableNotifications").Id, "Achievement_CanDisableNotifications");
 				CreateAchievement(context, CreateGame(context, "Achievement_CanGetNotifications").Id, "Achievement_CanGetNotifications");
 				CreateAchievement(context, CreateGame(context, "Achievement_DontGetAlreadyRecievedNotifications").Id, "Achievement_DontGetAlreadyRecievedNotifications");
@@ -165,7 +163,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 					"Skill_DontGetAlreadyRecievedNotifications");
 				CreateSkill(context, 0, "Skill_CanGetGlobalSkillProgress");
 				CreateSkill(context, CreateGame(context, "Skill_CanGetSkillProgress").Id, "Skill_CanGetSkillProgress");
-				CreateGame(context, "Skill_CannotGetNotExistingSkillProgress");}
+				CreateGame(context, "Skill_CannotGetNotExistingSkillProgress");
+			}
 
 			#endregion
 		}
