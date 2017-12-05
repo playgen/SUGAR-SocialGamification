@@ -59,10 +59,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		protected List<LeaderboardStandingsResponse> GatherStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
 		{
-			var actors = GetActors(request.LeaderboardFilterType, leaderboard.ActorType, request.ActorId);
-
+			// TODO add evaluation data key and gameId to getActors to reduce number of actors evaluated
 			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, leaderboard.EvaluationDataCategory);
 
+			var actors = GetActors(request.LeaderboardFilterType, leaderboard.ActorType, request.ActorId, leaderboard.EvaluationDataKey, leaderboard.GameId, evaluationDataController);
+			
 			List<LeaderboardStandingsResponse> typeResults;
 
 			switch (leaderboard.LeaderboardType)
@@ -102,7 +103,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		protected List<ActorResponse> GetActors(LeaderboardFilterType filter, ActorType actorType, int? actorId)
+		protected List<ActorResponse> GetActors(LeaderboardFilterType filter, ActorType actorType, int? actorId, string evaluationDataKey, int gameId, EvaluationDataController evaluationDataController)
 		{
 			var actors = Enumerable.Empty<ActorResponse>().ToList();
 
@@ -157,28 +158,37 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					// todo what happens in the case where a user is in multiple groups?
 					break;
 			}
-
+			// get all valid actors (have evaluationDataKey evaluation data in game gameId)
+			var validActors = evaluationDataController.GetGameKeyActors(gameId, evaluationDataKey);
 			switch (actorType)
 			{
 				case ActorType.Undefined:
-					actors = ActorController.Get().Select(a => new ActorResponse {
-						Id = a.Id,
-						Name = GetName(a.Id, a.ActorType)
-					}).ToList();
+					actors = validActors.Select(a => ActorController.Get(a.Value))
+						.Where(a => a != null)
+						.Select(a => new ActorResponse {
+							Id = a.Id,
+							Name = GetName(a.Id, a.ActorType)
+						}).ToList();
 					break;
 
 				case ActorType.User:
-					actors = UserController.Get().Select(a => new ActorResponse {
-						Id = a.Id,
-						Name = a.Name
-					}).ToList();
+					actors = validActors.Select(a => UserController.Get(a.Value))
+						.Where(a => a != null)
+						.Select(a => new ActorResponse
+						{
+							Id = a.Id,
+							Name = a.Name
+						}).ToList();
 					break;
 
 				case ActorType.Group:
-					actors = GroupController.Get().Select(a => new ActorResponse {
-						Id = a.Id,
-						Name = a.Name
-					}).ToList();
+					actors = validActors.Select(a => GroupController.Get(a.Value))
+						.Where(a => a != null)
+						.Select(a => new ActorResponse
+						{
+							Id = a.Id,
+							Name = a.Name
+						}).ToList();
 					break;
 			}
 
