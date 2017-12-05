@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				var group = context.Groups
 					.IncludeAll()
-					.Find(context, id);
+					.FirstOrDefault(g => g.Id == id);
 
 				return group;
 			}
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 
 				var existing = context.Groups
 					.IncludeAll()
-					.Find(context, group.Id);
+					.FirstOrDefault(g => g.Id == group.Id);
 
 				if (existing != null)
 				{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Model;
 
@@ -9,17 +9,20 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class GameController
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		public static event Action<int> GameDeletedEvent;
 
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.GameController _gameDbController;
 		private readonly ActorClaimController _actorClaimController;
 		private readonly ActorRoleController _actorRoleController;
 
-		public GameController(EntityFramework.Controllers.GameController gameDbController,
-					ActorClaimController actorClaimController,
-					ActorRoleController actorRoleController)
+		public GameController(
+			ILogger<GameController> logger,
+			EntityFramework.Controllers.GameController gameDbController,
+			ActorClaimController actorClaimController,
+			ActorRoleController actorRoleController)
 		{
+			_logger = logger;
 			_gameDbController = gameDbController;
 			_actorClaimController = actorClaimController;
 			_actorRoleController = actorRoleController;
@@ -29,7 +32,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var games = _gameDbController.Get();
 
-			Logger.Info($"Got: {games?.Count} Games");
+			_logger.LogInformation($"Got: {games?.Count} Games");
 
 			return games;
 		}
@@ -40,7 +43,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Game).Select(p => p.EntityId).ToList();
 			games = games.Where(g => permissions.Contains(g.Id)).ToList();
 
-			Logger.Info($"Got: {games.Count} Games, for ActorId: {actorId}");
+			_logger.LogInformation($"Got: {games.Count} Games, for ActorId: {actorId}");
 
 			return games;
 		}
@@ -49,7 +52,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var game = _gameDbController.Get(id);
 
-			Logger.Info($"Got: Game: {game?.Id}, for Id: {id}");
+			_logger.LogInformation($"Got: Game: {game?.Id}, for Id: {id}");
 
 			return game;
 		}
@@ -58,7 +61,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var games = _gameDbController.Search(name);
 
-			Logger.Info($"Got: {games?.Count} Games, for Name: {name}");
+			_logger.LogInformation($"Got: {games?.Count} Games, for Name: {name}");
 
 			return games;
 		}
@@ -68,7 +71,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			newGame = _gameDbController.Create(newGame);
 			_actorRoleController.Create(ClaimScope.Game.ToString(), creatorId, newGame.Id);
 
-			Logger.Info($"Created: Game: {newGame.Id}, for CreatorId: {creatorId}");
+			_logger.LogInformation($"Created: Game: {newGame.Id}, for CreatorId: {creatorId}");
 
 			return newGame;
 		}
@@ -77,7 +80,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_gameDbController.Update(game);
 
-			Logger.Info($"{game?.Id}");
+			_logger.LogInformation($"{game?.Id}");
 		}
 
 		public void Delete(int id)
@@ -86,7 +89,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_gameDbController.Delete(id);
 
-			Logger.Info($"{id}");
+			_logger.LogInformation($"{id}");
 		}
 	}
 }

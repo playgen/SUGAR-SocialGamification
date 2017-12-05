@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Controllers;
 using PlayGen.SUGAR.Server.EntityFramework;
@@ -17,9 +18,16 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 		protected readonly UserFriendController UserFriendCoreController;
 		protected readonly SUGARContextFactory ContextFactory;
 
+		protected ILogger<EvaluationDataController> EvaluationDataLogger;
+
 		// todo change all db controller usage to core controller usage
-		public CriteriaEvaluator(SUGARContextFactory contextFactory, GroupMemberController groupMemberCoreController, UserFriendController userFriendCoreController)
+		public CriteriaEvaluator(
+			ILogger<EvaluationDataController> evaluationDataLogger,
+			SUGARContextFactory contextFactory, 
+			GroupMemberController groupMemberCoreController, 
+			UserFriendController userFriendCoreController)
 		{
+			EvaluationDataLogger = evaluationDataLogger;
 			ContextFactory = contextFactory;
 			GroupMemberCoreController = groupMemberCoreController;
 			UserFriendCoreController = userFriendCoreController;
@@ -81,7 +89,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateLong(int gameId, int actorId, EvaluationCriteria completionCriteria)
 		{
-			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, completionCriteria.EvaluationDataCategory);
 
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -108,7 +116,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateFloat(int gameId, int actorId, EvaluationCriteria completionCriteria)
 		{
-			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, completionCriteria.EvaluationDataCategory);
 
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -135,7 +143,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateString(int gameId, int actorId, EvaluationCriteria completionCriteria)
 		{
-			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, completionCriteria.EvaluationDataCategory);
 
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -158,7 +166,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateBool(int gameId, int actorId, EvaluationCriteria completionCriteria)
 		{
-			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, completionCriteria.EvaluationDataCategory);
 
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -181,7 +189,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateManyLong(int gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
 		{
-			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, completionCriteria.EvaluationDataCategory);
 
 			switch (completionCriteria.CriteriaQueryType)
 			{
@@ -200,7 +208,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		protected float EvaluateManyFloat(int gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
 		{
-			var evaluationDataController = new EvaluationDataController(ContextFactory, completionCriteria.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, completionCriteria.EvaluationDataCategory);
 			
 			switch (completionCriteria.CriteriaQueryType)
 			{

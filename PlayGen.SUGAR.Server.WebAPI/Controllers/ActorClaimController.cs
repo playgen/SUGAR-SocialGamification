@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			{
 				entityId = Platform.AllId;
 			}
-			if (await _authorizationService.AuthorizeAsync(User, entityId, HttpContext.ScopeItems(claim.ClaimScope)))
+			if ((await _authorizationService.AuthorizeAsync(User, entityId, HttpContext.ScopeItems(claim.ClaimScope))).Succeeded)
 			{
 				var actors = _actorClaimCoreController.GetClaimActors(claimId, entityId);
 				var actorContract = actors.ToActorContractList();
@@ -69,8 +69,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
 		public async Task<IActionResult> GetActorClaims([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.User)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.User))).Succeeded)
 			{
 				var claims = _actorClaimCoreController.GetActorClaims(id);
 				var claimsContract = claims.ToContractList();
@@ -98,7 +98,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			{
 				newClaim.EntityId = Platform.AllId;
 			}
-			if (await _authorizationService.AuthorizeAsync(User, newClaim.EntityId, HttpContext.ScopeItems(newClaimInfo.ClaimScope)))
+			if ((await _authorizationService.AuthorizeAsync(User, newClaim.EntityId, HttpContext.ScopeItems(newClaimInfo.ClaimScope))).Succeeded)
 			{
 				var claimScope = _claimCoreController.Get(newClaim.ClaimId.Value).ClaimScope;
 				var creatorClaims = _actorClaimCoreController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newClaim.EntityId.Value, claimScope);
@@ -128,7 +128,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			//todo check this logic to ensure correct claim scope is enforced (ie user with permissions of game with id 2 would pass permissions for group with id 2)
 			var actorClaim = _actorClaimCoreController.Get(id);
 			var claim = _claimCoreController.Get(actorClaim.ClaimId);
-			if (await _authorizationService.AuthorizeAsync(User, actorClaim.EntityId, HttpContext.ScopeItems(claim.ClaimScope)))
+			if ((await _authorizationService.AuthorizeAsync(User, actorClaim.EntityId, HttpContext.ScopeItems(claim.ClaimScope))).Succeeded)
 			{
 				var claimCount = _actorClaimCoreController.GetClaimActors(actorClaim.ClaimId, actorClaim.EntityId).Count;
 				if (claimCount > 1)

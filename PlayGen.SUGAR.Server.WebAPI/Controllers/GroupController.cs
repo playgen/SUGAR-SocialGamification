@@ -116,7 +116,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		// todo refactor to use groupupdaterequest that contains an Id property and have a separate groupcreaterequest that doen't have the Id
 		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] GroupRequest group)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Group)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
 			{
 				var groupModel = group.ToGroupModel();
 				groupModel.Id = id;
@@ -136,7 +136,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.Group)]
 		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Group)))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
 			{
 				_groupCoreController.Delete(id);
 				return Ok();

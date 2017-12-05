@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using MySQL.Data.EntityFrameworkCore.Extensions;
-using Xunit;
+﻿using Xunit;
 
 // todo change these to test the core layer (as that makes use of the ef layer but imposes restrictions too).
 
@@ -11,10 +8,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 	{
 		public ClearDatabaseFixture()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<SUGARContext>();
-			optionsBuilder.UseMySQL(ControllerLocator.ContextFactory.ConnectionString);
-
-			using (var context = new SUGARContext(optionsBuilder.Options))
+			using (var context = ControllerLocator.ContextFactory.Create())
 			{
 				context.Database.EnsureDeleted();
 				context.Database.EnsureCreated();

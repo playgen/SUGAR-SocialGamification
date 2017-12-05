@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class RoleClaimController
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.RoleClaimController _roleClaimDbController;
 
-		public RoleClaimController(EntityFramework.Controllers.RoleClaimController roleClaimDbController)
+		public RoleClaimController(
+			ILogger<RoleClaimController> logger,
+			EntityFramework.Controllers.RoleClaimController roleClaimDbController)
 		{
+			_logger = logger;
 			_roleClaimDbController = roleClaimDbController;
 		}
 
@@ -19,7 +21,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var roles = _roleClaimDbController.GetClaimsByRole(roleId);
 
-			Logger.Info($"{roles.Count} Roles for RoleId: {roleId}");
+			_logger.LogInformation($"{roles.Count} Roles for RoleId: {roleId}");
 
 			return roles;
 		}
@@ -28,7 +30,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var roles = _roleClaimDbController.GetClaimsByRoles(ids);
 
-			Logger.Info($"{roles.Count} Roles for Ids: {string.Join(", ", ids)}");
+			_logger.LogInformation($"{roles.Count} Roles for Ids: {string.Join(", ", ids)}");
 
 			return roles;
 		}
@@ -37,7 +39,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var claims = _roleClaimDbController.GetRolesByClaim(id);
 
-			Logger.Info($"{claims.Count} Claims for Id: {id}");
+			_logger.LogInformation($"{claims.Count} Claims for Id: {id}");
 
 			return claims;
 		}
@@ -46,7 +48,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			newRoleClaim = _roleClaimDbController.Create(newRoleClaim);
 
-			Logger.Info($"RoleId: {newRoleClaim?.RoleId}, ClaimId: {newRoleClaim?.ClaimId}");
+			_logger.LogInformation($"RoleId: {newRoleClaim?.RoleId}, ClaimId: {newRoleClaim?.ClaimId}");
 
 			return newRoleClaim;
 		}
@@ -55,7 +57,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_roleClaimDbController.Delete(roleId, claimId);
 
-			Logger.Info($"RoleId: {roleId}, ClaimId: {claimId}");
+			_logger.LogInformation($"RoleId: {roleId}, ClaimId: {claimId}");
 		}
 	}
 }

@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Match)]
 		public async Task<IActionResult> Create(int gameId)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var userId = HttpContext.Request.Headers.GetUserId();
 				var match = _matchCoreController.Create(gameId, userId);
@@ -63,9 +63,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		{
 			var userId = HttpContext.Request.Headers.GetUserId();
 			var gameId = HttpContext.Request.Headers.GetGameId();
-			if (await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.User)) ||
-				await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var match = _matchCoreController.Create(gameId, userId);
 				var contract = match.ToContract();
@@ -88,9 +88,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		{
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
-			if (await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.User)) ||
-				await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var match = _matchCoreController.Create(gameId, userId);
 				match = _matchCoreController.Start(match.Id);
@@ -115,9 +115,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		{
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
-			if (await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.User)) ||
-				await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var match = _matchCoreController.Start(matchId);
 				var contract = match.ToContract();
@@ -141,9 +141,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		{
 			var gameId = HttpContext.Request.Headers.GetGameId();
 			var userId = HttpContext.Request.Headers.GetUserId();
-			if (await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.User)) ||
-				await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, userId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var match = _matchCoreController.End(matchId);
 				var contract = match.ToContract();
@@ -165,7 +165,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Update, AuthorizationEntity.Match)]
 		public async Task<IActionResult> End([FromRoute]int gameId, [FromRoute]int matchId)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Global)))
+			if ((await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var match = _matchCoreController.End(matchId);
 				var contract = match.ToContract();
@@ -314,9 +314,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Match)]
 		public async Task<IActionResult> Add([FromBody]EvaluationDataRequest newData)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, HttpContext.ScopeItems(ClaimScope.User)) ||
-				await _authorizationService.AuthorizeAsync(User, newData.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, newData.CreatingActorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, newData.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var data = newData.ToMatchDataModel();
 				_matchCoreController.AddData(data);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging.Abstractions;
 using PlayGen.SUGAR.Server.Core.Sessions;
 using Xunit;
 
@@ -18,7 +19,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         public void CanStartSession()
         {
             // Arrange
-            var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
+            var sessionTracker = new SessionTracker(new NullLogger<SessionTracker>(), DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
             var game = Helpers.GetOrCreateGame("CanStartSession");
 
             var user = Helpers.GetOrCreateUser($"CanStartSession");
@@ -37,7 +38,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         public void CanEndSession()
         {
             // Arrange
-            var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
+            var sessionTracker = new SessionTracker(new NullLogger<SessionTracker>(), DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
             var game = Helpers.GetOrCreateGame("CanEndSession");
 
             var user = Helpers.GetOrCreateUser($"CanEndSession");
@@ -59,7 +60,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             // Arrange
             var activeSessions = new List<Session>();
 
-            var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
+            var sessionTracker = new SessionTracker(new NullLogger<SessionTracker>(), DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
             var game = Helpers.GetOrCreateGame("SessionRemovedOnActorRemoved");
 
             var removeUser = Helpers.GetOrCreateUser($"SessionRemovedOnActorRemoved_ShouldRemove");
@@ -91,7 +92,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             var inactiveSessions = new List<Session>();
             var activeSessions = new List<Session>();
 
-            var sessionTracker = new SessionTracker(DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
+            var sessionTracker = new SessionTracker(new NullLogger<SessionTracker>(), DefaultTimeoutCheckInterval, DefaultTimeoutCheckInterval);
             var removeGame = Helpers.GetOrCreateGame("SessionRemovedOnGameRemoved_Remove");
             var keepGame = Helpers.GetOrCreateGame("SessionRemovedOnGameRemoved_Keep");
 
@@ -129,7 +130,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             var inactiveSessions = new List<Session>();
             var activeSessions = new List<Session>();
 
-            var sessionTracker = new SessionTracker(new TimeSpan(0, 0, 0, timeoutSeconds), DefaultTimeoutCheckInterval);
+            var sessionTracker = new SessionTracker(new NullLogger<SessionTracker>(), new TimeSpan(0, 0, 0, timeoutSeconds), DefaultTimeoutCheckInterval);
             var game = Helpers.GetOrCreateGame("CanRemoveTimedOut");
 
             for (var i = 0; i < 5; i++)
@@ -167,7 +168,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             var timeoutMilliseconds = 100;
             var game = Helpers.GetOrCreateGame("InactiveGetRemoved");
             var sessions = new List<Session>();
-            var sessionTracker = new SessionTracker(new TimeSpan(0, 0, 0, 0, timeoutMilliseconds), new TimeSpan(0, 0, 0, 0, timeoutMilliseconds));
+            var sessionTracker = new SessionTracker(new NullLogger<SessionTracker>(), new TimeSpan(0, 0, 0, 0, timeoutMilliseconds), new TimeSpan(0, 0, 0, 0, timeoutMilliseconds));
 
             for (var i = 0; i < 100; i++)
             {

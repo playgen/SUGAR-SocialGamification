@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		protected async Task<IActionResult> Get(int gameId, EvaluationType evaluationType)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var evaluation = EvaluationCoreController.GetEvaluation(gameId, evaluationType);
 				var evaluationContract = evaluation.ToContractList();
@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		protected async Task<IActionResult> Get(string token, int gameId)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var evaluation = EvaluationCoreController.Get(token, gameId);
 				var evaluationContract = evaluation.ToContract();
@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		protected async Task<IActionResult> Delete(string token, int gameId)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				EvaluationCoreController.Delete(token, gameId);
 				return Ok();

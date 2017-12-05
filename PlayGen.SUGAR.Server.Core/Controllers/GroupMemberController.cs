@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.Model;
 
@@ -7,11 +7,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class GroupMemberController
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+		private readonly ILogger _logger;
 		private readonly GroupRelationshipController _groupRelationshipDbController;
 
-		public GroupMemberController(GroupRelationshipController groupRelationshipDbController)
+		public GroupMemberController(
+			ILogger<GroupMemberController> logger,
+			GroupRelationshipController groupRelationshipDbController)
 		{
+			_logger = logger;
 			_groupRelationshipDbController = groupRelationshipDbController;
 		}
 
@@ -19,7 +22,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var requestingMembers = _groupRelationshipDbController.GetRequests(groupId);
 
-			Logger.Info($"{requestingMembers?.Count} Group Members for GroupId: {groupId}");
+			_logger.LogInformation($"{requestingMembers?.Count} Group Members for GroupId: {groupId}");
 
 			return requestingMembers;
 		}
@@ -28,7 +31,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var requestedGroups = _groupRelationshipDbController.GetSentRequests(userId);
 
-			Logger.Info($"{requestedGroups?.Count} Sent Requests for UserId: {userId}");
+			_logger.LogInformation($"{requestedGroups?.Count} Sent Requests for UserId: {userId}");
 
 			return requestedGroups;
 		}
@@ -37,7 +40,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var members = _groupRelationshipDbController.GetMembers(groupId);
 
-			Logger.Info($"{members?.Count} Memebrs for GroupId: {groupId}");
+			_logger.LogInformation($"{members?.Count} Memebrs for GroupId: {groupId}");
 
 			return members;
 		}
@@ -52,7 +55,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var membershipGroups = _groupRelationshipDbController.GetUserGroups(userId);
 
-			Logger.Info($"{membershipGroups?.Count} User Groups for UserId: {userId}");
+			_logger.LogInformation($"{membershipGroups?.Count} User Groups for UserId: {userId}");
 
 			return membershipGroups;
 		}
@@ -61,14 +64,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_groupRelationshipDbController.Create(newRelationship, autoAccept);
 
-			Logger.Info($"{newRelationship?.RequestorId} -> {newRelationship?.AcceptorId}, Auto Accept: {autoAccept}");
+			_logger.LogInformation($"{newRelationship?.RequestorId} -> {newRelationship?.AcceptorId}, Auto Accept: {autoAccept}");
 		}
 
 		public void UpdateMemberRequest(UserToGroupRelationship relationship, bool autoAccept)
 		{
 			_groupRelationshipDbController.UpdateRequest(relationship, autoAccept);
 
-			Logger.Info($"{relationship?.RequestorId} -> {relationship?.AcceptorId}, Auto Accept: {autoAccept}");
+			_logger.LogInformation($"{relationship?.RequestorId} -> {relationship?.AcceptorId}, Auto Accept: {autoAccept}");
 		}
 
 		public void UpdateMember(UserToGroupRelationship relationship)
@@ -77,7 +80,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_groupRelationshipDbController.Update(relationship);
 			//todo Remove ActorRole for group if user has permissions
 
-			Logger.Info($"{relationship?.RequestorId} -> {relationship?.AcceptorId}");
+			_logger.LogInformation($"{relationship?.RequestorId} -> {relationship?.AcceptorId}");
 		}
 	}
 }

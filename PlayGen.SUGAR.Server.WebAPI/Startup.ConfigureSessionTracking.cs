@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Server.Core.Sessions;
 
 namespace PlayGen.SUGAR.Server.WebAPI
@@ -8,8 +9,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
     {
         private void ConfigureSessionTracking(IServiceCollection services, TimeSpan sessionTimeout, TimeSpan timeoutCheckInterval)
         {
-            var sessionTracker = new SessionTracker(sessionTimeout, timeoutCheckInterval);
-            services.AddSingleton(sessionTracker);
+            services.AddSingleton(serviceProvider => new SessionTracker(serviceProvider.GetService<ILogger<SessionTracker>>(), sessionTimeout, timeoutCheckInterval));
         }
     }
 }

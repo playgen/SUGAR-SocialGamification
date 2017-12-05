@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-
+using Microsoft.Extensions.DependencyInjection;
+using NLog.Web;
 using PlayGen.SUGAR.Server.Core.Authorization;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.EntityFramework;
@@ -11,41 +13,67 @@ namespace PlayGen.SUGAR.Server.WebAPI
 	public class Program
 	{
 		public static void Main(string[] args)
-		{
-			var host = new WebHostBuilder()
-				.UseKestrel()
-				.UseContentRoot(Directory.GetCurrentDirectory())
-				.UseIISIntegration()
+		{			
+			var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
+
+			try
+			{
+				var host = BuildWebHost(args);
+
+				Setup(host);
+
+				var environment = (IHostingEnvironment)host.Services.GetService(typeof(IHostingEnvironment));
+				logger.Debug("ContentRootPath: {0}", environment.ContentRootPath);
+				logger.Debug("WebRootPath: {0}", environment.WebRootPath);
+
+				host.Run();
+			}
+			catch (Exception initFailure)
+			{
+				logger.Error(initFailure);
+				throw;
+			}
+		}
+		
+		public static IWebHost BuildWebHost(string[] args) =>
+			WebHost.CreateDefaultBuilder(args)
 				.UseStartup<Startup>()
+				.UseNLog()
 				.Build();
 
-			SetUp(host);
 
-			host.Run();
-		}
-
-		public static void SetUp(IWebHost host)
+		public static void Setup(IWebHost host)
 		{
-			var env = ((IHostingEnvironment)host.Services.GetService(typeof(IHostingEnvironment))).EnvironmentName;
-			var factory = (SUGARContextFactory)host.Services.GetService(typeof(SUGARContextFactory));
-			using (var context = factory.Create())
+			using (var scope = host.Services.CreateScope())
 			{
-				if (env == "Tests")
+				var contextFactory = scope.ServiceProvider.GetService<SUGARContextFactory>();
+				var environment = scope.ServiceProvider.GetService<IHostingEnvironment>();
+
+				using (var context = contextFactory.Create())
 				{
-					context.Database.EnsureDeleted();
-				}
-				var newlyCreated = context.Database.EnsureCreated();
-				if (newlyCreated)
-				{
-					context.Seed();
-				}
-				((ClaimController)host.Services.GetService(typeof(ClaimController))).GetAuthorizationClaims();
-				if (env == "Tests")
-				{
-					context.SeedTesting();
+					if (environment.IsEnvironment("Tests"))
+					{
+						context.Database.EnsureDeleted();
+					}
+
+					var newlyCreated = context.Database.EnsureCreated();
+					if (newlyCreated)
+					{
+						context.Seed();
+					}
+
+					var claimController = scope.ServiceProvider.GetService<ClaimController>();
+					claimController.GetAuthorizationClaims();
+
+					if (environment.IsEnvironment("Tests"))
+					{
+						context.SeedTesting();
+					}
+					
+					var evaluationTracker = scope.ServiceProvider.GetService<EvaluationTracker>();
+					evaluationTracker.MapExistingEvaluations();
 				}
 			}
-			((EvaluationTracker)host.Services.GetService(typeof(EvaluationTracker))).MapExistingEvaluations();
 		}
 	}
 }

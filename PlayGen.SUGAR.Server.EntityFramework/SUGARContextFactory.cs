@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace PlayGen.SUGAR.Server.EntityFramework
 {
@@ -15,7 +14,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 		public SUGARContext Create()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<SUGARContext>();
-			optionsBuilder.UseMySQL(ConnectionString);
+			optionsBuilder.UseMySql(ConnectionString);
 
 			var context = new SUGARContext(optionsBuilder.Options);
 

@@ -30,7 +30,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				var evaluations = context.Evaluations
 					.IncludeAll()
-					.Where(a => a.GameId == gameId).ToList();
+					.Where(a => a.GameId == gameId)
+					.ToList();
 
 				return evaluations;
 			}

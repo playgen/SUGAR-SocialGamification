@@ -1,4 +1,4 @@
-﻿using NLog;
+﻿using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
@@ -7,18 +7,22 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class RewardController : CriteriaEvaluator
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+		private readonly ILogger _logger;
 
-		public RewardController(SUGARContextFactory contextFactory,
+		public RewardController(
+			ILogger<RewardController> logger,
+			ILogger<EvaluationDataController> evaluationDataLogger,
+			SUGARContextFactory contextFactory,
 			GroupMemberController groupMemberCoreController,
 			UserFriendController userFriendCoreController)
-			: base(contextFactory, groupMemberCoreController, userFriendCoreController)
+			: base(evaluationDataLogger, contextFactory, groupMemberCoreController, userFriendCoreController)
 		{
+			_logger = logger;
 		}
 
 		public bool AddReward(int actorId, int gameId, Reward reward)
 		{
-			var evaluationDataController = new EvaluationDataController(ContextFactory, reward.EvaluationDataCategory);
+			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, reward.EvaluationDataCategory);
 
 			var evaluationData = new EvaluationData {
 				Key = reward.EvaluationDataKey,
@@ -31,7 +35,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			evaluationDataController.Add(evaluationData);
 
-			Logger.Info($"Game Data: {evaluationData.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward.Id}");
+			_logger.LogInformation($"Game Data: {evaluationData.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward.Id}");
 
 			return true;
 		}

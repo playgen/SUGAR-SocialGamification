@@ -20,7 +20,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		private readonly Core.Controllers.AccountController _accountCoreController;
 		private readonly SessionTracker _sessionTracker;
 
-		public SessionController(Core.Controllers.AccountController accountCoreController,
+		public SessionController(
+			Core.Controllers.AccountController accountCoreController,
 			TokenController tokenController,
 			SessionTracker sessionTracker)
 		{

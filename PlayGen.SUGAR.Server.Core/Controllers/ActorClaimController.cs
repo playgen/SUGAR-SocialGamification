@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Model;
@@ -9,18 +9,20 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ActorClaimController
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.ActorClaimController _actorClaimDbController;
 		private readonly ActorRoleController _actorRoleController;
 		private readonly RoleClaimController _roleClaimController;
 		private readonly GroupMemberController _groupMemberController;
 
-		public ActorClaimController(EntityFramework.Controllers.ActorClaimController actorClaimDbController,
-					ActorRoleController actorRoleController,
-					RoleClaimController roleClaimController,
-					GroupMemberController groupMemberController)
+		public ActorClaimController(
+			ILogger<ActorClaimController> logger,
+			EntityFramework.Controllers.ActorClaimController actorClaimDbController,
+			ActorRoleController actorRoleController,
+			RoleClaimController roleClaimController,
+			GroupMemberController groupMemberController)
 		{
+			_logger = logger;
 			_actorClaimDbController = actorClaimDbController;
 			_actorRoleController = actorRoleController;
 			_roleClaimController = roleClaimController;
@@ -31,7 +33,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var claim = _actorClaimDbController.Get(id);
 
-			Logger.Info($"Claim {claim?.Id} for Id: {id}");
+			_logger.LogInformation($"Claim {claim?.Id} for Id: {id}");
 
 			return claim;
 		}
@@ -49,7 +51,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			var results = claims.Concat(roleClaims).Concat(groupClaims).Distinct().ToList();
 
-			Logger.Info($"{results.Count} Claims for ActorId: {actorId}");
+			_logger.LogInformation($"{results.Count} Claims for ActorId: {actorId}");
 
 			return results;
 		}
@@ -59,7 +61,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var claims = GetActorClaims(actorId).ToList();
 			claims = claims.Where(c => c.Claim.ClaimScope == scope).ToList();
 
-			Logger.Info($"{claims.Count} Actor Claims for ActorId: {actorId}, {nameof(ClaimScope)}: {scope}");
+			_logger.LogInformation($"{claims.Count} Actor Claims for ActorId: {actorId}, {nameof(ClaimScope)}: {scope}");
 
 			return claims;
 		}
@@ -72,7 +74,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var roleClaims = _actorRoleController.GetActorRolesForEntity(actorId, entityId, scope).SelectMany(r => r.RoleClaims).Select(rc => rc.Claim).ToList();
 			var totalClaims = claims.Concat(roleClaims).Concat(groupClaims).Distinct().ToList();
 
-			Logger.Info($"{totalClaims.Count} Claims for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
+			_logger.LogInformation($"{totalClaims.Count} Claims for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
 
 			return totalClaims;
 		}
@@ -85,7 +87,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			var results = claimActors.Concat(roleActors).Distinct().ToList();
 
-			Logger.Info($"{results.Count} Actors for ClaimId: {claimId}, EntityId: {entityId}");
+			_logger.LogInformation($"{results.Count} Actors for ClaimId: {claimId}, EntityId: {entityId}");
 
 			return results;
 		}
@@ -94,7 +96,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			newClaim = _actorClaimDbController.Create(newClaim);
 
-			Logger.Info($"{newClaim?.Id}");
+			_logger.LogInformation($"{newClaim?.Id}");
 
 			return newClaim;
 		}
@@ -103,7 +105,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_actorClaimDbController.Delete(id);
 
-			Logger.Info($"{id}");
+			_logger.LogInformation($"{id}");
 		}
 	}
 }

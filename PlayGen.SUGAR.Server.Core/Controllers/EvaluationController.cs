@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Extensions;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
@@ -13,25 +13,28 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class EvaluationController : CriteriaEvaluator
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
 		public static Action<Evaluation> EvaluationCreatedEvent;
 		public static Action<Evaluation> EvaluationUpdatedEvent;
 		public static Action<Evaluation> EvaluationDeletedEvent;
 
+		private readonly ILogger _logger;
 		private readonly RewardController _rewardController;
 		private readonly ActorController _actorController;
 		private readonly EntityFramework.Controllers.EvaluationController _evaluationDbController;
 
 		// todo change all db controller usages to core controller usages except for evaluation db controller
-		public EvaluationController(EntityFramework.Controllers.EvaluationController evaluationDbController,
+		public EvaluationController(
+			ILogger<EvaluationController> logger,
+			ILogger<EvaluationDataController> evaluationDataLogger,
+			EntityFramework.Controllers.EvaluationController evaluationDbController,
 			GroupMemberController groupMemberCoreController,
 			UserFriendController userFriendCoreController,
 			ActorController actorController,
 			RewardController rewardController,
 			SUGARContextFactory contextFactory)
-			: base(contextFactory, groupMemberCoreController, userFriendCoreController)
+			: base(evaluationDataLogger, contextFactory, groupMemberCoreController, userFriendCoreController)
 		{
+			_logger = logger;
 			_evaluationDbController = evaluationDbController;
 			_rewardController = rewardController;
 			_actorController = actorController;
@@ -41,7 +44,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var evaluations = _evaluationDbController.Get();
 
-			Logger.Info($"{evaluations?.Count}");
+			_logger.LogInformation($"{evaluations?.Count}");
 
 			return evaluations;
 		}
@@ -50,7 +53,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var evaluations = _evaluationDbController.GetByGame(gameId);
 
-			Logger.Info($"{evaluations?.Count} Evalautions for GameId: {gameId}");
+			_logger.LogInformation($"{evaluations?.Count} Evalautions for GameId: {gameId}");
 
 			return evaluations;
 		}
@@ -59,7 +62,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var evaluation = _evaluationDbController.Get(token, gameId);
 
-			Logger.Info($"Evalaution: {evaluation?.Id} for Token: {token}, GameId: {gameId}");
+			_logger.LogInformation($"Evalaution: {evaluation?.Id} for Token: {token}, GameId: {gameId}");
 
 			return evaluation;
 		}
@@ -68,7 +71,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var evaluations = _evaluationDbController.GetByEvaluationType(gameId, evaluationType);
 
-			Logger.Info($"{evaluations?.Count} Evaluations for GameId: {gameId}, EvaluationType: {evaluationType}");
+			_logger.LogInformation($"{evaluations?.Count} Evaluations for GameId: {gameId}, EvaluationType: {evaluationType}");
 
 			return evaluations;
 		}
@@ -84,7 +87,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				Progress = EvaluateProgress(e, actorId)
 			}).ToList();
 
-			Logger.Info($"{evaluationsProgress.Count} Evaluation Progresses for GameId: {gameId}, ActorId: {actorId}");
+			_logger.LogInformation($"{evaluationsProgress.Count} Evaluation Progresses for GameId: {gameId}, ActorId: {actorId}");
 
 			return evaluationsProgress;
 		}
@@ -100,7 +103,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				Progress = progress
 			};
 
-			Logger.Info($"{result.Name} Evaluation Progresses for Token: {token}, GameId: {gameId}, ActorId: {actorId}");
+			_logger.LogInformation($"{result.Name} Evaluation Progresses for Token: {token}, GameId: {gameId}, ActorId: {actorId}");
 
 			return result;
 		}
@@ -118,7 +121,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			EvaluationCreatedEvent?.Invoke(evaluation);
 
-			Logger.Info($"{evaluation?.Id}");
+			_logger.LogInformation($"{evaluation?.Id}");
 
 			return evaluation;
 		}
@@ -134,7 +137,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			}
 			_evaluationDbController.Update(evaluation);
 
-			Logger.Info($"{evaluation.Id}");
+			_logger.LogInformation($"{evaluation.Id}");
 
 			EvaluationUpdatedEvent?.Invoke(evaluation);
 		}
@@ -151,7 +154,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			EvaluationDeletedEvent?.Invoke(evaluation);
 			_evaluationDbController.Delete(token, gameId);
 
-			Logger.Info($"Deleted: {evaluation.Id} for Token {token}, GameId: {gameId}");
+			_logger.LogInformation($"Deleted: {evaluation.Id} for Token {token}, GameId: {gameId}");
 		}
 
 		private bool DataTypeValueValidation(EvaluationDataType dataType, string value)
@@ -198,14 +201,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				}
 			}
 
-			Logger.Debug($"Got: Progress: {completedProgress} for Evaluation.Id: {evaluation.Id}, ActorId: {actorId}");
+			_logger.LogDebug($"Got: Progress: {completedProgress} for Evaluation.Id: {evaluation.Id}, ActorId: {actorId}");
 
 			return completedProgress;
 		}
 
 		public bool IsAlreadyCompleted(Evaluation evaluation, int actorId)
 		{
-			var evaluationDataCoreController = new EvaluationDataController(ContextFactory, evaluation.EvaluationType.ToEvaluationDataCategory());
+			var evaluationDataCoreController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, evaluation.EvaluationType.ToEvaluationDataCategory());
 
 			var key = evaluation.Token;
 			var category = evaluation.EvaluationType == EvaluationType.Achievement
@@ -213,14 +216,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				: EvaluationDataCategory.Skill;
 			var completed = evaluationDataCoreController.KeyExists(evaluation.GameId, actorId, key, EvaluationDataType.String, category);
 
-			Logger.Debug($"Got: IsCompleted: {completed} for Evaluation.Id: {evaluation.Id}, ActorId: {actorId}");
+			_logger.LogDebug($"Got: IsCompleted: {completed} for Evaluation.Id: {evaluation.Id}, ActorId: {actorId}");
 
 			return completed;
 		}
 
 		private void SetCompleted(Evaluation evaluation, int actorId)
 		{
-			var evaluationDataCoreController = new EvaluationDataController(ContextFactory, evaluation.EvaluationType.ToEvaluationDataCategory());
+			var evaluationDataCoreController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, evaluation.EvaluationType.ToEvaluationDataCategory());
 
 			var evaluationData = new EvaluationData {
 				Category = evaluation.EvaluationType.ToEvaluationDataCategory(),
@@ -245,8 +248,8 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var provided = _actorController.Get(actorId);
 			evaluations = provided == null
-							? evaluations.Where(a => a.ActorType == ActorType.Undefined).ToList()
-							: evaluations.Where(a => a.ActorType == ActorType.Undefined || a.ActorType == provided.ActorType).ToList();
+				? evaluations.Where(a => a.ActorType == ActorType.Undefined).ToList()
+				: evaluations.Where(a => a.ActorType == ActorType.Undefined || a.ActorType == provided.ActorType).ToList();
 
 			return evaluations;
 		}

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework;
@@ -12,13 +12,16 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	{
 		public static Action<EvaluationData> EvaluationDataAddedEvent;
 
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController;
 		private readonly EvaluationDataCategory _category;
 
-		public EvaluationDataController(SUGARContextFactory contextFactory, EvaluationDataCategory category)
+		public EvaluationDataController(
+			ILogger<EvaluationDataController> logger,
+			SUGARContextFactory contextFactory, 
+			EvaluationDataCategory category)
 		{
+			_logger = logger;
 			_category = category;
 			_evaluationDataDbController = new EntityFramework.Controllers.EvaluationDataController(contextFactory, category);
 		}
@@ -53,7 +56,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				EvaluationDataAddedEvent?.Invoke(addedData);
 			}
 
-			Logger.Info($"Added: {datas.Length} Evaluation Datas.");
+			_logger.LogInformation($"Added: {datas.Length} Evaluation Datas.");
 		}
 
 		public EvaluationData Add(EvaluationData newData)
@@ -62,7 +65,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			newData = _evaluationDataDbController.Create(newData);
 
-			Logger.Info($"{newData?.Id}");
+			_logger.LogInformation($"{newData?.Id}");
 
 			EvaluationDataAddedEvent?.Invoke(newData);
 
@@ -75,7 +78,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			data = _evaluationDataDbController.Update(data);
 
-			Logger.Info($"Updated: {data?.Id}");
+			_logger.LogInformation($"Updated: {data?.Id}");
 
 			return data;
 		}
@@ -85,7 +88,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var keyExists = _evaluationDataDbController.KeyExists(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Key Exists: {keyExists} for GameId: {gameId}, ActorId: {actorId}, Key: {key}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return keyExists;
@@ -95,7 +98,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var datas = _evaluationDataDbController.Get(ids);
 
-			Logger.Info($"{datas.Count} Evaluation Datas for Ids: {string.Join(", ", ids)}");
+			_logger.LogInformation($"{datas.Count} Evaluation Datas for Ids: {string.Join(", ", ids)}");
 
 			return datas;
 		}
@@ -104,7 +107,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var datas = _evaluationDataDbController.Get(entityId, keys);
 
-			Logger.Info($"{datas?.Count} Evaluation Datas for EntityId {entityId}" +
+			_logger.LogInformation($"{datas?.Count} Evaluation Datas for EntityId {entityId}" +
 						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
 			return datas;
@@ -114,7 +117,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var datas = _evaluationDataDbController.Get(gameId, actorId, keys);
 
-			Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, ActorId {actorId}" +
+			_logger.LogInformation($"{datas?.Count} Evaluation Datas for GameId: {gameId}, ActorId {actorId}" +
 						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
 			return datas;
@@ -124,7 +127,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var datas = _evaluationDataDbController.Get(gameId, actorId, entityId, keys);
 
-			Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
+			_logger.LogInformation($"{datas?.Count} Evaluation Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
 						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
 			return datas;
@@ -134,7 +137,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var actors = _evaluationDataDbController.GetGameActors(gameId);
 
-			Logger.Info($"{actors?.Count} Actors for GameId {gameId}");
+			_logger.LogInformation($"{actors?.Count} Actors for GameId {gameId}");
 
 			return actors;
 		}
@@ -143,7 +146,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var datas = _evaluationDataDbController.GetGameKeys(gameId);
 
-			Logger.Info($"{datas?.Count} Evaluation Data Keys for GameId {gameId}");
+			_logger.LogInformation($"{datas?.Count} Evaluation Data Keys for GameId {gameId}");
 
 			return datas;
 		}
@@ -152,7 +155,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var datas = _evaluationDataDbController.GetActorData(actorId);
 
-			Logger.Info($"{datas?.Count} Evaluation Data Keys for ActorId {actorId}");
+			_logger.LogInformation($"{datas?.Count} Evaluation Data Keys for ActorId {actorId}");
 
 			return datas;
 		}
@@ -164,7 +167,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var all = _evaluationDataDbController.All<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start,
 				end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"{all?.Count} Values for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return all;
@@ -175,7 +178,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var sum = _evaluationDataDbController.Sum<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
+			_logger.LogDebug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return sum;
 		}
@@ -184,7 +187,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var max = _evaluationDataDbController.Max<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Highest: {max} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return max;
@@ -194,7 +197,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var min = _evaluationDataDbController.Min<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Highest: {min} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return min;
@@ -205,7 +208,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var didGetLatest = _evaluationDataDbController.TryGetLatest(gameId, actorId, key, out latest, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Latest {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return didGetLatest;
@@ -215,7 +218,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var highest = _evaluationDataDbController.GetEvaluationDataByHighestFloat(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				highest != null
 					? $"HighestId: {highest.Id} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}"
 					: $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
@@ -227,7 +230,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var highest = _evaluationDataDbController.GetEvaluationDataByHighestLong(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				highest != null
 					? $"HighestId: {highest.Id} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}"
 					: $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
@@ -240,7 +243,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var count = _evaluationDataDbController.CountKeys(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Count: {count} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return count;
@@ -253,7 +256,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var didGetEarliestKey = _evaluationDataDbController.TryGetEarliestKey(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start,
 				end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Earliest: {didGetEarliestKey} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return didGetEarliestKey;
@@ -265,7 +268,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var didGetLatestKey = _evaluationDataDbController.TryGetLatestKey(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Earliest: {didGetLatestKey} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return didGetLatestKey;

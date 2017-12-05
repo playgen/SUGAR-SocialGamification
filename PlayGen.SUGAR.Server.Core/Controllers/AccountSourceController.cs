@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class AccountSourceController
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.AccountSourceController _accountSourceDbController;
 
-		public AccountSourceController(EntityFramework.Controllers.AccountSourceController accountSourceDbController)
+		public AccountSourceController(
+			ILogger<AccountSourceController> logger,
+			EntityFramework.Controllers.AccountSourceController accountSourceDbController)
 		{
+			_logger = logger;
 			_accountSourceDbController = accountSourceDbController;
 		}
 
@@ -18,7 +21,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var sources = _accountSourceDbController.Get();
 
-			Logger.Info($"{sources?.Count} Sources.");
+			_logger.LogInformation($"{sources?.Count} Sources.");
 
 			return sources;
 		}
@@ -27,7 +30,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var source = _accountSourceDbController.Get(id);
 
-			Logger.Info($"Source: {source?.Id} for Id: {id}");
+			_logger.LogInformation($"Source: {source?.Id} for Id: {id}");
 
 			return source;
 		}
@@ -36,7 +39,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var source = _accountSourceDbController.Get(token);
 
-			Logger.Info($"Source: {source?.Id} for Token: {token}");
+			_logger.LogInformation($"Source: {source?.Id} for Token: {token}");
 
 			return source;
 		}
@@ -45,7 +48,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			newSource = _accountSourceDbController.Create(newSource);
 
-			Logger.Info($"{newSource?.Id}");
+			_logger.LogInformation($"{newSource?.Id}");
 
 			return newSource;
 		}
@@ -54,14 +57,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_accountSourceDbController.Update(source);
 
-			Logger.Info($"{source?.Id}");
+			_logger.LogInformation($"{source?.Id}");
 		}
 
 		public void Delete(int id)
 		{
 			_accountSourceDbController.Delete(id);
 
-			Logger.Info($"{id}");
+			_logger.LogInformation($"{id}");
 		}
 	}
 }

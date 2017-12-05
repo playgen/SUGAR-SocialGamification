@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// <summary>
 	/// Web Controller that facilitates UserData specific operations.
 	/// </summary>
-	// Values ensured to not be nulled by model validation
+	/// // Values ensured to not be nulled by model validation
 	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
@@ -47,9 +47,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		{
 			if (gameId.HasValue && actorId.HasValue)
 			{
-				if (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-					await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User)) ||
-					await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game)))
+				if ((await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 				{
 					var resource = _resourceController.Get(gameId.Value, actorId.Value, keys.Any() ? keys : null);
 					var resourceContract = resource.ToResourceContractList();
@@ -73,9 +73,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Resource)]
 		public async Task<IActionResult> AddOrUpdate([FromBody]ResourceAddRequest resourceRequest)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, HttpContext.ScopeItems(ClaimScope.User)) ||
-				await _authorizationService.AuthorizeAsync(User, resourceRequest.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, resourceRequest.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var resource = resourceRequest.ToModel();
 				var resources = _resourceController.Get(resourceRequest.GameId.Value, resourceRequest.ActorId.Value, new[] { resourceRequest.Key });
@@ -109,9 +109,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Resource)]
 		public async Task<IActionResult> Transfer([FromBody] ResourceTransferRequest transferRequest)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, HttpContext.ScopeItems(ClaimScope.Group)) ||
-				await _authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, HttpContext.ScopeItems(ClaimScope.User)) ||
-				await _authorizationService.AuthorizeAsync(User, transferRequest.GameId, HttpContext.ScopeItems(ClaimScope.Game)))
+			if ((await _authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, transferRequest.SenderActorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, transferRequest.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
 				var toResource = _resourceController.Transfer(transferRequest.GameId.Value, transferRequest.SenderActorId.Value, transferRequest.RecipientActorId.Value, transferRequest.Key, transferRequest.Quantity.Value, out var fromResource);
 
