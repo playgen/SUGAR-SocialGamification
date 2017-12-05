@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PlayGen.SUGAR.Documentation.Swagger": {
+      "commandName": "Project",
+      "commandLineArgs": "bin\\Debug\\netcoreapp2.0\\\\restapi.swagger2.json"
+    }
+  }
+}

@@ -14,53 +14,14 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/skills";
 
-		public SkillClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
+		public SkillClient(
+			string baseAddress,
+			IHttpHandler httpHandler,
+			Dictionary<string, string> persistentHeaders,
+			AsyncRequestController asyncRequestController,
+			EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
 		{
-		}
-
-		/// <summary>
-		/// Find a Global Skill that matches <param name="token"/>.
-		/// </summary>
-		/// <param name="token">Token of Skill</param>
-		/// <returns>Returns <see cref="EvaluationResponse"/> that holds Skill details</returns>
-		public EvaluationResponse GetGlobalById(string token)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/global", token).ToString();
-			return Get<EvaluationResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
-		}
-
-		/// <summary>
-		/// Find a Skill that matches <param name="token"/> and <param name="gameId"/>.
-		/// </summary>
-		/// <param name="token">Token of Skill</param>
-		/// <param name="gameId">ID of the Game the Skill is for</param>
-		/// <returns>Returns <see cref="EvaluationResponse"/> that holds Skill details</returns>
-		public EvaluationResponse GetById(string token, int gameId)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/find/{0}/{1}", token, gameId).ToString();
-			return Get<EvaluationResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
-		}
-
-		/// <summary>
-		/// Get all global skills, ie. skills that are not associated with a specific game
-		/// </summary>
-		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Skill details</returns>
-		public IEnumerable<EvaluationResponse> GetAllGlobal()
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/global/list").ToString();
-			return Get<IEnumerable<EvaluationResponse>>(query);
-		}
-
-		/// <summary>
-		/// Find a list of Skills that match <param name="gameId"/>.
-		/// </summary>
-		/// <param name="gameId">Game ID</param>
-		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Skill details</returns>
-		public IEnumerable<EvaluationResponse> GetByGame(int gameId)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/game/{0}/list", gameId).ToString();
-			return Get<IEnumerable<EvaluationResponse>>(query);
 		}
 
 		/// <summary>
@@ -72,6 +33,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/global/evaluate/{0}", actorId).ToString();
 			return Get<IEnumerable<EvaluationProgressResponse>>(query);
+		}
+
+		public void GetGlobalProgressAsync(int actorId, Action<IEnumerable<EvaluationProgressResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetGlobalProgress(actorId),
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>
@@ -88,9 +56,9 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetGameProgressAsync(int gameId, int actorId, Action<IEnumerable<EvaluationProgressResponse>> onSuccess, Action<Exception> onError)
 		{
-		    AsyncRequestController.EnqueueRequest(() => GetGameProgress(gameId, actorId),
-		        onSuccess,
-		        onError);
+			AsyncRequestController.EnqueueRequest(() => GetGameProgress(gameId, actorId),
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>
@@ -105,12 +73,19 @@ namespace PlayGen.SUGAR.Client
 			return Get<EvaluationProgressResponse>(query);
 		}
 
+		public void GetGlobalSkillProgressAsync(string token, int actorId, Action<EvaluationProgressResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetGlobalSkillProgress(token, actorId),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
-		/// Find the current progress for a Skill for <param name="actorId"/>.
+		/// Find the current progress for an Skill for <param name="actorId"/>.
 		/// </summary>
 		/// <param name="token">Token of Skill</param>
 		/// <param name="gameId">ID of the Game the Skill is for</param>
-		/// <param name="actorId">ID of Group/User</param>
+		/// <param name="actorId">ID of actor/User</param>
 		/// <returns>Returns <see cref="EvaluationProgressResponse"/> that hold current progress toward skill.</returns>
 		public EvaluationProgressResponse GetSkillProgress(string token, int gameId, int actorId)
 		{
@@ -118,47 +93,11 @@ namespace PlayGen.SUGAR.Client
 			return Get<EvaluationProgressResponse>(query);
 		}
 
-		/// <summary>
-		/// Create a new Skill.
-		/// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
-		/// </summary>
-		/// <param name="newSkill"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Skill.</param>
-		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Skill.</returns>
-		public EvaluationResponse Create(EvaluationCreateRequest newSkill)
+		public void GetSkillProgressAsync(string token, int gameId, int actorId, Action<EvaluationProgressResponse> onSuccess, Action<Exception> onError)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/create").ToString();
-			return Post<EvaluationCreateRequest, EvaluationResponse>(query, newSkill);
-		}
-
-		/// <summary>
-		/// Update an existing Skill.
-		/// </summary>
-		/// <param name="skill"><see cref="EvaluationCreateRequest"/> object that holds the details of the Skill.</param>
-		public void Update(EvaluationUpdateRequest skill)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/update").ToString();
-			Put(query, skill);
-		}
-
-		/// <summary>
-		/// Delete a global skill, ie. a skill that is not associated with a specific game
-		/// </summary>
-		/// <param name="token">Token of Skill</param>
-		public void DeleteGlobal(string token)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}/global", token).ToString();
-			Delete(query);
-		}
-
-		/// <summary>
-		/// Delete Skill with the  <param name="token"/> and <param name="gameId"/> provided.
-		/// </summary>
-		/// <param name="token">Token of Skill</param>
-		/// <param name="gameId">ID of the Game the Skill is for</param>
-		public void Delete(string token, int gameId)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}", token, gameId).ToString();
-			Delete(query);
+			AsyncRequestController.EnqueueRequest(() => GetSkillProgress(token, gameId, actorId),
+				onSuccess,
+				onError);
 		}
 
 		#region Evaluation Notifications

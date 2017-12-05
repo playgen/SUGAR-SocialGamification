@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class AchievementExtensions
 	{
 		public static EvaluationResponse ToContract(this Achievement model)
@@ -22,7 +25,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				ActorType = model.ActorType,
 				Token = model.Token,
 				EvaluationCriterias = model.EvaluationCriterias.ToContractList(),
-				Rewards = model.Rewards.ToContractList(),
+				Rewards = model.Rewards.ToContractList()
 			};
 		}
 
@@ -36,11 +39,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			var achievementModel = new Achievement {
 				Name = achievementContract.Name,
 				Description = achievementContract.Description,
-				GameId = achievementContract.GameId ?? 0,
-				ActorType = achievementContract.ActorType,
+				GameId = achievementContract.GameId.Value,
+				ActorType = achievementContract.ActorType.Value,
 				Token = achievementContract.Token,
 				EvaluationCriterias = achievementContract.EvaluationCriterias.ToModelList(),
-				Rewards = achievementContract.Rewards.ToModelList(),
+				Rewards = achievementContract.Rewards.ToModelList()
 			};
 
 			return achievementModel;
@@ -49,14 +52,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static Achievement ToAchievementModel(this EvaluationUpdateRequest achievementContract)
 		{
 			var achievementModel = new Achievement {
-				Id = achievementContract.Id,
+				Id = achievementContract.Id.Value,
 				Name = achievementContract.Name,
 				Description = achievementContract.Description,
-				GameId = achievementContract.GameId ?? 0,
-				ActorType = achievementContract.ActorType,
+				GameId = achievementContract.GameId.Value,
+				ActorType = achievementContract.ActorType.Value,
 				Token = achievementContract.Token,
 				EvaluationCriterias = achievementContract.EvaluationCriterias.ToModelList(),
-				Rewards = achievementContract.Rewards.ToModelList(),
+				Rewards = achievementContract.Rewards.ToModelList()
 			};
 
 			return achievementModel;

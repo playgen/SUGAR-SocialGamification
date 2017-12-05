@@ -13,19 +13,14 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/user";
 
-		public UserClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
+		public UserClient(
+			string baseAddress,
+			IHttpHandler httpHandler,
+			Dictionary<string, string> persistentHeaders,
+			AsyncRequestController asyncRequestController,
+			EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
 		{
-		}
-
-		/// <summary>
-		/// Get a list of all Users.
-		/// </summary>
-		/// <returns>A list of <see cref="UserResponse"/> that hold User details.</returns>
-		public IEnumerable<UserResponse> Get()
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/list").ToString();
-			return Get<IEnumerable<UserResponse>>(query);
 		}
 
 		/// <summary>
@@ -58,16 +53,11 @@ namespace PlayGen.SUGAR.Client
 			return Get<UserResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
-		/// <summary>
-		/// Create a new User.
-		/// Requires the <see cref="UserRequest"/>'s Name to be unique for Users.
-		/// </summary>
-		/// <param name="actor"><see cref="UserRequest"/> object that holds the details of the new User.</param>
-		/// <returns>A <see cref="UserResponse"/> containing the new User details.</returns>
-		public UserResponse Create(UserRequest actor)
+		public void GetAsync(int id, Action<UserResponse> onSuccess, Action<Exception> onError)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "").ToString();
-			return Post<UserRequest, UserResponse>(query, actor);
+			AsyncRequestController.EnqueueRequest(() => Get(id),
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>
@@ -81,14 +71,11 @@ namespace PlayGen.SUGAR.Client
 			Put(query, user);
 		}
 
-		/// <summary>
-		/// Delete User with the <param name="id"/> provided.
-		/// </summary>
-		/// <param name="id">User ID.</param>
-		public void Delete(int id)
+		public void UpdateAsync(int id, UserRequest user, Action onSuccess, Action<Exception> onError)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}", id).ToString();
-			Delete(query);
+			AsyncRequestController.EnqueueRequest(() => Update(id, user),
+				onSuccess,
+				onError);
 		}
 	}
 }

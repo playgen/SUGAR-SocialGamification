@@ -13,11 +13,16 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/leaderboards";
 
-		public LeaderboardClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
+		public LeaderboardClient(
+			string baseAddress,
+			IHttpHandler httpHandler,
+			Dictionary<string, string> persistentHeaders,
+			AsyncRequestController asyncRequestController,
+			EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
 		{
 		}
-		
+
 		/// <summary>
 		/// Get all global leaderboards, ie. leaderboards that are not associated with a specific game
 		/// </summary>
@@ -26,6 +31,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/global/list").ToString();
 			return Get<IEnumerable<LeaderboardResponse>>(query);
+		}
+
+		public void GetGlobalAsync(Action<IEnumerable<LeaderboardResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(GetGlobal,
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>
@@ -57,6 +69,13 @@ namespace PlayGen.SUGAR.Client
 			return Get<LeaderboardResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
+		public void GetGlobalAsync(string token, Action<LeaderboardResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetGlobal(token),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Find a single leaderboard matching the token and gameId.
 		/// </summary>
@@ -77,18 +96,6 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		/// <summary>
-		/// Create a new Leaderboard.
-		/// Requires <see cref="LeaderboardRequest.Name"/> and <see cref="LeaderboardRequest.Token"/> to be unique to that <see cref="LeaderboardRequest.GameId"/>.
-		/// </summary>
-		/// <param name="newLeaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the new Leaderboard.</param>
-		/// <returns>Returns a <see cref="LeaderboardResponse"/> object containing details for the newly created Leaderboard.</returns>
-		public LeaderboardResponse Create(LeaderboardRequest newLeaderboard)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/create").ToString();
-			return Post<LeaderboardRequest, LeaderboardResponse>(query, newLeaderboard);
-		}
-
-		/// <summary>
 		/// Get the standings for a Leaderboard using a <see cref="LeaderboardStandingsRequest"/>.
 		/// </summary>
 		/// <param name="leaderboardDetails"><see cref="LeaderboardStandingsRequest"/> object that holds the details that are wanted from the Leaderboard.</param>
@@ -104,37 +111,6 @@ namespace PlayGen.SUGAR.Client
 		    AsyncRequestController.EnqueueRequest(() => CreateGetLeaderboardStandings(leaderboardDetails),
 		        onSuccess,
 		        onError);
-		}
-
-		/// <summary>
-		/// Update an existing Leaderboard.
-		/// </summary>
-		/// <param name="leaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the Leaderboard.</param>
-		public void Update(LeaderboardRequest leaderboard)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/update").ToString();
-			Put(query, leaderboard);
-		}
-
-		/// <summary>
-		/// Delete a global leaderboard, ie. a leaderboard that is not associated with a specific game
-		/// </summary>
-		/// <param name="token">Token of Leaderboard</param>
-		public void DeleteGlobal(string token)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}/global", token).ToString();
-			Delete(query);
-		}
-
-		/// <summary>
-		/// Delete Leaderboards with the <param name="gameId"/> and <param name="token"/> provided.
-		/// </summary>
-		/// <param name="token">Token of Leaderboard</param>
-		/// <param name="gameId">ID of the Game the Leaderboard is for</param>
-		public void Delete(string token, int gameId)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}/{1}", token, gameId).ToString();
-			Delete(query);
 		}
 	}
 }

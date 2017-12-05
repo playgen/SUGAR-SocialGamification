@@ -1,44 +1,38 @@
 ﻿using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.PlatformAbstractions;
 
 namespace PlayGen.SUGAR.Server.WebAPI
 {
 	public partial class Startup
 	{
-		private void ConfigureDocumentationGeneratorServices(IServiceCollection services, IHostingEnvironment env)
+		private void ConfigureDocumentationGeneratorServices(IServiceCollection services)
 		{
-			if (!env.IsEnvironment("Tests"))
+			services.AddSwaggerGen();
+
+			services.ConfigureSwaggerGen(options =>
 			{
-				services.AddSwaggerGen();
+				options.DescribeAllEnumsAsStrings();
 
-				services.ConfigureSwaggerGen(options =>
-				{
-					options.DescribeAllEnumsAsStrings();
-
-					options.IncludeXmlComments(APIXmlCommentsPath);
-					options.IncludeXmlComments(ContractsXmlCommentsPath);
-				});
-			}
+				options.IncludeXmlComments(APIXmlCommentsPath);
+				options.IncludeXmlComments(ContractsXmlCommentsPath);
+			});
+			
 		}
 
-		private void ConfigureDocumentationGenerator(IApplicationBuilder app, IHostingEnvironment env)
+		private void ConfigureDocumentationGenerator(IApplicationBuilder app)
 		{
-			if (!env.IsEnvironment("Tests"))
-			{ 
-				app.UseSwagger();
-				app.UseSwaggerUi();
-			}
+			app.UseSwagger();
+			app.UseSwaggerUi();
 		}
 
 		private string APIXmlCommentsPath
 		{
 			get
 			{
-				var app = PlatformServices.Default.Application;
-				return Path.Combine(app.ApplicationBasePath, app.ApplicationName + ".xml");
+				var assemblyLocation = Assembly.Load(new AssemblyName("PlayGen.SUGAR.Server.WebAPI")).Location;
+				return Path.ChangeExtension(assemblyLocation, ".xml");
 			}
 		}
 
@@ -46,8 +40,8 @@ namespace PlayGen.SUGAR.Server.WebAPI
 		{
 			get
 			{
-				var app = PlatformServices.Default.Application;
-				return Path.Combine(app.ApplicationBasePath, "PlayGen.SUGAR.Contracts.xml");
+				var assemblyLocation = Assembly.Load(new AssemblyName("PlayGen.SUGAR.Contracts")).Location;
+				return Path.ChangeExtension(assemblyLocation, ".xml");
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.Model;
 
@@ -7,12 +7,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class UserFriendController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly UserRelationshipController _userRelationshipDbController;
 
-		public UserFriendController(UserRelationshipController userRelationshipDbController)
+		public UserFriendController(
+			ILogger<UserFriendController> logger,
+			UserRelationshipController userRelationshipDbController)
 		{
+			_logger = logger;
 			_userRelationshipDbController = userRelationshipDbController;
 		}
 
@@ -20,7 +22,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var requestors = _userRelationshipDbController.GetRequests(userId);
 
-			Logger.Info($"{requestors.Count} Requestors for UserId: {userId}");
+			_logger.LogInformation($"{requestors.Count} Requestors for UserId: {userId}");
 
 			return requestors;
 		}
@@ -29,7 +31,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var requests = _userRelationshipDbController.GetSentRequests(userId);
 
-			Logger.Info($"{requests.Count} Requests for UserId: {userId}");
+			_logger.LogInformation($"{requests.Count} Requests for UserId: {userId}");
 
 			return requests;
 		}
@@ -38,7 +40,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var friends = _userRelationshipDbController.GetFriends(userId);
 
-			Logger.Info($"{friends.Count} Friends for UserId: {userId}");
+			_logger.LogInformation($"{friends.Count} Friends for UserId: {userId}");
 
 			return friends;
 		}
@@ -47,21 +49,21 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_userRelationshipDbController.Create(newRelationship, autoAccept);
 
-			Logger.Info($"{newRelationship.RequestorId} -> {newRelationship.AcceptorId}, AutoAccept: {autoAccept}");
+			_logger.LogInformation($"{newRelationship.RequestorId} -> {newRelationship.AcceptorId}, AutoAccept: {autoAccept}");
 		}
 
 		public void UpdateFriendRequest(UserToUserRelationship relationship, bool accepted)
 		{
 			_userRelationshipDbController.UpdateRequest(relationship, accepted);
 
-			Logger.Info($"{relationship.RequestorId} -> {relationship.AcceptorId}, Accepted: {accepted}");
+			_logger.LogInformation($"{relationship.RequestorId} -> {relationship.AcceptorId}, Accepted: {accepted}");
 		}
 
 		public void UpdateFriend(UserToUserRelationship relationship)
 		{
 			_userRelationshipDbController.Update(relationship);
 
-			Logger.Info($"{relationship.RequestorId} -> {relationship.AcceptorId}");
+			_logger.LogInformation($"{relationship.RequestorId} -> {relationship.AcceptorId}");
 		}
 	}
 }

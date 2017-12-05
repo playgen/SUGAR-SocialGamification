@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts;
@@ -12,8 +13,13 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/game";
 
-		public GameClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
+		public GameClient(
+			string baseAddress,
+			IHttpHandler httpHandler,
+			Dictionary<string, string> persistentHeaders,
+			AsyncRequestController asyncRequestController,
+			EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
 		{
 		}
 
@@ -25,6 +31,13 @@ namespace PlayGen.SUGAR.Client
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/list").ToString();
 			return Get<IEnumerable<GameResponse>>(query);
+		}
+
+		public void GetAsync(Action<IEnumerable<GameResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(Get,
+				onSuccess,
+				onError);
 		}
 
 		/// <summary>
@@ -39,6 +52,13 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<GameResponse>>(query);
 		}
 
+		public void GetAsync(string name, Action<IEnumerable<GameResponse>> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => Get(name),
+				onSuccess,
+				onError);
+		}
+
 		/// <summary>
 		/// Get Game that matches <param name="id"/> provided.
 		/// </summary>
@@ -50,37 +70,11 @@ namespace PlayGen.SUGAR.Client
 			return Get<GameResponse>(query, new[] { System.Net.HttpStatusCode.OK, System.Net.HttpStatusCode.NoContent });
 		}
 
-		/// <summary>
-		/// Create a new Game.
-		/// Requires the <see cref="GameRequest.Name"/> to be unique.
-		/// </summary>
-		/// <param name="game"><see cref="GameRequest"/> object that contains the details of the new Game.</param>
-		/// <returns>A <see cref="GameResponse"/> containing the new Game details.</returns>
-		public GameResponse Create(GameRequest game)
+		public void GetAsync(int id, Action<GameResponse> onSuccess, Action<Exception> onError)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "").ToString();
-			return Post<GameRequest, GameResponse>(query, game);
-		}
-
-		/// <summary>
-		/// Update an existing Game.
-		/// </summary>
-		/// <param name="id">Id of the existing Game.</param>
-		/// <param name="game"><see cref="GameRequest"/> object that holds the details of the Game.</param>
-		public void Update(int id, GameRequest game)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/update/{0}", id).ToString();
-			Put(query, game);
-		}
-
-		/// <summary>
-		/// Delete Game with the ID provided.
-		/// </summary>
-		/// <param name="id">Game ID.</param>
-		public void Delete(int id)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}", id).ToString();
-			Delete(query);
+			AsyncRequestController.EnqueueRequest(() => Get(id),
+				onSuccess,
+				onError);
 		}
 	}
 }

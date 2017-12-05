@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Contracts
         /// <summary>
 		/// The id of the Game which this ActorData/GameData relates to.
 		/// </summary>
-		public int? GameId { get; set; }
+		public int GameId { get; set; }
 
         /// <summary>
         /// Id of the match this data is related to.
@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.Contracts
 		/// <summary>
 		/// The id of the Actor which this ActorData/GameData relates to.
 		/// </summary>
-		public int? CreatingActorId { get; set; }
+		public int CreatingActorId { get; set; }
 
 		/// <summary>
 		/// The identifier of the data.

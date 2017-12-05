@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
@@ -6,6 +7,8 @@ using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class MatchExtensions
 	{
 		public static List<MatchResponse> ToContractList(this List<Match> models)
@@ -27,13 +30,13 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static EvaluationData ToMatchDataModel(this EvaluationDataRequest contract)
 		{
 			return new EvaluationData {
-				GameId = contract.GameId,
+				GameId = contract.GameId.Value,
 				MatchId = contract.MatchId,
-				ActorId = contract.CreatingActorId,
+				ActorId = contract.CreatingActorId.Value,
 				Key = contract.Key,
 				Value = contract.Value,
-				EvaluationDataType = contract.EvaluationDataType,
-				Category = EvaluationDataCategory.MatchData,
+				EvaluationDataType = contract.EvaluationDataType.Value,
+				Category = EvaluationDataCategory.MatchData
 			};
 		}
 	}

@@ -9,25 +9,25 @@ namespace PlayGen.SUGAR.Server.WebAPI
         private void ConfigureDbControllers(IServiceCollection services)
         {
             // Set EntityFramework's DBContext's connection string
-            services.AddScoped<AccountController>();
-            services.AddScoped<AccountSourceController>();
-			services.AddScoped<ActorDataController>();
-			services.AddScoped<GameController>();
-            services.AddScoped<GroupController>();
-            services.AddScoped<UserController>();
-            services.AddScoped<ActorController>();
-            services.AddScoped<EvaluationDataController>();
-            services.AddScoped<EvaluationController>();
-            services.AddScoped<LeaderboardController>();
-            services.AddScoped<GroupRelationshipController>();
-            services.AddScoped<UserRelationshipController>();
-            services.AddScoped<TokenController>();
-            services.AddScoped<ClaimController>();
-            services.AddScoped<RoleController>();
-            services.AddScoped<ActorRoleController>();
-			services.AddScoped<ActorClaimController>();
-			services.AddScoped<RoleClaimController>();
-            services.AddScoped<MatchController>();
+            services.AddSingleton<AccountController>();
+            services.AddSingleton<AccountSourceController>();
+			services.AddSingleton<ActorDataController>();
+			services.AddSingleton<GameController>();
+            services.AddSingleton<GroupController>();
+            services.AddSingleton<UserController>();
+            services.AddSingleton<ActorController>();
+            services.AddSingleton<EvaluationDataController>();
+            services.AddSingleton<EvaluationController>();
+            services.AddSingleton<LeaderboardController>();
+            services.AddSingleton<GroupRelationshipController>();
+            services.AddSingleton<UserRelationshipController>();
+            services.AddSingleton<TokenController>();
+            services.AddSingleton<ClaimController>();
+            services.AddSingleton<RoleController>();
+            services.AddSingleton<ActorRoleController>();
+			services.AddSingleton<ActorClaimController>();
+			services.AddSingleton<RoleClaimController>();
+            services.AddSingleton<MatchController>();
         }
     }
 }

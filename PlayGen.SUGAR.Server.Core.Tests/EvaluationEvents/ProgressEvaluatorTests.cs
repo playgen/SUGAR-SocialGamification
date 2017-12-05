@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.Core.Sessions;
 using PlayGen.SUGAR.Server.Model;
@@ -20,7 +22,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
         {
             // Assign
             var evaluationCount = 2;
-            var session = new Session(null, Helpers.GetOrCreateUser("CanEvaluateActor").Id);
+            var session = new Session(Platform.GlobalId, Helpers.GetOrCreateUser("CanEvaluateActor").Id);
 
             var evaluations = new List<Evaluation>();
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Model;
 
@@ -7,15 +7,17 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class UserController : ActorController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.UserController _userController;
 		private readonly ActorRoleController _actorRoleController;
 
-		public UserController(EntityFramework.Controllers.UserController userController,
-					EntityFramework.Controllers.ActorController actorDbController,
-					ActorRoleController actorRoleController) : base(actorDbController)
+		public UserController(
+			ILogger<UserController> logger,
+			EntityFramework.Controllers.UserController userController,
+			EntityFramework.Controllers.ActorController actorDbController,
+			ActorRoleController actorRoleController) : base(actorDbController)
 		{
+			_logger = logger;
 			_userController = userController;
 			_actorRoleController = actorRoleController;
 		}
@@ -24,7 +26,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var users = _userController.Get();
 
-			Logger.Info($"{users?.Count} Users");
+			_logger.LogInformation($"{users?.Count} Users");
 
 			return users;
 		}
@@ -33,7 +35,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var user = _userController.Get(id);
 
-			Logger.Info($"User: {user?.Id} for Id: {id}");
+			_logger.LogInformation($"User: {user?.Id} for Id: {id}");
 
 			return user;
 		}
@@ -42,7 +44,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var users = _userController.Search(name, exactMatch);
 
-			Logger.Info($"{users?.Count} Users for Name: {name}, ExactMatch: {exactMatch}");
+			_logger.LogInformation($"{users?.Count} Users for Name: {name}, ExactMatch: {exactMatch}");
 
 			return users;
 		}
@@ -52,7 +54,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			newUser = _userController.Create(newUser);
 			_actorRoleController.Create(ClaimScope.User.ToString(), newUser.Id, newUser.Id);
 
-			Logger.Info($"{newUser.Id}");
+			_logger.LogInformation($"{newUser.Id}");
 
 			return newUser;
 		}
@@ -61,7 +63,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_userController.Update(user);
 
-			Logger.Info($"{user.Id}");
+			_logger.LogInformation($"{user.Id}");
 		}
 
 		public void Delete(int id)
@@ -70,7 +72,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_userController.Delete(id);
 
-			Logger.Info($"{id}");
+			_logger.LogInformation($"{id}");
 		}
 	}
 }

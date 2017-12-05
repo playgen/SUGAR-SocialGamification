@@ -18,8 +18,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.AccountController _accountCoreController;
 
-		public AccountController(Core.Controllers.AccountController accountCoreController,
-			IAuthorizationService authorizationService)
+		public AccountController(Core.Controllers.AccountController accountCoreController, IAuthorizationService authorizationService)
 		{
 			_accountCoreController = accountCoreController;
 			_authorizationService = authorizationService;
@@ -35,9 +34,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
 		[HttpPost("create")]
-		[HttpPost("{gameId:int}/create")]
 		[ArgumentsNotNull]
-		public IActionResult Create([FromRoute]int? gameId, [FromBody] AccountRequest accountRequest)
+		public IActionResult Create([FromBody] AccountRequest accountRequest)
 		{
 			var account = accountRequest.ToModel();
 			account = _accountCoreController.Create(account, accountRequest.SourceToken);
@@ -57,7 +55,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[ValidateSession]
 		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, (IAuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Account)]))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Account))).Succeeded)
 			{
 				_accountCoreController.Delete(id);
 				return Ok();

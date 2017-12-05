@@ -1,8 +1,12 @@
-﻿using PlayGen.SUGAR.Contracts;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class RelationshipExtensions
 	{
 		public static RelationshipResponse ToContract(this UserToGroupRelationship relationshipModel)
@@ -35,16 +39,16 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static UserToUserRelationship ToUserModel(this RelationshipRequest relationContract)
 		{
 			return new UserToUserRelationship {
-				RequestorId = relationContract.RequestorId,
-				AcceptorId = relationContract.AcceptorId
+				RequestorId = relationContract.RequestorId.Value,
+				AcceptorId = relationContract.AcceptorId.Value
 			};
 		}
 
 		public static UserToGroupRelationship ToGroupModel(this RelationshipRequest relationContract)
 		{
 			return new UserToGroupRelationship {
-				RequestorId = relationContract.RequestorId,
-				AcceptorId = relationContract.AcceptorId
+				RequestorId = relationContract.RequestorId.Value,
+				AcceptorId = relationContract.AcceptorId.Value
 			};
 		}
 	}

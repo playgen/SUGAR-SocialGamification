@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
@@ -8,6 +9,8 @@ using EvaluationCriteria = PlayGen.SUGAR.Server.Model.EvaluationCriteria;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	internal static class EvaluationExtensions
 	{
 		public static EvaluationResponse ToContract(this Evaluation model)
@@ -25,7 +28,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				ActorType = model.ActorType,
 				Token = model.Token,
 				EvaluationCriterias = model.EvaluationCriterias.ToContractList(),
-				Rewards = model.Rewards.ToContractList(),
+				Rewards = model.Rewards.ToContractList()
 			};
 		}
 
@@ -42,20 +45,20 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				CriteriaQueryType = contract.CriteriaQueryType,
 				EvaluationDataType = contract.EvaluationDataType,
 				Scope = contract.Scope,
-				Value = contract.Value,
+				Value = contract.Value
 			};
 		}
 
 		public static EvaluationCriteria ToModel(this EvaluationCriteriaUpdateRequest contract)
 		{
 			return new EvaluationCriteria {
-				Id = contract.Id,
+				Id = contract.Id.Value,
 				EvaluationDataKey = contract.EvaluationDataKey,
 				ComparisonType = contract.ComparisonType,
 				CriteriaQueryType = contract.CriteriaQueryType,
 				EvaluationDataType = contract.EvaluationDataType,
 				Scope = contract.Scope,
-				Value = contract.Value,
+				Value = contract.Value
 			};
 		}
 
@@ -69,7 +72,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			return new EvaluationProgressResponse {
 				Actor = model.Actor.ToActorContract(),
 				Name = model.Name,
-				Progress = model.Progress,
+				Progress = model.Progress
 			};
 		}
 

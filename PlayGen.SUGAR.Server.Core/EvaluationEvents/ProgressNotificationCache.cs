@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
         // Latest stored last in <evaluation, progress> list.
         private readonly ConcurrentProgressCache _pendingNotifications = new ConcurrentProgressCache();
        
-        public bool Remove(int? gameId, int actorId)
+        public bool Remove(int gameId, int actorId)
         {
             return _pendingNotifications.RemoveActor(gameId, actorId);
         }
@@ -24,10 +24,10 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
         public void Update(ConcurrentProgressCache addProgress, float minProgress = 1f)   // todo make this config driven (should probably be stored on the achievemnt as notification progress interval)
         {
-            _pendingNotifications.AddProgress(addProgress, (progress) => progress >= minProgress );
+            _pendingNotifications.AddProgress(addProgress, progress => progress >= minProgress );
         }
 
-        public ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> Get(int? gameId, int actorId)
+        public ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> Get(int gameId, int actorId)
         {
             var actorsProgress = _pendingNotifications.TakeActorProgress(gameId, actorId);
 

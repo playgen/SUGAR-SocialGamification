@@ -1,28 +1,37 @@
 ﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
-using PlayGen.SUGAR.Server.EntityFramework.Tests;
 using PlayGen.SUGAR.Server.WebAPI;
 using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class ClientTestsFixture : ClearDatabaseFixture, IDisposable
+	public class ClientTestsFixture : IDisposable
 	{
 		public readonly SUGARClient SUGARClient;
 		protected readonly TestServer Server;
 
-		protected ClientTestsFixture(string environment = "Tests")
+		public ClientTestsFixture()
 		{
-			var builder = new WebHostBuilder()
+			var builder = WebHost.CreateDefaultBuilder()
 				.UseStartup<Startup>()
-				.UseEnvironment(environment);
+				.UseEnvironment("Tests");
 
 			Server = new TestServer(builder);
+
+			Program.Setup(Server.Host);
+
+			SUGARClient = CreateSugarClient();
+		}
+
+		public SUGARClient CreateSugarClient(Dictionary<string, string> persistentHeaders = null)
+		{
 			var client = Server.CreateClient();
 			var testHttpHandler = new HttpClientHandler(client);
-
-			SUGARClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler);
+			var sugarClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler, persistentHeaders);
+			return sugarClient;
 		}
 
 		public void Dispose()
@@ -32,7 +41,7 @@ namespace PlayGen.SUGAR.Client.Tests
 	}
 
 	[CollectionDefinition(nameof(ClientTestsFixture))]
-	// Note: This class must be in the same assemblt as the tests in order for xUnit to detect it
+	// Note: This class must be in the same assembly as the tests in order for xUnit to detect it
 	public class ClientTestsFixtureCollection : ICollectionFixture<ClientTestsFixture>
 	{
 		// This class has no code, and is never created. Its purpose is simply

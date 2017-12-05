@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
+using PlayGen.SUGAR.Server.WebAPI;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
@@ -84,18 +86,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			const string environmentName = "Tests";
 
-			var type = typeof(ControllerLocator);
-			var assembly = type.GetTypeInfo().Assembly;
-			var uriBuilder = new UriBuilder(assembly.CodeBase);
-			var assemblyDir = Path.GetDirectoryName(Uri.UnescapeDataString(uriBuilder.Path));
-
-			var builder = new ConfigurationBuilder()
-				.SetBasePath(assemblyDir)
-				.AddJsonFile($"appsettings.{environmentName}.json", true);
-
-			var config = builder.Build();
-
-			var connectionString = config.GetConnectionString("DefaultConnection");
+			var configuration = new ConfigurationBuilder()
+				.SetBasePath(Directory.GetCurrentDirectory())
+				.AddJsonFile($"appsettings.{environmentName}.json")
+				.Build();
+			
+			var connectionString = configuration.GetConnectionString("DefaultConnection");
 			ContextFactory = new SUGARContextFactory(connectionString);
 		}
 	}

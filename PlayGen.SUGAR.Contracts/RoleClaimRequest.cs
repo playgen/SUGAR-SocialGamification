@@ -18,12 +18,12 @@ namespace PlayGen.SUGAR.Contracts
         /// The ID of the role related to this roleclaim.
         /// </summary>
         [Required]
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
 
         /// <summary>
         /// The ID of the claim related to this roleclaim.
         /// </summary>
         [Required]
-        public int ClaimId { get; set; }
+        public int? ClaimId { get; set; }
     }
 }

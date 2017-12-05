@@ -8,9 +8,9 @@ namespace PlayGen.SUGAR.Server.Model
 	{
 		public int Id { get; set; }
 
-		public int? GameId { get; set; }
+		public int GameId { get; set; }
 
-		public int? ActorId { get; set; }
+		public int ActorId { get; set; }
 
 		public int? MatchId { get; set; }
 

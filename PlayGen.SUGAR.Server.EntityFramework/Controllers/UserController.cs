@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				var user = context.Users
 					.IncludeAll()
-					.Find(context, id);
+					.FirstOrDefault(u => u.Id == id);
 
 				return user;
 			}
@@ -83,7 +83,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				var existing = context.Users
 					.IncludeAll()
-					.Find(context, user.Id);
+					.FirstOrDefault(u => u.Id == user.Id);
 
 				if (existing != null)
 				{

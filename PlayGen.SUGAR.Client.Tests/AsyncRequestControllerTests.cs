@@ -129,21 +129,22 @@ namespace PlayGen.SUGAR.Client.Tests
 			asyncRequestController.SetTimeout(100, () => didTimeout = true);
 
 			// Act
-			var responseCount = 0;
+			
 			var stopWatch = new Stopwatch();
 			stopWatch.Start();
 			var timeout = 1 * 1000;
 
 			while (!didTimeout && stopWatch.ElapsedMilliseconds < timeout)
 			{
-				if (asyncRequestController.TryExecuteResponse())
-				{
-					responseCount++;
-				}
 			}
 
 			// Assert
 			Assert.True(didTimeout);
 		}
+
+		public AsyncRequestControllerTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
 		}
+	}
 }

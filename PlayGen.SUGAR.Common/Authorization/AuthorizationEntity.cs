@@ -1,8 +1,8 @@
 ﻿namespace PlayGen.SUGAR.Common.Authorization
 {
-    public enum AuthorizationEntity
-    {
-        Account = 0,
+	public enum AuthorizationEntity
+	{
+		Account = 0,
 		AccountSource = 1,
 		Achievement = 2,
 		ActorClaim = 3,

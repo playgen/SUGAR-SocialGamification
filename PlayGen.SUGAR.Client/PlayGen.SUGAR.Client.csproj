@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net35;netcoreapp1.1</TargetFrameworks>
+		<TargetFrameworks>net35;netcoreapp2.0</TargetFrameworks>
 	</PropertyGroup>
 
 	<Choose>
@@ -10,7 +10,7 @@
 				<PackageReference Include="Json.Net.Unity3D" Version="9.0.1" />
 			</ItemGroup>
 		</When>
-		<When Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
+		<When Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
 			<ItemGroup>
 				<PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
 			</ItemGroup>

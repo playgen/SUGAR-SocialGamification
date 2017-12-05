@@ -14,11 +14,15 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/resource";
 
-		public ResourceClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
+		public ResourceClient(
+			string baseAddress,
+			IHttpHandler httpHandler,
+			Dictionary<string, string> persistentHeaders,
+			AsyncRequestController asyncRequestController,
+			EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
 		{
 		}
-		
 
 		/// <summary>
 		/// Find a list of all Resources that match the <param name="gameId"/>, <param name="actorId"/> and <param name="keys"/> provided.
@@ -27,7 +31,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="keys">Array of Key names.</param>
 		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ResourceResponse> Get(int? gameId, int? actorId, string[] keys)
+		public IEnumerable<ResourceResponse> Get(int gameId, int actorId, string[] keys)
 		{
 			var query = GetUriBuilder(ControllerPrefix)
 				.AppendQueryParameter(gameId, "gameId={0}")
@@ -37,7 +41,7 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<ResourceResponse>>(query);
 		}
 
-		public void GetAsync(int? gameId, int? actorId, string[] keys, Action<IEnumerable<ResourceResponse>> onSuccess, Action<Exception> onError)
+		public void GetAsync(int gameId, int actorId, string[] keys, Action<IEnumerable<ResourceResponse>> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Get(gameId, actorId, keys),
 				onSuccess,
@@ -76,20 +80,6 @@ namespace PlayGen.SUGAR.Client
 		public void TransferAsync(ResourceTransferRequest data, Action<ResourceTransferResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Transfer(data),
-				onSuccess,
-				onError);
-		}
-
-
-				public ResourceAddResponse Add(ResourceAddRequest data)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/add").ToString();
-			return Post<ResourceAddRequest, ResourceAddResponse>(query, data);
-		}
-
-		public void AddAsync(ResourceAddRequest data, Action<ResourceAddResponse> onSuccess, Action<Exception> onError)
-		{
-			AsyncRequestController.EnqueueRequest(() => Add(data),
 				onSuccess,
 				onError);
 		}

@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Contracts
 		/// <summary>
 		/// The Id of the game which this leaderboard belongs to.
 		/// </summary>
-		public int? GameId { get; set; }
+		public int GameId { get; set; }
 
 		/// <summary>
 		/// The display name of the leaderboard.

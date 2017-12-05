@@ -20,8 +20,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		private readonly IAuthorizationService _authorizationService;
 		private readonly Core.Controllers.GroupController _groupCoreController;
 
-		public GroupController(Core.Controllers.GroupController groupCoreController,
-					IAuthorizationService authorizationService)
+		public GroupController(Core.Controllers.GroupController groupCoreController, IAuthorizationService authorizationService)
 		{
 			_groupCoreController = groupCoreController;
 			_authorizationService = authorizationService;
@@ -34,8 +33,21 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
 		[HttpGet("list")]
-		//[ResponseType(typeof(IEnumerable<GroupResponse>))]
 		public IActionResult Get()
+		{
+			var groups = _groupCoreController.Get();
+			var actorContract = groups.ToContractList();
+			return new ObjectResult(actorContract);
+		}
+
+		/// <summary>
+		/// Get a list of all Groups this Actor has control over.
+		/// 
+		/// Example Usage: GET api/group/controlled
+		/// </summary>
+		/// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
+		[HttpGet("controlled")]
+		public IActionResult GetControlled()
 		{
 			var groups = _groupCoreController.GetByPermissions(int.Parse(User.Identity.Name));
 			var actorContract = groups.ToContractList();
@@ -50,7 +62,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="name">Group name.</param>
 		/// <returns>A list of <see cref="GroupResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
-		//[ResponseType(typeof(IEnumerable<GroupResponse>))]
 		public IActionResult Get([FromRoute]string name)
 		{
 			var groups = _groupCoreController.Search(name);
@@ -67,7 +78,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="id">Group id.</param>
 		/// <returns><see cref="GroupResponse"/> which matches search criteria.</returns>
 		[HttpGet("findbyid/{id:int}", Name = "GetByGroupId")]
-		//[ResponseType(typeof(GroupResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
 			var group = _groupCoreController.Get(id);
@@ -84,19 +94,13 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="actor"><see cref="GroupRequest"/> object that holds the details of the new Group.</param>
 		/// <returns>A <see cref="GroupResponse"/> containing the new Group details.</returns>
 		[HttpPost]
-		//[ResponseType(typeof(GroupResponse))]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Group)]
-		public async Task<IActionResult> Create([FromBody]GroupRequest actor)
+		public IActionResult Create([FromBody]GroupRequest actor)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, Platform.EntityId, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Global)]))
-			{
-				var group = actor.ToGroupModel();
-				_groupCoreController.Create(group, int.Parse(User.Identity.Name));
-				var actorContract = group.ToContract();
-				return new ObjectResult(actorContract);
-			}
-			return Forbid();
+			var group = actor.ToGroupModel();
+			_groupCoreController.Create(group, int.Parse(User.Identity.Name));
+			var actorContract = group.ToContract();
+			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
@@ -112,7 +116,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		// todo refactor to use groupupdaterequest that contains an Id property and have a separate groupcreaterequest that doen't have the Id
 		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] GroupRequest group)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
 			{
 				var groupModel = group.ToGroupModel();
 				groupModel.Id = id;
@@ -132,7 +136,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.Group)]
 		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
-			if (await _authorizationService.AuthorizeAsync(User, id, (AuthorizationRequirement)HttpContext.Items[AuthorizationAttribute.Key(ClaimScope.Group)]))
+			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
 			{
 				_groupCoreController.Delete(id);
 				return Ok();

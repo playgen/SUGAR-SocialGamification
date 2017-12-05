@@ -3,7 +3,7 @@
 namespace PlayGen.SUGAR.Server.Model
 {
 	public class Skill : Evaluation
-    {
-        public override EvaluationType EvaluationType => EvaluationType.Skill;
-    }
+	{
+		public override EvaluationType EvaluationType => EvaluationType.Skill;
+	}
 }

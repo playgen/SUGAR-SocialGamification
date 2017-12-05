@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework;
@@ -12,13 +12,16 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	{
 		public static Action<EvaluationData> EvaluationDataAddedEvent;
 
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController;
 		private readonly EvaluationDataCategory _category;
 
-		public EvaluationDataController(SUGARContextFactory contextFactory, EvaluationDataCategory category)
+		public EvaluationDataController(
+			ILogger<EvaluationDataController> logger,
+			SUGARContextFactory contextFactory, 
+			EvaluationDataCategory category)
 		{
+			_logger = logger;
 			_category = category;
 			_evaluationDataDbController = new EntityFramework.Controllers.EvaluationDataController(contextFactory, category);
 		}
@@ -53,7 +56,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				EvaluationDataAddedEvent?.Invoke(addedData);
 			}
 
-			Logger.Info($"Added: {datas?.Length} Evaluation Datas.");
+			_logger.LogInformation($"Added: {datas.Length} Evaluation Datas.");
 		}
 
 		public EvaluationData Add(EvaluationData newData)
@@ -62,7 +65,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			newData = _evaluationDataDbController.Create(newData);
 
-			Logger.Info($"{newData?.Id}");
+			_logger.LogInformation($"{newData?.Id}");
 
 			EvaluationDataAddedEvent?.Invoke(newData);
 
@@ -75,17 +78,17 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			data = _evaluationDataDbController.Update(data);
 
-			Logger.Info($"Updated: {data?.Id}");
+			_logger.LogInformation($"Updated: {data?.Id}");
 
 			return data;
 		}
 
-		public bool KeyExists(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime),
+		public bool KeyExists(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime),
 			DateTime end = default(DateTime))
 		{
 			var keyExists = _evaluationDataDbController.KeyExists(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Key Exists: {keyExists} for GameId: {gameId}, ActorId: {actorId}, Key: {key}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return keyExists;
@@ -95,7 +98,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var datas = _evaluationDataDbController.Get(ids);
 
-			Logger.Info($"{datas.Count} Evaluation Datas for Ids: {string.Join(", ", ids)}");
+			_logger.LogInformation($"{datas.Count} Evaluation Datas for Ids: {string.Join(", ", ids)}");
 
 			return datas;
 		}
@@ -104,118 +107,118 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var datas = _evaluationDataDbController.Get(entityId, keys);
 
-			Logger.Info($"{datas?.Count} Evaluation Datas for EntityId {entityId}" +
+			_logger.LogInformation($"{datas?.Count} Evaluation Datas for EntityId {entityId}" +
 						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
 			return datas;
 		}
 
-		public List<EvaluationData> Get(int? gameId = null, int? actorId = null, string[] keys = null)
+		public List<EvaluationData> Get(int gameId, int actorId, string[] keys = null)
 		{
 			var datas = _evaluationDataDbController.Get(gameId, actorId, keys);
 
-			Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, ActorId {actorId}" +
+			_logger.LogInformation($"{datas?.Count} Evaluation Datas for GameId: {gameId}, ActorId {actorId}" +
 						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
 			return datas;
 		}
 
-		public List<EvaluationData> Get(int? gameId, int? entityId, int? actorId, string[] keys)
+		public List<EvaluationData> Get(int gameId, int actorId, int? entityId, string[] keys = null)
 		{
-			var datas = _evaluationDataDbController.Get(gameId, entityId, actorId, keys);
+			var datas = _evaluationDataDbController.Get(gameId, actorId, entityId, keys);
 
-			Logger.Info($"{datas?.Count} Evaluation Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
+			_logger.LogInformation($"{datas?.Count} Evaluation Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
 						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
 
 			return datas;
 		}
 
-		public List<int?> GetGameActors(int? gameId)
+		public List<int> GetGameActors(int gameId)
 		{
 			var actors = _evaluationDataDbController.GetGameActors(gameId);
 
-			Logger.Info($"{actors?.Count} Actors for GameId {gameId}");
+			_logger.LogInformation($"{actors?.Count} Actors for GameId {gameId}");
 
 			return actors;
 		}
 
-		public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int? gameId)
+		public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int gameId)
 		{
 			var datas = _evaluationDataDbController.GetGameKeys(gameId);
 
-			Logger.Info($"{datas?.Count} Evaluation Data Keys for GameId {gameId}");
+			_logger.LogInformation($"{datas?.Count} Evaluation Data Keys for GameId {gameId}");
 
 			return datas;
 		}
 
-		public List<EvaluationData> GetActorData(int? actorId)
+		public List<EvaluationData> GetActorData(int actorId)
 		{
 			var datas = _evaluationDataDbController.GetActorData(actorId);
 
-			Logger.Info($"{datas?.Count} Evaluation Data Keys for ActorId {actorId}");
+			_logger.LogInformation($"{datas?.Count} Evaluation Data Keys for ActorId {actorId}");
 
 			return datas;
 		}
 
-		public List<T> All<T>(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType,
-			EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime),
+		public List<T> All<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType,
+			EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime),
 			DateTime end = default(DateTime))
 		{
 			var all = _evaluationDataDbController.All<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start,
 				end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"{all?.Count} Values for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return all;
 		}
 
-		public T Sum<T>(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime),
+		public T Sum<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime),
 			DateTime end = default(DateTime))
 		{
 			var sum = _evaluationDataDbController.Sum<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
+			_logger.LogDebug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return sum;
 		}
 
-		public T Max<T>(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public T Max<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var max = _evaluationDataDbController.Max<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Highest: {max} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return max;
 		}
 
-		public T Min<T>(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public T Min<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var min = _evaluationDataDbController.Min<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Highest: {min} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return min;
 		}
 
-		public bool TryGetLatest<T>(int? gameId, int? actorId, string key, out T latest, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory,
+		public bool TryGetLatest<T>(int gameId, int actorId, string key, out T latest, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
 			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var didGetLatest = _evaluationDataDbController.TryGetLatest<T>(gameId, actorId, key, out latest, evaluationDataType, evaluationDataCategory, start, end);
+			var didGetLatest = _evaluationDataDbController.TryGetLatest(gameId, actorId, key, out latest, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Latest {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return didGetLatest;
 		}
 
-		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public EvaluationData GetEvaluationDataByHighestFloat(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var highest = _evaluationDataDbController.GetEvaluationDataByHighestFloat(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				highest != null
 					? $"HighestId: {highest.Id} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}"
 					: $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
@@ -223,11 +226,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return highest;
 		}
 
-		public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public EvaluationData GetEvaluationDataByHighestLong(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var highest = _evaluationDataDbController.GetEvaluationDataByHighestLong(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				highest != null
 					? $"HighestId: {highest.Id} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}"
 					: $"Highest not found for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
@@ -235,37 +238,37 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return highest;
 		}
 
-		public int CountKeys(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory,
+		public int CountKeys(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
 			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var count = _evaluationDataDbController.CountKeys(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Count: {count} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return count;
 		}
 
 		// todo change to bool TryGet[name](out value) pattern
-		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory,
+		public DateTime TryGetEarliestKey(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
 			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var didGetEarliestKey = _evaluationDataDbController.TryGetEarliestKey(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start,
 				end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Earliest: {didGetEarliestKey} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return didGetEarliestKey;
 		}
 
 		// todo change to bool TryGet[name](out value) pattern
-		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, EvaluationDataType? evaluationDataType, EvaluationDataCategory? evaluationDataCategory,
+		public DateTime TryGetLatestKey(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
 			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var didGetLatestKey = _evaluationDataDbController.TryGetLatestKey(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
-			Logger.Debug(
+			_logger.LogDebug(
 				$"Earliest: {didGetLatestKey} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
 
 			return didGetLatestKey;

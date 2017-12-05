@@ -19,7 +19,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				return context.Matches
 					.IncludeAll()
-					.Find(context, matchId);
+					.First(m => m.Id == matchId);
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 
 				return context.Matches
 					.IncludeAll()
-					.Find(context, match.Id);
+					.First(m => m.Id == match.Id);
 			}
 		}
 
@@ -125,7 +125,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 
 				return context.Matches
 					.IncludeAll()
-					.Find(context, match.Id);
+					.First(m => m.Id == match.Id);
 			}
 		}
 
@@ -133,7 +133,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var match = context.Matches.Find(context, matchId);
+				var match = context.Matches.Find(matchId);
 				context.Matches.Remove(match);
 				SaveChanges(context);
 			}

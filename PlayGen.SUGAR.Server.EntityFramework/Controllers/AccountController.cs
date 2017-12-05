@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 
-				var account = context.Accounts.Find(context, id);
+				var account = context.Accounts.Find(id);
 
 				if (account == null)
 				{

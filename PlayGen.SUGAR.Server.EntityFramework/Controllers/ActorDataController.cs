@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 		}
 
-		public bool KeyExists(int? gameId, int? actorId, string key)
+		public bool KeyExists(int gameId, int actorId, string key)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<ActorData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
+		public List<ActorData> Get(int gameId, int actorId, ICollection<string> keys = null)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -59,7 +59,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				// context.SaveChanges();
 
 				var existingData = context.ActorData
-					.Find(context, updatedData.Id);
+					.Find(updatedData.Id);
 
 				if (existingData == null)
 				{

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework;
@@ -10,27 +10,31 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class MatchController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.MatchController _matchDbController;
 		private readonly EvaluationDataController _evaluationDataController;
 
-		public MatchController(SUGARContextFactory contextFactory, EntityFramework.Controllers.MatchController matchDbController)
+		public MatchController(
+			ILogger<MatchController> logger,
+			ILogger<EvaluationDataController> evaluationDataLogger,
+			SUGARContextFactory contextFactory, 
+			EntityFramework.Controllers.MatchController matchDbController)
 		{
+			_logger = logger;
 			_matchDbController = matchDbController;
-			_evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.MatchData);
+			_evaluationDataController = new EvaluationDataController(evaluationDataLogger, contextFactory, EvaluationDataCategory.MatchData);
 		}
 
 		public Match Create(int gameId, int creatorId)
 		{
 			var match = new Match {
 				GameId = gameId,
-				CreatorId = creatorId,
+				CreatorId = creatorId
 			};
 
 			_matchDbController.Create(match);
 
-			Logger.Info($"Match: {match.Id} created for Game: {gameId}, CreatorId: {creatorId}");
+			_logger.LogInformation($"Match: {match.Id} created for Game: {gameId}, CreatorId: {creatorId}");
 
 			return match;
 		}
@@ -41,7 +45,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			match.Started = DateTime.UtcNow;
 			match = _matchDbController.Update(match);
 
-			Logger.Info($"Match: {match.Id} started");
+			_logger.LogInformation($"Match: {match.Id} started");
 
 			return match;
 		}
@@ -53,13 +57,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			if (match.Started == null)
 			{
 				throw new Exceptions.InvalidOperationException($"The match {matchId} hasn't had its Started time set. " +
-															   $"This must be set before setting the Ended time.");
+															   "This must be set before setting the Ended time.");
 			}
 
 			match.Ended = DateTime.UtcNow;
 			match = _matchDbController.Update(match);
 
-			Logger.Info($"Match: {match.Id} ended");
+			_logger.LogInformation($"Match: {match.Id} ended");
 
 			return match;
 		}
@@ -68,7 +72,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var match = _matchDbController.Get(matchId);
 
-			Logger.Info($"Found {match?.Id}");
+			_logger.LogInformation($"Found {match?.Id}");
 
 			return match;
 		}
@@ -77,7 +81,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var results = _matchDbController.GetByTime(start, end);
 
-			Logger.Info($"{results.Count} Matches for Start: {start}, End: {end}");
+			_logger.LogInformation($"{results.Count} Matches for Start: {start}, End: {end}");
 
 			return results;
 		}
@@ -86,7 +90,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var results = _matchDbController.GetByGame(gameId);
 
-			Logger.Info($"{results.Count} Matches for GameId: {gameId}");
+			_logger.LogInformation($"{results.Count} Matches for GameId: {gameId}");
 
 			return results;
 		}
@@ -95,7 +99,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var results = _matchDbController.GetByGame(gameId, start, end);
 
-			Logger.Info($"{results.Count} Matches for GameId: {gameId}, Start: {start}, End: {end}");
+			_logger.LogInformation($"{results.Count} Matches for GameId: {gameId}, Start: {start}, End: {end}");
 
 			return results;
 		}
@@ -104,7 +108,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var results = _matchDbController.GetByCreator(creatorId);
 
-			Logger.Info($"{results.Count} Matches for Creator: {creatorId}");
+			_logger.LogInformation($"{results.Count} Matches for Creator: {creatorId}");
 
 			return results;
 		}
@@ -113,7 +117,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var results = _matchDbController.GetByCreator(creatorId, start, end);
 
-			Logger.Info($"{results.Count} Matches for CreatorId: {creatorId}, Start: {start}, End: {end}");
+			_logger.LogInformation($"{results.Count} Matches for CreatorId: {creatorId}, Start: {start}, End: {end}");
 
 			return results;
 		}
@@ -122,7 +126,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var results = _matchDbController.GetByGameAndCreator(gameId, creatorId);
 
-			Logger.Info($"{results.Count} Matches for GameId: {gameId}, CreatorId: {creatorId}");
+			_logger.LogInformation($"{results.Count} Matches for GameId: {gameId}, CreatorId: {creatorId}");
 
 			return results;
 		}
@@ -131,7 +135,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var results = _matchDbController.GetByGameAndCreator(gameId, creatorId, start, end);
 
-			Logger.Info($"{results.Count} Matches for GameId: {gameId}, CreatorId: {creatorId}, Start: {start}, End: {end}");
+			_logger.LogInformation($"{results.Count} Matches for GameId: {gameId}, CreatorId: {creatorId}, Start: {start}, End: {end}");
 
 			return results;
 		}

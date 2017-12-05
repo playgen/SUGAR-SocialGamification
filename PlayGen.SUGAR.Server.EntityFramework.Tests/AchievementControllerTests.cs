@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void GetAchievementsByNonExistingGame()
 		{
-			var achievements = _evaluationController.GetByGame(-1);
+			var achievements = _evaluationController.GetByGame(int.MinValue);
 
 			Assert.Empty(achievements);
 		}
@@ -143,7 +143,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var achievementName = "UpdateNonExistingAchievement";
 
-			var achievement = new Achievement {
+			var achievement = new Achievement
+			{
+				Id = int.MinValue,
 				Name = achievementName,
 				Token = achievementName,
 				GameId = -1,

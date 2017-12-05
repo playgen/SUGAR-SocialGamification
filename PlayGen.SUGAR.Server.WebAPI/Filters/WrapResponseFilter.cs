@@ -29,8 +29,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 
             if (objectResult == null) return;
 
-            var wrappedResponse = new ResponseWrapper<object>()
-            {
+            var wrappedResponse = new ResponseWrapper<object>
+									{
                 Response = objectResult.Value,
                 EvaluationsProgress = GetPendingEvents(context.HttpContext.Request)
             };
