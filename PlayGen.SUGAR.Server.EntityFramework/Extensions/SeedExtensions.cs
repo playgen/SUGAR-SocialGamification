@@ -91,6 +91,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			var leaderboardCanGetLeaderboardStandings = CreateGame(context, "Leaderboard_CanGetLeaderboardStandings");
 			CreateLeaderboard(context, leaderboardCanGetLeaderboardStandings.Id, leaderboardCanGetLeaderboardStandings.Name);
 			CreateGame(context, "Leaderboard_CannotGetNotExistingLeaderboardStandings");
+			var leaderboardCanGetMultipleLeaderboardStandingsForActor = CreateGame(context, "Leaderboard_CanGetMultipleLeaderboardStandingsForActor");
+			CreateLeaderboard(context, leaderboardCanGetMultipleLeaderboardStandingsForActor.Id, leaderboardCanGetMultipleLeaderboardStandingsForActor.Name);
 			var leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType = CreateGame(context, "Leaderboard_CannotGetStandingsWithIncorrectActorType");
 			CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Id, leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Name, ActorType.Group);
 			var leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit = CreateGame(context, "Leaderboard_CannotGetLeaderboardStandingsWithZeroPageLimit");

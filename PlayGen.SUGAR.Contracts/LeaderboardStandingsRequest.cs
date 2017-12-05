@@ -58,6 +58,11 @@ namespace PlayGen.SUGAR.Contracts
 		public int PageOffset { get; set; }
 
 		/// <summary>
+		/// Whether the leaderboard standings should show all a players scores or just 1
+		/// </summary>
+		public bool MultiplePerActor { get; set; }
+
+		/// <summary>
 		/// The earliest point which data should be collected from.
 		/// Can be left null to set no earliest point.
 		/// </summary>

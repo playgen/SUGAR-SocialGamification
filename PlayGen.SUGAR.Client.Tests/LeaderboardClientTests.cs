@@ -137,6 +137,42 @@ namespace PlayGen.SUGAR.Client.Tests
 		}
 
 		[Fact]
+		public void CanGetMultipleLeaderboardStandingsForActor()
+		{
+			var key = "Leaderboard_CanGetMultipleLeaderboardStandingsForActor";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			var count = 10;
+			for (var i = 1; i < count+1; i++)
+			{
+				var gameData = new EvaluationDataRequest
+				{
+					Key = key,
+					EvaluationDataType = EvaluationDataType.Long,
+					CreatingActorId = loggedInAccount.User.Id,
+					Value = i.ToString(),
+					GameId = game.Id
+				};
+
+				Fixture.SUGARClient.GameData.Add(gameData);
+			}
+
+			var standingsRequest = new LeaderboardStandingsRequest
+			{
+				LeaderboardToken = key,
+				LeaderboardFilterType = LeaderboardFilterType.Top,
+				PageLimit = 10,
+				PageOffset = 0,
+				GameId = game.Id,
+				MultiplePerActor = true
+			};
+
+			var standingsResponse = Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
+
+			Assert.Equal(count, standingsResponse.Count());
+			Assert.Equal(count.ToString(), standingsResponse.First().Value);
+		}
+
+		[Fact]
 		public void CannotGetNotExistingLeaderboardStandings()
 		{
 			var key = "Leaderboard_CannotGetNotExistingLeaderboardStandings";
