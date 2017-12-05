@@ -10,6 +10,9 @@ namespace PlayGen.SUGAR.Server.WebAPI
 		{
 			var connectionString = Configuration.GetConnectionString("DefaultConnection");
 			services.AddSingleton(new SUGARContextFactory(connectionString));
+
+			services.AddDbContext<SUGARContext>((serviceProvider, options) =>
+				serviceProvider.GetService<SUGARContextFactory>().ApplyOptions(options));
 		}
 	}
 }

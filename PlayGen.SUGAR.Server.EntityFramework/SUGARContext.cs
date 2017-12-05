@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.EntityFramework.EntityConfigs;
 using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
 using PlayGen.SUGAR.Server.Model.Interfaces;
@@ -19,12 +21,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 		{
 			_isSaveDisabled = disableSave;
 		}
-		
+
 		public DbSet<Account> Accounts { get; set; }
 		public DbSet<AccountSource> AccountSources { get; set; }
 
 		public DbSet<Game> Games { get; set; }
-		
+
 		public DbSet<Evaluation> Evaluations { get; set; }
 		public DbSet<SentEvaluationNotification> SentEvaluationNotifications { get; set; }
 		public DbSet<Achievement> Achievements { get; set; }
@@ -53,19 +55,25 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.ConfigureTableNames();
-			modelBuilder.ConfigureHierarchy();
-			modelBuilder.ConfigureCompositePrimaryKeys();
-			modelBuilder.ConfigureIndexes();
-			modelBuilder.ConfigureForeignKeys();
-			modelBuilder.ConfigureProperties();
+			var implementedConfigTypes = Assembly.GetExecutingAssembly()
+				.GetTypes()
+				.Where(t => !t.IsAbstract
+					&& !t.IsGenericTypeDefinition
+					&& t.GetTypeInfo().ImplementedInterfaces.Any(i =>
+						i.GetTypeInfo().IsGenericType && i.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)));
+			
+			foreach (var configType in implementedConfigTypes)
+			{
+				dynamic config = Activator.CreateInstance(configType);
+				modelBuilder.ApplyConfiguration(config);
+			}
 		}
 
 		public override int SaveChanges()
 		{
 			UpdateModificationHistory();
 
-			return _isSaveDisabled 
+			return _isSaveDisabled
 				? 0
 				: base.SaveChanges();
 		}
