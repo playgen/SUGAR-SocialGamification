@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Authorization;
@@ -12,6 +13,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// <summary>
 	/// Web Controller that facilitates User to User relationship specific operations.
 	/// </summary>
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
 	[ValidateSession]
@@ -98,7 +101,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 				(await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded)
 			{
 				var request = relationship.ToGroupModel();
-				_userFriendCoreController.CreateFriendRequest(relationship.ToUserModel(), relationship.AutoAccept);
+				_userFriendCoreController.CreateFriendRequest(relationship.ToUserModel(), relationship.AutoAccept.Value);
 				var relationshipContract = request.ToContract();
 				return new ObjectResult(relationshipContract);
 			}
@@ -125,7 +128,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 					RequestorId = relationship.RequestorId,
 					AcceptorId = relationship.AcceptorId
 				};
-				_userFriendCoreController.UpdateFriendRequest(relation.ToUserModel(), relationship.Accepted);
+				_userFriendCoreController.UpdateFriendRequest(relation.ToUserModel(), relationship.Accepted.Value);
 				return Ok();
 			}
 			return Forbid();

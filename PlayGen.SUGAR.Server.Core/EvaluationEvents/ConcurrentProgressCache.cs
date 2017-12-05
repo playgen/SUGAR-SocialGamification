@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Common.Extensions;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
@@ -13,20 +12,20 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
         private readonly ConcurrentDictionary<int, ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>>> _progress = new ConcurrentDictionary<int, ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>>>();
 
         // out <actorId, <evaluation, progress>>
-        public bool TryGetGameProgress(int? gameId, out ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> gameProgress)
+        public bool TryGetGameProgress(int gameId, out ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> gameProgress)
         {
             gameProgress = GetGameProgress(gameId);
             return gameProgress != null;
         }
 
         // out <evaluation, progress>
-        public bool TryGetActorProgress(int? gameId, int actorId, out ConcurrentDictionary<Evaluation, float> actorProgress)
+        public bool TryGetActorProgress(int gameId, int actorId, out ConcurrentDictionary<Evaluation, float> actorProgress)
         {
             actorProgress = GetActorProgress(gameId, actorId);
             return actorProgress != null;
         }
 
-        public bool RemoveActor(int? gameId, int actorId)
+        public bool RemoveActor(int gameId, int actorId)
         {
             var didRemove = false;
 
@@ -39,16 +38,16 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
                 if (gameProgress.Count == 0)
                 {
                     ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> removedGameProgress;
-                    _progress.TryRemove(gameId.ToInt(), out removedGameProgress);
+                    _progress.TryRemove(gameId, out removedGameProgress);
                 }
             }
 
             return didRemove;
         }
 
-        public ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> TakeActorProgress(int? gameId, int actorId)
+        public ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> TakeActorProgress(int gameId, int actorId)
         {
-            ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> actorsProgress = new ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>>();
+            var actorsProgress = new ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>>();
 
             ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> gameProgress;
             if (TryGetGameProgress(gameId, out gameProgress))
@@ -95,17 +94,16 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
             }
         }
 
-        public ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> GetGameProgress(int? gameId)
+        public ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> GetGameProgress(int gameId)
         {
             ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> gameProgress;
-            _progress.TryGetValue(gameId.ToInt(), out gameProgress);
+            _progress.TryGetValue(gameId, out gameProgress);
 
             return gameProgress;
         }
 
         public bool Remove(int evaluationId)
         {
-            var didRemove = false;
             var actorsToRemove = new List<KeyValuePair<int, int>>();    // <gameId, actorId>
 
             foreach (var gameProgress in _progress)
@@ -127,7 +125,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
             PruneActors(actorsToRemove);
 
-            return didRemove;
+            return false;
         }
 
         private void PruneActors(List<KeyValuePair<int, int>> actorsToRemove)
@@ -153,7 +151,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
         }
        
         // <evaluation, progress>
-        public ConcurrentDictionary<Evaluation, float> GetActorProgress(int? gameId, int actorId)
+        public ConcurrentDictionary<Evaluation, float> GetActorProgress(int gameId, int actorId)
         {
             ConcurrentDictionary<Evaluation, float> actorProgress = null;
 
@@ -166,19 +164,19 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
             return actorProgress;
         }
 
-        public void AddProgress(int? gameId, int actorId, Evaluation evaluation, float progress)
+        public void AddProgress(int gameId, int actorId, Evaluation evaluation, float progress)
         {
             ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> gameProgress;
             ConcurrentDictionary<Evaluation, float> actorProgress = null;
             
-            if (_progress.TryGetValue(gameId.ToInt(), out gameProgress))
+            if (_progress.TryGetValue(gameId, out gameProgress))
             {
                 gameProgress.TryGetValue(actorId, out actorProgress);
             }
             else
             {
                 gameProgress = new ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>>();
-                _progress[gameId.ToInt()] = gameProgress;
+                _progress[gameId] = gameProgress;
             }
 
             if(actorProgress == null)

@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Authorization;
 using PlayGen.SUGAR.Server.Core.Controllers;
 
@@ -8,7 +10,7 @@ namespace PlayGen.SUGAR.Server.Core.Authorization
 {
     internal class AuthorizationHandlerHelper
     {
-        internal static Task HandleRequirements(ClaimController _claimDbController, ActorClaimController _actorClaimDbController, AuthorizationHandlerContext context, AuthorizationRequirement requirement, int entityId = 0)
+        internal static Task HandleRequirements(ClaimController _claimDbController, ActorClaimController _actorClaimDbController, AuthorizationHandlerContext context, AuthorizationRequirement requirement, int entityId = Platform.GlobalId)
         {
             var claim = _claimDbController.Get(requirement.ClaimScope, requirement.Name);
             if (claim != null)

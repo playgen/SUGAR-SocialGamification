@@ -32,8 +32,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public Account Authenticate(Account toVerify, string sourceToken)
 		{
-			Account verified;
-
 			var source = _accountSourceCoreController.GetByToken(sourceToken);
 
 			if (source != null)
@@ -41,6 +39,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				var found = _accountDbController.Get(new[] { toVerify.Name }, source.Id).SingleOrDefault();
 				if (found != null)
 				{
+					Account verified;
 					if (source.RequiresPassword)
 					{
 						if (PasswordEncryption.Verify(toVerify.Password, found.Password))
@@ -57,11 +56,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 						verified = found;
 					}
 
-					_logger.LogInformation($"Account: {toVerify?.Id} passed verification: {verified}");
+					_logger.LogInformation($"Account: {toVerify.Id} passed verification: {verified}");
 
 					return verified;
 				}
-				else if (source.AutoRegister)
+				if (source.AutoRegister)
 				{
 					return Create(toVerify, sourceToken);
 				}
@@ -98,7 +97,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_actorRoleController.Create(ClaimScope.Account.ToString(), registered.UserId, registered.Id);
 
-			_logger.LogInformation($"{registered?.Id}");
+			_logger.LogInformation($"{registered.Id}");
 
 			return registered;
 		}

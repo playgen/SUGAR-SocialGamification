@@ -14,23 +14,19 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 		}
 
-		public List<Leaderboard> GetByGame(int? gameId)
+		public List<Leaderboard> GetByGame(int gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				gameId = gameId ?? 0;
-
 				var leaderboards = context.Leaderboards.Where(l => l.GameId == gameId).ToList();
 				return leaderboards;
 			}
 		}
 
-		public Leaderboard Get(string token, int? gameId)
+		public Leaderboard Get(string token, int gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				gameId = gameId ?? 0;
-
 				var leaderboard = context.Leaderboards.Find(token, gameId);
 				return leaderboard;
 			}
@@ -54,7 +50,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 
 				if (hasConflicts)
 				{
-					throw new System.ArgumentException($"A leaderboard cannot be created with LeaderboardType {leaderboard.LeaderboardType.ToString()} and EvaluationDataType{leaderboard.EvaluationDataType.ToString()} as it would always return zero results.");
+					throw new System.ArgumentException($"A leaderboard cannot be created with LeaderboardType {leaderboard.LeaderboardType} and EvaluationDataType{leaderboard.EvaluationDataType} as it would always return zero results.");
 				}
 
 				context.Leaderboards.Add(leaderboard);
@@ -89,7 +85,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 
 						if (hasTypeConflicts)
 						{
-							throw new System.ArgumentException($"A leaderboard cannot be updated to use LeaderboardType {leaderboard.LeaderboardType.ToString()} and EvaluationDataType{leaderboard.EvaluationDataType.ToString()}, as it would always return zero results.");
+							throw new System.ArgumentException($"A leaderboard cannot be updated to use LeaderboardType {leaderboard.LeaderboardType} and EvaluationDataType{leaderboard.EvaluationDataType}, as it would always return zero results.");
 						}
 					}
 
@@ -111,12 +107,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public void Delete(string token, int? gameId)
+		public void Delete(string token, int gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				gameId = gameId ?? 0;
-
 				var leaderboard = context.Leaderboards.Find(token, gameId);
 				if (leaderboard != null)
 				{

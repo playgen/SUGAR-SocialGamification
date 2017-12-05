@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// <summary>
 	/// Web Controller that facilitates RoleClaim specific operations.
 	/// </summary>
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
 	[ValidateSession]
@@ -66,14 +69,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, newRoleClaim.RoleId, HttpContext.ScopeItems(ClaimScope.Role))).Succeeded)
 			{
-				var role = _roleController.GetById(newRoleClaim.RoleId);
+				var role = _roleController.GetById(newRoleClaim.RoleId.Value);
 				if (!role.Default)
 				{
-					var claimScope = _claimController.Get(newRoleClaim.ClaimId).ClaimScope;
+					var claimScope = _claimController.Get(newRoleClaim.ClaimId.Value).ClaimScope;
 					if (role.ClaimScope == claimScope)
 					{
 						var claims = _actorClaimController.GetActorClaims(int.Parse(User.Identity.Name)).Select(c => c.ClaimId);
-						if (claims.Contains(newRoleClaim.ClaimId))
+						if (claims.Contains(newRoleClaim.ClaimId.Value))
 						{
 							var roleClaim = newRoleClaim.ToModel();
 							_roleClaimCoreController.Create(roleClaim);

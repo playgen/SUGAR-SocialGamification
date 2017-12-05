@@ -30,28 +30,28 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			if (!context.ActorRoles.Any())
 			{
 				//global (admin)
-				CreateActorRole(context, roles[ClaimScope.Global], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.Global], adminUser, Platform.AllId);
 
 				//global game control
-				CreateActorRole(context, roles[ClaimScope.Game], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.Game], adminUser, Platform.AllId);
 
 				//global group control
-				CreateActorRole(context, roles[ClaimScope.Group], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.Group], adminUser, Platform.AllId);
 
 				// admin user
 				CreateActorRole(context, roles[ClaimScope.User], adminUser, adminUser.Id);
 
 				//global user control
-				CreateActorRole(context, roles[ClaimScope.User], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.User], adminUser, Platform.AllId);
 
 				// admin account
 				CreateActorRole(context, roles[ClaimScope.Account], adminUser, adminAccount.Id);
 
 				//global account control
-				CreateActorRole(context, roles[ClaimScope.Account], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.Account], adminUser, Platform.AllId);
 
 				//global role control
-				CreateActorRole(context, roles[ClaimScope.Role], adminUser, Platform.EntityId);
+			CreateActorRole(context, roles[ClaimScope.Role], adminUser, Platform.AllId);
 			}
 			#endregion
 		}
@@ -60,6 +60,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 		{
 			if (!context.Games.Any())
 			{
+				CreateGame(context, "Global");
+			
 				#region Game Client Tests
 				CreateGame(context, "Game_CanGetGamesByName 1");
 				CreateGame(context, "Game_CanGetGamesByName 2");
@@ -71,6 +73,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				CreateGame(context, "GameData_CannotCreateWithoutActorId");
 				CreateGame(context, "GameData_CannotCreateWithoutKey");
 				CreateGame(context, "GameData_CannotCreateWithoutValue");
+				CreateGame(context, "GameData_CannotCreateWithoutEvaluationDataType");
 				CreateGame(context, "GameData_CannotCreateWithMismatchedData");
 				CreateGame(context, "GameData_CanGetGameData");
 				CreateGame(context, "GameData_CannotGetGameDataWithoutActorId");
@@ -85,6 +88,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				CreateGame(context, "Resource_CanGetResource");
 				CreateGame(context, "Resource_CannotGetResourceWithoutActorId");
 				CreateGame(context, "Resource_CanGetResourceByMultipleKeys");
+				CreateGame(context, "Resource_CannotCreateWithoutQuantity");
+				CreateGame(context, "Resource_CannotCreateWithoutKey");
 				#endregion
 			}
 
@@ -114,6 +119,16 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				var leaderboardCanGetLeaderboardStandings = CreateGame(context, "Leaderboard_CanGetLeaderboardStandings");
 				CreateLeaderboard(context, leaderboardCanGetLeaderboardStandings.Id, leaderboardCanGetLeaderboardStandings.Name);
 				CreateGame(context, "Leaderboard_CannotGetNotExistingLeaderboardStandings");
+				var leaderboardCannotGetLeaderboardStandingsWithoutToken = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutToken");
+				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutToken.Id, leaderboardCannotGetLeaderboardStandingsWithoutToken.Name);
+				var leaderboardCannotGetLeaderboardStandingsWithoutGameId = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutGameId");
+				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutGameId.Id, leaderboardCannotGetLeaderboardStandingsWithoutGameId.Name);
+				var leaderboardCannotGetLeaderboardStandingsWithoutFilterType = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutFilterType");
+				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutFilterType.Id, leaderboardCannotGetLeaderboardStandingsWithoutFilterType.Name);
+				var leaderboardCannotGetLeaderboardStandingsWithoutLimit = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutLimit");
+				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutLimit.Id, leaderboardCannotGetLeaderboardStandingsWithoutLimit.Name);
+				var leaderboardCannotGetLeaderboardStandingsWithoutOffset = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutOffset");
+				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutOffset.Id, leaderboardCannotGetLeaderboardStandingsWithoutOffset.Name);
 				var leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType =
 					CreateGame(context, "Leaderboard_CannotGetStandingsWithIncorrectActorType");
 				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Id,
@@ -194,9 +209,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 		{
 			var accountSource = context.AccountSources.Add(new AccountSource
 			{
-				Description = "SUGAR",
-				Token = "SUGAR",
-				RequiresPassword = true
+				Description = description,
+				Token = token,
+				RequiresPassword = requiresPass
 			}).Entity;
 			context.SaveChanges();
 			return accountSource;

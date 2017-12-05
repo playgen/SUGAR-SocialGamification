@@ -24,12 +24,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<Evaluation> GetByGame(int? gameId)
+		public List<Evaluation> GetByGame(int gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				gameId = gameId ?? 0;
-
 				var evaluations = context.Evaluations
 					.IncludeAll()
 					.Where(a => a.GameId == gameId)
@@ -39,12 +37,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<Evaluation> GetByEvaluationType(int? gameId, EvaluationType evaluationType)
+		public List<Evaluation> GetByEvaluationType(int gameId, EvaluationType evaluationType)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				gameId = gameId ?? 0;
-
 				var evaluations = context.Evaluations
 					.IncludeAll()
 					.Where(a => a.GameId == gameId && a.EvaluationType == evaluationType).ToList();
@@ -53,12 +49,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public Evaluation Get(string token, int? gameId)
+		public Evaluation Get(string token, int gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				gameId = gameId ?? 0;
-
 				return context.Evaluations
 					.IncludeAll()
 					.SingleOrDefault(e => e.Token == token && e.GameId == gameId);
@@ -93,12 +87,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public void Delete(string token, int? gameId)
+		public void Delete(string token, int gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				gameId = gameId ?? 0;
-
 				var evaluation = context.Evaluations
 					.IncludeAll()
 					.SingleOrDefault(e => e.Token == token && e.GameId == gameId);

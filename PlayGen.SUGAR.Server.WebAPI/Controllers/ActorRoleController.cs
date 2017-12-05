@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +15,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// <summary>
 	/// Web Controller that facilitates ActorRole specific operations.
 	/// </summary>
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
 	[ValidateSession]
@@ -55,7 +58,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 			if (role.ClaimScope == ClaimScope.Global)
 			{
-				entityId = Platform.EntityId;
+				entityId = Platform.AllId;
 			}
 
 			if ((await _authorizationService.AuthorizeAsync(User, entityId, HttpContext.ScopeItems(role.ClaimScope))).Succeeded)
@@ -120,16 +123,16 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.ActorRole)]
 		public async Task<IActionResult> Create([FromBody]ActorRoleRequest newRole)
 		{
-			var newRoleInfo = _roleController.GetById(newRole.RoleId);
+			var newRoleInfo = _roleController.GetById(newRole.RoleId.Value);
 			if (newRoleInfo.ClaimScope == ClaimScope.Global)
 			{
-				newRole.EntityId = Platform.EntityId;
+				newRole.EntityId = Platform.AllId;
 			}
 			if ((await _authorizationService.AuthorizeAsync(User, newRole.EntityId, HttpContext.ScopeItems(newRoleInfo.ClaimScope))).Succeeded)
 			{
-				var claimScope = _roleController.GetById(newRole.RoleId).ClaimScope;
-				var creatorClaims = _actorClaimController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newRole.EntityId, claimScope).Select(c => c.Id).ToList();
-				var newClaims = _roleClaimController.GetClaimsByRole(newRole.RoleId).Select(c => c.Id);
+				var claimScope = _roleController.GetById(newRole.RoleId.Value).ClaimScope;
+				var creatorClaims = _actorClaimController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newRole.EntityId.Value, claimScope).Select(c => c.Id).ToList();
+				var newClaims = _roleClaimController.GetClaimsByRole(newRole.RoleId.Value).Select(c => c.Id);
 				if (newClaims.All(nc => creatorClaims.Contains(nc)))
 				{
 					var role = newRole.ToModel();

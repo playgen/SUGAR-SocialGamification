@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_logger = logger;
 		}
 
-		public bool AddReward(int? actorId, int? gameId, Reward reward)
+		public bool AddReward(int actorId, int gameId, Reward reward)
 		{
 			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, reward.EvaluationDataCategory);
 
@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			evaluationDataController.Add(evaluationData);
 
-			_logger.LogInformation($"Game Data: {evaluationData?.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward?.Id}");
+			_logger.LogInformation($"Game Data: {evaluationData.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward.Id}");
 
 			return true;
 		}

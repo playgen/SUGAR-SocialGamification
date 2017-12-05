@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
@@ -8,6 +9,8 @@ using EvaluationCriteria = PlayGen.SUGAR.Server.Model.EvaluationCriteria;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	internal static class EvaluationExtensions
 	{
 		public static EvaluationResponse ToContract(this Evaluation model)
@@ -49,7 +52,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static EvaluationCriteria ToModel(this EvaluationCriteriaUpdateRequest contract)
 		{
 			return new EvaluationCriteria {
-				Id = contract.Id,
+				Id = contract.Id.Value,
 				EvaluationDataKey = contract.EvaluationDataKey,
 				ComparisonType = contract.ComparisonType,
 				CriteriaQueryType = contract.CriteriaQueryType,

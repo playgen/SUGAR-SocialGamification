@@ -62,7 +62,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			newRole = _roleDbController.Create(newRole);
 			_actorRoleController.Create(ClaimScope.Role.ToString(), creatorId, newRole.Id);
 
-			_logger.LogInformation($"Role: {newRole?.Id} for CreatorId: {creatorId}");
+			_logger.LogInformation($"Role: {newRole.Id} for CreatorId: {creatorId}");
 
 			return newRole;
 		}

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authentication;
 using PlayGen.SUGAR.Server.Core.Sessions;
@@ -44,7 +46,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 			account = _accountCoreController.Authenticate(account, accountRequest.SourceToken);
 
-			var session = _sessionTracker.StartSession(null, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
+			var session = _sessionTracker.StartSession(Platform.GlobalId, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
 			_tokenController.IssueToken(HttpContext, session);
 
 			var response = account.ToContract();
@@ -62,7 +64,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		[HttpPost("{gameId:int}/logingame")]
 		[ArgumentsNotNull]
-		public IActionResult Login([FromRoute]int? gameId, [FromBody]AccountRequest accountRequest)
+		public IActionResult Login([FromRoute]int gameId, [FromBody]AccountRequest accountRequest)
 		{
 			// todo check if has permission to login for specified game
 			var account = accountRequest.ToModel();
@@ -90,7 +92,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			var account = accountRequest.ToModel();
 			_accountCoreController.Create(account, accountRequest.SourceToken);
 
-			var result = Login(null, accountRequest);
+			var result = Login(Platform.GlobalId, accountRequest);
 			return result;
 		}
 
@@ -104,7 +106,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		[HttpPost("{gameId:int}/createandlogingame")]
 		[ArgumentsNotNull]
-		public IActionResult CreateAndLogin([FromRoute]int? gameId, [FromBody] AccountRequest accountRequest)
+		public IActionResult CreateAndLogin([FromRoute]int gameId, [FromBody] AccountRequest accountRequest)
 		{
 			var account = accountRequest.ToModel();
 			_accountCoreController.Create(account, accountRequest.SourceToken);

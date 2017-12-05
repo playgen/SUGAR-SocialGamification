@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				EvaluationDataAddedEvent?.Invoke(addedData);
 			}
 
-			_logger.LogInformation($"Added: {datas?.Length} Evaluation Datas.");
+			_logger.LogInformation($"Added: {datas.Length} Evaluation Datas.");
 		}
 
 		public EvaluationData Add(EvaluationData newData)
@@ -83,7 +83,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return data;
 		}
 
-		public bool KeyExists(int? gameId, int? actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime),
+		public bool KeyExists(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime),
 			DateTime end = default(DateTime))
 		{
 			var keyExists = _evaluationDataDbController.KeyExists(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
@@ -113,7 +113,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return datas;
 		}
 
-		public List<EvaluationData> Get(int? gameId = null, int? actorId = null, string[] keys = null)
+		public List<EvaluationData> Get(int gameId, int actorId, string[] keys = null)
 		{
 			var datas = _evaluationDataDbController.Get(gameId, actorId, keys);
 
@@ -123,9 +123,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return datas;
 		}
 
-		public List<EvaluationData> Get(int? gameId, int? entityId, int? actorId, string[] keys)
+		public List<EvaluationData> Get(int gameId, int actorId, int? entityId, string[] keys = null)
 		{
-			var datas = _evaluationDataDbController.Get(gameId, entityId, actorId, keys);
+			var datas = _evaluationDataDbController.Get(gameId, actorId, entityId, keys);
 
 			_logger.LogInformation($"{datas?.Count} Evaluation Datas for GameId: {gameId}, EntityId: {entityId}, ActorId {actorId}" +
 						(keys != null ? $", Keys: {string.Join(", ", keys)}" : ""));
@@ -133,7 +133,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return datas;
 		}
 
-		public List<int?> GetGameActors(int? gameId)
+		public List<int> GetGameActors(int gameId)
 		{
 			var actors = _evaluationDataDbController.GetGameActors(gameId);
 
@@ -142,7 +142,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return actors;
 		}
 
-		public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int? gameId)
+		public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int gameId)
 		{
 			var datas = _evaluationDataDbController.GetGameKeys(gameId);
 
@@ -151,7 +151,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return datas;
 		}
 
-		public List<EvaluationData> GetActorData(int? actorId)
+		public List<EvaluationData> GetActorData(int actorId)
 		{
 			var datas = _evaluationDataDbController.GetActorData(actorId);
 
@@ -160,7 +160,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return datas;
 		}
 
-		public List<T> All<T>(int? gameId, int? actorId, string key, EvaluationDataType evaluationDataType,
+		public List<T> All<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType,
 			EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime),
 			DateTime end = default(DateTime))
 		{
@@ -173,7 +173,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return all;
 		}
 
-		public T Sum<T>(int? gameId, int? actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime),
+		public T Sum<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime),
 			DateTime end = default(DateTime))
 		{
 			var sum = _evaluationDataDbController.Sum<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
@@ -183,7 +183,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return sum;
 		}
 
-		public T Max<T>(int? gameId, int? actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public T Max<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var max = _evaluationDataDbController.Max<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
@@ -193,7 +193,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return max;
 		}
 
-		public T Min<T>(int? gameId, int? actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public T Min<T>(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var min = _evaluationDataDbController.Min<T>(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
@@ -203,10 +203,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return min;
 		}
 
-		public bool TryGetLatest<T>(int? gameId, int? actorId, string key, out T latest, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
+		public bool TryGetLatest<T>(int gameId, int actorId, string key, out T latest, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
 			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var didGetLatest = _evaluationDataDbController.TryGetLatest<T>(gameId, actorId, key, out latest, evaluationDataType, evaluationDataCategory, start, end);
+			var didGetLatest = _evaluationDataDbController.TryGetLatest(gameId, actorId, key, out latest, evaluationDataType, evaluationDataCategory, start, end);
 
 			_logger.LogDebug(
 				$"Latest {latest} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, EvaludationDataCategory: {evaluationDataCategory}, Start: {start}, End: {end}");
@@ -214,7 +214,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return didGetLatest;
 		}
 
-		public EvaluationData GetEvaluationDataByHighestFloat(int? gameId, int? actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public EvaluationData GetEvaluationDataByHighestFloat(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var highest = _evaluationDataDbController.GetEvaluationDataByHighestFloat(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
@@ -226,7 +226,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return highest;
 		}
 
-		public EvaluationData GetEvaluationDataByHighestLong(int? gameId, int? actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public EvaluationData GetEvaluationDataByHighestLong(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var highest = _evaluationDataDbController.GetEvaluationDataByHighestLong(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
 
@@ -238,7 +238,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return highest;
 		}
 
-		public int CountKeys(int? gameId, int? actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
+		public int CountKeys(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
 			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var count = _evaluationDataDbController.CountKeys(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
@@ -250,7 +250,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		}
 
 		// todo change to bool TryGet[name](out value) pattern
-		public DateTime TryGetEarliestKey(int? gameId, int? actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
+		public DateTime TryGetEarliestKey(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
 			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var didGetEarliestKey = _evaluationDataDbController.TryGetEarliestKey(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start,
@@ -263,7 +263,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		}
 
 		// todo change to bool TryGet[name](out value) pattern
-		public DateTime TryGetLatestKey(int? gameId, int? actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
+		public DateTime TryGetLatestKey(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory,
 			DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var didGetLatestKey = _evaluationDataDbController.TryGetLatestKey(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);

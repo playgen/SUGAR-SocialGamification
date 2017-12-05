@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return evaluations;
 		}
 
-		public List<Evaluation> GetByGame(int? gameId)
+		public List<Evaluation> GetByGame(int gameId)
 		{
 			var evaluations = _evaluationDbController.GetByGame(gameId);
 
@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return evaluations;
 		}
 
-		public Evaluation Get(string token, int? gameId)
+		public Evaluation Get(string token, int gameId)
 		{
 			var evaluation = _evaluationDbController.Get(token, gameId);
 
@@ -67,7 +67,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return evaluation;
 		}
 
-		public List<Evaluation> GetEvaluation(int? gameId, EvaluationType evaluationType)
+		public List<Evaluation> GetEvaluation(int gameId, EvaluationType evaluationType)
 		{
 			var evaluations = _evaluationDbController.GetByEvaluationType(gameId, evaluationType);
 
@@ -76,23 +76,23 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return evaluations;
 		}
 
-		public List<EvaluationProgress> GetGameProgress(int gameId, int? actorId)
+		public List<EvaluationProgress> GetGameProgress(int gameId, int actorId)
 		{
 			var evaluations = _evaluationDbController.GetByGame(gameId);
 			evaluations = FilterByActorType(evaluations, actorId);
 
 			var evaluationsProgress = evaluations.Select(e => new EvaluationProgress {
-				Actor = _actorController.Get(actorId.Value),
+				Actor = _actorController.Get(actorId),
 				Name = e.Name,
-				Progress = EvaluateProgress(e, actorId),
+				Progress = EvaluateProgress(e, actorId)
 			}).ToList();
 
-			_logger.LogInformation($"{evaluationsProgress?.Count} Evaluation Progresses for GameId: {gameId}, ActorId: {actorId}");
+			_logger.LogInformation($"{evaluationsProgress.Count} Evaluation Progresses for GameId: {gameId}, ActorId: {actorId}");
 
 			return evaluationsProgress;
 		}
 
-		public EvaluationProgress GetProgress(string token, int? gameId, int actorId)
+		public EvaluationProgress GetProgress(string token, int gameId, int actorId)
 		{
 			var evaluation = _evaluationDbController.Get(token, gameId);
 			var progress = EvaluateProgress(evaluation, actorId);
@@ -100,10 +100,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var result = new EvaluationProgress {
 				Actor = _actorController.Get(actorId),
 				Name = evaluation.Name,
-				Progress = progress,
+				Progress = progress
 			};
 
-			_logger.LogInformation($"{result?.Name} Evaluation Progresses for Token: {token}, GameId: {gameId}, ActorId: {actorId}");
+			_logger.LogInformation($"{result.Name} Evaluation Progresses for Token: {token}, GameId: {gameId}, ActorId: {actorId}");
 
 			return result;
 		}
@@ -137,12 +137,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			}
 			_evaluationDbController.Update(evaluation);
 
-			_logger.LogInformation($"{evaluation?.Id}");
+			_logger.LogInformation($"{evaluation.Id}");
 
 			EvaluationUpdatedEvent?.Invoke(evaluation);
 		}
 
-		public void Delete(string token, int? gameId)
+		public void Delete(string token, int gameId)
 		{
 			var evaluation = Get(token, gameId);
 
@@ -154,7 +154,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			EvaluationDeletedEvent?.Invoke(evaluation);
 			_evaluationDbController.Delete(token, gameId);
 
-			_logger.LogInformation($"Deleted: {evaluation?.Id} for Token {token}, GameId: {gameId}");
+			_logger.LogInformation($"Deleted: {evaluation.Id} for Token {token}, GameId: {gameId}");
 		}
 
 		private bool DataTypeValueValidation(EvaluationDataType dataType, string value)
@@ -177,22 +177,19 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			}
 		}
 
-		public float EvaluateProgress(Evaluation evaluation, int? actorId)
+		public float EvaluateProgress(Evaluation evaluation, int actorId)
 		{
 			if (evaluation == null)
 			{
 				throw new MissingRecordException("The provided evaluation does not exist.");
 			}
-			if (actorId != null)
+			var provided = _actorController.Get(actorId);
+			if (evaluation.ActorType != ActorType.Undefined && (provided == null || provided.ActorType != evaluation.ActorType))
 			{
-				var provided = _actorController.Get(actorId.Value);
-				if (evaluation.ActorType != ActorType.Undefined && (provided == null || provided.ActorType != evaluation.ActorType))
-				{
-					throw new MissingRecordException("The provided ActorId cannot complete this evaluation.");
-				}
+				throw new MissingRecordException("The provided ActorId cannot complete this evaluation.");
 			}
 
-			var completed = IsAlreadyCompleted(evaluation, actorId.Value);
+			var completed = IsAlreadyCompleted(evaluation, actorId);
 			var completedProgress = completed ? 1f : 0f;
 
 			if (!completed)
@@ -204,7 +201,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				}
 			}
 
-			_logger.LogDebug($"Got: Progress: {completedProgress} for Evaluation.Id: {evaluation?.Id}, ActorId: {actorId}");
+			_logger.LogDebug($"Got: Progress: {completedProgress} for Evaluation.Id: {evaluation.Id}, ActorId: {actorId}");
 
 			return completedProgress;
 		}
@@ -224,11 +221,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return completed;
 		}
 
-		private void SetCompleted(Evaluation evaluation, int? actorId)
+		private void SetCompleted(Evaluation evaluation, int actorId)
 		{
 			var evaluationDataCoreController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, evaluation.EvaluationType.ToEvaluationDataCategory());
 
-			var EvaluationData = new EvaluationData {
+			var evaluationData = new EvaluationData {
 				Category = evaluation.EvaluationType.ToEvaluationDataCategory(),
 				Key = evaluation.Token,
 				GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game
@@ -237,25 +234,22 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				Value = null
 			};
 
-			evaluationDataCoreController.Add(EvaluationData);
+			evaluationDataCoreController.Add(evaluationData);
 
 			ProcessEvaluationRewards(evaluation, actorId);
 		}
 
-		private void ProcessEvaluationRewards(Evaluation evaluation, int? actorId)
+		private void ProcessEvaluationRewards(Evaluation evaluation, int actorId)
 		{
 			evaluation.Rewards?.ForEach(reward => _rewardController.AddReward(actorId, evaluation.GameId, reward));
 		}
 
-		private List<Evaluation> FilterByActorType(List<Evaluation> evaluations, int? actorId)
+		private List<Evaluation> FilterByActorType(List<Evaluation> evaluations, int actorId)
 		{
-			if (actorId.HasValue)
-			{
-				var provided = _actorController.Get(actorId.Value);
-				evaluations = provided == null
-					? evaluations.Where(a => a.ActorType == ActorType.Undefined).ToList()
-					: evaluations.Where(a => a.ActorType == ActorType.Undefined || a.ActorType == provided.ActorType).ToList();
-			}
+			var provided = _actorController.Get(actorId);
+			evaluations = provided == null
+				? evaluations.Where(a => a.ActorType == ActorType.Undefined).ToList()
+				: evaluations.Where(a => a.ActorType == ActorType.Undefined || a.ActorType == provided.ActorType).ToList();
 
 			return evaluations;
 		}

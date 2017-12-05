@@ -41,7 +41,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.AccountSource)]
 		public async Task<IActionResult> Get()
 		{
-			if ((await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
+			if ((await _authorizationService.AuthorizeAsync(User, Platform.AllId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var accountSources = _accountSourceCoreController.Get();
 				var accountSourceContract = accountSources.ToContractList();
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.AccountSource)]
 		public async Task<IActionResult> Create([FromBody]AccountSourceRequest newAccountSource)
 		{
-			if ((await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
+			if ((await _authorizationService.AuthorizeAsync(User, Platform.AllId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var accountSource = newAccountSource.ToModel();
 				_accountSourceCoreController.Create(accountSource);

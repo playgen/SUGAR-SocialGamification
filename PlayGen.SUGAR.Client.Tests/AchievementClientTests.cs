@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Common.Authorization;
+
 using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
@@ -105,7 +107,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var progressAchievement = Fixture.SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id);
 			Assert.Equal(0, progressAchievement.Progress);
 
-			CompleteGenericEvaluation(key, loggedInAccount.User.Id);
+			CompleteGenericEvaluation(key, loggedInAccount.User.Id, Platform.GlobalId);
 
 			progressAchievement = Fixture.SUGARClient.Achievement.GetGlobalAchievementProgress(key, loggedInAccount.User.Id);
 			Assert.True(progressAchievement.Progress >= 1);

@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class SkillExtensions
 	{
 		public static EvaluationResponse ToContract(this Skill model)
@@ -36,8 +39,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			var skillModel = new Skill {
 				Name = skillContract.Name,
 				Description = skillContract.Description,
-				GameId = skillContract.GameId ?? 0,
-				ActorType = skillContract.ActorType,
+				GameId = skillContract.GameId.Value,
+				ActorType = skillContract.ActorType.Value,
 				Token = skillContract.Token,
 				EvaluationCriterias = skillContract.EvaluationCriterias.ToModelList(),
 				Rewards = skillContract.Rewards.ToModelList()
@@ -49,11 +52,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static Skill ToSkillModel(this EvaluationUpdateRequest skillContract)
 		{
 			var skillModel = new Skill {
-				Id = skillContract.Id,
+				Id = skillContract.Id.Value,
 				Name = skillContract.Name,
 				Description = skillContract.Description,
-				GameId = skillContract.GameId ?? 0,
-				ActorType = skillContract.ActorType,
+				GameId = skillContract.GameId.Value,
+				ActorType = skillContract.ActorType.Value,
 				Token = skillContract.Token,
 				EvaluationCriterias = skillContract.EvaluationCriterias.ToModelList(),
 				Rewards = skillContract.Rewards.ToModelList()

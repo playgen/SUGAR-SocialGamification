@@ -17,7 +17,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = group.Id
+				AcceptorId = group.Id,
+				AutoAccept = false
 			};
 
 			var relationshipResponse = Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
@@ -62,6 +63,10 @@ namespace PlayGen.SUGAR.Client.Tests
 			var received = Fixture.SUGARClient.GroupMember.GetMembers(group.Id);
 
 			Assert.Equal(2, received.Count());
+
+			var receivedCount = Fixture.SUGARClient.GroupMember.GetMemberCount(group.Id);
+
+			Assert.Equal(2, receivedCount);
 		}
 
 		[Fact]
@@ -74,7 +79,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = group.Id
+				AcceptorId = group.Id,
+				AutoAccept = false
 			};
 
 			Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
@@ -113,7 +119,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = group.Id
+				AcceptorId = group.Id,
+				AutoAccept = false
 			};
 
 			Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
@@ -164,7 +171,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = group.Id
+				AcceptorId = group.Id,
+				AutoAccept = false
 			};
 
 			Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
@@ -196,6 +204,10 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(2, received.Count());
 
+			var receivedCount = Fixture.SUGARClient.GroupMember.GetMemberCount(group.Id);
+
+			Assert.Equal(2, receivedCount);
+
 			Helpers.Login(Fixture.SUGARClient, "Global", key, out game, out loggedInAccount);
 
 			sent = Fixture.SUGARClient.GroupMember.GetSentRequests(loggedInAccount.User.Id);
@@ -217,7 +229,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			var relationshipRequest = new RelationshipRequest
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = group.Id
+				AcceptorId = group.Id,
+				AutoAccept = false
 			};
 
 			Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
@@ -248,6 +261,10 @@ namespace PlayGen.SUGAR.Client.Tests
 			received = Fixture.SUGARClient.GroupMember.GetMembers(group.Id);
 
 			Assert.Equal(1, received.Count());
+
+			var receivedCount = Fixture.SUGARClient.GroupMember.GetMemberCount(group.Id);
+
+			Assert.Equal(1, receivedCount);
 
 			Helpers.Login(Fixture.SUGARClient, "Global", key, out game, out loggedInAccount);
 
@@ -328,10 +345,15 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(2, received.Count());
 
+			var receivedCount = Fixture.SUGARClient.GroupMember.GetMemberCount(group.Id);
+
+			Assert.Equal(2, receivedCount);
+
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
 				RequestorId = loggedInAccount.User.Id,
-				AcceptorId = group.Id
+				AcceptorId = group.Id,
+				Accepted = false
 			};
 
 			Fixture.SUGARClient.GroupMember.UpdateMember(relationshipStatusUpdate);
@@ -343,6 +365,10 @@ namespace PlayGen.SUGAR.Client.Tests
 			received = Fixture.SUGARClient.GroupMember.GetMembers(group.Id);
 
 			Assert.Equal(1, received.Count());
+
+			receivedCount = Fixture.SUGARClient.GroupMember.GetMemberCount(group.Id);
+
+			Assert.Equal(1, receivedCount);
 		}
 
 		[Fact]
@@ -382,7 +408,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = requestAccount.User.Id,
-					AcceptorId = group.Id
+					AcceptorId = group.Id,
+					AutoAccept = false
 				};
 				Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
 			}
@@ -416,7 +443,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = loggedInAccountLoop.User.Id,
-					AcceptorId = group.Id
+					AcceptorId = group.Id,
+					AutoAccept = false
 				};
 				Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
 			}
@@ -462,6 +490,10 @@ namespace PlayGen.SUGAR.Client.Tests
 			var members = Fixture.SUGARClient.GroupMember.GetMembers(group.Id);
 
 			Assert.Equal(6, members.Count());
+
+			var memberCount = Fixture.SUGARClient.GroupMember.GetMemberCount(group.Id);
+
+			Assert.Equal(6, memberCount);
 
 			var memberCheck = members.Where(r => requestorNames.Any(rn => r.Name.Contains(rn)));
 

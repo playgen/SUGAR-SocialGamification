@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Authorization;
@@ -12,6 +13,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// <summary>
 	/// Web Controller that facilitates User to Group relationship specific operations.
 	/// </summary>
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
 	[ValidateSession]
@@ -128,7 +131,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 				(await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
 			{
 				var request = relationship.ToGroupModel();
-				_groupMemberCoreController.CreateMemberRequest(relationship.ToGroupModel(), relationship.AutoAccept);
+				_groupMemberCoreController.CreateMemberRequest(relationship.ToGroupModel(), relationship.AutoAccept.Value);
 				var relationshipContract = request.ToContract();
 				return new ObjectResult(relationshipContract);
 			}
@@ -156,7 +159,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 					RequestorId = relationship.RequestorId,
 					AcceptorId = relationship.AcceptorId
 				};
-				_groupMemberCoreController.UpdateMemberRequest(relation.ToGroupModel(), relationship.Accepted);
+				_groupMemberCoreController.UpdateMemberRequest(relation.ToGroupModel(), relationship.Accepted.Value);
 				return Ok();
 			}
 			return Forbid();

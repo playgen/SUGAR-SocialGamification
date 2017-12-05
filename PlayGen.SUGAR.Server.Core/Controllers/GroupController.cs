@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Group).Select(p => p.EntityId).ToList();
 			groups = groups.Where(g => permissions.Contains(g.Id)).ToList();
 
-			_logger.LogInformation($"{groups?.Count} Groups");
+			_logger.LogInformation($"{groups.Count} Groups");
 
 			return groups;
 		}
@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_actorRoleController.Create(ClaimScope.Group.ToString(), creatorId, newGroup.Id);
 			_groupMemberController.CreateMemberRequest(new UserToGroupRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
 
-			_logger.LogInformation($"{newGroup?.Id} for CreatorId: {creatorId}");
+			_logger.LogInformation($"{newGroup.Id} for CreatorId: {creatorId}");
 
 			return newGroup;
 		}

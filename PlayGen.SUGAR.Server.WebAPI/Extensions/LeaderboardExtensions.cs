@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class LeaderboardExtensions
 	{
 		public static LeaderboardResponse ToContract(this Leaderboard leaderboardModel)
@@ -36,15 +39,15 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static Leaderboard ToModel(this LeaderboardRequest leaderboardContract)
 		{
 			return new Leaderboard {
-				GameId = leaderboardContract.GameId ?? 0,
+				GameId = leaderboardContract.GameId.Value,
 				Name = leaderboardContract.Name,
 				Token = leaderboardContract.Token,
-				EvaluationDataCategory = leaderboardContract.EvaluationDataCategory,
+				EvaluationDataCategory = leaderboardContract.EvaluationDataCategory.Value,
 				EvaluationDataKey = leaderboardContract.Key,
-				ActorType = leaderboardContract.ActorType,
-				EvaluationDataType = leaderboardContract.EvaluationDataType,
-				CriteriaScope = leaderboardContract.CriteriaScope,
-				LeaderboardType = leaderboardContract.LeaderboardType
+				ActorType = leaderboardContract.ActorType.Value,
+				EvaluationDataType = leaderboardContract.EvaluationDataType.Value,
+				CriteriaScope = leaderboardContract.CriteriaScope.Value,
+				LeaderboardType = leaderboardContract.LeaderboardType.Value
 			};
 		}
 	}

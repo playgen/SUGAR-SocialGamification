@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Authorization;
@@ -13,6 +14,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// <summary>
 	/// Web Controller that facilitates Leaderboard specific operations.
 	/// </summary>
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
 	[ValidateSession]
@@ -39,7 +42,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
-		public IActionResult Get([FromRoute]int? gameId)
+		public IActionResult Get([FromRoute]int gameId)
 		{
 			var leaderboard = _leaderboardController.GetByGame(gameId);
 			var leaderboardContract = leaderboard.ToContractList();
@@ -56,7 +59,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>Returns a single <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
 		[HttpGet("{token}/global")]
 		[HttpGet("{token}/{gameId:int}")]
-		public IActionResult Get([FromRoute]string token, [FromRoute]int? gameId)
+		public IActionResult Get([FromRoute]string token, [FromRoute]int gameId)
 		{
 			var leaderboard = _leaderboardController.Get(token, gameId);
 			var leaderboardContract = leaderboard.ToContract();
@@ -96,7 +99,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpPost("standings")]
 		public IActionResult GetLeaderboardStandings([FromBody]LeaderboardStandingsRequest leaderboardDetails)
 		{
-			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardToken, leaderboardDetails.GameId);
+			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardToken, leaderboardDetails.GameId.Value);
 			var standings = _leaderboardEvaluationController.GetStandings(leaderboard, leaderboardDetails);
 			return new ObjectResult(standings);
 		}
@@ -131,7 +134,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Leaderboard)]
-		public async Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int? gameId)
+		public async Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int gameId)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{

@@ -2,6 +2,7 @@
 using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using Xunit;
 
@@ -34,7 +35,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		}
 
 		[Fact]
-		public void CanCreateWithoutGameId()
+		public void CannotCreateWithoutGameId()
 		{
 			var key = "GameData_CanCreateWithoutGameId";
 			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
@@ -47,13 +48,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.String
 			};
 
-			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
-
-			Assert.Equal(evaluationDataRequest.CreatingActorId, response.CreatingActorId);
-			Assert.Equal(evaluationDataRequest.GameId, response.GameId);
-			Assert.Equal(evaluationDataRequest.Key, response.Key);
-			Assert.Equal(evaluationDataRequest.Value, response.Value);
-			Assert.Equal(evaluationDataRequest.EvaluationDataType, response.EvaluationDataType);
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 		}
 
 		[Fact]
@@ -102,6 +97,23 @@ namespace PlayGen.SUGAR.Client.Tests
 				GameId = game.Id,
 				Key = key,
 				EvaluationDataType = EvaluationDataType.String
+			};
+
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
+		}
+
+		[Fact]
+		public void CannotCreateWithoutEvaluationDataType()
+		{
+			var key = "GameData_CannotCreateWithoutEvaluationDataType";
+			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+
+			var evaluationDataRequest = new EvaluationDataRequest
+			{
+				CreatingActorId = loggedInAccount.User.Id,
+				GameId = game.Id,
+				Key = key,
+				Value = "Test Value"
 			};
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
@@ -191,11 +203,11 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
 
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Get(0, game.Id, new[] { key }));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.Get(Platform.GlobalId, game.Id, new[] { key }));
 		}
 
 		[Fact]
-		public void CanGetGameDataWithoutGameId()
+		public void CanGetGlobalGameData()
 		{
 			var key = "GameData_CanGetGameDataWithoutGameId";
 			Helpers.Login(Fixture.SUGARClient, key, key, out var _, out var loggedInAccount);
@@ -203,6 +215,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
 				CreatingActorId = loggedInAccount.User.Id,
+				GameId = Platform.GlobalId,
 				Key = key,
 				Value = "Test Value",
 				EvaluationDataType = EvaluationDataType.String
@@ -210,7 +223,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var response = Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
 
-			var get = Fixture.SUGARClient.GameData.Get(loggedInAccount.User.Id, null, new[] { key });
+			var get = Fixture.SUGARClient.GameData.Get(loggedInAccount.User.Id, Platform.GlobalId, new[] { key });
 
 			Assert.Equal(1, get.Count());
 			Assert.Equal(get.First().CreatingActorId, response.CreatingActorId);
@@ -282,6 +295,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var evaluationDataRequest = new EvaluationDataRequest
 			{
 				Key = dataKey,
+				GameId = Platform.GlobalId,
 				Value = "TestValue",
 				EvaluationDataType = EvaluationDataType.String,
 				CreatingActorId = loggedInAccount.User.Id

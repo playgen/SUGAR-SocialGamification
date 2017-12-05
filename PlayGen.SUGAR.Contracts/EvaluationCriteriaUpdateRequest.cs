@@ -1,4 +1,5 @@
-﻿using PlayGen.SUGAR.Common;
+﻿using System.ComponentModel.DataAnnotations;
+using PlayGen.SUGAR.Common;
 
 namespace PlayGen.SUGAR.Contracts
 {
@@ -21,7 +22,8 @@ namespace PlayGen.SUGAR.Contracts
 		/// <summary>
 		/// The unqiue identifier for this type.
 		/// </summary>
-		public int Id { get; set; }
+		[Required]
+		public int? Id { get; set; }
 
 		// todo make all fields required for contracts
 	}

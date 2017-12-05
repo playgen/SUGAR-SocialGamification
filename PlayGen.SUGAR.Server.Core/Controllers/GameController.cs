@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Game).Select(p => p.EntityId).ToList();
 			games = games.Where(g => permissions.Contains(g.Id)).ToList();
 
-			_logger.LogInformation($"Got: {games?.Count} Games, for ActorId: {actorId}");
+			_logger.LogInformation($"Got: {games.Count} Games, for ActorId: {actorId}");
 
 			return games;
 		}
@@ -71,7 +71,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			newGame = _gameDbController.Create(newGame);
 			_actorRoleController.Create(ClaimScope.Game.ToString(), creatorId, newGame.Id);
 
-			_logger.LogInformation($"Created: Game: {newGame?.Id}, for CreatorId: {creatorId}");
+			_logger.LogInformation($"Created: Game: {newGame.Id}, for CreatorId: {creatorId}");
 
 			return newGame;
 		}

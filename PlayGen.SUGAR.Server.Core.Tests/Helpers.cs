@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			return game;
 		}
 
-		public static Evaluation ComposeGenericAchievement(string key, int? gameId = null, int evaluationCriteriaCount = 1)
+		public static Evaluation ComposeGenericAchievement(string key, int gameId, int evaluationCriteriaCount = 1)
 		{
 			var evaluationCriterias = new List<EvaluationCriteria>();
 			for (var i = 0; i < evaluationCriteriaCount; i++)
@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             return gameDatas;
         }
 
-        public static EvaluationData ComposeEvaluationData(int actorId, EvaluationCriteria evaluationCriteria, int? gameId = null, string value = "50")
+        public static EvaluationData ComposeEvaluationData(int actorId, EvaluationCriteria evaluationCriteria, int gameId, string value = "50")
 		{
 			return new EvaluationData
 			{
@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			};
 		}
 
-		public static Evaluation CreateGenericAchievement(string key, int? gameId = null)
+		public static Evaluation CreateGenericAchievement(string key, int gameId)
 		{
 		    return ControllerLocator.EvaluationController.Create(ComposeGenericAchievement(key, gameId));
 		}
@@ -129,7 +129,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             evaluationDataController.Add(gameDatas.ToArray());
         }
 
-	    public static Evaluation CreateAndCompleteGenericAchievement(string key, int actorId, int? gameId = null)
+	    public static Evaluation CreateAndCompleteGenericAchievement(string key, int actorId, int gameId)
 	    {
 	        var evaluation = CreateGenericAchievement(key, gameId);
 	        CompleteGenericAchievement(evaluation, actorId);

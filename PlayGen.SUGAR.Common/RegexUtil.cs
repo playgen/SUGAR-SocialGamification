@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace PlayGen.SUGAR.Common
 {
-    public static class RegexUtil
+	public static class RegexUtil
 	{
 		public const string AlphaNumericUnderscoreNotEmpty = @"^\w+$";
 

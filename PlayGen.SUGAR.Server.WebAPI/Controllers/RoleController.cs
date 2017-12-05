@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// <summary>
 	/// Web Controller that facilitates Role specific operations.
 	/// </summary>
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
 	[ValidateSession]
@@ -36,7 +39,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.Role)]
 		public async Task<IActionResult> Get()
 		{
-			if ((await _authorizationService.AuthorizeAsync(User, Platform.EntityId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
+			if ((await _authorizationService.AuthorizeAsync(User, Platform.AllId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
 				var roles = _roleCoreController.Get();
 				var roleContract = roles.ToContractList();
@@ -110,7 +113,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Role)]
 		public async Task<IActionResult> Create([FromBody]RoleRequest newRole)
 		{
-			if ((await _authorizationService.AuthorizeAsync(User, newRole.ClaimScope, HttpContext.ScopeItems(newRole.ClaimScope))).Succeeded)
+			if ((await _authorizationService.AuthorizeAsync(User, newRole.ClaimScope, HttpContext.ScopeItems(newRole.ClaimScope.Value))).Succeeded)
 			{
 				var role = newRole.ToModel();
 				_roleCoreController.Create(role, int.Parse(User.Identity.Name));

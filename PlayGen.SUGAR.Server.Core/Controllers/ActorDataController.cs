@@ -19,7 +19,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_actorDataDbController = actorDataDbController;
 		}
 
-		public List<ActorData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
+		public List<ActorData> Get(int gameId, int actorId, ICollection<string> keys = null)
 		{
 			var datas = _actorDataDbController.Get(gameId, actorId, keys);
 
@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return datas;
 		}
 
-		public bool KeyExists(int? gameId, int? actorId, string key)
+		public bool KeyExists(int gameId, int actorId, string key)
 		{
 			var keyExists = _actorDataDbController.KeyExists(gameId, actorId, key);
 
@@ -47,10 +47,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 				return newData;
 			}
-			else
-			{
-				throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
-			}
+			throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
 		}
 
 		public void Update(ActorData newData)

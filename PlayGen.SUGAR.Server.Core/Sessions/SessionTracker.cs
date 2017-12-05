@@ -8,120 +8,120 @@ using PlayGen.SUGAR.Server.Core.Controllers;
 
 namespace PlayGen.SUGAR.Server.Core.Sessions
 {
-    public class SessionTracker : IDisposable
-    {
-        public event Action<Session> SessionStartedEvent;
-        public event Action<Session> SessionEndedEvent;
+	public class SessionTracker : IDisposable
+	{
+		public event Action<Session> SessionStartedEvent;
+		public event Action<Session> SessionEndedEvent;
 
 		private readonly ConcurrentDictionary<long, Session> _sessions = new ConcurrentDictionary<long, Session>();
 		private readonly ILogger _logger;
 		private readonly TimeSpan _sessionTimeout;
-        private readonly Timer _timer;
+		private readonly Timer _timer;
 
-        private bool _isDisposed;
+		private bool _isDisposed;
 
-        public SessionTracker(
+		public SessionTracker(
 			ILogger<SessionTracker> logger,
 			TimeSpan sessionTimeout, 
 			TimeSpan timeoutCheckInterval)
 		{
 			_logger = logger;
-            _sessionTimeout = sessionTimeout;
-            ActorController.ActorDeletedEvent += OnActorDeleted;
-            GameController.GameDeletedEvent += OnGameDeleted;
+			_sessionTimeout = sessionTimeout;
+			ActorController.ActorDeletedEvent += OnActorDeleted;
+			GameController.GameDeletedEvent += OnGameDeleted;
 
-            _timer = new Timer(state => RemoveTimedOut(), new object(), timeoutCheckInterval, timeoutCheckInterval);
-        }
+			_timer = new Timer(state => RemoveTimedOut(), new object(), timeoutCheckInterval, timeoutCheckInterval);
+		}
 
-        public void SetLastActive(long sessionId, DateTime lastActive)
-        {
-            _sessions[sessionId].LastActive = lastActive;
-        }
+		public void SetLastActive(long sessionId, DateTime lastActive)
+		{
+			_sessions[sessionId].LastActive = lastActive;
+		}
 
-        ~SessionTracker()
-        {
-            Dispose();
-        }
+		~SessionTracker()
+		{
+			Dispose();
+		}
 
-        public void Dispose()
-        {
-            if (_isDisposed) return;
+		public void Dispose()
+		{
+			if (_isDisposed) return;
 
-            _timer.Dispose();
+			_timer.Dispose();
 
-            ActorController.ActorDeletedEvent -= OnActorDeleted;
-            GameController.GameDeletedEvent -= OnGameDeleted;
+			ActorController.ActorDeletedEvent -= OnActorDeleted;
+			GameController.GameDeletedEvent -= OnGameDeleted;
 
-            _isDisposed = true;
-        }
+			_isDisposed = true;
+		}
 
-        public Session StartSession(int? gameId, int actorId)
-        {
-            var session = new Session(gameId, actorId);
+		public Session StartSession(int gameId, int actorId)
+		{
+			var session = new Session(gameId, actorId);
 
-            _sessions.TryAdd(session.Id, session);
+			_sessions.TryAdd(session.Id, session);
 
-            SessionStartedEvent?.Invoke(session);
+			SessionStartedEvent?.Invoke(session);
 
-            _logger.LogInformation($"SessionId: {session.Id} for GameId: {gameId}, ActorId: {actorId}");
+			_logger.LogInformation($"SessionId: {session.Id} for GameId: {gameId}, ActorId: {actorId}");
 
-            return session;
-        }
-        
-        public void EndSession(long sessionId)
-        {
-            Session session;
-            _sessions.TryRemove(sessionId, out session);
+			return session;
+		}
+		
+		public void EndSession(long sessionId)
+		{
+			Session session;
+			_sessions.TryRemove(sessionId, out session);
 
-            SessionEndedEvent?.Invoke(session);
+			SessionEndedEvent?.Invoke(session);
 
-            _logger.LogInformation($"SessionId: {session.Id}");
-        }
+			_logger.LogInformation($"SessionId: {session.Id}");
+		}
 
-        public bool IsActive(long sessionId)
-        {
-            return _sessions.ContainsKey(sessionId);
-        }
+		public bool IsActive(long sessionId)
+		{
+			return _sessions.ContainsKey(sessionId);
+		}
 
-        public List<Session> GetByActor(int actorId)
-        {
-            return _sessions.Values.Where(s => s.ActorId == actorId).ToList();
-        }
+		public List<Session> GetByActor(int actorId)
+		{
+			return _sessions.Values.Where(s => s.ActorId == actorId).ToList();
+		}
 
-        public List<Session> GetByGames(List<int?> gameIds)
-        {
-            return _sessions.Values.Where(s => gameIds.Contains(s.GameId)).ToList();
-        }
+		public List<Session> GetByGames(List<int> gameIds)
+		{
+			return _sessions.Values.Where(s => gameIds.Contains(s.GameId)).ToList();
+		}
 
-        private void RemoveTimedOut()
-        {
-            var activityThreshold = DateTime.UtcNow - _sessionTimeout;
+		private void RemoveTimedOut()
+		{
+			var activityThreshold = DateTime.UtcNow - _sessionTimeout;
 
-            var sessionIds = _sessions
-                .Where(kvp => kvp.Value.LastActive < activityThreshold)
-                .Select(kvp => kvp.Key).ToList();
+			var sessionIds = _sessions
+				.Where(kvp => kvp.Value.LastActive < activityThreshold)
+				.Select(kvp => kvp.Key).ToList();
 
-            _logger.LogInformation($"Timedout: {string.Join(", ", sessionIds)}");
+			_logger.LogInformation($"Timedout: {string.Join(", ", sessionIds)}");
 
-            sessionIds.ForEach(EndSession);
-        }
+			sessionIds.ForEach(EndSession);
+		}
 
-        private void OnActorDeleted(int actorId)
-        {
-            var sessionIds = _sessions
-                .Where(kvp => kvp.Value.ActorId == actorId)
-                .Select(kvp => kvp.Key).ToList();
+		private void OnActorDeleted(int actorId)
+		{
+			var sessionIds = _sessions
+				.Where(kvp => kvp.Value.ActorId == actorId)
+				.Select(kvp => kvp.Key).ToList();
 
-            sessionIds.ForEach(EndSession);
-        }
-        
-        private void OnGameDeleted(int gameId)
-        {
-            var sessionIds = _sessions
-                .Where(kvp => kvp.Value.GameId == gameId)
-                .Select(kvp => kvp.Key).ToList();
+			sessionIds.ForEach(EndSession);
+		}
+		
+		private void OnGameDeleted(int gameId)
+		{
+			var sessionIds = _sessions
+				.Where(kvp => kvp.Value.GameId == gameId)
+				.Select(kvp => kvp.Key).ToList();
 
-            sessionIds.ForEach(EndSession);
-        }
-    }
+			sessionIds.ForEach(EndSession);
+		}
+	}
 }

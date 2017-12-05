@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class RewardExtensions
 	{
 		public static List<RewardResponse> ToContractList(this List<Reward> rewards)
@@ -48,7 +51,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static Reward ToModel(this RewardUpdateRequest contract)
 		{
 			return new Reward {
-				Id = contract.Id,
+				Id = contract.Id.Value,
 				EvaluationDataKey = contract.EvaluationDataKey,
 				EvaluationDataType = contract.EvaluationDataType,
 				Value = contract.Value

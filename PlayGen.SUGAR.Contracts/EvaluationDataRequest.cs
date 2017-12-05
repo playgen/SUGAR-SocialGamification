@@ -19,13 +19,15 @@ namespace PlayGen.SUGAR.Contracts
 	public class EvaluationDataRequest
     {
 		/// <summary>
-		/// The id of the Actor which this ActorData/GameData is being ensigned to. Can be left null to ensign to the system/game.
+		/// The id of the Actor which this ActorData/GameData is being ensigned to.
 		/// </summary>
+		[Required]
 		public int? CreatingActorId { get; set; }
 
 		/// <summary>
-		/// The id of the Game which this ActorData/GameData relates to. Can be left null to relate the ActorData/GameData to the wider system.
+		/// The id of the Game which this ActorData/GameData relates to.
 		/// </summary>
+		[Required]
 		public int? GameId { get; set; }
 
         /// <summary>
@@ -51,6 +53,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// The type of data which is being stored.
 		/// </summary>
 		[Required]
-		public EvaluationDataType EvaluationDataType { get; set; }
+		public EvaluationDataType? EvaluationDataType { get; set; }
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// <summary>
 	/// Web Controller that facilitates ActorClaim specific operations.
 	/// </summary>
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
 	[ValidateSession]
@@ -44,7 +47,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			var claim = _claimCoreController.Get(claimId);
 			if (claim.ClaimScope == ClaimScope.Global)
 			{
-				entityId = Platform.EntityId;
+				entityId = Platform.AllId;
 			}
 			if ((await _authorizationService.AuthorizeAsync(User, entityId, HttpContext.ScopeItems(claim.ClaimScope))).Succeeded)
 			{
@@ -90,16 +93,16 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.ActorClaim)]
 		public async Task<IActionResult> Create([FromBody]ActorClaimRequest newClaim)
 		{
-			var newClaimInfo = _claimCoreController.Get(newClaim.ClaimId);
+			var newClaimInfo = _claimCoreController.Get(newClaim.ClaimId.Value);
 			if (newClaimInfo.ClaimScope == ClaimScope.Global)
 			{
-				newClaim.EntityId = Platform.EntityId;
+				newClaim.EntityId = Platform.AllId;
 			}
 			if ((await _authorizationService.AuthorizeAsync(User, newClaim.EntityId, HttpContext.ScopeItems(newClaimInfo.ClaimScope))).Succeeded)
 			{
-				var claimScope = _claimCoreController.Get(newClaim.ClaimId).ClaimScope;
-				var creatorClaims = _actorClaimCoreController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newClaim.EntityId, claimScope);
-				if (creatorClaims.Select(cc => cc.Id).Contains(newClaim.ClaimId))
+				var claimScope = _claimCoreController.Get(newClaim.ClaimId.Value).ClaimScope;
+				var creatorClaims = _actorClaimCoreController.GetActorClaimsForEntity(int.Parse(User.Identity.Name), newClaim.EntityId.Value, claimScope);
+				if (creatorClaims.Select(cc => cc.Id).Contains(newClaim.ClaimId.Value))
 				{
 					var claim = newClaim.ToModel();
 					_actorClaimCoreController.Create(claim);

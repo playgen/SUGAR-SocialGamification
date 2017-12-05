@@ -21,9 +21,5 @@
 		/// The display name of the user/group.
 		/// </summary>
 		public string Name { get; set; }
-
-		public ActorResponse()
-		{
-		}
 	}
 }

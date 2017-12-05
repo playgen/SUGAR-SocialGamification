@@ -1,7 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Common.Extensions;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
@@ -75,9 +74,9 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
             }
         }
 
-        private string CreateMappingKey(int? gameId, EvaluationDataType dataType, string EvaluationDataKey)
+        private string CreateMappingKey(int gameId, EvaluationDataType dataType, string evaluationDataKey)
         {
-            return $"{gameId.ToInt()};{dataType};{EvaluationDataKey}";
+            return $"{gameId};{dataType};{evaluationDataKey}";
         }
     }
 }
