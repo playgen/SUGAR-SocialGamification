@@ -24,12 +24,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			_category = category;
 		}
 
-		public bool KeyExists(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool KeyExists(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			using (var context = ContextFactory.Create())
 			{
 				return context.GetCategoryData(_category)
-					.FilterBy(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end)
+					.FilterBy(gameId, actorId, key, evaluationDataType, start, end)
 					.Any();
 			}
 		}
@@ -92,13 +92,15 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<int> GetGameKeyActors(int gameId, string key)
+		public List<int> GetGameKeyActors(int gameId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			using (var context = ContextFactory.Create())
 			{
 				return context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
 					.FilterByKey(key)
+					.FilterByDataType(evaluationDataType)
+					.FilterByDateTimeRange(start, end)
 					.Select(d => d.ActorId)
 					.Distinct()
 					.ToList();
@@ -127,24 +129,24 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		private List<EvaluationData> GetContextEvaluationData(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		private List<EvaluationData> GetContextEvaluationData(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			using (var context = ContextFactory.Create())
 			{
-				return context.EvaluationData.FilterBy(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+				return context.EvaluationData.FilterBy(gameId, actorId, key, evaluationDataType, start, end);
 			}
 		}
 
-		public List<EvaluationData> List(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<EvaluationData> List(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var list = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).ToList();
+			var list = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, start, end).ToList();
 			return list;
 		}
 
-		public bool TryGetSum<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetSum<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 			where T : struct
 		{
-			var list = List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			var list = List(gameId, actorId, key, evaluationDataType, start, end);
 			if (list.Count > 0)
 			{
 				var sum = list.Sum(s => Convert.ToDouble(s.Value));
@@ -155,10 +157,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			return false;
 		}
 
-		public bool TryGetMax<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetMax<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 			where T : struct
 		{
-			var list = List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			var list = List(gameId, actorId, key, evaluationDataType, start, end);
 			if (list.Count > 0)
 			{
 				var max = list.Max(s => Convert.ToDouble(s.Value));
@@ -169,10 +171,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			return false;
 		}
 
-		public bool TryGetMin<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetMin<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 			where T : struct
 		{
-			var list = List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			var list = List(gameId, actorId, key, evaluationDataType, start, end);
 			if (list.Count > 0)
 			{
 				var min = list.Min(s => Convert.ToDouble(s.Value));
@@ -183,9 +185,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			return false;
 		}
 
-		public bool TryGetLatest(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetLatest(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var list = List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			var list = List(gameId, actorId, key, evaluationDataType, start, end);
 			if (list.Count > 0)
 			{
 				value = list.OrderByDescending(s => s.DateModified).First();
@@ -195,9 +197,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			return false;
 		}
 
-		public bool TryGetEarliest(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool TryGetEarliest(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var list = List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end);
+			var list = List(gameId, actorId, key, evaluationDataType, start, end);
 			if (list.Count > 0)
 			{
 				value = list.OrderBy(s => s.DateCreated).First();
@@ -207,9 +209,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			return false;
 		}
 
-		public int CountKeys(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public int CountKeys(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			return List(gameId, actorId, key, evaluationDataType, evaluationDataCategory, start, end).Count;
+			return List(gameId, actorId, key, evaluationDataType, start, end).Count;
 		}
 
 		public EvaluationData Create(EvaluationData data)

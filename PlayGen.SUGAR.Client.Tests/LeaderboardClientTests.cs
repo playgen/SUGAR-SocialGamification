@@ -98,7 +98,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 10,
 				PageOffset = 0, 
-				GameId = Platform.GlobalId
+				GameId = Platform.GlobalId,
+				MultiplePerActor = false
 			};
 
 			var standingsResponse = Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
@@ -130,7 +131,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 10,
 				PageOffset = 0,
-				GameId = game.Id
+				GameId = game.Id,
+				MultiplePerActor = false
 			};
 
 			var standingsResponse = Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
