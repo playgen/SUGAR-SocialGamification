@@ -22,14 +22,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		private static GameController _gameController;
 		private static EvaluationDataController _evaluationDataController;
 		private static GroupController _groupController;
-		private static GroupRelationshipController _groupRelationshipController;
 		private static LeaderboardController _leaderboardController;
 		private static EvaluationController _evaluationController;
 		private static RoleController _roleController;
 		private static RoleClaimController _roleClaimController;
 		private static UserController _userController;
-		private static UserRelationshipController _userRelationshipController;
 		private static MatchController _matchController;
+		private static RelationshipController _relationshipController;
 
 		public static AccountController AccountController
 			=> _accountController ?? (_accountController = new AccountController(ContextFactory));
@@ -61,9 +60,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		public static GroupController GroupController
 			=> _groupController ?? (_groupController = new GroupController(ContextFactory));
 
-		public static GroupRelationshipController GroupRelationshipController
-			=> _groupRelationshipController ?? (_groupRelationshipController = new GroupRelationshipController(ContextFactory));
-
 		public static LeaderboardController LeaderboardController
 			=> _leaderboardController ?? (_leaderboardController = new LeaderboardController(ContextFactory));
 
@@ -76,11 +72,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		public static UserController UserController
 			=> _userController ?? (_userController = new UserController(ContextFactory));
 
-		public static UserRelationshipController UserRelationshipController
-			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(ContextFactory));
-
 		public static MatchController MatchController
 			=> _matchController ?? (_matchController = new MatchController(ContextFactory));
+
+		public static RelationshipController RelationshipController
+			=> _relationshipController ?? (_relationshipController = new RelationshipController(ContextFactory));
 
 		static ControllerLocator()
 		{

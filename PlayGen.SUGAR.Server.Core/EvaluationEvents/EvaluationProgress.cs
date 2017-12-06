@@ -1,4 +1,6 @@
-﻿namespace PlayGen.SUGAR.Common
+﻿using PlayGen.SUGAR.Server.Model;
+
+namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 {
     public class EvaluationProgress
     {

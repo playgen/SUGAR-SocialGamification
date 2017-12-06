@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.Model;
 using EvaluationCriteria = PlayGen.SUGAR.Server.Model.EvaluationCriteria;
 

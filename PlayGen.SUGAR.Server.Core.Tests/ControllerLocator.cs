@@ -17,17 +17,16 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         private static GameController _gameController;
         private static EvaluationDataController _evaluationDataController;
         private static GroupController _groupController;
-        private static GroupMemberController _groupMemberController;
         private static LeaderboardController _leaderboardController;
         private static ResourceController _resourceController;
         private static RewardController _rewardController;
         private static RoleController _roleController;
         private static RoleClaimController _roleClaimController;
         private static UserController _userController;
-        private static UserFriendController _userFriendController;
         private static MatchController _matchController;
         private static ActorController _actorController;
         private static GameDataController _gameDataController;
+	    private static RelationshipController _relationshipController;
 
         public static AccountController AccountController
             => _accountController ?? (_accountController = new AccountController(new NullLogger<AccountController>(), DbControllerLocator.AccountController, AccountSourceController, UserController, ActorRoleController));
@@ -36,7 +35,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             => _accountSourceController ?? (_accountSourceController = new AccountSourceController(new NullLogger<AccountSourceController>(), DbControllerLocator.AccountSourceController));
 
 		public static ActorClaimController ActorClaimController
-			=> _actorClaimController ?? (_actorClaimController = new ActorClaimController(new NullLogger<ActorClaimController>(), DbControllerLocator.ActorClaimController, ActorRoleController, RoleClaimController, GroupMemberController));
+			=> _actorClaimController ?? (_actorClaimController = new ActorClaimController(new NullLogger<ActorClaimController>(), DbControllerLocator.ActorClaimController, ActorRoleController, RoleClaimController, RelationshipController));
 
 		public static ActorRoleController ActorRoleController
             => _actorRoleController ?? (_actorRoleController = new ActorRoleController(new NullLogger<ActorRoleController>(), DbControllerLocator.ActorRoleController, DbControllerLocator.RoleController));
@@ -45,25 +44,22 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             => _claimController ?? (_claimController = new ClaimController(DbControllerLocator.ClaimController, DbControllerLocator.RoleController, DbControllerLocator.RoleClaimController));
 
         public static EvaluationController EvaluationController
-            => _evaluationController ?? (_evaluationController= new EvaluationController(new NullLogger<EvaluationController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.EvaluationController, GroupMemberController, UserFriendController, ActorController, RewardController, DbControllerLocator.ContextFactory));
+            => _evaluationController ?? (_evaluationController= new EvaluationController(new NullLogger<EvaluationController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.EvaluationController, RelationshipController, ActorController, RewardController, DbControllerLocator.ContextFactory));
 
         public static GameController GameController
             => _gameController ?? (_gameController = new GameController(new NullLogger<GameController>(), DbControllerLocator.GameController, ActorClaimController, ActorRoleController));
         
         public static GroupController GroupController
-            => _groupController ?? (_groupController = new GroupController(new NullLogger<GroupController>(), DbControllerLocator.GroupController, DbControllerLocator.ActorController, ActorClaimController, ActorRoleController, GroupMemberController));
-
-        public static GroupMemberController GroupMemberController
-            => _groupMemberController ?? (_groupMemberController = new GroupMemberController(new NullLogger<GroupMemberController>(), DbControllerLocator.GroupRelationshipController));
+            => _groupController ?? (_groupController = new GroupController(new NullLogger<GroupController>(), DbControllerLocator.GroupController, DbControllerLocator.ActorController, ActorClaimController, ActorRoleController, RelationshipController));
 
         public static LeaderboardController LeaderboardController
-            => _leaderboardController ?? (_leaderboardController = new LeaderboardController(new NullLogger<LeaderboardController>(), new NullLogger<EvaluationDataController>(), GroupMemberController, UserFriendController, DbControllerLocator.ActorController, DbControllerLocator.GroupController, DbControllerLocator.UserController, DbControllerLocator.ContextFactory));
+            => _leaderboardController ?? (_leaderboardController = new LeaderboardController(new NullLogger<LeaderboardController>(), new NullLogger<EvaluationDataController>(), RelationshipController, DbControllerLocator.ActorController, DbControllerLocator.GroupController, DbControllerLocator.UserController, DbControllerLocator.ContextFactory));
 
         public static ResourceController ResourceController
             => _resourceController ?? (_resourceController = new ResourceController(new NullLogger<ResourceController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory));
 
         public static RewardController RewardController
-            => _rewardController ?? (_rewardController = new RewardController(new NullLogger<RewardController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, GroupMemberController, UserFriendController));
+            => _rewardController ?? (_rewardController = new RewardController(new NullLogger<RewardController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, RelationshipController));
 
         public static RoleController RoleController
             => _roleController ?? (_roleController = new RoleController(new NullLogger<RoleController>(), DbControllerLocator.RoleController, ActorRoleController));
@@ -74,9 +70,6 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         public static UserController UserController
             => _userController ?? (_userController = new UserController(new NullLogger<UserController>(), DbControllerLocator.UserController, DbControllerLocator.ActorController, ActorRoleController));
 
-        public static UserFriendController UserFriendController
-            => _userFriendController ?? (_userFriendController = new UserFriendController(new NullLogger<UserFriendController>(), DbControllerLocator.UserRelationshipController));
-
         public static MatchController MatchController
             => _matchController ?? (_matchController = new MatchController(new NullLogger<MatchController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, DbControllerLocator.MatchController));
 
@@ -85,5 +78,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
         public static GameDataController GameDataController =>
             _gameDataController ?? (_gameDataController = new GameDataController(new NullLogger<GameDataController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, ActorController));
+
+	    public static RelationshipController RelationshipController
+		    => _relationshipController ?? (_relationshipController =
+					new RelationshipController(new NullLogger<RelationshipController>(), DbControllerLocator.RelationshipController));
+
     }
 }

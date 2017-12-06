@@ -30,13 +30,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public LeaderboardController(
 			ILogger<LeaderboardController> logger,
 			ILogger<EvaluationDataController> evaluationDataLogger,
-			GroupMemberController groupMemberCoreController,
-			UserFriendController userFriendCoreController,
+			RelationshipController relationshipCoreController,
 			EntityFramework.Controllers.ActorController actorController,
 			EntityFramework.Controllers.GroupController groupController,
 			EntityFramework.Controllers.UserController userController,
 			SUGARContextFactory contextFactory)
-			: base(evaluationDataLogger, contextFactory, groupMemberCoreController, userFriendCoreController)
+			: base(evaluationDataLogger, contextFactory, relationshipCoreController)
 		{
 			_logger = logger;
 			ActorController = actorController;
@@ -444,7 +443,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					});
 					if (actorId != null)
 					{
-						var friends = UserFriendCoreController.GetFriends(actorId.Value).Select(r => r.Id).ToList();
+						var friends = RelationshipCoreController.GetRelationships(actorId.Value, ActorType.User).Select(r => r.Id).ToList();
 						friends.Add(actorId.Value);
 						var friendsOnly = overall.Where(r => friends.Contains(r.ActorId));
 						friendsOnly = friendsOnly.Skip(offset * limit).Take(limit);
@@ -460,8 +459,8 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 						Ranking = ++position
 					});
 					if (actorId != null)
-					{
-						var members = GroupMemberCoreController.GetMembers(actorId.Value).Select(r => r.Id);
+					{ 
+						var members = RelationshipCoreController.GetRelationships(actorId.Value, ActorType.User).Select(r => r.Id);
 						var membersOnly = all.Where(r => members.Contains(r.ActorId));
 						membersOnly = membersOnly.Skip(offset * limit).Take(limit);
 						return membersOnly.ToList();
