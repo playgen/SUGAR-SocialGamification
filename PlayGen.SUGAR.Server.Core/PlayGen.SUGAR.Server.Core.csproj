@@ -12,7 +12,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
-	  <ProjectReference Include="..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj" />
 	  <ProjectReference Include="..\PlayGen.SUGAR.Server.Authorization\PlayGen.SUGAR.Server.Authorization.csproj" />
 	  <ProjectReference Include="..\PlayGen.SUGAR.Server.EntityFramework\PlayGen.SUGAR.Server.EntityFramework.csproj" />
 	  <ProjectReference Include="..\PlayGen.SUGAR.Server.Model\PlayGen.SUGAR.Server.Model.csproj" />

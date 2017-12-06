@@ -1,14 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
 {
-	// Values ensured to not be nulled by model validation
-	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public class RewardController : CriteriaEvaluator
 	{
 		private readonly ILogger _logger;
@@ -26,14 +22,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public bool AddReward(int actorId, int gameId, Reward reward)
 		{
-			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, reward.EvaluationDataCategory.Value);
+			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, reward.EvaluationDataCategory);
 
 			var evaluationData = new EvaluationData {
 				Key = reward.EvaluationDataKey,
 				GameId = gameId,
 				ActorId = actorId,
-				Category = reward.EvaluationDataCategory.Value,
-				EvaluationDataType = reward.EvaluationDataType.Value,
+				Category = reward.EvaluationDataCategory,
+				EvaluationDataType = reward.EvaluationDataType,
 				Value = reward.Value
 			};
 

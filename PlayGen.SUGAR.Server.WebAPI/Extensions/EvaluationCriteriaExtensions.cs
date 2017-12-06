@@ -40,12 +40,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				return null;
 			}
 			return new EvaluationCriteria {
-				EvaluationDataCategory = completionCriteria.EvaluationDataCategory,
+				EvaluationDataCategory = completionCriteria.EvaluationDataCategory.Value,
 				EvaluationDataKey = completionCriteria.EvaluationDataKey,
-				EvaluationDataType = completionCriteria.EvaluationDataType,
-				CriteriaQueryType = completionCriteria.CriteriaQueryType,
-				ComparisonType = completionCriteria.ComparisonType,
-				Scope = completionCriteria.Scope,
+				EvaluationDataType = completionCriteria.EvaluationDataType.Value,
+				CriteriaQueryType = completionCriteria.CriteriaQueryType.Value,
+				ComparisonType = completionCriteria.ComparisonType.Value,
+				Scope = completionCriteria.Scope.Value,
 				Value = completionCriteria.Value
 			};
 		}
@@ -58,12 +58,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			}
 			return new EvaluationCriteria {
 				Id = completionCriteria.Id.Value,
-				EvaluationDataCategory = completionCriteria.EvaluationDataCategory,
+				EvaluationDataCategory = completionCriteria.EvaluationDataCategory.Value,
 				EvaluationDataKey = completionCriteria.EvaluationDataKey,
-				EvaluationDataType = completionCriteria.EvaluationDataType,
-				CriteriaQueryType = completionCriteria.CriteriaQueryType,
-				ComparisonType = completionCriteria.ComparisonType,
-				Scope = completionCriteria.Scope,
+				EvaluationDataType = completionCriteria.EvaluationDataType.Value,
+				CriteriaQueryType = completionCriteria.CriteriaQueryType.Value,
+				ComparisonType = completionCriteria.ComparisonType.Value,
+				Scope = completionCriteria.Scope.Value,
 				Value = completionCriteria.Value
 			};
 		}

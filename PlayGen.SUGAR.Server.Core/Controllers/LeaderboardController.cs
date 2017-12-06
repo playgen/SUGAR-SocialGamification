@@ -1,13 +1,9 @@
-﻿// todo remove any references to the contracts project
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Extensions;
-using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
@@ -15,8 +11,6 @@ using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
 {
-	// Values ensured to not be nulled by model validation
-	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public class LeaderboardController : CriteriaEvaluator
 	{
 		protected readonly ActorController ActorController;
@@ -42,7 +36,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			UserController = userController;
 		}
 
-		public List<LeaderboardStandingsResponse> GetStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
+		public List<StandingsResponse> GetStandings(Leaderboard leaderboard, StandingsRequest request)
 		{
 			if (leaderboard == null)
 			{
@@ -59,13 +53,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return standings;
 		}
 
-		protected List<LeaderboardStandingsResponse> GatherStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
+		protected List<StandingsResponse> GatherStandings(Leaderboard leaderboard, StandingsRequest request)
 		{
 			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, leaderboard.EvaluationDataCategory);
 
 			var actors = GetActors(evaluationDataController, leaderboard, request);
 			
-			List<LeaderboardStandingsResponse> typeResults;
+			List<StandingsResponse> typeResults;
 
 			switch (leaderboard.LeaderboardType)
 			{
@@ -97,17 +91,15 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					return null;
 			}
 
-			var results = FilterResults(typeResults, request.PageLimit.Value, request.PageOffset.Value, request.LeaderboardFilterType.Value, request.ActorId);
+			var results = FilterResults(typeResults, request.PageLimit, request.PageOffset, request.LeaderboardFilterType, request.ActorId);
 
 			_logger.LogInformation($"{results?.Count} Standings for Leaderboard: {leaderboard.Token}");
 
 			return results;
 		}
 
-		protected List<ActorResponse> GetActors(EvaluationDataController evaluationDataController, Leaderboard leaderboard, LeaderboardStandingsRequest request)
+		protected List<Actor> GetActors(EvaluationDataController evaluationDataController, Leaderboard leaderboard, StandingsRequest request)
 		{
-			var actors = new List<ActorResponse>();
-
 			switch (request.LeaderboardFilterType)
 			{
 				case LeaderboardFilterType.Top:
@@ -156,37 +148,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			}
 			// get all valid actors (have evaluationDataKey evaluation data in game gameId)
 			var validActors = evaluationDataController.GetGameKeyActors(leaderboard.GameId, leaderboard.EvaluationDataKey, leaderboard.EvaluationDataType, request.DateStart, request.DateEnd);
-			switch (leaderboard.ActorType)
-			{
-				case ActorType.Undefined:
-					actors = validActors.Select(a => ActorController.Get(a))
-						.Where(a => a != null)
-						.Select(a => new ActorResponse {
-							Id = a.Id,
-							Name = GetName(a.Id, a.ActorType)
-						}).ToList();
-					break;
-
-				case ActorType.User:
-					actors = validActors.Select(a => UserController.Get(a))
-						.Where(a => a != null)
-						.Select(a => new ActorResponse
-						{
-							Id = a.Id,
-							Name = a.Name
-						}).ToList();
-					break;
-
-				case ActorType.Group:
-					actors = validActors.Select(a => GroupController.Get(a))
-						.Where(a => a != null)
-						.Select(a => new ActorResponse
-						{
-							Id = a.Id,
-							Name = a.Name
-						}).ToList();
-					break;
-			}
+			var actors = validActors.Select(a => ActorController.Get(a)).Where(a => a != null).ToList();
 
 			_logger.LogDebug($"{actors.Count} Actors for Filter: {request.LeaderboardFilterType}, ActorType: {leaderboard.ActorType}, ActorId: {request.ActorId}");
 
@@ -208,10 +170,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			}
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateHighest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
+		protected List<StandingsResponse> EvaluateHighest(EvaluationDataController evaluationDataController, List<Actor> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)
 		{
-			List<LeaderboardStandingsResponse> results;
-			if (request.MultiplePerActor.Value)
+			List<StandingsResponse> results;
+			if (request.MultiplePerActor)
 			{
 				results = GetAllActorResults(evaluationDataController, actors, gameId, key, evaluationDataType, request);
 			}
@@ -221,7 +183,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case EvaluationDataType.Long:
 					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMax<long>(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
-						.Select(a => new LeaderboardStandingsResponse
+						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
@@ -231,7 +193,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case EvaluationDataType.Float:
 					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMax<float>(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
-						.Select(a => new LeaderboardStandingsResponse
+						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
@@ -250,10 +212,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateLowest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
+		protected List<StandingsResponse> EvaluateLowest(EvaluationDataController evaluationDataController, List<Actor> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)
 		{
-			List<LeaderboardStandingsResponse> results;
-			if (request.MultiplePerActor.Value)
+			List<StandingsResponse> results;
+			if (request.MultiplePerActor)
 			{
 				results = GetAllActorResults(evaluationDataController, actors, gameId, key, evaluationDataType, request);
 			}
@@ -263,7 +225,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case EvaluationDataType.Long:
 					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMin<long>(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
-						.Select(a => new LeaderboardStandingsResponse
+						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
@@ -274,7 +236,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case EvaluationDataType.Float:
 					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMin<float>(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
-						.Select(a => new LeaderboardStandingsResponse
+						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
@@ -293,15 +255,15 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateCumulative(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
+		protected List<StandingsResponse> EvaluateCumulative(EvaluationDataController evaluationDataController, List<Actor> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)
 		{
-			List<LeaderboardStandingsResponse> results;
+			List<StandingsResponse> results;
 			switch (evaluationDataType)
 			{
 				case EvaluationDataType.Long:
 					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetSum<long>(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
-						.Select(a => new LeaderboardStandingsResponse
+						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
@@ -312,7 +274,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case EvaluationDataType.Float:
 					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetSum<float>(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
-						.Select(a => new LeaderboardStandingsResponse
+						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
@@ -331,13 +293,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateCount(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
+		protected List<StandingsResponse> EvaluateCount(EvaluationDataController evaluationDataController, List<Actor> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)
 		{
-			List<LeaderboardStandingsResponse> results;
+			List<StandingsResponse> results;
 			switch (evaluationDataType)
 			{
 				case EvaluationDataType.String:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
+					results = actors.Select(r => new StandingsResponse {
 						ActorId = r.Id,
 						ActorName = r.Name,
 						Value = evaluationDataController.CountKeys(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToString()
@@ -345,7 +307,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					break;
 
 				case EvaluationDataType.Boolean:
-					results = actors.Select(r => new LeaderboardStandingsResponse {
+					results = actors.Select(r => new StandingsResponse {
 						ActorId = r.Id,
 						ActorName = r.Name,
 						Value = evaluationDataController.CountKeys(gameId, r.Id, key, evaluationDataType, request.DateStart, request.DateEnd).ToString()
@@ -363,10 +325,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateEarliest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
+		protected List<StandingsResponse> EvaluateEarliest(EvaluationDataController evaluationDataController, List<Actor> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)
 		{
-			List<LeaderboardStandingsResponse> results;
-			if (request.MultiplePerActor.Value)
+			List<StandingsResponse> results;
+			if (request.MultiplePerActor)
 			{
 				results = GetAllActorResults(evaluationDataController, actors, gameId, key, evaluationDataType, request);
 			}
@@ -377,7 +339,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					case EvaluationDataType.String:
 						results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetEarliest(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 							.Where(a => a.Value != null)
-							.Select(a => new LeaderboardStandingsResponse
+							.Select(a => new StandingsResponse
 							{
 								ActorId = a.Actor.Id,
 								ActorName = a.Actor.Name,
@@ -388,7 +350,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					case EvaluationDataType.Boolean:
 						results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetEarliest(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 							.Where(a => a.Value != null)
-							.Select(a => new LeaderboardStandingsResponse
+							.Select(a => new StandingsResponse
 							{
 								ActorId = a.Actor.Id,
 								ActorName = a.Actor.Name,
@@ -408,10 +370,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		protected List<LeaderboardStandingsResponse> EvaluateLatest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
+		protected List<StandingsResponse> EvaluateLatest(EvaluationDataController evaluationDataController, List<Actor> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)
 		{
-			List<LeaderboardStandingsResponse> results;
-			if (request.MultiplePerActor.Value)
+			List<StandingsResponse> results;
+			if (request.MultiplePerActor)
 			{
 				results = GetAllActorResults(evaluationDataController, actors, gameId, key, evaluationDataType, request);
 			}
@@ -422,7 +384,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					case EvaluationDataType.String:
 						results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetLatest(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 							.Where(a => a.Value != null)
-							.Select(a => new LeaderboardStandingsResponse
+							.Select(a => new StandingsResponse
 							{
 								ActorId = a.Actor.Id,
 								ActorName = a.Actor.Name,
@@ -433,7 +395,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					case EvaluationDataType.Boolean:
 						results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetLatest(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 							.Where(a => a.Value != null)
-							.Select(a => new LeaderboardStandingsResponse
+							.Select(a => new StandingsResponse
 							{
 								ActorId = a.Actor.Id,
 								ActorName = a.Actor.Name,
@@ -453,9 +415,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		private List<LeaderboardStandingsResponse> GetAllActorResults(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, EvaluationDataType evaluationDataType, LeaderboardStandingsRequest request)
+		private List<StandingsResponse> GetAllActorResults(EvaluationDataController evaluationDataController, List<Actor> actors, int gameId, string key, EvaluationDataType evaluationDataType, StandingsRequest request)
 		{
-			return actors.SelectMany(a => evaluationDataController.List(gameId, a.Id, key, evaluationDataType, request.DateStart, request.DateEnd).Select(r => new LeaderboardStandingsResponse
+			return actors.SelectMany(a => evaluationDataController.List(gameId, a.Id, key, evaluationDataType, request.DateStart, request.DateEnd).Select(r => new StandingsResponse
 			{
 				ActorId = a.Id,
 				ActorName = a.Name,
@@ -463,7 +425,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			})).ToList();
 		}
 
-		protected List<LeaderboardStandingsResponse> FilterResults(List<LeaderboardStandingsResponse> typeResults, int limit, int offset, LeaderboardFilterType filter, int? actorId)
+		protected List<StandingsResponse> FilterResults(List<StandingsResponse> typeResults, int limit, int offset, LeaderboardFilterType filter, int? actorId)
 		{
 			int position;
 			switch (filter)
@@ -478,7 +440,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					}
 					else
 					{
-						typeResults = new List<LeaderboardStandingsResponse>();
+						typeResults = new List<StandingsResponse>();
 					}
 					break;
 				case LeaderboardFilterType.Friends:
@@ -490,7 +452,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					}
 					else
 					{
-						typeResults = new List<LeaderboardStandingsResponse>();
+						typeResults = new List<StandingsResponse>();
 					}
 					break;
 				case LeaderboardFilterType.GroupMembers:
@@ -501,7 +463,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					}
 					else
 					{
-						typeResults = new List<LeaderboardStandingsResponse>();
+						typeResults = new List<StandingsResponse>();
 					}
 					break;
 				default:
@@ -509,7 +471,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			}
 			typeResults = typeResults.Skip(offset * limit).Take(limit).ToList();
 			position = offset * limit;
-			return typeResults.Select(s => new LeaderboardStandingsResponse
+			return typeResults.Select(s => new StandingsResponse
 			{
 				ActorId = s.ActorId,
 				ActorName = s.ActorName,

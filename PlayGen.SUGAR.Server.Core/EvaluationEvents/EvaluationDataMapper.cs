@@ -10,8 +10,6 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 	/// <summary>
 	/// Mappings of game data keys to evaluations with criteria that make use of the specific keys.
 	/// </summary>
-	// Values ensured to not be nulled by model validation
-	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public class EvaluationDataMapper
 	{
 		// <EvaluationData key, <evaluationId, evaluation>>
@@ -45,7 +43,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 		{
 			foreach (var evaluationCriteria in evaluation.EvaluationCriterias)
 			{
-				var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.EvaluationDataType.Value, evaluationCriteria.EvaluationDataKey);
+				var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.EvaluationDataType, evaluationCriteria.EvaluationDataKey);
 
 				ConcurrentDictionary<int, Evaluation> mappedEvaluationsForKey;
 
@@ -63,7 +61,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 		{
 			foreach (var evaluationCriteria in evaluation.EvaluationCriterias)
 			{
-				var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.EvaluationDataType.Value, evaluationCriteria.EvaluationDataKey);
+				var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.EvaluationDataType, evaluationCriteria.EvaluationDataKey);
 
 				ConcurrentDictionary<int, Evaluation> mappedEvaluationsForKey;
 				if (_mappings.TryGetValue(mappingKey, out mappedEvaluationsForKey))

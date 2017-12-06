@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
@@ -12,8 +11,6 @@ using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
 {
-	// Values ensured to not be nulled by model validation
-	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public class EvaluationController : CriteriaEvaluator
 	{
 		public static Action<Evaluation> EvaluationCreatedEvent;
@@ -114,7 +111,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			foreach (var ec in evaluation.EvaluationCriterias)
 			{
-				if (!DataTypeValueValidation(ec.EvaluationDataType.Value, ec.Value))
+				if (!DataTypeValueValidation(ec.EvaluationDataType, ec.Value))
 				{
 					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.EvaluationDataType}");
 				}
@@ -132,7 +129,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			foreach (var ec in evaluation.EvaluationCriterias)
 			{
-				if (!DataTypeValueValidation(ec.EvaluationDataType.Value, ec.Value))
+				if (!DataTypeValueValidation(ec.EvaluationDataType, ec.Value))
 				{
 					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.EvaluationDataType}");
 				}
@@ -166,14 +163,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case EvaluationDataType.String:
 					return true;
 				case EvaluationDataType.Long:
-					long longValue;
-					return long.TryParse(value, out longValue);
+					return long.TryParse(value, out var _);
 				case EvaluationDataType.Float:
-					float floatValue;
-					return float.TryParse(value, out floatValue);
+					return float.TryParse(value, out var _);
 				case EvaluationDataType.Boolean:
-					bool boolValue;
-					return bool.TryParse(value, out boolValue);
+					return bool.TryParse(value, out var _);
 				default:
 					return false;
 			}

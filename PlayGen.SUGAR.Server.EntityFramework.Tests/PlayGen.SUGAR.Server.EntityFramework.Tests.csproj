@@ -20,10 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
-    <ProjectReference Include="..\PlayGen.SUGAR.Server.Core\PlayGen.SUGAR.Server.Core.csproj" />
     <ProjectReference Include="..\PlayGen.SUGAR.Server.EntityFramework\PlayGen.SUGAR.Server.EntityFramework.csproj" />
     <ProjectReference Include="..\PlayGen.SUGAR.Server.Model\PlayGen.SUGAR.Server.Model.csproj" />
-    <ProjectReference Include="..\PlayGen.SUGAR.Server.WebAPI\PlayGen.SUGAR.Server.WebAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
