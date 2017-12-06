@@ -142,6 +142,15 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return actors;
 		}
 
+		public List<int> GetGameKeyActors(int gameId, string key)
+		{
+			var actors = _evaluationDataDbController.GetGameKeyActors(gameId, key);
+
+			_logger.LogInformation($"{actors?.Count} Actors for GameId {gameId} and Key {key}");
+
+			return actors;
+		}
+
 		public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int gameId)
 		{
 			var datas = _evaluationDataDbController.GetGameKeys(gameId);

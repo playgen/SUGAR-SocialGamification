@@ -86,7 +86,19 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				return context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
-					.ToList()
+					.Select(d => d.ActorId)
+					.Distinct()
+					.ToList();
+			}
+		}
+
+		public List<int> GetGameKeyActors(int gameId, string key)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				return context.GetCategoryData(_category)
+					.FilterByGameId(gameId)
+					.FilterByKey(key)
 					.Select(d => d.ActorId)
 					.Distinct()
 					.ToList();
@@ -99,7 +111,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				return context.GetCategoryData(_category)
 					.FilterByGameId(gameId)
-					.ToList()
 					.Select(d => new KeyValuePair<string, EvaluationDataType>(d.Key, d.EvaluationDataType))
 					.Distinct()
 					.ToList();

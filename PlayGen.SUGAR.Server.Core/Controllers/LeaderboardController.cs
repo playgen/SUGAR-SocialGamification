@@ -63,10 +63,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		protected List<LeaderboardStandingsResponse> GatherStandings(Leaderboard leaderboard, LeaderboardStandingsRequest request)
 		{
-			var actors = GetActors(request.LeaderboardFilterType.Value, leaderboard.ActorType, request.ActorId);
-
 			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, leaderboard.EvaluationDataCategory);
 
+			var actors = GetActors(request.LeaderboardFilterType.Value, leaderboard.ActorType, request.ActorId, leaderboard.EvaluationDataKey, leaderboard.GameId, evaluationDataController);
+			
 			List<LeaderboardStandingsResponse> typeResults;
 
 			switch (leaderboard.LeaderboardType)
@@ -106,7 +106,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		protected List<ActorResponse> GetActors(LeaderboardFilterType filter, ActorType actorType, int? actorId)
+		protected List<ActorResponse> GetActors(LeaderboardFilterType filter, ActorType actorType, int? actorId, string evaluationDataKey, int gameId, EvaluationDataController evaluationDataController)
 		{
 			var actors = Enumerable.Empty<ActorResponse>().ToList();
 
@@ -161,28 +161,37 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					// todo what happens in the case where a user is in multiple groups?
 					break;
 			}
-
+			// get all valid actors (have evaluationDataKey evaluation data in game gameId)
+			var validActors = evaluationDataController.GetGameKeyActors(gameId, evaluationDataKey);
 			switch (actorType)
 			{
 				case ActorType.Undefined:
-					actors = ActorController.Get().Select(a => new ActorResponse {
-						Id = a.Id,
-						Name = GetName(a.Id, a.ActorType)
-					}).ToList();
+					actors = validActors.Select(a => ActorController.Get(a))
+						.Where(a => a != null)
+						.Select(a => new ActorResponse {
+							Id = a.Id,
+							Name = GetName(a.Id, a.ActorType)
+						}).ToList();
 					break;
 
 				case ActorType.User:
-					actors = UserController.Get().Select(a => new ActorResponse {
-						Id = a.Id,
-						Name = a.Name
-					}).ToList();
+					actors = validActors.Select(a => UserController.Get(a))
+						.Where(a => a != null)
+						.Select(a => new ActorResponse
+						{
+							Id = a.Id,
+							Name = a.Name
+						}).ToList();
 					break;
 
 				case ActorType.Group:
-					actors = GroupController.Get().Select(a => new ActorResponse {
-						Id = a.Id,
-						Name = a.Name
-					}).ToList();
+					actors = validActors.Select(a => GroupController.Get(a))
+						.Where(a => a != null)
+						.Select(a => new ActorResponse
+						{
+							Id = a.Id,
+							Name = a.Name
+						}).ToList();
 					break;
 			}
 
@@ -209,8 +218,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		protected List<LeaderboardStandingsResponse> EvaluateHighest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, LeaderboardStandingsRequest request)
 		{
 			List<LeaderboardStandingsResponse> results;
-			switch (evaluationDataType)
+			if (request.MultiplePerActor)
 			{
+				results = GetAllActorResults(evaluationDataController, actors, gameId, key, evaluationDataType, evaluationDataCategory, request);
+			}
+			else {
+				switch (evaluationDataType)
+				{
 				case EvaluationDataType.Long:
 					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMax<long>(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
@@ -221,7 +235,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 							Value = a.Value.ToString()
 						}).ToList();
 					break;
-
 				case EvaluationDataType.Float:
 					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMax<float>(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
@@ -232,12 +245,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 							Value = a.Value.ToString()
 						}).ToList();
 					break;
-
 				default:
 					return null;
+				}
 			}
 
-			results = results.OrderByDescending(r => r.Value)
+			results = results.OrderByDescending(r => float.Parse(r.Value))
 						.Where(r => float.Parse(r.Value) > 0).ToList();
 
 			_logger.LogDebug($"{results.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
@@ -248,8 +261,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		protected List<LeaderboardStandingsResponse> EvaluateLowest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, LeaderboardStandingsRequest request)
 		{
 			List<LeaderboardStandingsResponse> results;
-			switch (evaluationDataType)
+			if (request.MultiplePerActor)
 			{
+				results = GetAllActorResults(evaluationDataController, actors, gameId, key, evaluationDataType, evaluationDataCategory, request);
+			}
+			else {
+				switch (evaluationDataType)
+				{
 				case EvaluationDataType.Long:
 					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMin<long>(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
@@ -271,9 +289,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 							Value = a.Value.ToString()
 						}).ToList();
 					break;
-
 				default:
 					return null;
+				}
 			}
 
 			results = results.OrderBy(r => float.Parse(r.Value))
@@ -359,35 +377,42 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		protected List<LeaderboardStandingsResponse> EvaluateEarliest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, LeaderboardStandingsRequest request)
 		{
 			List<LeaderboardStandingsResponse> results;
-			switch (evaluationDataType)
+			if (request.MultiplePerActor)
 			{
-				case EvaluationDataType.String:
-					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetEarliest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
-						.Where(a => a.Value != null)
-						.Select(a => new LeaderboardStandingsResponse
-						{
-							ActorId = a.Actor.Id,
-							ActorName = a.Actor.Name,
-							Value = a.Value.DateCreated.SerializeToString()
-						}).ToList();
-					break;
+				results = GetAllActorResults(evaluationDataController, actors, gameId, key, evaluationDataType, evaluationDataCategory, request);
+			}
+			else
+			{
+				switch (evaluationDataType)
+				{
+					case EvaluationDataType.String:
+						results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetEarliest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+							.Where(a => a.Value != null)
+							.Select(a => new LeaderboardStandingsResponse
+							{
+								ActorId = a.Actor.Id,
+								ActorName = a.Actor.Name,
+								Value = a.Value.DateCreated.SerializeToString()
+							}).ToList();
+						break;
 
-				case EvaluationDataType.Boolean:
-					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetEarliest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
-						.Where(a => a.Value != null)
-						.Select(a => new LeaderboardStandingsResponse
-						{
-							ActorId = a.Actor.Id,
-							ActorName = a.Actor.Name,
-							Value = a.Value.DateCreated.SerializeToString()
-						}).ToList();
-					break;
+					case EvaluationDataType.Boolean:
+						results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetEarliest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+							.Where(a => a.Value != null)
+							.Select(a => new LeaderboardStandingsResponse
+							{
+								ActorId = a.Actor.Id,
+								ActorName = a.Actor.Name,
+								Value = a.Value.DateCreated.SerializeToString()
+							}).ToList();
+						break;
 
-				default:
-					return null;
+					default:
+						return null;
+				}
 			}
 
-			results = results.OrderBy(r => r.Value)
+			results = results.OrderBy(r => DateTime.Parse(r.Value))
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime)).ToList();
 
 			_logger.LogDebug($"{results.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
@@ -398,40 +423,57 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		protected List<LeaderboardStandingsResponse> EvaluateLatest(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, LeaderboardStandingsRequest request)
 		{
 			List<LeaderboardStandingsResponse> results;
-			switch (evaluationDataType)
+			if (request.MultiplePerActor)
 			{
-				case EvaluationDataType.String:
-					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetLatest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
-						.Where(a => a.Value != null)
-						.Select(a => new LeaderboardStandingsResponse
-						{
-							ActorId = a.Actor.Id,
-							ActorName = a.Actor.Name,
-							Value = a.Value.DateCreated.SerializeToString()
-						}).ToList();
-					break;
+				results = GetAllActorResults(evaluationDataController, actors, gameId, key, evaluationDataType, evaluationDataCategory, request);
+			}
+			else
+			{
+				switch (evaluationDataType)
+				{
+					case EvaluationDataType.String:
+						results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetLatest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+							.Where(a => a.Value != null)
+							.Select(a => new LeaderboardStandingsResponse
+							{
+								ActorId = a.Actor.Id,
+								ActorName = a.Actor.Name,
+								Value = a.Value.DateCreated.SerializeToString()
+							}).ToList();
+						break;
 
-				case EvaluationDataType.Boolean:
-					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetLatest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
-						.Where(a => a.Value != null)
-						.Select(a => new LeaderboardStandingsResponse
-						{
-							ActorId = a.Actor.Id,
-							ActorName = a.Actor.Name,
-							Value = a.Value.DateCreated.SerializeToString()
-						}).ToList();
-					break;
+					case EvaluationDataType.Boolean:
+						results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetLatest(gameId, a.Id, key, out var value, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd) ? value : null })
+							.Where(a => a.Value != null)
+							.Select(a => new LeaderboardStandingsResponse
+							{
+								ActorId = a.Actor.Id,
+								ActorName = a.Actor.Name,
+								Value = a.Value.DateCreated.SerializeToString()
+							}).ToList();
+						break;
 
-				default:
-					return null;
+					default:
+						return null;
+				}
 			}
 
-			results = results.OrderByDescending(r => r.Value)
+			results = results.OrderByDescending(r => DateTime.Parse(r.Value))
 						.Where(r => DateTime.Parse(r.Value) != default(DateTime)).ToList();
 
 			_logger.LogDebug($"{results.Count} Actors for GameId: {gameId}, Key: {key}, Leaderboard Type: {type}, Save Data Type: {evaluationDataType}");
 
 			return results;
+		}
+
+		private List<LeaderboardStandingsResponse> GetAllActorResults(EvaluationDataController evaluationDataController, List<ActorResponse> actors, int gameId, string key, EvaluationDataType evaluationDataType, EvaluationDataCategory evaluationDataCategory, LeaderboardStandingsRequest request)
+		{
+			return actors.SelectMany(a => evaluationDataController.List(gameId, a.Id, key, evaluationDataType, evaluationDataCategory, request.DateStart, request.DateEnd).Select(r => new LeaderboardStandingsResponse
+			{
+				ActorId = a.Id,
+				ActorName = a.Name,
+				Value = r.ToString()
+			})).ToList();
 		}
 
 		protected List<LeaderboardStandingsResponse> FilterResults(List<LeaderboardStandingsResponse> typeResults, int limit, int offset, LeaderboardFilterType filter, int? actorId)
