@@ -65,10 +65,10 @@ namespace PlayGen.SUGAR.Client
 		/// </summary>
 		/// <param name="id">Id of the existing User.</param>
 		/// <param name="user"><see cref="UserRequest"/> object that holds the details of the User.</param>
-		public void Update(int id, UserRequest user)
+		public UserResponse Update(int id, UserRequest user)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/update/{0}", id).ToString();
-			Put(query, user);
+			return Put<UserRequest, UserResponse>(query, user);
 		}
 
 		public void UpdateAsync(int id, UserRequest user, Action onSuccess, Action<Exception> onError)

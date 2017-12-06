@@ -59,11 +59,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return newUser;
 		}
 
-		public void Update(User user)
+		public User Update(User user)
 		{
-			_userController.Update(user);
-
 			_logger.LogInformation($"{user.Id}");
+
+			return _userController.Update(user);
 		}
 
 		public void Delete(int id)

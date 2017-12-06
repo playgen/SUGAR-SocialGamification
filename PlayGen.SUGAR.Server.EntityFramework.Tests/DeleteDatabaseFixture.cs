@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Microsoft.EntityFrameworkCore;
+using Xunit;
 
 // todo change these to test the core layer (as that makes use of the ef layer but imposes restrictions too).
 
@@ -11,7 +12,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			using (var context = ControllerLocator.ContextFactory.Create())
 			{
 				context.Database.EnsureDeleted();
-				context.Database.EnsureCreated();
+				context.Database.Migrate();
 			}
 		}
 	}

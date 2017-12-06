@@ -117,8 +117,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			{
 				var userModel = user.ToUserModel();
 				userModel.Id = id;
-				_userCoreController.Update(userModel);
-				return Ok();
+				var updatedUserModel = _userCoreController.Update(userModel);
+				return new ObjectResult(updatedUserModel.ToContract());
 			}
 			return Forbid();
 		}

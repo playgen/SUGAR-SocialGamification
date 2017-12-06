@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NLog.Web;
 using PlayGen.SUGAR.Server.Core.Authorization;
@@ -16,8 +17,10 @@ namespace PlayGen.SUGAR.Server.WebAPI
 		{			
 			var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
 
+#if !DEBUG
 			try
 			{
+#endif
 				var host = BuildWebHost(args);
 
 				Setup(host);
@@ -27,14 +30,16 @@ namespace PlayGen.SUGAR.Server.WebAPI
 				logger.Debug("WebRootPath: {0}", environment.WebRootPath);
 
 				host.Run();
+#if !DEBUG			
 			}
 			catch (Exception initFailure)
 			{
 				logger.Error(initFailure);
 				throw;
 			}
+#endif
 		}
-		
+
 		public static IWebHost BuildWebHost(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
 				.UseStartup<Startup>()
@@ -56,18 +61,15 @@ namespace PlayGen.SUGAR.Server.WebAPI
 						context.Database.EnsureDeleted();
 					}
 
-					var newlyCreated = context.Database.EnsureCreated();
-					if (newlyCreated)
-					{
-						context.Seed();
-					}
+					context.Database.Migrate();
+					context.EnsureSeeded();
 
 					var claimController = scope.ServiceProvider.GetService<ClaimController>();
 					claimController.GetAuthorizationClaims();
 
 					if (environment.IsEnvironment("Tests"))
 					{
-						context.SeedTesting();
+						context.EnsureTestsSeeded();
 					}
 					
 					var evaluationTracker = scope.ServiceProvider.GetService<EvaluationTracker>();
