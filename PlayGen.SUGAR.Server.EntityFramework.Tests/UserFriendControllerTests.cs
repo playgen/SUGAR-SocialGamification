@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.Model;
@@ -10,7 +11,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 	public class UserFriendControllerTests : EntityFrameworkTestBase
 	{
 		#region Configuration
-		private readonly UserRelationshipController _userRelationshipController = ControllerLocator.UserRelationshipController;
+		private readonly RelationshipController _relationshipController = ControllerLocator.RelationshipController;
 		private readonly UserController _userController = ControllerLocator.UserController;
 		#endregion
 
@@ -18,14 +19,14 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void CreateAndGetUserFriendRequest()
 		{
-			var userFriendName = "CreateUserFriendRequest";
+			var userFriendName = " CreateRelationshipRequest";
 
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
+			var newFriend =  CreateRelationship(requestor.Id, acceptor.Id);
 
-			var userRequests = _userRelationshipController.GetRequests(newFriend.AcceptorId);
+			var userRequests = _relationshipController.GetRequests(newFriend.AcceptorId, ActorType.User);
 
 			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 
@@ -33,19 +34,19 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		}
 
 		[Fact]
-		public void CreateUserFriendWithNonExistingRequestor()
+		public void  CreateRelationshipWithNonExistingRequestor()
 		{
-			var userFriendName = "CreateUserFriendWithNonExistingRequestor";
+			var userFriendName = " CreateRelationshipWithNonExistingRequestor";
 			var acceptor = CreateUser(userFriendName);
-			Assert.Throws<MissingRecordException>(() => CreateUserFriend(-1, acceptor.Id));
+			Assert.Throws<MissingRecordException>(() =>  CreateRelationship(-1, acceptor.Id));
 		}
 
 		[Fact]
-		public void CreateUserFriendWithNonExistingAcceptor()
+		public void  CreateRelationshipWithNonExistingAcceptor()
 		{
-			var userFriendName = "CreateUserFriendWithNonExistingAcceptor";
+			var userFriendName = " CreateRelationshipWithNonExistingAcceptor";
 			var requestor = CreateUser(userFriendName);
-			Assert.Throws<MissingRecordException>(() => CreateUserFriend(requestor.Id, -1));
+			Assert.Throws<MissingRecordException>(() =>  CreateRelationship(requestor.Id, -1));
 		}
 
 		[Fact]
@@ -56,9 +57,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			CreateUserFriend(requestor.Id, acceptor.Id);
+			 CreateRelationship(requestor.Id, acceptor.Id);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(requestor.Id, acceptor.Id));
+			Assert.Throws<DuplicateRecordException>(() =>  CreateRelationship(requestor.Id, acceptor.Id));
 		}
 
 		[Fact]
@@ -69,15 +70,15 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			CreateUserFriend(requestor.Id, acceptor.Id);
+			 CreateRelationship(requestor.Id, acceptor.Id);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(acceptor.Id, requestor.Id));
+			Assert.Throws<DuplicateRecordException>(() =>  CreateRelationship(acceptor.Id, requestor.Id));
 		}
 
 		[Fact]
 		public void GetNonExistingUserFriendRequests()
 		{
-			var userFriends = _userRelationshipController.GetRequests(-1);
+			var userFriends = _relationshipController.GetRequests(-1, ActorType.User);
 
 			Assert.Empty(userFriends);
 		}
@@ -90,9 +91,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
+			var newFriend =  CreateRelationship(requestor.Id, acceptor.Id);
 
-			var userRequests = _userRelationshipController.GetSentRequests(newFriend.RequestorId);
+			var userRequests = _relationshipController.GetSentRequests(newFriend.RequestorId, ActorType.User);
 
 			var matches = userRequests.Count(g => g.Name == userFriendName + " Acceptor");
 
@@ -102,7 +103,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void GetNonExistingUserSentFriendRequests()
 		{
-			var userFriends = _userRelationshipController.GetSentRequests(-1);
+			var userFriends = _relationshipController.GetSentRequests(-1, ActorType.User);
 
 			Assert.Empty(userFriends);
 		}
@@ -115,17 +116,17 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
+			var newFriend =  CreateRelationship(requestor.Id, acceptor.Id);
 
-			_userRelationshipController.UpdateRequest(newFriend, true);
+			_relationshipController.UpdateRequest(newFriend, true);
 
-			var userRequests = _userRelationshipController.GetRequests(newFriend.AcceptorId);
+			var userRequests = _relationshipController.GetRequests(newFriend.AcceptorId, ActorType.User);
 
 			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 
 			Assert.Equal(matches, 0);
 
-			var userFriends = _userRelationshipController.GetFriends(newFriend.RequestorId);
+			var userFriends = _relationshipController.GetRelationships(newFriend.RequestorId, ActorType.User);
 
 			matches = userFriends.Count(g => g.Name == userFriendName + " Acceptor");
 
@@ -140,17 +141,17 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
+			var newFriend =  CreateRelationship(requestor.Id, acceptor.Id);
 
-			_userRelationshipController.UpdateRequest(newFriend, false);
+			_relationshipController.UpdateRequest(newFriend, false);
 
-			var userRequests = _userRelationshipController.GetRequests(newFriend.AcceptorId);
+			var userRequests = _relationshipController.GetRequests(newFriend.AcceptorId, ActorType.User);
 
 			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 
 			Assert.Equal(matches, 0);
 
-			var userFriends = _userRelationshipController.GetFriends(newFriend.RequestorId);
+			var userFriends = _relationshipController.GetRelationships(newFriend.RequestorId, ActorType.User);
 
 			matches = userFriends.Count(g => g.Name == userFriendName + " Acceptor");
 
@@ -165,18 +166,15 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = new UserToUserRelationship {
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id
-			};
+			var newFriend = CreateRelationship(requestor.Id,acceptor.Id);
 
-			Assert.Throws<InvalidOperationException>(() => _userRelationshipController.UpdateRequest(newFriend, true));
+			Assert.Throws<InvalidOperationException>(() => _relationshipController.UpdateRequest(newFriend, true));
 		}
 
 		[Fact]
 		public void GetNonExistingUserFriends()
 		{
-			var userFriends = _userRelationshipController.GetFriends(-1);
+			var userFriends = _relationshipController.GetRelationships(-1, ActorType.User);
 
 			Assert.Empty(userFriends);
 		}
@@ -189,11 +187,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
+			var newFriend =  CreateRelationship(requestor.Id, acceptor.Id);
 
-			_userRelationshipController.UpdateRequest(newFriend, true);
+			_relationshipController.UpdateRequest(newFriend, true);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(requestor.Id, acceptor.Id));
+			Assert.Throws<DuplicateRecordException>(() =>  CreateRelationship(requestor.Id, acceptor.Id));
 		}
 
 		[Fact]
@@ -204,11 +202,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
+			var newFriend =  CreateRelationship(requestor.Id, acceptor.Id);
 
-			_userRelationshipController.UpdateRequest(newFriend, true);
+			_relationshipController.UpdateRequest(newFriend, true);
 
-			Assert.Throws<DuplicateRecordException>(() => CreateUserFriend(acceptor.Id, requestor.Id));
+			Assert.Throws<DuplicateRecordException>(() =>  CreateRelationship(acceptor.Id, requestor.Id));
 		}
 
 		[Fact]
@@ -219,12 +217,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = CreateUserFriend(requestor.Id, acceptor.Id);
+			var newFriend =  CreateRelationship(requestor.Id, acceptor.Id);
 
-			_userRelationshipController.UpdateRequest(newFriend, true);
+			_relationshipController.UpdateRequest(newFriend, true);
 
-			_userRelationshipController.Update(newFriend);
-			var friends = _userRelationshipController.GetFriends(acceptor.Id);
+			_relationshipController.Update(newFriend);
+			var friends = _relationshipController.GetRelationships(acceptor.Id, ActorType.User);
 
 			Assert.Empty(friends);
 		}
@@ -237,12 +235,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			var requestor = CreateUser(userFriendName + " Requestor");
 			var acceptor = CreateUser(userFriendName + " Acceptor");
 
-			var newFriend = new UserToUserRelationship {
-				RequestorId = requestor.Id,
-				AcceptorId = acceptor.Id
-			};
+			var newFriend = CreateRelationship(requestor.Id, acceptor.Id);
 
-			Assert.Throws<InvalidOperationException>(() => _userRelationshipController.Update(newFriend));
+			Assert.Throws<InvalidOperationException>(() => _relationshipController.Update(newFriend));
 		}
 		#endregion
 
@@ -258,15 +253,16 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 			return user;
 		}
 
-		private UserToUserRelationship CreateUserFriend(int requestor, int acceptor)
+		private ActorRelationship CreateRelationship(int requestor, int acceptor)
 		{
-			var userFriend = new UserToUserRelationship {
+			var actorRelationship = new ActorRelationship
+			{
 				RequestorId = requestor,
 				AcceptorId = acceptor
 			};
-			_userRelationshipController.Create(userFriend, false);
+			_relationshipController.CreateRelationship(actorRelationship);
 
-			return userFriend;
+			return actorRelationship;
 		}
 		#endregion
 	}

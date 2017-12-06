@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, groupId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
 			{
-				var users = _relationshipCoreController.GetRequests(groupId, ActorType.Group);
+				var users = _relationshipCoreController.GetRequests(groupId, ActorType.User);
 				var actorContract = users.ToActorContractList();
 				return new ObjectResult(actorContract);
 			}

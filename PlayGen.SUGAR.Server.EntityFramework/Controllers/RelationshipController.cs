@@ -89,13 +89,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new DuplicateRecordException("A relationship with these users already exists.");
 				}
 
-				var requestorExists = context.Users.Any(u => u.Id == newRelation.RequestorId);
+				var requestorExists = context.Actors.Any(u => u.Id == newRelation.RequestorId);
 				if (!requestorExists)
 				{
 					throw new MissingRecordException("The requesting user does not exist.");
 				}
 
-				var acceptorExists = context.Users.Any(u => u.Id == newRelation.AcceptorId);
+				var acceptorExists = context.Actors.Any(u => u.Id == newRelation.AcceptorId);
 				if (!acceptorExists)
 				{
 					throw new MissingRecordException("The targeted user does not exist.");
@@ -139,13 +139,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new DuplicateRecordException("A relationship with these users already exists.");
 				}
 
-				var requestorExists = context.Users.Any(u => u.Id == newRelation.RequestorId);
+				var requestorExists = context.Actors.Any(u => u.Id == newRelation.RequestorId);
 				if (!requestorExists)
 				{
 					throw new MissingRecordException("The requesting user does not exist.");
 				}
 
-				var acceptorExists = context.Users.Any(u => u.Id == newRelation.AcceptorId);
+				var acceptorExists = context.Actors.Any(u => u.Id == newRelation.AcceptorId);
 				if (!acceptorExists)
 				{
 					throw new MissingRecordException("The targeted user does not exist.");

@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         private readonly EvaluationDataController _evaluationDataDbController = DbControllerLocator.EvaluationDataController;
         private readonly UserController _userDbController = DbControllerLocator.UserController;
         private readonly GroupController _groupDbController = DbControllerLocator.GroupController;
-        private readonly GroupRelationshipController _groupRelationshipDbController = DbControllerLocator.GroupRelationshipController;
+        private readonly RelationshipController _relationshipDbController = DbControllerLocator.RelationshipController;
         #endregion
 
         #region Tests
@@ -654,11 +654,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
             foreach (var user in users)
             {
-                _groupRelationshipDbController.Create(new UserToGroupRelationship
+                _relationshipDbController.CreateRelationship(new ActorRelationship
                 {
                     AcceptorId = group.Id,
                     RequestorId = user.Id,
-                }, true);
+                });
             }
         }
 
