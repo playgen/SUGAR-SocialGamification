@@ -235,9 +235,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				GameId = gameId,
 				ActorType = ActorType.User,
 				Description = key,
-				EvaluationCriterias = new List<Model.EvaluationCriteria>
+				EvaluationCriterias = new List<EvaluationCriteria>
 				{
-					new Model.EvaluationCriteria
+					new EvaluationCriteria
 					{
 						ComparisonType = ComparisonType.GreaterOrEqual,
 						CriteriaQueryType = CriteriaQueryType.Sum,
@@ -262,9 +262,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				GameId = gameId,
 				ActorType = ActorType.User,
 				Description = key,
-				EvaluationCriterias = new List<Model.EvaluationCriteria>
+				EvaluationCriterias = new List<EvaluationCriteria>
 				{
-					new Model.EvaluationCriteria
+					new EvaluationCriteria
 					{
 						ComparisonType = ComparisonType.GreaterOrEqual,
 						CriteriaQueryType = CriteriaQueryType.Sum,

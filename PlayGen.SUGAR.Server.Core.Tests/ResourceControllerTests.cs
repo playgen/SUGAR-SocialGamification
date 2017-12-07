@@ -156,7 +156,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
         private Actor GetOrCreateUser(string suffix = null)
         {
-            var name = "ResourceControllerTests" + suffix ?? $"_{suffix}";
+            var name = "ResourceControllerTests" + (suffix ?? $"_{suffix}");
             var users = _userController.Search(name, true);
             User user;
 

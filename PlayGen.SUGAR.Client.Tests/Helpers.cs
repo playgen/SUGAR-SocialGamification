@@ -15,22 +15,33 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			if (games.Any())
 			{
-				return games.Single();
+				return games.Single(g => g.Name == name);
 			}
 			throw new Exception("This game has not been set up in seeding.");
 		}
 		
 		public static AccountResponse CreateAndLoginGlobal(SUGARClient client, string userName)
 		{
-			return client.Session.CreateAndLogin(GlobalGameId, new AccountRequest
+			try
 			{
-				Name = userName,
-				Password = $"{userName}Password",
-				SourceToken = SugarSourceToken
-			});
+				return client.Session.CreateAndLogin(GlobalGameId, new AccountRequest
+				{
+					Name = userName,
+					Password = "ThisIsTheTestingPassword",
+					SourceToken = SugarSourceToken
+				});
+			}
+			catch
+			{
+				return client.Session.Login(GlobalGameId, new AccountRequest
+				{
+					Name = userName,
+					Password = "ThisIsTheTestingPassword",
+					SourceToken = SugarSourceToken
+				});
+			}
 		}
 
-		[Obsolete("Use one of the more specific helper methods to avoid making unnecessary requests.")]
 		public static void Login(SUGARClient client, string gameName, string userKey, out GameResponse game, out AccountResponse user)
 		{
 			var accountRequest = new AccountRequest

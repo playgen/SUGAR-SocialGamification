@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using System.IO;
 using Microsoft.Extensions.Configuration;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 

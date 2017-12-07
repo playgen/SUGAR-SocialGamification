@@ -1,6 +1,5 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Model;
@@ -21,8 +20,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			evaluations = null;
 			var mappedKey = CreateMappingKey(evaluationData.GameId, evaluationData.EvaluationDataType, evaluationData.Key);
 
-			ConcurrentDictionary<int, Evaluation> relatedEvalautions;
-			if (_mappings.TryGetValue(mappedKey, out relatedEvalautions))
+			if (_mappings.TryGetValue(mappedKey, out var relatedEvalautions))
 			{
 				evaluations = relatedEvalautions.Values;
 				didGetRelated = true;
@@ -45,9 +43,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			{
 				var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.EvaluationDataType, evaluationCriteria.EvaluationDataKey);
 
-				ConcurrentDictionary<int, Evaluation> mappedEvaluationsForKey;
-
-				if (!_mappings.TryGetValue(mappingKey, out mappedEvaluationsForKey))
+				if (!_mappings.TryGetValue(mappingKey, out var mappedEvaluationsForKey))
 				{
 					mappedEvaluationsForKey = new ConcurrentDictionary<int, Evaluation>();
 					_mappings[mappingKey] = mappedEvaluationsForKey;
@@ -63,14 +59,11 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			{
 				var mappingKey = CreateMappingKey(evaluation.GameId, evaluationCriteria.EvaluationDataType, evaluationCriteria.EvaluationDataKey);
 
-				ConcurrentDictionary<int, Evaluation> mappedEvaluationsForKey;
-				if (_mappings.TryGetValue(mappingKey, out mappedEvaluationsForKey))
+				if (_mappings.TryGetValue(mappingKey, out var mappedEvaluationsForKey))
 				{
-					Evaluation removedEvaluation;
-					if (mappedEvaluationsForKey.TryRemove(evaluation.Id, out removedEvaluation) && mappedEvaluationsForKey.Count == 0)
+					if (mappedEvaluationsForKey.TryRemove(evaluation.Id, out var _) && mappedEvaluationsForKey.Count == 0)
 					{
-						ConcurrentDictionary<int, Evaluation> removedEvaluations;
-						_mappings.TryRemove(mappingKey, out removedEvaluations);
+						_mappings.TryRemove(mappingKey, out var _);
 					}
 				}
 			}

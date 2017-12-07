@@ -34,8 +34,7 @@ namespace PlayGen.SUGAR.Server.Core.Authorization
 				var flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 				foreach (var method in type.GetMethods(flags))
 				{
-					var operation = method.GetCustomAttributes(typeof(AuthorizationAttribute), false) as AuthorizationAttribute[];
-					if (operation != null && operation.Length > 0)
+					if (method.GetCustomAttributes(typeof(AuthorizationAttribute), false) is AuthorizationAttribute[] operation && operation.Length > 0)
 					{
 						foreach (var op in operation)
 						{

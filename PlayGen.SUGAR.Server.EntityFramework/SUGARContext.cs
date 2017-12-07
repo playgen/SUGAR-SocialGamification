@@ -3,8 +3,6 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Server.EntityFramework.EntityConfigs;
-using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
 using PlayGen.SUGAR.Server.Model.Interfaces;
 

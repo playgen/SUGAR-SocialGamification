@@ -243,7 +243,6 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 		{
 			var comparisonResult = value.CompareTo(expected);
 
-			float expectedNum;
 			switch (comparisonType)
 			{
 				case ComparisonType.Equals:
@@ -261,15 +260,15 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					{
 						return 0;
 					}
-					if ((float.TryParse(expected.ToString(), out expectedNum))) {
+					if (float.TryParse(expected.ToString(), out var expectedGreaterNum)) {
 						if (dataType == EvaluationDataType.Long)
 						{
-							expectedNum += 1;
+							expectedGreaterNum += 1;
 						} else
 						{
-							expectedNum += 0.000001f;
+							expectedGreaterNum += 0.000001f;
 						}
-						return (float.Parse(value.ToString()) / expectedNum);
+						return float.Parse(value.ToString()) / expectedGreaterNum;
 					}
 					return 0;
 
@@ -282,9 +281,9 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					{
 						return 0;
 					}
-					if ((float.TryParse(expected.ToString(), out expectedNum)))
+					if (float.TryParse(expected.ToString(), out var expectedGreaterEqualNum))
 					{
-						return (float.Parse(value.ToString()) / expectedNum);
+						return float.Parse(value.ToString()) / expectedGreaterEqualNum;
 					}
 					return 0;
 
