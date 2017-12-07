@@ -14,7 +14,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			// Assign
 			var key = "Skill_CanDisableNotifications";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			Fixture.SUGARClient.Skill.EnableNotifications(true);
 
@@ -47,12 +48,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			CompleteGenericEvaluation(key, loggedInAccount.User.Id, game.Id);
 
 			// Act
-			EvaluationNotification notification;
 			var didGetnotification = false;
 			EvaluationNotification gotNotification = null;
 			var didGetSpecificConfiguration = false;
 
-			while (Fixture.SUGARClient.Skill.TryGetPendingNotification(out notification))
+			while (Fixture.SUGARClient.Skill.TryGetPendingNotification(out var notification))
 			{
 				didGetnotification = true;
 				gotNotification = notification;
@@ -71,7 +71,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			// Assign
 			var key = "Skill_DontGetAlreadyRecievedNotifications";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			Fixture.SUGARClient.Skill.EnableNotifications(true);
 
@@ -99,7 +100,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetGlobalSkillProgress()
 		{
 			var key = "Skill_CanGetGlobalSkillProgress";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var progressGame = Fixture.SUGARClient.Skill.GetGlobalProgress(loggedInAccount.User.Id);
 			Assert.NotEmpty(progressGame);
@@ -117,7 +118,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingGlobalSkillProgress()
 		{
 			var key = "Skill_CannotGetNotExistingGlobalSkillProgress";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Skill.GetGlobalSkillProgress(key, loggedInAccount.User.Id));
 		}
@@ -126,7 +127,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetSkillProgress()
 		{
 			var key = "Skill_CanGetSkillProgress";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var progressGame = Fixture.SUGARClient.Skill.GetGameProgress(game.Id, loggedInAccount.User.Id);
 			Assert.Equal(1, progressGame.Count());
@@ -144,7 +146,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingSkillProgress()
 		{
 			var key = "Skill_CannotGetNotExistingSkillProgress";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Skill.GetSkillProgress(key, game.Id, loggedInAccount.User.Id));
 		}

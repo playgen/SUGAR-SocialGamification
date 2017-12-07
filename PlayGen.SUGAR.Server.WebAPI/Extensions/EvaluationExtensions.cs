@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.Model;
@@ -42,10 +41,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		{
 			return new EvaluationCriteria {
 				EvaluationDataKey = contract.EvaluationDataKey,
-				ComparisonType = contract.ComparisonType,
-				CriteriaQueryType = contract.CriteriaQueryType,
-				EvaluationDataType = contract.EvaluationDataType,
-				Scope = contract.Scope,
+				ComparisonType = contract.ComparisonType.Value,
+				CriteriaQueryType = contract.CriteriaQueryType.Value,
+				EvaluationDataType = contract.EvaluationDataType.Value,
+				Scope = contract.Scope.Value,
 				Value = contract.Value
 			};
 		}
@@ -55,10 +54,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			return new EvaluationCriteria {
 				Id = contract.Id.Value,
 				EvaluationDataKey = contract.EvaluationDataKey,
-				ComparisonType = contract.ComparisonType,
-				CriteriaQueryType = contract.CriteriaQueryType,
-				EvaluationDataType = contract.EvaluationDataType,
-				Scope = contract.Scope,
+				ComparisonType = contract.ComparisonType.Value,
+				CriteriaQueryType = contract.CriteriaQueryType.Value,
+				EvaluationDataType = contract.EvaluationDataType.Value,
+				Scope = contract.Scope.Value,
 				Value = contract.Value
 			};
 		}

@@ -34,8 +34,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			fromResource = GetExistingResource(gameId, fromActorId, key);
 
-			string message;
-			if (!IsTransferValid(long.Parse(fromResource.Value), transferQuantity, out message))
+			if (!IsTransferValid(long.Parse(fromResource.Value), transferQuantity, out var message))
 			{
 				throw new ArgumentException(message);
 			}

@@ -15,7 +15,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		private readonly UserController _userCoreController;
 		private readonly ActorRoleController _actorRoleController;
 
-		// todo only take in account db controller but use core user controller
 		public AccountController(
 			ILogger<AccountController> logger,
 			EntityFramework.Controllers.AccountController accountDbController,

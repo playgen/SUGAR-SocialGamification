@@ -1,6 +1,4 @@
-FROM microsoft/dotnet
-
-RUN apt-get -qq update && apt-get -y install netcat
+FROM microsoft/aspnetcore-build:2.0
 
 COPY . app/
 WORKDIR app/
@@ -8,6 +6,6 @@ WORKDIR app/
 RUN ["dotnet", "restore"]
 
 WORKDIR PlayGen.SUGAR.Server.WebAPI/
-RUN ["dotnet", "publish", "--configuration", "Release", "--output", "out", "--framework", "netcoreapp1.1"]
+RUN ["dotnet", "publish", "--configuration", "Release", "--output", "out", "--framework", "netcoreapp2.0"]
 
-ENTRYPOINT ["./delay-startup.sh", "dotnet", "out/PlayGen.SUGAR.Server.WebAPI.dll"]
+ENTRYPOINT ["dotnet", "out/PlayGen.SUGAR.Server.WebAPI.dll"]

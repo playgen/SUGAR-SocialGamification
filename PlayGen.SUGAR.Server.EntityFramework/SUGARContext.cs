@@ -3,8 +3,6 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Server.EntityFramework.EntityConfigs;
-using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
 using PlayGen.SUGAR.Server.Model.Interfaces;
 
@@ -71,9 +69,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 		{
 			UpdateModificationHistory();
 
-			return _isSaveDisabled
-				? 0
-				: base.SaveChanges();
+			return _isSaveDisabled ? 0 : base.SaveChanges();
 		}
 
 		/// <summary>

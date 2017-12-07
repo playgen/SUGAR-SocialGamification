@@ -1,11 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using System.IO;
 using Microsoft.Extensions.Configuration;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
-using PlayGen.SUGAR.Server.WebAPI;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {

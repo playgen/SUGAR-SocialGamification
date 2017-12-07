@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Common.Exceptions;
 using PlayGen.SUGAR.Contracts;
 using Xunit;
 
@@ -15,7 +14,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var key = "User_CanGetUsersByName";
 			CreateUser(key + "_Extra1");
 			CreateUser(key + "_Extra2");
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var getUsers = Fixture.SUGARClient.User.Get(key + "_Extra");
 
@@ -26,7 +25,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingUserByName()
 		{
 			var key = "User_CannotGetNotExistingUserByName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var getUsers = Fixture.SUGARClient.User.Get(key + "_Extra");
 
@@ -37,7 +36,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetUserByEmptyName()
 		{
 			var key = "User_CannotGetUserByEmptyName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			Assert.Throws<ClientException>(() => Fixture.SUGARClient.User.Get(string.Empty));
 		}
@@ -47,7 +46,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "User_CanGetUserById";
 			var newUser = CreateUser(key + "_Extra1");
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var getUser = Fixture.SUGARClient.User.Get(newUser.Id);
 
@@ -58,7 +57,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingUserById()
 		{
 			var key = "User_CannotGetNotExistingUserById";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 			var getUser = Fixture.SUGARClient.User.Get(-1);
 
 			Assert.Null(getUser);
@@ -68,7 +67,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanUpdateUser()
 		{
 			var key = "User_CanUpdateUser";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var updateRequest = new UserRequest
 			{
@@ -88,7 +87,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "User_CannotUpdateUserToDuplicateName";
 			var extra = CreateUser(key + "_Extra");
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var updateUser = new UserRequest
 			{
@@ -102,7 +101,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotUpdateNonExistingUser()
 		{
 			var key = "User_CannotUpdateNonExistingUser";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var updateUser = new UserRequest
 			{
@@ -116,7 +115,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotUpdateUserToNoName()
 		{
 			var key = "User_CannotUpdateUserToNoName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var updateRequest = new UserRequest();
 
@@ -126,7 +125,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		#region Helpers
 		private UserResponse CreateUser(string key)
 		{
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var friendAccount);
+			var friendAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 			return friendAccount.User;
 		}
 		#endregion

@@ -10,9 +10,7 @@ namespace PlayGen.SUGAR.Server.Authentication.Extensions
     {
         public static long GetClaimLong(this IHeaderDictionary headers, string type)
         {
-            long value;
-
-            if (TryGetClaim(headers, type, out value))
+            if (TryGetClaim(headers, type, out long value))
             {
                 return value;
             }
@@ -22,9 +20,7 @@ namespace PlayGen.SUGAR.Server.Authentication.Extensions
 
         public static int GetClaimInt(this IHeaderDictionary headers, string type)
         {
-            int value;
-
-            if (TryGetClaim(headers, type, out value))
+            if (TryGetClaim(headers, type, out int value))
             {
                 return value;
             }
@@ -34,9 +30,7 @@ namespace PlayGen.SUGAR.Server.Authentication.Extensions
 
         public static DateTime GetClaimDateTime(this IHeaderDictionary headers, string type)
         {
-            DateTime value;
-
-            if (TryGetClaim(headers, type, out value))
+            if (TryGetClaim(headers, type, out DateTime value))
             {
                 return value;
             }
@@ -46,10 +40,9 @@ namespace PlayGen.SUGAR.Server.Authentication.Extensions
 
         public static bool TryGetClaim(this IHeaderDictionary headers, string type, out long value)
         {
-            string claimValue;
             value = default(long);
 
-            if (TryGetClaim(headers, type, ClaimValueTypes.Integer, out claimValue))
+            if (TryGetClaim(headers, type, ClaimValueTypes.Integer, out var claimValue))
             {
                 value = long.Parse(claimValue);
                 return true;
@@ -60,10 +53,9 @@ namespace PlayGen.SUGAR.Server.Authentication.Extensions
 
         public static bool TryGetClaim(this IHeaderDictionary headers, string type, out int value)
         {
-            string claimValue;
             value = default(int);
 
-            if (TryGetClaim(headers, type, ClaimValueTypes.Integer, out claimValue))
+            if (TryGetClaim(headers, type, ClaimValueTypes.Integer, out var claimValue))
             {
                 value = int.Parse(claimValue);
                 return true;
@@ -74,10 +66,9 @@ namespace PlayGen.SUGAR.Server.Authentication.Extensions
 
         public static bool TryGetClaim(this IHeaderDictionary headers, string type, out DateTime value)
         {
-            string claimValue;
             value = default(DateTime);
 
-            if(TryGetClaim(headers, type, ClaimValueTypes.DateTime, out claimValue))
+            if(TryGetClaim(headers, type, ClaimValueTypes.DateTime, out var claimValue))
             {
                 value = DateTime.Parse(claimValue);
                 return true;

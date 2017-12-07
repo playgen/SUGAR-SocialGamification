@@ -93,10 +93,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					SaveChanges(context);
 					return existing;
 				}
-				else
-				{
-					throw new MissingRecordException($"The existing user with ID {user.Id} could not be found.");
-				}
+				throw new MissingRecordException($"The existing user with ID {user.Id} could not be found.");
 			}
 		}
 

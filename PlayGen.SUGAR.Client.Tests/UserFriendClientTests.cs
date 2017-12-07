@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CanCreateRequest";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(1, sent.Count());
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Friend");
 
 			var received = Fixture.SUGARClient.UserFriend.GetFriendRequests(friend.Id);
 
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CanCreateAutoAcceptedRequest";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CannotCreateDuplicateRequest";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CannotCreateDuplicateRequestOfAccepted";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -110,7 +110,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CannotCreateDuplicateAutoAcceptedRequest";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -131,7 +131,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CannotCreateRequestWithNonExistingUser";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -146,7 +146,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotCreateRequestWithNonExistingFriend()
 		{
 			var key = "UserFriend_CannotCreateRequestWithNonExistingFriend";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -162,7 +162,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CanAcceptRequest";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -177,7 +177,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(1, sent.Count());
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Friend");
 
 			var received = Fixture.SUGARClient.UserFriend.GetFriendRequests(friend.Id);
 
@@ -200,7 +200,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(1, received.Count());
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out game, out loggedInAccount);
+			loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			sent = Fixture.SUGARClient.UserFriend.GetSentRequests(loggedInAccount.User.Id);
 
@@ -216,7 +216,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CanRejectRequest";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -231,7 +231,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(1, sent.Count());
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Friend");
 
 			var received = Fixture.SUGARClient.UserFriend.GetFriendRequests(friend.Id);
 
@@ -254,7 +254,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(0, received.Count());
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out game, out loggedInAccount);
+			loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			sent = Fixture.SUGARClient.UserFriend.GetSentRequests(loggedInAccount.User.Id);
 
@@ -270,7 +270,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CannotUpdateAlreadyAcceptedRequest";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -281,7 +281,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Friend");
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
@@ -297,7 +297,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotUpdateNotExistingRequest()
 		{
 			var key = "UserFriend_CannotUpdateNotExistingRequest";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
@@ -314,7 +314,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CanUpdateRelationship";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -356,7 +356,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CannotUpdateNotExistingRelationship";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
@@ -372,7 +372,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CanGetFriendRequests";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var requestorNames = new[] {
 				key + "1",
@@ -384,7 +384,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			foreach (var name in requestorNames)
 			{
-				Helpers.Login(Fixture.SUGARClient, "Global", name, out game, out var requestAccount);
+				var requestAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, name);
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = requestAccount.User.Id,
@@ -394,7 +394,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 			}
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Friend");
 
 			var requests = Fixture.SUGARClient.UserFriend.GetFriendRequests(friend.Id);
 
@@ -419,7 +419,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			foreach (var name in acceptorNames)
 			{
 				var friend = CreateUser(name);
-				Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccountLoop);
+				var loggedInAccountLoop = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = loggedInAccountLoop.User.Id,
@@ -429,7 +429,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 			}
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var requests = Fixture.SUGARClient.UserFriend.GetSentRequests(loggedInAccount.User.Id);
 
@@ -445,7 +445,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "UserFriend_CanGetFriends";
 			var friend = CreateUser(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var requestorNames = new[] {
 				key + "1",
@@ -457,7 +457,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			foreach (var name in requestorNames)
 			{
-				Helpers.Login(Fixture.SUGARClient, "Global", name, out game, out var requestAccount);
+				var requestAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, name);
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = requestAccount.User.Id,
@@ -490,7 +490,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			foreach (var name in acceptorNames)
 			{
 				var friend = CreateUser(name);
-				Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccountLoop);
+				var loggedInAccountLoop = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = loggedInAccountLoop.User.Id,
@@ -500,7 +500,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				Fixture.SUGARClient.UserFriend.CreateFriendRequest(relationshipRequest);
 			}
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var userfriends = Fixture.SUGARClient.UserFriend.GetFriends(loggedInAccount.User.Id);
 
@@ -514,7 +514,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		#region Helpers
 		private UserResponse CreateUser(string key)
 		{
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Friend", out var _, out var friendAccount);
+			var friendAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Friend");
 			return friendAccount.User;
 		}
 		#endregion

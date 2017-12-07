@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CanCreateRequest";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(1, sent.Count());
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Creator", out game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Creator");
 
 			var received = Fixture.SUGARClient.GroupMember.GetMemberRequests(group.Id);
 
@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CanCreateAutoAcceptedRequest";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -74,7 +74,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CannotCreateDuplicateRequest";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -93,7 +93,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CannotCreateDuplicateRequestOfAccepted";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -114,7 +114,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CannotCreateDuplicateAutoAcceptedRequest";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -135,7 +135,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CannotCreateRequestWithNonExistingUser";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -150,7 +150,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotCreateRequestWithNonExistingGroup()
 		{
 			var key = "GroupMember_CannotCreateRequestWithNonExistingGroup";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -166,7 +166,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CanAcceptRequest";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -181,7 +181,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(1, sent.Count());
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Creator", out game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Creator");
 
 			var received = Fixture.SUGARClient.GroupMember.GetMemberRequests(group.Id);
 
@@ -208,7 +208,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(2, receivedCount);
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out game, out loggedInAccount);
+			loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			sent = Fixture.SUGARClient.GroupMember.GetSentRequests(loggedInAccount.User.Id);
 
@@ -224,7 +224,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CanRejectRequest";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -239,7 +239,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(1, sent.Count());
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Creator", out game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Creator");
 
 			var received = Fixture.SUGARClient.GroupMember.GetMemberRequests(group.Id);
 
@@ -266,7 +266,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Equal(1, receivedCount);
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out game, out loggedInAccount);
+			loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			sent = Fixture.SUGARClient.GroupMember.GetSentRequests(loggedInAccount.User.Id);
 
@@ -282,7 +282,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CannotUpdateAlreadyAcceptedRequest";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -293,7 +293,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Creator", out game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Creator");
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
@@ -309,7 +309,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotUpdateNotExistingRequest()
 		{
 			var key = "GroupMember_CannotUpdateNotExistingRequest";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
@@ -326,7 +326,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CanUpdateRelationship";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipRequest = new RelationshipRequest
 			{
@@ -376,7 +376,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CannotUpdateNotExistingRelationship";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var relationshipStatusUpdate = new RelationshipStatusUpdate
 			{
@@ -392,7 +392,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CanGetMemberRequests";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var requestorNames = new[] {
 				key + "1",
@@ -404,7 +404,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			foreach (var name in requestorNames)
 			{
-				Helpers.Login(Fixture.SUGARClient, "Global", name, out game, out var requestAccount);
+				var requestAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, name);
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = requestAccount.User.Id,
@@ -414,7 +414,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
 			}
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Creator", out game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Creator");
 
 			var requests = Fixture.SUGARClient.GroupMember.GetMemberRequests(group.Id);
 
@@ -439,7 +439,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			foreach (var name in acceptorNames)
 			{
 				var group = CreateGroup(name);
-				Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccountLoop);
+				var loggedInAccountLoop = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = loggedInAccountLoop.User.Id,
@@ -449,7 +449,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
 			}
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var requests = Fixture.SUGARClient.GroupMember.GetSentRequests(loggedInAccount.User.Id);
 
@@ -465,7 +465,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var key = "GroupMember_CanGetMembers";
 			var group = CreateGroup(key);
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var requestorNames = new[] {
 				key + "1",
@@ -477,7 +477,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			foreach (var name in requestorNames)
 			{
-				Helpers.Login(Fixture.SUGARClient, "Global", name, out game, out var requestAccount);
+				var requestAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, name);
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = requestAccount.User.Id,
@@ -514,7 +514,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			foreach (var name in acceptorNames)
 			{
 				var group = CreateGroup(name);
-				Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccountLoop);
+				var loggedInAccountLoop = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 				var relationshipRequest = new RelationshipRequest
 				{
 					RequestorId = loggedInAccountLoop.User.Id,
@@ -524,7 +524,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
 			}
 
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var userGroups = Fixture.SUGARClient.GroupMember.GetUserGroups(loggedInAccount.User.Id);
 
@@ -538,7 +538,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		#region Helpers
 		private GroupResponse CreateGroup(string key)
 		{
-			Helpers.Login(Fixture.SUGARClient, "Global", key + "_Creator", out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Creator");
 
 			var groupRequest = new GroupRequest
 			{
