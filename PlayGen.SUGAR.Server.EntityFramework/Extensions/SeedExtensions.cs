@@ -79,6 +79,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				CreateGame(context, "GameData_CannotGetGameDataWithoutActorId");
 				CreateGame(context, "GameData_CanGetGameDataWithoutGameId");
 				CreateGame(context, "GameData_CanGetGameDataByMultipleKeys");
+				CreateGame(context, "GameData_CanGetGameDataByLeaderboardType");
 				#endregion
 
 				#region Resource Client Tests

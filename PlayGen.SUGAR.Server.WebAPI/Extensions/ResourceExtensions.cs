@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Common;
@@ -19,11 +20,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			}
 
 			return new ResourceResponse {
-				Id = evaluationData.Id,
 				ActorId = evaluationData.ActorId,
 				GameId = evaluationData.GameId,
 				Key = evaluationData.Key,
-				Quantity = long.Parse(evaluationData.Value)
+				Quantity = long.Parse(evaluationData.Value),
+				DateCreated = evaluationData.DateCreated,
+				DateModified = evaluationData.DateCreated
 			};
 		}
 

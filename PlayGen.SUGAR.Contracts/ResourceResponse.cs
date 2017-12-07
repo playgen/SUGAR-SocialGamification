@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PlayGen.SUGAR.Contracts
 {
@@ -7,11 +8,6 @@ namespace PlayGen.SUGAR.Contracts
 	/// </summary>
 	public class ResourceResponse
 	{
-		/// <summary>
-		/// The id of the Resource.
-		/// </summary>
-		public int Id { get; set; }
-
 		/// <summary>
 		/// The id of the Actor which this Resource relates to.
 		/// </summary>
@@ -33,5 +29,15 @@ namespace PlayGen.SUGAR.Contracts
 		/// The amount of the Resource belonging to the actor/game.
 		/// </summary>
 		public long Quantity { get; set; }
+
+		/// <summary>
+		/// The DateTime at which this Resource was created.
+		/// </summary>
+		public DateTime DateCreated { get; set; }
+
+		/// <summary>
+		/// The DateTime at which this data was last edited.
+		/// </summary>
+		public DateTime DateModified { get; set; }
 	}
 }
