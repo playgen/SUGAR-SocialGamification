@@ -1,1 +1,1 @@
-xcopy ..\_site ..\..\PlayGen.SUGAR.Server.WebAPI\wwwroot\ /E
+xcopy ..\_site ..\..\PlayGen.SUGAR.Server.WebAPI\wwwroot\ /E /Y
