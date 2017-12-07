@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NLog.Web;
@@ -14,23 +15,26 @@ namespace PlayGen.SUGAR.Server.WebAPI
 	public class Program
 	{
 		public static void Main(string[] args)
-		{			
+		{
 			var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
 
 #if !DEBUG
 			try
 			{
 #endif
-				var host = BuildWebHost(args);
+			var host = BuildWebHost(args);
 
-				Setup(host);
+			Setup(host);
 
-				var environment = (IHostingEnvironment)host.Services.GetService(typeof(IHostingEnvironment));
+			using (var scope = host.Services.CreateScope())
+			{
+				var environment = scope.ServiceProvider.GetService<IHostingEnvironment>();
 				logger.Debug("ContentRootPath: {0}", environment.ContentRootPath);
 				logger.Debug("WebRootPath: {0}", environment.WebRootPath);
+			}
 
-				host.Run();
-#if !DEBUG			
+			host.Run();
+#if !DEBUG
 			}
 			catch (Exception initFailure)
 			{
@@ -45,8 +49,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 				.UseStartup<Startup>()
 				.UseNLog()
 				.Build();
-
-
+		
 		public static void Setup(IWebHost host)
 		{
 			using (var scope = host.Services.CreateScope())
@@ -71,7 +74,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 					{
 						context.EnsureTestsSeeded();
 					}
-					
+
 					var evaluationTracker = scope.ServiceProvider.GetService<EvaluationTracker>();
 					evaluationTracker.MapExistingEvaluations();
 				}

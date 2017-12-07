@@ -13,7 +13,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		public IActionResult Get()
 		{
 			return new OkObjectResult($"{DateTime.UtcNow}: {typeof(VersionController).GetTypeInfo().Assembly}." +
-									$" \nAPI Version: {APIVersion.Version}");
+									$" API Version: {APIVersion.Version}");
 		}
 	}
 }

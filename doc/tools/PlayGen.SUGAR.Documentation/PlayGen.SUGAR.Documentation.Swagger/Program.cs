@@ -20,20 +20,21 @@ namespace PlayGen.SUGAR.Server.WebAPI.Documentation
             else
             {
                 var outFilePath = args[0];
-
-                var a = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                
+                var configuration = new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.json")
+                    .AddJsonFile($"appsettings.{EnvironmentName.Development}.json")
+                    .Build();
 
                 var builder = WebHost.CreateDefaultBuilder()
-                    .UseStartup<Startup>()
-                    .UseConfiguration(new ConfigurationBuilder()
-                        .AddJsonFile("appsettings.json")
-                        .AddJsonFile("appsettings.Development.json")
-                        .Build());
-
+                    .UseEnvironment(EnvironmentName.Development)
+                    .UseConfiguration(configuration)
+                    .UseStartup<Startup>();
+                    
                 using (var server = new TestServer(builder))
                 using (var client = server.CreateClient())
                 {
-                    var content = client.GetStringAsync("swagger/v1/swagger.json").Result;
+                    var content = client.GetStringAsync(configuration.GetValue<string>("Swagger:Endpoint")).Result;
                     File.WriteAllText(outFilePath, content);
                 }
             }
