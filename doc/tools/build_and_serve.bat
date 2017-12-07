@@ -1,5 +1,3 @@
-call build_swagger.bat
-
 set PORT=5940
 
 pushd ..\
