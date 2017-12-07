@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			ConfigureCoreControllers(services);
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
-			ConfigureRESTAPIDocumentationGenerator(services);
+			ConfigureRESTAPIDocumentationGenerator(services, Environment);
 			ConfigureAuthorization(services, validityTimeout);
 			ConfigureAuthentication(services);
 			ConfigureEvaluationEvents(services);
