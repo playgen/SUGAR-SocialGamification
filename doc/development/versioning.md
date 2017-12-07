@@ -2,6 +2,8 @@
 uid: versioning
 ---
 
+# Versioning 
+
 The Server and Client share an API Version, used to ensure compatibility.
 
 The API Version is made up of three parts in the format **Major**.**Minor**.**Build** version numbers.
