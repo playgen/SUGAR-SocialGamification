@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>LeaderboardStandings | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="LeaderboardStandings | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="leaderboardStandings">
+              <h1 id="leaderboardstandings">LeaderboardStandings</h1>
+              
+<p>LeaderboardStandings are used to obtain a collection of <a class="xref" href="../features/user.html">Users</a> or <a class="xref" href="../features/group.html">Groups</a> based on a specific <a class="xref" href="../features/leaderboard.html">Leaderboard</a>.</p>
+<p>In order to setup a &lt;xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest&gt;, the following must be passed:</p>
+<ul>
+<li><p>LeaderboardToken - Used to identify the specific <a class="xref" href="../features/leaderboard.html">Leaderboard</a> that this LeaderboardStandings applies to.</p>
+</li>
+<li><p>GameId - The <a class="xref" href="../features/game.html">Game</a> that this LeaderboardStandings and leaderboard is specific to.</p>
+</li>
+<li><p>ActorId - The <a class="xref" href="../features/actor.html">Actor</a> that we are most concerned with. The actor is used in conjunction with the LeaderboardFilterType.</p>
+</li>
+<li><p>&lt;xref:PlayGen.SUGAR.Common.Shared.LeaderboardFilterType&gt; - Allows you to specify how you want the results returned in relation to the actor:</p>
+<ul>
+<li>Top: Returns the top globally ranked actors.</li>
+<li>Near: Returns the actors in relation to the actorId Provided. This works in conjunction with the PageOffset. By default it will return a collection that contains the provided actor.</li>
+<li>Friends: If the actor is a user, only the friends of that user are returned.</li>
+<li>GroupMembers: If the actor is a group, only the members of that group are returned.</li>
+</ul>
+</li>
+<li><p>PageLimit: The maximum amount of rankings to return.</p>
+</li>
+<li><p>PageOffset: Used in conjunction with the LeaderboardFilterType Near.</p>
+<ul>
+<li>Example 1 - if the actorId = a user&#39;s Id, LeaderboardFilterType = Near, PageLimit = 50 and PageOffset = 0, with the user ranked 80th, a collection of rankings will be returned where the user is at position 30, with 29 rankings before and 20 after.</li>
+<li>Example 2 - if the actorId = a user&#39;s Id, LeaderboardFilterType = Near, PageLimit = 50 and PageOffset = 1, with the user ranked 40th, a collection of rankings between 51th and 100th will be returned, with the user not included.</li>
+</ul>
+</li>
+<li><p>DateStart: Because the leaderboard associated with the LeaderboardStandings queries the <a class="xref" href="../features/gameData.html">GameData</a> of actors to determine their ranking; you can specify a StartDate and EndDate where on the GameData added to the system during that time span will be considered in determining actors&#39; rankings.</p>
+</li>
+<li><p>DateEnd: The end of the date range for gameData to be considered in determining an actor&#39;s ranking. Both the DateStart and DateEnd can be left empty in which case all of the gameData for the actors will be considered.</p>
+</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<pre><code>LeaderboardToken = &quot;Player High Score&quot;,  
+GameId = 5,  
+actorId = 23,  
+LeaderboardFilterType = &quot;Near&quot;,  
+PageLimit = 20,  
+PageOffset = 1,  
+DateStart = null,  
+DateEnd = null,  
+</code></pre>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

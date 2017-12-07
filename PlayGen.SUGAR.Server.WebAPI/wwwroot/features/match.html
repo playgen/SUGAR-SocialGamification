@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Matches | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Matches | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="match">
+              <h1 id="matches">Matches</h1>
+              
+<p>A match is an entity with a start time, end time, game and creator. 
+It can have various data attrubuted to it via the MatchData mechanism.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>CRUD Match</li>
+<li>Search Matches with filters: game, creator, start time, end time</li>
+<li>Add and Get Match specific data</li>
+</ul>
+<h2 id="api">API</h2>
+<ul>
+<li>Client<ul>
+<li>&lt;xref:PlayGen.SUGAR.Client.MatchClient&gt;</li>
+</ul>
+</li>
+<li>Contracts<ul>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.MatchResponse&gt;</li>
+</ul>
+</li>
+<li>WebAPI<ul>
+<li>&lt;xref:PlayGen.SUGAR.WebAPI.Controllers.MatchController&gt;</li>
+</ul>
+</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<ul>
+<li>Create a match</li>
+</ul>
+<pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
+        private MatchClient _matchClient;
+        private int _gameId;
+
+        private void CreateMatch() 
+        {
+            // create instance of the match client
+            _matchClient = sugarClient.Match;
+
+            // create the match and store the response
+            var matchResponse = _matchClient.Create();
+
+            // store the id of the match for use in other features
+            _matchId = matchResponse.Id;
+        }
+</code></pre><ul>
+<li>Starting a match</li>
+</ul>
+<pre><code class="lang-cs">        private MatchResponse StartMatch(int matchId) 
+        {
+            // check for the match and store the response
+            var matchResponse = _matchClient.Get(matchId);
+
+            // Start the match
+            matchResponse = _matchClient?.Start(matchResponse.Id);
+
+            return matchResponse:
+        }
+</code></pre><ul>
+<li>Ending a match</li>
+</ul>
+<pre><code class="lang-cs">        private MatchResponse EndMatch(int matchId) 
+        {
+            // check for the match and store the response
+            var matchResponse = _matchClient.Get(matchId);
+
+            // End the match
+            matchResponse = _matchClient?.End(matchResponse.Id);
+
+            return matchResponse:
+        }
+</code></pre><ul>
+<li>Adding match data</li>
+</ul>
+<pre><code class="lang-cs">        private EvaluationDataResponse AddMatchData(int matchId, int userId) 
+        {
+            var matchResponse = _matchClient.Get(matchId);
+
+            var matchData = SUGARClient.Match.AddData(new EvaluationDataRequest
+            {
+                RelatedEntityId = matchResponse.Id,
+                GameId = matchResponse.Game.Id,
+                CreatingActorId = userId,
+                EvaluationDataType = EvaluationDataType.Long,
+                Key = &quot;MyMatchScore&quot;,
+                Value = 100
+            });                     
+
+            return matchData:
+        }
+</code></pre><ul>
+<li>Getting match data</li>
+</ul>
+<pre><code class="lang-cs">        private EvaluationDataResponse GetAllMatchData(int matchId) 
+        {
+            var matchResponse = _matchClient.Get(matchId);
+
+            var allDataForMatch = SUGARClient.Match.GetData(matchId);
+
+            return allDataForMatch:
+        }
+</code></pre>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Development and Deployment | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Development and Deployment | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="installation">
+              <h1 id="development-and-deployment">Development and Deployment</h1>
+              
+<p>SUGAR is currently in active development and subject to change. We are committed to delivering a feature complete version of the components by the end of 2017. </p>
+<p>For upcoming features and development direction see the <a class="xref" href="roadmap.html">Roadmap</a></p>
+<h2 id="source-repositories">Source Repositories</h2>
+<p>All source code is provided under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a> and is hosten on GitHub. We welcome pull requests for bug fixes and engagement in discussion on feture development.</p>
+<ul>
+<li><p><a href="https://github.com/playgenhub/SUGAR-SocialGamification/">API Service Repository</a> </p>
+</li>
+<li><p><a href="https://github.com/playgenhub/SUGAR-AdminUI">Admin Web UI Repository</a></p>
+</li>
+<li><p><a href="https://github.com/playgenhub/SUGAR-UnityDemo">Unity Demo Repository</a> </p>
+</li>
+</ul>
+<h2 id="api-service">API Service</h2>
+<p>The SUGAR API Service is build using <a href="https://docs.asp.net/en/latest/intro.html">ASP.NET Core</a> (MVC/WebAPI) as a <a href="https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/">.NET Core</a> project. </p>
+<p>Currently the service is built for the <a href="https://docs.microsoft.com/en-us/dotnet/articles/core/packages#frameworks">.NETFramework 4.6</a> target so will only run on Windows systems, however this will soon be made compatible with the cross-platform NetStandard runtimes.</p>
+<p>Building the WebAPI project produces a Windows executable that can be executed directly to run the service in a console mode for debugging, or alternatively the service can be hosted in IIS or IIS express. In future releases the service will be made available as a <a href="https://www.docker.com/">Docker image</a> for easy deployment.</p>
+<h3 id="database">Database</h3>
+<p>The service currently uses MySQL for it&#39;s data storage, we reccomend using the <a href="https://mariadb.org/">MariaDB</a> release if you are hosting your own database instance.</p>
+<p>In the near future the <a class="xref" href="../features/gameData.html">GameData</a> key/value storage will most likely be migrated to a NoSQL data store, however no decision on this technology has been taken yet.</p>
+<h3 id="development-dependencies">Development Dependencies</h3>
+<ul>
+<li><a href="https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx">Visual Studio 2015</a> with <a href="https://go.microsoft.com/fwlink/?LinkId=691129">Update 3</a></li>
+<li><a href="https://www.microsoft.com/net/download#core">.NET Core SDK</a> for your platform</li>
+<li><p>The API documentation is generated with <a href="https://dotnet.github.io/docfx/tutorial/docfx_getting_started.html#4-use-docfx-under-dnx">DocFX</a>; currently the DNX version of this must be used for .NET Core projects</p>
+</li>
+<li><p>Building the entire solution including client assemblies has additional requirements for compatibility with <a href="http://unity3d.com/">Unity3D</a> <a class="xref" href="index.html#api-client">See Below</a></p>
+</li>
+</ul>
+<h3 id="iis-hosting">IIS Hosting</h3>
+<ul>
+<li>The server requires the <a href="https://www.microsoft.com/net/download#core">.NET Core Windows (Server Hosting)</a> runtime</li>
+<li><a href="http://www.iis.net/downloads/microsoft/url-rewrite">URL Rewrite</a> is reccomended to redirect HTTP requests to a HTTPS endpoint, using a web.config rewrite rule as below</li>
+</ul>
+<pre><code class="lang-xml">&lt;rewrite&gt;
+    &lt;rules&gt;
+        &lt;rule name=&quot;HTTPS-Upgrade&quot; enabled=&quot;true&quot; stopProcessing=&quot;true&quot;&gt;
+            &lt;match url=&quot;(.*)&quot; /&gt;
+            &lt;conditions&gt;
+                &lt;add input=&quot;{HTTPS}&quot; pattern=&quot;^OFF$&quot; /&gt;
+            &lt;/conditions&gt;
+            &lt;action type=&quot;Redirect&quot; url=&quot;https://{HTTP_HOST}/{R:1}&quot; /&gt;
+        &lt;/rule&gt;
+    &lt;/rules&gt;
+&lt;/rewrite&gt;
+</code></pre><h2 id="api-client">API Client</h2>
+<p>The API client provides a C# interface to the <a href="../restapi/restapi.html">RESTful API</a> exposed by the service. The client is intended to be hosted in C# projects and in Unity3D applications.</p>
+<h3 id="development-dependencies-1">Development Dependencies</h3>
+<h4 id="json-serialization">JSON Serialization</h4>
+<p>.NET MVC Uses the tried and tested <a href="http://www.newtonsoft.com/json">JSON.NET</a> library from Newtonsoft. For API consistency the C# client uses JSON.net for explicit serialization operations, however the generally released version of this library utilises System.Reflection operations that are not available in Unity&#39;s WebGL environment. </p>
+<p>This issue has been addressed by SaladLab who have produced a lightweight version of the JSON.Net library specifically for use in Unity projects (<a href="https://github.com/SaladLab/Json.Net.Unity3D">https://github.com/SaladLab/Json.Net.Unity3D</a>). We have decided to use this library for the C# client regardless of the target platform as it provided all required functionality. </p>
+<p>SaladLab only currently provide this in the unitypackage format, we have packaged this for NuGet which can currently be downloaded <a href="../files/Json.Net.Unity3D.9.0.1.nupkg">here</a>, however this will be published to the nuget.org package feed in the near future. For details on how to configure a local filesystem based NuGeT package feed see <a href="https://docs.nuget.org/create/hosting-your-own-nuget-feeds">here</a>.</p>
+<h3 id="unity">Unity</h3>
+<p>Unity uses Mono in place of Microsoft&#39;s .NET implementation and provides .NET 3.5 compatibility, because of this there a number or limitations on different platforms and those that we are currently aware of are detailed below:</p>
+<h4 id="webclient">WebClient</h4>
+<p>In Unity WebGL builds the socket operations performed by the <a href="https://msdn.microsoft.com/en-us/library/system.net.webclient(v=vs.90).aspx">System.Net.WebClient</a> are not available and an alternative method must be used to perform HTTP operations. This has been solved in the &lt;xref:PlayGen.SUGAR.Client&gt; by delegating the HTTP operations to a platform specific implementation. Unity WebGL applications can use the browsers native <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a> via external calls to a JavaScript library embedded in the project.</p>
+<ul>
+<li>TODO: JSLib installation instructions</li>
+</ul>
+<h4 id="https">HTTPS</h4>
+<p>Mono does not use the system certificate store and by default has no root trust certificates present causing all SSL certificates to be treated as untrusted. Mono can be configured to trust certificates from any source via the methods detailed <a href="http://www.mono-project.com/docs/faq/security/">here</a>, however there does not currently appear to be a way to use the machines trust store by default.</p>
+<p>This issue is discussed extensively by the <a href="http://answers.unity3d.com/topics/ssl.html">Unity community</a></p>
+<p>We have not currently arrived at a satisfactory solution with the options below being considered at present:</p>
+<ul>
+<li>Validate the fingerprint of specific certifictes by intercepting the validation operation as detailed <a href="http://forum.unity3d.com/threads/ssl-certificate-storage.371219/#post-2404806">here</a></li>
+<li>Add specific certificates corresponding to the root of trust for your instance of the API service to the mono trust store during application installation or initialization</li>
+</ul>
+<p>Both of these methods have limitations that undermine the security and maintenance of the system as approved certificates or fingerprints must be embedded in the application deployable.</p>
+<ul>
+<li>Application updates must be deployed if server certificates change.</li>
+<li>Security could be undermined if application integrity cannot be verified and binaries were tampered with by a 3rd party.</li>
+<li>Certificate revocation checks would have to be performed explicitly and could also be subject to tampering.</li>
+</ul>
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

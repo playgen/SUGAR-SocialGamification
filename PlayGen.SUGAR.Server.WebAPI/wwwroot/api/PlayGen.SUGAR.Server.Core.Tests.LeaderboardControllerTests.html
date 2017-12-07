@@ -1,0 +1,587 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class LeaderboardControllerTests
+   | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class LeaderboardControllerTests
+   | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests">
+  
+  
+  <h1 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests" class="text-break">Class LeaderboardControllerTests
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PlayGen.SUGAR.Server.Core.Tests.CoreTestBase.html">CoreTestBase</a></div>
+    <div class="level2"><span class="xref">LeaderboardControllerTests</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">Xunit.IClassFixture</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Tests.TestDataFixture.html">TestDataFixture</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.Core.Tests.html">PlayGen.SUGAR.Server.Core.Tests</a></h6>
+  <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.Core.Tests.dll</h6>
+  <h5 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class LeaderboardControllerTests : CoreTestBase, IClassFixture&lt;TestDataFixture&gt;</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateFriendsLeaderboardStandingRequestWithInvalidActorId_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateFriendsLeaderboardStandingRequestWithInvalidActorId*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateFriendsLeaderboardStandingRequestWithInvalidActorId" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateFriendsLeaderboardStandingRequestWithInvalidActorId">CreateFriendsLeaderboardStandingRequestWithInvalidActorId()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateFriendsLeaderboardStandingRequestWithInvalidActorId()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateFriendsLeaderboardStandingRequestWithInvalidActorType_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateFriendsLeaderboardStandingRequestWithInvalidActorType*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateFriendsLeaderboardStandingRequestWithInvalidActorType" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateFriendsLeaderboardStandingRequestWithInvalidActorType">CreateFriendsLeaderboardStandingRequestWithInvalidActorType()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateFriendsLeaderboardStandingRequestWithInvalidActorType()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateFriendsLeaderboardStandingRequestWithNoActorId_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateFriendsLeaderboardStandingRequestWithNoActorId*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateFriendsLeaderboardStandingRequestWithNoActorId" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateFriendsLeaderboardStandingRequestWithNoActorId">CreateFriendsLeaderboardStandingRequestWithNoActorId()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateFriendsLeaderboardStandingRequestWithNoActorId()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateLeaderboardStandingRequestWithInvalidLeaderboardId_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateLeaderboardStandingRequestWithInvalidLeaderboardId*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateLeaderboardStandingRequestWithInvalidLeaderboardId" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateLeaderboardStandingRequestWithInvalidLeaderboardId">CreateLeaderboardStandingRequestWithInvalidLeaderboardId()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateLeaderboardStandingRequestWithInvalidLeaderboardId()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateLeaderboardStandingRequestWithInvalidLimit_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateLeaderboardStandingRequestWithInvalidLimit*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateLeaderboardStandingRequestWithInvalidLimit" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateLeaderboardStandingRequestWithInvalidLimit">CreateLeaderboardStandingRequestWithInvalidLimit()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateLeaderboardStandingRequestWithInvalidLimit()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateMembersLeaderboardStandingRequestWithInvalidActorId_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateMembersLeaderboardStandingRequestWithInvalidActorId*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateMembersLeaderboardStandingRequestWithInvalidActorId" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateMembersLeaderboardStandingRequestWithInvalidActorId">CreateMembersLeaderboardStandingRequestWithInvalidActorId()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateMembersLeaderboardStandingRequestWithInvalidActorId()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateMembersLeaderboardStandingRequestWithInvalidActorType_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateMembersLeaderboardStandingRequestWithInvalidActorType*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateMembersLeaderboardStandingRequestWithInvalidActorType" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateMembersLeaderboardStandingRequestWithInvalidActorType">CreateMembersLeaderboardStandingRequestWithInvalidActorType()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateMembersLeaderboardStandingRequestWithInvalidActorType()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateMembersLeaderboardStandingRequestWithNoActorId_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateMembersLeaderboardStandingRequestWithNoActorId*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateMembersLeaderboardStandingRequestWithNoActorId" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateMembersLeaderboardStandingRequestWithNoActorId">CreateMembersLeaderboardStandingRequestWithNoActorId()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateMembersLeaderboardStandingRequestWithNoActorId()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateNearLeaderboardStandingRequestWithInvalidActorId_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateNearLeaderboardStandingRequestWithInvalidActorId*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateNearLeaderboardStandingRequestWithInvalidActorId" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateNearLeaderboardStandingRequestWithInvalidActorId">CreateNearLeaderboardStandingRequestWithInvalidActorId()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateNearLeaderboardStandingRequestWithInvalidActorId()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateNearLeaderboardStandingRequestWithInvalidActorType_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateNearLeaderboardStandingRequestWithInvalidActorType*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateNearLeaderboardStandingRequestWithInvalidActorType" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateNearLeaderboardStandingRequestWithInvalidActorType">CreateNearLeaderboardStandingRequestWithInvalidActorType()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateNearLeaderboardStandingRequestWithInvalidActorType()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateNearLeaderboardStandingRequestWithNoActorId_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateNearLeaderboardStandingRequestWithNoActorId*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_CreateNearLeaderboardStandingRequestWithNoActorId" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.CreateNearLeaderboardStandingRequestWithNoActorId">CreateNearLeaderboardStandingRequestWithNoActorId()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void CreateNearLeaderboardStandingRequestWithNoActorId()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardCountBoolAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardCountBoolAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardCountBoolAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardCountBoolAccuracyTest">GetLeaderboardCountBoolAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardCountBoolAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardCountBoolSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardCountBoolSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardCountBoolSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardCountBoolSpeedTest">GetLeaderboardCountBoolSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardCountBoolSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardCountStringAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardCountStringAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardCountStringAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardCountStringAccuracyTest">GetLeaderboardCountStringAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardCountStringAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardCountStringSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardCountStringSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardCountStringSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardCountStringSpeedTest">GetLeaderboardCountStringSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardCountStringSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardEarliestBoolAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardEarliestBoolAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardEarliestBoolAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardEarliestBoolAccuracyTest">GetLeaderboardEarliestBoolAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardEarliestBoolAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardEarliestBoolSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardEarliestBoolSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardEarliestBoolSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardEarliestBoolSpeedTest">GetLeaderboardEarliestBoolSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardEarliestBoolSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardEarliestStringAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardEarliestStringAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardEarliestStringAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardEarliestStringAccuracyTest">GetLeaderboardEarliestStringAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardEarliestStringAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardEarliestStringSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardEarliestStringSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardEarliestStringSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardEarliestStringSpeedTest">GetLeaderboardEarliestStringSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardEarliestStringSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardFriendFilterAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardFriendFilterAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardFriendFilterAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardFriendFilterAccuracyTest">GetLeaderboardFriendFilterAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardFriendFilterAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardFriendFilterSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardFriendFilterSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardFriendFilterSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardFriendFilterSpeedTest">GetLeaderboardFriendFilterSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardFriendFilterSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardGroupMemberFilterAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardGroupMemberFilterAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardGroupMemberFilterAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardGroupMemberFilterAccuracyTest">GetLeaderboardGroupMemberFilterAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardGroupMemberFilterAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardGroupMemberFilterSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardGroupMemberFilterSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardGroupMemberFilterSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardGroupMemberFilterSpeedTest">GetLeaderboardGroupMemberFilterSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardGroupMemberFilterSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardHighFloatAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardHighFloatAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardHighFloatAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardHighFloatAccuracyTest">GetLeaderboardHighFloatAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardHighFloatAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardHighFloatSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardHighFloatSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardHighFloatSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardHighFloatSpeedTest">GetLeaderboardHighFloatSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardHighFloatSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardHighLongAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardHighLongAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardHighLongAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardHighLongAccuracyTest">GetLeaderboardHighLongAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardHighLongAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardHighLongSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardHighLongSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardHighLongSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardHighLongSpeedTest">GetLeaderboardHighLongSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardHighLongSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLatestBoolSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLatestBoolSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLatestBoolSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLatestBoolSpeedTest">GetLeaderboardLatestBoolSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardLatestBoolSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLatestStringSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLatestStringSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLatestStringSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLatestStringSpeedTest">GetLeaderboardLatestStringSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardLatestStringSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLowFloatAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLowFloatAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLowFloatAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLowFloatAccuracyTest">GetLeaderboardLowFloatAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardLowFloatAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLowFloatSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLowFloatSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLowFloatSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLowFloatSpeedTest">GetLeaderboardLowFloatSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardLowFloatSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLowLongAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLowLongAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLowLongAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLowLongAccuracyTest">GetLeaderboardLowLongAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardLowLongAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLowLongSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLowLongSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardLowLongSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardLowLongSpeedTest">GetLeaderboardLowLongSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardLowLongSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardNearFilterAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardNearFilterAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardNearFilterAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardNearFilterAccuracyTest">GetLeaderboardNearFilterAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardNearFilterAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardNearFilterSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardNearFilterSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardNearFilterSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardNearFilterSpeedTest">GetLeaderboardNearFilterSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardNearFilterSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardSumFloatAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardSumFloatAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardSumFloatAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardSumFloatAccuracyTest">GetLeaderboardSumFloatAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardSumFloatAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardSumFloatSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardSumFloatSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardSumFloatSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardSumFloatSpeedTest">GetLeaderboardSumFloatSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardSumFloatSpeedTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardSumLongAccuracyTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardSumLongAccuracyTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardSumLongAccuracyTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardSumLongAccuracyTest">GetLeaderboardSumLongAccuracyTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetLeaderboardSumLongAccuracyTest()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardSumLongSpeedTest_" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardSumLongSpeedTest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Tests_LeaderboardControllerTests_GetLeaderboardSumLongSpeedTest" data-uid="PlayGen.SUGAR.Server.Core.Tests.LeaderboardControllerTests.GetLeaderboardSumLongSpeedTest">GetLeaderboardSumLongSpeedTest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Fact]
+public void GetLeaderboardSumLongSpeedTest()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">Xunit.IClassFixture&lt;TFixture&gt;</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
