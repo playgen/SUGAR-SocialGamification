@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Controllers;
 using PlayGen.SUGAR.Server.EntityFramework;
+using PlayGen.SUGAR.Server.Model;
 using EvaluationCriteria = PlayGen.SUGAR.Server.Model.EvaluationCriteria;
 
 namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
@@ -17,8 +18,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public class CriteriaEvaluator
 	{
-		protected readonly GroupMemberController GroupMemberCoreController;
-		protected readonly UserFriendController UserFriendCoreController;
+		protected readonly RelationshipController RelationshipCoreController;
 		protected readonly SUGARContextFactory ContextFactory;
 
 		protected ILogger<EvaluationDataController> EvaluationDataLogger;
@@ -26,13 +26,11 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 		public CriteriaEvaluator(
 			ILogger<EvaluationDataController> evaluationDataLogger,
 			SUGARContextFactory contextFactory, 
-			GroupMemberController groupMemberCoreController, 
-			UserFriendController userFriendCoreController)
+			RelationshipController relationshipCoreController)
 		{
 			EvaluationDataLogger = evaluationDataLogger;
 			ContextFactory = contextFactory;
-			GroupMemberCoreController = groupMemberCoreController;
-			UserFriendCoreController = userFriendCoreController;
+			RelationshipCoreController = relationshipCoreController;
 		}
 
 		// TODO: currently this is binary but should eventually return a progress value
@@ -51,7 +49,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 				{
 					throw new NotImplementedException("RelatedActors Scope is only implemented for groups");
 				}
-				var groupActors = GroupMemberCoreController.GetMembers(actorId).ToList<Actor>();
+				var groupActors = RelationshipCoreController.GetRelationships(actorId, ActorType.Group).ToList<Actor>();
 				switch (completionCriteria.EvaluationDataType)
 				{
 					case EvaluationDataType.Boolean:

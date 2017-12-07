@@ -17,14 +17,13 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			services.AddSingleton<GameController>();
             services.AddSingleton<GameDataController>();
             services.AddSingleton<GroupController>();
-			services.AddSingleton<GroupMemberController>();
+			services.AddSingleton<RelationshipController>();
 			services.AddSingleton<LeaderboardController>();
 			services.AddSingleton<ResourceController>();
 			services.AddSingleton<RewardController>();
 			services.AddSingleton<RoleController>();
 			services.AddSingleton<RoleClaimController>();
 			services.AddSingleton<UserController>();
-			services.AddSingleton<UserFriendController>();
 		    services.AddSingleton<MatchController>();
 		}
 	}

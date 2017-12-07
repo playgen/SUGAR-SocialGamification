@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class RelationshipExtensions
 	{
-		public static RelationshipResponse ToContract(this UserToGroupRelationship relationshipModel)
+		public static RelationshipResponse ToContract(this ActorRelationship relationshipModel)
 		{
 			if (relationshipModel == null)
 			{
@@ -22,31 +22,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			};
 		}
 
-		public static RelationshipResponse ToContract(this UserToUserRelationship relationshipModel)
+		public static ActorRelationship ToRelationshipModel(this RelationshipRequest relationContract)
 		{
-			if (relationshipModel == null)
+			return new ActorRelationship
 			{
-				return null;
-			}
-
-			return new RelationshipResponse {
-				RequestorId = relationshipModel.RequestorId,
-				AcceptorId = relationshipModel.AcceptorId
-			};
-		}
-
-
-		public static UserToUserRelationship ToUserModel(this RelationshipRequest relationContract)
-		{
-			return new UserToUserRelationship {
-				RequestorId = relationContract.RequestorId.Value,
-				AcceptorId = relationContract.AcceptorId.Value
-			};
-		}
-
-		public static UserToGroupRelationship ToGroupModel(this RelationshipRequest relationContract)
-		{
-			return new UserToGroupRelationship {
 				RequestorId = relationContract.RequestorId.Value,
 				AcceptorId = relationContract.AcceptorId.Value
 			};

@@ -12,7 +12,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		private readonly EntityFramework.Controllers.GroupController _groupDbController;
 		private readonly ActorClaimController _actorClaimController;
 		private readonly ActorRoleController _actorRoleController;
-		private readonly GroupMemberController _groupMemberController;
+		private readonly RelationshipController _relationshipController;
 
 		public GroupController(
 			ILogger<GroupController> logger,
@@ -20,13 +20,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			EntityFramework.Controllers.ActorController actorDbController,
 			ActorClaimController actorClaimController,
 			ActorRoleController actorRoleController,
-			GroupMemberController groupMemberController) : base(actorDbController)
+			RelationshipController relationshipController) : base(actorDbController)
 		{
 			_logger = logger;
 			_groupDbController = groupDbController;
 			_actorClaimController = actorClaimController;
 			_actorRoleController = actorRoleController;
-			_groupMemberController = groupMemberController;
+			_relationshipController = relationshipController;
 		}
 
 		public List<Group> Get()
@@ -71,7 +71,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			newGroup = _groupDbController.Create(newGroup);
 			_actorRoleController.Create(ClaimScope.Group.ToString(), creatorId, newGroup.Id);
-			_groupMemberController.CreateMemberRequest(new UserToGroupRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
+			_relationshipController.CreateRequest(new ActorRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
 
 			_logger.LogInformation($"{newGroup.Id} for CreatorId: {creatorId}");
 

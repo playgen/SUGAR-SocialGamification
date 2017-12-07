@@ -26,12 +26,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			ILogger<EvaluationController> logger,
 			ILogger<EvaluationDataController> evaluationDataLogger,
 			EntityFramework.Controllers.EvaluationController evaluationDbController,
-			GroupMemberController groupMemberCoreController,
-			UserFriendController userFriendCoreController,
+			RelationshipController relationshipCoreController,
 			ActorController actorController,
 			RewardController rewardController,
 			SUGARContextFactory contextFactory)
-			: base(evaluationDataLogger, contextFactory, groupMemberCoreController, userFriendCoreController)
+			: base(evaluationDataLogger, contextFactory, relationshipCoreController)
 		{
 			_logger = logger;
 			_evaluationDbController = evaluationDbController;

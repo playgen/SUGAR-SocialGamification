@@ -23,8 +23,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         private static readonly UserController _userController = ControllerLocator.UserController;
         private static readonly GroupController _groupController = ControllerLocator.GroupController;
         private static readonly GameController _gameController = ControllerLocator.GameController;
-        private static readonly UserFriendController _userFriendController = ControllerLocator.UserFriendController;
-        private static readonly GroupMemberController _groupMemberController = ControllerLocator.GroupMemberController;
+	    private static readonly RelationshipController _relationshipController = ControllerLocator.RelationshipController;
         private static readonly GameDataController GameDataController = ControllerLocator.GameDataController;
 
         public static IReadOnlyList<Game> Games => _games;
@@ -136,22 +135,22 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
         private static void CreateFriendship(int requestor, int acceptor)
         {
-            var relationship = new UserToUserRelationship
-            {
+            var relationship = new ActorRelationship
+			{
                 RequestorId = requestor,
                 AcceptorId = acceptor,
             };
-            _userFriendController.CreateFriendRequest(relationship, true);
+	        _relationshipController.CreateRequest(relationship, true);
         }
 
         private static void CreateMembership(int requestor, int acceptor)
         {
-            var relationship = new UserToGroupRelationship
+            var relationship = new ActorRelationship
             {
                 RequestorId = requestor,
                 AcceptorId = acceptor,
             };
-            _groupMemberController.CreateMemberRequest(relationship, true);
+	        _relationshipController.CreateRequest(relationship, true);
         }
 
         private static List<DataParam> GenerateDataValues()

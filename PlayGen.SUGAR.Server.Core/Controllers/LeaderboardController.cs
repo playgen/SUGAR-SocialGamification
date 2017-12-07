@@ -22,13 +22,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public LeaderboardController(
 			ILogger<LeaderboardController> logger,
 			ILogger<EvaluationDataController> evaluationDataLogger,
-			GroupMemberController groupMemberCoreController,
-			UserFriendController userFriendCoreController,
+			RelationshipController relationshipCoreController,
 			ActorController actorController,
 			GroupController groupController,
 			UserController userController,
 			SUGARContextFactory contextFactory)
-			: base(evaluationDataLogger, contextFactory, groupMemberCoreController, userFriendCoreController)
+			: base(evaluationDataLogger, contextFactory, relationshipCoreController)
 		{
 			_logger = logger;
 			ActorController = actorController;
@@ -446,7 +445,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case LeaderboardFilterType.Friends:
 					if (actorId != null)
 					{
-						var friends = UserFriendCoreController.GetFriends(actorId.Value).Select(r => r.Id).ToList();
+						var friends = RelationshipCoreController.GetRelationships(actorId.Value, ActorType.User).Select(r => r.Id).ToList();
 						friends.Add(actorId.Value);
 						typeResults = typeResults.Where(r => friends.Contains(r.ActorId)).Skip(offset * limit).Take(limit).ToList();
 					}
@@ -458,7 +457,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case LeaderboardFilterType.GroupMembers:
 					if (actorId != null)
 					{
-						var members = GroupMemberCoreController.GetMembers(actorId.Value).Select(r => r.Id);
+						var members = RelationshipCoreController.GetRelationships(actorId.Value, ActorType.User).Select(r => r.Id);
 						typeResults = typeResults.Where(r => members.Contains(r.ActorId)).Skip(offset * limit).Take(limit).ToList();
 					}
 					else
