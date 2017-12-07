@@ -1,4 +1,5 @@
 #/bin/bash
+cd ../
 export DB_CONTAINER="sugar-mariadb"
 export CONTAINER="sugar"
 docker stop $CONTAINER

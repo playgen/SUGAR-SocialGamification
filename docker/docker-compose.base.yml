@@ -33,11 +33,7 @@ services:
       - sugar-mariadb
     links:
       - sugar-mariadb
-    image: sugar
     network_mode: "bridge"
-    build:
-      context: .
-      dockerfile: Dockerfile
     container_name: sugar
     expose:
       - 5000
