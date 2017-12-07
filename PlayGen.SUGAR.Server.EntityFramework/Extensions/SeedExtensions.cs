@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 
 			foreach (var claimScope in (ClaimScope[])Enum.GetValues(typeof(ClaimScope)))
 			{
-				var addedClaimScope = CreateRole(context, claimScope);
+				var addedClaimScope = context.Roles.FirstOrDefault(r => r.Name == claimScope.ToString()) ?? CreateRole(context, claimScope);
 				roles.Add(claimScope, addedClaimScope);
 			}
 
