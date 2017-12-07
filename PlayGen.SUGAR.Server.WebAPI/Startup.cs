@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,10 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using NLog;
 using PlayGen.SUGAR.Server.Authentication;
 using PlayGen.SUGAR.Server.Authentication.Filters;
-using PlayGen.SUGAR.Server.Core.Utilities;
 using PlayGen.SUGAR.Server.WebAPI.Filters;
 
 namespace PlayGen.SUGAR.Server.WebAPI
@@ -26,12 +23,14 @@ namespace PlayGen.SUGAR.Server.WebAPI
 		private TokenAuthOptions tokenOptions;
 		
 
-		public Startup(IConfiguration configuration)
+		public Startup(IConfiguration configuration, IHostingEnvironment env)
 		{
 			Configuration = configuration;
+			Environment = env;
 		}
 
 		public IConfiguration Configuration { get; }
+		public IHostingEnvironment Environment { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -63,7 +62,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			ConfigureCoreControllers(services);
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
-			ConfigureDocumentationGeneratorServices(services);
+			ConfigureDocumentationGeneratorServices(services, Environment);
 			ConfigureAuthorization(services, validityTimeout);
 			ConfigureAuthentication(services);
 			ConfigureEvaluationEvents(services);
@@ -76,7 +75,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			app.UseCors("AllowAll");
 			app.UseMvc();
 
-			ConfigureDocumentationGenerator(app);
+			ConfigureDocumentationGenerator(app, env);
 		}
 	}
 }
