@@ -92,9 +92,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			return Forbid();
 		}
 
-		//todo make this method more generic for use with any filtering
 		/// <summary>
-		/// Finds a list of GameData with the highest <param name="dataType"/> for each <param name="key"/> provided that matches the <param name="actorId"/> and <param name="gameId"/>.
+		/// 
 		/// 
 		/// Example Usage: GET api/gamedata/highest?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2&amp;dataType=1
 		/// </summary>
@@ -102,47 +101,22 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="key">Array of Key names.</param>
 		/// <param name="dataType">Data type of value</param>
+		/// <param name="sortType"></param>
 		/// <returns></returns>
 		[HttpGet("highest")]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.GameData)]
-		public async Task<IActionResult> GetHighest(int? actorId, int? gameId, string[] key, EvaluationDataType dataType)
+		public async Task<IActionResult> GetByLeaderboardType(int actorId, int gameId, string key, EvaluationDataType dataType, LeaderboardType sortType)
 		{
-			if (gameId.HasValue && actorId.HasValue)
+			if ((await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
-				if ((await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
-				 (await _authorizationService.AuthorizeAsync(User, actorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
-				 (await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
-				{
-					var dataList = new List<EvaluationData>();
-					switch (dataType)
-					{
-						case EvaluationDataType.Float:
-							foreach (var dataKey in key)
-							{
-								var gameData = _gameDataCoreController.GetEvaluationDataByHighestFloat(gameId.Value, actorId.Value, dataKey);
-								if (gameData != null)
-								{
-									dataList.Add(gameData);
-								}
-							}
-							break;
-						case EvaluationDataType.Long:
-							foreach (var dataKey in key)
-							{
-								var gameData = _gameDataCoreController.GetEvaluationDataByHighestLong(gameId.Value, actorId.Value, dataKey);
-								if (gameData != null)
-								{
-									dataList.Add(gameData);
-								}
-							}
-							break;
-
-					}
-					var dataContract = dataList.ToContractList();
-					return new ObjectResult(dataContract);
-				}
+				var dataList = new List<EvaluationData>();
+				
+				var dataContract = dataList.ToContractList();
+				return new ObjectResult(dataContract);
 			}
 			return Forbid();
 		}

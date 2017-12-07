@@ -13,9 +13,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 	{
 		public static int GetSessionId(this HttpContext context)
 		{
-			int sessionId;
-
-			if (!context.Request.Headers.TryGetClaim("SessionId", out sessionId))
+			if (!context.Request.Headers.TryGetClaim("SessionId", out int sessionId))
 			{
 				throw new ArgumentException("Couldn't get claim \"SessionId\".");
 			}

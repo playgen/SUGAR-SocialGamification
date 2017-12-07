@@ -2,7 +2,7 @@
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-    public class AchievementProgressControllerTests : CoreTestBase
+	public class AchievementProgressControllerTests : CoreTestBase
 	{
 		/*
 		#region Configuration
@@ -29,9 +29,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		[Fact]
 		public void SumLongs()
 		{
-			User user;
-			Game game;
-			var generatedData = PopulateData("SumLongs", out game, out user);
+			var generatedData = PopulateData("SumLongs", out var game, out var user);
 
 			var dbResult = _userEvaluationDataDbController.SumLongs(game.Id, user.Id, "longs");
 
@@ -43,9 +41,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		[Fact]
 		public void SumFloats()
 		{
-			User user;
-			Game game;
-			var generatedData = PopulateData("SumFloats", out game, out user);
+			var generatedData = PopulateData("SumFloats", out var game, out var user);
 
 			var dbResult = _userEvaluationDataDbController.SumFloats(game.Id, user.Id, "floats");
 
@@ -57,12 +53,9 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		[Fact]
 		public void LatestString()
 		{
-			User user;
-			Game game;
-			var generatedData = PopulateData("TryGetLatestString", out game, out user);
+			var generatedData = PopulateData("TryGetLatestString", out var game, out var user);
 
-			string dbResult;
-			bool gotResult = _userEvaluationDataDbController.TryGetLatestString(game.Id, user.Id, "strings", out dbResult);
+			bool gotResult = _userEvaluationDataDbController.TryGetLatestString(game.Id, user.Id, "strings", out var dbResult);
 
 			var lastValue = (string)generatedData["strings"].Values[generatedData["strings"].Values.Length - 1];
 
@@ -73,12 +66,9 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		[Fact]
 		public void LatestBool()
 		{
-			User user;
-			Game game;
-			var generatedData = PopulateData("TryGetLatestBool", out game, out user);
+			var generatedData = PopulateData("TryGetLatestBool", out var game, out var user);
 
-			bool dbResult;
-			bool gotResult = _userEvaluationDataDbController.TryGetLatestBool(game.Id, user.Id, "bools", out dbResult);
+			bool gotResult = _userEvaluationDataDbController.TryGetLatestBool(game.Id, user.Id, "bools", out var dbResult);
 
 			var lastValue = (bool)generatedData["bools"].Values[generatedData["bools"].Values.Length - 1];
 
@@ -105,8 +95,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		[Fact]
 		public void LatestMissingStrings()
 		{
-			string dbResult;
-			bool gotResult = _userEvaluationDataDbController.TryGetLatestString(1, 1, "LatestMissingStrings", out dbResult);
+			bool gotResult = _userEvaluationDataDbController.TryGetLatestString(1, 1, "LatestMissingStrings", out var dbResult);
 
 			Assert.False(gotResult);
 		}
@@ -114,8 +103,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		[Fact]
 		public void LatestMissingBools()
 		{
-			bool dbResult;
-			bool gotResult = _userEvaluationDataDbController.TryGetLatestBool(1, 1, "LatestMissingBools", out dbResult);
+			bool gotResult = _userEvaluationDataDbController.TryGetLatestBool(1, 1, "LatestMissingBools", out var dbResult);
 
 			Assert.False(gotResult);
 		}

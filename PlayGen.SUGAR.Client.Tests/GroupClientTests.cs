@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
-using PlayGen.SUGAR.Common.Exceptions;
 using PlayGen.SUGAR.Contracts;
 using Xunit;
 
@@ -13,7 +12,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanCreateGroup()
 		{
 			var key = "Group_CanCreateGroup";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var groupRequest = new GroupRequest
 			{
@@ -30,7 +29,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotCreateDuplicateGroup()
 		{
 			var key = "Group_CannotCreateDuplicateGroup";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var groupRequest = new GroupRequest
 			{
@@ -46,7 +45,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotCreateGroupWithNoName()
 		{
 			var key = "Group_CannotCreateGroupWithNoName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var groupRequest = new GroupRequest();
 
@@ -57,7 +56,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetGroupsByName()
 		{
 			var key = "Group_CanGetGroupsByName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var groupRequestOne = new GroupRequest
 			{
@@ -82,7 +81,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingGroupByName()
 		{
 			var key = "Group_CannotGetNotExistingGroupByName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var getGroups = Fixture.SUGARClient.Group.Get(key);
 
@@ -93,7 +92,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetGroupByEmptyName()
 		{
 			var key = "Group_CannotGetGroupByEmptyName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			Assert.Throws<ClientException>(() => Fixture.SUGARClient.Group.Get(string.Empty));
 		}
@@ -102,7 +101,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetGroupById()
 		{
 			var key = "Group_CanGetGroupById";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var groupRequest = new GroupRequest
 			{
@@ -121,7 +120,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingGroupById()
 		{
 			var key = "Group_CannotGetNotExistingGroupById";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var getGroup = Fixture.SUGARClient.Group.Get(-1);
 
@@ -132,7 +131,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanUpdateGroup()
 		{
 			var key = "Group_CanUpdateGroup";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var groupRequest = new GroupRequest
 			{
@@ -158,7 +157,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotUpdateGroupToDuplicateName()
 		{
 			var key = "Group_CannotUpdateGroupToDuplicateName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var groupRequestOne = new GroupRequest
 			{
@@ -186,7 +185,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotUpdateNonExistingGroup()
 		{
 			var key = "Group_CannotUpdateNonExistingGroup";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var updateGroup = new GroupRequest
 			{
@@ -200,7 +199,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotUpdateGroupToNoName()
 		{
 			var key = "Group_CannotUpdateGroupToNoName";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var groupRequest = new GroupRequest
 			{
@@ -218,7 +217,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanDeleteGroup()
 		{
 			var key = "Group_CanDeleteGroup";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var groupRequest = new GroupRequest
 			{
@@ -242,7 +241,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotDeleteNonExistingGroup()
 		{
 			var key = "Group_CannotDeleteNonExistingGroup";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Group.Delete(-1));
 		}

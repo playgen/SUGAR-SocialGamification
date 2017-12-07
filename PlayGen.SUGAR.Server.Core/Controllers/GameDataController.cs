@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
@@ -54,17 +53,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public void Add(EvaluationData[] evaluationData)
 		{
 			_evaluationDataController.Add(evaluationData);
-		}
-
-		public EvaluationData GetEvaluationDataByHighestFloat(int gameId, int actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return _evaluationDataController.GetEvaluationDataByHighestFloat(gameId, actorId, key, EvaluationDataType.Float, EvaluationDataCategory.GameData, start, end);
-		}
-
-		public EvaluationData GetEvaluationDataByHighestLong(int gameId, int actorId, string key,
-			DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return _evaluationDataController.GetEvaluationDataByHighestLong(gameId, actorId, key, EvaluationDataType.Float, EvaluationDataCategory.GameData, start, end);
 		}
 	}
 }

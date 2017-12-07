@@ -16,7 +16,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 
 			foreach (var claimScope in (ClaimScope[])Enum.GetValues(typeof(ClaimScope)))
 			{
-				var addedClaimScope = CreateRole(context, claimScope);
+				var addedClaimScope = context.Roles.FirstOrDefault(r => r.Name == claimScope.ToString()) ?? CreateRole(context, claimScope);
 				roles.Add(claimScope, addedClaimScope);
 			}
 
@@ -127,30 +127,20 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutLimit.Id, leaderboardCannotGetLeaderboardStandingsWithoutLimit.Name);
 				var leaderboardCannotGetLeaderboardStandingsWithoutOffset = CreateGame(context, "Leaderboard_CannotGetStandingsWithoutOffset");
 				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithoutOffset.Id, leaderboardCannotGetLeaderboardStandingsWithoutOffset.Name);
-				var leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType =
-					CreateGame(context, "Leaderboard_CannotGetStandingsWithIncorrectActorType");
-				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Id,
-					leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Name, ActorType.Group);
-				var leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit =
-					CreateGame(context, "Leaderboard_CannotGetLeaderboardStandingsWithZeroPageLimit");
-				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit.Id,
-					leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit.Name);
-				var leaderboardCannotGetNearLeaderboardStandingsWithoutActorId =
-					CreateGame(context, "Leaderboard_CannotGetNearLeaderboardStandingsWithoutActorId");
-				CreateLeaderboard(context, leaderboardCannotGetNearLeaderboardStandingsWithoutActorId.Id,
-					leaderboardCannotGetNearLeaderboardStandingsWithoutActorId.Name);
-				var leaderboardCannotGetFriendsLeaderboardStandingsWithoutActorId = CreateGame(context,
-					"Leaderboard_CannotGetFriendsLeaderboardStandingsWithoutActorId");
-				CreateLeaderboard(context, leaderboardCannotGetFriendsLeaderboardStandingsWithoutActorId.Id,
-					leaderboardCannotGetFriendsLeaderboardStandingsWithoutActorId.Name);
-				var leaderboardCannotGetGroupMembersLeaderboardStandingsWithoutActorId =
-					CreateGame(context, "Leaderboard_CannotGetGroupMemberWithoutActorId");
-				CreateLeaderboard(context, leaderboardCannotGetGroupMembersLeaderboardStandingsWithoutActorId.Id,
-					leaderboardCannotGetGroupMembersLeaderboardStandingsWithoutActorId.Name, ActorType.Group);
-				var leaderboardCannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType =
-					CreateGame(context, "Leaderboard_CannotGetGroupMembersWithIncorrectActorType");
-				CreateLeaderboard(context, leaderboardCannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType.Id,
-					leaderboardCannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType.Name);
+				var leaderboardCanGetMultipleLeaderboardStandingsForActor = CreateGame(context, "Leaderboard_CanGetMultipleLeaderboardStandingsForActor");
+				CreateLeaderboard(context, leaderboardCanGetMultipleLeaderboardStandingsForActor.Id, leaderboardCanGetMultipleLeaderboardStandingsForActor.Name);
+				var leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType = CreateGame(context, "Leaderboard_CannotGetStandingsWithIncorrectActorType");
+				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Id, leaderboardCannotGetLeaderboardStandingsWithIncorrectActorType.Name, ActorType.Group);
+				var leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit = CreateGame(context, "Leaderboard_CannotGetLeaderboardStandingsWithZeroPageLimit");
+				CreateLeaderboard(context, leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit.Id, leaderboardCannotGetLeaderboardStandingsWithZeroPageLimit.Name);
+				var leaderboardCannotGetNearLeaderboardStandingsWithoutActorId = CreateGame(context, "Leaderboard_CannotGetNearLeaderboardStandingsWithoutActorId");
+				CreateLeaderboard(context, leaderboardCannotGetNearLeaderboardStandingsWithoutActorId.Id, leaderboardCannotGetNearLeaderboardStandingsWithoutActorId.Name);
+				var leaderboardCannotGetFriendsLeaderboardStandingsWithoutActorId = CreateGame(context, "Leaderboard_CannotGetFriendsLeaderboardStandingsWithoutActorId");
+				CreateLeaderboard(context, leaderboardCannotGetFriendsLeaderboardStandingsWithoutActorId.Id, leaderboardCannotGetFriendsLeaderboardStandingsWithoutActorId.Name);
+				var leaderboardCannotGetGroupMembersLeaderboardStandingsWithoutActorId = CreateGame(context, "Leaderboard_CannotGetGroupMemberWithoutActorId");
+				CreateLeaderboard(context, leaderboardCannotGetGroupMembersLeaderboardStandingsWithoutActorId.Id, leaderboardCannotGetGroupMembersLeaderboardStandingsWithoutActorId.Name, ActorType.Group);
+				var leaderboardCannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType = CreateGame(context, "Leaderboard_CannotGetGroupMembersWithIncorrectActorType");
+				CreateLeaderboard(context, leaderboardCannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType.Id, leaderboardCannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType.Name);
 			}
 			#endregion
 
@@ -245,14 +235,16 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				GameId = gameId,
 				ActorType = ActorType.User,
 				Description = key,
-				EvaluationCriterias = new List<Model.EvaluationCriteria>
+				EvaluationCriterias = new List<EvaluationCriteria>
 				{
-					new Model.EvaluationCriteria
+					new EvaluationCriteria
 					{
 						ComparisonType = ComparisonType.GreaterOrEqual,
 						CriteriaQueryType = CriteriaQueryType.Sum,
+						EvaluationDataCategory = EvaluationDataCategory.GameData,
 						EvaluationDataType = EvaluationDataType.Long,
 						EvaluationDataKey = key,
+						Scope = CriteriaScope.Actor,
 						Value = $"{100}"
 					}
 				},
@@ -270,14 +262,16 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				GameId = gameId,
 				ActorType = ActorType.User,
 				Description = key,
-				EvaluationCriterias = new List<Model.EvaluationCriteria>
+				EvaluationCriterias = new List<EvaluationCriteria>
 				{
-					new Model.EvaluationCriteria
+					new EvaluationCriteria
 					{
 						ComparisonType = ComparisonType.GreaterOrEqual,
 						CriteriaQueryType = CriteriaQueryType.Sum,
+						EvaluationDataCategory = EvaluationDataCategory.GameData,
 						EvaluationDataType = EvaluationDataType.Long,
 						EvaluationDataKey = key,
+						Scope = CriteriaScope.Actor,
 						Value = $"{100}"
 					}
 				},

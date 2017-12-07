@@ -13,20 +13,20 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		private readonly EntityFramework.Controllers.ActorClaimController _actorClaimDbController;
 		private readonly ActorRoleController _actorRoleController;
 		private readonly RoleClaimController _roleClaimController;
-		private readonly GroupMemberController _groupMemberController;
+		private readonly RelationshipController _relationshipController;
 
 		public ActorClaimController(
 			ILogger<ActorClaimController> logger,
 			EntityFramework.Controllers.ActorClaimController actorClaimDbController,
 			ActorRoleController actorRoleController,
 			RoleClaimController roleClaimController,
-			GroupMemberController groupMemberController)
+			RelationshipController relationshipController)
 		{
 			_logger = logger;
 			_actorClaimDbController = actorClaimDbController;
 			_actorRoleController = actorRoleController;
 			_roleClaimController = roleClaimController;
-			_groupMemberController = groupMemberController;
+			_relationshipController = relationshipController;
 		}
 
 		public ActorClaim Get(int id)
@@ -40,8 +40,8 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public List<ActorClaim> GetActorClaims(int actorId)
 		{
-			var claims = _actorClaimDbController.GetActorClaims(actorId).ToList();
-			var groups = _groupMemberController.GetUserGroups(actorId).ToList();
+			var claims = _actorClaimDbController.GetActorClaims(actorId);
+			var groups = _relationshipController.GetRelationships(actorId, ActorType.Group);
 			var groupClaims = groups.SelectMany(g => GetActorClaims(g.Id)).Distinct().ToList();
 			var roles = _actorRoleController.GetActorRoles(actorId, true);
 
@@ -68,8 +68,8 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public List<Claim> GetActorClaimsForEntity(int actorId, int entityId, ClaimScope scope)
 		{
-			var claims = _actorClaimDbController.GetActorClaimsForEntity(actorId, entityId, scope).ToList();
-			var groups = _groupMemberController.GetUserGroups(actorId).ToList();
+			var claims = _actorClaimDbController.GetActorClaimsForEntity(actorId, entityId, scope);
+			var groups = _relationshipController.GetRelationships(actorId, ActorType.Group);
 			var groupClaims = groups.SelectMany(g => GetActorClaimsForEntity(g.Id, entityId, scope)).Distinct().ToList();
 			var roleClaims = _actorRoleController.GetActorRolesForEntity(actorId, entityId, scope).SelectMany(r => r.RoleClaims).Select(rc => rc.Claim).ToList();
 			var totalClaims = claims.Concat(roleClaims).Concat(groupClaims).Distinct().ToList();

@@ -13,7 +13,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetLeaderboardsByGame()
 		{
 			var key = "Leaderboard_CanGetLeaderboardsByGame";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var getResponse = Fixture.SUGARClient.Leaderboard.Get(game.Id);
 
@@ -28,7 +29,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetLeaderboardsByNotExistingGame()
 		{
 			var key = "Leaderboard_CannotGetLeaderboardsByNotExistingGame";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var getResponse = Fixture.SUGARClient.Leaderboard.Get(-1);
 
@@ -39,7 +40,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingLeaderboard()
 		{
 			var key = "Leaderboard_CannotGetNotExistingLeaderboard";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var getResponse = Fixture.SUGARClient.Leaderboard.Get(key, -1);
 
@@ -50,7 +51,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetLeaderboardWithEmptyToken()
 		{
 			var key = "Leaderboard_CannotGetLeaderboardWithEmptyToken";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			Assert.Throws<ClientException>(() => Fixture.SUGARClient.Leaderboard.Get(string.Empty, game.Id));
 		}
@@ -59,7 +61,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNotExistingGlobalLeaderboard()
 		{
 			var key = "Leaderboard_CannotGetNotExistingLeaderboard";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var getResponse = Fixture.SUGARClient.Leaderboard.GetGlobal(key);
 
@@ -70,7 +72,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetGlobalLeaderboardWithEmptyToken()
 		{
 			var key = "Leaderboard_CannotGetGlobalLeaderboardWithEmptyToken";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			Assert.Throws<ClientException>(() => Fixture.SUGARClient.Leaderboard.GetGlobal(string.Empty));
 		}
@@ -79,7 +81,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetGlobalLeaderboardStandings()
 		{
 			var key = "Leaderboard_CanGetGlobalLeaderboardStandings";
-			Helpers.Login(Fixture.SUGARClient, "Global", key, out var _, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var gameData = new EvaluationDataRequest
 			{
@@ -98,7 +100,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 10,
 				PageOffset = 0, 
-				GameId = Platform.GlobalId
+				GameId = Platform.GlobalId,
+				MultiplePerActor = false
 			};
 
 			var standingsResponse = Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
@@ -111,7 +114,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CanGetLeaderboardStandings()
 		{
 			var key = "Leaderboard_CanGetLeaderboardStandings";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var gameData = new EvaluationDataRequest
 			{
@@ -130,7 +134,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 10,
 				PageOffset = 0,
-				GameId = game.Id
+				GameId = game.Id,
+				MultiplePerActor = false
 			};
 
 			var standingsResponse = Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
@@ -140,10 +145,48 @@ namespace PlayGen.SUGAR.Client.Tests
 		}
 
 		[Fact]
+		public void CanGetMultipleLeaderboardStandingsForActor()
+		{
+			var key = "Leaderboard_CanGetMultipleLeaderboardStandingsForActor";
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
+			var count = 10;
+			for (var i = 1; i < count+1; i++)
+			{
+				var gameData = new EvaluationDataRequest
+				{
+					Key = key,
+					EvaluationDataType = EvaluationDataType.Long,
+					CreatingActorId = loggedInAccount.User.Id,
+					Value = i.ToString(),
+					GameId = game.Id
+				};
+
+				Fixture.SUGARClient.GameData.Add(gameData);
+			}
+
+			var standingsRequest = new LeaderboardStandingsRequest
+			{
+				LeaderboardToken = key,
+				LeaderboardFilterType = LeaderboardFilterType.Top,
+				PageLimit = 10,
+				PageOffset = 0,
+				GameId = game.Id,
+				MultiplePerActor = true
+			};
+
+			var standingsResponse = Fixture.SUGARClient.Leaderboard.CreateGetLeaderboardStandings(standingsRequest);
+
+			Assert.Equal(count, standingsResponse.Count());
+			Assert.Equal(count.ToString(), standingsResponse.First().Value);
+		}
+
+		[Fact]
 		public void CannotGetNotExistingLeaderboardStandings()
 		{
 			var key = "Leaderboard_CannotGetNotExistingLeaderboardStandings";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -161,7 +204,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetLeaderboardStandingsWithoutToken()
 		{
 			var key = "Leaderboard_CannotGetStandingsWithoutToken";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -178,7 +222,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetLeaderboardStandingsWithoutGameId()
 		{
 			var key = "Leaderboard_CannotGetStandingsWithoutGameId";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -195,7 +239,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetLeaderboardStandingsWithoutLeaderboardFilterType()
 		{
 			var key = "Leaderboard_CannotGetStandingsWithoutFilterType";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -212,7 +257,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetLeaderboardStandingsWithoutPageLimit()
 		{
 			var key = "Leaderboard_CannotGetStandingsWithoutLimit";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -229,7 +275,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetLeaderboardStandingsWithoutPageOffset()
 		{
 			var key = "Leaderboard_CannotGetStandingsWithoutOffset";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -246,7 +293,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetLeaderboardStandingsWithIncorrectActorType()
 		{
 			var key = "Leaderboard_CannotGetStandingsWithIncorrectActorType";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var gameData = new EvaluationDataRequest
 			{
@@ -276,7 +324,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetLeaderboardStandingsWithZeroPageLimit()
 		{
 			var key = "Leaderboard_CannotGetLeaderboardStandingsWithZeroPageLimit";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -294,7 +343,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetNearLeaderboardStandingsWithoutActorId()
 		{
 			var key = "Leaderboard_CannotGetNearLeaderboardStandingsWithoutActorId";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -312,7 +362,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetFriendsLeaderboardStandingsWithoutActorId()
 		{
 			var key = "Leaderboard_CannotGetFriendsLeaderboardStandingsWithoutActorId";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -330,7 +381,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetGroupMemberLeaderboardStandingsWithoutActorId()
 		{
 			var key = "Leaderboard_CannotGetGroupMemberWithoutActorId";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var _);
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var standingsRequest = new LeaderboardStandingsRequest
 			{
@@ -348,7 +400,8 @@ namespace PlayGen.SUGAR.Client.Tests
 		public void CannotGetGroupMembersLeaderboardStandingsWithIncorrectActorType()
 		{
 			var key = "Leaderboard_CannotGetGroupMembersWithIncorrectActorType";
-			Helpers.Login(Fixture.SUGARClient, key, key, out var game, out var loggedInAccount);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
 			var gameData = new EvaluationDataRequest
 			{

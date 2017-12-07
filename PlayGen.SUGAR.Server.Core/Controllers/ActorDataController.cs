@@ -65,16 +65,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					return true;
 
 				case EvaluationDataType.Long:
-					long tryLong;
-					return long.TryParse(data.Value, out tryLong);
+					return long.TryParse(data.Value, out var _);
 
 				case EvaluationDataType.Float:
-					float tryFloat;
-					return float.TryParse(data.Value, out tryFloat);
+					return float.TryParse(data.Value, out var _);
 
 				case EvaluationDataType.Boolean:
-					bool tryBoolean;
-					return bool.TryParse(data.Value, out tryBoolean);
+					return bool.TryParse(data.Value, out var _);
 
 				default:
 					return false;

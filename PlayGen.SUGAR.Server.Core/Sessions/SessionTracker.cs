@@ -70,8 +70,7 @@ namespace PlayGen.SUGAR.Server.Core.Sessions
 		
 		public void EndSession(long sessionId)
 		{
-			Session session;
-			_sessions.TryRemove(sessionId, out session);
+			_sessions.TryRemove(sessionId, out var session);
 
 			SessionEndedEvent?.Invoke(session);
 

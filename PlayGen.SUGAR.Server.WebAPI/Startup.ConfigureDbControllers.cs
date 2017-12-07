@@ -19,8 +19,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
             services.AddSingleton<EvaluationDataController>();
             services.AddSingleton<EvaluationController>();
             services.AddSingleton<LeaderboardController>();
-            services.AddSingleton<GroupRelationshipController>();
-            services.AddSingleton<UserRelationshipController>();
+            services.AddSingleton<RelationshipController>();
             services.AddSingleton<TokenController>();
             services.AddSingleton<ClaimController>();
             services.AddSingleton<RoleController>();

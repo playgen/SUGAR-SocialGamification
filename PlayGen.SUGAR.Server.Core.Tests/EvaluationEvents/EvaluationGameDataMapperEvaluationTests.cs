@@ -35,8 +35,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
                 {
                     var gameData = Helpers.ComposeEvaluationData(0, evaluationCriteria, shouldGetEvaluation.GameId);
 
-                    ICollection<Evaluation> relatedEvaluations;
-                    var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
+                    var didGetRelated = gameDataMapper.TryGetRelated(gameData, out var relatedEvaluations);
 
                     Assert.True(didGetRelated, "Should have gotten related evaluations.");
                     Assert.Contains(shouldGetEvaluation, relatedEvaluations);
@@ -73,8 +72,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
             {
                 var gameData = Helpers.ComposeEvaluationData(0, evaluationCriteria, removeEvaluation.GameId);
 
-                ICollection<Evaluation> relatedEvaluations;
-                var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
+                var didGetRelated = gameDataMapper.TryGetRelated(gameData, out var relatedEvaluations);
 
                 // Either shouldn't have gotten related or if did, shouldn't have returned the removed evaluation
                 if (didGetRelated)
@@ -90,8 +88,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
                 {
                     var gameData = Helpers.ComposeEvaluationData(0, evaluationCriteria, shouldntRemoveEvaluation.GameId);
 
-                    ICollection<Evaluation> relatedEvaluations;
-                    var didGetRelated = gameDataMapper.TryGetRelated(gameData, out relatedEvaluations);
+                    var didGetRelated = gameDataMapper.TryGetRelated(gameData, out var relatedEvaluations);
 
                     Assert.True(didGetRelated, "Shouldn't have removed unremoved evaluations.");
                     Assert.Contains(shouldntRemoveEvaluation, relatedEvaluations);

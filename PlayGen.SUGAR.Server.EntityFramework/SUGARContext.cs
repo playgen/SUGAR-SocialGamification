@@ -3,8 +3,6 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Server.EntityFramework.EntityConfigs;
-using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
 using PlayGen.SUGAR.Server.Model.Interfaces;
 
@@ -41,10 +39,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 		public DbSet<EvaluationData> EvaluationData { get; set; }
 		public DbSet<ActorData> ActorData { get; set; }
 
-		public DbSet<UserToUserRelationshipRequest> UserToUserRelationshipRequests { get; set; }
-		public DbSet<UserToUserRelationship> UserToUserRelationships { get; set; }
-		public DbSet<UserToGroupRelationshipRequest> UserToGroupRelationshipRequests { get; set; }
-		public DbSet<UserToGroupRelationship> UserToGroupRelationships { get; set; }
+		public DbSet<ActorRelationship> Relationships { get; set; }
+		public DbSet<ActorRelationshipRequest> RelationshipRequests { get; set; }
 
 		public DbSet<Leaderboard> Leaderboards { get; set; }
 		public DbSet<Claim> Claims { get; set; }
@@ -73,9 +69,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 		{
 			UpdateModificationHistory();
 
-			return _isSaveDisabled
-				? 0
-				: base.SaveChanges();
+			return _isSaveDisabled ? 0 : base.SaveChanges();
 		}
 
 		/// <summary>

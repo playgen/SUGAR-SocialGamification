@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Server.Model;
 
@@ -27,15 +25,15 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 		public static IQueryable<Group> IncludeAll(this DbSet<Group> dbSet)
 		{
 			return dbSet
-				.Include(s => s.UserToGroupRelationships)
-				.Include(s => s.UserToGroupRelationshipRequests);
+				.Include(s => s.Requestors)
+				.Include(s => s.RequestRequestors)
+				.Include(s => s.Acceptors)
+				.Include(s => s.RequestAcceptors);
 		}
 
 		public static IQueryable<User> IncludeAll(this DbSet<User> dbSet)
 		{
 			return dbSet
-				.Include(s => s.UserToGroupRelationships)
-				.Include(s => s.UserToGroupRelationshipRequests)
 				.Include(s => s.Requestors)
 				.Include(s => s.RequestRequestors)
 				.Include(s => s.Acceptors)

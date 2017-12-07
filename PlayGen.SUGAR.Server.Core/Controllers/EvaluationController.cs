@@ -22,17 +22,15 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		private readonly ActorController _actorController;
 		private readonly EntityFramework.Controllers.EvaluationController _evaluationDbController;
 
-		// todo change all db controller usages to core controller usages except for evaluation db controller
 		public EvaluationController(
 			ILogger<EvaluationController> logger,
 			ILogger<EvaluationDataController> evaluationDataLogger,
 			EntityFramework.Controllers.EvaluationController evaluationDbController,
-			GroupMemberController groupMemberCoreController,
-			UserFriendController userFriendCoreController,
+			RelationshipController relationshipCoreController,
 			ActorController actorController,
 			RewardController rewardController,
 			SUGARContextFactory contextFactory)
-			: base(evaluationDataLogger, contextFactory, groupMemberCoreController, userFriendCoreController)
+			: base(evaluationDataLogger, contextFactory, relationshipCoreController)
 		{
 			_logger = logger;
 			_evaluationDbController = evaluationDbController;
@@ -164,14 +162,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case EvaluationDataType.String:
 					return true;
 				case EvaluationDataType.Long:
-					long longValue;
-					return long.TryParse(value, out longValue);
+					return long.TryParse(value, out var _);
 				case EvaluationDataType.Float:
-					float floatValue;
-					return float.TryParse(value, out floatValue);
+					return float.TryParse(value, out var _);
 				case EvaluationDataType.Boolean:
-					bool boolValue;
-					return bool.TryParse(value, out boolValue);
+					return bool.TryParse(value, out var _);
 				default:
 					return false;
 			}
@@ -211,10 +206,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var evaluationDataCoreController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, evaluation.EvaluationType.ToEvaluationDataCategory());
 
 			var key = evaluation.Token;
-			var category = evaluation.EvaluationType == EvaluationType.Achievement
-				? EvaluationDataCategory.Achievement
-				: EvaluationDataCategory.Skill;
-			var completed = evaluationDataCoreController.KeyExists(evaluation.GameId, actorId, key, EvaluationDataType.String, category);
+			var completed = evaluationDataCoreController.KeyExists(evaluation.GameId, actorId, key, EvaluationDataType.String);
 
 			_logger.LogDebug($"Got: IsCompleted: {completed} for Evaluation.Id: {evaluation.Id}, ActorId: {actorId}");
 
@@ -228,7 +220,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var evaluationData = new EvaluationData {
 				Category = evaluation.EvaluationType.ToEvaluationDataCategory(),
 				Key = evaluation.Token,
-				GameId = evaluation.GameId,    //TODO: handle the case where a global evaluation has been completed for a specific game
+				GameId = evaluation.GameId,
 				ActorId = actorId,
 				EvaluationDataType = EvaluationDataType.String,
 				Value = null

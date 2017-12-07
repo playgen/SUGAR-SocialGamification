@@ -100,8 +100,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		public IActionResult GetLeaderboardStandings([FromBody]LeaderboardStandingsRequest leaderboardDetails)
 		{
 			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardToken, leaderboardDetails.GameId.Value);
-			var standings = _leaderboardEvaluationController.GetStandings(leaderboard, leaderboardDetails);
-			return new ObjectResult(standings);
+			var standings = _leaderboardEvaluationController.GetStandings(leaderboard, leaderboardDetails.ToCore());
+			var standingsContract = standings.ToContractList();
+			return new ObjectResult(standingsContract);
 		}
 
 		/// <summary>
