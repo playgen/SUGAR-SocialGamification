@@ -18,7 +18,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				Id = groupModel.Id,
 				Name = groupModel.Name,
 				Description = groupModel.Description,
-				MemberCount = groupModel.Requestors?.Count ?? 0 + groupModel.Acceptors?.Count ?? 0
+				MemberCount = groupModel.UserRelationshipCount,
+				AllianceCount = groupModel.GroupRelationshipCount
 			};
 
 			return groupContract;
