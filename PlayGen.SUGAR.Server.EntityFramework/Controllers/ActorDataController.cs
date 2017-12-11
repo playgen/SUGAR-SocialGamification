@@ -54,20 +54,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				// todo replace with entire block with: (and update unit tests)
-				// context.[tablename].Update(entity);
-				// context.SaveChanges();
-
-				var existingData = context.ActorData
-					.Find(updatedData.Id);
-
-				if (existingData == null)
-				{
-					throw new MissingRecordException("Cannot find the object to update.");
-				}
-
-				existingData.Value = updatedData.Value;
-
+				context.ActorData.Update(updatedData);
 				SaveChanges(context);
 			}
 		}

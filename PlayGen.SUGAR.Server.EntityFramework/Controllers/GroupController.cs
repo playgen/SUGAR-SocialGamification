@@ -66,24 +66,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				// todo replace with entire block with: (and update unit tests)
-				// context.[tablename].Update(entity);
-				// context.SaveChanges();
-
-				var existing = context.Groups
-					.IncludeAll()
-					.FirstOrDefault(g => g.Id == group.Id);
-
-				if (existing != null)
-				{
-					context.Entry(existing).State = EntityState.Modified;
-					existing.Name = group.Name;
-					SaveChanges(context);
-				}
-				else
-				{
-					throw new MissingRecordException($"The existing group with ID {group.Id} could not be found.");
-				}
+				context.Groups.Update(group);
+				SaveChanges(context);
 			}
 		}
 
@@ -91,11 +75,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var group = context.Groups
-					.IncludeAll()
-					.Where(g => id == g.Id);
-
-				context.Groups.RemoveRange(group);
+				var group = context.Groups.Find(id);
+				if (group == null)
+				{
+					throw new MissingRecordException($"No Group exists with Id: {id}");
+				}
+				context.Groups.Remove(group);
 				SaveChanges(context);
 			}
 		}

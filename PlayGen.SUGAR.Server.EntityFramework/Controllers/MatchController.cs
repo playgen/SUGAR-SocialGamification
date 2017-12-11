@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
 
@@ -134,6 +136,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var match = context.Matches.Find(matchId);
+				if (match == null)
+				{
+					throw new MissingRecordException($"No Match exists with Id: {matchId}");
+				}
 				context.Matches.Remove(match);
 				SaveChanges(context);
 			}

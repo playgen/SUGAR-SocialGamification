@@ -111,11 +111,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var leaderboard = context.Leaderboards.Find(token, gameId);
-				if (leaderboard != null)
+				if (leaderboard == null)
 				{
-					context.Leaderboards.Remove(leaderboard);
-					SaveChanges(context);
+					throw new MissingRecordException($"No Leaderboard exists with Token: {token} and GameId: {gameId}");
 				}
+				context.Leaderboards.Remove(leaderboard);
+				SaveChanges(context);
 			}
 		}
 	}

@@ -1,4 +1,6 @@
-﻿using PlayGen.SUGAR.Common;
+﻿using System;
+
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
@@ -84,7 +86,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.Evaluations.Update(evaluation);
-				context.SaveChanges();
+				SaveChanges(context);
 			}
 		}
 
@@ -96,11 +98,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					.IncludeAll()
 					.SingleOrDefault(e => e.Token == token && e.GameId == gameId && e.EvaluationType == evaluationType);
 
-				if (evaluation != null)
+				if (evaluation == null)
 				{
-					context.Evaluations.Remove(evaluation);
-					SaveChanges(context);
+					throw new MissingRecordException($"No Evaluation exists with Token: {token}, GameId: {gameId} and EvaluationType: {evaluationType}");
 				}
+				context.Evaluations.Remove(evaluation);
+				SaveChanges(context);
 			}
 		}
 	}

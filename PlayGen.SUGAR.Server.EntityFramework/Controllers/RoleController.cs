@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Authorization;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
@@ -64,10 +65,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				// todo also delete all data associated with this role?
-				var role = context.Roles
-					.Where(r => id == r.Id);
-
-				context.Roles.RemoveRange(role);
+				var role = context.Roles.Find(id);
+				if (role == null)
+				{
+					throw new MissingRecordException($"No Role exists with Id: {id}");
+				}
+				context.Roles.Remove(role);
 				SaveChanges(context);
 			}
 		}

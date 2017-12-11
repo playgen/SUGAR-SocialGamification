@@ -1,4 +1,7 @@
 ﻿using System.Linq;
+
+using Microsoft.EntityFrameworkCore;
+
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.Model;
@@ -141,7 +144,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 				Name = "UpdateNonExistingGroup"
 			};
 
-			Assert.Throws<MissingRecordException>(() => _groupController.Update(group));
+			Assert.Throws<DbUpdateConcurrencyException>(() => _groupController.Update(group));
 		}
 
 		[Fact]
@@ -164,7 +167,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void DeleteNonExistingGroup()
 		{
-			_groupController.Delete(-1);
+			Assert.Throws<MissingRecordException>(() => _groupController.Delete(-1));
 		}
 		#endregion
 

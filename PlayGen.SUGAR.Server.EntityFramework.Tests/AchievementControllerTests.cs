@@ -135,7 +135,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 				Rewards = newAchievementDuplicate.Rewards
 			};
 
-			Assert.Throws<DbUpdateException>(() => _evaluationController.Update(update));
+			Assert.Throws<DuplicateRecordException>(() => _evaluationController.Update(update));
 		}
 
 		[Fact]
@@ -177,7 +177,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void DeleteNonExistingGroupAchievement()
 		{
-			_evaluationController.Delete("DeleteNonExistingGroupAchievement", -1, EvaluationType.Achievement);
+			Assert.Throws<MissingRecordException>(() => _evaluationController.Delete("DeleteNonExistingGroupAchievement", -1, EvaluationType.Achievement));
 		}
 		#endregion
 	}
