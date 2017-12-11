@@ -15,45 +15,41 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void CanHeartbeatAndReissueToken()
 		{
-			var key = "Session_CanHeartbeatAndReissueToken";
-			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
-
 			// Arrange
-			var headers = (Dictionary<string, string>)
-				typeof(ClientBase)
-				.GetField("_persistentHeaders", BindingFlags.NonPublic | BindingFlags.Instance)
-				.GetValue(Fixture.SUGARClient.Session);
+			var key = "Session_CanHeartbeatAndReissueToken";
 
-			var originalToken = headers[HeaderKeys.Authorization];
+			var sessionHeaders = new Dictionary<string, string>();
+			var sugarClient = Fixture.CreateSugarClient(sessionHeaders: sessionHeaders);
+			Helpers.CreateAndLoginGlobal(sugarClient, key);
+			
+			var originalToken = sessionHeaders[HeaderKeys.Authorization];
 			
 			// Act
 			Thread.Sleep(1 * 1000);
-			Fixture.SUGARClient.Session.Heartbeat();
+			sugarClient.Session.Heartbeat();
 
 			// Assert
-			var postHeartbeatToken = headers[HeaderKeys.Authorization];
+			var postHeartbeatToken = sessionHeaders[HeaderKeys.Authorization];
 			Assert.NotEqual(originalToken, postHeartbeatToken);
 		}
 
 		[Fact]
 		public void NewTokenForUserLogin()
 		{
-			var key = "Session_NewTokenForUserLogin";
-			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
-
 			// Arrange
-			var headers = (Dictionary<string, string>)
-				typeof(ClientBase)
-				.GetField("_persistentHeaders", BindingFlags.NonPublic | BindingFlags.Instance)
-				.GetValue(Fixture.SUGARClient.Session);
+			var key = "Session_NewTokenForUserLogin";
 
-			var originalToken = headers[HeaderKeys.Authorization];
+			var sessionHeaders = new Dictionary<string, string>();
+			var sugarClient = Fixture.CreateSugarClient(sessionHeaders: sessionHeaders);
+			Helpers.CreateAndLoginGlobal(sugarClient, key);
+
+			var originalToken = sessionHeaders[HeaderKeys.Authorization];
 
 			// Act
-			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_New");
+			Helpers.CreateAndLoginGlobal(sugarClient, key + "_New");
 
 			// Assert
-			var newToken = headers[HeaderKeys.Authorization];
+			var newToken = sessionHeaders[HeaderKeys.Authorization];
 			Assert.NotEqual(originalToken, newToken);
 		}
 

@@ -18,7 +18,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
-	[ValidateSession]
 	public class RoleController : Controller
 	{
 		private readonly IAuthorizationService _authorizationService;
