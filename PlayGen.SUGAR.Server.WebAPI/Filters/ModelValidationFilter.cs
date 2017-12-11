@@ -10,10 +10,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 	/// </summary>
 	public class ModelValidationFilter : IActionFilter
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="context"></param>
 		public void OnActionExecuting(ActionExecutingContext context)
 		{
 			if (!context.ModelState.IsValid)
@@ -36,11 +32,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 				context.Result = new BadRequestObjectResult(errorString);
 			}
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="context"></param>
+	
 		public void OnActionExecuted(ActionExecutedContext context)
 		{
 		}

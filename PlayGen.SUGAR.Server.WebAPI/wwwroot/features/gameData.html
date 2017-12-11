@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>GameData | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="GameData | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="gameData">
+              <h1 id="gamedata">GameData</h1>
+              
+<p>GameData provides a method of recording and querying key value pairs of data specific to a certain <a class="xref" href="game.html">Game</a> and optional <a class="xref" href="actor.html">Actor</a>.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>CRUD Resources</li>
+<li>Search Resources (ID/Name/Actor/Relationship) </li>
+<li>Gift resource from one actor to another</li>
+</ul>
+<h2 id="features-1">Features</h2>
+<ul>
+<li>CRD GameData </li>
+<li>Search GameData (by ID/Game/Actor/Skill)</li>
+</ul>
+<h2 id="gamedata-categories">GameData Categories</h2>
+<ul>
+<li>General Data - All information that does not fit into any other category.<ul>
+<li>Example - A <a class="xref" href="user.html">Users</a> gaining 10 points in level 2.</li>
+</ul>
+</li>
+<li>Resources - Long-only data which can be transferred to and from <a class="xref" href="actor.html">Actor</a> within the system.<ul>
+<li>Example - A user collecting 10 gold, a consumable item within the game. </li>
+</ul>
+</li>
+<li>Achievements - Stored completion of all &lt;xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria&gt; for an achievement.<ul>
+<li>Example - A user meeting the criteria for the achievement &quot;Score 10,000 points&quot; in a game.</li>
+</ul>
+</li>
+<li>Skills - Stored completion of all &lt;xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria&gt; for an skill.<ul>
+<li>Example - A user meeting the criteria for the &quot;Social&quot; skill in a game.</li>
+</ul>
+</li>
+</ul>
+<h2 id="api">API</h2>
+<ul>
+<li>Client<ul>
+<li>&lt;xref:PlayGen.SUGAR.Client.GameDataClient&gt;</li>
+</ul>
+</li>
+<li>Contracts<ul>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.EvaluationDataRequest&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.EvaluationDataResponse&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.CriteriaQueryType&gt;</li>
+</ul>
+</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<ul>
+<li><p>Submitting custom GameData</p>
+<p>  Custom GameData is submitted using the &lt;xref:PlayGen.SUGAR.Client.GameDataClient&gt;&#39;s Add function with a &lt;xref:PlayGen.SUGAR.Contracts.Shared.EvaluationDataRequest&gt; as the parameter. This explains how to track the number of dragon eggs hatched by the user, specifying &quot;EggHatched&quot; as the key.</p>
+</li>
+</ul>
+<pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
+        private GameDataClient _gameDataClient;
+        private int _gameId;
+        private int _userId;
+
+        private void OnEggHatched()
+        {
+            // create instance of GameDataClient
+            var gameDataClient = sugarClient.GameData;
+
+            // create GameDataRequest
+            var gameDataRequest = new GameDataRequest()
+            {
+                GameId = _gameId,
+                ActorId = _userId,
+                GameDataType = GameDataType.Long,
+                Value = &quot;1&quot;,
+                Key = &quot;EggHatched&quot;
+            };
+
+            // add the GameData
+            gameDataClient.Add(gameDataRequest);
+        }
+</code></pre><ul>
+<li><p>Querying for GameData</p>
+<p>  GameData is retreived using the &lt;xref:PlayGen.SUGAR.Client.GameDataClient&gt;&#39;s Get function with the ActorId and GameId you want to query as parameters. The parameters also takes a list of keys you want to find entries for in gameData. This example shows how to retrieve the user&#39;s &quot;EggHatched&quot; &lt;xref:PlayGen.SUGAR.Contracts.Shared.EvaluationDataResponse&gt; objects and count them.</p>
+</li>
+</ul>
+<pre><code class="lang-cs">        private long GetEggsHatched()
+        {
+            // add the GameData
+            var gameDataResponses = gameDataClient.Get
+            (
+                _actorId,
+                _gameId,
+                new string[] { &quot;EggHatched&quot; }
+            );
+
+            long totalClicks = 0;
+
+            // count values from each GameDataResponse
+            foreach (var response in gameDataResponses)
+            {
+                totalClicks += long.Parse(response.Value);
+            }
+
+            return totalClicks;
+        }
+</code></pre>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

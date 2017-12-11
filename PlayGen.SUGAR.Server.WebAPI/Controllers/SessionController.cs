@@ -40,6 +40,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		[HttpPost("loginplatform")]
 		[ArgumentsNotNull]
+		[AllowWithoutSession]
 		public IActionResult Login([FromBody]AccountRequest accountRequest)
 		{
 			var account = accountRequest.ToModel();
@@ -64,6 +65,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		[HttpPost("{gameId:int}/logingame")]
 		[ArgumentsNotNull]
+		[AllowWithoutSession]
 		public IActionResult Login([FromRoute]int gameId, [FromBody]AccountRequest accountRequest)
 		{
 			// todo check if has permission to login for specified game
@@ -87,6 +89,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		[HttpPost("createandloginplatform")]
 		[ArgumentsNotNull]
+		[AllowWithoutSession]
 		public IActionResult CreateAndLogin([FromBody] AccountRequest accountRequest)
 		{
 			var account = accountRequest.ToModel();
@@ -106,6 +109,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		[HttpPost("{gameId:int}/createandlogingame")]
 		[ArgumentsNotNull]
+		[AllowWithoutSession]
 		public IActionResult CreateAndLogin([FromRoute]int gameId, [FromBody] AccountRequest accountRequest)
 		{
 			var account = accountRequest.ToModel();
@@ -122,7 +126,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		[HttpGet("heartbeat")]
 		[Authorize("Bearer")]
-		[ValidateSession]
 		public IActionResult Heartbeat()
 		{
 			return new ObjectResult(null);
@@ -135,7 +138,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns></returns>
 		[HttpGet("logout")]
 		[Authorize("Bearer")]
-		[ValidateSession]
 		public IActionResult Logout()
 		{
 			var sessionId = HttpContext.GetSessionId();

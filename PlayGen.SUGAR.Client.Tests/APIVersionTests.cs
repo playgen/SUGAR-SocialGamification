@@ -14,8 +14,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			// Arrange
 			var accountRequest = new AccountRequest
 			{
-				Name = "CanAccessWithMatchingAPIVersion",
-				Password = "CanAccessWithMatchingAPIVersionPassword",
+				Name = $"{nameof(CanAccessWithMatchingAPIVersion)}",
+				Password = $"{nameof(CanAccessWithMatchingAPIVersion)}Password",
 				SourceToken = "SUGAR"
 			};
 
@@ -32,8 +32,8 @@ namespace PlayGen.SUGAR.Client.Tests
 			// Arrange
 			var accountRequest = new AccountRequest
 			{
-				Name = "CantAccessWithMismatchedAPIVersion",
-				Password = "CantAccessWithMismatchedAPIVersionPassword",
+				Name = $"{nameof(CantAccessWithMismatchedAPIVersion)}",
+				Password = $"{nameof(CantAccessWithMismatchedAPIVersion)}Password",
 				SourceToken = "SUGAR"
 			};
 
@@ -41,6 +41,37 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			// Act & Assert
 			Assert.Throws<ClientHttpException>(() => sugarClient.Account.Create(accountRequest));
+		}
+
+		[Fact]
+		public void CantAccessWithNoAPIVersion()
+		{
+			// Arrange
+			var accountRequest = new AccountRequest
+			{
+				Name = $"{nameof(CantAccessWithNoAPIVersion)}",
+				Password = $"{nameof(CantAccessWithNoAPIVersion)}Password",
+				SourceToken = "SUGAR"
+			};
+
+			var sugarClient = Fixture.CreateSugarClient(new Dictionary<string, string>());
+
+			// Act & Assert
+			Assert.Throws<ClientHttpException>(() => sugarClient.Account.Create(accountRequest));
+		}
+
+		[Fact]
+		public void CanGetAPIVersion()
+		{
+			// Arrange
+			var sugarClient = Fixture.CreateSugarClient(new Dictionary<string, string>());
+
+			// Act
+			var version = sugarClient.APIVersion.Get();
+
+			// Assert
+			Assert.NotEmpty(version);
+			Assert.Contains(APIVersion.Version, version);
 		}
 
 		[Theory]
@@ -53,12 +84,12 @@ namespace PlayGen.SUGAR.Client.Tests
 			// Arrange
 			var accountRequest = new AccountRequest
 			{
-				Name = $"CanAccessWithMatchingMajorButMismatchedMinor_{minor}.{build}",
-				Password = "CanAccessWithMatchingMajorButMismatchedMinorPassword",
+				Name = $"{nameof(CanAccessWithMatchingMajorButMismatchedMinor)}_{minor}.{build}",
+				Password = $"{nameof(CanAccessWithMatchingMajorButMismatchedMinor)}Password",
 				SourceToken = "SUGAR"
 			};
 
-			var sugarClient = Fixture.CreateSugarClient(new Dictionary<string, string> { { "APIVersion", $"{APIVersion.Major}.{minor}.{build}" } });
+			var sugarClient = Fixture.CreateSugarClient(new Dictionary<string, string> { { APIVersion.Key, $"{APIVersion.Major}.{minor}.{build}" } });
 
 			// Act
 			var response = sugarClient.Account.Create(accountRequest);

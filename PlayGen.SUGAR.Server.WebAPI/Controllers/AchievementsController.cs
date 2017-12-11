@@ -18,7 +18,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
-	[ValidateSession]
 	public class AchievementsController : EvaluationsController
 	{
 		/// <summary>

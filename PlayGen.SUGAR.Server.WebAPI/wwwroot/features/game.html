@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Game | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Game | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="game">
+              <h1 id="game">Game</h1>
+              
+<p>A game is an individual application as defined by the platform. A single instance of the platform has the capacity to service multiple games. This allows for users to take part in multiple of games under the same login and to potentially share resource across games depending on the game design. </p>
+<h2 id="features">Features</h2>
+<ul>
+<li>CRUD Game</li>
+<li>CRUD Game Metadata<ul>
+<li>Game Name</li>
+<li>Game Description</li>
+<li>Game Skills (Skills)  </li>
+</ul>
+</li>
+<li>Search Game (ID/Name/Actor)</li>
+</ul>
+<h2 id="api">API</h2>
+<ul>
+<li>Client<ul>
+<li>&lt;xref:PlayGen.SUGAR.Client.GameClient&gt;</li>
+</ul>
+</li>
+<li>Contracts<ul>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.GameRequest&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.GameResponse&gt;</li>
+</ul>
+</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<ul>
+<li><p>Create a game</p>
+<p>  Creating a game using the &lt;xref:PlayGen.SUGAR.Client.GameClient&gt;&#39;s Create function, passing a &lt;xref:PlayGen.SUGAR.Contracts.Shared.GameRequest&gt; object as the parameter. This example will be used to create a game with the name &quot;Thrones&quot; and store its Id from the returned &lt;xref:PlayGen.SUGAR.Contracts.Shared.GameResponse&gt;.</p>
+</li>
+</ul>
+<pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
+        private GameClient _gameClient;
+        private int _gameId;
+
+        private void CreateGame() 
+        {
+            // create instance of the game client
+            _gameClient = sugarClient.Game;
+
+            // create a GameRequest
+            var gameRequest = new GameRequest 
+            {
+                Name = &quot;Thrones&quot;
+            };
+
+            // create the game and store the response
+            var gameResponse = _gameClient.Create(gameRequest);
+
+            // store the id of the game for use in other features
+            _gameId = gameResponse.Id;
+        }
+</code></pre><ul>
+<li><p>Retreiving a game</p>
+<p>  Checking if a Game exists or storing the id of the Game prior to allowing the user to play may be vital. This is done using &lt;xref:PlayGen.SUGAR.Client.GameClient&gt;&#39;s Get function and passing the name of the game to match.</p>
+</li>
+</ul>
+<pre><code class="lang-cs">        private int CheckGame() 
+        {
+            // check for the game and store the responses
+            var gameResponses = _gameClient.Get(&quot;Thrones&quot;);
+
+            int id = -1;
+
+            foreach (response in gameResponses) 
+            {
+                // check if the name matches the desired game exactly
+                if (response.Name == &quot;Thrones&quot;) 
+                {   
+                    // store the game&#39;s id
+                    id = response.Id;
+                }
+            }
+
+            return id;
+        }
+</code></pre>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

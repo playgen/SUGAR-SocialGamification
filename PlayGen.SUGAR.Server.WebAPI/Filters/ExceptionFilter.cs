@@ -8,7 +8,7 @@ using PlayGen.SUGAR.Server.WebAPI.Exceptions;
 namespace PlayGen.SUGAR.Server.WebAPI.Filters
 {
 	/// <summary>
-	/// 
+	/// Wraps internal exceptions for external consumption.
 	/// </summary>
 	public class ExceptionFilter : ExceptionFilterAttribute
 	{
@@ -18,40 +18,39 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 		{
 			_logger = logger;
 		}
-
-        /// <inheritdoc />
+        
         public override void OnException(ExceptionContext context)
 		{
 			var exception = context.Exception;
-			var handled = false;
 
-			if (exception is DuplicateRecordException)
+			switch (exception)
 			{
-				context.Result = new ObjectResult("Invalid data provided.");
-				context.HttpContext.Response.StatusCode = (int) HttpStatusCode.Conflict;
-				handled = true;
-			}
+				case IncompatibleAPIVersionException apiVersion:
+					context.Result = new ObjectResult(apiVersion.Message);
+					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+					break;
 
-			if (exception is InvalidAccountDetailsException)
-			{
-				context.Result = new ObjectResult(exception.Message);
-				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-				handled = true;
-			}
+				case DuplicateRecordException duplicateRecord:
+					context.Result = new ObjectResult("Invalid data provided.");
+					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
+					break;
 
-			if (exception is InvalidSessionException)
-			{
-				context.Result = new ObjectResult(exception.Message);
-				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-				handled = true;
-			}
+				case InvalidAccountDetailsException invalidAccount:
+					context.Result = new ObjectResult(invalidAccount.Message);
+					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+					break;
 
-			if (!handled)
-			{ 
-				context.Result = new ObjectResult(context.Exception.Message);
-				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-			}
+				case InvalidSessionException invalidSession:
+					context.Result = new ObjectResult(invalidSession.Message);
+					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+					break;
 
+				default:
+					context.Result = new ObjectResult(context.Exception.Message);
+					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+					break;
+			}
+			
             _logger.LogError(exception.Message);
 
             context.Exception = null;

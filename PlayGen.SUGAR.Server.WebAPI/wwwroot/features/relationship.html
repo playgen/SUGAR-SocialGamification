@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Relationship | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Relationship | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="relationship">
+              <h1 id="relationship">Relationship</h1>
+              
+<p>Relationships are connections between two or more entities. For example a user belonging to a group or a user being friends or following another user. Relationships may follow a step by step process depending on the use case, for example in adding a ‘friend’, the relationship is initially stored as a request from the requester to the receiver until accepted by the receiver. Whereas the receiver may also refuse or block the request. </p>
+<h2 id="features">Features</h2>
+<ul>
+<li>CRUD Relationship </li>
+<li>CRUD Relationship request</li>
+<li>Search Relationship (ID/Actor)</li>
+</ul>
+<h2 id="api">API</h2>
+<ul>
+<li>Client<ul>
+<li>&lt;xref:PlayGen.SUGAR.Client.GroupMemberClient&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Client.UserFriendClient&gt;</li>
+</ul>
+</li>
+<li>Contracts<ul>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.RelationshipRequest&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.RelationshipResponse&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse&gt;</li>
+</ul>
+</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<ul>
+<li>Adding a User to a Group
+  A <a href="group.html">Group</a> can be joined by an actor. This will create a user to group relationship request. In this example, we will set the AutoAccept property in the &lt;xref:PlayGen.SUGAR.Contracts.Shared.RelationshipRequest&gt; object to true, so the relationship will be stored directly as a user to group relationship. The joined group&#39;s id is then extracted from the &lt;xref:PlayGen.SUGAR.Contracts.Shared.RelationshipResponse&gt;.</li>
+</ul>
+<pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
+        private GroupMemberClient _groupMemberClient;
+        private int _userId;
+        private int _groupId;
+
+        private void JoinGroup(int groupId) 
+        {
+            // create instance of the group member client
+            _groupMemberClient = sugarClient.GroupMember;
+
+            // create a RelationshipRequest
+            var relationshipRequest = new RelationshipRequest 
+            {
+                AcceptorId = groupId,
+                RequestorId = _userId,
+                AutoAccept = true
+            };
+
+            // create the member request and store the response
+            var relationshipResponse = _groupMemberClient.CreateMemberRequest(relationshipRequest);
+
+            // store the id of the group for use in other functions
+            _groupId = relationshipResponse.AcceptorId;
+        }
+</code></pre><ul>
+<li>Leaving a group
+  A user to group relationship status can be updated using a &lt;xref:PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate&gt; with the &lt;xref:PlayGen.SUGAR.Client.GroupMemberClient&gt;&#39;s UpdateMember function. This example shows the user leaving the group joined in the previous example. Calling the function automatically breaks the relationship between the group and player if there is one, without the need of passing the additional Accepted property in the RelationshipStatusUpdate.</li>
+</ul>
+<pre><code class="lang-cs">        private void LeaveGroup() 
+        {
+            // create a RelationshipStatusUpdate
+            var relationshipStatusUpdate = new RelationshipStatusUpdate 
+            {
+                AcceptorId = _groupId,
+                RequestorId = _userId
+            };
+
+            // create the member request and store the response
+            _groupMemberClient.UpdateMember(relationshipStatusUpdate);
+        }
+</code></pre><ul>
+<li>Adding a friend
+  Works identically to joining a group, except creating user to user relationships and using the &lt;xref:PlayGen.SUGAR.Client.UserFriendClient&gt;. </li>
+</ul>
+<pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
+        private UserFriendClient _userFriendClient;
+        private int _userId;
+        private int _friendId;
+
+        private void JoinGroup(int targetUserId) 
+        {
+            // create instance of the user friend client
+            _userFriendClient = sugarClient.UserFriend;
+
+            // create a RelationshipRequest
+            var relationshipRequest = new RelationshipRequest 
+            {
+                AcceptorId = targetUserId,
+                RequestorId = _userId,
+                AutoAccept = true
+            };
+
+            // create the friend request and store the response
+            var relationshipResponse = _userFriendClient.CreateFriendRequest(relationshipRequest);
+
+            // store the id of the group for use in other functions
+            _friendId = relationshipResponse.AcceptorId;
+        }
+</code></pre><ul>
+<li>Removing a friend
+  Like leaving a group, removing a friend updates the user to user relationship using a &lt;xref:PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate&gt; with &lt;xref:PlayGen.SUGAR.Client.UserFriendClient&gt;&#39;s UpdateFriend function. </li>
+</ul>
+<pre><code class="lang-cs">        private void RemoveFriend() 
+        {
+            // create a RelationshipStatusUpdate
+            var relationshipStatusUpdate = new RelationshipStatusUpdate 
+            {
+                AcceptorId = _friendId,
+                RequestorId = _userId,
+                Accepted = true
+            };
+
+            // create the member request and store the response
+            _userFriendClient.UpdateFriend(relationshipStatusUpdate);
+        }
+</code></pre><h2 id="roadmap">Roadmap</h2>
+<ul>
+<li>Relationship between two groups, creating an &lt;xref:alliance&gt;</li>
+</ul>
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

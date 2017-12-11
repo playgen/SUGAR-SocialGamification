@@ -15,6 +15,8 @@ namespace PlayGen.SUGAR.Common
 	/// </summary>
     public static class APIVersion
 	{
+		public const string Key = "APIVersion";
+
 		public const int Major = 1;
 
 		public const int Minor = 0;

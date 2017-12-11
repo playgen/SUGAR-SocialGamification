@@ -5,6 +5,10 @@
 		<AssemblyName>PlayGen.SUGAR.Server.WebAPI</AssemblyName>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.0|AnyCPU'">
 	  <DocumentationFile>bin\Debug\netcoreapp2.0\PlayGen.SUGAR.Server.WebAPI.xml</DocumentationFile>
 	</PropertyGroup>
@@ -46,12 +50,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="delay-startup.sh">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="NLog.config">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
+		<None Update="NLog.config">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

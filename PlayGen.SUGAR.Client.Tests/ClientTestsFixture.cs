@@ -26,11 +26,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			SUGARClient = CreateSugarClient();
 		}
 
-		public SUGARClient CreateSugarClient(Dictionary<string, string> persistentHeaders = null)
+		public SUGARClient CreateSugarClient(Dictionary<string, string> persistentHeaders = null, Dictionary<string, string> sessionHeaders = null)
 		{
 			var client = Server.CreateClient();
 			var testHttpHandler = new HttpClientHandler(client);
-			var sugarClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler, persistentHeaders);
+			var sugarClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler, persistentHeaders, sessionHeaders);
 			return sugarClient;
 		}
 

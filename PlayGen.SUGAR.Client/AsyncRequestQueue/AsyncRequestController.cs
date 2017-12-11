@@ -6,7 +6,6 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 {
 	public class AsyncRequestController : IDisposable
 	{
-
 		private readonly AutoResetEvent _processRequestHandle = new AutoResetEvent(false);
 		private readonly ManualResetEvent _abortHandle = new ManualResetEvent(false);
 
@@ -16,13 +15,17 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 		private readonly object _requestsLock = new object();
 		private readonly object _responsesLock = new object();
 
-		private int _timeoutMilliseconds = Timeout.Infinite;
-		private QueueItem _onTimeoutItem;
-		private Exception _workderException;
+		private readonly int _timeoutMilliseconds;
+		private readonly QueueItem _onTimeoutItem;
+
+		private Exception _workerException;
 		private bool _isDisposed;
 
-		public AsyncRequestController()
+		public AsyncRequestController(int timeoutMilliseconds, Action onTimeout)
 		{
+			_timeoutMilliseconds = timeoutMilliseconds;
+			_onTimeoutItem = new QueueItem(onTimeout, null, e => throw e);
+
 			var worker = new Thread(DoWork);
 			worker.Start();
 		}
@@ -30,12 +33,6 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 		~AsyncRequestController()
 		{
 			Dispose();
-		}
-
-		public void SetTimeout(int timeoutMilliseconds, Action onTimeout)
-		{
-			_timeoutMilliseconds = timeoutMilliseconds;
-			_onTimeoutItem = new QueueItem(onTimeout, null, e => throw e);
 		}
 
 		public void Dispose()
@@ -69,9 +66,9 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 
 		public bool TryExecuteResponse()
 		{
-			if (_workderException != null)
+			if (_workerException != null)
 			{
-				throw _workderException;
+				throw _workerException;
 			}
 
 			Action response = null;
@@ -162,7 +159,7 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 			}
 			catch (Exception e)
 			{
-				_workderException = e;
+				_workerException = e;
 			}
 		}
 	}

@@ -1,0 +1,6707 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SUGAR Engine REST API | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="SUGAR Engine REST API | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="/SUGAR Engine REST API/v1">
+
+<h1 id="_SUGAR_Engine_REST_API_v1" data-uid="/SUGAR Engine REST API/v1" class="text-capitalize text-break">SUGAR Engine REST API</h1>
+<h2 id="_SUGAR_Engine_REST_API_v1">Account</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountCreatePost" data-uid="SUGAR Engine REST API/v1/ApiAccountCreatePost" class="text-capitalize">ApiAccountCreatePost</h3>
+  <div class="markdown level1 summary"><p>Register a new account and creates an associated user.
+Requires the PlayGen.SUGAR.Contracts.AccountRequest.Name to be unique.
+Returns a JsonWebToken used for authorization in any further calls to the API.</p>
+<p>Example Usage: POST api/account/create</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Account/create</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">accountRequest</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.AccountRequest object that contains the details of the new Account.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiAccountByIdDelete" class="text-capitalize">ApiAccountByIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete Account with the ID provided.</p>
+<p>Example Usage: DELETE api/account/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/Account/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Account ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">AccountSource</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountSourceListGet" data-uid="SUGAR Engine REST API/v1/ApiAccountSourceListGet" class="text-capitalize">ApiAccountSourceListGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all AccountSources.</p>
+<p>Example Usage: GET api/accountSource/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/AccountSource/list</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountSourceFindbyidByIdGet" data-uid="SUGAR Engine REST API/v1/ApiAccountSourceFindbyidByIdGet" class="text-capitalize">ApiAccountSourceFindbyidByIdGet</h3>
+  <div class="markdown level1 summary"><p>Get AccountSource that matches <param name="id"> provided.</p>
+<p>Example Usage: GET api/accountSource/findbyid/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/AccountSource/findbyid/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountSourcePost" data-uid="SUGAR Engine REST API/v1/ApiAccountSourcePost" class="text-capitalize">ApiAccountSourcePost</h3>
+  <div class="markdown level1 summary"><p>Create a new AccountSource.
+Requires the PlayGen.SUGAR.Contracts.AccountSourceRequest.Token to be unique.</p>
+<p>Example Usage: POST api/accountSource</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/AccountSource</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newAccountSource</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.AccountSourceRequest object that contains the details of the new AccountSource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountSourceUpdateByIdPut" data-uid="SUGAR Engine REST API/v1/ApiAccountSourceUpdateByIdPut" class="text-capitalize">ApiAccountSourceUpdateByIdPut</h3>
+  <div class="markdown level1 summary"><p>Update an existing AccountSource.</p>
+<p>Example Usage: PUT api/accountSource/update/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/AccountSource/update/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Id of the existing AccountSource.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">accountSource</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.AccountSourceRequest object that holds the details of the AccountSource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountSourceByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiAccountSourceByIdDelete" class="text-capitalize">ApiAccountSourceByIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete AccountSource with the ID provided.</p>
+<p>Example Usage: DELETE api/accountSource/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/AccountSource/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>AccountSource ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Achievements</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsFindByTokenByGameIdGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsFindByTokenByGameIdGet" class="text-capitalize">ApiAchievementsFindByTokenByGameIdGet</h3>
+  <div class="markdown level1 summary"><p>Find an Achievement that matches <param name="token"> and <param name="gameId">.</p>
+<p>Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Achievements/find/{token}/{gameId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Achievement</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Achievement is for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsFindByTokenGlobalGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsFindByTokenGlobalGet" class="text-capitalize">ApiAchievementsFindByTokenGlobalGet</h3>
+  <div class="markdown level1 summary"><p>Find an Achievement that matches <param name="token"> and <param name="gameId">.</p>
+<p>Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Achievements/find/{token}/global</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Achievement</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Achievement is for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsGlobalListGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsGlobalListGet" class="text-capitalize">ApiAchievementsGlobalListGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of Achievements that match <param name="gameId">.
+If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.</p>
+<p>Example Usage: GET api/achievements/game/1/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Achievements/global/list</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Game ID</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsGameByGameIdListGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsGameByGameIdListGet" class="text-capitalize">ApiAchievementsGameByGameIdListGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of Achievements that match <param name="gameId">.
+If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.</p>
+<p>Example Usage: GET api/achievements/game/1/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Achievements/game/{gameId}/list</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Game ID</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsGameByGameIdEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsGameByGameIdEvaluateByActorIdGet" class="text-capitalize">ApiAchievementsGameByGameIdEvaluateByActorIdGet</h3>
+  <div class="markdown level1 summary"><p>Find the current progress for all achievements for a <param name="gameId"> for <param name="actorId">.</p>
+<p>Example Usage: GET api/achievements/game/1/evaluate/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Achievements/game/{gameId}/evaluate/{actorId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Game</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Group/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsGlobalEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsGlobalEvaluateByActorIdGet" class="text-capitalize">ApiAchievementsGlobalEvaluateByActorIdGet</h3>
+  <div class="markdown level1 summary"><p>Find the current progress for all achievements for a <param name="gameId"> for <param name="actorId">.</p>
+<p>Example Usage: GET api/achievements/game/1/evaluate/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Achievements/global/evaluate/{actorId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Game</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Group/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsByTokenByGameIdEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsByTokenByGameIdEvaluateByActorIdGet" class="text-capitalize">ApiAchievementsByTokenByGameIdEvaluateByActorIdGet</h3>
+  <div class="markdown level1 summary"><p>Find the current progress for an Achievement for <param name="actorId">.</p>
+<p>Example Usage: GET api/achievements/ACHIEVEMENT_TOKEN/1/evaluate/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Achievements/{token}/{gameId}/evaluate/{actorId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Achievement</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Achievement is for</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Group/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsByTokenGlobalEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsByTokenGlobalEvaluateByActorIdGet" class="text-capitalize">ApiAchievementsByTokenGlobalEvaluateByActorIdGet</h3>
+  <div class="markdown level1 summary"><p>Find the current progress for an Achievement for <param name="actorId">.</p>
+<p>Example Usage: GET api/achievements/ACHIEVEMENT_TOKEN/1/evaluate/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Achievements/{token}/global/evaluate/{actorId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Achievement</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Achievement is for</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Group/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsCreatePost" data-uid="SUGAR Engine REST API/v1/ApiAchievementsCreatePost" class="text-capitalize">ApiAchievementsCreatePost</h3>
+  <div class="markdown level1 summary"><p>Create a new Achievement.
+Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to that PlayGen.SUGAR.Contracts.EvaluationCreateRequest.GameId.</p>
+<p>Example Usage: POST api/achievements/create</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Achievements/create</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newAchievement</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.EvaluationCreateRequest object that holds the details of the new Achievement.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsUpdatePut" data-uid="SUGAR Engine REST API/v1/ApiAchievementsUpdatePut" class="text-capitalize">ApiAchievementsUpdatePut</h3>
+  <div class="markdown level1 summary"><p>Update an existing Achievement.</p>
+<p>Example Usage: PUT api/achievements/update</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/Achievements/update</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">achievement</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.EvaluationCreateRequest object that holds the details of the Achievement.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsByTokenGlobalDelete" data-uid="SUGAR Engine REST API/v1/ApiAchievementsByTokenGlobalDelete" class="text-capitalize">ApiAchievementsByTokenGlobalDelete</h3>
+  <div class="markdown level1 summary"><p>Delete Achievement with the <param name="token"> and <param name="gameId"> provided.</p>
+<p>Example Usage: DELETE api/achievements/ACHIEVEMENT_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/Achievements/{token}/global</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Achievement</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Achievement is for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsByTokenByGameIdDelete" data-uid="SUGAR Engine REST API/v1/ApiAchievementsByTokenByGameIdDelete" class="text-capitalize">ApiAchievementsByTokenByGameIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete Achievement with the <param name="token"> and <param name="gameId"> provided.</p>
+<p>Example Usage: DELETE api/achievements/ACHIEVEMENT_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/Achievements/{token}/{gameId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Achievement</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Achievement is for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">ActorClaim</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorClaimClaimByClaimIdEntityByEntityIdGet" data-uid="SUGAR Engine REST API/v1/ApiActorClaimClaimByClaimIdEntityByEntityIdGet" class="text-capitalize">ApiActorClaimClaimByClaimIdEntityByEntityIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Actors for this Claim and Entity.</p>
+<p>Example Usage: GET api/actorclaim/claim/1/entity/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/ActorClaim/claim/{claimId}/entity/{entityId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*claimId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*entityId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorClaimActorByIdGet" data-uid="SUGAR Engine REST API/v1/ApiActorClaimActorByIdGet" class="text-capitalize">ApiActorClaimActorByIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Claims for this Actor.</p>
+<p>Example Usage: GET api/actorclaim/actor/1/</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/ActorClaim/actor/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorClaimPost" data-uid="SUGAR Engine REST API/v1/ApiActorClaimPost" class="text-capitalize">ApiActorClaimPost</h3>
+  <div class="markdown level1 summary"><p>Create a new ActorClaim.</p>
+<p>Example Usage: POST api/actorclaim</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/ActorClaim</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newClaim</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.ActorClaimRequest object that contains the details of the new ActorClaim.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorClaimByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiActorClaimByIdDelete" class="text-capitalize">ApiActorClaimByIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete ActorClaim with the ID provided.</p>
+<p>Example Usage: DELETE api/actorclaim/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/ActorClaim/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ActorClaim ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">ActorData</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorDataGet" data-uid="SUGAR Engine REST API/v1/ApiActorDataGet" class="text-capitalize">ApiActorDataGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of all ActorData that match the <param name="actorId">, <param name="gameId"> and <param name="key"> provided.</p>
+<p>Example Usage: GET api/actordata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/ActorData[?actorId&amp;gameId&amp;key]</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a User/Group.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a Game.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">key</span></td>
+        <td>array</td>
+        <td></td>
+        <td><p>Array of Key names.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorDataPost" data-uid="SUGAR Engine REST API/v1/ApiActorDataPost" class="text-capitalize">ApiActorDataPost</h3>
+  <div class="markdown level1 summary"><p>Create a new ActorData record.</p>
+<p>Example Usage: POST api/actordata</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/ActorData</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newData</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.EvaluationDataRequest object that holds the details of the new ActorData.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">ActorRole</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorRoleRoleByRoleIdEntityByEntityIdGet" data-uid="SUGAR Engine REST API/v1/ApiActorRoleRoleByRoleIdEntityByEntityIdGet" class="text-capitalize">ApiActorRoleRoleByRoleIdEntityByEntityIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Actors for this Role and Entity.</p>
+<p>Example Usage: GET api/actorrole/role/1/entity/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/ActorRole/role/{roleId}/entity/{entityId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*roleId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*entityId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorRoleActorByActorIdEntityByEntityIdClaimscopeByScopeNameGet" data-uid="SUGAR Engine REST API/v1/ApiActorRoleActorByActorIdEntityByEntityIdClaimscopeByScopeNameGet" class="text-capitalize">ApiActorRoleActorByActorIdEntityByEntityIdClaimscopeByScopeNameGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Roles for this Actor, ClaimScope and Entity.</p>
+<p>Example Usage: GET api/actorrole/actor/1/entity/1/claimscope/game</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/ActorRole/actor/{actorId}/entity/{entityId}/claimscope/{scopeName}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*entityId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*scopeName</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorRoleControlledGet" data-uid="SUGAR Engine REST API/v1/ApiActorRoleControlledGet" class="text-capitalize">ApiActorRoleControlledGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Roles this Actor has control over.</p>
+<p>Example Usage: GET api/actorrole/controlled</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/ActorRole/controlled</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorRolePost" data-uid="SUGAR Engine REST API/v1/ApiActorRolePost" class="text-capitalize">ApiActorRolePost</h3>
+  <div class="markdown level1 summary"><p>Create a new ActorRole.</p>
+<p>Example Usage: POST api/actorrole</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/ActorRole</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newRole</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.ActorRoleRequest object that contains the details of the new ActorRole.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiActorRoleByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiActorRoleByIdDelete" class="text-capitalize">ApiActorRoleByIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete ActorRole with the ID provided.</p>
+<p>Example Usage: DELETE api/actorrole/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/ActorRole/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ActorRole ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Game</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameListGet" data-uid="SUGAR Engine REST API/v1/ApiGameListGet" class="text-capitalize">ApiGameListGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Games.</p>
+<p>Example Usage: GET api/game/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Game/list</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameControlledGet" data-uid="SUGAR Engine REST API/v1/ApiGameControlledGet" class="text-capitalize">ApiGameControlledGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Games this Actor has control over.</p>
+<p>Example Usage: GET api/game/controlled</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Game/controlled</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameFindByNameGet" data-uid="SUGAR Engine REST API/v1/ApiGameFindByNameGet" class="text-capitalize">ApiGameFindByNameGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of Games that match <param name="name"> provided.</p>
+<p>Example Usage: GET api/game/find/game1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Game/find/{name}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*name</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Game name</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameFindbyidByIdGet" data-uid="SUGAR Engine REST API/v1/ApiGameFindbyidByIdGet" class="text-capitalize">ApiGameFindbyidByIdGet</h3>
+  <div class="markdown level1 summary"><p>Get Game that matches <param name="id"> provided.</p>
+<p>Example Usage: GET api/game/findbyid/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Game/findbyid/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Game id</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGamePost" data-uid="SUGAR Engine REST API/v1/ApiGamePost" class="text-capitalize">ApiGamePost</h3>
+  <div class="markdown level1 summary"><p>Create a new Game.
+Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
+<p>Example Usage: POST api/game</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Game</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newGame</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.GameRequest object that contains the details of the new Game.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameUpdateByIdPut" data-uid="SUGAR Engine REST API/v1/ApiGameUpdateByIdPut" class="text-capitalize">ApiGameUpdateByIdPut</h3>
+  <div class="markdown level1 summary"><p>Update an existing Game.</p>
+<p>Example Usage: PUT api/game/update/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/Game/update/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Id of the existing Game.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">game</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.GameRequest object that holds the details of the Game.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiGameByIdDelete" class="text-capitalize">ApiGameByIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete Game with the ID provided.</p>
+<p>Example Usage: DELETE api/game/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/Game/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Game ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">GameData</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameDataGet" data-uid="SUGAR Engine REST API/v1/ApiGameDataGet" class="text-capitalize">ApiGameDataGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of all GameData that match the <param name="actorId">, <param name="gameId"> and <param name="key"> provided.</p>
+<p>Example Usage: GET api/gamedata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/GameData[?actorId&amp;gameId&amp;key]</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a User/Group.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a Game.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">key</span></td>
+        <td>array</td>
+        <td></td>
+        <td><p>Array of Key names.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameDataPost" data-uid="SUGAR Engine REST API/v1/ApiGameDataPost" class="text-capitalize">ApiGameDataPost</h3>
+  <div class="markdown level1 summary"><p>Create a new GameData record.</p>
+<p>Example Usage: POST api/gamedata</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/GameData</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newData</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.EvaluationDataRequest object that holds the details of the new GameData.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameDataGameactorsByIdGet" data-uid="SUGAR Engine REST API/v1/ApiGameDataGameactorsByIdGet" class="text-capitalize">ApiGameDataGameactorsByIdGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of all Actors that have data saved for the game <param name="id"> provided.</p>
+<p>Example Usage: GET api/gamedata/gameactors/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/GameData/gameactors/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a Game.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameDataGamekeysByIdGet" data-uid="SUGAR Engine REST API/v1/ApiGameDataGamekeysByIdGet" class="text-capitalize">ApiGameDataGamekeysByIdGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of all GameData keys for the <param name="id"> provided.</p>
+<p>Example Usage: GET api/gamedata/gamekeys/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/GameData/gamekeys/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a Game.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGameDataHighestGet" data-uid="SUGAR Engine REST API/v1/ApiGameDataHighestGet" class="text-capitalize">ApiGameDataHighestGet</h3>
+  <div class="markdown level1 summary"><p>Example Usage: GET api/gamedata/highest?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2&amp;dataType=1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/GameData/highest?actorId&amp;gameId&amp;dataType&amp;sortType[&amp;key]</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a User/Group.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a Game.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">key</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Array of Key names.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*dataType</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Data type of value</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*sortType</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Group</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupListGet" data-uid="SUGAR Engine REST API/v1/ApiGroupListGet" class="text-capitalize">ApiGroupListGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Groups.</p>
+<p>Example Usage: GET api/group/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Group/list</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupControlledGet" data-uid="SUGAR Engine REST API/v1/ApiGroupControlledGet" class="text-capitalize">ApiGroupControlledGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Groups this Actor has control over.</p>
+<p>Example Usage: GET api/group/controlled</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Group/controlled</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupFindByNameGet" data-uid="SUGAR Engine REST API/v1/ApiGroupFindByNameGet" class="text-capitalize">ApiGroupFindByNameGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of Groups that match <param name="name"> provided.</p>
+<p>Example Usage: GET api/group/find/group1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Group/find/{name}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*name</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Group name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupFindbyidByIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupFindbyidByIdGet" class="text-capitalize">ApiGroupFindbyidByIdGet</h3>
+  <div class="markdown level1 summary"><p>Get Group that matches <param name="id"> provided.</p>
+<p>Example Usage: GET api/group/findbyid/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Group/findbyid/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Group id.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupPost" data-uid="SUGAR Engine REST API/v1/ApiGroupPost" class="text-capitalize">ApiGroupPost</h3>
+  <div class="markdown level1 summary"><p>Create a new Group.
+Requires the !:GroupRequest.Name to be unique for Groups.</p>
+<p>Example Usage: POST api/group</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Group</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">actor</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.GroupRequest object that holds the details of the new Group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupUpdateByIdPut" data-uid="SUGAR Engine REST API/v1/ApiGroupUpdateByIdPut" class="text-capitalize">ApiGroupUpdateByIdPut</h3>
+  <div class="markdown level1 summary"><p>Update an existing Group.</p>
+<p>Example Usage: PUT api/group/update/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/Group/update/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Id of the existing Group.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">group</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.GroupRequest object that holds the details of the Group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiGroupByIdDelete" class="text-capitalize">ApiGroupByIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete group with the <param name="id"> provided.</p>
+<p>Example Usage: DELETE api/group/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/Group/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Group ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">GroupMember</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberRequestsByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberRequestsByGroupIdGet" class="text-capitalize">ApiGroupMemberRequestsByGroupIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Users that have relationship requests for this <param name="groupId">.</p>
+<p>Example Usage: GET api/groupmember/requests/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/GroupMember/requests/{groupId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*groupId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberSentrequestsByUserIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberSentrequestsByUserIdGet" class="text-capitalize">ApiGroupMemberSentrequestsByUserIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Groups that have been sent relationship requests for this <param name="userId">.</p>
+<p>Example Usage: GET api/groupmember/sentrequests/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/GroupMember/sentrequests/{userId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*userId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the user.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberMembersByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberMembersByGroupIdGet" class="text-capitalize">ApiGroupMemberMembersByGroupIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Users that have relationships with this <param name="groupId">.</p>
+<p>Example Usage: GET api/groupmember/members/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/GroupMember/members/{groupId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*groupId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberMembercountByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberMembercountByGroupIdGet" class="text-capitalize">ApiGroupMemberMembercountByGroupIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a count of users that have a relationship with this <param name="groupId">.</p>
+<p>Example Usage: GET api/groupmember/membercount/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/GroupMember/membercount/{groupId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*groupId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberUsergroupsByUserIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberUsergroupsByUserIdGet" class="text-capitalize">ApiGroupMemberUsergroupsByUserIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Groups that have relationships with this <param name="userId">.</p>
+<p>Example Usage: GET api/groupmember/usergroups/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/GroupMember/usergroups/{userId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*userId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the User.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberPut" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberPut" class="text-capitalize">ApiGroupMemberPut</h3>
+  <div class="markdown level1 summary"><p>Update an existing relationship between <param name="relationship.UserId.UserId"> and <param name="relationship.GroupId.GroupId">.
+Requires the relationship to already exist between the User and Group.</p>
+<p>Example Usage: PUT api/groupmember</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/GroupMember</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">relationship</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RelationshipStatusUpdate object that holds the details of the relationship.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberPost" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberPost" class="text-capitalize">ApiGroupMemberPost</h3>
+  <div class="markdown level1 summary"><p>Create a new relationship request between the User and Group.
+Requires a relationship between the User and Group to not already exist.</p>
+<p>Example Usage: POST api/groupmember</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/GroupMember</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">relationship</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RelationshipRequest object that holds the details of the new relationship request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberRequestPut" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberRequestPut" class="text-capitalize">ApiGroupMemberRequestPut</h3>
+  <div class="markdown level1 summary"><p>Update an existing relationship request between <param name="relationship.UserId.UserId"> and <param name="relationship.GroupId.GroupId">.
+Requires the relationship request to already exist between the User and Group.</p>
+<p>Example Usage: PUT api/groupmember/request</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/GroupMember/request</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">relationship</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RelationshipStatusUpdate object that holds the details of the relationship.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Leaderboards</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsGlobalListGet" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsGlobalListGet" class="text-capitalize">ApiLeaderboardsGlobalListGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of leaderboards that match <param name="gameId">.
+If global is provided instead of a gameId, get all global leaderboards, ie. leaderboards that are not associated with a specific game.</p>
+<p>Example Usage: GET api/leaderboards/game/1/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Leaderboards/global/list</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Game ID</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsGameByGameIdListGet" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsGameByGameIdListGet" class="text-capitalize">ApiLeaderboardsGameByGameIdListGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of leaderboards that match <param name="gameId">.
+If global is provided instead of a gameId, get all global leaderboards, ie. leaderboards that are not associated with a specific game.</p>
+<p>Example Usage: GET api/leaderboards/game/1/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Leaderboards/game/{gameId}/list</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Game ID</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsByTokenGlobalGet" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsByTokenGlobalGet" class="text-capitalize">ApiLeaderboardsByTokenGlobalGet</h3>
+  <div class="markdown level1 summary"><p>Find a single leaderboard matching the token and gameId.</p>
+<p>Example Usage: GET api/leaderboards/LEADERBOARD_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Leaderboards/{token}/global</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsByTokenGlobalDelete" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsByTokenGlobalDelete" class="text-capitalize">ApiLeaderboardsByTokenGlobalDelete</h3>
+  <div class="markdown level1 summary"><p>Delete Leaderboard with the <param name="token"> and <param name="gameId"> provided.</p>
+<p>Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/Leaderboards/{token}/global</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Leaderboard</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Leaderboard is for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsByTokenByGameIdGet" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsByTokenByGameIdGet" class="text-capitalize">ApiLeaderboardsByTokenByGameIdGet</h3>
+  <div class="markdown level1 summary"><p>Find a single leaderboard matching the token and gameId.</p>
+<p>Example Usage: GET api/leaderboards/LEADERBOARD_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Leaderboards/{token}/{gameId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsByTokenByGameIdDelete" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsByTokenByGameIdDelete" class="text-capitalize">ApiLeaderboardsByTokenByGameIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete Leaderboard with the <param name="token"> and <param name="gameId"> provided.</p>
+<p>Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/Leaderboards/{token}/{gameId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Leaderboard</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Leaderboard is for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsCreatePost" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsCreatePost" class="text-capitalize">ApiLeaderboardsCreatePost</h3>
+  <div class="markdown level1 summary"><p>Create a new Leaderboard.
+Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contracts.LeaderboardRequest.Token to be unique to that PlayGen.SUGAR.Contracts.LeaderboardRequest.GameId.</p>
+<p>Example Usage: POST api/leaderboards/create</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Leaderboards/create</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newLeaderboard</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.LeaderboardRequest object that holds the details of the new Leaderboard.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsStandingsPost" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsStandingsPost" class="text-capitalize">ApiLeaderboardsStandingsPost</h3>
+  <div class="markdown level1 summary"><p>Get the standings for a Leaderboard using a PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest.</p>
+<p>Example Usage: POST api/leaderboards/standings</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Leaderboards/standings</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">leaderboardDetails</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest object that holds the details that are wanted from the Leaderboard.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsUpdatePut" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsUpdatePut" class="text-capitalize">ApiLeaderboardsUpdatePut</h3>
+  <div class="markdown level1 summary"><p>Update an existing Leaderboard.</p>
+<p>Example Usage: PUT api/leaderboards/update</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/Leaderboards/update</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">leaderboard</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.LeaderboardRequest object that holds the details of the Leaderboard.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Match</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchCreateByGameIdGet" data-uid="SUGAR Engine REST API/v1/ApiMatchCreateByGameIdGet" class="text-capitalize">ApiMatchCreateByGameIdGet</h3>
+  <div class="markdown level1 summary"><p>Method for admins to creates a match for a game they are not logged into.</p>
+<p>Example Usage: GET api/match/create/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/create/{gameId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchCreateGet" data-uid="SUGAR Engine REST API/v1/ApiMatchCreateGet" class="text-capitalize">ApiMatchCreateGet</h3>
+  <div class="markdown level1 summary"><p>Method to create a match for a game a user is currently logged into</p>
+<p>Example Usage: GET api/match/create</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/create</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchCreateandstartGet" data-uid="SUGAR Engine REST API/v1/ApiMatchCreateandstartGet" class="text-capitalize">ApiMatchCreateandstartGet</h3>
+  <div class="markdown level1 summary"><p>Method to create a match for a game a user is currently logged into which is also started automatically.</p>
+<p>Example Usage: GET api/match/create</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/createandstart</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchByMatchIdStartGet" data-uid="SUGAR Engine REST API/v1/ApiMatchByMatchIdStartGet" class="text-capitalize">ApiMatchByMatchIdStartGet</h3>
+  <div class="markdown level1 summary"><p>Start a match for the game the user is currently logged into.</p>
+<p>Example Usage: GET api/match/1/start</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/{matchId}/start</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*matchId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchByMatchIdEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchByMatchIdEndGet" class="text-capitalize">ApiMatchByMatchIdEndGet</h3>
+  <div class="markdown level1 summary"><p>Ends a match for the game that the user is currently logged in for.</p>
+<p>Example Usage: GET api/match/1/end</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/{matchId}/end</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*matchId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchByGameIdByMatchIdEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchByGameIdByMatchIdEndGet" class="text-capitalize">ApiMatchByGameIdByMatchIdEndGet</h3>
+  <div class="markdown level1 summary"><p>Method for admins to end a match for a game they are not logged into.</p>
+<p>Example Usage: GET api/match/1/end</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/{gameId}/{matchId}/end</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*matchId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchByStartByEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchByStartByEndGet" class="text-capitalize">ApiMatchByStartByEndGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of matches filtered by a time range.</p>
+<p>Example Usage: GET api/match/2016-12-20T15:40:30/2016-12-20T16:50:40</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/{start}/{end}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*start</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*end</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchGameByGameIdGet" data-uid="SUGAR Engine REST API/v1/ApiMatchGameByGameIdGet" class="text-capitalize">ApiMatchGameByGameIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of matches for a specific game.</p>
+<p>Example Usage: GET api/match/game/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/game/{gameId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchGameByGameIdByStartByEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchGameByGameIdByStartByEndGet" class="text-capitalize">ApiMatchGameByGameIdByStartByEndGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of matches for a specific game, filtered by a time range.</p>
+<p>Example Usage: GET api/match/game/1/2016-12-20T15:40:30/2016-12-20T16:50:40</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/game/{gameId}/{start}/{end}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*start</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*end</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchCreatorByCreatorIdGet" data-uid="SUGAR Engine REST API/v1/ApiMatchCreatorByCreatorIdGet" class="text-capitalize">ApiMatchCreatorByCreatorIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of matches that were created by a specific actor.</p>
+<p>Example Usage: GET api/match/creator/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/creator/{creatorId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*creatorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchCreatorByCreatorIdByStartByEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchCreatorByCreatorIdByStartByEndGet" class="text-capitalize">ApiMatchCreatorByCreatorIdByStartByEndGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of matches that were created by a specific actor, filtered by a time range.</p>
+<p>Example Usage: GET api/match/creator/1/2016-12-20T15:40:30/2016-12-20T16:50:40</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/creator/{creatorId}/{start}/{end}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*creatorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*start</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*end</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchGameByGameIdCreatorByCreatorIdGet" data-uid="SUGAR Engine REST API/v1/ApiMatchGameByGameIdCreatorByCreatorIdGet" class="text-capitalize">ApiMatchGameByGameIdCreatorByCreatorIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of matches for a specific game created by a specific actor.</p>
+<p>Example Usage: GET api/match/game/1/creator/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/game/{gameId}/creator/{creatorId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*creatorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchGameByGameIdCreatorByCreatorIdByStartByEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchGameByGameIdCreatorByCreatorIdByStartByEndGet" class="text-capitalize">ApiMatchGameByGameIdCreatorByCreatorIdByStartByEndGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of matches for a specific game created by a specific user, filtered by a time range.</p>
+<p>Example Usage: GET api/match/game/1/creator/1/2016-12-20T15:40:30/2016-12-20T16:50:40</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match/game/{gameId}/creator/{creatorId}/{start}/{end}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*creatorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*start</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*end</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchGet" data-uid="SUGAR Engine REST API/v1/ApiMatchGet" class="text-capitalize">ApiMatchGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of all MatchData that match the input parameters.</p>
+<p>Example Usage: GET api/match/1/data</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Match?matchId[&amp;keys]</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*matchId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Id of a User/Group.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">keys</span></td>
+        <td>array</td>
+        <td></td>
+        <td><p>Array of Key names.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchPost" data-uid="SUGAR Engine REST API/v1/ApiMatchPost" class="text-capitalize">ApiMatchPost</h3>
+  <div class="markdown level1 summary"><p>Create a new GameData record.</p>
+<p>Example Usage: POST api/match/1/data</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Match</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newData</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.EvaluationDataRequest object that holds the details of the new Match Data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Resource</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiResourceGet" data-uid="SUGAR Engine REST API/v1/ApiResourceGet" class="text-capitalize">ApiResourceGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of all Resources filtered by the <param name="actorId">, <param name="gameId"> and <param name="keys"> provided.</p>
+<p>Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Resource[?gameId&amp;actorId&amp;keys]</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a Game.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a User/Group.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">keys</span></td>
+        <td>array</td>
+        <td></td>
+        <td><p>Optional array of Key names to filter results by.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiResourcePost" data-uid="SUGAR Engine REST API/v1/ApiResourcePost" class="text-capitalize">ApiResourcePost</h3>
+  <div class="markdown level1 summary"><p>Creates or updates a Resource record.</p>
+<p>Example Usage: POST api/resource</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Resource</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">resourceRequest</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.ResourceAddRequest object that holds the details of the ResourceData.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiResourceTransferPost" data-uid="SUGAR Engine REST API/v1/ApiResourceTransferPost" class="text-capitalize">ApiResourceTransferPost</h3>
+  <div class="markdown level1 summary"><p>Transfers a quantity of a specific resource.</p>
+<p>Example Usage: Post api/resource/transfer</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Resource/transfer</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">transferRequest</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.ResourceTransferRequest object that holds the details of the resoruce transfer.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Role</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleListGet" data-uid="SUGAR Engine REST API/v1/ApiRoleListGet" class="text-capitalize">ApiRoleListGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Roles.</p>
+<p>Example Usage: GET api/role/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Role/list</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleScopeByNameGet" data-uid="SUGAR Engine REST API/v1/ApiRoleScopeByNameGet" class="text-capitalize">ApiRoleScopeByNameGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Roles for the scope with this name.</p>
+<p>Example Usage: GET api/role/scope/game</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Role/scope/{name}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*name</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleScopedefaultByNameGet" data-uid="SUGAR Engine REST API/v1/ApiRoleScopedefaultByNameGet" class="text-capitalize">ApiRoleScopedefaultByNameGet</h3>
+  <div class="markdown level1 summary"><p>Get default Role for the scope with this name.</p>
+<p>Example Usage: GET api/role/scopedefault/game</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Role/scopedefault/{name}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*name</span></td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiRolePost" data-uid="SUGAR Engine REST API/v1/ApiRolePost" class="text-capitalize">ApiRolePost</h3>
+  <div class="markdown level1 summary"><p>Create a new Role.
+Requires the PlayGen.SUGAR.Contracts.RoleRequest.Name to be unique.</p>
+<p>Example Usage: POST api/role</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Role</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newRole</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RoleRequest object that contains the details of the new Role.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiRoleByIdDelete" class="text-capitalize">ApiRoleByIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete Role with the ID provided.</p>
+<p>Example Usage: DELETE api/role/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/Role/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Role ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">RoleClaim</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleClaimRoleByIdGet" data-uid="SUGAR Engine REST API/v1/ApiRoleClaimRoleByIdGet" class="text-capitalize">ApiRoleClaimRoleByIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Claims for this Role.</p>
+<p>Example Usage: GET api/roleclaim/role/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/RoleClaim/role/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleClaimPost" data-uid="SUGAR Engine REST API/v1/ApiRoleClaimPost" class="text-capitalize">ApiRoleClaimPost</h3>
+  <div class="markdown level1 summary"><p>Create a new RoleClaim.</p>
+<p>Example Usage: POST api/roleclaim</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/RoleClaim</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newRoleClaim</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RoleClaimRequest object that contains the details of the new RoleClaim.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleClaimRoleByRoleIdClaimByClaimIdDelete" data-uid="SUGAR Engine REST API/v1/ApiRoleClaimRoleByRoleIdClaimByClaimIdDelete" class="text-capitalize">ApiRoleClaimRoleByRoleIdClaimByClaimIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete RoleClaim with the ID provided.</p>
+<p>Example Usage: DELETE api/roleclaim/role/1/claim/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/RoleClaim/role/{roleId}/claim/{claimId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*roleId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Role ID.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*claimId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Claim ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Session</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLoginplatformPost" data-uid="SUGAR Engine REST API/v1/ApiLoginplatformPost" class="text-capitalize">ApiLoginplatformPost</h3>
+  <div class="markdown level1 summary"><p>Logs in an account based on the name and password combination.
+Returns a JsonWebToken used for authorization in any further calls to the API.</p>
+<p>Example Usage: POST api/loginplatform</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/loginplatform</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">accountRequest</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.AccountRequest object that contains the account details provided.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiByGameIdLogingamePost" data-uid="SUGAR Engine REST API/v1/ApiByGameIdLogingamePost" class="text-capitalize">ApiByGameIdLogingamePost</h3>
+  <div class="markdown level1 summary"><p>Logs in an account based on the name and password combination.
+Returns a JsonWebToken used for authorization in any further calls to the API.</p>
+<p>Example Usage: POST api/1/logingame</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/{gameId}/logingame</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Optional Id of the game the account is logging in for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">accountRequest</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.AccountRequest object that contains the account details provided.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiCreateandloginplatformPost" data-uid="SUGAR Engine REST API/v1/ApiCreateandloginplatformPost" class="text-capitalize">ApiCreateandloginplatformPost</h3>
+  <div class="markdown level1 summary"><p>Creates a new account and login that account.</p>
+<p>Example Usage: POST api/createandloginplatform</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/createandloginplatform</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">accountRequest</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.AccountRequest object that contains the account details provided.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiByGameIdCreateandlogingamePost" data-uid="SUGAR Engine REST API/v1/ApiByGameIdCreateandlogingamePost" class="text-capitalize">ApiByGameIdCreateandlogingamePost</h3>
+  <div class="markdown level1 summary"><p>Creates a new account and login that account.</p>
+<p>Example Usage: POST api/1/createandlogingame</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/{gameId}/createandlogingame</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Optional Id of the game the account is logging in for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">accountRequest</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.AccountRequest object that contains the account details provided.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiHeartbeatGet" data-uid="SUGAR Engine REST API/v1/ApiHeartbeatGet" class="text-capitalize">ApiHeartbeatGet</h3>
+  <div class="markdown level1 summary"><p>Heartbeat method to keep the specific session alive.
+Calling it within a server defined interval will notify the server that the
+session is still active.</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/heartbeat</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiLogoutGet" data-uid="SUGAR Engine REST API/v1/ApiLogoutGet" class="text-capitalize">ApiLogoutGet</h3>
+  <div class="markdown level1 summary"><p>Logs out the currently logged in account, ending it&#39;s session and removing the 
+authorization token.</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/logout</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Skills</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsFindByTokenByGameIdGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsFindByTokenByGameIdGet" class="text-capitalize">ApiSkillsFindByTokenByGameIdGet</h3>
+  <div class="markdown level1 summary"><p>Find a Skill that matches <param name="token"> and <param name="gameId">.</p>
+<p>Example Usage: GET api/skills/find/SKILL_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Skills/find/{token}/{gameId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Skill</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Skill is for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsFindByTokenGlobalGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsFindByTokenGlobalGet" class="text-capitalize">ApiSkillsFindByTokenGlobalGet</h3>
+  <div class="markdown level1 summary"><p>Find a Skill that matches <param name="token"> and <param name="gameId">.</p>
+<p>Example Usage: GET api/skills/find/SKILL_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Skills/find/{token}/global</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Skill</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Skill is for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsGlobalListGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsGlobalListGet" class="text-capitalize">ApiSkillsGlobalListGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of Skills that match <param name="gameId">.
+If global is provided instead of a gameId, get all global skills, ie. skills that are not associated with a specific game.</p>
+<p>Example Usage: GET api/skills/game/1/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Skills/global/list</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Game ID</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsGameByGameIdListGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsGameByGameIdListGet" class="text-capitalize">ApiSkillsGameByGameIdListGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of Skills that match <param name="gameId">.
+If global is provided instead of a gameId, get all global skills, ie. skills that are not associated with a specific game.</p>
+<p>Example Usage: GET api/skills/game/1/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Skills/game/{gameId}/list</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Game ID</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsGameByGameIdEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsGameByGameIdEvaluateByActorIdGet" class="text-capitalize">ApiSkillsGameByGameIdEvaluateByActorIdGet</h3>
+  <div class="markdown level1 summary"><p>Find the current progress for all skills for a <param name="gameId"> for <param name="actorId">.</p>
+<p>Example Usage: GET api/skills/game/1/evaluate/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Skills/game/{gameId}/evaluate/{actorId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Game</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Group/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsGlobalEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsGlobalEvaluateByActorIdGet" class="text-capitalize">ApiSkillsGlobalEvaluateByActorIdGet</h3>
+  <div class="markdown level1 summary"><p>Find the current progress for all skills for a <param name="gameId"> for <param name="actorId">.</p>
+<p>Example Usage: GET api/skills/game/1/evaluate/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Skills/global/evaluate/{actorId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Game</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Group/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsByTokenByGameIdEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsByTokenByGameIdEvaluateByActorIdGet" class="text-capitalize">ApiSkillsByTokenByGameIdEvaluateByActorIdGet</h3>
+  <div class="markdown level1 summary"><p>Find the current progress for a Skill for <param name="actorId">.</p>
+<p>Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Skills/{token}/{gameId}/evaluate/{actorId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Skill</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Skill is for</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Group/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsByTokenGlobalEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsByTokenGlobalEvaluateByActorIdGet" class="text-capitalize">ApiSkillsByTokenGlobalEvaluateByActorIdGet</h3>
+  <div class="markdown level1 summary"><p>Find the current progress for a Skill for <param name="actorId">.</p>
+<p>Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Skills/{token}/global/evaluate/{actorId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Skill</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Skill is for</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*actorId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of Group/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsCreatePost" data-uid="SUGAR Engine REST API/v1/ApiSkillsCreatePost" class="text-capitalize">ApiSkillsCreatePost</h3>
+  <div class="markdown level1 summary"><p>Create a new Skill.
+Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to that PlayGen.SUGAR.Contracts.EvaluationCreateRequest.GameId.</p>
+<p>Example Usage: POST api/skills/create</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Skills/create</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">newSkill</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.EvaluationCreateRequest object that holds the details of the new Skill.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsUpdatePut" data-uid="SUGAR Engine REST API/v1/ApiSkillsUpdatePut" class="text-capitalize">ApiSkillsUpdatePut</h3>
+  <div class="markdown level1 summary"><p>Update an existing Skill.</p>
+<p>Example Usage: PUT api/skills/update</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/Skills/update</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">skill</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.EvaluationCreateRequest object that holds the details of the Skill.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsByTokenGlobalDelete" data-uid="SUGAR Engine REST API/v1/ApiSkillsByTokenGlobalDelete" class="text-capitalize">ApiSkillsByTokenGlobalDelete</h3>
+  <div class="markdown level1 summary"><p>Delete Skill with the <param name="token"> and <param name="gameId"> provided.</p>
+<p>Example Usage: DELETE api/skills/SKILL_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/Skills/{token}/global</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Skill</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Skill is for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsByTokenByGameIdDelete" data-uid="SUGAR Engine REST API/v1/ApiSkillsByTokenByGameIdDelete" class="text-capitalize">ApiSkillsByTokenByGameIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete Skill with the <param name="token"> and <param name="gameId"> provided.</p>
+<p>Example Usage: DELETE api/skills/SKILL_TOKEN/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/Skills/{token}/{gameId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*token</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>Token of Skill</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*gameId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the Game the Skill is for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">User</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserListGet" data-uid="SUGAR Engine REST API/v1/ApiUserListGet" class="text-capitalize">ApiUserListGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Users.</p>
+<p>Example Usage: GET api/user/list</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/User/list</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFindByNameGet" data-uid="SUGAR Engine REST API/v1/ApiUserFindByNameGet" class="text-capitalize">ApiUserFindByNameGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of Users that match <param name="name"> provided.</p>
+<p>Example Usage: GET api/user/find/user1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/User/find/{name}?exactMatch</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*name</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>User name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*exactMatch</span></td>
+        <td>boolean</td>
+        <td></td>
+        <td><p>Match the name exactly.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFindByNameByExactMatchGet" data-uid="SUGAR Engine REST API/v1/ApiUserFindByNameByExactMatchGet" class="text-capitalize">ApiUserFindByNameByExactMatchGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of Users that match <param name="name"> provided.</p>
+<p>Example Usage: GET api/user/find/user1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/User/find/{name}/{exactMatch}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*name</span></td>
+        <td>string</td>
+        <td></td>
+        <td><p>User name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">*exactMatch</span></td>
+        <td>boolean</td>
+        <td></td>
+        <td><p>Match the name exactly.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFindbyidByIdGet" data-uid="SUGAR Engine REST API/v1/ApiUserFindbyidByIdGet" class="text-capitalize">ApiUserFindbyidByIdGet</h3>
+  <div class="markdown level1 summary"><p>Get User that matches <param name="id"> provided.</p>
+<p>Example Usage: GET api/user/findbyid/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/User/findbyid/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>User id.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserPost" data-uid="SUGAR Engine REST API/v1/ApiUserPost" class="text-capitalize">ApiUserPost</h3>
+  <div class="markdown level1 summary"><p>Create a new User.
+Requires the PlayGen.SUGAR.Contracts.UserRequest&#39;s Name to be unique for Users.</p>
+<p>Example Usage: POST api/user</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/User</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">actor</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.UserRequest object that holds the details of the new User.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserUpdateByIdPut" data-uid="SUGAR Engine REST API/v1/ApiUserUpdateByIdPut" class="text-capitalize">ApiUserUpdateByIdPut</h3>
+  <div class="markdown level1 summary"><p>Update an existing User.</p>
+<p>Example Usage: PUT api/user/update/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/User/update/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>Id of the existing User.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">user</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.UserRequest object that holds the details of the User.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiUserByIdDelete" class="text-capitalize">ApiUserByIdDelete</h3>
+  <div class="markdown level1 summary"><p>Delete user with the <param name="id"> provided.</p>
+<p>Example Usage: DELETE api/user/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">DELETE /api/User/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>User ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">UserFriend</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendRequestsByUserIdGet" data-uid="SUGAR Engine REST API/v1/ApiUserFriendRequestsByUserIdGet" class="text-capitalize">ApiUserFriendRequestsByUserIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Users that have relationship requests for this <param name="userId">.</p>
+<p>Example Usage: GET api/userfriend/requests/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/UserFriend/requests/{userId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*userId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendSentrequestsByUserIdGet" data-uid="SUGAR Engine REST API/v1/ApiUserFriendSentrequestsByUserIdGet" class="text-capitalize">ApiUserFriendSentrequestsByUserIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Users that have been sent relationship requests for this <param name="userId">.</p>
+<p>Example Usage: GET api/userfriend/sentrequests/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/UserFriend/sentrequests/{userId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*userId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the user.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendFriendsByUserIdGet" data-uid="SUGAR Engine REST API/v1/ApiUserFriendFriendsByUserIdGet" class="text-capitalize">ApiUserFriendFriendsByUserIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Users that have relationships with this <param name="userId">.</p>
+<p>Example Usage: GET api/userfriend/friends/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/UserFriend/friends/{userId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*userId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the user.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendPut" data-uid="SUGAR Engine REST API/v1/ApiUserFriendPut" class="text-capitalize">ApiUserFriendPut</h3>
+  <div class="markdown level1 summary"><p>Update an existing relationship between <param name="relationship.RequestorId.RequestorId"> and <param name="relationship.AcceptorId.AcceptorId">.
+Requires the relationship to already exist between the two Users.</p>
+<p>Example Usage: PUT api/userfriend</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/UserFriend</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">relationship</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RelationshipStatusUpdate object that holds the details of the relationship.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendPost" data-uid="SUGAR Engine REST API/v1/ApiUserFriendPost" class="text-capitalize">ApiUserFriendPost</h3>
+  <div class="markdown level1 summary"><p>Create a new relationship request between two Users.
+Requires a relationship between the two to not already exist.</p>
+<p>Example Usage: POST api/userfriend</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/UserFriend</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">relationship</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RelationshipRequest object that holds the details of the new relationship request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendRequestPut" data-uid="SUGAR Engine REST API/v1/ApiUserFriendRequestPut" class="text-capitalize">ApiUserFriendRequestPut</h3>
+  <div class="markdown level1 summary"><p>Update an existing relationship request between <param name="relationship.RequestorId.RequestorId"> and <param name="relationship.AcceptorId.AcceptorId">.
+Requires the relationship request to already exist between the two Users.</p>
+<p>Example Usage: PUT api/userfriend/request</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/UserFriend/request</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">relationship</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RelationshipStatusUpdate object that holds the details of the relationship.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Version</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiVersionGet" data-uid="SUGAR Engine REST API/v1/ApiVersionGet" class="text-capitalize">ApiVersionGet</h3>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Version</code></pre>
+  </div>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -35,6 +35,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
 		[HttpPost("create")]
 		[ArgumentsNotNull]
+		[AllowWithoutSession]
 		public IActionResult Create([FromBody] AccountRequest accountRequest)
 		{
 			var account = accountRequest.ToModel();
@@ -52,7 +53,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpDelete("{id:int}")]
 		[Authorize("Bearer")]
 		[Authorization(ClaimScope.Account, AuthorizationAction.Delete, AuthorizationEntity.Account)]
-		[ValidateSession]
 		public async Task<IActionResult> Delete([FromRoute]int id)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, id, HttpContext.ScopeItems(ClaimScope.Account))).Succeeded)
