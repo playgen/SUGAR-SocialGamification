@@ -2,6 +2,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.WebAPI.Attributes;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 {
@@ -10,10 +11,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	{
 		// GET
 		[HttpGet]
+		[AllowAnyAPIVersion]
+		[AllowWithoutSession]
 		public IActionResult Get()
 		{
 			return new OkObjectResult($"{DateTime.UtcNow}: {typeof(VersionController).GetTypeInfo().Assembly}." +
-									$" API Version: {APIVersion.Version}");
+									$" {APIVersion.Key}: {APIVersion.Version}");
 		}
 	}
 }

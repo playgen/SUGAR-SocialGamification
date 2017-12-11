@@ -1,19 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using NLog;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.WebAPI.Attributes;
 using PlayGen.SUGAR.Server.WebAPI.Exceptions;
+using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Filters
 {
-    public class APIVersionFilterFilter : IActionFilter
-    {
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
-		public void OnActionExecuting(ActionExecutingContext context)
-        {
-			if (context.HttpContext.Request.Headers.TryGetValue("APIVersion", out var requestApiVersion))
+	/// <summary>
+	/// Ensures API Versions match for incoming request and server
+	/// </summary>
+	public class APIVersionFilterFilter : IAuthorizationFilter
+	{
+		public void OnAuthorization(AuthorizationFilterContext context)
+		{
+			if (context.ActionDescriptor.GetCustomMethodAttribute<AllowAnyAPIVersion>() == null)
 			{
-				if (!APIVersion.IsCompatible(requestApiVersion))
+				if (!context.HttpContext.Request.Headers.TryGetValue(APIVersion.Key, out var requestApiVersion)
+					|| !APIVersion.IsCompatible(requestApiVersion))
 				{
 					throw new IncompatibleAPIVersionException("Server and Client API Major versions do not match." +
 															" This is likley to cause unpredictable behaviour." +
@@ -21,14 +24,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 															$" \nClient API Version: {requestApiVersion}");
 				}
 			}
-			else
-			{
-				Logger.Warn("Incoming request with no APIVersion specified: {0}", context.ActionDescriptor.AttributeRouteInfo.Template);
-			}
-        }
-
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-        }
-    }
+		}
+	}
 }
