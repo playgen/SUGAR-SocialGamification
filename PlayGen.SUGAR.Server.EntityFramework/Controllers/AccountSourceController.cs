@@ -2,7 +2,6 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
-using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
@@ -27,7 +26,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var source = context.AccountSources.Find(context, id);
+				var source = context.AccountSources.Find(id);
 				return source;
 			}
 		}
@@ -60,7 +59,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				// context.[tablename].Update(entity);
 				// context.SaveChanges();
 
-				var existing = context.AccountSources.Find(context, source.Id);
+				var existing = context.AccountSources.Find(source.Id);
 
 				if (existing != null)
 				{

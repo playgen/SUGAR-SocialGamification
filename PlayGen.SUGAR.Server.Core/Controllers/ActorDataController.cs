@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Model;
 
@@ -8,29 +8,31 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ActorDataController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.ActorDataController _actorDataDbController;
 
-		public ActorDataController(EntityFramework.Controllers.ActorDataController actorDataDbController)
+		public ActorDataController(
+			ILogger<ActorDataController> logger,
+			EntityFramework.Controllers.ActorDataController actorDataDbController)
 		{
+			_logger = logger;
 			_actorDataDbController = actorDataDbController;
 		}
 
-		public List<ActorData> Get(int? gameId = null, int? actorId = null, ICollection<string> keys = null)
+		public List<ActorData> Get(int gameId, int actorId, ICollection<string> keys = null)
 		{
 			var datas = _actorDataDbController.Get(gameId, actorId, keys);
 
-			Logger.Info($"{datas?.Count} Actor Datas for GameId: {gameId}, ActorId: {actorId}, Keys: {string.Join(", ", keys)}");
+			_logger.LogInformation($"{datas?.Count} Actor Datas for GameId: {gameId}, ActorId: {actorId}, Keys: {string.Join(", ", keys)}");
 
 			return datas;
 		}
 
-		public bool KeyExists(int? gameId, int? actorId, string key)
+		public bool KeyExists(int gameId, int actorId, string key)
 		{
 			var keyExists = _actorDataDbController.KeyExists(gameId, actorId, key);
 
-			Logger.Info($"Key Exists: {keyExists} for GameId: {gameId}, ActorId: {actorId}, Key: {key}");
+			_logger.LogInformation($"Key Exists: {keyExists} for GameId: {gameId}, ActorId: {actorId}, Key: {key}");
 
 			return keyExists;
 		}
@@ -41,21 +43,18 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				newData = _actorDataDbController.Create(newData);
 
-				Logger.Info($"{newData?.Id}");
+				_logger.LogInformation($"{newData?.Id}");
 
 				return newData;
 			}
-			else
-			{
-				throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
-			}
+			throw new ArgumentException($"Invalid Value {newData.Value} for EvaluationDataType {newData.EvaluationDataType}");
 		}
 
 		public void Update(ActorData newData)
 		{
 			_actorDataDbController.Update(newData);
 
-			Logger.Info($"{newData?.Id}");
+			_logger.LogInformation($"{newData?.Id}");
 		}
 
 		protected bool ParseCheck(ActorData data)
@@ -66,16 +65,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					return true;
 
 				case EvaluationDataType.Long:
-					long tryLong;
-					return long.TryParse(data.Value, out tryLong);
+					return long.TryParse(data.Value, out var _);
 
 				case EvaluationDataType.Float:
-					float tryFloat;
-					return float.TryParse(data.Value, out tryFloat);
+					return float.TryParse(data.Value, out var _);
 
 				case EvaluationDataType.Boolean:
-					bool tryBoolean;
-					return bool.TryParse(data.Value, out tryBoolean);
+					return bool.TryParse(data.Value, out var _);
 
 				default:
 					return false;

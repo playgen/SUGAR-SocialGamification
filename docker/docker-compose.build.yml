@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  sugar:
+    image: sugar
+    build:
+      context: ../
+      dockerfile: Dockerfile    

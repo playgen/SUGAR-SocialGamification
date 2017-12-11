@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Core.Exceptions;
 using PlayGen.SUGAR.Server.Core.Utilities;
@@ -9,19 +9,20 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class AccountController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.AccountController _accountDbController;
 		private readonly AccountSourceController _accountSourceCoreController;
 		private readonly UserController _userCoreController;
 		private readonly ActorRoleController _actorRoleController;
 
-		// todo only take in account db controller but use core user controller
-		public AccountController(EntityFramework.Controllers.AccountController accountDbController,
-					AccountSourceController accountSourceCoreController,
-					UserController userCoreController,
-					ActorRoleController actorRoleController)
+		public AccountController(
+			ILogger<AccountController> logger,
+			EntityFramework.Controllers.AccountController accountDbController,
+			AccountSourceController accountSourceCoreController,
+			UserController userCoreController,
+			ActorRoleController actorRoleController)
 		{
+			_logger = logger;
 			_accountDbController = accountDbController;
 			_accountSourceCoreController = accountSourceCoreController;
 			_userCoreController = userCoreController;
@@ -30,8 +31,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public Account Authenticate(Account toVerify, string sourceToken)
 		{
-			Account verified;
-
 			var source = _accountSourceCoreController.GetByToken(sourceToken);
 
 			if (source != null)
@@ -39,6 +38,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				var found = _accountDbController.Get(new[] { toVerify.Name }, source.Id).SingleOrDefault();
 				if (found != null)
 				{
+					Account verified;
 					if (source.RequiresPassword)
 					{
 						if (PasswordEncryption.Verify(toVerify.Password, found.Password))
@@ -55,11 +55,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 						verified = found;
 					}
 
-					Logger.Info($"Account: {toVerify?.Id} passed verification: {verified}");
+					_logger.LogInformation($"Account: {toVerify.Id} passed verification: {verified}");
 
 					return verified;
 				}
-				else if (source.AutoRegister)
+				if (source.AutoRegister)
 				{
 					return Create(toVerify, sourceToken);
 				}
@@ -96,7 +96,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_actorRoleController.Create(ClaimScope.Account.ToString(), registered.UserId, registered.Id);
 
-			Logger.Info($"{registered?.Id}");
+			_logger.LogInformation($"{registered.Id}");
 
 			return registered;
 		}
@@ -105,7 +105,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_accountDbController.Delete(id);
 
-			Logger.Info($"{id}");
+			_logger.LogInformation($"{id}");
 		}
 	}
 }

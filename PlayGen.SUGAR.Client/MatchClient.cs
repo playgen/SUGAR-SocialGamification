@@ -14,15 +14,20 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/match";
 
-		public MatchClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
+		public MatchClient(
+			string baseAddress,
+			IHttpHandler httpHandler,
+			Dictionary<string, string> persistentHeaders,
+			AsyncRequestController asyncRequestController,
+			EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
 		{
 		}
 
-        /// <summary>
-        /// Method to create a match for a game a user is currently logged into
-        /// </summary>
-        /// <returns></returns>
+		/// <summary>
+		/// Method to create a match for a game a user is currently logged into
+		/// </summary>
+		/// <returns></returns>
 		public MatchResponse Create()
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/create").ToString();

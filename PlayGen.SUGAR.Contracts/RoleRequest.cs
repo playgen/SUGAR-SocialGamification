@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Contracts
         /// <summary>
         /// The ClaimScope of this role.
         /// </summary>
-        public ClaimScope ClaimScope { get; set; }
+        public ClaimScope? ClaimScope { get; set; }
     }
 }
 

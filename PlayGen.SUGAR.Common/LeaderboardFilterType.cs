@@ -12,14 +12,14 @@
 		/// <summary>
 		/// Provides standings in relation to the actorId provided. 
 		/// </summary>
-		Near,
+		Near = 1,
 		/// <summary>
 		/// Provides only the standings of those who are friends of the actorId provided.
 		/// </summary>
-		Friends,
+		Friends = 2,
 		/// <summary>
 		/// Provides only the standings of those who are members of the actorId provided.
 		/// </summary>
-		GroupMembers
+		GroupMembers = 3
 	}
 }

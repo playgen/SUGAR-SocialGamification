@@ -1,8 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.IO;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Tests
@@ -20,14 +17,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		private static GameController _gameController;
 		private static EvaluationDataController _evaluationDataController;
 		private static GroupController _groupController;
-		private static GroupRelationshipController _groupRelationshipController;
 		private static LeaderboardController _leaderboardController;
 		private static EvaluationController _evaluationController;
 		private static RoleController _roleController;
 		private static RoleClaimController _roleClaimController;
 		private static UserController _userController;
-		private static UserRelationshipController _userRelationshipController;
 		private static MatchController _matchController;
+		private static RelationshipController _relationshipController;
 
 		public static AccountController AccountController
 			=> _accountController ?? (_accountController = new AccountController(ContextFactory));
@@ -59,9 +55,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		public static GroupController GroupController
 			=> _groupController ?? (_groupController = new GroupController(ContextFactory));
 
-		public static GroupRelationshipController GroupRelationshipController
-			=> _groupRelationshipController ?? (_groupRelationshipController = new GroupRelationshipController(ContextFactory));
-
 		public static LeaderboardController LeaderboardController
 			=> _leaderboardController ?? (_leaderboardController = new LeaderboardController(ContextFactory));
 
@@ -74,28 +67,22 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		public static UserController UserController
 			=> _userController ?? (_userController = new UserController(ContextFactory));
 
-		public static UserRelationshipController UserRelationshipController
-			=> _userRelationshipController ?? (_userRelationshipController = new UserRelationshipController(ContextFactory));
-
 		public static MatchController MatchController
 			=> _matchController ?? (_matchController = new MatchController(ContextFactory));
+
+		public static RelationshipController RelationshipController
+			=> _relationshipController ?? (_relationshipController = new RelationshipController(ContextFactory));
 
 		static ControllerLocator()
 		{
 			const string environmentName = "Tests";
 
-			var type = typeof(ControllerLocator);
-			var assembly = type.GetTypeInfo().Assembly;
-			var uriBuilder = new UriBuilder(assembly.CodeBase);
-			var assemblyDir = Path.GetDirectoryName(Uri.UnescapeDataString(uriBuilder.Path));
-
-			var builder = new ConfigurationBuilder()
-				.SetBasePath(assemblyDir)
-				.AddJsonFile($"appsettings.{environmentName}.json", true);
-
-			var config = builder.Build();
-
-			var connectionString = config.GetConnectionString("DefaultConnection");
+			var configuration = new ConfigurationBuilder()
+				.SetBasePath(Directory.GetCurrentDirectory())
+				.AddJsonFile($"appsettings.{environmentName}.json")
+				.Build();
+			
+			var connectionString = configuration.GetConnectionString("DefaultConnection");
 			ContextFactory = new SUGARContextFactory(connectionString);
 		}
 	}

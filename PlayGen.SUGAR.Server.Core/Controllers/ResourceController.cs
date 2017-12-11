@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
@@ -11,28 +11,30 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ResourceController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EvaluationDataController _evaluationDataController;
 
-		public ResourceController(SUGARContextFactory contextFactory)
+		public ResourceController(
+			ILogger<ResourceController> logger,
+			ILogger<EvaluationDataController> evaluationDataLogger,
+			SUGARContextFactory contextFactory)
 		{
-			_evaluationDataController = new EvaluationDataController(contextFactory, EvaluationDataCategory.Resource);
+			_logger = logger;
+			_evaluationDataController = new EvaluationDataController(evaluationDataLogger, contextFactory, EvaluationDataCategory.Resource);
 		}
 
-		public List<EvaluationData> Get(int? gameId = null, int? actorId = null, string[] keys = null)
+		public List<EvaluationData> Get(int gameId, int actorId, string[] keys = null)
 		{
 			var results = _evaluationDataController.Get(gameId, actorId, keys);
 
 			return results;
 		}
 
-		public EvaluationData Transfer(int? gameId, int? fromActorId, int? toActorId, string key, long transferQuantity, out EvaluationData fromResource)
+		public EvaluationData Transfer(int gameId, int fromActorId, int toActorId, string key, long transferQuantity, out EvaluationData fromResource)
 		{
 			fromResource = GetExistingResource(gameId, fromActorId, key);
 
-			string message;
-			if (!IsTransferValid(long.Parse(fromResource.Value), transferQuantity, out message))
+			if (!IsTransferValid(long.Parse(fromResource.Value), transferQuantity, out var message))
 			{
 				throw new ArgumentException(message);
 			}
@@ -55,49 +57,24 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					Key = fromResource.Key,
 					Value = transferQuantity.ToString(),
 					Category = fromResource.Category,
-					EvaluationDataType = fromResource.EvaluationDataType,
+					EvaluationDataType = fromResource.EvaluationDataType
 				};
 				Create(toResource);
 			}
 
-			Logger.Info($"{fromResource?.Id} -> {toResource?.Id} for GameId: {gameId}, FromActorId: {fromActorId}, ToActorId: {toActorId}, Key: {key}, Quantity: {transferQuantity}");
+			_logger.LogInformation($"{fromResource?.Id} -> {toResource?.Id} for GameId: {gameId}, FromActorId: {fromActorId}, ToActorId: {toActorId}, Key: {key}, Quantity: {transferQuantity}");
 
 			return toResource;
 		}
 
-		public EvaluationData AddResource(int? gameId, int? ActorId, string key, long Quantity)
+		public void Create(EvaluationData data)
 		{
-
-			EvaluationData resource;
-			var foundResources = _evaluationDataController.Get(gameId, ActorId, new[] {key });
-
-			if (foundResources.Any())
+			if (!EvaluationDataController.IsValid(data, out var failure))
 			{
-				resource = foundResources.Single();
-				if(long.Parse(resource.Value) + Quantity < 0.0)
-				{
-					Quantity = -long.Parse(resource.Value);
-				}
-				resource = AddQuantity(resource.Id, Quantity);
+				throw new ArgumentException(failure);
 			}
-			else
-			{
-				if (Quantity < 0.0)
-				{
-					Quantity = (long) 0;
-				}
-				resource = new EvaluationData {
-					GameId = gameId,
-					ActorId = ActorId,
-					Key = key,
-					Value = Quantity.ToString(),
-					Category = EvaluationDataCategory.Resource,
-					//At the moment hard coded to just be longs. Need to think about if boolean and string would make sense
-					//for a resource. Floats definitely should be implemented
-					EvaluationDataType = EvaluationDataType.Long,
-				};
-				Create(resource);
-			}
+			
+			var existingEntries = _evaluationDataController.Get(data.GameId, data.ActorId, new[] {data.Key});
 
 			Logger.Info($"{resource?.Id} for GameId: {gameId}, ToActorId: {ActorId}, Key: {key}, Quantity: {Quantity}");
 
@@ -155,7 +132,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_evaluationDataController.Add(data);
 
-			Logger.Info($"{data?.Id}");
+			_logger.LogInformation($"{data.Id}");
 		}
 
 		public EvaluationData AddQuantity(int resourceId, long addAmount)
@@ -167,7 +144,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_evaluationDataController.Update(resource);
 
-			Logger.Info($"{resource?.Id} with Amount: {addAmount}");
+			_logger.LogInformation($"{resource.Id} with Amount: {addAmount}");
 
 			return resource;
 		}
@@ -195,12 +172,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			var found = foundResources.Single();
 
-			Logger.Info($"{found?.Id}");
+			_logger.LogInformation($"{found?.Id}");
 
 			return found;
 		}
 
-		private static bool IsTransferValid(long current, long transfer, out string message)
+		private bool IsTransferValid(long current, long transfer, out string message)
 		{
 			message = string.Empty;
 
@@ -215,7 +192,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			var result = message == string.Empty;
 
-			Logger.Debug($"{result} with Message: \"{message}\" for Current: {current}, Transfer {transfer}");
+			_logger.LogDebug($"{result} with Message: \"{message}\" for Current: {current}, Transfer {transfer}");
 
 			return result;
 		}

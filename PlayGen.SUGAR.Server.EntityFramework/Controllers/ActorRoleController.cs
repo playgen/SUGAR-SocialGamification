@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
-using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
@@ -19,12 +17,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var role = context.ActorRoles.Find(context, id);
+				var role = context.ActorRoles.Find(id);
 				return role;
 			}
 		}
 
-		public List<ActorRole> GetActorRolesForEntity(int actorId, int? entityId, ClaimScope scope, bool includeClaims = false)
+		public List<ActorRole> GetActorRolesForEntity(int actorId, int entityId, ClaimScope scope, bool includeClaims = false)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -34,13 +32,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 						.Include(r => r.Role)
 						.ThenInclude(r => r.RoleClaims)
 						.ThenInclude(rc => rc.Claim)
-						.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == Platform.EntityId) && ar.Role.ClaimScope == scope).ToList();
+						.Where(ar => ar.ActorId == actorId && (ar.EntityId == entityId || ar.EntityId == Platform.AllId) && ar.Role.ClaimScope == scope).ToList();
 					return roles;
 				}
 				else
 				{
 					var roles = context.ActorRoles
-					.Where(ar => ar.ActorId == actorId && (ar.EntityId.Value == entityId.Value || ar.EntityId.Value == Platform.EntityId) && ar.Role.ClaimScope == scope).ToList();
+					.Where(ar => ar.ActorId == actorId && (ar.EntityId == entityId || ar.EntityId == Platform.AllId) && ar.Role.ClaimScope == scope).ToList();
 					return roles;
 				}
 			}
@@ -67,11 +65,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<Actor> GetRoleActors(int roleId, int? entityId)
+		public List<Actor> GetRoleActors(int roleId, int entityId)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId.Value == entityId.Value).Select(ar => ar.Actor).Distinct().ToList();
+				var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId == entityId).Select(ar => ar.Actor).Distinct().ToList();
 				return actors;
 			}
 		}

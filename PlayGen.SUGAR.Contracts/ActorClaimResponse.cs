@@ -37,6 +37,6 @@
 		/// <summary>
 		/// The ID of the entity (game, actor etc) related to this actorclaim.
 		/// </summary>
-		public int? EntityId { get; set; }
+		public int EntityId { get; set; }
 	}
 }

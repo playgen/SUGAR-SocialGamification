@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Contracts
 		/// <summary>
 		/// The ID of the Game which this achievement/skill belongs to.
 		/// </summary>
-		public int? GameId { get; set; }
+		public int GameId { get; set; }
 
 		/// <summary>
 		/// The display name for the achievement/skill.

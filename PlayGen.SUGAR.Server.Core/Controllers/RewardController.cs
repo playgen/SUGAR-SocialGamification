@@ -1,4 +1,4 @@
-﻿using NLog;
+﻿using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
@@ -9,16 +9,19 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class RewardController : CriteriaEvaluator
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
+		private readonly ILogger _logger;
 
-		public RewardController(SUGARContextFactory contextFactory,
-			GroupMemberController groupMemberCoreController,
-			UserFriendController userFriendCoreController)
-			: base(contextFactory, groupMemberCoreController, userFriendCoreController)
+		public RewardController(
+			ILogger<RewardController> logger,
+			ILogger<EvaluationDataController> evaluationDataLogger,
+			SUGARContextFactory contextFactory,
+			RelationshipController relationshipController)
+			: base(evaluationDataLogger, contextFactory, relationshipController)
 		{
+			_logger = logger;
 		}
 
-		public bool AddReward(int? actorId, int? gameId, Reward reward)
+		public bool AddReward(int actorId, int gameId, Reward reward)
 		{
 			var evaluationDataController = new EvaluationDataController(ContextFactory, reward.EvaluationDataCategory);
 			

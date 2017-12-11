@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netcoreapp1.1</TargetFramework>
+		<TargetFramework>netcoreapp2.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="BCrypt.Net-Core" Version="1.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.0" />
 		<PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-rtm-alpha3" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
-	  <ProjectReference Include="..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj" />
 	  <ProjectReference Include="..\PlayGen.SUGAR.Server.Authorization\PlayGen.SUGAR.Server.Authorization.csproj" />
 	  <ProjectReference Include="..\PlayGen.SUGAR.Server.EntityFramework\PlayGen.SUGAR.Server.EntityFramework.csproj" />
 	  <ProjectReference Include="..\PlayGen.SUGAR.Server.Model\PlayGen.SUGAR.Server.Model.csproj" />

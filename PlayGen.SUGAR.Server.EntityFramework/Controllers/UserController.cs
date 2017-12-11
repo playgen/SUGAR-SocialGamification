@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				var user = context.Users
 					.IncludeAll()
-					.Find(context, id);
+					.FirstOrDefault(u => u.Id == id);
 
 				return user;
 			}
@@ -77,24 +77,23 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public void Update(User user)
+		public User Update(User user)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				var existing = context.Users
 					.IncludeAll()
-					.Find(context, user.Id);
+					.FirstOrDefault(u => u.Id == user.Id);
 
 				if (existing != null)
 				{
 					context.Entry(existing).State = EntityState.Modified;
 					existing.Name = user.Name;
+					existing.Description = user.Description;
 					SaveChanges(context);
+					return existing;
 				}
-				else
-				{
-					throw new MissingRecordException($"The existing user with ID {user.Id} could not be found.");
-				}
+				throw new MissingRecordException($"The existing user with ID {user.Id} could not be found.");
 			}
 		}
 

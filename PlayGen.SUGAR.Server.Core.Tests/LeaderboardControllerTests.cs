@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.Model;
@@ -11,8 +12,8 @@ using DbControllerLocator = PlayGen.SUGAR.Server.EntityFramework.Tests.Controlle
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-    // todo Change to user core controllers
-    public class LeaderboardControllerTests : CoreTestBase, IClassFixture<TestDataFixture>
+	// todo Change to user core controllers
+	public class LeaderboardControllerTests : CoreTestBase, IClassFixture<TestDataFixture>
     {
         #region Configuration
 
@@ -22,7 +23,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         private readonly EvaluationDataController _evaluationDataDbController = DbControllerLocator.EvaluationDataController;
         private readonly UserController _userDbController = DbControllerLocator.UserController;
         private readonly GroupController _groupDbController = DbControllerLocator.GroupController;
-        private readonly GroupRelationshipController _groupRelationshipDbController = DbControllerLocator.GroupRelationshipController;
+        private readonly RelationshipController _relationshipDbController = DbControllerLocator.RelationshipController;
         #endregion
 
         #region Tests
@@ -651,11 +652,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
             foreach (var user in users)
             {
-                _groupRelationshipDbController.Create(new UserToGroupRelationship
+                _relationshipDbController.CreateRelationship(new ActorRelationship
                 {
                     AcceptorId = group.Id,
                     RequestorId = user.Id,
-                }, true);
+                });
             }
         }
 
@@ -704,9 +705,9 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             return leaderboard;
         }
 
-        private LeaderboardStandingsRequest CreateLeaderboardStandingsRequest(string token, int gameId, LeaderboardFilterType filterType, int limit, int actorId = 0)
+        private StandingsRequest CreateLeaderboardStandingsRequest(string token, int gameId, LeaderboardFilterType filterType, int limit, int actorId = 0)
         {
-            var filter = new LeaderboardStandingsRequest
+            var filter = new StandingsRequest
             {
                 LeaderboardToken = token,
                 GameId = gameId,

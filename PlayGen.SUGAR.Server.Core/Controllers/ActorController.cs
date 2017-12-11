@@ -1,5 +1,5 @@
 ﻿using System;
-using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
 {

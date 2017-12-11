@@ -1,0 +1,1013 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class LeaderboardController
+   | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class LeaderboardController
+   | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController">
+  
+  
+  <h1 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController" class="text-break">Class LeaderboardController
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html">CriteriaEvaluator</a></div>
+    <div class="level2"><span class="xref">LeaderboardController</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_RelationshipCoreController">CriteriaEvaluator.RelationshipCoreController</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_ContextFactory">CriteriaEvaluator.ContextFactory</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluationDataLogger">CriteriaEvaluator.EvaluationDataLogger</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_IsCriteriaSatisified_System_Int32_System_Int32_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_EvaluationCriteria__ActorType_EvaluationType_">CriteriaEvaluator.IsCriteriaSatisified(Int32, Int32, List&lt;EvaluationCriteria&gt;, ActorType, EvaluationType)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_Evaluate_System_Int32_System_Int32_PlayGen_SUGAR_Server_Model_EvaluationCriteria_ActorType_EvaluationType_">CriteriaEvaluator.Evaluate(Int32, Int32, EvaluationCriteria, ActorType, EvaluationType)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateLong_System_Int32_System_Int32_PlayGen_SUGAR_Server_Model_EvaluationCriteria_">CriteriaEvaluator.EvaluateLong(Int32, Int32, EvaluationCriteria)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateFloat_System_Int32_System_Int32_PlayGen_SUGAR_Server_Model_EvaluationCriteria_">CriteriaEvaluator.EvaluateFloat(Int32, Int32, EvaluationCriteria)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateString_System_Int32_System_Int32_PlayGen_SUGAR_Server_Model_EvaluationCriteria_">CriteriaEvaluator.EvaluateString(Int32, Int32, EvaluationCriteria)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateBool_System_Int32_System_Int32_PlayGen_SUGAR_Server_Model_EvaluationCriteria_">CriteriaEvaluator.EvaluateBool(Int32, Int32, EvaluationCriteria)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyLong_System_Int32_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_EvaluationCriteria_">CriteriaEvaluator.EvaluateManyLong(Int32, List&lt;Actor&gt;, EvaluationCriteria)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyFloat_System_Int32_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_EvaluationCriteria_">CriteriaEvaluator.EvaluateManyFloat(Int32, List&lt;Actor&gt;, EvaluationCriteria)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyString_System_Int32_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_EvaluationCriteria_">CriteriaEvaluator.EvaluateManyString(Int32, List&lt;Actor&gt;, EvaluationCriteria)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyBool_System_Int32_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_EvaluationCriteria_">CriteriaEvaluator.EvaluateManyBool(Int32, List&lt;Actor&gt;, EvaluationCriteria)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_CompareValues__1___0___0_ComparisonType_EvaluationDataType_">CriteriaEvaluator.CompareValues&lt;T&gt;(T, T, ComparisonType, EvaluationDataType)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.html">PlayGen.SUGAR.Server.Core.Controllers</a></h6>
+  <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.Core.dll</h6>
+  <h5 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class LeaderboardController : CriteriaEvaluator</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController__ctor_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.#ctor*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController__ctor_Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController__Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController__PlayGen_SUGAR_Server_Core_Controllers_RelationshipController_PlayGen_SUGAR_Server_Core_Controllers_ActorController_PlayGen_SUGAR_Server_Core_Controllers_GroupController_PlayGen_SUGAR_Server_Core_Controllers_UserController_PlayGen_SUGAR_Server_EntityFramework_SUGARContextFactory_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController},Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController},PlayGen.SUGAR.Server.Core.Controllers.RelationshipController,PlayGen.SUGAR.Server.Core.Controllers.ActorController,PlayGen.SUGAR.Server.Core.Controllers.GroupController,PlayGen.SUGAR.Server.Core.Controllers.UserController,PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory)">LeaderboardController(ILogger&lt;LeaderboardController&gt;, ILogger&lt;EvaluationDataController&gt;, RelationshipController, ActorController, GroupController, UserController, SUGARContextFactory)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LeaderboardController(ILogger&lt;LeaderboardController&gt; logger, ILogger&lt;EvaluationDataController&gt; evaluationDataLogger, RelationshipController relationshipCoreController, ActorController actorController, GroupController groupController, UserController userController, SUGARContextFactory contextFactory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Extensions.Logging.ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html">LeaderboardController</a>&gt;</td>
+        <td><span class="parametername">logger</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Extensions.Logging.ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a>&gt;</td>
+        <td><span class="parametername">evaluationDataLogger</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.html">RelationshipController</a></td>
+        <td><span class="parametername">relationshipCoreController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.ActorController.html">ActorController</a></td>
+        <td><span class="parametername">actorController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.GroupController.html">GroupController</a></td>
+        <td><span class="parametername">groupController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.UserController.html">UserController</a></td>
+        <td><span class="parametername">userController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory.html">SUGARContextFactory</a></td>
+        <td><span class="parametername">contextFactory</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_ActorController" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.ActorController">ActorController</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly ActorController ActorController</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.ActorController.html">ActorController</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_GroupController" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GroupController">GroupController</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly GroupController GroupController</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.GroupController.html">GroupController</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_UserController" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.UserController">UserController</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly UserController UserController</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.UserController.html">UserController</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateCount_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateCount_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_LeaderboardType_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,LeaderboardType,EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)">EvaluateCount(EvaluationDataController, List&lt;Actor&gt;, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;StandingsResponse&gt; EvaluateCount(EvaluationDataController evaluationDataController, List&lt;Actor&gt; actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a></td>
+        <td><span class="parametername">evaluationDataController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td><span class="parametername">actors</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">LeaderboardType</span></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">EvaluationDataType</span></td>
+        <td><span class="parametername">evaluationDataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html">StandingsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateCumulative_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateCumulative_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_LeaderboardType_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,LeaderboardType,EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)">EvaluateCumulative(EvaluationDataController, List&lt;Actor&gt;, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;StandingsResponse&gt; EvaluateCumulative(EvaluationDataController evaluationDataController, List&lt;Actor&gt; actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a></td>
+        <td><span class="parametername">evaluationDataController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td><span class="parametername">actors</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">LeaderboardType</span></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">EvaluationDataType</span></td>
+        <td><span class="parametername">evaluationDataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html">StandingsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateEarliest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateEarliest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_LeaderboardType_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,LeaderboardType,EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)">EvaluateEarliest(EvaluationDataController, List&lt;Actor&gt;, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;StandingsResponse&gt; EvaluateEarliest(EvaluationDataController evaluationDataController, List&lt;Actor&gt; actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a></td>
+        <td><span class="parametername">evaluationDataController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td><span class="parametername">actors</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">LeaderboardType</span></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">EvaluationDataType</span></td>
+        <td><span class="parametername">evaluationDataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html">StandingsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateHighest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateHighest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_LeaderboardType_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,LeaderboardType,EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)">EvaluateHighest(EvaluationDataController, List&lt;Actor&gt;, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;StandingsResponse&gt; EvaluateHighest(EvaluationDataController evaluationDataController, List&lt;Actor&gt; actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a></td>
+        <td><span class="parametername">evaluationDataController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td><span class="parametername">actors</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">LeaderboardType</span></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">EvaluationDataType</span></td>
+        <td><span class="parametername">evaluationDataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html">StandingsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateLatest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateLatest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_LeaderboardType_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,LeaderboardType,EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)">EvaluateLatest(EvaluationDataController, List&lt;Actor&gt;, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;StandingsResponse&gt; EvaluateLatest(EvaluationDataController evaluationDataController, List&lt;Actor&gt; actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a></td>
+        <td><span class="parametername">evaluationDataController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td><span class="parametername">actors</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">LeaderboardType</span></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">EvaluationDataType</span></td>
+        <td><span class="parametername">evaluationDataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html">StandingsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateLowest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateLowest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_LeaderboardType_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,LeaderboardType,EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)">EvaluateLowest(EvaluationDataController, List&lt;Actor&gt;, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;StandingsResponse&gt; EvaluateLowest(EvaluationDataController evaluationDataController, List&lt;Actor&gt; actors, int gameId, string key, LeaderboardType type, EvaluationDataType evaluationDataType, StandingsRequest request)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a></td>
+        <td><span class="parametername">evaluationDataController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td><span class="parametername">actors</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">LeaderboardType</span></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">EvaluationDataType</span></td>
+        <td><span class="parametername">evaluationDataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html">StandingsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_FilterResults_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.FilterResults*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_FilterResults_System_Collections_Generic_List_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsResponse__System_Int32_System_Int32_LeaderboardFilterType_System_Nullable_System_Int32__" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.FilterResults(System.Collections.Generic.List{PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse},System.Int32,System.Int32,LeaderboardFilterType,System.Nullable{System.Int32})">FilterResults(List&lt;StandingsResponse&gt;, Int32, Int32, LeaderboardFilterType, Nullable&lt;Int32&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;StandingsResponse&gt; FilterResults(List&lt;StandingsResponse&gt; typeResults, int limit, int offset, LeaderboardFilterType filter, int ? actorId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td><span class="parametername">typeResults</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">limit</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">offset</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">LeaderboardFilterType</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_GatherStandings_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GatherStandings*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_GatherStandings_PlayGen_SUGAR_Server_Model_Leaderboard_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GatherStandings(PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)">GatherStandings(Leaderboard, StandingsRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;StandingsResponse&gt; GatherStandings(Leaderboard leaderboard, StandingsRequest request)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Leaderboard.html">Leaderboard</a></td>
+        <td><span class="parametername">leaderboard</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html">StandingsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_GetActors_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GetActors*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_GetActors_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_PlayGen_SUGAR_Server_Model_Leaderboard_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GetActors(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)">GetActors(EvaluationDataController, Leaderboard, StandingsRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;Actor&gt; GetActors(EvaluationDataController evaluationDataController, Leaderboard leaderboard, StandingsRequest request)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a></td>
+        <td><span class="parametername">evaluationDataController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Leaderboard.html">Leaderboard</a></td>
+        <td><span class="parametername">leaderboard</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html">StandingsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_GetName_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GetName*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_GetName_System_Int32_ActorType_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GetName(System.Int32,ActorType)">GetName(Int32, ActorType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected string GetName(int id, ActorType actorType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">ActorType</span></td>
+        <td><span class="parametername">actorType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_GetStandings_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GetStandings*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_GetStandings_PlayGen_SUGAR_Server_Model_Leaderboard_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GetStandings(PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)">GetStandings(Leaderboard, StandingsRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;StandingsResponse&gt; GetStandings(Leaderboard leaderboard, StandingsRequest request)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Leaderboard.html">Leaderboard</a></td>
+        <td><span class="parametername">leaderboard</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html">StandingsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

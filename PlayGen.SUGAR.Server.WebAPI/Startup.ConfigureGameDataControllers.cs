@@ -8,10 +8,10 @@ namespace PlayGen.SUGAR.Server.WebAPI
         private void ConfigureGameDataControllers(IServiceCollection services)
         {
             // TODO set category types for GameDataControllers used by other controllers
-            services.AddScoped<EvaluationController>();
-            services.AddScoped<ResourceController>();
-            services.AddScoped<RewardController>();
-            services.AddScoped<LeaderboardController>();
+            services.AddSingleton<EvaluationController>();
+            services.AddSingleton<ResourceController>();
+            services.AddSingleton<RewardController>();
+            services.AddSingleton<LeaderboardController>();
         }
     }
 }

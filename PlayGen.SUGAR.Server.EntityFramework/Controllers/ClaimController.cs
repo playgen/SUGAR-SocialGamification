@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Authorization;
-using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
@@ -26,7 +25,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var claim = context.Claims.Find(context, id);
+				var claim = context.Claims.Find(id);
 				return claim;
 			}
 		}
@@ -44,7 +43,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var claimList = claims as List<Claim> ?? claims.ToList();
+				var claimList = claims ?? new List<Claim>();
 				context.Claims.AddRange(claimList);
 				SaveChanges(context);
 

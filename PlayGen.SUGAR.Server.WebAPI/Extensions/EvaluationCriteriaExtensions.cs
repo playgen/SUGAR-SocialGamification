@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class EvaluationCriteriaExtensions
 	{
 		public static EvaluationCriteriaResponse ToContract(this EvaluationCriteria completionCriteria)
@@ -15,12 +18,13 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			}
 			return new EvaluationCriteriaResponse {
 				Id = completionCriteria.Id,
+				EvaluationDataCategory = completionCriteria.EvaluationDataCategory,
 				EvaluationDataKey = completionCriteria.EvaluationDataKey,
 				EvaluationDataType = completionCriteria.EvaluationDataType,
 				CriteriaQueryType = completionCriteria.CriteriaQueryType,
 				ComparisonType = completionCriteria.ComparisonType,
 				Scope = completionCriteria.Scope,
-				Value = completionCriteria.Value,
+				Value = completionCriteria.Value
 			};
 		}
 
@@ -36,12 +40,13 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				return null;
 			}
 			return new EvaluationCriteria {
+				EvaluationDataCategory = completionCriteria.EvaluationDataCategory.Value,
 				EvaluationDataKey = completionCriteria.EvaluationDataKey,
-				EvaluationDataType = completionCriteria.EvaluationDataType,
-				CriteriaQueryType = completionCriteria.CriteriaQueryType,
-				ComparisonType = completionCriteria.ComparisonType,
-				Scope = completionCriteria.Scope,
-				Value = completionCriteria.Value,
+				EvaluationDataType = completionCriteria.EvaluationDataType.Value,
+				CriteriaQueryType = completionCriteria.CriteriaQueryType.Value,
+				ComparisonType = completionCriteria.ComparisonType.Value,
+				Scope = completionCriteria.Scope.Value,
+				Value = completionCriteria.Value
 			};
 		}
 
@@ -52,13 +57,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				return null;
 			}
 			return new EvaluationCriteria {
-				Id = completionCriteria.Id,
+				Id = completionCriteria.Id.Value,
+				EvaluationDataCategory = completionCriteria.EvaluationDataCategory.Value,
 				EvaluationDataKey = completionCriteria.EvaluationDataKey,
-				EvaluationDataType = completionCriteria.EvaluationDataType,
-				CriteriaQueryType = completionCriteria.CriteriaQueryType,
-				ComparisonType = completionCriteria.ComparisonType,
-				Scope = completionCriteria.Scope,
-				Value = completionCriteria.Value,
+				EvaluationDataType = completionCriteria.EvaluationDataType.Value,
+				CriteriaQueryType = completionCriteria.CriteriaQueryType.Value,
+				ComparisonType = completionCriteria.ComparisonType.Value,
+				Scope = completionCriteria.Scope.Value,
+				Value = completionCriteria.Value
 			};
 		}
 

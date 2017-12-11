@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Leaderboard | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Leaderboard | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="leaderboard">
+              <h1 id="leaderboard">Leaderboard</h1>
+              
+<p>Leaderboards provide a visual comparison tool for measurements of resources or objects associated with actors. A wide variety of leaderboards are supported including those based achievement or resource based on individual, group or single and multiple games. Leaderboards can utilise any <a href="gameData.html">GameData</a>, <a href="actor.html">Actor</a>,<a href="skill.html">Skill</a> or <a href="resource.html">Resource</a>. </p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Generate a leaderboard by:<ul>
+<li>Game / Resource / Skill / Actor</li>
+<li>ActorType (Group, Player)</li>
+<li>Key (from GameData, Resource, Actor, Skill)</li>
+</ul>
+</li>
+<li>Aggregation of values by:<ul>
+<li>Frequency</li>
+<li>Summation</li>
+<li>Earliest/Latest occurrence </li>
+<li>Highest/Lowest overall occurrence </li>
+</ul>
+</li>
+<li>Filter results by threshold values (e.g. top 20 or around current player&#39;s rank) or <a href="relationship.html">Relationships</a></li>
+</ul>
+<h2 id="api">API</h2>
+<ul>
+<li>Client<ul>
+<li>&lt;xref:PlayGen.SUGAR.Client.LeaderboardClient&gt;</li>
+</ul>
+</li>
+<li>Contracts<ul>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardResponse&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsResponse&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.LeaderboardType&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.LeaderboardFilterType&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.EvaluationDataType&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.CriteriaScope&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.ActorType&gt;</li>
+</ul>
+</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<ul>
+<li>Create a leaderboard
+  This example shows how to create a leaderboard which will display the highest rankings for the combined total of kingdoms the players have conquered. This uses &lt;xref:PlayGen.SUGAR.Client.LeaderboardClient&gt;&#39;s Create function, passing a &lt;xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest&gt; as the parameter. This request will specify the identifier token &quot;MOST_KINGDOMS_CONQUERED&quot;, key for which to check in <a href="gameData.html">GameData</a> &quot;KingdomsConquered&quot; and &lt;xref:PlayGen.SUGAR.Common.Shared.LeaderboardType&gt; Cumulative to add all the values of every entry matching the key. The code will then store the Token of the leaderboard from the &lt;xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardResponse&gt; for later use.</li>
+</ul>
+<pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
+        private LeaderboardClient _leaderboardClient;
+        private int _gameId;
+        private string _leaderboardToken;
+
+        private void CreateLeaderboard() 
+        {
+            // create instance of the leaderboard client
+            _leaderboardClient = sugarClient.Leaderboard;
+
+            // create a LeaderboardRequest
+            var leaderboardRequest = new LeaderboardRequest 
+            {
+                GameId = _gameId,
+                Name = &quot;Most Kingdoms Conquered&quot;,
+                Token = &quot;MOST_KINGDOMS_CONQUERED&quot;,
+                Key = &quot;KingdomsConquered&quot;,
+                ActorType = ActorType.User,
+                GameDataType = GameDataType.Long,
+                CriteriaScope = CriteriaScope.Actor,
+                LeaderboardType = LeaderboardType.Cumulative
+            };
+
+            // create the leaderboard and store the response
+            var leaderboardResponse = _leaderboardClient.Create(leaderboardRequest);
+
+            // store the token of the leaderboard for use in other functions
+            _leaderboardToken = leaderboardResponse.Token;
+        }
+</code></pre><ul>
+<li>Get standings for a leaderboard
+  To display the leaderboard inside the game, the current standings of the leaderboard must be retreived. The &lt;xref:PlayGen.SUGAR.Client.LeaderboardClient&gt;&#39;s CreateGetLeaderboardStandings function is called by passing a &lt;xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest&gt; object as the parameter, which specifies filters for the returned results. This example will retreive the 8 rankings nearest to the player by setting the &lt;xref:PlayGen.SUGAR.Common.Shared.LeaderboardFilterType&gt; to Near, the limit to 8 and offset as 0. The returned &lt;xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsResponse&gt; contains all the data to populate the visual representation of the leaderboard. </li>
+</ul>
+<pre><code class="lang-cs">        private void GetLeaderboardStadings() 
+        {
+            // create a LeaderboardStandingsRequest
+            var leaderboardStandingsRequest = new LeaderboardStandingsRequest 
+            {
+                LeaderboardToken = _leaderboardToken,
+                GameId = _gameId,
+                ActorId = _userId,
+                LeaderboardFilterType = LeaderboardFilterType.Near,
+                PageLimit = 8,
+                PageOffset = 0
+            };
+
+            // retreive the standings and store the responses
+            var leaderboardStandingsResponse = _leaderboardClient.CreateGetLeaderboardStandings(leaderboardStandingReqeusts);
+
+            // output the leaderboard
+            foreach (var standing in leaderboardStandings)
+            {
+                Console.WriteLine(standing.Ranking.ToString() + &quot; | &quot; + standing.ActorName + &quot; | Conquered: &quot; + standing.Value);
+            }
+        }
+</code></pre>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

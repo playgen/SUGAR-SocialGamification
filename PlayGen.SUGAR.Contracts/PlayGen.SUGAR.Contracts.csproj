@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp1.1;net35</TargetFrameworks>
+		<TargetFrameworks>netcoreapp2.0;net35</TargetFrameworks>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp1.1|AnyCPU'">
-	  <DocumentationFile>bin\Debug\netcoreapp1.1\PlayGen.SUGAR.Contracts.xml</DocumentationFile>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.0|AnyCPU'">
+	  <DocumentationFile>bin\Debug\netcoreapp2.0\PlayGen.SUGAR.Contracts.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<Choose>

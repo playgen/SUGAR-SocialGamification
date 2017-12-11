@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 {
+	// Values ensured to not be nulled by model validation
+	[SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
 	public static class RoleClaimExtensions
 	{
 		public static RoleClaimResponse ToContract(this RoleClaim roleClaimModel)
@@ -28,8 +31,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static RoleClaim ToModel(this RoleClaimRequest roleClaimContract)
 		{
 			return new RoleClaim {
-				RoleId = roleClaimContract.RoleId,
-				ClaimId = roleClaimContract.ClaimId
+				RoleId = roleClaimContract.RoleId.Value,
+				ClaimId = roleClaimContract.ClaimId.Value
 			};
 		}
 	}

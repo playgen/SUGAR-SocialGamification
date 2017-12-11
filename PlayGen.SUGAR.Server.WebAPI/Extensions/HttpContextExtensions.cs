@@ -13,9 +13,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 	{
 		public static int GetSessionId(this HttpContext context)
 		{
-			int sessionId;
-
-			if (!context.Request.Headers.TryGetClaim("SessionId", out sessionId))
+			if (!context.Request.Headers.TryGetClaim("SessionId", out int sessionId))
 			{
 				throw new ArgumentException("Couldn't get claim \"SessionId\".");
 			}
@@ -26,12 +24,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static IEnumerable<T> GetCustomMethodAttributes<T>(this ActionDescriptor actionDescriptor) where T : Attribute
 		{
 			var controllerActionDescriptor = actionDescriptor as ControllerActionDescriptor;
-			if (controllerActionDescriptor != null)
-			{
-				return controllerActionDescriptor.MethodInfo.GetCustomAttributes<T>(true);
-			}
-
-			return Enumerable.Empty<T>();
+			return controllerActionDescriptor != null ? controllerActionDescriptor.MethodInfo.GetCustomAttributes<T>(true) : Enumerable.Empty<T>();
 		}
 
 		public static T GetCustomMethodAttribute<T>(this ActionDescriptor actionDescriptor) where T : Attribute
@@ -42,12 +35,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		public static IEnumerable<T> GetCustomClassAttributes<T>(this ActionDescriptor actionDescriptor) where T : Attribute
 		{
 			var controllerActionDescriptor = actionDescriptor as ControllerActionDescriptor;
-			if (controllerActionDescriptor != null)
-			{
-				return controllerActionDescriptor.ControllerTypeInfo.GetCustomAttributes<T>(true);
-			}
-
-			return Enumerable.Empty<T>();
+			return controllerActionDescriptor != null ? controllerActionDescriptor.ControllerTypeInfo.GetCustomAttributes<T>(true) : Enumerable.Empty<T>();
 		}
 
 		public static T GetCustomClassAttribute<T>(this ActionDescriptor actionDescriptor) where T : Attribute

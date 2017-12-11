@@ -12,10 +12,10 @@
 		/// <summary>
 		/// Intended for just Users.
 		/// </summary>
-		User,
+		User = 1,
 		/// <summary>
 		/// Intended for just Groups.
 		/// </summary>
-		Group
+		Group = 2
 	}
 }

@@ -14,9 +14,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			{
 				return null;
 			}
-			var userContract = new UserResponse {
+
+			var userContract = new UserResponse
+			{
 				Id = userModel.Id,
-				Name = userModel.Name
+				Name = userModel.Name,
+				Description = userModel.Description
 			};
 
 			return userContract;
@@ -29,8 +32,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 
 		public static User ToUserModel(this UserRequest userContract)
 		{
-			return new User {
-				Name = userContract.Name
+			return new User
+			{
+				Name = userContract.Name,
+				Description = userContract.Description
 			};
 		}
 	}

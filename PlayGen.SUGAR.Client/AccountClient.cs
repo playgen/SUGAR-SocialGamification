@@ -13,8 +13,13 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/account";
 
-		public AccountClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
+		public AccountClient(
+			string baseAddress, 
+			IHttpHandler httpHandler, 
+			Dictionary<string, string> persistentHeaders,
+			AsyncRequestController asyncRequestController, 
+			EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
 		{
 		}
 
@@ -31,39 +36,11 @@ namespace PlayGen.SUGAR.Client
 			return Post<AccountRequest, AccountResponse>(query, accountRequest);
 		}
 
-		/// <summary>
-		/// Register a new account and creates an associated user.
-		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
-		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// </summary>
-		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
-		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
-		public AccountResponse Create(int gameId, AccountRequest accountRequest)
+		public void CreateAsync(AccountRequest accountRequest, Action<AccountResponse> onSuccess, Action<Exception> onError)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/{0}/create", gameId).ToString();
-			return Post<AccountRequest, AccountResponse>(query, accountRequest);
-		}
-
-		public void CreateAsync(int gameId, AccountRequest accountRequest, Action<AccountResponse> onSuccess, Action<Exception> onError)
-		{
-			AsyncRequestController.EnqueueRequest(() => Create(gameId, accountRequest),
+			AsyncRequestController.EnqueueRequest(() => Create(accountRequest),
 				onSuccess,
 				onError);
-		}
-
-		/// <summary>
-		/// Register a new account for an existing user.
-		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
-		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// </summary>
-		/// <param name="userId">ID of the existing User.</param>
-		/// <param name="newAccount"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
-		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
-		public AccountResponse CreateWithExisting(int userId, AccountRequest newAccount)
-		{
-			var query = GetUriBuilder(ControllerPrefix + "/createwithid/{0}", userId).ToString();
-			return Post<AccountRequest, AccountResponse>(query, newAccount);
 		}
 
 		/// <summary>

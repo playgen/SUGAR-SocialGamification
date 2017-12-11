@@ -13,8 +13,13 @@ namespace PlayGen.SUGAR.Client
 	{
 		private const string ControllerPrefix = "api/groupmember";
 
-		public GroupMemberClient(string baseAddress, IHttpHandler httpHandler, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, asyncRequestController, evaluationNotifications)
+		public GroupMemberClient(
+			string baseAddress,
+			IHttpHandler httpHandler,
+			Dictionary<string, string> persistentHeaders,
+			AsyncRequestController asyncRequestController,
+			EvaluationNotifications evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
 		{
 		}
 
@@ -50,6 +55,24 @@ namespace PlayGen.SUGAR.Client
 		public void GetSentRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetSentRequests(userId),
+				onSuccess,
+				onError);
+		}
+
+		/// <summary>
+		/// Get a count of users that have a relationship with this <param name="groupId"/>.
+		/// </summary>
+		/// <param name="groupId">ID of the group.</param>
+		/// <returns>A count of members in the group that matches the search criteria.</returns>
+		public int GetMemberCount(int groupId)
+		{
+			var query = GetUriBuilder(ControllerPrefix + "/membercount/{0}", groupId).ToString();
+			return Get<int>(query);
+		}
+
+		public void GetMemberCountAsync(int groupId, Action<int> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => GetMemberCount(groupId),
 				onSuccess,
 				onError);
 		}

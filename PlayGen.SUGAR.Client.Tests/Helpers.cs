@@ -1,94 +1,75 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-    public static class Helpers
-    {
-        public static ActorResponse GetOrCreateUser(UserClient userClient, string name)
-        {
-            var users = userClient.Get(name, true);
-            ActorResponse user;
+	public static class Helpers
+	{
+		private const int GlobalGameId = 1;
+		private const string SugarSourceToken = "SUGAR";
 
-            if (users.Any())
-            {
-                user = users.Single();
-            }
-            else
-            {
-                user = userClient.Create(new UserRequest
-                {
-                    Name = name
-                });
-            }
+		public static GameResponse GetGame(GameClient gameClient, string name)
+		{
+			var games = gameClient.Get(name);
 
-            return user;
-        }
+			if (games.Any())
+			{
+				return games.Single(g => g.Name == name);
+			}
+			throw new Exception("This game has not been set up in seeding.");
+		}
+		
+		public static AccountResponse CreateAndLoginGlobal(SUGARClient client, string userName)
+		{
+			try
+			{
+				return client.Session.CreateAndLogin(GlobalGameId, new AccountRequest
+				{
+					Name = userName,
+					Password = "ThisIsTheTestingPassword",
+					SourceToken = SugarSourceToken
+				});
+			}
+			catch
+			{
+				return client.Session.Login(GlobalGameId, new AccountRequest
+				{
+					Name = userName,
+					Password = "ThisIsTheTestingPassword",
+					SourceToken = SugarSourceToken
+				});
+			}
+		}
 
-        public static ActorResponse GetOrCreateGroup(GroupClient groupClient, string name)
-        {
-            var groups = groupClient.Get(name);
-            ActorResponse group;
+		public static void Login(SUGARClient client, string gameName, string userKey, out GameResponse game, out AccountResponse user)
+		{
+			var accountRequest = new AccountRequest
+			{
+				Name = userKey,
+				Password = "ThisIsTheTestingPassword",
+				SourceToken = "SUGAR"
+			};
+			//gameId is 1 so that user is able to log in to get actual gameId (can in theory be anything)
+			try
+			{
+				client.Session.Login(1, accountRequest);
+			}
+			catch
+			{
+				client.Session.CreateAndLogin(1, accountRequest);
+			}
+			var games = client.Game.Get(gameName);
 
-            if (groups.Any())
-            {
-                group = groups.Single();
-            }
-            else
-            {
-                group = groupClient.Create(new GroupRequest
-                {
-                    Name = name
-                });
-            }
-
-            return group;
-        }
-
-        public static GameResponse GetOrCreateGame(GameClient gameClient, string name)
-        {
-            var games = gameClient.Get(name);
-            GameResponse game;
-
-            if (games.Any())
-            {
-                game = games.Single();
-            }
-            else
-            {
-                game = gameClient.Create(new GameRequest
-                {
-                    Name = name
-                });
-            }
-
-            return game;
-        }
-
-        public static void Login(SessionClient sessionClient, int gameId, AccountRequest accountRequest)
-        {
-            try
-            {
-                sessionClient.Login(gameId, accountRequest);
-            }
-            catch (Exception e)
-            {
-                sessionClient.CreateAndLogin(gameId, accountRequest);
-            }
-        }
-
-        public static void Login(SessionClient sessionClient, AccountRequest accountRequest)
-        {
-            try
-            {
-                sessionClient.Login(accountRequest);
-            }
-            catch (Exception e)
-            {
-                sessionClient.CreateAndLogin(accountRequest);
-            }
-        }
-    }
+			if (games.Any())
+			{
+				game = games.Single(g => g.Name == gameName);
+				user = client.Session.Login(game.Id, accountRequest);
+			}
+			else
+			{
+				throw new Exception("This game has not been set up in seeding.");
+			}
+		}
+	}
 }

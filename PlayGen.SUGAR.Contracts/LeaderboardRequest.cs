@@ -29,9 +29,9 @@ namespace PlayGen.SUGAR.Contracts
 		public string Token { get; set; }
 
 		/// <summary>
-		/// The Id of the Game which this leaderboards belongs to. Can be left null to relate this leaderboard to the system rather than a game.
-		/// This Id is also used when gathering GameData using the Key provided.
+		/// The Id of the Game which this leaderboards belongs to. This Id is also used when gathering GameData using the Key provided.
 		/// </summary>
+		[Required]
 		public int? GameId { get; set; }
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.Contracts
 		/// The EvaluationDataCategory of the GameData being checked against.
 		/// </summary>
 		[Required]
-        public EvaluationDataCategory EvaluationDataCategory { get; set; }
+        public EvaluationDataCategory? EvaluationDataCategory { get; set; }
 
         /// <summary>
         /// The GameData key which is checked against in order to create the leaderboard standings.
@@ -58,24 +58,24 @@ namespace PlayGen.SUGAR.Contracts
 		/// The type of actor which this leaderboard is intended for.
 		/// </summary>
 		[Required]
-		public ActorType ActorType { get; set; }
+		public ActorType? ActorType { get; set; }
 
 		/// <summary>
 		/// The EvaluationDataType of the GameData being checked against.
 		/// </summary>
 		[Required]
-		public EvaluationDataType EvaluationDataType { get; set; }
+		public EvaluationDataType? EvaluationDataType { get; set; }
 
 		/// <summary>
 		/// Whether the criteria will be checked against the actor or relatedactors (i.e. group members, user friends).
 		/// </summary>
 		[Required]
-		public CriteriaScope CriteriaScope { get; set; }
+		public CriteriaScope? CriteriaScope { get; set; }
 
 		/// <summary>
 		/// The method which data will be collected and sorted for this leaderboard.
 		/// </summary>
 		[Required]
-		public LeaderboardType LeaderboardType { get; set; }
+		public LeaderboardType? LeaderboardType { get; set; }
 	}
 }

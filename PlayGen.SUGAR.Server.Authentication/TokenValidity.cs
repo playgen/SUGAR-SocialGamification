@@ -3,7 +3,7 @@
 	public enum TokenValidity
 	{
 		Invalid = 0,
-		Valid,
-		Expired,
+		Valid = 1,
+		Expired = 2
 	}
 }

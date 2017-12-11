@@ -1,35 +1,50 @@
 ﻿using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace PlayGen.SUGAR.Server.WebAPI
 {
 	public partial class Startup
 	{
-		private void ConfigureDocumentationGeneratorServices(IServiceCollection services, IHostingEnvironment env)
+		private void ConfigureRESTAPIDocumentationGenerator(IServiceCollection services, IHostingEnvironment env)
 		{
-			if (!env.IsEnvironment("Tests"))
+			if (env.IsDevelopment())
 			{
-				services.AddSwaggerGen();
-
-				services.ConfigureSwaggerGen(options =>
+				services.AddSwaggerGen(options =>
 				{
-					options.DescribeAllEnumsAsStrings();
+					var version = Configuration.GetValue<string>("Swagger:Version");
+					var title = Configuration.GetValue<string>("Swagger:Title");
+					var description = Configuration.GetValue<string>("Swagger:Description");
+					options.SwaggerDoc(version, new Info
+					{
+						Version = version,
+						Title = title,
+						Description = description
+					});
 
+					options.DescribeAllEnumsAsStrings();
 					options.IncludeXmlComments(APIXmlCommentsPath);
 					options.IncludeXmlComments(ContractsXmlCommentsPath);
 				});
 			}
 		}
 
-		private void ConfigureDocumentationGenerator(IApplicationBuilder app, IHostingEnvironment env)
+		private void UseRESTAPIDocumentation(IApplicationBuilder app, IHostingEnvironment env)
 		{
-			if (!env.IsEnvironment("Tests"))
-			{ 
+			if (env.IsDevelopment())
+			{
 				app.UseSwagger();
-				app.UseSwaggerUi();
+
+				app.UseSwaggerUI(options =>
+				{
+					var endpoint = Configuration.GetValue<string>("Swagger:Endpoint");
+					var description = Configuration.GetValue<string>("Swagger:Description");
+					options.SwaggerEndpoint(endpoint, description);
+				});
 			}
 		}
 
@@ -37,8 +52,8 @@ namespace PlayGen.SUGAR.Server.WebAPI
 		{
 			get
 			{
-				var app = PlatformServices.Default.Application;
-				return Path.Combine(app.ApplicationBasePath, app.ApplicationName + ".xml");
+				var assemblyLocation = Assembly.Load(new AssemblyName("PlayGen.SUGAR.Server.WebAPI")).Location;
+				return Path.ChangeExtension(assemblyLocation, ".xml");
 			}
 		}
 
@@ -46,8 +61,8 @@ namespace PlayGen.SUGAR.Server.WebAPI
 		{
 			get
 			{
-				var app = PlatformServices.Default.Application;
-				return Path.Combine(app.ApplicationBasePath, "PlayGen.SUGAR.Contracts.xml");
+				var assemblyLocation = Assembly.Load(new AssemblyName("PlayGen.SUGAR.Contracts")).Location;
+				return Path.ChangeExtension(assemblyLocation, ".xml");
 			}
 		}
 	}

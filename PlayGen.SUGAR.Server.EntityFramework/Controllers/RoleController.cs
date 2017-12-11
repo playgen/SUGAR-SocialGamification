@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common.Authorization;
-using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
@@ -44,7 +43,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var role = context.Roles.Find(context, id);
+				var role = context.Roles.Find(id);
 				return role;
 			}
 		}

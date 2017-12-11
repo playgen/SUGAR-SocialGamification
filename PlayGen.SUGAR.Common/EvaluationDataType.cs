@@ -12,14 +12,14 @@
 		/// <summary>
 		/// Numeric value with no decimal places.
 		/// </summary>
-		Long,
+		Long = 1,
 		/// <summary>
 		/// Numeric value with decimal places.
 		/// </summary>
-		Float,
+		Float = 2,
 		/// <summary>
 		/// True or false.
 		/// </summary>
-		Boolean
+		Boolean = 3
 	}
 }

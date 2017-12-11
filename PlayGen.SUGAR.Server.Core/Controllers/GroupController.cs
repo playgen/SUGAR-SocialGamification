@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NLog;
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Model;
 
@@ -8,30 +8,32 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class GroupController : ActorController
 	{
-		private static Logger Logger = LogManager.GetCurrentClassLogger();
-
+		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.GroupController _groupDbController;
 		private readonly ActorClaimController _actorClaimController;
 		private readonly ActorRoleController _actorRoleController;
-		private readonly GroupMemberController _groupMemberController;
+		private readonly RelationshipController _relationshipController;
 
-		public GroupController(EntityFramework.Controllers.GroupController groupDbController,
-					EntityFramework.Controllers.ActorController actorDbController,
-					ActorClaimController actorClaimController,
-					ActorRoleController actorRoleController,
-					GroupMemberController groupMemberController) : base(actorDbController)
+		public GroupController(
+			ILogger<GroupController> logger,
+			EntityFramework.Controllers.GroupController groupDbController,
+			EntityFramework.Controllers.ActorController actorDbController,
+			ActorClaimController actorClaimController,
+			ActorRoleController actorRoleController,
+			RelationshipController relationshipController) : base(actorDbController)
 		{
+			_logger = logger;
 			_groupDbController = groupDbController;
 			_actorClaimController = actorClaimController;
 			_actorRoleController = actorRoleController;
-			_groupMemberController = groupMemberController;
+			_relationshipController = relationshipController;
 		}
 
 		public List<Group> Get()
 		{
 			var groups = _groupDbController.Get();
 
-			Logger.Info($"{groups?.Count} Groups");
+			_logger.LogInformation($"{groups?.Count} Groups");
 
 			return groups;
 		}
@@ -42,7 +44,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Group).Select(p => p.EntityId).ToList();
 			groups = groups.Where(g => permissions.Contains(g.Id)).ToList();
 
-			Logger.Info($"{groups?.Count} Groups");
+			_logger.LogInformation($"{groups.Count} Groups");
 
 			return groups;
 		}
@@ -51,7 +53,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var group = _groupDbController.Get(id);
 
-			Logger.Info($"Group: {group?.Id} for Id: {id}");
+			_logger.LogInformation($"Group: {group?.Id} for Id: {id}");
 
 			return group;
 		}
@@ -60,7 +62,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var groups = _groupDbController.Get(name);
 
-			Logger.Info($"{groups?.Count} Groups for Name: {name}");
+			_logger.LogInformation($"{groups?.Count} Groups for Name: {name}");
 
 			return groups;
 		}
@@ -69,9 +71,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			newGroup = _groupDbController.Create(newGroup);
 			_actorRoleController.Create(ClaimScope.Group.ToString(), creatorId, newGroup.Id);
-			_groupMemberController.CreateMemberRequest(new UserToGroupRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
+			_relationshipController.CreateRequest(new ActorRelationship { RequestorId = creatorId, AcceptorId = newGroup.Id }, true);
 
-			Logger.Info($"{newGroup?.Id} for CreatorId: {creatorId}");
+			_logger.LogInformation($"{newGroup.Id} for CreatorId: {creatorId}");
 
 			return newGroup;
 		}
@@ -80,7 +82,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			_groupDbController.Update(group);
 
-			Logger.Info($"{group?.Id}");
+			_logger.LogInformation($"{group?.Id}");
 		}
 
 		public void Delete(int id)
@@ -89,7 +91,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			_groupDbController.Delete(id);
 
-			Logger.Info($"{id}");
+			_logger.LogInformation($"{id}");
 		}
 	}
 }

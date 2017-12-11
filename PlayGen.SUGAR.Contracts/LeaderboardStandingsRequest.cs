@@ -29,8 +29,9 @@ namespace PlayGen.SUGAR.Contracts
 		public string LeaderboardToken { get; set; }
 
 		/// <summary>
-		/// The Id of the Game the leaderboard. Can be left null for system-wide leaderboards.
+		/// The Id of the Game the leaderboard.
 		/// </summary>
+		[Required]
 		public int? GameId { get; set; }
 
 		/// <summary>
@@ -42,20 +43,26 @@ namespace PlayGen.SUGAR.Contracts
 		/// The filter for what standings will be returned.
 		/// </summary>
 		[Required]
-		public LeaderboardFilterType LeaderboardFilterType { get; set; }
+		public LeaderboardFilterType? LeaderboardFilterType { get; set; }
 
 		/// <summary>
 		/// The maximum number of results which will be returned.
 		/// </summary>
 		[Required]
-		public int PageLimit { get; set; }
+		public int? PageLimit { get; set; }
 
 		/// <summary>
 		/// The set of results which will be returned based on the limit.
 		/// 0 returns the first set of results for Top, Friends and Group Member and the nearest range for Near.
 		/// </summary>
 		[Required]
-		public int PageOffset { get; set; }
+		public int? PageOffset { get; set; }
+
+		/// <summary>
+		/// Whether the leaderboard standings should show all data for a player or just the highest ranking
+		/// </summary>
+		[Required]
+		public bool? MultiplePerActor { get; set; }
 
 		/// <summary>
 		/// The earliest point which data should be collected from.

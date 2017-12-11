@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Server.EntityFramework.Extensions;
+using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
@@ -26,7 +25,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var actor = context.Actors.Find(context, id);
+				var actor = context.Actors.Find(id);
 
 				return actor;
 			}
