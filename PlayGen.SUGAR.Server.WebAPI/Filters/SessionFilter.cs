@@ -22,9 +22,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
         {
             if (!HasValidateSessionAttribute(context.ActionDescriptor)) return;
 
-            int sessionId;
-
-            if (!context.HttpContext.Request.Headers.TryGetSessionId(out sessionId))
+			if (!context.HttpContext.Request.Headers.TryGetSessionId(out var sessionId))
             {
                 throw new InvalidSessionException("No \"SessionId\" set in the token's claims.");
             }

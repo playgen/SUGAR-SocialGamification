@@ -25,9 +25,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            var objectResult = context.Result as ObjectResult;
-
-            if (objectResult == null) return;
+			if (!(context.Result is ObjectResult objectResult)) return;
 
             var wrappedResponse = new ResponseWrapper<object>
 									{
@@ -44,11 +42,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 
             if (request.Headers.ContainsKey(HeaderKeys.EvaluationNotifications))
             {
-                int gameId;
-                int userId;
-
-                if (request.Headers.TryGetGameId(out gameId)
-                    && request.Headers.TryGetUserId(out userId))
+				if (request.Headers.TryGetGameId(out var gameId)
+                    && request.Headers.TryGetUserId(out var userId))
                 {
                     pendingEvents = GetPendingEvents(gameId, userId);
                 }

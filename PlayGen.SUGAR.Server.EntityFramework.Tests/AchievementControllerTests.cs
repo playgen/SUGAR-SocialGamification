@@ -25,7 +25,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var newAchievement = Helpers.CreateAchievement(achievementName);
 
-			var achievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
+			var achievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId, EvaluationType.Achievement);
 
 			Assert.Equal(achievementName, achievement.Name);
 		}
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var newAchievement = Helpers.CreateAchievement(achievementName, 0);
 
-			var achievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
+			var achievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId, EvaluationType.Achievement);
 
 			Assert.Equal(achievementName, achievement.Name);
 		}
@@ -90,7 +90,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void GetNonExistingAchievement()
 		{
-			var achievement = _evaluationController.Get("GetNonExistingAchievement", -1);
+			var achievement = _evaluationController.Get("GetNonExistingAchievement", -1, EvaluationType.Achievement);
 
 			Assert.Null(achievement);
 		}
@@ -102,7 +102,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var newAchievement = Helpers.CreateAchievement(achievementName);
 
-			var foundAchievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
+			var foundAchievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId, EvaluationType.Achievement);
 
 			Assert.NotNull(foundAchievement);
 			Assert.NotEqual(newAchievement.Name + "Updated", foundAchievement.Name);
@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			_evaluationController.Update(foundAchievement);
 
-			var updatedAchievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId);
+			var updatedAchievement = _evaluationController.Get(newAchievement.Token, newAchievement.GameId, EvaluationType.Achievement);
 
 			Assert.NotEqual(achievementName, updatedAchievement.Name);
 			Assert.Equal(foundAchievement.Name, updatedAchievement.Name);
@@ -164,12 +164,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var achievement = Helpers.CreateAchievement(achievementName);
 
-			var achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId);
+			var achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId, EvaluationType.Achievement);
 			Assert.NotNull(achievementReturned);
 			Assert.Equal(achievementReturned.Name, achievementName);
 
-			_evaluationController.Delete(achievement.Token, achievement.GameId);
-			achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId);
+			_evaluationController.Delete(achievement.Token, achievement.GameId, EvaluationType.Achievement);
+			achievementReturned = _evaluationController.Get(achievement.Token, achievement.GameId, EvaluationType.Achievement);
 
 			Assert.Null(achievementReturned);
 		}
@@ -177,7 +177,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void DeleteNonExistingGroupAchievement()
 		{
-			_evaluationController.Delete("DeleteNonExistingGroupAchievement", -1);
+			_evaluationController.Delete("DeleteNonExistingGroupAchievement", -1, EvaluationType.Achievement);
 		}
 		#endregion
 	}

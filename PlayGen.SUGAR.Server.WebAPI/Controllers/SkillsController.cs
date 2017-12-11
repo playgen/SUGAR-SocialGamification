@@ -36,9 +36,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("find/{token}/{gameId:int}")]
 		[HttpGet("find/{token}/global")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
-		public new Task<IActionResult> Get([FromRoute]string token, [FromRoute]int gameId)
+		public Task<IActionResult> Get([FromRoute]string token, [FromRoute]int gameId)
 		{
-			return base.Get(token, gameId);
+			return Get(token, gameId, EvaluationType.Skill);
 		}
 
 		/// <summary>
@@ -67,9 +67,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward skill.</returns>
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("global/evaluate/{actorId:int}")]
-		public new IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int actorId)
+		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int actorId)
 		{
-			return base.GetGameProgress(gameId, actorId);
+			return GetGameProgress(gameId, actorId, EvaluationType.Skill);
 		}
 
 		/// <summary>
@@ -85,7 +85,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("{token}/global/evaluate/{actorId:int}")]
 		public IActionResult GetSkillProgress([FromRoute]string token, [FromRoute]int gameId, [FromRoute]int actorId)
 		{
-			return GetEvaluationProgress(token, gameId, actorId);
+			return GetEvaluationProgress(token, gameId, actorId, EvaluationType.Skill);
 		}
 
 		/// <summary>
@@ -141,9 +141,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Achievement)]
-		public new Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int gameId)
+		public Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int gameId)
 		{
-			return base.Delete(token, gameId);
+			return base.Delete(token, gameId, EvaluationType.Skill);
 		}
 	}
 }
