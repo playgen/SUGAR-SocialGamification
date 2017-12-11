@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("requests/{groupId:int}")]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GroupMemberRequest)]
-		public async Task<IActionResult> GetMemberRequests([FromRoute]int groupId)
+		public async Task<IActionResult> GetAllianceRequests([FromRoute]int groupId)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, groupId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
 			{
@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("{groupId:int}")]
-		public IActionResult GetMembers([FromRoute]int groupId)
+		public IActionResult GetAlliances([FromRoute]int groupId)
 		{
 			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.Group);
 			var actorContract = members.ToActorContractList();
