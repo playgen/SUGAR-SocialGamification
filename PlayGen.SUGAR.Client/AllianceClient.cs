@@ -17,9 +17,10 @@ namespace PlayGen.SUGAR.Client
 			string baseAddress,
 			IHttpHandler httpHandler,
 			Dictionary<string, string> persistentHeaders,
+			Dictionary<string, string> sessionHeaders,
 			AsyncRequestController asyncRequestController,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, persistentHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, persistentHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
 		{
 		}
 
