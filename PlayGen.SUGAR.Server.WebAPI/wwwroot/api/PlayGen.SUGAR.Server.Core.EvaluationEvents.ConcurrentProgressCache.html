@@ -1,0 +1,548 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ConcurrentProgressCache
+   | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ConcurrentProgressCache
+   | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache">
+  
+  
+  <h1 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache" class="text-break">Class ConcurrentProgressCache
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">ConcurrentProgressCache</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.html">PlayGen.SUGAR.Server.Core.EvaluationEvents</a></h6>
+  <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.Core.dll</h6>
+  <h5 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ConcurrentProgressCache</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_AddProgress_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.AddProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_AddProgress_PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_System_Func_System_Single_System_Boolean__" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.AddProgress(PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache,System.Func{System.Single,System.Boolean})">AddProgress(ConcurrentProgressCache, Func&lt;Single, Boolean&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddProgress(ConcurrentProgressCache addConcurrentProgressCache, Func&lt;float, bool&gt; addCondition = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.html">ConcurrentProgressCache</a></td>
+        <td><span class="parametername">addConcurrentProgressCache</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Single</span>, <span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">addCondition</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_AddProgress_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.AddProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_AddProgress_System_Int32_System_Int32_PlayGen_SUGAR_Server_Model_Evaluation_System_Single_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.AddProgress(System.Int32,System.Int32,PlayGen.SUGAR.Server.Model.Evaluation,System.Single)">AddProgress(Int32, Int32, Evaluation, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddProgress(int gameId, int actorId, Evaluation evaluation, float progress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a></td>
+        <td><span class="parametername">evaluation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">progress</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_GetActorProgress_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.GetActorProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_GetActorProgress_System_Int32_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.GetActorProgress(System.Int32,System.Int32)">GetActorProgress(Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConcurrentDictionary&lt;Evaluation, float&gt; GetActorProgress(int gameId, int actorId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Concurrent.ConcurrentDictionary</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>, <span class="xref">System.Single</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_GetGameProgress_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.GetGameProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_GetGameProgress_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.GetGameProgress(System.Int32)">GetGameProgress(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConcurrentDictionary&lt;int, ConcurrentDictionary&lt;Evaluation, float&gt;&gt; GetGameProgress(int gameId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Concurrent.ConcurrentDictionary</span>&lt;<span class="xref">System.Int32</span>, <span class="xref">System.Collections.Concurrent.ConcurrentDictionary</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>, <span class="xref">System.Single</span>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_Remove_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.Remove*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_Remove_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.Remove(System.Int32)">Remove(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Remove(int evaluationId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">evaluationId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_RemoveActor_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.RemoveActor*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_RemoveActor_System_Int32_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.RemoveActor(System.Int32,System.Int32)">RemoveActor(Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RemoveActor(int gameId, int actorId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_TakeActorProgress_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.TakeActorProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_TakeActorProgress_System_Int32_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.TakeActorProgress(System.Int32,System.Int32)">TakeActorProgress(Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConcurrentDictionary&lt;int, ConcurrentDictionary&lt;Evaluation, float&gt;&gt; TakeActorProgress(int gameId, int actorId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Concurrent.ConcurrentDictionary</span>&lt;<span class="xref">System.Int32</span>, <span class="xref">System.Collections.Concurrent.ConcurrentDictionary</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>, <span class="xref">System.Single</span>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_TryGetActorProgress_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.TryGetActorProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_TryGetActorProgress_System_Int32_System_Int32_System_Collections_Concurrent_ConcurrentDictionary_PlayGen_SUGAR_Server_Model_Evaluation_System_Single___" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.TryGetActorProgress(System.Int32,System.Int32,System.Collections.Concurrent.ConcurrentDictionary{PlayGen.SUGAR.Server.Model.Evaluation,System.Single}@)">TryGetActorProgress(Int32, Int32, out ConcurrentDictionary&lt;Evaluation, Single&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetActorProgress(int gameId, int actorId, out ConcurrentDictionary&lt;Evaluation, float&gt; actorProgress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Concurrent.ConcurrentDictionary</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>, <span class="xref">System.Single</span>&gt;</td>
+        <td><span class="parametername">actorProgress</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_TryGetGameProgress_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.TryGetGameProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ConcurrentProgressCache_TryGetGameProgress_System_Int32_System_Collections_Concurrent_ConcurrentDictionary_System_Int32_System_Collections_Concurrent_ConcurrentDictionary_PlayGen_SUGAR_Server_Model_Evaluation_System_Single____" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.TryGetGameProgress(System.Int32,System.Collections.Concurrent.ConcurrentDictionary{System.Int32,System.Collections.Concurrent.ConcurrentDictionary{PlayGen.SUGAR.Server.Model.Evaluation,System.Single}}@)">TryGetGameProgress(Int32, out ConcurrentDictionary&lt;Int32, ConcurrentDictionary&lt;Evaluation, Single&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetGameProgress(int gameId, out ConcurrentDictionary&lt;int, ConcurrentDictionary&lt;Evaluation, float&gt;&gt; gameProgress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Concurrent.ConcurrentDictionary</span>&lt;<span class="xref">System.Int32</span>, <span class="xref">System.Collections.Concurrent.ConcurrentDictionary</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>, <span class="xref">System.Single</span>&gt;&gt;</td>
+        <td><span class="parametername">gameProgress</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

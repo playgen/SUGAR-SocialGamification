@@ -10,12 +10,12 @@ namespace PlayGen.SUGAR.Server.WebAPI
 {
 	public partial class Startup
 	{
-		private void ConfigureDocumentationGeneratorServices(IServiceCollection services, IHostingEnvironment env)
+		private void ConfigureRESTAPIDocumentationGenerator(IServiceCollection services, IHostingEnvironment env)
 		{
 			if (env.IsDevelopment())
 			{
 				services.AddSwaggerGen(options =>
-				{ 
+				{
 					var version = Configuration.GetValue<string>("Swagger:Version");
 					var title = Configuration.GetValue<string>("Swagger:Title");
 					var description = Configuration.GetValue<string>("Swagger:Description");
@@ -33,11 +33,12 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			}
 		}
 
-		private void ConfigureDocumentationGenerator(IApplicationBuilder app, IHostingEnvironment env)
+		private void UseRESTAPIDocumentation(IApplicationBuilder app, IHostingEnvironment env)
 		{
 			if (env.IsDevelopment())
 			{
 				app.UseSwagger();
+
 				app.UseSwaggerUI(options =>
 				{
 					var endpoint = Configuration.GetValue<string>("Swagger:Endpoint");

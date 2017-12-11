@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Skills | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Skills | SUGAR ">
+    <meta name="generator" content="docfx 2.28.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="skill">
+              <h1 id="skills">Skills</h1>
+              
+<p>Skills represent a players proficiency or ability. SUGAR allows the game designer to define and track which skills the game is designed to teach.</p>
+<p>Such a skill is globally defined with a game-specific criteria. The criteria checks the <a href="gameData.html">GameData</a> table for occurrences that serve as evidence of that skill&#39;s demonstration.</p>
+<h1 id="note">Note</h1>
+<p>Both Skills and <a href="achievement.html">Achievements</a> build on &quot;Evaluations&quot; which may contain a multitude of &quot;EvaluationCriteria&quot;, specifiying the conditions that need to be satisfied for this specific Evaluation to be considered complete.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Get all skills</li>
+<li>Get all skills that match a name/id</li>
+<li>Get all skills associated with a particular game</li>
+<li>Get a player&#39;s performance of a particular skill</li>
+<li>Can be global or game-specific</li>
+<li>CRUD Skill</li>
+<li>CRUD Skill Metadata</li>
+<li>Search Skill (ID/name/metadata/Actor)</li>
+</ul>
+<h2 id="api">API</h2>
+<ul>
+<li>Client<ul>
+<li>&lt;xref:PlayGen.SUGAR.Client.SkillClient&gt;</li>
+</ul>
+</li>
+<li>Contracts<ul>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.EvaluationUpdateRequest&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.EvaluationResponse&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.EvaluationDataType&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.CriteriaQueryType&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.ComparisonType&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.ActorType&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.Shared.CriteriaScope&gt;</li>
+</ul>
+</li>
+<li>WebAPI<ul>
+<li>&lt;xref:PlayGen.SUGAR.WebAPI.Controllers.SkillsController&gt;</li>
+</ul>
+</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<ul>
+<li>Create a skill
+  Skills work identically to <a href="achievement.html">Achievements</a>, utilising the same contracts and <a href="gameData.html">GameData</a>. This example shows how to set up the Swordsmanship skill for a game. The skill has an [&lt;xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria&gt; specifying the value and ComparisonType to determine at which point the skill has been learnt, key &quot;Swordsmanship&quot; and CriteriaQueryType to sum all GameData entry values matching the key.</li>
+</ul>
+<pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
+        private SkillClient _skillClient;
+        private int _gameId;
+
+        private void SetUpSkill()
+        {
+            // create instance of the achievement client
+            _skillClient = sugarClient.Skill;
+
+            // create an EvaluationCriteria list
+            var EvaluationCriteria = new List&lt;EvaluationCriteria&gt;()
+            {
+                new EvaluationCriteria()
+                {
+                    DataType = GameDataType.Long,
+                    Value = &quot;100&quot;,
+                    Key = &quot;Swordsmanship&quot;,
+                    CriteriaQueryType = CriteriaQueryType.Sum,
+                    ComparisonType = ComparisonType.GreaterOrEqual,
+                    Scope = CriteriaScope.Actor
+                }
+            };
+
+            // place the criteria inside an EvaluationCreateRequest
+            var EvaluationCreateRequest = new EvaluationCreateRequest()
+            {
+                GameId = _gameId,
+                Name = &quot;Swordsmanship Skill!&quot;,
+                ActorType = ActorType.User,
+                Token = &quot;swordsmanship&quot;,
+                CompletionCriteria = EvaluationCriteria
+            };
+
+            // create the skill
+            _skillClient.Create(EvaluationCreateRequest);
+        }
+</code></pre><ul>
+<li><p>Submitting data for when somthing which may be used to evaluate progress towards a Skill</p>
+<p>  A skill uses keys in <a href="gameData.html">GameData</a> that match its &lt;xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria&gt;. This data is submitted at points in the game which demonstrate progress towards the skill (as well as other uses).</p>
+</li>
+</ul>
+<pre><code class="lang-cs">        private void SwingSword()
+        {
+            // *Sword Swinging Code* //
+
+
+            // create instance of GameDataClient
+            var gameDataClient = sugarClient.GameData;
+
+            // create GameDataRequest
+            var gameDataRequest = new GameDataRequest()
+            {
+                GameId = _gameId,
+                ActorId = _userId,
+                GameDataType = GameDataType.Long,
+                Value = &quot;1&quot;,
+                Key = &quot;Swordsmanship&quot;
+            };
+
+            // add the GameData
+            gameDataClient.Add(gameDataRequest);
+        }
+</code></pre><ul>
+<li><p>Automatically recieve skill progress completion notifications:</p>
+<p>Enable and use automatic notifications:</p>
+</li>
+</ul>
+<pre><code class="lang-cs">        _skillClient.EnableNotifications(true);
+</code></pre><p>  And then poll to see if any achievements have been recieved.</p>
+<pre><code class="lang-cs">        EvaluationNotification notification;
+        if(_skillClient.TryGetPendingNotification(out notification))
+        {
+            // There was a penging skill notification, so do something with it
+            Log.Info($&quot;Got skill notification: {notification.Name} &quot; + 
+                $&quot;with progress: {notification.Progress}&quot;);
+        }
+</code></pre><ul>
+<li>Requesting specific using the <a href="xref:PlayGen.SUGAR.Client.SkillClient">SkillClient</a>&#39;s GetSkillProgress function and specifying the GameId, ActorId and Token returns an &lt;xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse&gt; object for that Actor&#39;s progress towards the skill in that game. </li>
+</ul>
+<pre><code class="lang-cs">        private float CheckSkillProgress()
+        {
+            // Check the user&#39;s progress towards the achievements in the specified game
+            var skillProgressResponse = _skillClient.GetSkillProgress
+            (
+                &quot;swordsmanship&quot;, 
+                _gameId,
+                 _userId
+             );
+
+            // Output the progress
+            return skillProgressResponse.Progress;
+        }
+</code></pre>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
