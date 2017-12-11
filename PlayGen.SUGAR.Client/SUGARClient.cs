@@ -23,6 +23,7 @@ namespace PlayGen.SUGAR.Client
 		private GroupMemberClient _groupMemberClient;
 		private UserClient _userClient;
 		private UserFriendClient _userFriendClient;
+		private AllianceClient _allianceClient;
 		private ResourceClient _resourceClient;
 		private LeaderboardClient _leaderboardClient;
 		private SkillClient _skillClient;
@@ -38,6 +39,7 @@ namespace PlayGen.SUGAR.Client
 		public GroupMemberClient GroupMember => _groupMemberClient ?? (_groupMemberClient = new GroupMemberClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
 		public UserClient User => _userClient ?? (_userClient = new UserClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
 		public UserFriendClient UserFriend => _userFriendClient ?? (_userFriendClient = new UserFriendClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
+		public AllianceClient AllianceClient => _allianceClient ?? (_allianceClient = new AllianceClient(_baseAddress, _httpHandler, _persistentHeaders, _asyncRequestController, _evaluationNotifications));
 		public ResourceClient Resource => _resourceClient ?? (_resourceClient = new ResourceClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
 		public LeaderboardClient Leaderboard => _leaderboardClient ?? (_leaderboardClient = new LeaderboardClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
 		public SkillClient Skill => _skillClient ?? (_skillClient = new SkillClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
