@@ -41,15 +41,15 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<ActorClaim> GetActorClaims(int actorId)
 		{
 			var claims = _actorClaimDbController.GetActorClaims(actorId);
-			var groups = _relationshipController.GetRelationships(actorId, ActorType.Group);
-			var groupClaims = groups.SelectMany(g => GetActorClaims(g.Id)).Distinct().ToList();
+			//var groups = _relationshipController.GetRelationships(actorId, ActorType.Group);
+			//var groupClaims = groups.SelectMany(g => GetActorClaims(g.Id)).Distinct().ToList();
 			var roles = _actorRoleController.GetActorRoles(actorId, true);
 
 			var roleClaims = roles
 				.Select(r => new { actorRole = r, claims = r.Role.RoleClaims.Select(rc => rc.Claim) })
 				.SelectMany(x => x.claims.Select(c => new ActorClaim { ActorId = x.actorRole.ActorId, EntityId = x.actorRole.EntityId, ClaimId = c.Id, Claim = c }));
 
-			var results = claims.Concat(roleClaims).Concat(groupClaims).Distinct().ToList();
+			var results = claims.Concat(roleClaims)/*.Concat(groupClaims).Distinct()*/.ToList();
 
 			_logger.LogInformation($"{results.Count} Claims for ActorId: {actorId}");
 
