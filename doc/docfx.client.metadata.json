@@ -1,0 +1,87 @@
+{
+	"metadata": [
+		{
+			"src": [
+				{
+					"files": [
+						"**/*.csproj"
+					],
+					"exclude": [
+						"**/obj/**",
+						"**/bin/**",
+						"_site/**",
+						"**/*.Tests/**"
+					],
+					"src": "../"
+				}
+			],
+			"properties": {
+				"TargetFramework": "net35"
+			},
+			"dest": "api",
+			"disableGitFeatures": false
+		}
+	],
+	"build": {
+		"content": [
+			{
+				"files": [
+					"api/**.yml",
+					"api/index.md"
+				]
+			},
+			{
+				"files": [
+					"**/*.md",
+					"**/*.yml",
+					"toc.yml",
+					"*.md",
+					"restapi/**"
+				],
+				"exclude": [
+					"obj/**",
+					"_site/**"
+				]
+			}
+		],
+		"resource": [
+			{
+				"files": [
+					"images/**",
+					"files/**"
+				],
+				"exclude": [
+					"obj/**",
+					"_site/**"
+				]
+			}
+		],
+		"overwrite": [
+			{
+				"files": [
+					"apidoc/**.md"
+				],
+				"exclude": [
+					"obj/**",
+					"_site/**"
+				]
+			}
+		],
+		"dest": "_site",
+		"globalMetadataFiles": [],
+		"fileMetadataFiles": [],
+		"template": [
+			"default",
+			"template"
+		],
+		"globalMetadata": {
+			"_appTitle": "SUGAR",
+			"_enableSearch": true
+		},
+		"postProcessors": [],
+		"noLangKeyword": false,
+		"keepFileLink": false,
+		"cleanupCacheHistory": false,
+		"disableGitFeatures": false
+	}
+}

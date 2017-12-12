@@ -1,23 +1,4 @@
-{
-	"metadata": [
-		{
-			"src": [
-				{
-					"files": [
-						"**/*.csproj"
-					],
-					"exclude": [
-						"**/obj/**",
-						"**/bin/**",
-						"_site/**"
-					],
-					"src": "../"
-				}
-			],
-			"dest": "api",
-			"disableGitFeatures": false
-		}
-	],
+{	
 	"build": {
 		"content": [
 			{

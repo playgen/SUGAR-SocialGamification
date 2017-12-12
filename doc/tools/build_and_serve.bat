@@ -4,4 +4,6 @@ pushd ..\
 
 start "" http://localhost:%PORT%
 
-docfx build docfx.json --serve --port %PORT%
+docfx metadata docfx.client.metadata.json
+docfx metadata docfx.server.metadata.json
+docfx build docfx.build.json --serve --port %PORT%
