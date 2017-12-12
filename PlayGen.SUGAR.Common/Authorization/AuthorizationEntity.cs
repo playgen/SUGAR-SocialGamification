@@ -20,6 +20,8 @@
 		User = 15,
 		UserFriendRequest = 16,
 		UserFriend = 17,
-		Match = 18
+		Match = 18,
+		AllianceRequest = 19,
+		Alliance = 20
 	}
 }

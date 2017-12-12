@@ -28,14 +28,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 				{
 					throw new InvalidSessionException("No \"SessionId\" set in the token's claims.");
 				}
-				else if (!_sessionTracker.IsActive(sessionId))
+				if (!_sessionTracker.IsActive(sessionId))
 				{
 					throw new InvalidSessionException($"Session with id \"{sessionId}\" is not active.");
 				}
-				else
-				{
-					_sessionTracker.SetLastActive(sessionId, DateTime.UtcNow);
-				}
+				_sessionTracker.SetLastActive(sessionId, DateTime.UtcNow);
 			}
 		}
 	}

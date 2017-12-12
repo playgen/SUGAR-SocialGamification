@@ -31,11 +31,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public Role GetDefault(string roleName)
+		public Role GetDefault(ClaimScope scope)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var role = context.Roles.FirstOrDefault(r => r.Name == roleName && r.Default);
+				var role = context.Roles.FirstOrDefault(r => r.ClaimScope == scope && r.Default);
 				return role;
 			}
 		}

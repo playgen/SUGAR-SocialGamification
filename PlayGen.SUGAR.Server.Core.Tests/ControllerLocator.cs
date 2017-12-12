@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             => _accountSourceController ?? (_accountSourceController = new AccountSourceController(new NullLogger<AccountSourceController>(), DbControllerLocator.AccountSourceController));
 
 		public static ActorClaimController ActorClaimController
-			=> _actorClaimController ?? (_actorClaimController = new ActorClaimController(new NullLogger<ActorClaimController>(), DbControllerLocator.ActorClaimController, ActorRoleController, RoleClaimController, RelationshipController));
+			=> _actorClaimController ?? (_actorClaimController = new ActorClaimController(new NullLogger<ActorClaimController>(), DbControllerLocator.ActorClaimController, ActorRoleController, RoleClaimController));
 
 		public static ActorRoleController ActorRoleController
             => _actorRoleController ?? (_actorRoleController = new ActorRoleController(new NullLogger<ActorRoleController>(), DbControllerLocator.ActorRoleController, DbControllerLocator.RoleController));
@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             => _groupController ?? (_groupController = new GroupController(new NullLogger<GroupController>(), DbControllerLocator.GroupController, DbControllerLocator.ActorController, ActorClaimController, ActorRoleController, RelationshipController));
 
         public static LeaderboardController LeaderboardController
-            => _leaderboardController ?? (_leaderboardController = new LeaderboardController(new NullLogger<LeaderboardController>(), new NullLogger<EvaluationDataController>(), RelationshipController, ActorController, GroupController, UserController, DbControllerLocator.ContextFactory));
+            => _leaderboardController ?? (_leaderboardController = new LeaderboardController(new NullLogger<LeaderboardController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.LeaderboardController, RelationshipController, ActorController, GroupController, UserController, DbControllerLocator.ContextFactory));
 
         public static ResourceController ResourceController
             => _resourceController ?? (_resourceController = new ResourceController(new NullLogger<ResourceController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory));

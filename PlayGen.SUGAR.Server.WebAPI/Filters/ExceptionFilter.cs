@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
-using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.WebAPI.Exceptions;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Filters
@@ -12,14 +11,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 	/// </summary>
 	public class ExceptionFilter : ExceptionFilterAttribute
 	{
-        private readonly ILogger _logger;
+		private readonly ILogger _logger;
 
 		public ExceptionFilter(ILogger<ExceptionFilter> logger)
 		{
 			_logger = logger;
 		}
-        
-        public override void OnException(ExceptionContext context)
+		
+		public override void OnException(ExceptionContext context)
 		{
 			var exception = context.Exception;
 
@@ -28,11 +27,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 				case IncompatibleAPIVersionException apiVersion:
 					context.Result = new ObjectResult(apiVersion.Message);
 					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-					break;
-
-				case DuplicateRecordException duplicateRecord:
-					context.Result = new ObjectResult("Invalid data provided.");
-					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
 					break;
 
 				case InvalidAccountDetailsException invalidAccount:
@@ -51,9 +45,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 					break;
 			}
 			
-            _logger.LogError(exception.Message);
+			_logger.LogError(exception.Message);
 
-            context.Exception = null;
+			context.Exception = null;
 			base.OnException(context);
 		}
 	}

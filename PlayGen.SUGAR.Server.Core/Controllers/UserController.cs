@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public User Create(User newUser)
 		{
 			newUser = _userController.Create(newUser);
-			_actorRoleController.Create(ClaimScope.User.ToString(), newUser.Id, newUser.Id);
+			_actorRoleController.Create(ClaimScope.User, newUser.Id, newUser.Id);
 
 			_logger.LogInformation($"{newUser.Id}");
 

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
-using PlayGen.SUGAR.Server.EntityFramework.Controllers;
+using PlayGen.SUGAR.Server.Core.Controllers;
 using PlayGen.SUGAR.Server.WebAPI.Attributes;
 using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
@@ -22,12 +22,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	{
 		private readonly IAuthorizationService _authorizationService;
 		private readonly LeaderboardController _leaderboardController;
-		private readonly Core.Controllers.LeaderboardController _leaderboardEvaluationController;
 
-		public LeaderboardsController(LeaderboardController leaderboardController, Core.Controllers.LeaderboardController leaderboardEvaluationController, IAuthorizationService authorizationService)
+		public LeaderboardsController(LeaderboardController leaderboardController, IAuthorizationService authorizationService)
 		{
 			_leaderboardController = leaderboardController;
-			_leaderboardEvaluationController = leaderboardEvaluationController;
 			_authorizationService = authorizationService;
 		}
 
@@ -43,7 +41,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("game/{gameId:int}/list")]
 		public IActionResult Get([FromRoute]int gameId)
 		{
-			var leaderboard = _leaderboardController.GetByGame(gameId);
+			var leaderboard = _leaderboardController.Get(gameId);
 			var leaderboardContract = leaderboard.ToContractList();
 			return new ObjectResult(leaderboardContract);
 		}
@@ -99,7 +97,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		public IActionResult GetLeaderboardStandings([FromBody]LeaderboardStandingsRequest leaderboardDetails)
 		{
 			var leaderboard = _leaderboardController.Get(leaderboardDetails.LeaderboardToken, leaderboardDetails.GameId.Value);
-			var standings = _leaderboardEvaluationController.GetStandings(leaderboard, leaderboardDetails.ToCore());
+			var standings = _leaderboardController.GetStandings(leaderboard, leaderboardDetails.ToCore());
 			var standingsContract = standings.ToContractList();
 			return new ObjectResult(standingsContract);
 		}

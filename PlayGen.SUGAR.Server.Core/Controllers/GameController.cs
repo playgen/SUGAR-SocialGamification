@@ -69,7 +69,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public Game Create(Game newGame, int creatorId)
 		{
 			newGame = _gameDbController.Create(newGame);
-			_actorRoleController.Create(ClaimScope.Game.ToString(), creatorId, newGame.Id);
+			_actorRoleController.Create(ClaimScope.Game, creatorId, newGame.Id);
 
 			_logger.LogInformation($"Created: Game: {newGame.Id}, for CreatorId: {creatorId}");
 

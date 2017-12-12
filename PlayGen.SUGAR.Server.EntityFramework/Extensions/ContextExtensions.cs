@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Extensions

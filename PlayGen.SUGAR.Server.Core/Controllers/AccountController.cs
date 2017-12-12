@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				User = user
 			});
 
-			_actorRoleController.Create(ClaimScope.Account.ToString(), registered.UserId, registered.Id);
+			_actorRoleController.Create(ClaimScope.Account, registered.UserId, registered.Id);
 
 			_logger.LogInformation($"{registered.Id}");
 

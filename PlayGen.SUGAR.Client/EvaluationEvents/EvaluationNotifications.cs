@@ -34,8 +34,8 @@ namespace PlayGen.SUGAR.Client.EvaluationEvents
 
         private void RemoveDuplicates(List<EvaluationNotification> evaluationNotifications)
         {
-            var names = evaluationNotifications.Select(n => n.Name);
-            _pendingNotifications.RemoveAll(n => names.Contains(n.Name));
+            var names = evaluationNotifications.Select(n => n.Token);
+            _pendingNotifications.RemoveAll(n => names.Contains(n.Token));
         }
 
         internal void Clear()

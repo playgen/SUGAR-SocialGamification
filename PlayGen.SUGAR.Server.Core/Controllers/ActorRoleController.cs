@@ -82,11 +82,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return newRole;
 		}
 
-		public void Create(string roleName, int actorId, int entityId)
+		public void Create(ClaimScope claimScope, int actorId, int entityId)
 		{
-			var role = _roleController.GetDefault(roleName);
+			var role = _roleController.GetDefault(claimScope);
 
-			_logger.LogInformation($"RoleName: {roleName}, ActorId: {actorId}, EntityId: {entityId}");
+			_logger.LogInformation($"ClaimScope: {claimScope}, ActorId: {actorId}, EntityId: {entityId}");
 
 			if (role != null)
 			{

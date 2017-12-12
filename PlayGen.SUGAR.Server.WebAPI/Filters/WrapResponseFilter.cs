@@ -30,9 +30,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 
 		public void OnActionExecuted(ActionExecutedContext context)
 		{
-			var objectResult = context.Result as ObjectResult;
-
-			if (objectResult != null)
+			if (context.Result is ObjectResult objectResult)
 			{
 				var wrappedResponse = new ResponseWrapper<object>
 				{

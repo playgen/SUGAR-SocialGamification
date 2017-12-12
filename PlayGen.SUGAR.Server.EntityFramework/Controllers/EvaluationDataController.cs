@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
 

@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("requests/{groupId:int}")]
-		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GroupMemberRequest)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.AllianceRequest)]
 		public async Task<IActionResult> GetAllianceRequests([FromRoute]int groupId)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, groupId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
@@ -57,7 +57,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("sentrequests/{groupId:int}")]
-		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GroupMemberRequest)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.AllianceRequest)]
 		public async Task<IActionResult> GetSentRequests([FromRoute]int groupId)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, groupId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
 		[HttpPost]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.GroupMemberRequest)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.AllianceRequest)]
 		public async Task<IActionResult> CreateMemberRequest([FromBody]RelationshipRequest relationship)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
@@ -131,7 +131,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut("request")]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.GroupMemberRequest)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.AllianceRequest)]
 		public async Task<IActionResult> UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
@@ -157,7 +157,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut]
 		[ArgumentsNotNull]
-		[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.GroupMember)]
+		[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.Alliance)]
 		public async Task<IActionResult> UpdateMember([FromBody] RelationshipStatusUpdate relationship)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||

@@ -1,5 +1,4 @@
-﻿using PlayGen.SUGAR.Common;
-using PlayGen.SUGAR.Server.Model.Interfaces;
+﻿using PlayGen.SUGAR.Server.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Server.Model
 {

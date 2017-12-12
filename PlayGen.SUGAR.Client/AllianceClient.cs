@@ -71,7 +71,7 @@ namespace PlayGen.SUGAR.Client
 			return Get<int>(query);
 		}
 
-		public void GetMemberCountAsync(int groupId, Action<int> onSuccess, Action<Exception> onError)
+		public void GetAllianceCountAsync(int groupId, Action<int> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => GetAllianceCount(groupId),
 				onSuccess,

@@ -50,7 +50,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public Role GetDefaultForScope(ClaimScope scope)
 		{
-			var role = _roleDbController.GetDefault(scope.ToString());
+			var role = _roleDbController.GetDefault(scope);
 
 			_logger.LogInformation($"{role?.Id} Role ID for {nameof(ClaimScope)}: {scope}");
 
@@ -60,7 +60,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public Role Create(Role newRole, int creatorId)
 		{
 			newRole = _roleDbController.Create(newRole);
-			_actorRoleController.Create(ClaimScope.Role.ToString(), creatorId, newRole.Id);
+			_actorRoleController.Create(ClaimScope.Role, creatorId, newRole.Id);
 
 			_logger.LogInformation($"Role: {newRole.Id} for CreatorId: {creatorId}");
 
