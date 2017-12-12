@@ -1,4 +1,7 @@
 ﻿using System.Linq;
+
+using PlayGen.SUGAR.Common;
+
 using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
@@ -207,7 +210,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
             var evaluation = Helpers.CreateAndCompleteGenericAchievement("RemovesProgressOnEvaluationDeleted", user.Id, game.Id);
 
             // Act
-            ControllerLocator.EvaluationController.Delete(evaluation.Token, game.Id);
+            ControllerLocator.EvaluationController.Delete(evaluation.Token, game.Id, EvaluationType.Achievement);
 
             // Assert
             var progress = EvaluationTracker.GetPendingNotifications(game.Id, user.Id);

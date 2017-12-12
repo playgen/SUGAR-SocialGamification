@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A count of members in the group that matches the search criteria.</returns>
 		[HttpGet("count/{groupId:int}")]
-		public IActionResult GetMemberCount([FromRoute]int groupId)
+		public IActionResult GetAllianceCount([FromRoute]int groupId)
 		{
 			var count = _relationshipCoreController.GetRelationshipCount(groupId, ActorType.Group);
 			return new ObjectResult(count);
@@ -109,7 +109,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpPost]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.GroupMemberRequest)]
-		public async Task<IActionResult> CreateMemberRequest([FromBody]RelationshipRequest relationship)
+		public async Task<IActionResult> CreateAllianceRequest([FromBody]RelationshipRequest relationship)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
 				(await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
@@ -132,7 +132,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpPut("request")]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.GroupMemberRequest)]
-		public async Task<IActionResult> UpdateMemberRequest([FromBody] RelationshipStatusUpdate relationship)
+		public async Task<IActionResult> UpdateAllianceRequest([FromBody] RelationshipStatusUpdate relationship)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
 				(await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
@@ -158,7 +158,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpPut]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.GroupMember)]
-		public async Task<IActionResult> UpdateMember([FromBody] RelationshipStatusUpdate relationship)
+		public async Task<IActionResult> UpdateAlliance([FromBody] RelationshipStatusUpdate relationship)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
 				(await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)

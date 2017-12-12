@@ -43,14 +43,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-
 				var account = context.Accounts.Find(id);
-
 				if (account == null)
 				{
-					throw new MissingRecordException($"No account exsits with Id: {id}");
+					throw new MissingRecordException($"No Account exists with Id: {id}");
 				}
-
 				context.Accounts.Remove(account);
 				SaveChanges(context);
 			}

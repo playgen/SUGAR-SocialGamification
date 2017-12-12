@@ -76,20 +76,15 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="key">Array of Key names.</param>
 		/// <param name="dataType">Data type of value</param>
 		/// <returns>A list of <see cref="EvaluationDataResponse"/> which match the search criteria.</returns>
-		public IEnumerable<EvaluationDataResponse> GetHighest(int actorId, int gameId, string[] key, EvaluationDataType dataType)
+		public EvaluationDataResponse GetByLeaderboardType(int actorId, int gameId, string key, EvaluationDataType dataType, LeaderboardType leaderboardType)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "/highest")
-				.AppendQueryParameter(actorId, "actorId={0}")
-				.AppendQueryParameter(gameId, "gameId={0}")
-				.AppendQueryParameters(key, "key={0}")
-				.AppendQueryParameter(dataType, "dataType={0}")
-				.ToString();
-			return Get<IEnumerable<EvaluationDataResponse>>(query);
+			var query = GetUriBuilder(ControllerPrefix + "/leaderboardType/{0}/{1}/{2}/{3}/{4}", actorId, gameId, key, dataType.ToString(), leaderboardType.ToString()).ToString();
+			return Get<EvaluationDataResponse>(query);
 		}
 
-		public void GetHighestAsync(int actorId, int gameId, string[] key, EvaluationDataType dataType, Action<IEnumerable<EvaluationDataResponse>> onSuccess, Action<Exception> onError)
+		public void GetByLeaderboardTypeAsync(int actorId, int gameId, string key, EvaluationDataType dataType, LeaderboardType leaderboardType, Action<EvaluationDataResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetHighest(actorId, gameId, key, dataType),
+			AsyncRequestController.EnqueueRequest(() => GetByLeaderboardType(actorId, gameId, key, dataType, leaderboardType),
 				onSuccess,
 				onError);
 		}

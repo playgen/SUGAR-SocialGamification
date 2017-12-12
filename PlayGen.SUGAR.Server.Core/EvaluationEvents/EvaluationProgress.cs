@@ -6,7 +6,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
     {
         public Actor Actor { get; set; }
 
-        public string Name { get; set; }
+        public Evaluation Evaluation { get; set; }
 
         public float Progress { get; set; }
     }

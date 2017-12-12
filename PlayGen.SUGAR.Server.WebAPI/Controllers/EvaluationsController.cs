@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
-using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.WebAPI.Extensions;
@@ -29,48 +28,45 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
-				var evaluation = EvaluationCoreController.GetEvaluation(gameId, evaluationType);
+				var evaluation = EvaluationCoreController.GetByGame(gameId, evaluationType);
 				var evaluationContract = evaluation.ToContractList();
 				return new ObjectResult(evaluationContract);
 			}
 			return Forbid();
 		}
 
-		protected async Task<IActionResult> Get(string token, int gameId)
+		protected async Task<IActionResult> Get(string token, int gameId, EvaluationType evaluationType)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
-				var evaluation = EvaluationCoreController.Get(token, gameId);
+				var evaluation = EvaluationCoreController.Get(token, gameId, evaluationType);
 				var evaluationContract = evaluation.ToContract();
 				return new ObjectResult(evaluationContract);
 			}
 			return Forbid();
 		}
 
-		protected IActionResult GetGameProgress(int gameId, int actorId)
+		protected IActionResult GetGameProgress(int gameId, int actorId, EvaluationType evaluationType)
 		{
 			// todo: should this be taken from the progress cache?
-			var evaluationsProgress = EvaluationCoreController.GetGameProgress(gameId, actorId);
+			var evaluationsProgress = EvaluationCoreController.GetGameProgress(gameId, actorId, evaluationType);
 			var evaluationsProgressResponses = evaluationsProgress.ToContractList();
 			return new ObjectResult(evaluationsProgressResponses);
 		}
 
-		protected IActionResult GetEvaluationProgress(string token, int gameId, int actorId)
+		protected IActionResult GetEvaluationProgress(string token, int gameId, int actorId, EvaluationType evaluationType)
 		{
 			// todo: should this be taken from the progress cache?
-			var evaluation = EvaluationCoreController.Get(token, gameId);
-			var progress = EvaluationCoreController.EvaluateProgress(evaluation, actorId);
-			return new ObjectResult(new EvaluationProgressResponse {
-				Name = evaluation.Name,
-				Progress = progress
-			});
+			var progress = EvaluationCoreController.GetProgress(token, gameId, actorId, evaluationType);
+			var progressContract = progress.ToContract();
+			return new ObjectResult(progressContract);
 		}
 
-		protected async Task<IActionResult> Delete(string token, int gameId)
+		protected async Task<IActionResult> Delete(string token, int gameId, EvaluationType evaluationType)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, gameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
-				EvaluationCoreController.Delete(token, gameId);
+				EvaluationCoreController.Delete(token, gameId, evaluationType);
 				return Ok();
 			}
 			return Forbid();

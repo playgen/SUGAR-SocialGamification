@@ -1,4 +1,6 @@
-﻿using PlayGen.SUGAR.Common;
+﻿using System;
+
+using PlayGen.SUGAR.Common;
 
 namespace PlayGen.SUGAR.Contracts
 {
@@ -17,15 +19,15 @@ namespace PlayGen.SUGAR.Contracts
 	/// </example>
 	public class EvaluationDataResponse
 	{
-        /// <summary>
+		/// <summary>
 		/// The id of the Game which this ActorData/GameData relates to.
 		/// </summary>
 		public int GameId { get; set; }
 
-        /// <summary>
-        /// Id of the match this data is related to.
-        /// </summary>
-        public int? MatchId { get; set; }
+		/// <summary>
+		/// Id of the match this data is related to.
+		/// </summary>
+		public int? MatchId { get; set; }
 
 		/// <summary>
 		/// The id of the Actor which this ActorData/GameData relates to.
@@ -46,5 +48,15 @@ namespace PlayGen.SUGAR.Contracts
 		/// The type of the value for this data.
 		/// </summary>
 		public EvaluationDataType EvaluationDataType { get; set; }
+
+		/// <summary>
+		/// The DateTime at which this data was created. Can be left null for data when this does not apply (summed data totals or counts)
+		/// </summary>
+		public DateTime? DateCreated { get; set; }
+
+		/// <summary>
+		/// The DateTime at which this data was last edited. Can be left null for data when this does not apply (summed data totals or counts)
+		/// </summary>
+		public DateTime? DateModified { get; set; }
 	}
 }

@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				PageOffset = standingsContract.PageOffset.Value,
 				MultiplePerActor = standingsContract.MultiplePerActor.Value,
 				DateStart = standingsContract.DateStart,
-				DateEnd = standingsContract.DateEnd,
+				DateEnd = standingsContract.DateEnd
 			};
 		}
 

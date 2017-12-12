@@ -56,22 +56,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				// todo replace with entire block with: (and update unit tests)
-				// context.[tablename].Update(entity);
-				// context.SaveChanges();
-
-				var existing = context.Games.Find(game.Id);
-
-				if (existing != null)
-				{
-					context.Entry(existing).State = EntityState.Modified;
-					existing.Name = game.Name;
-					SaveChanges(context);
-				}
-				else
-				{
-					throw new MissingRecordException($"The existing game with ID {game.Id} could not be found.");
-				}
+				context.Games.Update(game);
+				SaveChanges(context);
 			}
 		}
 
@@ -79,12 +65,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				// todo why are we removing multiple games?
 				// todo should we not also be deleting all data associated with this game?
-				var game = context.Games
-					.Where(g => id == g.Id);
-
-				context.Games.RemoveRange(game);
+				var game = context.Games.Find(id);
+				if (game == null)
+				{
+					throw new MissingRecordException($"No Game exists with Id: {id}");
+				}
+				context.Games.Remove(game);
 				SaveChanges(context);
 			}
 		}

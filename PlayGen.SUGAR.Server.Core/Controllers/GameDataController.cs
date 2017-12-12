@@ -29,6 +29,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return _evaluationDataController.Get(gameId, actorId, keys);
 		}
 
+		public EvaluationData Get(int gameId, int actorId, string key, EvaluationDataType dataType, LeaderboardType sortType)
+		{
+			return _evaluationDataController.Get(gameId, actorId, key, dataType, sortType);
+		}
+
 		public List<Actor> GetGameActors(int gameId)
 		{
 			var ids = _evaluationDataController.GetGameActors(gameId);

@@ -39,7 +39,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 					Response = objectResult.Value,
 					EvaluationsProgress = GetPendingEvents(context.HttpContext.Request)
 				};
-
 				context.Result = new ObjectResult(wrappedResponse);
 			}
 		}
@@ -56,7 +55,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 					pendingEvents = GetPendingEvents(gameId, userId);
 				}
 			}
-
 			return pendingEvents;
 		}
 

@@ -14,9 +14,10 @@ using System;
 namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 {
     [DbContext(typeof(SUGARContext))]
-    partial class SUGARContextModelSnapshot : ModelSnapshot
+    [Migration("20171211174541_MemberCountAndAllianceCount")]
+    partial class MemberCountAndAllianceCount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

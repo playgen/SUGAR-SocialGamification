@@ -23,8 +23,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 
 		public static IEnumerable<T> GetCustomMethodAttributes<T>(this ActionDescriptor actionDescriptor) where T : Attribute
 		{
-			var controllerActionDescriptor = actionDescriptor as ControllerActionDescriptor;
-			return controllerActionDescriptor != null ? controllerActionDescriptor.MethodInfo.GetCustomAttributes<T>(true) : Enumerable.Empty<T>();
+			return actionDescriptor is ControllerActionDescriptor controllerActionDescriptor ? controllerActionDescriptor.MethodInfo.GetCustomAttributes<T>(true) : Enumerable.Empty<T>();
 		}
 
 		public static T GetCustomMethodAttribute<T>(this ActionDescriptor actionDescriptor) where T : Attribute
@@ -34,8 +33,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 
 		public static IEnumerable<T> GetCustomClassAttributes<T>(this ActionDescriptor actionDescriptor) where T : Attribute
 		{
-			var controllerActionDescriptor = actionDescriptor as ControllerActionDescriptor;
-			return controllerActionDescriptor != null ? controllerActionDescriptor.ControllerTypeInfo.GetCustomAttributes<T>(true) : Enumerable.Empty<T>();
+			return actionDescriptor is ControllerActionDescriptor controllerActionDescriptor ? controllerActionDescriptor.ControllerTypeInfo.GetCustomAttributes<T>(true) : Enumerable.Empty<T>();
 		}
 
 		public static T GetCustomClassAttribute<T>(this ActionDescriptor actionDescriptor) where T : Attribute

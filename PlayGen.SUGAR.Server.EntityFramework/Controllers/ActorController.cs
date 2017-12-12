@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
@@ -40,13 +42,16 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public void Delete(int[] id)
+		public void Delete(int id)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var actors = context.Actors.Where(a => id.Contains(a.Id)).ToList();
-
-				context.Actors.RemoveRange(actors);
+				var actor = context.Actors.Find(id);
+				if (actor == null)
+				{
+					throw new MissingRecordException($"No Actor exists with Id: {id}");
+				}
+				context.Actors.Remove(actor);
 				SaveChanges(context);
 			}
 		}

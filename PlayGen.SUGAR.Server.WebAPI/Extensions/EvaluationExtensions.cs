@@ -71,18 +71,22 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 		{
 			return new EvaluationProgressResponse {
 				Actor = model.Actor.ToActorContract(),
-				Name = model.Name,
-				Progress = model.Progress
+				Name = model.Evaluation.Name,
+				Description = model.Evaluation.Description,
+				Token = model.Evaluation.Token,
+				Progress = model.Progress,
+				Type = model.Evaluation.EvaluationType
 			};
 		}
 
 		public static List<EvaluationProgressResponse> ToContractList(this ConcurrentDictionary<int, ConcurrentDictionary<Evaluation, float>> pendingNotifications)
 		{
 			if (pendingNotifications == null)
+			{
 				return null;
+			}
 
 			var progressResponses = new List<EvaluationProgressResponse>();
-
 			foreach (var actorProgress in pendingNotifications)
 			{
 				foreach (var evaluationProgress in actorProgress.Value)
@@ -92,11 +96,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 							// todo get name
 							Id = actorProgress.Key
 						},
-
 						Name = evaluationProgress.Key.Name,
-
+						Description = evaluationProgress.Key.Description,
+						Token = evaluationProgress.Key.Token,
 						Progress = evaluationProgress.Value,
-
 						Type = evaluationProgress.Key.EvaluationType
 					});
 				}

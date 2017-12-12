@@ -16,5 +16,10 @@
 		/// The number of members in this group.
 		/// </summary>
 		public int MemberCount { get; set; }
+
+		/// <summary>
+		/// The number of alliances this group has
+		/// </summary>
+		public int AllianceCount { get; set; }
 	}
 }
