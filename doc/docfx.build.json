@@ -17,7 +17,8 @@
 				],
 				"exclude": [
 					"obj/**",
-					"_site/**"
+					"_site/**",
+					"tools/**"
 				]
 			}
 		],
@@ -29,7 +30,8 @@
 				],
 				"exclude": [
 					"obj/**",
-					"_site/**"
+					"_site/**",
+					"tools/**"
 				]
 			}
 		],
@@ -40,7 +42,8 @@
 				],
 				"exclude": [
 					"obj/**",
-					"_site/**"
+					"_site/**",
+					"tools/**"
 				]
 			}
 		],
