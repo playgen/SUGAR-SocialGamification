@@ -21,20 +21,20 @@ Leaderboards provide a visual comparison tool for measurements of resources or o
 * Client
     * <xref:PlayGen.SUGAR.Client.LeaderboardClient>
 * Contracts
-    * <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardResponse>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsResponse>
-    * <xref:PlayGen.SUGAR.Common.Shared.LeaderboardType>
-    * <xref:PlayGen.SUGAR.Common.Shared.LeaderboardFilterType>
-    * <xref:PlayGen.SUGAR.Common.Shared.EvaluationDataType>
-    * <xref:PlayGen.SUGAR.Common.Shared.CriteriaScope>
-    * <xref:PlayGen.SUGAR.Common.Shared.ActorType>
+    * <xref:PlayGen.SUGAR.Contracts.LeaderboardRequest>
+    * <xref:PlayGen.SUGAR.Contracts.LeaderboardResponse>
+    * <xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest>
+    * <xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse>
+    * <xref:PlayGen.SUGAR.Common.LeaderboardType>
+    * <xref:PlayGen.SUGAR.Common.LeaderboardFilterType>
+    * <xref:PlayGen.SUGAR.Common.EvaluationDataType>
+    * <xref:PlayGen.SUGAR.Common.CriteriaScope>
+    * <xref:PlayGen.SUGAR.Common.ActorType>
 
 
 ## Examples
 * Create a leaderboard
-	This example shows how to create a leaderboard which will display the highest rankings for the combined total of kingdoms the players have conquered. This uses <xref:PlayGen.SUGAR.Client.LeaderboardClient>'s Create function, passing a <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardRequest> as the parameter. This request will specify the identifier token "MOST_KINGDOMS_CONQUERED", key for which to check in [GameData](gameData.md) "KingdomsConquered" and <xref:PlayGen.SUGAR.Common.Shared.LeaderboardType> Cumulative to add all the values of every entry matching the key. The code will then store the Token of the leaderboard from the <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardResponse> for later use.
+	This example shows how to create a leaderboard which will display the highest rankings for the combined total of kingdoms the players have conquered. This uses <xref:PlayGen.SUGAR.Client.LeaderboardClient>'s Create function, passing a <xref:PlayGen.SUGAR.Contracts.LeaderboardRequest> as the parameter. This request will specify the identifier token "MOST_KINGDOMS_CONQUERED", key for which to check in [GameData](gameData.md) "KingdomsConquered" and <xref:PlayGen.SUGAR.Common.LeaderboardType> Cumulative to add all the values of every entry matching the key. The code will then store the Token of the leaderboard from the <xref:PlayGen.SUGAR.Contracts.LeaderboardResponse> for later use.
 
 ```cs
 		public SUGARClient sugarClient = new SUGARClient(BaseUri);
@@ -69,7 +69,7 @@ Leaderboards provide a visual comparison tool for measurements of resources or o
 ```
 
 * Get standings for a leaderboard
-	To display the leaderboard inside the game, the current standings of the leaderboard must be retreived. The <xref:PlayGen.SUGAR.Client.LeaderboardClient>'s CreateGetLeaderboardStandings function is called by passing a <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest> object as the parameter, which specifies filters for the returned results. This example will retreive the 8 rankings nearest to the player by setting the <xref:PlayGen.SUGAR.Common.Shared.LeaderboardFilterType> to Near, the limit to 8 and offset as 0. The returned <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsResponse> contains all the data to populate the visual representation of the leaderboard. 
+	To display the leaderboard inside the game, the current standings of the leaderboard must be retreived. The <xref:PlayGen.SUGAR.Client.LeaderboardClient>'s CreateGetLeaderboardStandings function is called by passing a <xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest> object as the parameter, which specifies filters for the returned results. This example will retreive the 8 rankings nearest to the player by setting the <xref:PlayGen.SUGAR.Common.LeaderboardFilterType> to Near, the limit to 8 and offset as 0. The returned <xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse> contains all the data to populate the visual representation of the leaderboard. 
 
 
 ```cs

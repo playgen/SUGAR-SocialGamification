@@ -25,13 +25,13 @@ Actors can join, leave or add another actor to a group.
 * Client
     * <xref:PlayGen.SUGAR.Client.GroupClient>
 * Contracts
-    * <xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.ActorRequest>
+    * <xref:PlayGen.SUGAR.Contracts.ActorResponse>
+    * <xref:PlayGen.SUGAR.Contracts.ActorRequest>
 
     
 ## Examples
 * Create a group
-	This example will show how to create a group called "Wildlings" using the <xref:PlayGen.SUGAR.Client.GroupClient>'s Create function, passing an <xref:PlayGen.SUGAR.Contracts.Shared.ActorRequest> as the parameter and storing the group's id returned inside the <xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse> object.
+	This example will show how to create a group called "Wildlings" using the <xref:PlayGen.SUGAR.Client.GroupClient>'s Create function, passing an <xref:PlayGen.SUGAR.Contracts.ActorRequest> as the parameter and storing the group's id returned inside the <xref:PlayGen.SUGAR.Contracts.ActorResponse> object.
 
 ```cs
 		public SUGARClient sugarClient = new SUGARClient(BaseUri);

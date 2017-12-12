@@ -12,4 +12,4 @@ There are various build scripts in doc/tools to build, copy and serve the docs.
 
 ## Hosting
 
-Docs are built and copied to the PlayGen.SUGAR.WebAPI.Server/wwwroot where they are served from.
+Docs are built and copied to the PlayGen.SUGAR.Server.WebAPI.Server/wwwroot where they are served from.

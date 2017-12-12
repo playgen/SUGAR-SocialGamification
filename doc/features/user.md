@@ -18,12 +18,11 @@ Users are individuals interacting with the system. They may fulfil a range of ro
 * Client
     * [UserClient](xref:PlayGen.SUGAR.Client.UserClient)
 * Contracts
-    * <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria>
-    * [AchievementProgressResponse](xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse)
-    * [ActorRequest](xref:PlayGen.SUGAR.Contracts.Shared.ActorRequest)
-    * [ActorResponse](xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse)
+    * [AchievementProgressResponse](xref:PlayGen.SUGAR.Contracts.EvaluationProgressResponse)
+    * [ActorRequest](xref:PlayGen.SUGAR.Contracts.ActorRequest)
+    * [ActorResponse](xref:PlayGen.SUGAR.Contracts.ActorResponse)
 * WebAPI
-    * [UserController](xref:PlayGen.SUGAR.WebAPI.Controllers.UserController)
+    * [UserController](xref:PlayGen.SUGAR.Server.WebAPI.Controllers.UserController)
 
 ## Roadmap
 
