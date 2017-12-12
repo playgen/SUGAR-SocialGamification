@@ -14,7 +14,8 @@ uid: docker
 
 # Quick Start
 
-To run the SUGAR docker services without having to build the SUGAR image, run the docker/docker-compose_image_deploy script.
+To run the SUGAR docker services without having to build the SUGAR image:
+Run the docker/docker-compose_image_deploy script.
 
 This will use the latest docker image of SUGAR from the [Automated Builds](#automated-builds) and create and link the database container.
 
@@ -30,15 +31,15 @@ To build and run SUGAR, run the docker/docker-compose_build_deploy script.
 
 This will build the SUGAR image using the Dockerfile in the root of the repository, and then create and link the database container.
 
-# Configuration 
+## Configuration 
 
-## Dockerfile
+### Dockerfile
 
 The Dockerfile for SUGAR is in the project root. It is built off the base image recommended by Microsoft for .NETCoreApp2.0 applications.
 
 It copies the contents of the SUGAR repository into the filesystem of the container. The container contains the necessary environment to build this project thanks to the base image provided by Microsoft. The next steps restore the NuGet packages, build the project and launch the server via the PlayGen.SUGAR.Server.WebAPI entrypoint.
 
-## Docker-Compose file
+### Docker-Compose file
 
 The SUGAR docker-compose files have been split into 3 parts:
 
@@ -46,17 +47,17 @@ The SUGAR docker-compose files have been split into 3 parts:
 - [docker-compose.build.yml](#docker-composebuildyml): this has the configuration to build SUGAR image from source.
 - [docker-compose.base.yml](#docker-composebaseyml): this contains all the shared settings for the SUGAR container as well as the database and inter-container links.
 
-### docker-compose.image.yml
+#### docker-compose.image.yml
 
 See the docker/docker-compose_image_deploy script.
 It uses this in conjunction with [docker-compose.base.yml](#docker-composebaseyml).
 
-### docker-compose.build.yml
+#### docker-compose.build.yml
 
 See the docker/docker-compose_build_deploy script.
 It uses this in conjunction with [docker-compose.base.yml](#docker-composebaseyml).
 
-### docker-compose.base.yml
+#### docker-compose.base.yml
 
 The SUGAR compose configuration requires the sugar-mariadb container which hosts the databse. This is simply built from the mariadb image.
 
