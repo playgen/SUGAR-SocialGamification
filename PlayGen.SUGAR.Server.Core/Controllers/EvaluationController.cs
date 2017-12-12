@@ -56,52 +56,48 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return evaluations;
 		}
 
-		public Evaluation Get(string token, int gameId)
+		public List<Evaluation> GetByGame(int gameId, EvaluationType evaluationType)
 		{
-			var evaluation = _evaluationDbController.Get(token, gameId);
+			var evaluations = _evaluationDbController.GetByGame(gameId, evaluationType);
+
+			_logger.LogInformation($"{evaluations?.Count} Evalautions for GameId: {gameId}");
+
+			return evaluations;
+		}
+
+		public Evaluation Get(string token, int gameId, EvaluationType evaluationType)
+		{
+			var evaluation = _evaluationDbController.Get(token, gameId, evaluationType);
 
 			_logger.LogInformation($"Evalaution: {evaluation?.Id} for Token: {token}, GameId: {gameId}");
 
 			return evaluation;
 		}
 
-		public List<Evaluation> GetEvaluation(int gameId, EvaluationType evaluationType)
+		public List<EvaluationProgress> GetGameProgress(int gameId, int actorId, EvaluationType evaluationType)
 		{
-			var evaluations = _evaluationDbController.GetByEvaluationType(gameId, evaluationType);
-
-			_logger.LogInformation($"{evaluations?.Count} Evaluations for GameId: {gameId}, EvaluationType: {evaluationType}");
-
-			return evaluations;
-		}
-
-		public List<EvaluationProgress> GetGameProgress(int gameId, int actorId)
-		{
-			var evaluations = _evaluationDbController.GetByGame(gameId);
+			var evaluations = GetByGame(gameId, evaluationType);
 			evaluations = FilterByActorType(evaluations, actorId);
 
-			var evaluationsProgress = evaluations.Select(e => new EvaluationProgress {
-				Actor = _actorController.Get(actorId),
-				Name = e.Name,
-				Progress = EvaluateProgress(e, actorId)
-			}).ToList();
+			var evaluationsProgress = evaluations.Select(e => GetProgress(e.Token, gameId, actorId, evaluationType)).ToList();
 
 			_logger.LogInformation($"{evaluationsProgress.Count} Evaluation Progresses for GameId: {gameId}, ActorId: {actorId}");
 
 			return evaluationsProgress;
 		}
 
-		public EvaluationProgress GetProgress(string token, int gameId, int actorId)
+		public EvaluationProgress GetProgress(string token, int gameId, int actorId, EvaluationType evaluationType)
 		{
-			var evaluation = _evaluationDbController.Get(token, gameId);
+			var evaluation = Get(token, gameId, evaluationType);
 			var progress = EvaluateProgress(evaluation, actorId);
 
 			var result = new EvaluationProgress {
 				Actor = _actorController.Get(actorId),
-				Name = evaluation.Name,
+				Evaluation = evaluation,
 				Progress = progress
 			};
 
-			_logger.LogInformation($"{result.Name} Evaluation Progresses for Token: {token}, GameId: {gameId}, ActorId: {actorId}");
+			_logger.LogInformation($"{result.Evaluation.Name} Evaluation Progresses for Token: {token}, GameId: {gameId}, ActorId: {actorId}");
 
 			return result;
 		}
@@ -140,9 +136,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			EvaluationUpdatedEvent?.Invoke(evaluation);
 		}
 
-		public void Delete(string token, int gameId)
+		public void Delete(string token, int gameId, EvaluationType evaluationType)
 		{
-			var evaluation = Get(token, gameId);
+			var evaluation = Get(token, gameId, evaluationType);
 
 			if (evaluation == null)
 			{
@@ -150,7 +146,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			}
 
 			EvaluationDeletedEvent?.Invoke(evaluation);
-			_evaluationDbController.Delete(token, gameId);
+			_evaluationDbController.Delete(token, gameId, evaluationType);
 
 			_logger.LogInformation($"Deleted: {evaluation.Id} for Token {token}, GameId: {gameId}");
 		}

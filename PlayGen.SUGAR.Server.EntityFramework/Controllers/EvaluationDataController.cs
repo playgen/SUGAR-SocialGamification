@@ -157,28 +157,24 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			return false;
 		}
 
-		public bool TryGetMax<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
-			where T : struct
+		public bool TryGetMax(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var list = List(gameId, actorId, key, evaluationDataType, start, end);
 			if (list.Count > 0)
 			{
-				var max = list.Max(s => Convert.ToDouble(s.Value));
-				value = (T)Convert.ChangeType(max, typeof(T));
+				value = list.OrderByDescending(s => Convert.ToDouble(s.Value)).First();
 				return true;
 			}
 			value = null;
 			return false;
 		}
 
-		public bool TryGetMin<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
-			where T : struct
+		public bool TryGetMin(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			var list = List(gameId, actorId, key, evaluationDataType, start, end);
 			if (list.Count > 0)
 			{
-				var min = list.Min(s => Convert.ToDouble(s.Value));
-				value = (T)Convert.ChangeType(min, typeof(T));
+				value = list.OrderBy(s => Convert.ToDouble(s.Value)).First();
 				return true;
 			}
 			value = null;
@@ -241,23 +237,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				// todo replace with entire block with: (and update unit tests)
-				// context.[tablename].Update(entity);
-				// context.SaveChanges();
-
-				var existingData = context.EvaluationData
-					.Find(updatedData.Id);
-
-				if (existingData == null)
-				{
-					throw new MissingRecordException("Cannot find the object to update.");
-				}
-
-				existingData.Value = updatedData.Value;
-
-				SaveChanges(context);
-
-				return existingData;
+				context.EvaluationData.Update(updatedData);
+				context.SaveChanges();
+				return updatedData;
 			}
 		}
 	}

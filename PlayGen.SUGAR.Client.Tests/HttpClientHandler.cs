@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
+using PlayGen.SUGAR.Client.Exceptions;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
@@ -27,8 +29,16 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			request.Headers.ToList().ForEach(hkvp => requestMessage.Headers.Add(hkvp.Key, hkvp.Value));
 
-			var responseMessage = _client.SendAsync(requestMessage).Result;
-			
+			HttpResponseMessage responseMessage;
+			try
+			{
+				responseMessage = _client.SendAsync(requestMessage).Result;
+			}
+			catch (Exception error)
+			{
+				throw new ClientHttpException(HttpStatusCode.InternalServerError, "See inner exception for details", error);
+			}
+
 			var response = new HttpResponse
 			{
 				StatusCode = (int)responseMessage.StatusCode,

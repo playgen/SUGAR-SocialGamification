@@ -29,13 +29,23 @@ namespace PlayGen.SUGAR.Contracts
 		public string Name { get; set; }
 
 		/// <summary>
+		/// The description of the achievement/skill which progress was being checked for.
+		/// </summary>
+		public string Description { get; set; }
+
+		/// <summary>
+		/// The token of the achievement/skill which progress was being checked for.
+		/// </summary>
+		public string Token { get; set; }
+
+		/// <summary>
 		/// Progress of current achievement/skill [0 to 1].
 		/// </summary>
 		public float Progress { get; set; }
 
-        /// <summary>
-        /// Skill or Achievement
-        /// </summary>
-        public EvaluationType Type { get; set; }
+		/// <summary>
+		/// Skill or Achievement
+		/// </summary>
+		public EvaluationType Type { get; set; }
 	}
 }

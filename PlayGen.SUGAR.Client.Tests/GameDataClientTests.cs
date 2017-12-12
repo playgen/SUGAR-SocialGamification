@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
@@ -335,6 +336,77 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			// Act Assert
 			Assert.Throws<ArgumentException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
+		}
+
+		[Fact]
+		public void CanGetGameDataByLeaderboardType()
+		{
+			var key = "GameData_CanGetGameDataByLeaderboardType";
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
+
+			for (var i = 0; i < 25; i++)
+			{
+				var evaluationDataRequest = new EvaluationDataRequest
+				{
+					CreatingActorId = loggedInAccount.User.Id,
+					GameId = game.Id,
+					Key = key,
+					Value = (((i + 12) % 25) + 1).ToString()
+				};
+
+				evaluationDataRequest.EvaluationDataType = EvaluationDataType.String;
+				Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Long;
+				Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Float;
+				evaluationDataRequest.Value = ((((i + 12) % 25) + 1) + ((i/100f) + 0.01f)).ToString(CultureInfo.InvariantCulture);
+				Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Boolean;
+				evaluationDataRequest.Value = (i % 2 == 0).ToString();
+				Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+			}
+
+			var get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Count);
+			Assert.Equal("25", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Earliest);
+			Assert.Equal("13", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Latest);
+			Assert.Equal("12", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Count);
+			Assert.Equal("25", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Earliest);
+			Assert.Equal("True", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Latest);
+			Assert.Equal("True", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Cumulative);
+			Assert.Equal("325", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Highest);
+			Assert.Equal("25", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Lowest);
+			Assert.Equal("1", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Earliest);
+			Assert.Equal("13", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Latest);
+			Assert.Equal("12", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Cumulative);
+			Assert.Equal("328.25", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Highest);
+			Assert.Equal("25.13", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Lowest);
+			Assert.Equal("1.14", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Earliest);
+			Assert.Equal("13.01", get.Value);
+			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Latest);
+			Assert.Equal("12.25", get.Value);
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Highest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Lowest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Cumulative));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Highest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Lowest));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Cumulative));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Count));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Count));
 		}
 
 		public GameDataClientTests(ClientTestsFixture fixture)

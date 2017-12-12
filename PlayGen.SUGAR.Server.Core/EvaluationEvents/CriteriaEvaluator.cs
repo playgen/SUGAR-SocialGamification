@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 				{
 					throw new NotImplementedException("RelatedActors Scope is only implemented for groups");
 				}
-				var groupActors = RelationshipCoreController.GetRelationships(actorId, ActorType.Group).ToList<Actor>();
+				var groupActors = RelationshipCoreController.GetRelationships(actorId, ActorType.Group);
 				switch (completionCriteria.EvaluationDataType)
 				{
 					case EvaluationDataType.Boolean:

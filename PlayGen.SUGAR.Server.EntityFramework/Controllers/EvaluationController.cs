@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
@@ -37,25 +39,26 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<Evaluation> GetByEvaluationType(int gameId, EvaluationType evaluationType)
+		public List<Evaluation> GetByGame(int gameId, EvaluationType evaluationType)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				var evaluations = context.Evaluations
 					.IncludeAll()
-					.Where(a => a.GameId == gameId && a.EvaluationType == evaluationType).ToList();
+					.Where(a => a.GameId == gameId && a.EvaluationType == evaluationType)
+					.ToList();
 
 				return evaluations;
 			}
 		}
 
-		public Evaluation Get(string token, int gameId)
+		public Evaluation Get(string token, int gameId, EvaluationType evaluationType)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				return context.Evaluations
 					.IncludeAll()
-					.SingleOrDefault(e => e.Token == token && e.GameId == gameId);
+					.SingleOrDefault(e => e.Token == token && e.GameId == gameId && e.EvaluationType == evaluationType);
 			}
 		}
 
@@ -83,23 +86,24 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.Evaluations.Update(evaluation);
-				context.SaveChanges();
+				SaveChanges(context);
 			}
 		}
 
-		public void Delete(string token, int gameId)
+		public void Delete(string token, int gameId, EvaluationType evaluationType)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				var evaluation = context.Evaluations
 					.IncludeAll()
-					.SingleOrDefault(e => e.Token == token && e.GameId == gameId);
+					.SingleOrDefault(e => e.Token == token && e.GameId == gameId && e.EvaluationType == evaluationType);
 
-				if (evaluation != null)
+				if (evaluation == null)
 				{
-					context.Evaluations.Remove(evaluation);
-					SaveChanges(context);
+					throw new MissingRecordException($"No Evaluation exists with Token: {token}, GameId: {gameId} and EvaluationType: {evaluationType}");
 				}
+				context.Evaluations.Remove(evaluation);
+				SaveChanges(context);
 			}
 		}
 	}

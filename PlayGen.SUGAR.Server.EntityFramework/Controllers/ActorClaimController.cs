@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Common.Authorization;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
@@ -68,10 +69,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var actorClaim = context.ActorClaims
-					.Where(r => id == r.Id);
-
-				context.ActorClaims.RemoveRange(actorClaim);
+				var actorClaim = context.ActorClaims.Find(id);
+				if (actorClaim == null)
+				{
+					throw new MissingRecordException($"No ActorClaim exists with Id: {id}");
+				}
+				context.ActorClaims.Remove(actorClaim);
 				SaveChanges(context);
 			}
 		}

@@ -81,19 +81,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var existing = context.Users
-					.IncludeAll()
-					.FirstOrDefault(u => u.Id == user.Id);
-
-				if (existing != null)
-				{
-					context.Entry(existing).State = EntityState.Modified;
-					existing.Name = user.Name;
-					existing.Description = user.Description;
-					SaveChanges(context);
-					return existing;
-				}
-				throw new MissingRecordException($"The existing user with ID {user.Id} could not be found.");
+				context.Users.Update(user);
+				SaveChanges(context);
+				return user;
 			}
 		}
 
@@ -101,11 +91,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var user = context.Users
-					.IncludeAll()
-					.Where(g => id == g.Id);
-
-				context.Users.RemoveRange(user);
+				var user = context.Users.Find(id);
+				if (user == null)
+				{
+					throw new MissingRecordException($"No User exists with Id: {id}");
+				}
+				context.Users.Remove(user);
 				SaveChanges(context);
 			}
 		}

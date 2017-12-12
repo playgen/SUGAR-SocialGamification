@@ -129,7 +129,6 @@ namespace PlayGen.SUGAR.Client.Tests
 				new[] {createdResource.Key}).Single();
 
 			Assert.Equal(createdQuantity + updatedQuantity, updatedResource.Quantity);
-			Assert.Equal(createdResource.Id, updatedResource.Id);
 		}
 
 		[Fact]

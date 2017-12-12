@@ -16,7 +16,8 @@ namespace PlayGen.SUGAR.Client
 {
 	public abstract class ClientBase
 	{
-		private readonly Dictionary<string, string> _persistentHeaders;
+		private readonly Dictionary<string, string> _constantHeaders;
+		private readonly Dictionary<string, string> _sessionHeaders;
 		private readonly string _baseAddress;
 		private readonly IHttpHandler _httpHandler;
 
@@ -24,6 +25,9 @@ namespace PlayGen.SUGAR.Client
 		protected readonly EvaluationNotifications EvaluationNotifications;
 
 		public static readonly JsonSerializerSettings SerializerSettings;
+		private string baseAddress;
+		private IHttpHandler httpHandler;
+		private Dictionary<string, string> constantHeaders;
 
 		static ClientBase()
 		{
@@ -34,13 +38,15 @@ namespace PlayGen.SUGAR.Client
 				ContractResolver = new CamelCasePropertyNamesContractResolver(),
 				ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
 			};
+
 			SerializerSettings.Converters.Add(new StringEnumConverter());
 		}
 
 		protected ClientBase(
 			string baseAddress, 
 			IHttpHandler httpHandler,
-			Dictionary<string, string> persistentHeaders,
+			Dictionary<string, string> constantHeaders,
+			Dictionary<string, string> sessionHeaders,
 			AsyncRequestController asyncRequestController, 
 			EvaluationNotifications evaluationNotifications)
 		{
@@ -48,29 +54,31 @@ namespace PlayGen.SUGAR.Client
 			{
 				throw new ClientException("Base address is not an absolute or valid URI");
 			}
+
 			_baseAddress = baseAddress;
 			_httpHandler = httpHandler;
-			_persistentHeaders = persistentHeaders;
+			_constantHeaders = constantHeaders;
+			_sessionHeaders = sessionHeaders;
 			AsyncRequestController = asyncRequestController;
 			EvaluationNotifications = evaluationNotifications;
 		}
-
+		
 		protected void EnableEvaluationNotifications(bool enable = true)
 		{
 			if (enable)
 			{
-				_persistentHeaders[HeaderKeys.EvaluationNotifications] = $"{true}";
+				_sessionHeaders[HeaderKeys.EvaluationNotifications] = $"{true}";
 			}
 			else
 			{
-				_persistentHeaders.Remove(HeaderKeys.EvaluationNotifications);
+				_sessionHeaders.Remove(HeaderKeys.EvaluationNotifications);
 			}
 		}
 
 		protected void ClearSessionData()
 		{
 			AsyncRequestController.Clear();
-			_persistentHeaders.Clear();
+			_sessionHeaders.Clear();
 			EvaluationNotifications.Clear();
 		}
 
@@ -137,7 +145,12 @@ namespace PlayGen.SUGAR.Client
 		{
 			var requestHeaders = headers == null ? new Dictionary<string, string>() : new Dictionary<string, string>(headers);
 
-			foreach (var keyValuePair in _persistentHeaders)
+			foreach (var keyValuePair in _constantHeaders)
+			{
+				requestHeaders[keyValuePair.Key] = keyValuePair.Value;
+			}
+
+			foreach (var keyValuePair in _sessionHeaders)
 			{
 				requestHeaders[keyValuePair.Key] = keyValuePair.Value;
 			}
@@ -264,11 +277,10 @@ namespace PlayGen.SUGAR.Client
 				}
 				throw new ClientHttpException((HttpStatusCode)response.StatusCode, error);
 			}
-
-			//TODO: check if this has changed
+			
 			if (response.Headers.ContainsKey(HeaderKeys.Authorization))
 			{
-				_persistentHeaders[HeaderKeys.Authorization] = response.Headers[HeaderKeys.Authorization];
+				_sessionHeaders[HeaderKeys.Authorization] = response.Headers[HeaderKeys.Authorization];
 			}
 		}
 	}

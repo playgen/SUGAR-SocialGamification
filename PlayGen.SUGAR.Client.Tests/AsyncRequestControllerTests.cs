@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using Xunit;
 
@@ -9,17 +10,8 @@ namespace PlayGen.SUGAR.Client.Tests
 {
 	public class AsyncRequestControllerTests : ClientTestBase
 	{
-		private AsyncRequestController DefaultAsyncRequestController
-		{
-			get
-			{
-				var controller = new AsyncRequestController();
-				controller.SetTimeout(60 * 1000, null);
+		private AsyncRequestController DefaultAsyncRequestController => new AsyncRequestController(60 * 1000, null);
 
-				return controller;
-			}
-		}
-		
 		[Fact]
 		public void ValueRequestsTriggerOnSuccessCallbacks()
 		{
@@ -27,29 +19,31 @@ namespace PlayGen.SUGAR.Client.Tests
 			var onSuccessValues = new List<int>();
 			var onErrorValues = new List<int>();
 
-			var asyncRequestController = DefaultAsyncRequestController;
-			var values = Enumerable.Range(0, 1000).ToList();
-
-			// Act
-			values.ForEach(i =>
+			using (var asyncRequestController = DefaultAsyncRequestController)
 			{
-				asyncRequestController.EnqueueRequest(() => i,
-					r => onSuccessValues.Add(r),
-					e => onErrorValues.Add(i));
-			});
+				var values = Enumerable.Range(0, 1000).ToList();
 
-			var responseCount = 0;
-			while (responseCount < values.Count)
-			{
-				if (asyncRequestController.TryExecuteResponse())
+				// Act
+				values.ForEach(i =>
 				{
-					responseCount++;
-				}
-			}
+					asyncRequestController.EnqueueRequest(() => i,
+						r => onSuccessValues.Add(r),
+						e => onErrorValues.Add(i));
+				});
 
-			// Assert
-			Assert.Empty(onErrorValues);
-			Assert.Equal(values, onSuccessValues);
+				var responseCount = 0;
+				while (responseCount < values.Count)
+				{
+					if (asyncRequestController.TryExecuteResponse())
+					{
+						responseCount++;
+					}
+				}
+
+				// Assert
+				Assert.Empty(onErrorValues);
+				Assert.Equal(values, onSuccessValues);
+			}
 		}
 
 		[Fact]
@@ -59,29 +53,31 @@ namespace PlayGen.SUGAR.Client.Tests
 			var onSuccessVoids = new List<int>();
 			var onErrorValues = new List<int>();
 
-			var asyncRequestController = DefaultAsyncRequestController;
-			var values = Enumerable.Range(0, 1000).ToList();
-
-			// Act
-			values.ForEach(i =>
+			using (var asyncRequestController = DefaultAsyncRequestController)
 			{
-				asyncRequestController.EnqueueRequest(() => { },
-					() => onSuccessVoids.Add(i),
-					e => onErrorValues.Add(i));
-			});
+				var values = Enumerable.Range(0, 1000).ToList();
 
-			var responseCount = 0;
-			while (responseCount < values.Count)
-			{
-				if (asyncRequestController.TryExecuteResponse())
+				// Act
+				values.ForEach(i =>
 				{
-					responseCount++;
-				}
-			}
+					asyncRequestController.EnqueueRequest(() => { },
+						() => onSuccessVoids.Add(i),
+						e => onErrorValues.Add(i));
+				});
 
-			// Assert
-			Assert.Empty(onErrorValues);
-			Assert.Equal(values, onSuccessVoids);
+				var responseCount = 0;
+				while (responseCount < values.Count)
+				{
+					if (asyncRequestController.TryExecuteResponse())
+					{
+						responseCount++;
+					}
+				}
+
+				// Assert
+				Assert.Empty(onErrorValues);
+				Assert.Equal(values, onSuccessVoids);
+			}
 		}
 
 		[Fact]
@@ -91,55 +87,56 @@ namespace PlayGen.SUGAR.Client.Tests
 			var onErrorValues = new List<int>();
 			var onSuccessValues = new List<int>();
 
-			var asyncRequestController = DefaultAsyncRequestController;
-			var values = Enumerable.Range(0, 1000).ToList();
-
-			// Act
-			values.ForEach(i =>
+			using (var asyncRequestController = DefaultAsyncRequestController)
 			{
-				asyncRequestController.EnqueueRequest(() =>
-					{
-						throw new Exception($"{i}");
-						return i;
-					},
-					r => onSuccessValues.Add(r),
-					e => onErrorValues.Add(int.Parse(e.Message)));
-			});
+				var values = Enumerable.Range(0, 1000).ToList();
 
-			var responseCount = 0;
-			while (responseCount < values.Count)
-			{
-				if (asyncRequestController.TryExecuteResponse())
+				// Act
+				values.ForEach(i =>
 				{
-					responseCount++;
-				}
-			}
+					asyncRequestController.EnqueueRequest(() =>
+						{
+							throw new Exception($"{i}");
+							return i;
+						},
+						r => onSuccessValues.Add(r),
+						e => onErrorValues.Add(int.Parse(e.Message)));
+				});
 
-			// Assert
-			Assert.Empty(onSuccessValues);
-			Assert.Equal(values, onErrorValues);
+				var responseCount = 0;
+				while (responseCount < values.Count)
+				{
+					if (asyncRequestController.TryExecuteResponse())
+					{
+						responseCount++;
+					}
+				}
+
+				// Assert
+				Assert.Empty(onSuccessValues);
+				Assert.Equal(values, onErrorValues);
+			}
 		}
 
 		[Fact]
-		public void DoesTimeoutAction()
+		public async void DoesTimeoutAction()
 		{
 			// Arrange
 			var didTimeout = false;
-			var asyncRequestController = new AsyncRequestController();
-			asyncRequestController.SetTimeout(100, () => didTimeout = true);
-
-			// Act
-			
-			var stopWatch = new Stopwatch();
-			stopWatch.Start();
-			var timeout = 1 * 1000;
-
-			while (!didTimeout && stopWatch.ElapsedMilliseconds < timeout)
+			using (var asyncRequestController = new AsyncRequestController(100, () => didTimeout = true))
 			{
-			}
+				// Act
+				var stopWatch = Stopwatch.StartNew();
+				var timeout = 1 * 1000;
 
-			// Assert
-			Assert.True(didTimeout);
+				while (!didTimeout && stopWatch.ElapsedMilliseconds < timeout)
+				{
+					await Task.Delay(100);
+				}
+
+				// Assert
+				Assert.True(didTimeout);
+			}
 		}
 
 		public AsyncRequestControllerTests(ClientTestsFixture fixture)

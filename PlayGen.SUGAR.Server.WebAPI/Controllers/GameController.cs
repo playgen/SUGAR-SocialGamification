@@ -14,7 +14,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
-	[ValidateSession]
 	public class GameController : Controller
 	{
 		private readonly IAuthorizationService _authorizationService;

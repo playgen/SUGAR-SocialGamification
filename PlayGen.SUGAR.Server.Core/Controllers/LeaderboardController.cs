@@ -180,23 +180,23 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				switch (evaluationDataType)
 				{
 				case EvaluationDataType.Long:
-					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMax<long>(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMax(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
 						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
-							Value = a.Value.ToString()
+							Value = a.Value.Value
 						}).ToList();
 					break;
 				case EvaluationDataType.Float:
-					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMax<float>(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMax(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
 						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
-							Value = a.Value.ToString()
+							Value = a.Value.Value
 						}).ToList();
 					break;
 				default:
@@ -222,24 +222,24 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				switch (evaluationDataType)
 				{
 				case EvaluationDataType.Long:
-					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMin<long>(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMin(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
 						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
-							Value = a.Value.ToString()
+							Value = a.Value.Value
 						}).ToList();
 					break;
 
 				case EvaluationDataType.Float:
-					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMin<float>(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
+					results = actors.Select(a => new { Actor = a, Value = evaluationDataController.TryGetMin(gameId, a.Id, key, out var value, evaluationDataType, request.DateStart, request.DateEnd) ? value : null })
 						.Where(a => a.Value != null)
 						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
-							Value = a.Value.ToString()
+							Value = a.Value.Value
 						}).ToList();
 					break;
 				default:

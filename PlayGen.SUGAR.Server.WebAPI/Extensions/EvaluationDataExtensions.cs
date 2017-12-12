@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Model;
@@ -25,7 +26,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 				CreatingActorId = evaluationData.ActorId,
 				Key = evaluationData.Key,
 				Value = evaluationData.Value,
-				EvaluationDataType = evaluationData.EvaluationDataType
+				EvaluationDataType = evaluationData.EvaluationDataType,
+				DateCreated = evaluationData.DateCreated == default(DateTime) ? (DateTime?)null : evaluationData.DateCreated,
+				DateModified = evaluationData.DateModified == default(DateTime) ? (DateTime?)null : evaluationData.DateCreated
 			};
 		}
 	}

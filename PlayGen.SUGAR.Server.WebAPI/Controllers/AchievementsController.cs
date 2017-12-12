@@ -18,7 +18,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	/// </summary>
 	[Route("api/[controller]")]
 	[Authorize("Bearer")]
-	[ValidateSession]
 	public class AchievementsController : EvaluationsController
 	{
 		/// <summary>
@@ -42,9 +41,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("find/{token}/{gameId:int}")]
 		[HttpGet("find/{token}/global")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
-		public new Task<IActionResult> Get([FromRoute]string token, [FromRoute]int gameId)
+		public Task<IActionResult> Get([FromRoute]string token, [FromRoute]int gameId)
 		{
-			return base.Get(token, gameId);
+			return Get(token, gameId, EvaluationType.Achievement);
 		}
 
 		/// <summary>
@@ -73,9 +72,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("global/evaluate/{actorId:int}")]
-		public new IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int actorId)
+		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int actorId)
 		{
-			return base.GetGameProgress(gameId, actorId);
+			return GetGameProgress(gameId, actorId, EvaluationType.Achievement);
 		}
 
 		/// <summary>
@@ -91,7 +90,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("{token}/global/evaluate/{actorId:int}")]
 		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int gameId, [FromRoute]int actorId)
 		{
-			return GetEvaluationProgress(token, gameId, actorId);
+			return GetEvaluationProgress(token, gameId, actorId, EvaluationType.Achievement);
 		}
 
 		/// <summary>
@@ -147,9 +146,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpDelete("{token}/global")]
 		[HttpDelete("{token}/{gameId:int}")]
 		[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Achievement)]
-		public new Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int gameId)
+		public Task<IActionResult> Delete([FromRoute]string token, [FromRoute]int gameId)
 		{
-			return base.Delete(token, gameId);
+			return Delete(token, gameId, EvaluationType.Achievement);
 		}
 	}
 }
