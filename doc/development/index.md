@@ -20,11 +20,11 @@ All source code is provided under the [Apache License, Version 2.0](http://www.a
 
 ## API Service
 
-The SUGAR API Service is build using [ASP.NET Core](https://docs.asp.net/en/latest/intro.html) (MVC/WebAPI) as a [.NET Core](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/) project. 
+The SUGAR API Service is build using [ASP.NET Core](https://docs.asp.net/en/latest/intro.html) (MVC/WebAPI). 
 
-Currently the service is built for the [.NETFramework 4.6](https://docs.microsoft.com/en-us/dotnet/articles/core/packages#frameworks) target so will only run on Windows systems, however this will soon be made compatible with the cross-platform NetStandard runtimes.
+Currently the service is built for the [.NETCoreApp 2.0](https://docs.microsoft.com/en-us/dotnet/core/packages#net-core-application) target so will only run on Windows systems, however this will soon be made compatible with the cross-platform NetStandard runtimes.
 
-Building the WebAPI project produces a Windows executable that can be executed directly to run the service in a console mode for debugging, or alternatively the service can be hosted in IIS or IIS express. In future releases the service will be made available as a [Docker image](https://www.docker.com/) for easy deployment.
+Building the WebAPI project produces a Windows or Linux executable that can be executed directly to run the service in a console mode for debugging, or alternatively the service can be hosted in IIS or IIS express. SUGAR is setup to also run in a windows or linux hosted docker container. See the [docker section](xref:docker).
 
 ### Database
 
@@ -34,15 +34,15 @@ In the near future the <xref:gameData> key/value storage will most likely be mig
 
 ### Development Dependencies
 
-* [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx) with [Update 3](https://go.microsoft.com/fwlink/?LinkId=691129)
+* [Visual Studio 2017](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx) Version 15.4.5 minimum.
 * [.NET Core SDK](https://www.microsoft.com/net/download#core) for your platform
-* The API documentation is generated with [DocFX](https://dotnet.github.io/docfx/tutorial/docfx_getting_started.html#4-use-docfx-under-dnx); currently the DNX version of this must be used for .NET Core projects
+* The API documentation is generated with [DocFX](xref:documentation)
 
 * Building the entire solution including client assemblies has additional requirements for compatibility with [Unity3D](http://unity3d.com/) [See Below](xref:installation#api-client)
 
 ### IIS Hosting
 
-* The server requires the [.NET Core Windows (Server Hosting)](https://www.microsoft.com/net/download#core) runtime
+* The server requires the [.NET Core (Server Hosting)](https://www.microsoft.com/net/download#core) runtime
 * [URL Rewrite](http://www.iis.net/downloads/microsoft/url-rewrite) is reccomended to redirect HTTP requests to a HTTPS endpoint, using a web.config rewrite rule as below
 
 ```xml
