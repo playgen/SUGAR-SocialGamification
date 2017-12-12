@@ -33,7 +33,6 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			RelationshipCoreController = relationshipCoreController;
 		}
 
-		// TODO: currently this is binary but should eventually return a progress value
 		// The method of returning calculating the progress (for multiple criteria conditions) and 
 		// how the progress is going to be represented (0f to 1f ?) need to be determined first.
 		public float IsCriteriaSatisified(int gameId, int actorId, List<EvaluationCriteria> completionCriterias, ActorType actorType, EvaluationType evaluationType)
@@ -42,46 +41,102 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 		}
 
 		protected float Evaluate(int gameId, int actorId, EvaluationCriteria completionCriteria, ActorType actorType, EvaluationType evaluationType)
-		{ 
-			if (completionCriteria.Scope == CriteriaScope.RelatedActors)
+		{
+			switch (completionCriteria.Scope)
 			{
-				if (actorType != ActorType.Group)
-				{
-					throw new NotImplementedException("RelatedActors Scope is only implemented for groups");
-				}
-				var groupActors = RelationshipCoreController.GetRelationships(actorId, ActorType.Group);
-				switch (completionCriteria.EvaluationDataType)
-				{
-					case EvaluationDataType.Boolean:
-						return EvaluateManyBool(gameId, groupActors, completionCriteria);
+				case CriteriaScope.Actor:
+					switch (completionCriteria.EvaluationDataType)
+					{
+						case EvaluationDataType.Boolean:
+							return EvaluateBool(gameId, actorId, completionCriteria);
 
-					case EvaluationDataType.String:
-						return EvaluateManyString(gameId, groupActors, completionCriteria);
+						case EvaluationDataType.String:
+							return EvaluateString(gameId, actorId, completionCriteria);
 
-					case EvaluationDataType.Float:
-						return EvaluateManyFloat(gameId, groupActors, completionCriteria);
+						case EvaluationDataType.Float:
+							return EvaluateFloat(gameId, actorId, completionCriteria);
 
-					case EvaluationDataType.Long:
-						return EvaluateManyLong(gameId, groupActors, completionCriteria);
+						case EvaluationDataType.Long:
+							return EvaluateLong(gameId, actorId, completionCriteria);
 
-					default:
-						return 0;
-				}
-			}
-			switch (completionCriteria.EvaluationDataType)
-			{
-				case EvaluationDataType.Boolean:
-					return EvaluateBool(gameId, actorId, completionCriteria);
+						default:
+							return 0;
+					}
+				case CriteriaScope.RelatedUsers:
+					var relatedUsers = RelationshipCoreController.GetRelationships(actorId, ActorType.User).Select(a => a.Id).ToList();
+					if (actorType == ActorType.User)
+					{
+						relatedUsers.Add(actorId);
+						relatedUsers = relatedUsers.Distinct().ToList();
+					}
+					switch (completionCriteria.EvaluationDataType)
+					{
+						case EvaluationDataType.Boolean:
+							return EvaluateManyBool(gameId, relatedUsers, completionCriteria);
 
-				case EvaluationDataType.String:
-					return EvaluateString(gameId, actorId, completionCriteria);
+						case EvaluationDataType.String:
+							return EvaluateManyString(gameId, relatedUsers, completionCriteria);
 
-				case EvaluationDataType.Float:
-					return EvaluateFloat(gameId, actorId, completionCriteria);
+						case EvaluationDataType.Float:
+							return EvaluateManyFloat(gameId, relatedUsers, completionCriteria);
 
-				case EvaluationDataType.Long:
-					return EvaluateLong(gameId, actorId, completionCriteria);
+						case EvaluationDataType.Long:
+							return EvaluateManyLong(gameId, relatedUsers, completionCriteria);
 
+						default:
+							return 0;
+					}
+				case CriteriaScope.RelatedGroups:
+					if (actorType == ActorType.User)
+					{
+						throw new NotImplementedException("RelatedGroups Scope is only implemented for groups");
+					}
+					var relatedGroups = RelationshipCoreController.GetRelationships(actorId, ActorType.Group).Select(a => a.Id).ToList();
+					relatedGroups.Add(actorId);
+					relatedGroups = relatedGroups.Distinct().ToList();
+					switch (completionCriteria.EvaluationDataType)
+					{
+						case EvaluationDataType.Boolean:
+							return EvaluateManyBool(gameId, relatedGroups, completionCriteria);
+
+						case EvaluationDataType.String:
+							return EvaluateManyString(gameId, relatedGroups, completionCriteria);
+
+						case EvaluationDataType.Float:
+							return EvaluateManyFloat(gameId, relatedGroups, completionCriteria);
+
+						case EvaluationDataType.Long:
+							return EvaluateManyLong(gameId, relatedGroups, completionCriteria);
+
+						default:
+							return 0;
+					}
+				case CriteriaScope.RelatedGroupUsers:
+					if (actorType == ActorType.User)
+					{
+						throw new NotImplementedException("RelatedGroupUsers Scope is only implemented for groups");
+					}
+					var groups = RelationshipCoreController.GetRelationships(actorId, ActorType.Group).Select(a => a.Id).ToList();
+					groups.Add(actorId);
+					groups = groups.Distinct().ToList();
+					var relatedGroupUsers = groups.SelectMany(g => RelationshipCoreController.GetRelationships(g, ActorType.User).Select(a => a.Id)).Distinct().ToList();
+					switch (completionCriteria.EvaluationDataType)
+					{
+						case EvaluationDataType.Boolean:
+							return EvaluateManyBool(gameId, relatedGroupUsers, completionCriteria);
+
+						case EvaluationDataType.String:
+							return EvaluateManyString(gameId, relatedGroupUsers, completionCriteria);
+
+						case EvaluationDataType.Float:
+							return EvaluateManyFloat(gameId, relatedGroupUsers, completionCriteria);
+
+						case EvaluationDataType.Long:
+							return EvaluateManyLong(gameId, relatedGroupUsers, completionCriteria);
+
+						default:
+							return 0;
+					}
 				default:
 					return 0;
 			}
@@ -94,7 +149,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
-					var any = evaluationDataController.List(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.Long).ToList();
+					var any = evaluationDataController.List(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.Long);
 
 					return !any.Any() ? 0 : any.Max(value => CompareValues(long.Parse(value.Value), long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
 				case CriteriaQueryType.Sum:
@@ -123,7 +178,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
-					var any = evaluationDataController.List(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.Float).ToList();
+					var any = evaluationDataController.List(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.Float);
 
 					return !any.Any() ? 0 : any.Max(value => CompareValues(float.Parse(value.Value), float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
 				case CriteriaQueryType.Sum:
@@ -152,7 +207,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
-					var any = evaluationDataController.List(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.String).ToList();
+					var any = evaluationDataController.List(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.String);
 
 					return !any.Any() ? 0 : any.Max(value => CompareValues(value.Value, completionCriteria.Value, completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
 				case CriteriaQueryType.Latest:
@@ -174,7 +229,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Any:
-					var any = evaluationDataController.List(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.Boolean).ToList();
+					var any = evaluationDataController.List(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.Boolean);
 
 					return !any.Any() ? 0 : any.Max(value => CompareValues(bool.Parse(value.Value), bool.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
 				case CriteriaQueryType.Latest:
@@ -189,52 +244,44 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			}
 		}
 
-		protected float EvaluateManyLong(int gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyLong(int gameId, List<int> actors, EvaluationCriteria completionCriteria)
 		{
 			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, completionCriteria.EvaluationDataCategory);
 
 			switch (completionCriteria.CriteriaQueryType)
 			{
-				case CriteriaQueryType.Any:
-					return actors.Sum(a => EvaluateLong(gameId, a.Id, completionCriteria)) / actors.Count;
 				case CriteriaQueryType.Sum:
-					var totalSum = actors.Sum(a => evaluationDataController.TryGetSum<long>(gameId, a.Id, completionCriteria.EvaluationDataKey, out var sum, EvaluationDataType.Long) ? sum.Value : 0);
+					var totalSum = actors.Sum(a => evaluationDataController.TryGetSum<long>(gameId, a, completionCriteria.EvaluationDataKey, out var sum, EvaluationDataType.Long) ? sum.Value : 0);
 
 					return CompareValues(totalSum, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
-				case CriteriaQueryType.Latest:
-					return actors.Sum(a => EvaluateLong(gameId, a.Id, completionCriteria)) / actors.Count;
 				default:
 					return 0;
 			}
 		}
 
-		protected float EvaluateManyFloat(int gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyFloat(int gameId, List<int> actors, EvaluationCriteria completionCriteria)
 		{
 			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, completionCriteria.EvaluationDataCategory);
 			
 			switch (completionCriteria.CriteriaQueryType)
 			{
-				case CriteriaQueryType.Any:
-					return actors.Sum(a => EvaluateFloat(gameId, a.Id, completionCriteria)) / actors.Count;
 				case CriteriaQueryType.Sum:
-					var totalSum = actors.Sum(a => evaluationDataController.TryGetSum<float>(gameId, a.Id, completionCriteria.EvaluationDataKey, out var sum, EvaluationDataType.Float) ? sum.Value : 0f);
+					var totalSum = actors.Sum(a => evaluationDataController.TryGetSum<float>(gameId, a, completionCriteria.EvaluationDataKey, out var sum, EvaluationDataType.Float) ? sum.Value : 0f);
 
 					return CompareValues(totalSum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
-				case CriteriaQueryType.Latest:
-					return actors.Sum(a => EvaluateFloat(gameId, a.Id, completionCriteria)) / actors.Count;
 				default:
 					return 0;
 			}
 		}
 
-		protected float EvaluateManyString(int gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyString(int gameId, List<int> actors, EvaluationCriteria completionCriteria)
 		{
-			return actors.Sum(a => EvaluateString(gameId, a.Id, completionCriteria)) / actors.Count;
+			return 0;
 		}
 
-		protected float EvaluateManyBool(int gameId, List<Actor> actors, EvaluationCriteria completionCriteria)
+		protected float EvaluateManyBool(int gameId, List<int> actors, EvaluationCriteria completionCriteria)
 		{
-			return actors.Sum(a => EvaluateBool(gameId, a.Id, completionCriteria)) / actors.Count;
+			return 0;
 		}
 
 		protected static float CompareValues<T>(T value, T expected, ComparisonType comparisonType, EvaluationDataType dataType) where T : IComparable

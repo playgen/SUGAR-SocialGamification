@@ -20,6 +20,10 @@
 		/// <summary>
 		/// Provides only the standings of those who are members of the actorId provided.
 		/// </summary>
-		GroupMembers = 3
+		GroupMembers = 3,
+		/// <summary>
+		/// Provides only the standings of those who are in an alliance with the actorId provided.
+		/// </summary>
+		Alliances = 4
 	}
 }

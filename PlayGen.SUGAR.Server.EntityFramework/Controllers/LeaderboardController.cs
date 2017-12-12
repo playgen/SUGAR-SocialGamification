@@ -49,7 +49,22 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 
 				if (hasConflicts)
 				{
-					throw new System.ArgumentException($"A leaderboard cannot be created with LeaderboardType {leaderboard.LeaderboardType} and EvaluationDataType{leaderboard.EvaluationDataType} as it would always return zero results.");
+					throw new System.ArgumentException($"A leaderboard cannot be created with LeaderboardType {leaderboard.LeaderboardType} and EvaluationDataType {leaderboard.EvaluationDataType} as it would always return zero results.");
+				}
+
+				hasConflicts = leaderboard.CriteriaScope > 0 && (int)leaderboard.LeaderboardType != 2 && (int)leaderboard.LeaderboardType != 3;
+
+				if (hasConflicts)
+				{
+					throw new System.ArgumentException($"A leaderboard cannot be created with LeaderboardType {leaderboard.LeaderboardType} and CriteriaScope {leaderboard.CriteriaScope}.");
+				}
+
+				hasConflicts = ((int)leaderboard.CriteriaScope == 1 && (int)leaderboard.ActorType == 0) ||
+								((int)leaderboard.CriteriaScope > 1 && (int)leaderboard.ActorType != 2);
+
+				if (hasConflicts)
+				{
+					throw new System.ArgumentException($"A leaderboard cannot be created with ActorType {leaderboard.ActorType} and CriteriaScope {leaderboard.CriteriaScope}.");
 				}
 
 				context.Leaderboards.Add(leaderboard);
@@ -80,11 +95,26 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					else
 					{
 						var hasTypeConflicts = ((int)leaderboard.LeaderboardType < 3 && ((int)leaderboard.EvaluationDataType == 1 || (int)leaderboard.EvaluationDataType == 2)) ||
-								((int)leaderboard.LeaderboardType > 2 && ((int)leaderboard.EvaluationDataType == 0 || (int)leaderboard.EvaluationDataType == 3)) ? false : true;
+												((int)leaderboard.LeaderboardType > 2 && ((int)leaderboard.EvaluationDataType == 0 || (int)leaderboard.EvaluationDataType == 3)) ? false : true;
 
 						if (hasTypeConflicts)
 						{
-							throw new System.ArgumentException($"A leaderboard cannot be updated to use LeaderboardType {leaderboard.LeaderboardType} and EvaluationDataType{leaderboard.EvaluationDataType}, as it would always return zero results.");
+							throw new System.ArgumentException($"A leaderboard cannot be updated to use LeaderboardType {leaderboard.LeaderboardType} and EvaluationDataType {leaderboard.EvaluationDataType}, as it would always return zero results.");
+						}
+
+						var hasScopeConflicts = leaderboard.CriteriaScope > 0 && (int)leaderboard.LeaderboardType != 2 && (int)leaderboard.LeaderboardType != 3;
+
+						if (hasScopeConflicts)
+						{
+							throw new System.ArgumentException($"A leaderboard cannot be updated with LeaderboardType {leaderboard.LeaderboardType} and CriteriaScope {leaderboard.CriteriaScope}.");
+						}
+
+						var hasActorConflicts = ((int)leaderboard.CriteriaScope == 1 && (int)leaderboard.ActorType == 0) ||
+												((int)leaderboard.CriteriaScope > 1 && (int)leaderboard.ActorType != 2);
+
+						if (hasActorConflicts)
+						{
+							throw new System.ArgumentException($"A leaderboard cannot be created with ActorType {leaderboard.ActorType} and CriteriaScope {leaderboard.CriteriaScope}.");
 						}
 					}
 

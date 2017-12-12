@@ -106,6 +106,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			foreach (var ec in evaluation.EvaluationCriterias)
 			{
+				CriteriaScopeValidation(ec.EvaluationDataType, ec.Scope, ec.CriteriaQueryType, evaluation.ActorType);
 				if (!DataTypeValueValidation(ec.EvaluationDataType, ec.Value))
 				{
 					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.EvaluationDataType}");
@@ -124,6 +125,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			foreach (var ec in evaluation.EvaluationCriterias)
 			{
+				CriteriaScopeValidation(ec.EvaluationDataType, ec.Scope, ec.CriteriaQueryType, evaluation.ActorType);
 				if (!DataTypeValueValidation(ec.EvaluationDataType, ec.Value))
 				{
 					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.EvaluationDataType}");
@@ -165,6 +167,49 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					return bool.TryParse(value, out var _);
 				default:
 					return false;
+			}
+		}
+
+		private void CriteriaScopeValidation(EvaluationDataType dataType, CriteriaScope scope, CriteriaQueryType queryType, ActorType actorType)
+		{
+			if (queryType == CriteriaQueryType.Sum && (dataType == EvaluationDataType.Boolean || dataType == EvaluationDataType.String))
+			{
+				throw new ArgumentException($"Cannot create EvaluationCriteria as DataType {dataType} cannot be summed");
+			}
+			switch (scope)
+			{
+				case CriteriaScope.Actor:
+					break;
+				case CriteriaScope.RelatedUsers:
+					if (actorType == ActorType.Undefined)
+					{
+						throw new ArgumentException($"Cannot create EvaluationCriteria using CriteriaScope {scope} and ActorType {actorType}");
+					}
+					if (queryType != CriteriaQueryType.Sum)
+					{
+						throw new ArgumentException($"Cannot create EvaluationCriteria as only CriteriaQueryType {CriteriaQueryType.Sum} can be used with CriteriaScope {scope}");
+					}
+					break;
+				case CriteriaScope.RelatedGroups:
+					if (actorType != ActorType.Group)
+					{
+						throw new ArgumentException($"Cannot create EvaluationCriteria using CriteriaScope {scope} and ActorType {actorType}");
+					}
+					if (queryType != CriteriaQueryType.Sum)
+					{
+						throw new ArgumentException($"Cannot create EvaluationCriteria as only CriteriaQueryType {CriteriaQueryType.Sum} can be used with CriteriaScope {scope}");
+					}
+					break;
+				case CriteriaScope.RelatedGroupUsers:
+					if (actorType != ActorType.Group)
+					{
+						throw new ArgumentException($"Cannot create EvaluationCriteria using CriteriaScope {scope} and ActorType {actorType}");
+					}
+					if (queryType != CriteriaQueryType.Sum)
+					{
+						throw new ArgumentException($"Cannot create EvaluationCriteria as only CriteriaQueryType {CriteriaQueryType.Sum} can be used with CriteriaScope {scope}");
+					}
+					break;
 			}
 		}
 

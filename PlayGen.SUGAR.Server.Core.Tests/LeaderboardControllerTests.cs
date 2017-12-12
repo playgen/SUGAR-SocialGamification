@@ -187,7 +187,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             Random random = new Random();
             var leaderboard = CreateLeaderboard("GetLeaderboardGroupMemberFilterSpeedTest", EvaluationDataType.Long, LeaderboardType.Cumulative);
 
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, TestDataFixture.UserCount, random.Next(TestDataFixture.UserCount + 1, TestDataFixture.UserCount + TestDataFixture.GroupCount + 1));
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, TestDataFixture.UserCount, TestDataFixture.UserCount + TestDataFixture.GroupCount + 1));
 
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
 
