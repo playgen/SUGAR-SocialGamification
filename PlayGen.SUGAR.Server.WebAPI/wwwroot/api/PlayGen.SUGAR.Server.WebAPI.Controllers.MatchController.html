@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MatchController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -639,7 +639,7 @@ public class MatchController : Controller, IActionFilter, IAsyncActionFilter, IF
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_MatchController_Add_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.MatchController.Add*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_MatchController_Add_EvaluationDataRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.MatchController.Add(EvaluationDataRequest)">Add(EvaluationDataRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_MatchController_Add_PlayGen_SUGAR_Contracts_EvaluationDataRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.MatchController.Add(PlayGen.SUGAR.Contracts.EvaluationDataRequest)">Add(EvaluationDataRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new GameData record.</p>
 <p>Example Usage: POST api/match/1/data</p>
 </div>
@@ -647,6 +647,9 @@ public class MatchController : Controller, IActionFilter, IAsyncActionFilter, IF
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.Match)]
+[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.Match)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Match)]
 public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -660,9 +663,9 @@ public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EvaluationDataRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataRequest.html">EvaluationDataRequest</a></td>
         <td><span class="parametername">newData</span></td>
-        <td><p><see cref="!:EvaluationDataRequest"></see> object that holds the details of the new Match Data.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataRequest.html">EvaluationDataRequest</a> object that holds the details of the new Match Data.</p>
 </td>
       </tr>
     </tbody>
@@ -678,7 +681,7 @@ public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:EvaluationDataResponse"></see> containing the new Match Data details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a> containing the new Match Data details.</p>
 </td>
       </tr>
     </tbody>
@@ -694,6 +697,9 @@ public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;create&quot;)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Match)]
+[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.Match)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Match)]
 public Task&lt;IActionResult&gt; Create()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -707,7 +713,7 @@ public Task&lt;IActionResult&gt; Create()</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>The newly created <see cref="!:MatchResponse"></see></p>
+        <td><p>The newly created <a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></p>
 </td>
       </tr>
     </tbody>
@@ -723,6 +729,7 @@ public Task&lt;IActionResult&gt; Create()</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;create/{gameId:int}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Match)]
 public Task&lt;IActionResult&gt; Create(int gameId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -753,7 +760,7 @@ public Task&lt;IActionResult&gt; Create(int gameId)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>The newly created <see cref="!:MatchResponse"></see></p>
+        <td><p>The newly created <a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></p>
 </td>
       </tr>
     </tbody>
@@ -769,6 +776,9 @@ public Task&lt;IActionResult&gt; Create(int gameId)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;createandstart&quot;)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.Match)]
+[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.Match)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Match)]
 public Task&lt;IActionResult&gt; CreateAndStart()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -782,7 +792,7 @@ public Task&lt;IActionResult&gt; CreateAndStart()</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>The newly created <see cref="!:MatchResponse"></see></p>
+        <td><p>The newly created <a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></p>
 </td>
       </tr>
     </tbody>
@@ -798,6 +808,9 @@ public Task&lt;IActionResult&gt; CreateAndStart()</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;{matchId:int}/end&quot;)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Match)]
+[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.Match)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Match)]
 public Task&lt;IActionResult&gt; End([FromRoute] int matchId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -828,7 +841,7 @@ public Task&lt;IActionResult&gt; End([FromRoute] int matchId)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><see cref="!:MatchResponse"></see></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></td>
       </tr>
     </tbody>
   </table>
@@ -843,6 +856,7 @@ public Task&lt;IActionResult&gt; End([FromRoute] int matchId)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;{gameId:int}/{matchId:int}/end&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Update, AuthorizationEntity.Match)]
 public Task&lt;IActionResult&gt; End([FromRoute] int gameId, [FromRoute] int matchId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -878,7 +892,7 @@ public Task&lt;IActionResult&gt; End([FromRoute] int gameId, [FromRoute] int mat
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><see cref="!:MatchResponse"></see></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></td>
       </tr>
     </tbody>
   </table>
@@ -930,7 +944,7 @@ public IActionResult Get(int matchId, string[] keys)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:EvaluationDataResponse"></see> which match the search criteria.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a> which match the search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -976,7 +990,7 @@ public IActionResult GetByCreator(int creatorId)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:MatchResponse"></see></p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></p>
 </td>
       </tr>
     </tbody>
@@ -1032,7 +1046,7 @@ public IActionResult GetByCreator(int creatorId, DateTime? start, DateTime? end)
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:MatchResponse"></see></p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></p>
 </td>
       </tr>
     </tbody>
@@ -1078,7 +1092,7 @@ public IActionResult GetByGame(int gameId)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:MatchResponse"></see></p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></p>
 </td>
       </tr>
     </tbody>
@@ -1134,7 +1148,7 @@ public IActionResult GetByGame(int gameId, DateTime? start, DateTime? end)</code
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:MatchResponse"></see></p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></p>
 </td>
       </tr>
     </tbody>
@@ -1185,7 +1199,7 @@ public IActionResult GetByGameAndCreator(int gameId, int creatorId)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:MatchResponse"></see></p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></p>
 </td>
       </tr>
     </tbody>
@@ -1246,7 +1260,7 @@ public IActionResult GetByGameAndCreator(int gameId, int creatorId, DateTime? st
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:MatchResponse"></see></p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></p>
 </td>
       </tr>
     </tbody>
@@ -1297,7 +1311,7 @@ public IActionResult GetByTime(DateTime? start, DateTime? end)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:MatchResponse"></see></p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></p>
 </td>
       </tr>
     </tbody>
@@ -1313,6 +1327,9 @@ public IActionResult GetByTime(DateTime? start, DateTime? end)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;{matchId:int}/start&quot;)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Match)]
+[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.Match)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Match)]
 public Task&lt;IActionResult&gt; Start(int matchId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -1343,7 +1360,7 @@ public Task&lt;IActionResult&gt; Start(int matchId)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><see cref="!:MatchResponse"></see></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.MatchResponse.html">MatchResponse</a></td>
       </tr>
     </tbody>
   </table>

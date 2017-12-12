@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ActorRoleController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -654,7 +654,7 @@ public class ActorRoleController : Controller, IActionFilter, IAsyncActionFilter
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_ActorRoleController_Create_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.ActorRoleController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_ActorRoleController_Create_ActorRoleRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.ActorRoleController.Create(ActorRoleRequest)">Create(ActorRoleRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_ActorRoleController_Create_PlayGen_SUGAR_Contracts_ActorRoleRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.ActorRoleController.Create(PlayGen.SUGAR.Contracts.ActorRoleRequest)">Create(ActorRoleRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new ActorRole.</p>
 <p>Example Usage: POST api/actorrole</p>
 </div>
@@ -662,6 +662,9 @@ public class ActorRoleController : Controller, IActionFilter, IAsyncActionFilter
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.ActorRole)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.ActorRole)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.ActorRole)]
 public Task&lt;IActionResult&gt; Create([FromBody] ActorRoleRequest newRole)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -675,9 +678,9 @@ public Task&lt;IActionResult&gt; Create([FromBody] ActorRoleRequest newRole)</co
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ActorRoleRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.ActorRoleRequest.html">ActorRoleRequest</a></td>
         <td><span class="parametername">newRole</span></td>
-        <td><p><see cref="!:ActorRoleRequest"></see> object that contains the details of the new ActorRole.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.ActorRoleRequest.html">ActorRoleRequest</a> object that contains the details of the new ActorRole.</p>
 </td>
       </tr>
     </tbody>
@@ -693,7 +696,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] ActorRoleRequest newRole)</co
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:ActorRoleResponse"></see> containing the new ActorRole details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.ActorRoleResponse.html">ActorRoleResponse</a> containing the new ActorRole details.</p>
 </td>
       </tr>
     </tbody>
@@ -709,6 +712,9 @@ public Task&lt;IActionResult&gt; Create([FromBody] ActorRoleRequest newRole)</co
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpDelete(&quot;{id:int}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Delete, AuthorizationEntity.ActorRole)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.ActorRole)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.ActorRole)]
 public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -755,6 +761,9 @@ public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;actor/{actorId:int}/entity/{entityId:int}/claimscope/{scopeName}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
 public Task&lt;IActionResult&gt; GetActorEntityRoles([FromRoute] int actorId, [FromRoute] int entityId, [FromRoute] string scopeName)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -795,7 +804,7 @@ public Task&lt;IActionResult&gt; GetActorEntityRoles([FromRoute] int actorId, [F
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:RoleResponse"></see> that hold Role details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.RoleResponse.html">RoleResponse</a> that hold Role details.</p>
 </td>
       </tr>
     </tbody>
@@ -824,7 +833,7 @@ public IActionResult GetControlled()</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:RoleResponse"></see> that hold Role details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.RoleResponse.html">RoleResponse</a> that hold Role details.</p>
 </td>
       </tr>
     </tbody>
@@ -840,6 +849,9 @@ public IActionResult GetControlled()</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;role/{roleId:int}/entity/{entityId:int}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
 public Task&lt;IActionResult&gt; GetRoleActors([FromRoute] int roleId, [FromRoute] int entityId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -875,7 +887,7 @@ public Task&lt;IActionResult&gt; GetRoleActors([FromRoute] int roleId, [FromRout
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:ActorResponse"></see> that hold Actor details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a> that hold Actor details.</p>
 </td>
       </tr>
     </tbody>

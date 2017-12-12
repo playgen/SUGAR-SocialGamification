@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class GameDataController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -639,7 +639,7 @@ public class GameDataController : Controller, IActionFilter, IAsyncActionFilter,
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameDataController_Add_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameDataController.Add*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameDataController_Add_EvaluationDataRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameDataController.Add(EvaluationDataRequest)">Add(EvaluationDataRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameDataController_Add_PlayGen_SUGAR_Contracts_EvaluationDataRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameDataController.Add(PlayGen.SUGAR.Contracts.EvaluationDataRequest)">Add(EvaluationDataRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new GameData record.</p>
 <p>Example Usage: POST api/gamedata</p>
 </div>
@@ -647,6 +647,9 @@ public class GameDataController : Controller, IActionFilter, IAsyncActionFilter,
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.GameData)]
+[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.GameData)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.GameData)]
 public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -660,9 +663,9 @@ public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EvaluationDataRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataRequest.html">EvaluationDataRequest</a></td>
         <td><span class="parametername">newData</span></td>
-        <td><p><see cref="!:EvaluationDataRequest"></see> object that holds the details of the new GameData.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataRequest.html">EvaluationDataRequest</a> object that holds the details of the new GameData.</p>
 </td>
       </tr>
     </tbody>
@@ -678,7 +681,7 @@ public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:EvaluationDataResponse"></see> containing the new GameData details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a> containing the new GameData details.</p>
 </td>
       </tr>
     </tbody>
@@ -694,6 +697,9 @@ public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GameData)]
+[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.GameData)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 public Task&lt;IActionResult&gt; Get(int ? actorId, int ? gameId, string[] key)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -737,7 +743,7 @@ public Task&lt;IActionResult&gt; Get(int ? actorId, int ? gameId, string[] key)<
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:EvaluationDataResponse"></see> which match the search criteria.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a> which match the search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -745,13 +751,16 @@ public Task&lt;IActionResult&gt; Get(int ? actorId, int ? gameId, string[] key)<
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameDataController_GetByLeaderboardType_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameDataController.GetByLeaderboardType*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameDataController_GetByLeaderboardType_System_Int32_System_Int32_System_String_EvaluationDataType_LeaderboardType_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameDataController.GetByLeaderboardType(System.Int32,System.Int32,System.String,EvaluationDataType,LeaderboardType)">GetByLeaderboardType(Int32, Int32, String, EvaluationDataType, LeaderboardType)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameDataController_GetByLeaderboardType_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_PlayGen_SUGAR_Common_LeaderboardType_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameDataController.GetByLeaderboardType(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Common.LeaderboardType)">GetByLeaderboardType(Int32, Int32, String, EvaluationDataType, LeaderboardType)</h4>
   <div class="markdown level1 summary"><p>Example Usage: GET api/gamedata/highest?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2&amp;dataType=1</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;highest&quot;)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GameData)]
+[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.GameData)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 public Task&lt;IActionResult&gt; GetByLeaderboardType(int actorId, int gameId, string key, EvaluationDataType dataType, LeaderboardType sortType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -783,13 +792,13 @@ public Task&lt;IActionResult&gt; GetByLeaderboardType(int actorId, int gameId, s
 </td>
       </tr>
       <tr>
-        <td><span class="xref">EvaluationDataType</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
         <td><span class="parametername">dataType</span></td>
         <td><p>Data type of value</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">LeaderboardType</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.LeaderboardType.html">LeaderboardType</a></td>
         <td><span class="parametername">sortType</span></td>
         <td></td>
       </tr>
@@ -852,7 +861,7 @@ public IActionResult GetGameActors(int id)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:ActorResponse"></see> which match the search criteria.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a> which match the search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -868,6 +877,7 @@ public IActionResult GetGameActors(int id)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;gamekeys/{id:int}&quot;)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 public Task&lt;IActionResult&gt; GetGameKeys(int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class UserController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -639,15 +639,16 @@ public class UserController : Controller, IActionFilter, IAsyncActionFilter, IFi
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserController_Create_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserController_Create_UserRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserController.Create(UserRequest)">Create(UserRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserController_Create_PlayGen_SUGAR_Contracts_UserRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserController.Create(PlayGen.SUGAR.Contracts.UserRequest)">Create(UserRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new User.
-Requires the <see cref="!:UserRequest"></see>&apos;s Name to be unique for Users.</p>
+Requires the <a class="xref" href="PlayGen.SUGAR.Contracts.UserRequest.html">UserRequest</a>&apos;s Name to be unique for Users.</p>
 <p>Example Usage: POST api/user</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.User)]
 public Task&lt;IActionResult&gt; Create([FromBody] UserRequest actor)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -661,9 +662,9 @@ public Task&lt;IActionResult&gt; Create([FromBody] UserRequest actor)</code></pr
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">UserRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.UserRequest.html">UserRequest</a></td>
         <td><span class="parametername">actor</span></td>
-        <td><p><see cref="!:UserRequest"></see> object that holds the details of the new User.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.UserRequest.html">UserRequest</a> object that holds the details of the new User.</p>
 </td>
       </tr>
     </tbody>
@@ -679,7 +680,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] UserRequest actor)</code></pr
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:UserResponse"></see> containing the new User details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.UserResponse.html">UserResponse</a> containing the new User details.</p>
 </td>
       </tr>
     </tbody>
@@ -695,6 +696,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] UserRequest actor)</code></pr
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpDelete(&quot;{id:int}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Delete, AuthorizationEntity.User)]
 public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -741,6 +743,7 @@ public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;list&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.User)]
 public Task&lt;IActionResult&gt; Get()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -754,7 +757,7 @@ public Task&lt;IActionResult&gt; Get()</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:UserResponse"></see> that hold User details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.UserResponse.html">UserResponse</a> that hold User details.</p>
 </td>
       </tr>
     </tbody>
@@ -801,7 +804,7 @@ public IActionResult Get([FromRoute] int id)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p><see cref="!:UserResponse"></see> which matches search criteria.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.UserResponse.html">UserResponse</a> which matches search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -855,7 +858,7 @@ public IActionResult Get([FromRoute] string name, bool exactMatch = false)</code
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:UserResponse"></see> which match the search criteria.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.UserResponse.html">UserResponse</a> which match the search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -863,7 +866,7 @@ public IActionResult Get([FromRoute] string name, bool exactMatch = false)</code
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserController_Update_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserController.Update*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserController_Update_System_Int32_UserRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserController.Update(System.Int32,UserRequest)">Update(Int32, UserRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserController_Update_System_Int32_PlayGen_SUGAR_Contracts_UserRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserController.Update(System.Int32,PlayGen.SUGAR.Contracts.UserRequest)">Update(Int32, UserRequest)</h4>
   <div class="markdown level1 summary"><p>Update an existing User.</p>
 <p>Example Usage: PUT api/user/update/1</p>
 </div>
@@ -871,6 +874,7 @@ public IActionResult Get([FromRoute] string name, bool exactMatch = false)</code
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut(&quot;update/{id:int}&quot;)]
+[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.User)]
 public Task&lt;IActionResult&gt; Update([FromRoute] int id, [FromBody] UserRequest user)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -890,9 +894,9 @@ public Task&lt;IActionResult&gt; Update([FromRoute] int id, [FromBody] UserReque
 </td>
       </tr>
       <tr>
-        <td><span class="xref">UserRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.UserRequest.html">UserRequest</a></td>
         <td><span class="parametername">user</span></td>
-        <td><p><see cref="!:UserRequest"></see> object that holds the details of the User.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.UserRequest.html">UserRequest</a> object that holds the details of the User.</p>
 </td>
       </tr>
     </tbody>

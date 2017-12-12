@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class AccountController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -638,9 +638,9 @@ public class AccountController : Controller, IActionFilter, IAsyncActionFilter, 
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_AccountController_Create_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AccountController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AccountController_Create_AccountRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AccountController.Create(AccountRequest)">Create(AccountRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AccountController_Create_PlayGen_SUGAR_Contracts_AccountRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AccountController.Create(PlayGen.SUGAR.Contracts.AccountRequest)">Create(AccountRequest)</h4>
   <div class="markdown level1 summary"><p>Register a new account and creates an associated user.
-Requires the <see cref="!:AccountRequest.Name"></see> to be unique.
+Requires the <a class="xref" href="PlayGen.SUGAR.Contracts.AccountRequest.html#PlayGen_SUGAR_Contracts_AccountRequest_Name">Name</a> to be unique.
 Returns a JsonWebToken used for authorization in any further calls to the API.</p>
 <p>Example Usage: POST api/account/create</p>
 </div>
@@ -661,9 +661,9 @@ public IActionResult Create([FromBody] AccountRequest accountRequest)</code></pr
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">AccountRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.AccountRequest.html">AccountRequest</a></td>
         <td><span class="parametername">accountRequest</span></td>
-        <td><p><see cref="!:AccountRequest"></see> object that contains the details of the new Account.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.AccountRequest.html">AccountRequest</a> object that contains the details of the new Account.</p>
 </td>
       </tr>
     </tbody>
@@ -679,7 +679,7 @@ public IActionResult Create([FromBody] AccountRequest accountRequest)</code></pr
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A <see cref="!:AccountResponse"></see> containing the new Account details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.AccountResponse.html">AccountResponse</a> containing the new Account details.</p>
 </td>
       </tr>
     </tbody>
@@ -696,6 +696,7 @@ public IActionResult Create([FromBody] AccountRequest accountRequest)</code></pr
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpDelete(&quot;{id:int}&quot;)]
 [Authorize(&quot;Bearer&quot;)]
+[Authorization(ClaimScope.Account, AuthorizationAction.Delete, AuthorizationEntity.Account)]
 public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>

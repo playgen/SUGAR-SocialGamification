@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class GroupController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -639,7 +639,7 @@ public class GroupController : Controller, IActionFilter, IAsyncActionFilter, IF
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_GroupController_Create_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GroupController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GroupController_Create_GroupRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GroupController.Create(GroupRequest)">Create(GroupRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GroupController_Create_PlayGen_SUGAR_Contracts_GroupRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GroupController.Create(PlayGen.SUGAR.Contracts.GroupRequest)">Create(GroupRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new Group.
 Requires the <see cref="!:GroupRequest.Name"></see> to be unique for Groups.</p>
 <p>Example Usage: POST api/group</p>
@@ -661,9 +661,9 @@ public IActionResult Create([FromBody] GroupRequest actor)</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">GroupRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a></td>
         <td><span class="parametername">actor</span></td>
-        <td><p><see cref="!:GroupRequest"></see> object that holds the details of the new Group.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a> object that holds the details of the new Group.</p>
 </td>
       </tr>
     </tbody>
@@ -679,7 +679,7 @@ public IActionResult Create([FromBody] GroupRequest actor)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A <see cref="!:GroupResponse"></see> containing the new Group details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a> containing the new Group details.</p>
 </td>
       </tr>
     </tbody>
@@ -695,6 +695,7 @@ public IActionResult Create([FromBody] GroupRequest actor)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpDelete(&quot;{id:int}&quot;)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.Group)]
 public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -754,7 +755,7 @@ public IActionResult Get()</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:GroupResponse"></see> that hold Group details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a> that hold Group details.</p>
 </td>
       </tr>
     </tbody>
@@ -801,7 +802,7 @@ public IActionResult Get([FromRoute] int id)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p><see cref="!:GroupResponse"></see> which matches search criteria.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a> which matches search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -848,7 +849,7 @@ public IActionResult Get([FromRoute] string name)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:GroupResponse"></see> which match the search criteria.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a> which match the search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -877,7 +878,7 @@ public IActionResult GetControlled()</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:GroupResponse"></see> that hold Group details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a> that hold Group details.</p>
 </td>
       </tr>
     </tbody>
@@ -885,7 +886,7 @@ public IActionResult GetControlled()</code></pre>
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_GroupController_Update_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GroupController.Update*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GroupController_Update_System_Int32_GroupRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GroupController.Update(System.Int32,GroupRequest)">Update(Int32, GroupRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GroupController_Update_System_Int32_PlayGen_SUGAR_Contracts_GroupRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GroupController.Update(System.Int32,PlayGen.SUGAR.Contracts.GroupRequest)">Update(Int32, GroupRequest)</h4>
   <div class="markdown level1 summary"><p>Update an existing Group.</p>
 <p>Example Usage: PUT api/group/update/1</p>
 </div>
@@ -893,6 +894,7 @@ public IActionResult GetControlled()</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut(&quot;update/{id:int}&quot;)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.Group)]
 public Task&lt;IActionResult&gt; Update([FromRoute] int id, [FromBody] GroupRequest group)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -912,9 +914,9 @@ public Task&lt;IActionResult&gt; Update([FromRoute] int id, [FromBody] GroupRequ
 </td>
       </tr>
       <tr>
-        <td><span class="xref">GroupRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a></td>
         <td><span class="parametername">group</span></td>
-        <td><p><see cref="!:GroupRequest"></see> object that holds the details of the Group.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a> object that holds the details of the Group.</p>
 </td>
       </tr>
     </tbody>

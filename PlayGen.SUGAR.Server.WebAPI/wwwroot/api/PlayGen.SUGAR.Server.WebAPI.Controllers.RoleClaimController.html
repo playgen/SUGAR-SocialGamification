@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class RoleClaimController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -654,7 +654,7 @@ public class RoleClaimController : Controller, IActionFilter, IAsyncActionFilter
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_RoleClaimController_Create_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.RoleClaimController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_RoleClaimController_Create_RoleClaimRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.RoleClaimController.Create(RoleClaimRequest)">Create(RoleClaimRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_RoleClaimController_Create_PlayGen_SUGAR_Contracts_RoleClaimRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.RoleClaimController.Create(PlayGen.SUGAR.Contracts.RoleClaimRequest)">Create(RoleClaimRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new RoleClaim.</p>
 <p>Example Usage: POST api/roleclaim</p>
 </div>
@@ -662,6 +662,7 @@ public class RoleClaimController : Controller, IActionFilter, IAsyncActionFilter
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.Role, AuthorizationAction.Create, AuthorizationEntity.RoleClaim)]
 public Task&lt;IActionResult&gt; Create([FromBody] RoleClaimRequest newRoleClaim)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -675,9 +676,9 @@ public Task&lt;IActionResult&gt; Create([FromBody] RoleClaimRequest newRoleClaim
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">RoleClaimRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.RoleClaimRequest.html">RoleClaimRequest</a></td>
         <td><span class="parametername">newRoleClaim</span></td>
-        <td><p><see cref="!:RoleClaimRequest"></see> object that contains the details of the new RoleClaim.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.RoleClaimRequest.html">RoleClaimRequest</a> object that contains the details of the new RoleClaim.</p>
 </td>
       </tr>
     </tbody>
@@ -693,7 +694,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] RoleClaimRequest newRoleClaim
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:RoleClaimResponse"></see> containing the new RoleClaim details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.RoleClaimResponse.html">RoleClaimResponse</a> containing the new RoleClaim details.</p>
 </td>
       </tr>
     </tbody>
@@ -709,6 +710,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] RoleClaimRequest newRoleClaim
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpDelete(&quot;role/{roleId:int}/claim/{claimId:int}&quot;)]
+[Authorization(ClaimScope.Role, AuthorizationAction.Delete, AuthorizationEntity.RoleClaim)]
 public Task&lt;IActionResult&gt; Delete([FromRoute] int roleId, [FromRoute] int claimId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -761,6 +763,7 @@ public Task&lt;IActionResult&gt; Delete([FromRoute] int roleId, [FromRoute] int 
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;role/{id:int}&quot;)]
+[Authorization(ClaimScope.Role, AuthorizationAction.Get, AuthorizationEntity.RoleClaim)]
 public Task&lt;IActionResult&gt; GetRoleClaims([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -791,7 +794,7 @@ public Task&lt;IActionResult&gt; GetRoleClaims([FromRoute] int id)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:ClaimResponse"></see> that hold Claim details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.ClaimResponse.html">ClaimResponse</a> that hold Claim details.</p>
 </td>
       </tr>
     </tbody>

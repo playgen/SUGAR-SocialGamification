@@ -1,0 +1,771 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class GroupClient
+   | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class GroupClient
+   | SUGAR ">
+    <meta name="generator" content="docfx 2.28.3.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Client.GroupClient">
+  
+  
+  <h1 id="PlayGen_SUGAR_Client_GroupClient" data-uid="PlayGen.SUGAR.Client.GroupClient" class="text-break">Class GroupClient
+  </h1>
+  <div class="markdown level0 summary"><p>Controller that facilitates Group specific operations.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html">ClientBase</a></div>
+    <div class="level2"><span class="xref">GroupClient</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_AsyncRequestController">ClientBase.AsyncRequestController</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_EvaluationNotifications">ClientBase.EvaluationNotifications</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_SerializerSettings">ClientBase.SerializerSettings</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_EnableEvaluationNotifications_System_Boolean_">ClientBase.EnableEvaluationNotifications(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_ClearSessionData">ClientBase.ClearSessionData()</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_AreUriParamsValid_System_Object___">ClientBase.AreUriParamsValid(Object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_GetUriBuilder_System_String_System_Object___">ClientBase.GetUriBuilder(String, Object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Post__2_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Post&lt;TRequest, TResponse&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Post__1_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Post&lt;TRequest&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Put__2_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Put&lt;TRequest, TResponse&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Put__1_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Put&lt;TRequest&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_PostPut__1_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Object_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__">ClientBase.PostPut&lt;TResponse&gt;(String, String, Dictionary&lt;String, String&gt;, Object, IEnumerable&lt;HttpStatusCode&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_PostPut_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Object_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__">ClientBase.PostPut(String, String, Dictionary&lt;String, String&gt;, Object, IEnumerable&lt;HttpStatusCode&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Get__1_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Get&lt;TResponse&gt;(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Get_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Get(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Delete__1_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Delete&lt;TResponse&gt;(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Delete_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Delete(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_GetDelete__1_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__">ClientBase.GetDelete&lt;TResponse&gt;(String, String, Dictionary&lt;String, String&gt;, IEnumerable&lt;HttpStatusCode&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_GetDelete_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__">ClientBase.GetDelete(String, String, Dictionary&lt;String, String&gt;, IEnumerable&lt;HttpStatusCode&gt;)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Client.html">PlayGen.SUGAR.Client</a></h6>
+  <h6><strong>Assembly</strong>: PlayGen.SUGAR.Client.dll</h6>
+  <h5 id="PlayGen_SUGAR_Client_GroupClient_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GroupClient : ClientBase</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient__ctor_" data-uid="PlayGen.SUGAR.Client.GroupClient.#ctor*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient__ctor_System_String_PlayGen_SUGAR_Client_IHttpHandler_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__PlayGen_SUGAR_Client_AsyncRequestQueue_AsyncRequestController_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_" data-uid="PlayGen.SUGAR.Client.GroupClient.#ctor(System.String,PlayGen.SUGAR.Client.IHttpHandler,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController,PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications)">GroupClient(String, IHttpHandler, Dictionary&lt;String, String&gt;, Dictionary&lt;String, String&gt;, AsyncRequestController, EvaluationNotifications)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GroupClient(string baseAddress, IHttpHandler httpHandler, Dictionary&lt;string, string&gt; constantHeaders, Dictionary&lt;string, string&gt; sessionHeaders, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">baseAddress</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Client.IHttpHandler.html">IHttpHandler</a></td>
+        <td><span class="parametername">httpHandler</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">constantHeaders</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">sessionHeaders</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController.html">AsyncRequestController</a></td>
+        <td><span class="parametername">asyncRequestController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.html">EvaluationNotifications</a></td>
+        <td><span class="parametername">evaluationNotifications</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_Create_" data-uid="PlayGen.SUGAR.Client.GroupClient.Create*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_Create_PlayGen_SUGAR_Contracts_GroupRequest_" data-uid="PlayGen.SUGAR.Client.GroupClient.Create(PlayGen.SUGAR.Contracts.GroupRequest)">Create(GroupRequest)</h4>
+  <div class="markdown level1 summary"><p>Create a new Group.
+Requires the <a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a>&apos;s Name to be unique for Groups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GroupResponse Create(GroupRequest actor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a></td>
+        <td><span class="parametername">actor</span></td>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a> object that holds the details of the new Group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a></td>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a> containing the new Group details.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_CreateAsync_" data-uid="PlayGen.SUGAR.Client.GroupClient.CreateAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_CreateAsync_PlayGen_SUGAR_Contracts_GroupRequest_System_Action_PlayGen_SUGAR_Contracts_GroupResponse__System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GroupClient.CreateAsync(PlayGen.SUGAR.Contracts.GroupRequest,System.Action{PlayGen.SUGAR.Contracts.GroupResponse},System.Action{System.Exception})">CreateAsync(GroupRequest, Action&lt;GroupResponse&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CreateAsync(GroupRequest actor, Action&lt;GroupResponse&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a></td>
+        <td><span class="parametername">actor</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a>&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_Delete_" data-uid="PlayGen.SUGAR.Client.GroupClient.Delete*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_Delete_System_Int32_" data-uid="PlayGen.SUGAR.Client.GroupClient.Delete(System.Int32)">Delete(Int32)</h4>
+  <div class="markdown level1 summary"><p>Delete group with the <param name="id"> provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Delete(int id)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>Group ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_DeleteAsync_" data-uid="PlayGen.SUGAR.Client.GroupClient.DeleteAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_DeleteAsync_System_Int32_System_Action_System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GroupClient.DeleteAsync(System.Int32,System.Action,System.Action{System.Exception})">DeleteAsync(Int32, Action, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DeleteAsync(int id, Action onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span></td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_Get_" data-uid="PlayGen.SUGAR.Client.GroupClient.Get*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_Get" data-uid="PlayGen.SUGAR.Client.GroupClient.Get">Get()</h4>
+  <div class="markdown level1 summary"><p>Get a list of all Groups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;GroupResponse&gt; Get()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a>&gt;</td>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a> that hold Group details.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_Get_" data-uid="PlayGen.SUGAR.Client.GroupClient.Get*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_Get_System_Int32_" data-uid="PlayGen.SUGAR.Client.GroupClient.Get(System.Int32)">Get(Int32)</h4>
+  <div class="markdown level1 summary"><p>Get Group that matches <param name="id"> provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GroupResponse Get(int id)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>Group id.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a></td>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a> which matches search criteria.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_Get_" data-uid="PlayGen.SUGAR.Client.GroupClient.Get*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_Get_System_String_" data-uid="PlayGen.SUGAR.Client.GroupClient.Get(System.String)">Get(String)</h4>
+  <div class="markdown level1 summary"><p>Get a list of Groups that match <param name="name"> provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;GroupResponse&gt; Get(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Group name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a>&gt;</td>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a> which match the search criteria.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_GetAsync_" data-uid="PlayGen.SUGAR.Client.GroupClient.GetAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_GetAsync_System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_GroupResponse___System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GroupClient.GetAsync(System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.GroupResponse}},System.Action{System.Exception})">GetAsync(Action&lt;IEnumerable&lt;GroupResponse&gt;&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetAsync(Action&lt;IEnumerable&lt;GroupResponse&gt;&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a>&gt;&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_GetAsync_" data-uid="PlayGen.SUGAR.Client.GroupClient.GetAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_GetAsync_System_Int32_System_Action_PlayGen_SUGAR_Contracts_GroupResponse__System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GroupClient.GetAsync(System.Int32,System.Action{PlayGen.SUGAR.Contracts.GroupResponse},System.Action{System.Exception})">GetAsync(Int32, Action&lt;GroupResponse&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetAsync(int id, Action&lt;GroupResponse&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a>&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_GetAsync_" data-uid="PlayGen.SUGAR.Client.GroupClient.GetAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_GetAsync_System_String_System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_GroupResponse___System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GroupClient.GetAsync(System.String,System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.GroupResponse}},System.Action{System.Exception})">GetAsync(String, Action&lt;IEnumerable&lt;GroupResponse&gt;&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetAsync(string name, Action&lt;IEnumerable&lt;GroupResponse&gt;&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a>&gt;&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_GetControlled_" data-uid="PlayGen.SUGAR.Client.GroupClient.GetControlled*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_GetControlled" data-uid="PlayGen.SUGAR.Client.GroupClient.GetControlled">GetControlled()</h4>
+  <div class="markdown level1 summary"><p>Get a list of all Groups this Actor has control over.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;GroupResponse&gt; GetControlled()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a>&gt;</td>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a> that hold Group details.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_GetControlledAsync_" data-uid="PlayGen.SUGAR.Client.GroupClient.GetControlledAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_GetControlledAsync_System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_GroupResponse___System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GroupClient.GetControlledAsync(System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.GroupResponse}},System.Action{System.Exception})">GetControlledAsync(Action&lt;IEnumerable&lt;GroupResponse&gt;&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetControlledAsync(Action&lt;IEnumerable&lt;GroupResponse&gt;&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.GroupResponse.html">GroupResponse</a>&gt;&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_Update_" data-uid="PlayGen.SUGAR.Client.GroupClient.Update*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_Update_System_Int32_PlayGen_SUGAR_Contracts_GroupRequest_" data-uid="PlayGen.SUGAR.Client.GroupClient.Update(System.Int32,PlayGen.SUGAR.Contracts.GroupRequest)">Update(Int32, GroupRequest)</h4>
+  <div class="markdown level1 summary"><p>Update an existing Group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Update(int id, GroupRequest group)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>Id of the existing Group.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a></td>
+        <td><span class="parametername">group</span></td>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a> object that holds the details of the Group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GroupClient_UpdateAsync_" data-uid="PlayGen.SUGAR.Client.GroupClient.UpdateAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GroupClient_UpdateAsync_System_Int32_PlayGen_SUGAR_Contracts_GroupRequest_System_Action_System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GroupClient.UpdateAsync(System.Int32,PlayGen.SUGAR.Contracts.GroupRequest,System.Action,System.Action{System.Exception})">UpdateAsync(Int32, GroupRequest, Action, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateAsync(int id, GroupRequest group, Action onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.GroupRequest.html">GroupRequest</a></td>
+        <td><span class="parametername">group</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span></td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

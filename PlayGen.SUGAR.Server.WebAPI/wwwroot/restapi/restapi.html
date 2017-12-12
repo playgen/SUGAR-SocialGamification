@@ -8,7 +8,7 @@
     <title>SUGAR Engine REST API | SUGAR </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="SUGAR Engine REST API | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -1687,6 +1687,374 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
         <td>integer</td>
         <td></td>
         <td><p>ActorRole ID.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<h2 id="_SUGAR_Engine_REST_API_v1">Alliance</h2>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAllianceRequestsByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiAllianceRequestsByGroupIdGet" class="text-capitalize">ApiAllianceRequestsByGroupIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all groups that have relationship requests for this <param name="groupId">.</p>
+<p>Example Usage: GET api/alliance/requests/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Alliance/requests/{groupId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*groupId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAllianceSentrequestsByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiAllianceSentrequestsByGroupIdGet" class="text-capitalize">ApiAllianceSentrequestsByGroupIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all Groups that have been sent relationship requests for this <param name="groupId">.</p>
+<p>Example Usage: GET api/alliance/sentrequests/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Alliance/sentrequests/{groupId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*groupId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAllianceByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiAllianceByGroupIdGet" class="text-capitalize">ApiAllianceByGroupIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a list of all groups that have relationships with this <param name="groupId">.</p>
+<p>Example Usage: GET api/alliance/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Alliance/{groupId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*groupId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAllianceCountByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiAllianceCountByGroupIdGet" class="text-capitalize">ApiAllianceCountByGroupIdGet</h3>
+  <div class="markdown level1 summary"><p>Get a count of groups that have a relationship with this <param name="groupId">.</p>
+<p>Example Usage: GET api/alliances/count/1</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Alliance/count/{groupId}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*groupId</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of the group.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAlliancePut" data-uid="SUGAR Engine REST API/v1/ApiAlliancePut" class="text-capitalize">ApiAlliancePut</h3>
+  <div class="markdown level1 summary"><p>Update an existing relationship between <param name="relationship.requestorId.requestorId"> and <param name="relationship.acceptorID.acceptorID">.
+Requires the relationship to already exist between the User and Group.</p>
+<p>Example Usage: PUT api/alliance</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/Alliance</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">relationship</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RelationshipStatusUpdate object that holds the details of the relationship.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAlliancePost" data-uid="SUGAR Engine REST API/v1/ApiAlliancePost" class="text-capitalize">ApiAlliancePost</h3>
+  <div class="markdown level1 summary"><p>Create a new relationship request between a Group and Group.
+Requires a relationship between the User and Group to not already exist.</p>
+<p>Example Usage: POST api/alliance</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">POST /api/Alliance</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">relationship</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RelationshipRequest object that holds the details of the new relationship request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiAllianceRequestPut" data-uid="SUGAR Engine REST API/v1/ApiAllianceRequestPut" class="text-capitalize">ApiAllianceRequestPut</h3>
+  <div class="markdown level1 summary"><p>Update an existing relationship request between <param name="relationship.requestorId.requestorId"> and <param name="relationship.acceptorID.acceptorID">.
+Requires the relationship request to already exist between a Group and Group.</p>
+<p>Example Usage: PUT api/alliancer/request</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">PUT /api/Alliance/request</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">relationship</span></td>
+        <td></td>
+        <td></td>
+        <td><p>PlayGen.SUGAR.Contracts.RelationshipStatusUpdate object that holds the details of the relationship.</p>
 </td>
       </tr>
     </tbody>
