@@ -247,3 +247,6 @@ ModelManifest.xml
 .fake/
 Unity/Assets/Plugins/PlayGen.SUGAR.Unity/
 src/PlayGen.SUGAR.WebAPI/out/
+
+# Documentation Website
+!**/wwwroot/**/*
