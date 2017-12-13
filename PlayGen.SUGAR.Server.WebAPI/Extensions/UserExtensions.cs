@@ -19,7 +19,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			{
 				Id = userModel.Id,
 				Name = userModel.Name,
-				Description = userModel.Description
+				Description = userModel.Description,
+				FriendCount = userModel.UserRelationshipCount,
+				GroupCount = userModel.GroupRelationshipCount
 			};
 
 			return userContract;

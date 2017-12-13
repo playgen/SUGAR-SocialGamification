@@ -19,7 +19,7 @@ Each account stores a unique login name and password for the associated user.
 * Client
 	* <xref:PlayGen.SUGAR.Client.AccountClient>
 * Contracts
-	* <xref:PlayGen.SUGAR.Contracts.Shared.AccountRequest>
-	* <xref:PlayGen.SUGAR.Contracts.Shared.AccountResponse>
+	* <xref:PlayGen.SUGAR.Contracts.AccountRequest>
+	* <xref:PlayGen.SUGAR.Contracts.AccountResponse>
 * WebAPI
-	* <xref:PlayGen.SUGAR.WebAPI.Controllers.AccountController>
+	* <xref:PlayGen.SUGAR.Server.WebAPI.Controllers.AccountController>

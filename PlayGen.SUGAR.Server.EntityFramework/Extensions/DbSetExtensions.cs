@@ -26,18 +26,42 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 		{
 			return dbSet
 				.Include(s => s.Requestors)
+				.ThenInclude(r => r.Requestor)
+				.Include(s => s.Requestors)
+				.ThenInclude(r => r.Acceptor)
 				.Include(s => s.RequestRequestors)
+				.ThenInclude(r => r.Requestor)
+				.Include(s => s.RequestRequestors)
+				.ThenInclude(r => r.Acceptor)
 				.Include(s => s.Acceptors)
-				.Include(s => s.RequestAcceptors);
+				.ThenInclude(r => r.Requestor)
+				.Include(s => s.Acceptors)
+				.ThenInclude(r => r.Acceptor)
+				.Include(s => s.RequestAcceptors)
+				.ThenInclude(r => r.Requestor)
+				.Include(s => s.RequestAcceptors)
+				.ThenInclude(r => r.Acceptor);
 		}
 
 		public static IQueryable<User> IncludeAll(this DbSet<User> dbSet)
 		{
 			return dbSet
 				.Include(s => s.Requestors)
+				.ThenInclude(r => r.Requestor)
+				.Include(s => s.Requestors)
+				.ThenInclude(r => r.Acceptor)
 				.Include(s => s.RequestRequestors)
+				.ThenInclude(r => r.Requestor)
+				.Include(s => s.RequestRequestors)
+				.ThenInclude(r => r.Acceptor)
 				.Include(s => s.Acceptors)
-				.Include(s => s.RequestAcceptors);
+				.ThenInclude(r => r.Requestor)
+				.Include(s => s.Acceptors)
+				.ThenInclude(r => r.Acceptor)
+				.Include(s => s.RequestAcceptors)
+				.ThenInclude(r => r.Requestor)
+				.Include(s => s.RequestAcceptors)
+				.ThenInclude(r => r.Acceptor);
 		}
 
 		public static IQueryable<Match> IncludeAll(this DbSet<Match> dbSet)

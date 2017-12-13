@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class RoleController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -639,15 +639,18 @@ public class RoleController : Controller, IActionFilter, IAsyncActionFilter, IFi
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_RoleController_Create_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.RoleController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_RoleController_Create_RoleRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.RoleController.Create(RoleRequest)">Create(RoleRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_RoleController_Create_PlayGen_SUGAR_Contracts_RoleRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.RoleController.Create(PlayGen.SUGAR.Contracts.RoleRequest)">Create(RoleRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new Role.
-Requires the <see cref="!:RoleRequest.Name"></see> to be unique.</p>
+Requires the <a class="xref" href="PlayGen.SUGAR.Contracts.RoleRequest.html#PlayGen_SUGAR_Contracts_RoleRequest_Name">Name</a> to be unique.</p>
 <p>Example Usage: POST api/role</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Role)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.Role)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Role)]
 public Task&lt;IActionResult&gt; Create([FromBody] RoleRequest newRole)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -661,9 +664,9 @@ public Task&lt;IActionResult&gt; Create([FromBody] RoleRequest newRole)</code></
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">RoleRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.RoleRequest.html">RoleRequest</a></td>
         <td><span class="parametername">newRole</span></td>
-        <td><p><see cref="!:RoleRequest"></see> object that contains the details of the new Role.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.RoleRequest.html">RoleRequest</a> object that contains the details of the new Role.</p>
 </td>
       </tr>
     </tbody>
@@ -679,7 +682,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] RoleRequest newRole)</code></
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:RoleResponse"></see> containing the new Role details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.RoleResponse.html">RoleResponse</a> containing the new Role details.</p>
 </td>
       </tr>
     </tbody>
@@ -695,6 +698,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] RoleRequest newRole)</code></
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpDelete(&quot;{id:int}&quot;)]
+[Authorization(ClaimScope.Role, AuthorizationAction.Delete, AuthorizationEntity.Role)]
 public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -741,6 +745,7 @@ public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;list&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.Role)]
 public Task&lt;IActionResult&gt; Get()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -754,7 +759,7 @@ public Task&lt;IActionResult&gt; Get()</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:RoleResponse"></see> that hold Role details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.RoleResponse.html">RoleResponse</a> that hold Role details.</p>
 </td>
       </tr>
     </tbody>
@@ -770,6 +775,9 @@ public Task&lt;IActionResult&gt; Get()</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;scope/{name}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.Role)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.Role)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Role)]
 public Task&lt;IActionResult&gt; GetByScope([FromRoute] string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -800,7 +808,7 @@ public Task&lt;IActionResult&gt; GetByScope([FromRoute] string name)</code></pre
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:RoleResponse"></see> that hold Role details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.RoleResponse.html">RoleResponse</a> that hold Role details.</p>
 </td>
       </tr>
     </tbody>
@@ -816,6 +824,9 @@ public Task&lt;IActionResult&gt; GetByScope([FromRoute] string name)</code></pre
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;scopedefault/{name}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.Role)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.Role)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Role)]
 public Task&lt;IActionResult&gt; GetDefaultForScope([FromRoute] string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -846,7 +857,7 @@ public Task&lt;IActionResult&gt; GetDefaultForScope([FromRoute] string name)</co
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:RoleResponse"></see> that holds Role details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.RoleResponse.html">RoleResponse</a> that holds Role details.</p>
 </td>
       </tr>
     </tbody>

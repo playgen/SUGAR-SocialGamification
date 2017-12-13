@@ -241,19 +241,15 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.Property<int>("EvaluationDataCategory");
 
-                    b.Property<string>("EvaluationDataKey")
-                        .IsRequired()
-                        .HasMaxLength(64);
+                    b.Property<string>("EvaluationDataKey");
 
                     b.Property<int>("EvaluationDataType");
 
-                    b.Property<int?>("EvaluationId");
+                    b.Property<int>("EvaluationId");
 
                     b.Property<int>("Scope");
 
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(64);
+                    b.Property<string>("Value");
 
                     b.HasKey("Id");
 
@@ -370,17 +366,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.Property<int>("EvaluationDataCategory");
 
-                    b.Property<string>("EvaluationDataKey")
-                        .IsRequired()
-                        .HasMaxLength(64);
+                    b.Property<string>("EvaluationDataKey");
 
                     b.Property<int>("EvaluationDataType");
 
-                    b.Property<int?>("EvaluationId");
+                    b.Property<int>("EvaluationId");
 
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(64);
+                    b.Property<string>("Value");
 
                     b.HasKey("Id");
 
@@ -546,9 +538,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.EvaluationCriteria", b =>
                 {
-                    b.HasOne("PlayGen.SUGAR.Server.Model.Evaluation")
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Evaluation", "Evaluation")
                         .WithMany("EvaluationCriterias")
-                        .HasForeignKey("EvaluationId");
+                        .HasForeignKey("EvaluationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.EvaluationData", b =>
@@ -573,9 +566,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.Reward", b =>
                 {
-                    b.HasOne("PlayGen.SUGAR.Server.Model.Evaluation")
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Evaluation", "Evaluation")
                         .WithMany("Rewards")
-                        .HasForeignKey("EvaluationId");
+                        .HasForeignKey("EvaluationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.RoleClaim", b =>

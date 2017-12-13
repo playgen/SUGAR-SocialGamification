@@ -8,7 +8,7 @@
     <title>Group | SUGAR </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Group | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -80,19 +80,19 @@
 <h2 id="api">API</h2>
 <ul>
 <li>Client<ul>
-<li>&lt;xref:PlayGen.SUGAR.Client.GroupClient&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Client.GroupClient.html">GroupClient</a></li>
 </ul>
 </li>
 <li>Contracts<ul>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.ActorRequest&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.ActorRequest.html">ActorRequest</a></li>
 </ul>
 </li>
 </ul>
 <h2 id="examples">Examples</h2>
 <ul>
 <li>Create a group
-  This example will show how to create a group called &quot;Wildlings&quot; using the &lt;xref:PlayGen.SUGAR.Client.GroupClient&gt;&#39;s Create function, passing an &lt;xref:PlayGen.SUGAR.Contracts.Shared.ActorRequest&gt; as the parameter and storing the group&#39;s id returned inside the &lt;xref:PlayGen.SUGAR.Contracts.Shared.ActorResponse&gt; object.</li>
+  This example will show how to create a group called &quot;Wildlings&quot; using the <a class="xref" href="../api/PlayGen.SUGAR.Client.GroupClient.html">GroupClient</a>&#39;s Create function, passing an <a class="xref" href="../api/PlayGen.SUGAR.Contracts.ActorRequest.html">ActorRequest</a> as the parameter and storing the group&#39;s id returned inside the <a class="xref" href="../api/PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a> object.</li>
 </ul>
 <pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
         private GroupClient _groupClient;
@@ -117,7 +117,7 @@
         }
 </code></pre><ul>
 <li><p>Retreiving a game</p>
-<p>  Checking if a Group exists or finding the id of a Group may be desired functionalities. This is done using &lt;xref:PlayGen.SUGAR.Client.GroupClient&gt;&#39;s Get function and passing the name of the group to match.</p>
+<p>  Checking if a Group exists or finding the id of a Group may be desired functionalities. This is done using <a class="xref" href="../api/PlayGen.SUGAR.Client.GroupClient.html">GroupClient</a>&#39;s Get function and passing the name of the group to match.</p>
 </li>
 </ul>
 <pre><code class="lang-cs">        private bool CheckGroupExists() 

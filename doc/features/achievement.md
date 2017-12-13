@@ -18,21 +18,23 @@ Both Achievements and [Skills](skill.md) build on "Evaluations" which may contai
 * Client
     * <xref:PlayGen.SUGAR.Client.AchievementClient>
 * Contracts
-    * <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationUpdateRequest>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationResponse>
-    * <xref:PlayGen.SUGAR.Common.Shared.EvaluationDataType>
-    * <xref:PlayGen.SUGAR.Common.Shared.CriteriaQueryType>
-    * <xref:PlayGen.SUGAR.Common.Shared.ComparisonType>
-    * <xref:PlayGen.SUGAR.Common.Shared.ActorType>
-    * <xref:PlayGen.SUGAR.Common.Shared.CriteriaScope>
+	* <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest>
+    * <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaUpdateRequest>
+    * <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaResponse>
+    * <xref:PlayGen.SUGAR.Contracts.EvaluationProgressResponse>
+    * <xref:PlayGen.SUGAR.Contracts.EvaluationCreateRequest>
+    * <xref:PlayGen.SUGAR.Contracts.EvaluationUpdateRequest>
+    * <xref:PlayGen.SUGAR.Contracts.EvaluationResponse>
+    * <xref:PlayGen.SUGAR.Common.EvaluationDataType>
+    * <xref:PlayGen.SUGAR.Common.CriteriaQueryType>
+    * <xref:PlayGen.SUGAR.Common.ComparisonType>
+    * <xref:PlayGen.SUGAR.Common.ActorType>
+    * <xref:PlayGen.SUGAR.Common.CriteriaScope>
 
 ## Examples
 * Specifying an achievement
 
-	This example will describe how to implement the 'Slay 10 Enemies!' achievement. An achievement must be specified with an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest> with a list of <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCriteriaCreateRequest> that will be evalutated against to determine progress.
+	This example will describe how to implement the 'Slay 10 Enemies!' achievement. An achievement must be specified with an <xref:PlayGen.SUGAR.Contracts.EvaluationCreateRequest> with a list of <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest> that will be evalutated against to determine progress.
 	All 'EnemiesSlain' keys will be checked in gameData and whether the sum of their values is greater than or equal to 10.
 
 ```cs
@@ -77,7 +79,7 @@ Both Achievements and [Skills](skill.md) build on "Evaluations" which may contai
 
 * Submitting data for when somthing which may be used to evaluate progress towards an Achievement  
 	
-	An achievement uses keys in <xref:gameData> that match its <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria>. This data is submitted at points in the game which demonstrate progress towards the achievement (as well as other uses).
+	An achievement uses keys in <xref:gameData> that match its <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest>. This data is submitted at points in the game which demonstrate progress towards the achievement (as well as other uses).
 
 ```cs
 		private void SlayEnemies(int quantity)
@@ -123,7 +125,7 @@ Both Achievements and [Skills](skill.md) build on "Evaluations" which may contai
 		}
 ```
 
- * Requesting specific achievement progress using the <xref:PlayGen.SUGAR.Client.AchievementClient> and specifying the GameId, ActorId and Token, returns an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse> object for that Actor's progress towards the achievement in that game. 
+ * Requesting specific achievement progress using the <xref:PlayGen.SUGAR.Client.AchievementClient> and specifying the GameId, ActorId and Token, returns an <xref:PlayGen.SUGAR.Contracts.EvaluationProgressResponse> object for that Actor's progress towards the achievement in that game. 
 
 ```cs
 		private float CheckAchievementProgress()

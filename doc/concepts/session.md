@@ -19,7 +19,7 @@ The "Heartbeat" method can be used to keep sessions active.
 * Client
 	* <xref:PlayGen.SUGAR.Client.SessionClient>
 * Contracts
-	* <xref:PlayGen.SUGAR.Contracts.Shared.AccountRequest>
-	* <xref:PlayGen.SUGAR.Contracts.Shared.AccountResponse>
+	* <xref:PlayGen.SUGAR.Contracts.AccountRequest>
+	* <xref:PlayGen.SUGAR.Contracts.AccountResponse>
 * WebAPI
-	* <xref:PlayGen.SUGAR.WebAPI.Controllers.SessionController>
+	* <xref:PlayGen.SUGAR.Server.WebAPI.Controllers.SessionController>

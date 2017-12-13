@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Logging;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Model;
 
@@ -32,6 +33,8 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<Group> Get()
 		{
 			var groups = _groupDbController.Get();
+			groups.ForEach(g => g.UserRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.User));
+			groups.ForEach(g => g.GroupRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.Group));
 
 			_logger.LogInformation($"{groups?.Count} Groups");
 
@@ -43,6 +46,8 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var groups = Get();
 			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Group).Select(p => p.EntityId).ToList();
 			groups = groups.Where(g => permissions.Contains(g.Id)).ToList();
+			groups.ForEach(g => g.UserRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.User));
+			groups.ForEach(g => g.GroupRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.Group));
 
 			_logger.LogInformation($"{groups.Count} Groups");
 
@@ -53,6 +58,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var group = _groupDbController.Get(id);
 
+			if (group != null)
+			{
+				group.UserRelationshipCount = _relationshipController.GetRelationshipCount(group.Id, ActorType.User);
+				group.GroupRelationshipCount = _relationshipController.GetRelationshipCount(group.Id, ActorType.Group);
+			}
+
 			_logger.LogInformation($"Group: {group?.Id} for Id: {id}");
 
 			return group;
@@ -61,6 +72,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<Group> Search(string name)
 		{
 			var groups = _groupDbController.Get(name);
+			groups.ForEach(g => g.UserRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.User));
+			groups.ForEach(g => g.GroupRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.Group));
+
 
 			_logger.LogInformation($"{groups?.Count} Groups for Name: {name}");
 

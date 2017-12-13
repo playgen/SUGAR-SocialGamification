@@ -11,3 +11,6 @@ _site
 # Auto Generated
 api/
 restapi/restapi.swagger2.json
+
+# Don't ignore
+!files/*.nupkg

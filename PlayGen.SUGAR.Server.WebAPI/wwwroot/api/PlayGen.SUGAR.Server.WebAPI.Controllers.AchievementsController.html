@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class AchievementsController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -101,7 +101,7 @@
       <a class="xref" href="PlayGen.SUGAR.Server.WebAPI.Controllers.EvaluationsController.html#PlayGen_SUGAR_Server_WebAPI_Controllers_EvaluationsController_EvaluationCoreController">EvaluationsController.EvaluationCoreController</a>
     </div>
     <div>
-      <a class="xref" href="PlayGen.SUGAR.Server.WebAPI.Controllers.EvaluationsController.html#PlayGen_SUGAR_Server_WebAPI_Controllers_EvaluationsController_Get_System_Int32_EvaluationType_">EvaluationsController.Get(Int32, EvaluationType)</a>
+      <a class="xref" href="PlayGen.SUGAR.Server.WebAPI.Controllers.EvaluationsController.html#PlayGen_SUGAR_Server_WebAPI_Controllers_EvaluationsController_Get_System_Int32_PlayGen_SUGAR_Common_EvaluationType_">EvaluationsController.Get(Int32, EvaluationType)</a>
     </div>
     <div>
       <a class="xref" href="PlayGen.SUGAR.Server.WebAPI.Controllers.EvaluationsController.html#PlayGen_SUGAR_Server_WebAPI_Controllers_EvaluationsController_GetEvaluationProgress_System_String_System_Int32_System_Int32_">EvaluationsController.GetEvaluationProgress(String, Int32, Int32)</a>
@@ -657,15 +657,16 @@ public class AchievementsController : EvaluationsController, IActionFilter, IAsy
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_AchievementsController_Create_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AchievementsController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AchievementsController_Create_EvaluationCreateRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AchievementsController.Create(EvaluationCreateRequest)">Create(EvaluationCreateRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AchievementsController_Create_PlayGen_SUGAR_Contracts_EvaluationCreateRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AchievementsController.Create(PlayGen.SUGAR.Contracts.EvaluationCreateRequest)">Create(EvaluationCreateRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new Achievement.
-Requires <see cref="!:EvaluationCreateRequest.Name"></see> to be unique to that <see cref="!:EvaluationCreateRequest.GameId"></see>.</p>
+Requires <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationCreateRequest.html#PlayGen_SUGAR_Contracts_EvaluationCreateRequest_Name">Name</a> to be unique to that <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationCreateRequest.html#PlayGen_SUGAR_Contracts_EvaluationCreateRequest_GameId">GameId</a>.</p>
 <p>Example Usage: POST api/achievements/create</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost(&quot;create&quot;)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.Achievement)]
 public Task&lt;IActionResult&gt; Create([FromBody] EvaluationCreateRequest newAchievement)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -679,9 +680,9 @@ public Task&lt;IActionResult&gt; Create([FromBody] EvaluationCreateRequest newAc
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EvaluationCreateRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationCreateRequest.html">EvaluationCreateRequest</a></td>
         <td><span class="parametername">newAchievement</span></td>
-        <td><p><see cref="!:EvaluationCreateRequest"></see> object that holds the details of the new Achievement.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationCreateRequest.html">EvaluationCreateRequest</a> object that holds the details of the new Achievement.</p>
 </td>
       </tr>
     </tbody>
@@ -697,7 +698,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] EvaluationCreateRequest newAc
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>Returns a <see cref="!:EvaluationResponse"></see> object containing details for the newly created Achievement.</p>
+        <td><p>Returns a <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationResponse.html">EvaluationResponse</a> object containing details for the newly created Achievement.</p>
 </td>
       </tr>
     </tbody>
@@ -714,6 +715,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] EvaluationCreateRequest newAc
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpDelete(&quot;{token}/global&quot;)]
 [HttpDelete(&quot;{token}/{gameId:int}&quot;)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Achievement)]
 public Task&lt;IActionResult&gt; Delete([FromRoute] string token, [FromRoute] int gameId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -768,6 +770,7 @@ If global is provided instead of a gameId, get all global achievements, ie. achi
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;global/list&quot;)]
 [HttpGet(&quot;game/{gameId:int}/list&quot;)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
 public Task&lt;IActionResult&gt; Get([FromRoute] int gameId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -799,7 +802,7 @@ public Task&lt;IActionResult&gt; Get([FromRoute] int gameId)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>Returns multiple <see cref="!:EvaluationResponse"></see> that hold Achievement details</p>
+        <td><p>Returns multiple <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationResponse.html">EvaluationResponse</a> that hold Achievement details</p>
 </td>
       </tr>
     </tbody>
@@ -816,6 +819,7 @@ public Task&lt;IActionResult&gt; Get([FromRoute] int gameId)</code></pre>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;find/{token}/{gameId:int}&quot;)]
 [HttpGet(&quot;find/{token}/global&quot;)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.Achievement)]
 public Task&lt;IActionResult&gt; Get([FromRoute] string token, [FromRoute] int gameId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -853,7 +857,7 @@ public Task&lt;IActionResult&gt; Get([FromRoute] string token, [FromRoute] int g
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>Returns <see cref="!:EvaluationResponse"></see> that holds Achievement details</p>
+        <td><p>Returns <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationResponse.html">EvaluationResponse</a> that holds Achievement details</p>
 </td>
       </tr>
     </tbody>
@@ -913,7 +917,7 @@ public IActionResult GetAchievementProgress([FromRoute] string token, [FromRoute
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>Returns multiple <see cref="!:EvaluationProgressResponse"></see> that hold current progress toward achievement.</p>
+        <td><p>Returns multiple <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a> that hold current progress toward achievement.</p>
 </td>
       </tr>
     </tbody>
@@ -967,7 +971,7 @@ public IActionResult GetGameProgress([FromRoute] int gameId, [FromRoute] int act
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>Returns multiple <see cref="!:EvaluationProgressResponse"></see> that hold current progress toward achievement.</p>
+        <td><p>Returns multiple <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a> that hold current progress toward achievement.</p>
 </td>
       </tr>
     </tbody>
@@ -975,7 +979,7 @@ public IActionResult GetGameProgress([FromRoute] int gameId, [FromRoute] int act
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_AchievementsController_Update_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AchievementsController.Update*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AchievementsController_Update_EvaluationUpdateRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AchievementsController.Update(EvaluationUpdateRequest)">Update(EvaluationUpdateRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AchievementsController_Update_PlayGen_SUGAR_Contracts_EvaluationUpdateRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AchievementsController.Update(PlayGen.SUGAR.Contracts.EvaluationUpdateRequest)">Update(EvaluationUpdateRequest)</h4>
   <div class="markdown level1 summary"><p>Update an existing Achievement.</p>
 <p>Example Usage: PUT api/achievements/update</p>
 </div>
@@ -983,6 +987,7 @@ public IActionResult GetGameProgress([FromRoute] int gameId, [FromRoute] int act
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut(&quot;update&quot;)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Achievement)]
 public Task&lt;IActionResult&gt; Update([FromBody] EvaluationUpdateRequest achievement)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -996,9 +1001,9 @@ public Task&lt;IActionResult&gt; Update([FromBody] EvaluationUpdateRequest achie
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EvaluationUpdateRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationUpdateRequest.html">EvaluationUpdateRequest</a></td>
         <td><span class="parametername">achievement</span></td>
-        <td><p><see cref="!:EvaluationCreateRequest"></see> object that holds the details of the Achievement.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationCreateRequest.html">EvaluationCreateRequest</a> object that holds the details of the Achievement.</p>
 </td>
       </tr>
     </tbody>

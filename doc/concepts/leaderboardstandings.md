@@ -6,7 +6,7 @@ uid: leaderboardStandings
 
 LeaderboardStandings are used to obtain a collection of [Users](xref:user) or [Groups](xref:group) based on a specific <xref:leaderboard>.
 
-In order to setup a <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsRequest>, the following must be passed:
+In order to setup a <xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest>, the following must be passed:
 
 - LeaderboardToken - Used to identify the specific <xref:leaderboard> that this LeaderboardStandings applies to.
 
@@ -14,7 +14,7 @@ In order to setup a <xref:PlayGen.SUGAR.Contracts.Shared.LeaderboardStandingsReq
 
 - ActorId - The <xref:actor> that we are most concerned with. The actor is used in conjunction with the LeaderboardFilterType.
 
-- <xref:PlayGen.SUGAR.Common.Shared.LeaderboardFilterType> - Allows you to specify how you want the results returned in relation to the actor:
+- <xref:PlayGen.SUGAR.Common.LeaderboardFilterType> - Allows you to specify how you want the results returned in relation to the actor:
 	- Top: Returns the top globally ranked actors.
 	- Near: Returns the actors in relation to the actorId Provided. This works in conjunction with the PageOffset. By default it will return a collection that contains the provided actor.
 	- Friends: If the actor is a user, only the friends of that user are returned.

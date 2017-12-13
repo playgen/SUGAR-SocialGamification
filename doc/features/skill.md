@@ -25,22 +25,22 @@ Both Skills and [Achievements](achievement.md) build on "Evaluations" which may 
 * Client
     * <xref:PlayGen.SUGAR.Client.SkillClient>
 * Contracts
- 	* <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationCreateRequest>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationUpdateRequest>
-    * <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationResponse>
-    * <xref:PlayGen.SUGAR.Common.Shared.EvaluationDataType>
-    * <xref:PlayGen.SUGAR.Common.Shared.CriteriaQueryType>
-    * <xref:PlayGen.SUGAR.Common.Shared.ComparisonType>
-    * <xref:PlayGen.SUGAR.Common.Shared.ActorType>
-    * <xref:PlayGen.SUGAR.Common.Shared.CriteriaScope>
+ 	* <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest>
+    * <xref:PlayGen.SUGAR.Contracts.EvaluationProgressResponse>
+    * <xref:PlayGen.SUGAR.Contracts.EvaluationCreateRequest>
+    * <xref:PlayGen.SUGAR.Contracts.EvaluationUpdateRequest>
+    * <xref:PlayGen.SUGAR.Contracts.EvaluationResponse>
+    * <xref:PlayGen.SUGAR.Common.EvaluationDataType>
+    * <xref:PlayGen.SUGAR.Common.CriteriaQueryType>
+    * <xref:PlayGen.SUGAR.Common.ComparisonType>
+    * <xref:PlayGen.SUGAR.Common.ActorType>
+    * <xref:PlayGen.SUGAR.Common.CriteriaScope>
 * WebAPI
-    * <xref:PlayGen.SUGAR.WebAPI.Controllers.SkillsController>
+    * <xref:PlayGen.SUGAR.Server.WebAPI.Controllers.SkillsController>
 
 ## Examples
 * Create a skill
-	Skills work identically to [Achievements](achievement.md), utilising the same contracts and [GameData](gameData.md). This example shows how to set up the Swordsmanship skill for a game. The skill has an [<xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria> specifying the value and ComparisonType to determine at which point the skill has been learnt, key "Swordsmanship" and CriteriaQueryType to sum all GameData entry values matching the key.
+	Skills work identically to [Achievements](achievement.md), utilising the same contracts and [GameData](gameData.md). This example shows how to set up the Swordsmanship skill for a game. The skill has an [<xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest> specifying the value and ComparisonType to determine at which point the skill has been learnt, key "Swordsmanship" and CriteriaQueryType to sum all GameData entry values matching the key.
 
 ```cs
 		public SUGARClient sugarClient = new SUGARClient(BaseUri);
@@ -84,7 +84,7 @@ Both Skills and [Achievements](achievement.md) build on "Evaluations" which may 
 
 * Submitting data for when somthing which may be used to evaluate progress towards a Skill
 	
-	A skill uses keys in [GameData](gameData.md) that match its <xref:PlayGen.SUGAR.Common.Shared.EvaluationCriteria>. This data is submitted at points in the game which demonstrate progress towards the skill (as well as other uses).
+	A skill uses keys in [GameData](gameData.md) that match its <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest>. This data is submitted at points in the game which demonstrate progress towards the skill (as well as other uses).
 
 ```cs
 		private void SwingSword()
@@ -130,7 +130,7 @@ Both Skills and [Achievements](achievement.md) build on "Evaluations" which may 
 		}
 ```
 
-* Requesting specific using the [SkillClient](xref:PlayGen.SUGAR.Client.SkillClient)'s GetSkillProgress function and specifying the GameId, ActorId and Token returns an <xref:PlayGen.SUGAR.Contracts.Shared.EvaluationProgressResponse> object for that Actor's progress towards the skill in that game. 
+* Requesting specific using the [SkillClient](xref:PlayGen.SUGAR.Client.SkillClient)'s GetSkillProgress function and specifying the GameId, ActorId and Token returns an <xref:PlayGen.SUGAR.Contracts.EvaluationProgressResponse> object for that Actor's progress towards the skill in that game. 
 
 ```cs
 		private float CheckSkillProgress()

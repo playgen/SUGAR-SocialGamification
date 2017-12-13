@@ -8,7 +8,7 @@
     <title>Game | SUGAR </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Game | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -77,19 +77,19 @@
 <h2 id="api">API</h2>
 <ul>
 <li>Client<ul>
-<li>&lt;xref:PlayGen.SUGAR.Client.GameClient&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Client.GameClient.html">GameClient</a></li>
 </ul>
 </li>
 <li>Contracts<ul>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.GameRequest&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.Shared.GameResponse&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.GameRequest.html">GameRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.GameResponse.html">GameResponse</a></li>
 </ul>
 </li>
 </ul>
 <h2 id="examples">Examples</h2>
 <ul>
 <li><p>Create a game</p>
-<p>  Creating a game using the &lt;xref:PlayGen.SUGAR.Client.GameClient&gt;&#39;s Create function, passing a &lt;xref:PlayGen.SUGAR.Contracts.Shared.GameRequest&gt; object as the parameter. This example will be used to create a game with the name &quot;Thrones&quot; and store its Id from the returned &lt;xref:PlayGen.SUGAR.Contracts.Shared.GameResponse&gt;.</p>
+<p>  Creating a game using the <a class="xref" href="../api/PlayGen.SUGAR.Client.GameClient.html">GameClient</a>&#39;s Create function, passing a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.GameRequest.html">GameRequest</a> object as the parameter. This example will be used to create a game with the name &quot;Thrones&quot; and store its Id from the returned <a class="xref" href="../api/PlayGen.SUGAR.Contracts.GameResponse.html">GameResponse</a>.</p>
 </li>
 </ul>
 <pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
@@ -115,7 +115,7 @@
         }
 </code></pre><ul>
 <li><p>Retreiving a game</p>
-<p>  Checking if a Game exists or storing the id of the Game prior to allowing the user to play may be vital. This is done using &lt;xref:PlayGen.SUGAR.Client.GameClient&gt;&#39;s Get function and passing the name of the game to match.</p>
+<p>  Checking if a Game exists or storing the id of the Game prior to allowing the user to play may be vital. This is done using <a class="xref" href="../api/PlayGen.SUGAR.Client.GameClient.html">GameClient</a>&#39;s Get function and passing the name of the game to match.</p>
 </li>
 </ul>
 <pre><code class="lang-cs">        private int CheckGame() 

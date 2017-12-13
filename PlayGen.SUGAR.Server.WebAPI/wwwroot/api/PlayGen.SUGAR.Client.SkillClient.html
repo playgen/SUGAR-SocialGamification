@@ -1,0 +1,708 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SkillClient
+   | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SkillClient
+   | SUGAR ">
+    <meta name="generator" content="docfx 2.28.3.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Client.SkillClient">
+  
+  
+  <h1 id="PlayGen_SUGAR_Client_SkillClient" data-uid="PlayGen.SUGAR.Client.SkillClient" class="text-break">Class SkillClient
+  </h1>
+  <div class="markdown level0 summary"><p>Controller that facilitates Skill specific operations.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html">ClientBase</a></div>
+    <div class="level2"><span class="xref">SkillClient</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_AsyncRequestController">ClientBase.AsyncRequestController</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_EvaluationNotifications">ClientBase.EvaluationNotifications</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_SerializerSettings">ClientBase.SerializerSettings</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_EnableEvaluationNotifications_System_Boolean_">ClientBase.EnableEvaluationNotifications(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_ClearSessionData">ClientBase.ClearSessionData()</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_AreUriParamsValid_System_Object___">ClientBase.AreUriParamsValid(Object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_GetUriBuilder_System_String_System_Object___">ClientBase.GetUriBuilder(String, Object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Post__2_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Post&lt;TRequest, TResponse&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Post__1_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Post&lt;TRequest&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Put__2_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Put&lt;TRequest, TResponse&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Put__1_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Put&lt;TRequest&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_PostPut__1_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Object_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__">ClientBase.PostPut&lt;TResponse&gt;(String, String, Dictionary&lt;String, String&gt;, Object, IEnumerable&lt;HttpStatusCode&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_PostPut_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Object_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__">ClientBase.PostPut(String, String, Dictionary&lt;String, String&gt;, Object, IEnumerable&lt;HttpStatusCode&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Get__1_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Get&lt;TResponse&gt;(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Get_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Get(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Delete__1_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Delete&lt;TResponse&gt;(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Delete_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__">ClientBase.Delete(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_GetDelete__1_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__">ClientBase.GetDelete&lt;TResponse&gt;(String, String, Dictionary&lt;String, String&gt;, IEnumerable&lt;HttpStatusCode&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_GetDelete_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__">ClientBase.GetDelete(String, String, Dictionary&lt;String, String&gt;, IEnumerable&lt;HttpStatusCode&gt;)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Client.html">PlayGen.SUGAR.Client</a></h6>
+  <h6><strong>Assembly</strong>: PlayGen.SUGAR.Client.dll</h6>
+  <h5 id="PlayGen_SUGAR_Client_SkillClient_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SkillClient : ClientBase</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient__ctor_" data-uid="PlayGen.SUGAR.Client.SkillClient.#ctor*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient__ctor_System_String_PlayGen_SUGAR_Client_IHttpHandler_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__PlayGen_SUGAR_Client_AsyncRequestQueue_AsyncRequestController_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_" data-uid="PlayGen.SUGAR.Client.SkillClient.#ctor(System.String,PlayGen.SUGAR.Client.IHttpHandler,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController,PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications)">SkillClient(String, IHttpHandler, Dictionary&lt;String, String&gt;, Dictionary&lt;String, String&gt;, AsyncRequestController, EvaluationNotifications)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SkillClient(string baseAddress, IHttpHandler httpHandler, Dictionary&lt;string, string&gt; constantHeaders, Dictionary&lt;string, string&gt; sessionHeaders, AsyncRequestController asyncRequestController, EvaluationNotifications evaluationNotifications)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">baseAddress</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Client.IHttpHandler.html">IHttpHandler</a></td>
+        <td><span class="parametername">httpHandler</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">constantHeaders</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">sessionHeaders</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController.html">AsyncRequestController</a></td>
+        <td><span class="parametername">asyncRequestController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.html">EvaluationNotifications</a></td>
+        <td><span class="parametername">evaluationNotifications</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient_EnableNotifications_" data-uid="PlayGen.SUGAR.Client.SkillClient.EnableNotifications*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient_EnableNotifications_System_Boolean_" data-uid="PlayGen.SUGAR.Client.SkillClient.EnableNotifications(System.Boolean)">EnableNotifications(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Sets flag to return pending skill notifications from the server as they become available.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void EnableNotifications(bool enable)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">enable</span></td>
+        <td><p>Whether to enable or disable notifications.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient_GetGameProgress_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGameProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient_GetGameProgress_System_Int32_System_Int32_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGameProgress(System.Int32,System.Int32)">GetGameProgress(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Find the current progress for all skills for a <param name="gameId"> for <param name="actorId">.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;EvaluationProgressResponse&gt; GetGameProgress(int gameId, int actorId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td><p>ID of Game</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td><p>ID of Group/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a>&gt;</td>
+        <td><p>Returns multiple <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a> that hold current progress toward skill.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient_GetGameProgressAsync_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGameProgressAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient_GetGameProgressAsync_System_Int32_System_Int32_System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_EvaluationProgressResponse___System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGameProgressAsync(System.Int32,System.Int32,System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.EvaluationProgressResponse}},System.Action{System.Exception})">GetGameProgressAsync(Int32, Int32, Action&lt;IEnumerable&lt;EvaluationProgressResponse&gt;&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetGameProgressAsync(int gameId, int actorId, Action&lt;IEnumerable&lt;EvaluationProgressResponse&gt;&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a>&gt;&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient_GetGlobalProgress_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGlobalProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient_GetGlobalProgress_System_Int32_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGlobalProgress(System.Int32)">GetGlobalProgress(Int32)</h4>
+  <div class="markdown level1 summary"><p>Find the current progress for all global skills for <param name="actorId">.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;EvaluationProgressResponse&gt; GetGlobalProgress(int actorId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td><p>ID of Group/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a>&gt;</td>
+        <td><p>Returns multiple <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a> that hold Skill progress details</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient_GetGlobalProgressAsync_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGlobalProgressAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient_GetGlobalProgressAsync_System_Int32_System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_EvaluationProgressResponse___System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGlobalProgressAsync(System.Int32,System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.EvaluationProgressResponse}},System.Action{System.Exception})">GetGlobalProgressAsync(Int32, Action&lt;IEnumerable&lt;EvaluationProgressResponse&gt;&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetGlobalProgressAsync(int actorId, Action&lt;IEnumerable&lt;EvaluationProgressResponse&gt;&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a>&gt;&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient_GetGlobalSkillProgress_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGlobalSkillProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient_GetGlobalSkillProgress_System_String_System_Int32_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGlobalSkillProgress(System.String,System.Int32)">GetGlobalSkillProgress(String, Int32)</h4>
+  <div class="markdown level1 summary"><p>Find the current progress for an Skill for <param name="actorId">.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EvaluationProgressResponse GetGlobalSkillProgress(string token, int actorId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>Token of Skill</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td><p>ID of actor/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a></td>
+        <td><p>Returns <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a> that hold current progress toward skill.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient_GetGlobalSkillProgressAsync_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGlobalSkillProgressAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient_GetGlobalSkillProgressAsync_System_String_System_Int32_System_Action_PlayGen_SUGAR_Contracts_EvaluationProgressResponse__System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.SkillClient.GetGlobalSkillProgressAsync(System.String,System.Int32,System.Action{PlayGen.SUGAR.Contracts.EvaluationProgressResponse},System.Action{System.Exception})">GetGlobalSkillProgressAsync(String, Int32, Action&lt;EvaluationProgressResponse&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetGlobalSkillProgressAsync(string token, int actorId, Action&lt;EvaluationProgressResponse&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">token</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a>&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient_GetSkillProgress_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetSkillProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient_GetSkillProgress_System_String_System_Int32_System_Int32_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetSkillProgress(System.String,System.Int32,System.Int32)">GetSkillProgress(String, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Find the current progress for an Skill for <param name="actorId">.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EvaluationProgressResponse GetSkillProgress(string token, int gameId, int actorId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>Token of Skill</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td><p>ID of the Game the Skill is for</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td><p>ID of actor/User</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a></td>
+        <td><p>Returns <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a> that hold current progress toward skill.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient_GetSkillProgressAsync_" data-uid="PlayGen.SUGAR.Client.SkillClient.GetSkillProgressAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient_GetSkillProgressAsync_System_String_System_Int32_System_Int32_System_Action_PlayGen_SUGAR_Contracts_EvaluationProgressResponse__System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.SkillClient.GetSkillProgressAsync(System.String,System.Int32,System.Int32,System.Action{PlayGen.SUGAR.Contracts.EvaluationProgressResponse},System.Action{System.Exception})">GetSkillProgressAsync(String, Int32, Int32, Action&lt;EvaluationProgressResponse&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetSkillProgressAsync(string token, int gameId, int actorId, Action&lt;EvaluationProgressResponse&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">token</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a>&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SkillClient_TryGetPendingNotification_" data-uid="PlayGen.SUGAR.Client.SkillClient.TryGetPendingNotification*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SkillClient_TryGetPendingNotification_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification__" data-uid="PlayGen.SUGAR.Client.SkillClient.TryGetPendingNotification(PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification@)">TryGetPendingNotification(out EvaluationNotification)</h4>
+  <div class="markdown level1 summary"><p>Gets pending skill progress notifications.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetPendingNotification(out EvaluationNotification notification)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html">EvaluationNotification</a></td>
+        <td><span class="parametername">notification</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Returns a boolean value indicating whether there was a notification to retrieve or not.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

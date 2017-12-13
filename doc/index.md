@@ -6,7 +6,7 @@ SUGAR provides a software platform consisting of Web API and Client side compone
 
 The documentation includes : 
 
-- Installation(coming in July 2016) : Link to step-by-step process to install SUGAR on your server. 
+- [Installation](xref:docker#quick-start) : Simple guide to getting the SUGAR server running with docker.
 
 - [Features](xref:feature_overview) : Detailed description of features supported by the software including the roadmap for up-and-coming features.
 

@@ -15,9 +15,9 @@ It can have various data attrubuted to it via the MatchData mechanism.
 * Client
     * <xref:PlayGen.SUGAR.Client.MatchClient>
 * Contracts
-    * <xref:PlayGen.SUGAR.Contracts.Shared.MatchResponse>
+    * <xref:PlayGen.SUGAR.Contracts.MatchResponse>
 * WebAPI
-    * <xref:PlayGen.SUGAR.WebAPI.Controllers.MatchController>
+    * <xref:PlayGen.SUGAR.Server.WebAPI.Controllers.MatchController>
 
 
 ## Examples

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ActorDataController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -639,7 +639,7 @@ public class ActorDataController : Controller, IActionFilter, IAsyncActionFilter
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_ActorDataController_Add_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.ActorDataController.Add*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_ActorDataController_Add_EvaluationDataRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.ActorDataController.Add(EvaluationDataRequest)">Add(EvaluationDataRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_ActorDataController_Add_PlayGen_SUGAR_Contracts_EvaluationDataRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.ActorDataController.Add(PlayGen.SUGAR.Contracts.EvaluationDataRequest)">Add(EvaluationDataRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new ActorData record.</p>
 <p>Example Usage: POST api/actordata</p>
 </div>
@@ -647,6 +647,8 @@ public class ActorDataController : Controller, IActionFilter, IAsyncActionFilter
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.ActorData)]
+[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.ActorData)]
 public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -660,9 +662,9 @@ public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EvaluationDataRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataRequest.html">EvaluationDataRequest</a></td>
         <td><span class="parametername">newData</span></td>
-        <td><p><see cref="!:EvaluationDataRequest"></see> object that holds the details of the new ActorData.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataRequest.html">EvaluationDataRequest</a> object that holds the details of the new ActorData.</p>
 </td>
       </tr>
     </tbody>
@@ -678,7 +680,7 @@ public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:EvaluationDataResponse"></see> containing the new ActorData details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a> containing the new ActorData details.</p>
 </td>
       </tr>
     </tbody>
@@ -694,6 +696,8 @@ public Task&lt;IActionResult&gt; Add([FromBody] EvaluationDataRequest newData)</
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet]
+[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.ActorData)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorData)]
 public Task&lt;IActionResult&gt; Get(int ? actorId, int ? gameId, string[] key)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -737,7 +741,7 @@ public Task&lt;IActionResult&gt; Get(int ? actorId, int ? gameId, string[] key)<
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:EvaluationDataResponse"></see> which match the search criteria.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a> which match the search criteria.</p>
 </td>
       </tr>
     </tbody>

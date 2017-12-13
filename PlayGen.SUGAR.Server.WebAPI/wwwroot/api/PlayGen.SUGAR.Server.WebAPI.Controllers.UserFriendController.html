@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class UserFriendController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -639,7 +639,7 @@ public class UserFriendController : Controller, IActionFilter, IAsyncActionFilte
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_CreateFriendRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.CreateFriendRequest*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_CreateFriendRequest_RelationshipRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.CreateFriendRequest(RelationshipRequest)">CreateFriendRequest(RelationshipRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_CreateFriendRequest_PlayGen_SUGAR_Contracts_RelationshipRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.CreateFriendRequest(PlayGen.SUGAR.Contracts.RelationshipRequest)">CreateFriendRequest(RelationshipRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new relationship request between two Users.
 Requires a relationship between the two to not already exist.</p>
 <p>Example Usage: POST api/userfriend</p>
@@ -648,6 +648,7 @@ Requires a relationship between the two to not already exist.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.UserFriendRequest)]
 public Task&lt;IActionResult&gt; CreateFriendRequest([FromBody] RelationshipRequest relationship)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -661,9 +662,9 @@ public Task&lt;IActionResult&gt; CreateFriendRequest([FromBody] RelationshipRequ
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">RelationshipRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.RelationshipRequest.html">RelationshipRequest</a></td>
         <td><span class="parametername">relationship</span></td>
-        <td><p><see cref="!:RelationshipRequest"></see> object that holds the details of the new relationship request.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.RelationshipRequest.html">RelationshipRequest</a> object that holds the details of the new relationship request.</p>
 </td>
       </tr>
     </tbody>
@@ -679,7 +680,7 @@ public Task&lt;IActionResult&gt; CreateFriendRequest([FromBody] RelationshipRequ
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:RelationshipResponse"></see> containing the new Relationship details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.RelationshipResponse.html">RelationshipResponse</a> containing the new Relationship details.</p>
 </td>
       </tr>
     </tbody>
@@ -695,6 +696,7 @@ public Task&lt;IActionResult&gt; CreateFriendRequest([FromBody] RelationshipRequ
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;requests/{userId:int}&quot;)]
+[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.UserFriendRequest)]
 public Task&lt;IActionResult&gt; GetFriendRequests([FromRoute] int userId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -726,7 +728,7 @@ public Task&lt;IActionResult&gt; GetFriendRequests([FromRoute] int userId)</code
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:ActorResponse"></see> which match the search criteria.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a> which match the search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -773,7 +775,7 @@ public IActionResult GetFriends([FromRoute] int userId)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:ActorResponse"></see> which match the search criteria.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a> which match the search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -789,6 +791,7 @@ public IActionResult GetFriends([FromRoute] int userId)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;sentrequests/{userId:int}&quot;)]
+[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.UserFriendRequest)]
 public Task&lt;IActionResult&gt; GetSentRequests([FromRoute] int userId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -820,7 +823,7 @@ public Task&lt;IActionResult&gt; GetSentRequests([FromRoute] int userId)</code><
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:ActorResponse"></see> which match the search criteria.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a> which match the search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -828,7 +831,7 @@ public Task&lt;IActionResult&gt; GetSentRequests([FromRoute] int userId)</code><
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_UpdateFriend_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.UpdateFriend*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_UpdateFriend_RelationshipStatusUpdate_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.UpdateFriend(RelationshipStatusUpdate)">UpdateFriend(RelationshipStatusUpdate)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_UpdateFriend_PlayGen_SUGAR_Contracts_RelationshipStatusUpdate_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.UpdateFriend(PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)">UpdateFriend(RelationshipStatusUpdate)</h4>
   <div class="markdown level1 summary"><p>Update an existing relationship between <param name="relationship.RequestorId.RequestorId"> and <param name="relationship.AcceptorId.AcceptorId">.
 Requires the relationship to already exist between the two Users.</p>
 <p>Example Usage: PUT api/userfriend</p>
@@ -837,6 +840,7 @@ Requires the relationship to already exist between the two Users.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut]
+[Authorization(ClaimScope.User, AuthorizationAction.Delete, AuthorizationEntity.UserFriend)]
 public Task&lt;IActionResult&gt; UpdateFriend([FromBody] RelationshipStatusUpdate relationship)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -850,9 +854,9 @@ public Task&lt;IActionResult&gt; UpdateFriend([FromBody] RelationshipStatusUpdat
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">RelationshipStatusUpdate</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.html">RelationshipStatusUpdate</a></td>
         <td><span class="parametername">relationship</span></td>
-        <td><p><see cref="!:RelationshipStatusUpdate"></see> object that holds the details of the relationship.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.html">RelationshipStatusUpdate</a> object that holds the details of the relationship.</p>
 </td>
       </tr>
     </tbody>
@@ -875,7 +879,7 @@ public Task&lt;IActionResult&gt; UpdateFriend([FromBody] RelationshipStatusUpdat
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_UpdateFriendRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.UpdateFriendRequest*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_UpdateFriendRequest_RelationshipStatusUpdate_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.UpdateFriendRequest(RelationshipStatusUpdate)">UpdateFriendRequest(RelationshipStatusUpdate)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_UpdateFriendRequest_PlayGen_SUGAR_Contracts_RelationshipStatusUpdate_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.UpdateFriendRequest(PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)">UpdateFriendRequest(RelationshipStatusUpdate)</h4>
   <div class="markdown level1 summary"><p>Update an existing relationship request between <param name="relationship.RequestorId.RequestorId"> and <param name="relationship.AcceptorId.AcceptorId">.
 Requires the relationship request to already exist between the two Users.</p>
 <p>Example Usage: PUT api/userfriend/request</p>
@@ -884,6 +888,7 @@ Requires the relationship request to already exist between the two Users.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut(&quot;request&quot;)]
+[Authorization(ClaimScope.User, AuthorizationAction.Update, AuthorizationEntity.UserFriendRequest)]
 public Task&lt;IActionResult&gt; UpdateFriendRequest([FromBody] RelationshipStatusUpdate relationship)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -897,9 +902,9 @@ public Task&lt;IActionResult&gt; UpdateFriendRequest([FromBody] RelationshipStat
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">RelationshipStatusUpdate</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.html">RelationshipStatusUpdate</a></td>
         <td><span class="parametername">relationship</span></td>
-        <td><p><see cref="!:RelationshipStatusUpdate"></see> object that holds the details of the relationship.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.html">RelationshipStatusUpdate</a> object that holds the details of the relationship.</p>
 </td>
       </tr>
     </tbody>

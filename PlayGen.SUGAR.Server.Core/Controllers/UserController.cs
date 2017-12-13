@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Model;
 
@@ -10,21 +11,26 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.UserController _userController;
 		private readonly ActorRoleController _actorRoleController;
+		private readonly RelationshipController _relationshipController;
 
 		public UserController(
 			ILogger<UserController> logger,
 			EntityFramework.Controllers.UserController userController,
 			EntityFramework.Controllers.ActorController actorDbController,
-			ActorRoleController actorRoleController) : base(actorDbController)
+			ActorRoleController actorRoleController,
+			RelationshipController relationshipController) : base(actorDbController)
 		{
 			_logger = logger;
 			_userController = userController;
 			_actorRoleController = actorRoleController;
+			_relationshipController = relationshipController;
 		}
 
 		public List<User> Get()
 		{
 			var users = _userController.Get();
+			users.ForEach(u => u.UserRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.User));
+			users.ForEach(u => u.GroupRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.Group));
 
 			_logger.LogInformation($"{users?.Count} Users");
 
@@ -35,6 +41,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var user = _userController.Get(id);
 
+			if (user != null)
+			{
+				user.UserRelationshipCount = _relationshipController.GetRelationshipCount(user.Id, ActorType.User);
+				user.GroupRelationshipCount = _relationshipController.GetRelationshipCount(user.Id, ActorType.Group);
+			}
+
 			_logger.LogInformation($"User: {user?.Id} for Id: {id}");
 
 			return user;
@@ -43,6 +55,8 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<User> Search(string name, bool exactMatch)
 		{
 			var users = _userController.Search(name, exactMatch);
+			users.ForEach(u => u.UserRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.User));
+			users.ForEach(u => u.GroupRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.Group));
 
 			_logger.LogInformation($"{users?.Count} Users for Name: {name}, ExactMatch: {exactMatch}");
 

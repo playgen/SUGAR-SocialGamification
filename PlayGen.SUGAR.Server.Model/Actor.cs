@@ -1,5 +1,6 @@
 ﻿using PlayGen.SUGAR.Common;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PlayGen.SUGAR.Server.Model
 {
@@ -20,5 +21,11 @@ namespace PlayGen.SUGAR.Server.Model
 	    public virtual List<ActorRelationshipRequest> RequestRequestors { get; set; }
 
 		public abstract ActorType ActorType { get; }
-    }
+
+		[NotMapped]
+	    public int GroupRelationshipCount { get; set; }
+
+		[NotMapped]
+	    public int UserRelationshipCount { get; set; }
+	}
 }

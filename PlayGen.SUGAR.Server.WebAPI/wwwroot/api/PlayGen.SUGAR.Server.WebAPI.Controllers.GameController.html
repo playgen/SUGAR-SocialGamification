@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class GameController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -639,15 +639,16 @@ public class GameController : Controller, IActionFilter, IAsyncActionFilter, IFi
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameController_Create_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameController_Create_GameRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameController.Create(GameRequest)">Create(GameRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameController_Create_PlayGen_SUGAR_Contracts_GameRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameController.Create(PlayGen.SUGAR.Contracts.GameRequest)">Create(GameRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new Game.
-Requires the <see cref="!:GameRequest.Name"></see> to be unique.</p>
+Requires the <a class="xref" href="PlayGen.SUGAR.Contracts.GameRequest.html#PlayGen_SUGAR_Contracts_GameRequest_Name">Name</a> to be unique.</p>
 <p>Example Usage: POST api/game</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Game)]
 public Task&lt;IActionResult&gt; Create([FromBody] GameRequest newGame)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -661,9 +662,9 @@ public Task&lt;IActionResult&gt; Create([FromBody] GameRequest newGame)</code></
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">GameRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.GameRequest.html">GameRequest</a></td>
         <td><span class="parametername">newGame</span></td>
-        <td><p><see cref="!:GameRequest"></see> object that contains the details of the new Game.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.GameRequest.html">GameRequest</a> object that contains the details of the new Game.</p>
 </td>
       </tr>
     </tbody>
@@ -679,7 +680,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] GameRequest newGame)</code></
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:GameResponse"></see> containing the new Game details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.GameResponse.html">GameResponse</a> containing the new Game details.</p>
 </td>
       </tr>
     </tbody>
@@ -695,6 +696,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] GameRequest newGame)</code></
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpDelete(&quot;{id:int}&quot;)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.Game)]
 public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -754,7 +756,7 @@ public IActionResult Get()</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:GameResponse"></see> that hold Game details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.GameResponse.html">GameResponse</a> that hold Game details.</p>
 </td>
       </tr>
     </tbody>
@@ -801,7 +803,7 @@ public IActionResult Get([FromRoute] string name)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:GameResponse"></see> which match the search criteria.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.GameResponse.html">GameResponse</a> which match the search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -848,7 +850,7 @@ public IActionResult GetById([FromRoute] int id)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p><see cref="!:GameResponse"></see> which matches search criteria.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.GameResponse.html">GameResponse</a> which matches search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -877,7 +879,7 @@ public IActionResult GetControlled()</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td><p>A list of <see cref="!:GameResponse"></see> that hold Game details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.GameResponse.html">GameResponse</a> that hold Game details.</p>
 </td>
       </tr>
     </tbody>
@@ -885,7 +887,7 @@ public IActionResult GetControlled()</code></pre>
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameController_Update_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameController.Update*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameController_Update_System_Int32_GameRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameController.Update(System.Int32,GameRequest)">Update(Int32, GameRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GameController_Update_System_Int32_PlayGen_SUGAR_Contracts_GameRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GameController.Update(System.Int32,PlayGen.SUGAR.Contracts.GameRequest)">Update(Int32, GameRequest)</h4>
   <div class="markdown level1 summary"><p>Update an existing Game.</p>
 <p>Example Usage: PUT api/game/update/1</p>
 </div>
@@ -893,6 +895,7 @@ public IActionResult GetControlled()</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut(&quot;update/{id:int}&quot;)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Update, AuthorizationEntity.Game)]
 public Task&lt;IActionResult&gt; Update([FromRoute] int id, [FromBody] GameRequest game)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -912,9 +915,9 @@ public Task&lt;IActionResult&gt; Update([FromRoute] int id, [FromBody] GameReque
 </td>
       </tr>
       <tr>
-        <td><span class="xref">GameRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.GameRequest.html">GameRequest</a></td>
         <td><span class="parametername">game</span></td>
-        <td><p><see cref="!:GameRequest"></see> object that holds the details of the Game.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.GameRequest.html">GameRequest</a> object that holds the details of the Game.</p>
 </td>
       </tr>
     </tbody>

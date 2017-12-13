@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class AccountSourceController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -639,15 +639,16 @@ public class AccountSourceController : Controller, IActionFilter, IAsyncActionFi
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_AccountSourceController_Create_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AccountSourceController_Create_AccountSourceRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.Create(AccountSourceRequest)">Create(AccountSourceRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AccountSourceController_Create_PlayGen_SUGAR_Contracts_AccountSourceRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.Create(PlayGen.SUGAR.Contracts.AccountSourceRequest)">Create(AccountSourceRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new AccountSource.
-Requires the <see cref="!:AccountSourceRequest.Token"></see> to be unique.</p>
+Requires the <a class="xref" href="PlayGen.SUGAR.Contracts.AccountSourceRequest.html#PlayGen_SUGAR_Contracts_AccountSourceRequest_Token">Token</a> to be unique.</p>
 <p>Example Usage: POST api/accountSource</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.AccountSource)]
 public Task&lt;IActionResult&gt; Create([FromBody] AccountSourceRequest newAccountSource)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -661,9 +662,9 @@ public Task&lt;IActionResult&gt; Create([FromBody] AccountSourceRequest newAccou
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">AccountSourceRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.AccountSourceRequest.html">AccountSourceRequest</a></td>
         <td><span class="parametername">newAccountSource</span></td>
-        <td><p><see cref="!:AccountSourceRequest"></see> object that contains the details of the new AccountSource.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.AccountSourceRequest.html">AccountSourceRequest</a> object that contains the details of the new AccountSource.</p>
 </td>
       </tr>
     </tbody>
@@ -679,7 +680,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] AccountSourceRequest newAccou
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:AccountSourceResponse"></see> containing the new AccountSource details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.AccountSourceResponse.html">AccountSourceResponse</a> containing the new AccountSource details.</p>
 </td>
       </tr>
     </tbody>
@@ -695,6 +696,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] AccountSourceRequest newAccou
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpDelete(&quot;{id:int}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Delete, AuthorizationEntity.AccountSource)]
 public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -741,6 +743,7 @@ public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;list&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.AccountSource)]
 public Task&lt;IActionResult&gt; Get()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -754,7 +757,7 @@ public Task&lt;IActionResult&gt; Get()</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:AccountSourceResponse"></see> that hold AccountSource details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.AccountSourceResponse.html">AccountSourceResponse</a> that hold AccountSource details.</p>
 </td>
       </tr>
     </tbody>
@@ -770,6 +773,7 @@ public Task&lt;IActionResult&gt; Get()</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;findbyid/{id:int}&quot;, Name = &quot;GetByAccountSourceId&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.AccountSource)]
 public Task&lt;IActionResult&gt; GetById([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -800,7 +804,7 @@ public Task&lt;IActionResult&gt; GetById([FromRoute] int id)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p><see cref="!:AccountSourceResponse"></see> which matches search criteria.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.AccountSourceResponse.html">AccountSourceResponse</a> which matches search criteria.</p>
 </td>
       </tr>
     </tbody>
@@ -808,7 +812,7 @@ public Task&lt;IActionResult&gt; GetById([FromRoute] int id)</code></pre>
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_AccountSourceController_Update_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.Update*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AccountSourceController_Update_System_Int32_AccountSourceRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.Update(System.Int32,AccountSourceRequest)">Update(Int32, AccountSourceRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AccountSourceController_Update_System_Int32_PlayGen_SUGAR_Contracts_AccountSourceRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.Update(System.Int32,PlayGen.SUGAR.Contracts.AccountSourceRequest)">Update(Int32, AccountSourceRequest)</h4>
   <div class="markdown level1 summary"><p>Update an existing AccountSource.</p>
 <p>Example Usage: PUT api/accountSource/update/1</p>
 </div>
@@ -816,6 +820,7 @@ public Task&lt;IActionResult&gt; GetById([FromRoute] int id)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut(&quot;update/{id:int}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Update, AuthorizationEntity.AccountSource)]
 public Task&lt;IActionResult&gt; Update([FromRoute] int id, [FromBody] AccountSourceRequest accountSource)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -835,9 +840,9 @@ public Task&lt;IActionResult&gt; Update([FromRoute] int id, [FromBody] AccountSo
 </td>
       </tr>
       <tr>
-        <td><span class="xref">AccountSourceRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.AccountSourceRequest.html">AccountSourceRequest</a></td>
         <td><span class="parametername">accountSource</span></td>
-        <td><p><see cref="!:AccountSourceRequest"></see> object that holds the details of the AccountSource.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.AccountSourceRequest.html">AccountSourceRequest</a> object that holds the details of the AccountSource.</p>
 </td>
       </tr>
     </tbody>

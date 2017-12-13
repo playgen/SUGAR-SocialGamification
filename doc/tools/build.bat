@@ -1,3 +1,3 @@
 pushd ..\
 
-docfx build docfx.json
+docfx build docfx.build.json

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ActorClaimController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.0.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -644,7 +644,7 @@ public class ActorClaimController : Controller, IActionFilter, IAsyncActionFilte
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_ActorClaimController_Create_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.ActorClaimController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_ActorClaimController_Create_ActorClaimRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.ActorClaimController.Create(ActorClaimRequest)">Create(ActorClaimRequest)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_ActorClaimController_Create_PlayGen_SUGAR_Contracts_ActorClaimRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.ActorClaimController.Create(PlayGen.SUGAR.Contracts.ActorClaimRequest)">Create(ActorClaimRequest)</h4>
   <div class="markdown level1 summary"><p>Create a new ActorClaim.</p>
 <p>Example Usage: POST api/actorclaim</p>
 </div>
@@ -652,6 +652,9 @@ public class ActorClaimController : Controller, IActionFilter, IAsyncActionFilte
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
+[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.ActorClaim)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.ActorClaim)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Create, AuthorizationEntity.ActorClaim)]
 public Task&lt;IActionResult&gt; Create([FromBody] ActorClaimRequest newClaim)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -665,9 +668,9 @@ public Task&lt;IActionResult&gt; Create([FromBody] ActorClaimRequest newClaim)</
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ActorClaimRequest</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.ActorClaimRequest.html">ActorClaimRequest</a></td>
         <td><span class="parametername">newClaim</span></td>
-        <td><p><see cref="!:ActorClaimRequest"></see> object that contains the details of the new ActorClaim.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.ActorClaimRequest.html">ActorClaimRequest</a> object that contains the details of the new ActorClaim.</p>
 </td>
       </tr>
     </tbody>
@@ -683,7 +686,7 @@ public Task&lt;IActionResult&gt; Create([FromBody] ActorClaimRequest newClaim)</
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A <see cref="!:ActorClaimResponse"></see> containing the new ActorClaim details.</p>
+        <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.ActorClaimResponse.html">ActorClaimResponse</a> containing the new ActorClaim details.</p>
 </td>
       </tr>
     </tbody>
@@ -699,6 +702,9 @@ public Task&lt;IActionResult&gt; Create([FromBody] ActorClaimRequest newClaim)</
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpDelete(&quot;{id:int}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Delete, AuthorizationEntity.ActorClaim)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.ActorClaim)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Delete, AuthorizationEntity.ActorClaim)]
 public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -745,6 +751,8 @@ public Task&lt;IActionResult&gt; Delete([FromRoute] int id)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;actor/{id:int}&quot;)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
+[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
 public Task&lt;IActionResult&gt; GetActorClaims([FromRoute] int id)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -775,7 +783,7 @@ public Task&lt;IActionResult&gt; GetActorClaims([FromRoute] int id)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:ActorClaimResponse"></see> that hold ActorClaim details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.ActorClaimResponse.html">ActorClaimResponse</a> that hold ActorClaim details.</p>
 </td>
       </tr>
     </tbody>
@@ -791,6 +799,9 @@ public Task&lt;IActionResult&gt; GetActorClaims([FromRoute] int id)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;claim/{claimId:int}/entity/{entityId:int}&quot;)]
+[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
+[Authorization(ClaimScope.Game, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
 public Task&lt;IActionResult&gt; GetClaimActors([FromRoute] int claimId, [FromRoute] int entityId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -826,7 +837,7 @@ public Task&lt;IActionResult&gt; GetClaimActors([FromRoute] int claimId, [FromRo
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span>&gt;</td>
-        <td><p>A list of <see cref="!:ActorResponse"></see> that hold ActorClaim details.</p>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a> that hold ActorClaim details.</p>
 </td>
       </tr>
     </tbody>
