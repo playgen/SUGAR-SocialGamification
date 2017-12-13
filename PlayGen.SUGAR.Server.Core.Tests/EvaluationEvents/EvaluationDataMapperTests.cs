@@ -7,7 +7,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
 {
-    public class EvaluationGameDataMapperEvaluationTests : EvaluationTestsBase
+    public class EvaluationDataMapperTests : EvaluationTestsBase
     {
         [Fact]
         public void CreateAndGetRelated()
@@ -20,8 +20,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
 
             for (var i = 0; i < count; i++)
             {
-                shouldGetEvaluations.Add(Helpers.ComposeGenericAchievement($"MapsExistingEvaluationsGameData_{i}", Platform.GlobalId));
-                shouldntGetEvaluations.Add(Helpers.ComposeGenericAchievement($"MapsExistingEvaluationsGameData_Ignore_{i}", Platform.GlobalId));
+                shouldGetEvaluations.Add(Helpers.ComposeGenericAchievement($"MapsExistingEvaluationsEvaluationData_{i}", Platform.GlobalId));
+                shouldntGetEvaluations.Add(Helpers.ComposeGenericAchievement($"MapsExistingEvaluationsEvaluationData_Ignore_{i}", Platform.GlobalId));
             }
 
             // Act
@@ -46,18 +46,18 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
         }
 
         [Fact]
-        public void RemovesEvaluationsGameDataMapping()
+        public void RemovesEvaluationDataMapping()
         {
             // Arrange
             var gameDataMapper = new EvaluationDataMapper();
             var count = 10;
-            var removeEvaluation = Helpers.ComposeGenericAchievement($"RemovesEvaluationsGameDataMapping", Platform.GlobalId);
+            var removeEvaluation = Helpers.ComposeGenericAchievement($"RemovesEvaluationDataMapping", Platform.GlobalId);
 
             var shouldntRemoveEvaluations = new List<Evaluation>(count);
 
             for (var i = 0; i < count; i++)
             {
-                shouldntRemoveEvaluations.Add(Helpers.ComposeGenericAchievement($"RemovesEvaluationsGameDataMapping_ShouldntRemove_{i}", Platform.GlobalId));
+                shouldntRemoveEvaluations.Add(Helpers.ComposeGenericAchievement($"RemovesEvaluationsEvaluationDataMapping_ShouldntRemove_{i}", Platform.GlobalId));
             }
 
             gameDataMapper.CreateMapping(removeEvaluation);

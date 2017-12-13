@@ -36,12 +36,12 @@ namespace PlayGen.SUGAR.Contracts
 		public string Name { get; set; }
 
         /// <summary>
-		/// The EvaluationDataCategory of the GameData being checked against.
+		/// The EvaluationDataCategory of the EvaluationData being checked against.
 		/// </summary>
         public EvaluationDataCategory EvaluationDataCategory { get; set; }
 
         /// <summary>
-        /// The GameData key which is checked against in order to create the leaderboard standings.
+        /// The EvaluationData key which is checked against in order to create the leaderboard standings.
         /// </summary>
         public string Key { get; set; }
 
@@ -51,7 +51,7 @@ namespace PlayGen.SUGAR.Contracts
 		public ActorType ActorType { get; set; }
 
 		/// <summary>
-		/// The EvaluationDataType of the GameData being checked against.
+		/// The EvaluationDataType of the EvaluationData being checked against.
 		/// </summary>
 		public EvaluationDataType EvaluationDataType { get; set; }
 

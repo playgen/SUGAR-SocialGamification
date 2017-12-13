@@ -138,7 +138,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			if (((int)sortType == 3 && ((int)dataType == 1 || (int)dataType == 2)) || ((int)sortType < 3 && ((int)dataType == 0 || (int)dataType == 3)))
 			{
-				throw new ArgumentException($"Cannot get GameData for LeaderboardType {sortType} and EvaluationDataType {dataType} as it would always return zero results.");
+				throw new ArgumentException($"Cannot get EvaluationData for LeaderboardType {sortType} and EvaluationDataType {dataType} as it would always return zero results.");
 			}
 			EvaluationData data = null;
 			float? value = null;

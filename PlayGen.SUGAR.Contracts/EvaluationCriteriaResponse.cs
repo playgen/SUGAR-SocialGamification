@@ -8,12 +8,12 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Key : "GameData Key",
+	/// Key : "EvaluationData Key",
 	/// DataType : "String",
 	/// CriteriaQueryType : "Any",
 	/// ComparisonType : "Equals",
 	/// Scope : "Actor",
-	/// Value : "GameData Key Value"
+	/// Value : "EvaluationData Key Value"
 	/// }
 	/// </example>
 	public class EvaluationCriteriaResponse
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Contracts
 		public EvaluationDataType EvaluationDataType { get; set; }
 
 		/// <summary>
-		/// Which stored GameData will be queried.
+		/// Which stored EvaluationData will be queried.
 		/// </summary>
 		public CriteriaQueryType CriteriaQueryType { get; set; }
 

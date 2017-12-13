@@ -1,6 +1,6 @@
 ﻿namespace PlayGen.SUGAR.Server.Model.Interfaces
 {
-	public interface IGameData
+	public interface IEvaluationData
 	{
 		int ActorId { get; }
 	}

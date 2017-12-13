@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			}
 		}
 
-		public static void HandleDetatchedGameData(this SUGARContext context, EvaluationData evaluationData)
+		public static void HandleDetatchedEvaluationData(this SUGARContext context, EvaluationData evaluationData)
 		{
 			if (evaluationData != null && context.Entry(evaluationData).State == EntityState.Detached)
 			{

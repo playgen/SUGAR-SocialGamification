@@ -4,7 +4,7 @@ using PlayGen.SUGAR.Common;
 namespace PlayGen.SUGAR.Contracts
 {
 	/// <summary>
-	/// Encapsulates ActorData/GameData details.
+	/// Encapsulates ActorData/EvaluationData details.
 	/// </summary>
 	/// <example>
 	/// JSON
@@ -19,13 +19,13 @@ namespace PlayGen.SUGAR.Contracts
 	public class EvaluationDataRequest
     {
 		/// <summary>
-		/// The id of the Actor which this ActorData/GameData is being ensigned to.
+		/// The id of the Actor which this ActorData/EvaluationData is being ensigned to.
 		/// </summary>
 		[Required]
 		public int? CreatingActorId { get; set; }
 
 		/// <summary>
-		/// The id of the Game which this ActorData/GameData relates to.
+		/// The id of the Game which this ActorData/EvaluationData relates to.
 		/// </summary>
 		[Required]
 		public int? GameId { get; set; }
