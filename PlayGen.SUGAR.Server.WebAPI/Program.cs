@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore;
+﻿#if !DEBUG
+using System;
+#endif
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
