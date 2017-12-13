@@ -74,6 +74,7 @@
 <li>Client<ul>
 <li><a class="xref" href="../api/PlayGen.SUGAR.Client.GroupMemberClient.html">GroupMemberClient</a></li>
 <li><a class="xref" href="../api/PlayGen.SUGAR.Client.UserFriendClient.html">UserFriendClient</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Client.AllianceClient.html">AllianceClient</a></li>
 </ul>
 </li>
 <li>Contracts<ul>
@@ -86,8 +87,9 @@
 </ul>
 <h2 id="examples">Examples</h2>
 <ul>
-<li>Adding a User to a Group
-  A <a href="group.html">Group</a> can be joined by an actor. This will create a user to group relationship request. In this example, we will set the AutoAccept property in the <a class="xref" href="../api/PlayGen.SUGAR.Contracts.RelationshipRequest.html">RelationshipRequest</a> object to true, so the relationship will be stored directly as a user to group relationship. The joined group&#39;s id is then extracted from the <a class="xref" href="../api/PlayGen.SUGAR.Contracts.RelationshipResponse.html">RelationshipResponse</a>.</li>
+<li><p>Adding a User to a Group</p>
+<p>  A <a href="group.html">Group</a> can be joined by an actor. This will create a user to group relationship request. In this example, we will set the AutoAccept property in the <a class="xref" href="../api/PlayGen.SUGAR.Contracts.RelationshipRequest.html">RelationshipRequest</a> object to true, so the relationship will be stored directly as a user to group relationship. The joined group&#39;s id is then extracted from the <a class="xref" href="../api/PlayGen.SUGAR.Contracts.RelationshipResponse.html">RelationshipResponse</a>.</p>
+</li>
 </ul>
 <pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
         private GroupMemberClient _groupMemberClient;
@@ -114,8 +116,9 @@
             _groupId = relationshipResponse.AcceptorId;
         }
 </code></pre><ul>
-<li>Leaving a group
-  A user to group relationship status can be updated using a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.html">RelationshipStatusUpdate</a> with the <a class="xref" href="../api/PlayGen.SUGAR.Client.GroupMemberClient.html">GroupMemberClient</a>&#39;s UpdateMember function. This example shows the user leaving the group joined in the previous example. Calling the function automatically breaks the relationship between the group and player if there is one, without the need of passing the additional Accepted property in the RelationshipStatusUpdate.</li>
+<li><p>Leaving a group</p>
+<p>  A user to group relationship status can be updated using a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.html">RelationshipStatusUpdate</a> with the <a class="xref" href="../api/PlayGen.SUGAR.Client.GroupMemberClient.html">GroupMemberClient</a>&#39;s UpdateMember function. This example shows the user leaving the group joined in the previous example. Calling the function automatically breaks the relationship between the group and player if there is one, without the need of passing the additional Accepted property in the RelationshipStatusUpdate.</p>
+</li>
 </ul>
 <pre><code class="lang-cs">        private void LeaveGroup() 
         {
@@ -130,8 +133,9 @@
             _groupMemberClient.UpdateMember(relationshipStatusUpdate);
         }
 </code></pre><ul>
-<li>Adding a friend
-  Works identically to joining a group, except creating user to user relationships and using the <a class="xref" href="../api/PlayGen.SUGAR.Client.UserFriendClient.html">UserFriendClient</a>. </li>
+<li><p>Adding a friend</p>
+<p>  Works identically to joining a group, except creating user to user relationships and using the <a class="xref" href="../api/PlayGen.SUGAR.Client.UserFriendClient.html">UserFriendClient</a>. </p>
+</li>
 </ul>
 <pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
         private UserFriendClient _userFriendClient;
@@ -158,8 +162,9 @@
             _friendId = relationshipResponse.AcceptorId;
         }
 </code></pre><ul>
-<li>Removing a friend
-  Like leaving a group, removing a friend updates the user to user relationship using a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.html">RelationshipStatusUpdate</a> with <a class="xref" href="../api/PlayGen.SUGAR.Client.UserFriendClient.html">UserFriendClient</a>&#39;s UpdateFriend function. </li>
+<li><p>Removing a friend</p>
+<p>  Like leaving a group, removing a friend updates the user to user relationship using a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.html">RelationshipStatusUpdate</a> with <a class="xref" href="../api/PlayGen.SUGAR.Client.UserFriendClient.html">UserFriendClient</a>&#39;s UpdateFriend function. </p>
+</li>
 </ul>
 <pre><code class="lang-cs">        private void RemoveFriend() 
         {
@@ -174,11 +179,53 @@
             // create the member request and store the response
             _userFriendClient.UpdateFriend(relationshipStatusUpdate);
         }
-</code></pre><h2 id="roadmap">Roadmap</h2>
-<ul>
-<li>Relationship between two groups, creating an &lt;xref:alliance&gt;</li>
+</code></pre><ul>
+<li><p>Creating an alliance</p>
+<p>  Two <a href="group.html">Groups</a> can be joined together in an alliance. This will create a group to group relationship request. In this example, we will set the AutoAccept property in the &lt;xref:PlayGen.SUGAR.Contracts.Shared.RelationshipRequest&gt; object to true, so the relationship will be stored directly as a group to group relationship. The joined group&#39;s id is then extracted from the &lt;xref:PlayGen.SUGAR.Contracts.Shared.RelationshipResponse&gt;.</p>
+</li>
 </ul>
+<pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
+        private AllianceClient _allianceClient;
+        private int _requestorGroupId;
+        private int _acceptorGroupId;
 
+        private void CreateAlliance(int groupId) 
+        {
+            // create instance of the Alliance client
+            _allianceClient = sugarClient.Alliance;
+
+            // create a RelationshipRequest
+            var relationshipRequest = new RelationshipRequest 
+            {
+                RequestorId = _requestorGroupId,
+                AcceptorId = _acceptorGroupId,
+                AutoAccept = true
+            };
+
+            // create the member request and store the response
+            var relationshipResponse = _allianceClient.CreateAlliance(relationshipRequest);
+
+            // store the id of the group for use in other functions
+            _acceptorGroupId = relationshipResponse.AcceptorId;
+        }
+</code></pre><ul>
+<li><p>Breaking an alliance</p>
+<p>  A group to group relationship status can be updated using a &lt;xref:PlayGen.SUGAR.Contracts.Shared.RelationshipStatusUpdate&gt; with the <a class="xref" href="../api/PlayGen.SUGAR.Client.AllianceClient.html">AllianceClient</a>&#39;s UpdateAlliance function. This example shows the user breaking the alliance created in the previous example. Calling the function automatically breaks the relationship between the two groups if there is one, without the need of passing the additional Accepted property in the RelationshipStatusUpdate.</p>
+</li>
+</ul>
+<pre><code class="lang-cs">        private void BreakAlliance() 
+        {
+            // create a RelationshipStatusUpdate
+            var relationshipStatusUpdate = new RelationshipStatusUpdate 
+            {
+                AcceptorId = _acceptorGroupId,
+                RequestorId = _requestorGroupId
+            };
+
+            // create the member request and store the response
+            _allianceClient.UpdateAlliance(relationshipStatusUpdate);
+        }
+</code></pre>
             </article>
           </div>
           

@@ -988,12 +988,12 @@ public EvaluationDataController(SUGARContextFactory contextFactory)</code></pre>
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMax_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMax*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMax__1_System_Int32_System_Int32_System_String_System_Nullable___0___PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMax``1(System.Int32,System.Int32,System.String,System.Nullable{``0}@,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">TryGetMax&lt;T&gt;(Int32, Int32, String, out Nullable&lt;T&gt;, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMax_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Server_Model_EvaluationData__PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMax(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Server.Model.EvaluationData@,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">TryGetMax(Int32, Int32, String, out EvaluationData, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryGetMax&lt;T&gt;(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))where T : struct</code></pre>
+    <pre><code class="lang-csharp hljs">public bool TryGetMax(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1021,7 +1021,7 @@ public EvaluationDataController(SUGARContextFactory contextFactory)</code></pre>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Nullable</span>&lt;T&gt;</td>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a></td>
         <td><span class="parametername">value</span></td>
         <td></td>
       </tr>
@@ -1053,21 +1053,6 @@ public EvaluationDataController(SUGARContextFactory contextFactory)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1075,12 +1060,12 @@ public EvaluationDataController(SUGARContextFactory contextFactory)</code></pre>
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMin_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMin*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMin__1_System_Int32_System_Int32_System_String_System_Nullable___0___PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMin``1(System.Int32,System.Int32,System.String,System.Nullable{``0}@,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">TryGetMin&lt;T&gt;(Int32, Int32, String, out Nullable&lt;T&gt;, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMin_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Server_Model_EvaluationData__PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMin(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Server.Model.EvaluationData@,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">TryGetMin(Int32, Int32, String, out EvaluationData, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryGetMin&lt;T&gt;(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))where T : struct</code></pre>
+    <pre><code class="lang-csharp hljs">public bool TryGetMin(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1108,7 +1093,7 @@ public EvaluationDataController(SUGARContextFactory contextFactory)</code></pre>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Nullable</span>&lt;T&gt;</td>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a></td>
         <td><span class="parametername">value</span></td>
         <td></td>
       </tr>
@@ -1140,21 +1125,6 @@ public EvaluationDataController(SUGARContextFactory contextFactory)</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
