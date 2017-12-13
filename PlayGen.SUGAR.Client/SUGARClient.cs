@@ -6,12 +6,12 @@ namespace PlayGen.SUGAR.Client
 {
 	public class SUGARClient
 	{
-		private readonly string _baseAddress;
-		private readonly IHttpHandler _httpHandler;
-		private readonly Dictionary<string, string> _persistentHeaders;
-		private readonly Dictionary<string, string> _sessionHeaders;
-		private readonly AsyncRequestController _asyncRequestController;
-		private readonly EvaluationNotifications _evaluationNotifications = new EvaluationNotifications();
+		protected readonly string _baseAddress;
+		protected readonly IHttpHandler _httpHandler;
+		protected readonly Dictionary<string, string> _persistentHeaders;
+		protected readonly Dictionary<string, string> _sessionHeaders;
+		protected readonly AsyncRequestController _asyncRequestController;
+		protected readonly EvaluationNotifications _evaluationNotifications = new EvaluationNotifications();
 
 		private APIVersionClient _apiVersionClient;
 		private AccountClient _accountClient;

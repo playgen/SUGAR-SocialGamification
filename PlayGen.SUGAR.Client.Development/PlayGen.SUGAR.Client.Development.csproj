@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net35;netcoreapp2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition=" '$(TargetFramework)' == 'net35' ">
+      <ItemGroup>
+        <PackageReference Include="Json.Net.Unity3D" Version="9.0.1" />
+      </ItemGroup>
+    </When>
+    <When Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
+      <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PlayGen.SUGAR.Client\PlayGen.SUGAR.Client.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\PlayGen.SUGAR.Contracts\PlayGen.SUGAR.Contracts.csproj">
+      <Private>true</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>
