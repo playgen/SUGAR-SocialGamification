@@ -1,0 +1,8 @@
+bin/
+obj/
+doc/
+*.Tests/
+PlayGen.SUGAR.Client/
+
+# Keep all files to be served
+!wwwroot/
