@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Linq;
+
+using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
@@ -32,7 +34,24 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				Value = reward.Value
 			};
 
-			evaluationDataController.Add(evaluationData);
+			if (reward.EvaluationDataCategory == Common.EvaluationDataCategory.Resource)
+			{
+				var current = evaluationDataController.Get(gameId, actorId, new[] { reward.EvaluationDataKey });
+				if (current.Any())
+				{
+					evaluationData.Value = (long.Parse(reward.Value) + long.Parse(current.Single().Value)).ToString();
+
+					evaluationDataController.Update(evaluationData);
+				}
+				else
+				{
+					evaluationDataController.Add(evaluationData);
+				}
+			}
+			else
+			{
+				evaluationDataController.Add(evaluationData);
+			}
 
 			_logger.LogInformation($"Game Data: {evaluationData.Id} for ActorId: {actorId}, GameId: {gameId}, Reward: {reward.Id}");
 
