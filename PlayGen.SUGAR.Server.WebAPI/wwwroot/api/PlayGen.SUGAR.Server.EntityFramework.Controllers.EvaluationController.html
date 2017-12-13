@@ -197,12 +197,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationController_Delete_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.Delete*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationController_Delete_System_String_System_Int32_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.Delete(System.String,System.Int32)">Delete(String, Int32)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationController_Delete_System_String_System_Int32_PlayGen_SUGAR_Common_EvaluationType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.Delete(System.String,System.Int32,PlayGen.SUGAR.Common.EvaluationType)">Delete(String, Int32, EvaluationType)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Delete(string token, int gameId)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Delete(string token, int gameId, EvaluationType evaluationType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -222,6 +222,11 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.EvaluationType.html">EvaluationType</a></td>
+        <td><span class="parametername">evaluationType</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -254,12 +259,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationController_Get_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.Get*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationController_Get_System_String_System_Int32_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.Get(System.String,System.Int32)">Get(String, Int32)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationController_Get_System_String_System_Int32_PlayGen_SUGAR_Common_EvaluationType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.Get(System.String,System.Int32,PlayGen.SUGAR.Common.EvaluationType)">Get(String, Int32, EvaluationType)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Evaluation Get(string token, int gameId)</code></pre>
+    <pre><code class="lang-csharp hljs">public Evaluation Get(string token, int gameId, EvaluationType evaluationType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -276,48 +281,6 @@
         <td><span class="parametername">token</span></td>
         <td></td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">gameId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationController_GetByEvaluationType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.GetByEvaluationType*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationController_GetByEvaluationType_System_Int32_PlayGen_SUGAR_Common_EvaluationType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.GetByEvaluationType(System.Int32,PlayGen.SUGAR.Common.EvaluationType)">GetByEvaluationType(Int32, EvaluationType)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;Evaluation&gt; GetByEvaluationType(int gameId, EvaluationType evaluationType)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">gameId</span></td>
@@ -340,7 +303,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>&gt;</td>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -368,6 +331,53 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationController_GetByGame_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.GetByGame*"></a>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationController_GetByGame_System_Int32_PlayGen_SUGAR_Common_EvaluationType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.GetByGame(System.Int32,PlayGen.SUGAR.Common.EvaluationType)">GetByGame(Int32, EvaluationType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Evaluation&gt; GetByGame(int gameId, EvaluationType evaluationType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.EvaluationType.html">EvaluationType</a></td>
+        <td><span class="parametername">evaluationType</span></td>
         <td></td>
       </tr>
     </tbody>

@@ -414,6 +414,131 @@
   </table>
   
   
+  <a id="PlayGen_SUGAR_Client_GameDataClient_GetByLeaderboardType_" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetByLeaderboardType*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GameDataClient_GetByLeaderboardType_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_PlayGen_SUGAR_Common_LeaderboardType_" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetByLeaderboardType(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Common.LeaderboardType)">GetByLeaderboardType(Int32, Int32, String, EvaluationDataType, LeaderboardType)</h4>
+  <div class="markdown level1 summary"><p>Finds a list of GameData with the highest <param name="dataType"> for each <param name="key"> provided that matches the <param name="actorId"> and <param name="gameId">.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EvaluationDataResponse GetByLeaderboardType(int actorId, int gameId, string key, EvaluationDataType dataType, LeaderboardType leaderboardType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td><p>ID of a User/Group.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td><p>ID of a Game.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>Array of Key names.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="parametername">dataType</span></td>
+        <td><p>Data type of value</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.LeaderboardType.html">LeaderboardType</a></td>
+        <td><span class="parametername">leaderboardType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a></td>
+        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a> which match the search criteria.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_GameDataClient_GetByLeaderboardTypeAsync_" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetByLeaderboardTypeAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_GameDataClient_GetByLeaderboardTypeAsync_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_PlayGen_SUGAR_Common_LeaderboardType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetByLeaderboardTypeAsync(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Common.LeaderboardType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse},System.Action{System.Exception})">GetByLeaderboardTypeAsync(Int32, Int32, String, EvaluationDataType, LeaderboardType, Action&lt;EvaluationDataResponse&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetByLeaderboardTypeAsync(int actorId, int gameId, string key, EvaluationDataType dataType, LeaderboardType leaderboardType, Action&lt;EvaluationDataResponse&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="parametername">dataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.LeaderboardType.html">LeaderboardType</a></td>
+        <td><span class="parametername">leaderboardType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="PlayGen_SUGAR_Client_GameDataClient_GetGameActors_" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetGameActors*"></a>
   <h4 id="PlayGen_SUGAR_Client_GameDataClient_GetGameActors_System_Int32_" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetGameActors(System.Int32)">GetGameActors(Int32)</h4>
   <div class="markdown level1 summary"><p>Find a list of all Actors that have data saved for the game <param name="id"> provided.</p>
@@ -484,121 +609,6 @@
       </tr>
       <tr>
         <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a>&gt;&gt;</td>
-        <td><span class="parametername">onSuccess</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onError</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Client_GameDataClient_GetHighest_" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetHighest*"></a>
-  <h4 id="PlayGen_SUGAR_Client_GameDataClient_GetHighest_System_Int32_System_Int32_System_String___PlayGen_SUGAR_Common_EvaluationDataType_" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetHighest(System.Int32,System.Int32,System.String[],PlayGen.SUGAR.Common.EvaluationDataType)">GetHighest(Int32, Int32, String[], EvaluationDataType)</h4>
-  <div class="markdown level1 summary"><p>Finds a list of GameData with the highest <param name="dataType"> for each <param name="key"> provided that matches the <param name="actorId"> and <param name="gameId">.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerable&lt;EvaluationDataResponse&gt; GetHighest(int actorId, int gameId, string[] key, EvaluationDataType dataType)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">actorId</span></td>
-        <td><p>ID of a User/Group.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">gameId</span></td>
-        <td><p>ID of a Game.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span>[]</td>
-        <td><span class="parametername">key</span></td>
-        <td><p>Array of Key names.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
-        <td><span class="parametername">dataType</span></td>
-        <td><p>Data type of value</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
-        <td><p>A list of <a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a> which match the search criteria.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Client_GameDataClient_GetHighestAsync_" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetHighestAsync*"></a>
-  <h4 id="PlayGen_SUGAR_Client_GameDataClient_GetHighestAsync_System_Int32_System_Int32_System_String___PlayGen_SUGAR_Common_EvaluationDataType_System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_EvaluationDataResponse___System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetHighestAsync(System.Int32,System.Int32,System.String[],PlayGen.SUGAR.Common.EvaluationDataType,System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.EvaluationDataResponse}},System.Action{System.Exception})">GetHighestAsync(Int32, Int32, String[], EvaluationDataType, Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt;, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetHighestAsync(int actorId, int gameId, string[] key, EvaluationDataType dataType, Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">actorId</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">gameId</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span>[]</td>
-        <td><span class="parametername">key</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
-        <td><span class="parametername">dataType</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;&gt;</td>
         <td><span class="parametername">onSuccess</span></td>
         <td></td>
       </tr>

@@ -72,7 +72,8 @@
 </li>
 </ul>
 <h1 id="quick-start">Quick Start</h1>
-<p>To run the SUGAR docker services without having to build the SUGAR image, run the docker/docker-compose_image_deploy script.</p>
+<p>To run the SUGAR docker services without having to build the SUGAR image:
+Run the docker/docker-compose_image_deploy script.</p>
 <p>This will use the latest docker image of SUGAR from the <a href="#automated-builds">Automated Builds</a> and create and link the database container.</p>
 <h2 id="automated-builds">Automated Builds</h2>
 <p>Using the <a href="https://docs.docker.com/docker-hub/builds">automated build service</a>, Docker Hub does a build of SUGAR each time a commit is pushed to the master branch on <a href="https://github.com/playgen/SUGAR-SocialGamification">GitHub</a>.</p>
@@ -80,24 +81,24 @@
 <h1 id="building">Building</h1>
 <p>To build and run SUGAR, run the docker/docker-compose_build_deploy script.</p>
 <p>This will build the SUGAR image using the Dockerfile in the root of the repository, and then create and link the database container.</p>
-<h1 id="configuration">Configuration</h1>
-<h2 id="dockerfile">Dockerfile</h2>
+<h2 id="configuration">Configuration</h2>
+<h3 id="dockerfile">Dockerfile</h3>
 <p>The Dockerfile for SUGAR is in the project root. It is built off the base image recommended by Microsoft for .NETCoreApp2.0 applications.</p>
 <p>It copies the contents of the SUGAR repository into the filesystem of the container. The container contains the necessary environment to build this project thanks to the base image provided by Microsoft. The next steps restore the NuGet packages, build the project and launch the server via the PlayGen.SUGAR.Server.WebAPI entrypoint.</p>
-<h2 id="docker-compose-file">Docker-Compose file</h2>
+<h3 id="docker-compose-file">Docker-Compose file</h3>
 <p>The SUGAR docker-compose files have been split into 3 parts:</p>
 <ul>
 <li><a href="#docker-composeimageyml">docker-compose.image.yml</a>: this has the configuration to pull the SUGAR image from DockerHub.</li>
 <li><a href="#docker-composebuildyml">docker-compose.build.yml</a>: this has the configuration to build SUGAR image from source.</li>
 <li><a href="#docker-composebaseyml">docker-compose.base.yml</a>: this contains all the shared settings for the SUGAR container as well as the database and inter-container links.</li>
 </ul>
-<h3 id="docker-composeimageyml">docker-compose.image.yml</h3>
+<h4 id="docker-composeimageyml">docker-compose.image.yml</h4>
 <p>See the docker/docker-compose_image_deploy script.
 It uses this in conjunction with <a href="#docker-composebaseyml">docker-compose.base.yml</a>.</p>
-<h3 id="docker-composebuildyml">docker-compose.build.yml</h3>
+<h4 id="docker-composebuildyml">docker-compose.build.yml</h4>
 <p>See the docker/docker-compose_build_deploy script.
 It uses this in conjunction with <a href="#docker-composebaseyml">docker-compose.base.yml</a>.</p>
-<h3 id="docker-composebaseyml">docker-compose.base.yml</h3>
+<h4 id="docker-composebaseyml">docker-compose.base.yml</h4>
 <p>The SUGAR compose configuration requires the sugar-mariadb container which hosts the databse. This is simply built from the mariadb image.</p>
 <p>When launching SUGAR, one of the first steps it does is to setup the database which requires it to be able to connect to the database within the sugar-mariadb container. If the database takes longer to startup than the SUGAR server, the server will attempt to connect to the database and fail. This is the reason for the wait-for-db container. It&#39;s purpose is to stay active until the database is fully initialized and ready to accept connections.</p>
 <p>This compose file along with the command sequence in the docker-compose_deploy scripts ensures that the container SUGAR is only launched after the database is ready.</p>

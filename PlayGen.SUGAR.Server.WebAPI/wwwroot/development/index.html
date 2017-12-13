@@ -75,24 +75,24 @@
 </li>
 </ul>
 <h2 id="api-service">API Service</h2>
-<p>The SUGAR API Service is build using <a href="https://docs.asp.net/en/latest/intro.html">ASP.NET Core</a> (MVC/WebAPI) as a <a href="https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/">.NET Core</a> project. </p>
-<p>Currently the service is built for the <a href="https://docs.microsoft.com/en-us/dotnet/articles/core/packages#frameworks">.NETFramework 4.6</a> target so will only run on Windows systems, however this will soon be made compatible with the cross-platform NetStandard runtimes.</p>
-<p>Building the WebAPI project produces a Windows executable that can be executed directly to run the service in a console mode for debugging, or alternatively the service can be hosted in IIS or IIS express. In future releases the service will be made available as a <a href="https://www.docker.com/">Docker image</a> for easy deployment.</p>
+<p>The SUGAR API Service is build using <a href="https://docs.asp.net/en/latest/intro.html">ASP.NET Core</a> (MVC/WebAPI). </p>
+<p>Currently the service is built for the <a href="https://docs.microsoft.com/en-us/dotnet/core/packages#net-core-application">.NETCoreApp 2.0</a> target so will only run on Windows systems, however this will soon be made compatible with the cross-platform NetStandard runtimes.</p>
+<p>Building the WebAPI project produces a Windows or Linux executable that can be executed directly to run the service in a console mode for debugging, or alternatively the service can be hosted in IIS or IIS express. SUGAR is setup to also run in a windows or linux hosted docker container. See the <a class="xref" href="docker.html">docker section</a>.</p>
 <h3 id="database">Database</h3>
 <p>The service currently uses MySQL for it&#39;s data storage, we reccomend using the <a href="https://mariadb.org/">MariaDB</a> release if you are hosting your own database instance.</p>
 <p>In the near future the <a class="xref" href="../features/gameData.html">GameData</a> key/value storage will most likely be migrated to a NoSQL data store, however no decision on this technology has been taken yet.</p>
 <h3 id="development-dependencies">Development Dependencies</h3>
 <ul>
-<li><a href="https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx">Visual Studio 2015</a> with <a href="https://go.microsoft.com/fwlink/?LinkId=691129">Update 3</a></li>
+<li><a href="https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx">Visual Studio 2017</a> Version 15.4.5 minimum.</li>
 <li><a href="https://www.microsoft.com/net/download#core">.NET Core SDK</a> for your platform</li>
-<li><p>The API documentation is generated with <a href="https://dotnet.github.io/docfx/tutorial/docfx_getting_started.html#4-use-docfx-under-dnx">DocFX</a>; currently the DNX version of this must be used for .NET Core projects</p>
+<li><p>The API documentation is generated with <a class="xref" href="../unity-client/development/documentation.html">DocFX</a></p>
 </li>
 <li><p>Building the entire solution including client assemblies has additional requirements for compatibility with <a href="http://unity3d.com/">Unity3D</a> <a class="xref" href="index.html#api-client">See Below</a></p>
 </li>
 </ul>
 <h3 id="iis-hosting">IIS Hosting</h3>
 <ul>
-<li>The server requires the <a href="https://www.microsoft.com/net/download#core">.NET Core Windows (Server Hosting)</a> runtime</li>
+<li>The server requires the <a href="https://www.microsoft.com/net/download#core">.NET Core (Server Hosting)</a> runtime</li>
 <li><a href="http://www.iis.net/downloads/microsoft/url-rewrite">URL Rewrite</a> is reccomended to redirect HTTP requests to a HTTPS endpoint, using a web.config rewrite rule as below</li>
 </ul>
 <pre><code class="lang-xml">&lt;rewrite&gt;
