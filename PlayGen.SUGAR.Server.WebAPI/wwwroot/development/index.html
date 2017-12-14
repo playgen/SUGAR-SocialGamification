@@ -59,11 +59,11 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="installation">
+            <article class="content wrap" id="_content" data-uid="">
               <h1 id="development-and-deployment">Development and Deployment</h1>
               
 <p>SUGAR is currently in active development and subject to change. We are committed to delivering a feature complete version of the components by the end of 2017. </p>
-<p>For upcoming features and development direction see the <a class="xref" href="roadmap.html">Roadmap</a></p>
+<p>For upcoming features and development direction see the <a href="roadmap.md">roadmap</a></p>
 <h2 id="source-repositories">Source Repositories</h2>
 <p>All source code is provided under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a> and is hosten on GitHub. We welcome pull requests for bug fixes and engagement in discussion on feture development.</p>
 <ul>
@@ -77,17 +77,17 @@
 <h2 id="api-service">API Service</h2>
 <p>The SUGAR API Service is build using <a href="https://docs.asp.net/en/latest/intro.html">ASP.NET Core</a> (MVC/WebAPI). </p>
 <p>Currently the service is built for the <a href="https://docs.microsoft.com/en-us/dotnet/core/packages#net-core-application">.NETCoreApp 2.0</a> target so will only run on Windows systems, however this will soon be made compatible with the cross-platform NetStandard runtimes.</p>
-<p>Building the WebAPI project produces a Windows or Linux executable that can be executed directly to run the service in a console mode for debugging, or alternatively the service can be hosted in IIS or IIS express. SUGAR is setup to also run in a windows or linux hosted docker container. See the <a class="xref" href="docker.html">docker section</a>.</p>
+<p>Building the WebAPI project produces a Windows or Linux executable that can be executed directly to run the service in a console mode for debugging, or alternatively the service can be hosted in IIS or IIS express. SUGAR is setup to also run in a windows or linux hosted docker container. See the <a href="xref:docker">docker section</a>.</p>
 <h3 id="database">Database</h3>
 <p>The service currently uses MySQL for it&#39;s data storage, we reccomend using the <a href="https://mariadb.org/">MariaDB</a> release if you are hosting your own database instance.</p>
-<p>In the near future the <a class="xref" href="../features/gameData.html">GameData</a> key/value storage will most likely be migrated to a NoSQL data store, however no decision on this technology has been taken yet.</p>
+<p>In the near future the <a href="gameData.md">gameData</a> key/value storage will most likely be migrated to a NoSQL data store, however no decision on this technology has been taken yet.</p>
 <h3 id="development-dependencies">Development Dependencies</h3>
 <ul>
 <li><a href="https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx">Visual Studio 2017</a> Version 15.4.5 minimum.</li>
 <li><a href="https://www.microsoft.com/net/download#core">.NET Core SDK</a> for your platform</li>
-<li><p>The API documentation is generated with <a class="xref" href="../unity-client/development/documentation.html">DocFX</a></p>
+<li><p>The API documentation is generated with <a href="xref:documentation">DocFX</a></p>
 </li>
-<li><p>Building the entire solution including client assemblies has additional requirements for compatibility with <a href="http://unity3d.com/">Unity3D</a> <a class="xref" href="index.html#api-client">See Below</a></p>
+<li><p>Building the entire solution including client assemblies has additional requirements for compatibility with <a href="http://unity3d.com/">Unity3D</a> <a href="xref:installation#api-client">See Below</a></p>
 </li>
 </ul>
 <h3 id="iis-hosting">IIS Hosting</h3>

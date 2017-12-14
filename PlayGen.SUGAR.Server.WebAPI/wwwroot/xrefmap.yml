@@ -16,21 +16,12 @@ references:
 - uid: criteria
   name: Evalutation Criteria
   href: concepts/criteria.html
-- uid: docker
-  name: Docker
-  href: development/docker.html
-- uid: documentation
-  name: Documentation
-  href: unity-client/development/documentation.html
 - uid: entityModel
   name: Entity Model
   href: concepts/entityModel.html
 - uid: evaluationData
   name: EvaluationData
   href: features/evaluationData.html
-- uid: feature_overview
-  name: Feature Overview
-  href: features/feature_overview.html
 - uid: game
   name: Game
   href: features/game.html
@@ -40,9 +31,6 @@ references:
 - uid: group
   name: Group
   href: features/group.html
-- uid: installation
-  name: Development and Deployment
-  href: development/index.html
 - uid: leaderboard
   name: Leaderboard
   href: features/leaderboard.html
@@ -19559,6 +19547,12 @@ references:
   commentId: T:PlayGen.SUGAR.Unity.BaseLeaderboardInterface
   fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface
   nameWithType: BaseLeaderboardInterface
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface._alliancesButton
+  name: _alliancesButton
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface__alliancesButton
+  commentId: F:PlayGen.SUGAR.Unity.BaseLeaderboardInterface._alliancesButton
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface._alliancesButton
+  nameWithType: BaseLeaderboardInterface._alliancesButton
 - uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface._friendsButton
   name: _friendsButton
   href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface__friendsButton
@@ -19577,6 +19571,12 @@ references:
   commentId: F:PlayGen.SUGAR.Unity.BaseLeaderboardInterface._leaderboardType
   fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface._leaderboardType
   nameWithType: BaseLeaderboardInterface._leaderboardType
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface._membersButton
+  name: _membersButton
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface__membersButton
+  commentId: F:PlayGen.SUGAR.Unity.BaseLeaderboardInterface._membersButton
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface._membersButton
+  nameWithType: BaseLeaderboardInterface._membersButton
 - uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface._nearButton
   name: _nearButton
   href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface__nearButton
@@ -20002,6 +20002,18 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.CommandLineOptions.AutoLogin
   fullName: PlayGen.SUGAR.Unity.CommandLineOptions.AutoLogin
   nameWithType: CommandLineOptions.AutoLogin
+- uid: PlayGen.SUGAR.Unity.CommandLineOptions.ClassId
+  name: ClassId
+  href: unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.html#PlayGen_SUGAR_Unity_CommandLineOptions_ClassId
+  commentId: P:PlayGen.SUGAR.Unity.CommandLineOptions.ClassId
+  fullName: PlayGen.SUGAR.Unity.CommandLineOptions.ClassId
+  nameWithType: CommandLineOptions.ClassId
+- uid: PlayGen.SUGAR.Unity.CommandLineOptions.ClassId*
+  name: ClassId
+  href: unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.html#PlayGen_SUGAR_Unity_CommandLineOptions_ClassId_
+  commentId: Overload:PlayGen.SUGAR.Unity.CommandLineOptions.ClassId
+  fullName: PlayGen.SUGAR.Unity.CommandLineOptions.ClassId
+  nameWithType: CommandLineOptions.ClassId
 - uid: PlayGen.SUGAR.Unity.CommandLineOptions.Custom
   name: Custom
   href: unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.html#PlayGen_SUGAR_Unity_CommandLineOptions_Custom
@@ -20014,18 +20026,6 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.CommandLineOptions.Custom
   fullName: PlayGen.SUGAR.Unity.CommandLineOptions.Custom
   nameWithType: CommandLineOptions.Custom
-- uid: PlayGen.SUGAR.Unity.CommandLineOptions.GroupId
-  name: GroupId
-  href: unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.html#PlayGen_SUGAR_Unity_CommandLineOptions_GroupId
-  commentId: P:PlayGen.SUGAR.Unity.CommandLineOptions.GroupId
-  fullName: PlayGen.SUGAR.Unity.CommandLineOptions.GroupId
-  nameWithType: CommandLineOptions.GroupId
-- uid: PlayGen.SUGAR.Unity.CommandLineOptions.GroupId*
-  name: GroupId
-  href: unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.html#PlayGen_SUGAR_Unity_CommandLineOptions_GroupId_
-  commentId: Overload:PlayGen.SUGAR.Unity.CommandLineOptions.GroupId
-  fullName: PlayGen.SUGAR.Unity.CommandLineOptions.GroupId
-  nameWithType: CommandLineOptions.GroupId
 - uid: PlayGen.SUGAR.Unity.CommandLineOptions.Password
   name: Password
   href: unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.html#PlayGen_SUGAR_Unity_CommandLineOptions_Password
@@ -20749,6 +20749,30 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.Account
   fullName: PlayGen.SUGAR.Unity.SUGARManager.Account
   nameWithType: SUGARManager.Account
+- uid: PlayGen.SUGAR.Unity.SUGARManager.ClassId
+  name: ClassId
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_ClassId
+  commentId: P:PlayGen.SUGAR.Unity.SUGARManager.ClassId
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.ClassId
+  nameWithType: SUGARManager.ClassId
+- uid: PlayGen.SUGAR.Unity.SUGARManager.ClassId*
+  name: ClassId
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_ClassId_
+  commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.ClassId
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.ClassId
+  nameWithType: SUGARManager.ClassId
+- uid: PlayGen.SUGAR.Unity.SUGARManager.CurrentGroup
+  name: CurrentGroup
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_CurrentGroup
+  commentId: P:PlayGen.SUGAR.Unity.SUGARManager.CurrentGroup
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.CurrentGroup
+  nameWithType: SUGARManager.CurrentGroup
+- uid: PlayGen.SUGAR.Unity.SUGARManager.CurrentGroup*
+  name: CurrentGroup
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_CurrentGroup_
+  commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.CurrentGroup
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.CurrentGroup
+  nameWithType: SUGARManager.CurrentGroup
 - uid: PlayGen.SUGAR.Unity.SUGARManager.CurrentUser
   name: CurrentUser
   href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_CurrentUser
@@ -20809,18 +20833,6 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.GameLeaderboard
   fullName: PlayGen.SUGAR.Unity.SUGARManager.GameLeaderboard
   nameWithType: SUGARManager.GameLeaderboard
-- uid: PlayGen.SUGAR.Unity.SUGARManager.GroupId
-  name: GroupId
-  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_GroupId
-  commentId: P:PlayGen.SUGAR.Unity.SUGARManager.GroupId
-  fullName: PlayGen.SUGAR.Unity.SUGARManager.GroupId
-  nameWithType: SUGARManager.GroupId
-- uid: PlayGen.SUGAR.Unity.SUGARManager.GroupId*
-  name: GroupId
-  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_GroupId_
-  commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.GroupId
-  fullName: PlayGen.SUGAR.Unity.SUGARManager.GroupId
-  nameWithType: SUGARManager.GroupId
 - uid: PlayGen.SUGAR.Unity.SUGARManager.GroupMember
   name: GroupMember
   href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_GroupMember
@@ -21234,7 +21246,7 @@ references:
   href: concepts/rewards.html
 - uid: roadmap
   name: Roadmap
-  href: development/roadmap.html
+  href: features/roadmap.html
 - uid: session
   name: Session
   href: concepts/session.html
@@ -21637,6 +21649,3 @@ references:
 - uid: user
   name: Users
   href: features/user.html
-- uid: versioning
-  name: Versioning
-  href: development/versioning.html

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Versioning | SUGAR </title>
+    <title>Roadmap | SUGAR </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Versioning | SUGAR ">
+    <meta name="title" content="Roadmap | SUGAR ">
     <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -59,19 +59,59 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="">
-              <h1 id="versioning">Versioning</h1>
+            <article class="content wrap" id="_content" data-uid="roadmap">
+              <h1 id="roadmap">Roadmap</h1>
               
-<p>The Server and Client share an API Version, used to ensure compatibility.</p>
-<p>The API Version is made up of three parts in the format <strong>Major</strong>.<strong>Minor</strong>.<strong>Build</strong> version numbers.</p>
+<p>This page provides an overview of upcoming development for the platform. </p>
+<h2 id="features">Features</h2>
+<h3 id="matches">Matches</h3>
 <ul>
-<li><strong>Major</strong>: Should increment when API Breaking changes are added.</li>
-<li><strong>Minor</strong>: Should increment for Fixes and Additions that won&#39;t cause existing clients with the same Major version to break.</li>
-<li><strong>Build</strong>: Should increment for every build.</li>
+<li>Track play sessions and associated data</li>
+<li>Schedule competitive/cooperative games</li>
+<li>Pre-configure player to game role mapping</li>
+<li>Provide synchronisation mechanism for match/round/session start</li>
 </ul>
-<p>Version compatibility is ensured by the APIVersion filter in the PlayGen.SUGAR.Server.WebAPI project.</p>
-<p>When the Client sends a request, it must include the API Version string with the key &quot;APIVersion&quot; as a header.</p>
-<p>The APIVersion is shared between Server and Client projects in PlayGen.SUGAR.Common.APIVersion.</p>
+<h3 id="matchmaking">Matchmaking</h3>
+<p>Matching players based on arbitrary criteria using game data evaluation </p>
+<ul>
+<li>Score matching</li>
+<li>History matching</li>
+<li>Plugin external matching algorithms (to support matching functions from RAGE)</li>
+<li>Integration with Tournaments</li>
+</ul>
+<h3 id="tournaments">Tournaments</h3>
+<p>Providing a variety of team based game dynamics, tournaments can be configured as:</p>
+<ul>
+<li>Round-robin</li>
+<li>Knock-out</li>
+<li>Combination of both</li>
+</ul>
+<h3 id="challenge-system">Challenge system</h3>
+<ul>
+<li>Issue challenges to players, groups or globally</li>
+<li>Set time and arbitary criteria restrictions on challenge eligibility</li>
+</ul>
+<h3 id="portable-achievement-system">Portable achievement system</h3>
+<p>Integration with achievement systems on popular app stores and game distribution platforms.</p>
+<h3 id="rewards">Rewards</h3>
+<ul>
+<li><a class="xref" href="resource.html">Resources</a> can be awarded for participation in Matches and Tournaments.</li>
+</ul>
+<h3 id="group-permissioning">Group Permissioning</h3>
+<ul>
+<li>Group roles with configurable permissions</li>
+<li>Group resource accessibility restrictions</li>
+<li>Group Alliance</li>
+<li>Extended Group Achievements</li>
+</ul>
+<p>See <a class="xref" href="group.html">Group</a></p>
+<h2 id="tech">Tech</h2>
+<h3 id="standalone-api">Standalone API</h3>
+<p>Create an offline and/or in memory <a class="xref" href="gameData.html">GameData</a> store and expose criteria evaluation functions.</p>
+<p>Implement state machine and game logic decisions using GameData evaluation</p>
+<h3 id="websockets">WebSockets</h3>
+<p>Add push messaging and event/message aggregation to API.</p>
+<h3 id="">???</h3>
 
             </article>
           </div>
