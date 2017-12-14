@@ -334,6 +334,21 @@ references:
   commentId: Overload:PlayGen.SUGAR.Client.AllianceClient.GetAllianceCount
   fullName: PlayGen.SUGAR.Client.AllianceClient.GetAllianceCount
   nameWithType: AllianceClient.GetAllianceCount
+- uid: PlayGen.SUGAR.Client.AllianceClient.GetAllianceCountAsync(System.Int32,System.Action{System.Int32},System.Action{System.Exception})
+  name: GetAllianceCountAsync(Int32, Action<Int32>, Action<Exception>)
+  href: api/PlayGen.SUGAR.Client.AllianceClient.html#PlayGen_SUGAR_Client_AllianceClient_GetAllianceCountAsync_System_Int32_System_Action_System_Int32__System_Action_System_Exception__
+  commentId: M:PlayGen.SUGAR.Client.AllianceClient.GetAllianceCountAsync(System.Int32,System.Action{System.Int32},System.Action{System.Exception})
+  name.vb: GetAllianceCountAsync(Int32, Action(Of Int32), Action(Of Exception))
+  fullName: PlayGen.SUGAR.Client.AllianceClient.GetAllianceCountAsync(System.Int32, System.Action<System.Int32>, System.Action<System.Exception>)
+  fullName.vb: PlayGen.SUGAR.Client.AllianceClient.GetAllianceCountAsync(System.Int32, System.Action(Of System.Int32), System.Action(Of System.Exception))
+  nameWithType: AllianceClient.GetAllianceCountAsync(Int32, Action<Int32>, Action<Exception>)
+  nameWithType.vb: AllianceClient.GetAllianceCountAsync(Int32, Action(Of Int32), Action(Of Exception))
+- uid: PlayGen.SUGAR.Client.AllianceClient.GetAllianceCountAsync*
+  name: GetAllianceCountAsync
+  href: api/PlayGen.SUGAR.Client.AllianceClient.html#PlayGen_SUGAR_Client_AllianceClient_GetAllianceCountAsync_
+  commentId: Overload:PlayGen.SUGAR.Client.AllianceClient.GetAllianceCountAsync
+  fullName: PlayGen.SUGAR.Client.AllianceClient.GetAllianceCountAsync
+  nameWithType: AllianceClient.GetAllianceCountAsync
 - uid: PlayGen.SUGAR.Client.AllianceClient.GetAllianceRequests(System.Int32)
   name: GetAllianceRequests(Int32)
   href: api/PlayGen.SUGAR.Client.AllianceClient.html#PlayGen_SUGAR_Client_AllianceClient_GetAllianceRequests_System_Int32_
@@ -388,21 +403,6 @@ references:
   commentId: Overload:PlayGen.SUGAR.Client.AllianceClient.GetAlliancesAsync
   fullName: PlayGen.SUGAR.Client.AllianceClient.GetAlliancesAsync
   nameWithType: AllianceClient.GetAlliancesAsync
-- uid: PlayGen.SUGAR.Client.AllianceClient.GetMemberCountAsync(System.Int32,System.Action{System.Int32},System.Action{System.Exception})
-  name: GetMemberCountAsync(Int32, Action<Int32>, Action<Exception>)
-  href: api/PlayGen.SUGAR.Client.AllianceClient.html#PlayGen_SUGAR_Client_AllianceClient_GetMemberCountAsync_System_Int32_System_Action_System_Int32__System_Action_System_Exception__
-  commentId: M:PlayGen.SUGAR.Client.AllianceClient.GetMemberCountAsync(System.Int32,System.Action{System.Int32},System.Action{System.Exception})
-  name.vb: GetMemberCountAsync(Int32, Action(Of Int32), Action(Of Exception))
-  fullName: PlayGen.SUGAR.Client.AllianceClient.GetMemberCountAsync(System.Int32, System.Action<System.Int32>, System.Action<System.Exception>)
-  fullName.vb: PlayGen.SUGAR.Client.AllianceClient.GetMemberCountAsync(System.Int32, System.Action(Of System.Int32), System.Action(Of System.Exception))
-  nameWithType: AllianceClient.GetMemberCountAsync(Int32, Action<Int32>, Action<Exception>)
-  nameWithType.vb: AllianceClient.GetMemberCountAsync(Int32, Action(Of Int32), Action(Of Exception))
-- uid: PlayGen.SUGAR.Client.AllianceClient.GetMemberCountAsync*
-  name: GetMemberCountAsync
-  href: api/PlayGen.SUGAR.Client.AllianceClient.html#PlayGen_SUGAR_Client_AllianceClient_GetMemberCountAsync_
-  commentId: Overload:PlayGen.SUGAR.Client.AllianceClient.GetMemberCountAsync
-  fullName: PlayGen.SUGAR.Client.AllianceClient.GetMemberCountAsync
-  nameWithType: AllianceClient.GetMemberCountAsync
 - uid: PlayGen.SUGAR.Client.AllianceClient.GetSentRequests(System.Int32)
   name: GetSentRequests(Int32)
   href: api/PlayGen.SUGAR.Client.AllianceClient.html#PlayGen_SUGAR_Client_AllianceClient_GetSentRequests_System_Int32_
@@ -1014,6 +1014,174 @@ references:
   commentId: Overload:PlayGen.SUGAR.Client.DefaultHttpHandler.SendData
   fullName: PlayGen.SUGAR.Client.DefaultHttpHandler.SendData
   nameWithType: DefaultHttpHandler.SendData
+- uid: PlayGen.SUGAR.Client.Development
+  name: PlayGen.SUGAR.Client.Development
+  href: api/PlayGen.SUGAR.Client.Development.html
+  commentId: N:PlayGen.SUGAR.Client.Development
+  fullName: PlayGen.SUGAR.Client.Development
+  nameWithType: PlayGen.SUGAR.Client.Development
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient
+  name: DevelopmentClient
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html
+  commentId: T:PlayGen.SUGAR.Client.Development.DevelopmentClient
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient
+  nameWithType: DevelopmentClient
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.#ctor(System.String,PlayGen.SUGAR.Client.IHttpHandler,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController,PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications)
+  name: DevelopmentClient(String, IHttpHandler, Dictionary<String, String>, Dictionary<String, String>, AsyncRequestController, EvaluationNotifications)
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient__ctor_System_String_PlayGen_SUGAR_Client_IHttpHandler_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__PlayGen_SUGAR_Client_AsyncRequestQueue_AsyncRequestController_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_
+  commentId: M:PlayGen.SUGAR.Client.Development.DevelopmentClient.#ctor(System.String,PlayGen.SUGAR.Client.IHttpHandler,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController,PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications)
+  name.vb: DevelopmentClient(String, IHttpHandler, Dictionary(Of String, String), Dictionary(Of String, String), AsyncRequestController, EvaluationNotifications)
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.DevelopmentClient(System.String, PlayGen.SUGAR.Client.IHttpHandler, System.Collections.Generic.Dictionary<System.String, System.String>, System.Collections.Generic.Dictionary<System.String, System.String>, PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController, PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications)
+  fullName.vb: PlayGen.SUGAR.Client.Development.DevelopmentClient.DevelopmentClient(System.String, PlayGen.SUGAR.Client.IHttpHandler, System.Collections.Generic.Dictionary(Of System.String, System.String), System.Collections.Generic.Dictionary(Of System.String, System.String), PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController, PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications)
+  nameWithType: DevelopmentClient.DevelopmentClient(String, IHttpHandler, Dictionary<String, String>, Dictionary<String, String>, AsyncRequestController, EvaluationNotifications)
+  nameWithType.vb: DevelopmentClient.DevelopmentClient(String, IHttpHandler, Dictionary(Of String, String), Dictionary(Of String, String), AsyncRequestController, EvaluationNotifications)
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.#ctor*
+  name: DevelopmentClient
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient__ctor_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.DevelopmentClient.#ctor
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.DevelopmentClient
+  nameWithType: DevelopmentClient.DevelopmentClient
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievement(PlayGen.SUGAR.Contracts.EvaluationCreateRequest)
+  name: CreateAchievement(EvaluationCreateRequest)
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateAchievement_PlayGen_SUGAR_Contracts_EvaluationCreateRequest_
+  commentId: M:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievement(PlayGen.SUGAR.Contracts.EvaluationCreateRequest)
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievement(PlayGen.SUGAR.Contracts.EvaluationCreateRequest)
+  nameWithType: DevelopmentClient.CreateAchievement(EvaluationCreateRequest)
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievement*
+  name: CreateAchievement
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateAchievement_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievement
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievement
+  nameWithType: DevelopmentClient.CreateAchievement
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievementAsync(PlayGen.SUGAR.Contracts.EvaluationCreateRequest,System.Action{PlayGen.SUGAR.Contracts.EvaluationResponse},System.Action{System.Exception})
+  name: CreateAchievementAsync(EvaluationCreateRequest, Action<EvaluationResponse>, Action<Exception>)
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateAchievementAsync_PlayGen_SUGAR_Contracts_EvaluationCreateRequest_System_Action_PlayGen_SUGAR_Contracts_EvaluationResponse__System_Action_System_Exception__
+  commentId: M:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievementAsync(PlayGen.SUGAR.Contracts.EvaluationCreateRequest,System.Action{PlayGen.SUGAR.Contracts.EvaluationResponse},System.Action{System.Exception})
+  name.vb: CreateAchievementAsync(EvaluationCreateRequest, Action(Of EvaluationResponse), Action(Of Exception))
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievementAsync(PlayGen.SUGAR.Contracts.EvaluationCreateRequest, System.Action<PlayGen.SUGAR.Contracts.EvaluationResponse>, System.Action<System.Exception>)
+  fullName.vb: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievementAsync(PlayGen.SUGAR.Contracts.EvaluationCreateRequest, System.Action(Of PlayGen.SUGAR.Contracts.EvaluationResponse), System.Action(Of System.Exception))
+  nameWithType: DevelopmentClient.CreateAchievementAsync(EvaluationCreateRequest, Action<EvaluationResponse>, Action<Exception>)
+  nameWithType.vb: DevelopmentClient.CreateAchievementAsync(EvaluationCreateRequest, Action(Of EvaluationResponse), Action(Of Exception))
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievementAsync*
+  name: CreateAchievementAsync
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateAchievementAsync_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievementAsync
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateAchievementAsync
+  nameWithType: DevelopmentClient.CreateAchievementAsync
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGame(PlayGen.SUGAR.Contracts.GameRequest)
+  name: CreateGame(GameRequest)
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateGame_PlayGen_SUGAR_Contracts_GameRequest_
+  commentId: M:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGame(PlayGen.SUGAR.Contracts.GameRequest)
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGame(PlayGen.SUGAR.Contracts.GameRequest)
+  nameWithType: DevelopmentClient.CreateGame(GameRequest)
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGame*
+  name: CreateGame
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateGame_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGame
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGame
+  nameWithType: DevelopmentClient.CreateGame
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGameAsync(PlayGen.SUGAR.Contracts.GameRequest,System.Action{PlayGen.SUGAR.Contracts.GameResponse},System.Action{System.Exception})
+  name: CreateGameAsync(GameRequest, Action<GameResponse>, Action<Exception>)
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateGameAsync_PlayGen_SUGAR_Contracts_GameRequest_System_Action_PlayGen_SUGAR_Contracts_GameResponse__System_Action_System_Exception__
+  commentId: M:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGameAsync(PlayGen.SUGAR.Contracts.GameRequest,System.Action{PlayGen.SUGAR.Contracts.GameResponse},System.Action{System.Exception})
+  name.vb: CreateGameAsync(GameRequest, Action(Of GameResponse), Action(Of Exception))
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGameAsync(PlayGen.SUGAR.Contracts.GameRequest, System.Action<PlayGen.SUGAR.Contracts.GameResponse>, System.Action<System.Exception>)
+  fullName.vb: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGameAsync(PlayGen.SUGAR.Contracts.GameRequest, System.Action(Of PlayGen.SUGAR.Contracts.GameResponse), System.Action(Of System.Exception))
+  nameWithType: DevelopmentClient.CreateGameAsync(GameRequest, Action<GameResponse>, Action<Exception>)
+  nameWithType.vb: DevelopmentClient.CreateGameAsync(GameRequest, Action(Of GameResponse), Action(Of Exception))
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGameAsync*
+  name: CreateGameAsync
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateGameAsync_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGameAsync
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateGameAsync
+  nameWithType: DevelopmentClient.CreateGameAsync
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboard(PlayGen.SUGAR.Contracts.LeaderboardRequest)
+  name: CreateLeaderboard(LeaderboardRequest)
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateLeaderboard_PlayGen_SUGAR_Contracts_LeaderboardRequest_
+  commentId: M:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboard(PlayGen.SUGAR.Contracts.LeaderboardRequest)
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboard(PlayGen.SUGAR.Contracts.LeaderboardRequest)
+  nameWithType: DevelopmentClient.CreateLeaderboard(LeaderboardRequest)
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboard*
+  name: CreateLeaderboard
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateLeaderboard_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboard
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboard
+  nameWithType: DevelopmentClient.CreateLeaderboard
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboardAsync(PlayGen.SUGAR.Contracts.LeaderboardRequest,System.Action{PlayGen.SUGAR.Contracts.LeaderboardResponse},System.Action{System.Exception})
+  name: CreateLeaderboardAsync(LeaderboardRequest, Action<LeaderboardResponse>, Action<Exception>)
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateLeaderboardAsync_PlayGen_SUGAR_Contracts_LeaderboardRequest_System_Action_PlayGen_SUGAR_Contracts_LeaderboardResponse__System_Action_System_Exception__
+  commentId: M:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboardAsync(PlayGen.SUGAR.Contracts.LeaderboardRequest,System.Action{PlayGen.SUGAR.Contracts.LeaderboardResponse},System.Action{System.Exception})
+  name.vb: CreateLeaderboardAsync(LeaderboardRequest, Action(Of LeaderboardResponse), Action(Of Exception))
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboardAsync(PlayGen.SUGAR.Contracts.LeaderboardRequest, System.Action<PlayGen.SUGAR.Contracts.LeaderboardResponse>, System.Action<System.Exception>)
+  fullName.vb: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboardAsync(PlayGen.SUGAR.Contracts.LeaderboardRequest, System.Action(Of PlayGen.SUGAR.Contracts.LeaderboardResponse), System.Action(Of System.Exception))
+  nameWithType: DevelopmentClient.CreateLeaderboardAsync(LeaderboardRequest, Action<LeaderboardResponse>, Action<Exception>)
+  nameWithType.vb: DevelopmentClient.CreateLeaderboardAsync(LeaderboardRequest, Action(Of LeaderboardResponse), Action(Of Exception))
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboardAsync*
+  name: CreateLeaderboardAsync
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateLeaderboardAsync_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboardAsync
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateLeaderboardAsync
+  nameWithType: DevelopmentClient.CreateLeaderboardAsync
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkill(PlayGen.SUGAR.Contracts.EvaluationCreateRequest)
+  name: CreateSkill(EvaluationCreateRequest)
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateSkill_PlayGen_SUGAR_Contracts_EvaluationCreateRequest_
+  commentId: M:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkill(PlayGen.SUGAR.Contracts.EvaluationCreateRequest)
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkill(PlayGen.SUGAR.Contracts.EvaluationCreateRequest)
+  nameWithType: DevelopmentClient.CreateSkill(EvaluationCreateRequest)
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkill*
+  name: CreateSkill
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateSkill_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkill
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkill
+  nameWithType: DevelopmentClient.CreateSkill
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkillAsync(PlayGen.SUGAR.Contracts.EvaluationCreateRequest,System.Action{PlayGen.SUGAR.Contracts.EvaluationResponse},System.Action{System.Exception})
+  name: CreateSkillAsync(EvaluationCreateRequest, Action<EvaluationResponse>, Action<Exception>)
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateSkillAsync_PlayGen_SUGAR_Contracts_EvaluationCreateRequest_System_Action_PlayGen_SUGAR_Contracts_EvaluationResponse__System_Action_System_Exception__
+  commentId: M:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkillAsync(PlayGen.SUGAR.Contracts.EvaluationCreateRequest,System.Action{PlayGen.SUGAR.Contracts.EvaluationResponse},System.Action{System.Exception})
+  name.vb: CreateSkillAsync(EvaluationCreateRequest, Action(Of EvaluationResponse), Action(Of Exception))
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkillAsync(PlayGen.SUGAR.Contracts.EvaluationCreateRequest, System.Action<PlayGen.SUGAR.Contracts.EvaluationResponse>, System.Action<System.Exception>)
+  fullName.vb: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkillAsync(PlayGen.SUGAR.Contracts.EvaluationCreateRequest, System.Action(Of PlayGen.SUGAR.Contracts.EvaluationResponse), System.Action(Of System.Exception))
+  nameWithType: DevelopmentClient.CreateSkillAsync(EvaluationCreateRequest, Action<EvaluationResponse>, Action<Exception>)
+  nameWithType.vb: DevelopmentClient.CreateSkillAsync(EvaluationCreateRequest, Action(Of EvaluationResponse), Action(Of Exception))
+- uid: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkillAsync*
+  name: CreateSkillAsync
+  href: api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html#PlayGen_SUGAR_Client_Development_DevelopmentClient_CreateSkillAsync_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkillAsync
+  fullName: PlayGen.SUGAR.Client.Development.DevelopmentClient.CreateSkillAsync
+  nameWithType: DevelopmentClient.CreateSkillAsync
+- uid: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient
+  name: SUGARDevelopmentClient
+  href: api/PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.html
+  commentId: T:PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient
+  fullName: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient
+  nameWithType: SUGARDevelopmentClient
+- uid: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.#ctor(System.String,PlayGen.SUGAR.Client.IHttpHandler,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},System.Int32)
+  name: SUGARDevelopmentClient(String, IHttpHandler, Dictionary<String, String>, Dictionary<String, String>, Int32)
+  href: api/PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.html#PlayGen_SUGAR_Client_Development_SUGARDevelopmentClient__ctor_System_String_PlayGen_SUGAR_Client_IHttpHandler_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__System_Int32_
+  commentId: M:PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.#ctor(System.String,PlayGen.SUGAR.Client.IHttpHandler,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},System.Int32)
+  name.vb: SUGARDevelopmentClient(String, IHttpHandler, Dictionary(Of String, String), Dictionary(Of String, String), Int32)
+  fullName: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.SUGARDevelopmentClient(System.String, PlayGen.SUGAR.Client.IHttpHandler, System.Collections.Generic.Dictionary<System.String, System.String>, System.Collections.Generic.Dictionary<System.String, System.String>, System.Int32)
+  fullName.vb: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.SUGARDevelopmentClient(System.String, PlayGen.SUGAR.Client.IHttpHandler, System.Collections.Generic.Dictionary(Of System.String, System.String), System.Collections.Generic.Dictionary(Of System.String, System.String), System.Int32)
+  nameWithType: SUGARDevelopmentClient.SUGARDevelopmentClient(String, IHttpHandler, Dictionary<String, String>, Dictionary<String, String>, Int32)
+  nameWithType.vb: SUGARDevelopmentClient.SUGARDevelopmentClient(String, IHttpHandler, Dictionary(Of String, String), Dictionary(Of String, String), Int32)
+- uid: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.#ctor*
+  name: SUGARDevelopmentClient
+  href: api/PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.html#PlayGen_SUGAR_Client_Development_SUGARDevelopmentClient__ctor_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.#ctor
+  fullName: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.SUGARDevelopmentClient
+  nameWithType: SUGARDevelopmentClient.SUGARDevelopmentClient
+- uid: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.Development
+  name: Development
+  href: api/PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.html#PlayGen_SUGAR_Client_Development_SUGARDevelopmentClient_Development
+  commentId: P:PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.Development
+  fullName: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.Development
+  nameWithType: SUGARDevelopmentClient.Development
+- uid: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.Development*
+  name: Development
+  href: api/PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.html#PlayGen_SUGAR_Client_Development_SUGARDevelopmentClient_Development_
+  commentId: Overload:PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.Development
+  fullName: PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.Development
+  nameWithType: SUGARDevelopmentClient.Development
 - uid: PlayGen.SUGAR.Client.EvaluationEvents
   name: PlayGen.SUGAR.Client.EvaluationEvents
   href: api/PlayGen.SUGAR.Client.EvaluationEvents.html
@@ -1071,6 +1239,18 @@ references:
   commentId: Overload:PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Actor
   fullName: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Actor
   nameWithType: EvaluationNotification.Actor
+- uid: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Description
+  name: Description
+  href: api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html#PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification_Description
+  commentId: P:PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Description
+  fullName: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Description
+  nameWithType: EvaluationNotification.Description
+- uid: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Description*
+  name: Description
+  href: api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html#PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification_Description_
+  commentId: Overload:PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Description
+  fullName: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Description
+  nameWithType: EvaluationNotification.Description
 - uid: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Name
   name: Name
   href: api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html#PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification_Name
@@ -1095,6 +1275,18 @@ references:
   commentId: Overload:PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Progress
   fullName: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Progress
   nameWithType: EvaluationNotification.Progress
+- uid: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Token
+  name: Token
+  href: api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html#PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification_Token
+  commentId: P:PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Token
+  fullName: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Token
+  nameWithType: EvaluationNotification.Token
+- uid: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Token*
+  name: Token
+  href: api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html#PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification_Token_
+  commentId: Overload:PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Token
+  fullName: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Token
+  nameWithType: EvaluationNotification.Token
 - uid: PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.Type
   name: Type
   href: api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html#PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification_Type
@@ -2736,6 +2928,42 @@ references:
   commentId: Overload:PlayGen.SUGAR.Client.SUGARClient.#ctor
   fullName: PlayGen.SUGAR.Client.SUGARClient.SUGARClient
   nameWithType: SUGARClient.SUGARClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._asyncRequestController
+  name: _asyncRequestController
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__asyncRequestController
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._asyncRequestController
+  fullName: PlayGen.SUGAR.Client.SUGARClient._asyncRequestController
+  nameWithType: SUGARClient._asyncRequestController
+- uid: PlayGen.SUGAR.Client.SUGARClient._baseAddress
+  name: _baseAddress
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__baseAddress
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._baseAddress
+  fullName: PlayGen.SUGAR.Client.SUGARClient._baseAddress
+  nameWithType: SUGARClient._baseAddress
+- uid: PlayGen.SUGAR.Client.SUGARClient._evaluationNotifications
+  name: _evaluationNotifications
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__evaluationNotifications
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._evaluationNotifications
+  fullName: PlayGen.SUGAR.Client.SUGARClient._evaluationNotifications
+  nameWithType: SUGARClient._evaluationNotifications
+- uid: PlayGen.SUGAR.Client.SUGARClient._httpHandler
+  name: _httpHandler
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__httpHandler
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._httpHandler
+  fullName: PlayGen.SUGAR.Client.SUGARClient._httpHandler
+  nameWithType: SUGARClient._httpHandler
+- uid: PlayGen.SUGAR.Client.SUGARClient._persistentHeaders
+  name: _persistentHeaders
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__persistentHeaders
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._persistentHeaders
+  fullName: PlayGen.SUGAR.Client.SUGARClient._persistentHeaders
+  nameWithType: SUGARClient._persistentHeaders
+- uid: PlayGen.SUGAR.Client.SUGARClient._sessionHeaders
+  name: _sessionHeaders
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__sessionHeaders
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._sessionHeaders
+  fullName: PlayGen.SUGAR.Client.SUGARClient._sessionHeaders
+  nameWithType: SUGARClient._sessionHeaders
 - uid: PlayGen.SUGAR.Client.SUGARClient.Account
   name: Account
   href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient_Account
@@ -3393,6 +3621,18 @@ references:
   commentId: F:PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.ActorRole
   fullName: PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.ActorRole
   nameWithType: AuthorizationEntity.ActorRole
+- uid: PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.Alliance
+  name: Alliance
+  href: api/PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.html#PlayGen_SUGAR_Common_Authorization_AuthorizationEntity_Alliance
+  commentId: F:PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.Alliance
+  fullName: PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.Alliance
+  nameWithType: AuthorizationEntity.Alliance
+- uid: PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.AllianceRequest
+  name: AllianceRequest
+  href: api/PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.html#PlayGen_SUGAR_Common_Authorization_AuthorizationEntity_AllianceRequest
+  commentId: F:PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.AllianceRequest
+  fullName: PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.AllianceRequest
+  nameWithType: AuthorizationEntity.AllianceRequest
 - uid: PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.Game
   name: Game
   href: api/PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.html#PlayGen_SUGAR_Common_Authorization_AuthorizationEntity_Game
@@ -3627,12 +3867,24 @@ references:
   commentId: F:PlayGen.SUGAR.Common.CriteriaScope.Actor
   fullName: PlayGen.SUGAR.Common.CriteriaScope.Actor
   nameWithType: CriteriaScope.Actor
-- uid: PlayGen.SUGAR.Common.CriteriaScope.RelatedActors
-  name: RelatedActors
-  href: api/PlayGen.SUGAR.Common.CriteriaScope.html#PlayGen_SUGAR_Common_CriteriaScope_RelatedActors
-  commentId: F:PlayGen.SUGAR.Common.CriteriaScope.RelatedActors
-  fullName: PlayGen.SUGAR.Common.CriteriaScope.RelatedActors
-  nameWithType: CriteriaScope.RelatedActors
+- uid: PlayGen.SUGAR.Common.CriteriaScope.RelatedGroups
+  name: RelatedGroups
+  href: api/PlayGen.SUGAR.Common.CriteriaScope.html#PlayGen_SUGAR_Common_CriteriaScope_RelatedGroups
+  commentId: F:PlayGen.SUGAR.Common.CriteriaScope.RelatedGroups
+  fullName: PlayGen.SUGAR.Common.CriteriaScope.RelatedGroups
+  nameWithType: CriteriaScope.RelatedGroups
+- uid: PlayGen.SUGAR.Common.CriteriaScope.RelatedGroupUsers
+  name: RelatedGroupUsers
+  href: api/PlayGen.SUGAR.Common.CriteriaScope.html#PlayGen_SUGAR_Common_CriteriaScope_RelatedGroupUsers
+  commentId: F:PlayGen.SUGAR.Common.CriteriaScope.RelatedGroupUsers
+  fullName: PlayGen.SUGAR.Common.CriteriaScope.RelatedGroupUsers
+  nameWithType: CriteriaScope.RelatedGroupUsers
+- uid: PlayGen.SUGAR.Common.CriteriaScope.RelatedUsers
+  name: RelatedUsers
+  href: api/PlayGen.SUGAR.Common.CriteriaScope.html#PlayGen_SUGAR_Common_CriteriaScope_RelatedUsers
+  commentId: F:PlayGen.SUGAR.Common.CriteriaScope.RelatedUsers
+  fullName: PlayGen.SUGAR.Common.CriteriaScope.RelatedUsers
+  nameWithType: CriteriaScope.RelatedUsers
 - uid: PlayGen.SUGAR.Common.EvaluationDataCategory
   name: EvaluationDataCategory
   href: api/PlayGen.SUGAR.Common.EvaluationDataCategory.html
@@ -3801,6 +4053,12 @@ references:
   commentId: T:PlayGen.SUGAR.Common.LeaderboardFilterType
   fullName: PlayGen.SUGAR.Common.LeaderboardFilterType
   nameWithType: LeaderboardFilterType
+- uid: PlayGen.SUGAR.Common.LeaderboardFilterType.Alliances
+  name: Alliances
+  href: api/PlayGen.SUGAR.Common.LeaderboardFilterType.html#PlayGen_SUGAR_Common_LeaderboardFilterType_Alliances
+  commentId: F:PlayGen.SUGAR.Common.LeaderboardFilterType.Alliances
+  fullName: PlayGen.SUGAR.Common.LeaderboardFilterType.Alliances
+  nameWithType: LeaderboardFilterType.Alliances
 - uid: PlayGen.SUGAR.Common.LeaderboardFilterType.Friends
   name: Friends
   href: api/PlayGen.SUGAR.Common.LeaderboardFilterType.html#PlayGen_SUGAR_Common_LeaderboardFilterType_Friends
@@ -7511,15 +7769,15 @@ references:
   commentId: T:PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController
   fullName: PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController
   nameWithType: ActorClaimController
-- uid: PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController},PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController,PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController,PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController,PlayGen.SUGAR.Server.Core.Controllers.RelationshipController)
-  name: ActorClaimController(ILogger<ActorClaimController>, ActorClaimController, ActorRoleController, RoleClaimController, RelationshipController)
-  href: api/PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorClaimController__ctor_Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_ActorClaimController__PlayGen_SUGAR_Server_EntityFramework_Controllers_ActorClaimController_PlayGen_SUGAR_Server_Core_Controllers_ActorRoleController_PlayGen_SUGAR_Server_Core_Controllers_RoleClaimController_PlayGen_SUGAR_Server_Core_Controllers_RelationshipController_
-  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController},PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController,PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController,PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController,PlayGen.SUGAR.Server.Core.Controllers.RelationshipController)
-  name.vb: ActorClaimController(ILogger(Of ActorClaimController), ActorClaimController, ActorRoleController, RoleClaimController, RelationshipController)
-  fullName: PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.ActorClaimController(Microsoft.Extensions.Logging.ILogger<PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController>, PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController, PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController, PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController, PlayGen.SUGAR.Server.Core.Controllers.RelationshipController)
-  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.ActorClaimController(Microsoft.Extensions.Logging.ILogger(Of PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController), PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController, PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController, PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController, PlayGen.SUGAR.Server.Core.Controllers.RelationshipController)
-  nameWithType: ActorClaimController.ActorClaimController(ILogger<ActorClaimController>, ActorClaimController, ActorRoleController, RoleClaimController, RelationshipController)
-  nameWithType.vb: ActorClaimController.ActorClaimController(ILogger(Of ActorClaimController), ActorClaimController, ActorRoleController, RoleClaimController, RelationshipController)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController},PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController,PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController,PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController)
+  name: ActorClaimController(ILogger<ActorClaimController>, ActorClaimController, ActorRoleController, RoleClaimController)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorClaimController__ctor_Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_ActorClaimController__PlayGen_SUGAR_Server_EntityFramework_Controllers_ActorClaimController_PlayGen_SUGAR_Server_Core_Controllers_ActorRoleController_PlayGen_SUGAR_Server_Core_Controllers_RoleClaimController_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController},PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController,PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController,PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController)
+  name.vb: ActorClaimController(ILogger(Of ActorClaimController), ActorClaimController, ActorRoleController, RoleClaimController)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.ActorClaimController(Microsoft.Extensions.Logging.ILogger<PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController>, PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController, PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController, PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController)
+  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.ActorClaimController(Microsoft.Extensions.Logging.ILogger(Of PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController), PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController, PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController, PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController)
+  nameWithType: ActorClaimController.ActorClaimController(ILogger<ActorClaimController>, ActorClaimController, ActorRoleController, RoleClaimController)
+  nameWithType.vb: ActorClaimController.ActorClaimController(ILogger(Of ActorClaimController), ActorClaimController, ActorRoleController, RoleClaimController)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.#ctor*
   name: ActorClaimController
   href: api/PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorClaimController__ctor_
@@ -7763,18 +8021,18 @@ references:
   commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.#ctor
   fullName: PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.ActorRoleController
   nameWithType: ActorRoleController.ActorRoleController
+- uid: PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.Create(PlayGen.SUGAR.Common.Authorization.ClaimScope,System.Int32,System.Int32)
+  name: Create(ClaimScope, Int32, Int32)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorRoleController_Create_PlayGen_SUGAR_Common_Authorization_ClaimScope_System_Int32_System_Int32_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.Create(PlayGen.SUGAR.Common.Authorization.ClaimScope,System.Int32,System.Int32)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.Create(PlayGen.SUGAR.Common.Authorization.ClaimScope, System.Int32, System.Int32)
+  nameWithType: ActorRoleController.Create(ClaimScope, Int32, Int32)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.Create(PlayGen.SUGAR.Server.Model.ActorRole)
   name: Create(ActorRole)
   href: api/PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorRoleController_Create_PlayGen_SUGAR_Server_Model_ActorRole_
   commentId: M:PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.Create(PlayGen.SUGAR.Server.Model.ActorRole)
   fullName: PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.Create(PlayGen.SUGAR.Server.Model.ActorRole)
   nameWithType: ActorRoleController.Create(ActorRole)
-- uid: PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.Create(System.String,System.Int32,System.Int32)
-  name: Create(String, Int32, Int32)
-  href: api/PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorRoleController_Create_System_String_System_Int32_System_Int32_
-  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.Create(System.String,System.Int32,System.Int32)
-  fullName: PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.Create(System.String, System.Int32, System.Int32)
-  nameWithType: ActorRoleController.Create(String, Int32, Int32)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.Create*
   name: Create
   href: api/PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorRoleController_Create_
@@ -8627,15 +8885,15 @@ references:
   commentId: T:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController
   fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController
   nameWithType: LeaderboardController
-- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController},Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController},PlayGen.SUGAR.Server.Core.Controllers.RelationshipController,PlayGen.SUGAR.Server.Core.Controllers.ActorController,PlayGen.SUGAR.Server.Core.Controllers.GroupController,PlayGen.SUGAR.Server.Core.Controllers.UserController,PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory)
-  name: LeaderboardController(ILogger<LeaderboardController>, ILogger<EvaluationDataController>, RelationshipController, ActorController, GroupController, UserController, SUGARContextFactory)
-  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController__ctor_Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController__Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController__PlayGen_SUGAR_Server_Core_Controllers_RelationshipController_PlayGen_SUGAR_Server_Core_Controllers_ActorController_PlayGen_SUGAR_Server_Core_Controllers_GroupController_PlayGen_SUGAR_Server_Core_Controllers_UserController_PlayGen_SUGAR_Server_EntityFramework_SUGARContextFactory_
-  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController},Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController},PlayGen.SUGAR.Server.Core.Controllers.RelationshipController,PlayGen.SUGAR.Server.Core.Controllers.ActorController,PlayGen.SUGAR.Server.Core.Controllers.GroupController,PlayGen.SUGAR.Server.Core.Controllers.UserController,PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory)
-  name.vb: LeaderboardController(ILogger(Of LeaderboardController), ILogger(Of EvaluationDataController), RelationshipController, ActorController, GroupController, UserController, SUGARContextFactory)
-  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.LeaderboardController(Microsoft.Extensions.Logging.ILogger<PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController>, Microsoft.Extensions.Logging.ILogger<PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController>, PlayGen.SUGAR.Server.Core.Controllers.RelationshipController, PlayGen.SUGAR.Server.Core.Controllers.ActorController, PlayGen.SUGAR.Server.Core.Controllers.GroupController, PlayGen.SUGAR.Server.Core.Controllers.UserController, PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory)
-  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.LeaderboardController(Microsoft.Extensions.Logging.ILogger(Of PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController), Microsoft.Extensions.Logging.ILogger(Of PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController), PlayGen.SUGAR.Server.Core.Controllers.RelationshipController, PlayGen.SUGAR.Server.Core.Controllers.ActorController, PlayGen.SUGAR.Server.Core.Controllers.GroupController, PlayGen.SUGAR.Server.Core.Controllers.UserController, PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory)
-  nameWithType: LeaderboardController.LeaderboardController(ILogger<LeaderboardController>, ILogger<EvaluationDataController>, RelationshipController, ActorController, GroupController, UserController, SUGARContextFactory)
-  nameWithType.vb: LeaderboardController.LeaderboardController(ILogger(Of LeaderboardController), ILogger(Of EvaluationDataController), RelationshipController, ActorController, GroupController, UserController, SUGARContextFactory)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController},Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController},PlayGen.SUGAR.Server.EntityFramework.Controllers.LeaderboardController,PlayGen.SUGAR.Server.Core.Controllers.RelationshipController,PlayGen.SUGAR.Server.Core.Controllers.ActorController,PlayGen.SUGAR.Server.Core.Controllers.GroupController,PlayGen.SUGAR.Server.Core.Controllers.UserController,PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory)
+  name: LeaderboardController(ILogger<LeaderboardController>, ILogger<EvaluationDataController>, LeaderboardController, RelationshipController, ActorController, GroupController, UserController, SUGARContextFactory)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController__ctor_Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController__Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController__PlayGen_SUGAR_Server_EntityFramework_Controllers_LeaderboardController_PlayGen_SUGAR_Server_Core_Controllers_RelationshipController_PlayGen_SUGAR_Server_Core_Controllers_ActorController_PlayGen_SUGAR_Server_Core_Controllers_GroupController_PlayGen_SUGAR_Server_Core_Controllers_UserController_PlayGen_SUGAR_Server_EntityFramework_SUGARContextFactory_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController},Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController},PlayGen.SUGAR.Server.EntityFramework.Controllers.LeaderboardController,PlayGen.SUGAR.Server.Core.Controllers.RelationshipController,PlayGen.SUGAR.Server.Core.Controllers.ActorController,PlayGen.SUGAR.Server.Core.Controllers.GroupController,PlayGen.SUGAR.Server.Core.Controllers.UserController,PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory)
+  name.vb: LeaderboardController(ILogger(Of LeaderboardController), ILogger(Of EvaluationDataController), LeaderboardController, RelationshipController, ActorController, GroupController, UserController, SUGARContextFactory)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.LeaderboardController(Microsoft.Extensions.Logging.ILogger<PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController>, Microsoft.Extensions.Logging.ILogger<PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController>, PlayGen.SUGAR.Server.EntityFramework.Controllers.LeaderboardController, PlayGen.SUGAR.Server.Core.Controllers.RelationshipController, PlayGen.SUGAR.Server.Core.Controllers.ActorController, PlayGen.SUGAR.Server.Core.Controllers.GroupController, PlayGen.SUGAR.Server.Core.Controllers.UserController, PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory)
+  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.LeaderboardController(Microsoft.Extensions.Logging.ILogger(Of PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController), Microsoft.Extensions.Logging.ILogger(Of PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController), PlayGen.SUGAR.Server.EntityFramework.Controllers.LeaderboardController, PlayGen.SUGAR.Server.Core.Controllers.RelationshipController, PlayGen.SUGAR.Server.Core.Controllers.ActorController, PlayGen.SUGAR.Server.Core.Controllers.GroupController, PlayGen.SUGAR.Server.Core.Controllers.UserController, PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory)
+  nameWithType: LeaderboardController.LeaderboardController(ILogger<LeaderboardController>, ILogger<EvaluationDataController>, LeaderboardController, RelationshipController, ActorController, GroupController, UserController, SUGARContextFactory)
+  nameWithType.vb: LeaderboardController.LeaderboardController(ILogger(Of LeaderboardController), ILogger(Of EvaluationDataController), LeaderboardController, RelationshipController, ActorController, GroupController, UserController, SUGARContextFactory)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.#ctor*
   name: LeaderboardController
   href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController__ctor_
@@ -8648,90 +8906,114 @@ references:
   commentId: F:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.ActorController
   fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.ActorController
   nameWithType: LeaderboardController.ActorController
-- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name: EvaluateCount(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateCount_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_PlayGen_SUGAR_Common_LeaderboardType_PlayGen_SUGAR_Common_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
-  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name.vb: EvaluateCount(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  nameWithType: LeaderboardController.EvaluateCount(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  nameWithType.vb: LeaderboardController.EvaluateCount(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Create(PlayGen.SUGAR.Server.Model.Leaderboard)
+  name: Create(Leaderboard)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Create_PlayGen_SUGAR_Server_Model_Leaderboard_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Create(PlayGen.SUGAR.Server.Model.Leaderboard)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Create(PlayGen.SUGAR.Server.Model.Leaderboard)
+  nameWithType: LeaderboardController.Create(Leaderboard)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Create*
+  name: Create
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Create_
+  commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Create
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Create
+  nameWithType: LeaderboardController.Create
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Delete(System.String,System.Int32)
+  name: Delete(String, Int32)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Delete_System_String_System_Int32_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Delete(System.String,System.Int32)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Delete(System.String, System.Int32)
+  nameWithType: LeaderboardController.Delete(String, Int32)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Delete*
+  name: Delete
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Delete_
+  commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Delete
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Delete
+  nameWithType: LeaderboardController.Delete
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name: EvaluateCount(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateCount_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_Leaderboard_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name.vb: EvaluateCount(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  nameWithType: LeaderboardController.EvaluateCount(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  nameWithType.vb: LeaderboardController.EvaluateCount(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount*
   name: EvaluateCount
   href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateCount_
   commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount
   fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCount
   nameWithType: LeaderboardController.EvaluateCount
-- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name: EvaluateCumulative(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateCumulative_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_PlayGen_SUGAR_Common_LeaderboardType_PlayGen_SUGAR_Common_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
-  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name.vb: EvaluateCumulative(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  nameWithType: LeaderboardController.EvaluateCumulative(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  nameWithType.vb: LeaderboardController.EvaluateCumulative(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name: EvaluateCumulative(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateCumulative_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_Leaderboard_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name.vb: EvaluateCumulative(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  nameWithType: LeaderboardController.EvaluateCumulative(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  nameWithType.vb: LeaderboardController.EvaluateCumulative(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative*
   name: EvaluateCumulative
   href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateCumulative_
   commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative
   fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateCumulative
   nameWithType: LeaderboardController.EvaluateCumulative
-- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name: EvaluateEarliest(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateEarliest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_PlayGen_SUGAR_Common_LeaderboardType_PlayGen_SUGAR_Common_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
-  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name.vb: EvaluateEarliest(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  nameWithType: LeaderboardController.EvaluateEarliest(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  nameWithType.vb: LeaderboardController.EvaluateEarliest(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name: EvaluateEarliest(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateEarliest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_Leaderboard_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name.vb: EvaluateEarliest(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  nameWithType: LeaderboardController.EvaluateEarliest(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  nameWithType.vb: LeaderboardController.EvaluateEarliest(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest*
   name: EvaluateEarliest
   href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateEarliest_
   commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest
   fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateEarliest
   nameWithType: LeaderboardController.EvaluateEarliest
-- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name: EvaluateHighest(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateHighest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_PlayGen_SUGAR_Common_LeaderboardType_PlayGen_SUGAR_Common_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
-  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name.vb: EvaluateHighest(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  nameWithType: LeaderboardController.EvaluateHighest(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  nameWithType.vb: LeaderboardController.EvaluateHighest(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name: EvaluateHighest(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateHighest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_Leaderboard_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name.vb: EvaluateHighest(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  nameWithType: LeaderboardController.EvaluateHighest(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  nameWithType.vb: LeaderboardController.EvaluateHighest(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest*
   name: EvaluateHighest
   href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateHighest_
   commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest
   fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateHighest
   nameWithType: LeaderboardController.EvaluateHighest
-- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name: EvaluateLatest(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateLatest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_PlayGen_SUGAR_Common_LeaderboardType_PlayGen_SUGAR_Common_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
-  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name.vb: EvaluateLatest(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  nameWithType: LeaderboardController.EvaluateLatest(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  nameWithType.vb: LeaderboardController.EvaluateLatest(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name: EvaluateLatest(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateLatest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_Leaderboard_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name.vb: EvaluateLatest(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  nameWithType: LeaderboardController.EvaluateLatest(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  nameWithType.vb: LeaderboardController.EvaluateLatest(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest*
   name: EvaluateLatest
   href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateLatest_
   commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest
   fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLatest
   nameWithType: LeaderboardController.EvaluateLatest
-- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name: EvaluateLowest(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateLowest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__System_Int32_System_String_PlayGen_SUGAR_Common_LeaderboardType_PlayGen_SUGAR_Common_EvaluationDataType_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
-  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},System.Int32,System.String,PlayGen.SUGAR.Common.LeaderboardType,PlayGen.SUGAR.Common.EvaluationDataType,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  name.vb: EvaluateLowest(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), System.Int32, System.String, PlayGen.SUGAR.Common.LeaderboardType, PlayGen.SUGAR.Common.EvaluationDataType, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
-  nameWithType: LeaderboardController.EvaluateLowest(EvaluationDataController, List<Actor>, Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
-  nameWithType.vb: LeaderboardController.EvaluateLowest(EvaluationDataController, List(Of Actor), Int32, String, LeaderboardType, EvaluationDataType, StandingsRequest)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name: EvaluateLowest(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateLowest_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_Leaderboard_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  name.vb: EvaluateLowest(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), PlayGen.SUGAR.Server.Model.Leaderboard, PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
+  nameWithType: LeaderboardController.EvaluateLowest(EvaluationDataController, List<Actor>, Leaderboard, StandingsRequest)
+  nameWithType.vb: LeaderboardController.EvaluateLowest(EvaluationDataController, List(Of Actor), Leaderboard, StandingsRequest)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.EvaluateLowest*
   name: EvaluateLowest
   href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_EvaluateLowest_
@@ -8765,6 +9047,24 @@ references:
   commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GatherStandings
   fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GatherStandings
   nameWithType: LeaderboardController.GatherStandings
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Get(System.Int32)
+  name: Get(Int32)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Get_System_Int32_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Get(System.Int32)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Get(System.Int32)
+  nameWithType: LeaderboardController.Get(Int32)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Get(System.String,System.Int32)
+  name: Get(String, Int32)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Get_System_String_System_Int32_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Get(System.String,System.Int32)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Get(System.String, System.Int32)
+  nameWithType: LeaderboardController.Get(String, Int32)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Get*
+  name: Get
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Get_
+  commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Get
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Get
+  nameWithType: LeaderboardController.Get
 - uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GetActors(PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController,PlayGen.SUGAR.Server.Model.Leaderboard,PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest)
   name: GetActors(EvaluationDataController, Leaderboard, StandingsRequest)
   href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_GetActors_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController_PlayGen_SUGAR_Server_Model_Leaderboard_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsRequest_
@@ -8807,6 +9107,18 @@ references:
   commentId: F:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GroupController
   fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.GroupController
   nameWithType: LeaderboardController.GroupController
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Update(PlayGen.SUGAR.Server.Model.Leaderboard)
+  name: Update(Leaderboard)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Update_PlayGen_SUGAR_Server_Model_Leaderboard_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Update(PlayGen.SUGAR.Server.Model.Leaderboard)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Update(PlayGen.SUGAR.Server.Model.Leaderboard)
+  nameWithType: LeaderboardController.Update(Leaderboard)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Update*
+  name: Update
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Update_
+  commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Update
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.Update
+  nameWithType: LeaderboardController.Update
 - uid: PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.UserController
   name: UserController
   href: api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html#PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_UserController
@@ -9677,60 +9989,60 @@ references:
   commentId: Overload:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateLong
   fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateLong
   nameWithType: CriteriaEvaluator.EvaluateLong
-- uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool(System.Int32,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  name: EvaluateManyBool(Int32, List<Actor>, EvaluationCriteria)
-  href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyBool_System_Int32_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_EvaluationCriteria_
-  commentId: M:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool(System.Int32,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  name.vb: EvaluateManyBool(Int32, List(Of Actor), EvaluationCriteria)
-  fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool(System.Int32, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  fullName.vb: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool(System.Int32, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  nameWithType: CriteriaEvaluator.EvaluateManyBool(Int32, List<Actor>, EvaluationCriteria)
-  nameWithType.vb: CriteriaEvaluator.EvaluateManyBool(Int32, List(Of Actor), EvaluationCriteria)
+- uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  name: EvaluateManyBool(Int32, List<Int32>, EvaluationCriteria)
+  href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyBool_System_Int32_System_Collections_Generic_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_
+  commentId: M:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  name.vb: EvaluateManyBool(Int32, List(Of Int32), EvaluationCriteria)
+  fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool(System.Int32, System.Collections.Generic.List<System.Int32>, PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  fullName.vb: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool(System.Int32, System.Collections.Generic.List(Of System.Int32), PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  nameWithType: CriteriaEvaluator.EvaluateManyBool(Int32, List<Int32>, EvaluationCriteria)
+  nameWithType.vb: CriteriaEvaluator.EvaluateManyBool(Int32, List(Of Int32), EvaluationCriteria)
 - uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool*
   name: EvaluateManyBool
   href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyBool_
   commentId: Overload:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool
   fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool
   nameWithType: CriteriaEvaluator.EvaluateManyBool
-- uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat(System.Int32,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  name: EvaluateManyFloat(Int32, List<Actor>, EvaluationCriteria)
-  href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyFloat_System_Int32_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_EvaluationCriteria_
-  commentId: M:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat(System.Int32,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  name.vb: EvaluateManyFloat(Int32, List(Of Actor), EvaluationCriteria)
-  fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat(System.Int32, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  fullName.vb: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat(System.Int32, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  nameWithType: CriteriaEvaluator.EvaluateManyFloat(Int32, List<Actor>, EvaluationCriteria)
-  nameWithType.vb: CriteriaEvaluator.EvaluateManyFloat(Int32, List(Of Actor), EvaluationCriteria)
+- uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  name: EvaluateManyFloat(Int32, List<Int32>, EvaluationCriteria)
+  href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyFloat_System_Int32_System_Collections_Generic_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_
+  commentId: M:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  name.vb: EvaluateManyFloat(Int32, List(Of Int32), EvaluationCriteria)
+  fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat(System.Int32, System.Collections.Generic.List<System.Int32>, PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  fullName.vb: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat(System.Int32, System.Collections.Generic.List(Of System.Int32), PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  nameWithType: CriteriaEvaluator.EvaluateManyFloat(Int32, List<Int32>, EvaluationCriteria)
+  nameWithType.vb: CriteriaEvaluator.EvaluateManyFloat(Int32, List(Of Int32), EvaluationCriteria)
 - uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat*
   name: EvaluateManyFloat
   href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyFloat_
   commentId: Overload:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat
   fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat
   nameWithType: CriteriaEvaluator.EvaluateManyFloat
-- uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong(System.Int32,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  name: EvaluateManyLong(Int32, List<Actor>, EvaluationCriteria)
-  href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyLong_System_Int32_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_EvaluationCriteria_
-  commentId: M:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong(System.Int32,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  name.vb: EvaluateManyLong(Int32, List(Of Actor), EvaluationCriteria)
-  fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong(System.Int32, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  fullName.vb: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong(System.Int32, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  nameWithType: CriteriaEvaluator.EvaluateManyLong(Int32, List<Actor>, EvaluationCriteria)
-  nameWithType.vb: CriteriaEvaluator.EvaluateManyLong(Int32, List(Of Actor), EvaluationCriteria)
+- uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  name: EvaluateManyLong(Int32, List<Int32>, EvaluationCriteria)
+  href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyLong_System_Int32_System_Collections_Generic_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_
+  commentId: M:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  name.vb: EvaluateManyLong(Int32, List(Of Int32), EvaluationCriteria)
+  fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong(System.Int32, System.Collections.Generic.List<System.Int32>, PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  fullName.vb: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong(System.Int32, System.Collections.Generic.List(Of System.Int32), PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  nameWithType: CriteriaEvaluator.EvaluateManyLong(Int32, List<Int32>, EvaluationCriteria)
+  nameWithType.vb: CriteriaEvaluator.EvaluateManyLong(Int32, List(Of Int32), EvaluationCriteria)
 - uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong*
   name: EvaluateManyLong
   href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyLong_
   commentId: Overload:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong
   fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong
   nameWithType: CriteriaEvaluator.EvaluateManyLong
-- uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString(System.Int32,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  name: EvaluateManyString(Int32, List<Actor>, EvaluationCriteria)
-  href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyString_System_Int32_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Actor__PlayGen_SUGAR_Server_Model_EvaluationCriteria_
-  commentId: M:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString(System.Int32,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Actor},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  name.vb: EvaluateManyString(Int32, List(Of Actor), EvaluationCriteria)
-  fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString(System.Int32, System.Collections.Generic.List<PlayGen.SUGAR.Server.Model.Actor>, PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  fullName.vb: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString(System.Int32, System.Collections.Generic.List(Of PlayGen.SUGAR.Server.Model.Actor), PlayGen.SUGAR.Server.Model.EvaluationCriteria)
-  nameWithType: CriteriaEvaluator.EvaluateManyString(Int32, List<Actor>, EvaluationCriteria)
-  nameWithType.vb: CriteriaEvaluator.EvaluateManyString(Int32, List(Of Actor), EvaluationCriteria)
+- uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  name: EvaluateManyString(Int32, List<Int32>, EvaluationCriteria)
+  href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyString_System_Int32_System_Collections_Generic_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_
+  commentId: M:PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  name.vb: EvaluateManyString(Int32, List(Of Int32), EvaluationCriteria)
+  fullName: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString(System.Int32, System.Collections.Generic.List<System.Int32>, PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  fullName.vb: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString(System.Int32, System.Collections.Generic.List(Of System.Int32), PlayGen.SUGAR.Server.Model.EvaluationCriteria)
+  nameWithType: CriteriaEvaluator.EvaluateManyString(Int32, List<Int32>, EvaluationCriteria)
+  nameWithType.vb: CriteriaEvaluator.EvaluateManyString(Int32, List(Of Int32), EvaluationCriteria)
 - uid: PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString*
   name: EvaluateManyString
   href: api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html#PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyString_
@@ -12101,12 +12413,12 @@ references:
   commentId: Overload:PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.Get
   fullName: PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.Get
   nameWithType: RoleController.Get
-- uid: PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.GetDefault(System.String)
-  name: GetDefault(String)
-  href: api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.html#PlayGen_SUGAR_Server_EntityFramework_Controllers_RoleController_GetDefault_System_String_
-  commentId: M:PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.GetDefault(System.String)
-  fullName: PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.GetDefault(System.String)
-  nameWithType: RoleController.GetDefault(String)
+- uid: PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.GetDefault(PlayGen.SUGAR.Common.Authorization.ClaimScope)
+  name: GetDefault(ClaimScope)
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.html#PlayGen_SUGAR_Server_EntityFramework_Controllers_RoleController_GetDefault_PlayGen_SUGAR_Common_Authorization_ClaimScope_
+  commentId: M:PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.GetDefault(PlayGen.SUGAR.Common.Authorization.ClaimScope)
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.GetDefault(PlayGen.SUGAR.Common.Authorization.ClaimScope)
+  nameWithType: RoleController.GetDefault(ClaimScope)
 - uid: PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.GetDefault*
   name: GetDefault
   href: api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.html#PlayGen_SUGAR_Server_EntityFramework_Controllers_RoleController_GetDefault_
@@ -12794,6 +13106,18 @@ references:
   commentId: Overload:PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedActor
   fullName: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedActor
   nameWithType: ContextExtensions.HandleDetatchedActor
+- uid: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedEvaluationData(PlayGen.SUGAR.Server.EntityFramework.SUGARContext,PlayGen.SUGAR.Server.Model.EvaluationData)
+  name: HandleDetatchedEvaluationData(SUGARContext, EvaluationData)
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.html#PlayGen_SUGAR_Server_EntityFramework_Extensions_ContextExtensions_HandleDetatchedEvaluationData_PlayGen_SUGAR_Server_EntityFramework_SUGARContext_PlayGen_SUGAR_Server_Model_EvaluationData_
+  commentId: M:PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedEvaluationData(PlayGen.SUGAR.Server.EntityFramework.SUGARContext,PlayGen.SUGAR.Server.Model.EvaluationData)
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedEvaluationData(PlayGen.SUGAR.Server.EntityFramework.SUGARContext, PlayGen.SUGAR.Server.Model.EvaluationData)
+  nameWithType: ContextExtensions.HandleDetatchedEvaluationData(SUGARContext, EvaluationData)
+- uid: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedEvaluationData*
+  name: HandleDetatchedEvaluationData
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.html#PlayGen_SUGAR_Server_EntityFramework_Extensions_ContextExtensions_HandleDetatchedEvaluationData_
+  commentId: Overload:PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedEvaluationData
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedEvaluationData
+  nameWithType: ContextExtensions.HandleDetatchedEvaluationData
 - uid: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedGame(PlayGen.SUGAR.Server.EntityFramework.SUGARContext,System.Int32)
   name: HandleDetatchedGame(SUGARContext, Int32)
   href: api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.html#PlayGen_SUGAR_Server_EntityFramework_Extensions_ContextExtensions_HandleDetatchedGame_PlayGen_SUGAR_Server_EntityFramework_SUGARContext_System_Int32_
@@ -12806,18 +13130,6 @@ references:
   commentId: Overload:PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedGame
   fullName: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedGame
   nameWithType: ContextExtensions.HandleDetatchedGame
-- uid: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedGameData(PlayGen.SUGAR.Server.EntityFramework.SUGARContext,PlayGen.SUGAR.Server.Model.EvaluationData)
-  name: HandleDetatchedGameData(SUGARContext, EvaluationData)
-  href: api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.html#PlayGen_SUGAR_Server_EntityFramework_Extensions_ContextExtensions_HandleDetatchedGameData_PlayGen_SUGAR_Server_EntityFramework_SUGARContext_PlayGen_SUGAR_Server_Model_EvaluationData_
-  commentId: M:PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedGameData(PlayGen.SUGAR.Server.EntityFramework.SUGARContext,PlayGen.SUGAR.Server.Model.EvaluationData)
-  fullName: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedGameData(PlayGen.SUGAR.Server.EntityFramework.SUGARContext, PlayGen.SUGAR.Server.Model.EvaluationData)
-  nameWithType: ContextExtensions.HandleDetatchedGameData(SUGARContext, EvaluationData)
-- uid: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedGameData*
-  name: HandleDetatchedGameData
-  href: api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.html#PlayGen_SUGAR_Server_EntityFramework_Extensions_ContextExtensions_HandleDetatchedGameData_
-  commentId: Overload:PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedGameData
-  fullName: PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.HandleDetatchedGameData
-  nameWithType: ContextExtensions.HandleDetatchedGameData
 - uid: PlayGen.SUGAR.Server.EntityFramework.Extensions.DbSetExtensions
   name: DbSetExtensions
   href: api/PlayGen.SUGAR.Server.EntityFramework.Extensions.DbSetExtensions.html
@@ -14762,24 +15074,24 @@ references:
   commentId: N:PlayGen.SUGAR.Server.Model.Interfaces
   fullName: PlayGen.SUGAR.Server.Model.Interfaces
   nameWithType: PlayGen.SUGAR.Server.Model.Interfaces
-- uid: PlayGen.SUGAR.Server.Model.Interfaces.IGameData
-  name: IGameData
-  href: api/PlayGen.SUGAR.Server.Model.Interfaces.IGameData.html
-  commentId: T:PlayGen.SUGAR.Server.Model.Interfaces.IGameData
-  fullName: PlayGen.SUGAR.Server.Model.Interfaces.IGameData
-  nameWithType: IGameData
-- uid: PlayGen.SUGAR.Server.Model.Interfaces.IGameData.ActorId
+- uid: PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData
+  name: IEvaluationData
+  href: api/PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.html
+  commentId: T:PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData
+  fullName: PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData
+  nameWithType: IEvaluationData
+- uid: PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.ActorId
   name: ActorId
-  href: api/PlayGen.SUGAR.Server.Model.Interfaces.IGameData.html#PlayGen_SUGAR_Server_Model_Interfaces_IGameData_ActorId
-  commentId: P:PlayGen.SUGAR.Server.Model.Interfaces.IGameData.ActorId
-  fullName: PlayGen.SUGAR.Server.Model.Interfaces.IGameData.ActorId
-  nameWithType: IGameData.ActorId
-- uid: PlayGen.SUGAR.Server.Model.Interfaces.IGameData.ActorId*
+  href: api/PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.html#PlayGen_SUGAR_Server_Model_Interfaces_IEvaluationData_ActorId
+  commentId: P:PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.ActorId
+  fullName: PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.ActorId
+  nameWithType: IEvaluationData.ActorId
+- uid: PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.ActorId*
   name: ActorId
-  href: api/PlayGen.SUGAR.Server.Model.Interfaces.IGameData.html#PlayGen_SUGAR_Server_Model_Interfaces_IGameData_ActorId_
-  commentId: Overload:PlayGen.SUGAR.Server.Model.Interfaces.IGameData.ActorId
-  fullName: PlayGen.SUGAR.Server.Model.Interfaces.IGameData.ActorId
-  nameWithType: IGameData.ActorId
+  href: api/PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.html#PlayGen_SUGAR_Server_Model_Interfaces_IEvaluationData_ActorId_
+  commentId: Overload:PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.ActorId
+  fullName: PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.ActorId
+  nameWithType: IEvaluationData.ActorId
 - uid: PlayGen.SUGAR.Server.Model.Interfaces.IModificationHistory
   name: IModificationHistory
   href: api/PlayGen.SUGAR.Server.Model.Interfaces.IModificationHistory.html
@@ -16382,12 +16694,12 @@ references:
   commentId: T:PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController
   fullName: PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController
   nameWithType: LeaderboardsController
-- uid: PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.#ctor(PlayGen.SUGAR.Server.EntityFramework.Controllers.LeaderboardController,PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController,Microsoft.AspNetCore.Authorization.IAuthorizationService)
-  name: LeaderboardsController(LeaderboardController, LeaderboardController, IAuthorizationService)
-  href: api/PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.html#PlayGen_SUGAR_Server_WebAPI_Controllers_LeaderboardsController__ctor_PlayGen_SUGAR_Server_EntityFramework_Controllers_LeaderboardController_PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Microsoft_AspNetCore_Authorization_IAuthorizationService_
-  commentId: M:PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.#ctor(PlayGen.SUGAR.Server.EntityFramework.Controllers.LeaderboardController,PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController,Microsoft.AspNetCore.Authorization.IAuthorizationService)
-  fullName: PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.LeaderboardsController(PlayGen.SUGAR.Server.EntityFramework.Controllers.LeaderboardController, PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController, Microsoft.AspNetCore.Authorization.IAuthorizationService)
-  nameWithType: LeaderboardsController.LeaderboardsController(LeaderboardController, LeaderboardController, IAuthorizationService)
+- uid: PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.#ctor(PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController,Microsoft.AspNetCore.Authorization.IAuthorizationService)
+  name: LeaderboardsController(LeaderboardController, IAuthorizationService)
+  href: api/PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.html#PlayGen_SUGAR_Server_WebAPI_Controllers_LeaderboardsController__ctor_PlayGen_SUGAR_Server_Core_Controllers_LeaderboardController_Microsoft_AspNetCore_Authorization_IAuthorizationService_
+  commentId: M:PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.#ctor(PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController,Microsoft.AspNetCore.Authorization.IAuthorizationService)
+  fullName: PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.LeaderboardsController(PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController, Microsoft.AspNetCore.Authorization.IAuthorizationService)
+  nameWithType: LeaderboardsController.LeaderboardsController(LeaderboardController, IAuthorizationService)
 - uid: PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.#ctor*
   name: LeaderboardsController
   href: api/PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.html#PlayGen_SUGAR_Server_WebAPI_Controllers_LeaderboardsController__ctor_
@@ -18704,6 +19016,21 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.AccountUnityClient.IsActive
   fullName: PlayGen.SUGAR.Unity.AccountUnityClient.IsActive
   nameWithType: AccountUnityClient.IsActive
+- uid: PlayGen.SUGAR.Unity.AccountUnityClient.Logout(System.Action{System.Boolean})
+  name: Logout(Action<Boolean>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_Logout_System_Action_System_Boolean__
+  commentId: M:PlayGen.SUGAR.Unity.AccountUnityClient.Logout(System.Action{System.Boolean})
+  name.vb: Logout(Action(Of Boolean))
+  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.Logout(System.Action<System.Boolean>)
+  fullName.vb: PlayGen.SUGAR.Unity.AccountUnityClient.Logout(System.Action(Of System.Boolean))
+  nameWithType: AccountUnityClient.Logout(Action<Boolean>)
+  nameWithType.vb: AccountUnityClient.Logout(Action(Of Boolean))
+- uid: PlayGen.SUGAR.Unity.AccountUnityClient.Logout*
+  name: Logout
+  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_Logout_
+  commentId: Overload:PlayGen.SUGAR.Unity.AccountUnityClient.Logout
+  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.Logout
+  nameWithType: AccountUnityClient.Logout
 - uid: PlayGen.SUGAR.Unity.AchievementUnityClient
   name: AchievementUnityClient
   href: unity-client/api/PlayGen.SUGAR.Unity.AchievementUnityClient.html
@@ -18944,6 +19271,96 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.BaseAchievementPopupInterface.Display
   fullName: PlayGen.SUGAR.Unity.BaseAchievementPopupInterface.Display
   nameWithType: BaseAchievementPopupInterface.Display
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationListInterface
+  name: BaseEvaluationListInterface
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html
+  commentId: T:PlayGen.SUGAR.Unity.BaseEvaluationListInterface
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationListInterface
+  nameWithType: BaseEvaluationListInterface
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.ErrorDraw(System.Boolean)
+  name: ErrorDraw(Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationListInterface_ErrorDraw_System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.BaseEvaluationListInterface.ErrorDraw(System.Boolean)
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.ErrorDraw(System.Boolean)
+  nameWithType: BaseEvaluationListInterface.ErrorDraw(Boolean)
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.ErrorDraw*
+  name: ErrorDraw
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationListInterface_ErrorDraw_
+  commentId: Overload:PlayGen.SUGAR.Unity.BaseEvaluationListInterface.ErrorDraw
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.ErrorDraw
+  nameWithType: BaseEvaluationListInterface.ErrorDraw
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.HideInterfaces
+  name: HideInterfaces()
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationListInterface_HideInterfaces
+  commentId: M:PlayGen.SUGAR.Unity.BaseEvaluationListInterface.HideInterfaces
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.HideInterfaces()
+  nameWithType: BaseEvaluationListInterface.HideInterfaces()
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.HideInterfaces*
+  name: HideInterfaces
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationListInterface_HideInterfaces_
+  commentId: Overload:PlayGen.SUGAR.Unity.BaseEvaluationListInterface.HideInterfaces
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.HideInterfaces
+  nameWithType: BaseEvaluationListInterface.HideInterfaces
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.LoadErrorText
+  name: LoadErrorText()
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationListInterface_LoadErrorText
+  commentId: M:PlayGen.SUGAR.Unity.BaseEvaluationListInterface.LoadErrorText
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.LoadErrorText()
+  nameWithType: BaseEvaluationListInterface.LoadErrorText()
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.LoadErrorText*
+  name: LoadErrorText
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationListInterface_LoadErrorText_
+  commentId: Overload:PlayGen.SUGAR.Unity.BaseEvaluationListInterface.LoadErrorText
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.LoadErrorText
+  nameWithType: BaseEvaluationListInterface.LoadErrorText
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.NoResultsErrorText
+  name: NoResultsErrorText()
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationListInterface_NoResultsErrorText
+  commentId: M:PlayGen.SUGAR.Unity.BaseEvaluationListInterface.NoResultsErrorText
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.NoResultsErrorText()
+  nameWithType: BaseEvaluationListInterface.NoResultsErrorText()
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.NoResultsErrorText*
+  name: NoResultsErrorText
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationListInterface_NoResultsErrorText_
+  commentId: Overload:PlayGen.SUGAR.Unity.BaseEvaluationListInterface.NoResultsErrorText
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationListInterface.NoResultsErrorText
+  nameWithType: BaseEvaluationListInterface.NoResultsErrorText
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface
+  name: BaseEvaluationPopupInterface
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.html
+  commentId: T:PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface
+  nameWithType: BaseEvaluationPopupInterface
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface._evaluationQueue
+  name: _evaluationQueue
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationPopupInterface__evaluationQueue
+  commentId: F:PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface._evaluationQueue
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface._evaluationQueue
+  nameWithType: BaseEvaluationPopupInterface._evaluationQueue
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface._image
+  name: _image
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationPopupInterface__image
+  commentId: F:PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface._image
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface._image
+  nameWithType: BaseEvaluationPopupInterface._image
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface._name
+  name: _name
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationPopupInterface__name
+  commentId: F:PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface._name
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface._name
+  nameWithType: BaseEvaluationPopupInterface._name
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.Display(PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification)
+  name: Display(EvaluationNotification)
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationPopupInterface_Display_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification_
+  commentId: M:PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.Display(PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification)
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.Display(PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification)
+  nameWithType: BaseEvaluationPopupInterface.Display(EvaluationNotification)
+- uid: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.Display*
+  name: Display
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.html#PlayGen_SUGAR_Unity_BaseEvaluationPopupInterface_Display_
+  commentId: Overload:PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.Display
+  fullName: PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.Display
+  nameWithType: BaseEvaluationPopupInterface.Display
 - uid: PlayGen.SUGAR.Unity.BaseGroupMemberInterface
   name: BaseGroupMemberInterface
   href: unity-client/api/PlayGen.SUGAR.Unity.BaseGroupMemberInterface.html
@@ -19825,27 +20242,171 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.SetAutoLogIn
   fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.SetAutoLogIn
   nameWithType: SetEditorAutoLogin.SetAutoLogIn
+- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient
+  name: EvaluationUnityClient
+  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html
+  commentId: T:PlayGen.SUGAR.Unity.EvaluationUnityClient
+  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient
+  nameWithType: EvaluationUnityClient
+- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayAchievementList
+  name: DisplayAchievementList()
+  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayAchievementList
+  commentId: M:PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayAchievementList
+  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayAchievementList()
+  nameWithType: EvaluationUnityClient.DisplayAchievementList()
+- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayAchievementList*
+  name: DisplayAchievementList
+  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayAchievementList_
+  commentId: Overload:PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayAchievementList
+  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayAchievementList
+  nameWithType: EvaluationUnityClient.DisplayAchievementList
+- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplaySkillList
+  name: DisplaySkillList()
+  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplaySkillList
+  commentId: M:PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplaySkillList
+  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplaySkillList()
+  nameWithType: EvaluationUnityClient.DisplaySkillList()
+- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplaySkillList*
+  name: DisplaySkillList
+  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplaySkillList_
+  commentId: Overload:PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplaySkillList
+  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplaySkillList
+  nameWithType: EvaluationUnityClient.DisplaySkillList
+- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.ForceNotificationTest(System.String)
+  name: ForceNotificationTest(String)
+  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_ForceNotificationTest_System_String_
+  commentId: M:PlayGen.SUGAR.Unity.EvaluationUnityClient.ForceNotificationTest(System.String)
+  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.ForceNotificationTest(System.String)
+  nameWithType: EvaluationUnityClient.ForceNotificationTest(String)
+- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.ForceNotificationTest*
+  name: ForceNotificationTest
+  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_ForceNotificationTest_
+  commentId: Overload:PlayGen.SUGAR.Unity.EvaluationUnityClient.ForceNotificationTest
+  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.ForceNotificationTest
+  nameWithType: EvaluationUnityClient.ForceNotificationTest
+- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.Progress
+  name: Progress
+  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_Progress
+  commentId: P:PlayGen.SUGAR.Unity.EvaluationUnityClient.Progress
+  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.Progress
+  nameWithType: EvaluationUnityClient.Progress
+- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.Progress*
+  name: Progress
+  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_Progress_
+  commentId: Overload:PlayGen.SUGAR.Unity.EvaluationUnityClient.Progress
+  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.Progress
+  nameWithType: EvaluationUnityClient.Progress
 - uid: PlayGen.SUGAR.Unity.GameDataUnityClient
   name: GameDataUnityClient
   href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html
   commentId: T:PlayGen.SUGAR.Unity.GameDataUnityClient
   fullName: PlayGen.SUGAR.Unity.GameDataUnityClient
   nameWithType: GameDataUnityClient
-- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String[],PlayGen.SUGAR.Common.EvaluationDataType)
-  name: GetHighest(String[], EvaluationDataType)
-  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetHighest_System_String___PlayGen_SUGAR_Common_EvaluationDataType_
-  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String[],PlayGen.SUGAR.Common.EvaluationDataType)
-  name.vb: GetHighest(String(), EvaluationDataType)
-  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String[], PlayGen.SUGAR.Common.EvaluationDataType)
-  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String(), PlayGen.SUGAR.Common.EvaluationDataType)
-  nameWithType: GameDataUnityClient.GetHighest(String[], EvaluationDataType)
-  nameWithType.vb: GameDataUnityClient.GetHighest(String(), EvaluationDataType)
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Get(System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.EvaluationDataResponse}},System.String[])
+  name: Get(Action<IEnumerable<EvaluationDataResponse>>, String[])
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Get_System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_EvaluationDataResponse___System_String___
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.Get(System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.EvaluationDataResponse}},System.String[])
+  name.vb: Get(Action(Of IEnumerable(Of EvaluationDataResponse)), String())
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.Get(System.Action<System.Collections.Generic.IEnumerable<PlayGen.SUGAR.Contracts.EvaluationDataResponse>>, System.String[])
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.Get(System.Action(Of System.Collections.Generic.IEnumerable(Of PlayGen.SUGAR.Contracts.EvaluationDataResponse)), System.String())
+  nameWithType: GameDataUnityClient.Get(Action<IEnumerable<EvaluationDataResponse>>, String[])
+  nameWithType.vb: GameDataUnityClient.Get(Action(Of IEnumerable(Of EvaluationDataResponse)), String())
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Get*
+  name: Get
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Get_
+  commentId: Overload:PlayGen.SUGAR.Unity.GameDataUnityClient.Get
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.Get
+  nameWithType: GameDataUnityClient.Get
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name: GetCount(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetCount_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name.vb: GetCount(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action<PlayGen.SUGAR.Contracts.EvaluationDataResponse>)
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action(Of PlayGen.SUGAR.Contracts.EvaluationDataResponse))
+  nameWithType: GameDataUnityClient.GetCount(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  nameWithType.vb: GameDataUnityClient.GetCount(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount*
+  name: GetCount
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetCount_
+  commentId: Overload:PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount
+  nameWithType: GameDataUnityClient.GetCount
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name: GetCumulative(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetCumulative_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name.vb: GetCumulative(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action<PlayGen.SUGAR.Contracts.EvaluationDataResponse>)
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action(Of PlayGen.SUGAR.Contracts.EvaluationDataResponse))
+  nameWithType: GameDataUnityClient.GetCumulative(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  nameWithType.vb: GameDataUnityClient.GetCumulative(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative*
+  name: GetCumulative
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetCumulative_
+  commentId: Overload:PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative
+  nameWithType: GameDataUnityClient.GetCumulative
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name: GetEarliest(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetEarliest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name.vb: GetEarliest(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action<PlayGen.SUGAR.Contracts.EvaluationDataResponse>)
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action(Of PlayGen.SUGAR.Contracts.EvaluationDataResponse))
+  nameWithType: GameDataUnityClient.GetEarliest(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  nameWithType.vb: GameDataUnityClient.GetEarliest(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest*
+  name: GetEarliest
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetEarliest_
+  commentId: Overload:PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest
+  nameWithType: GameDataUnityClient.GetEarliest
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name: GetHighest(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetHighest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name.vb: GetHighest(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action<PlayGen.SUGAR.Contracts.EvaluationDataResponse>)
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action(Of PlayGen.SUGAR.Contracts.EvaluationDataResponse))
+  nameWithType: GameDataUnityClient.GetHighest(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  nameWithType.vb: GameDataUnityClient.GetHighest(String, EvaluationDataType, Action(Of EvaluationDataResponse))
 - uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest*
   name: GetHighest
   href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetHighest_
   commentId: Overload:PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest
   fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest
   nameWithType: GameDataUnityClient.GetHighest
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name: GetLatest(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetLatest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name.vb: GetLatest(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action<PlayGen.SUGAR.Contracts.EvaluationDataResponse>)
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action(Of PlayGen.SUGAR.Contracts.EvaluationDataResponse))
+  nameWithType: GameDataUnityClient.GetLatest(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  nameWithType.vb: GameDataUnityClient.GetLatest(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest*
+  name: GetLatest
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetLatest_
+  commentId: Overload:PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest
+  nameWithType: GameDataUnityClient.GetLatest
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name: GetLowest(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetLowest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})
+  name.vb: GetLowest(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action<PlayGen.SUGAR.Contracts.EvaluationDataResponse>)
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest(System.String, PlayGen.SUGAR.Common.EvaluationDataType, System.Action(Of PlayGen.SUGAR.Contracts.EvaluationDataResponse))
+  nameWithType: GameDataUnityClient.GetLowest(String, EvaluationDataType, Action<EvaluationDataResponse>)
+  nameWithType.vb: GameDataUnityClient.GetLowest(String, EvaluationDataType, Action(Of EvaluationDataResponse))
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest*
+  name: GetLowest
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_GetLowest_
+  commentId: Overload:PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest
+  nameWithType: GameDataUnityClient.GetLowest
 - uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Boolean)
   name: Send(String, Boolean)
   href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Boolean_
@@ -19948,18 +20509,30 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.LeaderboardListUnityClient.CurrentActorType
   fullName: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.CurrentActorType
   nameWithType: LeaderboardListUnityClient.CurrentActorType
-- uid: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayList(PlayGen.SUGAR.Common.ActorType)
-  name: DisplayList(ActorType)
-  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardListUnityClient_DisplayList_PlayGen_SUGAR_Common_ActorType_
-  commentId: M:PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayList(PlayGen.SUGAR.Common.ActorType)
-  fullName: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayList(PlayGen.SUGAR.Common.ActorType)
-  nameWithType: LeaderboardListUnityClient.DisplayList(ActorType)
-- uid: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayList*
-  name: DisplayList
-  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardListUnityClient_DisplayList_
-  commentId: Overload:PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayList
-  fullName: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayList
-  nameWithType: LeaderboardListUnityClient.DisplayList
+- uid: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGameList(PlayGen.SUGAR.Common.ActorType)
+  name: DisplayGameList(ActorType)
+  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardListUnityClient_DisplayGameList_PlayGen_SUGAR_Common_ActorType_
+  commentId: M:PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGameList(PlayGen.SUGAR.Common.ActorType)
+  fullName: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGameList(PlayGen.SUGAR.Common.ActorType)
+  nameWithType: LeaderboardListUnityClient.DisplayGameList(ActorType)
+- uid: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGameList*
+  name: DisplayGameList
+  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardListUnityClient_DisplayGameList_
+  commentId: Overload:PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGameList
+  fullName: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGameList
+  nameWithType: LeaderboardListUnityClient.DisplayGameList
+- uid: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGlobalList(PlayGen.SUGAR.Common.ActorType)
+  name: DisplayGlobalList(ActorType)
+  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardListUnityClient_DisplayGlobalList_PlayGen_SUGAR_Common_ActorType_
+  commentId: M:PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGlobalList(PlayGen.SUGAR.Common.ActorType)
+  fullName: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGlobalList(PlayGen.SUGAR.Common.ActorType)
+  nameWithType: LeaderboardListUnityClient.DisplayGlobalList(ActorType)
+- uid: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGlobalList*
+  name: DisplayGlobalList
+  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardListUnityClient_DisplayGlobalList_
+  commentId: Overload:PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGlobalList
+  fullName: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGlobalList
+  nameWithType: LeaderboardListUnityClient.DisplayGlobalList
 - uid: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.Leaderboards
   name: Leaderboards
   href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardListUnityClient_Leaderboards
@@ -20026,12 +20599,12 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.LeaderboardUnityClient.CurrentStandings
   fullName: PlayGen.SUGAR.Unity.LeaderboardUnityClient.CurrentStandings
   nameWithType: LeaderboardUnityClient.CurrentStandings
-- uid: PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,PlayGen.SUGAR.Common.LeaderboardFilterType,System.Int32)
-  name: Display(String, LeaderboardFilterType, Int32)
-  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_System_String_PlayGen_SUGAR_Common_LeaderboardFilterType_System_Int32_
-  commentId: M:PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,PlayGen.SUGAR.Common.LeaderboardFilterType,System.Int32)
-  fullName: PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String, PlayGen.SUGAR.Common.LeaderboardFilterType, System.Int32)
-  nameWithType: LeaderboardUnityClient.Display(String, LeaderboardFilterType, Int32)
+- uid: PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,PlayGen.SUGAR.Common.LeaderboardFilterType,System.Int32,System.Boolean)
+  name: Display(String, LeaderboardFilterType, Int32, Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_System_String_PlayGen_SUGAR_Common_LeaderboardFilterType_System_Int32_System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,PlayGen.SUGAR.Common.LeaderboardFilterType,System.Int32,System.Boolean)
+  fullName: PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String, PlayGen.SUGAR.Common.LeaderboardFilterType, System.Int32, System.Boolean)
+  nameWithType: LeaderboardUnityClient.Display(String, LeaderboardFilterType, Int32, Boolean)
 - uid: PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display*
   name: Display
   href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_
@@ -20098,33 +20671,21 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.Add
   fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Add
   nameWithType: ResourceUnityClient.Add
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Get(System.Action{System.Collections.Generic.List{PlayGen.SUGAR.Contracts.ResourceResponse}},System.String[],System.Boolean,System.Nullable{System.Int32})
-  name: Get(Action<List<ResourceResponse>>, String[], Boolean, Nullable<Int32>)
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Get_System_Action_System_Collections_Generic_List_PlayGen_SUGAR_Contracts_ResourceResponse___System_String___System_Boolean_System_Nullable_System_Int32__
-  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.Get(System.Action{System.Collections.Generic.List{PlayGen.SUGAR.Contracts.ResourceResponse}},System.String[],System.Boolean,System.Nullable{System.Int32})
-  name.vb: Get(Action(Of List(Of ResourceResponse)), String(), Boolean, Nullable(Of Int32))
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Get(System.Action<System.Collections.Generic.List<PlayGen.SUGAR.Contracts.ResourceResponse>>, System.String[], System.Boolean, System.Nullable<System.Int32>)
-  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.Get(System.Action(Of System.Collections.Generic.List(Of PlayGen.SUGAR.Contracts.ResourceResponse)), System.String(), System.Boolean, System.Nullable(Of System.Int32))
-  nameWithType: ResourceUnityClient.Get(Action<List<ResourceResponse>>, String[], Boolean, Nullable<Int32>)
-  nameWithType.vb: ResourceUnityClient.Get(Action(Of List(Of ResourceResponse)), String(), Boolean, Nullable(Of Int32))
+- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Get(System.Action{System.Collections.Generic.List{PlayGen.SUGAR.Contracts.ResourceResponse}},System.String[],System.Boolean)
+  name: Get(Action<List<ResourceResponse>>, String[], Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Get_System_Action_System_Collections_Generic_List_PlayGen_SUGAR_Contracts_ResourceResponse___System_String___System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.Get(System.Action{System.Collections.Generic.List{PlayGen.SUGAR.Contracts.ResourceResponse}},System.String[],System.Boolean)
+  name.vb: Get(Action(Of List(Of ResourceResponse)), String(), Boolean)
+  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Get(System.Action<System.Collections.Generic.List<PlayGen.SUGAR.Contracts.ResourceResponse>>, System.String[], System.Boolean)
+  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.Get(System.Action(Of System.Collections.Generic.List(Of PlayGen.SUGAR.Contracts.ResourceResponse)), System.String(), System.Boolean)
+  nameWithType: ResourceUnityClient.Get(Action<List<ResourceResponse>>, String[], Boolean)
+  nameWithType.vb: ResourceUnityClient.Get(Action(Of List(Of ResourceResponse)), String(), Boolean)
 - uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Get*
   name: Get
   href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Get_
   commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.Get
   fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Get
   nameWithType: ResourceUnityClient.Get
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalGameResources
-  name: GlobalGameResources
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_GlobalGameResources
-  commentId: P:PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalGameResources
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalGameResources
-  nameWithType: ResourceUnityClient.GlobalGameResources
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalGameResources*
-  name: GlobalGameResources
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_GlobalGameResources_
-  commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalGameResources
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalGameResources
-  nameWithType: ResourceUnityClient.GlobalGameResources
 - uid: PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources
   name: GlobalUserResources
   href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_GlobalUserResources
@@ -20137,21 +20698,6 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources
   fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources
   nameWithType: ResourceUnityClient.GlobalUserResources
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Set(System.String,System.Int64,System.Action{System.Boolean},System.Boolean)
-  name: Set(String, Int64, Action<Boolean>, Boolean)
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Set_System_String_System_Int64_System_Action_System_Boolean__System_Boolean_
-  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.Set(System.String,System.Int64,System.Action{System.Boolean},System.Boolean)
-  name.vb: Set(String, Int64, Action(Of Boolean), Boolean)
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Set(System.String, System.Int64, System.Action<System.Boolean>, System.Boolean)
-  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.Set(System.String, System.Int64, System.Action(Of System.Boolean), System.Boolean)
-  nameWithType: ResourceUnityClient.Set(String, Int64, Action<Boolean>, Boolean)
-  nameWithType.vb: ResourceUnityClient.Set(String, Int64, Action(Of Boolean), Boolean)
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Set*
-  name: Set
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Set_
-  commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.Set
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Set
-  nameWithType: ResourceUnityClient.Set
 - uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer(System.Int32,System.String,System.Int64,System.Action{System.Boolean},System.Boolean)
   name: Transfer(Int32, String, Int64, Action<Boolean>, Boolean)
   href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Transfer_System_Int32_System_String_System_Int64_System_Action_System_Boolean__System_Boolean_
@@ -20203,18 +20749,6 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.Account
   fullName: PlayGen.SUGAR.Unity.SUGARManager.Account
   nameWithType: SUGARManager.Account
-- uid: PlayGen.SUGAR.Unity.SUGARManager.Achievement
-  name: Achievement
-  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_Achievement
-  commentId: P:PlayGen.SUGAR.Unity.SUGARManager.Achievement
-  fullName: PlayGen.SUGAR.Unity.SUGARManager.Achievement
-  nameWithType: SUGARManager.Achievement
-- uid: PlayGen.SUGAR.Unity.SUGARManager.Achievement*
-  name: Achievement
-  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_Achievement_
-  commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.Achievement
-  fullName: PlayGen.SUGAR.Unity.SUGARManager.Achievement
-  nameWithType: SUGARManager.Achievement
 - uid: PlayGen.SUGAR.Unity.SUGARManager.CurrentUser
   name: CurrentUser
   href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_CurrentUser
@@ -20227,6 +20761,18 @@ references:
   commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.CurrentUser
   fullName: PlayGen.SUGAR.Unity.SUGARManager.CurrentUser
   nameWithType: SUGARManager.CurrentUser
+- uid: PlayGen.SUGAR.Unity.SUGARManager.Evaluation
+  name: Evaluation
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_Evaluation
+  commentId: P:PlayGen.SUGAR.Unity.SUGARManager.Evaluation
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.Evaluation
+  nameWithType: SUGARManager.Evaluation
+- uid: PlayGen.SUGAR.Unity.SUGARManager.Evaluation*
+  name: Evaluation
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_Evaluation_
+  commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.Evaluation
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.Evaluation
+  nameWithType: SUGARManager.Evaluation
 - uid: PlayGen.SUGAR.Unity.SUGARManager.GameData
   name: GameData
   href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_GameData

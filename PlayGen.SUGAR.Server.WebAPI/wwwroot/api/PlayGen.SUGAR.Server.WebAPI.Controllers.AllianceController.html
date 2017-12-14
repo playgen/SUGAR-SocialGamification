@@ -648,7 +648,7 @@ Requires a relationship between the User and Group to not already exist.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
-[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.GroupMemberRequest)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Create, AuthorizationEntity.AllianceRequest)]
 public Task&lt;IActionResult&gt; CreateAllianceRequest([FromBody] RelationshipRequest relationship)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -743,7 +743,7 @@ public IActionResult GetAllianceCount([FromRoute] int groupId)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;requests/{groupId:int}&quot;)]
-[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GroupMemberRequest)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.AllianceRequest)]
 public Task&lt;IActionResult&gt; GetAllianceRequests([FromRoute] int groupId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -838,7 +838,7 @@ public IActionResult GetAlliances([FromRoute] int groupId)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpGet(&quot;sentrequests/{groupId:int}&quot;)]
-[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GroupMemberRequest)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.AllianceRequest)]
 public Task&lt;IActionResult&gt; GetSentRequests([FromRoute] int groupId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -887,7 +887,7 @@ Requires the relationship to already exist between the User and Group.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut]
-[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.GroupMember)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.Alliance)]
 public Task&lt;IActionResult&gt; UpdateAlliance([FromBody] RelationshipStatusUpdate relationship)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -935,7 +935,7 @@ Requires the relationship request to already exist between a Group and Group.</p
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut(&quot;request&quot;)]
-[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.GroupMemberRequest)]
+[Authorization(ClaimScope.Group, AuthorizationAction.Update, AuthorizationEntity.AllianceRequest)]
 public Task&lt;IActionResult&gt; UpdateAllianceRequest([FromBody] RelationshipStatusUpdate relationship)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>

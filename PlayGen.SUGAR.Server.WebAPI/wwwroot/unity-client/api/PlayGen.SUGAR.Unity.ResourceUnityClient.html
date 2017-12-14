@@ -429,32 +429,6 @@
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Unity_ResourceUnityClient_GlobalGameResources_" data-uid="PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalGameResources*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_ResourceUnityClient_GlobalGameResources" data-uid="PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalGameResources">GlobalGameResources</h4>
-  <div class="markdown level1 summary"><p>Resources for the game not tied to any user.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, long&gt; GlobalGameResources { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Int64</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
   <a id="PlayGen_SUGAR_Unity_ResourceUnityClient_GlobalUserResources_" data-uid="PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources*"></a>
   <h4 id="PlayGen_SUGAR_Unity_ResourceUnityClient_GlobalUserResources" data-uid="PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources">GlobalUserResources</h4>
   <div class="markdown level1 summary"><p>Resources for the user not tied to any game.</p>
@@ -554,14 +528,14 @@ If globalResource is true, resource transferred will be global rather than for t
   
   
   <a id="PlayGen_SUGAR_Unity_ResourceUnityClient_Get_" data-uid="PlayGen.SUGAR.Unity.ResourceUnityClient.Get*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_ResourceUnityClient_Get_System_Action_System_Collections_Generic_List_PlayGen_SUGAR_Contracts_ResourceResponse___System_String___System_Boolean_System_Nullable_System_Int32__" data-uid="PlayGen.SUGAR.Unity.ResourceUnityClient.Get(System.Action{System.Collections.Generic.List{PlayGen.SUGAR.Contracts.ResourceResponse}},System.String[],System.Boolean,System.Nullable{System.Int32})">Get(Action&lt;List&lt;ResourceResponse&gt;&gt;, String[], Boolean, Nullable&lt;Int32&gt;)</h4>
-  <div class="markdown level1 summary"><p>Get the resources with the keys provided for the actorId provided (or currently user if left default).
+  <h4 id="PlayGen_SUGAR_Unity_ResourceUnityClient_Get_System_Action_System_Collections_Generic_List_PlayGen_SUGAR_Contracts_ResourceResponse___System_String___System_Boolean_" data-uid="PlayGen.SUGAR.Unity.ResourceUnityClient.Get(System.Action{System.Collections.Generic.List{PlayGen.SUGAR.Contracts.ResourceResponse}},System.String[],System.Boolean)">Get(Action&lt;List&lt;ResourceResponse&gt;&gt;, String[], Boolean)</h4>
+  <div class="markdown level1 summary"><p>Get the resources with the keys provided for the signed in user.
 If globalResource is true, resources will be global rather than for the game.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Get(Action&lt;List&lt;ResourceResponse&gt;&gt; result, string[] keys = null, bool globalResource = false, int ? actorId)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Get(Action&lt;List&lt;ResourceResponse&gt;&gt; result, string[] keys = null, bool globalResource = false)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -581,55 +555,6 @@ If globalResource is true, resources will be global rather than for the game.</p
       <tr>
         <td><span class="xref">System.String</span>[]</td>
         <td><span class="parametername">keys</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">globalResource</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
-        <td><span class="parametername">actorId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_ResourceUnityClient_Set_" data-uid="PlayGen.SUGAR.Unity.ResourceUnityClient.Set*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_ResourceUnityClient_Set_System_String_System_Int64_System_Action_System_Boolean__System_Boolean_" data-uid="PlayGen.SUGAR.Unity.ResourceUnityClient.Set(System.String,System.Int64,System.Action{System.Boolean},System.Boolean)">Set(String, Int64, Action&lt;Boolean&gt;, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Set the resource with the key provided from the currently signed in user.
-If globalResource is true, resource transferred will be global rather than for the game.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Set(string key, long amount, Action&lt;bool&gt; success, bool globalResource = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">key</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Int64</span></td>
-        <td><span class="parametername">amount</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
-        <td><span class="parametername">success</span></td>
         <td></td>
       </tr>
       <tr>
