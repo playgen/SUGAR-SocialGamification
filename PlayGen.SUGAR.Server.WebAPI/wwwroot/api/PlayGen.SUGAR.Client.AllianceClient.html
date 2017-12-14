@@ -356,6 +356,43 @@ Requires a relationship between two groups to not already exist.</p>
   </table>
   
   
+  <a id="PlayGen_SUGAR_Client_AllianceClient_GetAllianceCountAsync_" data-uid="PlayGen.SUGAR.Client.AllianceClient.GetAllianceCountAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_AllianceClient_GetAllianceCountAsync_System_Int32_System_Action_System_Int32__System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.AllianceClient.GetAllianceCountAsync(System.Int32,System.Action{System.Int32},System.Action{System.Exception})">GetAllianceCountAsync(Int32, Action&lt;Int32&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetAllianceCountAsync(int groupId, Action&lt;int&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">groupId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="PlayGen_SUGAR_Client_AllianceClient_GetAllianceRequests_" data-uid="PlayGen.SUGAR.Client.AllianceClient.GetAllianceRequests*"></a>
   <h4 id="PlayGen_SUGAR_Client_AllianceClient_GetAllianceRequests_System_Int32_" data-uid="PlayGen.SUGAR.Client.AllianceClient.GetAllianceRequests(System.Int32)">GetAllianceRequests(Int32)</h4>
   <div class="markdown level1 summary"><p>Get a list of all groups that have relationship requests for this <param name="groupId">.</p>
@@ -508,43 +545,6 @@ Requires a relationship between two groups to not already exist.</p>
       </tr>
       <tr>
         <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a>&gt;&gt;</td>
-        <td><span class="parametername">onSuccess</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onError</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Client_AllianceClient_GetMemberCountAsync_" data-uid="PlayGen.SUGAR.Client.AllianceClient.GetMemberCountAsync*"></a>
-  <h4 id="PlayGen_SUGAR_Client_AllianceClient_GetMemberCountAsync_System_Int32_System_Action_System_Int32__System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.AllianceClient.GetMemberCountAsync(System.Int32,System.Action{System.Int32},System.Action{System.Exception})">GetMemberCountAsync(Int32, Action&lt;Int32&gt;, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetMemberCountAsync(int groupId, Action&lt;int&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">groupId</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">onSuccess</span></td>
         <td></td>
       </tr>

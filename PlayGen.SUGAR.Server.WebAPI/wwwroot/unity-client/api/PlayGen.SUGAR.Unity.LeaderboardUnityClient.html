@@ -550,13 +550,13 @@ public class LeaderboardUnityClient : BaseUnityClient&lt;BaseLeaderboardInterfac
   
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_System_String_PlayGen_SUGAR_Common_LeaderboardFilterType_System_Int32_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,PlayGen.SUGAR.Common.LeaderboardFilterType,System.Int32)">Display(String, LeaderboardFilterType, Int32)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_System_String_PlayGen_SUGAR_Common_LeaderboardFilterType_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,PlayGen.SUGAR.Common.LeaderboardFilterType,System.Int32,System.Boolean)">Display(String, LeaderboardFilterType, Int32, Boolean)</h4>
   <div class="markdown level1 summary"><p>Gathers information on the leaderboard with the token provided and gets current standings based on the filter and page number provided, with the UI object displayed if provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Display(string token, LeaderboardFilterType filter, int pageNumber = 0)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Display(string token, LeaderboardFilterType filter, int pageNumber = 0, bool globalLeaderboard = false)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -581,6 +581,11 @@ public class LeaderboardUnityClient : BaseUnityClient&lt;BaseLeaderboardInterfac
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">pageNumber</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">globalLeaderboard</span></td>
         <td></td>
       </tr>
     </tbody>

@@ -116,14 +116,13 @@
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetHighest_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetHighest_System_String___PlayGen_SUGAR_Common_EvaluationDataType_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String[],PlayGen.SUGAR.Common.EvaluationDataType)">GetHighest(String[], EvaluationDataType)</h4>
-  <div class="markdown level1 summary"><p>Get the highest value for this user for the keys provided.</p>
-</div>
+  <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_Get_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Get*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Get_System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_EvaluationDataResponse___System_String___" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Get(System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.EvaluationDataResponse}},System.String[])">Get(Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt;, String[])</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerable&lt;EvaluationDataResponse&gt; GetHighest(string[] keys, EvaluationDataType dataType)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Get(Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt; success, string[] keys = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -136,8 +135,41 @@
     </thead>
     <tbody>
       <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;&gt;</td>
+        <td><span class="parametername">success</span></td>
+        <td></td>
+      </tr>
+      <tr>
         <td><span class="xref">System.String</span>[]</td>
         <td><span class="parametername">keys</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCount_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCount_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetCount(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get the count for this user for the key provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetCount(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
         <td></td>
       </tr>
       <tr>
@@ -145,19 +177,199 @@
         <td><span class="parametername">dataType</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="parametername">success</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCumulative_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCumulative_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetCumulative(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get the cumulative value for this user for the key provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetCumulative(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
+        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="parametername">dataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="parametername">success</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetEarliest_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetEarliest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetEarliest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get the earliest value for this user for the key provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetEarliest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="parametername">dataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="parametername">success</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetHighest_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetHighest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetHighest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get the highest value for this user for the key provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetHighest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="parametername">dataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="parametername">success</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetLatest_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetLatest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetLatest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get the latest value for this user for the key provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetLatest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="parametername">dataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="parametername">success</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetLowest_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetLowest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetLowest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get the lowest value for this user for the key provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetLowest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="parametername">dataType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="parametername">success</span></td>
         <td></td>
       </tr>
     </tbody>

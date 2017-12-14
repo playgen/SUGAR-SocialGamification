@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class AccountUnityClient
+    <title>Class EvaluationUnityClient
    | SUGAR </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class AccountUnityClient
+    <meta name="title" content="Class EvaluationUnityClient
    | SUGAR ">
     <meta name="generator" content="docfx 2.28.3.0">
     
@@ -69,12 +69,12 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient">
+            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient">
   
   
-  <h1 id="PlayGen_SUGAR_Unity_AccountUnityClient" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient" class="text-break">Class AccountUnityClient
+  <h1 id="PlayGen_SUGAR_Unity_EvaluationUnityClient" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient" class="text-break">Class EvaluationUnityClient
   </h1>
-  <div class="markdown level0 summary"><p>Unity client for calls related to accounts</p>
+  <div class="markdown level0 summary"><p>Unity client for calls related to evaluations.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -84,10 +84,23 @@
     <div class="level2"><span class="xref">UnityEngine.Component</span></div>
     <div class="level3"><span class="xref">UnityEngine.Behaviour</span></div>
     <div class="level4"><span class="xref">UnityEngine.MonoBehaviour</span></div>
-    <div class="level5"><span class="xref">AccountUnityClient</span></div>
+    <div class="level5"><a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html">BaseUnityClient</a>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html">BaseEvaluationListInterface</a>&gt;</div>
+    <div class="level6"><span class="xref">EvaluationUnityClient</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1__interface">BaseUnityClient&lt;BaseEvaluationListInterface&gt;._interface</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_HasInterface">BaseUnityClient&lt;BaseEvaluationListInterface&gt;.HasInterface</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_IsActive">BaseUnityClient&lt;BaseEvaluationListInterface&gt;.IsActive</a>
+    </div>
+    <div>
+      <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_Hide">BaseUnityClient&lt;BaseEvaluationListInterface&gt;.Hide()</a>
+    </div>
     <div>
       <span class="xref">UnityEngine.MonoBehaviour.Invoke(System.String, System.Single)</span>
     </div>
@@ -421,23 +434,23 @@
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Unity.html">PlayGen.SUGAR.Unity</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Unity.dll</h6>
-  <h5 id="PlayGen_SUGAR_Unity_AccountUnityClient_syntax">Syntax</h5>
+  <h5 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[DisallowMultipleComponent]
-public class AccountUnityClient : MonoBehaviour</code></pre>
+public class EvaluationUnityClient : BaseUnityClient&lt;BaseEvaluationListInterface&gt;</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Unity_AccountUnityClient_HasInterface_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.HasInterface*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_HasInterface" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.HasInterface">HasInterface</h4>
-  <div class="markdown level1 summary"><p>Has a UI object been provided for this Unity Client?</p>
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_Progress_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.Progress*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_Progress" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.Progress">Progress</h4>
+  <div class="markdown level1 summary"><p>Current completion status for evaluations in this application for this user.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool HasInterface { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;EvaluationProgressResponse&gt; Progress { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -449,33 +462,7 @@ public class AccountUnityClient : MonoBehaviour</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_AccountUnityClient_IsActive_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.IsActive*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_IsActive" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.IsActive">IsActive</h4>
-  <div class="markdown level1 summary"><p>Is there a UI object and if so is it currently active?</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsActive { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -484,15 +471,36 @@ public class AccountUnityClient : MonoBehaviour</code></pre>
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Unity_AccountUnityClient_DisplayPanel_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_DisplayPanel_System_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel(System.Action{System.Boolean})">DisplayPanel(Action&lt;Boolean&gt;)</h4>
-  <div class="markdown level1 summary"><p>Displays UI object if provided and allowAutoLogin is false. Attempts automatic sign in using provided details if allowAutoLogin is true.
-Note: allowAutoLogin is made false after automatic sign in is first attempted.</p>
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayAchievementList_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayAchievementList*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayAchievementList" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayAchievementList">DisplayAchievementList()</h4>
+  <div class="markdown level1 summary"><p>Gathers current evaluation completion status and displays UI object if provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void DisplayPanel(Action&lt;bool&gt; success)</code></pre>
+    <pre><code class="lang-csharp hljs">public void DisplayAchievementList()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplaySkillList_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplaySkillList*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplaySkillList" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplaySkillList">DisplaySkillList()</h4>
+  <div class="markdown level1 summary"><p>Gathers current skill completion status and displays UI object if provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DisplaySkillList()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_ForceNotificationTest_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.ForceNotificationTest*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_ForceNotificationTest_System_String_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.ForceNotificationTest(System.String)">ForceNotificationTest(String)</h4>
+  <div class="markdown level1 summary"><p>Force an evaluation notification to be displayed with the provided text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ForceNotificationTest(string notification = &quot;Test Notification&quot;)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -505,46 +513,8 @@ Note: allowAutoLogin is made false after automatic sign in is first attempted.</
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
-        <td><span class="parametername">success</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_AccountUnityClient_Hide_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Hide*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_Hide" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Hide">Hide()</h4>
-  <div class="markdown level1 summary"><p>Hide the UI object if it is currently active.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Hide()</code></pre>
-  </div>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_AccountUnityClient_Logout_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Logout*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_Logout_System_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Logout(System.Action{System.Boolean})">Logout(Action&lt;Boolean&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Logout(Action&lt;bool&gt; success)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
-        <td><span class="parametername">success</span></td>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">notification</span></td>
         <td></td>
       </tr>
     </tbody>
