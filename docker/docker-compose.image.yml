@@ -1,5 +1,5 @@
 version: '2'
 
 services:
-  sugar:      
+  sugar-v1:      
     image: playgen/sugar-socialgamification

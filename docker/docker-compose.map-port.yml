@@ -1,0 +1,6 @@
+version: '2'
+
+services:
+  sugar-v1:
+    ports:
+      - "5000:5000"
