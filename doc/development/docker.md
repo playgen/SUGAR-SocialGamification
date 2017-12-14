@@ -45,6 +45,7 @@ The SUGAR docker-compose files have been split into 3 parts:
 
 - [docker-compose.image.yml](#docker-composeimageyml): this has the configuration to pull the SUGAR image from DockerHub.
 - [docker-compose.build.yml](#docker-composebuildyml): this has the configuration to build SUGAR image from source.
+- [docker-compose.map-port.yml](#docker-composemap-portyml): this has the configuration to expose and map the sugar server to a port on the local machine.
 - [docker-compose.base.yml](#docker-composebaseyml): this contains all the shared settings for the SUGAR container as well as the database and inter-container links.
 
 #### docker-compose.image.yml
@@ -57,6 +58,13 @@ It uses this in conjunction with [docker-compose.base.yml](#docker-composebaseym
 See the docker/docker-compose_build_deploy script.
 It uses this in conjunction with [docker-compose.base.yml](#docker-composebaseyml).
 
+#### docker-compose.map-port.yml
+
+See the docker/docker-compose_build_deploy_map-port or docker/docker-compose_image_deploy_map-port scripts.
+It uses this in conjunction with the other docker compose files.
+
+This will map port 59400 of the SUGAR server container to 59400 on your local machine. Test that it has done so by going to http://localhost:59400.
+
 #### docker-compose.base.yml
 
 The SUGAR compose configuration requires the sugar-mariadb container which hosts the databse. This is simply built from the mariadb image.
@@ -64,5 +72,3 @@ The SUGAR compose configuration requires the sugar-mariadb container which hosts
 When launching SUGAR, one of the first steps it does is to setup the database which requires it to be able to connect to the database within the sugar-mariadb container. If the database takes longer to startup than the SUGAR server, the server will attempt to connect to the database and fail. This is the reason for the wait-for-db container. It's purpose is to stay active until the database is fully initialized and ready to accept connections.
 
 This compose file along with the command sequence in the docker-compose_deploy scripts ensures that the container SUGAR is only launched after the database is ready.
-
-Currently the SUGAR container is set to map port 5000 within the container to 5000 on the host meaning you can access the api on the host machine via: http://localhost:5000/api/version.
