@@ -1,7 +1,3 @@
----
-uid: docker
----
-
 # Docker 
 
 ## Requirements

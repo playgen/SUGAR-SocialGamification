@@ -1,7 +1,3 @@
----
-uid: versioning
----
-
 # Versioning 
 
 The Server and Client share an API Version, used to ensure compatibility.

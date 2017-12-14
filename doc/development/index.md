@@ -1,12 +1,8 @@
----
-uid: installation
----
-
 # Development and Deployment
 
 SUGAR is currently in active development and subject to change. We are committed to delivering a feature complete version of the components by the end of 2017. 
 
-For upcoming features and development direction see the <xref:roadmap>
+For upcoming features and development direction see the [roadmap](roadmap.md)
 
 ## Source Repositories
 
@@ -30,7 +26,7 @@ Building the WebAPI project produces a Windows or Linux executable that can be e
 
 The service currently uses MySQL for it's data storage, we reccomend using the [MariaDB](https://mariadb.org/) release if you are hosting your own database instance.
 
-In the near future the <xref:gameData> key/value storage will most likely be migrated to a NoSQL data store, however no decision on this technology has been taken yet.
+In the near future the [gameData](gameData.md) key/value storage will most likely be migrated to a NoSQL data store, however no decision on this technology has been taken yet.
 
 ### Development Dependencies
 

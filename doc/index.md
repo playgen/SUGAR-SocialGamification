@@ -6,9 +6,9 @@ SUGAR provides a software platform consisting of Web API and Client side compone
 
 The documentation includes : 
 
-- [Installation](xref:docker#quick-start) : Simple guide to getting the SUGAR server running with docker.
+- [Installation](development/docker.md#quick-start) : Simple guide to getting the SUGAR server running with docker.
 
-- [Features](xref:feature_overview) : Detailed description of features supported by the software including the roadmap for up-and-coming features.
+- [Features](features/index.md) : Detailed description of features supported by the software including the roadmap for up-and-coming features.
 
 - [Core Concepts](concepts/index.md) : Description of core concepts behind features within SUGAR. 
 

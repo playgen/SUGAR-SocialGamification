@@ -1,7 +1,3 @@
----
-uid: documentation
----
-
 # Documentation
 
 SUGAR's documentation is generated using [DocFX](https://dotnet.github.io/docfx/) using tripple slash code comments and [Swagger](https://swagger.io/) to generate the REST API.

@@ -1,6 +1,5 @@
 ﻿- name: Overview
-  uid: feature_overview
-  homepageUid: feature_overview
+  href: index.md
 - name: Achievements
   uid: achievement
 - name: Games
@@ -26,8 +25,8 @@
 - name: Roadmap
   uid: roadmap
 - name: Admin Panel
-  href: admin/toc.yml
-  homepage: admin/index.md
+  href: admin/
+  topicHref: admin/index.md
 - name: Unity UI Component
-  href: unity/toc.yml
-  homepage: unity/index.md
+  href: unity/
+  topicHref: unity/index.md

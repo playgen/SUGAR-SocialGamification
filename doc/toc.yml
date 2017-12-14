@@ -1,18 +1,21 @@
 ﻿- name: Home
-  href: index.md
-  homepage: index.md
+  href: index.md  
 - name: Concepts
   href: concepts/
+  topicHref: concepts/index.md
 - name: Features
   href: features/
+  topicHref: features/index.md
 - name: C# API
-  href: api/
+  href: api/  
 - name: REST API
   href: restapi/
 - name: Source & Deployment
   href: development/
+  topicHref: development/index.md
 - name: Demo
   href: demo/
+  topicHref: demo/index.md
 - name: Unity-Client
   href: unity-client/
   topicHref: unity-client/index.md

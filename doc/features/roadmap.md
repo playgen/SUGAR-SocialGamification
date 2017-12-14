@@ -50,7 +50,7 @@ Integration with achievement systems on popular app stores and game distribution
 * Group Alliance
 * Extended Group Achievements
 
-See [Groups] (/features/group.md)
+See <xref:group>
 
 ## Tech
 

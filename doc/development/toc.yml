@@ -1,12 +1,11 @@
 - name: Installation
-  uid: installation
-  homepageUid: installation
+  href: index.md  
 - name: Docker
-  uid: docker
+  href: docker.md
 - name: Documentation
-  uid: documentation
+  href: documentation.md
 - name: Versioning
-  uid: versioning
+  href: versioning.md
 - name: WebAPI
 - name: Client
 - name: Admin Interface
