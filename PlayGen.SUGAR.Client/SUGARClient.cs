@@ -13,21 +13,21 @@ namespace PlayGen.SUGAR.Client
 		protected readonly AsyncRequestController _asyncRequestController;
 		protected readonly EvaluationNotifications _evaluationNotifications = new EvaluationNotifications();
 
-		private APIVersionClient _apiVersionClient;
-		private AccountClient _accountClient;
-		private SessionClient _sessionClient;
-		private AchievementClient _achievementClient;
-		private GameClient _gameClient;
-		private GameDataClient _gameDataClient;
-		private GroupClient _groupClient;
-		private GroupMemberClient _groupMemberClient;
-		private UserClient _userClient;
-		private UserFriendClient _userFriendClient;
-		private AllianceClient _allianceClient;
-		private ResourceClient _resourceClient;
-		private LeaderboardClient _leaderboardClient;
-		private SkillClient _skillClient;
-		private MatchClient _matchClient;
+		protected APIVersionClient _apiVersionClient;
+		protected AccountClient _accountClient;
+		protected SessionClient _sessionClient;
+		protected AchievementClient _achievementClient;
+		protected GameClient _gameClient;
+		protected GameDataClient _gameDataClient;
+		protected GroupClient _groupClient;
+		protected GroupMemberClient _groupMemberClient;
+		protected UserClient _userClient;
+		protected UserFriendClient _userFriendClient;
+		protected AllianceClient _allianceClient;
+		protected ResourceClient _resourceClient;
+		protected LeaderboardClient _leaderboardClient;
+		protected SkillClient _skillClient;
+		protected MatchClient _matchClient;
 		
 		public APIVersionClient APIVersion => _apiVersionClient ?? (_apiVersionClient = new APIVersionClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
 		public AccountClient Account => _accountClient ?? (_accountClient = new AccountClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
