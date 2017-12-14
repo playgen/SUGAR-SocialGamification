@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Client.Development
 		/// <returns>A <see cref="GameResponse"/> containing the new achievement details.</returns>
 		public EvaluationResponse CreateAchievement(EvaluationCreateRequest achievement)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "achievement/create").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "achievements/create").ToString();
 			return Post<EvaluationCreateRequest, EvaluationResponse>(query, achievement);
 		}
 
@@ -67,7 +67,7 @@ namespace PlayGen.SUGAR.Client.Development
 		/// <returns>A <see cref="GameResponse"/> containing the new skill details.</returns>
 		public EvaluationResponse CreateSkill(EvaluationCreateRequest skill)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "skill/create").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "skills/create").ToString();
 			return Post<EvaluationCreateRequest, EvaluationResponse>(query, skill);
 		}
 
@@ -85,7 +85,7 @@ namespace PlayGen.SUGAR.Client.Development
 		/// <returns>A <see cref="GameResponse"/> containing the new leaderboard details.</returns>
 		public LeaderboardResponse CreateLeaderboard(LeaderboardRequest leaderboard)
 		{
-			var query = GetUriBuilder(ControllerPrefix + "leaderboard/create").ToString();
+			var query = GetUriBuilder(ControllerPrefix + "leaderboards/create").ToString();
 			return Post<LeaderboardRequest, LeaderboardResponse>(query, leaderboard);
 		}
 
