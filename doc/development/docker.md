@@ -11,7 +11,12 @@
 # Quick Start
 
 To run the SUGAR docker services without having to build the SUGAR image:
-Run the docker/docker-compose_image_deploy script.
+
+1. Make sure you've got the [requirements inatalled](#requirements).
+
+2. Run the docker/docker-compose_image_deploy_map-port.bat (or .sh on linux) script.
+
+3. When docker has finished deploying, check that the server is running by visiting http://localhost:59400 where you should see the SUGAR documentation.
 
 This will use the latest docker image of SUGAR from the [Automated Builds](#automated-builds) and create and link the database container.
 
