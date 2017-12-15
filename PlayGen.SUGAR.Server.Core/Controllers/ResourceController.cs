@@ -90,8 +90,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			var resource = _evaluationDataController.Get(new[] { resourceId }).Single();
 
-			var currentValue = long.Parse(resource.Value);
-			resource.Value = (currentValue + addAmount).ToString();
+			var value = long.Parse(resource.Value) + addAmount;
+			if (value < 0)
+			{
+				value = 0;
+			}
+			resource.Value = (value).ToString();
 
 			_evaluationDataController.Update(resource);
 
