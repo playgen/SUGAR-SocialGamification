@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetAsync(string name, Action < IEnumerable<UserResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Get(name),
+			RequestQueue.EnqueueRequest(() => Get(name),
 				onSuccess,
 				onError);
 		}
@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetAsync(int id, Action<UserResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Get(id),
+			RequestQueue.EnqueueRequest(() => Get(id),
 				onSuccess,
 				onError);
 		}
@@ -74,7 +74,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void UpdateAsync(int id, UserRequest user, Action onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Update(id, user),
+			RequestQueue.EnqueueRequest(() => Update(id, user),
 				onSuccess,
 				onError);
 		}

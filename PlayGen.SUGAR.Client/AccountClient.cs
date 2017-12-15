@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void CreateAsync(AccountRequest accountRequest, Action<AccountResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Create(accountRequest),
+			RequestQueue.EnqueueRequest(() => Create(accountRequest),
 				onSuccess,
 				onError);
 		}

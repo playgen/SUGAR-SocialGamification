@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace PlayGen.SUGAR.Client.AsyncRequestQueue
+namespace PlayGen.SUGAR.Client.RequestQueue
 {
-	public class AsyncRequestController : IDisposable
+	public class AsyncThreadRequestQueue : IRequestQueue, IDisposable
 	{
 		private readonly AutoResetEvent _processRequestHandle = new AutoResetEvent(false);
 		private readonly ManualResetEvent _abortHandle = new ManualResetEvent(false);
@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 		private Exception _workerException;
 		private bool _isDisposed;
 
-		public AsyncRequestController(int timeoutMilliseconds, Action onTimeout)
+		public AsyncThreadRequestQueue(int timeoutMilliseconds, Action onTimeout)
 		{
 			_timeoutMilliseconds = timeoutMilliseconds;
 			_onTimeoutItem = new QueueItem(onTimeout, null, e => throw e);
@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 			worker.Start();
 		}
 
-		~AsyncRequestController()
+		~AsyncThreadRequestQueue()
 		{
 			Dispose();
 		}

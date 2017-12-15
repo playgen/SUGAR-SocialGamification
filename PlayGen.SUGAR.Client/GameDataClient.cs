@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Extensions;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
 
@@ -20,9 +20,9 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetAsync(int actorId, int gameId, string[] key, Action<IEnumerable<EvaluationDataResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Get(actorId, gameId, key),
+			RequestQueue.EnqueueRequest(() => Get(actorId, gameId, key),
 				onSuccess,
 				onError);
 		}
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetGameActorsAsync(int id, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetGameActors(id),
+			RequestQueue.EnqueueRequest(() => GetGameActors(id),
 				onSuccess,
 				onError);
 		}
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetByLeaderboardTypeAsync(int actorId, int gameId, string key, EvaluationDataType dataType, LeaderboardType leaderboardType, Action<EvaluationDataResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetByLeaderboardType(actorId, gameId, key, dataType, leaderboardType),
+			RequestQueue.EnqueueRequest(() => GetByLeaderboardType(actorId, gameId, key, dataType, leaderboardType),
 				onSuccess,
 				onError);
 		}
@@ -111,7 +111,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void AddAsync(EvaluationDataRequest data, Action<EvaluationDataResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Add(data), 
+			RequestQueue.EnqueueRequest(() => Add(data), 
 				onSuccess, 
 				onError);
 		}

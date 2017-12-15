@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Contracts;
 
@@ -19,9 +19,9 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetGlobalProgressAsync(int actorId, Action<IEnumerable<EvaluationProgressResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetGlobalProgress(actorId),
+			RequestQueue.EnqueueRequest(() => GetGlobalProgress(actorId),
 				onSuccess,
 				onError);
 		}
@@ -57,7 +57,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetGameProgressAsync(int gameId, int actorId, Action<IEnumerable<EvaluationProgressResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetGameProgress(gameId, actorId),
+			RequestQueue.EnqueueRequest(() => GetGameProgress(gameId, actorId),
 				onSuccess,
 				onError);
 		}
@@ -76,7 +76,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetGlobalSkillProgressAsync(string token, int actorId, Action<EvaluationProgressResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetGlobalSkillProgress(token, actorId),
+			RequestQueue.EnqueueRequest(() => GetGlobalSkillProgress(token, actorId),
 				onSuccess,
 				onError);
 		}
@@ -96,7 +96,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetSkillProgressAsync(string token, int gameId, int actorId, Action<EvaluationProgressResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetSkillProgress(token, gameId, actorId),
+			RequestQueue.EnqueueRequest(() => GetSkillProgress(token, gameId, actorId),
 				onSuccess,
 				onError);
 		}

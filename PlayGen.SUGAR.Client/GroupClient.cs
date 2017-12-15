@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetAsync(Action<IEnumerable<GroupResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(Get,
+			RequestQueue.EnqueueRequest(Get,
 				onSuccess,
 				onError);
 		}
@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetControlledAsync(Action<IEnumerable<GroupResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(GetControlled,
+			RequestQueue.EnqueueRequest(GetControlled,
 				onSuccess,
 				onError);
 		}
@@ -71,7 +71,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetAsync(string name, Action<IEnumerable<GroupResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Get(name),
+			RequestQueue.EnqueueRequest(() => Get(name),
 				onSuccess,
 				onError);
 		}
@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetAsync(int id, Action<GroupResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Get(id),
+			RequestQueue.EnqueueRequest(() => Get(id),
 				onSuccess,
 				onError);
 		}
@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void CreateAsync(GroupRequest actor, Action<GroupResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Create(actor),
+			RequestQueue.EnqueueRequest(() => Create(actor),
 				onSuccess,
 				onError);
 		}
@@ -126,7 +126,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void UpdateAsync(int id, GroupRequest group, Action onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Update(id, group),
+			RequestQueue.EnqueueRequest(() => Update(id, group),
 				onSuccess,
 				onError);
 		}
@@ -143,7 +143,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void DeleteAsync(int id, Action onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Delete(id),
+			RequestQueue.EnqueueRequest(() => Delete(id),
 				onSuccess,
 				onError);
 		}

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client.Development
@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client.Development
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client.Development
 
 		public void CreateGameAsync(GameRequest game, Action<GameResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => CreateGame(game),
+			RequestQueue.EnqueueRequest(() => CreateGame(game),
 				onSuccess,
 				onError);
 		}
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Client.Development
 
 		public void CreateAchievementAsync(EvaluationCreateRequest achievement, Action<EvaluationResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => CreateAchievement(achievement),
+			RequestQueue.EnqueueRequest(() => CreateAchievement(achievement),
 				onSuccess,
 				onError);
 		}
@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Client.Development
 
 		public void CreateSkillAsync(EvaluationCreateRequest skill, Action<EvaluationResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => CreateSkill(skill),
+			RequestQueue.EnqueueRequest(() => CreateSkill(skill),
 				onSuccess,
 				onError);
 		}
@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.Client.Development
 
 		public void CreateLeaderboardAsync(LeaderboardRequest leaderboard, Action<LeaderboardResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => CreateLeaderboard(leaderboard),
+			RequestQueue.EnqueueRequest(() => CreateLeaderboard(leaderboard),
 				onSuccess,
 				onError);
 		}

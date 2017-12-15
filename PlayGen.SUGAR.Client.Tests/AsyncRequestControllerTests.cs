@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
+using PlayGen.SUGAR.Client.RequestQueue;
 using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
 	public class AsyncRequestControllerTests : ClientTestBase
 	{
-		private AsyncRequestController DefaultAsyncRequestController => new AsyncRequestController(60 * 1000, null);
+		private AsyncThreadRequestQueue DefaultAsyncThreadRequestQueue => new AsyncThreadRequestQueue(60 * 1000, null);
 
 		[Fact]
 		public void ValueRequestsTriggerOnSuccessCallbacks()
@@ -19,7 +19,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var onSuccessValues = new List<int>();
 			var onErrorValues = new List<int>();
 
-			using (var asyncRequestController = DefaultAsyncRequestController)
+			using (var asyncRequestController = DefaultAsyncThreadRequestQueue)
 			{
 				var values = Enumerable.Range(0, 1000).ToList();
 
@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var onSuccessVoids = new List<int>();
 			var onErrorValues = new List<int>();
 
-			using (var asyncRequestController = DefaultAsyncRequestController)
+			using (var asyncRequestController = DefaultAsyncThreadRequestQueue)
 			{
 				var values = Enumerable.Range(0, 1000).ToList();
 
@@ -87,7 +87,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var onErrorValues = new List<int>();
 			var onSuccessValues = new List<int>();
 
-			using (var asyncRequestController = DefaultAsyncRequestController)
+			using (var asyncRequestController = DefaultAsyncThreadRequestQueue)
 			{
 				var values = Enumerable.Range(0, 1000).ToList();
 
@@ -123,7 +123,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			// Arrange
 			var didTimeout = false;
-			using (var asyncRequestController = new AsyncRequestController(100, () => didTimeout = true))
+			using (var asyncRequestController = new AsyncThreadRequestQueue(100, () => didTimeout = true))
 			{
 				// Act
 				var stopWatch = Stopwatch.StartNew();

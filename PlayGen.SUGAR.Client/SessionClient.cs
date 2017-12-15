@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -39,7 +39,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void LoginAsync(int gameId, AccountRequest account, Action<AccountResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Login(gameId, account),
+			RequestQueue.EnqueueRequest(() => Login(gameId, account),
 				onSuccess,
 				onError);
 		}
@@ -53,7 +53,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void CreateAndLoginAsync(int gameId, AccountRequest account, Action<AccountResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => CreateAndLogin(gameId, account),
+			RequestQueue.EnqueueRequest(() => CreateAndLogin(gameId, account),
 				onSuccess,
 				onError);
 		}
@@ -66,7 +66,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void HeartbeatAsync(Action onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(Heartbeat,
+			RequestQueue.EnqueueRequest(Heartbeat,
 				onSuccess,
 				onError);
 		}
@@ -82,7 +82,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void LogoutAsync(Action onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(Logout,
+			RequestQueue.EnqueueRequest(Logout,
 				onSuccess,
 				onError);
 		}

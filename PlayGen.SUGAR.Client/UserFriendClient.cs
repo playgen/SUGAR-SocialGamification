@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetFriendRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetFriendRequests(userId),
+			RequestQueue.EnqueueRequest(() => GetFriendRequests(userId),
 				onSuccess,
 				onError);
 		}
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetSentRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetSentRequests(userId),
+			RequestQueue.EnqueueRequest(() => GetSentRequests(userId),
 				onSuccess,
 				onError);
 		}
@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetFriendsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetFriends(userId),
+			RequestQueue.EnqueueRequest(() => GetFriends(userId),
 				onSuccess,
 				onError);
 		}
@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void CreateFriendRequestAsync(RelationshipRequest relationship, Action<RelationshipResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => CreateFriendRequest(relationship),
+			RequestQueue.EnqueueRequest(() => CreateFriendRequest(relationship),
 				onSuccess,
 				onError);
 		}
@@ -110,7 +110,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void UpdateFriendRequestAsync(RelationshipStatusUpdate relationship, Action onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => UpdateFriendRequest(relationship),
+			RequestQueue.EnqueueRequest(() => UpdateFriendRequest(relationship),
 				onSuccess,
 				onError);
 		}
@@ -128,7 +128,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void UpdateFriendAsync(RelationshipStatusUpdate relationship, Action onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => UpdateFriend(relationship),
+			RequestQueue.EnqueueRequest(() => UpdateFriend(relationship),
 				onSuccess,
 				onError);
 		}

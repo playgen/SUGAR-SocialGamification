@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlayGen.SUGAR.Client.AsyncRequestQueue
+namespace PlayGen.SUGAR.Client.RequestQueue
 {
     public class QueueItem
     {

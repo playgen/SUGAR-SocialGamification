@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.RequestQueue;
 
 namespace PlayGen.SUGAR.Client
 {
@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Client
 		protected readonly IHttpHandler _httpHandler;
 		protected readonly Dictionary<string, string> _persistentHeaders;
 		protected readonly Dictionary<string, string> _sessionHeaders;
-		protected readonly AsyncRequestController _asyncRequestController;
+		protected readonly IRequestQueue RequestQueue;
 		protected readonly EvaluationNotifications _evaluationNotifications = new EvaluationNotifications();
 
 		protected APIVersionClient _apiVersionClient;
@@ -29,21 +29,21 @@ namespace PlayGen.SUGAR.Client
 		protected SkillClient _skillClient;
 		protected MatchClient _matchClient;
 		
-		public APIVersionClient APIVersion => _apiVersionClient ?? (_apiVersionClient = new APIVersionClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public AccountClient Account => _accountClient ?? (_accountClient = new AccountClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public SessionClient Session => _sessionClient ?? (_sessionClient = new SessionClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public AchievementClient Achievement => _achievementClient ?? (_achievementClient = new AchievementClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public GameClient Game => _gameClient ?? (_gameClient = new GameClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public GameDataClient GameData => _gameDataClient ?? (_gameDataClient = new GameDataClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public GroupClient Group => _groupClient ?? (_groupClient = new GroupClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public GroupMemberClient GroupMember => _groupMemberClient ?? (_groupMemberClient = new GroupMemberClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public UserClient User => _userClient ?? (_userClient = new UserClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public UserFriendClient UserFriend => _userFriendClient ?? (_userFriendClient = new UserFriendClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public AllianceClient AllianceClient => _allianceClient ?? (_allianceClient = new AllianceClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public ResourceClient Resource => _resourceClient ?? (_resourceClient = new ResourceClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public LeaderboardClient Leaderboard => _leaderboardClient ?? (_leaderboardClient = new LeaderboardClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public SkillClient Skill => _skillClient ?? (_skillClient = new SkillClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
-		public MatchClient Match => _matchClient ?? (_matchClient = new MatchClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
+		public APIVersionClient APIVersion => _apiVersionClient ?? (_apiVersionClient = new APIVersionClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public AccountClient Account => _accountClient ?? (_accountClient = new AccountClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public SessionClient Session => _sessionClient ?? (_sessionClient = new SessionClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public AchievementClient Achievement => _achievementClient ?? (_achievementClient = new AchievementClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public GameClient Game => _gameClient ?? (_gameClient = new GameClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public GameDataClient GameData => _gameDataClient ?? (_gameDataClient = new GameDataClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public GroupClient Group => _groupClient ?? (_groupClient = new GroupClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public GroupMemberClient GroupMember => _groupMemberClient ?? (_groupMemberClient = new GroupMemberClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public UserClient User => _userClient ?? (_userClient = new UserClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public UserFriendClient UserFriend => _userFriendClient ?? (_userFriendClient = new UserFriendClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public AllianceClient AllianceClient => _allianceClient ?? (_allianceClient = new AllianceClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public ResourceClient Resource => _resourceClient ?? (_resourceClient = new ResourceClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public LeaderboardClient Leaderboard => _leaderboardClient ?? (_leaderboardClient = new LeaderboardClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public SkillClient Skill => _skillClient ?? (_skillClient = new SkillClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
+		public MatchClient Match => _matchClient ?? (_matchClient = new MatchClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
 
 		// todo possibly pass update event so async requests are either read in and handled there or this creates another thread to poll the async queue
 		public SUGARClient(string baseAddress, IHttpHandler httpHandler = null, Dictionary<string, string> persistentHeaders = null, Dictionary<string, string> sessionHeaders = null, int timeoutMilliseconds = 60 * 1000)
@@ -52,12 +52,12 @@ namespace PlayGen.SUGAR.Client
 			_httpHandler = httpHandler ?? new DefaultHttpHandler();
 			_persistentHeaders = persistentHeaders ?? new Dictionary<string, string> { { Common.APIVersion.Key, Common.APIVersion.Version } };
 			_sessionHeaders = sessionHeaders ?? new Dictionary<string, string>();
-			_asyncRequestController = new AsyncRequestController(timeoutMilliseconds, () => Session.Heartbeat());
+			RequestQueue = new AsyncThreadRequestQueue(timeoutMilliseconds, () => Session.Heartbeat());
 		}
 
 		public bool TryExecuteResponse()
 		{
-			return _asyncRequestController.TryExecuteResponse();
+			return RequestQueue.TryExecuteResponse();
 		}
 	}
 }

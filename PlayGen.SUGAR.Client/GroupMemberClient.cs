@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetMemberRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetMemberRequests(userId),
+			RequestQueue.EnqueueRequest(() => GetMemberRequests(userId),
 				onSuccess,
 				onError);
 		}
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetSentRequestsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetSentRequests(userId),
+			RequestQueue.EnqueueRequest(() => GetSentRequests(userId),
 				onSuccess,
 				onError);
 		}
@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetMemberCountAsync(int groupId, Action<int> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetMemberCount(groupId),
+			RequestQueue.EnqueueRequest(() => GetMemberCount(groupId),
 				onSuccess,
 				onError);
 		}
@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetMembersAsync(int groupId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetMembers(groupId),
+			RequestQueue.EnqueueRequest(() => GetMembers(groupId),
 				onSuccess,
 				onError);
 		}
@@ -109,7 +109,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetUserGroupsAsync(int userId, Action<IEnumerable<ActorResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetUserGroups(userId),
+			RequestQueue.EnqueueRequest(() => GetUserGroups(userId),
 				onSuccess,
 				onError);
 		}
@@ -128,7 +128,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void CreateMemberRequestAsync(RelationshipRequest relationship, Action<RelationshipResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => CreateMemberRequest(relationship),
+			RequestQueue.EnqueueRequest(() => CreateMemberRequest(relationship),
 				onSuccess,
 				onError);
 		}
@@ -146,7 +146,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void UpdateMemberRequestAsync(RelationshipStatusUpdate relationship, Action onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => UpdateMemberRequest(relationship),
+			RequestQueue.EnqueueRequest(() => UpdateMemberRequest(relationship),
 				onSuccess,
 				onError);
 		}
@@ -164,7 +164,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void UpdateMemberAsync(RelationshipStatusUpdate relationship, Action onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => UpdateMember(relationship),
+			RequestQueue.EnqueueRequest(() => UpdateMember(relationship),
 				onSuccess,
 				onError);
 		}

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
@@ -18,9 +18,9 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetGlobalAsync(Action<IEnumerable<LeaderboardResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(GetGlobal,
+			RequestQueue.EnqueueRequest(GetGlobal,
 				onSuccess,
 				onError);
 		}
@@ -54,7 +54,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetAsync(int gameId, Action<IEnumerable<LeaderboardResponse>> onSuccess, Action<Exception> onError)
 		{
-		    AsyncRequestController.EnqueueRequest(() => Get(gameId),
+		    RequestQueue.EnqueueRequest(() => Get(gameId),
 		        onSuccess,
 		        onError);
 		}
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetGlobalAsync(string token, Action<LeaderboardResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => GetGlobal(token),
+			RequestQueue.EnqueueRequest(() => GetGlobal(token),
 				onSuccess,
 				onError);
 		}
@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetAsync(string token, int gameId, Action<LeaderboardResponse> onSuccess, Action<Exception> onError)
 		{
-		    AsyncRequestController.EnqueueRequest(() => Get(token, gameId),
+		    RequestQueue.EnqueueRequest(() => Get(token, gameId),
 		        onSuccess,
 		        onError);
 		}
@@ -109,7 +109,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void CreateGetLeaderboardStandingsAsync(LeaderboardStandingsRequest leaderboardDetails, Action<IEnumerable<LeaderboardStandingsResponse>> onSuccess, Action<Exception> onError)
 		{
-		    AsyncRequestController.EnqueueRequest(() => CreateGetLeaderboardStandings(leaderboardDetails),
+		    RequestQueue.EnqueueRequest(() => CreateGetLeaderboardStandings(leaderboardDetails),
 		        onSuccess,
 		        onError);
 		}

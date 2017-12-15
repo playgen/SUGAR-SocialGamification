@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayGen.SUGAR.Client.AsyncRequestQueue;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Client.Extensions;
+using PlayGen.SUGAR.Client.RequestQueue;
 using PlayGen.SUGAR.Contracts;
 
 namespace PlayGen.SUGAR.Client
@@ -19,9 +19,9 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IRequestQueue requestQueue,
 			EvaluationNotifications evaluationNotifications)
-			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
+			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, requestQueue, evaluationNotifications)
 		{
 		}
 
@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void GetAsync(int gameId, int actorId, string[] keys, Action<IEnumerable<ResourceResponse>> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Get(gameId, actorId, keys),
+			RequestQueue.EnqueueRequest(() => Get(gameId, actorId, keys),
 				onSuccess,
 				onError);
 		}
@@ -62,7 +62,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void AddOrUpdateAsync(ResourceAddRequest data, Action<ResourceResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => AddOrUpdate(data),
+			RequestQueue.EnqueueRequest(() => AddOrUpdate(data),
 				onSuccess,
 				onError);
 		}
@@ -80,7 +80,7 @@ namespace PlayGen.SUGAR.Client
 
 		public void TransferAsync(ResourceTransferRequest data, Action<ResourceTransferResponse> onSuccess, Action<Exception> onError)
 		{
-			AsyncRequestController.EnqueueRequest(() => Transfer(data),
+			RequestQueue.EnqueueRequest(() => Transfer(data),
 				onSuccess,
 				onError);
 		}
