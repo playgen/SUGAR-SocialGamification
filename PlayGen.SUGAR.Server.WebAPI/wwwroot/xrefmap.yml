@@ -13,6 +13,9 @@ references:
 - uid: actor
   name: Actor
   href: features/actor.html
+- uid: client-prefabs
+  name: Unity Client Prefabs
+  href: unity-client/tutorials/client-prefabs.html
 - uid: criteria
   name: Evalutation Criteria
   href: concepts/criteria.html
@@ -2916,6 +2919,30 @@ references:
   commentId: Overload:PlayGen.SUGAR.Client.SUGARClient.#ctor
   fullName: PlayGen.SUGAR.Client.SUGARClient.SUGARClient
   nameWithType: SUGARClient.SUGARClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._accountClient
+  name: _accountClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__accountClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._accountClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._accountClient
+  nameWithType: SUGARClient._accountClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._achievementClient
+  name: _achievementClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__achievementClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._achievementClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._achievementClient
+  nameWithType: SUGARClient._achievementClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._allianceClient
+  name: _allianceClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__allianceClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._allianceClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._allianceClient
+  nameWithType: SUGARClient._allianceClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._apiVersionClient
+  name: _apiVersionClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__apiVersionClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._apiVersionClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._apiVersionClient
+  nameWithType: SUGARClient._apiVersionClient
 - uid: PlayGen.SUGAR.Client.SUGARClient._asyncRequestController
   name: _asyncRequestController
   href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__asyncRequestController
@@ -2934,24 +2961,90 @@ references:
   commentId: F:PlayGen.SUGAR.Client.SUGARClient._evaluationNotifications
   fullName: PlayGen.SUGAR.Client.SUGARClient._evaluationNotifications
   nameWithType: SUGARClient._evaluationNotifications
+- uid: PlayGen.SUGAR.Client.SUGARClient._gameClient
+  name: _gameClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__gameClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._gameClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._gameClient
+  nameWithType: SUGARClient._gameClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._gameDataClient
+  name: _gameDataClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__gameDataClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._gameDataClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._gameDataClient
+  nameWithType: SUGARClient._gameDataClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._groupClient
+  name: _groupClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__groupClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._groupClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._groupClient
+  nameWithType: SUGARClient._groupClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._groupMemberClient
+  name: _groupMemberClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__groupMemberClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._groupMemberClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._groupMemberClient
+  nameWithType: SUGARClient._groupMemberClient
 - uid: PlayGen.SUGAR.Client.SUGARClient._httpHandler
   name: _httpHandler
   href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__httpHandler
   commentId: F:PlayGen.SUGAR.Client.SUGARClient._httpHandler
   fullName: PlayGen.SUGAR.Client.SUGARClient._httpHandler
   nameWithType: SUGARClient._httpHandler
+- uid: PlayGen.SUGAR.Client.SUGARClient._leaderboardClient
+  name: _leaderboardClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__leaderboardClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._leaderboardClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._leaderboardClient
+  nameWithType: SUGARClient._leaderboardClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._matchClient
+  name: _matchClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__matchClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._matchClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._matchClient
+  nameWithType: SUGARClient._matchClient
 - uid: PlayGen.SUGAR.Client.SUGARClient._persistentHeaders
   name: _persistentHeaders
   href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__persistentHeaders
   commentId: F:PlayGen.SUGAR.Client.SUGARClient._persistentHeaders
   fullName: PlayGen.SUGAR.Client.SUGARClient._persistentHeaders
   nameWithType: SUGARClient._persistentHeaders
+- uid: PlayGen.SUGAR.Client.SUGARClient._resourceClient
+  name: _resourceClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__resourceClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._resourceClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._resourceClient
+  nameWithType: SUGARClient._resourceClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._sessionClient
+  name: _sessionClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__sessionClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._sessionClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._sessionClient
+  nameWithType: SUGARClient._sessionClient
 - uid: PlayGen.SUGAR.Client.SUGARClient._sessionHeaders
   name: _sessionHeaders
   href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__sessionHeaders
   commentId: F:PlayGen.SUGAR.Client.SUGARClient._sessionHeaders
   fullName: PlayGen.SUGAR.Client.SUGARClient._sessionHeaders
   nameWithType: SUGARClient._sessionHeaders
+- uid: PlayGen.SUGAR.Client.SUGARClient._skillClient
+  name: _skillClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__skillClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._skillClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._skillClient
+  nameWithType: SUGARClient._skillClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._userClient
+  name: _userClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__userClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._userClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._userClient
+  nameWithType: SUGARClient._userClient
+- uid: PlayGen.SUGAR.Client.SUGARClient._userFriendClient
+  name: _userFriendClient
+  href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient__userFriendClient
+  commentId: F:PlayGen.SUGAR.Client.SUGARClient._userFriendClient
+  fullName: PlayGen.SUGAR.Client.SUGARClient._userFriendClient
+  nameWithType: SUGARClient._userFriendClient
 - uid: PlayGen.SUGAR.Client.SUGARClient.Account
   name: Account
   href: api/PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient_Account

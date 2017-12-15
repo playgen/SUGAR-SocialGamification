@@ -5,11 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace PlayGen.SUGAR.Client.Unity
-   | SUGAR </title>
+    <title>Quick Start | SUGAR </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace PlayGen.SUGAR.Client.Unity
-   | SUGAR ">
+    <meta name="title" content="Quick Start | SUGAR ">
     <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
@@ -17,7 +15,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="../pdf/toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -51,14 +49,6 @@
           </div>
         </div>
       </header>
-      <div class="container body-content">
-        
-        <div id="search-results">
-          <div class="search-list"></div>
-          <div class="sr-items"></div>
-          <ul id="pagination"></ul>
-        </div>
-      </div>
       <div role="main" class="container body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
@@ -69,18 +59,38 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Client.Unity">
-  
-  <h1 id="PlayGen_SUGAR_Client_Unity" data-uid="PlayGen.SUGAR.Client.Unity" class="text-break">Namespace PlayGen.SUGAR.Client.Unity
-  </h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
-    <h3 id="classes">Classes
-  </h3>
-      <h4><a class="xref" href="PlayGen.SUGAR.Client.Unity.UnityWebGlHttpHandler.html">UnityWebGlHttpHandler</a></h4>
-      <section></section>
-</article>
+            <article class="content wrap" id="_content" data-uid="">
+              <h1 id="quick-start">Quick Start</h1>
+              
+<p><strong>Note: Please ensure you have created a SUGAR account before going through the following steps.</strong></p>
+<h4 id="add-sugar">Add SUGAR</h4>
+<ol>
+<li>Add the &#39;SUGAR&#39; prefab, found at SUGAR/Prefabs/SUGAR, into your starting scene. All of the interfaces referenced on the Unity Clients on this object can be found at SUGAR/Example/Prefabs/Landscape.   </li>
+</ol>
+<h4 id="create-game-seed-file">Create Game Seed File</h4>
+<ol>
+<li>Open the &#39;Edit Game Seed&#39; tool by clicking Tools/SUGAR/Edit Game Seed.  </li>
+<li>Create a new game seed by clicking the &#39;Create Game Seed&#39; button.  </li>
+<li>Fill in the &#39;Name&#39; field with the name of the game you wish to seed.  </li>
+<li>Save this basic Seed file by clicking the &#39;Save&#39; button. If you do not change the selected file, this will overwrite the provided &#39;GameSeed&#39; file.</li>
+<li>If you wish to set up the achievements, leaderboards and skills for your game now, go to the guide on <a href="seeding.html">Seeding</a> for further details.  </li>
+</ol>
+<h4 id="seed-game">Seed Game</h4>
+<ol>
+<li>Open the &#39;Seed Game&#39; tool by clicking Tools/SUGAR/Seed Game.  </li>
+<li>Fill in the provided Username and Password fields with your SUGAR details.  </li>
+<li>If you did not overwrite the provided &#39;GameSeed&#39; file, change the &#39;Game Seed File&#39; field to use the file you created during step 2.  </li>
+<li>Click the &#39;Sign-in and Seed&#39; button to add the game to the platform. This step will fail if the seed file is invalid or you provide invalid user details.  </li>
+<li>Check that the &#39;Game Token&#39; and &#39;Game Id&#39; fields on the SUGAR object in your starting scene has been edited to match the details of the game you just created.  </li>
+</ol>
+<h4 id="set-auto-log-in-values-optional">Set Auto Log-in Values (optional)</h4>
+<ol>
+<li>Open the &#39;Set Auto Log-in Values&#39; tool by clicking Tools/SUGAR/Set Auto Log-in Values.  </li>
+<li>Fill in the details you want to use to automatically sign in when testing in Unity.  </li>
+<li>This feature is disabled if either &#39;Auto Log-in&#39; within the tool or &#39;Allow Auto Login&#39; in &#39;Account Unity Client&#39; on the &#39;SUGAR&#39; prefab is not checked.  </li>
+</ol>
+
+            </article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

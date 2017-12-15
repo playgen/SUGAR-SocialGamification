@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Seeding | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Seeding | SUGAR ">
+    <meta name="generator" content="docfx 2.28.3.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1 id="seeding">Seeding</h1>
+              
+<ul>
+<li><strong>Name</strong>: The name of the game you are adding to the SUGAR system. Please note that this name must be unique to the host.</li>
+</ul>
+<h2 id="achievementsskills">Achievements/Skills</h2>
+<ul>
+<li><strong>Name</strong>: The name of the achievement/skill you are creating. Please note that this name must be unique to the game. </li>
+<li><strong>Description</strong>: The description of the achievement/skill you are creating.</li>
+<li><strong>Token</strong>: The unique identification token for the achievement/skill you are creating. Please note that this name must be unique to the game. </li>
+<li><strong><a href="#actortype">ActorType</a></strong>: The type of Actor which this achievement/skill applies to.</li>
+</ul>
+<h4 id="evaluation-criteria">Evaluation Criteria</h4>
+<ul>
+<li><strong>EvaluationDataKey</strong>: The key of the data which is being used for this criteria. </li>
+<li><strong><a href="#evaluationdatacategory">EvaluationDataCategory</a></strong>: The category of data which the criteria is being checked against. </li>
+<li><strong><a href="#comparisontype">ComparisonType</a></strong>: What the current value has to be compared to the target value in order for this criteria to be completed.</li>
+<li><strong><a href="#criteriaquerytype">CriteriaQueryType</a></strong>: The data set from which the current value will be gathered.</li>
+<li><strong><a href="#evaluationdatatype">EvaluationDataType</a></strong>: The type of data which the criteria is being checked for.</li>
+<li><strong><a href="#criteriascope">Scope</a></strong>: The range of actors from which the data will be collected for comparision.</li>
+<li><strong>Value</strong>: The target value of this criteria.</li>
+</ul>
+<h4 id="rewards">Rewards</h4>
+<ul>
+<li><strong>EvaluationDataKey</strong>: The key of the data which will be provided to the actor upon completion of all criteria.</li>
+<li><strong><a href="#evaluationdatacategory">EvaluationDataCategory</a></strong>: The category of data which will be provided to the actor upon completion of all criteria.</li>
+<li><strong><a href="#evaluationdatatype">EvaluationDataType</a></strong>: The type of data which will be provided to the actor upon completion of all criteria.</li>
+<li><strong>Value</strong>: The value which will be provided to the actor upon completion of all criteria.</li>
+</ul>
+<h2 id="leaderboards">Leaderboards</h2>
+<ul>
+<li><strong>Token</strong>: The unique identification token for the leaderboard you are creating. Please note that this name must be unique to the game. </li>
+<li><strong>Name</strong>: The name of the leaderboard you are creating. Please note that this name must be unique to the game. </li>
+<li><strong>Key</strong>: The key of the data which will be used to form the leaderboard.</li>
+<li><strong><a href="#actortype">ActorType</a></strong>: The type of Actor which this leaderboard applies to.</li>
+<li><strong><a href="#evaluationdatacategory">EvaluationDataCategory</a></strong>: The category of data which will be used for this leaderboard.</li>
+<li><strong><a href="#evaluationdatatype">EvaluationDataType</a></strong>: The type of data which will be used for this leaderboard.</li>
+<li><strong><a href="#criteriascope">CriteriaScope</a></strong>: The range of actors from which the data will be collected.</li>
+<li><strong><a href="#leaderboardtype">LeaderboardType</a></strong>: How collected data will be sorted for this leaderboard.</li>
+</ul>
+<h2 id="enums">Enums</h2>
+<h4 id="actortype">ActorType</h4>
+<ul>
+<li><strong>Undefined</strong>: Intended use not defined and as such means it applies to both Users and Groups.</li>
+<li><strong>User</strong>: Intended for use for Users only.</li>
+<li><strong>Group</strong>: Intended for use for Groups only.</li>
+</ul>
+<h4 id="comparisontype">ComparisonType</h4>
+<ul>
+<li><strong>Equals</strong>: The current value and target value must exactly match.</li>
+<li><strong>Not Equal</strong>: The current value and target value do not exactly match.</li>
+<li><strong>Greater</strong>: The current value is greater in value than the target value (Long and Float only).</li>
+<li><strong>Greater or Equal</strong>: The current value is greater or exactly equal in value to the target value (Long and Float only).</li>
+<li><strong>Lesser</strong>: The current value is lower in value than the target value (Long and Float only).</li>
+<li><strong>Lesser or Equal</strong>: The current value is lower or exactly equal in value to the target value (Long and Float only).</li>
+</ul>
+<h4 id="criteriascope">CriteriaScope</h4>
+<ul>
+<li><strong>Actor</strong>: Data collected will have been submitted by the actor themselves.</li>
+<li><strong>Related Users</strong>: Data collected will have been submitted by the actor and their friends (if the actor is a User) or their members (if the actor is a Group). ActorType cannot also be Undefined.</li>
+<li><strong>Related Groups</strong>: Data collected will have been submitted by the actor and their alliances. ActorType must be Group.</li>
+<li><strong>Related Group Users</strong>: Data collected will have been submitted by their members and the members of their alliances. ActorType must be Group.</li>
+</ul>
+<h4 id="criteriaquerytype">CriteriaQueryType</h4>
+<ul>
+<li><strong>Any</strong>: Any collected data will be compared against the value set in the criteria. Can only be used when Scope is set to Actor.</li>
+<li><strong>Sum</strong>: The sum of all collected data will be compared against the value set in the criteria. Can only be used when EvaluationDataType is set to Long or Float.</li>
+<li><strong>Latest</strong>: The latest piece of data will be compared against the value set in the criteria. Can only be used when Scope is set to Actor.</li>
+</ul>
+<h4 id="evaluationdatacategory">EvaluationDataCategory</h4>
+<ul>
+<li><strong>Game Data</strong>: The data has been stored as a piece of Game Data, which allows for multiple values for the same key and all EvaluationDataTypes.</li>
+<li><strong>Resource</strong>: The data has been stored as a Resource, which allows for only one value per key and has its value stored as a Long.</li>
+<li><strong>Skill</strong>: The data has been stored as a Skill, marking the completion of all criteria for a Skill.</li>
+<li><strong>Achievement</strong>: The data has been stored as a Achievement, marking the completion of all criteria for a Achievement.</li>
+<li><strong>Match Data</strong>: The data has been stored as a piece of Match Data, which allows for multiple values for the same key in relation to a Match and all EvaluationDataTypes.</li>
+</ul>
+<h4 id="evaluationdatatype">EvaluationDataType</h4>
+<ul>
+<li><strong>String</strong>: The data has been stored and can be parsed as a String.</li>
+<li><strong>Long</strong>: The data has been stored and can be parsed as a Long.</li>
+<li><strong>Float</strong>: The data has been stored and can be parsed as a Float.</li>
+<li><strong>Boolean</strong>: The data has been stored and can be parsed as a Boolean.</li>
+</ul>
+<h4 id="leaderboardtype">LeaderboardType</h4>
+<ul>
+<li><strong>Highest</strong>: The leaderboard will be sorted from highest single value to lowest (Long and Float only).</li>
+<li><strong>Lowest</strong>: The leaderboard will be sorted from lowest single value to highest (Long and Float only).</li>
+<li><strong>Cumulative</strong>: The leaderboard will be sorted from highest combined value to lowest (Long and Float only).</li>
+<li><strong>Count</strong>: The leaderboard will be sorted from the highest amount which the key has been recorded to the lowest (String and Boolean only).</li>
+<li><strong>Earliest</strong>: The leaderboard will be sorted from the earliest time the key was recorded to the latest (String and Boolean only).</li>
+<li><strong>Latest</strong>: The leaderboard will be sorted from the latest time the key was recorded to the earliest (String and Boolean only).</li>
+</ul>
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

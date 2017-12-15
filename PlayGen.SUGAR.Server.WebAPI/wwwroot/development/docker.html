@@ -72,8 +72,15 @@
 </li>
 </ul>
 <h1 id="quick-start">Quick Start</h1>
-<p>To run the SUGAR docker services without having to build the SUGAR image:
-Run the docker/docker-compose_image_deploy script.</p>
+<p>To run the SUGAR docker services without having to build the SUGAR image:</p>
+<ol>
+<li><p>Make sure you&#39;ve got the <a href="#requirements">requirements inatalled</a>.</p>
+</li>
+<li><p>Run the docker/docker-compose_image_deploy_map-port.bat (or .sh on linux) script.</p>
+</li>
+<li><p>When docker has finished deploying, check that the server is running by visiting <a href="http://localhost:59400">http://localhost:59400</a> where you should see the SUGAR documentation.</p>
+</li>
+</ol>
 <p>This will use the latest docker image of SUGAR from the <a href="#automated-builds">Automated Builds</a> and create and link the database container.</p>
 <h2 id="automated-builds">Automated Builds</h2>
 <p>Using the <a href="https://docs.docker.com/docker-hub/builds">automated build service</a>, Docker Hub does a build of SUGAR each time a commit is pushed to the master branch on <a href="https://github.com/playgen/SUGAR-SocialGamification">GitHub</a>.</p>
