@@ -8,6 +8,7 @@ namespace PlayGen.SUGAR.Client.RequestQueue
 	{
 		private readonly AutoResetEvent _processRequestHandle = new AutoResetEvent(false);
 		private readonly ManualResetEvent _abortHandle = new ManualResetEvent(false);
+		private readonly AutoResetEvent _timeoutChangedHandle = new AutoResetEvent(false);
 
 		private readonly Queue<Action> _responses = new Queue<Action>();
 		private readonly Queue<QueueItem> _requests = new Queue<QueueItem>();
@@ -15,17 +16,14 @@ namespace PlayGen.SUGAR.Client.RequestQueue
 		private readonly object _requestsLock = new object();
 		private readonly object _responsesLock = new object();
 
-		private readonly int _timeoutMilliseconds;
-		private readonly QueueItem _onTimeoutItem;
+		private int _timeoutMilliseconds = int.MaxValue;
+		private QueueItem _onTimeoutItem;
 
 		private Exception _workerException;
 		private bool _isDisposed;
 
-		public AsyncThreadRequestQueue(int timeoutMilliseconds, Action onTimeout)
+		public AsyncThreadRequestQueue()
 		{
-			_timeoutMilliseconds = timeoutMilliseconds;
-			_onTimeoutItem = new QueueItem(onTimeout, null, e => throw e);
-
 			var worker = new Thread(DoWork);
 			worker.Start();
 		}
@@ -41,6 +39,13 @@ namespace PlayGen.SUGAR.Client.RequestQueue
 
 			_abortHandle.Set();
 			_isDisposed = true;
+		}
+
+		public void SetTimeout(int timeoutMilliseconds, Action onTimeout)
+		{
+			_timeoutMilliseconds = timeoutMilliseconds;
+			_onTimeoutItem = new QueueItem(onTimeout, null, e => throw e);
+			_timeoutChangedHandle.Set();
 		}
 
 		public void EnqueueRequest(Action request, Action onSuccess, Action<Exception> onError)
@@ -116,8 +121,9 @@ namespace PlayGen.SUGAR.Client.RequestQueue
 		{
 			try
 			{
-				var handles = new WaitHandle[] { _processRequestHandle, _abortHandle };
-				var abortHandleIndex = 1;
+				var handles = new WaitHandle[] { _processRequestHandle, _abortHandle, _timeoutChangedHandle };
+				var abortHandleIndex = Array.IndexOf(handles, _abortHandle);
+				var timeoutChangedHandleIndex = Array.IndexOf(handles, _timeoutChangedHandle);
 
 				while (true)
 				{
@@ -130,6 +136,10 @@ namespace PlayGen.SUGAR.Client.RequestQueue
 					else if (signal == abortHandleIndex)
 					{
 						break;
+					}
+					else if(signal == timeoutChangedHandleIndex)
+					{
+						continue;
 					}
 
 					QueueItem item;
@@ -161,6 +171,6 @@ namespace PlayGen.SUGAR.Client.RequestQueue
 			{
 				_workerException = e;
 			}
-		}
+		}		
 	}
 }

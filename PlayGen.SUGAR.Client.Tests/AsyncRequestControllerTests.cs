@@ -8,9 +8,17 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
 {
-	public class AsyncRequestControllerTests : ClientTestBase
+	public class AsyncRequestControllerTests
 	{
-		private AsyncThreadRequestQueue DefaultAsyncThreadRequestQueue => new AsyncThreadRequestQueue(60 * 1000, null);
+		private AsyncThreadRequestQueue DefaultAsyncThreadRequestQueue
+		{
+			get
+			{
+				var requestQueue = new AsyncThreadRequestQueue();
+				requestQueue.SetTimeout(60 * 1000, null);
+				return requestQueue;
+			}
+		}
 
 		[Fact]
 		public void ValueRequestsTriggerOnSuccessCallbacks()
@@ -123,8 +131,10 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			// Arrange
 			var didTimeout = false;
-			using (var asyncRequestController = new AsyncThreadRequestQueue(100, () => didTimeout = true))
+			using (var asyncRequestController = new AsyncThreadRequestQueue())
 			{
+				asyncRequestController.SetTimeout(100, () => didTimeout = true);
+
 				// Act
 				var stopWatch = Stopwatch.StartNew();
 				var timeout = 1 * 1000;
@@ -137,11 +147,6 @@ namespace PlayGen.SUGAR.Client.Tests
 				// Assert
 				Assert.True(didTimeout);
 			}
-		}
-
-		public AsyncRequestControllerTests(ClientTestsFixture fixture)
-			: base(fixture)
-		{
 		}
 	}
 }

@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Client
 		protected LeaderboardClient _leaderboardClient;
 		protected SkillClient _skillClient;
 		protected MatchClient _matchClient;
-		
+
 		public APIVersionClient APIVersion => _apiVersionClient ?? (_apiVersionClient = new APIVersionClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
 		public AccountClient Account => _accountClient ?? (_accountClient = new AccountClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
 		public SessionClient Session => _sessionClient ?? (_sessionClient = new SessionClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
@@ -44,17 +44,21 @@ namespace PlayGen.SUGAR.Client
 		public LeaderboardClient Leaderboard => _leaderboardClient ?? (_leaderboardClient = new LeaderboardClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
 		public SkillClient Skill => _skillClient ?? (_skillClient = new SkillClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
 		public MatchClient Match => _matchClient ?? (_matchClient = new MatchClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, RequestQueue, _evaluationNotifications));
-
-		// todo possibly pass update event so async requests are either read in and handled there or this creates another thread to poll the async queue
-		public SUGARClient(string baseAddress, IHttpHandler httpHandler = null, Dictionary<string, string> persistentHeaders = null, Dictionary<string, string> sessionHeaders = null, int timeoutMilliseconds = 60 * 1000)
+		
+		public SUGARClient(
+			string baseAddress,
+			IRequestQueue requestQueue,
+			IHttpHandler httpHandler = null,
+			Dictionary<string, string> persistentHeaders = null,
+			Dictionary<string, string> sessionHeaders = null)
 		{
 			_baseAddress = baseAddress;
+			RequestQueue = requestQueue;
 			_httpHandler = httpHandler ?? new DefaultHttpHandler();
 			_persistentHeaders = persistentHeaders ?? new Dictionary<string, string> { { Common.APIVersion.Key, Common.APIVersion.Version } };
 			_sessionHeaders = sessionHeaders ?? new Dictionary<string, string>();
-			RequestQueue = new AsyncThreadRequestQueue(timeoutMilliseconds, () => Session.Heartbeat());
 		}
-
+		
 		public bool TryExecuteResponse()
 		{
 			return RequestQueue.TryExecuteResponse();

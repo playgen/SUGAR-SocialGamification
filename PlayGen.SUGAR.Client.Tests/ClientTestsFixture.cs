@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using PlayGen.SUGAR.Client.RequestQueue;
+using PlayGen.SUGAR.Server.Core.Sessions;
 using PlayGen.SUGAR.Server.WebAPI;
 using Xunit;
 
@@ -28,9 +30,15 @@ namespace PlayGen.SUGAR.Client.Tests
 
 		public SUGARClient CreateSugarClient(Dictionary<string, string> persistentHeaders = null, Dictionary<string, string> sessionHeaders = null)
 		{
+			var timeoutMilliseconds = 60 * 1000;
+			var requestQueue = new AsyncThreadRequestQueue();
+
 			var client = Server.CreateClient();
 			var testHttpHandler = new HttpClientHandler(client);
-			var sugarClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler, persistentHeaders, sessionHeaders);
+			var sugarClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, requestQueue, testHttpHandler, persistentHeaders, sessionHeaders);
+
+			requestQueue.SetTimeout(timeoutMilliseconds, sugarClient.Session.Heartbeat);
+			
 			return sugarClient;
 		}
 
