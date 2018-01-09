@@ -1,9 +1,7 @@
 # Games
 *For more information on games view the <a href="../game.md">documentation</a>*
 
-The games screen allows the admin to do the following actions:
-* Create new games
-* Delete current games
+The games page shows a list of all games that the admin has permission to view, from here admins can create, edit and delete games.
 
 ![Games Page](../../images/features/admin/Games.png)
 
@@ -12,7 +10,41 @@ The admin can create new games by selecting the "Create New Game" button which w
 
 ![Create Games Prompt](../../images/features/admin/GamesCreate.png)
 
-### Delete current games
-Delete button will delete the selected game from the table
+### Game Details
+After selecting a game, metadata for the selected game is displayed, from which admins can make changes or delete the game. 
 
-![Delete Game Warning](../../images/features/admin/GamesDelete.png)
+The tabs available direct to different pages to manage the game and create <a href="../gameData.md">Game Data</a>, <a href="../achievement.md">Achievements</a>, <a href="../skill.md">Skills</a>, <a href="../resource.md">Resources</a> and <a href="../leaderboard.md">leaderboards</a> for the current game.
+
+![Game Details](../../images/features/admin/GamesDetails.png)
+
+### Creating Game Data
+
+From the Game Data tab, New game data can be added for each user by filling out the form, then can be viewed by selecting a user and loading their data
+
+![Game Data](../../images/features/admin/GamesActorData.png)
+
+### Creating Game Achievements and Skills
+
+Both the Achievements and Skills tabs have the same functionality where they allow admins to view existing, create new and delete Achievements and Skills. 
+
+![Game Achievements/Skills](../../images/features/admin/GamesAchievements.png)
+
+When creating a new achievment or skill, a page will show that contains all the fields required and allows for multiple criteria to added for each achievement or skill.
+
+![Creating Achievements/Skills](../../images/features/admin/GamesAchievementsCreate.png)
+
+### Creating Game Resources
+
+The resources tab allows admins to view each users resources for the current game and make any changes they wish, this tab also allows for new resources to be created for each user.
+
+![Game Resources](../../images/features/admin/GamesResources.png)
+
+### Creating Game Leaderbaords
+
+Leaderboards for a game can be viewed from the leaderboards tab, from here; new leaderboards can be created, existing leaderboards can be edited, deleted or can be viewed to see actor standings.
+
+![Game Leaderboards](../../images/features/admin/GamesLeaderboards.png)
+
+### Managing Game Roles
+
+The final tab allows admins to manage which users have access to the game, by adding new accounts, more users will have permissions to make changes to this game.
