@@ -1,18 +1,14 @@
 # Achievement
 *For more information on achievements view the <a href="../achievement.md">documentation</a>*
  
-The achievements page controls the achievements for a given game and global achievements by selecting from a list of games or the global achievements option
+From a game profile, admins can create, view and edit achievemnets. The image below shows a list of achievements for a game, clicking "View" will expand the achievement and provide more details about the criteria and rewards
 
-After selecting a platform the admin can:
-* Create a new achievement
-* Delete an existing achievement
-
-![Achievements Page](../../images/features/admin/AchievementsList.png)
+![Achievements Page](../../images/features/admin/GamesAchievements.png)
 
 ### Create a new achievement
 By selecting "Create New Achievement" a new page will be opened including all the fields needed for an achievement, achievements can have multiple criterias added using the "Add Criteria" and "Remove Criteria" buttons at the bottom of the screen to control the number required.
 
-![Create a new Achievement Page](../../images/features/admin/AchievementsCreate.png)
+![Create a new Achievement Page](../../images/features/admin/GamesAchievementsCreate.png)
 
 ### Delete an existing achievement
 Delete button will delete the selected achievement from the table

@@ -15,6 +15,12 @@ The admin can create new users by selecting the "Create new User" button, this w
 
 ![Create users prompt](../../images/features/admin/UsersCreate.png)
 
+### Manage users' actor data
+
+A user can have actor data for a game, this is managed through the "Actor Data" tab. By selecting a game from the drop down list and loading the data, admins will be able to see all the data saved for the current user in that game. If new actor data is needed, simply click the "Create New Actor Data" button and fill in the required fields
+
+![Users Actor Data](../../images/features/admin/UsersActorData.png)
+
 ### Manage users' friends
 
 Each user can have friends, pending friend requests and sent friend requests, from the friends page, admins can remove accepted friends, cancel sent friend requests and accept/reject requests from other users.
@@ -29,8 +35,10 @@ The "Add Group" button will prompt a group name to be entered, the name entered 
 
 ![Users' groups page](../../images/features/admin/UsersGroups.png)
 
-### Delete users
+### Users' Details
 
-Delete button will delete the selected user from the table
+The User Details tab allows the admin to make changes to user metadata.
 
-![Delete User Warning](../../images/features/admin/UsersDelete.png)
+![User Details](../../images/features/admin/UsersProfile.png)
+
+The delete button from the details tab will delete the selected user from the table
