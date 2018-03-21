@@ -1,7 +1,7 @@
 version: '2'
 
 services: 
-    sugar-mariadb-v0: 
+    sugar-v0-mariadb: 
         network_mode: "bridge"
         environment:
             MYSQL_ROOT_PASSWORD: "t0pSECr3t"
