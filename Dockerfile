@@ -1,4 +1,4 @@
-FROM microsoft/dotnet
+FROM microsoft/dotnet:1.0.0-preview2-sdk
 
 RUN apt-get -qq update && apt-get -y install netcat
 
