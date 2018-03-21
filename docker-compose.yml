@@ -6,17 +6,17 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: "t0pSECr3t"
         image: mariadb
-        container_name: "sugar-mariadb"
+        container_name: "sugar-v0-mariadb"
         expose:
             - 3306
     sugar:
         network_mode: "bridge"
         build:
             context: ./
-        image: "sugarengine"
-        container_name: "sugar"
+        image: "sugar-v0"
+        container_name: "sugar-v0"
         links:
-            - sugar-mariadb
+            - sugar-v0-mariadb
         expose:
             - 5000
         environment:

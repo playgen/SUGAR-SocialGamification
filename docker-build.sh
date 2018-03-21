@@ -1,3 +1,3 @@
 #/bin/bash
-export CONTAINER="sugarengine"
+export CONTAINER="sugar-v0"
 docker build -t $CONTAINER .
