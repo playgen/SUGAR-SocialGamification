@@ -9,6 +9,9 @@ services:
         container_name: "sugar-v0-mariadb"
         expose:
             - 3306
+        ports:
+        - "59430:3306"
+
     sugar-v0:
         network_mode: "bridge"
         build:
