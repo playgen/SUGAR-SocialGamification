@@ -57,7 +57,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		private void AddProgress(ConcurrentProgressCache concurrentProgress, Evaluation evaluation, Session session)
 		{
-		    if (!_evaluationController.IsAlreadyCompleted(evaluation, session.ActorId))
+		    if (evaluation.ActorType != Common.ActorType.Group && !_evaluationController.IsAlreadyCompleted(evaluation, session.ActorId))
 		    {
 		        var progressValue = _evaluationController.EvaluateProgress(evaluation, session.ActorId);
 		        concurrentProgress.AddProgress(session.GameId, session.ActorId, evaluation, progressValue);
