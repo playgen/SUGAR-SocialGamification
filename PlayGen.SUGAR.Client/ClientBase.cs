@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Client
 		private readonly string _baseAddress;
 		private readonly IHttpHandler _httpHandler;
 
-		protected readonly AsyncRequestController AsyncRequestController;
+		protected readonly IAsyncRequestController AsyncRequestController;
 		protected readonly EvaluationNotifications EvaluationNotifications;
 
 		public static readonly JsonSerializerSettings SerializerSettings;
@@ -47,7 +47,7 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController, 
+			IAsyncRequestController asyncRequestController, 
 			EvaluationNotifications evaluationNotifications)
 		{
 			if (!Uri.IsWellFormedUriString(baseAddress, UriKind.Absolute))
@@ -277,10 +277,12 @@ namespace PlayGen.SUGAR.Client
 				}
 				throw new ClientHttpException((HttpStatusCode)response.StatusCode, error);
 			}
-			
-			if (response.Headers.ContainsKey(HeaderKeys.Authorization))
+
+			var authorizationHeader = response.Headers.Keys.FirstOrDefault(h => string.Equals(h, HeaderKeys.Authorization, StringComparison.OrdinalIgnoreCase));
+
+			if (authorizationHeader != null)
 			{
-				_sessionHeaders[HeaderKeys.Authorization] = response.Headers[HeaderKeys.Authorization];
+				_sessionHeaders[HeaderKeys.Authorization] = response.Headers[authorizationHeader];
 			}
 		}
 	}

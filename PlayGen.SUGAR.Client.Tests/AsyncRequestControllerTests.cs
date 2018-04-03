@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Client.Tests
 {
 	public class AsyncRequestControllerTests : ClientTestBase
 	{
-		private AsyncRequestController DefaultAsyncRequestController => new AsyncRequestController(60 * 1000, null);
+		private IAsyncRequestController DefaultAsyncRequestController => new AsyncRequestController(60 * 1000, null);
 
 		[Fact]
 		public void ValueRequestsTriggerOnSuccessCallbacks()

@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace PlayGen.SUGAR.Client.AsyncRequestQueue
 {
-	public class AsyncRequestController : IDisposable
+	public class AsyncRequestController : IAsyncRequestController
 	{
 		private readonly AutoResetEvent _processRequestHandle = new AutoResetEvent(false);
 		private readonly ManualResetEvent _abortHandle = new ManualResetEvent(false);

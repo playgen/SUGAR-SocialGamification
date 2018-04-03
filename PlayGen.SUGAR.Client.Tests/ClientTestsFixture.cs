@@ -30,7 +30,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
 			var client = Server.CreateClient();
 			var testHttpHandler = new HttpClientHandler(client);
-			var sugarClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler, persistentHeaders, sessionHeaders);
+			var sugarClient = new SUGARClient(Server.BaseAddress.AbsoluteUri, testHttpHandler, true, persistentHeaders, sessionHeaders);
 			return sugarClient;
 		}
 

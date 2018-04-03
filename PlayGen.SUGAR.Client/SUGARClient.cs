@@ -10,7 +10,7 @@ namespace PlayGen.SUGAR.Client
 		protected readonly IHttpHandler _httpHandler;
 		protected readonly Dictionary<string, string> _persistentHeaders;
 		protected readonly Dictionary<string, string> _sessionHeaders;
-		protected readonly AsyncRequestController _asyncRequestController;
+		protected readonly IAsyncRequestController _asyncRequestController;
 		protected readonly EvaluationNotifications _evaluationNotifications = new EvaluationNotifications();
 
 		protected APIVersionClient _apiVersionClient;
@@ -46,13 +46,20 @@ namespace PlayGen.SUGAR.Client
 		public MatchClient Match => _matchClient ?? (_matchClient = new MatchClient(_baseAddress, _httpHandler, _persistentHeaders, _sessionHeaders, _asyncRequestController, _evaluationNotifications));
 
 		// todo possibly pass update event so async requests are either read in and handled there or this creates another thread to poll the async queue
-		public SUGARClient(string baseAddress, IHttpHandler httpHandler = null, Dictionary<string, string> persistentHeaders = null, Dictionary<string, string> sessionHeaders = null, int timeoutMilliseconds = 60 * 1000)
+		public SUGARClient(string baseAddress, IHttpHandler httpHandler = null, bool asyncEnabled = true, Dictionary<string, string> persistentHeaders = null, Dictionary<string, string> sessionHeaders = null, int timeoutMilliseconds = 60 * 1000)
 		{
 			_baseAddress = baseAddress;
 			_httpHandler = httpHandler ?? new DefaultHttpHandler();
 			_persistentHeaders = persistentHeaders ?? new Dictionary<string, string> { { Common.APIVersion.Key, Common.APIVersion.Version } };
 			_sessionHeaders = sessionHeaders ?? new Dictionary<string, string>();
-			_asyncRequestController = new AsyncRequestController(timeoutMilliseconds, () => Session.Heartbeat());
+			if (asyncEnabled)
+			{
+				_asyncRequestController = new AsyncRequestController(timeoutMilliseconds, () => Session.Heartbeat());
+			}
+			else
+			{
+				_asyncRequestController = new SyncRequestController();
+			}
 		}
 
 		public bool TryExecuteResponse()

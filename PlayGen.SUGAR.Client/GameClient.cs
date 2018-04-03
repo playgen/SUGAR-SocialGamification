@@ -18,7 +18,7 @@ namespace PlayGen.SUGAR.Client
 			IHttpHandler httpHandler,
 			Dictionary<string, string> constantHeaders,
 			Dictionary<string, string> sessionHeaders,
-			AsyncRequestController asyncRequestController,
+			IAsyncRequestController asyncRequestController,
 			EvaluationNotifications evaluationNotifications)
 			: base(baseAddress, httpHandler, constantHeaders, sessionHeaders, asyncRequestController, evaluationNotifications)
 		{
