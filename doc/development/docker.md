@@ -20,6 +20,12 @@ To run the SUGAR docker services without having to build the SUGAR image:
 
 This will use the latest docker image of SUGAR from the [Automated Builds](#automated-builds) and create and link the database container.
 
+### SUGAR Admin Interface: 
+If you want to use the SUGAR Admin Interface on your local machine too:
+1. Download the [repository](https://github.com/playgen/SUGAR-AdminUI).
+2. Run the relevant `docker_build_and_deploy_map_ports` file. 
+3. Browse to the mapped url e.g: "http://localhost:59440".
+
 ## Automated Builds
 
 Using the [automated build service](https://docs.docker.com/docker-hub/builds), Docker Hub does a build of SUGAR each time a commit is pushed to the master branch on [GitHub](https://github.com/playgen/SUGAR-SocialGamification).
