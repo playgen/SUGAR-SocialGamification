@@ -40,4 +40,4 @@ services:
     environment:
       ASPNETCORE_URLS: "http://0.0.0.0:59400"
     volumes:
-      - /other/docker/sugar-v1/logs:/app/PlayGen.SUGAR.Server.WebAPI/logs    
+      - ../../sugar-v1/logs:/app/PlayGen.SUGAR.Server.WebAPI/logs    
