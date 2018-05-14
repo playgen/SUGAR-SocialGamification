@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SUGARDevelopmentClient
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,7 +55,9 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -195,27 +197,6 @@
     <div>
       <a class="xref" href="PlayGen.SUGAR.Client.SUGARClient.html#PlayGen_SUGAR_Client_SUGARClient_TryExecuteResponse">SUGARClient.TryExecuteResponse()</a>
     </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Client.Development.html">PlayGen.SUGAR.Client.Development</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Client.Development.dll</h6>
@@ -228,12 +209,12 @@
   
   
   <a id="PlayGen_SUGAR_Client_Development_SUGARDevelopmentClient__ctor_" data-uid="PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.#ctor*"></a>
-  <h4 id="PlayGen_SUGAR_Client_Development_SUGARDevelopmentClient__ctor_System_String_PlayGen_SUGAR_Client_IHttpHandler_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__System_Int32_" data-uid="PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.#ctor(System.String,PlayGen.SUGAR.Client.IHttpHandler,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},System.Int32)">SUGARDevelopmentClient(String, IHttpHandler, Dictionary&lt;String, String&gt;, Dictionary&lt;String, String&gt;, Int32)</h4>
+  <h4 id="PlayGen_SUGAR_Client_Development_SUGARDevelopmentClient__ctor_System_String_PlayGen_SUGAR_Client_IHttpHandler_System_Boolean_Dictionary_System_String_System_String__Dictionary_System_String_System_String__System_Int32_" data-uid="PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.#ctor(System.String,PlayGen.SUGAR.Client.IHttpHandler,System.Boolean,Dictionary{System.String,System.String},Dictionary{System.String,System.String},System.Int32)">SUGARDevelopmentClient(String, IHttpHandler, Boolean, Dictionary&lt;String, String&gt;, Dictionary&lt;String, String&gt;, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SUGARDevelopmentClient(string baseAddress, IHttpHandler httpHandler = null, Dictionary&lt;string, string&gt; persistentHeaders = null, Dictionary&lt;string, string&gt; sessionHeaders = null, int timeoutMilliseconds = 60000)</code></pre>
+    <pre><code class="lang-csharp hljs">public SUGARDevelopmentClient(string baseAddress, IHttpHandler httpHandler = null, bool asyncEnabled = true, Dictionary&lt;string, string&gt; persistentHeaders = null, Dictionary&lt;string, string&gt; sessionHeaders = null, int timeoutMilliseconds = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -256,12 +237,17 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">asyncEnabled</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">persistentHeaders</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">sessionHeaders</span></td>
         <td></td>
       </tr>

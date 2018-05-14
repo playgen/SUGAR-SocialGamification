@@ -8,7 +8,7 @@
     <title>Docker | SUGAR </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Docker | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -82,6 +82,13 @@
 </li>
 </ol>
 <p>This will use the latest docker image of SUGAR from the <a href="#automated-builds">Automated Builds</a> and create and link the database container.</p>
+<h3 id="sugar-admin-interface">SUGAR Admin Interface:</h3>
+<p>If you want to use the SUGAR Admin Interface on your local machine too:</p>
+<ol>
+<li>Download the <a href="https://github.com/playgen/SUGAR-AdminUI">repository</a>.</li>
+<li>Run the relevant <code>docker_build_and_deploy_map_ports</code> file. </li>
+<li>Browse to the mapped url e.g: &quot;<a href="http://localhost:59440">http://localhost:59440</a>&quot;.</li>
+</ol>
 <h2 id="automated-builds">Automated Builds</h2>
 <p>Using the <a href="https://docs.docker.com/docker-hub/builds">automated build service</a>, Docker Hub does a build of SUGAR each time a commit is pushed to the master branch on <a href="https://github.com/playgen/SUGAR-SocialGamification">GitHub</a>.</p>
 <p>You can find and download the image <a href="https://hub.docker.com/r/playgen/sugar-socialgamification/">here</a>.</p>

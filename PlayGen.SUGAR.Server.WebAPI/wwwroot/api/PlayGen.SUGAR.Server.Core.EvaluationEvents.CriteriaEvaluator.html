@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class CriteriaEvaluator
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,7 +55,9 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -85,42 +87,18 @@
       <div class="level2"><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html">LeaderboardController</a></div>
       <div class="level2"><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.RewardController.html">RewardController</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.html">PlayGen.SUGAR.Server.Core.EvaluationEvents</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.Core.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class CriteriaEvaluator</code></pre>
+    <pre><code class="lang-csharp hljs">public class CriteriaEvaluator : object</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   
   
   <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator__ctor_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.#ctor*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator__ctor_Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController__PlayGen_SUGAR_Server_EntityFramework_SUGARContextFactory_PlayGen_SUGAR_Server_Core_Controllers_RelationshipController_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController},PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory,PlayGen.SUGAR.Server.Core.Controllers.RelationshipController)">CriteriaEvaluator(ILogger&lt;EvaluationDataController&gt;, SUGARContextFactory, RelationshipController)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator__ctor_ILogger_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController__PlayGen_SUGAR_Server_EntityFramework_SUGARContextFactory_PlayGen_SUGAR_Server_Core_Controllers_RelationshipController_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.#ctor(ILogger{PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController},PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory,PlayGen.SUGAR.Server.Core.Controllers.RelationshipController)">CriteriaEvaluator(ILogger&lt;EvaluationDataController&gt;, SUGARContextFactory, RelationshipController)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -138,7 +116,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.Extensions.Logging.ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a>&gt;</td>
+        <td><span class="xref">ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a>&gt;</td>
         <td><span class="parametername">evaluationDataLogger</span></td>
         <td></td>
       </tr>
@@ -199,7 +177,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.Extensions.Logging.ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a>&gt;</td>
+        <td><span class="xref">ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -238,7 +216,8 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected static float CompareValues&lt;T&gt;(T value, T expected, ComparisonType comparisonType, EvaluationDataType dataType)where T : IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">protected static float CompareValues&lt;T&gt;(T value, T expected, ComparisonType comparisonType, EvaluationDataType dataType)
+    where T : IComparable</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -523,7 +502,7 @@
   
   
   <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyBool_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyBool_System_Int32_System_Collections_Generic_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)">EvaluateManyBool(Int32, List&lt;Int32&gt;, EvaluationCriteria)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyBool_System_Int32_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyBool(System.Int32,List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)">EvaluateManyBool(Int32, List&lt;Int32&gt;, EvaluationCriteria)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -546,7 +525,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="xref">List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">actors</span></td>
         <td></td>
       </tr>
@@ -575,7 +554,7 @@
   
   
   <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyFloat_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyFloat_System_Int32_System_Collections_Generic_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)">EvaluateManyFloat(Int32, List&lt;Int32&gt;, EvaluationCriteria)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyFloat_System_Int32_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyFloat(System.Int32,List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)">EvaluateManyFloat(Int32, List&lt;Int32&gt;, EvaluationCriteria)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -598,7 +577,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="xref">List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">actors</span></td>
         <td></td>
       </tr>
@@ -627,7 +606,7 @@
   
   
   <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyLong_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyLong_System_Int32_System_Collections_Generic_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)">EvaluateManyLong(Int32, List&lt;Int32&gt;, EvaluationCriteria)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyLong_System_Int32_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyLong(System.Int32,List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)">EvaluateManyLong(Int32, List&lt;Int32&gt;, EvaluationCriteria)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -650,7 +629,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="xref">List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">actors</span></td>
         <td></td>
       </tr>
@@ -679,7 +658,7 @@
   
   
   <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyString_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyString_System_Int32_System_Collections_Generic_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString(System.Int32,System.Collections.Generic.List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)">EvaluateManyString(Int32, List&lt;Int32&gt;, EvaluationCriteria)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_EvaluateManyString_System_Int32_List_System_Int32__PlayGen_SUGAR_Server_Model_EvaluationCriteria_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.EvaluateManyString(System.Int32,List{System.Int32},PlayGen.SUGAR.Server.Model.EvaluationCriteria)">EvaluateManyString(Int32, List&lt;Int32&gt;, EvaluationCriteria)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -702,7 +681,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="xref">List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">actors</span></td>
         <td></td>
       </tr>
@@ -783,7 +762,7 @@
   
   
   <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_IsCriteriaSatisified_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.IsCriteriaSatisified*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_IsCriteriaSatisified_System_Int32_System_Int32_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_EvaluationCriteria__PlayGen_SUGAR_Common_ActorType_PlayGen_SUGAR_Common_EvaluationType_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.IsCriteriaSatisified(System.Int32,System.Int32,System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.EvaluationCriteria},PlayGen.SUGAR.Common.ActorType,PlayGen.SUGAR.Common.EvaluationType)">IsCriteriaSatisified(Int32, Int32, List&lt;EvaluationCriteria&gt;, ActorType, EvaluationType)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_CriteriaEvaluator_IsCriteriaSatisified_System_Int32_System_Int32_List_PlayGen_SUGAR_Server_Model_EvaluationCriteria__PlayGen_SUGAR_Common_ActorType_PlayGen_SUGAR_Common_EvaluationType_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.IsCriteriaSatisified(System.Int32,System.Int32,List{PlayGen.SUGAR.Server.Model.EvaluationCriteria},PlayGen.SUGAR.Common.ActorType,PlayGen.SUGAR.Common.EvaluationType)">IsCriteriaSatisified(Int32, Int32, List&lt;EvaluationCriteria&gt;, ActorType, EvaluationType)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -811,7 +790,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationCriteria.html">EvaluationCriteria</a>&gt;</td>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationCriteria.html">EvaluationCriteria</a>&gt;</td>
         <td><span class="parametername">completionCriterias</span></td>
         <td></td>
       </tr>

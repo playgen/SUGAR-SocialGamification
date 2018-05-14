@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class LeaderboardExtensions
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,7 +55,9 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -81,38 +83,56 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">LeaderboardExtensions</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.WebAPI.Extensions.html">PlayGen.SUGAR.Server.WebAPI.Extensions</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.WebAPI.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class LeaderboardExtensions</code></pre>
+    <pre><code class="lang-csharp hljs">public static class LeaderboardExtensions : object</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContract_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContract*"></a>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContract_Leaderboard_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContract(Leaderboard)">ToContract(Leaderboard)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static LeaderboardResponse ToContract(this Leaderboard leaderboardModel)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Leaderboard</span></td>
+        <td><span class="parametername">leaderboardModel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.LeaderboardResponse.html">LeaderboardResponse</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContract_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContract*"></a>
@@ -157,92 +177,8 @@
   </table>
   
   
-  <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContract_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContract*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContract_PlayGen_SUGAR_Server_Model_Leaderboard_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContract(PlayGen.SUGAR.Server.Model.Leaderboard)">ToContract(Leaderboard)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static LeaderboardResponse ToContract(this Leaderboard leaderboardModel)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Leaderboard.html">Leaderboard</a></td>
-        <td><span class="parametername">leaderboardModel</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Contracts.LeaderboardResponse.html">LeaderboardResponse</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
   <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContractList_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContractList*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContractList_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsResponse__" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContractList(System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse})">ToContractList(IEnumerable&lt;StandingsResponse&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;LeaderboardStandingsResponse&gt; ToContractList(this IEnumerable&lt;StandingsResponse&gt; standingsCores)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
-        <td><span class="parametername">standingsCores</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse.html">LeaderboardStandingsResponse</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContractList_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContractList*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContractList_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Server_Model_Leaderboard__" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContractList(System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Server.Model.Leaderboard})">ToContractList(IEnumerable&lt;Leaderboard&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContractList_IEnumerable_Leaderboard__" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContractList(IEnumerable{Leaderboard})">ToContractList(IEnumerable&lt;Leaderboard&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -260,7 +196,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Leaderboard.html">Leaderboard</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">Leaderboard</span>&gt;</td>
         <td><span class="parametername">leaderboardModels</span></td>
         <td></td>
       </tr>
@@ -276,7 +212,49 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.LeaderboardResponse.html">LeaderboardResponse</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.LeaderboardResponse.html">LeaderboardResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContractList_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContractList*"></a>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_LeaderboardExtensions_ToContractList_IEnumerable_PlayGen_SUGAR_Server_Core_EvaluationEvents_StandingsResponse__" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.ToContractList(IEnumerable{PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse})">ToContractList(IEnumerable&lt;StandingsResponse&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;LeaderboardStandingsResponse&gt; ToContractList(this IEnumerable&lt;StandingsResponse&gt; standingsCores)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html">StandingsResponse</a>&gt;</td>
+        <td><span class="parametername">standingsCores</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse.html">LeaderboardStandingsResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -360,7 +338,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Leaderboard.html">Leaderboard</a></td>
+        <td><span class="xref">Leaderboard</span></td>
         <td></td>
       </tr>
     </tbody>

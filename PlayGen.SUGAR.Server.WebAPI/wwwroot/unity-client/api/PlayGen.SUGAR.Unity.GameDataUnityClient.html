@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class GameDataUnityClient
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,7 +55,9 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -82,42 +84,18 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">GameDataUnityClient</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Unity.html">PlayGen.SUGAR.Unity</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Unity.dll</h6>
   <h5 id="PlayGen_SUGAR_Unity_GameDataUnityClient_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class GameDataUnityClient</code></pre>
+    <pre><code class="lang-csharp hljs">public class GameDataUnityClient : object</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_Get_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Get*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Get_System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_EvaluationDataResponse___System_String___" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Get(System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.EvaluationDataResponse}},System.String[])">Get(Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt;, String[])</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Get_Action_IEnumerable_EvaluationDataResponse___System_String___" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Get(Action{IEnumerable{EvaluationDataResponse}},System.String[])">Get(Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt;, String[])</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -135,7 +113,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;&gt;</td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">IEnumerable</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;&gt;</td>
         <td><span class="parametername">success</span></td>
         <td></td>
       </tr>
@@ -149,7 +127,7 @@
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCount_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCount_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetCount(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCount_System_String_EvaluationDataType_Action_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetCount(System.String,EvaluationDataType,Action{EvaluationDataResponse})">GetCount(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the count for this user for the key provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -173,12 +151,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="xref">EvaluationDataType</span></td>
         <td><span class="parametername">dataType</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
         <td></td>
       </tr>
@@ -187,7 +165,7 @@
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCumulative_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCumulative_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetCumulative(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCumulative_System_String_EvaluationDataType_Action_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetCumulative(System.String,EvaluationDataType,Action{EvaluationDataResponse})">GetCumulative(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the cumulative value for this user for the key provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -211,12 +189,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="xref">EvaluationDataType</span></td>
         <td><span class="parametername">dataType</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
         <td></td>
       </tr>
@@ -225,7 +203,7 @@
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetEarliest_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetEarliest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetEarliest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetEarliest_System_String_EvaluationDataType_Action_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest(System.String,EvaluationDataType,Action{EvaluationDataResponse})">GetEarliest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the earliest value for this user for the key provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -249,12 +227,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="xref">EvaluationDataType</span></td>
         <td><span class="parametername">dataType</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
         <td></td>
       </tr>
@@ -263,7 +241,7 @@
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetHighest_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetHighest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetHighest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetHighest_System_String_EvaluationDataType_Action_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetHighest(System.String,EvaluationDataType,Action{EvaluationDataResponse})">GetHighest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the highest value for this user for the key provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -287,12 +265,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="xref">EvaluationDataType</span></td>
         <td><span class="parametername">dataType</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
         <td></td>
       </tr>
@@ -301,7 +279,7 @@
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetLatest_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetLatest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetLatest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetLatest_System_String_EvaluationDataType_Action_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetLatest(System.String,EvaluationDataType,Action{EvaluationDataResponse})">GetLatest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the latest value for this user for the key provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -325,12 +303,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="xref">EvaluationDataType</span></td>
         <td><span class="parametername">dataType</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
         <td></td>
       </tr>
@@ -339,7 +317,7 @@
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetLowest_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetLowest_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_Action_PlayGen_SUGAR_Contracts_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest(System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.Action{PlayGen.SUGAR.Contracts.EvaluationDataResponse})">GetLowest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetLowest_System_String_EvaluationDataType_Action_EvaluationDataResponse__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest(System.String,EvaluationDataType,Action{EvaluationDataResponse})">GetLowest(String, EvaluationDataType, Action&lt;EvaluationDataResponse&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the lowest value for this user for the key provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -363,12 +341,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="../../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></td>
+        <td><span class="xref">EvaluationDataType</span></td>
         <td><span class="parametername">dataType</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="../../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
         <td></td>
       </tr>

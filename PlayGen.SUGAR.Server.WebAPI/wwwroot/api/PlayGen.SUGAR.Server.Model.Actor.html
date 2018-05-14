@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Actor
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,7 +55,9 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -83,35 +85,11 @@
       <div class="level2"><a class="xref" href="PlayGen.SUGAR.Server.Model.Group.html">Group</a></div>
       <div class="level2"><a class="xref" href="PlayGen.SUGAR.Server.Model.User.html">User</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.Model.html">PlayGen.SUGAR.Server.Model</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.Model.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_Model_Actor_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class Actor</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class Actor : object</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -135,7 +113,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationship.html">ActorRelationship</a>&gt;</td>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationship.html">ActorRelationship</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -198,8 +176,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[NotMapped]
-public int GroupRelationshipCount { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int GroupRelationshipCount { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -286,7 +263,7 @@ public int GroupRelationshipCount { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationshipRequest.html">ActorRelationshipRequest</a>&gt;</td>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationshipRequest.html">ActorRelationshipRequest</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -311,7 +288,7 @@ public int GroupRelationshipCount { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationship.html">ActorRelationship</a>&gt;</td>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationship.html">ActorRelationship</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -336,7 +313,7 @@ public int GroupRelationshipCount { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationshipRequest.html">ActorRelationshipRequest</a>&gt;</td>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationshipRequest.html">ActorRelationshipRequest</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -349,8 +326,7 @@ public int GroupRelationshipCount { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[NotMapped]
-public int UserRelationshipCount { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int UserRelationshipCount { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -367,10 +343,6 @@ public int UserRelationshipCount { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="PlayGen.SUGAR.Server.WebAPI.Extensions.ActorExtensions.html#PlayGen_SUGAR_Server_WebAPI_Extensions_ActorExtensions_ToActorContract_PlayGen_SUGAR_Server_Model_Actor_">ActorExtensions.ToActorContract(Actor)</a>
-  </div>
 </article>
           </div>
           
