@@ -6,7 +6,7 @@ For upcoming features and development direction see the [roadmap](roadmap.md)
 
 ## Source Repositories
 
-All source code is provided under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0) and is hosten on GitHub. We welcome pull requests for bug fixes and engagement in discussion on feture development.
+All source code is provided under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0) and is hosten on GitHub. We welcome pull requests for bug fixes and engagement in discussion on feature development.
 
 - [API Service Repository](https://github.com/playgenhub/SUGAR-SocialGamification/) 
 

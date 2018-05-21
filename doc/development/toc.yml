@@ -9,3 +9,4 @@
 - name: WebAPI
 - name: Client
 - name: Admin Interface
+  href: admin.md
