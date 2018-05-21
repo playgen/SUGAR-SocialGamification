@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class EvaluationNotifications
    | SUGAR ">
-    <meta name="generator" content="docfx 2.35.4.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
+  <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,9 +55,7 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
-          </div>
+          <div class="sr-items"></div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -83,18 +81,42 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">EvaluationNotifications</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Client.EvaluationEvents.html">PlayGen.SUGAR.Client.EvaluationEvents</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Client.dll</h6>
   <h5 id="PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class EvaluationNotifications : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class EvaluationNotifications</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   
   
   <a id="PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_Enqueue_" data-uid="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.Enqueue*"></a>
-  <h4 id="PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_Enqueue_List_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification__" data-uid="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.Enqueue(List{PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification})">Enqueue(List&lt;EvaluationNotification&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_Enqueue_System_Collections_Generic_List_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification__" data-uid="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.Enqueue(System.Collections.Generic.List{PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification})">Enqueue(List&lt;EvaluationNotification&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -112,7 +134,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html">EvaluationNotification</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html">EvaluationNotification</a>&gt;</td>
         <td><span class="parametername">evaluationNotifications</span></td>
         <td></td>
       </tr>
@@ -121,12 +143,12 @@
   
   
   <a id="PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_TryDequeue_" data-uid="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.TryDequeue*"></a>
-  <h4 id="PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_TryDequeue_EvaluationType_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification__" data-uid="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.TryDequeue(EvaluationType,PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification@)">TryDequeue(EvaluationType, out EvaluationNotification)</h4>
+  <h4 id="PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_TryDequeue_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification__" data-uid="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.TryDequeue(PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification@)">TryDequeue(out EvaluationNotification)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryDequeue(EvaluationType type, out EvaluationNotification evaluationNotification)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool TryDequeue(out EvaluationNotification evaluationNotification)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -138,11 +160,6 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><span class="xref">EvaluationType</span></td>
-        <td><span class="parametername">type</span></td>
-        <td></td>
-      </tr>
       <tr>
         <td><a class="xref" href="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html">EvaluationNotification</a></td>
         <td><span class="parametername">evaluationNotification</span></td>
@@ -168,12 +185,12 @@
   
   
   <a id="PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_TryDequeue_" data-uid="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.TryDequeue*"></a>
-  <h4 id="PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_TryDequeue_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification__" data-uid="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.TryDequeue(PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification@)">TryDequeue(out EvaluationNotification)</h4>
+  <h4 id="PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_TryDequeue_PlayGen_SUGAR_Common_EvaluationType_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotification__" data-uid="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.TryDequeue(PlayGen.SUGAR.Common.EvaluationType,PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification@)">TryDequeue(EvaluationType, out EvaluationNotification)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryDequeue(out EvaluationNotification evaluationNotification)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool TryDequeue(EvaluationType type, out EvaluationNotification evaluationNotification)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -185,6 +202,11 @@
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.EvaluationType.html">EvaluationType</a></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
       <tr>
         <td><a class="xref" href="PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html">EvaluationNotification</a></td>
         <td><span class="parametername">evaluationNotification</span></td>
