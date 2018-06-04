@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class HttpContextExtensions
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,7 +55,9 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -81,47 +83,24 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">HttpContextExtensions</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.WebAPI.Extensions.html">PlayGen.SUGAR.Server.WebAPI.Extensions</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.WebAPI.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class HttpContextExtensions</code></pre>
+    <pre><code class="lang-csharp hljs">public static class HttpContextExtensions : object</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomClassAttribute_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomClassAttribute*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomClassAttribute__1_Microsoft_AspNetCore_Mvc_Abstractions_ActionDescriptor_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomClassAttribute``1(Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)">GetCustomClassAttribute&lt;T&gt;(ActionDescriptor)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomClassAttribute__1_ActionDescriptor_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomClassAttribute``1(ActionDescriptor)">GetCustomClassAttribute&lt;T&gt;(ActionDescriptor)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static T GetCustomClassAttribute&lt;T&gt;(this ActionDescriptor actionDescriptor)where T : Attribute</code></pre>
+    <pre><code class="lang-csharp hljs">public static T GetCustomClassAttribute&lt;T&gt;(this ActionDescriptor actionDescriptor)
+    where T : Attribute</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -134,7 +113,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor</span></td>
+        <td><span class="xref">ActionDescriptor</span></td>
         <td><span class="parametername">actionDescriptor</span></td>
         <td></td>
       </tr>
@@ -173,12 +152,13 @@
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomClassAttributes_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomClassAttributes*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomClassAttributes__1_Microsoft_AspNetCore_Mvc_Abstractions_ActionDescriptor_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomClassAttributes``1(Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)">GetCustomClassAttributes&lt;T&gt;(ActionDescriptor)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomClassAttributes__1_ActionDescriptor_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomClassAttributes``1(ActionDescriptor)">GetCustomClassAttributes&lt;T&gt;(ActionDescriptor)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;T&gt; GetCustomClassAttributes&lt;T&gt;(this ActionDescriptor actionDescriptor)where T : Attribute</code></pre>
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;T&gt; GetCustomClassAttributes&lt;T&gt;(this ActionDescriptor actionDescriptor)
+    where T : Attribute</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -191,7 +171,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor</span></td>
+        <td><span class="xref">ActionDescriptor</span></td>
         <td><span class="parametername">actionDescriptor</span></td>
         <td></td>
       </tr>
@@ -207,7 +187,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;T&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -230,12 +210,13 @@
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomMethodAttribute_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomMethodAttribute*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomMethodAttribute__1_Microsoft_AspNetCore_Mvc_Abstractions_ActionDescriptor_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomMethodAttribute``1(Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)">GetCustomMethodAttribute&lt;T&gt;(ActionDescriptor)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomMethodAttribute__1_ActionDescriptor_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomMethodAttribute``1(ActionDescriptor)">GetCustomMethodAttribute&lt;T&gt;(ActionDescriptor)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static T GetCustomMethodAttribute&lt;T&gt;(this ActionDescriptor actionDescriptor)where T : Attribute</code></pre>
+    <pre><code class="lang-csharp hljs">public static T GetCustomMethodAttribute&lt;T&gt;(this ActionDescriptor actionDescriptor)
+    where T : Attribute</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -248,7 +229,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor</span></td>
+        <td><span class="xref">ActionDescriptor</span></td>
         <td><span class="parametername">actionDescriptor</span></td>
         <td></td>
       </tr>
@@ -287,12 +268,13 @@
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomMethodAttributes_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomMethodAttributes*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomMethodAttributes__1_Microsoft_AspNetCore_Mvc_Abstractions_ActionDescriptor_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomMethodAttributes``1(Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)">GetCustomMethodAttributes&lt;T&gt;(ActionDescriptor)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetCustomMethodAttributes__1_ActionDescriptor_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetCustomMethodAttributes``1(ActionDescriptor)">GetCustomMethodAttributes&lt;T&gt;(ActionDescriptor)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;T&gt; GetCustomMethodAttributes&lt;T&gt;(this ActionDescriptor actionDescriptor)where T : Attribute</code></pre>
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;T&gt; GetCustomMethodAttributes&lt;T&gt;(this ActionDescriptor actionDescriptor)
+    where T : Attribute</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -305,7 +287,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor</span></td>
+        <td><span class="xref">ActionDescriptor</span></td>
         <td><span class="parametername">actionDescriptor</span></td>
         <td></td>
       </tr>
@@ -321,7 +303,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;T&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -344,7 +326,7 @@
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetSessionId_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetSessionId*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetSessionId_Microsoft_AspNetCore_Http_HttpContext_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetSessionId(Microsoft.AspNetCore.Http.HttpContext)">GetSessionId(HttpContext)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Extensions_HttpContextExtensions_GetSessionId_HttpContext_" data-uid="PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.GetSessionId(HttpContext)">GetSessionId(HttpContext)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -362,7 +344,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.AspNetCore.Http.HttpContext</span></td>
+        <td><span class="xref">HttpContext</span></td>
         <td><span class="parametername">context</span></td>
         <td></td>
       </tr>

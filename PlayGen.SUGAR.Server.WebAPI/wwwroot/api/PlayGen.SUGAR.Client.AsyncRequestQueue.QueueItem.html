@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class QueueItem
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,7 +55,9 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -82,42 +84,18 @@
     <div class="level1"><span class="xref">QueueItem</span></div>
       <div class="level2"><a class="xref" href="PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem-1.html">QueueItem&lt;TResult&gt;</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Client.AsyncRequestQueue.html">PlayGen.SUGAR.Client.AsyncRequestQueue</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Client.dll</h6>
   <h5 id="PlayGen_SUGAR_Client_AsyncRequestQueue_QueueItem_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class QueueItem</code></pre>
+    <pre><code class="lang-csharp hljs">public class QueueItem : object</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   
   
   <a id="PlayGen_SUGAR_Client_AsyncRequestQueue_QueueItem__ctor_" data-uid="PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem.#ctor*"></a>
-  <h4 id="PlayGen_SUGAR_Client_AsyncRequestQueue_QueueItem__ctor_System_Action_System_Action_System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem.#ctor(System.Action,System.Action,System.Action{System.Exception})">QueueItem(Action, Action, Action&lt;Exception&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_AsyncRequestQueue_QueueItem__ctor_Action_Action_Action_Exception__" data-uid="PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem.#ctor(Action,Action,Action{Exception})">QueueItem(Action, Action, Action&lt;Exception&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -135,17 +113,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span></td>
+        <td><span class="xref">Action</span></td>
         <td><span class="parametername">request</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span></td>
+        <td><span class="xref">Action</span></td>
         <td><span class="parametername">onSuccess</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">Exception</span>&gt;</td>
         <td><span class="parametername">onError</span></td>
         <td></td>
       </tr>
@@ -154,7 +132,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_AsyncRequestQueue_QueueItem__ctor_" data-uid="PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem.#ctor*"></a>
-  <h4 id="PlayGen_SUGAR_Client_AsyncRequestQueue_QueueItem__ctor_System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem.#ctor(System.Action{System.Exception})">QueueItem(Action&lt;Exception&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_AsyncRequestQueue_QueueItem__ctor_Action_Exception__" data-uid="PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem.#ctor(Action{Exception})">QueueItem(Action&lt;Exception&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -172,7 +150,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">Exception</span>&gt;</td>
         <td><span class="parametername">onError</span></td>
         <td></td>
       </tr>
@@ -200,7 +178,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<span class="xref">Exception</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -225,7 +203,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span></td>
+        <td><span class="xref">Action</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -250,7 +228,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span></td>
+        <td><span class="xref">Action</span></td>
         <td></td>
       </tr>
     </tbody>

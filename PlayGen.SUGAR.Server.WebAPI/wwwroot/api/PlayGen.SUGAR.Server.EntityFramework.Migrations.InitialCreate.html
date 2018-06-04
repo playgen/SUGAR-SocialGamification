@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class InitialCreate
    | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,7 +55,9 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -79,62 +81,20 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration</span></div>
-    <div class="level2"><span class="xref">InitialCreate</span></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.InitialDatabase</span>
-    </div>
-    <div>
-      <span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.TargetModel</span>
-    </div>
-    <div>
-      <span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.UpOperations</span>
-    </div>
-    <div>
-      <span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.DownOperations</span>
-    </div>
-    <div>
-      <span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.ActiveProvider</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
+    <div class="level1"><span class="xref">InitialCreate</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Migrations.html">PlayGen.SUGAR.Server.EntityFramework.Migrations</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.EntityFramework.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_InitialCreate_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[DbContext(typeof (SUGARContext))]
-[Migration(&quot;20171205143841_InitialCreate&quot;)]
-public class InitialCreate : Migration</code></pre>
+    <pre><code class="lang-csharp hljs">public class InitialCreate : Migration</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Migrations_InitialCreate_BuildTargetModel_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.BuildTargetModel*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_InitialCreate_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">BuildTargetModel(ModelBuilder)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_InitialCreate_BuildTargetModel_ModelBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.BuildTargetModel(ModelBuilder)">BuildTargetModel(ModelBuilder)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -152,18 +112,16 @@ public class InitialCreate : Migration</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.EntityFrameworkCore.ModelBuilder</span></td>
+        <td><span class="xref">ModelBuilder</span></td>
         <td><span class="parametername">modelBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)</span></div>
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Migrations_InitialCreate_Down_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.Down*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_InitialCreate_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">Down(MigrationBuilder)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_InitialCreate_Down_MigrationBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.Down(MigrationBuilder)">Down(MigrationBuilder)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -181,18 +139,16 @@ public class InitialCreate : Migration</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder</span></td>
+        <td><span class="xref">MigrationBuilder</span></td>
         <td><span class="parametername">migrationBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)</span></div>
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Migrations_InitialCreate_Up_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.Up*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_InitialCreate_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">Up(MigrationBuilder)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_InitialCreate_Up_MigrationBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.Up(MigrationBuilder)">Up(MigrationBuilder)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -210,14 +166,12 @@ public class InitialCreate : Migration</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder</span></td>
+        <td><span class="xref">MigrationBuilder</span></td>
         <td><span class="parametername">migrationBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)</span></div>
 </article>
           </div>
           
