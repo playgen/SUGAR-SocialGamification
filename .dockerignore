@@ -1,6 +1,7 @@
 bin/
 obj/
 doc/
+docker/
 *.Tests/
 PlayGen.SUGAR.Client/
 
