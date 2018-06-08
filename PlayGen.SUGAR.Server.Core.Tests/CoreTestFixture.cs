@@ -2,89 +2,90 @@
 using System.Collections.Generic;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Controllers;
+using PlayGen.SUGAR.Server.EntityFramework.Tests;
 using PlayGen.SUGAR.Server.Model;
+using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-    public class TestDataFixture : IDisposable
+    public class CoreTestFixture
     {
+		// Must be divisible by GroupCount and (FriendCount + 1)
         public const int UserCount = 100;
         public const int GameCount = 100;
         public const int GroupCount = 10;
-        public const int FriendCount = 10;
+        public const int FriendCount = 9;
         public const int DataCount = 100000;
 
-        private static readonly List<Game> _games = new List<Game>(DataCount);
-        private static readonly List<User> _users = new List<User>(UserCount);
-        private static readonly List<Group> _groups = new List<Group>(GroupCount);
+        private readonly List<Game> _games = new List<Game>(DataCount);
+        private readonly List<User> _users = new List<User>(UserCount);
+        private readonly List<Group> _groups = new List<Group>(GroupCount);
         
-        private static readonly Random _random = new Random(123);
+        private readonly Random _random = new Random(123);
 
-        private static readonly UserController _userController = ControllerLocator.UserController;
-        private static readonly GroupController _groupController = ControllerLocator.GroupController;
-        private static readonly GameController _gameController = ControllerLocator.GameController;
-	    private static readonly RelationshipController _relationshipController = ControllerLocator.RelationshipController;
-        private static readonly GameDataController GameDataController = ControllerLocator.GameDataController;
+        private readonly UserController _userController = ControllerLocator.UserController;
+        private readonly GroupController _groupController = ControllerLocator.GroupController;
+        private readonly GameController _gameController = ControllerLocator.GameController;
+	    private readonly RelationshipController _relationshipController = ControllerLocator.RelationshipController;
+        private readonly GameDataController _gameDataController = ControllerLocator.GameDataController;
 
-        public static IReadOnlyList<Game> Games => _games;
-        public static IReadOnlyList<User> Users => _users;
-        public static IReadOnlyList<Group> Groups => _groups;
+        public IReadOnlyList<Game> Games => _games;
+        public IReadOnlyList<User> Users => _users;
+        public IReadOnlyList<Group> Groups => _groups;
 
-        public TestDataFixture()
+        public CoreTestFixture()
         {
+			ClearDatabaseFixture.Clear();
             PopulateData();
         }
-
-        public void Dispose()
-        {
-        }
-
-        private static void PopulateData()
+		
+        private void PopulateData()
         {
             _games.Clear();
             _users.Clear();
             _groups.Clear();
 
             var dataValues = GenerateDataValues();
-            for (int i = 0; i < UserCount; i++)
+            for (var i = 0; i < UserCount; i++)
             {
                 _users.Add(CreateUser((i + 1).ToString()));
-
             }
 
-            for (int i = 0; i < GameCount; i++)
+            for (var i = 0; i < GameCount; i++)
             {
                 _games.Add(CreateGame((i + 1).ToString()));
             }
 
-            for (int i = 0; i < GroupCount; i++)
+            for (var i = 0; i < GroupCount; i++)
             {
                 _groups.Add(CreateGroup((i + 1).ToString()));
             }
 
-            for (int i = 0; i < _users.Count; i++)
+            for (var userIndex = 0; userIndex < _users.Count; userIndex++)
             {
-                for (int j = 1; j <= FriendCount; j++)
-                {
-                    int friendId = i + j;
-                    if (i + j >= _users.Count)
-                    {
-                        friendId -= _users.Count;
-                    }
-                    CreateFriendship(_users[i].Id, _users[friendId].Id);
+	            var windowSize = FriendCount + 1;
+	            var indexInWindow = userIndex % windowSize;
+	            var friendsToAddCount = windowSize - (indexInWindow + 1);
+
+	            for (var friendIndexOffset = 1; friendIndexOffset <= friendsToAddCount; friendIndexOffset++)
+	            {
+		            var friendIndex = userIndex + friendIndexOffset;
+
+		            CreateFriendship(_users[userIndex].Id, _users[friendIndex].Id);
                 }
-                CreateMembership(_users[i].Id, _groups[i / GroupCount].Id);
+				
+                CreateMembership(_users[userIndex].Id, _groups[userIndex % GroupCount].Id);
             }
 
             var datas = new List<EvaluationData>();
-            for (int j = 0; j < DataCount; j++)
+            for (var j = 0; j < DataCount; j++)
             {
                 datas.Add(CreateData(_games[_random.Next(0, _games.Count)], _users[_random.Next(0, _users.Count)], dataValues[_random.Next(0, dataValues.Count)]));
             }
-            GameDataController.Add(datas.ToArray());
+            _gameDataController.Add(datas.ToArray());
         }
 
-        private static EvaluationData CreateData(Game game, User user, DataParam data)
+        private EvaluationData CreateData(Game game, User user, DataParam data)
         {
             var gameData = new EvaluationData
             {
@@ -98,22 +99,22 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             return gameData;
         }
 
-        private static User CreateUser(string name)
+        private User CreateUser(string name)
         {
             var user = new User
             {
-                Name = "User_" + name,
+                Name = $"User_{name}",
             };
             _userController.Create(user);
 
             return user;
         }
 
-        private static Group CreateGroup(string name)
+        private Group CreateGroup(string name)
         {
             var group = new Group
             {
-                Name = "Group_" + name,
+                Name = $"Group_{name}",
             };
             //todo use actual user id instead of 0
             _groupController.Create(group, 1);
@@ -121,11 +122,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             return group;
         }
 
-        private static Game CreateGame(string name)
+        private Game CreateGame(string name)
         {
             var game = new Game
             {
-                Name = "Game_" + name,
+                Name = $"Game_{name}",
             };
             //todo use actual user id instead of 0
             _gameController.Create(game, 1);
@@ -133,7 +134,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             return game;
         }
 
-        private static void CreateFriendship(int requestor, int acceptor)
+        private void CreateFriendship(int requestor, int acceptor)
         {
             var relationship = new ActorRelationship
 			{
@@ -143,7 +144,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        _relationshipController.CreateRequest(relationship, true);
         }
 
-        private static void CreateMembership(int requestor, int acceptor)
+        private void CreateMembership(int requestor, int acceptor)
         {
             var relationship = new ActorRelationship
             {
@@ -153,11 +154,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        _relationshipController.CreateRequest(relationship, true);
         }
 
-        private static List<DataParam> GenerateDataValues()
+        private List<DataParam> GenerateDataValues()
         {
-            List<DataParam> dataParams = new List<DataParam>();
+            var dataParams = new List<DataParam>();
 
-            for (int i = 0; i < 2500; i++)
+            for (var i = 0; i < 2500; i++)
             {
                 dataParams.Add(new DataParam
                 {
@@ -191,4 +192,12 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             public EvaluationDataType DataType;
         }
     }
+
+	[CollectionDefinition(nameof(CoreTestFixtureCollection))]
+	public class CoreTestFixtureCollection : ICollectionFixture<CoreTestFixture>
+	{
+		// This class has no code, and is never created. Its purpose is simply
+		// to be the place to apply [CollectionDefinition] and all the
+		// ICollectionFixture<> interfaces.
+	}
 }

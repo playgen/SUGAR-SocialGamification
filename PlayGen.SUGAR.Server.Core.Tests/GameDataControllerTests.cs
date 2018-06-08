@@ -5,8 +5,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-    [Collection("Project Fixture Collection")]
-    public class GameDataControllerTests
+    public class GameDataControllerTests : CoreTestBase
     {
         [Theory]
 		[InlineData("a")]

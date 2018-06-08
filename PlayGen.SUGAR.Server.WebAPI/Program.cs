@@ -65,8 +65,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 						context.Database.EnsureDeleted();
 					}
 
-					context.Database.Migrate();
-					context.EnsureSeeded();
+					context.MigrateAndSeed();
 
 					var claimController = scope.ServiceProvider.GetService<ClaimController>();
 					claimController.GetAuthorizationClaims();

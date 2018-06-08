@@ -10,8 +10,7 @@ using UserController = PlayGen.SUGAR.Server.EntityFramework.Controllers.UserCont
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-    [Collection("Project Fixture Collection")]
-    public class ResourceControllerTests
+    public class ResourceControllerTests : CoreTestBase
     {
         #region Configuration
         private readonly ResourceController _resourceController = ControllerLocator.ResourceController;

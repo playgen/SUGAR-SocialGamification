@@ -7,7 +7,7 @@ using Xunit;
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
 	[CollectionDefinition(nameof(ClearDatabaseFixture))]
-	// Note: This class must be in the same assemblt as the tests in order for xUnit to detect it
+	// Note: This class must be in the same assembly as the tests in order for xUnit to detect it
 	public class ClearDatabaseFixtureCollection : ICollectionFixture<ClearDatabaseFixture>
 	{
 		// This class has no code, and is never created. Its purpose is simply

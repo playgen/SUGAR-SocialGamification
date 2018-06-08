@@ -10,8 +10,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         #region Configuration
         private readonly AccountController _accountController = ControllerLocator.AccountController;
         private readonly AccountSourceController _accountSourceController = ControllerLocator.AccountSourceController;
-        //private readonly Data.EntityFramework.Controllers.UserController _userController = DbControllerLocator.UserController;
-        //private readonly Data.EntityFramework.Controllers.GameController _gameController = DbControllerLocator.GameController;
+        //private readonly SeededData.EntityFramework.Controllers.UserController _userController = DbControllerLocator.UserController;
+        //private readonly SeededData.EntityFramework.Controllers.GameController _gameController = DbControllerLocator.GameController;
         #endregion
 
         #region Tests

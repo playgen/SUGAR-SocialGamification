@@ -8,7 +8,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-    public class MatchControllerTests : IDisposable
+    public class MatchControllerTests : CoreTestBase, IDisposable
     {
         private bool _isDisposed;
 

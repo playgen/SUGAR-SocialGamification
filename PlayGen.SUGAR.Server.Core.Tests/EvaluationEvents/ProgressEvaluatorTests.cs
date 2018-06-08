@@ -8,7 +8,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
 {
-    public class ProgressEvaluatorTests
+    public class ProgressEvaluatorTests : CoreTestBase
 	{
 		private readonly ProgressEvaluator _progressEvaluator;
 

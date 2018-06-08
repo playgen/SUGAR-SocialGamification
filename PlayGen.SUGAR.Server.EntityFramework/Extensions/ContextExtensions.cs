@@ -6,7 +6,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 {
 	public static class ContextExtensions
 	{
-		public static void HandleDetatchedGame(this SUGARContext context, int gameId)
+		public static void MigrateAndSeed(this SUGARContext context)
+		{
+			context.Database.Migrate();
+			context.EnsureSeeded();
+		}
+
+        public static void HandleDetatchedGame(this SUGARContext context, int gameId)
 		{
 			if (gameId != 0)
 			{
