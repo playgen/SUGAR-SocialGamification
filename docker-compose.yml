@@ -10,7 +10,8 @@ services:
         expose:
             - 3306
         ports:
-        - "59430:3306"
+            - "59430:3306"
+        restart: always
 
     sugar-v0:
         network_mode: "bridge"
@@ -24,3 +25,4 @@ services:
             - 5000
         environment:
             ASPNETCORE_URLS: "http://0.0.0.0:5000"
+        restart: always
