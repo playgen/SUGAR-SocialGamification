@@ -11,8 +11,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
     public class CoreTestFixture
     {
 		// Must be divisible by GroupCount and (FriendCount + 1)
-        public const int UserCount = 100;
-        public const int GameCount = 100;
+        public const int UserCount = 1000;
+        public const int GameCount = 10;
         public const int GroupCount = 10;
         public const int FriendCount = 9;
         public const int DataCount = 100000;

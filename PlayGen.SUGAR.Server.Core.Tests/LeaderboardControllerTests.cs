@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
@@ -12,13 +13,15 @@ using DbControllerLocator = PlayGen.SUGAR.Server.EntityFramework.Tests.Controlle
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
 	// todo Change to user core controllers
-	public class LeaderboardControllerTestsFixture : CoreTestFixtureBase
+	public class LeaderboardControllerTests : CoreTestFixtureBase
     {
-        public LeaderboardControllerTestsFixture(CoreTestFixture fixture) : base(fixture)
+        public LeaderboardControllerTests(CoreTestFixture fixture) : base(fixture)
 	    {
 	    }
 
 	    #region Configuration
+
+		private const int GlobalMaxLeaderboardStandingsExecutionMilliseconds = 200;
 
         private readonly Controllers.LeaderboardController _leaderboardCoreController = ControllerLocator.LeaderboardController;
 
@@ -31,301 +34,334 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
         #region Tests
         [Fact]
-        public void GetLeaderboardSumLongSpeedTest()
-        {
-	        var key = nameof(GetLeaderboardSumLongSpeedTest);
+		public void GetLeaderboardSumLongSpeedTest()
+		{
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
-
-	        //CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId, true);
-
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
-
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-        }
+			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+			
+            // Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+		}
 
         [Fact]
         public void GetLeaderboardSumFloatSpeedTest()
         {
-            var key = nameof(GetLeaderboardSumFloatSpeedTest);
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Float, LeaderboardType.Cumulative);
-
+			CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
         public void GetLeaderboardHighLongSpeedTest()
         {
-            var leaderboard = CreateLeaderboard("GetLeaderboardHighLongSpeedTest", EvaluationDataType.Long, LeaderboardType.Highest);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Highest);
+			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
         public void GetLeaderboardHighFloatSpeedTest()
         {
-            var leaderboard = CreateLeaderboard("GetLeaderboardHighFloatSpeedTest", EvaluationDataType.Float, LeaderboardType.Highest);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Float, LeaderboardType.Highest);
+			CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
+            // Act & Assert
+            ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
         public void GetLeaderboardLowLongSpeedTest()
         {
-            var leaderboard = CreateLeaderboard("GetLeaderboardLowLongSpeedTest", EvaluationDataType.Long, LeaderboardType.Lowest);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Lowest);
+			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
         public void GetLeaderboardLowFloatSpeedTest()
         {
-            var leaderboard = CreateLeaderboard("GetLeaderboardLowFloatSpeedTest", EvaluationDataType.Float, LeaderboardType.Lowest);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Float, LeaderboardType.Lowest);
+			CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
         public void GetLeaderboardCountStringSpeedTest()
         {
-            var leaderboard = CreateLeaderboard("GetLeaderboardCountStringSpeedTest", EvaluationDataType.String, LeaderboardType.Count);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.String, LeaderboardType.Count);
+			CreateEvaluationDataAscending(key, EvaluationDataType.String, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
         public void GetLeaderboardCountBoolSpeedTest()
         {
-            var leaderboard = CreateLeaderboard("GetLeaderboardCountBoolSpeedTest", EvaluationDataType.Boolean, LeaderboardType.Count);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Boolean, LeaderboardType.Count);
+			CreateEvaluationDataAscending(key, EvaluationDataType.Boolean, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
         public void GetLeaderboardEarliestStringSpeedTest()
         {
-            var leaderboard = CreateLeaderboard("GetLeaderboardEarliestStringSpeedTest", EvaluationDataType.String, LeaderboardType.Earliest);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.String, LeaderboardType.Earliest);
+			CreateEvaluationDataAscending(key, EvaluationDataType.String, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
         public void GetLeaderboardEarliestBoolSpeedTest()
         {
-            var leaderboard = CreateLeaderboard("GetLeaderboardEarliestBoolSpeedTest", EvaluationDataType.Boolean, LeaderboardType.Earliest);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Boolean, LeaderboardType.Earliest);
+			CreateEvaluationDataAscending(key, EvaluationDataType.Boolean, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
         public void GetLeaderboardLatestStringSpeedTest()
         {
-            var leaderboard = CreateLeaderboard("GetLeaderboardLatestStringSpeedTest", EvaluationDataType.String, LeaderboardType.Latest);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.String, LeaderboardType.Latest);
+			CreateEvaluationDataAscending(key, EvaluationDataType.String, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
         public void GetLeaderboardLatestBoolSpeedTest()
         {
-            var leaderboard = CreateLeaderboard("GetLeaderboardLatestBoolSpeedTest", EvaluationDataType.Boolean, LeaderboardType.Latest);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Boolean, LeaderboardType.Latest);
+			CreateEvaluationDataAscending(key, EvaluationDataType.Boolean, leaderboard.GameId);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+        }
 
+        [Theory]
+		[InlineData(74)]
+		[InlineData(8)]
+        public void GetLeaderboardNearFilterSpeedTest(int userIndex)
+        {
+			// Arrange
+			var key = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{userIndex}";
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
+			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
+
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, Fixture.Users.Count, Fixture.Users[userIndex].Id);
+
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+        }
+
+        [Theory]
+		[InlineData(18)]
+		[InlineData(95)]
+        public void GetLeaderboardFriendFilterSpeedTest(int userIndex)
+        {
+            // Arrange
+			var key = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{userIndex}";
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
+			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.Users.Count, Fixture.Users[userIndex].Id);
+
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+        }
+
+        [Theory]
+		[InlineData(2)]
+		[InlineData(8)]
+        public void GetLeaderboardGroupMemberFilterSpeedTest(int groupIndex)
+        {
+            // Arrange
+			var key = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{groupIndex}";
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
+			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, Fixture.Users.Count, Fixture.Groups[groupIndex].Id);
+
+			// Act & Assert
+			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
         }
 
         [Fact]
-        public void GetLeaderboardNearFilterSpeedTest()
-        {
-            var random = new Random();
-            var leaderboard = CreateLeaderboard("GetLeaderboardNearFilterSpeedTest", EvaluationDataType.Long, LeaderboardType.Cumulative);
+        public void CantCreateLeaderboardStandingRequestWithInvalidLeaderboardId()
+		{
+			// Arrange
+			var key = "";
+            var filter = CreateLeaderboardStandingsRequest(key, -1, LeaderboardFilterType.Top, Fixture.Users.Count);
 
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, Fixture.Users.Count, random.Next(1, Fixture.Users.Count + 1));
-
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
-        }
-
-        [Fact]
-        public void GetLeaderboardFriendFilterSpeedTest()
-        {
-            var random = new Random();
-            var leaderboard = CreateLeaderboard("GetLeaderboardFriendFilterSpeedTest", EvaluationDataType.Long, LeaderboardType.Cumulative);
-
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.Users.Count, random.Next(1, Fixture.Users.Count + 1));
-
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-        }
-
-        [Fact]
-        public void GetLeaderboardGroupMemberFilterSpeedTest()
-        {
-            var random = new Random();
-            var leaderboard = CreateLeaderboard("GetLeaderboardGroupMemberFilterSpeedTest", EvaluationDataType.Long, LeaderboardType.Cumulative);
-
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, Fixture.Users.Count, Fixture.Users.Count + Fixture.Groups.Count + 1);
-
-            var standings = _leaderboardCoreController.GetStandings(leaderboard, filter);
-
-        }
-
-        [Fact]
-        public void CreateLeaderboardStandingRequestWithInvalidLeaderboardId()
-        {
-            var filter = CreateLeaderboardStandingsRequest("", -1, LeaderboardFilterType.Top, Fixture.Users.Count);
-
+			// Act & Assert
             Assert.Throws<MissingRecordException>(() => _leaderboardCoreController.GetStandings(null, filter));
         }
 
         [Fact]
-        public void CreateLeaderboardStandingRequestWithInvalidLimit()
+        public void CantCreateLeaderboardStandingRequestWithInvalidLimit()
         {
-            var leaderboard = CreateLeaderboard("CreateLeaderboardStandingRequestWithInvalidLimit", EvaluationDataType.Long, LeaderboardType.Cumulative);
-
+			// Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, 0);
 
+			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
-
         }
 
         [Fact]
-        public void CreateNearLeaderboardStandingRequestWithInvalidActorId()
+        public void CantCreateNearLeaderboardStandingRequestWithInvalidActorId()
         {
-            var leaderboard = CreateLeaderboard("CreateNearLeaderboardStandingRequestWithInvalidActorId", EvaluationDataType.Long, LeaderboardType.Cumulative);
-
+			// Arrange
+            var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, Fixture.Users.Count, -1);
 
+			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
-
         }
 
         [Fact]
-        public void CreateNearLeaderboardStandingRequestWithInvalidActorType()
+        public void CantCreateNearLeaderboardStandingRequestWithNoActorId()
         {
-            var random = new Random();
-            var leaderboard = CreateLeaderboard("CreateNearLeaderboardStandingRequestWithInvalidActorType", EvaluationDataType.Long, LeaderboardType.Cumulative);
-
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, 0, random.Next(Fixture.Users.Count + 1, Fixture.Users.Count + Fixture.Groups.Count + 1));
-
-            Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
-
-        }
-
-        [Fact]
-        public void CreateNearLeaderboardStandingRequestWithNoActorId()
-        {
-            var leaderboard = CreateLeaderboard("CreateNearLeaderboardStandingRequestWithNoActorId", EvaluationDataType.Long, LeaderboardType.Cumulative);
-
+			// Arrange
+            var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, 0);
 
+			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
-
         }
 
         [Fact]
-        public void CreateFriendsLeaderboardStandingRequestWithInvalidActorId()
+        public void CantCreateFriendsLeaderboardStandingRequestWithInvalidActorId()
         {
-            var leaderboard = CreateLeaderboard("CreateFriendsLeaderboardStandingRequestWithInvalidActorId", EvaluationDataType.Long, LeaderboardType.Cumulative);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
 
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.Users.Count, -1);
 
+			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
-
         }
 
         [Fact]
-        public void CreateFriendsLeaderboardStandingRequestWithInvalidActorType()
+        public void CantCreateFriendsLeaderboardStandingRequestWithInvalidActorType()
         {
-            var random = new Random();
-            var leaderboard = CreateLeaderboard("CreateFriendsLeaderboardStandingRequestWithInvalidActorType", EvaluationDataType.Long, LeaderboardType.Cumulative);
+            // Arrange
+            var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
+			// Using a group's id instead of a user's id to throw the error caught below
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, 0, Fixture.Groups[0].Id);
 
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, 0, random.Next(Fixture.Users.Count + 1, Fixture.Users.Count + Fixture.Groups.Count + 1));
-
+			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
-
         }
 
         [Fact]
-        public void CreateFriendsLeaderboardStandingRequestWithNoActorId()
+        public void CantCreateFriendsLeaderboardStandingRequestWithNoActorId()
         {
-            var leaderboard = CreateLeaderboard("CreateFriendsLeaderboardStandingRequestWithNoActorId", EvaluationDataType.Long, LeaderboardType.Cumulative);
-
+			// Arrange
+            var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, 0);
 
+			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
-
         }
 
         [Fact]
-        public void CreateMembersLeaderboardStandingRequestWithInvalidActorId()
+        public void CantCreateMembersLeaderboardStandingRequestWithInvalidActorId()
         {
-            var leaderboard = CreateLeaderboard("CreateMembersLeaderboardStandingRequestWithInvalidActorId", EvaluationDataType.Long, LeaderboardType.Cumulative);
-
+			// Arrange
+            var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, Fixture.Users.Count, -1);
 
+			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
-
         }
 
         [Fact]
-        public void CreateMembersLeaderboardStandingRequestWithInvalidActorType()
+		public void CantCreateMembersLeaderboardStandingRequestWithInvalidActorType()
         {
-            var random = new Random();
-            var leaderboard = CreateLeaderboard("CreateMembersLeaderboardStandingRequestWithInvalidActorType", EvaluationDataType.Long, LeaderboardType.Cumulative);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
+			// Using a user's id instead of a group's id to throw the error caught below
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, 0, Fixture.Users[0].Id);
 
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, 0, random.Next(1, Fixture.Users.Count + 1));
-
+			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
-
         }
 
         [Fact]
-        public void CreateMembersLeaderboardStandingRequestWithNoActorId()
+        public void CantCreateMembersLeaderboardStandingRequestWithNoActorId()
         {
-            var leaderboard = CreateLeaderboard("CreateMembersLeaderboardStandingRequestWithNoActorId", EvaluationDataType.Long, LeaderboardType.Cumulative);
-
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
             var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, 0);
 
+			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
-
         }
 
 		[Fact]
         public void GetLeaderboardSumLongAccuracyTest()
         {
-			// Arrange
-            var key = nameof(GetLeaderboardSumLongAccuracyTest);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative, key);
             CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
 
@@ -350,8 +386,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [Fact]
         public void GetLeaderboardSumFloatAccuracyTest()
         {
-			// Arrange
-            var key = nameof(GetLeaderboardSumFloatAccuracyTest);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Float, LeaderboardType.Cumulative, key);
             CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId);
 
@@ -376,8 +412,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [Fact]
         public void GetLeaderboardHighLongAccuracyTest()
         {
-			// Arrange
-            var key = nameof(GetLeaderboardHighLongAccuracyTest);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Highest, key);
             CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
 
@@ -402,8 +438,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [Fact]
         public void GetLeaderboardHighFloatAccuracyTest()
         {
-			// Arrange
-            var key = nameof(GetLeaderboardHighFloatAccuracyTest);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Float, LeaderboardType.Highest, key);
             CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId);
 
@@ -428,8 +464,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [Fact]
         public void GetLeaderboardLowLongAccuracyTest()
         {
-			// Arrange
-            var key = nameof(GetLeaderboardLowLongAccuracyTest);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Lowest, key);
             CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId, true);
 
@@ -454,8 +490,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [Fact]
         public void GetLeaderboardLowFloatAccuracyTest()
         {
-			// Arrange
-            var key = nameof(GetLeaderboardLowFloatAccuracyTest);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Float, LeaderboardType.Lowest, key);
             CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId, true);
 
@@ -480,8 +516,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [Fact]
         public void GetLeaderboardCountStringAccuracyTest()
         {
-			// Arrange
-            var key = nameof(GetLeaderboardCountStringAccuracyTest);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.String, LeaderboardType.Count, key);
             CreateEvaluationDataAscending(key, EvaluationDataType.String, leaderboard.GameId);
 
@@ -506,8 +542,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [Fact]
         public void GetLeaderboardCountBoolAccuracyTest()
         {
-			// Arrange
-	        var key = nameof(GetLeaderboardCountBoolAccuracyTest);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Boolean, LeaderboardType.Count, key);
             CreateEvaluationDataAscending(key, EvaluationDataType.Boolean, leaderboard.GameId);
 
@@ -532,8 +568,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [Fact]
         public void GetLeaderboardEarliestStringAccuracyTest()
         {
-			// Arrange
-            var key = nameof(GetLeaderboardEarliestStringAccuracyTest);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.String, LeaderboardType.Earliest, key);
             CreateEvaluationDataAscending(key, EvaluationDataType.String, leaderboard.GameId);
 
@@ -558,8 +594,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [Fact]
         public void GetLeaderboardEarliestBoolAccuracyTest()
         {
-			// Arrange
-            var key = nameof(GetLeaderboardEarliestBoolAccuracyTest);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Boolean, LeaderboardType.Earliest, key);
 
             CreateEvaluationDataAscending(key, EvaluationDataType.Boolean, leaderboard.GameId);
@@ -627,70 +663,69 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         //	}
         //}
 
-        [Fact]
-        public void GetLeaderboardNearFilterAccuracyTest()
+        [Theory]
+		[InlineData(37)]
+		[InlineData(76)]
+        public void GetLeaderboardNearFilterAccuracyTest(int userIndex)
         {
-	        // Arrange
-	        var key = nameof(GetLeaderboardNearFilterAccuracyTest);
-	        var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Lowest, key);
+            // Arrange
+			var key = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{userIndex}";
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Lowest, key);
 	        CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId, true);
 
-            foreach (var user in Fixture.Users)
+            
+		    // Act
+		    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, 10, Fixture.Users[userIndex].Id);
+	        var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
+
+	        // Assert
+	        Assert.Equal(filter.PageLimit, standings.Length);
+
+			// Check that this user is included in the standings
+			Assert.NotNull(standings.Single(s => s.ActorId == filter.ActorId));
+
+            // Make sure the standings are in the correct order
+
+	        // Assumptions:
+	        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
+	        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+	        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+
+	        var firstStandingActorId = standings[0].ActorId;
+	        var firstIndexInUsers = Fixture.Users.ToList().FindIndex(u => u.Id == firstStandingActorId);
+
+	        for (var i = 0; i < standings.Length; i++)
 	        {
-		        // Act
-			    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, 10, user.Id);
-		        var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
-
-		        // Assert
-		        Assert.Equal(filter.PageLimit, standings.Length);
-
-				// Check that this user is included in the standings
-				Assert.NotNull(standings.Single(s => s.ActorId == filter.ActorId));
-
-                // Make sure the standings are in the correct order
-
-		        // Assumptions:
-		        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-		        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-		        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
-
-		        var firstStandingActorId = standings[0].ActorId;
-		        var firstIndexInUsers = Fixture.Users.ToList().FindIndex(u => u.Id == firstStandingActorId);
-
-		        for (var i = 0; i < standings.Length; i++)
-		        {
-					Assert.Equal(Fixture.Users[firstIndexInUsers + i].Id, standings[i].ActorId);
-		        }
+				Assert.Equal(Fixture.Users[firstIndexInUsers + i].Id, standings[i].ActorId);
 	        }
         }
 
-        [Fact]
-        public void GetLeaderboardFriendFilterAccuracyTest()
+        [Theory]
+		[InlineData(5)]
+		[InlineData(63)]
+        public void GetLeaderboardFriendFilterAccuracyTest(int userIndex)
         {
-	        // Arrange
-	        var key = nameof(GetLeaderboardFriendFilterAccuracyTest);
-	        var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Lowest, key);
+            // Arrange
+			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Lowest, key);
 	        CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId, true);
 
-            foreach (var user in Fixture.Users)
+            // Act
+	        var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.Users.Count, Fixture.Users[userIndex].Id);
+	        var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
+
+            // Assert
+            // Assumptions: Each user is created with [CoreTestFixture.FriendCount] friends
+            Assert.Equal(CoreTestFixture.FriendCount + 1, standings.Length);
+
+            // Assumptions:
+            // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
+            // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+            // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+
+	        for (var i = 0; i < standings.Length - 1; i++)
 	        {
-		        // Act
-		        var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.Users.Count, user.Id);
-		        var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
-
-                // Assert
-                // Assumptions: Each user is created with [CoreTestFixture.FriendCount] friends
-                Assert.Equal(CoreTestFixture.FriendCount + 1, standings.Length);
-
-                // Assumptions:
-                // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-                // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-                // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
-
-		        for (var i = 0; i < standings.Length - 1; i++)
-		        {
-					Assert.True(standings[i].ActorId < standings[i + 1].ActorId);
-		        }
+				Assert.True(standings[i].ActorId < standings[i + 1].ActorId);
 	        }
         }
 
@@ -725,6 +760,16 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         #endregion
 
         #region Helpers
+
+		private void ExecutionTimeAssert(Action method, int maxMilliseconds)
+		{
+			var stopwatch = Stopwatch.StartNew();
+			method();
+			stopwatch.Stop();
+
+			Assert.True(stopwatch.ElapsedMilliseconds <= maxMilliseconds, $"Max duration: {maxMilliseconds} but took: {stopwatch.ElapsedMilliseconds} milliseconds.");
+		}
+
         private void CreateGroupMembership(string name, IEnumerable<User> users)
         {
             var group = new Group
