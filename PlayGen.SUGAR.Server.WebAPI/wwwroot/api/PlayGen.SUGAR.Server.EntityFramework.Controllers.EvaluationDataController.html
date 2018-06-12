@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class EvaluationDataController
    | SUGAR ">
-    <meta name="generator" content="docfx 2.35.4.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
+  <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,9 +55,7 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
-          </div>
+          <div class="sr-items"></div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -93,7 +91,28 @@
       <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Controllers.DbController.html#PlayGen_SUGAR_Server_EntityFramework_Controllers_DbController_DbExceptionHandler">DbController.DbExceptionHandler</a>
     </div>
     <div>
-      <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Controllers.DbController.html#PlayGen_SUGAR_Server_EntityFramework_Controllers_DbController_SaveChanges_DbContext_">DbController.SaveChanges(DbContext)</a>
+      <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Controllers.DbController.html#PlayGen_SUGAR_Server_EntityFramework_Controllers_DbController_SaveChanges_Microsoft_EntityFrameworkCore_DbContext_">DbController.SaveChanges(DbContext)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Controllers.html">PlayGen.SUGAR.Server.EntityFramework.Controllers</a></h6>
@@ -112,7 +131,8 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public EvaluationDataController(SUGARContextFactory contextFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public EvaluationDataController(SUGARContextFactory contextFactory)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -168,12 +188,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_CountKeys_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.CountKeys*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_CountKeys_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_DateTime_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.CountKeys(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,DateTime,DateTime)">CountKeys(Int32, Int32, String, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_CountKeys_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.CountKeys(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">CountKeys(Int32, Int32, String, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int CountKeys(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = null, DateTime end = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public int CountKeys(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -206,12 +226,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">start</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">end</span></td>
         <td></td>
       </tr>
@@ -228,33 +248,6 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Create_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Create*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Create_List_PlayGen_SUGAR_Server_Model_EvaluationData__" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Create(List{PlayGen.SUGAR.Server.Model.EvaluationData})">Create(List&lt;EvaluationData&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Create(List&lt;EvaluationData&gt; datas)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
-        <td><span class="parametername">datas</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -303,8 +296,35 @@
   </table>
   
   
+  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Create_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Create*"></a>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Create_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_EvaluationData__" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Create(System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.EvaluationData})">Create(List&lt;EvaluationData&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Create(List&lt;EvaluationData&gt; datas)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
+        <td><span class="parametername">datas</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_ICollection_System_Int32__" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get(ICollection{System.Int32})">Get(ICollection&lt;Int32&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_System_Collections_Generic_ICollection_System_Int32__" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get(System.Collections.Generic.ICollection{System.Int32})">Get(ICollection&lt;Int32&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -322,7 +342,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ICollection</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">ids</span></td>
         <td></td>
       </tr>
@@ -338,7 +358,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -346,7 +366,7 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_System_Int32_ICollection_System_String__" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get(System.Int32,ICollection{System.String})">Get(Int32, ICollection&lt;String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_System_Int32_System_Collections_Generic_ICollection_System_String__" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get(System.Int32,System.Collections.Generic.ICollection{System.String})">Get(Int32, ICollection&lt;String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -369,7 +389,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">ICollection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">keys</span></td>
         <td></td>
       </tr>
@@ -385,7 +405,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -393,7 +413,7 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_System_Int32_System_Int32_ICollection_System_String__" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get(System.Int32,System.Int32,ICollection{System.String})">Get(Int32, Int32, ICollection&lt;String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_System_Int32_System_Int32_System_Collections_Generic_ICollection_System_String__" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get(System.Int32,System.Int32,System.Collections.Generic.ICollection{System.String})">Get(Int32, Int32, ICollection&lt;String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -421,7 +441,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">ICollection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">keys</span></td>
         <td></td>
       </tr>
@@ -437,7 +457,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -445,12 +465,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_System_Int32_System_Int32_System_Nullable_System_Int32__ICollection_System_String__" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get(System.Int32,System.Int32,System.Nullable{System.Int32},ICollection{System.String})">Get(Int32, Int32, Nullable&lt;Int32&gt;, ICollection&lt;String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_Get_System_Int32_System_Int32_System_Nullable_System_Int32__System_Collections_Generic_ICollection_System_String__" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.Get(System.Int32,System.Int32,System.Nullable{System.Int32},System.Collections.Generic.ICollection{System.String})">Get(Int32, Int32, Nullable&lt;Int32&gt;, ICollection&lt;String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;EvaluationData&gt; Get(int gameId, int actorId, int? entityId = null, ICollection&lt;string&gt; keys = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;EvaluationData&gt; Get(int gameId, int actorId, int ? entityId = default (int ? ), ICollection&lt;string&gt; keys = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -478,7 +498,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">ICollection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">keys</span></td>
         <td></td>
       </tr>
@@ -494,7 +514,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -536,7 +556,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -578,7 +598,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -586,12 +606,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_GetGameKeyActors_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.GetGameKeyActors*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_GetGameKeyActors_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_DateTime_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.GetGameKeyActors(System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,DateTime,DateTime)">GetGameKeyActors(Int32, String, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_GetGameKeyActors_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.GetGameKeyActors(System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">GetGameKeyActors(Int32, String, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;int&gt; GetGameKeyActors(int gameId, string key, EvaluationDataType evaluationDataType, DateTime start = null, DateTime end = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;int&gt; GetGameKeyActors(int gameId, string key, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -619,12 +639,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">start</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">end</span></td>
         <td></td>
       </tr>
@@ -640,7 +660,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -682,7 +702,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<span class="xref">KeyValuePair</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a>&gt;&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Collections.Generic.KeyValuePair</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -690,12 +710,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_KeyExists_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.KeyExists*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_KeyExists_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_DateTime_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.KeyExists(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,DateTime,DateTime)">KeyExists(Int32, Int32, String, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_KeyExists_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.KeyExists(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">KeyExists(Int32, Int32, String, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool KeyExists(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = null, DateTime end = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool KeyExists(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -728,12 +748,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">start</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">end</span></td>
         <td></td>
       </tr>
@@ -757,12 +777,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_List_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.List*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_List_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_DateTime_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.List(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,DateTime,DateTime)">List(Int32, Int32, String, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_List_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.List(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">List(Int32, Int32, String, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;EvaluationData&gt; List(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = null, DateTime end = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;EvaluationData&gt; List(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -795,12 +815,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">start</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">end</span></td>
         <td></td>
       </tr>
@@ -816,7 +836,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -824,12 +844,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetEarliest_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetEarliest*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetEarliest_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Server_Model_EvaluationData__PlayGen_SUGAR_Common_EvaluationDataType_DateTime_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetEarliest(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Server.Model.EvaluationData@,PlayGen.SUGAR.Common.EvaluationDataType,DateTime,DateTime)">TryGetEarliest(Int32, Int32, String, out EvaluationData, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetEarliest_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Server_Model_EvaluationData__PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetEarliest(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Server.Model.EvaluationData@,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">TryGetEarliest(Int32, Int32, String, out EvaluationData, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryGetEarliest(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = null, DateTime end = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool TryGetEarliest(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -867,12 +887,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">start</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">end</span></td>
         <td></td>
       </tr>
@@ -896,12 +916,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetLatest_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetLatest*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetLatest_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Server_Model_EvaluationData__PlayGen_SUGAR_Common_EvaluationDataType_DateTime_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetLatest(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Server.Model.EvaluationData@,PlayGen.SUGAR.Common.EvaluationDataType,DateTime,DateTime)">TryGetLatest(Int32, Int32, String, out EvaluationData, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetLatest_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Server_Model_EvaluationData__PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetLatest(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Server.Model.EvaluationData@,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">TryGetLatest(Int32, Int32, String, out EvaluationData, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryGetLatest(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = null, DateTime end = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool TryGetLatest(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -939,12 +959,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">start</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">end</span></td>
         <td></td>
       </tr>
@@ -968,12 +988,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMax_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMax*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMax_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Server_Model_EvaluationData__PlayGen_SUGAR_Common_EvaluationDataType_DateTime_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMax(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Server.Model.EvaluationData@,PlayGen.SUGAR.Common.EvaluationDataType,DateTime,DateTime)">TryGetMax(Int32, Int32, String, out EvaluationData, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMax_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Server_Model_EvaluationData__PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMax(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Server.Model.EvaluationData@,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">TryGetMax(Int32, Int32, String, out EvaluationData, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryGetMax(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = null, DateTime end = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool TryGetMax(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1011,12 +1031,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">start</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">end</span></td>
         <td></td>
       </tr>
@@ -1040,12 +1060,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMin_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMin*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMin_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Server_Model_EvaluationData__PlayGen_SUGAR_Common_EvaluationDataType_DateTime_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMin(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Server.Model.EvaluationData@,PlayGen.SUGAR.Common.EvaluationDataType,DateTime,DateTime)">TryGetMin(Int32, Int32, String, out EvaluationData, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetMin_System_Int32_System_Int32_System_String_PlayGen_SUGAR_Server_Model_EvaluationData__PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetMin(System.Int32,System.Int32,System.String,PlayGen.SUGAR.Server.Model.EvaluationData@,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">TryGetMin(Int32, Int32, String, out EvaluationData, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryGetMin(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = null, DateTime end = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool TryGetMin(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1083,12 +1103,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">start</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">end</span></td>
         <td></td>
       </tr>
@@ -1112,13 +1132,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetSum_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetSum*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetSum__1_System_Int32_System_Int32_System_String_System_Nullable___0___PlayGen_SUGAR_Common_EvaluationDataType_DateTime_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetSum``1(System.Int32,System.Int32,System.String,System.Nullable{``0}@,PlayGen.SUGAR.Common.EvaluationDataType,DateTime,DateTime)">TryGetSum&lt;T&gt;(Int32, Int32, String, out Nullable&lt;T&gt;, EvaluationDataType, DateTime, DateTime)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_EvaluationDataController_TryGetSum__1_System_Int32_System_Int32_System_String_System_Nullable___0___PlayGen_SUGAR_Common_EvaluationDataType_System_DateTime_System_DateTime_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.TryGetSum``1(System.Int32,System.Int32,System.String,System.Nullable{``0}@,PlayGen.SUGAR.Common.EvaluationDataType,System.DateTime,System.DateTime)">TryGetSum&lt;T&gt;(Int32, Int32, String, out Nullable&lt;T&gt;, EvaluationDataType, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool TryGetSum&lt;T&gt;(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = null, DateTime end = null)
-    where T : struct</code></pre>
+    <pre><code class="lang-csharp hljs">public bool TryGetSum&lt;T&gt;(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default (DateTime), DateTime end = default (DateTime))where T : struct</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1156,12 +1175,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">start</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">end</span></td>
         <td></td>
       </tr>

@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "D:/Projects/SUGAR/doc",
+  "source_base_path": "C:/Users/Felix/Documents/Projects/RAGE/SUGAR/doc",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.APIVersionClient.html",
-          "hash": "LjfFfoOI+HzJdhJjBXO95Q=="
+          "hash": "jWhvJt1txtiCLI/xoz94Nw=="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.AccountClient.html",
-          "hash": "bvCW7yXNleM71N4cycGLcQ=="
+          "hash": "giYFBJychoayTDJFkWusAw=="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.AchievementClient.html",
-          "hash": "WkgDY8cQTofVf/wnCu3WvA=="
+          "hash": "Ht+k854lpQMwPoyRjymlyQ=="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.AllianceClient.html",
-          "hash": "rTgpf7YcASy2dcZTMuEpSw=="
+          "hash": "OlLzidV9tTivcUqtiLyLWQ=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController.html",
-          "hash": "ly0ah6fI2pDKO48bJNl0PA=="
+          "hash": "g1XSyvPMqvaz8S+LzAzpFg=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.IAsyncRequestController.html",
-          "hash": "uXECcrh8QKdj/7jyVJL3zw=="
+          "hash": "1QLWItdtrFnK+FPifI02SA=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem-1.html",
-          "hash": "Z8lmVsnXeOwhNjeNwRTDbQ=="
+          "hash": "jo5+HCvGPtsdfkoNzW77Hg=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem.html",
-          "hash": "mGZzxn4KBvdFLNVshzVo3Q=="
+          "hash": "EVTe2XYIeUOBjvQBZPDyKA=="
         }
       },
       "is_incremental": false,
@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.SyncRequestController.html",
-          "hash": "d3PRL6R/gmHoqkzyFMDMWw=="
+          "hash": "3H6Nruc3nzDtePYpABYTDA=="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.html",
-          "hash": "c0wof2sbzml9aeltbPjf/Q=="
+          "hash": "cVVT/H1ZSlfmP4JUAd1UrA=="
         }
       },
       "is_incremental": false,
@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.ClientBase.html",
-          "hash": "vyWKPw3GabbAjb4WCAEqcw=="
+          "hash": "vmUAAUC+VdPjSxDdqSsCkA=="
         }
       },
       "is_incremental": false,
@@ -150,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.DefaultHttpHandler.html",
-          "hash": "0QjxJOyLb/NKDHnWCKgxug=="
+          "hash": "A7BaIprzCS4HNmDAHi+V7Q=="
         }
       },
       "is_incremental": false,
@@ -162,7 +162,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html",
-          "hash": "nntbjCzTUbEngxSlarkSpw=="
+          "hash": "FfDP0iZC1wUmV1uGPTvzJg=="
         }
       },
       "is_incremental": false,
@@ -174,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.html",
-          "hash": "IH7+GAszsyJirUY3Xa43bw=="
+          "hash": "4Eee20iRcLj4y64vVpQDDg=="
         }
       },
       "is_incremental": false,
@@ -186,7 +186,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.Development.html",
-          "hash": "6HMuwTKJuwAiTsEAJxZROg=="
+          "hash": "8Lu4m+ueADI1ApeDqUfLpw=="
         }
       },
       "is_incremental": false,
@@ -198,7 +198,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationEventsExtensions.html",
-          "hash": "Vho5ezQexiBvVg6Do248Uw=="
+          "hash": "aKgAcfnN+zbA68AmavmcvA=="
         }
       },
       "is_incremental": false,
@@ -210,7 +210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html",
-          "hash": "50XGLNpJERjJPMgeY7hdQQ=="
+          "hash": "rTGSnDNLgn5WzlGRDbaeMg=="
         }
       },
       "is_incremental": false,
@@ -222,7 +222,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.html",
-          "hash": "af2sbDi7hcf2Jsq/KIT+aA=="
+          "hash": "1/xQ0Q/Cnw9p1FoAlKFlww=="
         }
       },
       "is_incremental": false,
@@ -234,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.html",
-          "hash": "BRnFlXsu44PbDRgFr55XBw=="
+          "hash": "liXd/XWp6yzOWbCSieeAnA=="
         }
       },
       "is_incremental": false,
@@ -246,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.Exceptions.ClientException.html",
-          "hash": "RfPvJ7PLYptxs3lO3Jm8+w=="
+          "hash": "shs9ZlHuCqNQPHHH7e5ahg=="
         }
       },
       "is_incremental": false,
@@ -258,7 +258,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.Exceptions.ClientHttpException.html",
-          "hash": "yRGCKW6dKVa77TlFbyz01g=="
+          "hash": "OCxJbXABK6O/On1J5mtYbA=="
         }
       },
       "is_incremental": false,
@@ -270,7 +270,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.Exceptions.html",
-          "hash": "oRYSGsGfnBWhGwAhqbdwZA=="
+          "hash": "UL4lXllrpAGdYJqVZevsPA=="
         }
       },
       "is_incremental": false,
@@ -282,7 +282,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.Extensions.UriBuilderExtensions.html",
-          "hash": "Bp0BsMLS+9NXjwOPT+xOIw=="
+          "hash": "uz4/P8rxzaohTbqlht2cNg=="
         }
       },
       "is_incremental": false,
@@ -294,7 +294,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.Extensions.html",
-          "hash": "qBBSiCHSnDuDzG1ltsekQQ=="
+          "hash": "yybC7uYMWTq4GCZZU5X1+A=="
         }
       },
       "is_incremental": false,
@@ -306,7 +306,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.GameClient.html",
-          "hash": "Y/EwyQzPHsinvv1fXW2Prw=="
+          "hash": "fhpYjOqKvgygWRl3ccnZrw=="
         }
       },
       "is_incremental": false,
@@ -318,7 +318,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.GameDataClient.html",
-          "hash": "JLAbMIdPHTxk028i5lknJw=="
+          "hash": "kSitaJHAtiVlokpf/c5N5w=="
         }
       },
       "is_incremental": false,
@@ -330,7 +330,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.GroupClient.html",
-          "hash": "homzKte4awRtS5pzMn093Q=="
+          "hash": "SIr6rXzVFCIwsUpocsDwBw=="
         }
       },
       "is_incremental": false,
@@ -342,7 +342,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.GroupMemberClient.html",
-          "hash": "AQUjJ0U9549FXQrTMfgXVw=="
+          "hash": "NhmsHHT3bMlUSVt01uor5w=="
         }
       },
       "is_incremental": false,
@@ -354,7 +354,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.HttpRequest.html",
-          "hash": "LbSxHtXyhYnuAkJQmCnXfQ=="
+          "hash": "i3oXAdfN8xi3/1e53rfuCQ=="
         }
       },
       "is_incremental": false,
@@ -366,7 +366,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.HttpResponse.html",
-          "hash": "CIk/x1rk2Ma0LzdyGO4dxA=="
+          "hash": "SzXV4URUl4DHf2c3FqFxCQ=="
         }
       },
       "is_incremental": false,
@@ -378,7 +378,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.IHttpHandler.html",
-          "hash": "IBFpoYC73lvAgDZ8ysc7uQ=="
+          "hash": "KEfXFECBfa4IK/e2rQgU/Q=="
         }
       },
       "is_incremental": false,
@@ -390,7 +390,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.LeaderboardClient.html",
-          "hash": "aO8KMRQg4A66vWwnwCiHUw=="
+          "hash": "fNfxwrAUNBTwxFl5D8AzUg=="
         }
       },
       "is_incremental": false,
@@ -402,7 +402,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.MatchClient.html",
-          "hash": "smvqFntktZV9ka4E5sDdXg=="
+          "hash": "GxjVDhNr/jwLs+nM/2648g=="
         }
       },
       "is_incremental": false,
@@ -414,7 +414,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.ResourceClient.html",
-          "hash": "w+jppFTS5EVUTSGErkCQFA=="
+          "hash": "yCFFl/y8X8raU7QLdOejGg=="
         }
       },
       "is_incremental": false,
@@ -426,7 +426,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.SUGARClient.html",
-          "hash": "e3X52L2FG8nW0UT9AAUrVw=="
+          "hash": "LD2fsYakgLeZc2nWLLpPiw=="
         }
       },
       "is_incremental": false,
@@ -438,7 +438,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.SessionClient.html",
-          "hash": "u3MA0lWth6c9slcYGbf7mQ=="
+          "hash": "SibCXrE1H3P/9bxYnqKYBg=="
         }
       },
       "is_incremental": false,
@@ -450,7 +450,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.SkillClient.html",
-          "hash": "m8Ym7Aqd9x3IXVgbX/b5xg=="
+          "hash": "w4BJpucBsiw5MUL0X5OVlQ=="
         }
       },
       "is_incremental": false,
@@ -462,7 +462,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.UserClient.html",
-          "hash": "o+nDgIJc2tj+Qcg/PyJiFw=="
+          "hash": "eCvBeAskSwFNTBOzX2vl4w=="
         }
       },
       "is_incremental": false,
@@ -474,7 +474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.UserFriendClient.html",
-          "hash": "cj3XXv5qSrnDykkrMyD+IA=="
+          "hash": "moTbjrC/3a4UgiCYLEWRFQ=="
         }
       },
       "is_incremental": false,
@@ -486,7 +486,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Client.html",
-          "hash": "h/+UYEEFY0zQzPWjqUwFGw=="
+          "hash": "918+5DqX+iTI4Y5876agxA=="
         }
       },
       "is_incremental": false,
@@ -498,7 +498,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.APIVersion.html",
-          "hash": "ZE5vnXlmnx5CkAHNdL5qmg=="
+          "hash": "HHGkIX6ZwpVaCT0i2f90Rg=="
         }
       },
       "is_incremental": false,
@@ -510,7 +510,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.ActorType.html",
-          "hash": "06eboJfUoNC3rS4TcTI8LA=="
+          "hash": "9w2oZ8+kTmv+aLwsyzUkMw=="
         }
       },
       "is_incremental": false,
@@ -522,7 +522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Authorization.AuthorizationAction.html",
-          "hash": "HemIanjqE9nPM/n6wmbefw=="
+          "hash": "D30G3VNrYvEbOlz3e4E0Ig=="
         }
       },
       "is_incremental": false,
@@ -534,7 +534,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.html",
-          "hash": "hQkpFYVY9vWctR9FCJBPPQ=="
+          "hash": "PuwZHglSdRVJxhiELV/I4w=="
         }
       },
       "is_incremental": false,
@@ -546,7 +546,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Authorization.AuthorizationName.html",
-          "hash": "roTdi7yhL8FvPTC0yZVesg=="
+          "hash": "UjylIXxGTgM5vvlXY1/dhw=="
         }
       },
       "is_incremental": false,
@@ -558,7 +558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Authorization.ClaimScope.html",
-          "hash": "Vlv6hZ/LPzyuPZ5dUBgyhw=="
+          "hash": "sLCQ3iAMEf3k+Uj1ksrEpQ=="
         }
       },
       "is_incremental": false,
@@ -570,7 +570,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Authorization.Platform.html",
-          "hash": "iF1D4On3ePEsRMlYLzWYUg=="
+          "hash": "5gm574u8KCrG3m/9tqJIgg=="
         }
       },
       "is_incremental": false,
@@ -582,7 +582,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Authorization.html",
-          "hash": "0ZXKmXFp+7UpRYvqImz2wA=="
+          "hash": "yx/rew7BV8ZmcJnbYX2IXw=="
         }
       },
       "is_incremental": false,
@@ -594,7 +594,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.ComparisonType.html",
-          "hash": "oGpRj0/Y4BRIezihh+puyw=="
+          "hash": "9eDPPnkUKGxOuftvpVggyg=="
         }
       },
       "is_incremental": false,
@@ -606,7 +606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.CriteriaQueryType.html",
-          "hash": "dJ4yMc/YZta8p85A0u0GWQ=="
+          "hash": "GEKjYQ54y1Fi5vXQwhyx3w=="
         }
       },
       "is_incremental": false,
@@ -618,7 +618,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.CriteriaScope.html",
-          "hash": "cMqB7UuOV8laF5f9XuVDDQ=="
+          "hash": "nkJI2rHBrtQfVvC12txiiA=="
         }
       },
       "is_incremental": false,
@@ -630,7 +630,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.EvaluationDataCategory.html",
-          "hash": "lWy/TT6ntXERJn0EbIEuTA=="
+          "hash": "dbHDq9L9uflnhorqt4ummw=="
         }
       },
       "is_incremental": false,
@@ -642,7 +642,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.EvaluationDataType.html",
-          "hash": "8z+YJAHyg0IPI7UbE3nh5w=="
+          "hash": "pSX66o8abj+wxqbfKa3TWQ=="
         }
       },
       "is_incremental": false,
@@ -654,7 +654,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.EvaluationType.html",
-          "hash": "fl+vLc7K0/nNd935epupEQ=="
+          "hash": "CmZKyvAECk4MZmRKRLErHw=="
         }
       },
       "is_incremental": false,
@@ -666,7 +666,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Exceptions.SUGARException.html",
-          "hash": "/hUxxmJrTPp1Nxnk0QcHYQ=="
+          "hash": "Swo8sEl0nbd+gqrEDoP0Jw=="
         }
       },
       "is_incremental": false,
@@ -678,7 +678,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Exceptions.html",
-          "hash": "o15T+yy8yumKKXUyr8c27w=="
+          "hash": "dIf7aHvGdklwzt4n6L9isA=="
         }
       },
       "is_incremental": false,
@@ -690,7 +690,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Extensions.DateTimeExtensions.html",
-          "hash": "fieGVxNT3vXScBe6iEop0A=="
+          "hash": "aL57S3nBez+jqA8eegp3YQ=="
         }
       },
       "is_incremental": false,
@@ -702,7 +702,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Extensions.EvaluationExtensions.html",
-          "hash": "G2A0cQr06Q6MhXHoU8cnbA=="
+          "hash": "Dkx9hAFbtIk1ezLWEizDAA=="
         }
       },
       "is_incremental": false,
@@ -714,7 +714,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Extensions.html",
-          "hash": "Kjnrh+VNM3ttQsb1gm47cQ=="
+          "hash": "hCPzZSnkOB54UiYtwt4w0A=="
         }
       },
       "is_incremental": false,
@@ -726,7 +726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.LeaderboardFilterType.html",
-          "hash": "FVxtaLJ2AqhgrIGrdqIYVA=="
+          "hash": "wZBy0OBKNvCapRAsuuGUIw=="
         }
       },
       "is_incremental": false,
@@ -738,7 +738,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.LeaderboardType.html",
-          "hash": "GMOB4oRWmbnaDzBp1icV9g=="
+          "hash": "/uyUe7ode8AV0/+1Cdusvw=="
         }
       },
       "is_incremental": false,
@@ -750,7 +750,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.RegexUtil.html",
-          "hash": "LsbwZRNfr75Nvb50tyoHOg=="
+          "hash": "KAR/i4DSiqdD1DP1snTplg=="
         }
       },
       "is_incremental": false,
@@ -762,7 +762,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Web.HeaderKeys.html",
-          "hash": "yK6kKRjtGl0qYTDHSV3ddQ=="
+          "hash": "ZECcRscCUlREUjrkZ97PjQ=="
         }
       },
       "is_incremental": false,
@@ -774,7 +774,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.Web.html",
-          "hash": "0EWiH72rQGPgvpnzbTVYbg=="
+          "hash": "AHcDb36JQDYnHYLA8nh7SQ=="
         }
       },
       "is_incremental": false,
@@ -786,7 +786,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Common.html",
-          "hash": "MGkHq51mAv+/ZWaXf+yQyg=="
+          "hash": "t0wAXoY2gJjVgpmyMam7mg=="
         }
       },
       "is_incremental": false,
@@ -798,7 +798,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.AccountRequest.html",
-          "hash": "SylzDQH1pqWkGQz2x37veA=="
+          "hash": "t2O4UHAvdmUtlCIGxCuhDA=="
         }
       },
       "is_incremental": false,
@@ -810,7 +810,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.AccountResponse.html",
-          "hash": "4gm7w90S+tT+dttHKAE4mg=="
+          "hash": "/2kfcgF6RGddlwwK8Jv7Lw=="
         }
       },
       "is_incremental": false,
@@ -822,7 +822,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.AccountSourceRequest.html",
-          "hash": "lo9seJ5jFif9ZBSZa0otyQ=="
+          "hash": "rfU/pRdII/hOiRXcDHw+LQ=="
         }
       },
       "is_incremental": false,
@@ -834,7 +834,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.AccountSourceResponse.html",
-          "hash": "rlY49EvnfBx07118WIPBgg=="
+          "hash": "aVJU1Q9JN6FWGdL71WM1ag=="
         }
       },
       "is_incremental": false,
@@ -846,7 +846,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ActorClaimRequest.html",
-          "hash": "JQeHcmFCo4i0dtUuZd5Ugg=="
+          "hash": "7k2pJMt9NlMgFP3eEEm48w=="
         }
       },
       "is_incremental": false,
@@ -858,7 +858,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ActorClaimResponse.html",
-          "hash": "ScbazopFh0Vsz2Uo0bMz+Q=="
+          "hash": "eyY1X3Ljej7/IVRdI/LjxA=="
         }
       },
       "is_incremental": false,
@@ -870,7 +870,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ActorRequest.html",
-          "hash": "NKXcj1l9h8PZs3jzrLPd8g=="
+          "hash": "oJFrXI++aJRc9oYz8pGFiA=="
         }
       },
       "is_incremental": false,
@@ -882,7 +882,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ActorResponse.html",
-          "hash": "b2WZr0GS2YQhDtpqlM9U/g=="
+          "hash": "b0aVcrbt8nLgiTJhcbw2pQ=="
         }
       },
       "is_incremental": false,
@@ -894,7 +894,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ActorRoleRequest.html",
-          "hash": "vzUrqRuZPz+4IqznwgH9GQ=="
+          "hash": "j6e8ixpRy2mOu2BWu5pOKA=="
         }
       },
       "is_incremental": false,
@@ -906,7 +906,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ActorRoleResponse.html",
-          "hash": "zE39P7rGGHdm8tyKl97iOw=="
+          "hash": "BIS+rq6b7DSfhIEkrMWB9Q=="
         }
       },
       "is_incremental": false,
@@ -918,7 +918,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ClaimResponse.html",
-          "hash": "OHkIqTjUIuumTA64qayJCQ=="
+          "hash": "WDa3oCb9Z/DcwmTCuyUkOw=="
         }
       },
       "is_incremental": false,
@@ -930,7 +930,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCreateRequest.html",
-          "hash": "+H4wic/849vcTDk6bNYMwQ=="
+          "hash": "ihgcAooU9u2bEryYB6KCBg=="
         }
       },
       "is_incremental": false,
@@ -942,7 +942,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html",
-          "hash": "SKB6myL/tNkfmnO44MxIBw=="
+          "hash": "B76Bkr0CUw97i5jxJL3iIA=="
         }
       },
       "is_incremental": false,
@@ -954,7 +954,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCriteriaResponse.html",
-          "hash": "ZAtlDi7ad0LlXHMuQpem3g=="
+          "hash": "Kysaugex4VRfPSx9wJVngQ=="
         }
       },
       "is_incremental": false,
@@ -966,7 +966,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCriteriaUpdateRequest.html",
-          "hash": "nCTusZBPIrFS83g4Dt6ccw=="
+          "hash": "6SCDRYPojsRpXKB7Tp37Ew=="
         }
       },
       "is_incremental": false,
@@ -978,7 +978,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationDataRequest.html",
-          "hash": "JdnKClRfoNcXMIhYz+1Yzw=="
+          "hash": "wuP3H20YkLgeTLEJieWRTw=="
         }
       },
       "is_incremental": false,
@@ -990,7 +990,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html",
-          "hash": "EtdEdoEedyFf6Ox/vnsoag=="
+          "hash": "LE/ilFmhMRlXc1Zma+pojw=="
         }
       },
       "is_incremental": false,
@@ -1002,7 +1002,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html",
-          "hash": "Rmv6g9Mmx8Vdfb0IrKLZ1w=="
+          "hash": "kaVP0ni7vFgUCzDir1E5dQ=="
         }
       },
       "is_incremental": false,
@@ -1014,7 +1014,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationResponse.html",
-          "hash": "0KMjQZhGbDbw4ynESwrgbw=="
+          "hash": "RjbPHi8CkfW8EMpv1Pmz2g=="
         }
       },
       "is_incremental": false,
@@ -1026,7 +1026,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationUpdateRequest.html",
-          "hash": "Wyu/hXhasRB7JSvIS3e6tg=="
+          "hash": "1zC2mDZkXngBQNM20UQE/A=="
         }
       },
       "is_incremental": false,
@@ -1038,7 +1038,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.GameRequest.html",
-          "hash": "6tWHBy1TyYDToxcvg4/73g=="
+          "hash": "HLlHWUR+hy1nbkz+o/vzxA=="
         }
       },
       "is_incremental": false,
@@ -1050,7 +1050,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.GameResponse.html",
-          "hash": "jmOZj2bwe0r1CS0LCkFRhg=="
+          "hash": "Ax5GymxkXVyv7IA6Gk2h6g=="
         }
       },
       "is_incremental": false,
@@ -1062,7 +1062,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.GroupRequest.html",
-          "hash": "/PRM3KuUTE6xGofYf9EtgQ=="
+          "hash": "AhAOQmJuZhiT2c4C3WLhhA=="
         }
       },
       "is_incremental": false,
@@ -1074,7 +1074,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.GroupResponse.html",
-          "hash": "vUGcdivndvY/L9QKzpOW2w=="
+          "hash": "+OfDMpoBH7xT0/+UJQWenw=="
         }
       },
       "is_incremental": false,
@@ -1086,7 +1086,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardRequest.html",
-          "hash": "m+1zHXIaQd/1TZOjRi4iCA=="
+          "hash": "JbEXi/W3nQLogg50FCN8aA=="
         }
       },
       "is_incremental": false,
@@ -1098,7 +1098,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardResponse.html",
-          "hash": "G4pdBaGHNWy0PUkdcaxewg=="
+          "hash": "IW/CbPCyL4HL7FWStx2H/Q=="
         }
       },
       "is_incremental": false,
@@ -1110,7 +1110,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest.html",
-          "hash": "wb0X7CtSkafTDYM3VNgf0Q=="
+          "hash": "xSiSl5NdZFAWcCLN9oQmJg=="
         }
       },
       "is_incremental": false,
@@ -1122,7 +1122,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse.html",
-          "hash": "2bEYZRSFqTcsWoTMa12ozw=="
+          "hash": "b1vg4CeFFmeklSm2TWN2Pw=="
         }
       },
       "is_incremental": false,
@@ -1134,7 +1134,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.MatchResponse.html",
-          "hash": "y6PJ6uIPGKU2WVM6ixFMSw=="
+          "hash": "m1Q/kjWUfq6rz3O0wBcOTg=="
         }
       },
       "is_incremental": false,
@@ -1146,7 +1146,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.RelationshipRequest.html",
-          "hash": "UP5knyZKvQscmMsX6P/UiA=="
+          "hash": "k9Y6PZAAPlCbWWCY7dkeFw=="
         }
       },
       "is_incremental": false,
@@ -1158,7 +1158,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.RelationshipResponse.html",
-          "hash": "lR6sPA2EEkSn7YAcF5rmwQ=="
+          "hash": "lijLhc127vO/yiq/N3ImxQ=="
         }
       },
       "is_incremental": false,
@@ -1170,7 +1170,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.html",
-          "hash": "tBB3c2fClgjSxHYRms5zdg=="
+          "hash": "rILLAvESdk3WzfqU4QHFNg=="
         }
       },
       "is_incremental": false,
@@ -1182,7 +1182,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ResourceAddRequest.html",
-          "hash": "EMCgk6sax3Vt8S0ITy9SYQ=="
+          "hash": "3eTdG8bdW+F+KWOmgjb/UQ=="
         }
       },
       "is_incremental": false,
@@ -1194,7 +1194,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ResourceResponse.html",
-          "hash": "jO5pJrPgwKiQHhV8HZvaLw=="
+          "hash": "crj18MQFGrmMD0HPpxgSww=="
         }
       },
       "is_incremental": false,
@@ -1206,7 +1206,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ResourceTransferRequest.html",
-          "hash": "EN44EbXrr7pmZHYcpHOYuQ=="
+          "hash": "4BHKNrTxFBUvS+dSvdTT4g=="
         }
       },
       "is_incremental": false,
@@ -1218,7 +1218,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ResourceTransferResponse.html",
-          "hash": "iKK6Mvzzzy2tN+TxXmvPew=="
+          "hash": "oHIMQ0grgtZVSCA9Qg7RYQ=="
         }
       },
       "is_incremental": false,
@@ -1230,7 +1230,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.ResponseWrapper-1.html",
-          "hash": "707YcgZLg6FoiEAJwykmfw=="
+          "hash": "2Jn9f+qcC8s9pfwX/pj/XA=="
         }
       },
       "is_incremental": false,
@@ -1242,7 +1242,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.RewardCreateRequest.html",
-          "hash": "uq0a2vf1FUrYLJOnHLM8rA=="
+          "hash": "3NF7yi3/sLKRDOGMT8mkmg=="
         }
       },
       "is_incremental": false,
@@ -1254,7 +1254,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.RewardResponse.html",
-          "hash": "Y2dXFmzjUSz5DhPo7TtOhg=="
+          "hash": "cqWq1m0QF1FIQlFZbrOUow=="
         }
       },
       "is_incremental": false,
@@ -1266,7 +1266,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.RewardUpdateRequest.html",
-          "hash": "izueV+2MLD2YazVmMDrk8A=="
+          "hash": "bHWylbeVE3rA0IX7X9cnQw=="
         }
       },
       "is_incremental": false,
@@ -1278,7 +1278,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.RoleClaimRequest.html",
-          "hash": "LL9OB6TIOBYc20/7gVRT+g=="
+          "hash": "Gs9SDC40BZ22PCgu0AMoDg=="
         }
       },
       "is_incremental": false,
@@ -1290,7 +1290,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.RoleClaimResponse.html",
-          "hash": "aOP4e0XqBqZYWxvyy4w7vA=="
+          "hash": "u2FhqV4iVdr96TiVzMf4hA=="
         }
       },
       "is_incremental": false,
@@ -1302,7 +1302,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.RoleRequest.html",
-          "hash": "bS8WlUnmg7Zcl0gp72SvuQ=="
+          "hash": "3xqCf1gNLpp7KOH7pTCgbA=="
         }
       },
       "is_incremental": false,
@@ -1314,7 +1314,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.RoleResponse.html",
-          "hash": "CSKJ7MyV0/ICyrLNpFRyHQ=="
+          "hash": "2s1IJVBYdUkZIbOyTUfJ/g=="
         }
       },
       "is_incremental": false,
@@ -1326,7 +1326,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.UserRequest.html",
-          "hash": "kFL0RbCog/dM6dWNxzClAg=="
+          "hash": "dMS+ph/sbpCPzojtQ8Ldwg=="
         }
       },
       "is_incremental": false,
@@ -1338,7 +1338,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.UserResponse.html",
-          "hash": "bS5v7cCMBb1FcvgzPRiFDQ=="
+          "hash": "w2gPCncV9v8QKUiXddcPpA=="
         }
       },
       "is_incremental": false,
@@ -1350,7 +1350,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Contracts.html",
-          "hash": "m1VkoFQ7YMHX+4OeaeOyXQ=="
+          "hash": "7uB9PpImFwYT6ZqKEfV/Aw=="
         }
       },
       "is_incremental": false,
@@ -1362,7 +1362,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Exceptions.ClaimNotFoundException.html",
-          "hash": "WEF7ODjhcBXAnNAUjGZjnw=="
+          "hash": "GgnaY5IzWiDpvMw/xcEh8Q=="
         }
       },
       "is_incremental": false,
@@ -1374,7 +1374,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Exceptions.html",
-          "hash": "BhfAemKh26rWU8pu7Qb/Aw=="
+          "hash": "eDMZsgHNCXdy2nq7v3GpGg=="
         }
       },
       "is_incremental": false,
@@ -1386,7 +1386,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.AuthorizationHeaderExtensions.html",
-          "hash": "gECW9ItXNArZCs3KUZM/Gg=="
+          "hash": "faS8Ki4QBdIyOPLZCVFUKA=="
         }
       },
       "is_incremental": false,
@@ -1398,7 +1398,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.AuthorizationTokenExtensions.html",
-          "hash": "0T3if7PgH+k/KGVrQaCKPQ=="
+          "hash": "9NPJK1HaCS5LeNWtHKTtwg=="
         }
       },
       "is_incremental": false,
@@ -1410,7 +1410,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.ClaimsExtensions.html",
-          "hash": "h+1KvRD2LVyvq4QyUBOQUg=="
+          "hash": "lC3IASr4NfrjSQ1l2y8X7g=="
         }
       },
       "is_incremental": false,
@@ -1422,7 +1422,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.html",
-          "hash": "EfCPHTuHIMPpDXdMxK6jZA=="
+          "hash": "+WdbZQ1J4yJhtQAwVhr7WQ=="
         }
       },
       "is_incremental": false,
@@ -1434,7 +1434,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Filters.TokenReissueFilter.html",
-          "hash": "zKlg4YehJL0kR13RgYW5Ew=="
+          "hash": "26s3mfgHDPhISKLEV6k8Eg=="
         }
       },
       "is_incremental": false,
@@ -1446,7 +1446,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Filters.html",
-          "hash": "oSp15ClEf3Wq1FwccEikyA=="
+          "hash": "9VomiBSwIJXcpCinSHaZCw=="
         }
       },
       "is_incremental": false,
@@ -1458,7 +1458,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Helpers.JWTSerializationAdapter.html",
-          "hash": "260MVpV5o5OI8QcXl+Vk4w=="
+          "hash": "DVRiK3DGzOps4JSn5ksRJA=="
         }
       },
       "is_incremental": false,
@@ -1470,7 +1470,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Helpers.html",
-          "hash": "UAq2tZL4tdtzEqiUdsjXJg=="
+          "hash": "VKQhxMLWgx/cauDZme11YQ=="
         }
       },
       "is_incremental": false,
@@ -1482,7 +1482,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.TokenAuthOptions.html",
-          "hash": "9TVcOFpqGgbB/flr5SRqfQ=="
+          "hash": "Op/rY1xdwySJ8Cki3Alxhg=="
         }
       },
       "is_incremental": false,
@@ -1494,7 +1494,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.TokenController.html",
-          "hash": "LBWbBCoDOhaqQMr7O0KsrQ=="
+          "hash": "1U8+zQzGb/rEyxtcHLf5AQ=="
         }
       },
       "is_incremental": false,
@@ -1506,7 +1506,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.TokenValidity.html",
-          "hash": "CfQq/K3AptJqcC/MejVFTg=="
+          "hash": "SUy1R1MFFn6ptGTWkAmd7Q=="
         }
       },
       "is_incremental": false,
@@ -1518,7 +1518,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authentication.html",
-          "hash": "i8Cl46TdDQukaixSm4D7nA=="
+          "hash": "OUP5Fq64k1oTJ6P3Us/POw=="
         }
       },
       "is_incremental": false,
@@ -1530,7 +1530,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authorization.AuthorizationAttribute.html",
-          "hash": "N+o+PcVl38eT0bhwdt8jZA=="
+          "hash": "s5mp5gF2W/WevPR9xUia0g=="
         }
       },
       "is_incremental": false,
@@ -1542,7 +1542,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authorization.AuthorizationExtensions.html",
-          "hash": "B7b854wL85lZmWRFlgx2Nw=="
+          "hash": "QlmHiqgPFYJQPxGi4T2azA=="
         }
       },
       "is_incremental": false,
@@ -1554,7 +1554,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authorization.AuthorizationRequirement.html",
-          "hash": "TNiGvj4tpSenMPl8/H84PQ=="
+          "hash": "njSb+hUGKnrG/Rmil5jcXw=="
         }
       },
       "is_incremental": false,
@@ -1566,7 +1566,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Authorization.html",
-          "hash": "AE6ztcaN7+dszB8L5lqaYg=="
+          "hash": "fi00rdemAqw6OcQSP68YcA=="
         }
       },
       "is_incremental": false,
@@ -1578,7 +1578,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.AuthorizationHandler.html",
-          "hash": "cxaUPmRBb/3LSnwBQQ+U4Q=="
+          "hash": "pAmJwcU8g+A7QQ42+CVU6w=="
         }
       },
       "is_incremental": false,
@@ -1590,7 +1590,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.AuthorizationHandlerWithNull.html",
-          "hash": "vXNoxXjZeoU1OUqBjOvTWA=="
+          "hash": "zRmqCnVfx/KqDICAmDBaXw=="
         }
       },
       "is_incremental": false,
@@ -1602,7 +1602,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.AuthorizationHandlerWithoutEntity.html",
-          "hash": "asmXlZQwsSs6HbbYE2lgEg=="
+          "hash": "UtjmOsDo/NdNIAGEj+Qwdg=="
         }
       },
       "is_incremental": false,
@@ -1614,7 +1614,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.ClaimController.html",
-          "hash": "/jvI+PuYuVCqKVUVZICnBA=="
+          "hash": "2dHYHTGNLJnzb3Yp0duTwA=="
         }
       },
       "is_incremental": false,
@@ -1626,7 +1626,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.html",
-          "hash": "DhDz1gZ23YVHbbRwTttU8A=="
+          "hash": "97fRW7xn+LjxhMGe33WAgg=="
         }
       },
       "is_incremental": false,
@@ -1638,7 +1638,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.AccountController.html",
-          "hash": "IOxZRTmVEFFii2gcof2URg=="
+          "hash": "2eA8P8vwKuFXKTR8X2NjrA=="
         }
       },
       "is_incremental": false,
@@ -1650,7 +1650,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.AccountSourceController.html",
-          "hash": "ZUnprdLml4otvTmTRZZ83w=="
+          "hash": "25zkUmCS6R6naO9VFW2Z/Q=="
         }
       },
       "is_incremental": false,
@@ -1662,7 +1662,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.html",
-          "hash": "KiAED34Zop2AiBvbFhO3PQ=="
+          "hash": "1iUhWZr6bYjm02pZKNnWMA=="
         }
       },
       "is_incremental": false,
@@ -1674,7 +1674,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorController.html",
-          "hash": "Cb1T68QzL0dgartOU+Dc3A=="
+          "hash": "+/0QKHQMiLfJlHD4LWQY2Q=="
         }
       },
       "is_incremental": false,
@@ -1686,7 +1686,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorDataController.html",
-          "hash": "3eEKhEUDN0h871NmaJRqEA=="
+          "hash": "9JZdM7kSp0GbtWhkcGIXpw=="
         }
       },
       "is_incremental": false,
@@ -1698,7 +1698,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.html",
-          "hash": "EsfsdztD8folZerci/0/eg=="
+          "hash": "WtEqnJ5K1Ww0JSDuZ9jJJA=="
         }
       },
       "is_incremental": false,
@@ -1710,7 +1710,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.EvaluationController.html",
-          "hash": "pLVHVYDJgKD/wD2k4dZKAQ=="
+          "hash": "9L+0hGfzm0FdSuqEryTKoQ=="
         }
       },
       "is_incremental": false,
@@ -1722,7 +1722,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html",
-          "hash": "9swTc2vHOiWME9rKPaF4Ng=="
+          "hash": "e/xFqKtr6piWWuiUM21JNg=="
         }
       },
       "is_incremental": false,
@@ -1734,7 +1734,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.GameController.html",
-          "hash": "zUY11wrYcr3DMWw8e8vXfw=="
+          "hash": "xPWUWBq0S2uovC3mV6ZYvw=="
         }
       },
       "is_incremental": false,
@@ -1746,7 +1746,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.GameDataController.html",
-          "hash": "IQJfWM/CfrFtqheMVyiQNA=="
+          "hash": "3bsJOxVeKk+IX4X5jwKS7Q=="
         }
       },
       "is_incremental": false,
@@ -1758,7 +1758,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.GroupController.html",
-          "hash": "az2iiuNdOCX1vcHP4803Gw=="
+          "hash": "HgBt/8LXoad0j6cCe2ITCg=="
         }
       },
       "is_incremental": false,
@@ -1770,7 +1770,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html",
-          "hash": "hCqVuizb/6vQKrtnUAU0OA=="
+          "hash": "4s3sDpmIb5va8zsRMk5CWw=="
         }
       },
       "is_incremental": false,
@@ -1782,7 +1782,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.MatchController.html",
-          "hash": "RaEVKsXKz3e8P0tpH52n+g=="
+          "hash": "WdROrYr2zq+37n3ZGMpSeg=="
         }
       },
       "is_incremental": false,
@@ -1794,7 +1794,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.html",
-          "hash": "8vFLuUi+KMr9eGXCAECv4Q=="
+          "hash": "cbsng60SoldFWNOJClb/Gg=="
         }
       },
       "is_incremental": false,
@@ -1806,7 +1806,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ResourceController.html",
-          "hash": "1ECGv41VVPxIZxrFyIg0Nw=="
+          "hash": "mOCl3i2QDtIyP7o6/LugZA=="
         }
       },
       "is_incremental": false,
@@ -1818,7 +1818,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RewardController.html",
-          "hash": "WjqaJ7jdnexhn2pVVTI8fg=="
+          "hash": "Xfqya2Lzh9AbhagNrffG2g=="
         }
       },
       "is_incremental": false,
@@ -1830,7 +1830,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController.html",
-          "hash": "SRJE7VJYwppbeBNd+jwKhw=="
+          "hash": "HGi8AZO5ENUCWmQM489Wyw=="
         }
       },
       "is_incremental": false,
@@ -1842,7 +1842,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RoleController.html",
-          "hash": "rMtNScubGFsZiYxz8ZSoFA=="
+          "hash": "XgY+btIXBkwiauHwMtRKIg=="
         }
       },
       "is_incremental": false,
@@ -1854,7 +1854,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.UserController.html",
-          "hash": "hUiuPUFvItJprfpOr65gDg=="
+          "hash": "p1adB77Ql/tAAr4K6jh9IQ=="
         }
       },
       "is_incremental": false,
@@ -1866,7 +1866,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.html",
-          "hash": "+y/FBxRXJTeq0L3Vo8cS3w=="
+          "hash": "Cxk/SW/Q5wDr3JyLls7EoA=="
         }
       },
       "is_incremental": false,
@@ -1878,7 +1878,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.html",
-          "hash": "ReHFZVP1saANpJ6mB8/TgA=="
+          "hash": "h/hd5YXfCjEqi+W25LkP4w=="
         }
       },
       "is_incremental": false,
@@ -1890,7 +1890,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html",
-          "hash": "Y8QPaduDUWHSUYS4Bu8wmQ=="
+          "hash": "uTdQQQam6o4sc2oczjpBww=="
         }
       },
       "is_incremental": false,
@@ -1902,7 +1902,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.EvaluationDataMapper.html",
-          "hash": "t0zB8mRFRy0jZSO/d5z7bw=="
+          "hash": "lntWKbsDCxWfWTu6bFfAOA=="
         }
       },
       "is_incremental": false,
@@ -1914,7 +1914,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.EvaluationProgress.html",
-          "hash": "xGlSEqapm/fR76xBnlPfkQ=="
+          "hash": "eIGUnYofTkjHxVe+8SVINQ=="
         }
       },
       "is_incremental": false,
@@ -1926,7 +1926,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.EvaluationTracker.html",
-          "hash": "hLacknmAw1afDz5QO375MA=="
+          "hash": "5xQoM8xiphi1L795NrdUcw=="
         }
       },
       "is_incremental": false,
@@ -1938,7 +1938,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.html",
-          "hash": "g6Mvpc5ZEiNytG4VzIYX0A=="
+          "hash": "EKjZWmN08in3D8Orq4FJNQ=="
         }
       },
       "is_incremental": false,
@@ -1950,7 +1950,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressNotificationCache.html",
-          "hash": "LsH07TVs0CCCdEbNJBrKag=="
+          "hash": "DDWQA03o6kCa0FImrXZRiQ=="
         }
       },
       "is_incremental": false,
@@ -1962,7 +1962,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html",
-          "hash": "CqUuIHbZLTU2as0VZsw5gw=="
+          "hash": "AZeLX7GwLSjXxNnV+6aKRA=="
         }
       },
       "is_incremental": false,
@@ -1974,7 +1974,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html",
-          "hash": "WRzB6fv/4FmoCma6mTzojQ=="
+          "hash": "unOFcuVsW+AoGkwLv6xckQ=="
         }
       },
       "is_incremental": false,
@@ -1986,7 +1986,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.html",
-          "hash": "/2V1ABW8AVANP9gLvQn7aQ=="
+          "hash": "FERo2JO+LfUHbJDO+N8elw=="
         }
       },
       "is_incremental": false,
@@ -1998,7 +1998,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.InvalidAccountDetailsException.html",
-          "hash": "8sT8LIzD8PiprC8eaayogQ=="
+          "hash": "4/n1GP0e750RQrWMu3+jfQ=="
         }
       },
       "is_incremental": false,
@@ -2010,7 +2010,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.InvalidDataException.html",
-          "hash": "IgBe2rKHgMU7Vzx2AJ16XQ=="
+          "hash": "mND+yo5cO3g+i9hf6etb4A=="
         }
       },
       "is_incremental": false,
@@ -2022,7 +2022,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.InvalidOperationException.html",
-          "hash": "DRnlVnTfGf2VtpfZGBUvrA=="
+          "hash": "PTAGczMl4aZQY2ii83kM3g=="
         }
       },
       "is_incremental": false,
@@ -2034,7 +2034,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.html",
-          "hash": "QZzL9L5UG+/YX7FBRkp43Q=="
+          "hash": "hSnn7pQglKfP2J7o5r7MGA=="
         }
       },
       "is_incremental": false,
@@ -2046,7 +2046,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Sessions.Session.html",
-          "hash": "shdkbr4ruoEojzK2AqY+JA=="
+          "hash": "eIKVMX/ZH7lxH91/Lxto2g=="
         }
       },
       "is_incremental": false,
@@ -2058,7 +2058,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Sessions.SessionTracker.html",
-          "hash": "3FXE+SCElJn1SUiYnSE+Dw=="
+          "hash": "vbkbaYVEQXcfKpCpMaK94g=="
         }
       },
       "is_incremental": false,
@@ -2070,7 +2070,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Sessions.html",
-          "hash": "MFWjWkrpxCGTsyTXj4O3cQ=="
+          "hash": "3m3YDx0ZSzOc/cAE06mObA=="
         }
       },
       "is_incremental": false,
@@ -2082,7 +2082,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Utilities.PasswordEncryption.html",
-          "hash": "EtVHAsVLEsLZ78l5DdENhw=="
+          "hash": "A14uGd9AGPeJO4k/wE34Vw=="
         }
       },
       "is_incremental": false,
@@ -2094,7 +2094,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Core.Utilities.html",
-          "hash": "hJhu6mBJ9Ezv/a5DfigUuQ=="
+          "hash": "Tpxk0Qsx8FsL3GP+o6ZQXw=="
         }
       },
       "is_incremental": false,
@@ -2106,7 +2106,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.AccountController.html",
-          "hash": "UDv7raFPAwqWiM2n6eVPyw=="
+          "hash": "QzSLj/t46QOaxq4pZk0R5g=="
         }
       },
       "is_incremental": false,
@@ -2118,7 +2118,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.AccountSourceController.html",
-          "hash": "0/s8+033bif/X9WXZUAZrw=="
+          "hash": "nvNJtbj9Nb48q2gcLB8DDA=="
         }
       },
       "is_incremental": false,
@@ -2130,7 +2130,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController.html",
-          "hash": "zTf63TIZqxWQ6d69HuoECA=="
+          "hash": "4iOFHeeZcmjqcaeoATtF9A=="
         }
       },
       "is_incremental": false,
@@ -2142,7 +2142,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorController.html",
-          "hash": "P0Yhm33EibmQxk6RuV9JsA=="
+          "hash": "4nN7Xhu+z+38XnQDfL7f6w=="
         }
       },
       "is_incremental": false,
@@ -2154,7 +2154,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorDataController.html",
-          "hash": "KFq/zv/24HVLJcNWLxsOdA=="
+          "hash": "AmwEO06dL+Ke9GjPb05KoA=="
         }
       },
       "is_incremental": false,
@@ -2166,7 +2166,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorRoleController.html",
-          "hash": "4OLkfcivCco9HL7HMDbDJg=="
+          "hash": "u5tLee5SerHUawmIqiL8Kg=="
         }
       },
       "is_incremental": false,
@@ -2178,7 +2178,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ClaimController.html",
-          "hash": "IUIs8s7I6NBOu/SLCcEazw=="
+          "hash": "zKBcAEbnE71fAGaGWoIOKw=="
         }
       },
       "is_incremental": false,
@@ -2190,7 +2190,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.DbController.html",
-          "hash": "uIPB+Toexf0AHI+k0m8f9w=="
+          "hash": "EqsQTiNw6/ee1EEIbUDWEA=="
         }
       },
       "is_incremental": false,
@@ -2202,7 +2202,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.html",
-          "hash": "PBeAA+e9Q3qGARO+rIs0oQ=="
+          "hash": "pxfn8lo4A8LiOWjouLnYXA=="
         }
       },
       "is_incremental": false,
@@ -2214,7 +2214,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.html",
-          "hash": "nVxwamww9lWFFc8unYA75A=="
+          "hash": "U6O0ibLD2RrjeAHRVdhNRQ=="
         }
       },
       "is_incremental": false,
@@ -2226,7 +2226,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.GameController.html",
-          "hash": "DR7cNb5hrO4dnPYzllg5vw=="
+          "hash": "V47TzkElGJNqKe1d2neXqQ=="
         }
       },
       "is_incremental": false,
@@ -2238,7 +2238,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.GroupController.html",
-          "hash": "doZ/9tSAOqvHOQgvtELt6Q=="
+          "hash": "ZTL64pttFY5R7NQX7fpuGQ=="
         }
       },
       "is_incremental": false,
@@ -2250,7 +2250,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.LeaderboardController.html",
-          "hash": "FNKFZYezmMIn5GdPlXcZSQ=="
+          "hash": "ue406QiubSeny2Z4Z839pA=="
         }
       },
       "is_incremental": false,
@@ -2262,7 +2262,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.MatchController.html",
-          "hash": "4cyQPhO1xmL8UgpMfTy/uQ=="
+          "hash": "Zmqh34p6MrKmZLLWz9IIRw=="
         }
       },
       "is_incremental": false,
@@ -2274,7 +2274,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.html",
-          "hash": "+PPq85JBs1JQRO5Uq9QNIA=="
+          "hash": "8pF15TWk6Cu/b1Lt4JYbYw=="
         }
       },
       "is_incremental": false,
@@ -2286,7 +2286,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleClaimController.html",
-          "hash": "YMs27vSvWmRmE+iseZq4gQ=="
+          "hash": "uWOSVLJtojHAlSaJZ6nKdg=="
         }
       },
       "is_incremental": false,
@@ -2298,7 +2298,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.html",
-          "hash": "Ac90idTnDG7R1+CHieTVMw=="
+          "hash": "TmjQWro3FyY3BUvYCMw7lQ=="
         }
       },
       "is_incremental": false,
@@ -2310,7 +2310,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.UserController.html",
-          "hash": "69l8Nm0ERF0dYRUlBBGvpg=="
+          "hash": "rI1KT6N1Bg/kreT6j9YQ0w=="
         }
       },
       "is_incremental": false,
@@ -2322,7 +2322,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.html",
-          "hash": "/HCpyZNqcwhOhkpvg8mJjg=="
+          "hash": "4VGzAdE8UsAImMC+wF+TLA=="
         }
       },
       "is_incremental": false,
@@ -2334,7 +2334,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.AccountConfig.html",
-          "hash": "nqohMFrIyekvMh5uxXXMVg=="
+          "hash": "DRAbGQK06qi7qyTQsW739A=="
         }
       },
       "is_incremental": false,
@@ -2346,7 +2346,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.AchievementConfig.html",
-          "hash": "+U+mQ9cKM87pW4BZnpgHJQ=="
+          "hash": "xSO9zHyaZIqY7sLTYZ2esg=="
         }
       },
       "is_incremental": false,
@@ -2358,7 +2358,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorClaimConfig.html",
-          "hash": "60cyGBM6PZMZaRbxcev8Rg=="
+          "hash": "Tlm+8hMbm10/pJSwGZk8UA=="
         }
       },
       "is_incremental": false,
@@ -2370,7 +2370,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorConfig.html",
-          "hash": "oc7tdzGwjIN3oCNWvO70DQ=="
+          "hash": "VkoVF3R28yC1/Igbyf5VhQ=="
         }
       },
       "is_incremental": false,
@@ -2382,7 +2382,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorDataConfig.html",
-          "hash": "GxSpnbIChbC/Jdcnewz39w=="
+          "hash": "YGPgAHl5GUeP6em2KFhTaQ=="
         }
       },
       "is_incremental": false,
@@ -2394,7 +2394,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorRelationshipConfig.html",
-          "hash": "YwtJipFrl5gL4eRHqARhJA=="
+          "hash": "dLS1LGwDYFym/zmYNF4fAA=="
         }
       },
       "is_incremental": false,
@@ -2406,7 +2406,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorRelationshipRequestConfig.html",
-          "hash": "dwn0gBOoS0WXkUyi7LokWg=="
+          "hash": "MG9JEE3JXnhB2rKBKFIbMg=="
         }
       },
       "is_incremental": false,
@@ -2418,7 +2418,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorRoleConfig.html",
-          "hash": "k/r7qeAHPokttguuAvNaww=="
+          "hash": "0UZiu6O/ScJ6LJCGfhgwxQ=="
         }
       },
       "is_incremental": false,
@@ -2430,7 +2430,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.EvaluationConfig.html",
-          "hash": "q4+s1tv1/5RyxBdiPg+5JQ=="
+          "hash": "7msdudN30cgv+vsEgC248g=="
         }
       },
       "is_incremental": false,
@@ -2442,7 +2442,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.EvaluationCriteriaConfig.html",
-          "hash": "2GU+OvJOBrB10TWvqrFm2A=="
+          "hash": "Pw64BHWPwfsF2vZiJTi1tA=="
         }
       },
       "is_incremental": false,
@@ -2454,7 +2454,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.EvaluationDataConfig.html",
-          "hash": "Ls95WzAgcULzQugQMdYXAQ=="
+          "hash": "aymSsKNMja+gEq232sSojA=="
         }
       },
       "is_incremental": false,
@@ -2466,7 +2466,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.GameConfig.html",
-          "hash": "78kwW4DArqkSP/ECeX42Tw=="
+          "hash": "UOH84udTM6TNgLjwOwQfHA=="
         }
       },
       "is_incremental": false,
@@ -2478,7 +2478,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.GroupConfig.html",
-          "hash": "JCfBGe4OxSvKCQgpWp7wug=="
+          "hash": "7bzwxe3Knv/1bZnepi/JRQ=="
         }
       },
       "is_incremental": false,
@@ -2490,7 +2490,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.LeaderboardConfig.html",
-          "hash": "8UyPTwb6xc72KNTqPS4Nlg=="
+          "hash": "pPAmc1KlO96WHZ6sGlQt/A=="
         }
       },
       "is_incremental": false,
@@ -2502,7 +2502,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.RewardConfig.html",
-          "hash": "wNcaUScVBewYpNfuIaM5Jg=="
+          "hash": "8+AxW3t+3zT+8mnrS6XbEQ=="
         }
       },
       "is_incremental": false,
@@ -2514,7 +2514,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.RoleClaimConfig.html",
-          "hash": "RHY5jaXGe9PUTAb1oMCVVw=="
+          "hash": "HvFMQXYE00OEjUSBbhDnWA=="
         }
       },
       "is_incremental": false,
@@ -2526,7 +2526,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.SentEvaluationNotificationConfig.html",
-          "hash": "CgFU2Zy1l2w8Dr/V3Fzb+g=="
+          "hash": "ErKnNEjq7lWiKT76Je6kOA=="
         }
       },
       "is_incremental": false,
@@ -2538,7 +2538,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.SkillConfig.html",
-          "hash": "XWfE+qAYCGSUPfnaHMDVkw=="
+          "hash": "eRahVfBazQ2zY3vWRjFtew=="
         }
       },
       "is_incremental": false,
@@ -2550,7 +2550,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.UserConfig.html",
-          "hash": "WehO1b45uPKmhQJbBUS46A=="
+          "hash": "a3Kdf6hID1fzgAWhf6Ji9A=="
         }
       },
       "is_incremental": false,
@@ -2562,7 +2562,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.html",
-          "hash": "RK7jTSiSyc8vd4f3fYdnLg=="
+          "hash": "GSzvfLchtTj9q4VMDyW3qg=="
         }
       },
       "is_incremental": false,
@@ -2574,7 +2574,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DbExceptionHandler.html",
-          "hash": "wZPsM2JcpxUAv/CK1rJhaw=="
+          "hash": "mqvYR9wuVAtGl7jdNKcXIQ=="
         }
       },
       "is_incremental": false,
@@ -2586,7 +2586,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRecordException.html",
-          "hash": "Er8/6fSBsDDcCxuc1DWk2A=="
+          "hash": "NBEy7TRCENq/JFYQDJhTIA=="
         }
       },
       "is_incremental": false,
@@ -2598,7 +2598,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.MissingRecordException.html",
-          "hash": "1MxPxid1IBSuY2kWkpnXMQ=="
+          "hash": "84X+5msKKt0mF7FtyKSXRA=="
         }
       },
       "is_incremental": false,
@@ -2610,7 +2610,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.html",
-          "hash": "/YiTEku5Da/bQYUQ7vrOcw=="
+          "hash": "sHdkEGYoZlmDCT+34KrLVw=="
         }
       },
       "is_incremental": false,
@@ -2622,7 +2622,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ActorDataExtensions.html",
-          "hash": "2sLzNkdI2tHYkE7bupGX6A=="
+          "hash": "Oo4pU9gXuY2NZnWqNFe8/A=="
         }
       },
       "is_incremental": false,
@@ -2634,7 +2634,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.html",
-          "hash": "EqgxO7SRrHaacoY6pSe5Nw=="
+          "hash": "uwtfH76nO5qoh4ye3QqSUQ=="
         }
       },
       "is_incremental": false,
@@ -2646,7 +2646,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.DbSetExtensions.html",
-          "hash": "A8C1rkYR+FCd/v4/w5PzyA=="
+          "hash": "LNhuW4cpnV8fSX76FFAGbw=="
         }
       },
       "is_incremental": false,
@@ -2658,7 +2658,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.EvaluationDataExtensions.html",
-          "hash": "meP0vp6jMYGFAvlNaafirg=="
+          "hash": "6CcxULZQ8hWUDz6iTGR4jw=="
         }
       },
       "is_incremental": false,
@@ -2670,7 +2670,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.MatchExtensions.html",
-          "hash": "M/LrgblWC0dbc6PSQzm7zg=="
+          "hash": "xWaB7k2Cm18k0NTsYxKLRA=="
         }
       },
       "is_incremental": false,
@@ -2682,7 +2682,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.SUGARContextSeedExtensions.html",
-          "hash": "Xkq8af7S/3ZVY7FAEFzr/g=="
+          "hash": "m4pb6rkp3oaGK/EEF/monA=="
         }
       },
       "is_incremental": false,
@@ -2694,7 +2694,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.html",
-          "hash": "O7ytHenlvdiAZ4wdrtykbg=="
+          "hash": "3AMkYq3rhSnj65J3hlg5ew=="
         }
       },
       "is_incremental": false,
@@ -2706,7 +2706,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.html",
-          "hash": "b2OlJ/SwhtG3gK+ZsiCgjg=="
+          "hash": "xiq9JtpsAP6wrLLEq0FFVg=="
         }
       },
       "is_incremental": false,
@@ -2718,7 +2718,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.html",
-          "hash": "OF2Marl0/8GlGm8uHk2ihA=="
+          "hash": "bdQ/IANyOVPvycg6Qnq6nQ=="
         }
       },
       "is_incremental": false,
@@ -2730,7 +2730,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.MemberCountAndAllianceCount.html",
-          "hash": "+LtgR7H354hZ+Psgy3WbqA=="
+          "hash": "sI53Y7rEXLWYqoEF6IvwUA=="
         }
       },
       "is_incremental": false,
@@ -2742,7 +2742,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.html",
-          "hash": "KRrLp6Vy8CqQWT1oBGLSUQ=="
+          "hash": "rjEibaSqysRpKcv54PXbzQ=="
         }
       },
       "is_incremental": false,
@@ -2754,7 +2754,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.SUGARContext.html",
-          "hash": "d9NIEg1R6wOMot1Ba//S/A=="
+          "hash": "pO4PKjSjJOAo8JVPE4qpog=="
         }
       },
       "is_incremental": false,
@@ -2766,7 +2766,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory.html",
-          "hash": "gyoEfqNfZd4Gj0s7Ckb4cQ=="
+          "hash": "JsJpgZawYqx7DQ8ni6LhPA=="
         }
       },
       "is_incremental": false,
@@ -2778,7 +2778,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.html",
-          "hash": "80/d16RIUgxS7ByP9CQNnQ=="
+          "hash": "Dv4yr1EmIpQqvwJ8kG1kug=="
         }
       },
       "is_incremental": false,
@@ -2790,7 +2790,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Account.html",
-          "hash": "YZra6px7n4TuRf/S1pIO3A=="
+          "hash": "2o8rRlyS60Ecbk64kUOj9A=="
         }
       },
       "is_incremental": false,
@@ -2802,7 +2802,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.AccountSource.html",
-          "hash": "Gggp4XjAK1/Zn8jUjgDA6Q=="
+          "hash": "OU+TvAncKM3asUmE+YI7aA=="
         }
       },
       "is_incremental": false,
@@ -2814,7 +2814,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Achievement.html",
-          "hash": "zBfvuWm5zaIg1KYO05cEAQ=="
+          "hash": "AcLJvXIeiHHoK1hUVO+0CQ=="
         }
       },
       "is_incremental": false,
@@ -2826,7 +2826,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Actor.html",
-          "hash": "Jj3gs4V2q3NX81RGYWoPbQ=="
+          "hash": "bN541aydw/FImUCUvdawIA=="
         }
       },
       "is_incremental": false,
@@ -2838,7 +2838,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.ActorClaim.html",
-          "hash": "BudZWchN0aG53Vi9++aXCQ=="
+          "hash": "8E+3twmmgSVfZCye8Lwkrg=="
         }
       },
       "is_incremental": false,
@@ -2850,7 +2850,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.ActorData.html",
-          "hash": "7YWPdgpQcO4CifBtqjlH4g=="
+          "hash": "2Rfo+NMfZ50ICByr3Uhd0g=="
         }
       },
       "is_incremental": false,
@@ -2862,7 +2862,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.ActorRelationship.html",
-          "hash": "sX/ys7PaBpBasA4HXA2/+A=="
+          "hash": "RZB4iThX5R+8k9kThkxKZA=="
         }
       },
       "is_incremental": false,
@@ -2874,7 +2874,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.ActorRelationshipRequest.html",
-          "hash": "K9Q2SFEZQ1PqxmqWRdP66w=="
+          "hash": "k7VfYlMBAOOOSPT1u8cq+A=="
         }
       },
       "is_incremental": false,
@@ -2886,7 +2886,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.ActorRole.html",
-          "hash": "nnIZEy++q0YQnUTC1b8Qtw=="
+          "hash": "kSjjWwgtNrcblz7Wxop/hA=="
         }
       },
       "is_incremental": false,
@@ -2898,7 +2898,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Claim.html",
-          "hash": "Vd2rWs9YsgWa9fTtAhBp+Q=="
+          "hash": "um6zohOc7c/T8SNZ3jmFCw=="
         }
       },
       "is_incremental": false,
@@ -2910,7 +2910,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Evaluation.html",
-          "hash": "whKfIXKsNMLO1wFOxGdm9A=="
+          "hash": "+EkTsnEQhg6TbhpXd3tV4w=="
         }
       },
       "is_incremental": false,
@@ -2922,7 +2922,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.EvaluationCriteria.html",
-          "hash": "Exm6rA81AeUO6dyDsk+YOA=="
+          "hash": "L5PbuWN5WzUhfOVPypIvjQ=="
         }
       },
       "is_incremental": false,
@@ -2934,7 +2934,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.EvaluationData.html",
-          "hash": "fZ984g0aRRxIREG1ryCWhg=="
+          "hash": "aNqySzylDTv1ESRJfSCdsQ=="
         }
       },
       "is_incremental": false,
@@ -2946,7 +2946,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Game.html",
-          "hash": "adoaEadwyDkFwwXXaa0QdA=="
+          "hash": "+JCDZEXfUUbrLvy3EnOD2Q=="
         }
       },
       "is_incremental": false,
@@ -2958,7 +2958,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Group.html",
-          "hash": "2B7hlIL97BgcD3M3EjjptQ=="
+          "hash": "vbcNi0sGJqtnKLBPeDp/9w=="
         }
       },
       "is_incremental": false,
@@ -2970,7 +2970,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.html",
-          "hash": "/phNDiQyfAsLb1hkOcYRlQ=="
+          "hash": "f7KLzeI3T7ugrdip1A2XfA=="
         }
       },
       "is_incremental": false,
@@ -2982,7 +2982,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.IModificationHistory.html",
-          "hash": "VmI9oaq5Q9OrDR4gGO6sBg=="
+          "hash": "aTgLQQR/+1AYThLyejkcNg=="
         }
       },
       "is_incremental": false,
@@ -2994,7 +2994,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.IRelationship.html",
-          "hash": "XWtnuAWIZ0v3djY703ndJA=="
+          "hash": "Ap4z3g3jG1A1yjkybmtOUg=="
         }
       },
       "is_incremental": false,
@@ -3006,7 +3006,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.html",
-          "hash": "bDILKoPXLElZBfcj1uIxOw=="
+          "hash": "rhzGiM5Hr/Mp63ildb9iCw=="
         }
       },
       "is_incremental": false,
@@ -3018,7 +3018,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Leaderboard.html",
-          "hash": "vglmV1yrtrtDaJ/uE3Kgng=="
+          "hash": "ZPvn0naQIsaydnaqbLPwmg=="
         }
       },
       "is_incremental": false,
@@ -3030,7 +3030,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Match.html",
-          "hash": "P8DS+bfA1Ofn7AKSe0BXuQ=="
+          "hash": "/YxFTVXIZWuox9WBwos0wA=="
         }
       },
       "is_incremental": false,
@@ -3042,7 +3042,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Reward.html",
-          "hash": "nFKvoL4VkxRYeNEaLe4D0A=="
+          "hash": "wMVriS4HQusZcv1x96vFRg=="
         }
       },
       "is_incremental": false,
@@ -3054,7 +3054,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Role.html",
-          "hash": "CcJf0F3PquFxlvnDDJuB8g=="
+          "hash": "ETqGYG/QKl6CxQO7b1jejA=="
         }
       },
       "is_incremental": false,
@@ -3066,7 +3066,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.RoleClaim.html",
-          "hash": "l7U9HURSn6ekFf/q0cZjeg=="
+          "hash": "CFbU80Lwk/B8ZgeJJV+M/Q=="
         }
       },
       "is_incremental": false,
@@ -3078,7 +3078,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.SentEvaluationNotification.html",
-          "hash": "fNojilow3pBnzKKxT0Ck+Q=="
+          "hash": "PjaydREDrwQuKWeEPpzNlQ=="
         }
       },
       "is_incremental": false,
@@ -3090,7 +3090,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.Skill.html",
-          "hash": "zX8exCuW3u35zVPERvUvng=="
+          "hash": "RDnlani8PihosgCl1J716Q=="
         }
       },
       "is_incremental": false,
@@ -3102,7 +3102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.User.html",
-          "hash": "N1TyOAnYMwEIcUPV35OfbQ=="
+          "hash": "viOz8PARtfA8KxRFJqULQA=="
         }
       },
       "is_incremental": false,
@@ -3114,7 +3114,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.Model.html",
-          "hash": "PdId2aGU9ufvDzidZjQCIA=="
+          "hash": "SKctOn09U9ElkEhWAN8MpQ=="
         }
       },
       "is_incremental": false,
@@ -3126,7 +3126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.AllowAnyAPIVersion.html",
-          "hash": "h59SQztw4nzz6TMj6NHfqA=="
+          "hash": "FAzy7e5mkU7NG/a7OMkI9Q=="
         }
       },
       "is_incremental": false,
@@ -3138,7 +3138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.AllowWithoutSession.html",
-          "hash": "9eYHcqGt8IXujXg02i7MLA=="
+          "hash": "3s2sZ3ueCh1cw7eMz6hHvg=="
         }
       },
       "is_incremental": false,
@@ -3150,7 +3150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.ArgumentsNotNullAttribute.html",
-          "hash": "aj4AA3PY4egsdIDPXmlv9w=="
+          "hash": "GmYnqPjWKlcjgEc4C/6NjA=="
         }
       },
       "is_incremental": false,
@@ -3162,7 +3162,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.html",
-          "hash": "V/JXlahmAt8TfPpAj81wHw=="
+          "hash": "KbDOsObj2x0bdVukPn4ZWg=="
         }
       },
       "is_incremental": false,
@@ -3174,7 +3174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AccountController.html",
-          "hash": "FASNcGoRtfWhxjv01Hxvsw=="
+          "hash": "eY2cgXJC8TFJ3QZcNUlPaA=="
         }
       },
       "is_incremental": false,
@@ -3186,7 +3186,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.html",
-          "hash": "zt1DFqy8prg1RbjB4iDD0w=="
+          "hash": "glYisXWI/RL+ldtpmpwJMA=="
         }
       },
       "is_incremental": false,
@@ -3198,7 +3198,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AchievementsController.html",
-          "hash": "BPqBbwqsnvibJFIGpgydLQ=="
+          "hash": "6MeonxsJiDTp4exJwJmxFw=="
         }
       },
       "is_incremental": false,
@@ -3210,7 +3210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ActorClaimController.html",
-          "hash": "PjQQzIViy6H7YQqTUhIMjA=="
+          "hash": "dVPxdjK06vy+rt1uV3qBhQ=="
         }
       },
       "is_incremental": false,
@@ -3222,7 +3222,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ActorDataController.html",
-          "hash": "ha6k2lM2ahgQPJNAVcz/tg=="
+          "hash": "3BNgCABcoCgJWOQzJV10ng=="
         }
       },
       "is_incremental": false,
@@ -3234,7 +3234,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ActorRoleController.html",
-          "hash": "TRYsSy98pd5rfsFGvO/Geg=="
+          "hash": "siDGUDwTpTlriYaEZMhsLw=="
         }
       },
       "is_incremental": false,
@@ -3246,7 +3246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AllianceController.html",
-          "hash": "xCKIrVcO69KB3laFiI+KBQ=="
+          "hash": "c9J5qYtCCUVRpI3O3dZ6kQ=="
         }
       },
       "is_incremental": false,
@@ -3258,7 +3258,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.EvaluationsController.html",
-          "hash": "m8nWVxhHSRQpiv9bzJj3LA=="
+          "hash": "ui7qMP5plm1UiHSlAkFhRw=="
         }
       },
       "is_incremental": false,
@@ -3270,7 +3270,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GameController.html",
-          "hash": "bJJYwxbbGX1mVnAO3+Kljg=="
+          "hash": "GTMc0ay3X2gHzTH9W+xWVg=="
         }
       },
       "is_incremental": false,
@@ -3282,7 +3282,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GameDataController.html",
-          "hash": "3B5Saz5HaivyBgHgej6hwA=="
+          "hash": "vf3OaonWGUfSlrQdZqBsvA=="
         }
       },
       "is_incremental": false,
@@ -3294,7 +3294,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GroupController.html",
-          "hash": "nikoYimgUn+caANIce6sFw=="
+          "hash": "XUA6pm73UvN1MvLgKZ7hBQ=="
         }
       },
       "is_incremental": false,
@@ -3306,7 +3306,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GroupMemberController.html",
-          "hash": "0cwK1vpR89pQ8ZNkv4OUQw=="
+          "hash": "mgm1GPdkrWiIHpk2sWHB9w=="
         }
       },
       "is_incremental": false,
@@ -3318,7 +3318,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.html",
-          "hash": "lulXzDLH5VpJulSSwYgiMw=="
+          "hash": "hJg/q5azP3gw5ey2ELZv5A=="
         }
       },
       "is_incremental": false,
@@ -3330,7 +3330,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.MatchController.html",
-          "hash": "8AE3ryXM1zwQTHb6Iu9qUQ=="
+          "hash": "c21WTwbpEeXm2y83TTZ4Lw=="
         }
       },
       "is_incremental": false,
@@ -3342,7 +3342,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ResourceController.html",
-          "hash": "o6k1VDQqLhms8g3yqMLMPA=="
+          "hash": "yeJW3FZ9gPoDg2c5wVx0WQ=="
         }
       },
       "is_incremental": false,
@@ -3354,7 +3354,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.RoleClaimController.html",
-          "hash": "dwSeGsZlTyz2ra9g2uctNQ=="
+          "hash": "bo7UoPEI5PbgdPsCXdp9Hw=="
         }
       },
       "is_incremental": false,
@@ -3366,7 +3366,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.RoleController.html",
-          "hash": "pjEo1BugEv4rtA/VSLeeBQ=="
+          "hash": "imNSE5kA5z2MozofhV9AcA=="
         }
       },
       "is_incremental": false,
@@ -3378,7 +3378,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.SessionController.html",
-          "hash": "iEedeS+HjZ3UP6/gk8l0Wg=="
+          "hash": "ZwJrZLqcZExuUSVbh/F1ZQ=="
         }
       },
       "is_incremental": false,
@@ -3390,7 +3390,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.SkillsController.html",
-          "hash": "P3qMLw5T0HJtONK2wwBUwg=="
+          "hash": "jVKiClLH1AvyL3tJK+eBxA=="
         }
       },
       "is_incremental": false,
@@ -3402,7 +3402,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.UserController.html",
-          "hash": "FJFXLi44Jxm6E/Xtb8/P2A=="
+          "hash": "f4EDMqcOgJInv+J6tAqfHA=="
         }
       },
       "is_incremental": false,
@@ -3414,7 +3414,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.html",
-          "hash": "2qwCkjpBrITFZsqlzHGLlQ=="
+          "hash": "UkSzY/UF2NBFKVO+foOJow=="
         }
       },
       "is_incremental": false,
@@ -3426,7 +3426,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.VersionController.html",
-          "hash": "9mwOX7J8HKuIXk8s4wAy4w=="
+          "hash": "TGYu8Q9t0QC6Y0hAJ9kKyw=="
         }
       },
       "is_incremental": false,
@@ -3438,7 +3438,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.html",
-          "hash": "Tjy8R/2ADYuqiJgi9h/19g=="
+          "hash": "J/vgcEVgYxzmkoBBI2i6og=="
         }
       },
       "is_incremental": false,
@@ -3450,7 +3450,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.ClaimNotFoundException.html",
-          "hash": "K/Cr4DD2Sn7jhuPP3FJzLQ=="
+          "hash": "ED2zx6oQlVnnPdOupJma3Q=="
         }
       },
       "is_incremental": false,
@@ -3462,7 +3462,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.IncompatibleAPIVersionException.html",
-          "hash": "b2UuX+vPFG520XY6N0RWdg=="
+          "hash": "929FZmAbQTGaPqDrnrEd0Q=="
         }
       },
       "is_incremental": false,
@@ -3474,7 +3474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.InvalidAccountDetailsException.html",
-          "hash": "n+ommxffyepHQasT1QvmzA=="
+          "hash": "K2xqYGTWJdnBaDR3R5iftQ=="
         }
       },
       "is_incremental": false,
@@ -3486,7 +3486,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.InvalidSessionException.html",
-          "hash": "pJiql1s3IwIkGdRYIdA7yA=="
+          "hash": "ZS5v1hZboqrk57JfJjED4Q=="
         }
       },
       "is_incremental": false,
@@ -3498,7 +3498,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.html",
-          "hash": "FnUD0J/6HToZ4PYei0DX3Q=="
+          "hash": "JGPndffGosF8rqSR25d4Sw=="
         }
       },
       "is_incremental": false,
@@ -3510,7 +3510,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.AccountExtensions.html",
-          "hash": "ZRA3H5BV6Ydhjp+U58FYYg=="
+          "hash": "N388YA2htFFVa6DWscjxKg=="
         }
       },
       "is_incremental": false,
@@ -3522,7 +3522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.AccountSourceExtensions.html",
-          "hash": "dkCpvvoD4bC02VoOvc9HkA=="
+          "hash": "UeQty/IpTU46YjjMM9f2Dg=="
         }
       },
       "is_incremental": false,
@@ -3534,7 +3534,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.AchievementExtensions.html",
-          "hash": "FO+gbAQMVRuo6HTWNrbLbQ=="
+          "hash": "g1vFcvgR7PLzA1y/vtH4cw=="
         }
       },
       "is_incremental": false,
@@ -3546,7 +3546,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorClaimExtensions.html",
-          "hash": "GFygrUcgtr9zetswzzc6NA=="
+          "hash": "xMrug7sIusxikY2oRFTxwA=="
         }
       },
       "is_incremental": false,
@@ -3558,7 +3558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorDataExtensions.html",
-          "hash": "G7647VATqiNXXNCutFj9lw=="
+          "hash": "a+naorRAnBhMGTpMVFYz0Q=="
         }
       },
       "is_incremental": false,
@@ -3570,7 +3570,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorExtensions.html",
-          "hash": "B9PYZyf2gl849PiCohl77w=="
+          "hash": "pffMxtwFX8foQf/jeiOqhg=="
         }
       },
       "is_incremental": false,
@@ -3582,7 +3582,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorRoleExtensions.html",
-          "hash": "EUSLVrdtITnJLF1sT4bzGQ=="
+          "hash": "qFpwaElFVihfTcdndZlJuQ=="
         }
       },
       "is_incremental": false,
@@ -3594,7 +3594,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ClaimExtensions.html",
-          "hash": "mPEmyExELwwtACDjMI3Tbw=="
+          "hash": "v/Y2EGlyNX7lgVscvLAOGg=="
         }
       },
       "is_incremental": false,
@@ -3606,7 +3606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.EvaluationCriteriaExtensions.html",
-          "hash": "b7D8Zs0ZIJ7AckBKrvUrHQ=="
+          "hash": "m6ftP58KZig6djw9Yyd+Ew=="
         }
       },
       "is_incremental": false,
@@ -3618,7 +3618,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.EvaluationDataExtensions.html",
-          "hash": "J9TT2UetewWCmjo4JW7Stw=="
+          "hash": "4yiFOOakiKw9/A5vizQTNg=="
         }
       },
       "is_incremental": false,
@@ -3630,7 +3630,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.GameDataExtensions.html",
-          "hash": "+iBG1lE5SPtgtGg7Al6e3w=="
+          "hash": "bmiWjgtYItLdSfNNL5L5NQ=="
         }
       },
       "is_incremental": false,
@@ -3642,7 +3642,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.GameExtensions.html",
-          "hash": "/K8yGUE3vqHYRw7svB/i3g=="
+          "hash": "WhjbkMeqkBjbD2cMHZ78MQ=="
         }
       },
       "is_incremental": false,
@@ -3654,7 +3654,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.GroupExtensions.html",
-          "hash": "XSqNlTVA6jRxUU+O7AvpmA=="
+          "hash": "BjxgLIhZKai04inFyociug=="
         }
       },
       "is_incremental": false,
@@ -3666,7 +3666,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.html",
-          "hash": "QH552XdJESIL+B73bF+YHQ=="
+          "hash": "2OtefPPiTT/2wOvdqPz2uQ=="
         }
       },
       "is_incremental": false,
@@ -3678,7 +3678,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.html",
-          "hash": "YuiQGCjfD9bCGdnZNQYllQ=="
+          "hash": "9FLKxPITT61jGpzZ7lMPVA=="
         }
       },
       "is_incremental": false,
@@ -3690,7 +3690,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.MatchExtensions.html",
-          "hash": "VPoIaSdDxX/DHKGQRfwFZg=="
+          "hash": "aWYGugeIA5Kxrk2KxErKEg=="
         }
       },
       "is_incremental": false,
@@ -3702,7 +3702,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RelationshipExtensions.html",
-          "hash": "c69406P5M/W38Oeg8ALThQ=="
+          "hash": "4+5Ol2lwHP5Djzz7vvk6nQ=="
         }
       },
       "is_incremental": false,
@@ -3714,7 +3714,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ResourceExtensions.html",
-          "hash": "fkDaWEccqjhJTLGGNUT7Pg=="
+          "hash": "yFh3hOVEKeoWd/M4BgQNZQ=="
         }
       },
       "is_incremental": false,
@@ -3726,7 +3726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RewardExtensions.html",
-          "hash": "lISOK8cqgptTOFd4i/2Hmw=="
+          "hash": "hcZAwvxJC2KkcyI0U7hwjA=="
         }
       },
       "is_incremental": false,
@@ -3738,7 +3738,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RoleClaimExtensions.html",
-          "hash": "s5b7WTjBFZGiZatjqicM+w=="
+          "hash": "gVR2LaNm9ME1yTMu08gJMw=="
         }
       },
       "is_incremental": false,
@@ -3750,7 +3750,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RoleExtensions.html",
-          "hash": "Y8ZuwUA9nke3GyhuBTsCYw=="
+          "hash": "SDdYlH5uF/DLuOOVeZp5iA=="
         }
       },
       "is_incremental": false,
@@ -3762,7 +3762,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.SkillExtensions.html",
-          "hash": "15qjYSxBz29JvOrPvBxnSw=="
+          "hash": "IwOp4p2Dhgkmy2XB4aMi8A=="
         }
       },
       "is_incremental": false,
@@ -3774,7 +3774,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.UserExtensions.html",
-          "hash": "S524BEa0+G3jWmAtD9yF7Q=="
+          "hash": "Rl6p7VyZom7gXUrxHt5k/w=="
         }
       },
       "is_incremental": false,
@@ -3786,7 +3786,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.html",
-          "hash": "iCRMqegRN2S78YZqGKg1pw=="
+          "hash": "ErIr7wIcIIjkFXEHOTKlqA=="
         }
       },
       "is_incremental": false,
@@ -3798,7 +3798,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.APIVersionFilterFilter.html",
-          "hash": "VQSM7x9/Bjy8AipjDCywXQ=="
+          "hash": "Q6Bzw66wCYAbt+sKeoNxtQ=="
         }
       },
       "is_incremental": false,
@@ -3810,7 +3810,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.ExceptionFilter.html",
-          "hash": "Ba3rQMgamhslZ3E2vZRlOg=="
+          "hash": "EwD1+g8weZl/W4jPY7cJRA=="
         }
       },
       "is_incremental": false,
@@ -3822,7 +3822,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.ModelValidationFilter.html",
-          "hash": "czt+h53cEvSjSI18nu1qRg=="
+          "hash": "OiDvP8z7dp7kyKqq+9h0zg=="
         }
       },
       "is_incremental": false,
@@ -3834,7 +3834,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.SessionFilter.html",
-          "hash": "H0zARrMMcdluL+Blm6E0kg=="
+          "hash": "nby7S+/xmZFP+jv7oc4kVg=="
         }
       },
       "is_incremental": false,
@@ -3846,7 +3846,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.WrapResponseFilter.html",
-          "hash": "XDEZZh5l0axP5zsG75IPrw=="
+          "hash": "U8CK4AuxR7IWmQ/JnGm5wQ=="
         }
       },
       "is_incremental": false,
@@ -3858,7 +3858,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.html",
-          "hash": "y2j7dhFFIOtoDYMS5z9SPA=="
+          "hash": "pjeqJYfql5/rhMF7+ue3Ow=="
         }
       },
       "is_incremental": false,
@@ -3870,7 +3870,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Program.html",
-          "hash": "8s/vcJG7LQoJxfRspJHLmw=="
+          "hash": "I42h9M5oK07bmrg5JgypvQ=="
         }
       },
       "is_incremental": false,
@@ -3882,7 +3882,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Startup.html",
-          "hash": "0SSgLBWXT2LPxJB9pEv/LQ=="
+          "hash": "5Qr8A1bkHaf5AEovw6Xd4w=="
         }
       },
       "is_incremental": false,
@@ -3894,7 +3894,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.html",
-          "hash": "l4t1BTV7ux6rSa9Dy+az2A=="
+          "hash": "tuf9/Lxke0ZeiaZefjsjZQ=="
         }
       },
       "is_incremental": false,
@@ -3918,7 +3918,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/account.html",
-          "hash": "jwZpCBNQNMKhG+LnfaesCA=="
+          "hash": "2cJE3VwCFkrbNM/fZWcd1Q=="
         }
       },
       "is_incremental": false,
@@ -3930,7 +3930,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/criteria.html",
-          "hash": "EfEBVe62sK746awXoJuFnQ=="
+          "hash": "JJBKBlpKkpyA8FhSmM5yVA=="
         }
       },
       "is_incremental": false,
@@ -3942,7 +3942,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/entityModel.html",
-          "hash": "L4x1Z9lEJCT+eUS+5KrZDQ=="
+          "hash": "e/OwzbSHARWPEUSo3R4p+Q=="
         }
       },
       "is_incremental": false,
@@ -3954,7 +3954,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/index.html",
-          "hash": "oHBLxO3WWrWS6QDTZjoFYA=="
+          "hash": "xpPKsuUZ0hxRiUE87/wzvg=="
         }
       },
       "is_incremental": false,
@@ -3966,7 +3966,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/leaderboardstandings.html",
-          "hash": "383PTdf/6DtmBmaqAh/5DQ=="
+          "hash": "sAjhGBZsw5b1sUYM+0E5YA=="
         }
       },
       "is_incremental": false,
@@ -3978,7 +3978,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/rewards.html",
-          "hash": "hkFbRwrws8jx4KI1lOgK9Q=="
+          "hash": "o1jF10gXMVnsUSMl4gChhQ=="
         }
       },
       "is_incremental": false,
@@ -3990,7 +3990,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/session.html",
-          "hash": "3czcQX9G2ovOqto14jUfdA=="
+          "hash": "9FFfBdxZX2hvOdLavAVg9g=="
         }
       },
       "is_incremental": false,
@@ -4014,7 +4014,7 @@
       "output": {
         ".html": {
           "relative_path": "demo/index.html",
-          "hash": "gf2MTal8D5Kg9eaEyQ/hZw=="
+          "hash": "OnhQZml1ssy6p8bp++OAQQ=="
         }
       },
       "is_incremental": false,
@@ -4038,7 +4038,7 @@
       "output": {
         ".html": {
           "relative_path": "development/admin.html",
-          "hash": "0VT+jfB7oFRx2VU8Rh9dmw=="
+          "hash": "vMF8i1qCMoWZT0CECdkG2Q=="
         }
       },
       "is_incremental": false,
@@ -4050,7 +4050,7 @@
       "output": {
         ".html": {
           "relative_path": "development/docker.html",
-          "hash": "2HETOnZEqDL5FUqH0TAD4Q=="
+          "hash": "xkGn/y0byVGIYcR20tcdXA=="
         }
       },
       "is_incremental": false,
@@ -4062,7 +4062,7 @@
       "output": {
         ".html": {
           "relative_path": "development/documentation.html",
-          "hash": "azDT5zZKMB5ea/Vp2C3QKw=="
+          "hash": "0wsxa1iOyFBcCz3fNj22Sw=="
         }
       },
       "is_incremental": false,
@@ -4070,15 +4070,14 @@
     },
     {
       "log_codes": [
-        "InvalidFileLink",
-        "UidNotFound"
+        "InvalidFileLink"
       ],
       "type": "Conceptual",
       "source_relative_path": "development/index.md",
       "output": {
         ".html": {
           "relative_path": "development/index.html",
-          "hash": "BtyC/Eb6SuZFPYi7M7Dz4w=="
+          "hash": "rVyL7IewKTzVx5+JUW4alg=="
         }
       },
       "is_incremental": false,
@@ -4102,7 +4101,7 @@
       "output": {
         ".html": {
           "relative_path": "development/versioning.html",
-          "hash": "7ZKr/zy2lYotr21Abn2r7A=="
+          "hash": "2CpFMZhEKs24UIH6AhmREw=="
         }
       },
       "is_incremental": false,
@@ -4114,7 +4113,7 @@
       "output": {
         ".html": {
           "relative_path": "features/achievement.html",
-          "hash": "MDNRKFBLMtB43N6bMgyAeg=="
+          "hash": "bibPhEe5RKcSTpYvNmqfWA=="
         }
       },
       "is_incremental": false,
@@ -4126,31 +4125,7 @@
       "output": {
         ".html": {
           "relative_path": "features/actor.html",
-          "hash": "+WfjE1JoXFvIfO7MWS3shg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "features/admin/Login.md",
-      "output": {
-        ".html": {
-          "relative_path": "features/admin/Login.html",
-          "hash": "bsNTi3EKaqPOjkvL59nomw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "features/admin/SiteMap.md",
-      "output": {
-        ".html": {
-          "relative_path": "features/admin/SiteMap.html",
-          "hash": "C7G5ni2lAat9/YTnHHZwEw=="
+          "hash": "PVhI8vrV2Asf8eAUdxOhEQ=="
         }
       },
       "is_incremental": false,
@@ -4162,7 +4137,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/achievement.html",
-          "hash": "k3UeQZedEPPc6oCTkLDlTg=="
+          "hash": "Mj7bnyCJxaOHo+lv7r2g7g=="
         }
       },
       "is_incremental": false,
@@ -4177,7 +4152,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/game.html",
-          "hash": "O/481WnogtaJqzkyhsLRCw=="
+          "hash": "T4JjWFAAjLci6B3Vtk/AsQ=="
         }
       },
       "is_incremental": false,
@@ -4189,7 +4164,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/group.html",
-          "hash": "pbKDYnMJ78PeG3ZPfYoDYw=="
+          "hash": "jfrAR9Z2F0h9LVprD+n3LA=="
         }
       },
       "is_incremental": false,
@@ -4201,7 +4176,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/index.html",
-          "hash": "BcKV6KWT4WlxOhzXEES/IA=="
+          "hash": "UmzvYIPYqJSAtr8GlDD62w=="
         }
       },
       "is_incremental": false,
@@ -4213,7 +4188,19 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/leaderboard.html",
-          "hash": "HJS5o8+UgPnPQRGWvsdTGQ=="
+          "hash": "4VA8i03kOK0I8JIGg/ycUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "features/admin/login.md",
+      "output": {
+        ".html": {
+          "relative_path": "features/admin/login.html",
+          "hash": "MVLywV6LmgtS2Weu2nThNA=="
         }
       },
       "is_incremental": false,
@@ -4225,7 +4212,19 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/resource.html",
-          "hash": "Y+BB44XxQm2vj2svU0WlKA=="
+          "hash": "lZ1VfxOfMH+rYsfHiSxRXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "features/admin/siteMap.md",
+      "output": {
+        ".html": {
+          "relative_path": "features/admin/SiteMap.html",
+          "hash": "wpoLG1Z2Xpe5TUdvK/gDYA=="
         }
       },
       "is_incremental": false,
@@ -4237,7 +4236,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/skill.html",
-          "hash": "oi1iVA2bl4dWfEPJ0X4jbQ=="
+          "hash": "/pPzqC4dttfW5M65nSwEmw=="
         }
       },
       "is_incremental": false,
@@ -4249,7 +4248,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/toc.html",
-          "hash": "A5iMakiexQbsdDHtkYq23g=="
+          "hash": "cPgp1PMzTd3us2zJqJ+Huw=="
         }
       },
       "is_incremental": false,
@@ -4261,7 +4260,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/user.html",
-          "hash": "2lBeDdz+9QUG6hQvZNAhKg=="
+          "hash": "Rp3qokF8HYRK5avRxPKmRg=="
         }
       },
       "is_incremental": false,
@@ -4273,7 +4272,7 @@
       "output": {
         ".html": {
           "relative_path": "features/evaluationData.html",
-          "hash": "GONLHbUavOrZlzKbCCsdrA=="
+          "hash": "DZZYEk46v1oVC40lsc1wPA=="
         }
       },
       "is_incremental": false,
@@ -4285,7 +4284,7 @@
       "output": {
         ".html": {
           "relative_path": "features/game.html",
-          "hash": "JqeZ4KUfmcCpjc5grtBFjw=="
+          "hash": "Ayl8nQzJ38gWhx2X+hu7hg=="
         }
       },
       "is_incremental": false,
@@ -4297,22 +4296,19 @@
       "output": {
         ".html": {
           "relative_path": "features/gameData.html",
-          "hash": "fZk2QOD+yR/zZMPSeRmH7g=="
+          "hash": "ONm76AQiX1Nk1PphgXzZNA=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "UidNotFound"
-      ],
       "type": "Conceptual",
       "source_relative_path": "features/group.md",
       "output": {
         ".html": {
           "relative_path": "features/group.html",
-          "hash": "uqEXeS2G8aFMnjeOMp37xQ=="
+          "hash": "voxjf70+jL1O9NxrM9dFtg=="
         }
       },
       "is_incremental": false,
@@ -4324,7 +4320,7 @@
       "output": {
         ".html": {
           "relative_path": "features/index.html",
-          "hash": "dYudllIYsNb5PQCTatYdpQ=="
+          "hash": "Mp7Ks89EOnEaafLk1QFDuA=="
         }
       },
       "is_incremental": false,
@@ -4336,7 +4332,7 @@
       "output": {
         ".html": {
           "relative_path": "features/leaderboard.html",
-          "hash": "nE5B9l5q8YeElqI6YG08JA=="
+          "hash": "050004g/irLQio3762KzfA=="
         }
       },
       "is_incremental": false,
@@ -4348,22 +4344,19 @@
       "output": {
         ".html": {
           "relative_path": "features/match.html",
-          "hash": "6wyB1pO9AqCjHF/FfpvKhA=="
+          "hash": "3kp21y6XTQIImUBiOMaKPw=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "UidNotFound"
-      ],
       "type": "Conceptual",
       "source_relative_path": "features/relationship.md",
       "output": {
         ".html": {
           "relative_path": "features/relationship.html",
-          "hash": "jDngWb41goH3HqFJy+iGZw=="
+          "hash": "68G65Tm+81XHCa8NxHGXBA=="
         }
       },
       "is_incremental": false,
@@ -4375,7 +4368,7 @@
       "output": {
         ".html": {
           "relative_path": "features/resource.html",
-          "hash": "U6CCk7pbFEoM7sFG0qFgFA=="
+          "hash": "z86vVjtqteXmG4r1xosRdw=="
         }
       },
       "is_incremental": false,
@@ -4387,7 +4380,7 @@
       "output": {
         ".html": {
           "relative_path": "features/roadmap.html",
-          "hash": "q6WQDzAJpw/pveCpx+IvXg=="
+          "hash": "+FA+jafGO8tk1CFOQGM6fw=="
         }
       },
       "is_incremental": false,
@@ -4399,7 +4392,7 @@
       "output": {
         ".html": {
           "relative_path": "features/skill.html",
-          "hash": "Uo80rk7r9ASY73qf5j50qg=="
+          "hash": "bhOlZ69sgTm7cS5YV4I2Tg=="
         }
       },
       "is_incremental": false,
@@ -4423,7 +4416,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/accounts.html",
-          "hash": "eAhRo0jrg3kAMrJBoGkhQQ=="
+          "hash": "QGs9FvGRP5GT6isSThBh/Q=="
         }
       },
       "is_incremental": false,
@@ -4435,7 +4428,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/achievements.html",
-          "hash": "UdYNzU8WW0uWmpw1sRKVIA=="
+          "hash": "F3yuhWi/uZJApardYdSTvw=="
         }
       },
       "is_incremental": false,
@@ -4447,7 +4440,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/configuration.html",
-          "hash": "a6QIrHJxJhEoHv4/hjbaCg=="
+          "hash": "XxdEIan1SIzE56xpPIp2Tw=="
         }
       },
       "is_incremental": false,
@@ -4459,7 +4452,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/index.html",
-          "hash": "JgXBvKgxzNVQIxY10cPgOw=="
+          "hash": "C4r3sQyZvkNax++XFDxRpQ=="
         }
       },
       "is_incremental": false,
@@ -4471,7 +4464,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/leaderboards.html",
-          "hash": "nQFXttruHQ6Lx0yR5OPgcA=="
+          "hash": "t+u7U1GtmL8IBb0rPL6NFQ=="
         }
       },
       "is_incremental": false,
@@ -4483,7 +4476,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/sendGameData.html",
-          "hash": "w8B385NmP96lkfbpu1vJdQ=="
+          "hash": "mJM3xwP8FKK3/1hWLAiWMQ=="
         }
       },
       "is_incremental": false,
@@ -4495,7 +4488,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/setup.html",
-          "hash": "LonOUk36tia5ypMeYZ2QuQ=="
+          "hash": "EWK0Uxf9rdadOI+KIIvQDw=="
         }
       },
       "is_incremental": false,
@@ -4519,7 +4512,7 @@
       "output": {
         ".html": {
           "relative_path": "features/user.html",
-          "hash": "PkLTYuIsNRt9a5Ww6yJWIA=="
+          "hash": "PRj9Dgzk8YO1tgq4TwU8Vw=="
         }
       },
       "is_incremental": false,
@@ -4560,10 +4553,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/Games.PNG",
+      "source_relative_path": "images/features/admin.zip",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/Games.PNG"
+          "relative_path": "images/features/admin.zip"
         }
       },
       "is_incremental": false,
@@ -4571,10 +4564,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GamesAchievements.PNG",
+      "source_relative_path": "images/features/admin/Games.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GamesAchievements.PNG"
+          "relative_path": "images/features/admin/Games.png"
         }
       },
       "is_incremental": false,
@@ -4582,10 +4575,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GamesAchievementsCreate.PNG",
+      "source_relative_path": "images/features/admin/GamesAchievements.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GamesAchievementsCreate.PNG"
+          "relative_path": "images/features/admin/GamesAchievements.png"
         }
       },
       "is_incremental": false,
@@ -4593,10 +4586,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GamesActorData.PNG",
+      "source_relative_path": "images/features/admin/GamesAchievementsCreate.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GamesActorData.PNG"
+          "relative_path": "images/features/admin/GamesAchievementsCreate.png"
         }
       },
       "is_incremental": false,
@@ -4604,10 +4597,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GamesCreate.PNG",
+      "source_relative_path": "images/features/admin/GamesActorData.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GamesCreate.PNG"
+          "relative_path": "images/features/admin/GamesActorData.png"
         }
       },
       "is_incremental": false,
@@ -4615,10 +4608,21 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GamesDetails.PNG",
+      "source_relative_path": "images/features/admin/GamesCreate.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GamesDetails.PNG"
+          "relative_path": "images/features/admin/GamesCreate.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/features/admin/GamesDetails.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/features/admin/GamesDetails.png"
         }
       },
       "is_incremental": false,
@@ -4637,10 +4641,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GamesResources.PNG",
+      "source_relative_path": "images/features/admin/GamesResources.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GamesResources.PNG"
+          "relative_path": "images/features/admin/GamesResources.png"
         }
       },
       "is_incremental": false,
@@ -4648,10 +4652,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/Groups.PNG",
+      "source_relative_path": "images/features/admin/Groups.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/Groups.PNG"
+          "relative_path": "images/features/admin/Groups.png"
         }
       },
       "is_incremental": false,
@@ -4659,10 +4663,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GroupsAllianceAdd.PNG",
+      "source_relative_path": "images/features/admin/GroupsAllianceAdd.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GroupsAllianceAdd.PNG"
+          "relative_path": "images/features/admin/GroupsAllianceAdd.png"
         }
       },
       "is_incremental": false,
@@ -4670,10 +4674,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GroupsAlliances.PNG",
+      "source_relative_path": "images/features/admin/GroupsAlliances.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GroupsAlliances.PNG"
+          "relative_path": "images/features/admin/GroupsAlliances.png"
         }
       },
       "is_incremental": false,
@@ -4681,10 +4685,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GroupsCreate.PNG",
+      "source_relative_path": "images/features/admin/GroupsCreate.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GroupsCreate.PNG"
+          "relative_path": "images/features/admin/GroupsCreate.png"
         }
       },
       "is_incremental": false,
@@ -4703,10 +4707,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GroupsMembers.PNG",
+      "source_relative_path": "images/features/admin/GroupsMembers.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GroupsMembers.PNG"
+          "relative_path": "images/features/admin/GroupsMembers.png"
         }
       },
       "is_incremental": false,
@@ -4714,10 +4718,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GroupsMembersAdd.PNG",
+      "source_relative_path": "images/features/admin/GroupsMembersAdd.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GroupsMembersAdd.PNG"
+          "relative_path": "images/features/admin/GroupsMembersAdd.png"
         }
       },
       "is_incremental": false,
@@ -4725,10 +4729,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/GroupsProfile.PNG",
+      "source_relative_path": "images/features/admin/GroupsProfile.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/GroupsProfile.PNG"
+          "relative_path": "images/features/admin/GroupsProfile.png"
         }
       },
       "is_incremental": false,
@@ -4736,10 +4740,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/Home.PNG",
+      "source_relative_path": "images/features/admin/Home.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/Home.PNG"
+          "relative_path": "images/features/admin/Home.png"
         }
       },
       "is_incremental": false,
@@ -4747,10 +4751,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/Leaderboards.PNG",
+      "source_relative_path": "images/features/admin/Leaderboards.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/Leaderboards.PNG"
+          "relative_path": "images/features/admin/Leaderboards.png"
         }
       },
       "is_incremental": false,
@@ -4758,10 +4762,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/LeaderboardsCreate.PNG",
+      "source_relative_path": "images/features/admin/LeaderboardsCreate.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/LeaderboardsCreate.PNG"
+          "relative_path": "images/features/admin/LeaderboardsCreate.png"
         }
       },
       "is_incremental": false,
@@ -4769,10 +4773,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/LeaderboardsList.PNG",
+      "source_relative_path": "images/features/admin/LeaderboardsList.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/LeaderboardsList.PNG"
+          "relative_path": "images/features/admin/LeaderboardsList.png"
         }
       },
       "is_incremental": false,
@@ -4780,10 +4784,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/LeaderboardsShow.PNG",
+      "source_relative_path": "images/features/admin/LeaderboardsShow.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/LeaderboardsShow.PNG"
+          "relative_path": "images/features/admin/LeaderboardsShow.png"
         }
       },
       "is_incremental": false,
@@ -4791,10 +4795,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/Login.PNG",
+      "source_relative_path": "images/features/admin/Login.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/Login.PNG"
+          "relative_path": "images/features/admin/Login.png"
         }
       },
       "is_incremental": false,
@@ -4802,10 +4806,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/Resources.PNG",
+      "source_relative_path": "images/features/admin/Resources.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/Resources.PNG"
+          "relative_path": "images/features/admin/Resources.png"
         }
       },
       "is_incremental": false,
@@ -4813,10 +4817,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/ResourcesActorManage.PNG",
+      "source_relative_path": "images/features/admin/ResourcesActorManage.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/ResourcesActorManage.PNG"
+          "relative_path": "images/features/admin/ResourcesActorManage.png"
         }
       },
       "is_incremental": false,
@@ -4824,10 +4828,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/ResourcesCreate.PNG",
+      "source_relative_path": "images/features/admin/ResourcesCreate.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/ResourcesCreate.PNG"
+          "relative_path": "images/features/admin/ResourcesCreate.png"
         }
       },
       "is_incremental": false,
@@ -4835,10 +4839,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/ResourcesManage.PNG",
+      "source_relative_path": "images/features/admin/ResourcesManage.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/ResourcesManage.PNG"
+          "relative_path": "images/features/admin/ResourcesManage.png"
         }
       },
       "is_incremental": false,
@@ -4857,10 +4861,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/Skills.PNG",
+      "source_relative_path": "images/features/admin/Skills.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/Skills.PNG"
+          "relative_path": "images/features/admin/Skills.png"
         }
       },
       "is_incremental": false,
@@ -4868,10 +4872,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/SkillsCreate.PNG",
+      "source_relative_path": "images/features/admin/SkillsCreate.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/SkillsCreate.PNG"
+          "relative_path": "images/features/admin/SkillsCreate.png"
         }
       },
       "is_incremental": false,
@@ -4879,10 +4883,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/SkillsList.PNG",
+      "source_relative_path": "images/features/admin/SkillsList.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/SkillsList.PNG"
+          "relative_path": "images/features/admin/SkillsList.png"
         }
       },
       "is_incremental": false,
@@ -4890,10 +4894,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/Users.PNG",
+      "source_relative_path": "images/features/admin/Users.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/Users.PNG"
+          "relative_path": "images/features/admin/Users.png"
         }
       },
       "is_incremental": false,
@@ -4901,10 +4905,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/UsersActorData.PNG",
+      "source_relative_path": "images/features/admin/UsersActorData.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/UsersActorData.PNG"
+          "relative_path": "images/features/admin/UsersActorData.png"
         }
       },
       "is_incremental": false,
@@ -4912,10 +4916,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/UsersCreate.PNG",
+      "source_relative_path": "images/features/admin/UsersCreate.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/UsersCreate.PNG"
+          "relative_path": "images/features/admin/UsersCreate.png"
         }
       },
       "is_incremental": false,
@@ -4923,10 +4927,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/UsersDelete.PNG",
+      "source_relative_path": "images/features/admin/UsersDelete.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/UsersDelete.PNG"
+          "relative_path": "images/features/admin/UsersDelete.png"
         }
       },
       "is_incremental": false,
@@ -4934,10 +4938,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/UsersFriends.PNG",
+      "source_relative_path": "images/features/admin/UsersFriends.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/UsersFriends.PNG"
+          "relative_path": "images/features/admin/UsersFriends.png"
         }
       },
       "is_incremental": false,
@@ -4945,10 +4949,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/UsersFriendsAdd.PNG",
+      "source_relative_path": "images/features/admin/UsersFriendsAdd.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/UsersFriendsAdd.PNG"
+          "relative_path": "images/features/admin/UsersFriendsAdd.png"
         }
       },
       "is_incremental": false,
@@ -4956,10 +4960,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/UsersFriendsDelete.PNG",
+      "source_relative_path": "images/features/admin/UsersFriendsDelete.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/UsersFriendsDelete.PNG"
+          "relative_path": "images/features/admin/UsersFriendsDelete.png"
         }
       },
       "is_incremental": false,
@@ -4967,10 +4971,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/UsersGroups.PNG",
+      "source_relative_path": "images/features/admin/UsersGroups.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/UsersGroups.PNG"
+          "relative_path": "images/features/admin/UsersGroups.png"
         }
       },
       "is_incremental": false,
@@ -4978,10 +4982,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/UsersGroupsJoin.PNG",
+      "source_relative_path": "images/features/admin/UsersGroupsJoin.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/UsersGroupsJoin.PNG"
+          "relative_path": "images/features/admin/UsersGroupsJoin.png"
         }
       },
       "is_incremental": false,
@@ -4989,10 +4993,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/features/admin/UsersProfile.PNG",
+      "source_relative_path": "images/features/admin/UsersProfile.png",
       "output": {
         "resource": {
-          "relative_path": "images/features/admin/UsersProfile.PNG"
+          "relative_path": "images/features/admin/UsersProfile.png"
         }
       },
       "is_incremental": false,
@@ -5004,7 +5008,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "TLY3xX5HTal7PUnJRBrB+g=="
+          "hash": "IrEzHy4YOrYsbfaqwmOswg=="
         }
       },
       "is_incremental": false,
@@ -5016,7 +5020,7 @@
       "output": {
         ".html": {
           "relative_path": "restapi/restapi.html",
-          "hash": "7h2zeFMh3H7UTNb69EdFpw=="
+          "hash": "xVynM0jsYj84K5Dk6PuuNg=="
         }
       },
       "is_incremental": false,
@@ -5040,571 +5044,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "MgF3HkEogoCWAOHwsXflrA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html",
-          "hash": "lRFf2B1NlhApKSXoljkXxw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ActorResponseAllowableActions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html",
-          "hash": "NfNBiuWvpUJzhsDm6lnK1g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseAccountInterface.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseAccountInterface.html",
-          "hash": "Cou4CTRI9HV04uQn3Gy0xw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html",
-          "hash": "cyhOg5RqNMR4gv6BS1POow=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.html",
-          "hash": "zD/REXxGVTzer8aL4PIMdA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseGroupMemberInterface.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseGroupMemberInterface.html",
-          "hash": "8WIqPAD7/iIb44iLyj/NzQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseInterface.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseInterface.html",
-          "hash": "un64Kiih7F7KsOsnr1SZdw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html",
-          "hash": "EoKvQ8KWB2Z65wjt+K7RCA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.html",
-          "hash": "NhBrJZE69/kRtXZZNYsjoA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUnityClient-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUnityClient-1.html",
-          "hash": "CRT3ToY9e4FMgSLYaeGlqg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserFriendInterface.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserFriendInterface.html",
-          "hash": "12nLjZy/NPyI9oSoCsczbw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserGroupInterface.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserGroupInterface.html",
-          "hash": "jBrbKCIigBuYaMcrEgeEGA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.html",
-          "hash": "oX5w/ycpg6xBj1ZAOUtuxg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineUtility.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineUtility.html",
-          "hash": "SZTel1Tlngk5pqLCK47wwA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Config.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Config.html",
-          "hash": "ual24/Zsi2x6n92Hzgeqtw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CustomInterface.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CustomInterface.html",
-          "hash": "NXtElTPH8kE9qXvK5qZbWg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.AutoLogIn.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.AutoLogIn.html",
-          "hash": "eqx8trAPNDuKbtqSYTQuCQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeed.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeed.html",
-          "hash": "eq3Ne9g67IldUUP/T65cmg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeedWindow.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeedWindow.html",
-          "hash": "xryxjqKsnUCYXRdKsFGzuQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGame.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGame.html",
-          "hash": "6vbCS3jDOQUP7zR+DQxWfA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGameWindow.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGameWindow.html",
-          "hash": "zq3RbUv1gqLH2WD/2wb10A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.html",
-          "hash": "9OzvLp/kWQXrDpIrg+TrMg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.html",
-          "hash": "/BBLahMEdQL3u5Jg8qWUnA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html",
-          "hash": "5CwzPViqHwlPBbhSdt9dtw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html",
-          "hash": "Q/7H3WiZ225m9s90zbmMng=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GroupMemberUnityClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GroupMemberUnityClient.html",
-          "hash": "u9nUpUILqRmI1Er6EGFYMQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html",
-          "hash": "3dig3510azL8pBOk9PY+bQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html",
-          "hash": "3LR+x5oDI8eK3Ok1Y41wcQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html",
-          "hash": "Kjar1Aa3VmMDiV1KBRAc4g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResponseHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResponseHandler.html",
-          "hash": "CkceFfbZe6dyox/halnv1w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html",
-          "hash": "urgqV7cbYuVkWNWl6QY3KA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARUnityManager.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARUnityManager.html",
-          "hash": "8LYU/hBb7r9XBjn4LwecwQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserFriendUnityClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserFriendUnityClient.html",
-          "hash": "mCSHxUpbU4Ey6jsj4aWNjQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserGroupUnityClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserGroupUnityClient.html",
-          "hash": "U7WTzmY+y6f5iiBgUGs0Tg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.html",
-          "hash": "zphb2ExZMrMoLXhEsUf04w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/api/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/api/index.html",
-          "hash": "wSb9XnFP/j2RtMIqMfjQ9A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/development/documentation.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/development/documentation.html",
-          "hash": "Xhr+RneuLMIwuFCLas7qTw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/development/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/development/index.html",
-          "hash": "N/P3YDrDg1VP1tcLLDVyhQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/index.html",
-          "hash": "YRW0H8M7JG1lERpe+Fp+dQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/pdf/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/pdf/index.html",
-          "hash": "GTa3tkX/p69s9abU08IWIA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "unity-client/pdf/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/pdf/toc.html",
-          "hash": "9X57Mnz2fAkVR85SsXrBiQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "unity-client/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/toc.html",
-          "hash": "o2qwCCzWhX4go5FPKQU8/w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/tutorials/build-instructions.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/tutorials/build-instructions.html",
-          "hash": "XrlNu9JJc5jry7NUoq295w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/tutorials/client-prefabs.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/tutorials/client-prefabs.html",
-          "hash": "ZZXANLZU9ogQPCAoprlx1A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/tutorials/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/tutorials/index.html",
-          "hash": "izGH+ZOSlL2SwEoCCLV9Hg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/tutorials/quick-start.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/tutorials/quick-start.html",
-          "hash": "HLKEcmjLfpDHUo+UJJYihQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/tutorials/seeding.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/tutorials/seeding.html",
-          "hash": "+Ulzgqnvh6JCOIU1Giu9PQ=="
+          "hash": "53NXM6H+gGcwTYg2eqBwlA=="
         }
       },
       "is_incremental": false,
@@ -5614,8 +5054,7 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because last build info is missing.",
+        "can_incremental": true,
         "incrementalPhase": "build"
       },
       "processors": {
@@ -5624,22 +5063,22 @@
           "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }
