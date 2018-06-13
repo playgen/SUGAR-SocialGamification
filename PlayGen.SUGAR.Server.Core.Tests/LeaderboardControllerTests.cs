@@ -706,7 +706,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         public void GetLeaderboardFriendFilterAccuracyTest(int userIndex)
         {
             // Arrange
-			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
+			var key = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{userIndex}";
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Lowest, key);
 	        CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId, true);
 
