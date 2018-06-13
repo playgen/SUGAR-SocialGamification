@@ -119,7 +119,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, value);
 			
 			var evaluationDataController = new EvaluationDataController(new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].EvaluationDataCategory);
-			evaluationDataController.Add(gameDatas.ToArray());
+			evaluationDataController.Add(gameDatas);
 		}
 
 		public static void CompleteGenericAchievement(Evaluation evaluation, int actorId)
@@ -127,7 +127,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var gameDatas = ComposeAchievementGameDatas(actorId, evaluation, "100");
 
 			var evaluationDataController = new EvaluationDataController(new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, evaluation.EvaluationCriterias[0].EvaluationDataCategory);
-			evaluationDataController.Add(gameDatas.ToArray());
+			evaluationDataController.Add(gameDatas);
 		}
 
 		public static Evaluation CreateAndCompleteGenericAchievement(string key, int actorId, int gameId)

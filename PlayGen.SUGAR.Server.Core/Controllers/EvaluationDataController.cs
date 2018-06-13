@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Exceptions;
@@ -30,38 +30,16 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_contextFactory = contextFactory;
 		}
 
-		public void Add(EvaluationData[] datas)
+		public void Add(List<EvaluationData> datas)
 		{
-			var dataList = new List<EvaluationData>();
-			var i = 0;
-			var chunkSize = 1000;
+			datas.ForEach(ValidateData);
 
-			var uniqueAddedData = new Dictionary<string, EvaluationData>();
+            _evaluationDataDbController.Create(datas);
 			
-			do
-			{
-				var newData = datas[i];
-				ValidateData(newData);
-				dataList.Add(newData);
-				uniqueAddedData[$"{newData.GameId}_{newData.Key}_{newData.Category}"] = newData;
+			datas.ForEach(d => EvaluationDataAddedEvent?.Invoke(d));
 
-				if (dataList.Count >= chunkSize || i == datas.Length - 1)
-				{
-					_evaluationDataDbController.Create(dataList);
-					dataList.Clear();
-				}
-
-				i++;
-
-			} while (dataList.Count > 0 && i < datas.Length);
-
-			foreach (var addedData in uniqueAddedData.Values)
-			{
-				EvaluationDataAddedEvent?.Invoke(addedData);
-			}
-
-			_logger.LogInformation($"Added: {datas.Length} Evaluation Datas.");
-		}
+			_logger.LogInformation($"Added: {datas.Count} Evaluation Datas.");
+        }
 
 		public EvaluationData Add(EvaluationData newData)
 		{
@@ -314,7 +292,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			if (data.Category != _category)
 			{
 				throw new InvalidDataException(
-					$"Cannot save data with category: {data.Category} with controller for mismatched category: {_category}");
+					$"Cannot save datas with category: {data.Category} with controller for mismatched category: {_category}");
 			}
 
 			if (!IsValid(data, out var failure))
