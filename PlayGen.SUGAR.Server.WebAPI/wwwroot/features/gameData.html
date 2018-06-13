@@ -84,11 +84,11 @@
 <li>Example - A user collecting 10 gold, a consumable item within the game. </li>
 </ul>
 </li>
-<li>Achievements - Stored completion of all <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a> for an achievement.<ul>
+<li>Achievements - Stored completion of all &lt;xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest&gt; for an achievement.<ul>
 <li>Example - A user meeting the criteria for the achievement &quot;Score 10,000 points&quot; in a game.</li>
 </ul>
 </li>
-<li>Skills - Stored completion of all <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a> for an skill.<ul>
+<li>Skills - Stored completion of all &lt;xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest&gt; for an skill.<ul>
 <li>Example - A user meeting the criteria for the &quot;Social&quot; skill in a game.</li>
 </ul>
 </li>
@@ -96,20 +96,20 @@
 <h2 id="api">API</h2>
 <ul>
 <li>Client<ul>
-<li><a class="xref" href="../api/PlayGen.SUGAR.Client.GameDataClient.html">GameDataClient</a></li>
+<li>&lt;xref:PlayGen.SUGAR.Client.GameDataClient&gt;</li>
 </ul>
 </li>
 <li>Contracts<ul>
-<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationDataRequest.html">EvaluationDataRequest</a></li>
-<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a></li>
-<li><a class="xref" href="../api/PlayGen.SUGAR.Common.CriteriaQueryType.html">CriteriaQueryType</a></li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationDataRequest&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationDataResponse&gt;</li>
+<li>&lt;xref:PlayGen.SUGAR.Common.CriteriaQueryType&gt;</li>
 </ul>
 </li>
 </ul>
 <h2 id="examples">Examples</h2>
 <ul>
 <li><p>Submitting custom GameData</p>
-<p>  Custom GameData is submitted using the <a class="xref" href="../api/PlayGen.SUGAR.Client.GameDataClient.html">GameDataClient</a>&#39;s Add function with a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationDataRequest.html">EvaluationDataRequest</a> as the parameter. This explains how to track the number of dragon eggs hatched by the user, specifying &quot;EggHatched&quot; as the key.</p>
+<p>  Custom GameData is submitted using the &lt;xref:PlayGen.SUGAR.Client.GameDataClient&gt;&#39;s Add function with a &lt;xref:PlayGen.SUGAR.Contracts.EvaluationDataRequest&gt; as the parameter. This explains how to track the number of dragon eggs hatched by the user, specifying &quot;EggHatched&quot; as the key.</p>
 </li>
 </ul>
 <pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
@@ -137,7 +137,7 @@
         }
 </code></pre><ul>
 <li><p>Querying for GameData</p>
-<p>  GameData is retreived using the <a class="xref" href="../api/PlayGen.SUGAR.Client.GameDataClient.html">GameDataClient</a>&#39;s Get function with the ActorId and GameId you want to query as parameters. The parameters also takes a list of keys you want to find entries for in gameData. This example shows how to retrieve the user&#39;s &quot;EggHatched&quot; <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html">EvaluationDataResponse</a> objects and count them.</p>
+<p>  GameData is retreived using the &lt;xref:PlayGen.SUGAR.Client.GameDataClient&gt;&#39;s Get function with the ActorId and GameId you want to query as parameters. The parameters also takes a list of keys you want to find entries for in gameData. This example shows how to retrieve the user&#39;s &quot;EggHatched&quot; &lt;xref:PlayGen.SUGAR.Contracts.EvaluationDataResponse&gt; objects and count them.</p>
 </li>
 </ul>
 <pre><code class="lang-cs">        private long GetEggsHatched()
