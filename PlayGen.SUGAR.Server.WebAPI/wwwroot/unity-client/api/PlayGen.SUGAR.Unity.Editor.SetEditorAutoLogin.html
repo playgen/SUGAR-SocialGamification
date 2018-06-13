@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SetEditorAutoLogin
    | SUGAR ">
-    <meta name="generator" content="docfx 2.35.4.0">
+    <meta name="generator" content="docfx 2.28.3.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     <meta property="docfx:rel" content="../../">
     
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
+  <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
       <header>
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
@@ -55,9 +55,7 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
-          </div>
+          <div class="sr-items"></div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -83,11 +81,36 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">SetEditorAutoLogin</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Unity.Editor.html">PlayGen.SUGAR.Unity.Editor</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Unity.Editor.dll</h6>
   <h5 id="PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class SetEditorAutoLogin : object</code></pre>
+    <pre><code class="lang-csharp hljs">[InitializeOnLoad]
+public static class SetEditorAutoLogin</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
@@ -99,7 +122,8 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void SetAutoLogIn()</code></pre>
+    <pre><code class="lang-csharp hljs">[MenuItem(&quot;Tools/SUGAR/Set Auto Log-in Values&quot;)]
+public static void SetAutoLogIn()</code></pre>
   </div>
 </article>
           </div>

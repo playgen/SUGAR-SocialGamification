@@ -1133,7 +1133,571 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "RmDrV7KnkDQBGm2AtGtbMw=="
+          "hash": "w2+MB6q+roXWaTcdwdRp2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html",
+          "hash": "Z5wl04PoJSUeB+3MLgosjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ActorResponseAllowableActions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html",
+          "hash": "eAZn4jVdy1IXshktU/Glww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseAccountInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseAccountInterface.html",
+          "hash": "1A6EGiZrWIb8dSSNqCJZOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html",
+          "hash": "v5f/2a05/sQvLUdOcYrGdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.html",
+          "hash": "NWHCQTw/yBnd579jaKK1UQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseGroupMemberInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseGroupMemberInterface.html",
+          "hash": "mZsrlrnXTF/6ukEqeYCC4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseInterface.html",
+          "hash": "0oLRMgrE2WO3Anmv9iCQ8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html",
+          "hash": "sg1my1RjnL9jsJjhYn7CaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.html",
+          "hash": "081W1yUNxnLF9b0V9+oyCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUnityClient-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUnityClient-1.html",
+          "hash": "mu7DvLdCnZxW4xv1uQtCTQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserFriendInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserFriendInterface.html",
+          "hash": "Us5xzwZwYL8Rv85j1hPI4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserGroupInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserGroupInterface.html",
+          "hash": "32YKL6cLQdhH37n5cNBqVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.html",
+          "hash": "hvLs3a9Om65FcNoor+qumA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineUtility.html",
+          "hash": "4lmofDcxLitZDY8/47PCiA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Config.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Config.html",
+          "hash": "eItnpWEimNpyikEOLcmZ2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CustomInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CustomInterface.html",
+          "hash": "M9+ezMKK6h7g4GpZbAHprw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.AutoLogIn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.AutoLogIn.html",
+          "hash": "EbXQ9qbQLTpGTReMUYFWBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeed.html",
+          "hash": "BzzldgGwMwlMveByE+GZkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeedWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeedWindow.html",
+          "hash": "A/VVPlC9SQgSLrhWJYWSXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGame.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGame.html",
+          "hash": "NIbo5F+qTHRkkRBVoTlc9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGameWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGameWindow.html",
+          "hash": "iGv9R6+pqLSMiJJXJ0ICeg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.html",
+          "hash": "GnsKvLynV2ppP/BP7sek0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.html",
+          "hash": "6Iym+TbPjHLHw+XUHKafAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html",
+          "hash": "TiCXrNiUsLlZn7A4iBR/TQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html",
+          "hash": "eyf1JGVIux/6LFWhNKAwcA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GroupMemberUnityClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GroupMemberUnityClient.html",
+          "hash": "k9eYJGgC+KdofLFxnat/Bg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html",
+          "hash": "T22RwnUsxBnsBEmw9F59pw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html",
+          "hash": "Qc033NRXX22NYM/IWa5bQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html",
+          "hash": "W+NPXbAECq4cmk7r3ij6ww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResponseHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResponseHandler.html",
+          "hash": "a93to8ImBXnYZHDOMDKeVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html",
+          "hash": "EwP6gk53+vvMl/S4SjBEvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARUnityManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARUnityManager.html",
+          "hash": "PB7cwdyJZUj82OGD6zSuyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserFriendUnityClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserFriendUnityClient.html",
+          "hash": "fJG5q4Y4QkbL0l9x4G3WNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserGroupUnityClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserGroupUnityClient.html",
+          "hash": "xbneNQ3CvTE0a/JVutJh0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.html",
+          "hash": "GsBLPIgjT1Otv50hdjgSsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/index.html",
+          "hash": "TOi4jMsM3vVxkK8Ngi11+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/development/documentation.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/development/documentation.html",
+          "hash": "UMnE53RA1tubBkQPXzBsfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/development/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/development/index.html",
+          "hash": "/akZGl9PsEwzYoTXIBUgnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/index.html",
+          "hash": "tMdoPVm+J+7fO5vY4S75iQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/pdf/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/pdf/index.html",
+          "hash": "extEMNj+98AJCP1Jsxayqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "unity-client/pdf/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/pdf/toc.html",
+          "hash": "9X57Mnz2fAkVR85SsXrBiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "unity-client/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/toc.html",
+          "hash": "o2qwCCzWhX4go5FPKQU8/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/tutorials/build-instructions.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/tutorials/build-instructions.html",
+          "hash": "8Klc0F4mgzt8k4CdxQ4/AA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/tutorials/client-prefabs.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/tutorials/client-prefabs.html",
+          "hash": "IYgSQTf2pGE2IEXmwJb1Vg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/tutorials/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/tutorials/index.html",
+          "hash": "GugInMxmA68kHZ6FzEtZ3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/tutorials/quick-start.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/tutorials/quick-start.html",
+          "hash": "AmBJMGG4LQqSyPaDVPs4kQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/tutorials/seeding.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/tutorials/seeding.html",
+          "hash": "wPInmV0JMsDCoVH/hZQ6yA=="
         }
       },
       "is_incremental": false,
@@ -1143,28 +1707,32 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because last build info is missing.",
+        "can_incremental": true,
         "incrementalPhase": "build"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor ManagedReferenceDocumentProcessor disable incremental build because last build doesn't contain version .",
           "incrementalPhase": "build"
         },
         "RestApiDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }
