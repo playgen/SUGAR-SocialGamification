@@ -5,12 +5,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 	public class SUGARContextFactory
 	{
 		public readonly string ConnectionString;
-		private readonly DbContextOptions _options;
 
 		public SUGARContextFactory(string connectionString = null)
 		{
 			ConnectionString = connectionString;
-			_options = ApplyOptions(new DbContextOptionsBuilder()).Options;
 		}
 
 		public SUGARContext Create()

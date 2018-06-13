@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			{
 				var claimList = claims ?? new List<Claim>();
 				context.Claims.AddRange(claimList);
-				SaveChanges(context);
+				context.SaveChanges();
 
 				return claimList;
 			}

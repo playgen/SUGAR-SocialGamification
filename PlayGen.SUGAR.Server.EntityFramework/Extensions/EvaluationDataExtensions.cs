@@ -68,16 +68,5 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			end = end == default(DateTime) ? DateTime.Now : end;
 			return evaluationDataQueryable.Where(data => data.DateModified >= start && data.DateModified <= end);
 		}
-
-		public static List<EvaluationData> FilterBy(this IQueryable<EvaluationData> evaluationDataQueryable, int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return evaluationDataQueryable
-				.FilterByGameId(gameId)
-				.FilterByActorId(actorId)
-				.FilterByKey(key)
-				.FilterByDataType(evaluationDataType)
-				.FilterByDateTimeRange(start, end)
-				.ToList();
-		}
 	}
 }

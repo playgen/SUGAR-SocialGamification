@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.Model;
 using PlayGen.SUGAR.Server.Model.Interfaces;
 
@@ -13,6 +14,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 	public class SUGARContext : DbContext
 	{
 		private readonly bool _isSaveDisabled;
+		private readonly DbExceptionHandler _exceptionHandler = new DbExceptionHandler();
 
 		public SUGARContext(DbContextOptions<SUGARContext> options, bool disableSave = false) : base(options)
 		{
@@ -66,9 +68,15 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 
 		public override int SaveChanges()
 		{
-			UpdateModificationHistory();
-
-			return _isSaveDisabled ? 0 : base.SaveChanges();
+			try
+			{
+				UpdateModificationHistory();
+				return _isSaveDisabled ? 0 : base.SaveChanges();
+            }
+			catch (Exception exception)
+			{
+				throw _exceptionHandler.Process(exception);
+			}
 		}
 
 		/// <summary>

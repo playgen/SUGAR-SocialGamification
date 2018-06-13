@@ -17,6 +17,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController;
 		private readonly EvaluationDataCategory _category;
+		private readonly SUGARContextFactory _contextFactory;
 
 		public EvaluationDataController(
 			ILogger<EvaluationDataController> logger,
@@ -26,6 +27,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_logger = logger;
 			_category = category;
 			_evaluationDataDbController = new EntityFramework.Controllers.EvaluationDataController(contextFactory, category);
+			_contextFactory = contextFactory;
 		}
 
 		public void Add(EvaluationData[] datas)
@@ -35,7 +37,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var chunkSize = 1000;
 
 			var uniqueAddedData = new Dictionary<string, EvaluationData>();
-
+			
 			do
 			{
 				var newData = datas[i];

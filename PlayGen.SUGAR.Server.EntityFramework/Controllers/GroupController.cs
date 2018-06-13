@@ -50,15 +50,24 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public Group Create(Group group)
+		public Group Create(Group group, SUGARContext context = null)
 		{
-			using (var context = ContextFactory.Create())
+			var didCreateContext = false;
+			if(context == null)
 			{
-				context.Groups.Add(group);
-				SaveChanges(context);
-
-				return group;
+				context = ContextFactory.Create();
+				didCreateContext = true;
 			}
+
+			context.Groups.Add(group);
+
+			if (didCreateContext)
+			{
+				context.SaveChanges();
+				context.Dispose();
+			}
+
+			return group;
 		}
 
 		public void Update(Group group)
@@ -66,7 +75,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.Groups.Update(group);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 
@@ -80,7 +89,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No Group exists with Id: {id}");
 				}
 				context.Groups.Remove(group);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

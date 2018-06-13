@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.AccountSources.Add(source);
-				SaveChanges(context);
+				context.SaveChanges();
 
 				return source;
 			}
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.AccountSources.Update(source);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 
@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No AccountSource exists with Id: {id}");
 				}
 				context.AccountSources.Remove(source);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

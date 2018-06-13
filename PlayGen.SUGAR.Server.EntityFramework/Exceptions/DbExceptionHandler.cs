@@ -4,7 +4,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Exceptions
 {
 	public class DbExceptionHandler
 	{
-		public void Handle(Exception exception)
+		public Exception Process(Exception exception)
 		{
 			var message = exception.GetBaseException().Message;
 
@@ -12,7 +12,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Exceptions
 			{
 				throw new DuplicateRecordException(message);
 			}
-			throw exception;
+
+			return exception;
 		}
 	}
 }

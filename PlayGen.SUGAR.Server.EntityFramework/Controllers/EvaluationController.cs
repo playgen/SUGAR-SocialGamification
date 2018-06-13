@@ -74,7 +74,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				}
 
 				context.Evaluations.Add(evaluation);
-				SaveChanges(context);
+				context.SaveChanges();
 				return evaluation;
 			}
 		}
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.Evaluations.Update(evaluation);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 
@@ -101,7 +101,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No Evaluation exists with Token: {token}, GameId: {gameId} and EvaluationType: {evaluationType}");
 				}
 				context.Evaluations.Remove(evaluation);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

@@ -23,12 +23,16 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			_category = category;
 		}
 
-		public bool KeyExists(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public bool KeyExists(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start, DateTime end)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				return context.GetCategoryData(_category)
-					.FilterBy(gameId, actorId, key, evaluationDataType, start, end)
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(evaluationDataType)
+					.FilterByDateTimeRange(start, end)
 					.Any();
 			}
 		}
@@ -128,19 +132,19 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		private List<EvaluationData> GetContextEvaluationData(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public List<EvaluationData> List(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
 			using (var context = ContextFactory.Create())
 			{
-				return context.EvaluationData.FilterBy(gameId, actorId, key, evaluationDataType, start, end);
+				return context.GetCategoryData(_category)
+					.FilterByGameId(gameId)
+					.FilterByActorId(actorId)
+					.FilterByKey(key)
+					.FilterByDataType(evaluationDataType)
+					.FilterByDateTimeRange(start, end)
+					.ToList();
 			}
-		}
-
-		public List<EvaluationData> List(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			var list = GetContextEvaluationData(gameId, actorId, key, evaluationDataType, start, end).ToList();
-			return list;
-		}
+        }
 
 		public bool TryGetSum<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 			where T : struct
@@ -217,18 +221,27 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				context.HandleDetatchedActor(data.ActorId);
 
 				context.EvaluationData.Add(data);
-				SaveChanges(context);
+				context.SaveChanges();
 
 				return data;
 			}
 		}
 
-		public void Create(List<EvaluationData> datas)
+		public void Create(List<EvaluationData> datas, SUGARContext context = null)
 		{
-			using (var context = ContextFactory.Create())
+			var didCreateContext = false;
+			if (context == null)
 			{
-				context.EvaluationData.AddRange(datas);
-				SaveChanges(context);
+				context = ContextFactory.Create();
+				didCreateContext = true;
+			}
+			
+			context.EvaluationData.AddRange(datas);
+
+			if (didCreateContext)
+			{
+				context.SaveChanges();
+				context.Dispose();
 			}
 		}
 

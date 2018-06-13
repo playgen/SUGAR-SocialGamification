@@ -110,7 +110,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.Matches.Add(match);
-				SaveChanges(context);
+				context.SaveChanges();
 
 				return context.Matches
 					.IncludeAll()
@@ -123,7 +123,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.Matches.Update(match);
-				SaveChanges(context);
+				context.SaveChanges();
 
 				return context.Matches
 					.IncludeAll()
@@ -141,7 +141,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No Match exists with Id: {matchId}");
 				}
 				context.Matches.Remove(match);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

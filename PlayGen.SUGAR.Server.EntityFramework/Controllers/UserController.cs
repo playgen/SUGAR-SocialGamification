@@ -3,6 +3,7 @@ using System.Linq;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
+using Remotion.Linq.Utilities;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
@@ -60,20 +61,29 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public User Create(User user)
+		public User Create(User user, SUGARContext context = null)
 		{
-			using (var context = ContextFactory.Create())
+			var didCreate = false;
+			if (context == null)
 			{
-				if (context.Users.Any(g => g.Name == user.Name))
-				{
-					throw new DuplicateRecordException($"A user with the name: \"{user.Name}\" already exists.");
-				}
-
-				context.Users.Add(user);
-				SaveChanges(context);
-
-				return user;
+				context = ContextFactory.Create();
+				didCreate = true;
 			}
+			
+			if (context.Users.Any(g => g.Name == user.Name))
+			{
+				throw new DuplicateRecordException($"A user with the name: \"{user.Name}\" already exists.");
+			}
+
+			context.Users.Add(user);
+
+			if (didCreate)
+			{
+				context.SaveChanges();
+				context.Dispose();
+			}
+
+			return user;
 		}
 
 		public User Update(User user)
@@ -81,7 +91,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.Users.Update(user);
-				SaveChanges(context);
+				context.SaveChanges();
 				return user;
 			}
 		}
@@ -96,7 +106,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No User exists with Id: {id}");
 				}
 				context.Users.Remove(user);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

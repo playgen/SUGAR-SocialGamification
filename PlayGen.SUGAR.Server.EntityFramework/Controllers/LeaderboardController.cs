@@ -68,7 +68,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				}
 
 				context.Leaderboards.Add(leaderboard);
-				SaveChanges(context);
+				context.SaveChanges();
 				return leaderboard;
 			}
 		}
@@ -127,7 +127,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					existing.LeaderboardType = leaderboard.LeaderboardType;
 					existing.Token = leaderboard.Token;
 
-					SaveChanges(context);
+					context.SaveChanges();
 				}
 				else
 				{
@@ -146,7 +146,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No Leaderboard exists with Token: {token} and GameId: {gameId}");
 				}
 				context.Leaderboards.Remove(leaderboard);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

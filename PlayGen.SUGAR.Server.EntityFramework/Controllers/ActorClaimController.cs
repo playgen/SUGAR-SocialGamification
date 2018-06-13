@@ -58,7 +58,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.ActorClaims.Add(actorClaim);
-				SaveChanges(context);
+				context.SaveChanges();
 				actorClaim.Claim = context.Claims.Find(actorClaim.ClaimId);
 
 				return actorClaim;
@@ -75,7 +75,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No ActorClaim exists with Id: {id}");
 				}
 				context.ActorClaims.Remove(actorClaim);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

@@ -28,10 +28,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
                 Description = "",
                 AutoRegister = true
             }); 
-
-
-
-
+			
             var toVerify = new Account()
             {
                  Name = "testUser",

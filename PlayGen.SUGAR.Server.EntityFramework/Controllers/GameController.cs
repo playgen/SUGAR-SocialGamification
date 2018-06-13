@@ -40,15 +40,24 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public Game Create(Game game)
+		public Game Create(Game game, SUGARContext context = null)
 		{
-			using (var context = ContextFactory.Create())
+			var didCreateContext = false;
+			if (context == null)
 			{
-				context.Games.Add(game);
-				SaveChanges(context);
-
-				return game;
+				context = ContextFactory.Create();
+				didCreateContext = true;
 			}
+
+			context.Games.Add(game);
+
+			if (didCreateContext)
+			{
+				context.SaveChanges();
+				context.Dispose();
+			}
+
+			return game;
 		}
 
 		public void Update(Game game)
@@ -56,7 +65,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.Games.Update(game);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 
@@ -71,7 +80,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No Game exists with Id: {id}");
 				}
 				context.Games.Remove(game);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

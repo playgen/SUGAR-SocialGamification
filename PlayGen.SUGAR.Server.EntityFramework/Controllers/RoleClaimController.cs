@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.RoleClaims.Add(roleClaim);
-				SaveChanges(context);
+				context.SaveChanges();
 
 				return roleClaim;
 			}
@@ -56,7 +56,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				var roleClaim = context.RoleClaims.SingleOrDefault(r => role == r.RoleId && claim == r.ClaimId);
 
 				context.RoleClaims.Remove(roleClaim);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

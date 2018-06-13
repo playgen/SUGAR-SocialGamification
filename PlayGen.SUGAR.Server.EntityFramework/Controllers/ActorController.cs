@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.Actors.Add(actor);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 
@@ -52,7 +52,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No Actor exists with Id: {id}");
 				}
 				context.Actors.Remove(actor);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.EvaluationEvents;
@@ -21,7 +20,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
 	    #region Configuration
 
-		private const int GlobalMaxLeaderboardStandingsExecutionMilliseconds = 200;
+		private const int GlobalAverageLeaderboardStandingsExecutionMilliseconds = 50;
+	    private const int GlobalLeaderboardStandingsExecutionCount = 100;
 
         private readonly Controllers.LeaderboardController _leaderboardCoreController = ControllerLocator.LeaderboardController;
 
@@ -40,10 +40,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 			
             // Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
 		}
 
         [Fact]
@@ -53,10 +53,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Float, LeaderboardType.Cumulative);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -66,10 +66,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Highest);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -79,10 +79,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Float, LeaderboardType.Highest);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
             // Act & Assert
-            ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+            AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -92,10 +92,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Lowest);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -105,10 +105,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Float, LeaderboardType.Lowest);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -118,10 +118,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.String, LeaderboardType.Count);
 			CreateEvaluationDataAscending(key, EvaluationDataType.String, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -131,10 +131,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Boolean, LeaderboardType.Count);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Boolean, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -144,10 +144,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.String, LeaderboardType.Earliest);
 			CreateEvaluationDataAscending(key, EvaluationDataType.String, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -157,10 +157,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Boolean, LeaderboardType.Earliest);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Boolean, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -170,10 +170,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.String, LeaderboardType.Latest);
 			CreateEvaluationDataAscending(key, EvaluationDataType.String, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -183,10 +183,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Boolean, LeaderboardType.Latest);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Boolean, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Theory]
@@ -199,10 +199,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
 
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, Fixture.Users.Count, Fixture.Users[userIndex].Id);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, Fixture.SortedUsers.Count, Fixture.SortedUsers[userIndex].Id);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Theory]
@@ -214,10 +214,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{userIndex}";
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.Users.Count, Fixture.Users[userIndex].Id);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.SortedUsers.Count, Fixture.SortedUsers[userIndex].Id);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Theory]
@@ -229,10 +229,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{groupIndex}";
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
 			CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, Fixture.Users.Count, Fixture.Groups[groupIndex].Id);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, Fixture.SortedUsers.Count, Fixture.SortedGroups[groupIndex].Id);
 
 			// Act & Assert
-			ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalMaxLeaderboardStandingsExecutionMilliseconds);
+			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
         }
 
         [Fact]
@@ -240,7 +240,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		{
 			// Arrange
 			var key = "";
-            var filter = CreateLeaderboardStandingsRequest(key, -1, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(key, -1, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
 			// Act & Assert
             Assert.Throws<MissingRecordException>(() => _leaderboardCoreController.GetStandings(null, filter));
@@ -264,7 +264,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			// Arrange
             var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, Fixture.Users.Count, -1);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, Fixture.SortedUsers.Count, -1);
 
 			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
@@ -289,7 +289,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
 
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.Users.Count, -1);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.SortedUsers.Count, -1);
 
 			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
@@ -302,7 +302,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
 			// Using a group's id instead of a user's id to throw the error caught below
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, 0, Fixture.Groups[0].Id);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, 0, Fixture.SortedGroups[0].Id);
 
 			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
@@ -326,7 +326,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			// Arrange
             var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, Fixture.Users.Count, -1);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, Fixture.SortedUsers.Count, -1);
 
 			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
@@ -339,7 +339,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = System.Reflection.MethodBase.GetCurrentMethod().Name;
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Cumulative);
 			// Using a user's id instead of a group's id to throw the error caught below
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, 0, Fixture.Users[0].Id);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, 0, Fixture.SortedUsers[0].Id);
 
 			// Act & Assert
             Assert.Throws<ArgumentException>(() => _leaderboardCoreController.GetStandings(leaderboard, filter));
@@ -366,7 +366,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
 
 			// Act
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
 			// Assert
@@ -375,11 +375,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        for (var i = 0; i < filter.PageLimit; i++)
 	        {
 		        // Assumptions:
-		        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-		        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-		        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+		        // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+		        // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+		        // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
-		        Assert.Equal(Fixture.Users[Fixture.Users.Count - (i + 1)].Id, standings[i].ActorId);
+		        Assert.Equal(Fixture.SortedUsers[Fixture.SortedUsers.Count - (i + 1)].Id, standings[i].ActorId);
 	        }
         }
 
@@ -392,7 +392,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId);
 
 			// Act
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
 			// Assert
@@ -401,11 +401,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        for (var i = 0; i < filter.PageLimit; i++)
 	        {
 		        // Assumptions:
-		        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-		        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-		        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+		        // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+		        // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+		        // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
-		        Assert.Equal(Fixture.Users[Fixture.Users.Count - (i + 1)].Id, standings[i].ActorId);
+		        Assert.Equal(Fixture.SortedUsers[Fixture.SortedUsers.Count - (i + 1)].Id, standings[i].ActorId);
 	        }
         }
 
@@ -418,7 +418,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId);
 
 			// Act
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
 			// Assert
@@ -427,11 +427,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        for (var i = 0; i < filter.PageLimit; i++)
 	        {
 		        // Assumptions:
-		        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-		        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-		        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+		        // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+		        // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+		        // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
-		        Assert.Equal(Fixture.Users[Fixture.Users.Count - (i + 1)].Id, standings[i].ActorId);
+		        Assert.Equal(Fixture.SortedUsers[Fixture.SortedUsers.Count - (i + 1)].Id, standings[i].ActorId);
 	        }
         }
 
@@ -444,7 +444,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId);
 
 			// Act
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
 			// Assert
@@ -453,11 +453,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        for (var i = 0; i < filter.PageLimit; i++)
 	        {
 		        // Assumptions:
-		        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-		        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-		        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+		        // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+		        // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+		        // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
-		        Assert.Equal(Fixture.Users[Fixture.Users.Count - (i + 1)].Id, standings[i].ActorId);
+		        Assert.Equal(Fixture.SortedUsers[Fixture.SortedUsers.Count - (i + 1)].Id, standings[i].ActorId);
 	        }
         }
 
@@ -470,7 +470,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId, true);
 
 			// Act
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
 			// Assert
@@ -479,11 +479,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        for (var i = 0; i < filter.PageLimit; i++)
 	        {
 		        // Assumptions:
-		        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-		        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-		        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+		        // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+		        // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+		        // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
-		        Assert.Equal(Fixture.Users[i].Id, standings[i].ActorId);
+		        Assert.Equal(Fixture.SortedUsers[i].Id, standings[i].ActorId);
 	        }
         }
 
@@ -496,7 +496,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             CreateEvaluationDataAscending(key, EvaluationDataType.Float, leaderboard.GameId, true);
 
 			// Act
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
 			// Assert
@@ -505,11 +505,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        for (var i = 0; i < filter.PageLimit; i++)
 	        {
 		        // Assumptions:
-		        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-		        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-		        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+		        // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+		        // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+		        // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
-		        Assert.Equal(Fixture.Users[i].Id, standings[i].ActorId);
+		        Assert.Equal(Fixture.SortedUsers[i].Id, standings[i].ActorId);
 	        }
         }
 
@@ -522,7 +522,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             CreateEvaluationDataAscending(key, EvaluationDataType.String, leaderboard.GameId);
 
 			// Act
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
 			// Assert
@@ -531,11 +531,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        for (var i = 0; i < filter.PageLimit; i++)
 	        {
 		        // Assumptions:
-		        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-		        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-		        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+		        // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+		        // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+		        // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
-		        Assert.Equal(Fixture.Users[Fixture.Users.Count - (i + 1)].Id, standings[i].ActorId);
+		        Assert.Equal(Fixture.SortedUsers[Fixture.SortedUsers.Count - (i + 1)].Id, standings[i].ActorId);
 	        }
         }
 
@@ -548,7 +548,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             CreateEvaluationDataAscending(key, EvaluationDataType.Boolean, leaderboard.GameId);
 
 			// Act
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
 			// Assert
@@ -557,11 +557,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			for(var i = 0; i < filter.PageLimit; i++)
 	        {
                 // Assumptions:
-                // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-                // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-				// So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+                // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+                // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+				// So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 				
-                Assert.Equal(Fixture.Users[Fixture.Users.Count - (i + 1)].Id, standings[i].ActorId);
+                Assert.Equal(Fixture.SortedUsers[Fixture.SortedUsers.Count - (i + 1)].Id, standings[i].ActorId);
             }
         }
 
@@ -574,7 +574,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             CreateEvaluationDataAscending(key, EvaluationDataType.String, leaderboard.GameId);
 
 			// Act
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
 			// Assert
@@ -583,11 +583,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        for (var i = 0; i < filter.PageLimit; i++)
 	        {
 		        // Assumptions:
-		        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-		        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-		        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+		        // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+		        // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+		        // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
-		        Assert.Equal(Fixture.Users[i].Id, standings[i].ActorId);
+		        Assert.Equal(Fixture.SortedUsers[i].Id, standings[i].ActorId);
 	        }
         }
 
@@ -601,7 +601,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             CreateEvaluationDataAscending(key, EvaluationDataType.Boolean, leaderboard.GameId);
 
 			// Act
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
             var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
@@ -611,11 +611,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        for (var i = 0; i < filter.PageLimit; i++)
 	        {
 		        // Assumptions:
-		        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-		        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-		        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+		        // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+		        // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+		        // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
-		        Assert.Equal(Fixture.Users[i].Id, standings[i].ActorId);
+		        Assert.Equal(Fixture.SortedUsers[i].Id, standings[i].ActorId);
 	        }
         }
 
@@ -627,7 +627,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
         //	CreateEvaluationDataAscending("GetLeaderboardLatestStringAccuracyTest", EvaluationDataType.String, leaderboard.GameId);
 
-        //	var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+        //	var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
         //	var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
@@ -636,7 +636,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         //	for (int i = 0; i < 5; i++)
         //	{
         //		Random random = new Random();
-        //		int randomId = random.Next(1, Fixture.Users.Count + 1);
+        //		int randomId = random.Next(1, Fixture.SortedUsers.Count + 1);
         //		Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
         //	}
         //}
@@ -649,7 +649,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
         //	CreateEvaluationDataAscending("GetLeaderboardLatestBoolAccuracyTest", EvaluationDataType.Boolean, leaderboard.GameId);
 
-        //	var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.Users.Count);
+        //	var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, Fixture.SortedUsers.Count);
 
         //	var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
@@ -658,7 +658,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         //	for (int i = 0; i < 5; i++)
         //	{
         //		Random random = new Random();
-        //		int randomId = random.Next(1, Fixture.Users.Count + 1);
+        //		int randomId = random.Next(1, Fixture.SortedUsers.Count + 1);
         //		Assert.Equal(randomId, standings[filter.PageLimit - randomId].ActorId);
         //	}
         //}
@@ -672,10 +672,9 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			var key = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{userIndex}";
             var leaderboard = CreateLeaderboard(key, EvaluationDataType.Long, LeaderboardType.Lowest, key);
 	        CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId, true);
-
             
 		    // Act
-		    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, 10, Fixture.Users[userIndex].Id);
+		    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, 10, Fixture.SortedUsers[userIndex].Id);
 	        var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
 	        // Assert
@@ -687,16 +686,16 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             // Make sure the standings are in the correct order
 
 	        // Assumptions:
-	        // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-	        // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-	        // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+	        // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+	        // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+	        // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
 	        var firstStandingActorId = standings[0].ActorId;
-	        var firstIndexInUsers = Fixture.Users.ToList().FindIndex(u => u.Id == firstStandingActorId);
+	        var firstIndexInUsers = Fixture.SortedUsers.ToList().FindIndex(u => u.Id == firstStandingActorId);
 
 	        for (var i = 0; i < standings.Length; i++)
 	        {
-				Assert.Equal(Fixture.Users[firstIndexInUsers + i].Id, standings[i].ActorId);
+				Assert.Equal(Fixture.SortedUsers[firstIndexInUsers + i].Id, standings[i].ActorId);
 	        }
         }
 
@@ -711,7 +710,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        CreateEvaluationDataAscending(key, EvaluationDataType.Long, leaderboard.GameId, true);
 
             // Act
-	        var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.Users.Count, Fixture.Users[userIndex].Id);
+	        var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.SortedUsers.Count, Fixture.SortedUsers[userIndex].Id);
 	        var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
             // Assert
@@ -719,9 +718,9 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             Assert.Equal(CoreTestFixture.FriendCount + 1, standings.Length);
 
             // Assumptions:
-            // Each user in Fixture.Users was created in sequence so the ActorId of each user in Fixture.Users is in ascending order.
-            // Each user in Fixture.Users has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-            // So the leaderboard order should match that of [Fixture.Users reversed] for ascending evaluations.
+            // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+            // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+            // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
 
 	        for (var i = 0; i < standings.Length - 1; i++)
 	        {
@@ -738,11 +737,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			Random random = new Random();
 			var leaderboard = CreateLeaderboard("GetLeaderboardGroupMemberFilterAccuracyTest", EvaluationDataType.Long, LeaderboardType.Lowest, "GetLeaderboardGroupMemberFilterAccuracyTest");
 
-			var users = CreateUsers(EvaluationDataFixture.Users.Count, "GetLeaderboardGroupMemberFilterAccuracyTest");
+			var users = CreateUsers(EvaluationDataFixture.SortedUsers.Count, "GetLeaderboardGroupMemberFilterAccuracyTest");
 			CreateEvaluationDataAscending(users, "GetLeaderboardGroupMemberFilterAccuracyTest", EvaluationDataType.Long, leaderboard.GameId, true);
 		    CreateGroupMembership("GetLeaderboardGroupMemberFilterAccuracyTest", users);
             
-			var pageLimit = EvaluationDataFixture.Users.Count/3;
+			var pageLimit = EvaluationDataFixture.SortedUsers.Count/3;
 			var actorId = users.ElementAt(random.Next(0, users.Count())).Id;
 
 			var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, pageLimit, actorId);
@@ -753,23 +752,13 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
 			for (int i = 0; i < filter.PageLimit; i++)
 			{
-				int offset = (filter.ActorId.Value - EvaluationDataFixture.Users.Count - 1) * filter.PageLimit;
+				int offset = (filter.ActorId.Value - EvaluationDataFixture.SortedUsers.Count - 1) * filter.PageLimit;
 				Assert.Equal(offset + i + 1, standings[i].ActorId);
 			}
         }*/
         #endregion
 
         #region Helpers
-
-		private void ExecutionTimeAssert(Action method, int maxMilliseconds)
-		{
-			var stopwatch = Stopwatch.StartNew();
-			method();
-			stopwatch.Stop();
-
-			Assert.True(stopwatch.ElapsedMilliseconds <= maxMilliseconds, $"Max duration: {maxMilliseconds} but took: {stopwatch.ElapsedMilliseconds} milliseconds.");
-		}
-
         private void CreateGroupMembership(string name, IEnumerable<User> users)
         {
             var group = new Group
@@ -908,14 +897,14 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        // users[0] will have 1 EvaluationData
 	        // users[1] will have 2 EvaluationData
 	        // users[2] will have 3 EvaluationData
-            for (var userIndex = 0; userIndex < Fixture.Users.Count; userIndex++)
+            for (var userIndex = 0; userIndex < Fixture.SortedUsers.Count; userIndex++)
             {
                 var data = new List<EvaluationData>();
                 for (var userDataIndex = 0; userDataIndex < userIndex + 1 && (!singular || userDataIndex < 1); userDataIndex++)
                 {
                     var gameData = new EvaluationData
                     {
-                        ActorId = Fixture.Users[userIndex].Id,
+                        ActorId = Fixture.SortedUsers[userIndex].Id,
                         GameId = gameId,
                         Key = key,
                         Value = userDataIndex.ToString(),
@@ -935,6 +924,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
                 }
 
                 _evaluationDataDbController.Create(data.ToList());
+
+				// todo add all data together and send in one fuckoff huge clusterwank
             }
         }
         #endregion

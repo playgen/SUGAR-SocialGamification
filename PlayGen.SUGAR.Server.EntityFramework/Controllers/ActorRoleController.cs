@@ -75,15 +75,24 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public ActorRole Create(ActorRole actorRole)
+		public ActorRole Create(ActorRole actorRole, SUGARContext context = null)
 		{
-			using (var context = ContextFactory.Create())
+			var didCreate = false;
+			if (context == null)
 			{
-				context.ActorRoles.Add(actorRole);
-				SaveChanges(context);
-
-				return actorRole;
+				context = ContextFactory.Create();
+				didCreate = true;
 			}
+
+			context.ActorRoles.Add(actorRole);
+
+			if (didCreate)
+			{
+				context.SaveChanges();
+				context.Dispose();
+			}
+
+			return actorRole;
 		}
 
 		public void Delete(int id)
@@ -96,7 +105,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No ActorRole exists with Id: {id}");
 				}
 				context.ActorRoles.Remove(actorRole);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}
