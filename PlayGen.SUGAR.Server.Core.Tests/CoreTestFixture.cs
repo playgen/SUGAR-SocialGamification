@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Controllers;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.EntityFramework.Tests;
@@ -27,19 +29,18 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         public const int GameCount = 10;
         public const int GroupCount = 10;
         public const int FriendCount = 9;
-        public const int DataCount = 100000;
+        public const int UserDataCount = 100000;
+	    public const int GroupDataCount = 10000;
 
-        private readonly List<Game> _sortedGames = new List<Game>(DataCount);
+        private readonly List<Game> _sortedGames = new List<Game>(GameCount);
         private readonly List<User> _sortedUsers = new List<User>(UserCount);
         private readonly List<Group> _sortedGroups = new List<Group>(GroupCount);
         
-        private readonly Random _random = new Random(123);
-
         private readonly UserController _userController = ControllerLocator.UserController;
         private readonly GroupController _groupController = ControllerLocator.GroupController;
         private readonly GameController _gameController = ControllerLocator.GameController;
 	    private readonly RelationshipController _relationshipController = ControllerLocator.RelationshipController;
-        private readonly GameDataController _gameDataController = ControllerLocator.GameDataController;
+	    private readonly GameDataController _gameDataController = ControllerLocator.GameDataController;
 
         public IReadOnlyList<Game> SortedGames => _sortedGames;
         public IReadOnlyList<User> SortedUsers => _sortedUsers;
@@ -50,58 +51,92 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			ClearDatabaseFixture.Clear();
             PopulateData();
         }
-		
-        private void PopulateData()
-        {
-            _sortedGames.Clear();
-            _sortedUsers.Clear();
-            _sortedGroups.Clear();
 
-	        using (var context = EntityFramework.Tests.ControllerLocator.ContextFactory.Create())
-	        {
-		        for (var i = 0; i < UserCount; i++)
-		        {
-			        _sortedUsers.Add(CreateUser($"{i + 1}", context));
-		        }
+	    private void PopulateData()
+	    {
+		    _sortedGames.Clear();
+		    _sortedUsers.Clear();
+		    _sortedGroups.Clear();
 
-		        for (var i = 0; i < GameCount; i++)
-		        {
-			        _sortedGames.Add(CreateGame($"{i + 1}", context));
-		        }
+		    // Add users and games
+		    using (var context = EntityFramework.Tests.ControllerLocator.ContextFactory.Create())
+		    {
+			    for (var i = 0; i < UserCount; i++)
+			    {
+				    _sortedUsers.Add(CreateUser($"{i + 1}", context));
+			    }
 
-		        context.SaveChanges();
-            }
-	        _sortedUsers.Sort((a, b) => a.Id - b.Id);
-	        _sortedGames.Sort((a, b) => a.Id - b.Id);
+			    for (var i = 0; i < GameCount; i++)
+			    {
+				    _sortedGames.Add(CreateGame($"{i + 1}", context));
+			    }
 
-            var groupAdmin = CreateUser("TestingGroupAdmin");
-            for (var i = 0; i < GroupCount; i++)
-	        {
-		        _sortedGroups.Add(CreateGroup($"{i + 1}", groupAdmin.Id));
-	        }
-	        _sortedGroups.Sort((a, b) => a.Id - b.Id);
+			    context.SaveChanges();
+		    }
 
-            using (var context = EntityFramework.Tests.ControllerLocator.ContextFactory.Create())
-	        {
-                for (var userIndex = 0; userIndex < _sortedUsers.Count; userIndex++)
-		        {
-			        var windowSize = FriendCount + 1;
-			        var indexInWindow = userIndex % windowSize;
-			        var friendsToAddCount = windowSize - (indexInWindow + 1);
+		    _sortedUsers.Sort((a, b) => a.Id - b.Id);
+		    _sortedGames.Sort((a, b) => a.Id - b.Id);
 
-			        for (var friendIndexOffset = 1; friendIndexOffset <= friendsToAddCount; friendIndexOffset++)
-			        {
-				        var friendIndex = userIndex + friendIndexOffset;
+		    // Add groups
+		    var groupAdmin = CreateUser("TestingGroupAdmin");
+		    for (var i = 0; i < GroupCount; i++)
+		    {
+			    _sortedGroups.Add(CreateGroup($"{i + 1}", groupAdmin.Id));
+		    }
 
-				        CreateFriendship(_sortedUsers[userIndex].Id, _sortedUsers[friendIndex].Id, context);
-			        }
+		    _sortedGroups.Sort((a, b) => a.Id - b.Id);
 
-			        CreateMembership(_sortedUsers[userIndex].Id, _sortedGroups[userIndex % GroupCount].Id, context);
-		        }
+		    using (var context = EntityFramework.Tests.ControllerLocator.ContextFactory.Create())
+		    {
+			    for (var userIndex = 0; userIndex < _sortedUsers.Count; userIndex++)
+			    {
+				    var windowSize = FriendCount + 1;
+				    var indexInWindow = userIndex % windowSize;
+				    var friendsToAddCount = windowSize - (indexInWindow + 1);
 
-		        context.SaveChanges();
-	        }
+				    for (var friendIndexOffset = 1; friendIndexOffset <= friendsToAddCount; friendIndexOffset++)
+				    {
+					    var friendIndex = userIndex + friendIndexOffset;
+
+					    CreateFriendship(_sortedUsers[userIndex].Id, _sortedUsers[friendIndex].Id, context);
+				    }
+
+				    CreateMembership(_sortedUsers[userIndex].Id, _sortedGroups[userIndex % GroupCount].Id, context);
+			    }
+
+			    context.SaveChanges();
+		    }
+
+		    // Add user data
+		    GenerateGameDataForActor(_sortedUsers.Cast<Actor>().ToList(), UserDataCount);
+
+		    GenerateGameDataForActor(_sortedGroups.Cast<Actor>().ToList(), GroupDataCount);
         }
+
+		private void GenerateGameDataForActor(List<Actor> actors, int dataCount)
+		{ 
+	        var evaluationDataType = (EvaluationDataType[])Enum.GetValues(typeof(EvaluationDataType));
+
+            var data = new List<EvaluationData>();
+	        var dataPerActor = dataCount / (float)actors.Count;
+	        for (var i = 0; i < dataCount; i++)
+	        {
+		        var actorIndex = (int)Math.Floor(i / dataPerActor);
+
+				var dataType = evaluationDataType[i % (evaluationDataType.Length - 1)];
+		        
+		        data.Add(new EvaluationData
+		        {
+					Category = EvaluationDataCategory.GameData,
+					EvaluationDataType = dataType,
+					ActorId = actors[actorIndex].Id,
+					Key = $"{nameof(CoreTestFixture)}_generated",
+					Value = $"{i}"
+		        });
+	        }
+
+			_gameDataController.Add(data);
+		}
 
 		private User CreateUser(string name, SUGARContext context = null)
         {
