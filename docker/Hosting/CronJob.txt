@@ -1,0 +1,2 @@
+mkdir -p /home/syncthing/backup/database_dumps && 
+[ "$(docker ps | grep sugar-v1-mariadb)" ] && docker exec sugar-v1-mariadb /usr/bin/mysqldump -u root --password=t0pSECr3t SUGAR > /home/syncthing/backup/database_dumps/sugar-v1_dump.sql
