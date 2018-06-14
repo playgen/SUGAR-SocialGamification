@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework.Extensions;
 using PlayGen.SUGAR.Server.Model;
@@ -235,21 +236,22 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public void Create(List<EvaluationData> datas, SUGARContext context = null)
+		public void Create(List<EvaluationData> datas)
 		{
-			var didCreateContext = false;
-			if (context == null)
+			var batchSize = 10000;
+			var offset = 0;
+			while (offset < datas.Count)
 			{
-				context = ContextFactory.Create();
-				didCreateContext = true;
-			}
-			
-			context.EvaluationData.AddRange(datas);
+				var batch = datas.Skip(offset).Take(batchSize);
+				offset += batchSize;
 
-			if (didCreateContext)
-			{
-				context.SaveChanges();
-				context.Dispose();
+				using (var context = ContextFactory.Create())
+				{
+					context.ChangeTracker.AutoDetectChangesEnabled = false;
+					context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+					context.EvaluationData.AddRange(batch);
+					context.SaveChanges(false);
+				}
 			}
 		}
 
