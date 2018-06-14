@@ -355,7 +355,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 										leaderboard.GameId, 
 										r, 
 										leaderboard.EvaluationDataKey, 
-										leaderboard.EvaluationDataType, 
 										request.DateStart, 
 										request.DateEnd)
 									)
@@ -381,7 +380,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
                                         evaluationDataController.SumFloat(leaderboard.GameId, 
 											r, 
 											leaderboard.EvaluationDataKey, 
-											leaderboard.EvaluationDataType, 
 											request.DateStart, 
 											request.DateEnd)
 										)

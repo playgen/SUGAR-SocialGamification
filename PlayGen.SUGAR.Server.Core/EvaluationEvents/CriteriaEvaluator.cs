@@ -153,7 +153,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					return !any.Any() ? 0 : any.Max(value => CompareValues(long.Parse(value.Value), long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
 
 				case CriteriaQueryType.Sum:
-					var sum = evaluationDataController.SumLong(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.Long);
+					var sum = evaluationDataController.SumLong(gameId, actorId, completionCriteria.EvaluationDataKey);
 					return CompareValues(sum, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
 
 				case CriteriaQueryType.Latest:
@@ -180,7 +180,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					return !any.Any() ? 0 : any.Max(value => CompareValues(float.Parse(value.Value), float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType));
 
 				case CriteriaQueryType.Sum:
-					var sum = evaluationDataController.SumFloat(gameId, actorId, completionCriteria.EvaluationDataKey, EvaluationDataType.Float);
+					var sum = evaluationDataController.SumFloat(gameId, actorId, completionCriteria.EvaluationDataKey);
 					return CompareValues(sum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
 
 				case CriteriaQueryType.Latest:
@@ -246,7 +246,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Sum:
-					var totalSum = actors.Sum(a => evaluationDataController.SumLong(gameId, a, completionCriteria.EvaluationDataKey, EvaluationDataType.Long));
+					var totalSum = actors.Sum(a => evaluationDataController.SumLong(gameId, a, completionCriteria.EvaluationDataKey));
 
 					return CompareValues(totalSum, long.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
 				default:
@@ -261,7 +261,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			switch (completionCriteria.CriteriaQueryType)
 			{
 				case CriteriaQueryType.Sum:
-					var totalSum = actors.Sum(a => evaluationDataController.SumFloat(gameId, a, completionCriteria.EvaluationDataKey, EvaluationDataType.Float));
+					var totalSum = actors.Sum(a => evaluationDataController.SumFloat(gameId, a, completionCriteria.EvaluationDataKey));
 
 					return CompareValues(totalSum, float.Parse(completionCriteria.Value), completionCriteria.ComparisonType, completionCriteria.EvaluationDataType);
 				default:

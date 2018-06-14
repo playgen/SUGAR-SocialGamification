@@ -135,14 +135,14 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 
 		public List<EvaluationData> List(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			using (var context = ContextFactory.Create())
+			using (var context = ContextFactory.CreateReadOnly())
 			{
 				return Query(context, gameId, actorId, key, evaluationDataType, start, end).ToList();
 			}
         }
-
-		public IQueryable<EvaluationData> Query(SUGARContext context, int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
+		
+        public IQueryable<EvaluationData> Query(SUGARContext context, int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{		
 			return context.GetCategoryData(_category)
 				.FilterByGameId(gameId)
 				.FilterByActorId(actorId)
@@ -151,20 +151,20 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				.FilterByDateTimeRange(start, end);
 		}
 
-		public float SumFloat(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public float SumFloat(int gameId, int actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			using (var context = ContextFactory.Create())
+			using (var context = ContextFactory.CreateReadOnly())
 			{
-				var matchingData = Query(context, gameId, actorId, key, evaluationDataType, start, end);
+				var matchingData = Query(context, gameId, actorId, key, EvaluationDataType.Float, start, end);
 				return matchingData.Sum(s => Convert.ToSingle(s.Value));
 			}
 		}
 
-        public long SumLong(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public long SumLong(int gameId, int actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			using (var context = ContextFactory.Create())
+			using (var context = ContextFactory.CreateReadOnly())
 			{
-				var matchingData = Query(context, gameId, actorId, key, evaluationDataType, start, end);
+				var matchingData = Query(context, gameId, actorId, key, EvaluationDataType.Long, start, end);
 				return matchingData.Sum(s => Convert.ToInt64(s.Value));
 			}
 		}

@@ -17,7 +17,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.EvaluationDataController _evaluationDataDbController;
 		private readonly EvaluationDataCategory _category;
-		private readonly SUGARContextFactory _contextFactory;
 
 		public EvaluationDataController(
 			ILogger<EvaluationDataController> logger,
@@ -27,7 +26,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_logger = logger;
 			_category = category;
 			_evaluationDataDbController = new EntityFramework.Controllers.EvaluationDataController(contextFactory, category);
-			_contextFactory = contextFactory;
 		}
 
 		public void Add(List<EvaluationData> datas)
@@ -134,10 +132,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					switch (dataType)
 					{
 						case EvaluationDataType.Long:
-							value = SumLong(gameId, actorId, key, dataType).ToString(CultureInfo.InvariantCulture);
+							value = SumLong(gameId, actorId, key).ToString(CultureInfo.InvariantCulture);
 							break;
 						case EvaluationDataType.Float:
-							value = SumFloat(gameId, actorId, key, dataType).ToString(CultureInfo.InvariantCulture);
+							value = SumFloat(gameId, actorId, key).ToString(CultureInfo.InvariantCulture);
 							break;
 					}
 					break;
@@ -210,20 +208,20 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return list;
 		}
 
-		public float SumFloat(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		public float SumFloat(int gameId, int actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var sum = _evaluationDataDbController.SumFloat(gameId, actorId, key, evaluationDataType, start, end);
+			var sum = _evaluationDataDbController.SumFloat(gameId, actorId, key, start, end);
 
-			_logger.LogDebug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, Start: {start}, End: {end}");
+			_logger.LogDebug($"{nameof(SumFloat)}: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
 			return sum;
 		}
 
-        public long SumLong(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+        public long SumLong(int gameId, int actorId, string key, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var sum = _evaluationDataDbController.SumLong(gameId, actorId, key, evaluationDataType, start, end);
+			var sum = _evaluationDataDbController.SumLong(gameId, actorId, key, start, end);
 
-			_logger.LogDebug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, Start: {start}, End: {end}");
+			_logger.LogDebug($"{nameof(SumLong)}: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, Start: {start}, End: {end}");
 
 			return sum;
 		}
