@@ -13,12 +13,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 	/// </summary>
 	public class SUGARContext : DbContext
 	{
-		private readonly bool _isSaveDisabled;
+		private readonly bool _isReadOnly;
 		private readonly DbExceptionHandler _exceptionHandler = new DbExceptionHandler();
 
-		public SUGARContext(DbContextOptions<SUGARContext> options, bool disableSave = false) : base(options)
+		public SUGARContext(DbContextOptions<SUGARContext> options, bool isReadOnly = false) : base(options)
 		{
-			_isSaveDisabled = disableSave;
+			_isReadOnly = isReadOnly;
 		}
 
 		public DbSet<Account> Accounts { get; set; }
@@ -66,12 +66,17 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 			}
 		}
 
-		public override int SaveChanges()
+		public override int SaveChanges(bool acceptAllChangesOnSuccess = true)
 		{
 			try
 			{
-				UpdateModificationHistory();
-				return _isSaveDisabled ? 0 : base.SaveChanges();
+				if (_isReadOnly)
+				{
+					throw new ReadOnlyContextException();
+				}
+
+                UpdateModificationHistory();
+				return base.SaveChanges(acceptAllChangesOnSuccess);
             }
 			catch (Exception exception)
 			{

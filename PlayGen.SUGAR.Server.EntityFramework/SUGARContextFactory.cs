@@ -13,9 +13,17 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 
 		public SUGARContext Create()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<SUGARContext>();
-			optionsBuilder.UseMySql(ConnectionString);
+			var optionsBuilder = CreateOptionsBuilder();
 			var context = new SUGARContext(optionsBuilder.Options);
+			return context;
+		}
+
+		public SUGARContext CreateReadOnly()
+		{
+			var optionsBuilder = CreateOptionsBuilder();
+			optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+			var context = new SUGARContext(optionsBuilder.Options, true);
+			context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 			return context;
 		}
@@ -25,5 +33,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework
 			options.UseMySql(ConnectionString);
 			return options;
 		}
-	}
+
+		private DbContextOptionsBuilder<SUGARContext> CreateOptionsBuilder()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<SUGARContext>();
+			optionsBuilder.UseMySql(ConnectionString);
+			return optionsBuilder;
+		}
+    }
 }
