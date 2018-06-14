@@ -283,13 +283,16 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ActorId");
-
-                    b.HasIndex("Category");
-
-                    b.HasIndex("Key");
-
                     b.HasIndex("MatchId");
+
+                    b.HasIndex("GameId", "Category", "ActorId", "EvaluationDataType")
+                        .HasName("IX_EvaluationData_Game_Category_Creator_Type");
+
+                    b.HasIndex("GameId", "Category", "MatchId", "EvaluationDataType")
+                        .HasName("IX_EvaluationData_Game_Category_Match_Type");
+
+                    b.HasIndex("Key", "GameId", "Category", "ActorId", "EvaluationDataType")
+                        .HasName("IX_EvaluationData_Key_Game_Category_Creator_Type");
 
                     b.ToTable("EvaluationData");
                 });
