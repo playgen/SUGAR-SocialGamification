@@ -892,14 +892,15 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
         private void CreateEvaluationDataAscending(string key, EvaluationDataType type, int gameId = 0, bool singular = false)
         {
-	        // Each user will have that user's index + 1 amount of EvaluationData (unless singular is defined)
-	        // i.e:
-	        // users[0] will have 1 EvaluationData
-	        // users[1] will have 2 EvaluationData
-	        // users[2] will have 3 EvaluationData
+			var data = new List<EvaluationData>();
+
+            // Each user will have that user's index + 1 amount of EvaluationData (unless singular is defined)
+            // i.e:
+            // users[0] will have 1 EvaluationData
+            // users[1] will have 2 EvaluationData
+            // users[2] will have 3 EvaluationData
             for (var userIndex = 0; userIndex < Fixture.SortedUsers.Count; userIndex++)
             {
-                var data = new List<EvaluationData>();
                 for (var userDataIndex = 0; userDataIndex < userIndex + 1 && (!singular || userDataIndex < 1); userDataIndex++)
                 {
                     var gameData = new EvaluationData
@@ -922,11 +923,9 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
                     data.Add(gameData);
                 }
-
-                _evaluationDataDbController.Create(data.ToList());
-
-				// todo add all data together and send in one fuckoff huge clusterwank
             }
+
+			_evaluationDataDbController.Create(data.ToList());
         }
         #endregion
     }
