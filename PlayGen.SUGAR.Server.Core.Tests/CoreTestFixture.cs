@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Controllers;
@@ -10,27 +11,24 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
-	/*
-	// This is to debug slow setup speeds. It will not run in conjunction with the cire tests
+	/*// This is to debug slow setup speeds. It will not run in conjunction with the cire tests
 	public class CoreTestFixtureTests
 	{
 		[Fact]
 		public void SetupSpeedTest()
 		{
 			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => new CoreTestFixture(), 40 * 1000, 1);
+			AssertUtil.ExecutionTimeAssert(() => new CoreTestFixture(), 30 * 1000, 1);
         }
 	}*/
 
     public class CoreTestFixture
     {
 		// Must be divisible by GroupCount and (FriendCount + 1)
-        public const int UserCount = 100;
+        public const int UserCount = 200;
         public const int GameCount = 10;
         public const int GroupCount = 10;
         public const int FriendCount = 9;
-        public const int UserDataCount = 100000;
-	    public const int GroupDataCount = 10000;
 
         private readonly List<Game> _sortedGames = new List<Game>(GameCount);
         private readonly List<User> _sortedUsers = new List<User>(UserCount);
@@ -45,14 +43,27 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         public IReadOnlyList<Game> SortedGames => _sortedGames;
         public IReadOnlyList<User> SortedUsers => _sortedUsers;
         public IReadOnlyList<Group> SortedGroups => _sortedGroups;
+		
+	    // Evaluation Data Keys
+	    public string EvaluationDataKeyAscendingString => GenerateEvaluationDataKey(EvaluationDataType.String);
+	    public string EvaluationDataKeyAscendingBoolean => GenerateEvaluationDataKey(EvaluationDataType.Boolean);
+	    public string EvaluationDataKeyAscendingFloat => GenerateEvaluationDataKey(EvaluationDataType.Float);
+	    public string EvaluationDataKeyAscendingLong => GenerateEvaluationDataKey(EvaluationDataType.Long);
+		
+        public int EvaluationDataGameId => _sortedGames[0].Id;
 
-        public CoreTestFixture()
+		public CoreTestFixture()
         {
 			ClearDatabaseFixture.Clear();
             PopulateData();
         }
 
-	    private void PopulateData()
+	    public string GenerateEvaluationDataKey(EvaluationDataType dataType)
+	    {
+		    return $"{nameof(CoreTestFixture)}_Ascending_{dataType}";
+	    }
+
+        private void PopulateData()
 	    {
 		    _sortedGames.Clear();
 		    _sortedUsers.Clear();
@@ -107,38 +118,58 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 			    context.SaveChanges();
 		    }
 
-		    // Add user data
-		    GenerateGameDataForActor(_sortedUsers.Cast<Actor>().ToList(), UserDataCount);
+			// Add User Evaluation Data
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingString, EvaluationDataType.String, EvaluationDataGameId, _sortedUsers.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingBoolean, EvaluationDataType.Boolean, EvaluationDataGameId, _sortedUsers.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingFloat, EvaluationDataType.Float, EvaluationDataGameId, _sortedUsers.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingLong, EvaluationDataType.Long, EvaluationDataGameId, _sortedUsers.Cast<Actor>().ToList());
 
-		    GenerateGameDataForActor(_sortedGroups.Cast<Actor>().ToList(), GroupDataCount);
+            // Add Group Evaluation Data
+            CreateEvaluationDataAscending(EvaluationDataKeyAscendingString, EvaluationDataType.String, EvaluationDataGameId, _sortedGroups.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingBoolean, EvaluationDataType.Boolean, EvaluationDataGameId, _sortedGroups.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingFloat, EvaluationDataType.Float, EvaluationDataGameId, _sortedGroups.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingLong, EvaluationDataType.Long, EvaluationDataGameId, _sortedGroups.Cast<Actor>().ToList());
         }
 
-		private void GenerateGameDataForActor(List<Actor> actors, int dataCount)
-		{ 
-	        var evaluationDataType = (EvaluationDataType[])Enum.GetValues(typeof(EvaluationDataType));
+	    private void CreateEvaluationDataAscending(string key, EvaluationDataType type, int gameId, List<Actor> actors)
+	    {
+		    var data = new List<EvaluationData>();
 
-            var data = new List<EvaluationData>();
-	        var dataPerActor = dataCount / (float)actors.Count;
-	        for (var i = 0; i < dataCount; i++)
-	        {
-		        var actorIndex = (int)Math.Floor(i / dataPerActor);
+		    // Each user will have that user's index + 1 amount of EvaluationData (unless singular is defined)
+		    // i.e:
+		    // users[0] will have 1 EvaluationData
+		    // users[1] will have 2 EvaluationData
+		    // users[2] will have 3 EvaluationData
+		    for (var actorIndex = 0; actorIndex < actors.Count; actorIndex++)
+		    {
+			    for (var actorDataIndex = 0; actorDataIndex < actorIndex + 1; actorDataIndex++)
+			    {
+				    var gameData = new EvaluationData
+				    {
+					    ActorId = actors[actorIndex].Id,
+					    GameId = gameId,
+					    Key = key,
+					    Value = actorDataIndex.ToString(),
+					    EvaluationDataType = type
+				    };
 
-				var dataType = evaluationDataType[i % (evaluationDataType.Length - 1)];
-		        
-		        data.Add(new EvaluationData
-		        {
-					Category = EvaluationDataCategory.GameData,
-					EvaluationDataType = dataType,
-					ActorId = actors[actorIndex].Id,
-					Key = $"{nameof(CoreTestFixture)}_generated",
-					Value = $"{i}"
-		        });
-	        }
+				    if (type == EvaluationDataType.Float)
+				    {
+					    gameData.Value = (actorDataIndex * 0.01f).ToString(CultureInfo.InvariantCulture);
+				    }
+				    else if (type == EvaluationDataType.Boolean)
+				    {
+					    gameData.Value = (actorDataIndex % 2 == 0).ToString();
+				    }
 
-			_gameDataController.Add(data);
-		}
+				    data.Add(gameData);
+			    }
+		    }
 
-		private User CreateUser(string name, SUGARContext context = null)
+		    _gameDataController.Add(data);
+	    }
+
+        private User CreateUser(string name, SUGARContext context = null)
         {
             var user = new User
             {
