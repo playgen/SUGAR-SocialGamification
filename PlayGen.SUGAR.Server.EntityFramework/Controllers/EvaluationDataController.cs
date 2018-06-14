@@ -136,28 +136,36 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				return context.GetCategoryData(_category)
-					.FilterByGameId(gameId)
-					.FilterByActorId(actorId)
-					.FilterByKey(key)
-					.FilterByDataType(evaluationDataType)
-					.FilterByDateTimeRange(start, end)
-					.ToList();
+				return Query(context, gameId, actorId, key, evaluationDataType, start, end).ToList();
 			}
         }
 
-		public bool TryGetSum<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
-			where T : struct
+		public IQueryable<EvaluationData> Query(SUGARContext context, int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var list = List(gameId, actorId, key, evaluationDataType, start, end);
-			if (list.Count > 0)
+			return context.GetCategoryData(_category)
+				.FilterByGameId(gameId)
+				.FilterByActorId(actorId)
+				.FilterByKey(key)
+				.FilterByDataType(evaluationDataType)
+				.FilterByDateTimeRange(start, end);
+		}
+
+		public float SumFloat(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			using (var context = ContextFactory.Create())
 			{
-				var sum = list.Sum(s => Convert.ToDouble(s.Value));
-				value = (T)Convert.ChangeType(sum, typeof(T));
-				return true;
+				var matchingData = Query(context, gameId, actorId, key, evaluationDataType, start, end);
+				return matchingData.Sum(s => Convert.ToSingle(s.Value));
 			}
-			value = null;
-			return false;
+		}
+
+        public long SumLong(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			using (var context = ContextFactory.Create())
+			{
+				var matchingData = Query(context, gameId, actorId, key, evaluationDataType, start, end);
+				return matchingData.Sum(s => Convert.ToInt64(s.Value));
+			}
 		}
 
 		public bool TryGetMax(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))

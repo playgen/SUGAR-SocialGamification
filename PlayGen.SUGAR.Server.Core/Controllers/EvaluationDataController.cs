@@ -121,7 +121,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				throw new ArgumentException($"Cannot get EvaluationData for LeaderboardType {sortType} and EvaluationDataType {dataType} as it would always return zero results.");
 			}
 			EvaluationData data = null;
-			float? value = null;
+			string value = null;
 			switch (sortType)
 			{
 				case LeaderboardType.Highest:
@@ -134,15 +134,15 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					switch (dataType)
 					{
 						case EvaluationDataType.Long:
-							TryGetSum(gameId, actorId, key, out value, dataType);
+							value = SumLong(gameId, actorId, key, dataType).ToString(CultureInfo.InvariantCulture);
 							break;
 						case EvaluationDataType.Float:
-							TryGetSum(gameId, actorId, key, out value, dataType);
+							value = SumFloat(gameId, actorId, key, dataType).ToString(CultureInfo.InvariantCulture);
 							break;
 					}
 					break;
 				case LeaderboardType.Count:
-					value = CountKeys(gameId, actorId, key, dataType);
+					value = CountKeys(gameId, actorId, key, dataType).ToString(CultureInfo.InvariantCulture);
 					break;
 				case LeaderboardType.Earliest:
 					TryGetEarliest(gameId, actorId, key, out data, dataType);
@@ -151,18 +151,17 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					TryGetLatest(gameId, actorId, key, out data, dataType);
 					break;
 			}
-			if (value != null)
+
+			data = new EvaluationData
 			{
-				data = new EvaluationData
-				{
-					ActorId = actorId,
-					GameId = gameId,
-					Category = _category,
-					EvaluationDataType = dataType,
-					Key = key,
-					Value = (dataType == EvaluationDataType.Long ? (long)value.Value : value.Value).ToString(CultureInfo.InvariantCulture)
-				};
-			}
+				ActorId = actorId,
+				GameId = gameId,
+				Category = _category,
+				EvaluationDataType = dataType,
+				Key = key,
+				Value = value
+			};
+
 			return data;
 		}
 
@@ -211,14 +210,22 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return list;
 		}
 
-		public bool TryGetSum<T>(int gameId, int actorId, string key, out T? value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
-			where T : struct
+		public float SumFloat(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
 		{
-			var dataFound = _evaluationDataDbController.TryGetSum(gameId, actorId, key, out value, evaluationDataType, start, end);
+			var sum = _evaluationDataDbController.SumFloat(gameId, actorId, key, evaluationDataType, start, end);
 
-			_logger.LogDebug($"Sum: {value?.ToString() ?? "Null"} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, Start: {start}, End: {end}");
+			_logger.LogDebug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, Start: {start}, End: {end}");
 
-			return dataFound;
+			return sum;
+		}
+
+        public long SumLong(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
+		{
+			var sum = _evaluationDataDbController.SumLong(gameId, actorId, key, evaluationDataType, start, end);
+
+			_logger.LogDebug($"Sum: {sum} for: GameId: {gameId}, ActorId {actorId}, Key: {key}, EvaluationDataType: {evaluationDataType}, Start: {start}, End: {end}");
+
+			return sum;
 		}
 
 		public bool TryGetMax(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))

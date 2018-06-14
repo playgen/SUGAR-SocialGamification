@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
@@ -338,12 +339,29 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				throw new ArgumentException("Actors cannot be ranked multiple times in leaderboards which use LeaderboardType Cumulative.");
 			}
+
 			switch (leaderboard.EvaluationDataType)
 			{
 				case EvaluationDataType.Long:
-					results = actors.Select(a => new { Actor = a, Value = SumRelatedNullable(GetRelated(a, leaderboard.CriteriaScope).Select(r => evaluationDataController.TryGetSum<long>(leaderboard.GameId, r, leaderboard.EvaluationDataKey, out var value, leaderboard.EvaluationDataType, request.DateStart, request.DateEnd) ? value : null).ToList()) })
-						.Where(a => a.Value != null)
-						.Select(a => new StandingsResponse
+					results = actors
+						.Select(a => new
+						{
+							Actor = a,
+							Value = GetRelated(a, leaderboard.CriteriaScope)
+								// Sum each related actor's sum
+								.Sum(r => 
+									// Sum for each related actor
+									evaluationDataController.SumLong(
+										leaderboard.GameId, 
+										r, 
+										leaderboard.EvaluationDataKey, 
+										leaderboard.EvaluationDataType, 
+										request.DateStart, 
+										request.DateEnd)
+									)
+						})
+						.OrderByDescending(a => a.Value)
+                        .Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
@@ -352,21 +370,34 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					break;
 
 				case EvaluationDataType.Float:
-					results = actors.Select(a => new { Actor = a, Value = SumRelatedNullable(GetRelated(a, leaderboard.CriteriaScope).Select(r => evaluationDataController.TryGetSum<float>(leaderboard.GameId, r, leaderboard.EvaluationDataKey, out var value, leaderboard.EvaluationDataType, request.DateStart, request.DateEnd) ? value : null).ToList()) })
-						.Where(a => a.Value != null)
+					results = actors
+						.Select(a => new
+						{
+							Actor = a,
+							Value = GetRelated(a, leaderboard.CriteriaScope)
+									// Sum each related actor's sum
+                                    .Sum(r =>
+										// Sum for each related actor
+                                        evaluationDataController.SumFloat(leaderboard.GameId, 
+											r, 
+											leaderboard.EvaluationDataKey, 
+											leaderboard.EvaluationDataType, 
+											request.DateStart, 
+											request.DateEnd)
+										)
+						})
+						.OrderByDescending(a => a.Value)
 						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
-							Value = a.Value.ToString()
+							Value = a.Value.ToString(CultureInfo.InvariantCulture)
 						}).ToList();
 					break;
 
 				default:
 					return null;
 			}
-
-			results = results.OrderByDescending(r => float.Parse(r.Value)).ToList();
 
 			_logger.LogDebug($"{results.Count} Actors for GameId: {leaderboard.GameId}, Key: {leaderboard.EvaluationDataKey}, Leaderboard Type: {leaderboard.LeaderboardType}, Save Data Type: {leaderboard.EvaluationDataType}");
 
@@ -544,7 +575,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				return null;
 			}
-			return SumRelated<T>(values.Select(s => s.Value).ToList());
+			return SumRelated(values.Select(s => s.Value).ToList());
 		}
 
 		private T SumRelated<T>(List<T> values) where T : struct
