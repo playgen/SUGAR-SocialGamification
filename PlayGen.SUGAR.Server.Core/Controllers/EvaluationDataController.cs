@@ -125,9 +125,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case LeaderboardType.Highest:
 					TryGetMax(gameId, actorId, key, out data, dataType);
 					break;
+
 				case LeaderboardType.Lowest:
 					TryGetMin(gameId, actorId, key, out data, dataType);
 					break;
+
 				case LeaderboardType.Cumulative:
 					switch (dataType)
 					{
@@ -139,26 +141,32 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 							break;
 					}
 					break;
+
 				case LeaderboardType.Count:
 					value = CountKeys(gameId, actorId, key, dataType).ToString(CultureInfo.InvariantCulture);
 					break;
+
 				case LeaderboardType.Earliest:
 					TryGetEarliest(gameId, actorId, key, out data, dataType);
 					break;
+
 				case LeaderboardType.Latest:
 					TryGetLatest(gameId, actorId, key, out data, dataType);
 					break;
 			}
 
-			data = new EvaluationData
+			if (data == null)
 			{
-				ActorId = actorId,
-				GameId = gameId,
-				Category = _category,
-				EvaluationDataType = dataType,
-				Key = key,
-				Value = value
-			};
+				data = new EvaluationData
+				{
+					ActorId = actorId,
+					GameId = gameId,
+					Category = _category,
+					EvaluationDataType = dataType,
+					Key = key,
+					Value = value
+				};
+			}
 
 			return data;
 		}

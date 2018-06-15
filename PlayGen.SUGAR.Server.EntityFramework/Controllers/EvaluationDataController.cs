@@ -155,7 +155,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.CreateReadOnly())
 			{
-				var matchingData = Query(context, gameId, actorId, key, EvaluationDataType.Float, start, end);
+				var matchingData = Query(context, gameId, actorId, key, EvaluationDataType.Float, start, end).ToList();
 				return matchingData.Sum(s => Convert.ToSingle(s.Value));
 			}
 		}
@@ -164,7 +164,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.CreateReadOnly())
 			{
-				var matchingData = Query(context, gameId, actorId, key, EvaluationDataType.Long, start, end);
+				var matchingData = Query(context, gameId, actorId, key, EvaluationDataType.Long, start, end).ToList();
 				return matchingData.Sum(s => Convert.ToInt64(s.Value));
 			}
 		}
