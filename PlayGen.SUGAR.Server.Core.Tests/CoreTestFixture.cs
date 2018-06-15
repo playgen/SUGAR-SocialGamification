@@ -137,9 +137,10 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
 		    // Each user will have that user's index + 1 amount of EvaluationData (unless singular is defined)
 		    // i.e:
-		    // users[0] will have 1 EvaluationData
-		    // users[1] will have 2 EvaluationData
-		    // users[2] will have 3 EvaluationData
+		    // users[0] will have 1 EvaluationData of 1
+		    // users[1] will have 2 EvaluationData of 1 each = 2
+		    // users[2] will have 3 EvaluationData of 1 each = 3 
+			// etc
 		    for (var actorIndex = 0; actorIndex < actors.Count; actorIndex++)
 		    {
 			    for (var actorDataIndex = 0; actorDataIndex < actorIndex + 1; actorDataIndex++)
@@ -149,7 +150,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 					    ActorId = actors[actorIndex].Id,
 					    GameId = gameId,
 					    Key = key,
-					    Value = actorDataIndex.ToString(),
+					    Value = (actorDataIndex + 1).ToString(),
 					    EvaluationDataType = type
 				    };
 

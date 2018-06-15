@@ -20,8 +20,8 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		public bool MultiplePerActor { get; set; }
 
-		public DateTime DateStart { get; set; }
+		public DateTime? DateStart { get; set; }
 
-		public DateTime DateEnd { get; set; }
+		public DateTime? DateEnd { get; set; }
 	}
 }
