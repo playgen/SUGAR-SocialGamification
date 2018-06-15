@@ -70,10 +70,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				throw new MissingRecordException("The provided leaderboard does not exist.");
 			}
-			if (request.PageLimit <= 0)
-			{
-				throw new ArgumentException("You must request at least one ranking from the leaderboard.");
-			}
+			
 			var standings = GatherStandings(leaderboard, request);
 
 			_logger.LogInformation($"{standings?.Count} Standings for Leaderboard: {leaderboard.Token}");
@@ -84,6 +81,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		protected List<StandingsResponse> GatherStandings(Leaderboard leaderboard, StandingsRequest request)
 		{
 			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, leaderboard.EvaluationDataCategory);
+
+			if (request.MultiplePerActor && request.LeaderboardFilterType == LeaderboardFilterType.Near)
+			{
+				throw new ArgumentException($"You cannot use the filter type: {nameof(LeaderboardFilterType.Near)} in conjunction with {nameof(request.MultiplePerActor)}.");
+			}
 
 			var actors = GetActors(evaluationDataController, leaderboard, request);
 			
@@ -585,27 +587,48 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		protected List<StandingsResponse> FilterResults(List<StandingsResponse> typeResults, int limit, int offset, LeaderboardFilterType filter, int? actorId)
 		{
-			int position;
-			if (filter == LeaderboardFilterType.Near)
+			var limitedTypeResults = typeResults;
+			if (limit > 0)
 			{
-				if (actorId != null && typeResults.Any(r => r.ActorId == actorId.Value))
+				var firstIndex = 0;
+				int centerIndex;
+				var lastIndex = typeResults.Count - 1;
+
+				int entriesBeforeCenter;
+				int entriesAfterCenter;
+
+                if (filter == LeaderboardFilterType.Near)
 				{
-					var actorPosition = typeResults.TakeWhile(r => r.ActorId != actorId.Value).Count();
-					offset += actorPosition / limit;
-				}
+					if (actorId == null)
+					{
+						throw new ArgumentException($"You must provide an Actor Id when using the {nameof(LeaderboardFilterType.Near)} filter.");
+					}
+					
+					var actorIndex = typeResults.FindIndex(t => t.ActorId == actorId);
+					centerIndex = actorIndex + offset;
+					
+					entriesBeforeCenter = ((limit - 1) / 2);
+					entriesAfterCenter = (limit - 1 ) - entriesBeforeCenter;
+                }
 				else
-				{
-					typeResults = new List<StandingsResponse>();
-				}
-			}
-			typeResults = typeResults.Skip(offset * limit).Take(limit).ToList();
-			position = offset * limit;
-			return typeResults.Select(s => new StandingsResponse
+                {
+	                centerIndex = offset;
+	                entriesBeforeCenter = 0;
+	                entriesAfterCenter = limit - 1;
+                }
+
+				var startIndex = Math.Max(centerIndex - entriesBeforeCenter, firstIndex);
+                var endIndex = Math.Min(centerIndex + entriesAfterCenter, lastIndex);
+
+				limitedTypeResults = typeResults.GetRange(startIndex, (endIndex + 1) - startIndex);
+            }
+
+			return limitedTypeResults.Select(s => new StandingsResponse
 			{
 				ActorId = s.ActorId,
 				ActorName = s.ActorName,
 				Value = s.Value,
-				Ranking = ++position
+				Ranking = typeResults.IndexOf(s) + 1
 			}).ToList();
 		}
 	}

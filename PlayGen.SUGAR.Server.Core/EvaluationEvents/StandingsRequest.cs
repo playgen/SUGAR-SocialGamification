@@ -14,6 +14,9 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		public LeaderboardFilterType LeaderboardFilterType { get; set; }
 
+		/// <summary>
+        /// Use zero to signify all
+        /// </summary>
 		public int PageLimit { get; set; }
 
 		public int PageOffset { get; set; }
