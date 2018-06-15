@@ -46,8 +46,7 @@ namespace PlayGen.SUGAR.Client.Tests
 	{
 		public readonly SUGARClient SUGARClient;
 		public readonly Dictionary<string, object> SetupClassContexts = new Dictionary<string, object>();
-
-		protected readonly TestServer Server;
+		public readonly TestServer Server;
 
 		public ClientTestsFixture()
 		{

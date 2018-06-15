@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
+using PlayGen.SUGAR.Server.Core.Controllers;
+using PlayGen.SUGAR.Server.Model;
 using Xunit;
 
 namespace PlayGen.SUGAR.Client.Tests
@@ -22,42 +25,64 @@ namespace PlayGen.SUGAR.Client.Tests
 		{
         }
 
-		// todo rather get core controllers from the Fixture.Server to seed the data.
+        // todo make other client tests follow thhis pattern
+		// rather get core controllers from the Fixture.Server to seed the data.
 		// Seeding and test setup shouldn't also test the client functionalty.
 		// Client funcitonality should be tested by descrete tests per funcitonality.
-        // todo make other client tests follow thhis pattern
-		protected override object SetupClass(ClientTestsFixture fixture)
+        protected override object SetupClass(ClientTestsFixture fixture)
         {
-			// Data for:
+            // Data for:
             // CanGetGameDataByLeaderboardType
             // DoestGetInvalidDataByLeaderboardType
-            var loggedInAccount = Helpers.CreateAndLoginGlobal(fixture.SUGARClient, GameDataClientTestsLeaderboardKey);
-			var game = Helpers.GetGame(fixture.SUGARClient.Game, GameDataClientTestsLeaderboardKey);
 
-			for (var i = 0; i < GameDataClientTestsEvaluationDataCount; i++)
-			{
-				var evaluationDataRequest = new EvaluationDataRequest
-				{
-					CreatingActorId = loggedInAccount.User.Id,
-					GameId = game.Id,
-					Key = GameDataClientTestsLeaderboardKey,
-					Value = (i + GameDataClientTestsEvaluationStartValue).ToString()
-				};
+	        using (var scope = fixture.Server.Host.Services.CreateScope())
+	        {
+		        var gameDataController = scope.ServiceProvider.GetService<GameDataController>();
+		        var gameController = scope.ServiceProvider.GetService<GameController>();
+		        var userController = scope.ServiceProvider.GetService<UserController>();
 
-				evaluationDataRequest.EvaluationDataType = EvaluationDataType.String;
-				fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+		        var game = gameController.Search(GameDataClientTestsLeaderboardKey)[0];
+		        var user = userController.Create(new User
+		        {
+			        Name = GameDataClientTestsLeaderboardKey
+		        });
+				
+		        for (var i = 0; i < GameDataClientTestsEvaluationDataCount; i++)
+		        {
+					foreach(EvaluationDataType dataType in Enum.GetValues(typeof(EvaluationDataType)))
+					{
+						string value;
 
-				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Long;
-				fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+						switch (dataType)
+						{
+                            case EvaluationDataType.String:
+                            case EvaluationDataType.Long:
+                                value = (i + GameDataClientTestsEvaluationStartValue).ToString();
+	                            break;
 
-				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Float;
-				evaluationDataRequest.Value = ((i + GameDataClientTestsEvaluationStartValue) * GameDataClientTestsEvaluationDataFloatMultiplier).ToString(CultureInfo.InvariantCulture);
-				fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+                            case EvaluationDataType.Float:
+								value = ((i + GameDataClientTestsEvaluationStartValue) * GameDataClientTestsEvaluationDataFloatMultiplier).ToString(CultureInfo.InvariantCulture);
+								break;
 
-				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Boolean;
-				evaluationDataRequest.Value = (i % 2 == 0).ToString();
-				fixture.SUGARClient.GameData.Add(evaluationDataRequest);
-			}
+                            case EvaluationDataType.Boolean:
+								value = (i % 2 == 0).ToString();
+								break;
+
+							default:
+								throw new Exception($"Unhandled: {dataType}");
+						}
+						
+				        gameDataController.Add(new EvaluationData
+				        {
+					        ActorId = user.Id,
+					        GameId = game.Id,
+					        Key = GameDataClientTestsLeaderboardKey,
+					        Value = value,
+							EvaluationDataType = dataType
+				        });
+                    }
+                }
+	        }
 
 	        return null;
         }
