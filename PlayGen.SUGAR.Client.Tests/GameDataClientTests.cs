@@ -11,7 +11,58 @@ namespace PlayGen.SUGAR.Client.Tests
 {
 	public class GameDataClientTests : ClientTestBase
 	{
-		[Fact]
+		private static readonly string GameDataClientTestsLeaderboardKey = "GameData_CanGetGameDataByLeaderboardType";//$"{nameof(GameDataClientTests)}_Leaderboards";
+		private const int GameDataClientTestsEvaluationDataCount = 25;
+		private const int GameDataClientTestsEvaluationStartValue = 1;
+        private const int GameDataClientTestsEvaluationDataSum = GameDataClientTestsEvaluationDataCount * (GameDataClientTestsEvaluationDataCount + 1) / 2;
+        private const float GameDataClientTestsEvaluationDataFloatMultiplier = 0.1f;
+
+        public GameDataClientTests(ClientTestsFixture fixture)
+			: base(fixture)
+		{
+        }
+
+		// todo rather get core controllers from the Fixture.Server to seed the data.
+		// Seeding and test setup shouldn't also test the client functionalty.
+		// Client funcitonality should be tested by descrete tests per funcitonality.
+        // todo make other client tests follow thhis pattern
+		protected override object SetupClass(ClientTestsFixture fixture)
+        {
+			// Data for:
+            // CanGetGameDataByLeaderboardType
+            // DoestGetInvalidDataByLeaderboardType
+            var loggedInAccount = Helpers.CreateAndLoginGlobal(fixture.SUGARClient, GameDataClientTestsLeaderboardKey);
+			var game = Helpers.GetGame(fixture.SUGARClient.Game, GameDataClientTestsLeaderboardKey);
+
+			for (var i = 0; i < GameDataClientTestsEvaluationDataCount; i++)
+			{
+				var evaluationDataRequest = new EvaluationDataRequest
+				{
+					CreatingActorId = loggedInAccount.User.Id,
+					GameId = game.Id,
+					Key = GameDataClientTestsLeaderboardKey,
+					Value = (i + GameDataClientTestsEvaluationStartValue).ToString()
+				};
+
+				evaluationDataRequest.EvaluationDataType = EvaluationDataType.String;
+				fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+
+				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Long;
+				fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+
+				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Float;
+				evaluationDataRequest.Value = ((i + GameDataClientTestsEvaluationStartValue) * GameDataClientTestsEvaluationDataFloatMultiplier).ToString(CultureInfo.InvariantCulture);
+				fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+
+				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Boolean;
+				evaluationDataRequest.Value = (i % 2 == 0).ToString();
+				fixture.SUGARClient.GameData.Add(evaluationDataRequest);
+			}
+
+	        return null;
+        }
+
+        [Fact]
 		public void CanCreate()
 		{
 			var key = "GameData_CanCreate";
@@ -338,80 +389,47 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Throws<ArgumentException>(() => Fixture.SUGARClient.GameData.Add(evaluationDataRequest));
 		}
 
-		[Fact]
-		public void CanGetGameDataByLeaderboardType()
+		[Theory]
+		[InlineData(EvaluationDataType.String, LeaderboardType.Count, GameDataClientTestsEvaluationDataCount)]
+		[InlineData(EvaluationDataType.String, LeaderboardType.Earliest, GameDataClientTestsEvaluationStartValue)]
+		[InlineData(EvaluationDataType.String, LeaderboardType.Latest, GameDataClientTestsEvaluationDataCount)]
+		[InlineData(EvaluationDataType.Boolean, LeaderboardType.Count, GameDataClientTestsEvaluationDataCount)]
+		[InlineData(EvaluationDataType.Boolean, LeaderboardType.Earliest, "True")]
+		[InlineData(EvaluationDataType.Boolean, LeaderboardType.Latest, "True")]
+		[InlineData(EvaluationDataType.Long, LeaderboardType.Cumulative, GameDataClientTestsEvaluationDataSum)]
+		[InlineData(EvaluationDataType.Long, LeaderboardType.Highest, GameDataClientTestsEvaluationDataCount)]
+		[InlineData(EvaluationDataType.Long, LeaderboardType.Lowest, GameDataClientTestsEvaluationStartValue)]
+		[InlineData(EvaluationDataType.Long, LeaderboardType.Earliest, GameDataClientTestsEvaluationStartValue)]
+		[InlineData(EvaluationDataType.Long, LeaderboardType.Latest, GameDataClientTestsEvaluationDataCount)]
+		[InlineData(EvaluationDataType.Float, LeaderboardType.Cumulative, GameDataClientTestsEvaluationDataSum * GameDataClientTestsEvaluationDataFloatMultiplier)]
+		[InlineData(EvaluationDataType.Float, LeaderboardType.Highest, GameDataClientTestsEvaluationDataCount * GameDataClientTestsEvaluationDataFloatMultiplier)]
+		[InlineData(EvaluationDataType.Float, LeaderboardType.Lowest, GameDataClientTestsEvaluationStartValue * GameDataClientTestsEvaluationDataFloatMultiplier)]
+		[InlineData(EvaluationDataType.Float, LeaderboardType.Earliest, GameDataClientTestsEvaluationStartValue * GameDataClientTestsEvaluationDataFloatMultiplier)]
+		[InlineData(EvaluationDataType.Float, LeaderboardType.Latest, GameDataClientTestsEvaluationDataCount * GameDataClientTestsEvaluationDataFloatMultiplier)]
+		public void CanGetGameDataByLeaderboardType(EvaluationDataType dataType, LeaderboardType leaderboardType, string expectedValue)
 		{
-			var key = "GameData_CanGetGameDataByLeaderboardType";
-			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
-			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, GameDataClientTestsLeaderboardKey);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, GameDataClientTestsLeaderboardKey);
 
-			for (var i = 0; i < 25; i++)
-			{
-				var evaluationDataRequest = new EvaluationDataRequest
-				{
-					CreatingActorId = loggedInAccount.User.Id,
-					GameId = game.Id,
-					Key = key,
-					Value = (((i + 12) % 25) + 1).ToString()
-				};
-
-				evaluationDataRequest.EvaluationDataType = EvaluationDataType.String;
-				Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
-				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Long;
-				Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
-				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Float;
-				evaluationDataRequest.Value = ((((i + 12) % 25) + 1) + ((i/100f) + 0.01f)).ToString(CultureInfo.InvariantCulture);
-				Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
-				evaluationDataRequest.EvaluationDataType = EvaluationDataType.Boolean;
-				evaluationDataRequest.Value = (i % 2 == 0).ToString();
-				Fixture.SUGARClient.GameData.Add(evaluationDataRequest);
-			}
-
-			var get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Count);
-			Assert.Equal("25", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Earliest);
-			Assert.Equal("13", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Latest);
-			Assert.Equal("12", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Count);
-			Assert.Equal("25", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Earliest);
-			Assert.Equal("True", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Latest);
-			Assert.Equal("True", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Cumulative);
-			Assert.Equal("325", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Highest);
-			Assert.Equal("25", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Lowest);
-			Assert.Equal("1", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Earliest);
-			Assert.Equal("13", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Latest);
-			Assert.Equal("12", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Cumulative);
-			Assert.Equal("328.25", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Highest);
-			Assert.Equal("25.13", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Lowest);
-			Assert.Equal("1.14", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Earliest);
-			Assert.Equal("13.01", get.Value);
-			get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Latest);
-			Assert.Equal("12.25", get.Value);
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Highest));
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Lowest));
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.String, LeaderboardType.Cumulative));
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Highest));
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Lowest));
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Boolean, LeaderboardType.Cumulative));
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Long, LeaderboardType.Count));
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, key, EvaluationDataType.Float, LeaderboardType.Count));
+            var get = Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, GameDataClientTestsLeaderboardKey, dataType, leaderboardType);
+			Assert.Equal(expectedValue, get.Value);
 		}
 
-		public GameDataClientTests(ClientTestsFixture fixture)
-			: base(fixture)
+		[Theory]
+		[InlineData(EvaluationDataType.String, LeaderboardType.Highest)]
+		[InlineData(EvaluationDataType.String, LeaderboardType.Lowest)]
+		[InlineData(EvaluationDataType.String, LeaderboardType.Cumulative)]
+		[InlineData(EvaluationDataType.Boolean, LeaderboardType.Highest)]
+		[InlineData(EvaluationDataType.Boolean, LeaderboardType.Lowest)]
+		[InlineData(EvaluationDataType.Boolean, LeaderboardType.Cumulative)]
+		[InlineData(EvaluationDataType.Long, LeaderboardType.Count)]
+		[InlineData(EvaluationDataType.Float, LeaderboardType.Count)]
+        public void DoestGetInvalidDataByLeaderboardType(EvaluationDataType dataType, LeaderboardType leaderboardType)
 		{
-		}
-	}
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, GameDataClientTestsLeaderboardKey);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, GameDataClientTestsLeaderboardKey);
+
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.GameData.GetByLeaderboardType(loggedInAccount.User.Id, game.Id, GameDataClientTestsLeaderboardKey, dataType, leaderboardType));
+        }
+    }
 }
