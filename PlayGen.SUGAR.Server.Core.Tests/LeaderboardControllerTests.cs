@@ -14,7 +14,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	// todo Change to user core controllers
 	public class LeaderboardControllerTests : CoreTestFixtureBase
     {
-        private const int GlobalAverageLeaderboardStandingsExecutionMilliseconds = 50;
+        private const int GlobalAverageLeaderboardStandingsExecutionMilliseconds = 2000;
 	    private const int GlobalLeaderboardStandingsExecutionCount = 5;
         private readonly Controllers.LeaderboardController _leaderboardCoreController = ControllerLocator.LeaderboardController;
         private readonly LeaderboardController _leaderboardDbController = DbControllerLocator.LeaderboardController;
