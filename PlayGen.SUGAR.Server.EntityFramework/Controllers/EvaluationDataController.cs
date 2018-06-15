@@ -155,18 +155,20 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.CreateReadOnly())
 			{
-				var matchingData = Query(context, gameId, actorId, key, EvaluationDataType.Float, start, end).ToList();
-				return matchingData.Sum(s => Convert.ToSingle(s.Value));
-			}
+				return Query(context, gameId, actorId, key, EvaluationDataType.Float, start, end)
+					.Select(e => e.Value)
+					.Sum(v => float.Parse(v));
+            }
 		}
 
         public long SumLong(int gameId, int actorId, string key, DateTime? start = null, DateTime? end = null)
 		{
 			using (var context = ContextFactory.CreateReadOnly())
 			{
-				var matchingData = Query(context, gameId, actorId, key, EvaluationDataType.Long, start, end).ToList();
-				return matchingData.Sum(s => Convert.ToInt64(s.Value));
-			}
+				return Query(context, gameId, actorId, key, EvaluationDataType.Long, start, end)
+					.Select(e => e.Value)
+					.Sum(v => long.Parse(v));
+            }
 		}
 
 		public bool TryGetMax(int gameId, int actorId, string key, out EvaluationData value, EvaluationDataType evaluationDataType, DateTime? start = null, DateTime? end = null)
