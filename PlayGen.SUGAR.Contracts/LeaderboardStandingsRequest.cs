@@ -60,7 +60,8 @@ namespace PlayGen.SUGAR.Contracts
 		public int? PageOffset { get; set; }
 
 		/// <summary>
-		/// Whether the leaderboard standings should show all data for a player or just the highest ranking
+		/// Whether a user can rank multiple times if they have different values.
+		/// Only applicable for Highest, Lowest, Earliest, Latest.
 		/// </summary>
 		[Required]
 		public bool? MultiplePerActor { get; set; }
