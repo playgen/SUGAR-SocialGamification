@@ -43,7 +43,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				context.HandleDetatchedActor(data.ActorId);
 
 				context.ActorData.Add(data);
-				SaveChanges(context);
+				context.SaveChanges();
 
 				return data;
 			}
@@ -54,7 +54,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.ActorData.Update(updatedData);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

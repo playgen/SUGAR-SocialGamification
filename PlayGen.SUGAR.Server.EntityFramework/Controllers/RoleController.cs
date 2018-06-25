@@ -31,13 +31,23 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public Role GetDefault(ClaimScope scope)
+		public Role GetDefault(ClaimScope scope, SUGARContext context = null)
 		{
-			using (var context = ContextFactory.Create())
+			var didCreate = false;
+			if (context == null)
 			{
-				var role = context.Roles.FirstOrDefault(r => r.ClaimScope == scope && r.Default);
-				return role;
+				context = ContextFactory.Create();
+				didCreate = true;
 			}
+			
+			var role = context.Roles.FirstOrDefault(r => r.ClaimScope == scope && r.Default);
+
+			if (didCreate)
+			{
+				context.Dispose();
+			}
+
+			return role;
 		}
 
 		public Role Get(int id)
@@ -54,7 +64,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.Roles.Add(role);
-				SaveChanges(context);
+				context.SaveChanges();
 
 				return role;
 			}
@@ -71,7 +81,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No Role exists with Id: {id}");
 				}
 				context.Roles.Remove(role);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

@@ -21,7 +21,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				context.HandleDetatchedActor(account.User);
 
 				context.Accounts.Add(account);
-				SaveChanges(context);
+				context.SaveChanges();
 
 				return account;
 			}
@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					throw new MissingRecordException($"No Account exists with Id: {id}");
 				}
 				context.Accounts.Remove(account);
-				SaveChanges(context);
+				context.SaveChanges();
 			}
 		}
 	}

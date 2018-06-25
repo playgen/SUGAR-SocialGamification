@@ -1,195 +1,228 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Controllers;
+using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.EntityFramework.Tests;
 using PlayGen.SUGAR.Server.Model;
 using Xunit;
 
 namespace PlayGen.SUGAR.Server.Core.Tests
 {
+	/*// This is to debug slow setup speeds. It will not run in conjunction with the cire tests
+	public class CoreTestFixtureTests
+	{
+		[Fact]
+		public void SetupSpeedTest()
+		{
+			// Act & Assert
+			AssertUtil.ExecutionTimeAssert(() => new CoreTestFixture(), 30 * 1000, 1);
+        }
+	}*/
+
     public class CoreTestFixture
     {
 		// Must be divisible by GroupCount and (FriendCount + 1)
-        public const int UserCount = 1000;
+        public const int UserCount = 200;
         public const int GameCount = 10;
         public const int GroupCount = 10;
         public const int FriendCount = 9;
-        public const int DataCount = 100000;
 
-        private readonly List<Game> _games = new List<Game>(DataCount);
-        private readonly List<User> _users = new List<User>(UserCount);
-        private readonly List<Group> _groups = new List<Group>(GroupCount);
+        private readonly List<Game> _sortedGames = new List<Game>(GameCount);
+        private readonly List<User> _sortedUsers = new List<User>(UserCount);
+        private readonly List<Group> _sortedGroups = new List<Group>(GroupCount);
         
-        private readonly Random _random = new Random(123);
-
         private readonly UserController _userController = ControllerLocator.UserController;
         private readonly GroupController _groupController = ControllerLocator.GroupController;
         private readonly GameController _gameController = ControllerLocator.GameController;
 	    private readonly RelationshipController _relationshipController = ControllerLocator.RelationshipController;
-        private readonly GameDataController _gameDataController = ControllerLocator.GameDataController;
+	    private readonly GameDataController _gameDataController = ControllerLocator.GameDataController;
 
-        public IReadOnlyList<Game> Games => _games;
-        public IReadOnlyList<User> Users => _users;
-        public IReadOnlyList<Group> Groups => _groups;
+        public IReadOnlyList<Game> SortedGames => _sortedGames;
+        public IReadOnlyList<User> SortedUsers => _sortedUsers;
+        public IReadOnlyList<Group> SortedGroups => _sortedGroups;
+		
+	    // Evaluation Data Keys
+	    public string EvaluationDataKeyAscendingString => GenerateEvaluationDataKey(EvaluationDataType.String);
+	    public string EvaluationDataKeyAscendingBoolean => GenerateEvaluationDataKey(EvaluationDataType.Boolean);
+	    public string EvaluationDataKeyAscendingFloat => GenerateEvaluationDataKey(EvaluationDataType.Float);
+	    public string EvaluationDataKeyAscendingLong => GenerateEvaluationDataKey(EvaluationDataType.Long);
+		
+        public int EvaluationDataGameId => _sortedGames[0].Id;
 
-        public CoreTestFixture()
+		public CoreTestFixture()
         {
 			ClearDatabaseFixture.Clear();
             PopulateData();
         }
-		
+
+	    public string GenerateEvaluationDataKey(EvaluationDataType dataType)
+	    {
+		    return $"{nameof(CoreTestFixture)}_Ascending_{dataType}";
+	    }
+
         private void PopulateData()
-        {
-            _games.Clear();
-            _users.Clear();
-            _groups.Clear();
+	    {
+		    _sortedGames.Clear();
+		    _sortedUsers.Clear();
+		    _sortedGroups.Clear();
 
-            var dataValues = GenerateDataValues();
-            for (var i = 0; i < UserCount; i++)
-            {
-                _users.Add(CreateUser((i + 1).ToString()));
-            }
+		    // Add users and games
+		    using (var context = EntityFramework.Tests.ControllerLocator.ContextFactory.Create())
+		    {
+			    for (var i = 0; i < UserCount; i++)
+			    {
+				    _sortedUsers.Add(CreateUser($"{i + 1}", context));
+			    }
 
-            for (var i = 0; i < GameCount; i++)
-            {
-                _games.Add(CreateGame((i + 1).ToString()));
-            }
+			    for (var i = 0; i < GameCount; i++)
+			    {
+				    _sortedGames.Add(CreateGame($"{i + 1}", context));
+			    }
 
-            for (var i = 0; i < GroupCount; i++)
-            {
-                _groups.Add(CreateGroup((i + 1).ToString()));
-            }
+			    context.SaveChanges();
+		    }
 
-            for (var userIndex = 0; userIndex < _users.Count; userIndex++)
-            {
-	            var windowSize = FriendCount + 1;
-	            var indexInWindow = userIndex % windowSize;
-	            var friendsToAddCount = windowSize - (indexInWindow + 1);
+		    _sortedUsers.Sort((a, b) => a.Id - b.Id);
+		    _sortedGames.Sort((a, b) => a.Id - b.Id);
 
-	            for (var friendIndexOffset = 1; friendIndexOffset <= friendsToAddCount; friendIndexOffset++)
-	            {
-		            var friendIndex = userIndex + friendIndexOffset;
+		    // Add groups
+		    var groupAdmin = CreateUser("TestingGroupAdmin");
+		    for (var i = 0; i < GroupCount; i++)
+		    {
+			    _sortedGroups.Add(CreateGroup($"{i + 1}", groupAdmin.Id));
+		    }
 
-		            CreateFriendship(_users[userIndex].Id, _users[friendIndex].Id);
-                }
-				
-                CreateMembership(_users[userIndex].Id, _groups[userIndex % GroupCount].Id);
-            }
+		    _sortedGroups.Sort((a, b) => a.Id - b.Id);
 
-            var datas = new List<EvaluationData>();
-            for (var j = 0; j < DataCount; j++)
-            {
-                datas.Add(CreateData(_games[_random.Next(0, _games.Count)], _users[_random.Next(0, _users.Count)], dataValues[_random.Next(0, dataValues.Count)]));
-            }
-            _gameDataController.Add(datas.ToArray());
+		    using (var context = EntityFramework.Tests.ControllerLocator.ContextFactory.Create())
+		    {
+			    for (var userIndex = 0; userIndex < _sortedUsers.Count; userIndex++)
+			    {
+				    var windowSize = FriendCount + 1;
+				    var indexInWindow = userIndex % windowSize;
+				    var friendsToAddCount = windowSize - (indexInWindow + 1);
+
+				    for (var friendIndexOffset = 1; friendIndexOffset <= friendsToAddCount; friendIndexOffset++)
+				    {
+					    var friendIndex = userIndex + friendIndexOffset;
+
+					    CreateFriendship(_sortedUsers[userIndex].Id, _sortedUsers[friendIndex].Id, context);
+				    }
+
+				    CreateMembership(_sortedUsers[userIndex].Id, _sortedGroups[userIndex % GroupCount].Id, context);
+			    }
+
+			    context.SaveChanges();
+		    }
+
+			// Add User Evaluation Data
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingString, EvaluationDataType.String, EvaluationDataGameId, _sortedUsers.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingBoolean, EvaluationDataType.Boolean, EvaluationDataGameId, _sortedUsers.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingFloat, EvaluationDataType.Float, EvaluationDataGameId, _sortedUsers.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingLong, EvaluationDataType.Long, EvaluationDataGameId, _sortedUsers.Cast<Actor>().ToList());
+
+            // Add Group Evaluation Data
+            CreateEvaluationDataAscending(EvaluationDataKeyAscendingString, EvaluationDataType.String, EvaluationDataGameId, _sortedGroups.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingBoolean, EvaluationDataType.Boolean, EvaluationDataGameId, _sortedGroups.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingFloat, EvaluationDataType.Float, EvaluationDataGameId, _sortedGroups.Cast<Actor>().ToList());
+		    CreateEvaluationDataAscending(EvaluationDataKeyAscendingLong, EvaluationDataType.Long, EvaluationDataGameId, _sortedGroups.Cast<Actor>().ToList());
         }
 
-        private EvaluationData CreateData(Game game, User user, DataParam data)
-        {
-            var gameData = new EvaluationData
-            {
-                ActorId = user.Id,
-                GameId = game.Id,
-                Key = data.DataType.ToString(),
-                Value = data.Value,
-                EvaluationDataType = data.DataType,
-            };
+	    private void CreateEvaluationDataAscending(string key, EvaluationDataType type, int gameId, List<Actor> actors)
+	    {
+		    var data = new List<EvaluationData>();
 
-            return gameData;
-        }
+		    // Each user will have that user's index + 1 amount of EvaluationData (unless singular is defined)
+		    // i.e:
+		    // users[0] will have 1 EvaluationData of 1
+		    // users[1] will have 2 EvaluationData of 1 each = 2
+		    // users[2] will have 3 EvaluationData of 1 each = 3 
+			// etc
+		    for (var actorIndex = 0; actorIndex < actors.Count; actorIndex++)
+		    {
+			    for (var actorDataIndex = 0; actorDataIndex < actorIndex + 1; actorDataIndex++)
+			    {
+				    var gameData = new EvaluationData
+				    {
+					    ActorId = actors[actorIndex].Id,
+					    GameId = gameId,
+					    Key = key,
+					    Value = (actorDataIndex + 1).ToString(),
+					    EvaluationDataType = type
+				    };
 
-        private User CreateUser(string name)
+				    if (type == EvaluationDataType.Float)
+				    {
+					    gameData.Value = (actorDataIndex * 0.01f).ToString(CultureInfo.InvariantCulture);
+				    }
+				    else if (type == EvaluationDataType.Boolean)
+				    {
+					    gameData.Value = (actorDataIndex % 2 == 0).ToString();
+				    }
+
+				    data.Add(gameData);
+			    }
+		    }
+
+		    _gameDataController.Add(data);
+	    }
+
+        private User CreateUser(string name, SUGARContext context = null)
         {
             var user = new User
             {
                 Name = $"User_{name}",
             };
-            _userController.Create(user);
+            _userController.Create(user, context);
 
             return user;
         }
 
-        private Group CreateGroup(string name)
+        private Group CreateGroup(string name, int creatorId)
         {
             var group = new Group
             {
                 Name = $"Group_{name}",
             };
-            //todo use actual user id instead of 0
-            _groupController.Create(group, 1);
+            
+            _groupController.Create(group, creatorId);
 
             return group;
         }
 
-        private Game CreateGame(string name)
+        private Game CreateGame(string name, SUGARContext context)
         {
             var game = new Game
             {
                 Name = $"Game_{name}",
             };
             //todo use actual user id instead of 0
-            _gameController.Create(game, 1);
+            _gameController.Create(game, 1, context);
 
             return game;
         }
 
-        private void CreateFriendship(int requestor, int acceptor)
+        private void CreateFriendship(int requestor, int acceptor, SUGARContext context = null)
         {
             var relationship = new ActorRelationship
 			{
                 RequestorId = requestor,
                 AcceptorId = acceptor,
             };
-	        _relationshipController.CreateRequest(relationship, true);
+	        _relationshipController.CreateRequest(relationship, true, context);
         }
 
-        private void CreateMembership(int requestor, int acceptor)
+        private void CreateMembership(int requestor, int acceptor, SUGARContext context)
         {
             var relationship = new ActorRelationship
             {
                 RequestorId = requestor,
                 AcceptorId = acceptor,
             };
-	        _relationshipController.CreateRequest(relationship, true);
-        }
-
-        private List<DataParam> GenerateDataValues()
-        {
-            var dataParams = new List<DataParam>();
-
-            for (var i = 0; i < 2500; i++)
-            {
-                dataParams.Add(new DataParam
-                {
-                    Value = (_random.NextDouble() * 1000).ToString("f5"),
-                    DataType = EvaluationDataType.Float,
-                });
-                dataParams.Add(new DataParam
-                {
-                    Value = _random.Next(0, 1000).ToString(),
-                    DataType = EvaluationDataType.Long,
-                });
-                dataParams.Add(new DataParam
-                {
-                    Value = _random.Next(0, 1000).ToString(),
-                    DataType = EvaluationDataType.String,
-                });
-                dataParams.Add(new DataParam
-                {
-                    Value = (_random.Next(0, 2) == 1 ? true : false).ToString(),
-                    DataType = EvaluationDataType.Boolean,
-                });
-            }
-
-            return dataParams;
-        }
-
-        private struct DataParam
-        {
-            public string Value { get; set; }
-
-            public EvaluationDataType DataType;
+	        _relationshipController.CreateRequest(relationship, true, context);
         }
     }
 

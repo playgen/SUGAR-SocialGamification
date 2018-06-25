@@ -14,14 +14,17 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		public LeaderboardFilterType LeaderboardFilterType { get; set; }
 
+		/// <summary>
+        /// Use zero to signify all
+        /// </summary>
 		public int PageLimit { get; set; }
 
 		public int PageOffset { get; set; }
 
 		public bool MultiplePerActor { get; set; }
 
-		public DateTime DateStart { get; set; }
+		public DateTime? DateStart { get; set; }
 
-		public DateTime DateEnd { get; set; }
+		public DateTime? DateEnd { get; set; }
 	}
 }

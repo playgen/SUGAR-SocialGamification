@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
@@ -75,20 +76,21 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		    return count;
 	    }
 
-		/// <summary>
-		/// Create a new relationship between actores
-		/// </summary>
-		/// <param name="newRelationship"></param>
-		/// <param name="autoAccept">If the relationship is accepted immediately</param>
-	    public void CreateRequest(ActorRelationship newRelationship, bool autoAccept)
+	    /// <summary>
+	    /// Create a new relationship between actores
+	    /// </summary>
+	    /// <param name="newRelationship"></param>
+	    /// <param name="autoAccept">If the relationship is accepted immediately</param>
+	    /// <param name="context">Optional DbContext to perform opperations on. If ommitted a DbContext will be created.</param>
+	    public void CreateRequest(ActorRelationship newRelationship, bool autoAccept, SUGARContext context = null)
 	    {
 		    if (autoAccept)
 		    {
-			    _relationshipDbController.CreateRelationship(newRelationship);
+			    _relationshipDbController.CreateRelationship(newRelationship, context);
 		    }
 		    else
 		    {
-			    _relationshipDbController.CreateRelationshipRequest(newRelationship);
+			    _relationshipDbController.CreateRelationshipRequest(newRelationship, context);
 		    }
 
 		    _logger.LogInformation($"{newRelationship?.RequestorId} -> {newRelationship?.AcceptorId}, Auto Accept: {autoAccept}");

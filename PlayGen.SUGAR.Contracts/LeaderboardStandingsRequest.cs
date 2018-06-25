@@ -47,6 +47,7 @@ namespace PlayGen.SUGAR.Contracts
 
 		/// <summary>
 		/// The maximum number of results which will be returned.
+		/// Leave this as null to return all results as each time the next page is queried the database is queried 
 		/// </summary>
 		[Required]
 		public int? PageLimit { get; set; }
@@ -59,7 +60,8 @@ namespace PlayGen.SUGAR.Contracts
 		public int? PageOffset { get; set; }
 
 		/// <summary>
-		/// Whether the leaderboard standings should show all data for a player or just the highest ranking
+		/// Whether a user can rank multiple times if they have different values.
+		/// Only applicable for Highest, Lowest, Earliest, Latest.
 		/// </summary>
 		[Required]
 		public bool? MultiplePerActor { get; set; }
@@ -68,12 +70,12 @@ namespace PlayGen.SUGAR.Contracts
 		/// The earliest point which data should be collected from.
 		/// Can be left null to set no earliest point.
 		/// </summary>
-		public DateTime DateStart { get; set; }
+		public DateTime? DateStart { get; set; }
 
 		/// <summary>
 		/// The latest point which data should be collected from.
 		/// Can be left null to gather all data up to the present time.
 		/// </summary>
-		public DateTime DateEnd { get; set; }
+		public DateTime? DateEnd { get; set; }
 	}
 }

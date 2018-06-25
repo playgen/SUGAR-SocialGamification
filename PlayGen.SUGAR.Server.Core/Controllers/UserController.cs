@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
+using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
@@ -63,10 +64,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return users;
 		}
 
-		public User Create(User newUser)
+		public User Create(User newUser, SUGARContext context = null)
 		{
-			newUser = _userController.Create(newUser);
-			_actorRoleController.Create(ClaimScope.User, newUser.Id, newUser.Id);
+			newUser = _userController.Create(newUser, context);
+
+			_actorRoleController.Create(ClaimScope.User, newUser.Id, newUser.Id, context);
 
 			_logger.LogInformation($"{newUser.Id}");
 

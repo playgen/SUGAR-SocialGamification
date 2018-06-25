@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common.Authorization;
+using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
@@ -65,11 +66,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			return games;
 		}
-
-		public Game Create(Game newGame, int creatorId)
+		
+        public Game Create(Game newGame, int creatorId, SUGARContext context = null)
 		{
-			newGame = _gameDbController.Create(newGame);
-			_actorRoleController.Create(ClaimScope.Game, creatorId, newGame.Id);
+			newGame = _gameDbController.Create(newGame, context);
+			_actorRoleController.Create(ClaimScope.Game, creatorId, newGame.Id, context);
 
 			_logger.LogInformation($"Created: Game: {newGame.Id}, for CreatorId: {creatorId}");
 

@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_actorController = actorController;
 		}
 
-		public List<EvaluationData> Get(int gameId, int actorId, string[] keys)
+		public List<EvaluationData> Get(int gameId, int actorId, params string[] keys)
 		{
 			return _evaluationDataController.Get(gameId, actorId, keys);
 		}
@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return _evaluationDataController.Add(newData);
 		}
 
-		public void Add(EvaluationData[] evaluationData)
+		public void Add(List<EvaluationData> evaluationData)
 		{
 			_evaluationDataController.Add(evaluationData);
 		}

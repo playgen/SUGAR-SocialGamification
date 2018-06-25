@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common.Authorization;
+using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
@@ -73,24 +74,24 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return roles;
 		}
 
-		public ActorRole Create(ActorRole newRole)
+		public ActorRole Create(ActorRole newRole, SUGARContext context = null)
 		{
-			newRole = _actorRoleDbController.Create(newRole);
+			newRole = _actorRoleDbController.Create(newRole, context);
 
 			_logger.LogInformation($"{newRole?.Id}");
 
 			return newRole;
 		}
 
-		public void Create(ClaimScope claimScope, int actorId, int entityId)
+		public void Create(ClaimScope claimScope, int actorId, int entityId, SUGARContext context = null)
 		{
-			var role = _roleController.GetDefault(claimScope);
+			var role = _roleController.GetDefault(claimScope, context);
 
 			_logger.LogInformation($"ClaimScope: {claimScope}, ActorId: {actorId}, EntityId: {entityId}");
 
 			if (role != null)
 			{
-				Create(new ActorRole { ActorId = actorId, RoleId = role.Id, EntityId = entityId });
+				Create(new ActorRole { ActorId = actorId, RoleId = role.Id, EntityId = entityId }, context);
 			}
 		}
 

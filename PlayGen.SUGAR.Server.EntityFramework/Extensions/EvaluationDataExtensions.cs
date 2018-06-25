@@ -62,22 +62,25 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			return evaluationDataQueryable.Where(data => data.EvaluationDataType == type);
 		}
 
-		public static IQueryable<EvaluationData> FilterByDateTimeRange(this IQueryable<EvaluationData> evaluationDataQueryable,
-			DateTime start, DateTime end)
+		public static IQueryable<EvaluationData> FilterByDateTimeRange(
+			this IQueryable<EvaluationData> evaluationDataQueryable,
+			DateTime? start, 
+			DateTime? end)
 		{
-			end = end == default(DateTime) ? DateTime.Now : end;
-			return evaluationDataQueryable.Where(data => data.DateModified >= start && data.DateModified <= end);
-		}
+			var modifiedEvaluationDataQueryable = evaluationDataQueryable;
 
-		public static List<EvaluationData> FilterBy(this IQueryable<EvaluationData> evaluationDataQueryable, int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime start = default(DateTime), DateTime end = default(DateTime))
-		{
-			return evaluationDataQueryable
-				.FilterByGameId(gameId)
-				.FilterByActorId(actorId)
-				.FilterByKey(key)
-				.FilterByDataType(evaluationDataType)
-				.FilterByDateTimeRange(start, end)
-				.ToList();
+            if (start.HasValue)
+			{
+				modifiedEvaluationDataQueryable = modifiedEvaluationDataQueryable.Where(data => data.DateModified >= start);
+            }
+
+			if (end.HasValue)
+			{
+				modifiedEvaluationDataQueryable = evaluationDataQueryable.Where(data => data.DateModified <= end);
+			}
+
+			return modifiedEvaluationDataQueryable;
+
 		}
 	}
 }

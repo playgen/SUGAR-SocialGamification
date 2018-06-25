@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
@@ -69,10 +70,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				throw new MissingRecordException("The provided leaderboard does not exist.");
 			}
-			if (request.PageLimit <= 0)
-			{
-				throw new ArgumentException("You must request at least one ranking from the leaderboard.");
-			}
+			
 			var standings = GatherStandings(leaderboard, request);
 
 			_logger.LogInformation($"{standings?.Count} Standings for Leaderboard: {leaderboard.Token}");
@@ -83,6 +81,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		protected List<StandingsResponse> GatherStandings(Leaderboard leaderboard, StandingsRequest request)
 		{
 			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, leaderboard.EvaluationDataCategory);
+
+			if (request.MultiplePerActor && request.LeaderboardFilterType == LeaderboardFilterType.Near)
+			{
+				throw new ArgumentException($"You cannot use the filter type: {nameof(LeaderboardFilterType.Near)} in conjunction with {nameof(request.MultiplePerActor)}.");
+			}
 
 			var actors = GetActors(evaluationDataController, leaderboard, request);
 			
@@ -338,12 +341,28 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				throw new ArgumentException("Actors cannot be ranked multiple times in leaderboards which use LeaderboardType Cumulative.");
 			}
+
 			switch (leaderboard.EvaluationDataType)
 			{
 				case EvaluationDataType.Long:
-					results = actors.Select(a => new { Actor = a, Value = SumRelatedNullable(GetRelated(a, leaderboard.CriteriaScope).Select(r => evaluationDataController.TryGetSum<long>(leaderboard.GameId, r, leaderboard.EvaluationDataKey, out var value, leaderboard.EvaluationDataType, request.DateStart, request.DateEnd) ? value : null).ToList()) })
-						.Where(a => a.Value != null)
-						.Select(a => new StandingsResponse
+					results = actors
+						.Select(a => new
+						{
+							Actor = a,
+							Value = GetRelated(a, leaderboard.CriteriaScope)
+								// Sum each related actor's sum
+								.Sum(r => 
+									// Sum for each related actor
+									evaluationDataController.SumLong(
+										leaderboard.GameId, 
+										r, 
+										leaderboard.EvaluationDataKey, 
+										request.DateStart, 
+										request.DateEnd)
+									)
+						})
+						.OrderByDescending(a => a.Value)
+                        .Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
@@ -352,21 +371,33 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					break;
 
 				case EvaluationDataType.Float:
-					results = actors.Select(a => new { Actor = a, Value = SumRelatedNullable(GetRelated(a, leaderboard.CriteriaScope).Select(r => evaluationDataController.TryGetSum<float>(leaderboard.GameId, r, leaderboard.EvaluationDataKey, out var value, leaderboard.EvaluationDataType, request.DateStart, request.DateEnd) ? value : null).ToList()) })
-						.Where(a => a.Value != null)
+					results = actors
+						.Select(a => new
+						{
+							Actor = a,
+							Value = GetRelated(a, leaderboard.CriteriaScope)
+									// Sum each related actor's sum
+                                    .Sum(r =>
+										// Sum for each related actor
+                                        evaluationDataController.SumFloat(leaderboard.GameId, 
+											r, 
+											leaderboard.EvaluationDataKey, 
+											request.DateStart, 
+											request.DateEnd)
+										)
+						})
+						.OrderByDescending(a => a.Value)
 						.Select(a => new StandingsResponse
 						{
 							ActorId = a.Actor.Id,
 							ActorName = a.Actor.Name,
-							Value = a.Value.ToString()
+							Value = a.Value.ToString(CultureInfo.InvariantCulture)
 						}).ToList();
 					break;
 
 				default:
 					return null;
 			}
-
-			results = results.OrderByDescending(r => float.Parse(r.Value)).ToList();
 
 			_logger.LogDebug($"{results.Count} Actors for GameId: {leaderboard.GameId}, Key: {leaderboard.EvaluationDataKey}, Leaderboard Type: {leaderboard.LeaderboardType}, Save Data Type: {leaderboard.EvaluationDataType}");
 
@@ -544,7 +575,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				return null;
 			}
-			return SumRelated<T>(values.Select(s => s.Value).ToList());
+			return SumRelated(values.Select(s => s.Value).ToList());
 		}
 
 		private T SumRelated<T>(List<T> values) where T : struct
@@ -556,27 +587,48 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		protected List<StandingsResponse> FilterResults(List<StandingsResponse> typeResults, int limit, int offset, LeaderboardFilterType filter, int? actorId)
 		{
-			int position;
-			if (filter == LeaderboardFilterType.Near)
+			var limitedTypeResults = typeResults;
+			if (limit > 0)
 			{
-				if (actorId != null && typeResults.Any(r => r.ActorId == actorId.Value))
+				var firstIndex = 0;
+				int centerIndex;
+				var lastIndex = typeResults.Count - 1;
+
+				int entriesBeforeCenter;
+				int entriesAfterCenter;
+
+                if (filter == LeaderboardFilterType.Near)
 				{
-					var actorPosition = typeResults.TakeWhile(r => r.ActorId != actorId.Value).Count();
-					offset += actorPosition / limit;
-				}
+					if (actorId == null)
+					{
+						throw new ArgumentException($"You must provide an Actor Id when using the {nameof(LeaderboardFilterType.Near)} filter.");
+					}
+					
+					var actorIndex = typeResults.FindIndex(t => t.ActorId == actorId);
+					centerIndex = actorIndex + offset;
+					
+					entriesBeforeCenter = ((limit - 1) / 2);
+					entriesAfterCenter = (limit - 1 ) - entriesBeforeCenter;
+                }
 				else
-				{
-					typeResults = new List<StandingsResponse>();
-				}
-			}
-			typeResults = typeResults.Skip(offset * limit).Take(limit).ToList();
-			position = offset * limit;
-			return typeResults.Select(s => new StandingsResponse
+                {
+	                centerIndex = offset;
+	                entriesBeforeCenter = 0;
+	                entriesAfterCenter = limit - 1;
+                }
+
+				var startIndex = Math.Max(centerIndex - entriesBeforeCenter, firstIndex);
+                var endIndex = Math.Min(centerIndex + entriesAfterCenter, lastIndex);
+
+				limitedTypeResults = typeResults.GetRange(startIndex, (endIndex + 1) - startIndex);
+            }
+
+			return limitedTypeResults.Select(s => new StandingsResponse
 			{
 				ActorId = s.ActorId,
 				ActorName = s.ActorName,
 				Value = s.Value,
-				Ranking = ++position
+				Ranking = typeResults.IndexOf(s) + 1
 			}).ToList();
 		}
 	}
