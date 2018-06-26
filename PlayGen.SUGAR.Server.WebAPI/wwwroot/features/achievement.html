@@ -8,7 +8,7 @@
     <title>Achievement | SUGAR </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Achievement | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -74,29 +74,29 @@
 <h2 id="api">API</h2>
 <ul>
 <li>Client<ul>
-<li>&lt;xref:PlayGen.SUGAR.Client.AchievementClient&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Client.AchievementClient.html">AchievementClient</a></li>
 </ul>
 </li>
 <li>Contracts<ul>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaUpdateRequest&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaResponse&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationProgressResponse&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationCreateRequest&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationUpdateRequest&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationResponse&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.EvaluationDataType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.CriteriaQueryType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.ComparisonType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.ActorType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.CriteriaScope&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaUpdateRequest.html">EvaluationCriteriaUpdateRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaResponse.html">EvaluationCriteriaResponse</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCreateRequest.html">EvaluationCreateRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationUpdateRequest.html">EvaluationUpdateRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationResponse.html">EvaluationResponse</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.CriteriaQueryType.html">CriteriaQueryType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.ComparisonType.html">ComparisonType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.ActorType.html">ActorType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.CriteriaScope.html">CriteriaScope</a></li>
 </ul>
 </li>
 </ul>
 <h2 id="examples">Examples</h2>
 <ul>
 <li><p>Specifying an achievement</p>
-<p>  This example will describe how to implement the &#39;Slay 10 Enemies!&#39; achievement. An achievement must be specified with an &lt;xref:PlayGen.SUGAR.Contracts.EvaluationCreateRequest&gt; with a list of &lt;xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest&gt; that will be evalutated against to determine progress.
+<p>  This example will describe how to implement the &#39;Slay 10 Enemies!&#39; achievement. An achievement must be specified with an <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCreateRequest.html">EvaluationCreateRequest</a> with a list of <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a> that will be evalutated against to determine progress.
   All &#39;EnemiesSlain&#39; keys will be checked in gameData and whether the sum of their values is greater than or equal to 10.</p>
 </li>
 </ul>
@@ -139,7 +139,7 @@
         }
 </code></pre><ul>
 <li><p>Submitting data for when somthing which may be used to evaluate progress towards an Achievement  </p>
-<p>  An achievement uses keys in <a class="xref" href="gameData.html">GameData</a> that match its &lt;xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest&gt;. This data is submitted at points in the game which demonstrate progress towards the achievement (as well as other uses).</p>
+<p>  An achievement uses keys in <a class="xref" href="gameData.html">GameData</a> that match its <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a>. This data is submitted at points in the game which demonstrate progress towards the achievement (as well as other uses).</p>
 </li>
 </ul>
 <pre><code class="lang-cs">        private void SlayEnemies(int quantity)
@@ -178,7 +178,7 @@
                 $&quot;with progress: {notification.Progress}&quot;);
         }
 </code></pre><ul>
-<li>Requesting specific achievement progress using the &lt;xref:PlayGen.SUGAR.Client.AchievementClient&gt; and specifying the GameId, ActorId and Token, returns an &lt;xref:PlayGen.SUGAR.Contracts.EvaluationProgressResponse&gt; object for that Actor&#39;s progress towards the achievement in that game. </li>
+<li>Requesting specific achievement progress using the <a class="xref" href="../api/PlayGen.SUGAR.Client.AchievementClient.html">AchievementClient</a> and specifying the GameId, ActorId and Token, returns an <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a> object for that Actor&#39;s progress towards the achievement in that game. </li>
 </ul>
 <pre><code class="lang-cs">        private float CheckAchievementProgress()
         {

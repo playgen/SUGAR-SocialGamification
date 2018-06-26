@@ -8,7 +8,7 @@
     <title>Resources | SUGAR </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Resources | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -73,25 +73,25 @@
 <h2 id="api">API</h2>
 <ul>
 <li>Client<ul>
-<li><a href="xref:PlayGen.SUGAR.Client.ResourceClient">ResourceClient</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Client.ResourceClient.html">ResourceClient</a></li>
 </ul>
 </li>
 <li>Contracts<ul>
-<li><a href="xref:PlayGen.SUGAR.Contracts.ResourceAddRequest">ResourceAddRequest</a></li>
-<li><a href="xref:PlayGen.SUGAR.Contracts.ResourceResponse">ResourceResponse</a></li>
-<li><a href="xref:PlayGen.SUGAR.Contracts.ResourceTransferRequest">ResourceTransferRequest</a></li>
-<li><a href="xref:PlayGen.SUGAR.Contracts.ResourceTransferResponse">ResourceTransferResponse</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.ResourceAddRequest.html">ResourceAddRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.ResourceResponse.html">ResourceResponse</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.ResourceTransferRequest.html">ResourceTransferRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.ResourceTransferResponse.html">ResourceTransferResponse</a></li>
 </ul>
 </li>
 <li>WebAPI<ul>
-<li><a href="xref:PlayGen.SUGAR.Server.WebAPI.Controllers.ResourceController">ResourceController</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Server.WebAPI.Controllers.ResourceController.html">ResourceController</a></li>
 </ul>
 </li>
 </ul>
 <h2 id="examples">Examples</h2>
 <ul>
 <li>Creating a resource
-  The <a href="xref:PlayGen.SUGAR.Client.ResourceClient">ResourceClient</a> has an AddOrUpdate function which adds a new resource entry belonging to the user into <a href="gameData.html">GameData</a> or automatically updates an existing one if a duplicate entry was to be made. The function takes a <a href="xref:PlayGen.SUGAR.Contracts.ResourceAddRequest">ResourceAddRequest</a> parameter and returns a <a href="xref:PlayGen.SUGAR.Contracts.ResourceResponse">ResourceResponse</a>. This example will show how to both add a new entry or increment a player&#39;s amount of Valyrian steel. This is done by specifying the key &quot;ValyrianSteel&quot; which will be added with a value matching the quantity to GameData. If the entry already exists, it will add the quantity to its value (or subtract if the quantity is negative).</li>
+  The <a class="xref" href="../api/PlayGen.SUGAR.Client.ResourceClient.html">ResourceClient</a> has an AddOrUpdate function which adds a new resource entry belonging to the user into <a href="gameData.html">GameData</a> or automatically updates an existing one if a duplicate entry was to be made. The function takes a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.ResourceAddRequest.html">ResourceAddRequest</a> parameter and returns a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.ResourceResponse.html">ResourceResponse</a>. This example will show how to both add a new entry or increment a player&#39;s amount of Valyrian steel. This is done by specifying the key &quot;ValyrianSteel&quot; which will be added with a value matching the quantity to GameData. If the entry already exists, it will add the quantity to its value (or subtract if the quantity is negative).</li>
 </ul>
 <pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
         private ResourceClient _resourceClient;
@@ -117,7 +117,7 @@
         }
 </code></pre><ul>
 <li>Transfer a resource
-  This example will show how to give Valryian to another player. The <a href="xref:PlayGen.SUGAR.Client.ResourceClient">ResourceClient</a>&#39;s Transfer function handles this taking a <a href="xref:PlayGen.SUGAR.Contracts.ResourceTransferRequest">ResourceTransferRequest</a> parameter and returning a <a href="xref:PlayGen.SUGAR.Contracts.ResourceTransferResponse">ResourceTransferResponse</a> object. When the transfer is made, it adds the resource quantity to the target user, and subtracts it from the source user. </li>
+  This example will show how to give Valryian to another player. The <a class="xref" href="../api/PlayGen.SUGAR.Client.ResourceClient.html">ResourceClient</a>&#39;s Transfer function handles this taking a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.ResourceTransferRequest.html">ResourceTransferRequest</a> parameter and returning a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.ResourceTransferResponse.html">ResourceTransferResponse</a> object. When the transfer is made, it adds the resource quantity to the target user, and subtracts it from the source user. </li>
 </ul>
 <pre><code class="lang-cs">        private void TransferResource(int quantity, int targetUser) 
         {

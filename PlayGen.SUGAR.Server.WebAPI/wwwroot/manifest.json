@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "P:/SUGAR/doc",
+  "source_base_path": "P:/sugar/doc",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -13,12 +13,3924 @@
       "is_incremental": false
     },
     {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.APIVersionClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.APIVersionClient.html",
+          "hash": "LjfFfoOI+HzJdhJjBXO95Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.AccountClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.AccountClient.html",
+          "hash": "bvCW7yXNleM71N4cycGLcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.AchievementClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.AchievementClient.html",
+          "hash": "WkgDY8cQTofVf/wnCu3WvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.AllianceClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.AllianceClient.html",
+          "hash": "rTgpf7YcASy2dcZTMuEpSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.AsyncRequestController.html",
+          "hash": "ly0ah6fI2pDKO48bJNl0PA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.IAsyncRequestController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.IAsyncRequestController.html",
+          "hash": "uXECcrh8QKdj/7jyVJL3zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem-1.html",
+          "hash": "Z8lmVsnXeOwhNjeNwRTDbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.QueueItem.html",
+          "hash": "mGZzxn4KBvdFLNVshzVo3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.SyncRequestController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.SyncRequestController.html",
+          "hash": "d3PRL6R/gmHoqkzyFMDMWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.AsyncRequestQueue.html",
+          "hash": "c0wof2sbzml9aeltbPjf/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.ClientBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.ClientBase.html",
+          "hash": "vyWKPw3GabbAjb4WCAEqcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.DefaultHttpHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.DefaultHttpHandler.html",
+          "hash": "0QjxJOyLb/NKDHnWCKgxug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.Development.DevelopmentClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.Development.DevelopmentClient.html",
+          "hash": "nntbjCzTUbEngxSlarkSpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.Development.SUGARDevelopmentClient.html",
+          "hash": "IH7+GAszsyJirUY3Xa43bw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.Development.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.Development.html",
+          "hash": "6HMuwTKJuwAiTsEAJxZROg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationEventsExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationEventsExtensions.html",
+          "hash": "Vho5ezQexiBvVg6Do248Uw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotification.html",
+          "hash": "50XGLNpJERjJPMgeY7hdQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications.html",
+          "hash": "af2sbDi7hcf2Jsq/KIT+aA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.EvaluationEvents.html",
+          "hash": "BRnFlXsu44PbDRgFr55XBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.Exceptions.ClientException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.Exceptions.ClientException.html",
+          "hash": "RfPvJ7PLYptxs3lO3Jm8+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.Exceptions.ClientHttpException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.Exceptions.ClientHttpException.html",
+          "hash": "yRGCKW6dKVa77TlFbyz01g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.Exceptions.html",
+          "hash": "oRYSGsGfnBWhGwAhqbdwZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.Extensions.UriBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.Extensions.UriBuilderExtensions.html",
+          "hash": "Bp0BsMLS+9NXjwOPT+xOIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.Extensions.html",
+          "hash": "qBBSiCHSnDuDzG1ltsekQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.GameClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.GameClient.html",
+          "hash": "Y/EwyQzPHsinvv1fXW2Prw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.GameDataClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.GameDataClient.html",
+          "hash": "JLAbMIdPHTxk028i5lknJw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.GroupClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.GroupClient.html",
+          "hash": "homzKte4awRtS5pzMn093Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.GroupMemberClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.GroupMemberClient.html",
+          "hash": "AQUjJ0U9549FXQrTMfgXVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.HttpRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.HttpRequest.html",
+          "hash": "LbSxHtXyhYnuAkJQmCnXfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.HttpResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.HttpResponse.html",
+          "hash": "CIk/x1rk2Ma0LzdyGO4dxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.IHttpHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.IHttpHandler.html",
+          "hash": "IBFpoYC73lvAgDZ8ysc7uQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.LeaderboardClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.LeaderboardClient.html",
+          "hash": "aO8KMRQg4A66vWwnwCiHUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.MatchClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.MatchClient.html",
+          "hash": "smvqFntktZV9ka4E5sDdXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.ResourceClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.ResourceClient.html",
+          "hash": "w+jppFTS5EVUTSGErkCQFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.SUGARClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.SUGARClient.html",
+          "hash": "e3X52L2FG8nW0UT9AAUrVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.SessionClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.SessionClient.html",
+          "hash": "u3MA0lWth6c9slcYGbf7mQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.SkillClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.SkillClient.html",
+          "hash": "m8Ym7Aqd9x3IXVgbX/b5xg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.UserClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.UserClient.html",
+          "hash": "o+nDgIJc2tj+Qcg/PyJiFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.UserFriendClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.UserFriendClient.html",
+          "hash": "cj3XXv5qSrnDykkrMyD+IA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Client.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Client.html",
+          "hash": "h/+UYEEFY0zQzPWjqUwFGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.APIVersion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.APIVersion.html",
+          "hash": "ZE5vnXlmnx5CkAHNdL5qmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.ActorType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.ActorType.html",
+          "hash": "06eboJfUoNC3rS4TcTI8LA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Authorization.AuthorizationAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Authorization.AuthorizationAction.html",
+          "hash": "HemIanjqE9nPM/n6wmbefw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Authorization.AuthorizationEntity.html",
+          "hash": "hQkpFYVY9vWctR9FCJBPPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Authorization.AuthorizationName.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Authorization.AuthorizationName.html",
+          "hash": "roTdi7yhL8FvPTC0yZVesg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Authorization.ClaimScope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Authorization.ClaimScope.html",
+          "hash": "Vlv6hZ/LPzyuPZ5dUBgyhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Authorization.Platform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Authorization.Platform.html",
+          "hash": "iF1D4On3ePEsRMlYLzWYUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Authorization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Authorization.html",
+          "hash": "0ZXKmXFp+7UpRYvqImz2wA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.ComparisonType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.ComparisonType.html",
+          "hash": "oGpRj0/Y4BRIezihh+puyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.CriteriaQueryType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.CriteriaQueryType.html",
+          "hash": "dJ4yMc/YZta8p85A0u0GWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.CriteriaScope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.CriteriaScope.html",
+          "hash": "cMqB7UuOV8laF5f9XuVDDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.EvaluationDataCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.EvaluationDataCategory.html",
+          "hash": "lWy/TT6ntXERJn0EbIEuTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.EvaluationDataType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.EvaluationDataType.html",
+          "hash": "8z+YJAHyg0IPI7UbE3nh5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.EvaluationType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.EvaluationType.html",
+          "hash": "fl+vLc7K0/nNd935epupEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Exceptions.SUGARException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Exceptions.SUGARException.html",
+          "hash": "/hUxxmJrTPp1Nxnk0QcHYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Exceptions.html",
+          "hash": "o15T+yy8yumKKXUyr8c27w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Extensions.DateTimeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Extensions.DateTimeExtensions.html",
+          "hash": "fieGVxNT3vXScBe6iEop0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Extensions.EvaluationExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Extensions.EvaluationExtensions.html",
+          "hash": "G2A0cQr06Q6MhXHoU8cnbA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Extensions.html",
+          "hash": "Kjnrh+VNM3ttQsb1gm47cQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.LeaderboardFilterType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.LeaderboardFilterType.html",
+          "hash": "FVxtaLJ2AqhgrIGrdqIYVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.LeaderboardType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.LeaderboardType.html",
+          "hash": "GMOB4oRWmbnaDzBp1icV9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.RegexUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.RegexUtil.html",
+          "hash": "LsbwZRNfr75Nvb50tyoHOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Web.HeaderKeys.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Web.HeaderKeys.html",
+          "hash": "yK6kKRjtGl0qYTDHSV3ddQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.Web.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.Web.html",
+          "hash": "0EWiH72rQGPgvpnzbTVYbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Common.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Common.html",
+          "hash": "MGkHq51mAv+/ZWaXf+yQyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.AccountRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.AccountRequest.html",
+          "hash": "SylzDQH1pqWkGQz2x37veA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.AccountResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.AccountResponse.html",
+          "hash": "4gm7w90S+tT+dttHKAE4mg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.AccountSourceRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.AccountSourceRequest.html",
+          "hash": "lo9seJ5jFif9ZBSZa0otyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.AccountSourceResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.AccountSourceResponse.html",
+          "hash": "rlY49EvnfBx07118WIPBgg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ActorClaimRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ActorClaimRequest.html",
+          "hash": "JQeHcmFCo4i0dtUuZd5Ugg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ActorClaimResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ActorClaimResponse.html",
+          "hash": "ScbazopFh0Vsz2Uo0bMz+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ActorRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ActorRequest.html",
+          "hash": "NKXcj1l9h8PZs3jzrLPd8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ActorResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ActorResponse.html",
+          "hash": "b2WZr0GS2YQhDtpqlM9U/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ActorRoleRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ActorRoleRequest.html",
+          "hash": "vzUrqRuZPz+4IqznwgH9GQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ActorRoleResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ActorRoleResponse.html",
+          "hash": "zE39P7rGGHdm8tyKl97iOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ClaimResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ClaimResponse.html",
+          "hash": "OHkIqTjUIuumTA64qayJCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCreateRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCreateRequest.html",
+          "hash": "+H4wic/849vcTDk6bNYMwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html",
+          "hash": "SKB6myL/tNkfmnO44MxIBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCriteriaResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCriteriaResponse.html",
+          "hash": "ZAtlDi7ad0LlXHMuQpem3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCriteriaUpdateRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationCriteriaUpdateRequest.html",
+          "hash": "nCTusZBPIrFS83g4Dt6ccw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationDataRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationDataRequest.html",
+          "hash": "JdnKClRfoNcXMIhYz+1Yzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationDataResponse.html",
+          "hash": "EtdEdoEedyFf6Ox/vnsoag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationProgressResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html",
+          "hash": "Rmv6g9Mmx8Vdfb0IrKLZ1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationResponse.html",
+          "hash": "0KMjQZhGbDbw4ynESwrgbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationUpdateRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.EvaluationUpdateRequest.html",
+          "hash": "Wyu/hXhasRB7JSvIS3e6tg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.GameRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.GameRequest.html",
+          "hash": "6tWHBy1TyYDToxcvg4/73g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.GameResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.GameResponse.html",
+          "hash": "jmOZj2bwe0r1CS0LCkFRhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.GroupRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.GroupRequest.html",
+          "hash": "/PRM3KuUTE6xGofYf9EtgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.GroupResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.GroupResponse.html",
+          "hash": "vUGcdivndvY/L9QKzpOW2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardRequest.html",
+          "hash": "m+1zHXIaQd/1TZOjRi4iCA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardResponse.html",
+          "hash": "G4pdBaGHNWy0PUkdcaxewg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest.html",
+          "hash": "tXU869r0T3YCjQ0dQuzLvg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse.html",
+          "hash": "2bEYZRSFqTcsWoTMa12ozw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.MatchResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.MatchResponse.html",
+          "hash": "y6PJ6uIPGKU2WVM6ixFMSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.RelationshipRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.RelationshipRequest.html",
+          "hash": "UP5knyZKvQscmMsX6P/UiA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.RelationshipResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.RelationshipResponse.html",
+          "hash": "lR6sPA2EEkSn7YAcF5rmwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.RelationshipStatusUpdate.html",
+          "hash": "tBB3c2fClgjSxHYRms5zdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ResourceAddRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ResourceAddRequest.html",
+          "hash": "EMCgk6sax3Vt8S0ITy9SYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ResourceResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ResourceResponse.html",
+          "hash": "jO5pJrPgwKiQHhV8HZvaLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ResourceTransferRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ResourceTransferRequest.html",
+          "hash": "EN44EbXrr7pmZHYcpHOYuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ResourceTransferResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ResourceTransferResponse.html",
+          "hash": "iKK6Mvzzzy2tN+TxXmvPew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.ResponseWrapper-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.ResponseWrapper-1.html",
+          "hash": "707YcgZLg6FoiEAJwykmfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.RewardCreateRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.RewardCreateRequest.html",
+          "hash": "uq0a2vf1FUrYLJOnHLM8rA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.RewardResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.RewardResponse.html",
+          "hash": "Y2dXFmzjUSz5DhPo7TtOhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.RewardUpdateRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.RewardUpdateRequest.html",
+          "hash": "izueV+2MLD2YazVmMDrk8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.RoleClaimRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.RoleClaimRequest.html",
+          "hash": "LL9OB6TIOBYc20/7gVRT+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.RoleClaimResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.RoleClaimResponse.html",
+          "hash": "aOP4e0XqBqZYWxvyy4w7vA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.RoleRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.RoleRequest.html",
+          "hash": "bS8WlUnmg7Zcl0gp72SvuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.RoleResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.RoleResponse.html",
+          "hash": "CSKJ7MyV0/ICyrLNpFRyHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.UserRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.UserRequest.html",
+          "hash": "kFL0RbCog/dM6dWNxzClAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.UserResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.UserResponse.html",
+          "hash": "bS5v7cCMBb1FcvgzPRiFDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Contracts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Contracts.html",
+          "hash": "m1VkoFQ7YMHX+4OeaeOyXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.Exceptions.ClaimNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Exceptions.ClaimNotFoundException.html",
+          "hash": "WEF7ODjhcBXAnNAUjGZjnw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Exceptions.html",
+          "hash": "BhfAemKh26rWU8pu7Qb/Aw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.AuthorizationHeaderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.AuthorizationHeaderExtensions.html",
+          "hash": "gECW9ItXNArZCs3KUZM/Gg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.AuthorizationTokenExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.AuthorizationTokenExtensions.html",
+          "hash": "0T3if7PgH+k/KGVrQaCKPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.ClaimsExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.ClaimsExtensions.html",
+          "hash": "h+1KvRD2LVyvq4QyUBOQUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Extensions.html",
+          "hash": "EfCPHTuHIMPpDXdMxK6jZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.Filters.TokenReissueFilter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Filters.TokenReissueFilter.html",
+          "hash": "zKlg4YehJL0kR13RgYW5Ew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.Filters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Filters.html",
+          "hash": "oSp15ClEf3Wq1FwccEikyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.Helpers.JWTSerializationAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Helpers.JWTSerializationAdapter.html",
+          "hash": "260MVpV5o5OI8QcXl+Vk4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.Helpers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.Helpers.html",
+          "hash": "UAq2tZL4tdtzEqiUdsjXJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.TokenAuthOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.TokenAuthOptions.html",
+          "hash": "9TVcOFpqGgbB/flr5SRqfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.TokenController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.TokenController.html",
+          "hash": "LBWbBCoDOhaqQMr7O0KsrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.TokenValidity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.TokenValidity.html",
+          "hash": "CfQq/K3AptJqcC/MejVFTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authentication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authentication.html",
+          "hash": "i8Cl46TdDQukaixSm4D7nA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authorization.AuthorizationAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authorization.AuthorizationAttribute.html",
+          "hash": "N+o+PcVl38eT0bhwdt8jZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authorization.AuthorizationExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authorization.AuthorizationExtensions.html",
+          "hash": "B7b854wL85lZmWRFlgx2Nw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authorization.AuthorizationRequirement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authorization.AuthorizationRequirement.html",
+          "hash": "TNiGvj4tpSenMPl8/H84PQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Authorization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Authorization.html",
+          "hash": "AE6ztcaN7+dszB8L5lqaYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.AuthorizationHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.AuthorizationHandler.html",
+          "hash": "cxaUPmRBb/3LSnwBQQ+U4Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.AuthorizationHandlerWithNull.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.AuthorizationHandlerWithNull.html",
+          "hash": "vXNoxXjZeoU1OUqBjOvTWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.AuthorizationHandlerWithoutEntity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.AuthorizationHandlerWithoutEntity.html",
+          "hash": "asmXlZQwsSs6HbbYE2lgEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.ClaimController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.ClaimController.html",
+          "hash": "/jvI+PuYuVCqKVUVZICnBA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Authorization.html",
+          "hash": "DhDz1gZ23YVHbbRwTttU8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.AccountController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.AccountController.html",
+          "hash": "IOxZRTmVEFFii2gcof2URg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.AccountSourceController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.AccountSourceController.html",
+          "hash": "ZUnprdLml4otvTmTRZZ83w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorClaimController.html",
+          "hash": "KiAED34Zop2AiBvbFhO3PQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorController.html",
+          "hash": "Cb1T68QzL0dgartOU+Dc3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorDataController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorDataController.html",
+          "hash": "3eEKhEUDN0h871NmaJRqEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController.html",
+          "hash": "jp7cZbEJMFI6ZtiPtpyM6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.EvaluationController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.EvaluationController.html",
+          "hash": "pLVHVYDJgKD/wD2k4dZKAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html",
+          "hash": "iHUWSjzJPlvYNX1dbL9Fsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.GameController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.GameController.html",
+          "hash": "+3BscGJUj51JL2Z1NEO/aQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.GameDataController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.GameDataController.html",
+          "hash": "/aoZlzGrpCIu7FvtKz9MBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.GroupController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.GroupController.html",
+          "hash": "az2iiuNdOCX1vcHP4803Gw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.LeaderboardController.html",
+          "hash": "hCqVuizb/6vQKrtnUAU0OA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.MatchController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.MatchController.html",
+          "hash": "RaEVKsXKz3e8P0tpH52n+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.html",
+          "hash": "qrmKemDlgo1DTxM3UMX1Lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ResourceController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.ResourceController.html",
+          "hash": "1ECGv41VVPxIZxrFyIg0Nw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RewardController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RewardController.html",
+          "hash": "WjqaJ7jdnexhn2pVVTI8fg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RoleClaimController.html",
+          "hash": "SRJE7VJYwppbeBNd+jwKhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RoleController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.RoleController.html",
+          "hash": "rMtNScubGFsZiYxz8ZSoFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.UserController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.UserController.html",
+          "hash": "LAhZAdkSHowlGSBXkQOuqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Controllers.html",
+          "hash": "+y/FBxRXJTeq0L3Vo8cS3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.ConcurrentProgressCache.html",
+          "hash": "ReHFZVP1saANpJ6mB8/TgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.CriteriaEvaluator.html",
+          "hash": "Y8QPaduDUWHSUYS4Bu8wmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.EvaluationDataMapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.EvaluationDataMapper.html",
+          "hash": "t0zB8mRFRy0jZSO/d5z7bw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.EvaluationProgress.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.EvaluationProgress.html",
+          "hash": "xGlSEqapm/fR76xBnlPfkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.EvaluationTracker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.EvaluationTracker.html",
+          "hash": "hLacknmAw1afDz5QO375MA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.html",
+          "hash": "g6Mvpc5ZEiNytG4VzIYX0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressNotificationCache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressNotificationCache.html",
+          "hash": "LsH07TVs0CCCdEbNJBrKag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsRequest.html",
+          "hash": "aM3To8vPmf2FLIZzxCCOfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.StandingsResponse.html",
+          "hash": "WRzB6fv/4FmoCma6mTzojQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.EvaluationEvents.html",
+          "hash": "/2V1ABW8AVANP9gLvQn7aQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.InvalidAccountDetailsException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.InvalidAccountDetailsException.html",
+          "hash": "8sT8LIzD8PiprC8eaayogQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.InvalidDataException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.InvalidDataException.html",
+          "hash": "IgBe2rKHgMU7Vzx2AJ16XQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.InvalidOperationException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.InvalidOperationException.html",
+          "hash": "DRnlVnTfGf2VtpfZGBUvrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Exceptions.html",
+          "hash": "QZzL9L5UG+/YX7FBRkp43Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Sessions.Session.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Sessions.Session.html",
+          "hash": "shdkbr4ruoEojzK2AqY+JA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Sessions.SessionTracker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Sessions.SessionTracker.html",
+          "hash": "3FXE+SCElJn1SUiYnSE+Dw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Sessions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Sessions.html",
+          "hash": "MFWjWkrpxCGTsyTXj4O3cQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Utilities.PasswordEncryption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Utilities.PasswordEncryption.html",
+          "hash": "EtVHAsVLEsLZ78l5DdENhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Core.Utilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Core.Utilities.html",
+          "hash": "hJhu6mBJ9Ezv/a5DfigUuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.AccountController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.AccountController.html",
+          "hash": "IqoJ09GTsK1LJ4LnNVNAtg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.AccountSourceController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.AccountSourceController.html",
+          "hash": "w1MdQAPtddRkvIriA2jlGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController.html",
+          "hash": "JVJkk0leWVauXvSyaqjC5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorController.html",
+          "hash": "SOA12o0emrsu0xo1PU7e0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorDataController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorDataController.html",
+          "hash": "M5ILGtOBWBKQAaqdO7RT0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorRoleController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorRoleController.html",
+          "hash": "uK0QkrNKw/snIrZxs3/J6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ClaimController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.ClaimController.html",
+          "hash": "ikFv2lBIrIxCbJsrR32CGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.DbController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.DbController.html",
+          "hash": "EoypXzZ72FhnhFW3crRM1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationController.html",
+          "hash": "R2AiLcJH47hOmzKh1y7czA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.EvaluationDataController.html",
+          "hash": "ymNuR+MiVJymKilR8p1+3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.GameController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.GameController.html",
+          "hash": "VwkQwtxIfyobtywsvFEiFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.GroupController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.GroupController.html",
+          "hash": "d2nT9sKvGU301U0NpKUUow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.LeaderboardController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.LeaderboardController.html",
+          "hash": "zY+zOfQtYLexdl1ldWhVEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.MatchController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.MatchController.html",
+          "hash": "vC/ZjOwRUa7wjzLWrB9vng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.html",
+          "hash": "oLq7UEGxV1h+x5j7y87Zvg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleClaimController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleClaimController.html",
+          "hash": "tpBnLe/DimLC+RVMX02iRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.RoleController.html",
+          "hash": "olzlmYbz8lCae6K++cnx0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.UserController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.UserController.html",
+          "hash": "SWB3glwLwCjv4yLNGpaNmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Controllers.html",
+          "hash": "/HCpyZNqcwhOhkpvg8mJjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.AccountConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.AccountConfig.html",
+          "hash": "nqohMFrIyekvMh5uxXXMVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.AchievementConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.AchievementConfig.html",
+          "hash": "+U+mQ9cKM87pW4BZnpgHJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorClaimConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorClaimConfig.html",
+          "hash": "60cyGBM6PZMZaRbxcev8Rg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorConfig.html",
+          "hash": "oc7tdzGwjIN3oCNWvO70DQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorDataConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorDataConfig.html",
+          "hash": "GxSpnbIChbC/Jdcnewz39w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorRelationshipConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorRelationshipConfig.html",
+          "hash": "YwtJipFrl5gL4eRHqARhJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorRelationshipRequestConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorRelationshipRequestConfig.html",
+          "hash": "dwn0gBOoS0WXkUyi7LokWg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorRoleConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.ActorRoleConfig.html",
+          "hash": "k/r7qeAHPokttguuAvNaww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.EvaluationConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.EvaluationConfig.html",
+          "hash": "q4+s1tv1/5RyxBdiPg+5JQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.EvaluationCriteriaConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.EvaluationCriteriaConfig.html",
+          "hash": "2GU+OvJOBrB10TWvqrFm2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.EvaluationDataConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.EvaluationDataConfig.html",
+          "hash": "Ls95WzAgcULzQugQMdYXAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.GameConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.GameConfig.html",
+          "hash": "78kwW4DArqkSP/ECeX42Tw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.GroupConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.GroupConfig.html",
+          "hash": "JCfBGe4OxSvKCQgpWp7wug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.LeaderboardConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.LeaderboardConfig.html",
+          "hash": "8UyPTwb6xc72KNTqPS4Nlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.RewardConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.RewardConfig.html",
+          "hash": "wNcaUScVBewYpNfuIaM5Jg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.RoleClaimConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.RoleClaimConfig.html",
+          "hash": "RHY5jaXGe9PUTAb1oMCVVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.SentEvaluationNotificationConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.SentEvaluationNotificationConfig.html",
+          "hash": "CgFU2Zy1l2w8Dr/V3Fzb+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.SkillConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.SkillConfig.html",
+          "hash": "XWfE+qAYCGSUPfnaHMDVkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.UserConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.UserConfig.html",
+          "hash": "WehO1b45uPKmhQJbBUS46A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.EntityConfigs.html",
+          "hash": "RK7jTSiSyc8vd4f3fYdnLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DbExceptionHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DbExceptionHandler.html",
+          "hash": "IMfVaARW3MOyGjVnxmn2bQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRecordException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRecordException.html",
+          "hash": "Er8/6fSBsDDcCxuc1DWk2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.MissingRecordException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.MissingRecordException.html",
+          "hash": "1MxPxid1IBSuY2kWkpnXMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.ReadOnlyContextException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.ReadOnlyContextException.html",
+          "hash": "O7zapljqAgHma5QleOVadQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.html",
+          "hash": "0Wf16MJ64Oh2fbKatNE4Ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ActorDataExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ActorDataExtensions.html",
+          "hash": "2sLzNkdI2tHYkE7bupGX6A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.ContextExtensions.html",
+          "hash": "iFX5DtJn3GXkXm7JZ3B56A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.DbSetExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.DbSetExtensions.html",
+          "hash": "A8C1rkYR+FCd/v4/w5PzyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.EvaluationDataExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.EvaluationDataExtensions.html",
+          "hash": "0Z0FGws3IiULqYAIucVGkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.MatchExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.MatchExtensions.html",
+          "hash": "M/LrgblWC0dbc6PSQzm7zg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.SUGARContextSeedExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.SUGARContextSeedExtensions.html",
+          "hash": "Xkq8af7S/3ZVY7FAEFzr/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Extensions.html",
+          "hash": "O7ytHenlvdiAZ4wdrtykbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.html",
+          "hash": "b2OlJ/SwhtG3gK+ZsiCgjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.InitialCreate.html",
+          "hash": "OF2Marl0/8GlGm8uHk2ihA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.MemberCountAndAllianceCount.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.MemberCountAndAllianceCount.html",
+          "hash": "+LtgR7H354hZ+Psgy3WbqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.Migrations.html",
+          "hash": "KRrLp6Vy8CqQWT1oBGLSUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.SUGARContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.SUGARContext.html",
+          "hash": "Tsxd4HVny6/V0bE13KQsAw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory.html",
+          "hash": "XDgTTk0lBY2ydTuMEM/dig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.EntityFramework.html",
+          "hash": "80/d16RIUgxS7ByP9CQNnQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Account.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Account.html",
+          "hash": "YZra6px7n4TuRf/S1pIO3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.AccountSource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.AccountSource.html",
+          "hash": "Gggp4XjAK1/Zn8jUjgDA6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Achievement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Achievement.html",
+          "hash": "zBfvuWm5zaIg1KYO05cEAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Actor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Actor.html",
+          "hash": "Jj3gs4V2q3NX81RGYWoPbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.ActorClaim.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.ActorClaim.html",
+          "hash": "BudZWchN0aG53Vi9++aXCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.ActorData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.ActorData.html",
+          "hash": "7YWPdgpQcO4CifBtqjlH4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.ActorRelationship.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.ActorRelationship.html",
+          "hash": "sX/ys7PaBpBasA4HXA2/+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.ActorRelationshipRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.ActorRelationshipRequest.html",
+          "hash": "K9Q2SFEZQ1PqxmqWRdP66w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.ActorRole.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.ActorRole.html",
+          "hash": "nnIZEy++q0YQnUTC1b8Qtw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Claim.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Claim.html",
+          "hash": "Vd2rWs9YsgWa9fTtAhBp+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Evaluation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Evaluation.html",
+          "hash": "whKfIXKsNMLO1wFOxGdm9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.EvaluationCriteria.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.EvaluationCriteria.html",
+          "hash": "Exm6rA81AeUO6dyDsk+YOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.EvaluationData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.EvaluationData.html",
+          "hash": "fZ984g0aRRxIREG1ryCWhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Game.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Game.html",
+          "hash": "adoaEadwyDkFwwXXaa0QdA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Group.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Group.html",
+          "hash": "2B7hlIL97BgcD3M3EjjptQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.IEvaluationData.html",
+          "hash": "/phNDiQyfAsLb1hkOcYRlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.IModificationHistory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.IModificationHistory.html",
+          "hash": "VmI9oaq5Q9OrDR4gGO6sBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.IRelationship.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.IRelationship.html",
+          "hash": "XWtnuAWIZ0v3djY703ndJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Interfaces.html",
+          "hash": "bDILKoPXLElZBfcj1uIxOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Leaderboard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Leaderboard.html",
+          "hash": "vglmV1yrtrtDaJ/uE3Kgng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Match.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Match.html",
+          "hash": "P8DS+bfA1Ofn7AKSe0BXuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Reward.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Reward.html",
+          "hash": "nFKvoL4VkxRYeNEaLe4D0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Role.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Role.html",
+          "hash": "CcJf0F3PquFxlvnDDJuB8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.RoleClaim.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.RoleClaim.html",
+          "hash": "l7U9HURSn6ekFf/q0cZjeg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.SentEvaluationNotification.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.SentEvaluationNotification.html",
+          "hash": "fNojilow3pBnzKKxT0Ck+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.Skill.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.Skill.html",
+          "hash": "zX8exCuW3u35zVPERvUvng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.User.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.User.html",
+          "hash": "N1TyOAnYMwEIcUPV35OfbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.Model.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.Model.html",
+          "hash": "PdId2aGU9ufvDzidZjQCIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.AllowAnyAPIVersion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.AllowAnyAPIVersion.html",
+          "hash": "h59SQztw4nzz6TMj6NHfqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.AllowWithoutSession.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.AllowWithoutSession.html",
+          "hash": "9eYHcqGt8IXujXg02i7MLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.ArgumentsNotNullAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.ArgumentsNotNullAttribute.html",
+          "hash": "aj4AA3PY4egsdIDPXmlv9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Attributes.html",
+          "hash": "V/JXlahmAt8TfPpAj81wHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AccountController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AccountController.html",
+          "hash": "FASNcGoRtfWhxjv01Hxvsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.html",
+          "hash": "zt1DFqy8prg1RbjB4iDD0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AchievementsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AchievementsController.html",
+          "hash": "BPqBbwqsnvibJFIGpgydLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ActorClaimController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ActorClaimController.html",
+          "hash": "PjQQzIViy6H7YQqTUhIMjA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ActorDataController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ActorDataController.html",
+          "hash": "ha6k2lM2ahgQPJNAVcz/tg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ActorRoleController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ActorRoleController.html",
+          "hash": "TRYsSy98pd5rfsFGvO/Geg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AllianceController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.AllianceController.html",
+          "hash": "xCKIrVcO69KB3laFiI+KBQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.EvaluationsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.EvaluationsController.html",
+          "hash": "m8nWVxhHSRQpiv9bzJj3LA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GameController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GameController.html",
+          "hash": "bJJYwxbbGX1mVnAO3+Kljg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GameDataController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GameDataController.html",
+          "hash": "3B5Saz5HaivyBgHgej6hwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GroupController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GroupController.html",
+          "hash": "nikoYimgUn+caANIce6sFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GroupMemberController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.GroupMemberController.html",
+          "hash": "0cwK1vpR89pQ8ZNkv4OUQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.LeaderboardsController.html",
+          "hash": "lulXzDLH5VpJulSSwYgiMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.MatchController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.MatchController.html",
+          "hash": "8AE3ryXM1zwQTHb6Iu9qUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ResourceController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.ResourceController.html",
+          "hash": "o6k1VDQqLhms8g3yqMLMPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.RoleClaimController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.RoleClaimController.html",
+          "hash": "dwSeGsZlTyz2ra9g2uctNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.RoleController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.RoleController.html",
+          "hash": "pjEo1BugEv4rtA/VSLeeBQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.SessionController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.SessionController.html",
+          "hash": "iEedeS+HjZ3UP6/gk8l0Wg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.SkillsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.SkillsController.html",
+          "hash": "P3qMLw5T0HJtONK2wwBUwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.UserController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.UserController.html",
+          "hash": "FJFXLi44Jxm6E/Xtb8/P2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.html",
+          "hash": "2qwCkjpBrITFZsqlzHGLlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.VersionController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.VersionController.html",
+          "hash": "9mwOX7J8HKuIXk8s4wAy4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Controllers.html",
+          "hash": "Tjy8R/2ADYuqiJgi9h/19g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.ClaimNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.ClaimNotFoundException.html",
+          "hash": "K/Cr4DD2Sn7jhuPP3FJzLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.IncompatibleAPIVersionException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.IncompatibleAPIVersionException.html",
+          "hash": "b2UuX+vPFG520XY6N0RWdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.InvalidAccountDetailsException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.InvalidAccountDetailsException.html",
+          "hash": "n+ommxffyepHQasT1QvmzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.InvalidSessionException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.InvalidSessionException.html",
+          "hash": "pJiql1s3IwIkGdRYIdA7yA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Exceptions.html",
+          "hash": "FnUD0J/6HToZ4PYei0DX3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.AccountExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.AccountExtensions.html",
+          "hash": "ZRA3H5BV6Ydhjp+U58FYYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.AccountSourceExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.AccountSourceExtensions.html",
+          "hash": "dkCpvvoD4bC02VoOvc9HkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.AchievementExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.AchievementExtensions.html",
+          "hash": "FO+gbAQMVRuo6HTWNrbLbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorClaimExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorClaimExtensions.html",
+          "hash": "GFygrUcgtr9zetswzzc6NA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorDataExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorDataExtensions.html",
+          "hash": "G7647VATqiNXXNCutFj9lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorExtensions.html",
+          "hash": "B9PYZyf2gl849PiCohl77w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorRoleExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ActorRoleExtensions.html",
+          "hash": "EUSLVrdtITnJLF1sT4bzGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ClaimExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ClaimExtensions.html",
+          "hash": "mPEmyExELwwtACDjMI3Tbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.EvaluationCriteriaExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.EvaluationCriteriaExtensions.html",
+          "hash": "b7D8Zs0ZIJ7AckBKrvUrHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.EvaluationDataExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.EvaluationDataExtensions.html",
+          "hash": "J9TT2UetewWCmjo4JW7Stw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.GameDataExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.GameDataExtensions.html",
+          "hash": "+iBG1lE5SPtgtGg7Al6e3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.GameExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.GameExtensions.html",
+          "hash": "/K8yGUE3vqHYRw7svB/i3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.GroupExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.GroupExtensions.html",
+          "hash": "XSqNlTVA6jRxUU+O7AvpmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.HttpContextExtensions.html",
+          "hash": "QH552XdJESIL+B73bF+YHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.LeaderboardExtensions.html",
+          "hash": "YuiQGCjfD9bCGdnZNQYllQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.MatchExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.MatchExtensions.html",
+          "hash": "VPoIaSdDxX/DHKGQRfwFZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RelationshipExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RelationshipExtensions.html",
+          "hash": "c69406P5M/W38Oeg8ALThQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ResourceExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.ResourceExtensions.html",
+          "hash": "fkDaWEccqjhJTLGGNUT7Pg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RewardExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RewardExtensions.html",
+          "hash": "lISOK8cqgptTOFd4i/2Hmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RoleClaimExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RoleClaimExtensions.html",
+          "hash": "s5b7WTjBFZGiZatjqicM+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RoleExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.RoleExtensions.html",
+          "hash": "Y8ZuwUA9nke3GyhuBTsCYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.SkillExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.SkillExtensions.html",
+          "hash": "15qjYSxBz29JvOrPvBxnSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.UserExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.UserExtensions.html",
+          "hash": "S524BEa0+G3jWmAtD9yF7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Extensions.html",
+          "hash": "iCRMqegRN2S78YZqGKg1pw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.APIVersionFilterFilter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.APIVersionFilterFilter.html",
+          "hash": "VQSM7x9/Bjy8AipjDCywXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.ExceptionFilter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.ExceptionFilter.html",
+          "hash": "Ba3rQMgamhslZ3E2vZRlOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.ModelValidationFilter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.ModelValidationFilter.html",
+          "hash": "czt+h53cEvSjSI18nu1qRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.SessionFilter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.SessionFilter.html",
+          "hash": "H0zARrMMcdluL+Blm6E0kg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.WrapResponseFilter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.WrapResponseFilter.html",
+          "hash": "XDEZZh5l0axP5zsG75IPrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Filters.html",
+          "hash": "y2j7dhFFIOtoDYMS5z9SPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Program.html",
+          "hash": "8s/vcJG7LQoJxfRspJHLmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Startup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.Startup.html",
+          "hash": "0SSgLBWXT2LPxJB9pEv/LQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlayGen.SUGAR.Server.WebAPI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlayGen.SUGAR.Server.WebAPI.html",
+          "hash": "l4t1BTV7ux6rSa9Dy+az2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "A3+N+A/i5zb/Yd+eRq2lsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "concepts/account.md",
       "output": {
         ".html": {
           "relative_path": "concepts/account.html",
-          "hash": "BY4M0sqLZU+ejUDnleqJFg=="
+          "hash": "jwZpCBNQNMKhG+LnfaesCA=="
         }
       },
       "is_incremental": false,
@@ -30,7 +3942,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/criteria.html",
-          "hash": "rxW+Se3tJh4eU/V2KFrkgQ=="
+          "hash": "EfEBVe62sK746awXoJuFnQ=="
         }
       },
       "is_incremental": false,
@@ -42,7 +3954,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/entityModel.html",
-          "hash": "e/OwzbSHARWPEUSo3R4p+Q=="
+          "hash": "L4x1Z9lEJCT+eUS+5KrZDQ=="
         }
       },
       "is_incremental": false,
@@ -54,7 +3966,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/index.html",
-          "hash": "/hYMuvgYHEdJozeuAG31ng=="
+          "hash": "oHBLxO3WWrWS6QDTZjoFYA=="
         }
       },
       "is_incremental": false,
@@ -66,7 +3978,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/leaderboardstandings.html",
-          "hash": "82SjkAAGVwhbqLihLKlV3A=="
+          "hash": "383PTdf/6DtmBmaqAh/5DQ=="
         }
       },
       "is_incremental": false,
@@ -78,7 +3990,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/rewards.html",
-          "hash": "pniYQ2hwAyT8w6HJrqlqSA=="
+          "hash": "hkFbRwrws8jx4KI1lOgK9Q=="
         }
       },
       "is_incremental": false,
@@ -90,7 +4002,7 @@
       "output": {
         ".html": {
           "relative_path": "concepts/session.html",
-          "hash": "8wBbfviImM8jP35stP3I6g=="
+          "hash": "3czcQX9G2ovOqto14jUfdA=="
         }
       },
       "is_incremental": false,
@@ -114,7 +4026,7 @@
       "output": {
         ".html": {
           "relative_path": "demo/index.html",
-          "hash": "OnhQZml1ssy6p8bp++OAQQ=="
+          "hash": "gf2MTal8D5Kg9eaEyQ/hZw=="
         }
       },
       "is_incremental": false,
@@ -138,7 +4050,7 @@
       "output": {
         ".html": {
           "relative_path": "development/admin.html",
-          "hash": "vMF8i1qCMoWZT0CECdkG2Q=="
+          "hash": "0VT+jfB7oFRx2VU8Rh9dmw=="
         }
       },
       "is_incremental": false,
@@ -150,7 +4062,7 @@
       "output": {
         ".html": {
           "relative_path": "development/docker.html",
-          "hash": "xkGn/y0byVGIYcR20tcdXA=="
+          "hash": "2HETOnZEqDL5FUqH0TAD4Q=="
         }
       },
       "is_incremental": false,
@@ -162,7 +4074,7 @@
       "output": {
         ".html": {
           "relative_path": "development/documentation.html",
-          "hash": "0wsxa1iOyFBcCz3fNj22Sw=="
+          "hash": "azDT5zZKMB5ea/Vp2C3QKw=="
         }
       },
       "is_incremental": false,
@@ -170,14 +4082,15 @@
     },
     {
       "log_codes": [
-        "InvalidFileLink"
+        "InvalidFileLink",
+        "UidNotFound"
       ],
       "type": "Conceptual",
       "source_relative_path": "development/index.md",
       "output": {
         ".html": {
           "relative_path": "development/index.html",
-          "hash": "wT6fE8UbmUYehTRUbi0vvg=="
+          "hash": "BtyC/Eb6SuZFPYi7M7Dz4w=="
         }
       },
       "is_incremental": false,
@@ -201,7 +4114,7 @@
       "output": {
         ".html": {
           "relative_path": "development/versioning.html",
-          "hash": "2CpFMZhEKs24UIH6AhmREw=="
+          "hash": "7ZKr/zy2lYotr21Abn2r7A=="
         }
       },
       "is_incremental": false,
@@ -213,7 +4126,7 @@
       "output": {
         ".html": {
           "relative_path": "features/achievement.html",
-          "hash": "CXdsGYdtrTL+bDEQxpu1UQ=="
+          "hash": "MDNRKFBLMtB43N6bMgyAeg=="
         }
       },
       "is_incremental": false,
@@ -225,7 +4138,7 @@
       "output": {
         ".html": {
           "relative_path": "features/actor.html",
-          "hash": "PVhI8vrV2Asf8eAUdxOhEQ=="
+          "hash": "+WfjE1JoXFvIfO7MWS3shg=="
         }
       },
       "is_incremental": false,
@@ -237,7 +4150,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/SiteMap.html",
-          "hash": "wpoLG1Z2Xpe5TUdvK/gDYA=="
+          "hash": "C7G5ni2lAat9/YTnHHZwEw=="
         }
       },
       "is_incremental": false,
@@ -249,7 +4162,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/achievement.html",
-          "hash": "KtSvNFBh/+h7PRgP9Ov6KA=="
+          "hash": "928j+OvM7PqXd09Jx6HsvA=="
         }
       },
       "is_incremental": false,
@@ -264,7 +4177,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/game.html",
-          "hash": "yM4mcsujX0tJIwcHEsme0g=="
+          "hash": "EeT6JJ1ZfepvuZnY6GNhfg=="
         }
       },
       "is_incremental": false,
@@ -276,7 +4189,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/group.html",
-          "hash": "FX93a1KfmmyE2hzg9ySzoQ=="
+          "hash": "Rmki4YXX/hp+obbOZKA8OQ=="
         }
       },
       "is_incremental": false,
@@ -288,7 +4201,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/index.html",
-          "hash": "UmzvYIPYqJSAtr8GlDD62w=="
+          "hash": "BcKV6KWT4WlxOhzXEES/IA=="
         }
       },
       "is_incremental": false,
@@ -300,7 +4213,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/leaderboard.html",
-          "hash": "m7ZakBIt39/hAL0yenU66A=="
+          "hash": "8y8pHP0MWxe7iW6Hdtb/HQ=="
         }
       },
       "is_incremental": false,
@@ -312,7 +4225,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/login.html",
-          "hash": "MVLywV6LmgtS2Weu2nThNA=="
+          "hash": "MwQN0wDCFm9jJtTWyp8IkQ=="
         }
       },
       "is_incremental": false,
@@ -324,7 +4237,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/resource.html",
-          "hash": "3+T3ncCxDC65PViunxnwUw=="
+          "hash": "OxlrMSCtUvcolMmcdk35DQ=="
         }
       },
       "is_incremental": false,
@@ -336,7 +4249,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/skill.html",
-          "hash": "tiRQwOLfWB6Lm6VIhroqjA=="
+          "hash": "EQ/cVQkILFSEsSDSaIg8vg=="
         }
       },
       "is_incremental": false,
@@ -360,7 +4273,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/user.html",
-          "hash": "gHWG2m14v+zpevCL9crNoQ=="
+          "hash": "bAa5Kig2CPBlVJPYNBx9dw=="
         }
       },
       "is_incremental": false,
@@ -372,7 +4285,7 @@
       "output": {
         ".html": {
           "relative_path": "features/evaluationData.html",
-          "hash": "DZZYEk46v1oVC40lsc1wPA=="
+          "hash": "GONLHbUavOrZlzKbCCsdrA=="
         }
       },
       "is_incremental": false,
@@ -384,7 +4297,7 @@
       "output": {
         ".html": {
           "relative_path": "features/game.html",
-          "hash": "U043He+S5NxMlUot34XzVw=="
+          "hash": "JqeZ4KUfmcCpjc5grtBFjw=="
         }
       },
       "is_incremental": false,
@@ -396,19 +4309,22 @@
       "output": {
         ".html": {
           "relative_path": "features/gameData.html",
-          "hash": "UQ8B+TSdxfrh6C/O0VWThg=="
+          "hash": "fZk2QOD+yR/zZMPSeRmH7g=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
+      "log_codes": [
+        "UidNotFound"
+      ],
       "type": "Conceptual",
       "source_relative_path": "features/group.md",
       "output": {
         ".html": {
           "relative_path": "features/group.html",
-          "hash": "EDqrIYfjLts9f/VJVUT+Hw=="
+          "hash": "uqEXeS2G8aFMnjeOMp37xQ=="
         }
       },
       "is_incremental": false,
@@ -420,7 +4336,7 @@
       "output": {
         ".html": {
           "relative_path": "features/index.html",
-          "hash": "Mp7Ks89EOnEaafLk1QFDuA=="
+          "hash": "dYudllIYsNb5PQCTatYdpQ=="
         }
       },
       "is_incremental": false,
@@ -432,7 +4348,7 @@
       "output": {
         ".html": {
           "relative_path": "features/leaderboard.html",
-          "hash": "HoRuQXZjULEPyXbP3VJcFA=="
+          "hash": "nE5B9l5q8YeElqI6YG08JA=="
         }
       },
       "is_incremental": false,
@@ -444,19 +4360,22 @@
       "output": {
         ".html": {
           "relative_path": "features/match.html",
-          "hash": "VtR4EMXsF8aFfr1qlAlD8A=="
+          "hash": "6wyB1pO9AqCjHF/FfpvKhA=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
+      "log_codes": [
+        "UidNotFound"
+      ],
       "type": "Conceptual",
       "source_relative_path": "features/relationship.md",
       "output": {
         ".html": {
           "relative_path": "features/relationship.html",
-          "hash": "EdYTnL1jfwtCtiA+VF1TRA=="
+          "hash": "jDngWb41goH3HqFJy+iGZw=="
         }
       },
       "is_incremental": false,
@@ -468,7 +4387,7 @@
       "output": {
         ".html": {
           "relative_path": "features/resource.html",
-          "hash": "0yZB9f9xIIe0yhC+9+9eRw=="
+          "hash": "U6CCk7pbFEoM7sFG0qFgFA=="
         }
       },
       "is_incremental": false,
@@ -480,7 +4399,7 @@
       "output": {
         ".html": {
           "relative_path": "features/roadmap.html",
-          "hash": "+FA+jafGO8tk1CFOQGM6fw=="
+          "hash": "q6WQDzAJpw/pveCpx+IvXg=="
         }
       },
       "is_incremental": false,
@@ -492,7 +4411,7 @@
       "output": {
         ".html": {
           "relative_path": "features/skill.html",
-          "hash": "bxBfRRh6Af0EYdBYO2ODIQ=="
+          "hash": "Uo80rk7r9ASY73qf5j50qg=="
         }
       },
       "is_incremental": false,
@@ -516,7 +4435,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/accounts.html",
-          "hash": "QGs9FvGRP5GT6isSThBh/Q=="
+          "hash": "eAhRo0jrg3kAMrJBoGkhQQ=="
         }
       },
       "is_incremental": false,
@@ -528,7 +4447,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/achievements.html",
-          "hash": "F3yuhWi/uZJApardYdSTvw=="
+          "hash": "UdYNzU8WW0uWmpw1sRKVIA=="
         }
       },
       "is_incremental": false,
@@ -540,7 +4459,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/configuration.html",
-          "hash": "XxdEIan1SIzE56xpPIp2Tw=="
+          "hash": "a6QIrHJxJhEoHv4/hjbaCg=="
         }
       },
       "is_incremental": false,
@@ -552,7 +4471,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/index.html",
-          "hash": "C4r3sQyZvkNax++XFDxRpQ=="
+          "hash": "JgXBvKgxzNVQIxY10cPgOw=="
         }
       },
       "is_incremental": false,
@@ -564,7 +4483,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/leaderboards.html",
-          "hash": "t+u7U1GtmL8IBb0rPL6NFQ=="
+          "hash": "nQFXttruHQ6Lx0yR5OPgcA=="
         }
       },
       "is_incremental": false,
@@ -576,7 +4495,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/sendGameData.html",
-          "hash": "mJM3xwP8FKK3/1hWLAiWMQ=="
+          "hash": "w8B385NmP96lkfbpu1vJdQ=="
         }
       },
       "is_incremental": false,
@@ -588,7 +4507,7 @@
       "output": {
         ".html": {
           "relative_path": "features/unity/setup.html",
-          "hash": "EWK0Uxf9rdadOI+KIIvQDw=="
+          "hash": "LonOUk36tia5ypMeYZ2QuQ=="
         }
       },
       "is_incremental": false,
@@ -612,7 +4531,7 @@
       "output": {
         ".html": {
           "relative_path": "features/user.html",
-          "hash": "zchISE6CDzNTdF3nAxJ5AA=="
+          "hash": "PkLTYuIsNRt9a5Ww6yJWIA=="
         }
       },
       "is_incremental": false,
@@ -1097,7 +5016,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "Brw+JB7tXwWourOopBIpLg=="
+          "hash": "TLY3xX5HTal7PUnJRBrB+g=="
         }
       },
       "is_incremental": false,
@@ -1109,7 +5028,7 @@
       "output": {
         ".html": {
           "relative_path": "restapi/restapi.html",
-          "hash": "xVynM0jsYj84K5Dk6PuuNg=="
+          "hash": "7h2zeFMh3H7UTNb69EdFpw=="
         }
       },
       "is_incremental": false,
@@ -1133,7 +5052,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "w2+MB6q+roXWaTcdwdRp2w=="
+          "hash": "MgF3HkEogoCWAOHwsXflrA=="
         }
       },
       "is_incremental": false,
@@ -1145,7 +5064,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html",
-          "hash": "Z5wl04PoJSUeB+3MLgosjw=="
+          "hash": "gVhV95hRFXgGaewT9SYPtg=="
         }
       },
       "is_incremental": false,
@@ -1157,7 +5076,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html",
-          "hash": "eAZn4jVdy1IXshktU/Glww=="
+          "hash": "fEu2V++RMD9sRh4iWNJX1A=="
         }
       },
       "is_incremental": false,
@@ -1169,7 +5088,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseAccountInterface.html",
-          "hash": "1A6EGiZrWIb8dSSNqCJZOA=="
+          "hash": "cT8nPqnZal5co4DizvkAhQ=="
         }
       },
       "is_incremental": false,
@@ -1181,7 +5100,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html",
-          "hash": "v5f/2a05/sQvLUdOcYrGdg=="
+          "hash": "mOvvdiuVKT+fuEM8FRajig=="
         }
       },
       "is_incremental": false,
@@ -1193,7 +5112,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.html",
-          "hash": "NWHCQTw/yBnd579jaKK1UQ=="
+          "hash": "eqOvpQX36QPgiYkbmVmFwA=="
         }
       },
       "is_incremental": false,
@@ -1205,7 +5124,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseGroupMemberInterface.html",
-          "hash": "mZsrlrnXTF/6ukEqeYCC4w=="
+          "hash": "cxUANGmhvRfPsIVEWr2SLw=="
         }
       },
       "is_incremental": false,
@@ -1217,7 +5136,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseInterface.html",
-          "hash": "0oLRMgrE2WO3Anmv9iCQ8w=="
+          "hash": "61aJnNM/CsYBFcPs7QdzQw=="
         }
       },
       "is_incremental": false,
@@ -1229,7 +5148,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html",
-          "hash": "sg1my1RjnL9jsJjhYn7CaQ=="
+          "hash": "mzZ3CBcpXszodK0gZEeEGA=="
         }
       },
       "is_incremental": false,
@@ -1241,7 +5160,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.html",
-          "hash": "081W1yUNxnLF9b0V9+oyCw=="
+          "hash": "tA2WjxtvILLkqBg1lqHj0A=="
         }
       },
       "is_incremental": false,
@@ -1253,7 +5172,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUnityClient-1.html",
-          "hash": "mu7DvLdCnZxW4xv1uQtCTQ=="
+          "hash": "/Cc/tt2+xuITeL9Bm42PNQ=="
         }
       },
       "is_incremental": false,
@@ -1265,7 +5184,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserFriendInterface.html",
-          "hash": "Us5xzwZwYL8Rv85j1hPI4g=="
+          "hash": "YU1Qzmq+oaiUFIY2b/HdBw=="
         }
       },
       "is_incremental": false,
@@ -1277,7 +5196,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserGroupInterface.html",
-          "hash": "32YKL6cLQdhH37n5cNBqVg=="
+          "hash": "87fEiZF281milCj1toSoHg=="
         }
       },
       "is_incremental": false,
@@ -1289,7 +5208,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.html",
-          "hash": "hvLs3a9Om65FcNoor+qumA=="
+          "hash": "dvOaIe9RWRIIrL/HTAeHOg=="
         }
       },
       "is_incremental": false,
@@ -1301,7 +5220,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineUtility.html",
-          "hash": "4lmofDcxLitZDY8/47PCiA=="
+          "hash": "14tko5/5pV0+LF8j90sK5Q=="
         }
       },
       "is_incremental": false,
@@ -1313,7 +5232,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Config.html",
-          "hash": "eItnpWEimNpyikEOLcmZ2Q=="
+          "hash": "EMJgQl6Pkl9DjPb+9QkJxA=="
         }
       },
       "is_incremental": false,
@@ -1325,7 +5244,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CustomInterface.html",
-          "hash": "M9+ezMKK6h7g4GpZbAHprw=="
+          "hash": "HqAiBnNh8rn5BMOTKzYrVw=="
         }
       },
       "is_incremental": false,
@@ -1337,7 +5256,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.AutoLogIn.html",
-          "hash": "EbXQ9qbQLTpGTReMUYFWBg=="
+          "hash": "vCWZ7JDRCfobNDwT3Lz5dw=="
         }
       },
       "is_incremental": false,
@@ -1349,7 +5268,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeed.html",
-          "hash": "BzzldgGwMwlMveByE+GZkw=="
+          "hash": "0GhQzf6M/u4pFAon9PWOJA=="
         }
       },
       "is_incremental": false,
@@ -1361,7 +5280,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeedWindow.html",
-          "hash": "A/VVPlC9SQgSLrhWJYWSXw=="
+          "hash": "SZ2YypYIBYjD8ihvCCtagg=="
         }
       },
       "is_incremental": false,
@@ -1373,7 +5292,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGame.html",
-          "hash": "NIbo5F+qTHRkkRBVoTlc9Q=="
+          "hash": "gf/8A+wS3imrwLstQV3dhQ=="
         }
       },
       "is_incremental": false,
@@ -1385,7 +5304,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGameWindow.html",
-          "hash": "iGv9R6+pqLSMiJJXJ0ICeg=="
+          "hash": "FoLePP0QnZ17sMva/ACOdw=="
         }
       },
       "is_incremental": false,
@@ -1397,7 +5316,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.html",
-          "hash": "GnsKvLynV2ppP/BP7sek0g=="
+          "hash": "26VmWC4uGTCX9UUdl6VXYg=="
         }
       },
       "is_incremental": false,
@@ -1409,7 +5328,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.html",
-          "hash": "6Iym+TbPjHLHw+XUHKafAg=="
+          "hash": "/BBLahMEdQL3u5Jg8qWUnA=="
         }
       },
       "is_incremental": false,
@@ -1421,7 +5340,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html",
-          "hash": "TiCXrNiUsLlZn7A4iBR/TQ=="
+          "hash": "Muabow6xmhUOBwnlcuAuCw=="
         }
       },
       "is_incremental": false,
@@ -1433,7 +5352,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html",
-          "hash": "eyf1JGVIux/6LFWhNKAwcA=="
+          "hash": "MjaylKOKNFahZAKSkg048Q=="
         }
       },
       "is_incremental": false,
@@ -1445,7 +5364,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GroupMemberUnityClient.html",
-          "hash": "k9eYJGgC+KdofLFxnat/Bg=="
+          "hash": "eaFsUjMhadNlgxiGfgwZ8w=="
         }
       },
       "is_incremental": false,
@@ -1457,7 +5376,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html",
-          "hash": "T22RwnUsxBnsBEmw9F59pw=="
+          "hash": "W+Rq6CGp3ezTnh1riDnpaA=="
         }
       },
       "is_incremental": false,
@@ -1469,7 +5388,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html",
-          "hash": "Qc033NRXX22NYM/IWa5bQA=="
+          "hash": "v22P93UJ3QhP9TpXavoDAw=="
         }
       },
       "is_incremental": false,
@@ -1481,7 +5400,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html",
-          "hash": "W+NPXbAECq4cmk7r3ij6ww=="
+          "hash": "8Ntkm+8SERGR8UfnkhHbDw=="
         }
       },
       "is_incremental": false,
@@ -1493,7 +5412,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResponseHandler.html",
-          "hash": "a93to8ImBXnYZHDOMDKeVw=="
+          "hash": "oxQjCymX7k5spYMH128KSA=="
         }
       },
       "is_incremental": false,
@@ -1505,7 +5424,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html",
-          "hash": "EwP6gk53+vvMl/S4SjBEvA=="
+          "hash": "j2/mu/73kyhnWXjGdlWbuA=="
         }
       },
       "is_incremental": false,
@@ -1517,7 +5436,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARUnityManager.html",
-          "hash": "PB7cwdyJZUj82OGD6zSuyQ=="
+          "hash": "8wnNAsU6M2YBnXgC/57nUA=="
         }
       },
       "is_incremental": false,
@@ -1529,7 +5448,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserFriendUnityClient.html",
-          "hash": "fJG5q4Y4QkbL0l9x4G3WNQ=="
+          "hash": "K2XmtLUPSQSacg2Y6HIDNw=="
         }
       },
       "is_incremental": false,
@@ -1541,7 +5460,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserGroupUnityClient.html",
-          "hash": "xbneNQ3CvTE0a/JVutJh0A=="
+          "hash": "n2xrzhJwDg7JAj7qJyjW+w=="
         }
       },
       "is_incremental": false,
@@ -1553,7 +5472,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.html",
-          "hash": "GsBLPIgjT1Otv50hdjgSsA=="
+          "hash": "zphb2ExZMrMoLXhEsUf04w=="
         }
       },
       "is_incremental": false,
@@ -1565,7 +5484,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/index.html",
-          "hash": "TOi4jMsM3vVxkK8Ngi11+w=="
+          "hash": "wSb9XnFP/j2RtMIqMfjQ9A=="
         }
       },
       "is_incremental": false,
@@ -1577,7 +5496,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/development/documentation.html",
-          "hash": "UMnE53RA1tubBkQPXzBsfA=="
+          "hash": "Xhr+RneuLMIwuFCLas7qTw=="
         }
       },
       "is_incremental": false,
@@ -1589,7 +5508,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/development/index.html",
-          "hash": "/akZGl9PsEwzYoTXIBUgnA=="
+          "hash": "N/P3YDrDg1VP1tcLLDVyhQ=="
         }
       },
       "is_incremental": false,
@@ -1601,7 +5520,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/index.html",
-          "hash": "tMdoPVm+J+7fO5vY4S75iQ=="
+          "hash": "YRW0H8M7JG1lERpe+Fp+dQ=="
         }
       },
       "is_incremental": false,
@@ -1613,7 +5532,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/pdf/index.html",
-          "hash": "extEMNj+98AJCP1Jsxayqg=="
+          "hash": "GTa3tkX/p69s9abU08IWIA=="
         }
       },
       "is_incremental": false,
@@ -1649,7 +5568,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/build-instructions.html",
-          "hash": "8Klc0F4mgzt8k4CdxQ4/AA=="
+          "hash": "XrlNu9JJc5jry7NUoq295w=="
         }
       },
       "is_incremental": false,
@@ -1661,7 +5580,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/client-prefabs.html",
-          "hash": "IYgSQTf2pGE2IEXmwJb1Vg=="
+          "hash": "ZZXANLZU9ogQPCAoprlx1A=="
         }
       },
       "is_incremental": false,
@@ -1673,7 +5592,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/index.html",
-          "hash": "GugInMxmA68kHZ6FzEtZ3g=="
+          "hash": "izGH+ZOSlL2SwEoCCLV9Hg=="
         }
       },
       "is_incremental": false,
@@ -1685,7 +5604,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/quick-start.html",
-          "hash": "AmBJMGG4LQqSyPaDVPs4kQ=="
+          "hash": "HLKEcmjLfpDHUo+UJJYihQ=="
         }
       },
       "is_incremental": false,
@@ -1697,7 +5616,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/seeding.html",
-          "hash": "wPInmV0JMsDCoVH/hZQ6yA=="
+          "hash": "+Ulzgqnvh6JCOIU1Giu9PQ=="
         }
       },
       "is_incremental": false,
@@ -1716,18 +5635,17 @@
           "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
+        "RestApiDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ManagedReferenceDocumentProcessor disable incremental build because last build doesn't contain version .",
-          "incrementalPhase": "build"
-        },
-        "RestApiDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "can_incremental": true,
           "incrementalPhase": "build"
         },
         "TocDocumentProcessor": {

@@ -7,7 +7,7 @@
   href: features/
   topicHref: features/index.md
 - name: C# API
-  href: api/  
+  href: api/
 - name: REST API
   href: restapi/
 - name: Source & Deployment

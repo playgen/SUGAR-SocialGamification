@@ -8,7 +8,7 @@
     <title>Leaderboard | SUGAR </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Leaderboard | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,26 +83,26 @@
 <h2 id="api">API</h2>
 <ul>
 <li>Client<ul>
-<li>&lt;xref:PlayGen.SUGAR.Client.LeaderboardClient&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Client.LeaderboardClient.html">LeaderboardClient</a></li>
 </ul>
 </li>
 <li>Contracts<ul>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.LeaderboardRequest&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.LeaderboardResponse&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.LeaderboardType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.LeaderboardFilterType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.EvaluationDataType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.CriteriaScope&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.ActorType&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.LeaderboardRequest.html">LeaderboardRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.LeaderboardResponse.html">LeaderboardResponse</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest.html">LeaderboardStandingsRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse.html">LeaderboardStandingsResponse</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.LeaderboardType.html">LeaderboardType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.LeaderboardFilterType.html">LeaderboardFilterType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.CriteriaScope.html">CriteriaScope</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.ActorType.html">ActorType</a></li>
 </ul>
 </li>
 </ul>
 <h2 id="examples">Examples</h2>
 <ul>
 <li>Create a leaderboard
-  This example shows how to create a leaderboard which will display the highest rankings for the combined total of kingdoms the players have conquered. This uses &lt;xref:PlayGen.SUGAR.Client.LeaderboardClient&gt;&#39;s Create function, passing a &lt;xref:PlayGen.SUGAR.Contracts.LeaderboardRequest&gt; as the parameter. This request will specify the identifier token &quot;MOST_KINGDOMS_CONQUERED&quot;, key for which to check in <a href="gameData.html">GameData</a> &quot;KingdomsConquered&quot; and &lt;xref:PlayGen.SUGAR.Common.LeaderboardType&gt; Cumulative to add all the values of every entry matching the key. The code will then store the Token of the leaderboard from the &lt;xref:PlayGen.SUGAR.Contracts.LeaderboardResponse&gt; for later use.</li>
+  This example shows how to create a leaderboard which will display the highest rankings for the combined total of kingdoms the players have conquered. This uses <a class="xref" href="../api/PlayGen.SUGAR.Client.LeaderboardClient.html">LeaderboardClient</a>&#39;s Create function, passing a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.LeaderboardRequest.html">LeaderboardRequest</a> as the parameter. This request will specify the identifier token &quot;MOST_KINGDOMS_CONQUERED&quot;, key for which to check in <a href="gameData.html">GameData</a> &quot;KingdomsConquered&quot; and <a class="xref" href="../api/PlayGen.SUGAR.Common.LeaderboardType.html">LeaderboardType</a> Cumulative to add all the values of every entry matching the key. The code will then store the Token of the leaderboard from the <a class="xref" href="../api/PlayGen.SUGAR.Contracts.LeaderboardResponse.html">LeaderboardResponse</a> for later use.</li>
 </ul>
 <pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
         private LeaderboardClient _leaderboardClient;
@@ -135,7 +135,7 @@
         }
 </code></pre><ul>
 <li>Get standings for a leaderboard
-  To display the leaderboard inside the game, the current standings of the leaderboard must be retreived. The &lt;xref:PlayGen.SUGAR.Client.LeaderboardClient&gt;&#39;s CreateGetLeaderboardStandings function is called by passing a &lt;xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest&gt; object as the parameter, which specifies filters for the returned results. This example will retreive the 8 rankings nearest to the player by setting the &lt;xref:PlayGen.SUGAR.Common.LeaderboardFilterType&gt; to Near, the limit to 8 and offset as 0. The returned &lt;xref:PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse&gt; contains all the data to populate the visual representation of the leaderboard. </li>
+  To display the leaderboard inside the game, the current standings of the leaderboard must be retreived. The <a class="xref" href="../api/PlayGen.SUGAR.Client.LeaderboardClient.html">LeaderboardClient</a>&#39;s CreateGetLeaderboardStandings function is called by passing a <a class="xref" href="../api/PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest.html">LeaderboardStandingsRequest</a> object as the parameter, which specifies filters for the returned results. This example will retreive the 8 rankings nearest to the player by setting the <a class="xref" href="../api/PlayGen.SUGAR.Common.LeaderboardFilterType.html">LeaderboardFilterType</a> to Near, the limit to 8 and offset as 0. The returned <a class="xref" href="../api/PlayGen.SUGAR.Contracts.LeaderboardStandingsResponse.html">LeaderboardStandingsResponse</a> contains all the data to populate the visual representation of the leaderboard. </li>
 </ul>
 <pre><code class="lang-cs">        private void GetLeaderboardStadings() 
         {

@@ -8,7 +8,7 @@
     <title>Skills | SUGAR </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Skills | SUGAR ">
-    <meta name="generator" content="docfx 2.28.3.0">
+    <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -80,31 +80,31 @@
 <h2 id="api">API</h2>
 <ul>
 <li>Client<ul>
-<li>&lt;xref:PlayGen.SUGAR.Client.SkillClient&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Client.SkillClient.html">SkillClient</a></li>
 </ul>
 </li>
 <li>Contracts<ul>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationProgressResponse&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationCreateRequest&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationUpdateRequest&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Contracts.EvaluationResponse&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.EvaluationDataType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.CriteriaQueryType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.ComparisonType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.ActorType&gt;</li>
-<li>&lt;xref:PlayGen.SUGAR.Common.CriteriaScope&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCreateRequest.html">EvaluationCreateRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationUpdateRequest.html">EvaluationUpdateRequest</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationResponse.html">EvaluationResponse</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.CriteriaQueryType.html">CriteriaQueryType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.ComparisonType.html">ComparisonType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.ActorType.html">ActorType</a></li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Common.CriteriaScope.html">CriteriaScope</a></li>
 </ul>
 </li>
 <li>WebAPI<ul>
-<li>&lt;xref:PlayGen.SUGAR.Server.WebAPI.Controllers.SkillsController&gt;</li>
+<li><a class="xref" href="../api/PlayGen.SUGAR.Server.WebAPI.Controllers.SkillsController.html">SkillsController</a></li>
 </ul>
 </li>
 </ul>
 <h2 id="examples">Examples</h2>
 <ul>
 <li>Create a skill
-  Skills work identically to <a href="achievement.html">Achievements</a>, utilising the same contracts and <a href="gameData.html">GameData</a>. This example shows how to set up the Swordsmanship skill for a game. The skill has an [&lt;xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest&gt; specifying the value and ComparisonType to determine at which point the skill has been learnt, key &quot;Swordsmanship&quot; and CriteriaQueryType to sum all GameData entry values matching the key.</li>
+  Skills work identically to <a href="achievement.html">Achievements</a>, utilising the same contracts and <a href="gameData.html">GameData</a>. This example shows how to set up the Swordsmanship skill for a game. The skill has an [<a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a> specifying the value and ComparisonType to determine at which point the skill has been learnt, key &quot;Swordsmanship&quot; and CriteriaQueryType to sum all GameData entry values matching the key.</li>
 </ul>
 <pre><code class="lang-cs">        public SUGARClient sugarClient = new SUGARClient(BaseUri);
         private SkillClient _skillClient;
@@ -144,7 +144,7 @@
         }
 </code></pre><ul>
 <li><p>Submitting data for when somthing which may be used to evaluate progress towards a Skill</p>
-<p>  A skill uses keys in <a href="gameData.html">GameData</a> that match its &lt;xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest&gt;. This data is submitted at points in the game which demonstrate progress towards the skill (as well as other uses).</p>
+<p>  A skill uses keys in <a href="gameData.html">GameData</a> that match its <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a>. This data is submitted at points in the game which demonstrate progress towards the skill (as well as other uses).</p>
 </li>
 </ul>
 <pre><code class="lang-cs">        private void SwingSword()
@@ -183,7 +183,7 @@
                 $&quot;with progress: {notification.Progress}&quot;);
         }
 </code></pre><ul>
-<li>Requesting specific using the <a href="xref:PlayGen.SUGAR.Client.SkillClient">SkillClient</a>&#39;s GetSkillProgress function and specifying the GameId, ActorId and Token returns an &lt;xref:PlayGen.SUGAR.Contracts.EvaluationProgressResponse&gt; object for that Actor&#39;s progress towards the skill in that game. </li>
+<li>Requesting specific using the <a class="xref" href="../api/PlayGen.SUGAR.Client.SkillClient.html">SkillClient</a>&#39;s GetSkillProgress function and specifying the GameId, ActorId and Token returns an <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationProgressResponse.html">EvaluationProgressResponse</a> object for that Actor&#39;s progress towards the skill in that game. </li>
 </ul>
 <pre><code class="lang-cs">        private float CheckSkillProgress()
         {
