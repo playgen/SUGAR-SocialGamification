@@ -21697,6 +21697,79 @@ references:
   commentId: T:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin
   fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin
   nameWithType: SetEditorAutoLogin
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption
+  name: SetEditorAutoLogin.AutoLoginOption
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.html
+  commentId: T:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption
+  nameWithType: SetEditorAutoLogin.AutoLoginOption
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.AutoLoginPrefix
+  name: AutoLoginPrefix
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_AutoLoginOption_AutoLoginPrefix
+  commentId: F:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.AutoLoginPrefix
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.AutoLoginPrefix
+  nameWithType: SetEditorAutoLogin.AutoLoginOption.AutoLoginPrefix
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.DependsOnValue
+  name: DependsOnValue
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_AutoLoginOption_DependsOnValue
+  commentId: F:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.DependsOnValue
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.DependsOnValue
+  nameWithType: SetEditorAutoLogin.AutoLoginOption.DependsOnValue
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.Key
+  name: Key
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_AutoLoginOption_Key
+  commentId: F:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.Key
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.Key
+  nameWithType: SetEditorAutoLogin.AutoLoginOption.Key
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.Label
+  name: Label
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_AutoLoginOption_Label
+  commentId: F:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.Label
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.Label
+  nameWithType: SetEditorAutoLogin.AutoLoginOption.Label
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.Required
+  name: Required
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_AutoLoginOption_Required
+  commentId: F:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.Required
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.Required
+  nameWithType: SetEditorAutoLogin.AutoLoginOption.Required
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.SugarRefName
+  name: SugarRefName
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_AutoLoginOption_SugarRefName
+  commentId: F:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.SugarRefName
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.SugarRefName
+  nameWithType: SetEditorAutoLogin.AutoLoginOption.SugarRefName
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue
+  name: SetEditorAutoLogin.BoolValue
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.html
+  commentId: T:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue
+  nameWithType: SetEditorAutoLogin.BoolValue
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.#ctor(System.Boolean)
+  name: BoolValue(Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_BoolValue__ctor_System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.#ctor(System.Boolean)
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.BoolValue(System.Boolean)
+  nameWithType: SetEditorAutoLogin.BoolValue.BoolValue(Boolean)
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.#ctor(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)
+  name: BoolValue(String, String, String, String, Boolean, Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_BoolValue__ctor_System_String_System_String_System_String_System_String_System_Boolean_System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.#ctor(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.BoolValue(System.String, System.String, System.String, System.String, System.Boolean, System.Boolean)
+  nameWithType: SetEditorAutoLogin.BoolValue.BoolValue(String, String, String, String, Boolean, Boolean)
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.#ctor*
+  name: BoolValue
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_BoolValue__ctor_
+  commentId: Overload:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.#ctor
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.BoolValue
+  nameWithType: SetEditorAutoLogin.BoolValue.BoolValue
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.Value
+  name: Value
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_BoolValue_Value
+  commentId: F:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.Value
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.Value
+  nameWithType: SetEditorAutoLogin.BoolValue.Value
 - uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.SetAutoLogIn
   name: SetAutoLogIn()
   href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_SetAutoLogIn
@@ -21710,6 +21783,43 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.SetAutoLogIn
   nameWithType: SetEditorAutoLogin.SetAutoLogIn
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue
+  name: SetEditorAutoLogin.StringValue
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.html
+  commentId: T:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue
+  nameWithType: SetEditorAutoLogin.StringValue
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.#ctor(System.String)
+  name: StringValue(String)
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_StringValue__ctor_System_String_
+  commentId: M:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.#ctor(System.String)
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.StringValue(System.String)
+  nameWithType: SetEditorAutoLogin.StringValue.StringValue(String)
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.String)
+  name: StringValue(String, String, String, String, String, Boolean, Boolean, String)
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_StringValue__ctor_System_String_System_String_System_String_System_String_System_String_System_Boolean_System_Boolean_System_String_
+  commentId: M:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.String)
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.StringValue(System.String, System.String, System.String, System.String, System.String, System.Boolean, System.Boolean, System.String)
+  nameWithType: SetEditorAutoLogin.StringValue.StringValue(String, String, String, String, String, Boolean, Boolean, String)
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.#ctor*
+  name: StringValue
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_StringValue__ctor_
+  commentId: Overload:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.#ctor
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.StringValue
+  nameWithType: SetEditorAutoLogin.StringValue.StringValue
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.Hidden
+  name: Hidden
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_StringValue_Hidden
+  commentId: F:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.Hidden
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.Hidden
+  nameWithType: SetEditorAutoLogin.StringValue.Hidden
+- uid: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.Value
+  name: Value
+  href: unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.html#PlayGen_SUGAR_Unity_Editor_SetEditorAutoLogin_StringValue_Value
+  commentId: F:PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.Value
+  fullName: PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.Value
+  nameWithType: SetEditorAutoLogin.StringValue.Value
 - uid: PlayGen.SUGAR.Unity.EvaluationUnityClient
   name: EvaluationUnityClient
   href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html
@@ -22775,6 +22885,31 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.UserGroupUnityClient.SearchResults
   nameWithType: UserGroupUnityClient.SearchResults
+- uid: PlayGen.SUGAR.Unity.WebGL
+  name: PlayGen.SUGAR.Unity.WebGL
+  href: unity-client/api/PlayGen.SUGAR.Unity.WebGL.html
+  commentId: N:PlayGen.SUGAR.Unity.WebGL
+  fullName: PlayGen.SUGAR.Unity.WebGL
+  nameWithType: PlayGen.SUGAR.Unity.WebGL
+- uid: PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler
+  name: UnityWebGlHttpHandler
+  href: unity-client/api/PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.html
+  commentId: T:PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler
+  fullName: PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler
+  nameWithType: UnityWebGlHttpHandler
+- uid: PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.HandleRequest(HttpRequest)
+  name: HandleRequest(HttpRequest)
+  href: unity-client/api/PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.html#PlayGen_SUGAR_Unity_WebGL_UnityWebGlHttpHandler_HandleRequest_HttpRequest_
+  commentId: M:PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.HandleRequest(HttpRequest)
+  fullName: PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.HandleRequest(HttpRequest)
+  nameWithType: UnityWebGlHttpHandler.HandleRequest(HttpRequest)
+- uid: PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.HandleRequest*
+  name: HandleRequest
+  href: unity-client/api/PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.html#PlayGen_SUGAR_Unity_WebGL_UnityWebGlHttpHandler_HandleRequest_
+  commentId: Overload:PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.HandleRequest
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.HandleRequest
+  nameWithType: UnityWebGlHttpHandler.HandleRequest
 - uid: relationship
   name: Relationship
   href: features/relationship.html

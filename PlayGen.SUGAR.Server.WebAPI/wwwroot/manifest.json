@@ -4074,7 +4074,7 @@
       "output": {
         ".html": {
           "relative_path": "development/documentation.html",
-          "hash": "azDT5zZKMB5ea/Vp2C3QKw=="
+          "hash": "dNo1Clb2HHrEdxUZ1ueupQ=="
         }
       },
       "is_incremental": false,
@@ -5312,6 +5312,42 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.html",
+          "hash": "KdQWe9y0pezqybnGazc28A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.html",
+          "hash": "+Z6RZN2Yln2v53SkBT4xSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.html",
+          "hash": "8nedGF4oCw5OdJOGcPh4Vg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.yml",
       "output": {
         ".html": {
@@ -5468,6 +5504,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.html",
+          "hash": "VkTvsufxxH27A6XfxiimyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.WebGL.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.WebGL.html",
+          "hash": "rhe4nPFs7+sKTDlbAKP6lQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.yml",
       "output": {
         ".html": {
@@ -5544,7 +5604,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/pdf/toc.html",
-          "hash": "9X57Mnz2fAkVR85SsXrBiQ=="
+          "hash": "SWkwhLd1ZvGUn5NwvmX+UA=="
         }
       },
       "is_incremental": false,
@@ -5640,11 +5700,11 @@
           "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         },
-        "ManagedReferenceDocumentProcessor": {
+        "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         },
