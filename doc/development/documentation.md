@@ -14,9 +14,13 @@ It requires the Unity Client repository folder to be at the same level as the SU
 
 ### Requirements
 
-- [DocFX](https://dotnet.github.io/docfx/)
+- [DocFX](https://dotnet.github.io/docfx/) *Version 2.35.4.0*
 
 - "docfx" as a command needs to be availabe via the command console for the scripts to work.
+
+### Gotchas
+
+- DocFX Version 2.28.3.0 is known to not build metadata properly, so the version specified in requirements should be used.
 
 ## Hosting
 
