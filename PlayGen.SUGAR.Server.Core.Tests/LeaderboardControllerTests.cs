@@ -706,7 +706,46 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	        }
         }
 
-		/* todo: fix
+		[Theory]
+		[InlineData(LeaderboardFilterType.Top, 15, 0, CoreTestFixture.UserCount)]
+		[InlineData(LeaderboardFilterType.Top, 15, 1, CoreTestFixture.UserCount)]
+		[InlineData(LeaderboardFilterType.Near, 15, 0, CoreTestFixture.UserCount)]
+		[InlineData(LeaderboardFilterType.Near, 15, 1, CoreTestFixture.UserCount)]
+        public void CanHandleActorIndexOutOfRange(LeaderboardFilterType filterType, int userIndex, int offset, int limit)
+		{
+			// Arrange
+			var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{filterType}_{userIndex}_{offset}_{limit}";
+			TestNoStandingsResult(token, filterType, userIndex, offset, limit);
+
+		}
+
+		[Theory]
+		[InlineData(LeaderboardFilterType.Top, 15, 0, 10)]
+		[InlineData(LeaderboardFilterType.Top, 15, 1, 10)]
+		[InlineData(LeaderboardFilterType.Near, 15, 0, 10)]
+		[InlineData(LeaderboardFilterType.Near, 15, 1, 10)]
+		public void CanHandleNoResultsForKey(LeaderboardFilterType filterType, int userIndex, int offset, int limit)
+		{
+			// Arrange
+			var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{filterType}_{userIndex}_{offset}_{limit}";
+			TestNoStandingsResult(token, filterType, userIndex, offset, limit);
+
+		}
+
+        private void TestNoStandingsResult(string token, LeaderboardFilterType filterType, int userIndex, int offset, int limit)
+		{
+			// Arrange
+			var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Cumulative, $"{token}_ExpectedNoDataMatch");
+
+			// Act
+			var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, filterType, Fixture.SortedUsers[userIndex].Id, offset, limit);
+			var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
+
+			// Assert
+			Assert.Empty(standings);
+		}
+
+        /* todo: fix
         [Fact]
         public void GetLeaderboardGroupMemberFilterAccuracyTest()
         {
@@ -736,13 +775,13 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         }*/
 
         #region Helpers
-        private Leaderboard CreateLeaderboard(string token, EvaluationDataType dataType, LeaderboardType boardType)
+        private Leaderboard CreateLeaderboard(string token, EvaluationDataType dataType, LeaderboardType boardType, string overrideDataKey = null)
         {
             var leaderboard = new Leaderboard
             {
                 Name = token,
                 Token = token,
-                EvaluationDataKey = Fixture.GenerateEvaluationDataKey(dataType),
+                EvaluationDataKey = overrideDataKey ?? Fixture.GenerateEvaluationDataKey(dataType),
                 GameId = Fixture.EvaluationDataGameId,
                 ActorType = ActorType.User,
                 EvaluationDataType = dataType,

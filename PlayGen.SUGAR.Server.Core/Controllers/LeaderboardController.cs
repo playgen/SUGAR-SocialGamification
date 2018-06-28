@@ -620,8 +620,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				var startIndex = Math.Max(centerIndex - entriesBeforeCenter, firstIndex);
                 var endIndex = Math.Min(centerIndex + entriesAfterCenter, lastIndex);
 
-				limitedTypeResults = typeResults.GetRange(startIndex, (endIndex + 1) - startIndex);
-            }
+				limitedTypeResults = typeResults.Count >= startIndex
+					? typeResults.GetRange(startIndex, (endIndex + 1) - startIndex)
+					: new List<StandingsResponse>();
+
+			}
 
 			return limitedTypeResults.Select(s => new StandingsResponse
 			{
