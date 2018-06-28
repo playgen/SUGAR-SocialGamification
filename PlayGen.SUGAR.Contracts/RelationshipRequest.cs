@@ -31,6 +31,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// Whether the request should be automatically accepted.
 		/// </summary>
 		[Required]
-		public bool? AutoAccept { get; set; }
+		public bool AutoAccept { get; set; }
 	}
 }

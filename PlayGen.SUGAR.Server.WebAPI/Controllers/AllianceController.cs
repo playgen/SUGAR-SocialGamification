@@ -115,7 +115,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 				(await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
 			{
 				var request = relationship.ToRelationshipModel();
-				_relationshipCoreController.CreateRequest(relationship.ToRelationshipModel(), relationship.AutoAccept.Value);
+				_relationshipCoreController.CreateRequest(relationship.ToRelationshipModel(), relationship.AutoAccept);
 				var relationshipContract = request.ToContract();
 				return new ObjectResult(relationshipContract);
 			}
@@ -142,7 +142,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 					RequestorId = relationship.RequestorId,
 					AcceptorId = relationship.AcceptorId
 				};
-				_relationshipCoreController.UpdateRequest(relation.ToRelationshipModel(), relationship.Accepted.Value);
+				_relationshipCoreController.UpdateRequest(relation.ToRelationshipModel(), relationship.Accepted);
 				return Ok();
 			}
 			return Forbid();
