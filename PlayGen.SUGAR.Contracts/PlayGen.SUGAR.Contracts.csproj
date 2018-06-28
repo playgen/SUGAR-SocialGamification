@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp2.0;net35</TargetFrameworks>
+		<TargetFrameworks>net35;net46;netcoreapp2.0</TargetFrameworks>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.0|AnyCPU'">
@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<Choose>
-		<When Condition=" '$(TargetFramework)' == 'net35' ">
+		<When Condition=" '$(TargetFramework)' == 'net35' Or '$(TargetFramework)' == 'net46' ">
 			<ItemGroup>
 				<Reference Include="System.ComponentModel.DataAnnotations">
 				  <Private>true</Private>
