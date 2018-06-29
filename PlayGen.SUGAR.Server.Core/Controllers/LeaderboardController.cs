@@ -605,14 +605,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					}
 					
 					var actorIndex = typeResults.FindIndex(t => t.ActorId == actorId);
-					centerIndex = actorIndex + offset;
+					centerIndex = actorIndex + (offset * limit);
 					
 					entriesBeforeCenter = ((limit - 1) / 2);
 					entriesAfterCenter = (limit - 1 ) - entriesBeforeCenter;
                 }
 				else
                 {
-	                centerIndex = offset;
+	                centerIndex = offset * limit;
 	                entriesBeforeCenter = 0;
 	                entriesAfterCenter = limit - 1;
                 }
@@ -623,7 +623,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				limitedTypeResults = typeResults.Count >= startIndex
 					? typeResults.GetRange(startIndex, (endIndex + 1) - startIndex)
 					: new List<StandingsResponse>();
-
 			}
 
 			return limitedTypeResults.Select(s => new StandingsResponse

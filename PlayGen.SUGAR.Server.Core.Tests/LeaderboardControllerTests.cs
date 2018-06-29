@@ -573,66 +573,90 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [InlineData(5, 0)]
         [InlineData(22, 0)]
         [InlineData(58, 0)]
-        [InlineData(9, 10)]
-	    [InlineData(32, 31)]
-	    [InlineData(46, 20)]
-	    public void LimitsStandingsAndOffset(int pageLimit, int offset)
+        [InlineData(9, 1)]
+	    [InlineData(32, 2)]
+	    [InlineData(46, 3)]
+	    public void LimitsStandingsAndOffset(int pageLimit, int pageOffset)
 	    {
 		    // Arrange
-		    var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{pageLimit}_{offset}";
+		    var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{pageLimit}_{pageOffset}";
 		    var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Cumulative);
 
 		    // Act
-		    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, limit: pageLimit, offset: offset);
+		    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top, limit: pageLimit, offset: pageOffset);
 		    var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
-		    // Assert
-		    Assert.Equal(pageLimit == 0 ? Fixture.SortedUsers.Count : filter.PageLimit, standings.Length);
+            // Assert
+            // Page Limit Accuracy
+			var expected = Math.Min(pageLimit, Math.Max(0, Fixture.SortedUsers.Count - (pageLimit * pageOffset)));
+			Assert.Equal(expected, standings.Length);
 
-		    for (var i = 0; i < standings.Length; i++)
-		    {
-			    // Assumptions:
-			    // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
-			    // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-			    // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
+            var reversedUsers = Fixture.SortedUsers.Reverse().ToList();
 
-				Assert.Equal(Fixture.SortedUsers[(Fixture.SortedUsers.Count -1) - (i + offset)].Id, standings[i].ActorId);
-		    }
-        }
+			if (expected > 0)
+			{
+				// Offset Accuracy
+				var startIndex = pageLimit * pageOffset;
+				Assert.Equal(reversedUsers[startIndex].Id, standings[0].ActorId);
+
+				// Value Accuracy
+				for (var i = 0; i < standings.Length; i++)
+				{
+					// Assumptions:
+					// Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+					// Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+					// So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
+
+					Assert.Equal(reversedUsers[i + (pageLimit * pageOffset)].Id, standings[i].ActorId);
+				}
+			}
+		}
 
 	    [Theory]
 	    [InlineData(9, 0)]
 	    [InlineData(32, 0)]
 	    [InlineData(46, 0)]
-        [InlineData(9, 10)]
-	    [InlineData(32, 31)]
-	    [InlineData(46, 20)]
-	    public void LimitsStandingsAndOffsetNear(int pageLimit, int offset)
+        [InlineData(9, 1)]
+	    [InlineData(32, 2)]
+	    [InlineData(46, 3)]
+	    public void LimitsStandingsAndOffsetNear(int pageLimit, int pageOffset)
 	    {
 		    // Arrange
-		    var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{pageLimit}_{offset}";
+		    var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{pageLimit}_{pageOffset}";
 		    var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Cumulative);
 		    var actorIndex = Fixture.SortedUsers.Count / 2;
             var actorId = Fixture.SortedUsers[actorIndex].Id;
 		    var firstIndex = (actorIndex - ((pageLimit - 1) / 2)) - 1;
 
 		    // Act
-		    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, actorId, pageLimit, offset);
+		    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, actorId, pageLimit, pageOffset);
 		    var standings = _leaderboardCoreController.GetStandings(leaderboard, filter).ToArray();
 
             // Assert
-		    Assert.Equal(pageLimit == 0 ? Fixture.SortedUsers.Count : filter.PageLimit, standings.Length);
+			// Page Limit Accuracy
+			var expected = Math.Min(pageLimit, Math.Max(0, Fixture.SortedUsers.Count - (firstIndex + (pageLimit * pageOffset))));
+		    Assert.Equal(expected, standings.Length);
 
-            for (var i = 0; i < standings.Length; i++)
-		    {
-			    // Assumptions:
-			    // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
-			    // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-			    // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
+		    var reversedUsers = Fixture.SortedUsers.Reverse().ToList();
 
-			    Assert.Equal(Fixture.SortedUsers[(Fixture.SortedUsers.Count - 1) - (i + offset + firstIndex)].Id, standings[i].ActorId);
-		    }
-        }
+			if (expected > 0)
+			{
+				// Offset Accuracy
+				var startIndex = firstIndex + (pageLimit * pageOffset);
+				Assert.Equal(reversedUsers[startIndex].Id, standings[0].ActorId);
+
+				// Value Accuracy
+				for (var i = 0; i < standings.Length; i++)
+				{
+					// Assumptions:
+					// Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+					// Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+					// So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
+
+					Assert.Equal(reversedUsers[firstIndex + i + (pageOffset * pageLimit)].Id, standings[i].ActorId);
+				}
+			}
+		}
 
         // todo fix
         //[Fact]
@@ -769,8 +793,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
 			for (int i = 0; i < filter.PageLimit; i++)
 			{
-				int offset = (filter.ActorId.Value - EvaluationDataFixture.SortedUsers.Count - 1) * filter.PageLimit;
-				Assert.Equal(offset + i + 1, standings[i].ActorId);
+				int pageOffset = (filter.ActorId.Value - EvaluationDataFixture.SortedUsers.Count - 1) * filter.PageLimit;
+				Assert.Equal(pageOffset + i + 1, standings[i].ActorId);
 			}
         }*/
 
