@@ -20,194 +20,63 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	    public LeaderboardControllerTests(CoreTestFixture fixture) : base(fixture)
 	    {
 	    }
+		
+	    [Theory]
+	    [InlineData(LeaderboardType.Cumulative, EvaluationDataType.Long, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Cumulative, EvaluationDataType.Float, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Highest, EvaluationDataType.Long, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Highest, EvaluationDataType.Float, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Lowest, EvaluationDataType.Long, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Lowest, EvaluationDataType.Float, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Count, EvaluationDataType.String, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Count, EvaluationDataType.Boolean, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Earliest, EvaluationDataType.String, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Earliest, EvaluationDataType.Boolean, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Latest, EvaluationDataType.String, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Latest, EvaluationDataType.Boolean, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+        public void GetLeaderboardTopSpeedTest(LeaderboardType leaderboardType, EvaluationDataType dataType, int executionCount, int expectedAverage)
+	    {
+		    // Arrange
+		    var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{leaderboardType}_{dataType}_{executionCount}_{expectedAverage}";
+		    var leaderboard = CreateLeaderboard(token, dataType, leaderboardType);
+		    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
 
-        [Fact]
-		public void GetLeaderboardSumLongSpeedTest()
-		{
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Cumulative);
-			var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
-			
-            // Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-		}
-
-        [Fact]
-        public void GetLeaderboardSumFloatSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Float, LeaderboardType.Cumulative);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
+		    // Act & Assert
+		    AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), executionCount, expectedAverage);
         }
 
-        [Fact]
-        public void GetLeaderboardHighLongSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Highest);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
+	    [Theory]
+	    [InlineData(LeaderboardType.Cumulative, LeaderboardFilterType.Near, EvaluationDataType.Long, 74, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Cumulative, LeaderboardFilterType.Near, EvaluationDataType.Long, 8, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Cumulative, LeaderboardFilterType.Friends, EvaluationDataType.Long, 18, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Cumulative, LeaderboardFilterType.Friends, EvaluationDataType.Long, 95, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+        public void GetLeaderboardUserFilterTypeSpeedTest(LeaderboardType leaderboardType, LeaderboardFilterType filterType, EvaluationDataType dataType, int userIndex, int executionCount, int expectedAverage)
+	    {
+		    // Arrange
+		    var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{leaderboardType}_{dataType}_{userIndex}_{executionCount}_{expectedAverage}";
+		    var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Cumulative);
 
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
+		    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, filterType, Fixture.SortedUsers[userIndex].Id);
+
+		    // Act & Assert
+		    AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), executionCount, expectedAverage);
         }
 
-        [Fact]
-        public void GetLeaderboardHighFloatSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Float, LeaderboardType.Highest);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
+	    [Theory]
+	    [InlineData(LeaderboardType.Cumulative, LeaderboardFilterType.GroupMembers, EvaluationDataType.Long, 2, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    [InlineData(LeaderboardType.Cumulative, LeaderboardFilterType.GroupMembers, EvaluationDataType.Long, 8, GlobalLeaderboardStandingsExecutionCount, GlobalAverageLeaderboardStandingsExecutionMilliseconds)]
+	    public void GetLeaderboardGroupFilterTypeSpeedTest(LeaderboardType leaderboardType, LeaderboardFilterType filterType, EvaluationDataType dataType, int groupIndex, int executionCount, int expectedAverage)
+	    {
+		    // Arrange
+		    var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{leaderboardType}_{dataType}_{groupIndex}_{executionCount}_{expectedAverage}";
+		    var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Cumulative);
 
-            // Act & Assert
-            AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
+		    var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, filterType, Fixture.SortedGroups[groupIndex].Id);
 
-        [Fact]
-        public void GetLeaderboardLowLongSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Lowest);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
-        [Fact]
-        public void GetLeaderboardLowFloatSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Float, LeaderboardType.Lowest);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
-        [Fact]
-        public void GetLeaderboardCountStringSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.String, LeaderboardType.Count);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
-        [Fact]
-        public void GetLeaderboardCountBoolSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Boolean, LeaderboardType.Count);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
-        [Fact]
-        public void GetLeaderboardEarliestStringSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.String, LeaderboardType.Earliest);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
-        [Fact]
-        public void GetLeaderboardEarliestBoolSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Boolean, LeaderboardType.Earliest);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
-        [Fact]
-        public void GetLeaderboardLatestStringSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.String, LeaderboardType.Latest);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
-        [Fact]
-        public void GetLeaderboardLatestBoolSpeedTest()
-        {
-			// Arrange
-			var token = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Boolean, LeaderboardType.Latest);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Top);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
-        [Theory]
-		[InlineData(74)]
-		[InlineData(8)]
-        public void GetLeaderboardNearFilterSpeedTest(int userIndex)
-        {
-			// Arrange
-			var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{userIndex}";
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Cumulative);
-
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Near, Fixture.SortedUsers[userIndex].Id);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
-        [Theory]
-		[InlineData(18)]
-		[InlineData(95)]
-        public void GetLeaderboardFriendFilterSpeedTest(int userIndex)
-        {
-            // Arrange
-			var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{userIndex}";
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Cumulative);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.Friends, Fixture.SortedUsers[userIndex].Id);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
-        [Theory]
-		[InlineData(2)]
-		[InlineData(8)]
-        public void GetLeaderboardGroupMemberFilterSpeedTest(int groupIndex)
-        {
-            // Arrange
-			var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{groupIndex}";
-            var leaderboard = CreateLeaderboard(token, EvaluationDataType.Long, LeaderboardType.Cumulative);
-            var filter = CreateLeaderboardStandingsRequest(leaderboard.Token, leaderboard.GameId, LeaderboardFilterType.GroupMembers, Fixture.SortedGroups[groupIndex].Id);
-
-			// Act & Assert
-			AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), GlobalAverageLeaderboardStandingsExecutionMilliseconds, GlobalLeaderboardStandingsExecutionCount);
-        }
-
+		    // Act & Assert
+		    AssertUtil.ExecutionTimeAssert(() => _leaderboardCoreController.GetStandings(leaderboard, filter), executionCount, expectedAverage);
+	    }
+		
         [Fact]
         public void CantCreateLeaderboardStandingRequestWithInvalidLeaderboardId()
 		{

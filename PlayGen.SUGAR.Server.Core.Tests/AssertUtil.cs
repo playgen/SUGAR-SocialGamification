@@ -9,7 +9,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 {
     public static class AssertUtil
     {
-	    public static void ExecutionTimeAssert(Action method, int expectedAverageMilliseconds, int itterationCount)
+	    public static void ExecutionTimeAssert(Action method, int itterationCount, int expectedAverageMilliseconds)
 	    {
 		    var stopwatch = new Stopwatch();
 		    var individualTimings = new long[itterationCount];
