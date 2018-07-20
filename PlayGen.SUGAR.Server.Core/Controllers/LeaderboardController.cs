@@ -588,6 +588,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		protected List<StandingsResponse> FilterResults(List<StandingsResponse> typeResults, int limit, int offset, LeaderboardFilterType filter, int? actorId)
 		{
 			var limitedTypeResults = typeResults;
+			if (typeResults.Count == 0)
+			{
+				return new List<StandingsResponse>();
+			}
 			if (limit > 0)
 			{
 				var firstIndex = 0;
@@ -618,7 +622,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
                 }
 
 				var startIndex = Math.Max(centerIndex - entriesBeforeCenter, firstIndex);
-                var endIndex = Math.Min(centerIndex + entriesAfterCenter, lastIndex);
+                var endIndex = Math.Min(centerIndex + entriesAfterCenter, Math.Max(lastIndex, 0));
 
 				limitedTypeResults = typeResults.Count >= startIndex
 					? typeResults.GetRange(startIndex, (endIndex + 1) - startIndex)

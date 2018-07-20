@@ -68,6 +68,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 					context.MigrateAndSeed();
 
 					var claimController = scope.ServiceProvider.GetService<ClaimController>();
+					// Generate claims required from AuthorizationAttribute in WebAPI level
 					claimController.GetAuthorizationClaims();
 
 					if (environment.IsEnvironment("Tests"))

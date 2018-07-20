@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Roles and Permissions | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Roles and Permissions | SUGAR ">
+    <meta name="generator" content="docfx 2.35.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1 id="roles-and-permissions">Roles and Permissions</h1>
+              
+<h2 id="overview">Overview</h2>
+<p>Account actions are controlled by their associated <strong>permissions, known as Claims</strong>, if an account does not have the right claim to authorize their activity, SUGAR will block their request. A <strong>Role</strong> is a collection of permissions that an account can have. The default admin will have all roles assigned to them on Database seeding, whereas new logins will be given the Account and User Role, providing claims to their own account.</p>
+<h2 id="default-roles">Default Roles</h2>
+<p>SUGAR provides 6 Roles as default, these are defined in the table below</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Claims</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Global</td>
+<td>Create/Update/Delete Account Source<br>Create/Get/Delete Actor Claim<br>Create/Get/Delete Actor Role<br>Create Game<br>Create Group<br>Create/Get Role<br>Create/Get/Delete User</td>
+</tr>
+<tr>
+<td>Game</td>
+<td>Create/Get/Update/Delete Achievement<br>Create/Get/Delete Actor Claim<br>Create/Get/Delete Actor Role<br>Update/Delete Game<br>Create/Get Game Data<br>Create/Update/Delete Leaderboard<br>Create Resource<br>Create Role</td>
+</tr>
+<tr>
+<td>Group</td>
+<td>Create/Get/Delete Actor Claim<br>Create/Get Actor Data<br>Create/Get/Delete Actor Role<br>Create Game Data<br>Update/Delete Group<br>Create/Get/Update Group Member Request<br> Delete Group Member<br>Create/Update Resource<br>Create Role</td>
+</tr>
+<tr>
+<td>User</td>
+<td>Get Actor Data<br>Create/Get Actor Data<br>Create Game Data<br>Create/Get Group Member Request<br>Delete Group Member<br>Create/Update Resource<br>Update User<br>Create/Get/Update Friend Request<br>Delete User Friend</td>
+</tr>
+<tr>
+<td>Account</td>
+<td>Delete Account</td>
+</tr>
+<tr>
+<td>Role</td>
+<td>Delete Role<br>Create/Get/Delete Role Claim</td>
+</tr>
+</tbody>
+</table>
+<h2 id="adding-new-roles">Adding new roles</h2>
+<p>In order to add new roles, this can either be done by the REST API to firstly create a new Role, and then assign it the claims required, the claims must be assigned by Id to the Id of the newly created Role.</p>
+<p>Additionally Playgen.SUGAR.Server.Core/Authorization/ClaimController.cs, will automatically create new Roles when the API is started for AuthorizationAttributes, for example:</p>
+<pre><code class="lang-c#">    [Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.Group)]
+</code></pre><p>Will create the GroupDelete Claim for ClaimScope Group. </p>
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
