@@ -24,18 +24,23 @@ namespace PlayGen.SUGAR.Client.Tests
 			}
 		}
 
-		/// <summary>
-        /// Use this to do the setup for a test. Put any data on a context object and return that.
-        /// Do not set any values on the calling class.
-        /// Use this method in complete isolation.
+        /// <summary>
+        /// Override this method to do the setup for a test that you want to persist between any test cases in the class.
+        /// Put any data on a context object and return that.
+        /// Then when a test case is run, use <see cref="GetSetupClassContext{T}" /> to retrieve the context.
         /// </summary>
         /// <param name="fixture"></param>
-        /// <returns></returns>
-		protected virtual object SetupClass(ClientTestsFixture fixture)
+        /// <returns>The custom context you created for this test class</returns>
+        protected virtual object SetupClass(ClientTestsFixture fixture)
 		{
 			return null;
 		}
 
+		/// <summary>
+        /// To be used in a test case to retrieve the class context you returned in <see cref="SetupClass(ClientTestsFixture)" />
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
 		protected T GetSetupClassContext<T>()
 		{
 			return (T)Fixture.SetupClassContexts[GetType().Name];

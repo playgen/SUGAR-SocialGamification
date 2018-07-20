@@ -31,6 +31,6 @@ namespace PlayGen.SUGAR.Contracts
 		/// Whether the request was accepted or declined.
 		/// </summary>
 		[Required]
-		public bool? Accepted { get; set; }
+		public bool Accepted { get; set; }
 	}
 }

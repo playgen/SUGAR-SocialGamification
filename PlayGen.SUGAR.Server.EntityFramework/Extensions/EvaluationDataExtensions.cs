@@ -71,12 +71,19 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 
             if (start.HasValue)
 			{
-				modifiedEvaluationDataQueryable = modifiedEvaluationDataQueryable.Where(data => data.DateModified >= start);
-            }
+				if (start != default(DateTime)) // todo: Remove this check for v2 of the API. It has been added for compatibility with a previous version of the V1 data contracts
+				{
+					modifiedEvaluationDataQueryable =
+						modifiedEvaluationDataQueryable.Where(data => data.DateModified >= start);
+				}
+			}
 
 			if (end.HasValue)
 			{
-				modifiedEvaluationDataQueryable = evaluationDataQueryable.Where(data => data.DateModified <= end);
+				if (end != default(DateTime)) // todo: Remove this check for v2 of the API. It has been added for compatibility with a previous version of the V1 data contracts
+				{
+					modifiedEvaluationDataQueryable = evaluationDataQueryable.Where(data => data.DateModified <= end);
+				}
 			}
 
 			return modifiedEvaluationDataQueryable;

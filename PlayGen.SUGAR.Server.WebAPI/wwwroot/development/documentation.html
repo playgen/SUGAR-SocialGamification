@@ -63,22 +63,51 @@
               <h1 id="documentation">Documentation</h1>
               
 <p>SUGAR&#39;s documentation is generated using <a href="https://dotnet.github.io/docfx/">DocFX</a> using tripple slash code comments and <a href="https://swagger.io/">Swagger</a> to generate the REST API.</p>
-<h2 id="building">Building</h2>
-<p>There are various build scripts in doc/tools to build, copy and serve the docs.</p>
-<h3 id="unity-client">Unity-Client</h3>
-<p>The Unity Client documentation can be bundled and hosted with the SUGAR server documentation. </p>
-<p>It requires the Unity Client repository folder to be at the same level as the SUGAR server and for the Unity Client&#39;s documentation to have been built.</p>
 <h3 id="requirements">Requirements</h3>
 <ul>
-<li><p><a href="https://dotnet.github.io/docfx/">DocFX</a> <em>Version 2.35.4.0</em></p>
-</li>
-<li><p>&quot;docfx&quot; as a command needs to be availabe via the command console for the scripts to work.</p>
-</li>
+<li><a href="https://dotnet.github.io/docfx/">DocFX</a> <em>Version 2.35.4.0</em></li>
+<li>&quot;docfx&quot; as a command needs to be availabe via the command console for the scripts to work.</li>
+<li><a href="#Unity-Client">SUGAR-Unity documentation pre-built</a></li>
 </ul>
+<h3 id="process">Process</h3>
+<p>There are various build scripts in doc/tools to build, copy and serve the docs.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all_and_serve.bat</td>
+<td>Use this test that the docs work locally on your machine</td>
+</tr>
+<tr>
+<td>all_and_copy.bat</td>
+<td>Use this to generate the docs to be hosted by the SUGAR server.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> After generating the latest documentation it should be added to source control as it won&#39;t currently be built by the server&#39;s docker file.</p>
 <h3 id="gotchas">Gotchas</h3>
 <ul>
 <li>DocFX Version 2.28.3.0 is known to not build metadata properly, so the version specified in requirements should be used.</li>
 </ul>
+<h2 id="unity-client">Unity-Client</h2>
+<p>The Unity Client documentation can be bundled and hosted with the SUGAR server documentation. </p>
+<h3 id="requirements-1">Requirements</h3>
+<p>It requires the Unity Client repository folder to be at the same level as the SUGAR server e.g:</p>
+<ul>
+<li><strong>Root</strong><ul>
+<li><strong>sugar</strong>: <em>the SUGAR server repository.</em>        </li>
+<li><strong>sugar-unity</strong>: <em>the SUGAR Unity Client repository.</em>        </li>
+</ul>
+</li>
+</ul>
+<h3 id="process-1">Process</h3>
+<p>Follow <a href="../unity-client/development/documentation.html">this guide</a> to build the Unity Client&#39;s documentation.</p>
+<h3 id="-"></h3>
 <h2 id="hosting">Hosting</h2>
 <p>Docs are built and copied to the PlayGen.SUGAR.Server.WebAPI.Server/wwwroot where they are served from.</p>
 
