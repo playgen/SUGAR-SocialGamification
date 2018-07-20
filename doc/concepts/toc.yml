@@ -12,3 +12,5 @@
   href: account.md
 - name: Sessions
   href: session.md
+- name: Roles and Permissions
+  href: rolesandpermissions.md
