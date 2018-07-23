@@ -37,12 +37,38 @@ namespace PlayGen.SUGAR.Client
 			return Post<AccountRequest, AccountResponse>(query, account);
 		}
 
+		public AccountResponse Login(string token)
+		{
+			var query = GetUriBuilder(ControllerPrefix + "/logintoken").ToString();
+			var payload = new Token {TokenString = token};
+			return Post<AccountResponse>(query, payload);
+		}
+
 		public void LoginAsync(int gameId, AccountRequest account, Action<AccountResponse> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(() => Login(gameId, account),
 				onSuccess,
 				onError);
 		}
+		// HACK TEST
+		public class Token
+		{
+			public string TokenString;
+		}
+
+		public void LoginAsync(string authorizationToken, Action<AccountResponse> onSuccess, Action<Exception> onError)
+		{
+			AsyncRequestController.EnqueueRequest(() => Login(authorizationToken),
+				onSuccess,
+				onError);
+		}
+
+		public string GetAuthentication()
+		{
+			return GetAuthorizationHeader();
+		}
+
+		
 
 		// todo comment
 		public AccountResponse CreateAndLogin(int gameId, AccountRequest accountRequest)

@@ -18,14 +18,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	{
 		private readonly TokenController _tokenController;
 		private readonly Core.Controllers.AccountController _accountCoreController;
+		private readonly Core.Controllers.AccountSourceController _accountSourceController;
 		private readonly SessionTracker _sessionTracker;
 
 		public SessionController(
 			Core.Controllers.AccountController accountCoreController,
+			Core.Controllers.AccountSourceController accountSourceController,
 			TokenController tokenController,
 			SessionTracker sessionTracker)
 		{
 			_accountCoreController = accountCoreController;
+			_accountSourceController = accountSourceController;
 			_sessionTracker = sessionTracker;
 			_tokenController = tokenController;
 		}
@@ -79,6 +82,38 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			var response = account.ToContract();
 			return new ObjectResult(response);
 		}
+		// HACK TEST
+		public class Token
+		{
+			public string TokenString;
+		}
+
+		/// <summary>
+		/// Login to the game using a provided token
+		/// </summary>
+		/// <param name="token"></param>
+		/// <returns></returns>
+		[HttpPost("logintoken")]
+		[ArgumentsNotNull]
+		[AllowWithoutSession]
+		public IActionResult LoginToken([FromBody]Token token)
+		{
+			if (token.TokenString.Contains("Bearer"))
+			{
+				token.TokenString = token.TokenString.Substring(7, token.TokenString.Length - 7);
+			}
+			// todo check if has permission to login for specified game
+			var userId = _tokenController.ValidateToken(HttpContext, token.TokenString);
+
+			var account = _accountCoreController.GetUserId(userId);
+			var accountSourceToken = _accountSourceController.Get(account.AccountSourceId).Token;
+			
+			account = _accountCoreController.AuthenticateToken(account, accountSourceToken);
+
+			var response = account.ToContract();
+			return new ObjectResult(response);
+		}
+
 
 		/// <summary>
 		/// Creates a new account and login that account.

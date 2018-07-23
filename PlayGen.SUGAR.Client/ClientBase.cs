@@ -183,6 +183,11 @@ namespace PlayGen.SUGAR.Client
 
 		#region PostPut
 
+		protected TResponse Post<TResponse>(string url, object payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			return PostPut<TResponse>(url, "POST", headers, payload, expectedStatusCodes);
+		}
+
 		protected TResponse Post<TRequest, TResponse>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
 		{
 			return PostPut<TResponse>(url, "POST", headers, payload, expectedStatusCodes);
@@ -217,6 +222,11 @@ namespace PlayGen.SUGAR.Client
 			var request = CreateRequest(url, method, headers, payload);
 			var response = _httpHandler.HandleRequest(request);
 			ProcessResponse(response, expectedStatusCodes ?? new[] { HttpStatusCode.OK });
+		}
+
+		protected string GetAuthorizationHeader()
+		{
+			return _sessionHeaders[HeaderKeys.Authorization];
 		}
 
 		#endregion
