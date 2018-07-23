@@ -82,6 +82,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			var response = account.ToContract();
 			return new ObjectResult(response);
 		}
+
 		// HACK TEST
 		public class Token
 		{
@@ -98,14 +99,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[AllowWithoutSession]
 		public IActionResult LoginToken([FromBody]Token token)
 		{
-			if (token.TokenString.Contains("Bearer"))
-			{
-				token.TokenString = token.TokenString.Substring(7, token.TokenString.Length - 7);
-			}
 			// todo check if has permission to login for specified game
 			var userId = _tokenController.ValidateToken(HttpContext, token.TokenString);
 
-			var account = _accountCoreController.GetUserId(userId);
+			var account = _accountCoreController.GetByUser(userId);
 			var accountSourceToken = _accountSourceController.Get(account.AccountSourceId).Token;
 			
 			account = _accountCoreController.AuthenticateToken(account, accountSourceToken);

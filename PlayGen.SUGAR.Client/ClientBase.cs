@@ -182,12 +182,6 @@ namespace PlayGen.SUGAR.Client
 		}
 
 		#region PostPut
-
-		protected TResponse Post<TResponse>(string url, object payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
-		{
-			return PostPut<TResponse>(url, "POST", headers, payload, expectedStatusCodes);
-		}
-
 		protected TResponse Post<TRequest, TResponse>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
 		{
 			return PostPut<TResponse>(url, "POST", headers, payload, expectedStatusCodes);
@@ -196,6 +190,11 @@ namespace PlayGen.SUGAR.Client
 		protected void Post<TRequest>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
 		{
 			PostPut(url, "POST", headers, payload, expectedStatusCodes);
+		}
+
+		protected TResponse Post<TResponse>(string url, object payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
+		{
+			return PostPut<TResponse>(url, "POST", headers, payload, expectedStatusCodes);
 		}
 
 		protected TResponse Put<TRequest, TResponse>(string url, TRequest payload, IEnumerable<HttpStatusCode> expectedStatusCodes = null, Dictionary<string, string> headers = null)
@@ -226,7 +225,12 @@ namespace PlayGen.SUGAR.Client
 
 		protected string GetAuthorizationHeader()
 		{
-			return _sessionHeaders[HeaderKeys.Authorization];
+			var header = _sessionHeaders[HeaderKeys.Authorization];
+			if (header.Contains("Bearer"))
+			{
+				header = header.Substring(7, header.Length - 7);
+			}
+			return header;
 		}
 
 		#endregion

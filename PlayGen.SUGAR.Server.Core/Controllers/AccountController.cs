@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return account;
 		}
 
-		public Account GetUserId(int userId)
+		public Account GetByUser(int userId)
 		{
 			var account = _accountDbController.GetByUser(userId);
 			return account;
