@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Client
 		public AccountResponse Login(string token)
 		{
 			var query = GetUriBuilder(ControllerPrefix + "/logintoken").ToString();
-			var payload = new Token {TokenString = token};
+			var payload = new TokenLoginRequest {TokenString = token};
 			return Post<AccountResponse>(query, payload);
 		}
 
@@ -50,11 +50,6 @@ namespace PlayGen.SUGAR.Client
 				onSuccess,
 				onError);
 		}
-		// HACK TEST
-		public class Token
-		{
-			public string TokenString;
-		}
 
 		public void LoginAsync(string authorizationToken, Action<AccountResponse> onSuccess, Action<Exception> onError)
 		{
@@ -62,13 +57,6 @@ namespace PlayGen.SUGAR.Client
 				onSuccess,
 				onError);
 		}
-
-		public string GetAuthentication()
-		{
-			return GetAuthorizationHeader();
-		}
-
-		
 
 		// todo comment
 		public AccountResponse CreateAndLogin(int gameId, AccountRequest accountRequest)

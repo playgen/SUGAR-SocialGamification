@@ -223,16 +223,6 @@ namespace PlayGen.SUGAR.Client
 			ProcessResponse(response, expectedStatusCodes ?? new[] { HttpStatusCode.OK });
 		}
 
-		protected string GetAuthorizationHeader()
-		{
-			var header = _sessionHeaders[HeaderKeys.Authorization];
-			if (header.Contains("Bearer"))
-			{
-				header = header.Substring(7, header.Length - 7);
-			}
-			return header;
-		}
-
 		#endregion
 
 		#region GetDelete

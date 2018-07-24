@@ -11,7 +11,7 @@ namespace PlayGen.SUGAR.Server.WebAPI
 {
     public partial class Startup
     {
-        private void ConfigureAuthorization(IServiceCollection services, TimeSpan validityTimeout)
+        private void ConfigureAuthorization(IServiceCollection services, TimeSpan sessionTokenValidityTimeout, TimeSpan loginTokenValidityTimeout)
         {
             var keyBytes = Encoding.ASCII.GetBytes(Configuration["APIKey"]);
             key = new SymmetricSecurityKey(keyBytes);
@@ -21,8 +21,9 @@ namespace PlayGen.SUGAR.Server.WebAPI
                 Audience = TokenAudience,
                 Issuer = TokenIssuer,
                 SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
-                ValidityTimeout = validityTimeout
-            };
+                SessionTokenValidityTimeout = sessionTokenValidityTimeout,
+				LoginTokenValidityTimeout = loginTokenValidityTimeout
+			};
 
             services.AddSingleton(tokenOptions);
 

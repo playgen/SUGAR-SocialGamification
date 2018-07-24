@@ -35,8 +35,9 @@ namespace PlayGen.SUGAR.Server.WebAPI
 		public void ConfigureServices(IServiceCollection services)
 		{
 			var timeoutCheckInterval = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TimeoutCheckInterval"]);
-			var validityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["TokenValidityTimeout"]);
-						
+			var sessionTokenValidityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["SessionTokenValidityTimeout"]);
+			var loginTokenValidityTimeout = JsonConvert.DeserializeObject<TimeSpan>(Configuration["LoginTokenValidityTimeout"]);
+
 			services.AddApplicationInsightsTelemetry(Configuration);
 
 			// Add framework services.
@@ -62,10 +63,10 @@ namespace PlayGen.SUGAR.Server.WebAPI
 			ConfigureGameDataControllers(services);
 			ConfigureRouting(services);
 			ConfigureRESTAPIDocumentationGenerator(services, Environment);
-			ConfigureAuthorization(services, validityTimeout);
+			ConfigureAuthorization(services, sessionTokenValidityTimeout, loginTokenValidityTimeout);
 			ConfigureAuthentication(services);
 			ConfigureEvaluationEvents(services);
-			ConfigureSessionTracking(services, validityTimeout, timeoutCheckInterval);
+			ConfigureSessionTracking(services, sessionTokenValidityTimeout, timeoutCheckInterval);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
