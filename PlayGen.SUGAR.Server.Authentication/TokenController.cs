@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.Server.Authentication
 			return handler.WriteToken(securityToken);
 		}
 
-		private string CreateLoginToken(string gameId, string userId, DateTime expires) // TODo new expiry
+		private string CreateLoginToken(string gameId, string userId, DateTime expires) 
 		{
 			var identity = new ClaimsIdentity(
 				new GenericIdentity(userId, "TokenAuth"),
