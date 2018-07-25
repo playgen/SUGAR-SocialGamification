@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class AccountRequest
+    <title>Interface ISavedPrefsHandler
    | SUGAR </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class AccountRequest
+    <meta name="title" content="Interface ISavedPrefsHandler
    | SUGAR ">
     <meta name="generator" content="docfx 2.35.4.0">
     
@@ -71,71 +71,30 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Contracts.AccountRequest">
+            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Client.ISavedPrefsHandler">
   
   
-  <h1 id="PlayGen_SUGAR_Contracts_AccountRequest" data-uid="PlayGen.SUGAR.Contracts.AccountRequest" class="text-break">Class AccountRequest
+  <h1 id="PlayGen_SUGAR_Client_ISavedPrefsHandler" data-uid="PlayGen.SUGAR.Client.ISavedPrefsHandler" class="text-break">Interface ISavedPrefsHandler
   </h1>
-  <div class="markdown level0 summary"><p>Encapsulates log-in details.</p>
-</div>
+  <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">AccountRequest</span></div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Contracts.html">PlayGen.SUGAR.Contracts</a></h6>
-  <h6><strong>Assembly</strong>: PlayGen.SUGAR.Contracts.dll</h6>
-  <h5 id="PlayGen_SUGAR_Contracts_AccountRequest_syntax">Syntax</h5>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Client.html">PlayGen.SUGAR.Client</a></h6>
+  <h6><strong>Assembly</strong>: PlayGen.SUGAR.Client.dll</h6>
+  <h5 id="PlayGen_SUGAR_Client_ISavedPrefsHandler_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class AccountRequest : object</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ISavedPrefsHandler</code></pre>
   </div>
-  <h5 id="PlayGen_SUGAR_Contracts_AccountRequest_examples"><strong>Examples</strong></h5>
-  <p>JSON
-{
-Name : &quot;User Name&quot;,
-Password : &quot;Their Password&quot;,
-SourceToken : &quot;SUGAR&quot;
-}</p>
-
   <h3 id="properties">Properties
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Contracts_AccountRequest_IssueLoginToken_" data-uid="PlayGen.SUGAR.Contracts.AccountRequest.IssueLoginToken*"></a>
-  <h4 id="PlayGen_SUGAR_Contracts_AccountRequest_IssueLoginToken" data-uid="PlayGen.SUGAR.Contracts.AccountRequest.IssueLoginToken">IssueLoginToken</h4>
-  <div class="markdown level1 summary"><p>Whether the reqyest should return a login token for use in later logins</p>
-</div>
+  <a id="PlayGen_SUGAR_Client_ISavedPrefsHandler_Prefix_" data-uid="PlayGen.SUGAR.Client.ISavedPrefsHandler.Prefix*"></a>
+  <h4 id="PlayGen_SUGAR_Client_ISavedPrefsHandler_Prefix" data-uid="PlayGen.SUGAR.Client.ISavedPrefsHandler.Prefix">Prefix</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IssueLoginToken { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Contracts_AccountRequest_Name_" data-uid="PlayGen.SUGAR.Contracts.AccountRequest.Name*"></a>
-  <h4 id="PlayGen_SUGAR_Contracts_AccountRequest_Name" data-uid="PlayGen.SUGAR.Contracts.AccountRequest.Name">Name</h4>
-  <div class="markdown level1 summary"><p>The user&apos;s log-in name.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">string Prefix { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -152,18 +111,63 @@ SourceToken : &quot;SUGAR&quot;
       </tr>
     </tbody>
   </table>
+  <h3 id="methods">Methods
+  </h3>
   
   
-  <a id="PlayGen_SUGAR_Contracts_AccountRequest_Password_" data-uid="PlayGen.SUGAR.Contracts.AccountRequest.Password*"></a>
-  <h4 id="PlayGen_SUGAR_Contracts_AccountRequest_Password" data-uid="PlayGen.SUGAR.Contracts.AccountRequest.Password">Password</h4>
-  <div class="markdown level1 summary"><p>The user&apos;s password.</p>
-</div>
+  <a id="PlayGen_SUGAR_Client_ISavedPrefsHandler_Delete_" data-uid="PlayGen.SUGAR.Client.ISavedPrefsHandler.Delete*"></a>
+  <h4 id="PlayGen_SUGAR_Client_ISavedPrefsHandler_Delete_System_String_" data-uid="PlayGen.SUGAR.Client.ISavedPrefsHandler.Delete(System.String)">Delete(String)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Password { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">void Delete(string key)</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_ISavedPrefsHandler_Get_" data-uid="PlayGen.SUGAR.Client.ISavedPrefsHandler.Get*"></a>
+  <h4 id="PlayGen_SUGAR_Client_ISavedPrefsHandler_Get__1_System_String_" data-uid="PlayGen.SUGAR.Client.ISavedPrefsHandler.Get``1(System.String)">Get&lt;T&gt;(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">T Get&lt;T&gt;(string key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
@@ -173,41 +177,73 @@ SourceToken : &quot;SUGAR&quot;
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="PlayGen_SUGAR_Contracts_AccountRequest_SourceToken_" data-uid="PlayGen.SUGAR.Contracts.AccountRequest.SourceToken*"></a>
-  <h4 id="PlayGen_SUGAR_Contracts_AccountRequest_SourceToken" data-uid="PlayGen.SUGAR.Contracts.AccountRequest.SourceToken">SourceToken</h4>
-  <div class="markdown level1 summary"><p>The source from which the user is trying to log-in.</p>
-</div>
+  <a id="PlayGen_SUGAR_Client_ISavedPrefsHandler_Save_" data-uid="PlayGen.SUGAR.Client.ISavedPrefsHandler.Save*"></a>
+  <h4 id="PlayGen_SUGAR_Client_ISavedPrefsHandler_Save__1_System_String___0_" data-uid="PlayGen.SUGAR.Client.ISavedPrefsHandler.Save``1(System.String,``0)">Save&lt;T&gt;(String, T)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string SourceToken { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">void Save&lt;T&gt;(string key, T value)</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
+        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">value</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="PlayGen.SUGAR.Server.WebAPI.Extensions.AccountExtensions.html#PlayGen_SUGAR_Server_WebAPI_Extensions_AccountExtensions_ToModel_PlayGen_SUGAR_Contracts_AccountRequest_">AccountExtensions.ToModel(AccountRequest)</a>
-  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           

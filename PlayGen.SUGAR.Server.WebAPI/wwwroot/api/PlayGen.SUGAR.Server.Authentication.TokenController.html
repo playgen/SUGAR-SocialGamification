@@ -122,13 +122,60 @@
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Server_Authentication_TokenController_IssueToken_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.IssueToken*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Authentication_TokenController_IssueToken_HttpContext_PlayGen_SUGAR_Server_Core_Sessions_Session_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.IssueToken(HttpContext,PlayGen.SUGAR.Server.Core.Sessions.Session)">IssueToken(HttpContext, Session)</h4>
+  <a id="PlayGen_SUGAR_Server_Authentication_TokenController_IssueLoginToken_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.IssueLoginToken*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Authentication_TokenController_IssueLoginToken_System_Int32_System_Int32_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.IssueLoginToken(System.Int32,System.Int32)">IssueLoginToken(Int32, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void IssueToken(HttpContext context, Session session)</code></pre>
+    <pre><code class="lang-csharp hljs">public string IssueLoginToken(int gameId, int userId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">userId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Authentication_TokenController_IssueSessionToken_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.IssueSessionToken*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Authentication_TokenController_IssueSessionToken_HttpContext_PlayGen_SUGAR_Server_Core_Sessions_Session_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.IssueSessionToken(HttpContext,PlayGen.SUGAR.Server.Core.Sessions.Session)">IssueSessionToken(HttpContext, Session)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void IssueSessionToken(HttpContext context, Session session)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -154,13 +201,13 @@
   </table>
   
   
-  <a id="PlayGen_SUGAR_Server_Authentication_TokenController_IssueToken_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.IssueToken*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Authentication_TokenController_IssueToken_HttpContext_System_Int64_System_Int32_System_Int32_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.IssueToken(HttpContext,System.Int64,System.Int32,System.Int32)">IssueToken(HttpContext, Int64, Int32, Int32)</h4>
+  <a id="PlayGen_SUGAR_Server_Authentication_TokenController_IssueSessionToken_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.IssueSessionToken*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Authentication_TokenController_IssueSessionToken_HttpContext_System_Int64_System_Int32_System_Int32_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.IssueSessionToken(HttpContext,System.Int64,System.Int32,System.Int32)">IssueSessionToken(HttpContext, Int64, Int32, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void IssueToken(HttpContext context, long sessionId, int gameId, int userId)</code></pre>
+    <pre><code class="lang-csharp hljs">public void IssueSessionToken(HttpContext context, long sessionId, int gameId, int userId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -217,6 +264,95 @@
       <tr>
         <td><span class="xref">HttpContext</span></td>
         <td><span class="parametername">context</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Authentication_TokenController_ValidateToken_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.ValidateToken*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Authentication_TokenController_ValidateToken_HttpContext_System_String_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.ValidateToken(HttpContext,System.String)">ValidateToken(HttpContext, String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ValidateToken(HttpContext context, string token)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">HttpContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">token</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Authentication_TokenController_VerifyToken_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.VerifyToken*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Authentication_TokenController_VerifyToken_System_String_" data-uid="PlayGen.SUGAR.Server.Authentication.TokenController.VerifyToken(System.String)">VerifyToken(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool VerifyToken(string token)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">token</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
         <td></td>
       </tr>
     </tbody>

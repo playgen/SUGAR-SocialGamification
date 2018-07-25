@@ -115,6 +115,9 @@
       <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Post__1_System_String___0_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__">ClientBase.Post&lt;TRequest&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
     </div>
     <div>
+      <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Post__1_System_String_System_Object_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__">ClientBase.Post&lt;TResponse&gt;(String, Object, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
+    </div>
+    <div>
       <a class="xref" href="PlayGen.SUGAR.Client.ClientBase.html#PlayGen_SUGAR_Client_ClientBase_Put__2_System_String___0_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__">ClientBase.Put&lt;TRequest, TResponse&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</a>
     </div>
     <div>
@@ -392,6 +395,48 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
   </table>
   
   
+  <a id="PlayGen_SUGAR_Client_SessionClient_Login_" data-uid="PlayGen.SUGAR.Client.SessionClient.Login*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SessionClient_Login_System_String_" data-uid="PlayGen.SUGAR.Client.SessionClient.Login(System.String)">Login(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AccountResponse Login(string token)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">token</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.AccountResponse.html">AccountResponse</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="PlayGen_SUGAR_Client_SessionClient_LoginAsync_" data-uid="PlayGen.SUGAR.Client.SessionClient.LoginAsync*"></a>
   <h4 id="PlayGen_SUGAR_Client_SessionClient_LoginAsync_System_Int32_PlayGen_SUGAR_Contracts_AccountRequest_Action_PlayGen_SUGAR_Contracts_AccountResponse__Action_Exception__" data-uid="PlayGen.SUGAR.Client.SessionClient.LoginAsync(System.Int32,PlayGen.SUGAR.Contracts.AccountRequest,Action{PlayGen.SUGAR.Contracts.AccountResponse},Action{Exception})">LoginAsync(Int32, AccountRequest, Action&lt;AccountResponse&gt;, Action&lt;Exception&gt;)</h4>
   <div class="markdown level1 summary"></div>
@@ -418,6 +463,43 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
       <tr>
         <td><a class="xref" href="PlayGen.SUGAR.Contracts.AccountRequest.html">AccountRequest</a></td>
         <td><span class="parametername">account</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.AccountResponse.html">AccountResponse</a>&gt;</td>
+        <td><span class="parametername">onSuccess</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">Exception</span>&gt;</td>
+        <td><span class="parametername">onError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_SessionClient_LoginAsync_" data-uid="PlayGen.SUGAR.Client.SessionClient.LoginAsync*"></a>
+  <h4 id="PlayGen_SUGAR_Client_SessionClient_LoginAsync_System_String_Action_PlayGen_SUGAR_Contracts_AccountResponse__Action_Exception__" data-uid="PlayGen.SUGAR.Client.SessionClient.LoginAsync(System.String,Action{PlayGen.SUGAR.Contracts.AccountResponse},Action{Exception})">LoginAsync(String, Action&lt;AccountResponse&gt;, Action&lt;Exception&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LoginAsync(string authorizationToken, Action&lt;AccountResponse&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authorizationToken</span></td>
         <td></td>
       </tr>
       <tr>

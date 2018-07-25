@@ -95,12 +95,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_SessionController__ctor_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.SessionController.#ctor*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_SessionController__ctor_PlayGen_SUGAR_Server_Core_Controllers_AccountController_PlayGen_SUGAR_Server_Authentication_TokenController_PlayGen_SUGAR_Server_Core_Sessions_SessionTracker_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.SessionController.#ctor(PlayGen.SUGAR.Server.Core.Controllers.AccountController,PlayGen.SUGAR.Server.Authentication.TokenController,PlayGen.SUGAR.Server.Core.Sessions.SessionTracker)">SessionController(AccountController, TokenController, SessionTracker)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_SessionController__ctor_PlayGen_SUGAR_Server_Core_Controllers_AccountController_PlayGen_SUGAR_Server_Core_Controllers_AccountSourceController_PlayGen_SUGAR_Server_Authentication_TokenController_PlayGen_SUGAR_Server_Core_Sessions_SessionTracker_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.SessionController.#ctor(PlayGen.SUGAR.Server.Core.Controllers.AccountController,PlayGen.SUGAR.Server.Core.Controllers.AccountSourceController,PlayGen.SUGAR.Server.Authentication.TokenController,PlayGen.SUGAR.Server.Core.Sessions.SessionTracker)">SessionController(AccountController, AccountSourceController, TokenController, SessionTracker)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SessionController(AccountController accountCoreController, TokenController tokenController, SessionTracker sessionTracker)</code></pre>
+    <pre><code class="lang-csharp hljs">public SessionController(AccountController accountCoreController, AccountSourceController accountSourceController, TokenController tokenController, SessionTracker sessionTracker)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -115,6 +115,11 @@
       <tr>
         <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.AccountController.html">AccountController</a></td>
         <td><span class="parametername">accountCoreController</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.AccountSourceController.html">AccountSourceController</a></td>
+        <td><span class="parametername">accountSourceController</span></td>
         <td></td>
       </tr>
       <tr>
@@ -354,6 +359,49 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
         <td><span class="xref">IActionResult</span></td>
         <td><p>A <a class="xref" href="PlayGen.SUGAR.Contracts.AccountResponse.html">AccountResponse</a> containing the Account details.</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_SessionController_LoginToken_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.SessionController.LoginToken*"></a>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_SessionController_LoginToken_PlayGen_SUGAR_Contracts_TokenLoginRequest_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.SessionController.LoginToken(PlayGen.SUGAR.Contracts.TokenLoginRequest)">LoginToken(TokenLoginRequest)</h4>
+  <div class="markdown level1 summary"><p>Login to the game using a provided token</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IActionResult LoginToken(TokenLoginRequest tokenLogin)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Contracts.TokenLoginRequest.html">TokenLoginRequest</a></td>
+        <td><span class="parametername">tokenLogin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IActionResult</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
