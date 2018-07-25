@@ -18,5 +18,10 @@
 		/// ActorResponse object containing the user details.
 		/// </summary>
 		public UserResponse User { get; set; }
+
+		/// <summary>
+		/// Login token set if account request asks for IssueLoginToken
+		/// </summary>
+		public string LoginToken { get; set; }
 	}
 }

@@ -27,6 +27,29 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
+		public Account Get(int actorId)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				var account = context.Accounts
+					.First(a => a.Id == actorId);
+
+				return account;
+			}
+		}
+
+		public Account GetByUser(int userId)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				var account = context.Accounts
+					.First(a => a.UserId == userId);
+
+				return account;
+			}
+		}
+
+
 		public List<Account> Get(string[] names, int sourceId)
 		{
 			using (var context = ContextFactory.Create())
