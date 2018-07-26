@@ -488,7 +488,11 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         [InlineData(9, 1)]
 	    [InlineData(32, 2)]
 	    [InlineData(46, 3)]
-	    public void LimitsStandingsAndOffsetNear(int pageLimit, int pageOffset)
+	    [InlineData(12, -1)]
+	    [InlineData(23, -2)]
+	    [InlineData(30, -3)]
+        [InlineData(30, -4)]
+        public void LimitsStandingsAndOffsetNear(int pageLimit, int pageOffset)
 	    {
 		    // Arrange
 		    var token = $"{System.Reflection.MethodBase.GetCurrentMethod().Name}_{pageLimit}_{pageOffset}";
@@ -503,26 +507,30 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
             // Assert
 			// Page Limit Accuracy
-			var expected = Math.Min(pageLimit, Math.Max(0, Fixture.SortedUsers.Count - (firstIndex + (pageLimit * pageOffset))));
-		    Assert.Equal(expected, standings.Length);
+		    var expected = pageOffset >= 0
+			    ? Math.Min(pageLimit, Math.Max(0, Fixture.SortedUsers.Count - (firstIndex + (pageLimit * pageOffset))))
+			    : Math.Min(pageLimit, Math.Max(0, (firstIndex + (pageLimit * pageOffset)) + pageLimit));
 
-		    var reversedUsers = Fixture.SortedUsers.Reverse().ToList();
+            Assert.Equal(expected, standings.Length);
+
+		    // Assumptions:
+		    // Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
+		    // Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
+		    // So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
+            var reversedUsers = Fixture.SortedUsers.Reverse().ToList();
 
 			if (expected > 0)
 			{
-				// Offset Accuracy
+                // Offset Accuracy
+
 				var startIndex = firstIndex + (pageLimit * pageOffset);
-				Assert.Equal(reversedUsers[startIndex].Id, standings[0].ActorId);
+                var clampedStartIndex = Math.Max(0, startIndex);
+				Assert.Equal(reversedUsers[clampedStartIndex].Id, standings[0].ActorId);
 
 				// Value Accuracy
 				for (var i = 0; i < standings.Length; i++)
 				{
-					// Assumptions:
-					// Each user in Fixture.SortedUsers was created in sequence so the ActorId of each user in Fixture.SortedUsers is in ascending order.
-					// Each user in Fixture.SortedUsers has its index in the list + 1 amount of evaluation data - created by CreateEvaluationDataAscending
-					// So the leaderboard order should match that of [Fixture.SortedUsers reversed] for ascending evaluations.
-
-					Assert.Equal(reversedUsers[firstIndex + i + (pageOffset * pageLimit)].Id, standings[i].ActorId);
+					Assert.Equal(reversedUsers[clampedStartIndex + i].Id, standings[i].ActorId);
 				}
 			}
 		}

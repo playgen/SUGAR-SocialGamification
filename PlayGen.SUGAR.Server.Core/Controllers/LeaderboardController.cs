@@ -591,11 +591,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			if (limit > 0)
 			{
 				var firstIndex = 0;
-				int centerIndex;
+				int focalIndex;
 				var lastIndex = typeResults.Count - 1;
 
-				int entriesBeforeCenter;
-				int entriesAfterCenter;
+				int entriesBeforeFocal;
+				int entriesAfterFocal;
 
                 if (filter == LeaderboardFilterType.Near)
 				{
@@ -605,22 +605,22 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					}
 					
 					var actorIndex = typeResults.FindIndex(t => t.ActorId == actorId);
-					centerIndex = actorIndex + (offset * limit);
+					focalIndex = actorIndex + (offset * limit);
 					
-					entriesBeforeCenter = ((limit - 1) / 2);
-					entriesAfterCenter = (limit - 1 ) - entriesBeforeCenter;
+					entriesBeforeFocal = ((limit - 1) / 2);
+					entriesAfterFocal = (limit - 1 ) - entriesBeforeFocal;
                 }
 				else
                 {
-	                centerIndex = offset * limit;
-	                entriesBeforeCenter = 0;
-	                entriesAfterCenter = limit - 1;
+	                focalIndex = offset * limit;
+	                entriesBeforeFocal = 0;
+	                entriesAfterFocal = limit - 1;
                 }
 
-				var startIndex = Math.Max(centerIndex - entriesBeforeCenter, firstIndex);
-                var endIndex = Math.Min(centerIndex + entriesAfterCenter, lastIndex);
+				var startIndex = Math.Max(focalIndex - entriesBeforeFocal, firstIndex);
+                var endIndex = Math.Min(focalIndex + entriesAfterFocal, lastIndex);
 
-				limitedTypeResults = typeResults.Count >= startIndex
+				limitedTypeResults = typeResults.Count > startIndex && endIndex >= 0 
 					? typeResults.GetRange(startIndex, (endIndex + 1) - startIndex)
 					: new List<StandingsResponse>();
 			}
