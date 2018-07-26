@@ -80,7 +80,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
 	    public static RelationshipController RelationshipController
 		    => _relationshipController ?? (_relationshipController =
-					new RelationshipController(new NullLogger<RelationshipController>(), DbControllerLocator.RelationshipController));
+					new RelationshipController(new NullLogger<RelationshipController>(), DbControllerLocator.ActorClaimController, DbControllerLocator.ActorController, DbControllerLocator.ClaimController, DbControllerLocator.RelationshipController));
 
     }
 }
