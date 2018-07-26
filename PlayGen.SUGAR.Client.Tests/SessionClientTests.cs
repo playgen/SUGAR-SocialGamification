@@ -103,13 +103,16 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Equal(accountRequest.Name, response.User.Name);
 		}
 
-		[Fact]
-		public void CannotLoginWithInvalidLoginToken()
+		[Theory]
+		[InlineData("")]
+		[InlineData("ey1234567890-abc/a<>?!|$%£^&*(){}[]")]
+		[InlineData("asdhjsdjajsdhasdasdasdhjasdasd ashdakjshdk asdhaks dhakhsd khads kahs dkhadkh akASKDHAKSHD AKHSD K")]
+		[InlineData(null)]
+		public void CannotLoginWithInvalidLoginToken(string invalidToken)
 		{
 			// Arrange
 			var key = "Session_CannotLoginWithInvalidLoginToken";
 			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
-			var invalidToken = "ey1234567890-abc/a<>?!|$%£^&*(){}[]";
 
 			// Act / Assert
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Session.Login(invalidToken));

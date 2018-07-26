@@ -64,7 +64,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// Example Usage: POST api/1/logingame
 		/// </summary>
 		/// <param name="gameId">Optional Id of the game the account is logging in for.</param>
-		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
+		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided. Optional IssueLoginToken will return a token to remember login for future use</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		[HttpPost("{gameId:int}/logingame")]
 		[ArgumentsNotNull]
@@ -90,7 +90,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Login to the game using a provided token
 		/// </summary>
-		/// <param name="tokenLogin"></param>
+		/// <param name="tokenLogin">The login token receievd from a previous successful login, if requested</param>
 		/// <returns></returns>
 		[HttpPost("logintoken")]
 		[ArgumentsNotNull]
