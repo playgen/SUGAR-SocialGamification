@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Account Setup | SUGAR </title>
+    <title>Saving Data | SUGAR </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Account Setup | SUGAR ">
+    <meta name="title" content="Saving Data | SUGAR ">
     <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:tocrel" content="../pdf/toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -60,20 +60,11 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="account-setup">Account Setup</h1>
+              <h1 id="saving-data">Saving Data</h1>
               
-<p>The next component on the SUGAR prefab is the Account Unity Client script component. This is used to handle the player&#39;s login to their SUGAR account or the registration of new accounts.
-There are two ways of logging in a user. This can be done by a typical login panel gameobject or login can occur automatically via code if credentials come in from an external source.</p>
-<ul>
-<li><p>Login User Interface - Login panel gameobject, which appears to prompt the user to login. The gameobject must have the LoginUserInterface script attached. Included in the prefabs folder (&quot;Assets/SUGAR/Prefabs&quot;) is a fully functional login panel template. The login panel has a rememberMe option, which will set the IssueLoginToken flag to true in the login request, which will return a token for players to use for logging in on subsequent requests. If &quot;Remember Me&quot; has been selected, the interface will pre-populate user details.</p>
-</li>
-<li><p>Allow Auto Login - This enables the use of auto-login (bypassing the need for the login panel). If this is checked, and the command line arguments for auto login have been passed, then the Account Unity Client will attempt to login with the credentials. The command line options format is <code>game.exe -u [username] -s [source] -autologin</code>.</p>
-</li>
-<li><p>Allow Register - Currently, this displays the makes the register on the login panel visible for custom registration handlers. </p>
-</li>
-<li><p>Default Source Token - Source tokens are set to ensure the player is logging in from an allowed source. If the source is not set in the commandline options, then this value becomes the default.</p>
-</li>
-</ul>
+<p>SUGAR Unity includes a class which handles saving and retrieving of data, similar to the way in which <a href="https://docs.unity3d.com/ScriptReference/PlayerPrefs.html">Player Prefs</a> are set, retrieved and deleted. The class uses the following prefix: <strong>SUGAR_PREFS_</strong> followed by the key provided.</p>
+<h2 id="current-usage">Current Usage</h2>
+<p>Currently the saving and retrieving of data is used for storing player login tokens, allowing for players login details to be saved so they can log in without entering details every time</p>
 
             </article>
           </div>
