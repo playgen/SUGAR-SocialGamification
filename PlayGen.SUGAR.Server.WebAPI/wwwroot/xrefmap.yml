@@ -10321,15 +10321,15 @@ references:
   commentId: T:PlayGen.SUGAR.Server.Core.Controllers.RelationshipController
   fullName: PlayGen.SUGAR.Server.Core.Controllers.RelationshipController
   nameWithType: RelationshipController
-- uid: PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.#ctor(ILogger{PlayGen.SUGAR.Server.Core.Controllers.RelationshipController},PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController)
-  name: RelationshipController(ILogger<RelationshipController>, RelationshipController)
-  href: api/PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.html#PlayGen_SUGAR_Server_Core_Controllers_RelationshipController__ctor_ILogger_PlayGen_SUGAR_Server_Core_Controllers_RelationshipController__PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_
-  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.#ctor(ILogger{PlayGen.SUGAR.Server.Core.Controllers.RelationshipController},PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController)
-  name.vb: RelationshipController(ILogger(Of RelationshipController), RelationshipController)
-  fullName: PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.RelationshipController(ILogger<PlayGen.SUGAR.Server.Core.Controllers.RelationshipController>, PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController)
-  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.RelationshipController(ILogger(Of PlayGen.SUGAR.Server.Core.Controllers.RelationshipController), PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController)
-  nameWithType: RelationshipController.RelationshipController(ILogger<RelationshipController>, RelationshipController)
-  nameWithType.vb: RelationshipController.RelationshipController(ILogger(Of RelationshipController), RelationshipController)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.#ctor(ILogger{PlayGen.SUGAR.Server.Core.Controllers.RelationshipController},PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController,PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorController,PlayGen.SUGAR.Server.EntityFramework.Controllers.ClaimController,PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController)
+  name: RelationshipController(ILogger<RelationshipController>, ActorClaimController, ActorController, ClaimController, RelationshipController)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.html#PlayGen_SUGAR_Server_Core_Controllers_RelationshipController__ctor_ILogger_PlayGen_SUGAR_Server_Core_Controllers_RelationshipController__PlayGen_SUGAR_Server_EntityFramework_Controllers_ActorClaimController_PlayGen_SUGAR_Server_EntityFramework_Controllers_ActorController_PlayGen_SUGAR_Server_EntityFramework_Controllers_ClaimController_PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.#ctor(ILogger{PlayGen.SUGAR.Server.Core.Controllers.RelationshipController},PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController,PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorController,PlayGen.SUGAR.Server.EntityFramework.Controllers.ClaimController,PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController)
+  name.vb: RelationshipController(ILogger(Of RelationshipController), ActorClaimController, ActorController, ClaimController, RelationshipController)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.RelationshipController(ILogger<PlayGen.SUGAR.Server.Core.Controllers.RelationshipController>, PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController, PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorController, PlayGen.SUGAR.Server.EntityFramework.Controllers.ClaimController, PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController)
+  fullName.vb: PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.RelationshipController(ILogger(Of PlayGen.SUGAR.Server.Core.Controllers.RelationshipController), PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorClaimController, PlayGen.SUGAR.Server.EntityFramework.Controllers.ActorController, PlayGen.SUGAR.Server.EntityFramework.Controllers.ClaimController, PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController)
+  nameWithType: RelationshipController.RelationshipController(ILogger<RelationshipController>, ActorClaimController, ActorController, ClaimController, RelationshipController)
+  nameWithType.vb: RelationshipController.RelationshipController(ILogger(Of RelationshipController), ActorClaimController, ActorController, ClaimController, RelationshipController)
 - uid: PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.#ctor*
   name: RelationshipController
   href: api/PlayGen.SUGAR.Server.Core.Controllers.RelationshipController.html#PlayGen_SUGAR_Server_Core_Controllers_RelationshipController__ctor_
@@ -22773,6 +22773,22 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer
   nameWithType: ResourceUnityClient.Transfer
+- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32,System.String,System.Int64,Action{System.Boolean},System.Boolean)
+  name: TryTake(Int32, String, Int64, Action<Boolean>, Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_TryTake_System_Int32_System_String_System_Int64_Action_System_Boolean__System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32,System.String,System.Int64,Action{System.Boolean},System.Boolean)
+  name.vb: TryTake(Int32, String, Int64, Action(Of Boolean), Boolean)
+  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32, System.String, System.Int64, Action<System.Boolean>, System.Boolean)
+  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32, System.String, System.Int64, Action(Of System.Boolean), System.Boolean)
+  nameWithType: ResourceUnityClient.TryTake(Int32, String, Int64, Action<Boolean>, Boolean)
+  nameWithType.vb: ResourceUnityClient.TryTake(Int32, String, Int64, Action(Of Boolean), Boolean)
+- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake*
+  name: TryTake
+  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_TryTake_
+  commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake
+  nameWithType: ResourceUnityClient.TryTake
 - uid: PlayGen.SUGAR.Unity.ResourceUnityClient.UserGameResources
   name: UserGameResources
   href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_UserGameResources

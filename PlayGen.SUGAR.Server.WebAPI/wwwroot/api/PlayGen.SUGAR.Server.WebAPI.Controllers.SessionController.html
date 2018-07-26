@@ -341,7 +341,7 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
       <tr>
         <td><a class="xref" href="PlayGen.SUGAR.Contracts.AccountRequest.html">AccountRequest</a></td>
         <td><span class="parametername">accountRequest</span></td>
-        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.AccountRequest.html">AccountRequest</a> object that contains the account details provided.</p>
+        <td><p><a class="xref" href="PlayGen.SUGAR.Contracts.AccountRequest.html">AccountRequest</a> object that contains the account details provided. Optional IssueLoginToken will return a token to remember login for future use</p>
 </td>
       </tr>
     </tbody>
@@ -386,7 +386,8 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
       <tr>
         <td><a class="xref" href="PlayGen.SUGAR.Contracts.TokenLoginRequest.html">TokenLoginRequest</a></td>
         <td><span class="parametername">tokenLogin</span></td>
-        <td></td>
+        <td><p>The login token receievd from a previous successful login, if requested</p>
+</td>
       </tr>
     </tbody>
   </table>
