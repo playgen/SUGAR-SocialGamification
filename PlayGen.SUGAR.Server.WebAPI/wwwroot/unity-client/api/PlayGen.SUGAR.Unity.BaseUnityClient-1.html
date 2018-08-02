@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_BaseUnityClient_1" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1" class="text-break">Class BaseUnityClient&lt;T&gt;
   </h1>
-  <div class="markdown level0 summary"><p>Base class for UnityClient classes</p>
+  <div class="markdown level0 summary"><p>Base abstract class for UnityClient classes</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -94,7 +94,7 @@
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Unity.dll</h6>
   <h5 id="PlayGen_SUGAR_Unity_BaseUnityClient_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class BaseUnityClient&lt;T&gt; : MonoBehaviour where T : BaseInterface</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class BaseUnityClient&lt;T&gt; : MonoBehaviour where T : BaseInterface</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -116,7 +116,7 @@
   
   
   <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1__landscapeInterface" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1._landscapeInterface">_landscapeInterface</h4>
-  <div class="markdown level1 summary"><p>Landscape UI object for this unity client. Can be left null if not required.</p>
+  <div class="markdown level1 summary"><p>Landscape interface for this area of functionality. Can be left null if not required.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -141,7 +141,7 @@
   
   
   <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1__portraitInterface" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1._portraitInterface">_portraitInterface</h4>
-  <div class="markdown level1 summary"><p>Portrait UI object for this unity client. Can be left null if not required.</p>
+  <div class="markdown level1 summary"><p>Portrait interface for this area of functionality. Can be left null if not required.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -169,7 +169,8 @@
   
   <a id="PlayGen_SUGAR_Unity_BaseUnityClient_1__interface_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1._interface*"></a>
   <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1__interface" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1._interface">_interface</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The interface that is used for the current aspect ratio.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -194,7 +195,7 @@
   
   <a id="PlayGen_SUGAR_Unity_BaseUnityClient_1_HasInterface_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.HasInterface*"></a>
   <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1_HasInterface" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.HasInterface">HasInterface</h4>
-  <div class="markdown level1 summary"><p>Has a UI object been provided for this Unity Client?</p>
+  <div class="markdown level1 summary"><p>Has an interface been provided for this Unity Client?</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -220,7 +221,7 @@
   
   <a id="PlayGen_SUGAR_Unity_BaseUnityClient_1_IsActive_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.IsActive*"></a>
   <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1_IsActive" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.IsActive">IsActive</h4>
-  <div class="markdown level1 summary"><p>Is there a UI object and if so is it currently active?</p>
+  <div class="markdown level1 summary"><p>Is there an interface and if so is it currently active?</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -257,77 +258,10 @@
   </div>
   
   
-  <a id="PlayGen_SUGAR_Unity_BaseUnityClient_1_SetInterface_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.SetInterface*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1_SetInterface__1___0_Canvas_System_String_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.SetInterface``1(``0,Canvas,System.String)">SetInterface&lt;T&gt;(T, Canvas, String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected T SetInterface&lt;T&gt;(T panelInterface, Canvas canvas, string extension = &quot;&quot;)
-    where T : BaseInterface</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">T</span></td>
-        <td><span class="parametername">panelInterface</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Canvas</span></td>
-        <td><span class="parametername">canvas</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">extension</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">T</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
   <a id="PlayGen_SUGAR_Unity_BaseUnityClient_1_Update_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.Update*"></a>
   <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1_Update" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.Update">Update()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Change the used interface if the aspect ratio changes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">

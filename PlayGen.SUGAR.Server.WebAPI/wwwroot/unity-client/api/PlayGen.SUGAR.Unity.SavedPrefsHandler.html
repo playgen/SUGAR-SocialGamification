@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class UnityWebGlHttpHandler
+    <title>Class SavedPrefsHandler
    | SUGAR </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class UnityWebGlHttpHandler
+    <meta name="title" content="Class SavedPrefsHandler
    | SUGAR ">
     <meta name="generator" content="docfx 2.35.4.0">
     
@@ -71,35 +71,62 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Unity.UnityWebGlHttpHandler">
+            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Unity.SavedPrefsHandler">
   
   
-  <h1 id="PlayGen_SUGAR_Unity_UnityWebGlHttpHandler" data-uid="PlayGen.SUGAR.Unity.UnityWebGlHttpHandler" class="text-break">Class UnityWebGlHttpHandler
+  <h1 id="PlayGen_SUGAR_Unity_SavedPrefsHandler" data-uid="PlayGen.SUGAR.Unity.SavedPrefsHandler" class="text-break">Class SavedPrefsHandler
   </h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">UnityWebGlHttpHandler</span></div>
+    <div class="level1"><span class="xref">SavedPrefsHandler</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Unity.html">PlayGen.SUGAR.Unity</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Unity.dll</h6>
-  <h5 id="PlayGen_SUGAR_Unity_UnityWebGlHttpHandler_syntax">Syntax</h5>
+  <h5 id="PlayGen_SUGAR_Unity_SavedPrefsHandler_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class UnityWebGlHttpHandler : IHttpHandler</code></pre>
+    <pre><code class="lang-csharp hljs">public class SavedPrefsHandler : ISavedPrefsHandler</code></pre>
   </div>
-  <h3 id="methods">Methods
+  <h3 id="properties">Properties
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Unity_UnityWebGlHttpHandler_HandleRequest_" data-uid="PlayGen.SUGAR.Unity.UnityWebGlHttpHandler.HandleRequest*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UnityWebGlHttpHandler_HandleRequest_HttpRequest_" data-uid="PlayGen.SUGAR.Unity.UnityWebGlHttpHandler.HandleRequest(HttpRequest)">HandleRequest(HttpRequest)</h4>
+  <a id="PlayGen_SUGAR_Unity_SavedPrefsHandler_Prefix_" data-uid="PlayGen.SUGAR.Unity.SavedPrefsHandler.Prefix*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_SavedPrefsHandler_Prefix" data-uid="PlayGen.SUGAR.Unity.SavedPrefsHandler.Prefix">Prefix</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public HttpResponse HandleRequest(HttpRequest request)</code></pre>
+    <pre><code class="lang-csharp hljs">public string Prefix { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_SavedPrefsHandler_Delete_" data-uid="PlayGen.SUGAR.Unity.SavedPrefsHandler.Delete*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_SavedPrefsHandler_Delete_System_String_" data-uid="PlayGen.SUGAR.Unity.SavedPrefsHandler.Delete(System.String)">Delete(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Delete(string key)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -112,8 +139,35 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">HttpRequest</span></td>
-        <td><span class="parametername">request</span></td>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_SavedPrefsHandler_Get_" data-uid="PlayGen.SUGAR.Unity.SavedPrefsHandler.Get*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_SavedPrefsHandler_Get__1_System_String_" data-uid="PlayGen.SUGAR.Unity.SavedPrefsHandler.Get``1(System.String)">Get&lt;T&gt;(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Get&lt;T&gt;(string key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -128,7 +182,69 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">HttpResponse</span></td>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_SavedPrefsHandler_Save_" data-uid="PlayGen.SUGAR.Unity.SavedPrefsHandler.Save*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_SavedPrefsHandler_Save__1_System_String___0_" data-uid="PlayGen.SUGAR.Unity.SavedPrefsHandler.Save``1(System.String,``0)">Save&lt;T&gt;(String, T)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Save&lt;T&gt;(string key, T value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>

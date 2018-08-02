@@ -4344,6 +4344,12 @@ references:
   commentId: F:PlayGen.SUGAR.Common.CriteriaQueryType.Any
   fullName: PlayGen.SUGAR.Common.CriteriaQueryType.Any
   nameWithType: CriteriaQueryType.Any
+- uid: PlayGen.SUGAR.Common.CriteriaQueryType.Count
+  name: Count
+  href: api/PlayGen.SUGAR.Common.CriteriaQueryType.html#PlayGen_SUGAR_Common_CriteriaQueryType_Count
+  commentId: F:PlayGen.SUGAR.Common.CriteriaQueryType.Count
+  fullName: PlayGen.SUGAR.Common.CriteriaQueryType.Count
+  nameWithType: CriteriaQueryType.Count
 - uid: PlayGen.SUGAR.Common.CriteriaQueryType.Latest
   name: Latest
   href: api/PlayGen.SUGAR.Common.CriteriaQueryType.html#PlayGen_SUGAR_Common_CriteriaQueryType_Latest
@@ -20733,47 +20739,22 @@ references:
   commentId: T:PlayGen.SUGAR.Unity.AccountUnityClient
   fullName: PlayGen.SUGAR.Unity.AccountUnityClient
   nameWithType: AccountUnityClient
-- uid: PlayGen.SUGAR.Unity.AccountUnityClient._interface
-  name: _interface
-  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient__interface
-  commentId: P:PlayGen.SUGAR.Unity.AccountUnityClient._interface
-  fullName: PlayGen.SUGAR.Unity.AccountUnityClient._interface
-  nameWithType: AccountUnityClient._interface
-- uid: PlayGen.SUGAR.Unity.AccountUnityClient._interface*
-  name: _interface
-  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient__interface_
-  commentId: Overload:PlayGen.SUGAR.Unity.AccountUnityClient._interface
+- uid: PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel(Action{System.Boolean})
+  name: DisplayLogInPanel(Action<Boolean>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_DisplayLogInPanel_Action_System_Boolean__
+  commentId: M:PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel(Action{System.Boolean})
+  name.vb: DisplayLogInPanel(Action(Of Boolean))
+  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel(Action<System.Boolean>)
+  fullName.vb: PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel(Action(Of System.Boolean))
+  nameWithType: AccountUnityClient.DisplayLogInPanel(Action<Boolean>)
+  nameWithType.vb: AccountUnityClient.DisplayLogInPanel(Action(Of Boolean))
+- uid: PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel*
+  name: DisplayLogInPanel
+  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_DisplayLogInPanel_
+  commentId: Overload:PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel
   isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.AccountUnityClient._interface
-  nameWithType: AccountUnityClient._interface
-- uid: PlayGen.SUGAR.Unity.AccountUnityClient._landscapeInterface
-  name: _landscapeInterface
-  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient__landscapeInterface
-  commentId: F:PlayGen.SUGAR.Unity.AccountUnityClient._landscapeInterface
-  fullName: PlayGen.SUGAR.Unity.AccountUnityClient._landscapeInterface
-  nameWithType: AccountUnityClient._landscapeInterface
-- uid: PlayGen.SUGAR.Unity.AccountUnityClient._portraitInterface
-  name: _portraitInterface
-  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient__portraitInterface
-  commentId: F:PlayGen.SUGAR.Unity.AccountUnityClient._portraitInterface
-  fullName: PlayGen.SUGAR.Unity.AccountUnityClient._portraitInterface
-  nameWithType: AccountUnityClient._portraitInterface
-- uid: PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel(Action{System.Boolean})
-  name: DisplayPanel(Action<Boolean>)
-  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_DisplayPanel_Action_System_Boolean__
-  commentId: M:PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel(Action{System.Boolean})
-  name.vb: DisplayPanel(Action(Of Boolean))
-  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel(Action<System.Boolean>)
-  fullName.vb: PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel(Action(Of System.Boolean))
-  nameWithType: AccountUnityClient.DisplayPanel(Action<Boolean>)
-  nameWithType.vb: AccountUnityClient.DisplayPanel(Action(Of Boolean))
-- uid: PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel*
-  name: DisplayPanel
-  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_DisplayPanel_
-  commentId: Overload:PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel
-  isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel
-  nameWithType: AccountUnityClient.DisplayPanel
+  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel
+  nameWithType: AccountUnityClient.DisplayLogInPanel
 - uid: PlayGen.SUGAR.Unity.AccountUnityClient.HasInterface
   name: HasInterface
   href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_HasInterface
@@ -20829,32 +20810,6 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.AccountUnityClient.Logout
   nameWithType: AccountUnityClient.Logout
-- uid: PlayGen.SUGAR.Unity.AccountUnityClient.SetInterface(PlayGen.SUGAR.Unity.BaseAccountInterface,Canvas,System.String)
-  name: SetInterface(BaseAccountInterface, Canvas, String)
-  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_SetInterface_PlayGen_SUGAR_Unity_BaseAccountInterface_Canvas_System_String_
-  commentId: M:PlayGen.SUGAR.Unity.AccountUnityClient.SetInterface(PlayGen.SUGAR.Unity.BaseAccountInterface,Canvas,System.String)
-  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.SetInterface(PlayGen.SUGAR.Unity.BaseAccountInterface, Canvas, System.String)
-  nameWithType: AccountUnityClient.SetInterface(BaseAccountInterface, Canvas, String)
-- uid: PlayGen.SUGAR.Unity.AccountUnityClient.SetInterface*
-  name: SetInterface
-  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_SetInterface_
-  commentId: Overload:PlayGen.SUGAR.Unity.AccountUnityClient.SetInterface
-  isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.SetInterface
-  nameWithType: AccountUnityClient.SetInterface
-- uid: PlayGen.SUGAR.Unity.AccountUnityClient.Update
-  name: Update()
-  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_Update
-  commentId: M:PlayGen.SUGAR.Unity.AccountUnityClient.Update
-  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.Update()
-  nameWithType: AccountUnityClient.Update()
-- uid: PlayGen.SUGAR.Unity.AccountUnityClient.Update*
-  name: Update
-  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_Update_
-  commentId: Overload:PlayGen.SUGAR.Unity.AccountUnityClient.Update
-  isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.Update
-  nameWithType: AccountUnityClient.Update
 - uid: PlayGen.SUGAR.Unity.ActorResponseAllowableActions
   name: ActorResponseAllowableActions
   href: unity-client/api/PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html
@@ -20974,19 +20929,6 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.BaseAccountInterface.Awake
   nameWithType: BaseAccountInterface.Awake
-- uid: PlayGen.SUGAR.Unity.BaseAccountInterface.RememberLogin
-  name: RememberLogin()
-  href: unity-client/api/PlayGen.SUGAR.Unity.BaseAccountInterface.html#PlayGen_SUGAR_Unity_BaseAccountInterface_RememberLogin
-  commentId: M:PlayGen.SUGAR.Unity.BaseAccountInterface.RememberLogin
-  fullName: PlayGen.SUGAR.Unity.BaseAccountInterface.RememberLogin()
-  nameWithType: BaseAccountInterface.RememberLogin()
-- uid: PlayGen.SUGAR.Unity.BaseAccountInterface.RememberLogin*
-  name: RememberLogin
-  href: unity-client/api/PlayGen.SUGAR.Unity.BaseAccountInterface.html#PlayGen_SUGAR_Unity_BaseAccountInterface_RememberLogin_
-  commentId: Overload:PlayGen.SUGAR.Unity.BaseAccountInterface.RememberLogin
-  isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.BaseAccountInterface.RememberLogin
-  nameWithType: BaseAccountInterface.RememberLogin
 - uid: PlayGen.SUGAR.Unity.BaseEvaluationListInterface
   name: BaseEvaluationListInterface
   href: unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html
@@ -21588,24 +21530,6 @@ references:
   fullName.vb: PlayGen.SUGAR.Unity.BaseUnityClient(Of T).IsActive
   nameWithType: BaseUnityClient<T>.IsActive
   nameWithType.vb: BaseUnityClient(Of T).IsActive
-- uid: PlayGen.SUGAR.Unity.BaseUnityClient`1.SetInterface*
-  name: SetInterface
-  href: unity-client/api/PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_SetInterface_
-  commentId: Overload:PlayGen.SUGAR.Unity.BaseUnityClient`1.SetInterface
-  isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.BaseUnityClient<T>.SetInterface
-  fullName.vb: PlayGen.SUGAR.Unity.BaseUnityClient(Of T).SetInterface
-  nameWithType: BaseUnityClient<T>.SetInterface
-  nameWithType.vb: BaseUnityClient(Of T).SetInterface
-- uid: PlayGen.SUGAR.Unity.BaseUnityClient`1.SetInterface``1(``0,Canvas,System.String)
-  name: SetInterface<T>(T, Canvas, String)
-  href: unity-client/api/PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_SetInterface__1___0_Canvas_System_String_
-  commentId: M:PlayGen.SUGAR.Unity.BaseUnityClient`1.SetInterface``1(``0,Canvas,System.String)
-  name.vb: SetInterface(Of T)(T, Canvas, String)
-  fullName: PlayGen.SUGAR.Unity.BaseUnityClient<T>.SetInterface<T>(T, Canvas, System.String)
-  fullName.vb: PlayGen.SUGAR.Unity.BaseUnityClient(Of T).SetInterface(Of T)(T, Canvas, System.String)
-  nameWithType: BaseUnityClient<T>.SetInterface<T>(T, Canvas, String)
-  nameWithType.vb: BaseUnityClient(Of T).SetInterface(Of T)(T, Canvas, String)
 - uid: PlayGen.SUGAR.Unity.BaseUnityClient`1.Update
   name: Update()
   href: unity-client/api/PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_Update
@@ -22302,19 +22226,6 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.Progress
   nameWithType: EvaluationUnityClient.Progress
-- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.SetInterface(PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface,Canvas,System.String)
-  name: SetInterface(BaseEvaluationPopupInterface, Canvas, String)
-  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_SetInterface_PlayGen_SUGAR_Unity_BaseEvaluationPopupInterface_Canvas_System_String_
-  commentId: M:PlayGen.SUGAR.Unity.EvaluationUnityClient.SetInterface(PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface,Canvas,System.String)
-  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.SetInterface(PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface, Canvas, System.String)
-  nameWithType: EvaluationUnityClient.SetInterface(BaseEvaluationPopupInterface, Canvas, String)
-- uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.SetInterface*
-  name: SetInterface
-  href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_SetInterface_
-  commentId: Overload:PlayGen.SUGAR.Unity.EvaluationUnityClient.SetInterface
-  isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.EvaluationUnityClient.SetInterface
-  nameWithType: EvaluationUnityClient.SetInterface
 - uid: PlayGen.SUGAR.Unity.EvaluationUnityClient.Update
   name: Update()
   href: unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html#PlayGen_SUGAR_Unity_EvaluationUnityClient_Update
@@ -22808,6 +22719,70 @@ references:
   commentId: T:PlayGen.SUGAR.Unity.ResponseHandler
   fullName: PlayGen.SUGAR.Unity.ResponseHandler
   nameWithType: ResponseHandler
+- uid: PlayGen.SUGAR.Unity.SavedPrefsHandler
+  name: SavedPrefsHandler
+  href: unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.html
+  commentId: T:PlayGen.SUGAR.Unity.SavedPrefsHandler
+  fullName: PlayGen.SUGAR.Unity.SavedPrefsHandler
+  nameWithType: SavedPrefsHandler
+- uid: PlayGen.SUGAR.Unity.SavedPrefsHandler.Delete(System.String)
+  name: Delete(String)
+  href: unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.html#PlayGen_SUGAR_Unity_SavedPrefsHandler_Delete_System_String_
+  commentId: M:PlayGen.SUGAR.Unity.SavedPrefsHandler.Delete(System.String)
+  fullName: PlayGen.SUGAR.Unity.SavedPrefsHandler.Delete(System.String)
+  nameWithType: SavedPrefsHandler.Delete(String)
+- uid: PlayGen.SUGAR.Unity.SavedPrefsHandler.Delete*
+  name: Delete
+  href: unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.html#PlayGen_SUGAR_Unity_SavedPrefsHandler_Delete_
+  commentId: Overload:PlayGen.SUGAR.Unity.SavedPrefsHandler.Delete
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.SavedPrefsHandler.Delete
+  nameWithType: SavedPrefsHandler.Delete
+- uid: PlayGen.SUGAR.Unity.SavedPrefsHandler.Get*
+  name: Get
+  href: unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.html#PlayGen_SUGAR_Unity_SavedPrefsHandler_Get_
+  commentId: Overload:PlayGen.SUGAR.Unity.SavedPrefsHandler.Get
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.SavedPrefsHandler.Get
+  nameWithType: SavedPrefsHandler.Get
+- uid: PlayGen.SUGAR.Unity.SavedPrefsHandler.Get``1(System.String)
+  name: Get<T>(String)
+  href: unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.html#PlayGen_SUGAR_Unity_SavedPrefsHandler_Get__1_System_String_
+  commentId: M:PlayGen.SUGAR.Unity.SavedPrefsHandler.Get``1(System.String)
+  name.vb: Get(Of T)(String)
+  fullName: PlayGen.SUGAR.Unity.SavedPrefsHandler.Get<T>(System.String)
+  fullName.vb: PlayGen.SUGAR.Unity.SavedPrefsHandler.Get(Of T)(System.String)
+  nameWithType: SavedPrefsHandler.Get<T>(String)
+  nameWithType.vb: SavedPrefsHandler.Get(Of T)(String)
+- uid: PlayGen.SUGAR.Unity.SavedPrefsHandler.Prefix
+  name: Prefix
+  href: unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.html#PlayGen_SUGAR_Unity_SavedPrefsHandler_Prefix
+  commentId: P:PlayGen.SUGAR.Unity.SavedPrefsHandler.Prefix
+  fullName: PlayGen.SUGAR.Unity.SavedPrefsHandler.Prefix
+  nameWithType: SavedPrefsHandler.Prefix
+- uid: PlayGen.SUGAR.Unity.SavedPrefsHandler.Prefix*
+  name: Prefix
+  href: unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.html#PlayGen_SUGAR_Unity_SavedPrefsHandler_Prefix_
+  commentId: Overload:PlayGen.SUGAR.Unity.SavedPrefsHandler.Prefix
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.SavedPrefsHandler.Prefix
+  nameWithType: SavedPrefsHandler.Prefix
+- uid: PlayGen.SUGAR.Unity.SavedPrefsHandler.Save*
+  name: Save
+  href: unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.html#PlayGen_SUGAR_Unity_SavedPrefsHandler_Save_
+  commentId: Overload:PlayGen.SUGAR.Unity.SavedPrefsHandler.Save
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.SavedPrefsHandler.Save
+  nameWithType: SavedPrefsHandler.Save
+- uid: PlayGen.SUGAR.Unity.SavedPrefsHandler.Save``1(System.String,``0)
+  name: Save<T>(String, T)
+  href: unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.html#PlayGen_SUGAR_Unity_SavedPrefsHandler_Save__1_System_String___0_
+  commentId: M:PlayGen.SUGAR.Unity.SavedPrefsHandler.Save``1(System.String,``0)
+  name.vb: Save(Of T)(String, T)
+  fullName: PlayGen.SUGAR.Unity.SavedPrefsHandler.Save<T>(System.String, T)
+  fullName.vb: PlayGen.SUGAR.Unity.SavedPrefsHandler.Save(Of T)(System.String, T)
+  nameWithType: SavedPrefsHandler.Save<T>(String, T)
+  nameWithType.vb: SavedPrefsHandler.Save(Of T)(String, T)
 - uid: PlayGen.SUGAR.Unity.SUGARManager
   name: SUGARManager
   href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html
@@ -22970,6 +22945,32 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.SUGARManager.Resource
   nameWithType: SUGARManager.Resource
+- uid: PlayGen.SUGAR.Unity.SUGARManager.SetClassId(System.String)
+  name: SetClassId(String)
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_SetClassId_System_String_
+  commentId: M:PlayGen.SUGAR.Unity.SUGARManager.SetClassId(System.String)
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.SetClassId(System.String)
+  nameWithType: SUGARManager.SetClassId(String)
+- uid: PlayGen.SUGAR.Unity.SUGARManager.SetClassId*
+  name: SetClassId
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_SetClassId_
+  commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.SetClassId
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.SetClassId
+  nameWithType: SUGARManager.SetClassId
+- uid: PlayGen.SUGAR.Unity.SUGARManager.SetCurrentGroup(ActorResponse)
+  name: SetCurrentGroup(ActorResponse)
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_SetCurrentGroup_ActorResponse_
+  commentId: M:PlayGen.SUGAR.Unity.SUGARManager.SetCurrentGroup(ActorResponse)
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.SetCurrentGroup(ActorResponse)
+  nameWithType: SUGARManager.SetCurrentGroup(ActorResponse)
+- uid: PlayGen.SUGAR.Unity.SUGARManager.SetCurrentGroup*
+  name: SetCurrentGroup
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_SetCurrentGroup_
+  commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.SetCurrentGroup
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.SetCurrentGroup
+  nameWithType: SUGARManager.SetCurrentGroup
 - uid: PlayGen.SUGAR.Unity.SUGARManager.Unity
   name: Unity
   href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_Unity
@@ -23009,6 +23010,19 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.SUGARManager.UserGroup
   nameWithType: SUGARManager.UserGroup
+- uid: PlayGen.SUGAR.Unity.SUGARManager.UserSignedIn
+  name: UserSignedIn
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_UserSignedIn
+  commentId: P:PlayGen.SUGAR.Unity.SUGARManager.UserSignedIn
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.UserSignedIn
+  nameWithType: SUGARManager.UserSignedIn
+- uid: PlayGen.SUGAR.Unity.SUGARManager.UserSignedIn*
+  name: UserSignedIn
+  href: unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html#PlayGen_SUGAR_Unity_SUGARManager_UserSignedIn_
+  commentId: Overload:PlayGen.SUGAR.Unity.SUGARManager.UserSignedIn
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.SUGARManager.UserSignedIn
+  nameWithType: SUGARManager.UserSignedIn
 - uid: PlayGen.SUGAR.Unity.SUGARUnityManager
   name: SUGARUnityManager
   href: unity-client/api/PlayGen.SUGAR.Unity.SUGARUnityManager.html

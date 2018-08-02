@@ -16,6 +16,10 @@
 		/// <summary>
 		/// Check if the most recent piece of EvaluationData matches the criteria.
 		/// </summary>
-		Latest = 2
+		Latest = 2,
+        /// <summary>
+		/// Check if the count of all EvaluationData matches the criteria.
+        /// </summary>
+        Count = 3
 	}
 }
