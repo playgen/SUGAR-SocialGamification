@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_BaseAccountInterface" data-uid="PlayGen.SUGAR.Unity.BaseAccountInterface" class="text-break">Class BaseAccountInterface
   </h1>
-  <div class="markdown level0 summary"><p>Base abstract class for controlling the UI object related to accounts</p>
+  <div class="markdown level0 summary"><p>Base abstract class for controlling the UI object related to user accounts.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -145,7 +145,7 @@
   
   
   <h4 id="PlayGen_SUGAR_Unity_BaseAccountInterface__loginButton" data-uid="PlayGen.SUGAR.Unity.BaseAccountInterface._loginButton">_loginButton</h4>
-  <div class="markdown level1 summary"><p>Button used to trigger attempting signing in. Can be left null.</p>
+  <div class="markdown level1 summary"><p>Button used to trigger attempting to sign in. Can be left null.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -220,7 +220,7 @@
   
   
   <h4 id="PlayGen_SUGAR_Unity_BaseAccountInterface__registerButton" data-uid="PlayGen.SUGAR.Unity.BaseAccountInterface._registerButton">_registerButton</h4>
-  <div class="markdown level1 summary"><p>Button used to trigger attempting registration. Can be left null.</p>
+  <div class="markdown level1 summary"><p>Button used to trigger attempting to register a new account. Can be left null.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -245,7 +245,7 @@
   
   
   <h4 id="PlayGen_SUGAR_Unity_BaseAccountInterface__rememberMeToggle" data-uid="PlayGen.SUGAR.Unity.BaseAccountInterface._rememberMeToggle">_rememberMeToggle</h4>
-  <div class="markdown level1 summary"><p>Toggle used to remember the current user login details for easy log in</p>
+  <div class="markdown level1 summary"><p>Toggle used to enable/disable remembering the next signed in user&apos;s details for future sessions. Can be left null.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -280,31 +280,6 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">protected virtual void Awake()</code></pre>
   </div>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_BaseAccountInterface_RememberLogin_" data-uid="PlayGen.SUGAR.Unity.BaseAccountInterface.RememberLogin*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_BaseAccountInterface_RememberLogin" data-uid="PlayGen.SUGAR.Unity.BaseAccountInterface.RememberLogin">RememberLogin()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool RememberLogin()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
 </article>
           </div>
           

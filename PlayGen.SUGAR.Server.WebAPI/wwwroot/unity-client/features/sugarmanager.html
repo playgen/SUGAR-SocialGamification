@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SUGARManager | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="SUGARManager | SUGAR ">
+    <meta name="generator" content="docfx 2.35.4.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1 id="sugarmanager">SUGARManager</h1>
+              
+<p>Interaction with SUGAR in the SUGAR Unity Package is handled through SUGARManager.</p>
+<h2 id="currentuser">CurrentUser</h2>
+<p>The currently signed in user, set when a user signs in or registers using the &#39;SetCurrentUser&#39; method in <a href="../api/PlayGen.SUGAR.Unity.AccountUnityClient.html">AccountUnityClient</a>.</p>
+<p>The <a href="http://api.sugarengine.org/v1/api/PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a> object contains the user&#39;s Id, Name and Description.</p>
+<h2 id="currentgroup">CurrentGroup</h2>
+<p>The current &#39;primary&#39; group for the signed in user. Automatically set when signing in to the first group in that user&#39;s list of group that they&#39;re a member of. Can be manually set using the &#39;SetCurrentGroup&#39; method in SUGARManager.</p>
+<p>The <a href="http://api.sugarengine.org/v1/api/PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a> object contains the group&#39;s Id, Name and Description.</p>
+<h2 id="unity-clients">Unity Clients</h2>
+<table>
+<thead>
+<tr>
+<th>SUGAR Manager Property</th>
+<th>Functionality</th>
+<th>Unity Client Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Account</td>
+<td>Sign in, register and sign out</td>
+<td><a href="../api/PlayGen.SUGAR.Unity.AccountUnityClient.html">AccountUnityClient</a></td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td>Get list of achievements and skills and user/group progress in each, with an event triggered when one is completed</td>
+<td><a href="../api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html">EvaluationUnityClient</a></td>
+</tr>
+<tr>
+<td>GameData</td>
+<td>Get and send data related to the game</td>
+<td><a href="../api/PlayGen.SUGAR.Unity.GameDataUnityClient.html">GameDataUnityClient</a></td>
+</tr>
+<tr>
+<td>Resource</td>
+<td>Get current resources, add resources and send resources to other users</td>
+<td><a href="../api/PlayGen.SUGAR.Unity.Resource.yml">ResourceUnityClient</a></td>
+</tr>
+<tr>
+<td>GameLeaderboard</td>
+<td>Get leaderboards for this game</td>
+<td><a href="../api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html">LeaderboardListUnityClient</a></td>
+</tr>
+<tr>
+<td>Leaderboard</td>
+<td>Get the current standings for a leaderboard</td>
+<td><a href="../api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html">LeaderboardUnityClient</a></td>
+</tr>
+<tr>
+<td>UserFriend</td>
+<td>Get current user&#39;s list of friends and send and handle friend requests</td>
+<td><a href="../api/PlayGen.SUGAR.Unity.UserFriendUnityClient.html">UserFriendUnityClient</a></td>
+</tr>
+<tr>
+<td>UserGroup</td>
+<td>Get current user&#39;s list of groups and send and handle group requests</td>
+<td><a href="../api/PlayGen.SUGAR.Unity.UserGroupUnityClient.html">UserGroupUnityClient</a></td>
+</tr>
+<tr>
+<td>GroupMember</td>
+<td>Get list of members for a group</td>
+<td><a href="../api/PlayGen.SUGAR.Unity.GroupMemberUnityClient.html">GroupMemberUnityClient</a></td>
+</tr>
+<tr>
+<td>Unity</td>
+<td>Create client, enable and disable SUGAR objects, start and stop the loading spinner</td>
+<td><a href="../api/PlayGen.SUGAR.Unity.SUGARUnityManager.html">SUGARUnityManager</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="client">Client</h2>
+<p>All functionality within SUGAR Unity goes through this SUGAR Client. It is created within the &#39;CreateSUGARClient&#39; method and set within the &#39;CreateSUGARClient&#39; method of <a href="../api/PlayGen.SUGAR.Unity.SUGARUnityManager.html">SUGARUnityManager</a>, both of which are triggered from its &#39;Awake&#39; method.</p>
+<p>Any player-facing SUGAR functionality can be accessed using the Client directly instead. Please note that the Client does not make the same checks as SUGAR Unity to ensure that functionality can only be called once a user is signed in and that only functionality that the user has access to is available, so additional care should be taken when using the Client directly to avoid calls failing.</p>
+<h2 id="usersignedin">UserSignedIn</h2>
+<p>Boolean used to confirm if a user is signed in. If no user is signed in, most functionality will not be accessible.</p>
+<h2 id="classid">ClassId</h2>
+<p>Class name for the currently signed in user. Can be set when launching the application via the Command Line or via the &#39;SetClassId&#39; method in SUGARManager.</p>
+<h2 id="gameid">GameId</h2>
+<p>The Id of the game. Set in &#39;Awake&#39; in the <a href="../api/PlayGen.SUGAR.Unity.SUGARUnityManager.html">SUGARUnityManager</a> using the value set in the Inspector and cannot be overwritten.</p>
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

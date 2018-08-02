@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_AccountUnityClient" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient" class="text-break">Class AccountUnityClient
   </h1>
-  <div class="markdown level0 summary"><p>Unity client for calls related to accounts</p>
+  <div class="markdown level0 summary"><p>Unity client for functionality related to signing in, registering and signing out.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -90,90 +90,13 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class AccountUnityClient : MonoBehaviour</code></pre>
   </div>
-  <h3 id="fields">Fields
-  </h3>
-  
-  
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient__landscapeInterface" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient._landscapeInterface">_landscapeInterface</h4>
-  <div class="markdown level1 summary"><p>Landscape UI object for this unity client. Can be left null if not required.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected BaseAccountInterface _landscapeInterface</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Unity.BaseAccountInterface.html">BaseAccountInterface</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient__portraitInterface" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient._portraitInterface">_portraitInterface</h4>
-  <div class="markdown level1 summary"><p>Portrait UI object for this unity client. Can be left null if not required.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected BaseAccountInterface _portraitInterface</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Unity.BaseAccountInterface.html">BaseAccountInterface</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Unity_AccountUnityClient__interface_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient._interface*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient__interface" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient._interface">_interface</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected BaseAccountInterface _interface { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Unity.BaseAccountInterface.html">BaseAccountInterface</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
   <a id="PlayGen_SUGAR_Unity_AccountUnityClient_HasInterface_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.HasInterface*"></a>
   <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_HasInterface" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.HasInterface">HasInterface</h4>
-  <div class="markdown level1 summary"><p>Has a UI object been provided for this Unity Client?</p>
+  <div class="markdown level1 summary"><p>Has an interface been provided for this Unity Client?</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -199,7 +122,7 @@
   
   <a id="PlayGen_SUGAR_Unity_AccountUnityClient_IsActive_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.IsActive*"></a>
   <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_IsActive" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.IsActive">IsActive</h4>
-  <div class="markdown level1 summary"><p>Is there a UI object and if so is it currently active?</p>
+  <div class="markdown level1 summary"><p>Is there an interface and if so is it currently active?</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -225,15 +148,15 @@
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Unity_AccountUnityClient_DisplayPanel_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_DisplayPanel_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.DisplayPanel(Action{System.Boolean})">DisplayPanel(Action&lt;Boolean&gt;)</h4>
-  <div class="markdown level1 summary"><p>Displays UI object if provided and allowAutoLogin is false. Attempts automatic sign in using provided details if allowAutoLogin is true.
+  <a id="PlayGen_SUGAR_Unity_AccountUnityClient_DisplayLogInPanel_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_DisplayLogInPanel_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel(Action{System.Boolean})">DisplayLogInPanel(Action&lt;Boolean&gt;)</h4>
+  <div class="markdown level1 summary"><p>Displays interface if provided and allowAutoLogin is false. Attempts automatic sign in using provided details if allowAutoLogin is true.
 Note: allowAutoLogin is made false after automatic sign in is first attempted.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void DisplayPanel(Action&lt;bool&gt; success)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual void DisplayLogInPanel(Action&lt;bool&gt; success)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -248,7 +171,8 @@ Note: allowAutoLogin is made false after automatic sign in is first attempted.</
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td></td>
+        <td><p>Callback which will result whether the user successfully signed in.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -261,17 +185,18 @@ Note: allowAutoLogin is made false after automatic sign in is first attempted.</
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Hide()</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual void Hide()</code></pre>
   </div>
   
   
   <a id="PlayGen_SUGAR_Unity_AccountUnityClient_Logout_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Logout*"></a>
   <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_Logout_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Logout(Action{System.Boolean})">Logout(Action&lt;Boolean&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sign out the currently signed in user</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Logout(Action&lt;bool&gt; success)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual void Logout(Action&lt;bool&gt; success)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -286,72 +211,11 @@ Note: allowAutoLogin is made false after automatic sign in is first attempted.</
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td></td>
+        <td><p>Callback which will result whether the user successfully signed out.</p>
+</td>
       </tr>
     </tbody>
   </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_AccountUnityClient_SetInterface_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.SetInterface*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_SetInterface_PlayGen_SUGAR_Unity_BaseAccountInterface_Canvas_System_String_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.SetInterface(PlayGen.SUGAR.Unity.BaseAccountInterface,Canvas,System.String)">SetInterface(BaseAccountInterface, Canvas, String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected BaseAccountInterface SetInterface(BaseAccountInterface popupInterface, Canvas canvas, string extension = &quot;&quot;)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Unity.BaseAccountInterface.html">BaseAccountInterface</a></td>
-        <td><span class="parametername">popupInterface</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Canvas</span></td>
-        <td><span class="parametername">canvas</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">extension</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Unity.BaseAccountInterface.html">BaseAccountInterface</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_AccountUnityClient_Update_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Update*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_Update" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Update">Update()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual void Update()</code></pre>
-  </div>
 </article>
           </div>
           

@@ -5100,7 +5100,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html",
-          "hash": "lrM91pz3pb6WzNiT/jwYOg=="
+          "hash": "6xozh4LAR4qnfsJfn8MsFw=="
         }
       },
       "is_incremental": false,
@@ -5112,7 +5112,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html",
-          "hash": "NfNBiuWvpUJzhsDm6lnK1g=="
+          "hash": "oce22/UkMPoBJ446l+QUWw=="
         }
       },
       "is_incremental": false,
@@ -5124,7 +5124,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseAccountInterface.html",
-          "hash": "1d275v6g9JHr7ky9Q6xCFw=="
+          "hash": "mWMx5b3nb6QiIYySz4NiuA=="
         }
       },
       "is_incremental": false,
@@ -5136,7 +5136,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationListInterface.html",
-          "hash": "cyhOg5RqNMR4gv6BS1POow=="
+          "hash": "4qX7blSiMTVYS+S11lMsjA=="
         }
       },
       "is_incremental": false,
@@ -5148,7 +5148,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseEvaluationPopupInterface.html",
-          "hash": "zD/REXxGVTzer8aL4PIMdA=="
+          "hash": "0q4xeK2C7KiLfTHzUd51ag=="
         }
       },
       "is_incremental": false,
@@ -5160,7 +5160,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseGroupMemberInterface.html",
-          "hash": "8WIqPAD7/iIb44iLyj/NzQ=="
+          "hash": "8H7S2dOWJCFoaTbB6GCnww=="
         }
       },
       "is_incremental": false,
@@ -5172,7 +5172,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseInterface.html",
-          "hash": "un64Kiih7F7KsOsnr1SZdw=="
+          "hash": "pw/Dzqir6AcgL8yUlN1pNA=="
         }
       },
       "is_incremental": false,
@@ -5184,7 +5184,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html",
-          "hash": "EoKvQ8KWB2Z65wjt+K7RCA=="
+          "hash": "7sMZC+bYnMgoCw+eaXj0Eg=="
         }
       },
       "is_incremental": false,
@@ -5196,7 +5196,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.html",
-          "hash": "NhBrJZE69/kRtXZZNYsjoA=="
+          "hash": "4LCudtuxZ581HeRJBSL9tg=="
         }
       },
       "is_incremental": false,
@@ -5208,7 +5208,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUnityClient-1.html",
-          "hash": "8VuUA20F8fBP4qN0TBebYQ=="
+          "hash": "l5ovZi+K+R4TTcJN+w4jKg=="
         }
       },
       "is_incremental": false,
@@ -5220,7 +5220,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserFriendInterface.html",
-          "hash": "12nLjZy/NPyI9oSoCsczbw=="
+          "hash": "3t6z1MRZemha3gbcJoachw=="
         }
       },
       "is_incremental": false,
@@ -5232,7 +5232,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.BaseUserGroupInterface.html",
-          "hash": "jBrbKCIigBuYaMcrEgeEGA=="
+          "hash": "/mrOoeA7PXmg3ADEti5gXA=="
         }
       },
       "is_incremental": false,
@@ -5244,7 +5244,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineOptions.html",
-          "hash": "oX5w/ycpg6xBj1ZAOUtuxg=="
+          "hash": "CkKyRLDfHlyceMvt7JlKmg=="
         }
       },
       "is_incremental": false,
@@ -5256,7 +5256,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CommandLineUtility.html",
-          "hash": "SZTel1Tlngk5pqLCK47wwA=="
+          "hash": "bmPQ422+6dyoJpPr0X+xsQ=="
         }
       },
       "is_incremental": false,
@@ -5268,7 +5268,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Config.html",
-          "hash": "ual24/Zsi2x6n92Hzgeqtw=="
+          "hash": "So9Z04jorfKPZ3x90bZlvg=="
         }
       },
       "is_incremental": false,
@@ -5280,7 +5280,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.CustomInterface.html",
-          "hash": "NXtElTPH8kE9qXvK5qZbWg=="
+          "hash": "2xjrlae6/BpN/kdywVuaEA=="
         }
       },
       "is_incremental": false,
@@ -5292,7 +5292,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.AutoLogIn.html",
-          "hash": "eqx8trAPNDuKbtqSYTQuCQ=="
+          "hash": "CEjTBvoExaNY5CJW4Xx9jw=="
         }
       },
       "is_incremental": false,
@@ -5304,7 +5304,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeed.html",
-          "hash": "eq3Ne9g67IldUUP/T65cmg=="
+          "hash": "0ObTi6dq4SI/hhMX1SmhwA=="
         }
       },
       "is_incremental": false,
@@ -5316,7 +5316,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.EditGameSeedWindow.html",
-          "hash": "xryxjqKsnUCYXRdKsFGzuQ=="
+          "hash": "CdbkW39zk2Lqg9Fl2qkikA=="
         }
       },
       "is_incremental": false,
@@ -5328,7 +5328,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGame.html",
-          "hash": "6vbCS3jDOQUP7zR+DQxWfA=="
+          "hash": "U5fmuT6QY4MKAOo+WoZwoQ=="
         }
       },
       "is_incremental": false,
@@ -5340,7 +5340,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SeedGameWindow.html",
-          "hash": "zq3RbUv1gqLH2WD/2wb10A=="
+          "hash": "pNi3dWhVbNgWWKm4aEqS0g=="
         }
       },
       "is_incremental": false,
@@ -5352,7 +5352,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.AutoLoginOption.html",
-          "hash": "KdQWe9y0pezqybnGazc28A=="
+          "hash": "owUGVNUYYVgIf/4wEXqTLA=="
         }
       },
       "is_incremental": false,
@@ -5364,7 +5364,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.BoolValue.html",
-          "hash": "+Z6RZN2Yln2v53SkBT4xSQ=="
+          "hash": "jU3y8hVd1T4mKnXu2FjdTA=="
         }
       },
       "is_incremental": false,
@@ -5376,7 +5376,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.StringValue.html",
-          "hash": "8nedGF4oCw5OdJOGcPh4Vg=="
+          "hash": "0LiC9nUnOfxYoHXsDdZrrQ=="
         }
       },
       "is_incremental": false,
@@ -5388,7 +5388,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.SetEditorAutoLogin.html",
-          "hash": "IUzZBFwYmbQBenpWhnCARg=="
+          "hash": "tDrsz+3U6SFvlFalNJRdpA=="
         }
       },
       "is_incremental": false,
@@ -5400,7 +5400,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.html",
-          "hash": "XDN0gTLGSEXM2wcrZMvyjg=="
+          "hash": "2RVlHgMFiTyn+kFPGE76nQ=="
         }
       },
       "is_incremental": false,
@@ -5412,7 +5412,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.EvaluationUnityClient.html",
-          "hash": "Rigq7MJ2KD7BU+noFFtWWw=="
+          "hash": "u3o/VxdqDcjJDWEN2B1jjg=="
         }
       },
       "is_incremental": false,
@@ -5424,7 +5424,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html",
-          "hash": "2/6zspFWKm4ZwGc9LmQrjg=="
+          "hash": "DSSTO3HSICMHo0+s4CXuvg=="
         }
       },
       "is_incremental": false,
@@ -5436,7 +5436,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.GroupMemberUnityClient.html",
-          "hash": "DIhv8Kw0WL46yLRdDQxCIw=="
+          "hash": "Ew/6qaTUzI448eEdTa0VuQ=="
         }
       },
       "is_incremental": false,
@@ -5448,7 +5448,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html",
-          "hash": "3RirsKULReMk80RLKV87NA=="
+          "hash": "qI/h2+2Uy65b8BNK3ZeW9w=="
         }
       },
       "is_incremental": false,
@@ -5460,7 +5460,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html",
-          "hash": "Lac3qp96wxPuCZCscKNkFg=="
+          "hash": "fqkdi2xvYqrQjW4x1RpQ0g=="
         }
       },
       "is_incremental": false,
@@ -5472,7 +5472,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html",
-          "hash": "p/Oij/q0zAXyh27Vbd2F0g=="
+          "hash": "TzK+7eWp2Dsk8X+v6ElzEA=="
         }
       },
       "is_incremental": false,
@@ -5484,7 +5484,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.ResponseHandler.html",
-          "hash": "CkceFfbZe6dyox/halnv1w=="
+          "hash": "Kc1Z7rMvM6R0HkCWicqDOg=="
         }
       },
       "is_incremental": false,
@@ -5496,7 +5496,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARManager.html",
-          "hash": "urgqV7cbYuVkWNWl6QY3KA=="
+          "hash": "TNL0SmVszE5fDmknfjC7YA=="
         }
       },
       "is_incremental": false,
@@ -5508,7 +5508,19 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SUGARUnityManager.html",
-          "hash": "bWXXdl74y6gVRkZgR3VGeA=="
+          "hash": "ByPUEVkuGf9hZ68DLMiHXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.SavedPrefsHandler.html",
+          "hash": "9tEzJMg6IERcCuAxYd+oiQ=="
         }
       },
       "is_incremental": false,
@@ -5520,7 +5532,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserFriendUnityClient.html",
-          "hash": "tMGNS2AXL2lj7WCw3faMdA=="
+          "hash": "nBPV394036LRtf94g9vRNQ=="
         }
       },
       "is_incremental": false,
@@ -5532,7 +5544,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.UserGroupUnityClient.html",
-          "hash": "LE0Q9v0wn++B9gUwnhf21w=="
+          "hash": "/THrXhJlsQkdQrvaoVp04A=="
         }
       },
       "is_incremental": false,
@@ -5544,7 +5556,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.WebGL.UnityWebGlHttpHandler.html",
-          "hash": "VkTvsufxxH27A6XfxiimyA=="
+          "hash": "q4UchHyjZ5vuGAb22YYeng=="
         }
       },
       "is_incremental": false,
@@ -5556,7 +5568,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.WebGL.html",
-          "hash": "rhe4nPFs7+sKTDlbAKP6lQ=="
+          "hash": "3Q3mJOBPfG3dyw/JrYyFiQ=="
         }
       },
       "is_incremental": false,
@@ -5568,7 +5580,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.html",
-          "hash": "zphb2ExZMrMoLXhEsUf04w=="
+          "hash": "qG74Pc8IcQ7kZB0dLV/P1Q=="
         }
       },
       "is_incremental": false,
@@ -5580,7 +5592,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/index.html",
-          "hash": "wSb9XnFP/j2RtMIqMfjQ9A=="
+          "hash": "I6lZfxGngHNt78oYrbv1Dw=="
         }
       },
       "is_incremental": false,
@@ -5592,7 +5604,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/development/documentation.html",
-          "hash": "3ZBDyIZKWSg2T0dUqyWo8g=="
+          "hash": "AChOV+vmumbb9z3/qSnJFg=="
         }
       },
       "is_incremental": false,
@@ -5604,7 +5616,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/development/index.html",
-          "hash": "N/P3YDrDg1VP1tcLLDVyhQ=="
+          "hash": "nGQvk5Snf4HItVVSJpLLfw=="
         }
       },
       "is_incremental": false,
@@ -5616,7 +5628,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/development/savingdata.html",
-          "hash": "5sl1UEtdMkx6E4LDHI3Q3w=="
+          "hash": "FtSkcV3Il1rfJc0oJZj+UQ=="
         }
       },
       "is_incremental": false,
@@ -5628,7 +5640,46 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/development/sugarmanager.html",
-          "hash": "qFpQLh/PwONHntO8baL/qg=="
+          "hash": "m5eVzBZdKW+dtoSJWhbRQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/features/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/features/index.html",
+          "hash": "QmMjrETO1g0vHTgXsiGdDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/features/savingdata.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/features/savingdata.html",
+          "hash": "/p2OA4ZvEWaL8GuEBWbEbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/features/sugarmanager.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/features/sugarmanager.html",
+          "hash": "QcD6rOvrLjMk7hcbybiyDg=="
         }
       },
       "is_incremental": false,
@@ -5640,31 +5691,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/index.html",
-          "hash": "YRW0H8M7JG1lERpe+Fp+dQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "unity-client/pdf/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/pdf/index.html",
-          "hash": "GTa3tkX/p69s9abU08IWIA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "unity-client/pdf/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "unity-client/pdf/toc.html",
-          "hash": "KyeSmhJhEwWnGpn+PIho7w=="
+          "hash": "s3warKuTMBtgzmVLsdv/yw=="
         }
       },
       "is_incremental": false,
@@ -5676,7 +5703,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/toc.html",
-          "hash": "o2qwCCzWhX4go5FPKQU8/w=="
+          "hash": "E1Tu2NBAHHfmyNN8Sm9WgA=="
         }
       },
       "is_incremental": false,
@@ -5688,7 +5715,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/build-instructions.html",
-          "hash": "gl13EaQYKgTiH6c4OuQDDg=="
+          "hash": "eYKCngbxTZfgnALIt0vI1g=="
         }
       },
       "is_incremental": false,
@@ -5700,7 +5727,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/client-prefabs.html",
-          "hash": "ZZXANLZU9ogQPCAoprlx1A=="
+          "hash": "2gvQjQRiP4uKkLKqIKziHA=="
         }
       },
       "is_incremental": false,
@@ -5712,7 +5739,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/index.html",
-          "hash": "izGH+ZOSlL2SwEoCCLV9Hg=="
+          "hash": "GGU/P1qqwHDHFrnRsvREIQ=="
         }
       },
       "is_incremental": false,
@@ -5724,7 +5751,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/quick-start.html",
-          "hash": "eWqOO87CSFMJJaGH8KtMcg=="
+          "hash": "DLYT1RlBol6q/ER49X9pTg=="
         }
       },
       "is_incremental": false,
@@ -5736,7 +5763,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/seeding.html",
-          "hash": "+f/dNe5IUnvaOh4SLHfkcA=="
+          "hash": "9y7Da43P3caLu1lhwlGO2A=="
         }
       },
       "is_incremental": false,
@@ -5750,9 +5777,17 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "TocDocumentProcessor": {
+        "RestApiDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ResourceDocumentProcessor": {
@@ -5760,17 +5795,9 @@
           "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "RestApiDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build"
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
+          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }
