@@ -17,6 +17,7 @@ In order to set up an <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequ
     - "Any" checks to see if the criteria has been ever met by the collected data.
     - "Latest" checks if the last data that matched Key and GameDataType met the criteria.
     - "Sum" is used by numeric EvaluationDataTypes (Long and Float) and adds the value of all collected data together.
+    - "Count" checks if the amount of entries in the database of the specified EvaluationData matches the criteria.
 
 - <xref:PlayGen.SUGAR.Common.ComparisonType> - How the retrieved data will be compared against the target value. If the retrieved data compared to the value matches the ComparisonType provided, then the criteria has been met.
     - Example -  if the retrieved data equals 20, the value is 15 and the ComparisonType is "GreaterThan", the criteria has been met. If the ComparisonType was "Equals" then the criteria would not have been met.
