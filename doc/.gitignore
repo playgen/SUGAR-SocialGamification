@@ -11,7 +11,13 @@ _site
 # Auto Generated
 api/
 restapi/restapi.swagger2.json
-unity-client/
+
+# Copied in
+unity-client/**/*
+
+# Not copied in
+!unity-client/toc.yml
+!unity-client/index.md
 
 # Don't ignore
 !files/*.nupkg
