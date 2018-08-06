@@ -5,4 +5,7 @@ SUGAR provides gamification elements for increased user engagement and for bring
 
 ### For downloads visit http://sugarengine.org/developers
 
+### For details of changes see [Change Log](Changelog.md)
+
 #### This repository supercedes the now abandoned project: https://github.com/playgenhub/rage-sga-server/
+
