@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Authorization;
+using PlayGen.SUGAR.Server.Core.Authorization;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
 
@@ -10,14 +12,23 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
     {
 	    private readonly ILogger _logger;
 	    private readonly EntityFramework.Controllers.RelationshipController _relationshipDbController;
+		private readonly EntityFramework.Controllers.ActorClaimController _actorClaimController;
+	    private readonly EntityFramework.Controllers.ActorController _actorController;
+	    private readonly EntityFramework.Controllers.ClaimController _claimController;
 
-	    public RelationshipController(
+		public RelationshipController(
 		    ILogger<RelationshipController> logger,
+		    EntityFramework.Controllers.ActorClaimController actorClaimController,
+		    EntityFramework.Controllers.ActorController actorController,
+		    EntityFramework.Controllers.ClaimController claimController,
 			EntityFramework.Controllers.RelationshipController relationshipDbController)
-	    {
+		{
 		    _logger = logger;
+			_actorClaimController = actorClaimController;
+			_actorController = actorController;
+			_claimController = claimController;
 		    _relationshipDbController = relationshipDbController;
-	    }
+		}
 
 		/// <summary>
 		/// Get relationship requests from an actor type to an actor
@@ -84,9 +95,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	    /// <param name="context">Optional DbContext to perform opperations on. If ommitted a DbContext will be created.</param>
 	    public void CreateRequest(ActorRelationship newRelationship, bool autoAccept, SUGARContext context = null)
 	    {
+			// HACK auto accept default to false when using SUGAR Unity 1.0.2 or prior, not the expected behaviour
+		    // autoAccept = true;
+			// END HACK
 		    if (autoAccept)
 		    {
 			    _relationshipDbController.CreateRelationship(newRelationship, context);
+				// Assign users claims to the group that they do not get by default
+			    AssignUserResourceClaims(newRelationship);
 		    }
 		    else
 		    {
@@ -120,5 +136,54 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		    _logger.LogInformation($"{relationship?.RequestorId} -> {relationship?.AcceptorId}");
 	    }
+
+		// TODO This is assigning new users default claims to the group, to be moved to its own table
+		/// <summary>
+		/// Assign the user claims to resources for a newly created relationship with a group
+		/// </summary>
+		/// <param name="relation">the user/group relationship</param>
+	    private void AssignUserResourceClaims(ActorRelationship relation)
+	    {
+		    relation.Requestor = _actorController.Get(relation.RequestorId);
+		    relation.Acceptor = _actorController.Get(relation.AcceptorId);
+			// Group to user relationship
+		    if (relation.Requestor.ActorType == ActorType.Group && relation.Acceptor.ActorType == ActorType.User || relation.Acceptor.ActorType == ActorType.Group && relation.Requestor.ActorType == ActorType.User)
+		    {
+			    // Get user
+			    var user = relation.Requestor.ActorType == ActorType.User
+				    ? relation.Requestor
+				    : relation.Acceptor;
+
+			    var group = relation.Requestor.ActorType == ActorType.Group
+				    ? relation.Requestor
+				    : relation.Acceptor;
+
+			    var GetClaim = _claimController.Get(ClaimScope.Group, "Get-Resource");
+			    var CreateClaim = _claimController.Get(ClaimScope.Group, "Create-Resource");
+			    var UpdateClaim = _claimController.Get(ClaimScope.Group, "Update-Resource");
+			    var getActorClaim = new ActorClaim
+			    {
+				    ActorId = user.Id,
+					ClaimId = GetClaim.Id,
+				    EntityId = group.Id,
+			    };
+			    var updateActorClaim = new ActorClaim
+			    {
+				    ActorId = user.Id,
+				    ClaimId = UpdateClaim.Id,
+				    EntityId = group.Id,
+			    };
+			    var createActorClaim = new ActorClaim
+			    {
+				    ActorId = user.Id,
+				    ClaimId = CreateClaim.Id,
+				    EntityId = group.Id,
+			    };
+
+				_actorClaimController.Create(getActorClaim);
+				_actorClaimController.Create(createActorClaim);
+				_actorClaimController.Create(updateActorClaim);
+			}
+		}
 	}
 }
