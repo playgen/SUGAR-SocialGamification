@@ -19,9 +19,9 @@ namespace PlayGen.SUGAR.Common
 
 		public const int Major = 1;
 
-		public const int Minor = 2;
+		public const int Minor = 3;
 
-		public const int Build = 1;
+		public const int Build = 0;
 
 		public static string Version => $"{Major}.{Minor}.{Build}";
 
