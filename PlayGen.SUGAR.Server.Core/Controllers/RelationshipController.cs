@@ -95,11 +95,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	    /// <param name="context">Optional DbContext to perform opperations on. If ommitted a DbContext will be created.</param>
 	    public void CreateRequest(ActorRelationship newRelationship, bool autoAccept, SUGARContext context = null)
 	    {
-			// HACK
-		    //autoAccept = true;
+			// HACK auto accept default to false when using SUGAR Unity 1.0.2 or prior, not the expected behaviour
+		    // autoAccept = true;
+			// END HACK
 		    if (autoAccept)
 		    {
 			    _relationshipDbController.CreateRelationship(newRelationship, context);
+				// Assign users claims to the group that they do not get by default
 			    AssignUserResourceClaims(newRelationship);
 		    }
 		    else
@@ -135,6 +137,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		    _logger.LogInformation($"{relationship?.RequestorId} -> {relationship?.AcceptorId}");
 	    }
 
+		// TODO This is assigning new users default claims to the group, to be moved to its own table
 		/// <summary>
 		/// Assign the user claims to resources for a newly created relationship with a group
 		/// </summary>
