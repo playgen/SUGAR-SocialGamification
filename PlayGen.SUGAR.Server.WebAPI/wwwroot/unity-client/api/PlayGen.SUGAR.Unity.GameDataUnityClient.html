@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_GameDataUnityClient" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient" class="text-break">Class GameDataUnityClient
   </h1>
-  <div class="markdown level0 summary"><p>Get and send GameData for the currently signed in user.</p>
+  <div class="markdown level0 summary"><p>Use this to GET and POST data related to the game.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -116,13 +116,13 @@
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">IEnumerable</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td><p>Callback which will return the list of gathered results.</p>
+        <td><p>Callback with a list of gathered EvaluationDataResponse results.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span>[]</td>
         <td><span class="parametername">keys</span></td>
-        <td><p>Optional parameter. If provided, only GameData with a matching key will be returned.</p>
+        <td><p><strong>Optional</strong> Keys to search and return values for. (default: null)</p>
 </td>
       </tr>
     </tbody>
@@ -163,7 +163,7 @@
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td><p>Callback which will contain the gathered result.</p>
+        <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
     </tbody>
@@ -204,11 +204,16 @@
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td><p>Callback which will contain the gathered result.</p>
+        <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetCumulative_System_String_EvaluationDataType_Action_EvaluationDataResponse___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><ul>
+<li>EvaluationDataType should be a type that can be added together, eg. Long</li>
+</ul>
+</div>
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_GetEarliest_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.GetEarliest*"></a>
@@ -245,7 +250,7 @@
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td><p>Callback which will contain the gathered result.</p>
+        <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
     </tbody>
@@ -286,7 +291,7 @@
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td><p>Callback which will contain the gathered result.</p>
+        <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
     </tbody>
@@ -327,7 +332,7 @@
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td><p>Callback which will contain the gathered result.</p>
+        <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
     </tbody>
@@ -368,7 +373,7 @@
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td><p>Callback which will contain the gathered result.</p>
+        <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
     </tbody>
@@ -376,13 +381,13 @@
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Boolean)">Send(String, Boolean)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Boolean_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Boolean,Action{System.Boolean})">Send(String, Boolean, Action&lt;Boolean&gt;)</h4>
   <div class="markdown level1 summary"><p>Record GameData with EvaluationDataType Bool with the key and value provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Send(string key, bool value)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Send(string key, bool value, Action&lt;bool&gt; success = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -406,18 +411,24 @@
         <td><p>The Bool value that&apos;ll be recorded.</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">success</span></td>
+        <td><p><strong>Optional</strong> Callback returns whther the data was sent successfully (default: null)</p>
+</td>
+      </tr>
     </tbody>
   </table>
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Int64_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Int64)">Send(String, Int64)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Int64_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Int64,Action{System.Boolean})">Send(String, Int64, Action&lt;Boolean&gt;)</h4>
   <div class="markdown level1 summary"><p>Record GameData with EvaluationDataType Long with the key and value provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Send(string key, long value)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Send(string key, long value, Action&lt;bool&gt; success = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -441,18 +452,24 @@
         <td><p>The Long value that&apos;ll be recorded.</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">success</span></td>
+        <td><p><strong>Optional</strong> Callback returns whther the data was sent successfully (default: null)</p>
+</td>
+      </tr>
     </tbody>
   </table>
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Single_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Single)">Send(String, Single)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Single_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Single,Action{System.Boolean})">Send(String, Single, Action&lt;Boolean&gt;)</h4>
   <div class="markdown level1 summary"><p>Record GameData with EvaluationDataType Float with the key and value provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Send(string key, float value)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Send(string key, float value, Action&lt;bool&gt; success = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -476,18 +493,24 @@
         <td><p>The Float value that&apos;ll be recorded.</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">success</span></td>
+        <td><p><strong>Optional</strong> Callback returns whther the data was sent successfully (default: null)</p>
+</td>
+      </tr>
     </tbody>
   </table>
   
   
   <a id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_String_" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.String)">Send(String, String)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_String_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.String,Action{System.Boolean})">Send(String, String, Action&lt;Boolean&gt;)</h4>
   <div class="markdown level1 summary"><p>Record GameData with EvaluationDataType String with the key and value provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Send(string key, string value)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Send(string key, string value, Action&lt;bool&gt; success = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -509,6 +532,12 @@
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">value</span></td>
         <td><p>The String value that&apos;ll be recorded.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">success</span></td>
+        <td><p><strong>Optional</strong> Callback returns whther the data was sent successfully (default: null)</p>
 </td>
       </tr>
     </tbody>

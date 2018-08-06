@@ -21316,6 +21316,19 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.HideInterfaces
   nameWithType: BaseLeaderboardInterface.HideInterfaces
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.IsValid(ActorResponse,ActorType)
+  name: IsValid(ActorResponse, ActorType)
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface_IsValid_ActorResponse_ActorType_
+  commentId: M:PlayGen.SUGAR.Unity.BaseLeaderboardInterface.IsValid(ActorResponse,ActorType)
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.IsValid(ActorResponse, ActorType)
+  nameWithType: BaseLeaderboardInterface.IsValid(ActorResponse, ActorType)
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.IsValid*
+  name: IsValid
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface_IsValid_
+  commentId: Overload:PlayGen.SUGAR.Unity.BaseLeaderboardInterface.IsValid
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.IsValid
+  nameWithType: BaseLeaderboardInterface.IsValid
 - uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.LoadErrorText
   name: LoadErrorText()
   href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface_LoadErrorText
@@ -21342,6 +21355,45 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.NoResultsErrorText
   nameWithType: BaseLeaderboardInterface.NoResultsErrorText
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.SetInteractable(Button,System.Boolean)
+  name: SetInteractable(Button, Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface_SetInteractable_Button_System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.BaseLeaderboardInterface.SetInteractable(Button,System.Boolean)
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.SetInteractable(Button, System.Boolean)
+  nameWithType: BaseLeaderboardInterface.SetInteractable(Button, Boolean)
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.SetInteractable*
+  name: SetInteractable
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface_SetInteractable_
+  commentId: Overload:PlayGen.SUGAR.Unity.BaseLeaderboardInterface.SetInteractable
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.SetInteractable
+  nameWithType: BaseLeaderboardInterface.SetInteractable
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateFilter(LeaderboardFilterType)
+  name: UpdateFilter(LeaderboardFilterType)
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface_UpdateFilter_LeaderboardFilterType_
+  commentId: M:PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateFilter(LeaderboardFilterType)
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateFilter(LeaderboardFilterType)
+  nameWithType: BaseLeaderboardInterface.UpdateFilter(LeaderboardFilterType)
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateFilter*
+  name: UpdateFilter
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface_UpdateFilter_
+  commentId: Overload:PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateFilter
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateFilter
+  nameWithType: BaseLeaderboardInterface.UpdateFilter
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateMultiplePerActor(System.Boolean)
+  name: UpdateMultiplePerActor(Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface_UpdateMultiplePerActor_System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateMultiplePerActor(System.Boolean)
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateMultiplePerActor(System.Boolean)
+  nameWithType: BaseLeaderboardInterface.UpdateMultiplePerActor(Boolean)
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateMultiplePerActor*
+  name: UpdateMultiplePerActor
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardInterface_UpdateMultiplePerActor_
+  commentId: Overload:PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateMultiplePerActor
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateMultiplePerActor
+  nameWithType: BaseLeaderboardInterface.UpdateMultiplePerActor
 - uid: PlayGen.SUGAR.Unity.BaseLeaderboardListInterface
   name: BaseLeaderboardListInterface
   href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.html
@@ -21437,6 +21489,19 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.NoResultsErrorText
   nameWithType: BaseLeaderboardListInterface.NoResultsErrorText
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.UpdateFilter(ActorType)
+  name: UpdateFilter(ActorType)
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardListInterface_UpdateFilter_ActorType_
+  commentId: M:PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.UpdateFilter(ActorType)
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.UpdateFilter(ActorType)
+  nameWithType: BaseLeaderboardListInterface.UpdateFilter(ActorType)
+- uid: PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.UpdateFilter*
+  name: UpdateFilter
+  href: unity-client/api/PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.html#PlayGen_SUGAR_Unity_BaseLeaderboardListInterface_UpdateFilter_
+  commentId: Overload:PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.UpdateFilter
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.UpdateFilter
+  nameWithType: BaseLeaderboardListInterface.UpdateFilter
 - uid: PlayGen.SUGAR.Unity.BaseUnityClient`1
   name: BaseUnityClient<T>
   href: unity-client/api/PlayGen.SUGAR.Unity.BaseUnityClient-1.html
@@ -22357,30 +22422,42 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.GetLowest
   nameWithType: GameDataUnityClient.GetLowest
-- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Boolean)
-  name: Send(String, Boolean)
-  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Boolean_
-  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Boolean)
-  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.Boolean)
-  nameWithType: GameDataUnityClient.Send(String, Boolean)
-- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Int64)
-  name: Send(String, Int64)
-  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Int64_
-  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Int64)
-  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.Int64)
-  nameWithType: GameDataUnityClient.Send(String, Int64)
-- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Single)
-  name: Send(String, Single)
-  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Single_
-  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Single)
-  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.Single)
-  nameWithType: GameDataUnityClient.Send(String, Single)
-- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.String)
-  name: Send(String, String)
-  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_String_
-  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.String)
-  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.String)
-  nameWithType: GameDataUnityClient.Send(String, String)
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Boolean,Action{System.Boolean})
+  name: Send(String, Boolean, Action<Boolean>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Boolean_Action_System_Boolean__
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Boolean,Action{System.Boolean})
+  name.vb: Send(String, Boolean, Action(Of Boolean))
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.Boolean, Action<System.Boolean>)
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.Boolean, Action(Of System.Boolean))
+  nameWithType: GameDataUnityClient.Send(String, Boolean, Action<Boolean>)
+  nameWithType.vb: GameDataUnityClient.Send(String, Boolean, Action(Of Boolean))
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Int64,Action{System.Boolean})
+  name: Send(String, Int64, Action<Boolean>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Int64_Action_System_Boolean__
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Int64,Action{System.Boolean})
+  name.vb: Send(String, Int64, Action(Of Boolean))
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.Int64, Action<System.Boolean>)
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.Int64, Action(Of System.Boolean))
+  nameWithType: GameDataUnityClient.Send(String, Int64, Action<Boolean>)
+  nameWithType.vb: GameDataUnityClient.Send(String, Int64, Action(Of Boolean))
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Single,Action{System.Boolean})
+  name: Send(String, Single, Action<Boolean>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_Single_Action_System_Boolean__
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.Single,Action{System.Boolean})
+  name.vb: Send(String, Single, Action(Of Boolean))
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.Single, Action<System.Boolean>)
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.Single, Action(Of System.Boolean))
+  nameWithType: GameDataUnityClient.Send(String, Single, Action<Boolean>)
+  nameWithType.vb: GameDataUnityClient.Send(String, Single, Action(Of Boolean))
+- uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.String,Action{System.Boolean})
+  name: Send(String, String, Action<Boolean>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Send_System_String_System_String_Action_System_Boolean__
+  commentId: M:PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String,System.String,Action{System.Boolean})
+  name.vb: Send(String, String, Action(Of Boolean))
+  fullName: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.String, Action<System.Boolean>)
+  fullName.vb: PlayGen.SUGAR.Unity.GameDataUnityClient.Send(System.String, System.String, Action(Of System.Boolean))
+  nameWithType: GameDataUnityClient.Send(String, String, Action<Boolean>)
+  nameWithType.vb: GameDataUnityClient.Send(String, String, Action(Of Boolean))
 - uid: PlayGen.SUGAR.Unity.GameDataUnityClient.Send*
   name: Send
   href: unity-client/api/PlayGen.SUGAR.Unity.GameDataUnityClient.html#PlayGen_SUGAR_Unity_GameDataUnityClient_Send_
@@ -22504,19 +22581,6 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.Leaderboards
   nameWithType: LeaderboardListUnityClient.Leaderboards
-- uid: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.SetFilter(ActorType)
-  name: SetFilter(ActorType)
-  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardListUnityClient_SetFilter_ActorType_
-  commentId: M:PlayGen.SUGAR.Unity.LeaderboardListUnityClient.SetFilter(ActorType)
-  fullName: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.SetFilter(ActorType)
-  nameWithType: LeaderboardListUnityClient.SetFilter(ActorType)
-- uid: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.SetFilter*
-  name: SetFilter
-  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardListUnityClient_SetFilter_
-  commentId: Overload:PlayGen.SUGAR.Unity.LeaderboardListUnityClient.SetFilter
-  isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.LeaderboardListUnityClient.SetFilter
-  nameWithType: LeaderboardListUnityClient.SetFilter
 - uid: PlayGen.SUGAR.Unity.LeaderboardUnityClient
   name: LeaderboardUnityClient
   href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html
@@ -22562,12 +22626,12 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.LeaderboardUnityClient.CurrentStandings
   nameWithType: LeaderboardUnityClient.CurrentStandings
-- uid: PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,LeaderboardFilterType,System.Int32,System.Boolean)
-  name: Display(String, LeaderboardFilterType, Int32, Boolean)
-  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_System_String_LeaderboardFilterType_System_Int32_System_Boolean_
-  commentId: M:PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,LeaderboardFilterType,System.Int32,System.Boolean)
-  fullName: PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String, LeaderboardFilterType, System.Int32, System.Boolean)
-  nameWithType: LeaderboardUnityClient.Display(String, LeaderboardFilterType, Int32, Boolean)
+- uid: PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,LeaderboardFilterType,System.Boolean,System.Int32,System.Boolean)
+  name: Display(String, LeaderboardFilterType, Boolean, Int32, Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_System_String_LeaderboardFilterType_System_Boolean_System_Int32_System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,LeaderboardFilterType,System.Boolean,System.Int32,System.Boolean)
+  fullName: PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String, LeaderboardFilterType, System.Boolean, System.Int32, System.Boolean)
+  nameWithType: LeaderboardUnityClient.Display(String, LeaderboardFilterType, Boolean, Int32, Boolean)
 - uid: PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display*
   name: Display
   href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_
@@ -22591,6 +22655,19 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.LeaderboardUnityClient.GetLeaderboardStandings
   nameWithType: LeaderboardUnityClient.GetLeaderboardStandings
+- uid: PlayGen.SUGAR.Unity.LeaderboardUnityClient.MultiplePerActor
+  name: MultiplePerActor
+  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardUnityClient_MultiplePerActor
+  commentId: P:PlayGen.SUGAR.Unity.LeaderboardUnityClient.MultiplePerActor
+  fullName: PlayGen.SUGAR.Unity.LeaderboardUnityClient.MultiplePerActor
+  nameWithType: LeaderboardUnityClient.MultiplePerActor
+- uid: PlayGen.SUGAR.Unity.LeaderboardUnityClient.MultiplePerActor*
+  name: MultiplePerActor
+  href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardUnityClient_MultiplePerActor_
+  commentId: Overload:PlayGen.SUGAR.Unity.LeaderboardUnityClient.MultiplePerActor
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.LeaderboardUnityClient.MultiplePerActor
+  nameWithType: LeaderboardUnityClient.MultiplePerActor
 - uid: PlayGen.SUGAR.Unity.LeaderboardUnityClient.PositionCount
   name: PositionCount
   href: unity-client/api/PlayGen.SUGAR.Unity.LeaderboardUnityClient.html#PlayGen_SUGAR_Unity_LeaderboardUnityClient_PositionCount
@@ -22623,15 +22700,15 @@ references:
   commentId: T:PlayGen.SUGAR.Unity.ResourceUnityClient
   fullName: PlayGen.SUGAR.Unity.ResourceUnityClient
   nameWithType: ResourceUnityClient
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Add(System.String,System.Int64,Action{System.Boolean},System.Boolean)
-  name: Add(String, Int64, Action<Boolean>, Boolean)
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Add_System_String_System_Int64_Action_System_Boolean__System_Boolean_
-  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.Add(System.String,System.Int64,Action{System.Boolean},System.Boolean)
-  name.vb: Add(String, Int64, Action(Of Boolean), Boolean)
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Add(System.String, System.Int64, Action<System.Boolean>, System.Boolean)
-  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.Add(System.String, System.Int64, Action(Of System.Boolean), System.Boolean)
-  nameWithType: ResourceUnityClient.Add(String, Int64, Action<Boolean>, Boolean)
-  nameWithType.vb: ResourceUnityClient.Add(String, Int64, Action(Of Boolean), Boolean)
+- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Add(System.String,System.Int64,Action{System.Boolean,System.Int64},System.Boolean)
+  name: Add(String, Int64, Action<Boolean, Int64>, Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Add_System_String_System_Int64_Action_System_Boolean_System_Int64__System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.Add(System.String,System.Int64,Action{System.Boolean,System.Int64},System.Boolean)
+  name.vb: Add(String, Int64, Action(Of Boolean, Int64), Boolean)
+  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Add(System.String, System.Int64, Action<System.Boolean, System.Int64>, System.Boolean)
+  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.Add(System.String, System.Int64, Action(Of System.Boolean, System.Int64), System.Boolean)
+  nameWithType: ResourceUnityClient.Add(String, Int64, Action<Boolean, Int64>, Boolean)
+  nameWithType.vb: ResourceUnityClient.Add(String, Int64, Action(Of Boolean, Int64), Boolean)
 - uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Add*
   name: Add
   href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Add_
@@ -22639,44 +22716,44 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Add
   nameWithType: ResourceUnityClient.Add
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Get(Action{List{ResourceResponse}},System.String[],System.Boolean)
-  name: Get(Action<List<ResourceResponse>>, String[], Boolean)
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Get_Action_List_ResourceResponse___System_String___System_Boolean_
-  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.Get(Action{List{ResourceResponse}},System.String[],System.Boolean)
-  name.vb: Get(Action(Of List(Of ResourceResponse)), String(), Boolean)
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Get(Action<List<ResourceResponse>>, System.String[], System.Boolean)
-  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.Get(Action(Of List(Of ResourceResponse)), System.String(), System.Boolean)
-  nameWithType: ResourceUnityClient.Get(Action<List<ResourceResponse>>, String[], Boolean)
-  nameWithType.vb: ResourceUnityClient.Get(Action(Of List(Of ResourceResponse)), String(), Boolean)
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Get*
-  name: Get
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Get_
-  commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.Get
+- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromCache(System.String,System.Boolean)
+  name: GetFromCache(String, Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_GetFromCache_System_String_System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromCache(System.String,System.Boolean)
+  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromCache(System.String, System.Boolean)
+  nameWithType: ResourceUnityClient.GetFromCache(String, Boolean)
+- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromCache*
+  name: GetFromCache
+  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_GetFromCache_
+  commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromCache
   isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Get
-  nameWithType: ResourceUnityClient.Get
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources
-  name: GlobalUserResources
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_GlobalUserResources
-  commentId: P:PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources
-  nameWithType: ResourceUnityClient.GlobalUserResources
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources*
-  name: GlobalUserResources
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_GlobalUserResources_
-  commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources
+  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromCache
+  nameWithType: ResourceUnityClient.GetFromCache
+- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromServer(Action{System.Boolean,Dictionary{System.String,System.Int64}},System.String[],System.Boolean)
+  name: GetFromServer(Action<Boolean, Dictionary<String, Int64>>, String[], Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_GetFromServer_Action_System_Boolean_Dictionary_System_String_System_Int64___System_String___System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromServer(Action{System.Boolean,Dictionary{System.String,System.Int64}},System.String[],System.Boolean)
+  name.vb: GetFromServer(Action(Of Boolean, Dictionary(Of String, Int64)), String(), Boolean)
+  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromServer(Action<System.Boolean, Dictionary<System.String, System.Int64>>, System.String[], System.Boolean)
+  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromServer(Action(Of System.Boolean, Dictionary(Of System.String, System.Int64)), System.String(), System.Boolean)
+  nameWithType: ResourceUnityClient.GetFromServer(Action<Boolean, Dictionary<String, Int64>>, String[], Boolean)
+  nameWithType.vb: ResourceUnityClient.GetFromServer(Action(Of Boolean, Dictionary(Of String, Int64)), String(), Boolean)
+- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromServer*
+  name: GetFromServer
+  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_GetFromServer_
+  commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromServer
   isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.GlobalUserResources
-  nameWithType: ResourceUnityClient.GlobalUserResources
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer(System.Int32,System.String,System.Int64,Action{System.Boolean},System.Boolean)
-  name: Transfer(Int32, String, Int64, Action<Boolean>, Boolean)
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Transfer_System_Int32_System_String_System_Int64_Action_System_Boolean__System_Boolean_
-  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer(System.Int32,System.String,System.Int64,Action{System.Boolean},System.Boolean)
-  name.vb: Transfer(Int32, String, Int64, Action(Of Boolean), Boolean)
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer(System.Int32, System.String, System.Int64, Action<System.Boolean>, System.Boolean)
-  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer(System.Int32, System.String, System.Int64, Action(Of System.Boolean), System.Boolean)
-  nameWithType: ResourceUnityClient.Transfer(Int32, String, Int64, Action<Boolean>, Boolean)
-  nameWithType.vb: ResourceUnityClient.Transfer(Int32, String, Int64, Action(Of Boolean), Boolean)
+  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.GetFromServer
+  nameWithType: ResourceUnityClient.GetFromServer
+- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer(System.Int32,System.String,System.Int64,Action{System.Boolean,System.Int64},System.Boolean)
+  name: Transfer(Int32, String, Int64, Action<Boolean, Int64>, Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Transfer_System_Int32_System_String_System_Int64_Action_System_Boolean_System_Int64__System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer(System.Int32,System.String,System.Int64,Action{System.Boolean,System.Int64},System.Boolean)
+  name.vb: Transfer(Int32, String, Int64, Action(Of Boolean, Int64), Boolean)
+  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer(System.Int32, System.String, System.Int64, Action<System.Boolean, System.Int64>, System.Boolean)
+  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer(System.Int32, System.String, System.Int64, Action(Of System.Boolean, System.Int64), System.Boolean)
+  nameWithType: ResourceUnityClient.Transfer(Int32, String, Int64, Action<Boolean, Int64>, Boolean)
+  nameWithType.vb: ResourceUnityClient.Transfer(Int32, String, Int64, Action(Of Boolean, Int64), Boolean)
 - uid: PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer*
   name: Transfer
   href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_Transfer_
@@ -22684,15 +22761,15 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.Transfer
   nameWithType: ResourceUnityClient.Transfer
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32,System.String,System.Int64,Action{System.Boolean},System.Boolean)
-  name: TryTake(Int32, String, Int64, Action<Boolean>, Boolean)
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_TryTake_System_Int32_System_String_System_Int64_Action_System_Boolean__System_Boolean_
-  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32,System.String,System.Int64,Action{System.Boolean},System.Boolean)
-  name.vb: TryTake(Int32, String, Int64, Action(Of Boolean), Boolean)
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32, System.String, System.Int64, Action<System.Boolean>, System.Boolean)
-  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32, System.String, System.Int64, Action(Of System.Boolean), System.Boolean)
-  nameWithType: ResourceUnityClient.TryTake(Int32, String, Int64, Action<Boolean>, Boolean)
-  nameWithType.vb: ResourceUnityClient.TryTake(Int32, String, Int64, Action(Of Boolean), Boolean)
+- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32,System.String,System.Int64,Action{System.Boolean,System.Int64},System.Boolean)
+  name: TryTake(Int32, String, Int64, Action<Boolean, Int64>, Boolean)
+  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_TryTake_System_Int32_System_String_System_Int64_Action_System_Boolean_System_Int64__System_Boolean_
+  commentId: M:PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32,System.String,System.Int64,Action{System.Boolean,System.Int64},System.Boolean)
+  name.vb: TryTake(Int32, String, Int64, Action(Of Boolean, Int64), Boolean)
+  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32, System.String, System.Int64, Action<System.Boolean, System.Int64>, System.Boolean)
+  fullName.vb: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake(System.Int32, System.String, System.Int64, Action(Of System.Boolean, System.Int64), System.Boolean)
+  nameWithType: ResourceUnityClient.TryTake(Int32, String, Int64, Action<Boolean, Int64>, Boolean)
+  nameWithType.vb: ResourceUnityClient.TryTake(Int32, String, Int64, Action(Of Boolean, Int64), Boolean)
 - uid: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake*
   name: TryTake
   href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_TryTake_
@@ -22700,19 +22777,6 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.TryTake
   nameWithType: ResourceUnityClient.TryTake
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.UserGameResources
-  name: UserGameResources
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_UserGameResources
-  commentId: P:PlayGen.SUGAR.Unity.ResourceUnityClient.UserGameResources
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.UserGameResources
-  nameWithType: ResourceUnityClient.UserGameResources
-- uid: PlayGen.SUGAR.Unity.ResourceUnityClient.UserGameResources*
-  name: UserGameResources
-  href: unity-client/api/PlayGen.SUGAR.Unity.ResourceUnityClient.html#PlayGen_SUGAR_Unity_ResourceUnityClient_UserGameResources_
-  commentId: Overload:PlayGen.SUGAR.Unity.ResourceUnityClient.UserGameResources
-  isSpec: "True"
-  fullName: PlayGen.SUGAR.Unity.ResourceUnityClient.UserGameResources
-  nameWithType: ResourceUnityClient.UserGameResources
 - uid: PlayGen.SUGAR.Unity.ResponseHandler
   name: ResponseHandler
   href: unity-client/api/PlayGen.SUGAR.Unity.ResponseHandler.html

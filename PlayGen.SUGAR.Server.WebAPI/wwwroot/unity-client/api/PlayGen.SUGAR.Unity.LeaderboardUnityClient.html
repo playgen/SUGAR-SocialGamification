@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient" class="text-break">Class LeaderboardUnityClient
   </h1>
-  <div class="markdown level0 summary"><p>Unity client for calls related to leaderboard standings.</p>
+  <div class="markdown level0 summary"><p>Use this to get the current standings for a leaderboard</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -121,8 +121,7 @@
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_CurrentFilter_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.CurrentFilter*"></a>
   <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_CurrentFilter" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.CurrentFilter">CurrentFilter</h4>
-  <div class="markdown level1 summary"><p>Current filter to use for gathering leaderboard standings.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -139,7 +138,8 @@
     <tbody>
       <tr>
         <td><span class="xref">LeaderboardFilterType</span></td>
-        <td></td>
+        <td><p>Current filter to use for gathering leaderboard standings.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -147,8 +147,7 @@
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_CurrentLeaderboard_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.CurrentLeaderboard*"></a>
   <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_CurrentLeaderboard" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.CurrentLeaderboard">CurrentLeaderboard</h4>
-  <div class="markdown level1 summary"><p>Current leaderboard to use for gathering leaderboard standings from.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -165,7 +164,8 @@
     <tbody>
       <tr>
         <td><span class="xref">LeaderboardResponse</span></td>
-        <td></td>
+        <td><p>Current leaderboard to use for gathering leaderboard standings from.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -173,8 +173,7 @@
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_CurrentStandings_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.CurrentStandings*"></a>
   <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_CurrentStandings" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.CurrentStandings">CurrentStandings</h4>
-  <div class="markdown level1 summary"><p>Last set of standings gathered.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -191,7 +190,34 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<span class="xref">LeaderboardStandingsResponse</span>&gt;</td>
-        <td></td>
+        <td><p>Last set of standings gathered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_MultiplePerActor_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.MultiplePerActor*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_MultiplePerActor" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.MultiplePerActor">MultiplePerActor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool MultiplePerActor { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Current setting for whether actors can appear on leaderboards multiple times.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -199,8 +225,7 @@
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_PositionCount_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.PositionCount*"></a>
   <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_PositionCount" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.PositionCount">PositionCount</h4>
-  <div class="markdown level1 summary"><p>Number of results that should be gathered per call.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -217,7 +242,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td></td>
+        <td><p>Number of results that should be gathered per call.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -226,13 +252,13 @@
   
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_System_String_LeaderboardFilterType_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,LeaderboardFilterType,System.Int32,System.Boolean)">Display(String, LeaderboardFilterType, Int32, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Gathers information on the leaderboard with the token provided and gets current standings based on the filter and page number provided, with the UI object displayed if provided.</p>
+  <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_Display_System_String_LeaderboardFilterType_System_Boolean_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.Display(System.String,LeaderboardFilterType,System.Boolean,System.Int32,System.Boolean)">Display(String, LeaderboardFilterType, Boolean, Int32, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Gathers information for leaderboard and displays the interface if it has been provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Display(string token, LeaderboardFilterType filter, int pageNumber = 0, bool globalLeaderboard = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Display(string token, LeaderboardFilterType filter, bool multiplePerActor, int pageNumber = 0, bool globalLeaderboard = false)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -247,22 +273,32 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">token</span></td>
-        <td></td>
+        <td><p>The unique identifier for the Leaderboard</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">LeaderboardFilterType</span></td>
         <td><span class="parametername">filter</span></td>
-        <td></td>
+        <td><p>The Filter type to order standings by</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">multiplePerActor</span></td>
+        <td><p>If the leaderboard allows for actors to appeard multiple times</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">pageNumber</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> The page number to start from (default: 0)</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">globalLeaderboard</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> Whether the leaderboard is global or in game scope. (default: false)</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -270,7 +306,7 @@
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_GetLeaderboardStandings_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.GetLeaderboardStandings*"></a>
   <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_GetLeaderboardStandings_System_Int32_Action_System_Boolean__Action_List_LeaderboardStandingsResponse___" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.GetLeaderboardStandings(System.Int32,Action{System.Boolean},Action{List{LeaderboardStandingsResponse}})">GetLeaderboardStandings(Int32, Action&lt;Boolean&gt;, Action&lt;List&lt;LeaderboardStandingsResponse&gt;&gt;)</h4>
-  <div class="markdown level1 summary"><p>Get standings for the current leaderboard. A request for results to be returned means that the standings gotten will not be stored. Otherwise, they will be saved into CurrentStandings.</p>
+  <div class="markdown level1 summary"><p>Get standings for the current leaderboard. </p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -290,17 +326,20 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">pageNumber</span></td>
-        <td></td>
+        <td><p>The page number to retrieve</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td></td>
+        <td><p>Whether the standings were retrieved successfully</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">List</span>&lt;<span class="xref">LeaderboardStandingsResponse</span>&gt;&gt;</td>
         <td><span class="parametername">result</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> the results for the leaderboard standings, null value will save results to CurrentStandings (default: null)</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -308,7 +347,7 @@
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_SetPositionCount_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.SetPositionCount*"></a>
   <h4 id="PlayGen_SUGAR_Unity_LeaderboardUnityClient_SetPositionCount_System_Int32_" data-uid="PlayGen.SUGAR.Unity.LeaderboardUnityClient.SetPositionCount(System.Int32)">SetPositionCount(Int32)</h4>
-  <div class="markdown level1 summary"><p>Set the number of results to get at most per call.</p>
+  <div class="markdown level1 summary"><p>Set the maximum number of results to get per call.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -328,7 +367,8 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">count</span></td>
-        <td></td>
+        <td><p>The Maximum number of results</p>
+</td>
       </tr>
     </tbody>
   </table>
