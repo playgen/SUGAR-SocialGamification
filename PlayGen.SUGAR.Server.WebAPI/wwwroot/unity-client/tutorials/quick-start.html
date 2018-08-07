@@ -69,9 +69,13 @@
 <li>Open and build the PlayGen.SUGAR.Unity project.</li>
 </ol>
 <h3 id="add-sugar">Add SUGAR</h3>
-<ol>
-<li>Add the &#39;SUGAR&#39; prefab, found at SUGAR/Prefabs/SUGAR, into your starting scene. All of the interfaces referenced on the Unity Clients on this object can be found at SUGAR/Example/Prefabs/Landscape.   </li>
-</ol>
+<p>Add the &#39;SUGAR&#39; prefab, found at SUGAR/Prefabs/SUGAR, into your starting scene. All of the interfaces referenced on the Unity Clients on this object can be found at SUGAR/Example/Prefabs/Landscape. </p>
+<p>The SUGAR Unity Manager script component on the prefab holds universal information required by other SUGAR components. Configuring this component is necessary to connect to SUGAR.</p>
+<ul>
+<li>Base Address - web address of SUGAR server (e.g. <code>http://localhost:59400/</code> or <code>http://www.mysugarserver.com</code>). This is overwritten by the value set inside the config.json file (found in &quot;Assets/StreamingAssets&quot;).</li>
+<li>Game Token - name of the <a class="xref" href="../../features/game.html">Game</a> used for database lookup.</li>
+<li>Game Id - database row Id of the <a class="xref" href="../../features/game.html">Game</a>, returned from token lookup.</li>
+</ul>
 <h3 id="create-game-seed-file">Create Game Seed File</h3>
 <ol>
 <li>Open the &#39;Edit Game Seed&#39; tool by clicking Tools/SUGAR/Edit Game Seed.  </li>
