@@ -4,6 +4,10 @@ See below details for each release of SUGAR and the notable changes made.
 ### Next Version
 The following will be available in the next version of SUGAR
 
+### 1.3.1
+- Fix Resources not returning updated amount for existing resources
+- Expanded Unity client docs and startup guide
+
 ### 1.3.0
 - Add Count as a CriteriaQueryType
 - Add default group user claims to allow members to manage group resources (Get, Create, Update)
