@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_AccountUnityClient" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient" class="text-break">Class AccountUnityClient
   </h1>
-  <div class="markdown level0 summary"><p>Unity client for functionality related to signing in, registering and signing out.</p>
+  <div class="markdown level0 summary"><p>Use this to Sign In, Register, Logout and manage other account functionality</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -96,8 +96,7 @@
   
   <a id="PlayGen_SUGAR_Unity_AccountUnityClient_HasInterface_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.HasInterface*"></a>
   <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_HasInterface" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.HasInterface">HasInterface</h4>
-  <div class="markdown level1 summary"><p>Has an interface been provided for this Unity Client?</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -114,7 +113,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
+        <td><p>Has an interface been provided for this Unity Client in the current orientation</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -122,8 +122,7 @@
   
   <a id="PlayGen_SUGAR_Unity_AccountUnityClient_IsActive_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.IsActive*"></a>
   <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_IsActive" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.IsActive">IsActive</h4>
-  <div class="markdown level1 summary"><p>Is there an interface and if so is it currently active?</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -140,7 +139,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
+        <td><p>Is there an interface and if so is it currently active</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -150,8 +150,7 @@
   
   <a id="PlayGen_SUGAR_Unity_AccountUnityClient_DisplayLogInPanel_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel*"></a>
   <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_DisplayLogInPanel_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.DisplayLogInPanel(Action{System.Boolean})">DisplayLogInPanel(Action&lt;Boolean&gt;)</h4>
-  <div class="markdown level1 summary"><p>Displays interface if provided and allowAutoLogin is false. Attempts automatic sign in using provided details if allowAutoLogin is true.
-Note: allowAutoLogin is made false after automatic sign in is first attempted.</p>
+  <div class="markdown level1 summary"><p>Displays interface if provided and allowAutoLogin is false. Attempts automatic sign in using provided details if allowAutoLogin is true.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -171,16 +170,22 @@ Note: allowAutoLogin is made false after automatic sign in is first attempted.</
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td><p>Callback which will result whether the user successfully signed in.</p>
+        <td><p>Whether the user successfully signed in.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PlayGen_SUGAR_Unity_AccountUnityClient_DisplayLogInPanel_Action_System_Boolean___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><ul>
+<li>allowAutoLogin is set to false after automatic sign in is first attempted.</li>
+<li>If there is no interface provided callback will return false</li>
+</ul>
+</div>
   
   
   <a id="PlayGen_SUGAR_Unity_AccountUnityClient_Hide_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Hide*"></a>
   <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_Hide" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Hide">Hide()</h4>
-  <div class="markdown level1 summary"><p>Hide the UI object if it is currently active.</p>
+  <div class="markdown level1 summary"><p>Hide the AccountPanel game object</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -191,7 +196,7 @@ Note: allowAutoLogin is made false after automatic sign in is first attempted.</
   
   <a id="PlayGen_SUGAR_Unity_AccountUnityClient_Logout_" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Logout*"></a>
   <h4 id="PlayGen_SUGAR_Unity_AccountUnityClient_Logout_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.AccountUnityClient.Logout(Action{System.Boolean})">Logout(Action&lt;Boolean&gt;)</h4>
-  <div class="markdown level1 summary"><p>Sign out the currently signed in user</p>
+  <div class="markdown level1 summary"><p>Sign out the currently signed in user.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -211,11 +216,16 @@ Note: allowAutoLogin is made false after automatic sign in is first attempted.</
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td><p>Callback which will result whether the user successfully signed out.</p>
+        <td><p>Whether the currently signed in user successfully signed out.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PlayGen_SUGAR_Unity_AccountUnityClient_Logout_Action_System_Boolean___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><ul>
+<li>If no user is currently signed in, callback returns false</li>
+</ul>
+</div>
 </article>
           </div>
           
