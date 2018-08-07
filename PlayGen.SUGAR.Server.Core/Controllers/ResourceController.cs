@@ -104,7 +104,36 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return resource;
 		}
 
-		private EvaluationData GetExistingResource(int gameId, int ownerId, string key)
+		public EvaluationData CreateOrUpdate(int gameId, int actorId, string key, long quantity)
+		{
+			EvaluationData resource;
+
+			var resources = Get(gameId, actorId, new[] { key });
+			if (resources.Any())
+			{
+				// todo handle edge case of multiple resource entries
+				var existingResource = resources.Single();
+				resource = AddQuantity(existingResource.Id, quantity);
+			}
+			else
+			{
+				resource = new EvaluationData
+				{
+					GameId = gameId,
+					ActorId = actorId,
+					Key = key,
+					Value = quantity.ToString(),
+                    EvaluationDataType = EvaluationDataType.Long,
+					Category = EvaluationDataCategory.Resource,
+				};
+
+				Create(resource);
+			}
+
+			return resource;
+		}
+
+        private EvaluationData GetExistingResource(int gameId, int ownerId, string key)
 		{
 			var foundResources = _evaluationDataController.Get(gameId, ownerId, new[] { key });
 

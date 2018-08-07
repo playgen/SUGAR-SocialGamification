@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
+using PlayGen.SUGAR.Server.Model;
 using PlayGen.SUGAR.Server.WebAPI.Attributes;
 using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
@@ -76,17 +77,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 				(await _authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
 				(await _authorizationService.AuthorizeAsync(User, resourceRequest.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
-				var resource = resourceRequest.ToModel();
-				var resources = _resourceController.Get(resourceRequest.GameId.Value, resourceRequest.ActorId.Value, new[] { resourceRequest.Key });
-				if (resources.Any())
-				{
-					var firstResource = resources.Single();
-					_resourceController.AddQuantity(firstResource.Id, resourceRequest.Quantity.Value);
-				}
-				else
-				{
-					_resourceController.Create(resource);
-				}
+				var resource = _resourceController.CreateOrUpdate(
+					resourceRequest.GameId.Value, 
+					resourceRequest.ActorId.Value, 
+					resourceRequest.Key,
+					resourceRequest.Quantity.Value);
 
 				var resourceContract = resource.ToResourceContract();
 				return new ObjectResult(resourceContract);
