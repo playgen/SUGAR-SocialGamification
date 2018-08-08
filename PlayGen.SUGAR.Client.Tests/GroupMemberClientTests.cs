@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Transactions;
 using PlayGen.SUGAR.Client.Exceptions;
 using PlayGen.SUGAR.Common.Authorization;
@@ -134,6 +135,44 @@ namespace PlayGen.SUGAR.Client.Tests
 		}
 
 		[Fact]
+		public void CannotCreateDuplicateAutoAcceptedRequestAsync()
+		{
+			var key = "GroupMember_CannotCreateDuplicateAsync";
+			var group = CreateGroup(key);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+
+			var relationshipRequest = new RelationshipRequest
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = group.Id,
+				AutoAccept = false
+			};
+
+			Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
+
+			relationshipRequest.AutoAccept = true;
+
+            var complete = false;
+			Exception requestException = null;
+
+			Fixture.SUGARClient.GroupMember.CreateMemberRequestAsync(
+				relationshipRequest, 
+				response => complete = true,
+				exception =>
+				{
+					requestException = exception;
+                    complete = true;
+				});
+
+			while (!complete)
+			{
+				Fixture.SUGARClient.TryExecuteResponse();
+			}
+
+			Assert.IsType<ClientHttpException>(requestException);
+		}
+
+        [Fact]
 		public void CannotCreateRequestWithNonExistingUser()
 		{
 			var key = "GroupMember_CannotCreateRequestWithNonExistingUser";
