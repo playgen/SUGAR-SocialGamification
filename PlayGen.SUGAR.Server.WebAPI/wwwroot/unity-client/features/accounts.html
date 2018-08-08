@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Unity UI Component | SUGAR </title>
+    <title>Creating Accounts in Game | SUGAR </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Unity UI Component | SUGAR ">
+    <meta name="title" content="Creating Accounts in Game | SUGAR ">
     <meta name="generator" content="docfx 2.35.4.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
@@ -60,10 +60,21 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="unity-ui-component">Unity UI Component</h1>
+              <h1 id="creating-accounts-in-game">Creating Accounts in Game</h1>
               
-<p>The UI component is a Unity package developers can import into their Unity project to allow easy interactions with the SUGAR engine. 
-The package includes a folder of prefabs at &quot;Assets/SUGAR/Prefabs&quot;. For more details of the Unity Client see the details documentation <a href="http://docs.sugarengine.org/unity-client/index.html">here</a></p>
+<p>The Unity Client comes with functionality to create an account or login to SUGAR in your game. This is handled through the Account Panel, found at Assets/SUGAR/Example/Prefabs.</p>
+<p>For all login/register functionality, the account panel must have the LoginUserInterface class attached, the panel prompts the user to login. Included in the prefabs folder (&quot;Assets/SUGAR/Prefabs&quot;) is a fully functional login panel template. </p>
+<p>The login panel has a rememberMe option, which will set the IssueLoginToken flag to true in the login request, which will return a token for players to use for logging in on subsequent requests. If &quot;Remember Me&quot; has been selected, the interface will pre-populate user details.</p>
+<p>The Account Panel uses the following Values found on the SUGAR Prefab in scene:</p>
+<ul>
+<li><strong>Allow Auto Login</strong> - This enables the use of auto-login (bypassing the need for the login panel). If this is checked, and the command line arguments for auto login have been passed, then the Account Unity Client will attempt to login with the credentials. The command line options format is <code>game.exe -u [username] -s [source] -autologin</code>.</li>
+<li><strong>Allow Register</strong> - Currently, this displays the makes the register on the login panel visible for custom registration handlers. </li>
+<li><strong>Default Source Token</strong> - Source tokens are set to ensure the player is logging in from an allowed source. If the source is not set in the commandline options, then this value becomes the default.</li>
+</ul>
+<p>In order to interact with SUGAR, users need to be logged in. By default this is done on startup of the game but can be done at a later point by using: </p>
+<pre><code class="lang-c#">SUGARManager.Account.DisplayPanel();
+</code></pre><p><strong>Note</strong>: It is important that the SUGAR GameObject is present in your scene before attempting to make any calls, if not using Allow Auto Login, SUGAR will show the account panel immediately </p>
+<p>Further details of SUGARManager functionality can be found <a href="sugarmanager.html">here</a></p>
 
             </article>
           </div>
