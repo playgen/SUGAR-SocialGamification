@@ -200,13 +200,13 @@
   
   
   <a id="PlayGen_SUGAR_Unity_UserGroupUnityClient_AddGroup_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_AddGroup_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32,System.Boolean)">AddGroup(Int32, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Send group membership request to group.</p>
+  <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_AddGroup_System_Int32_System_Boolean_System_Boolean_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32,System.Boolean,System.Boolean,Action{System.Boolean})">AddGroup(Int32, Boolean, Boolean, Action&lt;Boolean&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send group membership request to group with id provided. If reload is true, UI is also redrawn.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddGroup(int id, bool reload = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddGroup(int id, bool reload = true, bool trySetAsCurrentGroup = false, Action&lt;bool&gt; callback = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -228,6 +228,18 @@
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">reload</span></td>
         <td><p><strong>Optional</strong> Whether the interface should reload on completion. (default: true)</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">trySetAsCurrentGroup</span></td>
+        <td><p>Will set this group as the current group if the user sucesfully joins the group.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>Callback with a variable indicating success or failure.</p>
 </td>
       </tr>
     </tbody>
