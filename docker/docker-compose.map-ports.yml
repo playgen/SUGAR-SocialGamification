@@ -7,4 +7,4 @@ services:
 
   sugar-v1-demo-mariadb:
     ports:
-      - "59431:3306"
+      - "59432:3306"
