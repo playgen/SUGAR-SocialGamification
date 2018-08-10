@@ -72,6 +72,17 @@
 <p>Version compatibility is ensured by the APIVersion filter in the PlayGen.SUGAR.Server.WebAPI project.</p>
 <p>When the Client sends a request, it must include the API Version string with the key &quot;APIVersion&quot; as a header.</p>
 <p>The APIVersion is shared between Server and Client projects in PlayGen.SUGAR.Common.APIVersion.</p>
+<h1 id="docker">Docker</h1>
+<p>The Major version is appended to the name of the docker container in the format:<br><code>[container name]</code>-v<code>[major version number]</code><br>i.e: <code>sugar-v1.</code></p>
+<p>When incrementing the container name version, you will need to change increment the database container name too. </p>
+<p>The container name references (and image versions) will need to be changed in:</p>
+<ul>
+<li><a href="../../docker/docker-compose.base.yml">docker/docker-compose.base.yml</a></li>
+<li><a href="../../docker/docker-compose.build.yml">docker/docker-compose.build.yml</a></li>
+<li><a href="../../docker/docker-compose.image.yml">docker/docker-compose.image.yml</a></li>
+<li><a href="../../docker/docker-compose.map-ports.yml">docker/docker-compose.map-ports.yml</a></li>
+<li>The database connection string in <a href="../../PlayGen.SUGAR.Server.WebAPI/appsettings.json">PlayGen.SUGAR.Server.WebAPI/appsettings.json</a></li>
+</ul>
 
             </article>
           </div>
