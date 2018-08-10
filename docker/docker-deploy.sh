@@ -1,7 +1,7 @@
 #/bin/bash
 cd ../
-export DB_CONTAINER="sugar-v1-mariadb"
-export CONTAINER="sugar-v1"
+export DB_CONTAINER="sugar-v1-demo-mariadb"
+export CONTAINER="sugar-v1-demo"
 docker stop $CONTAINER
 docker stop $DB_CONTAINER
 docker rm $CONTAINER

@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  sugar-v1:
+  sugar-v1-demo:
     image: sugar:1.0.0
     build:
       context: ../
