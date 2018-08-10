@@ -3,7 +3,7 @@ version: '2'
 services:
   sugar-v1-demo:
     ports:
-      - "59400:59400"
+      - "59402:59400"
 
   sugar-v1-demo-mariadb:
     ports:
