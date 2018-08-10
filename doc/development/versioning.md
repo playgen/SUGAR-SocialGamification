@@ -17,13 +17,29 @@ The APIVersion is shared between Server and Client projects in PlayGen.SUGAR.Com
 # Docker
 The Major version is appended to the name of the docker container in the format:  
 `[container name]`-v`[major version number]`  
-i.e: `sugar-v1.`
+i.e: `sugar-v1`
 
-When incrementing the container name version, you will need to change increment the database container name too. 
+When incrementing the sugar container version, you must also update the database container name too. 
 
-The container name references (and image versions) will need to be changed in:
-- [docker/docker-compose.base.yml](../../docker/docker-compose.base.yml)
-- [docker/docker-compose.build.yml](../../docker/docker-compose.build.yml)
-- [docker/docker-compose.image.yml](../../docker/docker-compose.image.yml)
-- [docker/docker-compose.map-ports.yml](../../docker/docker-compose.map-ports.yml)
-- The database connection string in [PlayGen.SUGAR.Server.WebAPI/appsettings.json](../../PlayGen.SUGAR.Server.WebAPI/appsettings.json)
+### Container Names:
+- `sugar-v1` -> `sugar-v2`  
+- `sugar-v1-mariadb` -> `sugar-v2-mariadb`
+- `sugar-v1-mariadb` -> `sugar-v2-mariadb`
+
+### Image Names:
+- `sugar-socialgamification:1.23.5` -> `sugar-socialgamification:2.0.0`
+
+### The container name references (and image versions) will need to be changed in:  
+
+#### Docker Compose
+- docker/docker-compose.base.yml
+- docker/docker-compose.build.yml
+- docker/docker-compose.image.yml
+- docker/docker-compose.map-ports.yml
+
+#### Web API Database Connection String
+- PlayGen.SUGAR.Server.WebAPI/appsettings.json
+
+#### Shell Scripts
+- All the .sh and .bat scripts in docker/
+
