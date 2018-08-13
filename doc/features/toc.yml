@@ -27,6 +27,3 @@
 - name: Admin Panel
   href: admin/
   topicHref: admin/index.md
-- name: Unity UI Component
-  href: unity/
-  topicHref: unity/index.md
