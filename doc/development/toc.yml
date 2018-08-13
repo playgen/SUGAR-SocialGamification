@@ -6,7 +6,5 @@
   href: documentation.md
 - name: Versioning
   href: versioning.md
-- name: WebAPI
-- name: Client
 - name: Admin Interface
   href: admin.md
