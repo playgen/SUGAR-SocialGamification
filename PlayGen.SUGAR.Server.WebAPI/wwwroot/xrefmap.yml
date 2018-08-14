@@ -15,7 +15,7 @@ references:
   href: features/actor.html
 - uid: client-prefabs
   name: Unity Client Prefabs
-  href: unity-client/tutorials/client-prefabs.html
+  href: unity-client/features/client-prefabs.html
 - uid: criteria
   name: Evalutation Criteria
   href: concepts/criteria.html
@@ -10482,6 +10482,19 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Server.Core.Controllers.ResourceController.Create
   nameWithType: ResourceController.Create
+- uid: PlayGen.SUGAR.Server.Core.Controllers.ResourceController.CreateOrUpdate(System.Int32,System.Int32,System.String,System.Int64)
+  name: CreateOrUpdate(Int32, Int32, String, Int64)
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.ResourceController.html#PlayGen_SUGAR_Server_Core_Controllers_ResourceController_CreateOrUpdate_System_Int32_System_Int32_System_String_System_Int64_
+  commentId: M:PlayGen.SUGAR.Server.Core.Controllers.ResourceController.CreateOrUpdate(System.Int32,System.Int32,System.String,System.Int64)
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.ResourceController.CreateOrUpdate(System.Int32, System.Int32, System.String, System.Int64)
+  nameWithType: ResourceController.CreateOrUpdate(Int32, Int32, String, Int64)
+- uid: PlayGen.SUGAR.Server.Core.Controllers.ResourceController.CreateOrUpdate*
+  name: CreateOrUpdate
+  href: api/PlayGen.SUGAR.Server.Core.Controllers.ResourceController.html#PlayGen_SUGAR_Server_Core_Controllers_ResourceController_CreateOrUpdate_
+  commentId: Overload:PlayGen.SUGAR.Server.Core.Controllers.ResourceController.CreateOrUpdate
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Server.Core.Controllers.ResourceController.CreateOrUpdate
+  nameWithType: ResourceController.CreateOrUpdate
 - uid: PlayGen.SUGAR.Server.Core.Controllers.ResourceController.Get(System.Int32,System.Int32,System.String[])
   name: Get(Int32, Int32, String[])
   href: api/PlayGen.SUGAR.Server.Core.Controllers.ResourceController.html#PlayGen_SUGAR_Server_Core_Controllers_ResourceController_Get_System_Int32_System_Int32_System_String___
@@ -14270,6 +14283,68 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRecordException.DuplicateRecordException
   nameWithType: DuplicateRecordException.DuplicateRecordException
+- uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException
+  name: DuplicateRelationshipException
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.html
+  commentId: T:PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException
+  nameWithType: DuplicateRelationshipException
+- uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.#ctor
+  name: DuplicateRelationshipException()
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.html#PlayGen_SUGAR_Server_EntityFramework_Exceptions_DuplicateRelationshipException__ctor
+  commentId: M:PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.#ctor
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.DuplicateRelationshipException()
+  nameWithType: DuplicateRelationshipException.DuplicateRelationshipException()
+- uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.#ctor(System.String)
+  name: DuplicateRelationshipException(String)
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.html#PlayGen_SUGAR_Server_EntityFramework_Exceptions_DuplicateRelationshipException__ctor_System_String_
+  commentId: M:PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.#ctor(System.String)
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.DuplicateRelationshipException(System.String)
+  nameWithType: DuplicateRelationshipException.DuplicateRelationshipException(String)
+- uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.#ctor(System.String,Exception)
+  name: DuplicateRelationshipException(String, Exception)
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.html#PlayGen_SUGAR_Server_EntityFramework_Exceptions_DuplicateRelationshipException__ctor_System_String_Exception_
+  commentId: M:PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.#ctor(System.String,Exception)
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.DuplicateRelationshipException(System.String, Exception)
+  nameWithType: DuplicateRelationshipException.DuplicateRelationshipException(String, Exception)
+- uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.#ctor*
+  name: DuplicateRelationshipException
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.html#PlayGen_SUGAR_Server_EntityFramework_Exceptions_DuplicateRelationshipException__ctor_
+  commentId: Overload:PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.#ctor
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.DuplicateRelationshipException.DuplicateRelationshipException
+  nameWithType: DuplicateRelationshipException.DuplicateRelationshipException
+- uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException
+  name: InvalidRelationshipException
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.html
+  commentId: T:PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException
+  nameWithType: InvalidRelationshipException
+- uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.#ctor
+  name: InvalidRelationshipException()
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.html#PlayGen_SUGAR_Server_EntityFramework_Exceptions_InvalidRelationshipException__ctor
+  commentId: M:PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.#ctor
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.InvalidRelationshipException()
+  nameWithType: InvalidRelationshipException.InvalidRelationshipException()
+- uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.#ctor(System.String)
+  name: InvalidRelationshipException(String)
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.html#PlayGen_SUGAR_Server_EntityFramework_Exceptions_InvalidRelationshipException__ctor_System_String_
+  commentId: M:PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.#ctor(System.String)
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.InvalidRelationshipException(System.String)
+  nameWithType: InvalidRelationshipException.InvalidRelationshipException(String)
+- uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.#ctor(System.String,Exception)
+  name: InvalidRelationshipException(String, Exception)
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.html#PlayGen_SUGAR_Server_EntityFramework_Exceptions_InvalidRelationshipException__ctor_System_String_Exception_
+  commentId: M:PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.#ctor(System.String,Exception)
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.InvalidRelationshipException(System.String, Exception)
+  nameWithType: InvalidRelationshipException.InvalidRelationshipException(String, Exception)
+- uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.#ctor*
+  name: InvalidRelationshipException
+  href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.html#PlayGen_SUGAR_Server_EntityFramework_Exceptions_InvalidRelationshipException__ctor_
+  commentId: Overload:PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.#ctor
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Server.EntityFramework.Exceptions.InvalidRelationshipException.InvalidRelationshipException
+  nameWithType: InvalidRelationshipException.InvalidRelationshipException
 - uid: PlayGen.SUGAR.Server.EntityFramework.Exceptions.MissingRecordException
   name: MissingRecordException
   href: api/PlayGen.SUGAR.Server.EntityFramework.Exceptions.MissingRecordException.html
@@ -20768,6 +20843,19 @@ references:
   isSpec: "True"
   fullName: PlayGen.SUGAR.Unity.AccountUnityClient.HasInterface
   nameWithType: AccountUnityClient.HasInterface
+- uid: PlayGen.SUGAR.Unity.AccountUnityClient.HasSavedLogin
+  name: HasSavedLogin
+  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_HasSavedLogin
+  commentId: P:PlayGen.SUGAR.Unity.AccountUnityClient.HasSavedLogin
+  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.HasSavedLogin
+  nameWithType: AccountUnityClient.HasSavedLogin
+- uid: PlayGen.SUGAR.Unity.AccountUnityClient.HasSavedLogin*
+  name: HasSavedLogin
+  href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_HasSavedLogin_
+  commentId: Overload:PlayGen.SUGAR.Unity.AccountUnityClient.HasSavedLogin
+  isSpec: "True"
+  fullName: PlayGen.SUGAR.Unity.AccountUnityClient.HasSavedLogin
+  nameWithType: AccountUnityClient.HasSavedLogin
 - uid: PlayGen.SUGAR.Unity.AccountUnityClient.Hide
   name: Hide()
   href: unity-client/api/PlayGen.SUGAR.Unity.AccountUnityClient.html#PlayGen_SUGAR_Unity_AccountUnityClient_Hide
@@ -23361,12 +23449,15 @@ references:
   commentId: T:PlayGen.SUGAR.Unity.UserGroupUnityClient
   fullName: PlayGen.SUGAR.Unity.UserGroupUnityClient
   nameWithType: UserGroupUnityClient
-- uid: PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32,System.Boolean)
-  name: AddGroup(Int32, Boolean)
-  href: unity-client/api/PlayGen.SUGAR.Unity.UserGroupUnityClient.html#PlayGen_SUGAR_Unity_UserGroupUnityClient_AddGroup_System_Int32_System_Boolean_
-  commentId: M:PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32,System.Boolean)
-  fullName: PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32, System.Boolean)
-  nameWithType: UserGroupUnityClient.AddGroup(Int32, Boolean)
+- uid: PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32,System.Boolean,System.Boolean,Action{System.Boolean})
+  name: AddGroup(Int32, Boolean, Boolean, Action<Boolean>)
+  href: unity-client/api/PlayGen.SUGAR.Unity.UserGroupUnityClient.html#PlayGen_SUGAR_Unity_UserGroupUnityClient_AddGroup_System_Int32_System_Boolean_System_Boolean_Action_System_Boolean__
+  commentId: M:PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32,System.Boolean,System.Boolean,Action{System.Boolean})
+  name.vb: AddGroup(Int32, Boolean, Boolean, Action(Of Boolean))
+  fullName: PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32, System.Boolean, System.Boolean, Action<System.Boolean>)
+  fullName.vb: PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32, System.Boolean, System.Boolean, Action(Of System.Boolean))
+  nameWithType: UserGroupUnityClient.AddGroup(Int32, Boolean, Boolean, Action<Boolean>)
+  nameWithType.vb: UserGroupUnityClient.AddGroup(Int32, Boolean, Boolean, Action(Of Boolean))
 - uid: PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup*
   name: AddGroup
   href: unity-client/api/PlayGen.SUGAR.Unity.UserGroupUnityClient.html#PlayGen_SUGAR_Unity_UserGroupUnityClient_AddGroup_

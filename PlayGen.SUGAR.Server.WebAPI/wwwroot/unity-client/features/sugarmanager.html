@@ -133,7 +133,8 @@
 </table>
 <h2 id="client">Client</h2>
 <p>All functionality within SUGAR Unity goes through this SUGAR Client. It is created within the &#39;CreateSUGARClient&#39; method and set within the &#39;CreateSUGARClient&#39; method of <a href="../api/PlayGen.SUGAR.Unity.SUGARUnityManager.html">SUGARUnityManager</a>, both of which are triggered from its &#39;Awake&#39; method.</p>
-<p>Any player-facing SUGAR functionality can be accessed using the Client directly instead. Please note that the Client does not make the same checks as SUGAR Unity to ensure that functionality can only be called once a user is signed in and that only functionality that the user has access to is available, so additional care should be taken when using the Client directly to avoid calls failing.</p>
+<p>Any player-facing SUGAR functionality can be accessed using the Client directly instead. </p>
+<p><strong>Important</strong>; the Client does not make the same checks as SUGAR Unity to ensure that functionality can only be called once a user is signed in and that only functionality that the user has access to is available, so additional care should be taken when using the Client directly to avoid calls failing.</p>
 <h2 id="usersignedin">UserSignedIn</h2>
 <p>Boolean used to confirm if a user is signed in. If no user is signed in, most functionality will not be accessible.</p>
 <h2 id="classid">ClassId</h2>

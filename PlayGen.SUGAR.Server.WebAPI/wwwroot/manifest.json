@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "P:/SUGAR/doc",
+  "source_base_path": "P:/sugar/doc",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -4162,7 +4162,7 @@
       "output": {
         ".html": {
           "relative_path": "development/toc.html",
-          "hash": "Rb9RG3abD+aNWHI/p5Mekw=="
+          "hash": "B9fxVMBIddFZ83/DqjIm+g=="
         }
       },
       "is_incremental": false,
@@ -4211,6 +4211,18 @@
         ".html": {
           "relative_path": "features/admin/SiteMap.html",
           "hash": "C7G5ni2lAat9/YTnHHZwEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "features/admin/accountsources.md",
+      "output": {
+        ".html": {
+          "relative_path": "features/admin/accountsources.html",
+          "hash": "rdry2MmFs/aHaFX9hrdIBw=="
         }
       },
       "is_incremental": false,
@@ -4305,6 +4317,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "features/admin/roles.md",
+      "output": {
+        ".html": {
+          "relative_path": "features/admin/roles.html",
+          "hash": "izMVfxF+m6k5TCXx1hSkvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "features/admin/skill.md",
       "output": {
         ".html": {
@@ -4321,7 +4345,7 @@
       "output": {
         ".html": {
           "relative_path": "features/admin/toc.html",
-          "hash": "cPgp1PMzTd3us2zJqJ+Huw=="
+          "hash": "DE/NnzZFkK3LpH/LNfY4mw=="
         }
       },
       "is_incremental": false,
@@ -4483,19 +4507,7 @@
       "output": {
         ".html": {
           "relative_path": "features/toc.html",
-          "hash": "KSsuX4sFg2h+AOqp5ITx1Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "features/unity/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "features/unity/index.html",
-          "hash": "yv8vA44tXIh+oGMJvEhapg=="
+          "hash": "lFyP9iQdsBA6852eajnCBg=="
         }
       },
       "is_incremental": false,
@@ -4541,6 +4553,17 @@
       "output": {
         "resource": {
           "relative_path": "images/favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/features/admin/AccountSources.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/features/admin/AccountSources.png"
         }
       },
       "is_incremental": false,
@@ -5340,7 +5363,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/api/PlayGen.SUGAR.Unity.Editor.html",
-          "hash": "2RVlHgMFiTyn+kFPGE76nQ=="
+          "hash": "SJer8LkJD7CSyXesb72k0Q=="
         }
       },
       "is_incremental": false,
@@ -5588,11 +5611,35 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "unity-client/features/accounts.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/features/accounts.html",
+          "hash": "PymlpcX1RsFh33BBVAJ4hQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/features/accountsources.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/features/accountsources.html",
+          "hash": "MKhB+g1fUh5nJo2ePP04Lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "unity-client/features/client-prefabs.md",
       "output": {
         ".html": {
           "relative_path": "unity-client/features/client-prefabs.html",
-          "hash": "Qcvq/z/Zozc7apmTww9eqw=="
+          "hash": "oZjYXfHkPOWbQjZPb88Ybw=="
         }
       },
       "is_incremental": false,
@@ -5604,7 +5651,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/features/index.html",
-          "hash": "t/mCS+DiZ0IwZR2vmxhfUQ=="
+          "hash": "75kkT5MzqjkWml7X21QBxA=="
         }
       },
       "is_incremental": false,
@@ -5628,7 +5675,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/features/sugarmanager.html",
-          "hash": "2UJiItxdO2mwB+woe7QfLQ=="
+          "hash": "PKued2yxlljfvfb8Urn0VQ=="
         }
       },
       "is_incremental": false,
@@ -5655,7 +5702,19 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/toc.html",
-          "hash": "3t1uxLfRaJYFrSFdX3TprA=="
+          "hash": "p6VZPnjLMoljBdFgIlt1Eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "unity-client/tutorials/creating-accounts.md",
+      "output": {
+        ".html": {
+          "relative_path": "unity-client/tutorials/creating-accounts.html",
+          "hash": "DVZXnriuDW32HMDwqBRntg=="
         }
       },
       "is_incremental": false,
@@ -5667,7 +5726,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/index.html",
-          "hash": "GGU/P1qqwHDHFrnRsvREIQ=="
+          "hash": "V8p0Jma06vaSjL0JmerICw=="
         }
       },
       "is_incremental": false,
@@ -5679,7 +5738,7 @@
       "output": {
         ".html": {
           "relative_path": "unity-client/tutorials/quick-start.html",
-          "hash": "YBYYPNdvBz/+E5s7Gevb6w=="
+          "hash": "khxJtBW0sUdNAY+2/5ghmA=="
         }
       },
       "is_incremental": false,
@@ -5693,12 +5752,9 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build"
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+        "RestApiDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ResourceDocumentProcessor": {
@@ -5706,9 +5762,12 @@
           "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "RestApiDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
           "incrementalPhase": "build"
         },
         "TocDocumentProcessor": {
