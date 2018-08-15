@@ -25,4 +25,4 @@ Each account stores a unique login name and password for the associated user.
 	* <xref:PlayGen.SUGAR.Server.WebAPI.Controllers.AccountController>
    
 # Account Sources
-SUGAR supports accounts from multiple sources, allowing for users to be grouped by where they are logging in to. The default [Account Source](http://docs.sugarengine.org/api/PlayGen.SUGAR.Server.Model.AccountSource.html) is "SUGAR", but you can add your own through the admin panel or [C# API](http://docs.sugarengine.org/api/PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.html).
+SUGAR supports accounts from multiple sources, allowing for users to be grouped by where they are logging in to. The default [Account Source](http://docs.sugarengine.org/api/PlayGen.SUGAR.Server.Model.AccountSource.html) is "SUGAR", but you can add your own through the [admin panel](../features/admin/accountsources.md) or [C# API](http://docs.sugarengine.org/api/PlayGen.SUGAR.Server.WebAPI.Controllers.AccountSourceController.html).
