@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class BaseUnityClient&lt;T&gt;
+    <title>Class ActorResponseRelationshipStatus&lt;T&gt;
    | SUGAR </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class BaseUnityClient&lt;T&gt;
+    <meta name="title" content="Class ActorResponseRelationshipStatus&lt;T&gt;
    | SUGAR ">
     <meta name="generator" content="docfx 2.35.4.0">
     
@@ -71,30 +71,26 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1">
+            <article class="content wrap" id="_content" data-uid="PlayGen.SUGAR.Unity.ActorResponseRelationshipStatus`1">
   
   
-  <h1 id="PlayGen_SUGAR_Unity_BaseUnityClient_1" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1" class="text-break">Class BaseUnityClient&lt;T&gt;
+  <h1 id="PlayGen_SUGAR_Unity_ActorResponseRelationshipStatus_1" data-uid="PlayGen.SUGAR.Unity.ActorResponseRelationshipStatus`1" class="text-break">Class ActorResponseRelationshipStatus&lt;T&gt;
   </h1>
-  <div class="markdown level0 summary"><p>Base abstract class for UnityClient classes</p>
+  <div class="markdown level0 summary"><p>ActorResponse with additional information on the relationship between the current user and the actor.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">BaseUnityClient&lt;T&gt;</span></div>
-      <div class="level2"><a class="xref" href="PlayGen.SUGAR.Unity.EvaluationUnityClient.html">EvaluationUnityClient</a></div>
-      <div class="level2"><a class="xref" href="PlayGen.SUGAR.Unity.GroupMemberUnityClient.html">GroupMemberUnityClient</a></div>
-      <div class="level2"><a class="xref" href="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.html">LeaderboardListUnityClient</a></div>
-      <div class="level2"><a class="xref" href="PlayGen.SUGAR.Unity.LeaderboardUnityClient.html">LeaderboardUnityClient</a></div>
-      <div class="level2"><a class="xref" href="PlayGen.SUGAR.Unity.UserFriendUnityClient.html">UserFriendUnityClient</a></div>
-      <div class="level2"><a class="xref" href="PlayGen.SUGAR.Unity.UserGroupUnityClient.html">UserGroupUnityClient</a></div>
+    <div class="level1"><span class="xref">ActorResponseRelationshipStatus&lt;T&gt;</span></div>
+      <div class="level2"><a class="xref" href="PlayGen.SUGAR.Unity.GroupResponseRelationshipStatus.html">GroupResponseRelationshipStatus</a></div>
+      <div class="level2"><a class="xref" href="PlayGen.SUGAR.Unity.UserResponseRelationshipStatus.html">UserResponseRelationshipStatus</a></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Unity.html">PlayGen.SUGAR.Unity</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Unity.dll</h6>
-  <h5 id="PlayGen_SUGAR_Unity_BaseUnityClient_1_syntax">Syntax</h5>
+  <h5 id="PlayGen_SUGAR_Unity_ActorResponseRelationshipStatus_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class BaseUnityClient&lt;T&gt; : MonoBehaviour where T : BaseInterface</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class ActorResponseRelationshipStatus&lt;T&gt; : object where T : ActorResponse</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -111,55 +107,38 @@
       </tr>
     </tbody>
   </table>
-  <h3 id="fields">Fields
+  <h3 id="constructors">Constructors
   </h3>
   
   
-  <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1__landscapeInterface" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1._landscapeInterface">_landscapeInterface</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="PlayGen_SUGAR_Unity_ActorResponseRelationshipStatus_1__ctor_" data-uid="PlayGen.SUGAR.Unity.ActorResponseRelationshipStatus`1.#ctor*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_ActorResponseRelationshipStatus_1__ctor__0_PlayGen_SUGAR_Unity_RelationshipStatus_" data-uid="PlayGen.SUGAR.Unity.ActorResponseRelationshipStatus`1.#ctor(`0,PlayGen.SUGAR.Unity.RelationshipStatus)">ActorResponseRelationshipStatus(T, RelationshipStatus)</h4>
+  <div class="markdown level1 summary"><p>Constructor</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected T _landscapeInterface</code></pre>
+    <pre><code class="lang-csharp hljs">public ActorResponseRelationshipStatus(T actor, RelationshipStatus status)</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
+        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><span class="xref">T</span></td>
-        <td><p>Landscape interface for this area of functionality. Can be left null if not required.</p>
-</td>
+        <td><span class="parametername">actor</span></td>
+        <td></td>
       </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1__portraitInterface" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1._portraitInterface">_portraitInterface</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected T _portraitInterface</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
       <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">T</span></td>
-        <td><p>Portrait interface for this area of functionality. Can be left null if not required.</p>
-</td>
+        <td><a class="xref" href="PlayGen.SUGAR.Unity.RelationshipStatus.html">RelationshipStatus</a></td>
+        <td><span class="parametername">status</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -167,13 +146,13 @@
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Unity_BaseUnityClient_1__interface_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1._interface*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1__interface" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1._interface">_interface</h4>
+  <a id="PlayGen_SUGAR_Unity_ActorResponseRelationshipStatus_1_Actor_" data-uid="PlayGen.SUGAR.Unity.ActorResponseRelationshipStatus`1.Actor*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_ActorResponseRelationshipStatus_1_Actor" data-uid="PlayGen.SUGAR.Unity.ActorResponseRelationshipStatus`1.Actor">Actor</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected T _interface { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public T Actor { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -186,20 +165,20 @@
     <tbody>
       <tr>
         <td><span class="xref">T</span></td>
-        <td><p>The interface that is used for the current aspect ratio.</p>
+        <td><p>ActorResponse contains the actor ID and Name.</p>
 </td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="PlayGen_SUGAR_Unity_BaseUnityClient_1_HasInterface_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.HasInterface*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1_HasInterface" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.HasInterface">HasInterface</h4>
+  <a id="PlayGen_SUGAR_Unity_ActorResponseRelationshipStatus_1_RelationshipStatus_" data-uid="PlayGen.SUGAR.Unity.ActorResponseRelationshipStatus`1.RelationshipStatus*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_ActorResponseRelationshipStatus_1_RelationshipStatus" data-uid="PlayGen.SUGAR.Unity.ActorResponseRelationshipStatus`1.RelationshipStatus">RelationshipStatus</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool HasInterface { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public RelationshipStatus RelationshipStatus { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -211,62 +190,12 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><p>Has an interface been provided for this Unity Client?</p>
+        <td><a class="xref" href="PlayGen.SUGAR.Unity.RelationshipStatus.html">RelationshipStatus</a></td>
+        <td><p>Current status of the relationship between this actor and the current user</p>
 </td>
       </tr>
     </tbody>
   </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_BaseUnityClient_1_IsActive_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.IsActive*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1_IsActive" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.IsActive">IsActive</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsActive { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><p>Is there an interface and if so is it currently active?</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_BaseUnityClient_1_Hide_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.Hide*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1_Hide" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.Hide">Hide()</h4>
-  <div class="markdown level1 summary"><p>Hide the UI object if it is currently active.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Hide()</code></pre>
-  </div>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_BaseUnityClient_1_Update_" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.Update*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_BaseUnityClient_1_Update" data-uid="PlayGen.SUGAR.Unity.BaseUnityClient`1.Update">Update()</h4>
-  <div class="markdown level1 summary"><p>Change the used interface if the aspect ratio changes.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual void Update()</code></pre>
-  </div>
 </article>
           </div>
           

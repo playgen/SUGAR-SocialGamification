@@ -146,7 +146,7 @@
   
   <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayAchievementList_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayAchievementList*"></a>
   <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayAchievementList" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayAchievementList">DisplayAchievementList()</h4>
-  <div class="markdown level1 summary"><p>Gathers current user achievement completion status and display the interface if it is provided and the GET Achievements request was successful.</p>
+  <div class="markdown level1 summary"><p>Gathers current user achievement completion status and displays the interface if it is provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -155,9 +155,20 @@
   </div>
   
   
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayEvaluationList_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayEvaluationList*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayEvaluationList" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayEvaluationList">DisplayEvaluationList()</h4>
+  <div class="markdown level1 summary"><p>Gathers current user achievement and skill completion status and displays the interface if it is provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DisplayEvaluationList()</code></pre>
+  </div>
+  
+  
   <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayGroupAchievementList_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayGroupAchievementList*"></a>
   <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayGroupAchievementList" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayGroupAchievementList">DisplayGroupAchievementList()</h4>
-  <div class="markdown level1 summary"><p>Gathers current group achievement completion status and displays interface if it is provided and the GET Achievements request was successful.</p>
+  <div class="markdown level1 summary"><p>Gathers current group achievement completion status and displays the interface if it is provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -166,9 +177,20 @@
   </div>
   
   
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayGroupEvaluationList_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayGroupEvaluationList*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayGroupEvaluationList" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayGroupEvaluationList">DisplayGroupEvaluationList()</h4>
+  <div class="markdown level1 summary"><p>Gathers current group achievement and skill completion status and displays the interface if it is provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DisplayGroupEvaluationList()</code></pre>
+  </div>
+  
+  
   <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayGroupSkillList_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayGroupSkillList*"></a>
   <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplayGroupSkillList" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplayGroupSkillList">DisplayGroupSkillList()</h4>
-  <div class="markdown level1 summary"><p>Gathers current group skill completion status and display the interface if it is provided and the GET Skill request was successful.</p>
+  <div class="markdown level1 summary"><p>Gathers current group skill completion status and displays the interface if it is provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -179,7 +201,7 @@
   
   <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplaySkillList_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplaySkillList*"></a>
   <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_DisplaySkillList" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.DisplaySkillList">DisplaySkillList()</h4>
-  <div class="markdown level1 summary"><p>Gathers current user skill completion status and display the interface if it is provided and the GET Skill request was successful.</p>
+  <div class="markdown level1 summary"><p>Gathers current user skill completion status and displays the interface if it is provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -220,6 +242,216 @@
 <li>This uses the EvaluationPopupInterface to display the text in the application</li>
 </ul>
 </div>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetAchievementProgress_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetAchievementProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetAchievementProgress_ActorResponse_Action_List_EvaluationProgressResponse___" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetAchievementProgress(ActorResponse,Action{List{EvaluationProgressResponse}})">GetAchievementProgress(ActorResponse, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gathers achievement completion status for the actor provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetAchievementProgress(ActorResponse actor, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt; progress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ActorResponse</span></td>
+        <td><span class="parametername">actor</span></td>
+        <td><p>The user or group the achievement progress will be gathered for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">List</span>&lt;<span class="xref">EvaluationProgressResponse</span>&gt;&gt;</td>
+        <td><span class="parametername">progress</span></td>
+        <td><p>Callback which will return the achievement progress for the actor provided.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetAchievementProgress_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetAchievementProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetAchievementProgress_System_Int32_Action_List_EvaluationProgressResponse___" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetAchievementProgress(System.Int32,Action{List{EvaluationProgressResponse}})">GetAchievementProgress(Int32, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gathers achievement completion status for the actor id provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetAchievementProgress(int id, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt; progress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The id of the user or group the achievement progress will be gathered for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">List</span>&lt;<span class="xref">EvaluationProgressResponse</span>&gt;&gt;</td>
+        <td><span class="parametername">progress</span></td>
+        <td><p>Callback which will return the achievement progress for the actor provided.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetEvaluationProgress_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetEvaluationProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetEvaluationProgress_ActorResponse_Action_List_EvaluationProgressResponse___" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetEvaluationProgress(ActorResponse,Action{List{EvaluationProgressResponse}})">GetEvaluationProgress(ActorResponse, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gathers achievement and skill completion status for the actor provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetEvaluationProgress(ActorResponse actor, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt; progress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ActorResponse</span></td>
+        <td><span class="parametername">actor</span></td>
+        <td><p>The user or group the achievement and skill progress will be gathered for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">List</span>&lt;<span class="xref">EvaluationProgressResponse</span>&gt;&gt;</td>
+        <td><span class="parametername">progress</span></td>
+        <td><p>Callback which will return the achievement and skill progress for the actor provided.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetEvaluationProgress_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetEvaluationProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetEvaluationProgress_System_Int32_Action_List_EvaluationProgressResponse___" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetEvaluationProgress(System.Int32,Action{List{EvaluationProgressResponse}})">GetEvaluationProgress(Int32, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gathers achievement and skill completion status for the actor id provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetEvaluationProgress(int id, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt; progress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The id of the user or group the achievement and skill progress will be gathered for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">List</span>&lt;<span class="xref">EvaluationProgressResponse</span>&gt;&gt;</td>
+        <td><span class="parametername">progress</span></td>
+        <td><p>Callback which will return the achievement and skill progress for the actor provided.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetSkillProgress_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetSkillProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetSkillProgress_ActorResponse_Action_List_EvaluationProgressResponse___" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetSkillProgress(ActorResponse,Action{List{EvaluationProgressResponse}})">GetSkillProgress(ActorResponse, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gathers skill completion status for the actor provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetSkillProgress(ActorResponse actor, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt; progress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ActorResponse</span></td>
+        <td><span class="parametername">actor</span></td>
+        <td><p>The user or group the skill progress will be gathered for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">List</span>&lt;<span class="xref">EvaluationProgressResponse</span>&gt;&gt;</td>
+        <td><span class="parametername">progress</span></td>
+        <td><p>Callback which will return the skill progress for the actor provided.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetSkillProgress_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetSkillProgress*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_EvaluationUnityClient_GetSkillProgress_System_Int32_Action_List_EvaluationProgressResponse___" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.GetSkillProgress(System.Int32,Action{List{EvaluationProgressResponse}})">GetSkillProgress(Int32, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gathers skill completion status for the actor id provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetSkillProgress(int id, Action&lt;List&lt;EvaluationProgressResponse&gt;&gt; progress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The id of the user or group the skill progress will be gathered for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">List</span>&lt;<span class="xref">EvaluationProgressResponse</span>&gt;&gt;</td>
+        <td><span class="parametername">progress</span></td>
+        <td><p>Callback which will return the skill progress for the actor provided.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   
   
   <a id="PlayGen_SUGAR_Unity_EvaluationUnityClient_Update_" data-uid="PlayGen.SUGAR.Unity.EvaluationUnityClient.Update*"></a>
