@@ -26,6 +26,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// The id of the actor requesting data
+		/// </summary>
+		private int RequestingId => int.Parse(User.Identity.Name);
+
+		/// <summary>
 		/// Get a list of all Users.
 		/// 
 		/// Example Usage: GET api/user/list
@@ -37,7 +42,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, Platform.AllId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
-				var users = _userCoreController.Get();
+				var users = _userCoreController.GetAll(int.Parse(User.Identity.Name));
 				var actorContract = users.ToContractList();
 				return new ObjectResult(actorContract);
 			}
@@ -56,7 +61,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("find/{name}/{exactMatch:bool}")]
 		public IActionResult Get([FromRoute]string name, bool exactMatch = false)
 		{
-			var users = _userCoreController.Search(name, exactMatch);
+
+			var users = _userCoreController.Search(name, exactMatch, RequestingId);
 			var actorContract = users.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -72,7 +78,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		//[ResponseType(typeof(UserResponse))]
 		public IActionResult Get([FromRoute]int id)
 		{
-			var user = _userCoreController.Get(id);
+			var user = _userCoreController.Get(id, RequestingId);
 			var actorContract = user.ToContract();
 			return new ObjectResult(actorContract);
 		}

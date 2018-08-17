@@ -26,5 +26,10 @@ namespace PlayGen.SUGAR.Contracts
 		/// </summary>
 		[StringLength(1023)]
 		public string Description { get; set; }
+
+		/// <summary>
+		/// Whether this actor will be visible in searches
+		/// </summary>
+		public bool Private { get; set; }
 	}
 }

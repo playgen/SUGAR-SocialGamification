@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
@@ -19,7 +20,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			EntityFramework.Controllers.UserController userController,
 			EntityFramework.Controllers.ActorController actorDbController,
 			ActorRoleController actorRoleController,
-			RelationshipController relationshipController) : base(actorDbController)
+			RelationshipController relationshipController) : base(actorDbController, actorRoleController)
 		{
 			_logger = logger;
 			_userController = userController;
@@ -27,9 +28,16 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_relationshipController = relationshipController;
 		}
 
-		public List<User> Get()
+		/// <summary>
+		/// Get a list of all the users
+		/// </summary>
+		/// <param name="requestingid">Id of the requesting actor, used to check if the actor has permissions to get the list with private members included </param>
+		/// <returns></returns>
+		public List<User> GetAll(int requestingid)
 		{
 			var users = _userController.Get();
+			users = FilterPrivate(users, requestingid);
+
 			users.ForEach(u => u.UserRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.User));
 			users.ForEach(u => u.GroupRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.Group));
 
@@ -38,24 +46,34 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return users;
 		}
 
-		public new User Get(int id)
+		public User Get(int id, int requestingId)
 		{
 			var user = _userController.Get(id);
+			user = FilterPrivate(user, requestingId);
 
-			if (user != null)
+			if (user == null)
 			{
-				user.UserRelationshipCount = _relationshipController.GetRelationshipCount(user.Id, ActorType.User);
-				user.GroupRelationshipCount = _relationshipController.GetRelationshipCount(user.Id, ActorType.Group);
+				return null;
 			}
+
+			user.UserRelationshipCount = _relationshipController.GetRelationshipCount(user.Id, ActorType.User);
+			user.GroupRelationshipCount = _relationshipController.GetRelationshipCount(user.Id, ActorType.Group);
 
 			_logger.LogInformation($"User: {user?.Id} for Id: {id}");
 
 			return user;
 		}
 
-		public List<User> Search(string name, bool exactMatch)
+		public User GetExistingUser(string name)
+		{
+			return _userController.Search(name, true).FirstOrDefault();
+		}
+
+		public List<User> Search(string name, bool exactMatch, int requestingId)
 		{
 			var users = _userController.Search(name, exactMatch);
+			users = FilterPrivate(users, requestingId);
+
 			users.ForEach(u => u.UserRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.User));
 			users.ForEach(u => u.GroupRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.Group));
 

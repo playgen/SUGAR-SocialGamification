@@ -109,7 +109,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				throw new InvalidAccountDetailsException("Invalid username or password.");
 			}
 
-			var user = _userCoreController.Search(toRegister.Name, true).FirstOrDefault() ?? _userCoreController.Create(new User {
+			var user = _userCoreController.GetExistingUser(toRegister.Name) ?? _userCoreController.Create(new User {
 				Name = toRegister.Name
 			});
 

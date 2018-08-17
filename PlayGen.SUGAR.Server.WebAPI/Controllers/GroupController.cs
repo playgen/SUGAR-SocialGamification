@@ -26,6 +26,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// The id of the actor requesting data
+		/// </summary>
+		private int RequestingId => int.Parse(User.Identity.Name);
+
+		/// <summary>
 		/// Get a list of all Groups.
 		/// 
 		/// Example Usage: GET api/group/list
@@ -34,7 +39,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("list")]
 		public IActionResult Get()
 		{
-			var groups = _groupCoreController.Get();
+			var groups = _groupCoreController.Get(RequestingId);
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -48,7 +53,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("controlled")]
 		public IActionResult GetControlled()
 		{
-			var groups = _groupCoreController.GetByPermissions(int.Parse(User.Identity.Name));
+			var groups = _groupCoreController.GetByPermissions(RequestingId);
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -63,7 +68,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("find/{name}")]
 		public IActionResult Get([FromRoute]string name)
 		{
-			var groups = _groupCoreController.Search(name);
+			var groups = _groupCoreController.Search(name, RequestingId);
 			var actorContract = groups.ToContractList();
 
 			return new ObjectResult(actorContract);
@@ -79,7 +84,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("findbyid/{id:int}", Name = "GetByGroupId")]
 		public IActionResult Get([FromRoute]int id)
 		{
-			var group = _groupCoreController.Get(id);
+			var group = _groupCoreController.Get(id, RequestingId);
 			var actorContract = group.ToContract();
 			return new ObjectResult(actorContract);
 		}

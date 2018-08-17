@@ -41,11 +41,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var requestors = context.Relationships
+				var relationships = context.Relationships;
+
+				var requestors = relationships
 					.Where(r => r.AcceptorId == id && r.Requestor.ActorType == relationshipActorType)
 					.Select(u => u.Requestor).ToList();
 
-				var acceptors = context.Relationships
+				var acceptors = relationships
 					.Where(r => r.RequestorId == id && r.Acceptor.ActorType == relationshipActorType)
 					.Select(u => u.Acceptor).ToList();
 

@@ -14,9 +14,10 @@ using System;
 namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 {
     [DbContext(typeof(SUGARContext))]
-    partial class SUGARContextModelSnapshot : ModelSnapshot
+    [Migration("20180816161946_PrivateActors")]
+    partial class PrivateActors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

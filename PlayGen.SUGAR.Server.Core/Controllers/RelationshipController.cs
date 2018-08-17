@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
@@ -13,18 +14,21 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	    private readonly ILogger _logger;
 	    private readonly EntityFramework.Controllers.RelationshipController _relationshipDbController;
 		private readonly EntityFramework.Controllers.ActorClaimController _actorClaimController;
-	    private readonly EntityFramework.Controllers.ActorController _actorController;
+		private readonly ActorRoleController _actorRoleController;
+		private readonly EntityFramework.Controllers.ActorController _actorController;
 	    private readonly EntityFramework.Controllers.ClaimController _claimController;
 
 		public RelationshipController(
 		    ILogger<RelationshipController> logger,
 		    EntityFramework.Controllers.ActorClaimController actorClaimController,
-		    EntityFramework.Controllers.ActorController actorController,
+		    ActorRoleController actorRoleController,
+			EntityFramework.Controllers.ActorController actorController,
 		    EntityFramework.Controllers.ClaimController claimController,
 			EntityFramework.Controllers.RelationshipController relationshipDbController)
 		{
 		    _logger = logger;
 			_actorClaimController = actorClaimController;
+			_actorRoleController = actorRoleController;
 			_actorController = actorController;
 			_claimController = claimController;
 		    _relationshipDbController = relationshipDbController;
@@ -66,11 +70,17 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		/// <param name="actorId">The actor to get list of relationsips with</param>
 		/// <param name="actorType">The tyoe of actor that relationship is shared with</param>
 		/// <returns></returns>
-	    public List<Actor> GetRelationships(int actorId, ActorType actorType)
+	    public List<Actor> GetRelationships(int actorId, ActorType actorType, int requestingId = -1)
 	    {
 		    var relationships = _relationshipDbController.GetRelationships(actorId, actorType);
+			var includePrivate = _actorRoleController.GetControlled(requestingId).Any(c => c.ClaimScope == ClaimScope.Global);
 
-		    _logger.LogInformation($"{relationships?.Count} relationships for ActorId: {actorId}");
+		    if (!includePrivate)
+		    {
+			    relationships = relationships.Where(r => !r.Private || r.Id == requestingId).ToList();
+		    }
+
+			_logger.LogInformation($"{relationships?.Count} relationships for ActorId: {actorId}");
 
 		    return relationships;
 	    }

@@ -17,9 +17,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var groups = context.Actors.ToList();
+				var actors = context.Actors
+					.Where(a => !a.Private)
+					.ToList();
 
-				return groups;
+				return actors;
 			}
 		}
 
@@ -28,8 +30,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var actor = context.Actors.Find(id);
-
-				return actor;
+				
+				return actor.Private
+					? null
+					: actor;	
 			}
 		}
 
