@@ -151,7 +151,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;ActorResponseAllowableActions&gt; Members { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;UserResponseRelationshipStatus&gt; Members { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -163,7 +163,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html">ActorResponseAllowableActions</a>&gt;</td>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.UserResponseRelationshipStatus.html">UserResponseRelationshipStatus</a>&gt;</td>
         <td><p>Members for the current group.</p>
 </td>
       </tr>
@@ -171,41 +171,6 @@
   </table>
   <h3 id="methods">Methods
   </h3>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_AddFriend_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.AddFriend*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_AddFriend_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.AddFriend(System.Int32,System.Boolean)">AddFriend(Int32, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Send group request to user with id provided. </p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddFriend(int id, bool reload = true)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">id</span></td>
-        <td><p>The group id</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">reload</span></td>
-        <td><p>Whether the UI should reload on complete</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   
   
   <a id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_Display_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.Display*"></a>
@@ -231,6 +196,76 @@
         <td><span class="xref">ActorResponse</span></td>
         <td><span class="parametername">group</span></td>
         <td><p>The group which should be set to CurrentGroup</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_GetGroupMembers_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.GetGroupMembers*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_GetGroupMembers_ActorResponse_Action_List_PlayGen_SUGAR_Unity_UserResponseRelationshipStatus___" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.GetGroupMembers(ActorResponse,Action{List{PlayGen.SUGAR.Unity.UserResponseRelationshipStatus}})">GetGroupMembers(ActorResponse, Action&lt;List&lt;UserResponseRelationshipStatus&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gather member list for the provided group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetGroupMembers(ActorResponse group, Action&lt;List&lt;UserResponseRelationshipStatus&gt;&gt; members)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ActorResponse</span></td>
+        <td><span class="parametername">group</span></td>
+        <td><p>The group for which members will be gathered</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.UserResponseRelationshipStatus.html">UserResponseRelationshipStatus</a>&gt;&gt;</td>
+        <td><span class="parametername">members</span></td>
+        <td><p>Callback which will return the list of group members and their current relationship with the signed in user.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_GetGroupMembers_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.GetGroupMembers*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_GetGroupMembers_System_Int32_Action_List_PlayGen_SUGAR_Unity_UserResponseRelationshipStatus___" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.GetGroupMembers(System.Int32,Action{List{PlayGen.SUGAR.Unity.UserResponseRelationshipStatus}})">GetGroupMembers(Int32, Action&lt;List&lt;UserResponseRelationshipStatus&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gather member list for the group with the provided id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetGroupMembers(int groupId, Action&lt;List&lt;UserResponseRelationshipStatus&gt;&gt; members)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">groupId</span></td>
+        <td><p>The id of the group for which members will be gathered</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.UserResponseRelationshipStatus.html">UserResponseRelationshipStatus</a>&gt;&gt;</td>
+        <td><span class="parametername">members</span></td>
+        <td><p>Callback which will return the list of group members and their current relationship with the signed in user.</p>
 </td>
       </tr>
     </tbody>

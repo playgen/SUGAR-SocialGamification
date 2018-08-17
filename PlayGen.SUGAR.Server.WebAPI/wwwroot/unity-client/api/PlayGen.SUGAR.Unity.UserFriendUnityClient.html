@@ -119,13 +119,13 @@
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_Friends_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.Friends*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_Friends" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.Friends">Friends</h4>
+  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_Relationships_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.Relationships*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_Relationships" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.Relationships">Relationships</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;ActorResponseAllowableActions&gt; Friends { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;UserResponseRelationshipStatus&gt; Relationships { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -137,86 +137,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html">ActorResponseAllowableActions</a>&gt;</td>
-        <td><p>Friends of the currently signed in user.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_PendingReceived_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.PendingReceived*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_PendingReceived" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.PendingReceived">PendingReceived</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;ActorResponseAllowableActions&gt; PendingReceived { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html">ActorResponseAllowableActions</a>&gt;</td>
-        <td><p>Received friend requests for currently signed in user.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_PendingSent_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.PendingSent*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_PendingSent" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.PendingSent">PendingSent</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;ActorResponseAllowableActions&gt; PendingSent { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html">ActorResponseAllowableActions</a>&gt;</td>
-        <td><p>Pending sent friend requests for currently signed in user.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_SearchResults_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.SearchResults*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_SearchResults" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.SearchResults">SearchResults</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;ActorResponseAllowableActions&gt; SearchResults { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html">ActorResponseAllowableActions</a>&gt;</td>
-        <td><p>Search results for the last search made.</p>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.UserResponseRelationshipStatus.html">UserResponseRelationshipStatus</a>&gt;</td>
+        <td><p>Users with some sort of relationship with the currently signed in user.</p>
 </td>
       </tr>
     </tbody>
@@ -226,13 +148,13 @@
   
   
   <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_AddFriend_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.AddFriend*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_AddFriend_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.AddFriend(System.Int32,System.Boolean)">AddFriend(Int32, Boolean)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_AddFriend_System_Int32_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.AddFriend(System.Int32,Action{System.Boolean})">AddFriend(Int32, Action&lt;Boolean&gt;)</h4>
   <div class="markdown level1 summary"><p>Send friend request to another user</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddFriend(int id, bool reload = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddFriend(int id, Action&lt;bool&gt; onComplete = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -251,69 +173,23 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">reload</span></td>
-        <td><p><strong>Optional</strong> Whether the interface should reload after the Friend is Added (default: true)</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_Display_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.Display*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_Display" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.Display">Display()</h4>
-  <div class="markdown level1 summary"><p>Updates lists and displays UI interface if it has been provided.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Display()</code></pre>
-  </div>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_GetFriendsList_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.GetFriendsList*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_GetFriendsList_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.GetFriendsList(Action{System.Boolean})">GetFriendsList(Action&lt;Boolean&gt;)</h4>
-  <div class="markdown level1 summary"><p>Get friends list for the currently signed in user.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetFriendsList(Action&lt;bool&gt; success)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
-        <td><span class="parametername">success</span></td>
-        <td><p>Callback which contains Whether the list was successfully returned</p>
+        <td><span class="parametername">onComplete</span></td>
+        <td><p><strong>Optional</strong> Callback for if the request was successfully performed</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_GetFriendsList_Action_System_Boolean___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>,</p>
-<ul>
-<li>If the retrieved list is empty, returns true</li>
-</ul>
-</div>
   
   
-  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_ManageFriendRequest_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.ManageFriendRequest*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_ManageFriendRequest_System_Int32_System_Boolean_System_Boolean_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.ManageFriendRequest(System.Int32,System.Boolean,System.Boolean,System.Boolean)">ManageFriendRequest(Int32, Boolean, Boolean, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Resolve friend requests sent to and from the current user</p>
+  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_CancelSentFriendRequest_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.CancelSentFriendRequest*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_CancelSentFriendRequest_System_Int32_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.CancelSentFriendRequest(System.Int32,Action{System.Boolean})">CancelSentFriendRequest(Int32, Action&lt;Boolean&gt;)</h4>
+  <div class="markdown level1 summary"><p>Cancel a friend request sent by the current user</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ManageFriendRequest(int id, bool accept, bool reverse = false, bool reload = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void CancelSentFriendRequest(int id, Action&lt;bool&gt; onComplete = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -328,7 +204,82 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td><p>The Id of the user who sent/received the request</p>
+        <td><p>The Id of the user who received the request</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">onComplete</span></td>
+        <td><p><strong>Optional</strong> Callback for if the request was successfully cancelled</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_Display_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.Display*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_Display" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.Display">Display()</h4>
+  <div class="markdown level1 summary"><p>Gathers updated versions of each type of relationship and displays interface UI object if it has been provided.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Display()</code></pre>
+  </div>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_GetFriendsList_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.GetFriendsList*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_GetFriendsList_Action_List_ActorResponse___" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.GetFriendsList(Action{List{ActorResponse}})">GetFriendsList(Action&lt;List&lt;ActorResponse&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get friends list for the currently signed in user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetFriendsList(Action&lt;List&lt;ActorResponse&gt;&gt; onComplete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">List</span>&lt;<span class="xref">ActorResponse</span>&gt;&gt;</td>
+        <td><span class="parametername">onComplete</span></td>
+        <td><p>Callback which contains the list of friends for the current user</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_ManageFriendRequest_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.ManageFriendRequest*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_ManageFriendRequest_System_Int32_System_Boolean_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.ManageFriendRequest(System.Int32,System.Boolean,Action{System.Boolean})">ManageFriendRequest(Int32, Boolean, Action&lt;Boolean&gt;)</h4>
+  <div class="markdown level1 summary"><p>Resolve a friend request sent to the current user</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ManageFriendRequest(int id, bool accept, Action&lt;bool&gt; onComplete = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The Id of the user who sent the request</p>
 </td>
       </tr>
       <tr>
@@ -338,34 +289,52 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">reverse</span></td>
-        <td><p>Whether the request is cancelled (default: false)</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">reload</span></td>
-        <td><p><strong>Optional</strong> Whether the interface should reload after the Friend is Added (default: true)</p>
+        <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">onComplete</span></td>
+        <td><p><strong>Optional</strong> Callback for if the request was successfully resolved</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_ManageFriendRequest_System_Int32_System_Boolean_System_Boolean_System_Boolean__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><ul>
-<li>reverse and accept cannot both be set to true, if reverse = true, then the request is cancelled.</li>
-</ul>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_RefreshRelationships_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.RefreshRelationships*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_RefreshRelationships_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.RefreshRelationships(Action{System.Boolean})">RefreshRelationships(Action&lt;Boolean&gt;)</h4>
+  <div class="markdown level1 summary"><p>Refresh the Relationship list with up to date information</p>
 </div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshRelationships(Action&lt;bool&gt; onComplete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">onComplete</span></td>
+        <td><p>Callback for if the update was successfully performed</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   
   
   <a id="PlayGen_SUGAR_Unity_UserFriendUnityClient_RemoveFriend_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.RemoveFriend*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_RemoveFriend_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.RemoveFriend(System.Int32,System.Boolean)">RemoveFriend(Int32, Boolean)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_UserFriendUnityClient_RemoveFriend_System_Int32_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.UserFriendUnityClient.RemoveFriend(System.Int32,Action{System.Boolean})">RemoveFriend(Int32, Action&lt;Boolean&gt;)</h4>
   <div class="markdown level1 summary"><p>Remove a relationship between the currently signed in user and another user.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RemoveFriend(int id, bool reload = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RemoveFriend(int id, Action&lt;bool&gt; onComplete = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -384,9 +353,9 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">reload</span></td>
-        <td><p><strong>Optional</strong> Whether the UI should be redrawn upon Friend removal (default: true)</p>
+        <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">onComplete</span></td>
+        <td><p><strong>Optional</strong> Callback for if the friendship was successfully cancelled</p>
 </td>
       </tr>
     </tbody>
