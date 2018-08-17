@@ -6,9 +6,12 @@ uid: criteria
 
 <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest> are the goals which a <xref:user> or <xref:group> are set in order to complete an <xref:achievement> or <xref:skill>. At least one must be assigned and only information stored within <xref:evaluationData> can be queried against.
 
-In order to set up an <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest> , the following must be passed:
+In order to set up an <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest>, the following must be passed:
 
 - Key - The fundermental piece of any criteria. All data collected will require the key to match with what is given here.
+
+- <xref:PlayGen.SUGAR.Common.EvaluationDataCategory> - The category of EvaluationData being queried against. As with key, only data that matches this category will be collected.
+    - Example - if "GameData" is given as EvaluationDataCategory, only data also stored as "GameData" will be checked against.
 
 - <xref:PlayGen.SUGAR.Common.EvaluationDataType> - The type of data being queried against. As with key, only data that matches this type will be collected.
     - Example - if "String" is given as DataType, only data also stored as "String" will be checked against.
@@ -24,8 +27,10 @@ In order to set up an <xref:PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequ
 
 - <xref:PlayGen.SUGAR.Common.CriteriaScope> - The range of data collected for this <xref:actor>. 
     - The "Actor" scope only looks at data stored against the actor directly.
-    - "RelatedActors" will collect data that have a relationship with the provided actor.
-    - Example - "RelatedActor" could be used with a group to collect data for all members of that group.
+    - "RelatedUsers" will collect data from users that have a relationship with the provided actor.
+    - "RelatedGroups" will collect data from groups that have a relationship with the provided actor.
+    - "RelatedGroupUsers" will collect data from users who are members of groups that have a relationship with the provided actor.
+    - Example - "RelatedUsers" could be used with a group to collect data for all members of that group.
 
 - Value - The target value which will be checked evaluated against. Must always be passed as a string.
 
