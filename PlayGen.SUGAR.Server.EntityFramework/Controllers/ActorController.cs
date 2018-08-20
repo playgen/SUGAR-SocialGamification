@@ -30,8 +30,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var actor = context.Actors.Find(id);
-				
-				return actor.Private
+
+				return actor == null || actor.Private
 					? null
 					: actor;	
 			}
