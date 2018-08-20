@@ -1,7 +1,9 @@
 # Roles and Permissions
 
 ## Overview
-User actions are controlled by their associated **permissions, known as Claims**. If an account does not have the right claim to authorize their activity, SUGAR will block their request. A **Role** is a collection of permissions that an user can have. The default admin will have all roles assigned to them on Database seeding, whereas new logins will be given the Account and User Role, providing claims to their own account.
+User actions are controlled by their associated permissions, known as **Claims**. If an account does not have the right claim to authorize their activity, SUGAR will block their request. A **Role** is a collection of permissions that an user can have. The default admin will have all default roles assigned to them on Database seeding, whereas new logins will be given the  default Account and default User Role, providing claims to their own account.
+
+When an user is given a Claim or Role, it is given with an EntityId related to the ClaimScope of that Claim or Role. For example, a User given a Role with a ClaimScope of Game and an EntityId of 5 means they have been given permissions over the game with the Id of 5. An EntityId that matches the AllId constent (currently -1) gives the User permissions over all items in that ClaimScope. 
 
 ## Default Roles
 SUGAR provides 6 Roles as default, these are defined in the table below
