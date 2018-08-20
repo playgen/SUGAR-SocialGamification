@@ -43,10 +43,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Get a list of all Actors for this Role and Entity.
-		/// 
-		/// Example Usage: GET api/actorrole/role/1/entity/1
 		/// </summary>
-		/// <returns>A list of <see cref="ActorResponse"/> that hold Actor details.</returns>
+		/// <returns>A list of <see cref="ActorResponse"/> that holds Actor details.</returns>
 		[HttpGet("role/{roleId:int}/entity/{entityId:int}")]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
@@ -71,10 +69,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Get a list of all Roles for this Actor, ClaimScope and Entity.
-		/// 
-		/// Example Usage: GET api/actorrole/actor/1/entity/1/claimscope/game
 		/// </summary>
-		/// <returns>A list of <see cref="RoleResponse"/> that hold Role details.</returns>
+		/// <returns>A list of <see cref="RoleResponse"/> that holds Role details.</returns>
 		[HttpGet("actor/{actorId:int}/entity/{entityId:int}/claimscope/{scopeName}")]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorRole)]
@@ -95,11 +91,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Roles this Actor has control over.
-		/// 
-		/// Example Usage: GET api/actorrole/controlled
+		/// Get a list of all Roles the signed in Actor has control over.
 		/// </summary>
-		/// <returns>A list of <see cref="RoleResponse"/> that hold Role details.</returns>
+		/// <returns>A list of <see cref="RoleResponse"/> that holds Role details.</returns>
 		[HttpGet("controlled")]
 		public IActionResult GetControlled()
 		{
@@ -110,8 +104,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new ActorRole.
-		/// 
-		/// Example Usage: POST api/actorrole
 		/// </summary>
 		/// <param name="newRole"><see cref="ActorRoleRequest"/> object that contains the details of the new ActorRole.</param>
 		/// <returns>A <see cref="ActorRoleResponse"/> containing the new ActorRole details.</returns>
@@ -145,8 +137,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Delete ActorRole with the ID provided.
-		/// 
-		/// Example Usage: DELETE api/actorrole/1
 		/// </summary>
 		/// <param name="id">ActorRole ID.</param>
 		[HttpDelete("{id:int}")]

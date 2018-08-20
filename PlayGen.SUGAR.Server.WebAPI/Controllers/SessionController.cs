@@ -36,8 +36,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Logs in an account based on the name and password combination.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// Example Usage: POST api/loginplatform
 		/// </summary>
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
@@ -60,8 +58,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Logs in an account based on the name and password combination.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// Example Usage: POST api/1/logingame
 		/// </summary>
 		/// <param name="gameId">Optional Id of the game the account is logging in for.</param>
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided. Optional IssueLoginToken will return a token to remember login for future use</param>
@@ -114,8 +110,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Creates a new account and login that account.
-		/// 
-		/// Example Usage: POST api/createandloginplatform
 		/// </summary>
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
@@ -133,8 +127,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Creates a new account and login that account.
-		/// 
-		/// Example Usage: POST api/1/createandlogingame
 		/// </summary>
 		/// <param name="gameId">Optional Id of the game the account is logging in for.</param>
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>

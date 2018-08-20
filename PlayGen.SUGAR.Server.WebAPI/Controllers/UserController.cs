@@ -27,8 +27,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Get a list of all Users.
-		/// 
-		/// Example Usage: GET api/user/list
 		/// </summary>
 		/// <returns>A list of <see cref="UserResponse"/> that hold User details.</returns>
 		[HttpGet("list")]
@@ -45,9 +43,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of Users that match <param name="name"/> provided.
-		/// 
-		/// Example Usage: GET api/user/find/user1
+		/// Get a list of Users whose name contain the name provided or have the same name if exactMatch is true.
 		/// </summary>
 		/// <param name="name">User name.</param>
 		/// <param name="exactMatch">Match the name exactly.</param>
@@ -62,9 +58,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get User that matches <param name="id"/> provided.
-		/// 
-		/// Example Usage: GET api/user/findbyid/1
+		/// Get User that matches the id provided.
 		/// </summary>
 		/// <param name="id">User id.</param>
 		/// <returns><see cref="UserResponse"/> which matches search criteria.</returns>
@@ -80,8 +74,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Create a new User.
 		/// Requires the <see cref="UserRequest"/>'s Name to be unique for Users.
-		/// 
-		/// Example Usage: POST api/user
 		/// </summary>
 		/// <param name="actor"><see cref="UserRequest"/> object that holds the details of the new User.</param>
 		/// <returns>A <see cref="UserResponse"/> containing the new User details.</returns>
@@ -102,8 +94,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Update an existing User.
-		/// 
-		/// Example Usage: PUT api/user/update/1
 		/// </summary>
 		/// <param name="id">Id of the existing User.</param>
 		/// <param name="user"><see cref="UserRequest"/> object that holds the details of the User.</param>
@@ -123,9 +113,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Delete user with the <param name="id"/> provided.
-		/// 
-		/// Example Usage: DELETE api/user/1
+		/// Delete user with the id provided.
 		/// </summary>
 		/// <param name="id">User ID.</param>
 		[HttpDelete("{id:int}")]
