@@ -50,12 +50,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get AccountSource that matches <param name="id"/> provided.
-		/// 
-		/// Example Usage: GET api/accountSource/findbyid/1
+		/// Get AccountSource that matches the id provided.
 		/// </summary>
-		/// <param>AccountSource id</param>
-		/// <param name="id"></param>
+		/// <param name="id">AccountSource id</param>
 		/// <returns><see cref="AccountSourceResponse"/> which matches search criteria.</returns>
 		[HttpGet("findbyid/{id:int}", Name = "GetByAccountSourceId")]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.AccountSource)]
@@ -73,8 +70,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Create a new AccountSource.
 		/// Requires the <see cref="AccountSourceRequest.Token"/> to be unique.
-		/// 
-		/// Example Usage: POST api/accountSource
 		/// </summary>
 		/// <param name="newAccountSource"><see cref="AccountSourceRequest"/> object that contains the details of the new AccountSource.</param>
 		/// <returns>A <see cref="AccountSourceResponse"/> containing the new AccountSource details.</returns>
@@ -95,8 +90,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Update an existing AccountSource.
-		/// 
-		/// Example Usage: PUT api/accountSource/update/1
 		/// </summary>
 		/// <param name="id">Id of the existing AccountSource.</param>
 		/// <param name="accountSource"><see cref="AccountSourceRequest"/> object that holds the details of the AccountSource.</param>
@@ -118,8 +111,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Delete AccountSource with the ID provided.
-		/// 
-		/// Example Usage: DELETE api/accountSource/1
 		/// </summary>
 		/// <param name="id">AccountSource ID.</param>
 		[HttpDelete("{id:int}")]

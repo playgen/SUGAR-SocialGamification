@@ -8,12 +8,14 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Key : "EvaluationData Key",
-	/// DataType : "String",
-	/// CriteriaQueryType : "Any",
-	/// ComparisonType : "Equals",
-	/// Scope : "Actor",
-	/// Value : "EvaluationData Key Value"
+	/// "Id" : 1,
+	/// "EvaluationDataKey" : "EvaluationData Key",
+	/// "EvaluationDataCategory" : "GameData",
+	/// "EvaluationDataType" : "String",
+	/// "CriteriaQueryType" : "Any",
+	/// "ComparisonType" : "Equals",
+	/// "Scope" : "Actor",
+	/// "Value" : "EvaluationData Key Value"
 	/// }
 	/// </example>
 	public class EvaluationCriteriaResponse

@@ -6,8 +6,8 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// Id : 1,
-	/// Name : "Game Name"
+	/// "Id" : 1,
+	/// "Name" : "Game Name"
 	/// }
 	/// </example>
 	public class GameResponse

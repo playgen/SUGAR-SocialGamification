@@ -31,7 +31,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all Resources filtered by the <param name="actorId"/>, <param name="gameId"/> and <param name="keys"/> provided.
+		/// Find a list of all Resources filtered by the actorId, gameId and keys provided.
 		/// 
 		/// Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
 		/// </summary>
@@ -61,8 +61,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Creates or updates a Resource record.
-		/// 
-		/// Example Usage: POST api/resource
 		/// </summary>
 		/// <param name="resourceRequest"><see cref="ResourceAddRequest"/> object that holds the details of the ResourceData.</param>
 		/// <returns>A <see cref="ResourceResponse"/> containing the new Resource details.</returns>
@@ -91,8 +89,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Transfers a quantity of a specific resource.
-		/// 
-		/// Example Usage: Post api/resource/transfer
 		/// </summary>
 		/// <param name="transferRequest"><see cref="ResourceTransferRequest"/> object that holds the details of the resoruce transfer.</param>
 		/// <returns>A <see cref="ResourceTransferResponse"/> containing the modified resources.</returns>

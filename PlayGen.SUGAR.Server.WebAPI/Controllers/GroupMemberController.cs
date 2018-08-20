@@ -30,14 +30,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// The id of the actor requesting data
-		/// </summary>
-		private int RequestingId => int.Parse(User.Identity.Name);
-
-		/// <summary>
-		/// Get a list of all Users that have relationship requests for this <param name="groupId"/>.
-		/// 
-		/// Example Usage: GET api/groupmember/requests/1
+		/// Get a list of all Users that have sent relationship requests to this groupId.
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
@@ -55,9 +48,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Groups that have been sent relationship requests for this <param name="userId"/>.
-		/// 
-		/// Example Usage: GET api/groupmember/sentrequests/1
+		/// Get a list of all Groups that have been sent relationship requests for this userId.
 		/// </summary>
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
@@ -75,24 +66,20 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have relationships with this <param name="groupId"/>.
-		/// 
-		/// Example Usage: GET api/groupmember/members/1
+		/// Get a list of all Users that have relationships with this groupId.
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		/// <returns>A list of <see cref="ActorResponse"/> that matches the search criteria.</returns>
 		[HttpGet("members/{groupId:int}")]
 		public IActionResult GetMembers([FromRoute]int groupId)
 		{
-			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.User, RequestingId);
+			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.User);
 			var actorContract = members.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
-		/// Get a count of users that have a relationship with this <param name="groupId"/>.
-		/// 
-		/// Example Usage: GET api/groupmember/membercount/1
+		/// Get a count of users that have a relationship with this groupId.
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A count of members in the group that matches the search criteria.</returns>
@@ -104,25 +91,21 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Groups that have relationships with this <param name="userId"/>.
-		/// 
-		/// Example Usage: GET api/groupmember/usergroups/1
+		/// Get a list of all Groups that have a relationship with this userId.
 		/// </summary>
 		/// <param name="userId">ID of the User.</param>
-		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		/// <returns>A list of <see cref="ActorResponse"/> that matches the search criteria.</returns>
 		[HttpGet("usergroups/{userId:int}")]
 		public IActionResult GetUserGroups([FromRoute]int userId)
 		{
-			var groups = _relationshipCoreController.GetRelationships(userId, ActorType.Group, RequestingId);
+			var groups = _relationshipCoreController.GetRelationships(userId, ActorType.Group);
 			var actorContract = groups.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
-		/// Create a new relationship request between the User and Group.
+		/// Create a new relationship request between a User and Group.
 		/// Requires a relationship between the User and Group to not already exist.
-		/// 
-		/// Example Usage: POST api/groupmember
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipRequest"/> object that holds the details of the new relationship request.</param>
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
@@ -144,10 +127,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Update an existing relationship request between <param name="relationship.UserId"/> and <param name="relationship.GroupId"/>.
+		/// Update an existing relationship request between a User and a Group.
 		/// Requires the relationship request to already exist between the User and Group.
-		/// 
-		/// Example Usage: PUT api/groupmember/request
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut("request")]
@@ -171,10 +152,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Update an existing relationship between <param name="relationship.UserId"/> and <param name="relationship.GroupId"/>.
+		/// Update an existing relationship between a User and a Group.
 		/// Requires the relationship to already exist between the User and Group.
-		/// 
-		/// Example Usage: PUT api/groupmember
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut]

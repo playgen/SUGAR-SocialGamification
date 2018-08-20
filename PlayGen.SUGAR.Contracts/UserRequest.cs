@@ -6,7 +6,8 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// Name : "Actor Name"
+	/// "Name" : "User Name",
+	/// "Description" : "User Description"
 	/// }
 	/// </example>
 	public class UserRequest : ActorRequest

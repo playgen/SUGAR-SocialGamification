@@ -33,10 +33,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Get a list of all Actors for this Claim and Entity.
-		/// 
-		/// Example Usage: GET api/actorclaim/claim/1/entity/1
 		/// </summary>
-		/// <returns>A list of <see cref="ActorResponse"/> that hold ActorClaim details.</returns>
+		/// <param name="claimId">Id of the Claim</param>
+		/// <param name="entityId">Id of the Entity</param>
+		/// <returns>A list of <see cref="ActorResponse"/> that holds Actor details.</returns>
 		[HttpGet("claim/{claimId:int}/entity/{entityId:int}")]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
@@ -59,10 +59,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Get a list of all Claims for this Actor.
-		/// 
-		/// Example Usage: GET api/actorclaim/actor/1/
 		/// </summary>
-		/// <returns>A list of <see cref="ActorClaimResponse"/> that hold ActorClaim details.</returns>
+		/// <param name="id">Id of the Actor</param>
+		/// <returns>A list of <see cref="ActorClaimResponse"/> that holds ActorClaim details.</returns>
 		[HttpGet("actor/{id:int}")]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.ActorClaim)]
@@ -80,8 +79,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new ActorClaim.
-		/// 
-		/// Example Usage: POST api/actorclaim
 		/// </summary>
 		/// <param name="newClaim"><see cref="ActorClaimRequest"/> object that contains the details of the new ActorClaim.</param>
 		/// <returns>A <see cref="ActorClaimResponse"/> containing the new ActorClaim details.</returns>
@@ -114,8 +111,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Delete ActorClaim with the ID provided.
-		/// 
-		/// Example Usage: DELETE api/actorclaim/1
 		/// </summary>
 		/// <param name="id">ActorClaim ID.</param>
 		[HttpDelete("{id:int}")]

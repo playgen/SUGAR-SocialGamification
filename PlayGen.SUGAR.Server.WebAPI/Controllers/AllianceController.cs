@@ -30,9 +30,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all groups that have relationship requests for this <param name="groupId"/>.
-		/// 
-		/// Example Usage: GET api/alliance/requests/1
+		/// Get a list of all groups that have sent relationship requests to this groupId.
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
@@ -50,9 +48,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Groups that have been sent relationship requests for this <param name="groupId"/>.
-		/// 
-		/// Example Usage: GET api/alliance/sentrequests/1
+		/// Get a list of all Groups that have been sent relationship requests from this groupId.
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
@@ -70,9 +66,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all groups that have relationships with this <param name="groupId"/>.
-		/// 
-		/// Example Usage: GET api/alliance/1
+		/// Get a list of all groups that have relationships with this groupId.
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
@@ -85,24 +79,20 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a count of groups that have a relationship with this <param name="groupId"/>.
-		/// 
-		/// Example Usage: GET api/alliances/count/1
+		/// Get a count of groups that have a relationship with this groupId.
 		/// </summary>
 		/// <param name="groupId">ID of the group.</param>
-		/// <returns>A count of members in the group that matches the search criteria.</returns>
+		/// <returns>A count of alliances for the group that matches the search criteria.</returns>
 		[HttpGet("count/{groupId:int}")]
 		public IActionResult GetAllianceCount([FromRoute]int groupId)
 		{
 			var count = _relationshipCoreController.GetRelationshipCount(groupId, ActorType.Group);
 			return new ObjectResult(count);
 		}
-		
+
 		/// <summary>
-		/// Create a new relationship request between a Group and Group.
-		/// Requires a relationship between the User and Group to not already exist.
-		/// 
-		/// Example Usage: POST api/alliance
+		/// Create a new relationship request between a Group and a Group.
+		/// Requires a relationship between the Groups to not already exist.
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipRequest"/> object that holds the details of the new relationship request.</param>
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
@@ -123,10 +113,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Update an existing relationship request between <param name="relationship.requestorId"/> and <param name="relationship.acceptorID"/>.
-		/// Requires the relationship request to already exist between a Group and Group.
-		/// 
-		/// Example Usage: PUT api/alliancer/request
+		/// Update an existing relationship request between two Groups.
+		/// Requires the relationship request to already exist between the two Groups.
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut("request")]
@@ -149,10 +137,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Update an existing relationship between <param name="relationship.requestorId"/> and <param name="relationship.acceptorID"/>.
-		/// Requires the relationship to already exist between the User and Group.
-		/// 
-		/// Example Usage: PUT api/alliance
+		/// Update an existing relationship between two Groups.
+		/// Requires the relationship to already exist between the two Groups.
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut]

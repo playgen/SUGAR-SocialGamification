@@ -31,9 +31,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find an Achievement that matches <param name="token"/> and <param name="gameId"/>.
-		/// 
-		/// Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1
+		/// Find an Achievement that matches the token and gameId provided.
+		/// If global is provided instead of a gameId, get the global Achievement that is not associated with a specific game with the provided token.
 		/// </summary>
 		/// <param name="token">Token of Achievement</param>
 		/// <param name="gameId">ID of the Game the Achievement is for</param>
@@ -47,10 +46,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of Achievements that match <param name="gameId"/>.
+		/// Find a list of Achievements for the gameId provided.
 		/// If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.
-		/// 
-		/// Example Usage: GET api/achievements/game/1/list
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Achievement details</returns>
@@ -63,13 +60,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find the current progress for all achievements for a <param name="gameId"/> for <param name="actorId"/>.
-		/// 
-		/// Example Usage: GET api/achievements/game/1/evaluate/1
+		/// Find the current progress for all achievements for a gameId for actorId.
+		/// If global is provided instead of a gameId, get all progress for global achievements, ie. achievements that are not associated with a specific game.
 		/// </summary>
 		/// <param name="gameId">ID of Game</param>
 		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
+		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievements.</returns>
 		[HttpGet("game/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("global/evaluate/{actorId:int}")]
 		public IActionResult GetGameProgress([FromRoute]int gameId, [FromRoute]int actorId)
@@ -78,14 +74,13 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find the current progress for an Achievement for <param name="actorId"/>.
-		/// 
-		/// Example Usage: GET api/achievements/ACHIEVEMENT_TOKEN/1/evaluate/1
+		/// Find the current progress for the Achievement with the provided token and gameId for the actorId.
+		/// If global is provided instead of a gameId, get progress for a global achievement with the token provided, ie. an achievement that is not associated with a specific game.
 		/// </summary>
 		/// <param name="token">Token of Achievement</param>
 		/// <param name="gameId">ID of the Game the Achievement is for</param>
 		/// <param name="actorId">ID of Group/User</param>
-		/// <returns>Returns multiple <see cref="EvaluationProgressResponse"/> that hold current progress toward achievement.</returns>
+		/// <returns>Returns a <see cref="EvaluationProgressResponse"/> that hold current progress toward the achievement.</returns>
 		[HttpGet("{token}/{gameId:int}/evaluate/{actorId:int}")]
 		[HttpGet("{token}/global/evaluate/{actorId:int}")]
 		public IActionResult GetAchievementProgress([FromRoute]string token, [FromRoute]int gameId, [FromRoute]int actorId)
@@ -96,8 +91,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Create a new Achievement.
 		/// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
-		/// 
-		/// Example Usage: POST api/achievements/create
 		/// </summary>
 		/// <param name="newAchievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Achievement.</param>
 		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Achievement.</returns>
@@ -118,8 +111,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Update an existing Achievement.
-		/// 
-		/// Example Usage: PUT api/achievements/update
 		/// </summary>
 		/// <param name="achievement"><see cref="EvaluationCreateRequest"/> object that holds the details of the Achievement.</param>
 		[HttpPut("update")]
@@ -137,9 +128,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Delete Achievement with the <param name="token"/> and <param name="gameId"/> provided.
-		/// 
-		/// Example Usage: DELETE api/achievements/ACHIEVEMENT_TOKEN/1
+		/// Delete the Achievement with the token and gameId provided.
 		/// </summary>
 		/// <param name="token">Token of Achievement</param>
 		/// <param name="gameId">ID of the Game the Achievement is for</param>

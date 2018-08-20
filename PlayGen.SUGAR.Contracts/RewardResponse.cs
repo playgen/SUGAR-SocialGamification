@@ -8,9 +8,11 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Key : "Reward Key",
-	/// DataType : "Float",
-	/// Value : "10.5"
+	/// "Id" : 1,
+	/// "EvaluationDataKey" : "Reward Key",
+	/// "EvaluationDataCategory" : "Resource",
+	/// "EvaluationDataType" : "Long",
+	/// "Value" : "11"
 	/// }
 	/// </example>
 	public class RewardResponse

@@ -9,14 +9,15 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Token : "THE_LEADERBOARD_TOKEN",
-	/// GameId : 1,
-	/// Name : "Leaderboard Name",
-	/// Key : "Key",
-	/// ActorType : "User",
-	/// EvaluationDataType : "Long",
-	/// CriteriaScope : "Actor",
-	/// LeaderboardType : "Highest"
+	/// "Token" : "THE_LEADERBOARD_TOKEN",
+	/// "GameId" : 1,
+	/// "Name" : "Leaderboard Name",
+	/// "EvaluationDataCategory" : "GameData",
+	/// "Key" : "Key",
+	/// "ActorType" : "User",
+	/// "EvaluationDataType" : "Long",
+	/// "CriteriaScope" : "Actor",
+	/// "LeaderboardType" : "Highest"
 	/// }
 	/// </example>
 	public class LeaderboardRequest

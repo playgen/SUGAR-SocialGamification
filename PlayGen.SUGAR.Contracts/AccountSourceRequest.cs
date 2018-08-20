@@ -2,17 +2,19 @@
 
 namespace PlayGen.SUGAR.Contracts
 {
-    /// <summary>
-    /// Encapsulates log-in source details.
-    /// </summary>
-    /// <example>
-    /// JSON
-    /// {
-    /// Name : "SUGAR",
-    /// RequiresPassword : true
-    /// }
-    /// </example>
-    public class AccountSourceRequest
+	/// <summary>
+	/// Encapsulates log-in source details.
+	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// "Description" : "SUGAR",
+	/// "Token" : "SUGAR",
+	/// "RequiresPassword" : true,
+	/// "AutoRegister" : false
+	/// }
+	/// </example>
+	public class AccountSourceRequest
     {
         /// <summary>
         /// The source description.

@@ -6,7 +6,8 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// Name : "Actor Name"
+	/// "Name" : "Group Name",
+	/// "Description" : "Group Description"
 	/// }
 	/// </example>
 	public class GroupRequest : ActorRequest

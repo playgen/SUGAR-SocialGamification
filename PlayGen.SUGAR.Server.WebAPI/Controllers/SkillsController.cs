@@ -25,9 +25,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a Skill that matches <param name="token"/> and <param name="gameId"/>.
-		/// 
-		/// Example Usage: GET api/skills/find/SKILL_TOKEN/1
+		/// Find a Skill that matches the token and gameId provided.
+		/// If global is provided instead of a gameId, get the global Skill that is not associated with a specific game with the provided token.
 		/// </summary>
 		/// <param name="token">Token of Skill</param>
 		/// <param name="gameId">ID of the Game the Skill is for</param>
@@ -41,10 +40,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of Skills that match <param name="gameId"/>.
+		/// Find a list of Skills for the gameId provided.
 		/// If global is provided instead of a gameId, get all global skills, ie. skills that are not associated with a specific game.
-		/// 
-		/// Example Usage: GET api/skills/game/1/list
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns multiple <see cref="EvaluationResponse"/> that hold Skill details</returns>
@@ -57,9 +54,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find the current progress for all skills for a <param name="gameId"/> for <param name="actorId"/>.
-		/// 
-		/// Example Usage: GET api/skills/game/1/evaluate/1
+		/// Find the current progress for all skills for a gameId for actorId.
+		/// If global is provided instead of a gameId, get all progress for global skills, ie. skills that are not associated with a specific game.
 		/// </summary>
 		/// <param name="gameId">ID of Game</param>
 		/// <param name="actorId">ID of Group/User</param>
@@ -72,9 +68,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find the current progress for a Skill for <param name="actorId"/>.
-		/// 
-		/// Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1
+		/// Find the current progress for the Skill with the provided token and gameId for the actorId.
+		/// If global is provided instead of a gameId, get progress for a global skill with the token provided, ie. a skill that is not associated with a specific game.
 		/// </summary>
 		/// <param name="token">Token of Skill</param>
 		/// <param name="gameId">ID of the Game the Skill is for</param>
@@ -89,9 +84,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new Skill.
-		/// Requires <see cref="EvaluationCreateRequest.Name"/> to be unique to that <see cref="EvaluationCreateRequest.GameId"/>.
-		/// 
-		/// Example Usage: POST api/skills/create
+		/// Requires <see cref="EvaluationCreateRequest"/> Name to be unique to that GameId.
 		/// </summary>
 		/// <param name="newSkill"><see cref="EvaluationCreateRequest"/> object that holds the details of the new Skill.</param>
 		/// <returns>Returns a <see cref="EvaluationResponse"/> object containing details for the newly created Skill.</returns>
@@ -112,8 +105,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Update an existing Skill.
-		/// 
-		/// Example Usage: PUT api/skills/update
 		/// </summary>
 		/// <param name="skill"><see cref="EvaluationCreateRequest"/> object that holds the details of the Skill.</param>
 		[HttpPut("update")]
@@ -131,9 +122,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Delete Skill with the <param name="token"/> and <param name="gameId"/> provided.
-		/// 
-		/// Example Usage: DELETE api/skills/SKILL_TOKEN/1
+		/// Delete Skill with the token and gameId provided.
 		/// </summary>
 		/// <param name="token">Token of Skill</param>
 		/// <param name="gameId">ID of the Game the Skill is for</param>

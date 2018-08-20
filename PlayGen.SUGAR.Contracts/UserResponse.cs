@@ -6,8 +6,11 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// Id : 1,
-	/// Name : "Actor Name"
+	/// "FriendCount" : 0,
+	/// "GroupCount" : 0,
+	/// "Id" : 1,
+	/// "Name" : "User Name",
+	/// "Description" : "User Description"
 	/// }
 	/// </example>
 	public class UserResponse : ActorResponse

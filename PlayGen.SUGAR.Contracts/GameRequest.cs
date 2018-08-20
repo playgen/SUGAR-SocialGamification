@@ -8,7 +8,7 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Name : "Game Name"
+	/// "Name" : "Game Name"
 	/// }
 	/// </example>
 	public class GameRequest

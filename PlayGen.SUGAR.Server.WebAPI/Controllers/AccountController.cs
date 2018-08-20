@@ -28,8 +28,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// Register a new account and creates an associated user.
 		/// Requires the <see cref="AccountRequest.Name"/> to be unique.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// Example Usage: POST api/account/create
 		/// </summary>
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the details of the new Account.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the new Account details.</returns>
@@ -46,8 +44,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Delete Account with the ID provided.
-		/// 
-		/// Example Usage: DELETE api/account/1
 		/// </summary>
 		/// <param name="id">Account ID.</param>
 		[HttpDelete("{id:int}")]

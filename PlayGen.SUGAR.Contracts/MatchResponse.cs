@@ -5,6 +5,23 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates a match entity's details from the database.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// "Id" : 1,
+	/// "Game" : {
+	/// "Id" : 1,
+	/// "Name" : "Game Name"
+	/// },
+	/// "Creator" : {
+	/// "Id" : 1,
+	/// "Name" : "Actor Name"
+	/// "Description" : "Description of Actor"
+	/// },
+	/// "Started" : "2018-08-12T16:32:29.482146",
+	/// "Ended" : "2018-08-12T18:32:29.482146"
+	/// }
+	/// </example>
 	public class MatchResponse
 	{
 		/// <summary>

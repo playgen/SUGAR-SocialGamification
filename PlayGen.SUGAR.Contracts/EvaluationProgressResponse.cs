@@ -8,12 +8,16 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Actor : [{
-	/// Id : 1,
-	/// Name : "Name"
-	/// }],
-	/// Name : "Achievement Unlocked",
-	/// Progress : 0
+	/// "Actor" : {
+	/// "Id" : 1,
+	/// "Name" : "Actor Name"
+	/// "Description" : "Description of Actor"
+	/// },
+	/// "Name" : "Achievement Unlocked",
+	/// "Description" : "Achievement Description",
+	/// "Progress" : 0,
+	/// "Token", "ACHIEVEMENT_TOKEN", 
+	/// "Type" : "Achievement"
 	/// }
 	/// </example>
 	public class EvaluationProgressResponse

@@ -30,10 +30,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 		/// <summary>
 		/// Get a list of all Roles.
-		/// 
-		/// Example Usage: GET api/role/list
 		/// </summary>
-		/// <returns>A list of <see cref="RoleResponse"/> that hold Role details.</returns>
+		/// <returns>A list of <see cref="RoleResponse"/> that holds Role details.</returns>
 		[HttpGet("list")]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.Role)]
 		public async Task<IActionResult> Get()
@@ -49,10 +47,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Get a list of all Roles for the scope with this name.
-		/// 
-		/// Example Usage: GET api/role/scope/game
 		/// </summary>
-		/// <returns>A list of <see cref="RoleResponse"/> that hold Role details.</returns>
+		/// <param name="name">Name of the ClaimScope to filter by.</param>
+		/// <returns>A list of <see cref="RoleResponse"/> that holds Role details.</returns>
 		[HttpGet("scope/{name}")]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.Role)]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.Role)]
@@ -74,9 +71,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Get default Role for the scope with this name.
-		/// 
-		/// Example Usage: GET api/role/scopedefault/game
 		/// </summary>
+		/// <param name="name">Name of the ClaimScope to get the default Role for.</param>
 		/// <returns>A <see cref="RoleResponse"/> that holds Role details.</returns>
 		[HttpGet("scopedefault/{name}")]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.Role)]
@@ -100,8 +96,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Create a new Role.
 		/// Requires the <see cref="RoleRequest.Name"/> to be unique.
-		/// 
-		/// Example Usage: POST api/role
 		/// </summary>
 		/// <param name="newRole"><see cref="RoleRequest"/> object that contains the details of the new Role.</param>
 		/// <returns>A <see cref="RoleResponse"/> containing the new Role details.</returns>
@@ -124,8 +118,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Delete Role with the ID provided.
-		/// 
-		/// Example Usage: DELETE api/role/1
 		/// </summary>
 		/// <param name="id">Role ID.</param>
 		[HttpDelete("{id:int}")]

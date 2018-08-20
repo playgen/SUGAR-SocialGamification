@@ -6,8 +6,11 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// Id : 1,
-	/// Name : "Actor Name"
+	/// "MemberCount" : 0,
+	/// "AllianceCount" : 0,
+	/// "Id" : 1,
+	/// "Name" : "Group Name",
+	/// "Description" : "Group Description"
 	/// }
 	/// </example>
 	public class GroupResponse : ActorResponse
