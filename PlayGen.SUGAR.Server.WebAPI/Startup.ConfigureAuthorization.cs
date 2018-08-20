@@ -36,7 +36,6 @@ namespace PlayGen.SUGAR.Server.WebAPI
             });
 
             services.AddSingleton<IAuthorizationHandler, AuthorizationHandler>();
-            services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithNull>();
             services.AddSingleton<IAuthorizationHandler, AuthorizationHandlerWithoutEntity>();
 
             services.AddSingleton<ClaimController>();
