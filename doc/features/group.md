@@ -7,7 +7,9 @@ Groups are actors representing collection of actors. They may be individual or m
 
 [Relationships](relationship.md) describe which actors belong to which groups. Groups can have associated achievements,  which can be set for all members of a group to complete. 
 
-Actors can join, leave or add another actor to a group. 
+Actors can join, leave or add another actor to a group.
+
+A group is public by default but can be made private by updating groups with an [ActorRequest](xref:PlayGen.SUGAR.Contracts.ActorRequest). Private groups will not show up in leaderboards or searches for other groups.  
 
 
 ## Features
@@ -81,12 +83,3 @@ Actors can join, leave or add another actor to a group.
 			return true;
 		}
 ```
-
-## Roadmap
-* Groups Alliance. 
-Provide the ability for relationship between groups. To form an <xref:alliance>
-* Group leader.
-Providing the ability for individual actors to control the group membership, to add or remove other actors.
-
-* Extended group achievements.
-Provide the ability to set the parameters such as number of actors required to meet the achievement criteria before it’s considered complete. 

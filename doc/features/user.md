@@ -5,6 +5,8 @@ uid: user
 # Users
 Users are individuals interacting with the system. They may fulfil a range of roles including player, game master, game admin, teacher or system admin. Users can have metadata associated with them, such as nice name, profile image and bio.
 
+A user is public by default but can be made private by updating users with an [ActorRequest](xref:PlayGen.SUGAR.Contracts.ActorRequest). Private users will not show up in leaderboards or searches for other users. 
+
 ## Features
 * CRUD users
 * Search users (name/id)
@@ -23,11 +25,3 @@ Users are individuals interacting with the system. They may fulfil a range of ro
     * [ActorResponse](xref:PlayGen.SUGAR.Contracts.ActorResponse)
 * WebAPI
     * [UserController](xref:PlayGen.SUGAR.Server.WebAPI.Controllers.UserController)
-
-## Roadmap
-
-* Integration of permission system.
-Providing the ability to set system or game specific permission across the platform functionalities.  
-
-* User id mapping.
-Providing the ability for an individual to have multiple usernames depending on their role, or connect with one or more social media accounts for example for authentication. 

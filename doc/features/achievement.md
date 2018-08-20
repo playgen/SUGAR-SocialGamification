@@ -142,12 +142,3 @@ Both Achievements and [Skills](skill.md) build on "Evaluations" which may contai
 			return achivementProgressResponse.Progress;
 		}
 ```
-
-## Roadmap
-
-* Portable achievement system.
-Many game networks such as the Google play services, Apple gamkits, Microsoft game centre, Facebook game services and Steam Works offer achievements. Integrating multiple achievement systems into a game is time consuming. Additionally platform providers regularly update their APIs, creating a head-ache for keeping up-to-date with multiple systems. The achievement system will provide the ability for the actors’ achievement to be recorded automatically against other 3rd party systems.   
-
-* Challenge system.
-Achievement system will be extended by adding temporal (time based) and ownership component. This extension will be referred to as Challenge.  Challenges may be seen as achievements that can be suggested to actors, gifted by one actor to another, accepted or  rejected by an actor, as well as tracked to see if actors attempted or abandoned them. 
-

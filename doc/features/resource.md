@@ -73,16 +73,3 @@ Resources are game objects which are obtained and exchanged by players. They may
 			_resourceClient.Transfer(resourceTransferRequest);
 		}
 ```
-
-## Roadmap
-* Read/write access management for group resources
-
-* Extended permissions.
-Proving mechanism to set ownership, and control of usage access. For example a player may own an item in the game which they can ‘lend’ to another player to use for a period, without the other player owning it. 
-
-*Extended metadata.
-Providing mechanism to record additional metadata against resources such as being able to rate them or track a history of owners or uses. 
-
-*Tradable resources
-Providing mechanism for actors to trade and exchange resource, including management of agreement by multiple parties through escrow system. 
-
