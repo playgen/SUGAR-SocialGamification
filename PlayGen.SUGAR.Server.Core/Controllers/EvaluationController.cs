@@ -239,7 +239,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			if (!completed)
 			{
-				completedProgress = IsCriteriaSatisified(evaluation.GameId, actorId, evaluation.EvaluationCriterias, evaluation.ActorType, evaluation.EvaluationType, 1);
+				completedProgress = IsCriteriaSatisified(evaluation.GameId, actorId, evaluation.EvaluationCriterias, evaluation.ActorType, evaluation.EvaluationType);
 				if (completedProgress >= 1)
 				{
 					SetCompleted(evaluation, actorId);

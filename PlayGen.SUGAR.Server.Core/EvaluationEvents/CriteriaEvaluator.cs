@@ -35,12 +35,12 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 
 		// The method of returning calculating the progress (for multiple criteria conditions) and 
 		// how the progress is going to be represented (0f to 1f ?) need to be determined first.
-		public float IsCriteriaSatisified(int gameId, int actorId, List<EvaluationCriteria> completionCriterias, ActorType actorType, EvaluationType evaluationType, int requestingId)
+		public float IsCriteriaSatisified(int gameId, int actorId, List<EvaluationCriteria> completionCriterias, ActorType actorType, EvaluationType evaluationType)
 		{
-			return completionCriterias.Sum(cc => Evaluate(gameId, actorId, cc, actorType, evaluationType, requestingId)) / completionCriterias.Count;
+			return completionCriterias.Sum(cc => Evaluate(gameId, actorId, cc, actorType, evaluationType)) / completionCriterias.Count;
 		}
 
-		protected float Evaluate(int gameId, int actorId, EvaluationCriteria completionCriteria, ActorType actorType, EvaluationType evaluationType, int requestingId)
+		protected float Evaluate(int gameId, int actorId, EvaluationCriteria completionCriteria, ActorType actorType, EvaluationType evaluationType)
 		{
 			switch (completionCriteria.Scope)
 			{
@@ -63,7 +63,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 							return 0;
 					}
 				case CriteriaScope.RelatedUsers:
-					var relatedUsers = RelationshipCoreController.GetRelationships(actorId, ActorType.User, requestingId).Select(a => a.Id).ToList();
+					var relatedUsers = RelationshipCoreController.GetRelationships(actorId, ActorType.User, actorId).Select(a => a.Id).ToList();
 					if (actorType == ActorType.User)
 					{
 						relatedUsers.Add(actorId);
@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					{
 						throw new NotImplementedException("RelatedGroups Scope is only implemented for groups");
 					}
-					var relatedGroups = RelationshipCoreController.GetRelationships(actorId, ActorType.Group, requestingId).Select(a => a.Id).ToList();
+					var relatedGroups = RelationshipCoreController.GetRelationships(actorId, ActorType.Group, actorId).Select(a => a.Id).ToList();
 					relatedGroups.Add(actorId);
 					relatedGroups = relatedGroups.Distinct().ToList();
 					switch (completionCriteria.EvaluationDataType)
@@ -116,10 +116,10 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					{
 						throw new NotImplementedException("RelatedGroupUsers Scope is only implemented for groups");
 					}
-					var groups = RelationshipCoreController.GetRelationships(actorId, ActorType.Group, requestingId).Select(a => a.Id).ToList();
+					var groups = RelationshipCoreController.GetRelationships(actorId, ActorType.Group).Select(a => a.Id).ToList();
 					groups.Add(actorId);
 					groups = groups.Distinct().ToList();
-					var relatedGroupUsers = groups.SelectMany(g => RelationshipCoreController.GetRelationships(g, ActorType.User, requestingId).Select(a => a.Id)).Distinct().ToList();
+					var relatedGroupUsers = groups.SelectMany(g => RelationshipCoreController.GetRelationships(g, ActorType.User, actorId).Select(a => a.Id)).Distinct().ToList();
 					switch (completionCriteria.EvaluationDataType)
 					{
 						case EvaluationDataType.Boolean:

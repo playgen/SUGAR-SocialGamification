@@ -30,6 +30,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
+		/// The id of the actor requesting data
+		/// </summary>
+		private int RequestingId => int.Parse(User.Identity.Name);
+
+		/// <summary>
 		/// Get a list of all Users that have relationship requests for this <param name="groupId"/>.
 		/// 
 		/// Example Usage: GET api/groupmember/requests/1
@@ -79,7 +84,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("members/{groupId:int}")]
 		public IActionResult GetMembers([FromRoute]int groupId)
 		{
-			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.User, int.Parse(User.Identity.Name));
+			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.User, RequestingId);
 			var actorContract = members.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -108,7 +113,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("usergroups/{userId:int}")]
 		public IActionResult GetUserGroups([FromRoute]int userId)
 		{
-			var groups = _relationshipCoreController.GetRelationships(userId, ActorType.Group, int.Parse(User.Identity.Name));
+			var groups = _relationshipCoreController.GetRelationships(userId, ActorType.Group, RequestingId);
 			var actorContract = groups.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}

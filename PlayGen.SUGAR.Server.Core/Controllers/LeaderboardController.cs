@@ -64,21 +64,21 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_leaderboardDbController.Delete(token, gameId);
 		}
 
-		public List<StandingsResponse> GetStandings(Leaderboard leaderboard, StandingsRequest request, int requestingId = -1)
+		public List<StandingsResponse> GetStandings(Leaderboard leaderboard, StandingsRequest request)
 		{
 			if (leaderboard == null)
 			{
 				throw new MissingRecordException("The provided leaderboard does not exist.");
 			}
 			
-			var standings = GatherStandings(leaderboard, request, requestingId);
+			var standings = GatherStandings(leaderboard, request);
 
 			_logger.LogInformation($"{standings?.Count} Standings for Leaderboard: {leaderboard.Token}");
 
 			return standings;
 		}
 
-		protected List<StandingsResponse> GatherStandings(Leaderboard leaderboard, StandingsRequest request, int requestingId)
+		protected List<StandingsResponse> GatherStandings(Leaderboard leaderboard, StandingsRequest request)
 		{
 			var evaluationDataController = new EvaluationDataController(EvaluationDataLogger, ContextFactory, leaderboard.EvaluationDataCategory);
 
@@ -87,7 +87,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				throw new ArgumentException($"You cannot use the filter type: {nameof(LeaderboardFilterType.Near)} in conjunction with {nameof(request.MultiplePerActor)}.");
 			}
 
-			var actors = GetActors(evaluationDataController, leaderboard, request, requestingId);
+			var actors = GetActors(evaluationDataController, leaderboard, request);
 			
 			List<StandingsResponse> typeResults;
 
@@ -102,11 +102,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					break;
 
 				case LeaderboardType.Cumulative:
-					typeResults = EvaluateCumulative(evaluationDataController, actors, leaderboard, request, requestingId);
+					typeResults = EvaluateCumulative(evaluationDataController, actors, leaderboard, request);
 					break;
 
 				case LeaderboardType.Count:
-					typeResults = EvaluateCount(evaluationDataController, actors, leaderboard, request, requestingId);
+					typeResults = EvaluateCount(evaluationDataController, actors, leaderboard, request);
 					break;
 
 				case LeaderboardType.Earliest:
@@ -128,7 +128,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		protected List<Actor> GetActors(EvaluationDataController evaluationDataController, Leaderboard leaderboard, StandingsRequest request, int requestingId)
+		protected List<Actor> GetActors(EvaluationDataController evaluationDataController, Leaderboard leaderboard, StandingsRequest request)
 		{
 			switch (request.LeaderboardFilterType)
 			{
@@ -206,7 +206,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					{
 						throw new ArgumentException("An ActorId has to be passed in order to gather rankings among friends");
 					}
-					var friends = RelationshipCoreController.GetRelationships(request.ActorId.Value, ActorType.User, requestingId).Select(r => r.Id).ToList();
+					var friends = RelationshipCoreController.GetRelationships(request.ActorId.Value, ActorType.User).Select(r => r.Id).ToList();
 					friends.Add(request.ActorId.Value);
 					actors = actors.Where(a => friends.Contains(a.Id)).ToList();
 					break;
@@ -215,7 +215,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					{
 						throw new ArgumentException("An ActorId has to be passed in order to gather rankings among group members");
 					}
-					var members = RelationshipCoreController.GetRelationships(request.ActorId.Value, ActorType.User, requestingId).Select(r => r.Id).ToList();
+					var members = RelationshipCoreController.GetRelationships(request.ActorId.Value, ActorType.User).Select(r => r.Id).ToList();
 					actors = actors.Where(a => members.Contains(a.Id)).ToList();
 					break;
 				case LeaderboardFilterType.Alliances:
@@ -223,7 +223,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					{
 						throw new ArgumentException("An ActorId has to be passed in order to gather rankings among group alliances");
 					}
-					var alliances = RelationshipCoreController.GetRelationships(request.ActorId.Value, ActorType.Group, requestingId).Select(r => r.Id).ToList();
+					var alliances = RelationshipCoreController.GetRelationships(request.ActorId.Value, ActorType.Group).Select(r => r.Id).ToList();
 					alliances.Add(request.ActorId.Value);
 					actors = actors.Where(a => alliances.Contains(a.Id)).ToList();
 					break;
@@ -334,7 +334,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		protected List<StandingsResponse> EvaluateCumulative(EvaluationDataController evaluationDataController, List<Actor> actors, Leaderboard leaderboard, StandingsRequest request, int requestingId)
+		protected List<StandingsResponse> EvaluateCumulative(EvaluationDataController evaluationDataController, List<Actor> actors, Leaderboard leaderboard, StandingsRequest request)
 		{
 			List<StandingsResponse> results;
 			if (request.MultiplePerActor)
@@ -349,7 +349,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 						.Select(a => new
 						{
 							Actor = a,
-							Value = GetRelated(a, leaderboard.CriteriaScope, requestingId)
+							Value = GetRelated(a, leaderboard.CriteriaScope)
 								// Sum each related actor's sum
 								.Sum(r => 
 									// Sum for each related actor
@@ -375,7 +375,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 						.Select(a => new
 						{
 							Actor = a,
-							Value = GetRelated(a, leaderboard.CriteriaScope, requestingId)
+							Value = GetRelated(a, leaderboard.CriteriaScope)
 									// Sum each related actor's sum
                                     .Sum(r =>
 										// Sum for each related actor
@@ -404,7 +404,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return results;
 		}
 
-		protected List<StandingsResponse> EvaluateCount(EvaluationDataController evaluationDataController, List<Actor> actors, Leaderboard leaderboard, StandingsRequest request, int requestingId)
+		protected List<StandingsResponse> EvaluateCount(EvaluationDataController evaluationDataController, List<Actor> actors, Leaderboard leaderboard, StandingsRequest request)
 		{
 			List<StandingsResponse> results;
 			if (request.MultiplePerActor)
@@ -417,7 +417,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					results = actors.Select(a => new StandingsResponse {
 						ActorId = a.Id,
 						ActorName = a.Name,
-						Value = SumRelated(GetRelated(a, leaderboard.CriteriaScope, requestingId).Select(r => evaluationDataController.CountKeys(leaderboard.GameId, r, leaderboard.EvaluationDataKey, leaderboard.EvaluationDataType, request.DateStart, request.DateEnd)).ToList()).ToString()
+						Value = SumRelated(GetRelated(a, leaderboard.CriteriaScope).Select(r => evaluationDataController.CountKeys(leaderboard.GameId, r, leaderboard.EvaluationDataKey, leaderboard.EvaluationDataType, request.DateStart, request.DateEnd)).ToList()).ToString()
 					}).ToList();
 					break;
 
@@ -425,7 +425,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					results = actors.Select(a => new StandingsResponse {
 						ActorId = a.Id,
 						ActorName = a.Name,
-						Value = SumRelated(GetRelated(a, leaderboard.CriteriaScope, requestingId).Select(r => evaluationDataController.CountKeys(leaderboard.GameId, r, leaderboard.EvaluationDataKey, leaderboard.EvaluationDataType, request.DateStart, request.DateEnd)).ToList()).ToString()
+						Value = SumRelated(GetRelated(a, leaderboard.CriteriaScope).Select(r => evaluationDataController.CountKeys(leaderboard.GameId, r, leaderboard.EvaluationDataKey, leaderboard.EvaluationDataType, request.DateStart, request.DateEnd)).ToList()).ToString()
 					}).ToList();
 					break;
 
@@ -540,28 +540,28 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			})).ToList();
 		}
 
-		private List<int> GetRelated(Actor actor, CriteriaScope scope, int requestingId)
+		private List<int> GetRelated(Actor actor, CriteriaScope scope)
 		{
 			switch (scope)
 			{
 				case CriteriaScope.Actor:
 					return new List<int> { actor.Id };
 				case CriteriaScope.RelatedUsers:
-					var relatedUsers = RelationshipCoreController.GetRelationships(actor.Id, ActorType.User, requestingId).Select(a => a.Id).ToList();
+					var relatedUsers = RelationshipCoreController.GetRelationships(actor.Id, ActorType.User).Select(a => a.Id).ToList();
 					if (actor.ActorType == ActorType.User)
 					{
 						relatedUsers.Add(actor.Id);
 					}
 					return relatedUsers.Distinct().ToList();
 				case CriteriaScope.RelatedGroups:
-					var relatedGroups = RelationshipCoreController.GetRelationships(actor.Id, ActorType.Group, requestingId).Select(a => a.Id).ToList();
+					var relatedGroups = RelationshipCoreController.GetRelationships(actor.Id, ActorType.Group).Select(a => a.Id).ToList();
 					relatedGroups.Add(actor.Id);
 					return relatedGroups.Distinct().ToList();
 				case CriteriaScope.RelatedGroupUsers:
-					var groups = RelationshipCoreController.GetRelationships(actor.Id, ActorType.Group, requestingId).Select(a => a.Id).ToList();
+					var groups = RelationshipCoreController.GetRelationships(actor.Id, ActorType.Group).Select(a => a.Id).ToList();
 					groups.Add(actor.Id);
 					groups = groups.Distinct().ToList();
-					return groups.SelectMany(g => RelationshipCoreController.GetRelationships(g, ActorType.User, requestingId).Select(a => a.Id)).Distinct().ToList();
+					return groups.SelectMany(g => RelationshipCoreController.GetRelationships(g, ActorType.User).Select(a => a.Id)).Distinct().ToList();
 				default:
 					var ints = new List<int>();
 					return ints;
