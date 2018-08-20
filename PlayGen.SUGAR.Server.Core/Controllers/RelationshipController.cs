@@ -171,29 +171,38 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			    var GetClaim = _claimController.Get(ClaimScope.Group, "Get-Resource");
 			    var CreateClaim = _claimController.Get(ClaimScope.Group, "Create-Resource");
 			    var UpdateClaim = _claimController.Get(ClaimScope.Group, "Update-Resource");
-			    var getActorClaim = new ActorClaim
+			    if (GetClaim != null)
 			    {
-				    ActorId = user.Id,
-					ClaimId = GetClaim.Id,
-				    EntityId = group.Id,
-			    };
-			    var updateActorClaim = new ActorClaim
+				    var getActorClaim = new ActorClaim
+				    {
+					    ActorId = user.Id,
+					    ClaimId = GetClaim.Id,
+					    EntityId = group.Id,
+				    };
+				    _actorClaimController.Create(getActorClaim);
+			    }
+			    if (UpdateClaim != null)
 			    {
-				    ActorId = user.Id,
-				    ClaimId = UpdateClaim.Id,
-				    EntityId = group.Id,
-			    };
-			    var createActorClaim = new ActorClaim
-			    {
-				    ActorId = user.Id,
-				    ClaimId = CreateClaim.Id,
-				    EntityId = group.Id,
-			    };
+				    var updateActorClaim = new ActorClaim
+				    {
+					    ActorId = user.Id,
+					    ClaimId = UpdateClaim.Id,
+					    EntityId = group.Id,
+				    };
+				    _actorClaimController.Create(updateActorClaim);
 
-				_actorClaimController.Create(getActorClaim);
-				_actorClaimController.Create(createActorClaim);
-				_actorClaimController.Create(updateActorClaim);
-			}
+				}
+				if (CreateClaim != null)
+			    {
+				    var createActorClaim = new ActorClaim
+				    {
+					    ActorId = user.Id,
+					    ClaimId = CreateClaim.Id,
+					    EntityId = group.Id,
+				    };
+				    _actorClaimController.Create(createActorClaim);
+			    }
+		    }
 		}
 	}
 }

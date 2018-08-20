@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
+using PlayGen.SUGAR.Server.Core.Extensions;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
 
@@ -20,7 +21,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			EntityFramework.Controllers.UserController userController,
 			EntityFramework.Controllers.ActorController actorDbController,
 			ActorRoleController actorRoleController,
-			RelationshipController relationshipController) : base(actorDbController, actorRoleController)
+			RelationshipController relationshipController) : base(actorDbController)
 		{
 			_logger = logger;
 			_userController = userController;
@@ -36,7 +37,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<User> GetAll(int requestingid)
 		{
 			var users = _userController.Get();
-			users = FilterPrivate(users, requestingid);
+			users = users.FilterPrivate(_actorRoleController, requestingid);
 
 			users.ForEach(u => u.UserRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.User));
 			users.ForEach(u => u.GroupRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.Group));
@@ -49,7 +50,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public User Get(int id, int requestingId)
 		{
 			var user = _userController.Get(id);
-			user = FilterPrivate(user, requestingId);
+			user = user.FilterPrivate(_actorRoleController, requestingId);
 
 			if (user == null)
 			{
@@ -72,7 +73,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<User> Search(string name, bool exactMatch, int requestingId)
 		{
 			var users = _userController.Search(name, exactMatch);
-			users = FilterPrivate(users, requestingId);
+			users = users.FilterPrivate(_actorRoleController, requestingId);
 
 			users.ForEach(u => u.UserRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.User));
 			users.ForEach(u => u.GroupRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.Group));

@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             => _matchController ?? (_matchController = new MatchController(new NullLogger<MatchController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, DbControllerLocator.MatchController));
 
         public static ActorController ActorController
-            => _actorController ?? (_actorController = new ActorController(DbControllerLocator.ActorController, ActorRoleController));
+            => _actorController ?? (_actorController = new ActorController(DbControllerLocator.ActorController));
 
         public static GameDataController GameDataController =>
             _gameDataController ?? (_gameDataController = new GameDataController(new NullLogger<GameDataController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, ActorController));

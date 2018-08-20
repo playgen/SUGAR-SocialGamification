@@ -1,10 +1,9 @@
-﻿using System.Linq;
-
-using Microsoft.EntityFrameworkCore;
-
+﻿using Microsoft.EntityFrameworkCore;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.Model;
+using System.Linq;
+using PlayGen.SUGAR.Server.Core.Extensions;
 using Xunit;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Tests
@@ -170,6 +169,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			Assert.Throws<MissingRecordException>(() => _userController.Delete(-1));
 		}
+
+
 		#endregion
 
 		#region Helpers
