@@ -8,9 +8,10 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Name : "User Name",
-	/// Password : "Their Password",
-	/// SourceToken : "SUGAR"
+	/// "Name" : "User Name",
+	/// "Password" : "Their Password",
+	/// "SourceToken" : "SUGAR".
+	/// "IssueLoginToken" : false
 	/// }
 	/// </example>
 	public class AccountRequest

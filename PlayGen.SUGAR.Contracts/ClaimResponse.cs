@@ -3,15 +3,15 @@
 namespace PlayGen.SUGAR.Contracts
 {
     /// <summary>
-    /// Encapsulates role details.
+    /// Encapsulates claim details.
     /// </summary>
     /// <example>
     /// JSON
     /// {
-    /// Id : 1,
-    /// Token : "CreateGame",
-    /// Description : "Allows for the creation of new games",
-    /// ClaimScope : "Game"
+    /// "Id" : 1,
+    /// "Token" : "CreateGame",
+    /// "Description" : "Allows for the creation of new games",
+    /// "ClaimScope" : "Game"
     /// }
     /// </example>
     public class ClaimResponse

@@ -6,9 +6,12 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// User : {
-	/// Id : 1,
-	/// Name : "User Name"
+	/// "User" : {
+	/// "FriendCount" : 0,
+	/// "GroupCount" : 0,
+	/// "Id" : 1,
+	/// "Name" : "User Name",
+	/// "Description" : "User Description"
 	/// }
 	/// }
 	/// </example>

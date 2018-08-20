@@ -8,9 +8,9 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// RequestorId : 1,
-	/// AcceptorId : 2,
-	/// Accepted : true
+	/// "RequestorId" : 1,
+	/// "AcceptorId" : 2,
+	/// "Accepted" : true
 	/// }
 	/// </example>
 	public class RelationshipStatusUpdate

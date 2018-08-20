@@ -6,6 +6,17 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates resource details from the server.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// "ActorId" : 1,
+	/// "GameId" : 1,
+	/// "Key" : "Resource Key",
+	/// "Quantity" : 20,
+	/// "DateCreated" : "2018-08-12T16:32:29.482146",
+	/// "DateModified" : "2018-08-12T16:32:29.482146"
+	/// }
+	/// </example>
 	public class ResourceResponse
 	{
 		/// <summary>

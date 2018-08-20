@@ -6,9 +6,9 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// Id : 1,
-	/// Name : "Actor Name"
-	/// Description: "Description of Actor"
+	/// "Id" : 1,
+	/// "Name" : "Actor Name"
+	/// "Description" : "Description of Actor"
 	/// }
 	/// </example>
 	public class ActorResponse

@@ -6,8 +6,8 @@
     /// <example>
     /// JSON
     /// {
-    /// RoleId : 1,
-    /// ClaimId : 1
+    /// "RoleId" : 1,
+    /// "ClaimId" : 1
     /// }
     /// </example>
     public class RoleClaimResponse

@@ -10,12 +10,13 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// LeaderboardToken : "AN_ACHIEVEMENT_TOKEN",
-	/// GameId : 1,
-	/// ActorId : 1,
-	/// LeaderboardFilterType : "Near",
-	/// Limit : 10,
-	/// Offset : 0,
+	/// "LeaderboardToken" : "AN_ACHIEVEMENT_TOKEN",
+	/// "GameId" : 1,
+	/// "ActorId" : 1,
+	/// "LeaderboardFilterType" : "Near",
+	/// "PageLimit" : 10,
+	/// "PageOffset" : 0,
+	/// "MultiplePerActor" : false,
 	/// DateStart : "2016-01-01 00:00:00",
 	/// DateEnd : "2016-12-31 23:59:59"
 	/// }

@@ -10,11 +10,14 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// ActorId : 1,
-	/// GameId : 1,
-	/// Key : "Data Key",
-	/// Value : "10",
-	/// EvaluationDataType : "Long"
+	/// "GameId" : 1,
+	/// "MatchId" : 1,
+	/// "CreatingActorId" : 1,
+	/// "Key" : "Data Key",
+	/// "Value" : "10",
+	/// "EvaluationDataType" : "Long",
+	/// "DateCreated" : "2018-08-12T16:32:29.482146",
+	/// "DateModified" : "2018-08-12T16:32:29.482146"
 	/// }
 	/// </example>
 	public class EvaluationDataResponse

@@ -5,6 +5,16 @@ namespace PlayGen.SUGAR.Contracts
 	/// <summary>
 	/// Encapsulates Resource Transfer details.
 	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// "SenderActorId" : 1,
+	/// "RecipientActorId" : 2,
+	/// "GameId" : 1,
+	/// "Key" : "Resource Key",
+	/// "Quantity" : 20
+	/// }
+	/// </example>
 	public class ResourceTransferRequest 
 	{
 		/// <summary>
