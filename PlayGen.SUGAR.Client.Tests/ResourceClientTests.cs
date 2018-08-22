@@ -383,6 +383,7 @@ namespace PlayGen.SUGAR.Client.Tests
 		[Fact]
 		public void UserCanTransferFromGroupToSelf()
 		{
+			// Arrange
 			var key = "Resource_UserCanTransferFromGroupToSelf";
 			var group = CreateGroup(key + "_Group");
 
@@ -396,6 +397,13 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 
+			Fixture.SUGARClient.GroupMember.CreateMemberRequest(new RelationshipRequest
+			{
+				AcceptorId = group.Id,
+				RequestorId = loggedInAccount.User.Id,
+				AutoAccept = true
+			});
+
 			var userInitialResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
 				ActorId = loggedInAccount.User.Id,
@@ -404,28 +412,29 @@ namespace PlayGen.SUGAR.Client.Tests
 				Quantity = 300
 			});
 
-			var originalFrmoQuantity = groupInitialResource.Quantity;
+			var originalFromQuantity = groupInitialResource.Quantity;
 			var originalToQuantity = userInitialResource.Quantity;
-			var transferQuantity = originalFrmoQuantity / 3;
+			var transferQuantity = originalFromQuantity / 3;
 
-
+			// Act
 			var transferResponse = Fixture.SUGARClient.Resource.Transfer(new ResourceTransferRequest
 			{
 				GameId = Platform.GlobalId,
-				SenderActorId = loggedInAccount.User.Id,
-				RecipientActorId = group.Id,
+				SenderActorId = group.Id,
+				RecipientActorId = loggedInAccount.User.Id,
 				Key = groupInitialResource.Key,
-				Quantity = -transferQuantity
+				Quantity = transferQuantity
 			});
 
-			Assert.Equal(originalFrmoQuantity - transferQuantity, transferResponse.FromResource.Quantity);
+			// Assert
+			Assert.Equal(originalFromQuantity - transferQuantity, transferResponse.FromResource.Quantity);
 			Assert.Equal(originalToQuantity + transferQuantity, transferResponse.ToResource.Quantity);
 			Assert.Equal(loggedInAccount.User.Id, transferResponse.ToResource.ActorId);
 			Assert.Equal(groupInitialResource.GameId, transferResponse.FromResource.GameId);
 			Assert.Equal(groupInitialResource.GameId, transferResponse.ToResource.GameId);
 		}
 
-		#region Helpers
+        #region Helpers
 		private GroupResponse CreateGroup(string key)
 		{
 			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Creator");
