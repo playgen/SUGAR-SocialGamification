@@ -4,6 +4,7 @@ See below details for each release of SUGAR and the notable changes made.
 ### Next Version
 The following will be available in the next version of SUGAR:
 - Remove AuthorizationHandlerWithNull as it is now unused.
+- Add ability to make private users and groups. Private actors will not appear in lists or leaderboards
 
 ### 1.3.1
 - Update Unity client docs and startup guide
