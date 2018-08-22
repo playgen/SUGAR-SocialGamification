@@ -67,13 +67,13 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             => _roleClaimController ?? (_roleClaimController = new RoleClaimController(new NullLogger<RoleClaimController>(), DbControllerLocator.RoleClaimController));
 
         public static UserController UserController
-            => _userController ?? (_userController = new UserController(new NullLogger<UserController>(), DbControllerLocator.UserController, DbControllerLocator.ActorController, ActorRoleController, RelationshipController));
+            => _userController ?? (_userController = new UserController(new NullLogger<UserController>(), DbControllerLocator.UserController, DbControllerLocator.ActorController, ActorClaimController, ActorRoleController, RelationshipController));
 
         public static MatchController MatchController
             => _matchController ?? (_matchController = new MatchController(new NullLogger<MatchController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, DbControllerLocator.MatchController));
 
         public static ActorController ActorController
-            => _actorController ?? (_actorController = new ActorController(DbControllerLocator.ActorController));
+            => _actorController ?? (_actorController = new ActorController(DbControllerLocator.ActorController, ActorClaimController));
 
         public static GameDataController GameDataController =>
             _gameDataController ?? (_gameDataController = new GameDataController(new NullLogger<GameDataController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, ActorController));

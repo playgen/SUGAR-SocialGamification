@@ -87,7 +87,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             var token = $"{nameof(CanGetCountCompletedProgressForGroupMembers)}_{evaluationDataType}";
 
             var group = Fixture.SortedGroups[groupIndex];
-            var groupUsers = ControllerLocator.RelationshipController.GetRelationships(group.Id, ActorType.User);
+            var groupUsers = ControllerLocator.RelationshipController.GetRelationships(group.Id, ActorType.User, null);
 
             // Each group user that was seeded using the CoreTestFixture should have
             // its index in sorted users + 1 as the count of data for a given type.
@@ -121,7 +121,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             var token = $"{nameof(CanGetCountIncompleteProgressForGroupMembers)}_{evaluationDataType}";
 
             var group = Fixture.SortedGroups[groupIndex];
-            var groupUsers = ControllerLocator.RelationshipController.GetRelationships(group.Id, ActorType.User);
+            var groupUsers = ControllerLocator.RelationshipController.GetRelationships(group.Id, ActorType.User, null);
 
             // Each group user that was seeded using the CoreTestFixture should have
             // its index in sorted users + 1 as the count of data for a given type.

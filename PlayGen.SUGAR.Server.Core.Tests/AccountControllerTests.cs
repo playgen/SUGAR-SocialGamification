@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Core.Controllers;
 using PlayGen.SUGAR.Server.Core.Extensions;
 using PlayGen.SUGAR.Server.Model;
@@ -14,7 +15,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
         private readonly AccountSourceController _accountSourceController = ControllerLocator.AccountSourceController;
 
 	    private readonly UserController _userController = ControllerLocator.UserController;
-	    private readonly ActorRoleController _actorRoleController = ControllerLocator.ActorRoleController;
+		private readonly ActorClaimController _actorClaimController = ControllerLocator.ActorClaimController;
 
         //private readonly SeededData.EntityFramework.Controllers.UserController _userController = DbControllerLocator.UserController;
         //private readonly SeededData.EntityFramework.Controllers.GameController _gameController = DbControllerLocator.GameController;
@@ -63,6 +64,35 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	    }
 
 	    [Fact]
+	    public void CanGetPrivateUsersWithGlobalClaims()
+	    {
+		    var userName = "CanGetPrivateUsersWithGlobalClaims";
+		    var privateUserName = userName + "_private";
+			var newUser = CreateUser(userName, false);
+
+			
+		    //_actorRoleController.Create(ClaimScope.Global, newUser.Id, -1);
+
+			// add private user 
+		    var newPrivateUser = CreateUser(privateUserName, true);
+
+		    // Assign claim to user
+		    var claim = new ActorClaim()
+		    {
+			    ActorId = newUser.Id,
+			    Claim = new Claim { ClaimScope = ClaimScope.User },
+			    EntityId = newPrivateUser.Id
+		    };
+		    _actorClaimController.Create(claim);
+
+
+			var user = _userController.Get(newPrivateUser.Id, newUser.Id);
+
+			Assert.NotNull(user);
+			Assert.Equal(privateUserName, user.Name);
+	    }
+
+	    [Fact]
 	    public void CannotFindPrivateUserInSearch()
 	    {
 		    var userName = "CannotFindPrivateUserInSearch";
@@ -71,7 +101,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
 			// sending with id -1 as should not be able to retriev newUser
 		    var allUsers = _userController.GetAll(-1);
-			allUsers = allUsers.FilterPrivate(_actorRoleController, -1);
+			allUsers = allUsers.FilterPrivate(_actorClaimController, -1);
 
 		    var matches = allUsers.Count(u => u.Name == userName);
 
@@ -85,7 +115,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 
 		    var newUser = CreateUser(userName, true);
 		    var allUsers = _userController.GetAll(newUser.Id);
-		    allUsers = allUsers.FilterPrivate(_actorRoleController, newUser.Id);
+		    allUsers = allUsers.FilterPrivate(_actorClaimController, newUser.Id);
 
 		    var matches = allUsers.Count(u => u.Name == userName);
 

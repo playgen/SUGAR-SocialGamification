@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("{groupId:int}")]
 		public IActionResult GetAlliances([FromRoute]int groupId)
 		{
-			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.Group);
+			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.Group, null);
 			var actorContract = members.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}

@@ -70,12 +70,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		/// <param name="actorId">The actor to get list of relationsips with</param>
 		/// <param name="actorType">The tyoe of actor that relationship is shared with</param>
 		/// <returns></returns>
-	    public List<Actor> GetRelationships(int actorId, ActorType actorType, int requestingId = -1)
+	    public List<Actor> GetRelationships(int actorId, ActorType actorType, int? requestingId)
 	    {
 		    var relationships = _relationshipDbController.GetRelationships(actorId, actorType);
-			var includePrivate = _actorRoleController.GetControlled(requestingId).Any(c => c.ClaimScope == ClaimScope.Global);
 
-		    if (!includePrivate)
+		    // ReSharper disable once SimplifyLinqExpression
+		    if (requestingId == null || !_actorRoleController.GetControlled(requestingId.Value).Any(c => c.ClaimScope == ClaimScope.Global))
 		    {
 			    relationships = relationships.Where(r => !r.Private || r.Id == requestingId).ToList();
 		    }

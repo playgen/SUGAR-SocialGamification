@@ -116,7 +116,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 					{
 						throw new NotImplementedException("RelatedGroupUsers Scope is only implemented for groups");
 					}
-					var groups = RelationshipCoreController.GetRelationships(actorId, ActorType.Group).Select(a => a.Id).ToList();
+					var groups = RelationshipCoreController.GetRelationships(actorId, ActorType.Group, null).Select(a => a.Id).ToList();
 					groups.Add(actorId);
 					groups = groups.Distinct().ToList();
 					var relatedGroupUsers = groups.SelectMany(g => RelationshipCoreController.GetRelationships(g, ActorType.User, actorId).Select(a => a.Id)).Distinct().ToList();

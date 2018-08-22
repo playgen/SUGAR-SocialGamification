@@ -24,7 +24,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			EntityFramework.Controllers.ActorController actorDbController,
 			ActorClaimController actorClaimController,
 			ActorRoleController actorRoleController,
-			RelationshipController relationshipController) : base(actorDbController)
+			RelationshipController relationshipController) : base(actorDbController, actorClaimController)
 		{
 			_logger = logger;
 			_groupDbController = groupDbController;
@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<Group> Get(int requestingId)
 		{
 			var groups = _groupDbController.Get();
-			groups = groups.FilterPrivate(_actorRoleController, requestingId);
+			groups = groups.FilterPrivate(_actorClaimController, requestingId);
 			groups.ForEach(g => g.UserRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.User));
 			groups.ForEach(g => g.GroupRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.Group));
 
@@ -61,7 +61,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public new Group Get(int id, int requestingId)
 		{
 			var group = _groupDbController.Get(id);
-			group = group.FilterPrivate(_actorRoleController, requestingId);
+			group = group.FilterPrivate(_actorClaimController, requestingId);
 
 			if (group != null)
 			{
@@ -77,7 +77,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<Group> Search(string name, int requestingId)
 		{
 			var groups = _groupDbController.Get(name);
-			groups = groups.FilterPrivate(_actorRoleController, requestingId);
+			groups = groups.FilterPrivate(_actorClaimController, requestingId);
 
 			groups.ForEach(g => g.UserRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.User));
 			groups.ForEach(g => g.GroupRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.Group));

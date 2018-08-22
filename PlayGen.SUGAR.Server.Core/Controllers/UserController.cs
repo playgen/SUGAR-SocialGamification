@@ -13,19 +13,22 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	{
 		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.UserController _userController;
-		private readonly ActorRoleController _actorRoleController;
+		private readonly ActorClaimController _actorClaimController;
+		private readonly ActorRoleController _actoRoleController;
 		private readonly RelationshipController _relationshipController;
 
 		public UserController(
 			ILogger<UserController> logger,
 			EntityFramework.Controllers.UserController userController,
 			EntityFramework.Controllers.ActorController actorDbController,
+			ActorClaimController actorClaimController,
 			ActorRoleController actorRoleController,
-			RelationshipController relationshipController) : base(actorDbController)
+			RelationshipController relationshipController) : base(actorDbController, actorClaimController)
 		{
 			_logger = logger;
 			_userController = userController;
-			_actorRoleController = actorRoleController;
+			_actorClaimController = actorClaimController;
+			_actoRoleController = actorRoleController;
 			_relationshipController = relationshipController;
 		}
 
@@ -37,7 +40,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<User> GetAll(int requestingid)
 		{
 			var users = _userController.Get();
-			users = users.FilterPrivate(_actorRoleController, requestingid);
+			users = users.FilterPrivate(_actorClaimController, requestingid);
 
 			users.ForEach(u => u.UserRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.User));
 			users.ForEach(u => u.GroupRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.Group));
@@ -50,7 +53,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public User Get(int id, int requestingId)
 		{
 			var user = _userController.Get(id);
-			user = user.FilterPrivate(_actorRoleController, requestingId);
+			user = user.FilterPrivate(_actorClaimController, requestingId);
 
 			if (user == null)
 			{
@@ -73,7 +76,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<User> Search(string name, bool exactMatch, int requestingId)
 		{
 			var users = _userController.Search(name, exactMatch);
-			users = users.FilterPrivate(_actorRoleController, requestingId);
+			users = users.FilterPrivate(_actorClaimController, requestingId);
 
 			users.ForEach(u => u.UserRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.User));
 			users.ForEach(u => u.GroupRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.Group));
@@ -87,7 +90,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			newUser = _userController.Create(newUser, context);
 
-			_actorRoleController.Create(ClaimScope.User, newUser.Id, newUser.Id, context);
+			_actoRoleController.Create(ClaimScope.User, newUser.Id, newUser.Id, context);
 
 			_logger.LogInformation($"{newUser.Id}");
 
