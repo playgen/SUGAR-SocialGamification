@@ -380,7 +380,61 @@ namespace PlayGen.SUGAR.Client.Tests
 			}
 		}
 
-		#region Helpers
+		[Fact]
+		public void UserCanTransferFromGroupToSelf()
+		{
+			// Arrange
+			var key = "Resource_UserCanTransferFromGroupToSelf";
+			var group = CreateGroup(key + "_Group");
+
+			var groupInitialResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
+			{
+				ActorId = group.Id,
+				GameId = Platform.GlobalId,
+				Key = key,
+				Quantity = 150
+			});
+
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+
+			Fixture.SUGARClient.GroupMember.CreateMemberRequest(new RelationshipRequest
+			{
+				AcceptorId = group.Id,
+				RequestorId = loggedInAccount.User.Id,
+				AutoAccept = true
+			});
+
+			var userInitialResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
+			{
+				ActorId = loggedInAccount.User.Id,
+				GameId = Platform.GlobalId,
+				Key = key,
+				Quantity = 300
+			});
+
+			var originalFromQuantity = groupInitialResource.Quantity;
+			var originalToQuantity = userInitialResource.Quantity;
+			var transferQuantity = originalFromQuantity / 3;
+
+			// Act
+			var transferResponse = Fixture.SUGARClient.Resource.Transfer(new ResourceTransferRequest
+			{
+				GameId = Platform.GlobalId,
+				SenderActorId = group.Id,
+				RecipientActorId = loggedInAccount.User.Id,
+				Key = groupInitialResource.Key,
+				Quantity = transferQuantity
+			});
+
+			// Assert
+			Assert.Equal(originalFromQuantity - transferQuantity, transferResponse.FromResource.Quantity);
+			Assert.Equal(originalToQuantity + transferQuantity, transferResponse.ToResource.Quantity);
+			Assert.Equal(loggedInAccount.User.Id, transferResponse.ToResource.ActorId);
+			Assert.Equal(groupInitialResource.GameId, transferResponse.FromResource.GameId);
+			Assert.Equal(groupInitialResource.GameId, transferResponse.ToResource.GameId);
+		}
+
+        #region Helpers
 		private GroupResponse CreateGroup(string key)
 		{
 			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Creator");

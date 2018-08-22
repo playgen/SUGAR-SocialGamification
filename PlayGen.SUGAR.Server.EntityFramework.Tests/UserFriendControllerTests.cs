@@ -38,7 +38,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = " CreateRelationshipWithNonExistingRequestor";
 			var acceptor = CreateUser(userFriendName);
-			Assert.Throws<MissingRecordException>(() =>  CreateRelationship(-1, acceptor.Id));
+			Assert.Throws<InvalidRelationshipException>(() =>  CreateRelationship(-1, acceptor.Id));
 		}
 
 		[Fact]
@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = " CreateRelationshipWithNonExistingAcceptor";
 			var requestor = CreateUser(userFriendName);
-			Assert.Throws<MissingRecordException>(() =>  CreateRelationship(requestor.Id, -1));
+			Assert.Throws<InvalidRelationshipException>(() =>  CreateRelationship(requestor.Id, -1));
 		}
 
 		[Fact]
@@ -59,7 +59,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			 CreateRelationship(requestor.Id, acceptor.Id);
 
-			Assert.Throws<DuplicateRecordException>(() =>  CreateRelationship(requestor.Id, acceptor.Id));
+			Assert.Throws<DuplicateRelationshipException>(() =>  CreateRelationship(requestor.Id, acceptor.Id));
 		}
 
 		[Fact]
@@ -72,7 +72,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			 CreateRelationship(requestor.Id, acceptor.Id);
 
-			Assert.Throws<DuplicateRecordException>(() =>  CreateRelationship(acceptor.Id, requestor.Id));
+			Assert.Throws<DuplicateRelationshipException>(() =>  CreateRelationship(acceptor.Id, requestor.Id));
 		}
 
 		[Fact]
@@ -187,7 +187,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			CreateRelationship(requestor.Id, acceptor.Id);
 
-			Assert.Throws<DuplicateRecordException>(() =>  CreateRelationship(requestor.Id, acceptor.Id));
+			Assert.Throws<DuplicateRelationshipException>(() =>  CreateRelationship(requestor.Id, acceptor.Id));
 		}
 
 		[Fact]
@@ -200,7 +200,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			CreateRelationship(requestor.Id, acceptor.Id);
 
-			Assert.Throws<DuplicateRecordException>(() =>  CreateRelationship(acceptor.Id, requestor.Id));
+			Assert.Throws<DuplicateRelationshipException>(() =>  CreateRelationship(acceptor.Id, requestor.Id));
 		}
 
 		[Fact]
