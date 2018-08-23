@@ -3,6 +3,14 @@ See below details for each release of SUGAR and the notable changes made.
 
 ### Next Version
 The following will be available in the next version of SUGAR:
+- Add ability to make private users and groups. Private actors will not appear in lists or leaderboards
+
+### 1.3.3
+- Add GetGameActors to resources to get all actors that have resources for the current game
+- Update ActorResponse to include actortype
+
+### 1.3.2
+- Update Documentation
 - Remove AuthorizationHandlerWithNull as it is now unused.
 
 ### 1.3.1
@@ -11,7 +19,7 @@ The following will be available in the next version of SUGAR:
 
 ### 1.3.0
 - Add Count as a CriteriaQueryType
-- Add default group user claims to allow members to manage group resources (Get, Create, Update)
+- Add default group user claims to allow members to manage group resources G(geet, Create, Update)
 - Update builds for new changes
 - Update SUGAR Unity docs for more detail on usage of SUGAR Manager
 
