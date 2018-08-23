@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
@@ -10,7 +9,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
-	public class AchievementControllerTests : EntityFrameworkTestBase
+	public class AchievementTests : EntityFrameworkTestBase
 	{
 		#region Configuration
 		private readonly EvaluationController _evaluationController = ControllerLocator.EvaluationController;

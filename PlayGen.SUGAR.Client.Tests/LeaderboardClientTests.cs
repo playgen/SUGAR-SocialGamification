@@ -89,7 +89,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				EvaluationDataType = EvaluationDataType.Long,
 				CreatingActorId = loggedInAccount.User.Id,
 				Value = "5",
-				GameId = Platform.GlobalId
+				GameId = Platform.GlobalGameId
 			};
 
 			Fixture.SUGARClient.GameData.Add(gameData);
@@ -100,7 +100,7 @@ namespace PlayGen.SUGAR.Client.Tests
 				LeaderboardFilterType = LeaderboardFilterType.Top,
 				PageLimit = 10,
 				PageOffset = 0, 
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				MultiplePerActor = false
 			};
 

@@ -8,7 +8,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.EntityConfigs
     {
 		public void Configure(EntityTypeBuilder<ActorData> builder)
 		{
-			builder.HasIndex(g => new { g.Key, g.GameId, g.ActorId, DataType = g.EvaluationDataType })
+			builder.HasIndex(a => a.ActorId);
+
+            builder.HasIndex(g => new { g.Key, g.GameId, g.ActorId, g.EvaluationDataType })
 				.IsUnique();
 		}
 	}

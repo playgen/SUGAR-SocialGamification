@@ -599,11 +599,11 @@ namespace PlayGen.SUGAR.Client.Tests
 			var initialQunatity = 100;
 			var transferQuantity = 20;
 
-			var resourceResponse = GiveResource(Platform.GlobalId, group.Id, key, initialQunatity);
+			var resourceResponse = GiveResource(Platform.GlobalGameId, group.Id, key, initialQunatity);
 			Assert.Equal(resourceResponse.Quantity, initialQunatity);
 
 			// Act
-			var transferResponse = TakeResource(Platform.GlobalId, key, loggedInAccount.User.Id, group.Id, transferQuantity);
+			var transferResponse = TakeResource(Platform.GlobalGameId, key, loggedInAccount.User.Id, group.Id, transferQuantity);
 
 			Assert.Equal(initialQunatity - transferQuantity, transferResponse.FromResource.Quantity);
 			Assert.Equal(transferQuantity, transferResponse.ToResource.Quantity);

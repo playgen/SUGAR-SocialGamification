@@ -37,7 +37,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<Actor> GetGameActors(int gameId)
 		{
 			var ids = _evaluationDataController.GetGameActors(gameId);
-			return ids.Select(a => _actorController.Get(a)).ToList();
+			return ids
+				.Where(id => id != null)
+				.Select(id => _actorController.Get(id.Value)).ToList();
 		}
 
 		public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int gameId)

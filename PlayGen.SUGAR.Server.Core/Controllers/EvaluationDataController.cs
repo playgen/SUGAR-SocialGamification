@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return datas;
 		}
 
-		public List<EvaluationData> Get(int gameId, int actorId, string[] keys = null)
+		public List<EvaluationData> Get(int gameId, int? actorId, string[] keys = null)
 		{
 			var datas = _evaluationDataDbController.Get(gameId, actorId, keys);
 
@@ -171,22 +171,22 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return data;
 		}
 
-		public List<int> GetGameActors(int gameId)
+		public List<int?> GetGameActors(int gameId)
 		{
-			var actors = _evaluationDataDbController.GetGameActors(gameId);
+			var actorIds = _evaluationDataDbController.GetGameActors(gameId);
 
-			_logger.LogInformation($"{actors?.Count} Actors for GameId {gameId}");
+			_logger.LogInformation($"{actorIds?.Count} Actors for GameId {gameId}");
 
-			return actors;
+			return actorIds;
 		}
 
-		public List<int> GetGameKeyActors(int gameId, string key, EvaluationDataType evaluationDataType, DateTime? start = null, DateTime? end = null)
+		public List<int?> GetGameKeyActors(int gameId, string key, EvaluationDataType evaluationDataType, DateTime? start = null, DateTime? end = null)
 		{
-			var actors = _evaluationDataDbController.GetGameKeyActors(gameId, key, evaluationDataType, start, end);
+			var actorIds = _evaluationDataDbController.GetGameKeyActors(gameId, key, evaluationDataType, start, end);
 
-			_logger.LogInformation($"{actors?.Count} Actors for GameId {gameId} and Key {key}");
+			_logger.LogInformation($"{actorIds?.Count} Actors for GameId {gameId} and Key {key}");
 
-			return actors;
+			return actorIds;
 		}
 
 		public List<KeyValuePair<string, EvaluationDataType>> GetGameKeys(int gameId)

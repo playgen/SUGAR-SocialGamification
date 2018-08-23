@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_evaluationDataController = new EvaluationDataController(evaluationDataLogger, contextFactory, EvaluationDataCategory.Resource);
 		}
 
-		public List<EvaluationData> Get(int gameId, int actorId, string[] keys = null)
+		public List<EvaluationData> Get(int gameId, int? actorId, string[] keys = null)
 		{
 			var results = _evaluationDataController.Get(gameId, actorId, keys);
 

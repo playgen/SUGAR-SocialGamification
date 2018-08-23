@@ -14,9 +14,10 @@ using System;
 namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 {
     [DbContext(typeof(SUGARContext))]
-    partial class SUGARContextModelSnapshot : ModelSnapshot
+    [Migration("20180822163529_ActorCascadeDelete")]
+    partial class ActorCascadeDelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

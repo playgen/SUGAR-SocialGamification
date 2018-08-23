@@ -35,7 +35,7 @@ namespace PlayGen.SUGAR.Contracts
 		/// <summary>
 		/// The id of the Actor which this ActorData/EvaluationData relates to.
 		/// </summary>
-		public int CreatingActorId { get; set; }
+		public int? CreatingActorId { get; set; }
 
 		/// <summary>
 		/// The identifier of the data.

@@ -32,7 +32,7 @@ namespace PlayGen.SUGAR.Client
 		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="keys">Array of Key names.</param>
 		/// <returns>A list of <see cref="ResourceResponse"/> which match the search criteria.</returns>
-		public IEnumerable<ResourceResponse> Get(int gameId, int actorId, string[] keys)
+		public IEnumerable<ResourceResponse> Get(int gameId, int? actorId, string[] keys)
 		{
 			var query = GetUriBuilder(ControllerPrefix)
 				.AppendQueryParameter(gameId, "gameId={0}")
