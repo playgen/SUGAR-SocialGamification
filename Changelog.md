@@ -5,6 +5,9 @@ See below details for each release of SUGAR and the notable changes made.
 The following will be available in the next version of SUGAR:
 - Add ability to make private users and groups. Private actors will not appear in lists or leaderboards
 
+### 1.3.4
+- Update Roadmap
+
 ### 1.3.3
 - Add GetGameActors to resources to get all actors that have resources for the current game
 - Update ActorResponse to include actortype
