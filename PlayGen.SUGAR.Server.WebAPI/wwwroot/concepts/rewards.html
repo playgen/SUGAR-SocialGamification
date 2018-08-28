@@ -62,19 +62,23 @@
             <article class="content wrap" id="_content" data-uid="reward">
               <h1 id="reward">Reward</h1>
               
-<p>Rewards can be provided to <a class="xref" href="../features/user.html">Users</a> and <a class="xref" href="../features/group.html">Groups</a> upon completion of <a class="xref" href="../features/achievement.html">Achievements</a> and <a class="xref" href="../features/skill.html">Skills</a>. Rewards given are stored within GameData, meaning they can in theory be used toward further <a class="xref" href="criteria.html">Criteria</a> and <a class="xref" href="../features/leaderboard.html">Leaderboards</a>.</p>
+<p>Rewards can be provided to <a class="xref" href="../features/user.html">Users</a> and <a class="xref" href="../features/group.html">Groups</a> upon completion of <a class="xref" href="../features/achievement.html">Achievements</a> and <a class="xref" href="../features/skill.html">Skills</a>. Rewards given are stored within EvaluationData, meaning they can in theory be used toward further <a class="xref" href="criteria.html">Criteria</a> and <a class="xref" href="../features/leaderboard.html">Leaderboards</a>.</p>
 <p>In order to set up aa <a class="xref" href="../api/PlayGen.SUGAR.Contracts.RewardCreateRequest.html">RewardCreateRequest</a>, the following must be passed:</p>
 <ul>
-<li><p>Key - The unique identifier for the reward being provided within GameData.</p>
+<li><p>EvaluationDataKey - The identifier for the reward being provided within EvaluationData.</p>
 </li>
-<li><p>DataType - The <a class="xref" href="../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a> of data being stored.</p>
+<li><p>EvaluationDataCategory - The <a class="xref" href="../api/PlayGen.SUGAR.Common.EvaluationDataCategory.html">EvaluationDataCategory</a> of data being stored.</p>
+</li>
+<li><p>EvaluationDataType - The <a class="xref" href="../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a> of data being stored.</p>
 </li>
 <li><p>Value - The value which is being stored.</p>
 </li>
 </ul>
 <h2 id="examples">Examples</h2>
-<p>   Key = &quot;Gold&quot;,<br>   DataType = &quot;Long&quot;,<br>   Value = &quot;15&quot;  </p>
-<p>   Key = &quot;Bonus_Points&quot;,<br>   DataType = &quot;Float&quot;,<br>   Value = &quot;2.5&quot;,  </p>
+<p>   EvaluationDataKey = &quot;Gold&quot;,
+   EvaluationDataCategory = &quot;Resource&quot;,<br>   EvaluationDataType = &quot;Long&quot;,<br>   Value = &quot;15&quot;  </p>
+<p>   EvaluationDataKey = &quot;Bonus_Points&quot;,
+EvaluationDataCategory = &quot;GameData&quot;,<br>   EvaluationDataType = &quot;Float&quot;,<br>   Value = &quot;2.5&quot;,  </p>
 
             </article>
           </div>

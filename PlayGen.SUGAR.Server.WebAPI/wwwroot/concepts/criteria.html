@@ -63,9 +63,14 @@
               <h1 id="evalutation-criteria">Evalutation Criteria</h1>
               
 <p><a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a> are the goals which a <a class="xref" href="../features/user.html">Users</a> or <a class="xref" href="../features/group.html">Group</a> are set in order to complete an <a class="xref" href="../features/achievement.html">Achievement</a> or <a class="xref" href="../features/skill.html">Skills</a>. At least one must be assigned and only information stored within <a class="xref" href="../features/evaluationData.html">EvaluationData</a> can be queried against.</p>
-<p>In order to set up an <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a> , the following must be passed:</p>
+<p>In order to set up an <a class="xref" href="../api/PlayGen.SUGAR.Contracts.EvaluationCriteriaCreateRequest.html">EvaluationCriteriaCreateRequest</a>, the following must be passed:</p>
 <ul>
 <li><p>Key - The fundermental piece of any criteria. All data collected will require the key to match with what is given here.</p>
+</li>
+<li><p><a class="xref" href="../api/PlayGen.SUGAR.Common.EvaluationDataCategory.html">EvaluationDataCategory</a> - The category of EvaluationData being queried against. As with key, only data that matches this category will be collected.</p>
+<ul>
+<li>Example - if &quot;GameData&quot; is given as EvaluationDataCategory, only data also stored as &quot;GameData&quot; will be checked against.</li>
+</ul>
 </li>
 <li><p><a class="xref" href="../api/PlayGen.SUGAR.Common.EvaluationDataType.html">EvaluationDataType</a> - The type of data being queried against. As with key, only data that matches this type will be collected.</p>
 <ul>
@@ -88,8 +93,10 @@
 <li><p><a class="xref" href="../api/PlayGen.SUGAR.Common.CriteriaScope.html">CriteriaScope</a> - The range of data collected for this <a class="xref" href="../features/actor.html">Actor</a>. </p>
 <ul>
 <li>The &quot;Actor&quot; scope only looks at data stored against the actor directly.</li>
-<li>&quot;RelatedActors&quot; will collect data that have a relationship with the provided actor.</li>
-<li>Example - &quot;RelatedActor&quot; could be used with a group to collect data for all members of that group.</li>
+<li>&quot;RelatedUsers&quot; will collect data from users that have a relationship with the provided actor.</li>
+<li>&quot;RelatedGroups&quot; will collect data from groups that have a relationship with the provided actor.</li>
+<li>&quot;RelatedGroupUsers&quot; will collect data from users who are members of groups that have a relationship with the provided actor.</li>
+<li>Example - &quot;RelatedUsers&quot; could be used with a group to collect data for all members of that group.</li>
 </ul>
 </li>
 <li><p>Value - The target value which will be checked evaluated against. Must always be passed as a string.</p>

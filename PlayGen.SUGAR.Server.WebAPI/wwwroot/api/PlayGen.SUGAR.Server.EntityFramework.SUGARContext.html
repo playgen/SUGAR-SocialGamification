@@ -82,20 +82,206 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">SUGARContext</span></div>
+    <div class="level1"><span class="xref">Microsoft.EntityFrameworkCore.DbContext</span></div>
+    <div class="level2"><span class="xref">SUGARContext</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IDisposable</span></div>
+    <div><span class="xref">Microsoft.EntityFrameworkCore.Infrastructure.IInfrastructure</span>&lt;<span class="xref">System.IServiceProvider</span>&gt;</div>
+    <div><span class="xref">Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies</span></div>
+    <div><span class="xref">Microsoft.EntityFrameworkCore.Internal.IDbSetCache</span></div>
+    <div><span class="xref">Microsoft.EntityFrameworkCore.Internal.IDbContextPoolable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbSetCache.GetOrAddSet(Microsoft.EntityFrameworkCore.Internal.IDbSetSource, System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Set&lt;TEntity&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.SaveChanges()</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(System.Threading.CancellationToken)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(System.Boolean, System.Threading.CancellationToken)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextPoolable.SetPool(Microsoft.EntityFrameworkCore.Internal.IDbContextPool)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextPoolable.SnapshotConfiguration()</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextPoolable.Resurrect(Microsoft.EntityFrameworkCore.Internal.DbContextPoolConfigurationSnapshot)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextPoolable.ResetState()</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Dispose()</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Entry&lt;TEntity&gt;(TEntity)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Entry(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Add&lt;TEntity&gt;(TEntity)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.AddAsync&lt;TEntity&gt;(TEntity, System.Threading.CancellationToken)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Attach&lt;TEntity&gt;(TEntity)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Update&lt;TEntity&gt;(TEntity)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Remove&lt;TEntity&gt;(TEntity)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Add(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.AddAsync(System.Object, System.Threading.CancellationToken)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Attach(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Update(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Remove(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.AddRange(System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.AddRangeAsync(System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.AttachRange(System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.UpdateRange(System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.RemoveRange(System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.AddRange(System.Collections.Generic.IEnumerable&lt;System.Object&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.AddRangeAsync(System.Collections.Generic.IEnumerable&lt;System.Object&gt;, System.Threading.CancellationToken)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.AttachRange(System.Collections.Generic.IEnumerable&lt;System.Object&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.UpdateRange(System.Collections.Generic.IEnumerable&lt;System.Object&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.RemoveRange(System.Collections.Generic.IEnumerable&lt;System.Object&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Find(System.Type, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.FindAsync(System.Type, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.FindAsync(System.Type, System.Object[], System.Threading.CancellationToken)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Find&lt;TEntity&gt;(System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.FindAsync&lt;TEntity&gt;(System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.FindAsync&lt;TEntity&gt;(System.Object[], System.Threading.CancellationToken)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Database</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.ChangeTracker</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Model</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.SetSource</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.EntityFinderSource</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.QueryProvider</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.StateManager</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.ChangeDetector</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.EntityGraphAttacher</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.UpdateLogger</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.InfrastructureLogger</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Infrastructure.IInfrastructure&lt;System.IServiceProvider&gt;.Instance</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.html">PlayGen.SUGAR.Server.EntityFramework</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.EntityFramework.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_EntityFramework_SUGARContext_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SUGARContext : DbContext</code></pre>
+    <pre><code class="lang-csharp hljs">public class SUGARContext : DbContext, IDisposable, IInfrastructure&lt;IServiceProvider&gt;, IDbContextDependencies, IDbSetCache, IDbContextPoolable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_SUGARContext__ctor_" data-uid="PlayGen.SUGAR.Server.EntityFramework.SUGARContext.#ctor*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_SUGARContext__ctor_DbContextOptions_PlayGen_SUGAR_Server_EntityFramework_SUGARContext__System_Boolean_" data-uid="PlayGen.SUGAR.Server.EntityFramework.SUGARContext.#ctor(DbContextOptions{PlayGen.SUGAR.Server.EntityFramework.SUGARContext},System.Boolean)">SUGARContext(DbContextOptions&lt;SUGARContext&gt;, Boolean)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_SUGARContext__ctor_Microsoft_EntityFrameworkCore_DbContextOptions_PlayGen_SUGAR_Server_EntityFramework_SUGARContext__System_Boolean_" data-uid="PlayGen.SUGAR.Server.EntityFramework.SUGARContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{PlayGen.SUGAR.Server.EntityFramework.SUGARContext},System.Boolean)">SUGARContext(DbContextOptions&lt;SUGARContext&gt;, Boolean)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -113,7 +299,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbContextOptions</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.SUGARContext.html">SUGARContext</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbContextOptions</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.SUGARContext.html">SUGARContext</a>&gt;</td>
         <td><span class="parametername">options</span></td>
         <td></td>
       </tr>
@@ -146,7 +332,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Account.html">Account</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Account.html">Account</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -171,7 +357,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.AccountSource.html">AccountSource</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.AccountSource.html">AccountSource</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -196,7 +382,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Achievement.html">Achievement</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Achievement.html">Achievement</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -221,7 +407,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorClaim.html">ActorClaim</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorClaim.html">ActorClaim</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -246,7 +432,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorData.html">ActorData</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorData.html">ActorData</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -271,7 +457,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRole.html">ActorRole</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRole.html">ActorRole</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -296,7 +482,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -321,7 +507,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Claim.html">Claim</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Claim.html">Claim</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -346,7 +532,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -371,7 +557,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -396,7 +582,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Game.html">Game</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Game.html">Game</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -421,7 +607,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Group.html">Group</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Group.html">Group</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -446,7 +632,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Leaderboard.html">Leaderboard</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Leaderboard.html">Leaderboard</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -471,7 +657,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Match.html">Match</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Match.html">Match</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -496,7 +682,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationshipRequest.html">ActorRelationshipRequest</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationshipRequest.html">ActorRelationshipRequest</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -521,7 +707,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationship.html">ActorRelationship</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationship.html">ActorRelationship</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -546,7 +732,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.RoleClaim.html">RoleClaim</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.RoleClaim.html">RoleClaim</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -571,7 +757,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Role.html">Role</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Role.html">Role</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -596,7 +782,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.SentEvaluationNotification.html">SentEvaluationNotification</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.SentEvaluationNotification.html">SentEvaluationNotification</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -621,7 +807,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Skill.html">Skill</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Skill.html">Skill</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -646,7 +832,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.User.html">User</a>&gt;</td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.DbSet</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.User.html">User</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -656,7 +842,7 @@
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_SUGARContext_OnModelCreating_" data-uid="PlayGen.SUGAR.Server.EntityFramework.SUGARContext.OnModelCreating*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_SUGARContext_OnModelCreating_ModelBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.SUGARContext.OnModelCreating(ModelBuilder)">OnModelCreating(ModelBuilder)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_SUGARContext_OnModelCreating_Microsoft_EntityFrameworkCore_ModelBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.SUGARContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">OnModelCreating(ModelBuilder)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -674,12 +860,14 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ModelBuilder</span></td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.ModelBuilder</span></td>
         <td><span class="parametername">modelBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Microsoft.EntityFrameworkCore.DbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)</span></div>
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_SUGARContext_SaveChanges_" data-uid="PlayGen.SUGAR.Server.EntityFramework.SUGARContext.SaveChanges*"></a>
@@ -722,9 +910,27 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Microsoft.EntityFrameworkCore.DbContext.SaveChanges(System.Boolean)</span></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
+  <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.Infrastructure.IInfrastructure&lt;T&gt;</span>
+  </div>
+  <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies</span>
+  </div>
+  <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.Internal.IDbSetCache</span>
+  </div>
+  <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.Internal.IDbContextPoolable</span>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Extensions.ActorDataExtensions.html#PlayGen_SUGAR_Server_EntityFramework_Extensions_ActorDataExtensions_FilterByIds_PlayGen_SUGAR_Server_EntityFramework_SUGARContext_List_System_Int32__">ActorDataExtensions.FilterByIds(SUGARContext, List&lt;Int32&gt;)</a>
+      <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Extensions.ActorDataExtensions.html#PlayGen_SUGAR_Server_EntityFramework_Extensions_ActorDataExtensions_FilterByIds_PlayGen_SUGAR_Server_EntityFramework_SUGARContext_System_Collections_Generic_List_System_Int32__">ActorDataExtensions.FilterByIds(SUGARContext, List&lt;Int32&gt;)</a>
   </div>
   <div>
       <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Extensions.ActorDataExtensions.html#PlayGen_SUGAR_Server_EntityFramework_Extensions_ActorDataExtensions_FilterByActorId_PlayGen_SUGAR_Server_EntityFramework_SUGARContext_System_Int32_">ActorDataExtensions.FilterByActorId(SUGARContext, Int32)</a>

@@ -84,21 +84,49 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">EvaluationProgressResponse</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Contracts.html">PlayGen.SUGAR.Contracts</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Contracts.dll</h6>
   <h5 id="PlayGen_SUGAR_Contracts_EvaluationProgressResponse_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class EvaluationProgressResponse : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class EvaluationProgressResponse</code></pre>
   </div>
   <h5 id="PlayGen_SUGAR_Contracts_EvaluationProgressResponse_examples"><strong>Examples</strong></h5>
   <p>JSON
 {
-Actor : [{
-Id : 1,
-Name : &quot;Name&quot;
-}],
-Name : &quot;Achievement Unlocked&quot;,
-Progress : 0
+&quot;Actor&quot; : {
+&quot;Id&quot; : 1,
+&quot;Name&quot; : &quot;Actor Name&quot;
+&quot;Description&quot; : &quot;Description of Actor&quot;
+},
+&quot;Name&quot; : &quot;Achievement Unlocked&quot;,
+&quot;Description&quot; : &quot;Achievement Description&quot;,
+&quot;Progress&quot; : 0,
+&quot;Token&quot;, &quot;ACHIEVEMENT_TOKEN&quot;, 
+&quot;Type&quot; : &quot;Achievement&quot;
 }</p>
 
   <h3 id="properties">Properties

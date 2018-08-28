@@ -84,23 +84,48 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">LeaderboardRequest</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Contracts.html">PlayGen.SUGAR.Contracts</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Contracts.dll</h6>
   <h5 id="PlayGen_SUGAR_Contracts_LeaderboardRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class LeaderboardRequest : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class LeaderboardRequest</code></pre>
   </div>
   <h5 id="PlayGen_SUGAR_Contracts_LeaderboardRequest_examples"><strong>Examples</strong></h5>
   <p>JSON
 {
-Token : &quot;THE_LEADERBOARD_TOKEN&quot;,
-GameId : 1,
-Name : &quot;Leaderboard Name&quot;,
-Key : &quot;Key&quot;,
-ActorType : &quot;User&quot;,
-EvaluationDataType : &quot;Long&quot;,
-CriteriaScope : &quot;Actor&quot;,
-LeaderboardType : &quot;Highest&quot;
+&quot;Token&quot; : &quot;THE_LEADERBOARD_TOKEN&quot;,
+&quot;GameId&quot; : 1,
+&quot;Name&quot; : &quot;Leaderboard Name&quot;,
+&quot;EvaluationDataCategory&quot; : &quot;GameData&quot;,
+&quot;Key&quot; : &quot;Key&quot;,
+&quot;ActorType&quot; : &quot;User&quot;,
+&quot;EvaluationDataType&quot; : &quot;Long&quot;,
+&quot;CriteriaScope&quot; : &quot;Actor&quot;,
+&quot;LeaderboardType&quot; : &quot;Highest&quot;
 }</p>
 
   <h3 id="properties">Properties
@@ -114,7 +139,8 @@ LeaderboardType : &quot;Highest&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ActorType? ActorType { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public ActorType? ActorType { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -140,7 +166,8 @@ LeaderboardType : &quot;Highest&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CriteriaScope? CriteriaScope { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public CriteriaScope? CriteriaScope { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -166,7 +193,8 @@ LeaderboardType : &quot;Highest&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public EvaluationDataCategory? EvaluationDataCategory { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public EvaluationDataCategory? EvaluationDataCategory { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -192,7 +220,8 @@ LeaderboardType : &quot;Highest&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public EvaluationDataType? EvaluationDataType { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public EvaluationDataType? EvaluationDataType { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -218,7 +247,8 @@ LeaderboardType : &quot;Highest&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int? GameId { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public int? GameId { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -244,7 +274,9 @@ LeaderboardType : &quot;Highest&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Key { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+[StringLength(64)]
+public string Key { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -270,7 +302,8 @@ LeaderboardType : &quot;Highest&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LeaderboardType? LeaderboardType { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public LeaderboardType? LeaderboardType { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -296,7 +329,9 @@ LeaderboardType : &quot;Highest&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+[StringLength(64)]
+public string Name { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -322,7 +357,9 @@ LeaderboardType : &quot;Highest&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Token { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+[StringLength(64)]
+public string Token { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">

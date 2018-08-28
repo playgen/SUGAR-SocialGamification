@@ -80,7 +80,6 @@
   <div class="markdown level1 summary"><p>Register a new account and creates an associated user.
 Requires the PlayGen.SUGAR.Contracts.AccountRequest.Name to be unique.
 Returns a JsonWebToken used for authorization in any further calls to the API.</p>
-<p>Example Usage: POST api/account/create</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -132,7 +131,6 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiAccountByIdDelete" class="text-capitalize">ApiAccountByIdDelete</h3>
   <div class="markdown level1 summary"><p>Delete Account with the ID provided.</p>
-<p>Example Usage: DELETE api/account/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -216,8 +214,7 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountSourceFindbyidByIdGet" data-uid="SUGAR Engine REST API/v1/ApiAccountSourceFindbyidByIdGet" class="text-capitalize">ApiAccountSourceFindbyidByIdGet</h3>
-  <div class="markdown level1 summary"><p>Get AccountSource that matches <param name="id"> provided.</p>
-<p>Example Usage: GET api/accountSource/findbyid/1</p>
+  <div class="markdown level1 summary"><p>Get AccountSource that matches the id provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -238,7 +235,8 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
         <td><span class="parametername">*id</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>AccountSource id</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -269,7 +267,6 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountSourcePost" data-uid="SUGAR Engine REST API/v1/ApiAccountSourcePost" class="text-capitalize">ApiAccountSourcePost</h3>
   <div class="markdown level1 summary"><p>Create a new AccountSource.
 Requires the PlayGen.SUGAR.Contracts.AccountSourceRequest.Token to be unique.</p>
-<p>Example Usage: POST api/accountSource</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -321,7 +318,6 @@ Requires the PlayGen.SUGAR.Contracts.AccountSourceRequest.Token to be unique.</p
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountSourceUpdateByIdPut" data-uid="SUGAR Engine REST API/v1/ApiAccountSourceUpdateByIdPut" class="text-capitalize">ApiAccountSourceUpdateByIdPut</h3>
   <div class="markdown level1 summary"><p>Update an existing AccountSource.</p>
-<p>Example Usage: PUT api/accountSource/update/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -380,7 +376,6 @@ Requires the PlayGen.SUGAR.Contracts.AccountSourceRequest.Token to be unique.</p
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAccountSourceByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiAccountSourceByIdDelete" class="text-capitalize">ApiAccountSourceByIdDelete</h3>
   <div class="markdown level1 summary"><p>Delete AccountSource with the ID provided.</p>
-<p>Example Usage: DELETE api/accountSource/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -432,8 +427,8 @@ Requires the PlayGen.SUGAR.Contracts.AccountSourceRequest.Token to be unique.</p
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsFindByTokenByGameIdGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsFindByTokenByGameIdGet" class="text-capitalize">ApiAchievementsFindByTokenByGameIdGet</h3>
-  <div class="markdown level1 summary"><p>Find an Achievement that matches <param name="token"> and <param name="gameId">.</p>
-<p>Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Find an Achievement that matches the token and gameId provided.
+If global is provided instead of a gameId, get the global Achievement that is not associated with a specific game with the provided token.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -491,8 +486,8 @@ Requires the PlayGen.SUGAR.Contracts.AccountSourceRequest.Token to be unique.</p
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsFindByTokenGlobalGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsFindByTokenGlobalGet" class="text-capitalize">ApiAchievementsFindByTokenGlobalGet</h3>
-  <div class="markdown level1 summary"><p>Find an Achievement that matches <param name="token"> and <param name="gameId">.</p>
-<p>Example Usage: GET api/achievements/find/ACHIEVEMENT_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Find an Achievement that matches the token and gameId provided.
+If global is provided instead of a gameId, get the global Achievement that is not associated with a specific game with the provided token.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -550,9 +545,8 @@ Requires the PlayGen.SUGAR.Contracts.AccountSourceRequest.Token to be unique.</p
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsGlobalListGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsGlobalListGet" class="text-capitalize">ApiAchievementsGlobalListGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of Achievements that match <param name="gameId">.
+  <div class="markdown level1 summary"><p>Find a list of Achievements for the gameId provided.
 If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.</p>
-<p>Example Usage: GET api/achievements/game/1/list</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -603,9 +597,8 @@ If global is provided instead of a gameId, get all global achievements, ie. achi
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsGameByGameIdListGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsGameByGameIdListGet" class="text-capitalize">ApiAchievementsGameByGameIdListGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of Achievements that match <param name="gameId">.
+  <div class="markdown level1 summary"><p>Find a list of Achievements for the gameId provided.
 If global is provided instead of a gameId, get all global achievements, ie. achievements that are not associated with a specific game.</p>
-<p>Example Usage: GET api/achievements/game/1/list</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -656,8 +649,8 @@ If global is provided instead of a gameId, get all global achievements, ie. achi
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsGameByGameIdEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsGameByGameIdEvaluateByActorIdGet" class="text-capitalize">ApiAchievementsGameByGameIdEvaluateByActorIdGet</h3>
-  <div class="markdown level1 summary"><p>Find the current progress for all achievements for a <param name="gameId"> for <param name="actorId">.</p>
-<p>Example Usage: GET api/achievements/game/1/evaluate/1</p>
+  <div class="markdown level1 summary"><p>Find the current progress for all achievements for a gameId for actorId.
+If global is provided instead of a gameId, get all progress for global achievements, ie. achievements that are not associated with a specific game.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -715,8 +708,8 @@ If global is provided instead of a gameId, get all global achievements, ie. achi
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsGlobalEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsGlobalEvaluateByActorIdGet" class="text-capitalize">ApiAchievementsGlobalEvaluateByActorIdGet</h3>
-  <div class="markdown level1 summary"><p>Find the current progress for all achievements for a <param name="gameId"> for <param name="actorId">.</p>
-<p>Example Usage: GET api/achievements/game/1/evaluate/1</p>
+  <div class="markdown level1 summary"><p>Find the current progress for all achievements for a gameId for actorId.
+If global is provided instead of a gameId, get all progress for global achievements, ie. achievements that are not associated with a specific game.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -774,8 +767,8 @@ If global is provided instead of a gameId, get all global achievements, ie. achi
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsByTokenByGameIdEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsByTokenByGameIdEvaluateByActorIdGet" class="text-capitalize">ApiAchievementsByTokenByGameIdEvaluateByActorIdGet</h3>
-  <div class="markdown level1 summary"><p>Find the current progress for an Achievement for <param name="actorId">.</p>
-<p>Example Usage: GET api/achievements/ACHIEVEMENT_TOKEN/1/evaluate/1</p>
+  <div class="markdown level1 summary"><p>Find the current progress for the Achievement with the provided token and gameId for the actorId.
+If global is provided instead of a gameId, get progress for a global achievement with the token provided, ie. an achievement that is not associated with a specific game.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -840,8 +833,8 @@ If global is provided instead of a gameId, get all global achievements, ie. achi
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsByTokenGlobalEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiAchievementsByTokenGlobalEvaluateByActorIdGet" class="text-capitalize">ApiAchievementsByTokenGlobalEvaluateByActorIdGet</h3>
-  <div class="markdown level1 summary"><p>Find the current progress for an Achievement for <param name="actorId">.</p>
-<p>Example Usage: GET api/achievements/ACHIEVEMENT_TOKEN/1/evaluate/1</p>
+  <div class="markdown level1 summary"><p>Find the current progress for the Achievement with the provided token and gameId for the actorId.
+If global is provided instead of a gameId, get progress for a global achievement with the token provided, ie. an achievement that is not associated with a specific game.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -908,7 +901,6 @@ If global is provided instead of a gameId, get all global achievements, ie. achi
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsCreatePost" data-uid="SUGAR Engine REST API/v1/ApiAchievementsCreatePost" class="text-capitalize">ApiAchievementsCreatePost</h3>
   <div class="markdown level1 summary"><p>Create a new Achievement.
 Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to that PlayGen.SUGAR.Contracts.EvaluationCreateRequest.GameId.</p>
-<p>Example Usage: POST api/achievements/create</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -960,7 +952,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsUpdatePut" data-uid="SUGAR Engine REST API/v1/ApiAchievementsUpdatePut" class="text-capitalize">ApiAchievementsUpdatePut</h3>
   <div class="markdown level1 summary"><p>Update an existing Achievement.</p>
-<p>Example Usage: PUT api/achievements/update</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1011,8 +1002,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsByTokenGlobalDelete" data-uid="SUGAR Engine REST API/v1/ApiAchievementsByTokenGlobalDelete" class="text-capitalize">ApiAchievementsByTokenGlobalDelete</h3>
-  <div class="markdown level1 summary"><p>Delete Achievement with the <param name="token"> and <param name="gameId"> provided.</p>
-<p>Example Usage: DELETE api/achievements/ACHIEVEMENT_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Delete the Achievement with the token and gameId provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1070,8 +1060,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAchievementsByTokenByGameIdDelete" data-uid="SUGAR Engine REST API/v1/ApiAchievementsByTokenByGameIdDelete" class="text-capitalize">ApiAchievementsByTokenByGameIdDelete</h3>
-  <div class="markdown level1 summary"><p>Delete Achievement with the <param name="token"> and <param name="gameId"> provided.</p>
-<p>Example Usage: DELETE api/achievements/ACHIEVEMENT_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Delete the Achievement with the token and gameId provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1131,7 +1120,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorClaimClaimByClaimIdEntityByEntityIdGet" data-uid="SUGAR Engine REST API/v1/ApiActorClaimClaimByClaimIdEntityByEntityIdGet" class="text-capitalize">ApiActorClaimClaimByClaimIdEntityByEntityIdGet</h3>
   <div class="markdown level1 summary"><p>Get a list of all Actors for this Claim and Entity.</p>
-<p>Example Usage: GET api/actorclaim/claim/1/entity/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1152,13 +1140,15 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
         <td><span class="parametername">*claimId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Id of the Claim</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*entityId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Id of the Entity</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1188,7 +1178,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorClaimActorByIdGet" data-uid="SUGAR Engine REST API/v1/ApiActorClaimActorByIdGet" class="text-capitalize">ApiActorClaimActorByIdGet</h3>
   <div class="markdown level1 summary"><p>Get a list of all Claims for this Actor.</p>
-<p>Example Usage: GET api/actorclaim/actor/1/</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1209,7 +1198,8 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
         <td><span class="parametername">*id</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Id of the Actor</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1239,7 +1229,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorClaimPost" data-uid="SUGAR Engine REST API/v1/ApiActorClaimPost" class="text-capitalize">ApiActorClaimPost</h3>
   <div class="markdown level1 summary"><p>Create a new ActorClaim.</p>
-<p>Example Usage: POST api/actorclaim</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1291,7 +1280,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorClaimByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiActorClaimByIdDelete" class="text-capitalize">ApiActorClaimByIdDelete</h3>
   <div class="markdown level1 summary"><p>Delete ActorClaim with the ID provided.</p>
-<p>Example Usage: DELETE api/actorclaim/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1343,8 +1331,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorDataGet" data-uid="SUGAR Engine REST API/v1/ApiActorDataGet" class="text-capitalize">ApiActorDataGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of all ActorData that match the <param name="actorId">, <param name="gameId"> and <param name="key"> provided.</p>
-<p>Example Usage: GET api/actordata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2</p>
+  <div class="markdown level1 summary"><p>Find a list of all ActorData that match the actorId, gameId and keys provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1410,7 +1397,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorDataPost" data-uid="SUGAR Engine REST API/v1/ApiActorDataPost" class="text-capitalize">ApiActorDataPost</h3>
   <div class="markdown level1 summary"><p>Create a new ActorData record.</p>
-<p>Example Usage: POST api/actordata</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1463,7 +1449,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorRoleRoleByRoleIdEntityByEntityIdGet" data-uid="SUGAR Engine REST API/v1/ApiActorRoleRoleByRoleIdEntityByEntityIdGet" class="text-capitalize">ApiActorRoleRoleByRoleIdEntityByEntityIdGet</h3>
   <div class="markdown level1 summary"><p>Get a list of all Actors for this Role and Entity.</p>
-<p>Example Usage: GET api/actorrole/role/1/entity/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1520,7 +1505,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorRoleActorByActorIdEntityByEntityIdClaimscopeByScopeNameGet" data-uid="SUGAR Engine REST API/v1/ApiActorRoleActorByActorIdEntityByEntityIdClaimscopeByScopeNameGet" class="text-capitalize">ApiActorRoleActorByActorIdEntityByEntityIdClaimscopeByScopeNameGet</h3>
   <div class="markdown level1 summary"><p>Get a list of all Roles for this Actor, ClaimScope and Entity.</p>
-<p>Example Usage: GET api/actorrole/actor/1/entity/1/claimscope/game</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1582,8 +1566,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorRoleControlledGet" data-uid="SUGAR Engine REST API/v1/ApiActorRoleControlledGet" class="text-capitalize">ApiActorRoleControlledGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Roles this Actor has control over.</p>
-<p>Example Usage: GET api/actorrole/controlled</p>
+  <div class="markdown level1 summary"><p>Get a list of all Roles the signed in Actor has control over.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1615,7 +1598,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorRolePost" data-uid="SUGAR Engine REST API/v1/ApiActorRolePost" class="text-capitalize">ApiActorRolePost</h3>
   <div class="markdown level1 summary"><p>Create a new ActorRole.</p>
-<p>Example Usage: POST api/actorrole</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1667,7 +1649,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiActorRoleByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiActorRoleByIdDelete" class="text-capitalize">ApiActorRoleByIdDelete</h3>
   <div class="markdown level1 summary"><p>Delete ActorRole with the ID provided.</p>
-<p>Example Usage: DELETE api/actorrole/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1719,8 +1700,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAllianceRequestsByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiAllianceRequestsByGroupIdGet" class="text-capitalize">ApiAllianceRequestsByGroupIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all groups that have relationship requests for this <param name="groupId">.</p>
-<p>Example Usage: GET api/alliance/requests/1</p>
+  <div class="markdown level1 summary"><p>Get a list of all groups that have sent relationship requests to this groupId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1771,8 +1751,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAllianceSentrequestsByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiAllianceSentrequestsByGroupIdGet" class="text-capitalize">ApiAllianceSentrequestsByGroupIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Groups that have been sent relationship requests for this <param name="groupId">.</p>
-<p>Example Usage: GET api/alliance/sentrequests/1</p>
+  <div class="markdown level1 summary"><p>Get a list of all Groups that have been sent relationship requests from this groupId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1823,8 +1802,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAllianceByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiAllianceByGroupIdGet" class="text-capitalize">ApiAllianceByGroupIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all groups that have relationships with this <param name="groupId">.</p>
-<p>Example Usage: GET api/alliance/1</p>
+  <div class="markdown level1 summary"><p>Get a list of all groups that have relationships with this groupId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1875,8 +1853,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAllianceCountByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiAllianceCountByGroupIdGet" class="text-capitalize">ApiAllianceCountByGroupIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a count of groups that have a relationship with this <param name="groupId">.</p>
-<p>Example Usage: GET api/alliances/count/1</p>
+  <div class="markdown level1 summary"><p>Get a count of groups that have a relationship with this groupId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1927,9 +1904,8 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAlliancePut" data-uid="SUGAR Engine REST API/v1/ApiAlliancePut" class="text-capitalize">ApiAlliancePut</h3>
-  <div class="markdown level1 summary"><p>Update an existing relationship between <param name="relationship.requestorId.requestorId"> and <param name="relationship.acceptorID.acceptorID">.
-Requires the relationship to already exist between the User and Group.</p>
-<p>Example Usage: PUT api/alliance</p>
+  <div class="markdown level1 summary"><p>Update an existing relationship between two Groups.
+Requires the relationship to already exist between the two Groups.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -1980,9 +1956,8 @@ Requires the relationship to already exist between the User and Group.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAlliancePost" data-uid="SUGAR Engine REST API/v1/ApiAlliancePost" class="text-capitalize">ApiAlliancePost</h3>
-  <div class="markdown level1 summary"><p>Create a new relationship request between a Group and Group.
-Requires a relationship between the User and Group to not already exist.</p>
-<p>Example Usage: POST api/alliance</p>
+  <div class="markdown level1 summary"><p>Create a new relationship request between a Group and a Group.
+Requires a relationship between the Groups to not already exist.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2033,9 +2008,8 @@ Requires a relationship between the User and Group to not already exist.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiAllianceRequestPut" data-uid="SUGAR Engine REST API/v1/ApiAllianceRequestPut" class="text-capitalize">ApiAllianceRequestPut</h3>
-  <div class="markdown level1 summary"><p>Update an existing relationship request between <param name="relationship.requestorId.requestorId"> and <param name="relationship.acceptorID.acceptorID">.
-Requires the relationship request to already exist between a Group and Group.</p>
-<p>Example Usage: PUT api/alliancer/request</p>
+  <div class="markdown level1 summary"><p>Update an existing relationship request between two Groups.
+Requires the relationship request to already exist between the two Groups.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2088,7 +2062,6 @@ Requires the relationship request to already exist between a Group and Group.</p
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameListGet" data-uid="SUGAR Engine REST API/v1/ApiGameListGet" class="text-capitalize">ApiGameListGet</h3>
   <div class="markdown level1 summary"><p>Get a list of all Games.</p>
-<p>Example Usage: GET api/game/list</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2119,8 +2092,7 @@ Requires the relationship request to already exist between a Group and Group.</p
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameControlledGet" data-uid="SUGAR Engine REST API/v1/ApiGameControlledGet" class="text-capitalize">ApiGameControlledGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Games this Actor has control over.</p>
-<p>Example Usage: GET api/game/controlled</p>
+  <div class="markdown level1 summary"><p>Get a list of all Games the signed in User has control over.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2151,8 +2123,7 @@ Requires the relationship request to already exist between a Group and Group.</p
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameFindByNameGet" data-uid="SUGAR Engine REST API/v1/ApiGameFindByNameGet" class="text-capitalize">ApiGameFindByNameGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of Games that match <param name="name"> provided.</p>
-<p>Example Usage: GET api/game/find/game1</p>
+  <div class="markdown level1 summary"><p>Get a list of Games whose name contains the name provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2203,8 +2174,7 @@ Requires the relationship request to already exist between a Group and Group.</p
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameFindbyidByIdGet" data-uid="SUGAR Engine REST API/v1/ApiGameFindbyidByIdGet" class="text-capitalize">ApiGameFindbyidByIdGet</h3>
-  <div class="markdown level1 summary"><p>Get Game that matches <param name="id"> provided.</p>
-<p>Example Usage: GET api/game/findbyid/1</p>
+  <div class="markdown level1 summary"><p>Get Game that matches the id provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2257,7 +2227,6 @@ Requires the relationship request to already exist between a Group and Group.</p
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGamePost" data-uid="SUGAR Engine REST API/v1/ApiGamePost" class="text-capitalize">ApiGamePost</h3>
   <div class="markdown level1 summary"><p>Create a new Game.
 Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
-<p>Example Usage: POST api/game</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2309,7 +2278,6 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameUpdateByIdPut" data-uid="SUGAR Engine REST API/v1/ApiGameUpdateByIdPut" class="text-capitalize">ApiGameUpdateByIdPut</h3>
   <div class="markdown level1 summary"><p>Update an existing Game.</p>
-<p>Example Usage: PUT api/game/update/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2368,7 +2336,6 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiGameByIdDelete" class="text-capitalize">ApiGameByIdDelete</h3>
   <div class="markdown level1 summary"><p>Delete Game with the ID provided.</p>
-<p>Example Usage: DELETE api/game/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2420,7 +2387,7 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameDataGet" data-uid="SUGAR Engine REST API/v1/ApiGameDataGet" class="text-capitalize">ApiGameDataGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of all GameData that match the <param name="actorId">, <param name="gameId"> and <param name="key"> provided.</p>
+  <div class="markdown level1 summary"><p>Find a list of all GameData that match the actorId, gameId and key provided.</p>
 <p>Example Usage: GET api/gamedata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2</p>
 </div>
   <h5>Request</h5>
@@ -2487,7 +2454,6 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameDataPost" data-uid="SUGAR Engine REST API/v1/ApiGameDataPost" class="text-capitalize">ApiGameDataPost</h3>
   <div class="markdown level1 summary"><p>Create a new GameData record.</p>
-<p>Example Usage: POST api/gamedata</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2538,8 +2504,7 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameDataGameactorsByIdGet" data-uid="SUGAR Engine REST API/v1/ApiGameDataGameactorsByIdGet" class="text-capitalize">ApiGameDataGameactorsByIdGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of all Actors that have data saved for the game <param name="id"> provided.</p>
-<p>Example Usage: GET api/gamedata/gameactors/1</p>
+  <div class="markdown level1 summary"><p>Find a list of all Actors that have data saved for the game id provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2590,8 +2555,7 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameDataGamekeysByIdGet" data-uid="SUGAR Engine REST API/v1/ApiGameDataGamekeysByIdGet" class="text-capitalize">ApiGameDataGamekeysByIdGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of all GameData keys for the <param name="id"> provided.</p>
-<p>Example Usage: GET api/gamedata/gamekeys/1</p>
+  <div class="markdown level1 summary"><p>Find a list of all GameData keys for the game id provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2642,8 +2606,7 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGameDataLeaderboardTypeByActorIdByGameIdByKeyByDataTypeBySortTypeGet" data-uid="SUGAR Engine REST API/v1/ApiGameDataLeaderboardTypeByActorIdByGameIdByKeyByDataTypeBySortTypeGet" class="text-capitalize">ApiGameDataLeaderboardTypeByActorIdByGameIdByKeyByDataTypeBySortTypeGet</h3>
-  <div class="markdown level1 summary"><p>Find GameData that matches the <param name="actorId">, <param name="gameId">, <param name="key">, <param name="dataType"> and <param name="sortType"> provided.</p>
-<p>Example Usage: GET api/gamedata/leaderboardType/1/1/datakey/long/highest</p>
+  <div class="markdown level1 summary"><p>Find GameData that matches the actorId, gameId, key, dataType and sortType provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2692,7 +2655,8 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
         <td><span class="parametername">*sortType</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>How the data point will be selected from the available range</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2723,7 +2687,6 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupListGet" data-uid="SUGAR Engine REST API/v1/ApiGroupListGet" class="text-capitalize">ApiGroupListGet</h3>
   <div class="markdown level1 summary"><p>Get a list of all Groups.</p>
-<p>Example Usage: GET api/group/list</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2754,8 +2717,7 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupControlledGet" data-uid="SUGAR Engine REST API/v1/ApiGroupControlledGet" class="text-capitalize">ApiGroupControlledGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Groups this Actor has control over.</p>
-<p>Example Usage: GET api/group/controlled</p>
+  <div class="markdown level1 summary"><p>Get a list of all Groups the signed in User has control over.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2786,8 +2748,7 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupFindByNameGet" data-uid="SUGAR Engine REST API/v1/ApiGroupFindByNameGet" class="text-capitalize">ApiGroupFindByNameGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of Groups that match <param name="name"> provided.</p>
-<p>Example Usage: GET api/group/find/group1</p>
+  <div class="markdown level1 summary"><p>Get a list of Groups whose name contain the name provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2838,8 +2799,7 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupFindbyidByIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupFindbyidByIdGet" class="text-capitalize">ApiGroupFindbyidByIdGet</h3>
-  <div class="markdown level1 summary"><p>Get Group that matches <param name="id"> provided.</p>
-<p>Example Usage: GET api/group/findbyid/1</p>
+  <div class="markdown level1 summary"><p>Get Group that matches the id provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2891,8 +2851,7 @@ Requires the PlayGen.SUGAR.Contracts.GameRequest.Name to be unique.</p>
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupPost" data-uid="SUGAR Engine REST API/v1/ApiGroupPost" class="text-capitalize">ApiGroupPost</h3>
   <div class="markdown level1 summary"><p>Create a new Group.
-Requires the !:GroupRequest.Name to be unique for Groups.</p>
-<p>Example Usage: POST api/group</p>
+Requires the PlayGen.SUGAR.Contracts.GroupRequest Name to be unique for Groups.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -2944,7 +2903,6 @@ Requires the !:GroupRequest.Name to be unique for Groups.</p>
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupUpdateByIdPut" data-uid="SUGAR Engine REST API/v1/ApiGroupUpdateByIdPut" class="text-capitalize">ApiGroupUpdateByIdPut</h3>
   <div class="markdown level1 summary"><p>Update an existing Group.</p>
-<p>Example Usage: PUT api/group/update/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3002,8 +2960,7 @@ Requires the !:GroupRequest.Name to be unique for Groups.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiGroupByIdDelete" class="text-capitalize">ApiGroupByIdDelete</h3>
-  <div class="markdown level1 summary"><p>Delete group with the <param name="id"> provided.</p>
-<p>Example Usage: DELETE api/group/1</p>
+  <div class="markdown level1 summary"><p>Delete Group with the id provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3055,8 +3012,7 @@ Requires the !:GroupRequest.Name to be unique for Groups.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberRequestsByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberRequestsByGroupIdGet" class="text-capitalize">ApiGroupMemberRequestsByGroupIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Users that have relationship requests for this <param name="groupId">.</p>
-<p>Example Usage: GET api/groupmember/requests/1</p>
+  <div class="markdown level1 summary"><p>Get a list of all Users that have sent relationship requests to this groupId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3107,8 +3063,7 @@ Requires the !:GroupRequest.Name to be unique for Groups.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberSentrequestsByUserIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberSentrequestsByUserIdGet" class="text-capitalize">ApiGroupMemberSentrequestsByUserIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Groups that have been sent relationship requests for this <param name="userId">.</p>
-<p>Example Usage: GET api/groupmember/sentrequests/1</p>
+  <div class="markdown level1 summary"><p>Get a list of all Groups that have been sent relationship requests for this userId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3159,8 +3114,7 @@ Requires the !:GroupRequest.Name to be unique for Groups.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberMembersByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberMembersByGroupIdGet" class="text-capitalize">ApiGroupMemberMembersByGroupIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Users that have relationships with this <param name="groupId">.</p>
-<p>Example Usage: GET api/groupmember/members/1</p>
+  <div class="markdown level1 summary"><p>Get a list of all Users that have relationships with this groupId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3211,8 +3165,7 @@ Requires the !:GroupRequest.Name to be unique for Groups.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberMembercountByGroupIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberMembercountByGroupIdGet" class="text-capitalize">ApiGroupMemberMembercountByGroupIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a count of users that have a relationship with this <param name="groupId">.</p>
-<p>Example Usage: GET api/groupmember/membercount/1</p>
+  <div class="markdown level1 summary"><p>Get a count of users that have a relationship with this groupId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3263,8 +3216,7 @@ Requires the !:GroupRequest.Name to be unique for Groups.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberUsergroupsByUserIdGet" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberUsergroupsByUserIdGet" class="text-capitalize">ApiGroupMemberUsergroupsByUserIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Groups that have relationships with this <param name="userId">.</p>
-<p>Example Usage: GET api/groupmember/usergroups/1</p>
+  <div class="markdown level1 summary"><p>Get a list of all Groups that have a relationship with this userId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3315,9 +3267,8 @@ Requires the !:GroupRequest.Name to be unique for Groups.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberPut" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberPut" class="text-capitalize">ApiGroupMemberPut</h3>
-  <div class="markdown level1 summary"><p>Update an existing relationship between <param name="relationship.UserId.UserId"> and <param name="relationship.GroupId.GroupId">.
+  <div class="markdown level1 summary"><p>Update an existing relationship between a User and a Group.
 Requires the relationship to already exist between the User and Group.</p>
-<p>Example Usage: PUT api/groupmember</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3368,9 +3319,8 @@ Requires the relationship to already exist between the User and Group.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberPost" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberPost" class="text-capitalize">ApiGroupMemberPost</h3>
-  <div class="markdown level1 summary"><p>Create a new relationship request between the User and Group.
+  <div class="markdown level1 summary"><p>Create a new relationship request between a User and Group.
 Requires a relationship between the User and Group to not already exist.</p>
-<p>Example Usage: POST api/groupmember</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3421,9 +3371,8 @@ Requires a relationship between the User and Group to not already exist.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiGroupMemberRequestPut" data-uid="SUGAR Engine REST API/v1/ApiGroupMemberRequestPut" class="text-capitalize">ApiGroupMemberRequestPut</h3>
-  <div class="markdown level1 summary"><p>Update an existing relationship request between <param name="relationship.UserId.UserId"> and <param name="relationship.GroupId.GroupId">.
+  <div class="markdown level1 summary"><p>Update an existing relationship request between a User and a Group.
 Requires the relationship request to already exist between the User and Group.</p>
-<p>Example Usage: PUT api/groupmember/request</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3475,9 +3424,8 @@ Requires the relationship request to already exist between the User and Group.</
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsGlobalListGet" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsGlobalListGet" class="text-capitalize">ApiLeaderboardsGlobalListGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of leaderboards that match <param name="gameId">.
+  <div class="markdown level1 summary"><p>Find a list of leaderboards that match the gameId provided.
 If global is provided instead of a gameId, get all global leaderboards, ie. leaderboards that are not associated with a specific game.</p>
-<p>Example Usage: GET api/leaderboards/game/1/list</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3528,9 +3476,8 @@ If global is provided instead of a gameId, get all global leaderboards, ie. lead
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsGameByGameIdListGet" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsGameByGameIdListGet" class="text-capitalize">ApiLeaderboardsGameByGameIdListGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of leaderboards that match <param name="gameId">.
+  <div class="markdown level1 summary"><p>Find a list of leaderboards that match the gameId provided.
 If global is provided instead of a gameId, get all global leaderboards, ie. leaderboards that are not associated with a specific game.</p>
-<p>Example Usage: GET api/leaderboards/game/1/list</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3581,8 +3528,8 @@ If global is provided instead of a gameId, get all global leaderboards, ie. lead
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsByTokenGlobalGet" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsByTokenGlobalGet" class="text-capitalize">ApiLeaderboardsByTokenGlobalGet</h3>
-  <div class="markdown level1 summary"><p>Find a single leaderboard matching the token and gameId.</p>
-<p>Example Usage: GET api/leaderboards/LEADERBOARD_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Find a single leaderboard matching the token and gameId.
+If global is provided instead of a gameId, get a global leaderboard with a matching token.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3603,14 +3550,15 @@ If global is provided instead of a gameId, get all global leaderboards, ie. lead
         <td><span class="parametername">*token</span></td>
         <td>string</td>
         <td></td>
-        <td><p>Token</p>
+        <td><p>Token of the leaderboard</p>
 </td>
       </tr>
       <tr>
         <td><span class="parametername">*gameId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Game ID</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3639,8 +3587,8 @@ If global is provided instead of a gameId, get all global leaderboards, ie. lead
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsByTokenGlobalDelete" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsByTokenGlobalDelete" class="text-capitalize">ApiLeaderboardsByTokenGlobalDelete</h3>
-  <div class="markdown level1 summary"><p>Delete Leaderboard with the <param name="token"> and <param name="gameId"> provided.</p>
-<p>Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Delete Leaderboard with the token and gameId provided.
+If global is provided instead of a gameId, delete a global leaderboard with a matching token.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3698,8 +3646,8 @@ If global is provided instead of a gameId, get all global leaderboards, ie. lead
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsByTokenByGameIdGet" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsByTokenByGameIdGet" class="text-capitalize">ApiLeaderboardsByTokenByGameIdGet</h3>
-  <div class="markdown level1 summary"><p>Find a single leaderboard matching the token and gameId.</p>
-<p>Example Usage: GET api/leaderboards/LEADERBOARD_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Find a single leaderboard matching the token and gameId.
+If global is provided instead of a gameId, get a global leaderboard with a matching token.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3720,14 +3668,15 @@ If global is provided instead of a gameId, get all global leaderboards, ie. lead
         <td><span class="parametername">*token</span></td>
         <td>string</td>
         <td></td>
-        <td><p>Token</p>
+        <td><p>Token of the leaderboard</p>
 </td>
       </tr>
       <tr>
         <td><span class="parametername">*gameId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Game ID</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -3756,8 +3705,8 @@ If global is provided instead of a gameId, get all global leaderboards, ie. lead
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsByTokenByGameIdDelete" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsByTokenByGameIdDelete" class="text-capitalize">ApiLeaderboardsByTokenByGameIdDelete</h3>
-  <div class="markdown level1 summary"><p>Delete Leaderboard with the <param name="token"> and <param name="gameId"> provided.</p>
-<p>Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Delete Leaderboard with the token and gameId provided.
+If global is provided instead of a gameId, delete a global leaderboard with a matching token.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3816,8 +3765,7 @@ If global is provided instead of a gameId, get all global leaderboards, ie. lead
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsCreatePost" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsCreatePost" class="text-capitalize">ApiLeaderboardsCreatePost</h3>
   <div class="markdown level1 summary"><p>Create a new Leaderboard.
-Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contracts.LeaderboardRequest.Token to be unique to that PlayGen.SUGAR.Contracts.LeaderboardRequest.GameId.</p>
-<p>Example Usage: POST api/leaderboards/create</p>
+Requires PlayGen.SUGAR.Contracts.LeaderboardRequest Name and Token to be unique to that GameId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3869,7 +3817,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsStandingsPost" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsStandingsPost" class="text-capitalize">ApiLeaderboardsStandingsPost</h3>
   <div class="markdown level1 summary"><p>Get the standings for a Leaderboard using a PlayGen.SUGAR.Contracts.LeaderboardStandingsRequest.</p>
-<p>Example Usage: POST api/leaderboards/standings</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3921,7 +3868,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiLeaderboardsUpdatePut" data-uid="SUGAR Engine REST API/v1/ApiLeaderboardsUpdatePut" class="text-capitalize">ApiLeaderboardsUpdatePut</h3>
   <div class="markdown level1 summary"><p>Update an existing Leaderboard.</p>
-<p>Example Usage: PUT api/leaderboards/update</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3974,7 +3920,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchCreateByGameIdGet" data-uid="SUGAR Engine REST API/v1/ApiMatchCreateByGameIdGet" class="text-capitalize">ApiMatchCreateByGameIdGet</h3>
   <div class="markdown level1 summary"><p>Method for admins to creates a match for a game they are not logged into.</p>
-<p>Example Usage: GET api/match/create/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -3995,7 +3940,8 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*gameId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Game ID</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4025,7 +3971,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchCreateGet" data-uid="SUGAR Engine REST API/v1/ApiMatchCreateGet" class="text-capitalize">ApiMatchCreateGet</h3>
   <div class="markdown level1 summary"><p>Method to create a match for a game a user is currently logged into</p>
-<p>Example Usage: GET api/match/create</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4057,7 +4002,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchCreateandstartGet" data-uid="SUGAR Engine REST API/v1/ApiMatchCreateandstartGet" class="text-capitalize">ApiMatchCreateandstartGet</h3>
   <div class="markdown level1 summary"><p>Method to create a match for a game a user is currently logged into which is also started automatically.</p>
-<p>Example Usage: GET api/match/create</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4089,7 +4033,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchByMatchIdStartGet" data-uid="SUGAR Engine REST API/v1/ApiMatchByMatchIdStartGet" class="text-capitalize">ApiMatchByMatchIdStartGet</h3>
   <div class="markdown level1 summary"><p>Start a match for the game the user is currently logged into.</p>
-<p>Example Usage: GET api/match/1/start</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4110,7 +4053,8 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*matchId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Match ID</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4140,7 +4084,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchByMatchIdEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchByMatchIdEndGet" class="text-capitalize">ApiMatchByMatchIdEndGet</h3>
   <div class="markdown level1 summary"><p>Ends a match for the game that the user is currently logged in for.</p>
-<p>Example Usage: GET api/match/1/end</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4161,7 +4104,8 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*matchId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Match ID</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4191,7 +4135,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchByGameIdByMatchIdEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchByGameIdByMatchIdEndGet" class="text-capitalize">ApiMatchByGameIdByMatchIdEndGet</h3>
   <div class="markdown level1 summary"><p>Method for admins to end a match for a game they are not logged into.</p>
-<p>Example Usage: GET api/match/1/end</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4212,13 +4155,15 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*gameId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Game ID</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*matchId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Match ID</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4248,7 +4193,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchByStartByEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchByStartByEndGet" class="text-capitalize">ApiMatchByStartByEndGet</h3>
   <div class="markdown level1 summary"><p>Get a list of matches filtered by a time range.</p>
-<p>Example Usage: GET api/match/2016-12-20T15:40:30/2016-12-20T16:50:40</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4269,13 +4213,15 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*start</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>Earliest time</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*end</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>Latest time</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4305,7 +4251,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchGameByGameIdGet" data-uid="SUGAR Engine REST API/v1/ApiMatchGameByGameIdGet" class="text-capitalize">ApiMatchGameByGameIdGet</h3>
   <div class="markdown level1 summary"><p>Get a list of matches for a specific game.</p>
-<p>Example Usage: GET api/match/game/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4326,7 +4271,8 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*gameId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Game ID</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4356,7 +4302,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchGameByGameIdByStartByEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchGameByGameIdByStartByEndGet" class="text-capitalize">ApiMatchGameByGameIdByStartByEndGet</h3>
   <div class="markdown level1 summary"><p>Get a list of matches for a specific game, filtered by a time range.</p>
-<p>Example Usage: GET api/match/game/1/2016-12-20T15:40:30/2016-12-20T16:50:40</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4377,19 +4322,22 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*gameId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Game ID</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*start</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>Earliest time</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*end</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>Latest time</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4419,7 +4367,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchCreatorByCreatorIdGet" data-uid="SUGAR Engine REST API/v1/ApiMatchCreatorByCreatorIdGet" class="text-capitalize">ApiMatchCreatorByCreatorIdGet</h3>
   <div class="markdown level1 summary"><p>Get a list of matches that were created by a specific actor.</p>
-<p>Example Usage: GET api/match/creator/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4440,7 +4387,8 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*creatorId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>The Actor Id of the creator</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4470,7 +4418,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchCreatorByCreatorIdByStartByEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchCreatorByCreatorIdByStartByEndGet" class="text-capitalize">ApiMatchCreatorByCreatorIdByStartByEndGet</h3>
   <div class="markdown level1 summary"><p>Get a list of matches that were created by a specific actor, filtered by a time range.</p>
-<p>Example Usage: GET api/match/creator/1/2016-12-20T15:40:30/2016-12-20T16:50:40</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4491,19 +4438,22 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*creatorId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>The Actor Id of the creator</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*start</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>Earliest time</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*end</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>Latest time</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4533,7 +4483,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchGameByGameIdCreatorByCreatorIdGet" data-uid="SUGAR Engine REST API/v1/ApiMatchGameByGameIdCreatorByCreatorIdGet" class="text-capitalize">ApiMatchGameByGameIdCreatorByCreatorIdGet</h3>
   <div class="markdown level1 summary"><p>Get a list of matches for a specific game created by a specific actor.</p>
-<p>Example Usage: GET api/match/game/1/creator/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4554,13 +4503,15 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*gameId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Game ID</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*creatorId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>The Actor Id of the creator</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4590,7 +4541,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchGameByGameIdCreatorByCreatorIdByStartByEndGet" data-uid="SUGAR Engine REST API/v1/ApiMatchGameByGameIdCreatorByCreatorIdByStartByEndGet" class="text-capitalize">ApiMatchGameByGameIdCreatorByCreatorIdByStartByEndGet</h3>
   <div class="markdown level1 summary"><p>Get a list of matches for a specific game created by a specific user, filtered by a time range.</p>
-<p>Example Usage: GET api/match/game/1/creator/1/2016-12-20T15:40:30/2016-12-20T16:50:40</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4611,25 +4561,29 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*gameId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>Game ID</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*creatorId</span></td>
         <td>integer</td>
         <td></td>
-        <td></td>
+        <td><p>The Actor Id of the creator</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*start</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>Earliest time</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">*end</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>Latest time</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -4659,7 +4613,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchGet" data-uid="SUGAR Engine REST API/v1/ApiMatchGet" class="text-capitalize">ApiMatchGet</h3>
   <div class="markdown level1 summary"><p>Find a list of all MatchData that match the input parameters.</p>
-<p>Example Usage: GET api/match/1/data</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4718,7 +4671,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiMatchPost" data-uid="SUGAR Engine REST API/v1/ApiMatchPost" class="text-capitalize">ApiMatchPost</h3>
   <div class="markdown level1 summary"><p>Create a new GameData record.</p>
-<p>Example Usage: POST api/match/1/data</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4770,7 +4722,7 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiResourceGet" data-uid="SUGAR Engine REST API/v1/ApiResourceGet" class="text-capitalize">ApiResourceGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of all Resources filtered by the <param name="actorId">, <param name="gameId"> and <param name="keys"> provided.</p>
+  <div class="markdown level1 summary"><p>Find a list of all Resources filtered by the actorId, gameId and keys provided.</p>
 <p>Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2</p>
 </div>
   <h5>Request</h5>
@@ -4837,7 +4789,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiResourcePost" data-uid="SUGAR Engine REST API/v1/ApiResourcePost" class="text-capitalize">ApiResourcePost</h3>
   <div class="markdown level1 summary"><p>Creates or updates a Resource record.</p>
-<p>Example Usage: POST api/resource</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4889,7 +4840,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiResourceTransferPost" data-uid="SUGAR Engine REST API/v1/ApiResourceTransferPost" class="text-capitalize">ApiResourceTransferPost</h3>
   <div class="markdown level1 summary"><p>Transfers a quantity of a specific resource.</p>
-<p>Example Usage: Post api/resource/transfer</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4936,13 +4886,63 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
       </tbody>
     </table>
   </div>
+  
+  
+  
+   <h3 id="SUGAR_Engine_REST_API_v1_ApiResourceGameactorsByIdGet" data-uid="SUGAR Engine REST API/v1/ApiResourceGameactorsByIdGet" class="text-capitalize">ApiResourceGameactorsByIdGet</h3>
+  <div class="markdown level1 summary"><p>Find a list of all Actors that have resources for the game id provided.</p>
+</div>
+  <h5>Request</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-restApi hljs">GET /api/Resource/gameactors/{id}</code></pre>
+  </div>
+  <h5>Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">*id</span></td>
+        <td>integer</td>
+        <td></td>
+        <td><p>ID of a Game.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="responses">
+    <h5>Responses</h5>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+          <th>Samples</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="status">200</span></td>
+        <td><p>Success</p>
+</td>
+        <td class="sample-response">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 <h2 id="_SUGAR_Engine_REST_API_v1">Role</h2>
   
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleListGet" data-uid="SUGAR Engine REST API/v1/ApiRoleListGet" class="text-capitalize">ApiRoleListGet</h3>
   <div class="markdown level1 summary"><p>Get a list of all Roles.</p>
-<p>Example Usage: GET api/role/list</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4974,7 +4974,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleScopeByNameGet" data-uid="SUGAR Engine REST API/v1/ApiRoleScopeByNameGet" class="text-capitalize">ApiRoleScopeByNameGet</h3>
   <div class="markdown level1 summary"><p>Get a list of all Roles for the scope with this name.</p>
-<p>Example Usage: GET api/role/scope/game</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -4995,7 +4994,8 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*name</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>Name of the ClaimScope to filter by.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -5025,7 +5025,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleScopedefaultByNameGet" data-uid="SUGAR Engine REST API/v1/ApiRoleScopedefaultByNameGet" class="text-capitalize">ApiRoleScopedefaultByNameGet</h3>
   <div class="markdown level1 summary"><p>Get default Role for the scope with this name.</p>
-<p>Example Usage: GET api/role/scopedefault/game</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5046,7 +5045,8 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
         <td><span class="parametername">*name</span></td>
         <td>string</td>
         <td></td>
-        <td></td>
+        <td><p>Name of the ClaimScope to get the default Role for.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -5077,7 +5077,6 @@ Requires PlayGen.SUGAR.Contracts.LeaderboardRequest.Name and PlayGen.SUGAR.Contr
    <h3 id="SUGAR_Engine_REST_API_v1_ApiRolePost" data-uid="SUGAR Engine REST API/v1/ApiRolePost" class="text-capitalize">ApiRolePost</h3>
   <div class="markdown level1 summary"><p>Create a new Role.
 Requires the PlayGen.SUGAR.Contracts.RoleRequest.Name to be unique.</p>
-<p>Example Usage: POST api/role</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5129,7 +5128,6 @@ Requires the PlayGen.SUGAR.Contracts.RoleRequest.Name to be unique.</p>
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiRoleByIdDelete" class="text-capitalize">ApiRoleByIdDelete</h3>
   <div class="markdown level1 summary"><p>Delete Role with the ID provided.</p>
-<p>Example Usage: DELETE api/role/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5182,7 +5180,6 @@ Requires the PlayGen.SUGAR.Contracts.RoleRequest.Name to be unique.</p>
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleClaimRoleByIdGet" data-uid="SUGAR Engine REST API/v1/ApiRoleClaimRoleByIdGet" class="text-capitalize">ApiRoleClaimRoleByIdGet</h3>
   <div class="markdown level1 summary"><p>Get a list of all Claims for this Role.</p>
-<p>Example Usage: GET api/roleclaim/role/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5233,7 +5230,6 @@ Requires the PlayGen.SUGAR.Contracts.RoleRequest.Name to be unique.</p>
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleClaimPost" data-uid="SUGAR Engine REST API/v1/ApiRoleClaimPost" class="text-capitalize">ApiRoleClaimPost</h3>
   <div class="markdown level1 summary"><p>Create a new RoleClaim.</p>
-<p>Example Usage: POST api/roleclaim</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5285,7 +5281,6 @@ Requires the PlayGen.SUGAR.Contracts.RoleRequest.Name to be unique.</p>
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiRoleClaimRoleByRoleIdClaimByClaimIdDelete" data-uid="SUGAR Engine REST API/v1/ApiRoleClaimRoleByRoleIdClaimByClaimIdDelete" class="text-capitalize">ApiRoleClaimRoleByRoleIdClaimByClaimIdDelete</h3>
   <div class="markdown level1 summary"><p>Delete RoleClaim with the ID provided.</p>
-<p>Example Usage: DELETE api/roleclaim/role/1/claim/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5346,7 +5341,6 @@ Requires the PlayGen.SUGAR.Contracts.RoleRequest.Name to be unique.</p>
    <h3 id="SUGAR_Engine_REST_API_v1_ApiLoginplatformPost" data-uid="SUGAR Engine REST API/v1/ApiLoginplatformPost" class="text-capitalize">ApiLoginplatformPost</h3>
   <div class="markdown level1 summary"><p>Logs in an account based on the name and password combination.
 Returns a JsonWebToken used for authorization in any further calls to the API.</p>
-<p>Example Usage: POST api/loginplatform</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5399,7 +5393,6 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
    <h3 id="SUGAR_Engine_REST_API_v1_ApiByGameIdLogingamePost" data-uid="SUGAR Engine REST API/v1/ApiByGameIdLogingamePost" class="text-capitalize">ApiByGameIdLogingamePost</h3>
   <div class="markdown level1 summary"><p>Logs in an account based on the name and password combination.
 Returns a JsonWebToken used for authorization in any further calls to the API.</p>
-<p>Example Usage: POST api/1/logingame</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5509,7 +5502,6 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiCreateandloginplatformPost" data-uid="SUGAR Engine REST API/v1/ApiCreateandloginplatformPost" class="text-capitalize">ApiCreateandloginplatformPost</h3>
   <div class="markdown level1 summary"><p>Creates a new account and login that account.</p>
-<p>Example Usage: POST api/createandloginplatform</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5561,7 +5553,6 @@ Returns a JsonWebToken used for authorization in any further calls to the API.</
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiByGameIdCreateandlogingamePost" data-uid="SUGAR Engine REST API/v1/ApiByGameIdCreateandlogingamePost" class="text-capitalize">ApiByGameIdCreateandlogingamePost</h3>
   <div class="markdown level1 summary"><p>Creates a new account and login that account.</p>
-<p>Example Usage: POST api/1/createandlogingame</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5685,8 +5676,8 @@ authorization token.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsFindByTokenByGameIdGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsFindByTokenByGameIdGet" class="text-capitalize">ApiSkillsFindByTokenByGameIdGet</h3>
-  <div class="markdown level1 summary"><p>Find a Skill that matches <param name="token"> and <param name="gameId">.</p>
-<p>Example Usage: GET api/skills/find/SKILL_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Find a Skill that matches the token and gameId provided.
+If global is provided instead of a gameId, get the global Skill that is not associated with a specific game with the provided token.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5744,8 +5735,8 @@ authorization token.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsFindByTokenGlobalGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsFindByTokenGlobalGet" class="text-capitalize">ApiSkillsFindByTokenGlobalGet</h3>
-  <div class="markdown level1 summary"><p>Find a Skill that matches <param name="token"> and <param name="gameId">.</p>
-<p>Example Usage: GET api/skills/find/SKILL_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Find a Skill that matches the token and gameId provided.
+If global is provided instead of a gameId, get the global Skill that is not associated with a specific game with the provided token.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5803,9 +5794,8 @@ authorization token.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsGlobalListGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsGlobalListGet" class="text-capitalize">ApiSkillsGlobalListGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of Skills that match <param name="gameId">.
+  <div class="markdown level1 summary"><p>Find a list of Skills for the gameId provided.
 If global is provided instead of a gameId, get all global skills, ie. skills that are not associated with a specific game.</p>
-<p>Example Usage: GET api/skills/game/1/list</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5856,9 +5846,8 @@ If global is provided instead of a gameId, get all global skills, ie. skills tha
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsGameByGameIdListGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsGameByGameIdListGet" class="text-capitalize">ApiSkillsGameByGameIdListGet</h3>
-  <div class="markdown level1 summary"><p>Find a list of Skills that match <param name="gameId">.
+  <div class="markdown level1 summary"><p>Find a list of Skills for the gameId provided.
 If global is provided instead of a gameId, get all global skills, ie. skills that are not associated with a specific game.</p>
-<p>Example Usage: GET api/skills/game/1/list</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5909,8 +5898,8 @@ If global is provided instead of a gameId, get all global skills, ie. skills tha
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsGameByGameIdEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsGameByGameIdEvaluateByActorIdGet" class="text-capitalize">ApiSkillsGameByGameIdEvaluateByActorIdGet</h3>
-  <div class="markdown level1 summary"><p>Find the current progress for all skills for a <param name="gameId"> for <param name="actorId">.</p>
-<p>Example Usage: GET api/skills/game/1/evaluate/1</p>
+  <div class="markdown level1 summary"><p>Find the current progress for all skills for a gameId for actorId.
+If global is provided instead of a gameId, get all progress for global skills, ie. skills that are not associated with a specific game.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -5968,8 +5957,8 @@ If global is provided instead of a gameId, get all global skills, ie. skills tha
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsGlobalEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsGlobalEvaluateByActorIdGet" class="text-capitalize">ApiSkillsGlobalEvaluateByActorIdGet</h3>
-  <div class="markdown level1 summary"><p>Find the current progress for all skills for a <param name="gameId"> for <param name="actorId">.</p>
-<p>Example Usage: GET api/skills/game/1/evaluate/1</p>
+  <div class="markdown level1 summary"><p>Find the current progress for all skills for a gameId for actorId.
+If global is provided instead of a gameId, get all progress for global skills, ie. skills that are not associated with a specific game.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6027,8 +6016,8 @@ If global is provided instead of a gameId, get all global skills, ie. skills tha
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsByTokenByGameIdEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsByTokenByGameIdEvaluateByActorIdGet" class="text-capitalize">ApiSkillsByTokenByGameIdEvaluateByActorIdGet</h3>
-  <div class="markdown level1 summary"><p>Find the current progress for a Skill for <param name="actorId">.</p>
-<p>Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1</p>
+  <div class="markdown level1 summary"><p>Find the current progress for the Skill with the provided token and gameId for the actorId.
+If global is provided instead of a gameId, get progress for a global skill with the token provided, ie. a skill that is not associated with a specific game.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6093,8 +6082,8 @@ If global is provided instead of a gameId, get all global skills, ie. skills tha
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsByTokenGlobalEvaluateByActorIdGet" data-uid="SUGAR Engine REST API/v1/ApiSkillsByTokenGlobalEvaluateByActorIdGet" class="text-capitalize">ApiSkillsByTokenGlobalEvaluateByActorIdGet</h3>
-  <div class="markdown level1 summary"><p>Find the current progress for a Skill for <param name="actorId">.</p>
-<p>Example Usage: GET api/skills/SKILL_TOKEN/1/evaluate/1</p>
+  <div class="markdown level1 summary"><p>Find the current progress for the Skill with the provided token and gameId for the actorId.
+If global is provided instead of a gameId, get progress for a global skill with the token provided, ie. a skill that is not associated with a specific game.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6160,8 +6149,7 @@ If global is provided instead of a gameId, get all global skills, ie. skills tha
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsCreatePost" data-uid="SUGAR Engine REST API/v1/ApiSkillsCreatePost" class="text-capitalize">ApiSkillsCreatePost</h3>
   <div class="markdown level1 summary"><p>Create a new Skill.
-Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to that PlayGen.SUGAR.Contracts.EvaluationCreateRequest.GameId.</p>
-<p>Example Usage: POST api/skills/create</p>
+Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest Name to be unique to that GameId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6213,7 +6201,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsUpdatePut" data-uid="SUGAR Engine REST API/v1/ApiSkillsUpdatePut" class="text-capitalize">ApiSkillsUpdatePut</h3>
   <div class="markdown level1 summary"><p>Update an existing Skill.</p>
-<p>Example Usage: PUT api/skills/update</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6264,8 +6251,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsByTokenGlobalDelete" data-uid="SUGAR Engine REST API/v1/ApiSkillsByTokenGlobalDelete" class="text-capitalize">ApiSkillsByTokenGlobalDelete</h3>
-  <div class="markdown level1 summary"><p>Delete Skill with the <param name="token"> and <param name="gameId"> provided.</p>
-<p>Example Usage: DELETE api/skills/SKILL_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Delete Skill with the token and gameId provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6323,8 +6309,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiSkillsByTokenByGameIdDelete" data-uid="SUGAR Engine REST API/v1/ApiSkillsByTokenByGameIdDelete" class="text-capitalize">ApiSkillsByTokenByGameIdDelete</h3>
-  <div class="markdown level1 summary"><p>Delete Skill with the <param name="token"> and <param name="gameId"> provided.</p>
-<p>Example Usage: DELETE api/skills/SKILL_TOKEN/1</p>
+  <div class="markdown level1 summary"><p>Delete Skill with the token and gameId provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6384,7 +6369,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserListGet" data-uid="SUGAR Engine REST API/v1/ApiUserListGet" class="text-capitalize">ApiUserListGet</h3>
   <div class="markdown level1 summary"><p>Get a list of all Users.</p>
-<p>Example Usage: GET api/user/list</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6415,8 +6399,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFindByNameGet" data-uid="SUGAR Engine REST API/v1/ApiUserFindByNameGet" class="text-capitalize">ApiUserFindByNameGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of Users that match <param name="name"> provided.</p>
-<p>Example Usage: GET api/user/find/user1</p>
+  <div class="markdown level1 summary"><p>Get a list of Users whose name contain the name provided or have the same name if exactMatch is true.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6474,8 +6457,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFindByNameByExactMatchGet" data-uid="SUGAR Engine REST API/v1/ApiUserFindByNameByExactMatchGet" class="text-capitalize">ApiUserFindByNameByExactMatchGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of Users that match <param name="name"> provided.</p>
-<p>Example Usage: GET api/user/find/user1</p>
+  <div class="markdown level1 summary"><p>Get a list of Users whose name contain the name provided or have the same name if exactMatch is true.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6533,8 +6515,7 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFindbyidByIdGet" data-uid="SUGAR Engine REST API/v1/ApiUserFindbyidByIdGet" class="text-capitalize">ApiUserFindbyidByIdGet</h3>
-  <div class="markdown level1 summary"><p>Get User that matches <param name="id"> provided.</p>
-<p>Example Usage: GET api/user/findbyid/1</p>
+  <div class="markdown level1 summary"><p>Get User that matches the id provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6587,7 +6568,6 @@ Requires PlayGen.SUGAR.Contracts.EvaluationCreateRequest.Name to be unique to th
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserPost" data-uid="SUGAR Engine REST API/v1/ApiUserPost" class="text-capitalize">ApiUserPost</h3>
   <div class="markdown level1 summary"><p>Create a new User.
 Requires the PlayGen.SUGAR.Contracts.UserRequest&#39;s Name to be unique for Users.</p>
-<p>Example Usage: POST api/user</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6639,7 +6619,6 @@ Requires the PlayGen.SUGAR.Contracts.UserRequest&#39;s Name to be unique for Use
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserUpdateByIdPut" data-uid="SUGAR Engine REST API/v1/ApiUserUpdateByIdPut" class="text-capitalize">ApiUserUpdateByIdPut</h3>
   <div class="markdown level1 summary"><p>Update an existing User.</p>
-<p>Example Usage: PUT api/user/update/1</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6697,8 +6676,7 @@ Requires the PlayGen.SUGAR.Contracts.UserRequest&#39;s Name to be unique for Use
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserByIdDelete" data-uid="SUGAR Engine REST API/v1/ApiUserByIdDelete" class="text-capitalize">ApiUserByIdDelete</h3>
-  <div class="markdown level1 summary"><p>Delete user with the <param name="id"> provided.</p>
-<p>Example Usage: DELETE api/user/1</p>
+  <div class="markdown level1 summary"><p>Delete user with the id provided.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6750,8 +6728,7 @@ Requires the PlayGen.SUGAR.Contracts.UserRequest&#39;s Name to be unique for Use
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendRequestsByUserIdGet" data-uid="SUGAR Engine REST API/v1/ApiUserFriendRequestsByUserIdGet" class="text-capitalize">ApiUserFriendRequestsByUserIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Users that have relationship requests for this <param name="userId">.</p>
-<p>Example Usage: GET api/userfriend/requests/1</p>
+  <div class="markdown level1 summary"><p>Get a list of all Users that have sent relationship requests to this userId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6772,7 +6749,7 @@ Requires the PlayGen.SUGAR.Contracts.UserRequest&#39;s Name to be unique for Use
         <td><span class="parametername">*userId</span></td>
         <td>integer</td>
         <td></td>
-        <td><p>ID of the group.</p>
+        <td><p>ID of the user.</p>
 </td>
       </tr>
     </tbody>
@@ -6802,8 +6779,7 @@ Requires the PlayGen.SUGAR.Contracts.UserRequest&#39;s Name to be unique for Use
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendSentrequestsByUserIdGet" data-uid="SUGAR Engine REST API/v1/ApiUserFriendSentrequestsByUserIdGet" class="text-capitalize">ApiUserFriendSentrequestsByUserIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Users that have been sent relationship requests for this <param name="userId">.</p>
-<p>Example Usage: GET api/userfriend/sentrequests/1</p>
+  <div class="markdown level1 summary"><p>Get a list of all Users that have been sent relationship requests from this userId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6854,8 +6830,7 @@ Requires the PlayGen.SUGAR.Contracts.UserRequest&#39;s Name to be unique for Use
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendFriendsByUserIdGet" data-uid="SUGAR Engine REST API/v1/ApiUserFriendFriendsByUserIdGet" class="text-capitalize">ApiUserFriendFriendsByUserIdGet</h3>
-  <div class="markdown level1 summary"><p>Get a list of all Users that have relationships with this <param name="userId">.</p>
-<p>Example Usage: GET api/userfriend/friends/1</p>
+  <div class="markdown level1 summary"><p>Get a list of all Users that have relationships with this userId.</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6906,9 +6881,8 @@ Requires the PlayGen.SUGAR.Contracts.UserRequest&#39;s Name to be unique for Use
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendPut" data-uid="SUGAR Engine REST API/v1/ApiUserFriendPut" class="text-capitalize">ApiUserFriendPut</h3>
-  <div class="markdown level1 summary"><p>Update an existing relationship between <param name="relationship.RequestorId.RequestorId"> and <param name="relationship.AcceptorId.AcceptorId">.
+  <div class="markdown level1 summary"><p>Update an existing relationship between two Users.
 Requires the relationship to already exist between the two Users.</p>
-<p>Example Usage: PUT api/userfriend</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -6961,7 +6935,6 @@ Requires the relationship to already exist between the two Users.</p>
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendPost" data-uid="SUGAR Engine REST API/v1/ApiUserFriendPost" class="text-capitalize">ApiUserFriendPost</h3>
   <div class="markdown level1 summary"><p>Create a new relationship request between two Users.
 Requires a relationship between the two to not already exist.</p>
-<p>Example Usage: POST api/userfriend</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">
@@ -7012,9 +6985,8 @@ Requires a relationship between the two to not already exist.</p>
   
   
    <h3 id="SUGAR_Engine_REST_API_v1_ApiUserFriendRequestPut" data-uid="SUGAR Engine REST API/v1/ApiUserFriendRequestPut" class="text-capitalize">ApiUserFriendRequestPut</h3>
-  <div class="markdown level1 summary"><p>Update an existing relationship request between <param name="relationship.RequestorId.RequestorId"> and <param name="relationship.AcceptorId.AcceptorId">.
+  <div class="markdown level1 summary"><p>Update an existing relationship request between two Users.
 Requires the relationship request to already exist between the two Users.</p>
-<p>Example Usage: PUT api/userfriend/request</p>
 </div>
   <h5>Request</h5>
   <div class="codewrapper">

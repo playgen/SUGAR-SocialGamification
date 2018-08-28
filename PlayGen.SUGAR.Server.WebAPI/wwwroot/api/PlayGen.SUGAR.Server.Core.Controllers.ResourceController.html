@@ -83,23 +83,47 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ResourceController</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.html">PlayGen.SUGAR.Server.Core.Controllers</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.Core.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_Core_Controllers_ResourceController_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ResourceController : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class ResourceController</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   
   
   <a id="PlayGen_SUGAR_Server_Core_Controllers_ResourceController__ctor_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.ResourceController.#ctor*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_ResourceController__ctor_ILogger_PlayGen_SUGAR_Server_Core_Controllers_ResourceController__ILogger_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController__PlayGen_SUGAR_Server_EntityFramework_SUGARContextFactory_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.ResourceController.#ctor(ILogger{PlayGen.SUGAR.Server.Core.Controllers.ResourceController},ILogger{PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController},PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory)">ResourceController(ILogger&lt;ResourceController&gt;, ILogger&lt;EvaluationDataController&gt;, SUGARContextFactory)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_ResourceController__ctor_Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_ResourceController__Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_EvaluationDataController__PlayGen_SUGAR_Server_EntityFramework_SUGARContextFactory_PlayGen_SUGAR_Server_Core_Controllers_ActorController_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.ResourceController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.ResourceController},Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController},PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory,PlayGen.SUGAR.Server.Core.Controllers.ActorController)">ResourceController(ILogger&lt;ResourceController&gt;, ILogger&lt;EvaluationDataController&gt;, SUGARContextFactory, ActorController)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ResourceController(ILogger&lt;ResourceController&gt; logger, ILogger&lt;EvaluationDataController&gt; evaluationDataLogger, SUGARContextFactory contextFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">public ResourceController(ILogger&lt;ResourceController&gt; logger, ILogger&lt;EvaluationDataController&gt; evaluationDataLogger, SUGARContextFactory contextFactory, ActorController actorController)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -112,18 +136,23 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.ResourceController.html">ResourceController</a>&gt;</td>
+        <td><span class="xref">Microsoft.Extensions.Logging.ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.ResourceController.html">ResourceController</a>&gt;</td>
         <td><span class="parametername">logger</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a>&gt;</td>
+        <td><span class="xref">Microsoft.Extensions.Logging.ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.EvaluationDataController.html">EvaluationDataController</a>&gt;</td>
         <td><span class="parametername">evaluationDataLogger</span></td>
         <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.SUGARContextFactory.html">SUGARContextFactory</a></td>
         <td><span class="parametername">contextFactory</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.ActorController.html">ActorController</a></td>
+        <td><span class="parametername">actorController</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -308,7 +337,49 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.EvaluationData.html">EvaluationData</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_ResourceController_GetGameActors_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.ResourceController.GetGameActors*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_ResourceController_GetGameActors_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.ResourceController.GetGameActors(System.Int32)">GetGameActors(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Actor&gt; GetGameActors(int gameId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">gameId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
