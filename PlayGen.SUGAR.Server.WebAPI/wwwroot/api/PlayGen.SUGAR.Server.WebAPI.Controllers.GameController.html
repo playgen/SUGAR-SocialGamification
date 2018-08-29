@@ -650,6 +650,7 @@ Requires the <a class="xref" href="PlayGen.SUGAR.Contracts.GameRequest.html#Play
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Game)]
+[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.Game)]
 public Task&lt;IActionResult&gt; Create([FromBody] GameRequest newGame)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
