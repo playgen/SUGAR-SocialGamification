@@ -1,7 +1,7 @@
 - name: Site Map
   href: siteMap.md
 - name: Login Screen
-  href: Login.md
+  href: login.md
 - name: Users
   href: user.md
 - name: Groups
