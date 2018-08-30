@@ -83,11 +83,35 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ProgressEvaluator</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.Core.EvaluationEvents.html">PlayGen.SUGAR.Server.Core.EvaluationEvents</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.Core.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ProgressEvaluator_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ProgressEvaluator : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class ProgressEvaluator</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -123,7 +147,7 @@
   
   
   <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ProgressEvaluator_EvaluateActor_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.EvaluateActor*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ProgressEvaluator_EvaluateActor_List_PlayGen_SUGAR_Server_Model_Evaluation__PlayGen_SUGAR_Server_Core_Sessions_Session_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.EvaluateActor(List{PlayGen.SUGAR.Server.Model.Evaluation},PlayGen.SUGAR.Server.Core.Sessions.Session)">EvaluateActor(List&lt;Evaluation&gt;, Session)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ProgressEvaluator_EvaluateActor_System_Collections_Generic_List_PlayGen_SUGAR_Server_Model_Evaluation__PlayGen_SUGAR_Server_Core_Sessions_Session_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.EvaluateActor(System.Collections.Generic.List{PlayGen.SUGAR.Server.Model.Evaluation},PlayGen.SUGAR.Server.Core.Sessions.Session)">EvaluateActor(List&lt;Evaluation&gt;, Session)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -141,7 +165,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>&gt;</td>
         <td><span class="parametername">evaluations</span></td>
         <td></td>
       </tr>
@@ -170,12 +194,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ProgressEvaluator_EvaluateSessions_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.EvaluateSessions*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ProgressEvaluator_EvaluateSessions_ICollection_PlayGen_SUGAR_Server_Core_Sessions_Session__ICollection_PlayGen_SUGAR_Server_Model_Evaluation__" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.EvaluateSessions(ICollection{PlayGen.SUGAR.Server.Core.Sessions.Session},ICollection{PlayGen.SUGAR.Server.Model.Evaluation})">EvaluateSessions(ICollection&lt;Session&gt;, ICollection&lt;Evaluation&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ProgressEvaluator_EvaluateSessions_System_Collections_Generic_ICollection_PlayGen_SUGAR_Server_Core_Sessions_Session__PlayGen_SUGAR_Server_Model_Evaluation_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.EvaluateSessions(System.Collections.Generic.ICollection{PlayGen.SUGAR.Server.Core.Sessions.Session},PlayGen.SUGAR.Server.Model.Evaluation)">EvaluateSessions(ICollection&lt;Session&gt;, Evaluation)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ConcurrentProgressCache EvaluateSessions(ICollection&lt;Session&gt; sessions, ICollection&lt;Evaluation&gt; evaluations)</code></pre>
+    <pre><code class="lang-csharp hljs">public ConcurrentProgressCache EvaluateSessions(ICollection&lt;Session&gt; sessions, Evaluation evaluation)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -188,13 +212,13 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ICollection</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Sessions.Session.html">Session</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Sessions.Session.html">Session</a>&gt;</td>
         <td><span class="parametername">sessions</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">ICollection</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>&gt;</td>
-        <td><span class="parametername">evaluations</span></td>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a></td>
+        <td><span class="parametername">evaluation</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -217,12 +241,12 @@
   
   
   <a id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ProgressEvaluator_EvaluateSessions_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.EvaluateSessions*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ProgressEvaluator_EvaluateSessions_ICollection_PlayGen_SUGAR_Server_Core_Sessions_Session__PlayGen_SUGAR_Server_Model_Evaluation_" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.EvaluateSessions(ICollection{PlayGen.SUGAR.Server.Core.Sessions.Session},PlayGen.SUGAR.Server.Model.Evaluation)">EvaluateSessions(ICollection&lt;Session&gt;, Evaluation)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_EvaluationEvents_ProgressEvaluator_EvaluateSessions_System_Collections_Generic_ICollection_PlayGen_SUGAR_Server_Core_Sessions_Session__System_Collections_Generic_ICollection_PlayGen_SUGAR_Server_Model_Evaluation__" data-uid="PlayGen.SUGAR.Server.Core.EvaluationEvents.ProgressEvaluator.EvaluateSessions(System.Collections.Generic.ICollection{PlayGen.SUGAR.Server.Core.Sessions.Session},System.Collections.Generic.ICollection{PlayGen.SUGAR.Server.Model.Evaluation})">EvaluateSessions(ICollection&lt;Session&gt;, ICollection&lt;Evaluation&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ConcurrentProgressCache EvaluateSessions(ICollection&lt;Session&gt; sessions, Evaluation evaluation)</code></pre>
+    <pre><code class="lang-csharp hljs">public ConcurrentProgressCache EvaluateSessions(ICollection&lt;Session&gt; sessions, ICollection&lt;Evaluation&gt; evaluations)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -235,13 +259,13 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ICollection</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Sessions.Session.html">Session</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Sessions.Session.html">Session</a>&gt;</td>
         <td><span class="parametername">sessions</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a></td>
-        <td><span class="parametername">evaluation</span></td>
+        <td><span class="xref">System.Collections.Generic.ICollection</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Evaluation.html">Evaluation</a>&gt;</td>
+        <td><span class="parametername">evaluations</span></td>
         <td></td>
       </tr>
     </tbody>

@@ -81,20 +81,62 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">GenericRelationships</span></div>
+    <div class="level1"><span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration</span></div>
+    <div class="level2"><span class="xref">GenericRelationships</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.InitialDatabase</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.TargetModel</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.UpOperations</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.DownOperations</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.ActiveProvider</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Migrations.html">PlayGen.SUGAR.Server.EntityFramework.Migrations</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.EntityFramework.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_GenericRelationships_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class GenericRelationships : Migration</code></pre>
+    <pre><code class="lang-csharp hljs">[DbContext(typeof(SUGARContext))]
+[Migration(&quot;20171206170542_GenericRelationships&quot;)]
+public class GenericRelationships : Migration</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Migrations_GenericRelationships_BuildTargetModel_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.BuildTargetModel*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_GenericRelationships_BuildTargetModel_ModelBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.BuildTargetModel(ModelBuilder)">BuildTargetModel(ModelBuilder)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_GenericRelationships_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">BuildTargetModel(ModelBuilder)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -112,16 +154,18 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ModelBuilder</span></td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.ModelBuilder</span></td>
         <td><span class="parametername">modelBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)</span></div>
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Migrations_GenericRelationships_Down_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.Down*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_GenericRelationships_Down_MigrationBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.Down(MigrationBuilder)">Down(MigrationBuilder)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_GenericRelationships_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">Down(MigrationBuilder)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -139,16 +183,18 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">MigrationBuilder</span></td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder</span></td>
         <td><span class="parametername">migrationBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)</span></div>
   
   
   <a id="PlayGen_SUGAR_Server_EntityFramework_Migrations_GenericRelationships_Up_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.Up*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_GenericRelationships_Up_MigrationBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.Up(MigrationBuilder)">Up(MigrationBuilder)</h4>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Migrations_GenericRelationships_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Migrations.GenericRelationships.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">Up(MigrationBuilder)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -166,12 +212,14 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">MigrationBuilder</span></td>
+        <td><span class="xref">Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder</span></td>
         <td><span class="parametername">migrationBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Microsoft.EntityFrameworkCore.Migrations.Migration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)</span></div>
 </article>
           </div>
           

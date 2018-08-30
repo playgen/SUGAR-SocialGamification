@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             => _leaderboardController ?? (_leaderboardController = new LeaderboardController(new NullLogger<LeaderboardController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.LeaderboardController, RelationshipController, ActorController, GroupController, UserController, DbControllerLocator.ContextFactory));
 
         public static ResourceController ResourceController
-            => _resourceController ?? (_resourceController = new ResourceController(new NullLogger<ResourceController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory));
+            => _resourceController ?? (_resourceController = new ResourceController(new NullLogger<ResourceController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, ActorController));
 
         public static RewardController RewardController
             => _rewardController ?? (_rewardController = new RewardController(new NullLogger<RewardController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, RelationshipController));

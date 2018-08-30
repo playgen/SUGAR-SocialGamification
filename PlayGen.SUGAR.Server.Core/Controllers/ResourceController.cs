@@ -13,14 +13,17 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	{
 		private readonly ILogger _logger;
 		private readonly EvaluationDataController _evaluationDataController;
+		private readonly ActorController _actorController;
 
 		public ResourceController(
 			ILogger<ResourceController> logger,
 			ILogger<EvaluationDataController> evaluationDataLogger,
-			SUGARContextFactory contextFactory)
+			SUGARContextFactory contextFactory,
+			ActorController actorController)
 		{
 			_logger = logger;
 			_evaluationDataController = new EvaluationDataController(evaluationDataLogger, contextFactory, EvaluationDataCategory.Resource);
+			_actorController = actorController;
 		}
 
 		public List<EvaluationData> Get(int gameId, int? actorId, string[] keys = null)
@@ -133,7 +136,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return resource;
 		}
 
-        private EvaluationData GetExistingResource(int gameId, int ownerId, string key)
+		public List<Actor> GetGameActors(int gameId)
+		{
+			var ids = _evaluationDataController.GetGameActors(gameId);
+			return ids.Select(a => _actorController.Get(a)).ToList();
+		}
+
+		private EvaluationData GetExistingResource(int gameId, int ownerId, string key)
 		{
 			var foundResources = _evaluationDataController.Get(gameId, ownerId, new[] { key });
 

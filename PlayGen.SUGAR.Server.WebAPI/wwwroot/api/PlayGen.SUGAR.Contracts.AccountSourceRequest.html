@@ -84,17 +84,43 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">AccountSourceRequest</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Contracts.html">PlayGen.SUGAR.Contracts</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Contracts.dll</h6>
   <h5 id="PlayGen_SUGAR_Contracts_AccountSourceRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class AccountSourceRequest : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class AccountSourceRequest</code></pre>
   </div>
   <h5 id="PlayGen_SUGAR_Contracts_AccountSourceRequest_examples"><strong>Examples</strong></h5>
   <p>JSON
 {
-Name : &quot;SUGAR&quot;,
-RequiresPassword : true
+&quot;Description&quot; : &quot;SUGAR&quot;,
+&quot;Token&quot; : &quot;SUGAR&quot;,
+&quot;RequiresPassword&quot; : true,
+&quot;AutoRegister&quot; : false
 }</p>
 
   <h3 id="properties">Properties
@@ -108,7 +134,8 @@ RequiresPassword : true
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool? AutoRegister { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public bool? AutoRegister { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -134,7 +161,9 @@ RequiresPassword : true
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Description { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+[StringLength(64)]
+public string Description { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -160,7 +189,8 @@ RequiresPassword : true
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool? RequiresPassword { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public bool? RequiresPassword { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -186,7 +216,9 @@ RequiresPassword : true
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Token { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+[StringLength(128)]
+public string Token { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
