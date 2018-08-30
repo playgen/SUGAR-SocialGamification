@@ -70,6 +70,12 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return group;
 		}
 
+		public List<Group> GetForGame(int gameId)
+		{
+			var groups = _groupDbController.Get().Where(g => g.GameId == gameId);
+			return groups.ToList();
+		}
+
 		public List<Group> Search(string name)
 		{
 			var groups = _groupDbController.Get(name);

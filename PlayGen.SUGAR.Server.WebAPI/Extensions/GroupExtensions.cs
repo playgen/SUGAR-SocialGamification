@@ -17,6 +17,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			{
 				Id = groupModel.Id,
 				Name = groupModel.Name,
+				GameId = groupModel.GameId,
 				Description = groupModel.Description,
 				MemberCount = groupModel.UserRelationshipCount,
 				AllianceCount = groupModel.GroupRelationshipCount
@@ -35,7 +36,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			return new Group
 			{
 				Name = groupContract.Name,
-				Description = groupContract.Description
+				Description = groupContract.Description,
+				GameId = groupContract.GameId
 			};
 		}
 	}

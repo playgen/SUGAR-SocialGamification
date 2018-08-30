@@ -16,6 +16,11 @@
 	public class GroupResponse : ActorResponse
 	{
 		/// <summary>
+		/// The game which this group belongs to
+		/// </summary>
+		public int? GameId { get; set; }
+
+		/// <summary>
 		/// The number of members in this group.
 		/// </summary>
 		public int MemberCount { get; set; }

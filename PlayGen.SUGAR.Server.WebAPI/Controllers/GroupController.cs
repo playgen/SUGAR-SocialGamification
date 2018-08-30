@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Authorization;
@@ -33,6 +34,19 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		public IActionResult Get()
 		{
 			var groups = _groupCoreController.Get();
+			var actorContract = groups.ToContractList();
+			return new ObjectResult(actorContract);
+		}
+
+		/// <summary>
+		/// Get a list of all Groups.
+		/// </summary>
+		/// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
+		[HttpGet("listglobal")]
+		public IActionResult GetGlobal()
+		{
+			// For global groups game id is not set
+			var groups = _groupCoreController.Get().Where(g => g.GameId == null);
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -73,6 +87,20 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		{
 			var group = _groupCoreController.Get(id);
 			var actorContract = group.ToContract();
+			return new ObjectResult(actorContract);
+		}
+
+		/// <summary>
+		/// Get Groups that are present in the group provided.
+		/// </summary>
+		/// <param name="gameId">Id of the current game</param>
+		/// <returns><see cref="GroupResponse"/> which matches search criteria.</returns>
+		[HttpGet("findbygame/{gameId:int}")]
+		public IActionResult GetByGame([FromRoute]int gameId)
+		{
+			var group = _groupCoreController.GetForGame(gameId);
+
+			var actorContract = group.ToContractList();
 			return new ObjectResult(actorContract);
 		}
 

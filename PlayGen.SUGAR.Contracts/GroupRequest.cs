@@ -12,6 +12,9 @@
 	/// </example>
 	public class GroupRequest : ActorRequest
     {
-		
+	    /// <summary>
+	    /// Optional game id that this group belongs to.
+	    /// </summary>
+	    public int? GameId { get; set; }
 	}
 }
