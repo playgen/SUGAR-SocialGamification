@@ -23,8 +23,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 			var adminUser = context.Users.FirstOrDefault(u => u.Name == "admin") ?? CreateUser(context, "admin");
 
 			var adminAccountSource = context.AccountSources.FirstOrDefault(a => a.Token == "SUGAR") ?? CreateAccountSource(context, "SUGAR", "SUGAR", true);
-
-			var adminAccount = context.Accounts.FirstOrDefault(a => a.Name == "admin") ?? CreateAccount(context, "admin", "$2a$13$O2QODZrc1Zfd68.sr8/AA.I/n8eCWAwC0gaioRavlZK70f9qkzS/y", adminAccountSource, adminUser);
+            
+            var adminAccount = context.Accounts.FirstOrDefault(a => a.Name == "admin") ?? CreateAccount(context, "admin", "$2a$12$SSIgQE0cQejeH0dM61JV/eScAiHwJo/I3Gg6xZFUc0gmwh0FnMFv.", adminAccountSource, adminUser);
 
 			#region Actor Roles
 			if (!context.ActorRoles.Any())
