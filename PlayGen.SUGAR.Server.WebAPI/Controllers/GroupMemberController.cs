@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("members/{groupId:int}")]
 		public IActionResult GetMembers([FromRoute]int groupId)
 		{
-			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.User);
+			var members = _relationshipCoreController.GetRelatedActors(groupId, ActorType.User);
 			var actorContract = members.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -98,7 +98,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("usergroups/{userId:int}")]
 		public IActionResult GetUserGroups([FromRoute]int userId)
 		{
-			var groups = _relationshipCoreController.GetRelationships(userId, ActorType.Group);
+			var groups = _relationshipCoreController.GetRelatedActors(userId, ActorType.Group);
 			var actorContract = groups.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -151,16 +151,16 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			return Forbid();
 		}
 
-		/// <summary>
-		/// Update an existing relationship between a User and a Group.
-		/// Requires the relationship to already exist between the User and Group.
-		/// </summary>
-		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
-		[HttpPut]
-		[ArgumentsNotNull]
+        /// <summary>
+        /// Update an existing relationship between a User and a Group.
+        /// Requires the relationship to already exist between the User and Group.
+        /// </summary>
+        /// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
+		[HttpPut] // todo change to a remove that takes both members of the relationship
+        [ArgumentsNotNull]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.GroupMember)]
 		[Authorization(ClaimScope.User, AuthorizationAction.Delete, AuthorizationEntity.GroupMember)]
-		public async Task<IActionResult> UpdateMember([FromBody] RelationshipStatusUpdate relationship)
+		public async Task<IActionResult> RemoveMember([FromBody] RelationshipStatusUpdate relationship)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
 				(await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
@@ -170,7 +170,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 					RequestorId = relationship.RequestorId,
 					AcceptorId = relationship.AcceptorId
 				};
-				_relationshipCoreController.Update(relation.ToRelationshipModel());
+				_relationshipCoreController.Delete(relation.ToRelationshipModel());
 				return Ok();
 			}
 			return Forbid();

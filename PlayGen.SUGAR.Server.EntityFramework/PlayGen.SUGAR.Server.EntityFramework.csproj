@@ -5,10 +5,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Migrations\20180822163407_ActorCascadeDelete.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\PlayGen.SUGAR.Common\PlayGen.SUGAR.Common.csproj" />
 		<ProjectReference Include="..\PlayGen.SUGAR.Server.Model\PlayGen.SUGAR.Server.Model.csproj" />
 	</ItemGroup>

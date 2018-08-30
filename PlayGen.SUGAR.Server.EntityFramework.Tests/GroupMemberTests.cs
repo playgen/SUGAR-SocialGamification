@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var newMember = CreateRelationshipRequest(requestor.Id, acceptor.Id);
 
-			var groupRequests = _relationshipController.GetRequests(newMember.AcceptorId, ActorType.User);
+			var groupRequests = _relationshipController.GetRelationRequestorActors(newMember.AcceptorId, ActorType.User);
 
 			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
 
@@ -79,7 +79,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void GetNonExistingGroupMemberRequests()
 		{
-			var requests = _relationshipController.GetRequests(-1, ActorType.Group);
+			var requests = _relationshipController.GetRelationRequestorActors(-1, ActorType.Group);
 
 			Assert.Empty(requests);
 		}
@@ -94,7 +94,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var newMember = CreateRelationshipRequest(requestor.Id, acceptor.Id);
 
-			var groupRequests = _relationshipController.GetSentRequests(newMember.RequestorId, ActorType.Group);
+			var groupRequests = _relationshipController.GetRelationAcceptorActors(newMember.RequestorId, ActorType.Group);
 
 			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Acceptor");
 
@@ -104,7 +104,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void GetNonExistingGroupMemberSentRequests()
 		{
-			var requests = _relationshipController.GetSentRequests(-1, ActorType.Group);
+			var requests = _relationshipController.GetRelationAcceptorActors(-1, ActorType.Group);
 
 			Assert.Empty(requests);
 		}
@@ -121,19 +121,19 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			_relationshipController.UpdateRequest(newMember, true);
 
-			var groupRequests = _relationshipController.GetRequests(newMember.AcceptorId, ActorType.User);
+			var groupRequests = _relationshipController.GetRelationRequestorActors(newMember.AcceptorId, ActorType.User);
 
 			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
 
 			Assert.Equal(matches, 0);
 
-			var groupMembers = _relationshipController.GetRelationships(newMember.AcceptorId, ActorType.User);
+			var groupMembers = _relationshipController.GetRelatedActors(newMember.AcceptorId, ActorType.User);
 
 			matches = groupMembers.Count(g => g.Name == groupMemberName + " Requestor");
 
 			Assert.Equal(matches, 1);
 
-			var userGroups = _relationshipController.GetRelationships(newMember.RequestorId, ActorType.Group);
+			var userGroups = _relationshipController.GetRelatedActors(newMember.RequestorId, ActorType.Group);
 
 			matches = userGroups.Count(g => g.Name == groupMemberName + " Acceptor");
 
@@ -152,19 +152,19 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			_relationshipController.UpdateRequest(newMember, false);
 
-			var groupRequests = _relationshipController.GetRequests(newMember.AcceptorId, ActorType.User);
+			var groupRequests = _relationshipController.GetRelationRequestorActors(newMember.AcceptorId, ActorType.User);
 
 			var matches = groupRequests.Count(g => g.Name == groupMemberName + " Requestor");
 
 			Assert.Equal(matches, 0);
 
-			var groupMembers = _relationshipController.GetRelationships(newMember.RequestorId, ActorType.User);
+			var groupMembers = _relationshipController.GetRelatedActors(newMember.RequestorId, ActorType.User);
 
 			matches = groupMembers.Count(g => g.Name == groupMemberName + " Acceptor");
 
 			Assert.Equal(matches, 0);
 
-			var userGroups = _relationshipController.GetRelationships(newMember.RequestorId, ActorType.Group);
+			var userGroups = _relationshipController.GetRelatedActors(newMember.RequestorId, ActorType.Group);
 
 			matches = userGroups.Count(g => g.Name == groupMemberName + " Acceptor");
 
@@ -187,7 +187,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void GetNonExistingGroupMembers()
 		{
-			var groupMembers = _relationshipController.GetRelationships(-1, ActorType.Group);
+			var groupMembers = _relationshipController.GetRelatedActors(-1, ActorType.Group);
 
 			Assert.Empty(groupMembers);
 		}
@@ -195,7 +195,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void GetNonExistingUserGroups()
 		{
-			var userGroups = _relationshipController.GetRelationships(-1, ActorType.User);
+			var userGroups = _relationshipController.GetRelatedActors(-1, ActorType.User);
 
 			Assert.Empty(userGroups);
 		}
@@ -236,9 +236,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var newMember = CreateRelationship(requestor.Id, acceptor.Id);
 
-			_relationshipController.Update(newMember);
+			_relationshipController.Delete(newMember);
 
-			var members = _relationshipController.GetRelationships(acceptor.Id, ActorType.User);
+			var members = _relationshipController.GetRelatedActors(acceptor.Id, ActorType.User);
 
 			Assert.Empty(members);
 		}

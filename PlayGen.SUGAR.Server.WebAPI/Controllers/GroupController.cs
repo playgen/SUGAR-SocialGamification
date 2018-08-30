@@ -44,7 +44,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("controlled")]
 		public IActionResult GetControlled()
 		{
-			var groups = _groupCoreController.GetByPermissions(int.Parse(User.Identity.Name));
+			var groups = _groupCoreController.GetControlled(int.Parse(User.Identity.Name));
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}

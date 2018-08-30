@@ -13,7 +13,6 @@ Users are individuals interacting with the system. They may fulfil a range of ro
 	* User Bio
 	* User profile icon 
 
-
 ## API
 * Client
     * [UserClient](xref:PlayGen.SUGAR.Client.UserClient)
@@ -23,6 +22,9 @@ Users are individuals interacting with the system. They may fulfil a range of ro
     * [ActorResponse](xref:PlayGen.SUGAR.Contracts.ActorResponse)
 * WebAPI
     * [UserController](xref:PlayGen.SUGAR.Server.WebAPI.Controllers.UserController)
+
+## Note: 
+When a user is deleted **all** of the user's data wwill be removed from the system too. This includes saved data, group memberships, friendships and anything else that references the user's internal Id. This is for GDPR compliance.
 
 ## Roadmap
 

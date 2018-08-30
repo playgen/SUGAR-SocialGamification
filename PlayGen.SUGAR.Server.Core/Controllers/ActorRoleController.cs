@@ -43,7 +43,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public List<Role> GetActorRolesForEntity(int actorId, int entityId, ClaimScope scope)
 		{
-			var roles = _actorRoleDbController.GetActorRolesForEntity(actorId, entityId, scope, true).Select(ar => ar.Role).ToList();
+			var roles = _actorRoleDbController
+				.GetActorRolesForEntity(actorId, entityId, scope, true)
+				.Select(ar => ar.Role)
+				.ToList();
 
 			_logger.LogInformation($"{roles.Count} Roles for ActorId: {actorId}, EntityId: {entityId}, {nameof(ClaimScope)}: {scope}");
 

@@ -13,18 +13,22 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		private readonly EntityFramework.Controllers.UserController _userController;
 		private readonly ActorRoleController _actorRoleController;
 		private readonly RelationshipController _relationshipController;
+		private readonly GroupController _groupController;
 
 		public UserController(
 			ILogger<UserController> logger,
 			EntityFramework.Controllers.UserController userController,
 			EntityFramework.Controllers.ActorController actorDbController,
 			ActorRoleController actorRoleController,
-			RelationshipController relationshipController) : base(actorDbController)
+			RelationshipController relationshipController,
+			GroupController groupController) : base(actorDbController)
 		{
 			_logger = logger;
 			_userController = userController;
 			_actorRoleController = actorRoleController;
 			_relationshipController = relationshipController;
+			_groupController = groupController;
+
 		}
 
 		public List<User> Get()
@@ -84,9 +88,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public void Delete(int id)
 		{
-			TriggerDeletedEvent(id);
+			TriggerDeleteEvent(id);
 
-			_userController.Delete(id);
+            // get all groups where this user is the only admin
+            // delete all returned groups that only have this user as the member
+			var groups = _relationshipController.GetRelatedActors(id, ActorType.Group);
+			groups.ForEach(g => _groupController.RemoveMember(g.Id, id));
+
+            _userController.Delete(id);
 
 			_logger.LogInformation($"{id}");
 		}

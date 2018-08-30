@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("friends/{userId:int}")]
 		public IActionResult GetFriends([FromRoute]int userId)
 		{
-			var actor = _relationshipCoreController.GetRelationships(userId, ActorType.User);
+			var actor = _relationshipCoreController.GetRelatedActors(userId, ActorType.User);
 			var actorContract = actor.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -129,10 +129,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// Requires the relationship to already exist between the two Users.
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
-		[HttpPut]
-		[ArgumentsNotNull]
+		[HttpPut] // todo change to a remove that takes both members of the relationship
+        [ArgumentsNotNull]
 		[Authorization(ClaimScope.User, AuthorizationAction.Delete, AuthorizationEntity.UserFriend)]
-		public async Task<IActionResult> UpdateFriend([FromBody] RelationshipStatusUpdate relationship)
+		public async Task<IActionResult> RemoveFriend([FromBody] RelationshipStatusUpdate relationship)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
 				(await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded)
@@ -142,7 +142,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 					RequestorId = relationship.RequestorId,
 					AcceptorId = relationship.AcceptorId
 				};
-				_relationshipCoreController.Update(relation.ToRelationshipModel());
+				_relationshipCoreController.Delete(relation.ToRelationshipModel());
 				return Ok();
 			}
 			return Forbid();

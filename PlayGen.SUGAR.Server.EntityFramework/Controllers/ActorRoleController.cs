@@ -33,13 +33,21 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 						.Include(r => r.Role)
 						.ThenInclude(r => r.RoleClaims)
 						.ThenInclude(rc => rc.Claim)
-						.Where(ar => ar.ActorId == actorId && (ar.EntityId == entityId || ar.EntityId == Platform.AllId) && ar.Role.ClaimScope == scope).ToList();
+						.Where(ar => ar.ActorId == actorId 
+									&& (ar.EntityId == entityId || ar.EntityId == Platform.AllId) 
+									&& ar.Role.ClaimScope == scope)
+						.ToList();
+
 					return roles;
 				}
 				else
 				{
 					var roles = context.ActorRoles
-					.Where(ar => ar.ActorId == actorId && (ar.EntityId == entityId || ar.EntityId == Platform.AllId) && ar.Role.ClaimScope == scope).ToList();
+					.Where(ar => ar.ActorId == actorId 
+								&& (ar.EntityId == entityId || ar.EntityId == Platform.AllId) 
+								&& ar.Role.ClaimScope == scope)
+						.ToList();
+
 					return roles;
 				}
 			}
@@ -55,12 +63,17 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 						.Include(r => r.Role)
 						.ThenInclude(r => r.RoleClaims)
 						.ThenInclude(rc => rc.Claim)
-						.Where(ar => ar.ActorId == actorId).ToList();
+						.Where(ar => ar.ActorId == actorId)
+						.ToList();
+
 					return roles;
 				}
 				else
 				{
-					var roles = context.ActorRoles.Where(ar => ar.ActorId == actorId).ToList();
+					var roles = context.ActorRoles
+						.Where(ar => ar.ActorId == actorId)
+						.ToList();
+
 					return roles;
 				}
 			}
@@ -70,7 +83,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var actors = context.ActorRoles.Where(ar => ar.RoleId == roleId && ar.EntityId == entityId).Select(ar => ar.Actor).Distinct().ToList();
+				var actors = context.ActorRoles
+					.Where(ar => ar.RoleId == roleId && ar.EntityId == entityId)
+					.Select(ar => ar.Actor)
+					.Distinct()
+					.ToList();
+
 				return actors;
 			}
 		}
