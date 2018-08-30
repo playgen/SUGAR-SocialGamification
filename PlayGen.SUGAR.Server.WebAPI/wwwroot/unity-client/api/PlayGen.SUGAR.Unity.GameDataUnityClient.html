@@ -101,7 +101,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Get(Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt; onComplete, string[] keys = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Get(Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt; success, string[] keys = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -115,7 +115,7 @@
     <tbody>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">IEnumerable</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p>Callback with a list of gathered EvaluationDataResponse results.</p>
 </td>
       </tr>
@@ -136,7 +136,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetCount(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; onComplete)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetCount(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -162,7 +162,7 @@
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
@@ -177,7 +177,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetCumulative(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; onComplete)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetCumulative(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -203,7 +203,7 @@
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
@@ -223,7 +223,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetEarliest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; onComplete)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetEarliest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -249,7 +249,7 @@
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
@@ -264,7 +264,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetHighest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; onComplete)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetHighest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -290,7 +290,7 @@
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
@@ -305,7 +305,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetLatest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; onComplete)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetLatest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -331,7 +331,7 @@
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
@@ -346,7 +346,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetLowest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; onComplete)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetLowest(string key, EvaluationDataType dataType, Action&lt;EvaluationDataResponse&gt; success)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -372,7 +372,7 @@
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">EvaluationDataResponse</span>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p>Callback which contains the gathered result.</p>
 </td>
       </tr>
@@ -387,7 +387,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Send(string key, bool value, Action&lt;bool&gt; onComplete = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Send(string key, bool value, Action&lt;bool&gt; success = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -413,7 +413,7 @@
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p><strong>Optional</strong> Callback returns whther the data was sent successfully (default: null)</p>
 </td>
       </tr>
@@ -428,7 +428,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Send(string key, long value, Action&lt;bool&gt; onComplete = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Send(string key, long value, Action&lt;bool&gt; success = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -454,7 +454,7 @@
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p><strong>Optional</strong> Callback returns whther the data was sent successfully (default: null)</p>
 </td>
       </tr>
@@ -469,7 +469,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Send(string key, float value, Action&lt;bool&gt; onComplete = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Send(string key, float value, Action&lt;bool&gt; success = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -495,7 +495,7 @@
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p><strong>Optional</strong> Callback returns whther the data was sent successfully (default: null)</p>
 </td>
       </tr>
@@ -510,7 +510,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Send(string key, string value, Action&lt;bool&gt; onComplete = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Send(string key, string value, Action&lt;bool&gt; success = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -536,7 +536,7 @@
       </tr>
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
-        <td><span class="parametername">onComplete</span></td>
+        <td><span class="parametername">success</span></td>
         <td><p><strong>Optional</strong> Callback returns whther the data was sent successfully (default: null)</p>
 </td>
       </tr>

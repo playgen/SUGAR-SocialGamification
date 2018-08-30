@@ -316,13 +316,13 @@
   
   
   <a id="PlayGen_SUGAR_Client_GameDataClient_Get_" data-uid="PlayGen.SUGAR.Client.GameDataClient.Get*"></a>
-  <h4 id="PlayGen_SUGAR_Client_GameDataClient_Get_System_Int32_System_Int32_System_String___" data-uid="PlayGen.SUGAR.Client.GameDataClient.Get(System.Int32,System.Int32,System.String[])">Get(Int32, Int32, String[])</h4>
+  <h4 id="PlayGen_SUGAR_Client_GameDataClient_Get_System_Nullable_System_Int32__System_Int32_System_String___" data-uid="PlayGen.SUGAR.Client.GameDataClient.Get(System.Nullable{System.Int32},System.Int32,System.String[])">Get(Nullable&lt;Int32&gt;, Int32, String[])</h4>
   <div class="markdown level1 summary"><p>Find a list of all GameData that match the <param name="actorId">, <param name="gameId"> and <param name="key"> provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerable&lt;EvaluationDataResponse&gt; Get(int actorId, int gameId, string[] key)</code></pre>
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;EvaluationDataResponse&gt; Get(int? actorId, int gameId, string[] key)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -335,7 +335,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Int32</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">actorId</span></td>
         <td><p>ID of a User/Group.</p>
 </td>
@@ -373,12 +373,12 @@
   
   
   <a id="PlayGen_SUGAR_Client_GameDataClient_GetAsync_" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetAsync*"></a>
-  <h4 id="PlayGen_SUGAR_Client_GameDataClient_GetAsync_System_Int32_System_Int32_System_String___System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_EvaluationDataResponse___System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetAsync(System.Int32,System.Int32,System.String[],System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.EvaluationDataResponse}},System.Action{System.Exception})">GetAsync(Int32, Int32, String[], Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt;, Action&lt;Exception&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_GameDataClient_GetAsync_System_Nullable_System_Int32__System_Int32_System_String___System_Action_System_Collections_Generic_IEnumerable_PlayGen_SUGAR_Contracts_EvaluationDataResponse___System_Action_System_Exception__" data-uid="PlayGen.SUGAR.Client.GameDataClient.GetAsync(System.Nullable{System.Int32},System.Int32,System.String[],System.Action{System.Collections.Generic.IEnumerable{PlayGen.SUGAR.Contracts.EvaluationDataResponse}},System.Action{System.Exception})">GetAsync(Nullable&lt;Int32&gt;, Int32, String[], Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt;, Action&lt;Exception&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetAsync(int actorId, int gameId, string[] key, Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetAsync(int? actorId, int gameId, string[] key, Action&lt;IEnumerable&lt;EvaluationDataResponse&gt;&gt; onSuccess, Action&lt;Exception&gt; onError)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -391,7 +391,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Int32</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">actorId</span></td>
         <td></td>
       </tr>

@@ -17,14 +17,14 @@ The APIVersion is shared between Server and Client projects in PlayGen.SUGAR.Com
 # Docker
 The Major version is appended to the name of the docker container in the format:  
 `[container name]`-v`[major version number]`  
-i.e: `sugar-v2`
+i.e: `sugar-v1`
 
 When incrementing the sugar container version, you must also update the database container name too. 
 
 ### Container Names:
-- `sugar-v2` -> `sugar-v2`  
-- `sugar-v2-mariadb` -> `sugar-v2-mariadb`
-- `sugar-v2-mariadb` -> `sugar-v2-mariadb`
+- `sugar-v1` -> `sugar-v2`  
+- `sugar-v1-mariadb` -> `sugar-v2-mariadb`
+- `sugar-v1-mariadb` -> `sugar-v2-mariadb`
 
 ### Image Names:
 - `sugar-socialgamification:1.23.5` -> `sugar-socialgamification:2.0.0`

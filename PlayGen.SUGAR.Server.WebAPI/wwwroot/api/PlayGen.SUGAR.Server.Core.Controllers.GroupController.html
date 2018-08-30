@@ -87,10 +87,10 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.ActorController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorController_ActorDeletedEvent">ActorController.ActorDeletedEvent</a>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.ActorController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorController_DeleteActorEvent">ActorController.DeleteActorEvent</a>
     </div>
     <div>
-      <a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.ActorController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorController_TriggerDeletedEvent_System_Int32_">ActorController.TriggerDeletedEvent(Int32)</a>
+      <a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.ActorController.html#PlayGen_SUGAR_Server_Core_Controllers_ActorController_TriggerDeleteEvent_System_Int32_">ActorController.TriggerDeleteEvent(Int32)</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -319,13 +319,13 @@
   </table>
   
   
-  <a id="PlayGen_SUGAR_Server_Core_Controllers_GroupController_GetByPermissions_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.GroupController.GetByPermissions*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_GroupController_GetByPermissions_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.GroupController.GetByPermissions(System.Int32)">GetByPermissions(Int32)</h4>
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_GroupController_GetControlled_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.GroupController.GetControlled*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_GroupController_GetControlled_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.GroupController.GetControlled(System.Int32)">GetControlled(Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;Group&gt; GetByPermissions(int actorId)</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;Group&gt; GetControlled(int userId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -339,7 +339,7 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">actorId</span></td>
+        <td><span class="parametername">userId</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -355,6 +355,40 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Group.html">Group</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_GroupController_RemoveMember_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.GroupController.RemoveMember*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_GroupController_RemoveMember_System_Int32_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.GroupController.RemoveMember(System.Int32,System.Int32)">RemoveMember(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Cleanly remove a group member. If it is the admin, admin will be delegated to another member.
+If the only member, the group will be deleted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveMember(int groupId, int memberId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">groupId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">memberId</span></td>
         <td></td>
       </tr>
     </tbody>

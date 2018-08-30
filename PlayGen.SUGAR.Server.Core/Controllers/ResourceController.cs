@@ -139,7 +139,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public List<Actor> GetGameActors(int gameId)
 		{
 			var ids = _evaluationDataController.GetGameActors(gameId);
-			return ids.Select(a => _actorController.Get(a)).ToList();
+			return ids.Select(a => _actorController.Get(a.Value)).ToList();
 		}
 
 		private EvaluationData GetExistingResource(int gameId, int ownerId, string key)

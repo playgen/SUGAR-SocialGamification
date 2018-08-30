@@ -874,8 +874,8 @@ public Task&lt;IActionResult&gt; GetSentRequests([FromRoute] int groupId)</code>
   </table>
   
   
-  <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_AllianceController_UpdateAlliance_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AllianceController.UpdateAlliance*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AllianceController_UpdateAlliance_PlayGen_SUGAR_Contracts_RelationshipStatusUpdate_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AllianceController.UpdateAlliance(PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)">UpdateAlliance(RelationshipStatusUpdate)</h4>
+  <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_AllianceController_RemoveAlliance_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AllianceController.RemoveAlliance*"></a>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_AllianceController_RemoveAlliance_PlayGen_SUGAR_Contracts_RelationshipStatusUpdate_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.AllianceController.RemoveAlliance(PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)">RemoveAlliance(RelationshipStatusUpdate)</h4>
   <div class="markdown level1 summary"><p>Update an existing relationship between two Groups.
 Requires the relationship to already exist between the two Groups.</p>
 </div>
@@ -884,7 +884,7 @@ Requires the relationship to already exist between the two Groups.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut]
 [Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.Alliance)]
-public Task&lt;IActionResult&gt; UpdateAlliance([FromBody] RelationshipStatusUpdate relationship)</code></pre>
+public Task&lt;IActionResult&gt; RemoveAlliance([FromBody] RelationshipStatusUpdate relationship)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">

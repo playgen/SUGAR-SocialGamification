@@ -28,25 +28,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActorData",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ActorId = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    EvaluationDataType = table.Column<int>(nullable: false),
-                    GameId = table.Column<int>(nullable: false),
-                    Key = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActorData", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Actors",
                 columns: table => new
                 {
@@ -184,7 +165,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserToGroupRelationshipRequests",
+                name: "RelationshipRequests",
                 columns: table => new
                 {
                     RequestorId = table.Column<int>(nullable: false),
@@ -192,15 +173,15 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserToGroupRelationshipRequests", x => new { x.RequestorId, x.AcceptorId });
+                    table.PrimaryKey("PK_RelationshipRequests", x => new { x.RequestorId, x.AcceptorId });
                     table.ForeignKey(
-                        name: "FK_UserToGroupRelationshipRequests_Actors_AcceptorId",
+                        name: "FK_RelationshipRequests_Actors_AcceptorId",
                         column: x => x.AcceptorId,
                         principalTable: "Actors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserToGroupRelationshipRequests_Actors_RequestorId",
+                        name: "FK_RelationshipRequests_Actors_RequestorId",
                         column: x => x.RequestorId,
                         principalTable: "Actors",
                         principalColumn: "Id",
@@ -208,7 +189,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserToGroupRelationships",
+                name: "Relationships",
                 columns: table => new
                 {
                     RequestorId = table.Column<int>(nullable: false),
@@ -216,63 +197,15 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserToGroupRelationships", x => new { x.RequestorId, x.AcceptorId });
+                    table.PrimaryKey("PK_Relationships", x => new { x.RequestorId, x.AcceptorId });
                     table.ForeignKey(
-                        name: "FK_UserToGroupRelationships_Actors_AcceptorId",
+                        name: "FK_Relationships_Actors_AcceptorId",
                         column: x => x.AcceptorId,
                         principalTable: "Actors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserToGroupRelationships_Actors_RequestorId",
-                        column: x => x.RequestorId,
-                        principalTable: "Actors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserToUserRelationshipRequests",
-                columns: table => new
-                {
-                    RequestorId = table.Column<int>(nullable: false),
-                    AcceptorId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserToUserRelationshipRequests", x => new { x.RequestorId, x.AcceptorId });
-                    table.ForeignKey(
-                        name: "FK_UserToUserRelationshipRequests_Actors_AcceptorId",
-                        column: x => x.AcceptorId,
-                        principalTable: "Actors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserToUserRelationshipRequests_Actors_RequestorId",
-                        column: x => x.RequestorId,
-                        principalTable: "Actors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserToUserRelationships",
-                columns: table => new
-                {
-                    RequestorId = table.Column<int>(nullable: false),
-                    AcceptorId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserToUserRelationships", x => new { x.RequestorId, x.AcceptorId });
-                    table.ForeignKey(
-                        name: "FK_UserToUserRelationships_Actors_AcceptorId",
-                        column: x => x.AcceptorId,
-                        principalTable: "Actors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserToUserRelationships_Actors_RequestorId",
+                        name: "FK_Relationships_Actors_RequestorId",
                         column: x => x.RequestorId,
                         principalTable: "Actors",
                         principalColumn: "Id",
@@ -315,11 +248,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     ComparisonType = table.Column<int>(nullable: false),
                     CriteriaQueryType = table.Column<int>(nullable: false),
                     EvaluationDataCategory = table.Column<int>(nullable: false),
-                    EvaluationDataKey = table.Column<string>(maxLength: 64, nullable: false),
+                    EvaluationDataKey = table.Column<string>(nullable: true),
                     EvaluationDataType = table.Column<int>(nullable: false),
-                    EvaluationId = table.Column<int>(nullable: true),
+                    EvaluationId = table.Column<int>(nullable: false),
                     Scope = table.Column<int>(nullable: false),
-                    Value = table.Column<string>(maxLength: 64, nullable: false)
+                    Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -329,7 +262,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                         column: x => x.EvaluationId,
                         principalTable: "Evaluations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -339,10 +272,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     EvaluationDataCategory = table.Column<int>(nullable: false),
-                    EvaluationDataKey = table.Column<string>(maxLength: 64, nullable: false),
+                    EvaluationDataKey = table.Column<string>(nullable: true),
                     EvaluationDataType = table.Column<int>(nullable: false),
-                    EvaluationId = table.Column<int>(nullable: true),
-                    Value = table.Column<string>(maxLength: 64, nullable: false)
+                    EvaluationId = table.Column<int>(nullable: false),
+                    Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -352,7 +285,38 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                         column: x => x.EvaluationId,
                         principalTable: "Evaluations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActorData",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ActorId = table.Column<int>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    EvaluationDataType = table.Column<int>(nullable: false),
+                    GameId = table.Column<int>(nullable: false),
+                    Key = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActorData", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActorData_Actors_ActorId",
+                        column: x => x.ActorId,
+                        principalTable: "Actors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ActorData_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -440,7 +404,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ActorId = table.Column<int>(nullable: false),
+                    ActorId = table.Column<int>(nullable: true),
                     Category = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
@@ -453,6 +417,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EvaluationData", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EvaluationData_Actors_ActorId",
+                        column: x => x.ActorId,
+                        principalTable: "Actors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EvaluationData_Matches_MatchId",
                         column: x => x.MatchId,
@@ -489,6 +459,16 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ActorData_ActorId",
+                table: "ActorData",
+                column: "ActorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActorData_GameId",
+                table: "ActorData",
+                column: "GameId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ActorData_Key_GameId_ActorId_EvaluationDataType",
                 table: "ActorData",
                 columns: new[] { "Key", "GameId", "ActorId", "EvaluationDataType" },
@@ -515,6 +495,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 name: "IX_EvaluationCriterias_EvaluationId",
                 table: "EvaluationCriterias",
                 column: "EvaluationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EvaluationData_ActorId",
+                table: "EvaluationData",
+                column: "ActorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EvaluationData_MatchId",
@@ -559,6 +544,16 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RelationshipRequests_AcceptorId",
+                table: "RelationshipRequests",
+                column: "AcceptorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Relationships_AcceptorId",
+                table: "Relationships",
+                column: "AcceptorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rewards_EvaluationId",
                 table: "Rewards",
                 column: "EvaluationId");
@@ -567,26 +562,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 name: "IX_RoleClaims_ClaimId",
                 table: "RoleClaims",
                 column: "ClaimId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserToGroupRelationshipRequests_AcceptorId",
-                table: "UserToGroupRelationshipRequests",
-                column: "AcceptorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserToGroupRelationships_AcceptorId",
-                table: "UserToGroupRelationships",
-                column: "AcceptorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserToUserRelationshipRequests_AcceptorId",
-                table: "UserToUserRelationshipRequests",
-                column: "AcceptorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserToUserRelationships_AcceptorId",
-                table: "UserToUserRelationships",
-                column: "AcceptorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -613,6 +588,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                 name: "Leaderboards");
 
             migrationBuilder.DropTable(
+                name: "RelationshipRequests");
+
+            migrationBuilder.DropTable(
+                name: "Relationships");
+
+            migrationBuilder.DropTable(
                 name: "Rewards");
 
             migrationBuilder.DropTable(
@@ -620,18 +601,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
             migrationBuilder.DropTable(
                 name: "SentEvaluationNotifications");
-
-            migrationBuilder.DropTable(
-                name: "UserToGroupRelationshipRequests");
-
-            migrationBuilder.DropTable(
-                name: "UserToGroupRelationships");
-
-            migrationBuilder.DropTable(
-                name: "UserToUserRelationshipRequests");
-
-            migrationBuilder.DropTable(
-                name: "UserToUserRelationships");
 
             migrationBuilder.DropTable(
                 name: "AccountSources");

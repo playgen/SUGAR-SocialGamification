@@ -64,7 +64,7 @@
               
 <p>Interaction with SUGAR in the SUGAR Unity Package is handled through SUGARManager.</p>
 <h2 id="currentuser">CurrentUser</h2>
-<p>The currently signed in user, set when a user signs in or registers using the <a href="../api/PlayGen.SUGAR.Unity.AccountUnityClient.html">AccountUnityClient</a>.</p>
+<p>The currently signed in user, set when a user signs in or registers using the &#39;SetCurrentUser&#39; method in <a href="../api/PlayGen.SUGAR.Unity.AccountUnityClient.html">AccountUnityClient</a>.</p>
 <p>The <a href="http://api.sugarengine.org/v1/api/PlayGen.SUGAR.Contracts.ActorResponse.html">ActorResponse</a> object contains the user&#39;s Id, Name and Description.</p>
 <h2 id="currentgroup">CurrentGroup</h2>
 <p>The current &#39;primary&#39; group for the signed in user. Automatically set when signing in to the first group in that user&#39;s list of group that they&#39;re a member of. Can be manually set using the &#39;SetCurrentGroup&#39; method in SUGARManager.</p>
@@ -83,11 +83,6 @@
 <td>Account</td>
 <td>Sign in, register and sign out</td>
 <td><a href="../api/PlayGen.SUGAR.Unity.AccountUnityClient.html">AccountUnityClient</a></td>
-</tr>
-<tr>
-<td>Actor</td>
-<td>Get, create, update and delete groups. Get and update users</td>
-<td><a href="../api/PlayGen.SUGAR.Unity.ActorUnityClient.html">ActorUnityClient</a></td>
 </tr>
 <tr>
 <td>Evaluation</td>
@@ -138,8 +133,7 @@
 </table>
 <h2 id="client">Client</h2>
 <p>All functionality within SUGAR Unity goes through this SUGAR Client. It is created within the &#39;CreateSUGARClient&#39; method and set within the &#39;CreateSUGARClient&#39; method of <a href="../api/PlayGen.SUGAR.Unity.SUGARUnityManager.html">SUGARUnityManager</a>, both of which are triggered from its &#39;Awake&#39; method.</p>
-<p>Any player-facing SUGAR functionality can be accessed using the Client directly instead. </p>
-<p><strong>Important</strong>: the Client does not make the same checks as SUGAR Unity to ensure that functionality can only be called once a user is signed in and that only functionality that the user has access to is available, so additional care should be taken when using the Client directly to avoid calls failing.</p>
+<p>Any player-facing SUGAR functionality can be accessed using the Client directly instead. Please note that the Client does not make the same checks as SUGAR Unity to ensure that functionality can only be called once a user is signed in and that only functionality that the user has access to is available, so additional care should be taken when using the Client directly to avoid calls failing.</p>
 <h2 id="usersignedin">UserSignedIn</h2>
 <p>Boolean used to confirm if a user is signed in. If no user is signed in, most functionality will not be accessible.</p>
 <h2 id="classid">ClassId</h2>

@@ -921,8 +921,8 @@ public IActionResult GetUserGroups([FromRoute] int userId)</code></pre>
   </table>
   
   
-  <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_GroupMemberController_UpdateMember_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GroupMemberController.UpdateMember*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GroupMemberController_UpdateMember_PlayGen_SUGAR_Contracts_RelationshipStatusUpdate_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GroupMemberController.UpdateMember(PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)">UpdateMember(RelationshipStatusUpdate)</h4>
+  <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_GroupMemberController_RemoveMember_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GroupMemberController.RemoveMember*"></a>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_GroupMemberController_RemoveMember_PlayGen_SUGAR_Contracts_RelationshipStatusUpdate_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.GroupMemberController.RemoveMember(PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)">RemoveMember(RelationshipStatusUpdate)</h4>
   <div class="markdown level1 summary"><p>Update an existing relationship between a User and a Group.
 Requires the relationship to already exist between the User and Group.</p>
 </div>
@@ -932,7 +932,7 @@ Requires the relationship to already exist between the User and Group.</p>
     <pre><code class="lang-csharp hljs">[HttpPut]
 [Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.GroupMember)]
 [Authorization(ClaimScope.User, AuthorizationAction.Delete, AuthorizationEntity.GroupMember)]
-public Task&lt;IActionResult&gt; UpdateMember([FromBody] RelationshipStatusUpdate relationship)</code></pre>
+public Task&lt;IActionResult&gt; RemoveMember([FromBody] RelationshipStatusUpdate relationship)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">

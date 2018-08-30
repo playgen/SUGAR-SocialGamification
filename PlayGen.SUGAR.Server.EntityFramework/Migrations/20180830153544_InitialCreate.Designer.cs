@@ -14,8 +14,8 @@ using System;
 namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 {
     [DbContext(typeof(SUGARContext))]
-    [Migration("20180822163529_ActorCascadeDelete")]
-    partial class ActorCascadeDelete
+    [Migration("20180830153544_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

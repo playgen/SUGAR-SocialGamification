@@ -63,20 +63,15 @@
               <h1 id="quick-start">Quick Start</h1>
               
 <p><strong>Note: Please ensure you have created a SUGAR account before going through the following steps.</strong></p>
-<p>See <a href="creating-accounts.html">creating accounts</a> for more details.</p>
-<h2 id="import-the-sugar-unity-client">Import the SUGAR Unity Client</h2>
-<p>Downlaod the SUGAR Unity package from the Unity Asset Store <a href="https://assetstore.unity.com/packages/tools/network/sugar-social-gamification-107078">here</a>.<br>OR<br>If you have downloaded the source code, follow the <a href="../development/build-instructions.html">build instructions</a>.</p>
-<h2 id="add-sugar-to-your-game">Add SUGAR to your game</h2>
-<p>Add the &#39;SUGAR&#39; prefab, found at SUGAR/Prefabs/SUGAR, into your starting scene. All of the interfaces referenced on the Unity Clients on this object can be found at SUGAR/Example/Prefabs. </p>
-<p>The SUGAR Unity Manager script component on the SUGAR prefab holds universal information required by other SUGAR components. Configuring this component is necessary to connect to SUGAR.</p>
-<ul>
-<li>Base Address - web address of SUGAR server (e.g. <code>http://localhost:59400/</code> or <code>http://www.mysugarserver.com</code>). This is overwritten by the value set inside the config.json file (found in &quot;Assets/StreamingAssets&quot;).</li>
-<li>Game Token - name of the <a class="xref" href="../../features/game.html">Game</a> used for database lookup.</li>
-<li>Game Id - database row Id of the <a class="xref" href="../../features/game.html">Game</a>, returned from token lookup.</li>
-<li>Source - <a href="../features/accountsources.html">Account Source</a> to log in to. Use &quot;SUGAR&quot; as default to get started quickly or if you don&#39;t need your own account source.</li>
-</ul>
-<h2 id="creating-your-game-in-sugar">Creating your Game in SUGAR</h2>
-<p>New games can be created through the admin panel or through the C# API, but the simplest is to use a game seed through Unity. The seed file allows you to define the name, achievements, leaderboards and skills at the same time. </p>
+<p>If you don&#39;t already have one, you can create a SUGAR account <a href="https://admindemo.sugarengine.org/">here</a>.</p>
+<h3 id="import-the-sugar-unity-client">Import the SUGAR Unity Client</h3>
+<ol>
+<li>Downlaod the SUGAR Unity package from the Unity Asset Store <a href="https://assetstore.unity.com/packages/tools/network/sugar-social-gamification-107078">here</a>.<br>OR<br>If you have downloaded the source code, follow the <a href="../development/build-instructions.html">build instructions</a>.</li>
+</ol>
+<h3 id="add-sugar">Add SUGAR</h3>
+<ol>
+<li>Add the &#39;SUGAR&#39; prefab, found at SUGAR/Prefabs/SUGAR, into your starting scene. All of the interfaces referenced on the Unity Clients on this object can be found at SUGAR/Example/Prefabs/Landscape.   </li>
+</ol>
 <h3 id="create-game-seed-file">Create Game Seed File</h3>
 <ol>
 <li>Open the &#39;Edit Game Seed&#39; tool by clicking Tools/SUGAR/Edit Game Seed.  </li>
@@ -93,18 +88,13 @@
 <li>Click the &#39;Sign-in and Seed&#39; button to add the game to the platform. This step will fail if the seed file is invalid or you provide invalid user details.  </li>
 <li>Check that the &#39;Game Token&#39; and &#39;Game Id&#39; fields on the SUGAR object in your starting scene has been edited to match the details of the game you just created.  </li>
 </ol>
-<h2 id="using-sugar-in-your-game">Using SUGAR in your game</h2>
-<p>Once you have set up your game in SUGAR, you are now ready to log in and start using SUGAR features in your game. SUGAR functionality is controlled through the <a href="../features/sugarmanager.html">SUGARManager</a>. </p>
-<p>Before using SUGAR functionality during your game, a user should be logged in.</p>
-<h3 id="logging-in-to-sugar">Logging in to SUGAR</h3>
-<p>By default when the SUGAR gameobject is present in the scene and no user is logged in, the login panel will be shown to the user. In the example scene this will happen as soon as the project is run. Alternatively you can set auto login values (for testing purposes).</p>
-<h3 id="setting-auto-log-in-values-optional">Setting Auto Log in values (optional)</h3>
+<h3 id="set-auto-log-in-values-optional">Set Auto Log-in Values (optional)</h3>
 <ol>
 <li>Open the &#39;Set Auto Log-in Values&#39; tool by clicking Tools/SUGAR/Set Auto Log-in Values.  </li>
 <li>Fill in the details you want to use to automatically sign in when testing in Unity.  </li>
 <li>This feature is disabled if either &#39;Auto Log-in&#39; within the tool or &#39;Allow Auto Login&#39; in &#39;Account Unity Client&#39; on the &#39;SUGAR&#39; prefab is not checked.  </li>
 </ol>
-<h2 id="testing-sugar-features-in-unity-project">Testing SUGAR features in Unity Project</h2>
+<h3 id="testing-sugar-features-in-unity-project">Testing SUGAR features in Unity Project</h3>
 <p>In the unity project, open <em>Unity/Assets/SUGAR/Example/Scene.unity</em>, after rebuilding the PlayGen.SUGAR.Unity project you can test the functionality with the following commands:</p>
 <table>
 <thead>
@@ -121,10 +111,6 @@
 <tr>
 <td>T + K</td>
 <td>Evaluation.DisplayAchievementList</td>
-</tr>
-<tr>
-<td>T + J</td>
-<td>Evaluation.DisplaySkillList</td>
 </tr>
 <tr>
 <td>T + A</td>

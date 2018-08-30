@@ -828,8 +828,8 @@ public Task&lt;IActionResult&gt; GetSentRequests([FromRoute] int userId)</code><
   </table>
   
   
-  <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_UpdateFriend_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.UpdateFriend*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_UpdateFriend_PlayGen_SUGAR_Contracts_RelationshipStatusUpdate_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.UpdateFriend(PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)">UpdateFriend(RelationshipStatusUpdate)</h4>
+  <a id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_RemoveFriend_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.RemoveFriend*"></a>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Controllers_UserFriendController_RemoveFriend_PlayGen_SUGAR_Contracts_RelationshipStatusUpdate_" data-uid="PlayGen.SUGAR.Server.WebAPI.Controllers.UserFriendController.RemoveFriend(PlayGen.SUGAR.Contracts.RelationshipStatusUpdate)">RemoveFriend(RelationshipStatusUpdate)</h4>
   <div class="markdown level1 summary"><p>Update an existing relationship between two Users.
 Requires the relationship to already exist between the two Users.</p>
 </div>
@@ -838,7 +838,7 @@ Requires the relationship to already exist between the two Users.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPut]
 [Authorization(ClaimScope.User, AuthorizationAction.Delete, AuthorizationEntity.UserFriend)]
-public Task&lt;IActionResult&gt; UpdateFriend([FromBody] RelationshipStatusUpdate relationship)</code></pre>
+public Task&lt;IActionResult&gt; RemoveFriend([FromBody] RelationshipStatusUpdate relationship)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
