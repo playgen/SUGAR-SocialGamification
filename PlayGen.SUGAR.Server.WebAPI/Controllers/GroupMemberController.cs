@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("members/{groupId:int}")]
 		public IActionResult GetMembers([FromRoute]int groupId)
 		{
-			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.User, null);
+			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.User);
 			var actorContract = members.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -98,7 +98,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("usergroups/{userId:int}")]
 		public IActionResult GetUserGroups([FromRoute]int userId)
 		{
-			var groups = _relationshipCoreController.GetRelationships(userId, ActorType.Group, null);
+			var groups = _relationshipCoreController.GetRelationships(userId, ActorType.Group);
 			var actorContract = groups.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
