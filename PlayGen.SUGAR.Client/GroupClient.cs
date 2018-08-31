@@ -34,6 +34,17 @@ namespace PlayGen.SUGAR.Client
 			return Get<IEnumerable<GroupResponse>>(query);
 		}
 
+		/// <summary>
+		/// Get a list of all groups for a game
+		/// </summary>
+		/// <param name="gameId"> The id of the game</param>
+		/// <returns></returns>
+		public IEnumerable<GroupResponse> GetByGame(int gameId)
+		{
+			var query = GetUriBuilder(ControllerPrefix + "/findbygame/" + gameId).ToString();
+			return Get<IEnumerable<GroupResponse>>(query);
+		}
+
 		public void GetAsync(Action<IEnumerable<GroupResponse>> onSuccess, Action<Exception> onError)
 		{
 			AsyncRequestController.EnqueueRequest(Get,

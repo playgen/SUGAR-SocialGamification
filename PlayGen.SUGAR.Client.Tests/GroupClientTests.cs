@@ -245,7 +245,43 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Group.Delete(-1));
 		}
-		
+
+		[Fact]
+		public void CanCreateGroupForGame()
+		{
+			var key = "Group_CanCreateGroupForGame";
+
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+
+			var getGames = Fixture.SUGARClient.Game.Get(key);
+			var game = getGames.First();
+			Assert.NotNull(game);
+
+			var groupRequest = new GroupRequest { Name = key + "_Group", GameId = game.Id};
+
+			Fixture.SUGARClient.Group.Create(groupRequest);
+			var groups = Fixture.SUGARClient.Group.GetByGame(game.Id);
+
+			Assert.NotNull(groups);
+			Assert.Equal(key+"_Group", groups.First().Name);
+		}
+
+		[Fact]
+		public void CannotCreateGroupForInvalidGame()
+		{
+			var key = "Group_CannotCreateGroupForInvalidGame";
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+
+			var getGames = Fixture.SUGARClient.Game.Get(key);
+			var game = getGames.First();
+			Assert.NotNull(game);
+
+			var groupRequest = new GroupRequest { Name = key + "_Group" , GameId = -1};
+			Fixture.SUGARClient.Group.Create(groupRequest);
+			var groups = Fixture.SUGARClient.Group.GetByGame(game.Id);
+			Assert.Equal(0, groups.Count());
+		}
+
 		[Theory]
 		[InlineData("")]
 		[InlineData("Short Description")]

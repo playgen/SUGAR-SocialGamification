@@ -66,6 +66,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 				CreateGame(context, "Game_CanGetGamesByName 1");
 				CreateGame(context, "Game_CanGetGamesByName 2");
 				CreateGame(context, "Game_CanGetGameById");
+				CreateGame(context, "Group_CanCreateGroupForGame");
+				CreateGame(context, "Group_CannotCreateGroupForInvalidGame");
 				#endregion
 
 				#region GameData Client Tests
