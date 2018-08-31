@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Controllers;
 using PlayGen.SUGAR.Server.Model;
 using Xunit;

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
@@ -30,17 +31,18 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		private int RequestingId => int.Parse(User.Identity.Name);
 
-		/// <summary>
-		/// Get a list of all Users.
+        /// <summary>
+        /// Get a list of all Users.
 		/// </summary>
-		/// <returns>A list of <see cref="UserResponse"/> that hold User details.</returns>
-		[HttpGet("list")]
+		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
+        /// <returns>A list of <see cref="UserResponse"/> that hold User details.</returns>
+        [HttpGet("list")]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Get, AuthorizationEntity.User)]
-		public async Task<IActionResult> Get()
+		public async Task<IActionResult> Get(ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, Platform.AllId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
 			{
-				var users = _userCoreController.GetAll(int.Parse(User.Identity.Name));
+				var users = _userCoreController.GetAll(actorVisibilityFilter);
 				var actorContract = users.ToContractList();
 				return new ObjectResult(actorContract);
 			}
@@ -52,27 +54,29 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		/// <param name="name">User name.</param>
 		/// <param name="exactMatch">Match the name exactly.</param>
+		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
 		/// <returns>A list of <see cref="UserResponse"/> which match the search criteria.</returns>
 		[HttpGet("find/{name}")]
 		[HttpGet("find/{name}/{exactMatch:bool}")]
-		public IActionResult Get([FromRoute]string name, bool exactMatch = false)
+		public IActionResult Get([FromRoute]string name, bool exactMatch, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
 		{
 
-			var users = _userCoreController.Search(name, exactMatch, RequestingId);
+			var users = _userCoreController.Search(name, exactMatch, actorVisibilityFilter);
 			var actorContract = users.ToContractList();
 			return new ObjectResult(actorContract);
 		}
 
-		/// <summary>
-		/// Get User that matches the id provided.
-		/// </summary>
-		/// <param name="id">User id.</param>
-		/// <returns><see cref="UserResponse"/> which matches search criteria.</returns>
-		[HttpGet("findbyid/{id:int}", Name = "GetByUserId")]
+        /// <summary>
+        /// Get User that matches the id provided.
+        /// </summary>
+        /// <param name="id">User id.</param>
+		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
+        /// <returns><see cref="UserResponse"/> which matches search criteria.</returns>
+        [HttpGet("findbyid/{id:int}", Name = "GetByUserId")]
 		//[ResponseType(typeof(UserResponse))]
-		public IActionResult Get([FromRoute]int id)
+		public IActionResult Get([FromRoute]int id, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
 		{
-			var user = _userCoreController.Get(id, RequestingId);
+			var user = _userCoreController.Get(id, actorVisibilityFilter);
 			var actorContract = user.ToContract();
 			return new ObjectResult(actorContract);
 		}

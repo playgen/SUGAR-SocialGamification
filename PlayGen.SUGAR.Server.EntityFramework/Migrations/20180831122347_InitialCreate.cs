@@ -35,7 +35,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(maxLength: 1023, nullable: true),
                     Discriminator = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Private = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
@@ -31,57 +30,57 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// </summary>
 		private int RequestingId => int.Parse(User.Identity.Name);
 
-        /// <summary>
-        /// Get a list of all Groups.
-        /// </summary>
-		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
-        /// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
-        [HttpGet("list")]
-		public IActionResult Get([FromBody] ActorVisibilityFilter actorVisibilityFilter)
-		{
-			var groups = _groupCoreController.GetAll(actorVisibilityFilter);
-			var actorContract = groups.ToContractList();
-			return new ObjectResult(actorContract);
-		}
-
-        /// <summary>
-        /// Get a list of all Groups the signed in User has control over.
+		/// <summary>
+		/// Get a list of all Groups.
 		/// </summary>
-		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
-        /// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
-        [HttpGet("controlled")]
-		public IActionResult GetControlled([FromBody] ActorVisibilityFilter actorVisibilityFilter)
+		/// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
+		[HttpGet("list")]
+		public IActionResult Get()
 		{
-			var groups = _groupCoreController.GetControlled(RequestingId, actorVisibilityFilter);
+			var groups = _groupCoreController.Get(RequestingId);
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}
 
-        /// <summary>
-        /// Get a list of Groups whose name contain the name provided.
-        /// </summary>
-        /// <param name="name">Group name.</param>
-		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
-        /// <returns>A list of <see cref="GroupResponse"/> which match the search criteria.</returns>
-        [HttpGet("find/{name}")]
-		public IActionResult Get([FromRoute]string name, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
+		/// <summary>
+		/// Get a list of all Groups the signed in User has control over.
+		/// </summary>
+		/// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
+		[HttpGet("controlled")]
+		public IActionResult GetControlled()
 		{
-			var groups = _groupCoreController.Search(name, actorVisibilityFilter);
+<<<<<<< HEAD
+			var groups = _groupCoreController.GetByPermissions(RequestingId);
+=======
+			var groups = _groupCoreController.GetControlled(int.Parse(User.Identity.Name));
+>>>>>>> master
+			var actorContract = groups.ToContractList();
+			return new ObjectResult(actorContract);
+		}
+
+		/// <summary>
+		/// Get a list of Groups whose name contain the name provided.
+		/// </summary>
+		/// <param name="name">Group name.</param>
+		/// <returns>A list of <see cref="GroupResponse"/> which match the search criteria.</returns>
+		[HttpGet("find/{name}")]
+		public IActionResult Get([FromRoute]string name)
+		{
+			var groups = _groupCoreController.Search(name, RequestingId);
 			var actorContract = groups.ToContractList();
 
 			return new ObjectResult(actorContract);
 		}
 
-        /// <summary>
-        /// Get Group that matches the id provided.
-        /// </summary>
-        /// <param name="id">Group id.</param>
-		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
-        /// <returns><see cref="GroupResponse"/> which matches search criteria.</returns>
-        [HttpGet("findbyid/{id:int}", Name = "GetByGroupId")]
-		public IActionResult Get([FromRoute]int id, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
+		/// <summary>
+		/// Get Group that matches the id provided.
+		/// </summary>
+		/// <param name="id">Group id.</param>
+		/// <returns><see cref="GroupResponse"/> which matches search criteria.</returns>
+		[HttpGet("findbyid/{id:int}", Name = "GetByGroupId")]
+		public IActionResult Get([FromRoute]int id)
 		{
-			var group = _groupCoreController.Get(id, actorVisibilityFilter);
+			var group = _groupCoreController.Get(id, RequestingId);
 			var actorContract = group.ToContract();
 			return new ObjectResult(actorContract);
 		}
@@ -97,7 +96,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		public IActionResult Create([FromBody]GroupRequest actor)
 		{
 			var group = actor.ToGroupModel();
-			_groupCoreController.Create(group, RequestingId);
+			_groupCoreController.Create(group, int.Parse(User.Identity.Name));
 			var actorContract = group.ToContract();
 			return new ObjectResult(actorContract);
 		}

@@ -1,41 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PlayGen.SUGAR.Common.Authorization;
-using PlayGen.SUGAR.Server.Core.Controllers;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Model;
-// ReSharper disable SimplifyLinqExpression
 
 namespace PlayGen.SUGAR.Server.Core.Extensions
 {
     public static class ActorExtensions
     {
-		public static List<T> FilterPrivate<T>(this List<T> actors, ActorClaimController actorClaimController, int? requestingId) where T : Actor
+		public static IEnumerable<T> FilterVisibility<T>(this List<T> actors, ActorVisibilityFilter filter) where T : Actor
 	    {
-			foreach (var actor in actors)
-			{
-				var hasClaim = requestingId != null &&
-								(actorClaimController.GetActorClaimsForEntity(requestingId.Value, actor.Id, ClaimScope.User).Any() || actorClaimController.GetActorClaimsForEntity(requestingId.Value, actor.Id, ClaimScope.Group).Any());
-				if (!hasClaim && requestingId != actor.Id && actor.Private)
-				{
-					actors.Remove(actor);
-				}
-			}
-			 return actors;
+			return actors
+				.Where(a => IsNotFilteredOut(a, filter));
 	    }
 
-	    public static T FilterPrivate<T>(this T actor,ActorClaimController actorClaimController, int? requestingId) where T : Actor
-	    {
-		    var hasClaim = requestingId  != null && 
-				(actorClaimController.GetActorClaimsForEntity(requestingId.Value, actor.Id, ClaimScope.User).Any() || actorClaimController.GetActorClaimsForEntity(requestingId.Value, actor.Id, ClaimScope.Group).Any()); 
+		public static T FilterVisibility<T>(this T actor, ActorVisibilityFilter filter) where T : Actor
+		{
+			return actor != null && IsNotFilteredOut(actor, filter) ? actor : null;
+		}
 
-			if (!hasClaim)
-			{
-				if (actor != null && actor.Private && actor.Id != requestingId)
-				{
-					return null;
-				}
-			}
-			return actor;
-	    }
-	}
+	    public static bool IsNotFilteredOut(Actor actor, ActorVisibilityFilter filter)
+		{
+			// if private should be included OR this is not private
+			return (filter & ActorVisibilityFilter.Private) != 0 || !actor.Private;
+		}
+    }
 }

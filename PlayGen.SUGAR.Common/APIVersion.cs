@@ -19,7 +19,7 @@ namespace PlayGen.SUGAR.Common
 
 		public const int Major = 2;
 
-		public const int Minor = 0;
+		public const int Minor = 1;
 
 		public const int Build = 0;
 

@@ -236,15 +236,15 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return actorIds;
 		}
 
-		protected string GetName(int id, ActorType actorType, int requestingId)
+		protected string GetName(int id, ActorType actorType, ActorVisibilityFilter actorVisibilityFilter)
 		{
 			switch (actorType)
 			{
 				case ActorType.User:
-					return UserController.Get(id, requestingId).Name;
+					return UserController.Get(id, actorVisibilityFilter).Name;
 
 				case ActorType.Group:
-					return GroupController.Get(id, requestingId).Name;
+					return GroupController.Get(id, actorVisibilityFilter).Name;
 
 				default:
 					return string.Empty;

@@ -69,15 +69,19 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		/// </summary>
 		/// <param name="actorId">The actor to get list of relationsips with</param>
 		/// <param name="actorType">The tyoe of actor that relationship is shared with</param>
-        /// <param name="actorVisibilityFilter">Filter to return related based on theri visibility setting</param>
-        /// <returns></returns>
-        public List<Actor> GetRelatedActors(int actorId, ActorType actorType, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
+		/// <returns></returns>
+<<<<<<< HEAD
+	    public List<Actor> GetRelationships(int actorId, ActorType actorType, int? requestingId = null)
+=======
+	    public List<Actor> GetRelatedActors(int actorId, ActorType actorType)
+>>>>>>> master
 	    {
 		    var relationships = _relationshipDbController.GetRelatedActors(actorId, actorType);
 
-			if ((actorVisibilityFilter & ActorVisibilityFilter.Private) == 0)
-			{
-				relationships = relationships.Where(r => !r.Private).ToList();
+		    // ReSharper disable once SimplifyLinqExpression
+		    if (requestingId == null || !_actorRoleController.GetControlled(requestingId.Value).Any(c => c.ClaimScope == ClaimScope.Global))
+		    {
+			    relationships = relationships.Where(r => !r.Private || r.Id == requestingId).ToList();
 		    }
 
 			_logger.LogInformation($"{relationships?.Count} relationships for ActorId: {actorId}");

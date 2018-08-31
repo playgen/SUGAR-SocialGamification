@@ -3,8 +3,13 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
+<<<<<<< HEAD
 using PlayGen.SUGAR.Server.Core.Extensions;
+using PlayGen.SUGAR.Server.Core.Utilities;
+using PlayGen.SUGAR.Server.EntityFramework;
+=======
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
+>>>>>>> master
 using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
@@ -13,6 +18,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	{
 		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.GroupController _groupDbController;
+		private readonly ActorClaimController _actorClaimController;
 		private readonly ActorRoleController _actorRoleController;
 		private readonly RelationshipController _relationshipController;
 
@@ -20,21 +26,21 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			ILogger<GroupController> logger,
 			EntityFramework.Controllers.GroupController groupDbController,
 			EntityFramework.Controllers.ActorController actorDbController,
+			ActorClaimController actorClaimController,
 			ActorRoleController actorRoleController,
-			RelationshipController relationshipController) : base(actorDbController)
+			RelationshipController relationshipController) : base(actorDbController, actorClaimController)
 		{
 			_logger = logger;
 			_groupDbController = groupDbController;
+			_actorClaimController = actorClaimController;
 			_actorRoleController = actorRoleController;
 			_relationshipController = relationshipController;
 		}
 
-		public List<Group> GetAll(ActorVisibilityFilter actorVisibilityFilter)
+		public List<Group> Get(int requestingId)
 		{
 			var groups = _groupDbController.Get();
-			
-			groups = groups.FilterVisibility(actorVisibilityFilter).ToList();
-
+			groups = groups.FilterPrivate(_actorClaimController, requestingId);
 			groups.ForEach(g => g.UserRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.User));
 			groups.ForEach(g => g.GroupRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.Group));
 
@@ -43,25 +49,16 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return groups;
 		}
 
-		public Group Get(int id, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
+		public List<Group> GetControlled(int userId)
 		{
-			var group = _groupDbController.Get(id);
-			group = group.FilterVisibility(actorVisibilityFilter);
-
-			if (group != null)
-			{
-				group.UserRelationshipCount = _relationshipController.GetRelationshipCount(group.Id, ActorType.User);
-				group.GroupRelationshipCount = _relationshipController.GetRelationshipCount(group.Id, ActorType.Group);
-			}
-
-			_logger.LogInformation($"Group: {group?.Id} for Id: {id}");
-
-			return group;
-		}
-
-        public List<Group> GetControlled(int userId, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.All)
-		{
-			var groups = GetAll(actorVisibilityFilter);
+<<<<<<< HEAD
+			var groups = Get(actorId);
+			var permissions = _actorClaimController.GetActorClaimsByScope(actorId, ClaimScope.Group).Select(p => p.EntityId).ToList();
+			groups = groups.Where(g => permissions.Contains(g.Id)).ToList();
+			groups.ForEach(g => g.UserRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.User));
+			groups.ForEach(g => g.GroupRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.Group));
+=======
+			var groups = Get();
 
 			var groupsWhereControlled = groups
 				.Where(g => IsGroupController(userId, g.Id))
@@ -72,12 +69,16 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				g.UserRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.User);
 				g.GroupRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.Group);
 			});
+>>>>>>> master
 
 			_logger.LogInformation($"{groups.Count} Groups");
 
 			return groupsWhereControlled;
 		}
 
+<<<<<<< HEAD
+		public new Group Get(int id, int requestingId)
+=======
 		/// <summary>
         /// Cleanly remove a group member. If it is the admin, admin will be delegated to another member.
         /// If the only member, the group will be deleted.
@@ -86,7 +87,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
         /// <param name="memberId"></param>
 		public void RemoveMember(int groupId, int memberId)
 		{
-			var members = _relationshipController.GetRelatedActors(groupId, ActorType.User, ActorVisibilityFilter.All);
+			var members = _relationshipController.GetRelatedActors(groupId, ActorType.User);
 
 			if (members.All(m => m.Id != memberId))
 			{
@@ -126,10 +127,27 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			}
 		}
 
-		public List<Group> Search(string name, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
+        public new Group Get(int id)
+>>>>>>> master
+		{
+			var group = _groupDbController.Get(id);
+			group = group.FilterPrivate(_actorClaimController, requestingId);
+
+			if (group != null)
+			{
+				group.UserRelationshipCount = _relationshipController.GetRelationshipCount(group.Id, ActorType.User);
+				group.GroupRelationshipCount = _relationshipController.GetRelationshipCount(group.Id, ActorType.Group);
+			}
+
+			_logger.LogInformation($"Group: {group?.Id} for Id: {id}");
+
+			return group;
+		}
+
+		public List<Group> Search(string name, int requestingId)
 		{
 			var groups = _groupDbController.Get(name);
-			groups = groups.FilterVisibility(actorVisibilityFilter).ToList();
+			groups = groups.FilterPrivate(_actorClaimController, requestingId);
 
 			groups.ForEach(g => g.UserRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.User));
 			groups.ForEach(g => g.GroupRelationshipCount = _relationshipController.GetRelationshipCount(g.Id, ActorType.Group));
@@ -173,6 +191,8 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_logger.LogInformation($"{id}");
 		}
 
+<<<<<<< HEAD
+=======
 		private bool IsGroupController(int memberId, int groupId)
 		{
 			// Get members of group where they have a role over the entire group (claim scope) 
@@ -183,5 +203,6 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					.GetActorRolesForEntity(memberId, groupId, ClaimScope.Group)
 					.Any(r => r.Default);
 		}
+>>>>>>> master
 	}
 }

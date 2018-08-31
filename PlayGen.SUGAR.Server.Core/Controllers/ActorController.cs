@@ -1,4 +1,5 @@
 ﻿using System;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.Core.Extensions;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.Model;
@@ -10,14 +11,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		public static event Action<int> DeleteActorEvent;
 
 		private readonly EntityFramework.Controllers.ActorController _actorDbController;
-		private readonly ActorClaimController _actorClaimController;
-		private EntityFramework.Controllers.ActorController actorDbController;
-
-
-		public ActorController(EntityFramework.Controllers.ActorController actorDbController, ActorClaimController actorClaimController)
+		
+		public ActorController(EntityFramework.Controllers.ActorController actorDbController)
 		{
 			_actorDbController = actorDbController;
-			_actorClaimController = actorClaimController;
 		}
 
 		protected void TriggerDeleteEvent(int actorId)
@@ -25,9 +22,10 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			DeleteActorEvent?.Invoke(actorId);
 		}
 
-		public Actor Get(int actorId)
+		public Actor Get(int actorId, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
 		{
-			return _actorDbController.Get(actorId).FilterPrivate(_actorClaimController, null);
+			var actor = _actorDbController.Get(actorId);
+			return actor.FilterVisibility(actorVisibilityFilter);
 		}
 	}
 }

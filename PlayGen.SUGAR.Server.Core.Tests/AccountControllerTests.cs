@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.Core.Controllers;
 using PlayGen.SUGAR.Server.Core.Extensions;
@@ -86,7 +87,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		    _actorClaimController.Create(claim);
 
 
-			var user = _userController.Get(newPrivateUser.Id, newUser.Id);
+			var user = _userController.Get(newPrivateUser.Id, ActorVisibilityFilter.All);
 
 			Assert.NotNull(user);
 			Assert.Equal(privateUserName, user.Name);
@@ -100,8 +101,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		    CreateUser(userName, true);
 
 			// sending with id -1 as should not be able to retriev newUser
-		    var allUsers = _userController.GetAll(-1);
-			allUsers = allUsers.FilterPrivate(_actorClaimController, -1);
+		    var allUsers = _userController.GetAll(ActorVisibilityFilter.Public);
 
 		    var matches = allUsers.Count(u => u.Name == userName);
 
@@ -114,8 +114,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		    var userName = "CanRetrievePrivateSelfFromSearch";
 
 		    var newUser = CreateUser(userName, true);
-		    var allUsers = _userController.GetAll(newUser.Id);
-		    allUsers = allUsers.FilterPrivate(_actorClaimController, newUser.Id);
+		    var allUsers = _userController.GetAll(ActorVisibilityFilter.Private);
 
 		    var matches = allUsers.Count(u => u.Name == userName);
 

@@ -14,7 +14,7 @@ using System;
 namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 {
     [DbContext(typeof(SUGARContext))]
-    [Migration("20180830153544_InitialCreate")]
+    [Migration("20180831122347_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,6 +83,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                         .IsRequired();
 
                     b.Property<string>("Name");
+
+                    b.Property<bool>("Private");
 
                     b.HasKey("Id");
 
