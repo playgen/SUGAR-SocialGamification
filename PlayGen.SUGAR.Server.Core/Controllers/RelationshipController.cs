@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		/// <param name="actorId">The actor to get list of relationsips with</param>
 		/// <param name="actorType">The tyoe of actor that relationship is shared with</param>
 		/// <returns></returns>
-	    public List<Actor> GetRelationships(int actorId, ActorType actorType, int? requestingId)
+	    public List<Actor> GetRelationships(int actorId, ActorType actorType, int? requestingId = null)
 	    {
 		    var relationships = _relationshipDbController.GetRelationships(actorId, actorType);
 
