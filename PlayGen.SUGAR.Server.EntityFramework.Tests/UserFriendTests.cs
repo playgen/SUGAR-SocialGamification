@@ -8,7 +8,7 @@ using Xunit;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 {
-	public class UserFriendControllerTests : EntityFrameworkTestBase
+	public class UserFriendTests : EntityFrameworkTestBase
 	{
 		#region Configuration
 		private readonly RelationshipController _relationshipController = ControllerLocator.RelationshipController;
@@ -21,12 +21,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = " CreateRelationshipRequest";
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
+			var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+			var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
 
 			var newFriend =  CreateRelationshipRequest(requestor.Id, acceptor.Id);
 
-			var userRequests = _relationshipController.GetRequests(newFriend.AcceptorId, ActorType.User);
+			var userRequests = _relationshipController.GetRelationRequestorActors(newFriend.AcceptorId, ActorType.User);
 
 			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 
@@ -37,7 +37,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		public void  CreateRelationshipWithNonExistingRequestor()
 		{
 			var userFriendName = " CreateRelationshipWithNonExistingRequestor";
-			var acceptor = CreateUser(userFriendName);
+			var acceptor = Helpers.CreateUser(userFriendName);
 			Assert.Throws<InvalidRelationshipException>(() =>  CreateRelationship(-1, acceptor.Id));
 		}
 
@@ -45,7 +45,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		public void  CreateRelationshipWithNonExistingAcceptor()
 		{
 			var userFriendName = " CreateRelationshipWithNonExistingAcceptor";
-			var requestor = CreateUser(userFriendName);
+			var requestor = Helpers.CreateUser(userFriendName);
 			Assert.Throws<InvalidRelationshipException>(() =>  CreateRelationship(requestor.Id, -1));
 		}
 
@@ -54,8 +54,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = "CreateDuplicateUserFriend";
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
+			var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+			var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
 
 			 CreateRelationship(requestor.Id, acceptor.Id);
 
@@ -67,8 +67,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = "CreateDuplicateReversedUserFriend";
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
+			var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+			var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
 
 			 CreateRelationship(requestor.Id, acceptor.Id);
 
@@ -78,7 +78,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void GetNonExistingUserFriendRequests()
 		{
-			var userFriends = _relationshipController.GetRequests(-1, ActorType.User);
+			var userFriends = _relationshipController.GetRelationRequestorActors(-1, ActorType.User);
 
 			Assert.Empty(userFriends);
 		}
@@ -88,12 +88,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = "GetUserSentFriendRequests";
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
+			var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+			var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
 
 			var newFriend =  CreateRelationshipRequest(requestor.Id, acceptor.Id);
 
-			var userRequests = _relationshipController.GetSentRequests(newFriend.RequestorId, ActorType.User);
+			var userRequests = _relationshipController.GetRelationAcceptorActors(newFriend.RequestorId, ActorType.User);
 
 			var matches = userRequests.Count(g => g.Name == userFriendName + " Acceptor");
 
@@ -103,7 +103,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void GetNonExistingUserSentFriendRequests()
 		{
-			var userFriends = _relationshipController.GetSentRequests(-1, ActorType.User);
+			var userFriends = _relationshipController.GetRelationAcceptorActors(-1, ActorType.User);
 
 			Assert.Empty(userFriends);
 		}
@@ -113,18 +113,18 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = "AcceptUserFriendRequest";
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
+			var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+			var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
 
 			var newFriend =  CreateRelationship(requestor.Id, acceptor.Id);
 
-			var userRequests = _relationshipController.GetRequests(newFriend.AcceptorId, ActorType.User);
+			var userRequests = _relationshipController.GetRelationRequestorActors(newFriend.AcceptorId, ActorType.User);
 
 			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 
 			Assert.Equal(matches, 0);
 
-			var userFriends = _relationshipController.GetRelationships(newFriend.RequestorId, ActorType.User);
+			var userFriends = _relationshipController.GetRelatedActors(newFriend.RequestorId, ActorType.User);
 
 			matches = userFriends.Count(g => g.Name == userFriendName + " Acceptor");
 
@@ -136,20 +136,20 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = "RejectUserFriendRequest";
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
+			var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+			var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
 
 			var newFriend =  CreateRelationshipRequest(requestor.Id, acceptor.Id);
 
 			_relationshipController.UpdateRequest(newFriend, false);
 
-			var userRequests = _relationshipController.GetRequests(newFriend.AcceptorId, ActorType.User);
+			var userRequests = _relationshipController.GetRelationRequestorActors(newFriend.AcceptorId, ActorType.User);
 
 			var matches = userRequests.Count(g => g.Name == userFriendName + " Requestor");
 
 			Assert.Equal(matches, 0);
 
-			var userFriends = _relationshipController.GetRelationships(newFriend.RequestorId, ActorType.User);
+			var userFriends = _relationshipController.GetRelatedActors(newFriend.RequestorId, ActorType.User);
 
 			matches = userFriends.Count(g => g.Name == userFriendName + " Acceptor");
 
@@ -161,8 +161,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = "UpdateNonExistingUserFriendRequest";
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
+			var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+			var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
 
 			var newFriend = CreateRelationship(requestor.Id,acceptor.Id);
 
@@ -172,7 +172,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		[Fact]
 		public void GetNonExistingUserFriends()
 		{
-			var userFriends = _relationshipController.GetRelationships(-1, ActorType.User);
+			var userFriends = _relationshipController.GetRelatedActors(-1, ActorType.User);
 
 			Assert.Empty(userFriends);
 		}
@@ -182,8 +182,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = "CreateDuplicateAcceptedUserFriend";
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
+			var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+			var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
 
 			CreateRelationship(requestor.Id, acceptor.Id);
 
@@ -195,8 +195,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = "CreateDuplicateReversedAcceptedUserFriend";
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
+			var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+			var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
 
 			CreateRelationship(requestor.Id, acceptor.Id);
 
@@ -208,47 +208,82 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userFriendName = "UpdateUserFriend";
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
+			var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+			var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
 
 			var newFriend =  CreateRelationship(requestor.Id, acceptor.Id);
 
-			_relationshipController.Update(newFriend);
-			var friends = _relationshipController.GetRelationships(acceptor.Id, ActorType.User);
+			_relationshipController.Delete(newFriend);
+			var friends = _relationshipController.GetRelatedActors(acceptor.Id, ActorType.User);
 
 			Assert.Empty(friends);
 		}
 
+        [Fact]
+        public void UpdateNonExistingUserFriend()
+        {
+            var userFriendName = "UpdateNonExistingUserFriend";
+
+            var requestor = Helpers.CreateUser(userFriendName + " Requestor");
+            var acceptor = Helpers.CreateUser(userFriendName + " Acceptor");
+
+            var newFriend = new ActorRelationship
+            {
+                RequestorId = requestor.Id,
+                AcceptorId = acceptor.Id
+            };
+
+            Assert.Throws<InvalidOperationException>(() => _relationshipController.Delete(newFriend));
+        }
+
 		[Fact]
-		public void UpdateNonExistingUserFriend()
+		public void DoesDeleteRelationshipWhenUserDeleted()
 		{
-			var userFriendName = "UpdateNonExistingUserFriend";
+            // Arrange
+			var requestor = Helpers.CreateUser($"{nameof(DoesDeleteRelationshipWhenUserDeleted)} Requestor");
+			var acceptor = Helpers.CreateUser($"{nameof(DoesDeleteRelationshipWhenUserDeleted)} Acceptor");
 
-			var requestor = CreateUser(userFriendName + " Requestor");
-			var acceptor = CreateUser(userFriendName + " Acceptor");
-
-			var newFriend = new ActorRelationship
+			var relationship = new ActorRelationship
 			{
 				RequestorId = requestor.Id,
 				AcceptorId = acceptor.Id
 			};
 
-			Assert.Throws<InvalidOperationException>(() => _relationshipController.Update(newFriend));
-		}
-		#endregion
+			_relationshipController.CreateRelationship(relationship);
 
-		#region Helpers
-		private User CreateUser(string name)
+            // Act
+			_userController.Delete(requestor.Id);
+
+            // Assert
+			var relationships = _relationshipController.GetRelatedActors(requestor.Id, ActorType.User);
+            Assert.Empty(relationships);
+		}
+
+		[Fact]
+		public void DoesDeleteRelationshipRequestWhenUserDeleted()
 		{
-			var user = new User {
-				Name = name,
+			// Arrange
+			var requestor = Helpers.CreateUser($"{nameof(DoesDeleteRelationshipRequestWhenUserDeleted)} Requestor");
+			var acceptor = Helpers.CreateUser($"{nameof(DoesDeleteRelationshipRequestWhenUserDeleted)} Acceptor");
+
+			var relationship = new ActorRelationship
+			{
+				RequestorId = requestor.Id,
+				AcceptorId = acceptor.Id
 			};
 
-			_userController.Create(user);
+			_relationshipController.CreateRelationshipRequest(relationship);
 
-			return user;
+			// Act
+			_userController.Delete(requestor.Id);
+
+			// Assert
+			var relationships = _relationshipController.GetRelationAcceptorActors(requestor.Id, ActorType.User);
+			Assert.Empty(relationships);
 		}
+        #endregion
 
+        #region Helpers
 		private ActorRelationship CreateRelationship(int requestor, int acceptor)
 		{
 			var actorRelationship = new ActorRelationship

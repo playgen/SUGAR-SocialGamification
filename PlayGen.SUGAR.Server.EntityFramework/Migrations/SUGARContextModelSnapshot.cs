@@ -134,6 +134,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ActorId");
+
+                    b.HasIndex("GameId");
+
                     b.HasIndex("Key", "GameId", "ActorId", "EvaluationDataType")
                         .IsUnique();
 
@@ -265,7 +269,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ActorId");
+                    b.Property<int?>("ActorId");
 
                     b.Property<int>("Category");
 
@@ -284,6 +288,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     b.Property<string>("Value");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActorId");
 
                     b.HasIndex("MatchId");
 
@@ -499,6 +505,19 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorData", b =>
+                {
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Actor")
+                        .WithMany()
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorRelationship", b =>
                 {
                     b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Acceptor")
@@ -548,6 +567,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.EvaluationData", b =>
                 {
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Actor")
+                        .WithMany()
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("PlayGen.SUGAR.Server.Model.Match", "Match")
                         .WithMany("Data")
                         .HasForeignKey("MatchId");

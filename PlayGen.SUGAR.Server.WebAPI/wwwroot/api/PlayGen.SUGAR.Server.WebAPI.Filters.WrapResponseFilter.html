@@ -88,11 +88,40 @@ Added aditional data:</p>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">WrapResponseFilter</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">Microsoft.AspNetCore.Mvc.Filters.IActionFilter</span></div>
+    <div><span class="xref">Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.WebAPI.Filters.html">PlayGen.SUGAR.Server.WebAPI.Filters</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.WebAPI.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_WebAPI_Filters_WrapResponseFilter_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class WrapResponseFilter : IActionFilter</code></pre>
+    <pre><code class="lang-csharp hljs">public class WrapResponseFilter : IActionFilter, IFilterMetadata</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -128,7 +157,7 @@ Added aditional data:</p>
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Filters_WrapResponseFilter_OnActionExecuted_" data-uid="PlayGen.SUGAR.Server.WebAPI.Filters.WrapResponseFilter.OnActionExecuted*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Filters_WrapResponseFilter_OnActionExecuted_ActionExecutedContext_" data-uid="PlayGen.SUGAR.Server.WebAPI.Filters.WrapResponseFilter.OnActionExecuted(ActionExecutedContext)">OnActionExecuted(ActionExecutedContext)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Filters_WrapResponseFilter_OnActionExecuted_Microsoft_AspNetCore_Mvc_Filters_ActionExecutedContext_" data-uid="PlayGen.SUGAR.Server.WebAPI.Filters.WrapResponseFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">OnActionExecuted(ActionExecutedContext)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -146,7 +175,7 @@ Added aditional data:</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ActionExecutedContext</span></td>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext</span></td>
         <td><span class="parametername">context</span></td>
         <td></td>
       </tr>
@@ -155,7 +184,7 @@ Added aditional data:</p>
   
   
   <a id="PlayGen_SUGAR_Server_WebAPI_Filters_WrapResponseFilter_OnActionExecuting_" data-uid="PlayGen.SUGAR.Server.WebAPI.Filters.WrapResponseFilter.OnActionExecuting*"></a>
-  <h4 id="PlayGen_SUGAR_Server_WebAPI_Filters_WrapResponseFilter_OnActionExecuting_ActionExecutingContext_" data-uid="PlayGen.SUGAR.Server.WebAPI.Filters.WrapResponseFilter.OnActionExecuting(ActionExecutingContext)">OnActionExecuting(ActionExecutingContext)</h4>
+  <h4 id="PlayGen_SUGAR_Server_WebAPI_Filters_WrapResponseFilter_OnActionExecuting_Microsoft_AspNetCore_Mvc_Filters_ActionExecutingContext_" data-uid="PlayGen.SUGAR.Server.WebAPI.Filters.WrapResponseFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">OnActionExecuting(ActionExecutingContext)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -173,12 +202,19 @@ Added aditional data:</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ActionExecutingContext</span></td>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext</span></td>
         <td><span class="parametername">context</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.Filters.IActionFilter</span>
+  </div>
+  <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata</span>
+  </div>
 </article>
           </div>
           

@@ -126,7 +126,7 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 		{
 			var evaluations = _evaluationController.GetByGame(gameId).ToList();
 
-			evaluations.AddRange(_evaluationController.GetByGame(Platform.GlobalId));
+			evaluations.AddRange(_evaluationController.GetByGame(Platform.GlobalGameId));
 
 			return evaluations;
 		}
@@ -136,13 +136,13 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 			var hasGlobal = false;
 			var gameIds = evaluations.Select(e =>
 			{
-				hasGlobal |= e.GameId == Platform.GlobalId;
+				hasGlobal |= e.GameId == Platform.GlobalGameId;
 				return e.GameId;
 			}).Distinct().ToList();
 
 			if (!hasGlobal)
 			{
-				gameIds.Add(Platform.GlobalId);
+				gameIds.Add(Platform.GlobalGameId);
 			}
 
 			return gameIds;
@@ -155,9 +155,9 @@ namespace PlayGen.SUGAR.Server.Core.EvaluationEvents
 				evaluation.GameId
 			};
 
-			if (evaluation.GameId != Platform.GlobalId)
+			if (evaluation.GameId != Platform.GlobalGameId)
 			{
-				gameIds.Add(Platform.GlobalId);
+				gameIds.Add(Platform.GlobalGameId);
 			}
 
 			return gameIds;

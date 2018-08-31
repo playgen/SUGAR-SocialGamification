@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("controlled")]
 		public IActionResult GetControlled()
 		{
-			var groups = _groupCoreController.GetByPermissions(RequestingId);
+			var groups = _groupCoreController.GetControlled(RequestingId);
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -92,7 +92,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		public IActionResult Create([FromBody]GroupRequest actor)
 		{
 			var group = actor.ToGroupModel();
-			_groupCoreController.Create(group, int.Parse(User.Identity.Name));
+			_groupCoreController.Create(group, RequestingId);
 			var actorContract = group.ToContract();
 			return new ObjectResult(actorContract);
 		}

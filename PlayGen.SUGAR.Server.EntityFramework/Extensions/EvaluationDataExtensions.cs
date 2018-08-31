@@ -36,7 +36,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 		}
 
 		public static IQueryable<EvaluationData> FilterByActorId(this IQueryable<EvaluationData> evaluationDataQueryable,
-			int actorId)
+			int? actorId)
 		{
 			return evaluationDataQueryable.Where(data => data.ActorId == actorId);
 		}

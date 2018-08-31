@@ -55,7 +55,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             => _leaderboardController ?? (_leaderboardController = new LeaderboardController(new NullLogger<LeaderboardController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.LeaderboardController, RelationshipController, ActorController, GroupController, UserController, DbControllerLocator.ContextFactory));
 
         public static ResourceController ResourceController
-            => _resourceController ?? (_resourceController = new ResourceController(new NullLogger<ResourceController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory));
+            => _resourceController ?? (_resourceController = new ResourceController(new NullLogger<ResourceController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, ActorController));
 
         public static RewardController RewardController
             => _rewardController ?? (_rewardController = new RewardController(new NullLogger<RewardController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, RelationshipController));
@@ -67,7 +67,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
             => _roleClaimController ?? (_roleClaimController = new RoleClaimController(new NullLogger<RoleClaimController>(), DbControllerLocator.RoleClaimController));
 
         public static UserController UserController
-            => _userController ?? (_userController = new UserController(new NullLogger<UserController>(), DbControllerLocator.UserController, DbControllerLocator.ActorController, ActorClaimController, ActorRoleController, RelationshipController));
+            => _userController ?? (_userController = new UserController(new NullLogger<UserController>(), DbControllerLocator.UserController, DbControllerLocator.ActorController, ActorClaimController, ActorRoleController, RelationshipController, GroupController));
 
         public static MatchController MatchController
             => _matchController ?? (_matchController = new MatchController(new NullLogger<MatchController>(), new NullLogger<EvaluationDataController>(), DbControllerLocator.ContextFactory, DbControllerLocator.MatchController));

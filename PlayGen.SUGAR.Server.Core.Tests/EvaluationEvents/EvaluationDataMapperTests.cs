@@ -20,8 +20,8 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
 
             for (var i = 0; i < count; i++)
             {
-                shouldGetEvaluations.Add(Helpers.ComposeGenericAchievement($"MapsExistingEvaluationsEvaluationData_{i}", Platform.GlobalId));
-                shouldntGetEvaluations.Add(Helpers.ComposeGenericAchievement($"MapsExistingEvaluationsEvaluationData_Ignore_{i}", Platform.GlobalId));
+                shouldGetEvaluations.Add(Helpers.ComposeGenericAchievement($"MapsExistingEvaluationsEvaluationData_{i}", Platform.GlobalGameId));
+                shouldntGetEvaluations.Add(Helpers.ComposeGenericAchievement($"MapsExistingEvaluationsEvaluationData_Ignore_{i}", Platform.GlobalGameId));
             }
 
             // Act
@@ -51,13 +51,13 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
             // Arrange
             var gameDataMapper = new EvaluationDataMapper();
             var count = 10;
-            var removeEvaluation = Helpers.ComposeGenericAchievement($"RemovesEvaluationDataMapping", Platform.GlobalId);
+            var removeEvaluation = Helpers.ComposeGenericAchievement($"RemovesEvaluationDataMapping", Platform.GlobalGameId);
 
             var shouldntRemoveEvaluations = new List<Evaluation>(count);
 
             for (var i = 0; i < count; i++)
             {
-                shouldntRemoveEvaluations.Add(Helpers.ComposeGenericAchievement($"RemovesEvaluationsEvaluationDataMapping_ShouldntRemove_{i}", Platform.GlobalId));
+                shouldntRemoveEvaluations.Add(Helpers.ComposeGenericAchievement($"RemovesEvaluationsEvaluationDataMapping_ShouldntRemove_{i}", Platform.GlobalGameId));
             }
 
             gameDataMapper.CreateMapping(removeEvaluation);

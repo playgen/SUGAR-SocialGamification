@@ -84,18 +84,44 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">RewardUpdateRequest</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Contracts.html">PlayGen.SUGAR.Contracts</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Contracts.dll</h6>
   <h5 id="PlayGen_SUGAR_Contracts_RewardUpdateRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class RewardUpdateRequest : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class RewardUpdateRequest</code></pre>
   </div>
   <h5 id="PlayGen_SUGAR_Contracts_RewardUpdateRequest_examples"><strong>Examples</strong></h5>
   <p>JSON
 {
-Key : &quot;Reward Key&quot;,
-DataType : &quot;Float&quot;,
-Value : &quot;10.5&quot;
+&quot;Id&quot; : 1,
+&quot;EvaluationDataKey&quot; : &quot;Reward Key&quot;,
+&quot;EvaluationDataCategory&quot; : &quot;Resource&quot;,
+&quot;EvaluationDataType&quot; : &quot;Long&quot;,
+&quot;Value&quot; : &quot;11&quot;
 }</p>
 
   <h3 id="properties">Properties
@@ -109,7 +135,8 @@ Value : &quot;10.5&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public EvaluationDataCategory? EvaluationDataCategory { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public EvaluationDataCategory? EvaluationDataCategory { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -135,7 +162,9 @@ Value : &quot;10.5&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string EvaluationDataKey { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+[StringLength(64)]
+public string EvaluationDataKey { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -161,7 +190,8 @@ Value : &quot;10.5&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public EvaluationDataType? EvaluationDataType { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public EvaluationDataType? EvaluationDataType { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -213,7 +243,9 @@ Value : &quot;10.5&quot;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Value { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+[StringLength(64)]
+public string Value { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">

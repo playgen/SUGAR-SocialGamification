@@ -28,8 +28,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Extensions
 
 		public static IQueryable<ActorData> FilterByKeys(this IQueryable<ActorData> actorDataQueryable, ICollection<string> keys)
 		{
-			var keyList = keys as List<string> ?? keys.ToList();
-			return keyList.Any() ? actorDataQueryable.Where(gd => keyList.Contains(gd.Key)) : actorDataQueryable;
+			return keys != null && keys.Any() ? actorDataQueryable.Where(gd => keys.Contains(gd.Key)) : actorDataQueryable;
 		}
 	}
 }

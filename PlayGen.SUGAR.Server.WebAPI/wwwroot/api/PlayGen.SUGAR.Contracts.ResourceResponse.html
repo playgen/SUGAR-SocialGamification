@@ -84,12 +84,47 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ResourceResponse</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Contracts.html">PlayGen.SUGAR.Contracts</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Contracts.dll</h6>
   <h5 id="PlayGen_SUGAR_Contracts_ResourceResponse_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ResourceResponse : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class ResourceResponse</code></pre>
   </div>
+  <h5 id="PlayGen_SUGAR_Contracts_ResourceResponse_examples"><strong>Examples</strong></h5>
+  <p>JSON
+{
+&quot;ActorId&quot; : 1,
+&quot;GameId&quot; : 1,
+&quot;Key&quot; : &quot;Resource Key&quot;,
+&quot;Quantity&quot; : 20,
+&quot;DateCreated&quot; : &quot;2018-08-12T16:32:29.482146&quot;,
+&quot;DateModified&quot; : &quot;2018-08-12T16:32:29.482146&quot;
+}</p>
+
   <h3 id="properties">Properties
   </h3>
   
@@ -101,7 +136,8 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int ActorId { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public int? ActorId { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -113,7 +149,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Int32</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -139,7 +175,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -165,7 +201,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -179,7 +215,8 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int GameId { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Required]
+public int GameId { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">

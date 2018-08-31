@@ -115,5 +115,18 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			}
 			return Forbid();
 		}
+
+		/// <summary>
+		/// Find a list of all Actors that have resources for the game id provided.
+		/// </summary>
+		/// <param name="id">ID of a Game.</param>
+		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		[HttpGet("gameactors/{id:int}")]
+		public IActionResult GetGameActors(int id)
+		{
+			var data = _resourceController.GetGameActors(id);
+			var dataContract = data.ToActorContractList();
+			return new ObjectResult(dataContract);
+		}
 	}
 }

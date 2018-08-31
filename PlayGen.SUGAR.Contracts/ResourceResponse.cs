@@ -23,7 +23,7 @@ namespace PlayGen.SUGAR.Contracts
 		/// The id of the Actor which this Resource relates to.
 		/// </summary>
 		[Required]
-		public int ActorId { get; set; }
+		public int? ActorId { get; set; }
 
 		/// <summary>
 		/// The id of the Game which this Resource relates to.

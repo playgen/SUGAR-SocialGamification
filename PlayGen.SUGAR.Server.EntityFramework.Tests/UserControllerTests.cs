@@ -169,12 +169,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			Assert.Throws<MissingRecordException>(() => _userController.Delete(-1));
 		}
+        #endregion
 
-
-		#endregion
-
-		#region Helpers
-		private User CreateUser(string name)
+        #region Helpers
+        private User CreateUser(string name)
 		{
 			var user = new User {
 				Name = name,

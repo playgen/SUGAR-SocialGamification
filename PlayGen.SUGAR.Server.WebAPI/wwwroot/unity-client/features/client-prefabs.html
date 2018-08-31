@@ -64,33 +64,27 @@
               
 <p>There are a number of prefabs included within the Unity package. Example usage can be viewed in the demo scene which can be found at: Assets/SUGAR/Example/Scene.unity</p>
 <p>After setting up a game using the <a href="../tutorials/quick-start.html">quick start guide</a>, all prefabs can be seen working by running the demo scene and entering the shortcuts to display each.</p>
-<p>Each of the prefabs can be activated using the SUGAR prefab provided (which must be added to the scene to use SUGAR). The SUGAR prefab has its own canvas which is rendered above the main Canvas which contains each of the panel prefabs. Each panel can be activated using their display functions, examples of which can be seen in TestImplementation.cs.</p>
+<p>Each of the prefabs can be activated using the SUGAR prefab provided (which must be added to the scene to use SUGAR). The SUGAR prefab has its own canvas which is rendered above the main Canvas which contains each of the panel prefabs. Each panel can be activated using their display functions, examples of which can be seen in: Assets/SUGAR/Example/Scripts/TestImplemtation.cs </p>
 <h2 id="panel-prefabs">Panel Prefabs</h2>
-<p>Panel Prefabs provided:</p>
+<p>Panel Prefabs provided</p>
 <ul>
 <li>AccountPanel</li>
 <li>EvaluationPanel</li>
 <li>EvaluationPopup</li>
 <li>FriendsListPanel</li>
+<li>UserGroupsPanel</li>
 <li>GroupMembersPanel </li>
 <li>LeaderboardListPanel</li>
 <li>LeaderboardPanel</li>
-<li>UserGroupsPanel</li>
 </ul>
-<p>There are 2 variations provided for each of the panels, one for landscape and one for portrait. The provided SUGAR prefab uses the landscape and portrait prefabs provided and will always display the correct interface for the current game resolution.</p>
-<h3 id="changing-sugar-panels">Changing SUGAR Panels</h3>
-<p>The example prefabs provided are all flexible and can be changed to better suit your game. The Interface classes found at Assets/SUGAR/Example/Scripts control how the data is handled and shown in the panel, these may need to be edited to work for any changes made to the layout.</p>
-<p>If an interface is not used, such as because the feature is not going to be implemented or because it is for an aspect ratio that will not be used by the game, it can be safely removed from the project and the reference removed from the SUGAR prefab. SUGAR will only try to display interfaces when they have been provided and no errors will occur as a result of their removal.</p>
-<h3 id="creating-your-own-sugar-panel">Creating your own SUGAR Panel</h3>
-<p>If you wish to create your own SUGAR panels, or want to adapt current UI in your game to now work with SUGAR, simply change the reference GameObject in your SUGAR prefab to a prefab that uses the corresponding Interface class found in Assets/SUGAR/Example/Scripts or uses a class derived from the corresponding base Interface class found within the PlayGen.SUGAR.Unity DLL and namespace.</p>
+<p>There are 2 variations provided for each of the panels, one for landscape and one for portrait. To switch the orientation used, change the Interface references in the SUGAR prefab to the required orientation prefabs.</p>
 <h2 id="panel-overview">Panel Overview</h2>
 <ul>
 <li><p><strong>AccountPanel</strong></p>
-<p>  Demo Shortcut: Triggered at the start of the demo scene. Can also be triggered by logging out with the &#39;Delete&#39; Key.</p>
 <p>  Handles logging in to SUGAR with username and password entered, does not display if auto login is enabled and the login details are correct.</p>
 </li>
 <li><p><strong>EvaluationPanel</strong></p>
-<p>  Demo Shortcut: Hold T &amp; Press K for Achievements. Hold T &amp; Press J for Skills.</p>
+<p>  Demo Shortcut: Hold T &amp; Press K.</p>
 <p>  Displays the achievements/skills for the current game and which ones have been completed. </p>
 </li>
 <li><p><strong>EvaluationPopup</strong></p>
@@ -107,7 +101,7 @@
 </li>
 <li><p><strong>GroupMembersPanel</strong> </p>
 <p>  Demo Shortcut: Hold T &amp; Press G -&gt; select a group.</p>
-<p>  Displays the members of a specific group and allows the current user to change their current relationship with any user, similar to the functionality provided by the Friends List Panel.</p>
+<p>  Displays the members of a specific group, allowing accounts with permissions to manage other accounts within that group.</p>
 </li>
 <li><p><strong>LeaderboardListPanel</strong></p>
 <p>  Demo Shortcut: Hold T &amp; Press L.</p>
@@ -117,11 +111,11 @@
 <p>  Demo Shortcut: Hold T &amp; Press L -&gt; select a leaderboard.</p>
 <p>  Displays the current standings for the selected leaderboard, allows users to filter results by:  </p>
 <ul>
-<li>Top - the best scores for the current leaderboard</li>
-<li>Nearby - the scores near to the current users score</li>
-<li>Friends - the current users&#39; friends scores</li>
-<li>Group Members - the scores for all members of your primary group</li>
-<li>Alliances - the scores of all groups in an alliance with your primary group</li>
+<li>Top (the best scores for the current leaderboard),  </li>
+<li>Nearby (the scores near to the current users score),</li>
+<li>Friends (the current users&#39; friends scores),</li>
+<li>Group Members (the scores for all members of your primary group),</li>
+<li>Alliances (the scores of all groups in an alliance with your primary group).</li>
 </ul>
 </li>
 </ul>

@@ -14,7 +14,7 @@ using System;
 namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 {
     [DbContext(typeof(SUGARContext))]
-    [Migration("20171205143841_InitialCreate")]
+    [Migration("20180830153544_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,26 +23,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
             modelBuilder
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
-
-            modelBuilder.Entity("PlayGen.SUGAR.Common.Actor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(1023);
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Actors");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Actor");
-                });
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.Account", b =>
                 {
@@ -91,6 +71,26 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     b.ToTable("AccountSources");
                 });
 
+            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.Actor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1023);
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Actors");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Actor");
+                });
+
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorClaim", b =>
                 {
                     b.Property<int>("Id")
@@ -133,10 +133,40 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ActorId");
+
+                    b.HasIndex("GameId");
+
                     b.HasIndex("Key", "GameId", "ActorId", "EvaluationDataType")
                         .IsUnique();
 
                     b.ToTable("ActorData");
+                });
+
+            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorRelationship", b =>
+                {
+                    b.Property<int>("RequestorId");
+
+                    b.Property<int>("AcceptorId");
+
+                    b.HasKey("RequestorId", "AcceptorId");
+
+                    b.HasIndex("AcceptorId");
+
+                    b.ToTable("Relationships");
+                });
+
+            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorRelationshipRequest", b =>
+                {
+                    b.Property<int>("RequestorId");
+
+                    b.Property<int>("AcceptorId");
+
+                    b.HasKey("RequestorId", "AcceptorId");
+
+                    b.HasIndex("AcceptorId");
+
+                    b.ToTable("RelationshipRequests");
                 });
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorRole", b =>
@@ -216,19 +246,15 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.Property<int>("EvaluationDataCategory");
 
-                    b.Property<string>("EvaluationDataKey")
-                        .IsRequired()
-                        .HasMaxLength(64);
+                    b.Property<string>("EvaluationDataKey");
 
                     b.Property<int>("EvaluationDataType");
 
-                    b.Property<int?>("EvaluationId");
+                    b.Property<int>("EvaluationId");
 
                     b.Property<int>("Scope");
 
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(64);
+                    b.Property<string>("Value");
 
                     b.HasKey("Id");
 
@@ -242,7 +268,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ActorId");
+                    b.Property<int?>("ActorId");
 
                     b.Property<int>("Category");
 
@@ -261,6 +287,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     b.Property<string>("Value");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActorId");
 
                     b.HasIndex("MatchId");
 
@@ -345,17 +373,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
                     b.Property<int>("EvaluationDataCategory");
 
-                    b.Property<string>("EvaluationDataKey")
-                        .IsRequired()
-                        .HasMaxLength(64);
+                    b.Property<string>("EvaluationDataKey");
 
                     b.Property<int>("EvaluationDataType");
 
-                    b.Property<int?>("EvaluationId");
+                    b.Property<int>("EvaluationId");
 
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(64);
+                    b.Property<string>("Value");
 
                     b.HasKey("Id");
 
@@ -408,61 +432,9 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     b.ToTable("SentEvaluationNotifications");
                 });
 
-            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.UserToGroupRelationship", b =>
-                {
-                    b.Property<int>("RequestorId");
-
-                    b.Property<int>("AcceptorId");
-
-                    b.HasKey("RequestorId", "AcceptorId");
-
-                    b.HasIndex("AcceptorId");
-
-                    b.ToTable("UserToGroupRelationships");
-                });
-
-            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.UserToGroupRelationshipRequest", b =>
-                {
-                    b.Property<int>("RequestorId");
-
-                    b.Property<int>("AcceptorId");
-
-                    b.HasKey("RequestorId", "AcceptorId");
-
-                    b.HasIndex("AcceptorId");
-
-                    b.ToTable("UserToGroupRelationshipRequests");
-                });
-
-            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.UserToUserRelationship", b =>
-                {
-                    b.Property<int>("RequestorId");
-
-                    b.Property<int>("AcceptorId");
-
-                    b.HasKey("RequestorId", "AcceptorId");
-
-                    b.HasIndex("AcceptorId");
-
-                    b.ToTable("UserToUserRelationships");
-                });
-
-            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.UserToUserRelationshipRequest", b =>
-                {
-                    b.Property<int>("RequestorId");
-
-                    b.Property<int>("AcceptorId");
-
-                    b.HasKey("RequestorId", "AcceptorId");
-
-                    b.HasIndex("AcceptorId");
-
-                    b.ToTable("UserToUserRelationshipRequests");
-                });
-
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.Group", b =>
                 {
-                    b.HasBaseType("PlayGen.SUGAR.Common.Actor");
+                    b.HasBaseType("PlayGen.SUGAR.Server.Model.Actor");
 
 
                     b.HasIndex("Name")
@@ -475,7 +447,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.User", b =>
                 {
-                    b.HasBaseType("PlayGen.SUGAR.Common.Actor");
+                    b.HasBaseType("PlayGen.SUGAR.Server.Model.Actor");
 
 
                     b.HasIndex("Name")
@@ -521,7 +493,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorClaim", b =>
                 {
-                    b.HasOne("PlayGen.SUGAR.Common.Actor", "Actor")
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Actor")
                         .WithMany()
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -532,9 +504,48 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorData", b =>
+                {
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Actor")
+                        .WithMany()
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorRelationship", b =>
+                {
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Acceptor")
+                        .WithMany("Acceptors")
+                        .HasForeignKey("AcceptorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Requestor")
+                        .WithMany("Requestors")
+                        .HasForeignKey("RequestorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorRelationshipRequest", b =>
+                {
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Acceptor")
+                        .WithMany("RequestRequestors")
+                        .HasForeignKey("AcceptorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Requestor")
+                        .WithMany("RequestAcceptors")
+                        .HasForeignKey("RequestorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.ActorRole", b =>
                 {
-                    b.HasOne("PlayGen.SUGAR.Common.Actor", "Actor")
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Actor")
                         .WithMany()
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -547,13 +558,19 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.EvaluationCriteria", b =>
                 {
-                    b.HasOne("PlayGen.SUGAR.Server.Model.Evaluation")
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Evaluation", "Evaluation")
                         .WithMany("EvaluationCriterias")
-                        .HasForeignKey("EvaluationId");
+                        .HasForeignKey("EvaluationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.EvaluationData", b =>
                 {
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Actor", "Actor")
+                        .WithMany()
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("PlayGen.SUGAR.Server.Model.Match", "Match")
                         .WithMany("Data")
                         .HasForeignKey("MatchId");
@@ -574,9 +591,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.Reward", b =>
                 {
-                    b.HasOne("PlayGen.SUGAR.Server.Model.Evaluation")
+                    b.HasOne("PlayGen.SUGAR.Server.Model.Evaluation", "Evaluation")
                         .WithMany("Rewards")
-                        .HasForeignKey("EvaluationId");
+                        .HasForeignKey("EvaluationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PlayGen.SUGAR.Server.Model.RoleClaim", b =>
@@ -589,58 +607,6 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Migrations
                     b.HasOne("PlayGen.SUGAR.Server.Model.Role", "Role")
                         .WithMany("RoleClaims")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.UserToGroupRelationship", b =>
-                {
-                    b.HasOne("PlayGen.SUGAR.Server.Model.Group", "Acceptor")
-                        .WithMany("UserToGroupRelationships")
-                        .HasForeignKey("AcceptorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("PlayGen.SUGAR.Server.Model.User", "Requestor")
-                        .WithMany("UserToGroupRelationships")
-                        .HasForeignKey("RequestorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.UserToGroupRelationshipRequest", b =>
-                {
-                    b.HasOne("PlayGen.SUGAR.Server.Model.Group", "Acceptor")
-                        .WithMany("UserToGroupRelationshipRequests")
-                        .HasForeignKey("AcceptorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("PlayGen.SUGAR.Server.Model.User", "Requestor")
-                        .WithMany("UserToGroupRelationshipRequests")
-                        .HasForeignKey("RequestorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.UserToUserRelationship", b =>
-                {
-                    b.HasOne("PlayGen.SUGAR.Server.Model.User", "Acceptor")
-                        .WithMany("Acceptors")
-                        .HasForeignKey("AcceptorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("PlayGen.SUGAR.Server.Model.User", "Requestor")
-                        .WithMany("Requestors")
-                        .HasForeignKey("RequestorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PlayGen.SUGAR.Server.Model.UserToUserRelationshipRequest", b =>
-                {
-                    b.HasOne("PlayGen.SUGAR.Server.Model.User", "Acceptor")
-                        .WithMany("RequestAcceptors")
-                        .HasForeignKey("AcceptorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("PlayGen.SUGAR.Server.Model.User", "Requestor")
-                        .WithMany("RequestRequestors")
-                        .HasForeignKey("RequestorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

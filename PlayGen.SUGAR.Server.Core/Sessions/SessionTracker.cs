@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Server.Core.Sessions
 		{
 			_logger = logger;
 			_sessionTimeout = sessionTimeout;
-			ActorController.ActorDeletedEvent += OnActorDeleted;
+			ActorController.DeleteActorEvent += OnDeleteActor;
 			GameController.GameDeletedEvent += OnGameDeleted;
 
 			_timer = new Timer(state => RemoveTimedOut(), new object(), timeoutCheckInterval, timeoutCheckInterval);
@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Server.Core.Sessions
 
 			_timer.Dispose();
 
-			ActorController.ActorDeletedEvent -= OnActorDeleted;
+			ActorController.DeleteActorEvent -= OnDeleteActor;
 			GameController.GameDeletedEvent -= OnGameDeleted;
 
 			_isDisposed = true;
@@ -105,7 +105,7 @@ namespace PlayGen.SUGAR.Server.Core.Sessions
 			sessionIds.ForEach(EndSession);
 		}
 
-		private void OnActorDeleted(int actorId)
+		private void OnDeleteActor(int actorId)
 		{
 			var sessionIds = _sessions
 				.Where(kvp => kvp.Value.ActorId == actorId)

@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		/// <returns></returns>
 		public List<Actor> GetRequests(int actorId, ActorType fromActorType)
 	    {
-		    var requesting = _relationshipDbController.GetRequests(actorId, fromActorType);
+		    var requesting = _relationshipDbController.GetRelationRequestorActors(actorId, fromActorType);
 
 		    _logger.LogInformation($"{requesting?.Count} Requests for ActorId: {actorId}");
 
@@ -57,7 +57,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		/// <returns></returns>
 	    public List<Actor> GetSentRequests(int actorId, ActorType toActorType)
 	    {
-		    var requests = _relationshipDbController.GetSentRequests(actorId, toActorType);
+		    var requests = _relationshipDbController.GetRelationAcceptorActors(actorId, toActorType);
 
 		    _logger.LogInformation($"{requests?.Count} Sent Requests for ActorId: {requests}");
 
@@ -70,7 +70,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		/// <param name="actorId">The actor to get list of relationsips with</param>
 		/// <param name="actorType">The tyoe of actor that relationship is shared with</param>
 		/// <returns></returns>
-	    public List<Actor> GetRelationships(int actorId, ActorType actorType, int? requestingId = null)
+	    public List<Actor> GetRelatedActors(int actorId, ActorType actorType, int? requestingId = null)
 	    {
 		    var relationships = _relationshipDbController.GetRelationships(actorId, actorType);
 
@@ -86,12 +86,34 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	    }
 
 		/// <summary>
-		/// Get a count of relationships shared between an actor and other actor types
+		/// Find the relatioship between two actors.
 		/// </summary>
-		/// <param name="actorId">The actor to get a list of relationships with</param>
-		/// <param name="actorType">The type of actor that relationship is shared with</param>
+		/// <param name="relatedActorA"></param>
+		/// <param name="relatedActorB"></param>
 		/// <returns></returns>
-	    public int GetRelationshipCount(int actorId, ActorType actorType)
+		public ActorRelationship GetRelationship(int relatedActorA, int relatedActorB)
+		{
+			return _relationshipDbController.GetRelationship(relatedActorA, relatedActorB);
+		}
+
+		/// <summary>
+        /// Get relationships between actor of id and all of specific type.
+        /// </summary>
+        /// <param name="actorId"></param>
+        /// <param name="actorType"></param>
+        /// <returns></returns>
+		public List<ActorRelationship> GetRelationships(int actorId, ActorType actorType)
+		{
+			return _relationshipDbController.GetRelationships(actorId, actorType);
+		}
+
+        /// <summary>
+        /// Get a count of relationships shared between an actor and other actor types
+        /// </summary>
+        /// <param name="actorId">The actor to get a list of relationships with</param>
+        /// <param name="actorType">The type of actor that relationship is shared with</param>
+        /// <returns></returns>
+        public int GetRelationshipCount(int actorId, ActorType actorType)
 	    {
 		    var count = _relationshipDbController.GetRelationshipCount(actorId, actorType);
 		    return count;
@@ -135,24 +157,24 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	    }
 
 		/// <summary>
-		/// Update an existing relationship between actors
-		/// </summary>
-		/// <param name="relationship"></param>
-	    public void Update(ActorRelationship relationship)
+        /// Delete an existing relationship between actors
+        /// </summary>
+        /// <param name="relationship"></param>
+        public void Delete(ActorRelationship relationship)
 	    {
 			//todo Check if user is only group admin
-		    _relationshipDbController.Update(relationship);
+		    _relationshipDbController.Delete(relationship);
 		    //todo Remove ActorRole for group if user has permissions
 
 		    _logger.LogInformation($"{relationship?.RequestorId} -> {relationship?.AcceptorId}");
 	    }
 
 		// TODO This is assigning new users default claims to the group, to be moved to its own table
-		/// <summary>
-		/// Assign the user claims to resources for a newly created relationship with a group
-		/// </summary>
-		/// <param name="relation">the user/group relationship</param>
-	    private void AssignUserResourceClaims(ActorRelationship relation)
+        /// <summary>
+        /// Assign the user claims to resources for a newly created relationship with a group
+        /// </summary>
+        /// <param name="relation">the user/group relationship</param>
+        private void AssignUserResourceClaims(ActorRelationship relation)
 	    {
 		    relation.Requestor = _actorController.Get(relation.RequestorId);
 		    relation.Acceptor = _actorController.Get(relation.AcceptorId);

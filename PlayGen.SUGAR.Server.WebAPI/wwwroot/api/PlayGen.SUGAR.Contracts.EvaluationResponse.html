@@ -84,32 +84,59 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">EvaluationResponse</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Contracts.html">PlayGen.SUGAR.Contracts</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Contracts.dll</h6>
   <h5 id="PlayGen_SUGAR_Contracts_EvaluationResponse_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class EvaluationResponse : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class EvaluationResponse</code></pre>
   </div>
   <h5 id="PlayGen_SUGAR_Contracts_EvaluationResponse_examples"><strong>Examples</strong></h5>
   <p>JSON
 {
-Token : &quot;AN_ACHIEVEMENT_TOKEN&quot;,
-GameId : 1,
-Name : &quot;Achievement Unlocked&quot;,
-Description : &quot;Fulfil the criteria to get the reward&quot;,
-ActorType : &quot;User&quot;,
-EvaluationCriteria : [{
-Key : &quot;Criteria Key&quot;,
-DataType : &quot;Long&quot;,
-CriteriaQueryType : &quot;Any&quot;,
-ComparisonType : &quot;Equals&quot;,
-Scope : &quot;Actor&quot;,
-Value : &quot;5&quot;
+&quot;Id&quot; : 1,
+&quot;Token&quot; : &quot;AN_ACHIEVEMENT_TOKEN&quot;,
+&quot;GameId&quot; : 1,
+&quot;Name&quot; : &quot;Achievement Unlocked&quot;,
+&quot;Description&quot; : &quot;Fulfil the criteria to get the reward&quot;,
+&quot;ActorType&quot; : &quot;User&quot;,
+&quot;EvaluationCriterias&quot; : [{
+&quot;EvaluationDataKey&quot; : &quot;Criteria Key&quot;,
+&quot;EvaluationDataCategory&quot; : &quot;GameData&quot;,
+&quot;EvaluationDataType&quot; : &quot;Long&quot;,
+&quot;CriteriaQueryType&quot; : &quot;Any&quot;,
+&quot;ComparisonType&quot; : &quot;Equals&quot;,
+&quot;Scope&quot; : &quot;Actor&quot;,
+&quot;Value&quot; : &quot;5&quot;
 }],
-Reward : [{
-Key : &quot;Reward Key&quot;,
-DataType : &quot;Float&quot;,
-Value : &quot;10.5&quot;
+&quot;Rewards&quot; : [{
+&quot;EvaluationDataKey&quot; : &quot;Reward Key&quot;,
+&quot;EvaluationDataCategory&quot; : &quot;Resource&quot;,
+&quot;EvaluationDataType&quot; : &quot;Long&quot;,
+&quot;Value&quot; : &quot;10.5&quot;
 }]
 }</p>
 
@@ -188,7 +215,7 @@ Value : &quot;10.5&quot;
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationCriteriaResponse.html">EvaluationCriteriaResponse</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.EvaluationCriteriaResponse.html">EvaluationCriteriaResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -292,7 +319,7 @@ Value : &quot;10.5&quot;
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.RewardResponse.html">RewardResponse</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Contracts.RewardResponse.html">RewardResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>

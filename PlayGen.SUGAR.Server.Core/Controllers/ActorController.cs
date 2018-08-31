@@ -7,7 +7,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 {
 	public class ActorController
 	{
-		public static event Action<int> ActorDeletedEvent;
+		public static event Action<int> DeleteActorEvent;
 
 		private readonly EntityFramework.Controllers.ActorController _actorDbController;
 		private readonly ActorClaimController _actorClaimController;
@@ -20,9 +20,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			_actorClaimController = actorClaimController;
 		}
 
-		protected void TriggerDeletedEvent(int actorId)
+		protected void TriggerDeleteEvent(int actorId)
 		{
-			ActorDeletedEvent?.Invoke(actorId);
+			DeleteActorEvent?.Invoke(actorId);
 		}
 
 		public Actor Get(int actorId)

@@ -73,7 +73,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		[HttpGet("{groupId:int}")]
 		public IActionResult GetAlliances([FromRoute]int groupId)
 		{
-			var members = _relationshipCoreController.GetRelationships(groupId, ActorType.Group);
+			var members = _relationshipCoreController.GetRelatedActors(groupId, ActorType.Group);
 			var actorContract = members.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -136,15 +136,15 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			return Forbid();
 		}
 
-		/// <summary>
-		/// Update an existing relationship between two Groups.
-		/// Requires the relationship to already exist between the two Groups.
-		/// </summary>
-		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
-		[HttpPut]
-		[ArgumentsNotNull]
+        /// <summary>
+        /// Update an existing relationship between two Groups.
+        /// Requires the relationship to already exist between the two Groups.
+        /// </summary>
+        /// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
+		[HttpPut] // todo change to a remove that takes both members of the relationship
+        [ArgumentsNotNull]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Delete, AuthorizationEntity.Alliance)]
-		public async Task<IActionResult> UpdateAlliance([FromBody] RelationshipStatusUpdate relationship)
+		public async Task<IActionResult> RemoveAlliance([FromBody] RelationshipStatusUpdate relationship)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded ||
 				(await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.Group))).Succeeded)
@@ -154,7 +154,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 					RequestorId = relationship.RequestorId,
 					AcceptorId = relationship.AcceptorId
 				};
-				_relationshipCoreController.Update(relation.ToRelationshipModel());
+				_relationshipCoreController.Delete(relation.ToRelationshipModel());
 				return Ok();
 			}
 			return Forbid();

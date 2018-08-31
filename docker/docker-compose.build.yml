@@ -1,8 +1,8 @@
 version: '2'
 
 services:
-  sugar-v1-demo:
-    image: sugar:1.0.0
+  sugar-v2:
+    image: sugar:2.0.0
     build:
       context: ../
       dockerfile: Dockerfile    

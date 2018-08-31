@@ -193,7 +193,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			}
 			// get all valid actors (have evaluationDataKey evaluation data in game gameId)
 			var validActors = evaluationDataController.GetGameKeyActors(leaderboard.GameId, leaderboard.EvaluationDataKey, leaderboard.EvaluationDataType, request.DateStart, request.DateEnd);
-			var actors = validActors.Select(a => ActorController.Get(a)).Where(a => a != null && (leaderboard.ActorType == ActorType.Undefined || leaderboard.ActorType == a.ActorType)).ToList();
+			var actorIds = validActors
+				.Where(actorId => actorId != null)
+				.Select(actorId => ActorController.Get(actorId.Value)).Where(a => a != null && (leaderboard.ActorType == ActorType.Undefined || leaderboard.ActorType == a.ActorType)).ToList();
 
 			switch (request.LeaderboardFilterType)
 			{
@@ -206,32 +208,32 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 					{
 						throw new ArgumentException("An ActorId has to be passed in order to gather rankings among friends");
 					}
-					var friends = RelationshipCoreController.GetRelationships(request.ActorId.Value, ActorType.User).Select(r => r.Id).ToList();
+					var friends = RelationshipCoreController.GetRelatedActors(request.ActorId.Value, ActorType.User).Select(r => r.Id).ToList();
 					friends.Add(request.ActorId.Value);
-					actors = actors.Where(a => friends.Contains(a.Id)).ToList();
+					actorIds = actorIds.Where(a => friends.Contains(a.Id)).ToList();
 					break;
 				case LeaderboardFilterType.GroupMembers:
 					if (!request.ActorId.HasValue)
 					{
 						throw new ArgumentException("An ActorId has to be passed in order to gather rankings among group members");
 					}
-					var members = RelationshipCoreController.GetRelationships(request.ActorId.Value, ActorType.User).Select(r => r.Id).ToList();
-					actors = actors.Where(a => members.Contains(a.Id)).ToList();
+					var members = RelationshipCoreController.GetRelatedActors(request.ActorId.Value, ActorType.User).Select(r => r.Id).ToList();
+					actorIds = actorIds.Where(a => members.Contains(a.Id)).ToList();
 					break;
 				case LeaderboardFilterType.Alliances:
 					if (!request.ActorId.HasValue)
 					{
 						throw new ArgumentException("An ActorId has to be passed in order to gather rankings among group alliances");
 					}
-					var alliances = RelationshipCoreController.GetRelationships(request.ActorId.Value, ActorType.Group).Select(r => r.Id).ToList();
+					var alliances = RelationshipCoreController.GetRelatedActors(request.ActorId.Value, ActorType.Group).Select(r => r.Id).ToList();
 					alliances.Add(request.ActorId.Value);
-					actors = actors.Where(a => alliances.Contains(a.Id)).ToList();
+					actorIds = actorIds.Where(a => alliances.Contains(a.Id)).ToList();
 					break;
 			}
 
-			_logger.LogDebug($"{actors.Count} Actors for Filter: {request.LeaderboardFilterType}, ActorType: {leaderboard.ActorType}, ActorId: {request.ActorId}");
+			_logger.LogDebug($"{actorIds.Count} Actors for Filter: {request.LeaderboardFilterType}, ActorType: {leaderboard.ActorType}, ActorId: {request.ActorId}");
 
-			return actors;
+			return actorIds;
 		}
 
 		protected string GetName(int id, ActorType actorType, int requestingId)
@@ -547,21 +549,21 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				case CriteriaScope.Actor:
 					return new List<int> { actor.Id };
 				case CriteriaScope.RelatedUsers:
-					var relatedUsers = RelationshipCoreController.GetRelationships(actor.Id, ActorType.User).Select(a => a.Id).ToList();
+					var relatedUsers = RelationshipCoreController.GetRelatedActors(actor.Id, ActorType.User).Select(a => a.Id).ToList();
 					if (actor.ActorType == ActorType.User)
 					{
 						relatedUsers.Add(actor.Id);
 					}
 					return relatedUsers.Distinct().ToList();
 				case CriteriaScope.RelatedGroups:
-					var relatedGroups = RelationshipCoreController.GetRelationships(actor.Id, ActorType.Group).Select(a => a.Id).ToList();
+					var relatedGroups = RelationshipCoreController.GetRelatedActors(actor.Id, ActorType.Group).Select(a => a.Id).ToList();
 					relatedGroups.Add(actor.Id);
 					return relatedGroups.Distinct().ToList();
 				case CriteriaScope.RelatedGroupUsers:
-					var groups = RelationshipCoreController.GetRelationships(actor.Id, ActorType.Group).Select(a => a.Id).ToList();
+					var groups = RelationshipCoreController.GetRelatedActors(actor.Id, ActorType.Group).Select(a => a.Id).ToList();
 					groups.Add(actor.Id);
 					groups = groups.Distinct().ToList();
-					return groups.SelectMany(g => RelationshipCoreController.GetRelationships(g, ActorType.User).Select(a => a.Id)).Distinct().ToList();
+					return groups.SelectMany(g => RelationshipCoreController.GetRelatedActors(g, ActorType.User).Select(a => a.Id)).Distinct().ToList();
 				default:
 					var ints = new List<int>();
 					return ints;

@@ -82,19 +82,19 @@ An Actor may collect 20 gems and decide to give 10 of them to another actor at a
 <p><a class="xref" href="../features/leaderboard.html">Leaderboards</a> are used to calculate an Actor&#39;s ranking against other actors of the same type.
 One leaderboard may rank Groups by the amount of members they have, in a game where one goal is to make as big a group as possible.
 Another leaderboard could be the typical high score, where Users are ranked by the score they have saved in the GameData.</p>
-<p><a class="xref" href="../features/achievement.html">Achievements</a> look at the GameData of a specfic Actor to see whether they have met the completion criteria for the achievement.
+<p><a class="xref" href="../features/achievement.html">Achievements</a> look at the EvaluationData of a specfic Actor to see whether they have met the completion criteria for the achievement.
 An achievement may check to see if an Actor&#39;s score is over 100, and if so, the Actor is evaluated as having completed the Achievement.</p>
 <p><a class="xref" href="../features/skill.html">Skills</a> operate in the same way as Achievements but are conceptually different.
 A Skill has the aim of teaching the player a &quot;skill&quot; in the process of completing it.
 For example, a Skill may be to give 10 gems to 10 different people to complete the &quot;sharing&quot; Skill.</p>
-<p>Achievements and Skills both have <a class="xref" href="criteria.html">Evalutation Criteria</a> which is a set of conditions that need to be met in order for the Skill or Achievement to be considered as completed.
-AchievementCriteria can look for specific data in GameData.</p>
-<p>Once completed, an Achievement or Skill may offer rewards to the Actor. These rewards would be in the form of GameData. 
+<p>Achievements and Skills both have <a class="xref" href="criteria.html">Evalutation Criteria</a> which are a set of conditions that need to be met in order for the Skill or Achievement to be considered as completed.
+EvalautionCriteria can look for specific data in EvaluationData.</p>
+<p>Once completed, an Achievement or Skill may offer rewards to the Actor. These rewards would be in the form of EvaluationData. 
 For example, an Actor may be credited with 20 points on completing an Achievement or Skill.
-Those 20 points would be saved in that Actor&#39;s GameData.</p>
+Those 20 points would be saved in that Actor&#39;s EvaluationData as GameData.</p>
 <p>Users can create, join and leave Groups.</p>
 <p>Users can also befriend other Users.</p>
-<p>Because there may be multiple <a class="xref" href="../features/game.html">Games</a>, the Game is used to associate Achievements, Skills, Leaderboards, GameData and Resources whithin that specific game.</p>
+<p>Because there may be multiple <a class="xref" href="../features/game.html">Games</a>, the Game is used to associate Achievements, Skills, Leaderboards, GameData and Resources within that specific game.</p>
 <p>Each user has an <a class="xref" href="account.html">Account</a>.
 The Account is only used to faciliatate user registration and logging in.
 After the user has logged in, the Account is not used until the next time they log in.</p>

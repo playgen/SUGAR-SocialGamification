@@ -26,6 +26,9 @@
 		/// The description/biography of the user/group.
 		/// </summary>
 		public string Description { get; set; }
-
+		/// <summary>
+		/// The actor type of the user/group
+		/// </summary>
+		public string ActorType { get; set; }
 	}
 }
