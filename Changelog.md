@@ -3,12 +3,19 @@ See below details for each release of SUGAR and the notable changes made.
 
 ### Next Version
 The following will be available in the next version of SUGAR:
-- Add ability to make private users and groups. Private actors will not appear in lists or leaderboards
 
-### 1.4.1 (forked)
+### 2.1.0
+- Add ability to make private users and groups. Private actors will not appear in lists or leaderboards
+- Add optional filtering to requests
+
+### 2.0.0
+- Update Global UserId to be set to null rather than -1
+- Update Docs
+
+### 1.4.1 
 - Update admin login docs to make it clearer how to setup a new user and login 
 
-### 1.4.0 (forked)
+### 1.4.0 
 - Add create game as default claim to users
 
 ### 1.3.4
