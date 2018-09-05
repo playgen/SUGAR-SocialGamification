@@ -36,9 +36,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
         /// </summary>
 		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
         /// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
+        
         [HttpGet("list")]
-		public IActionResult Get([FromBody] ActorVisibilityFilter actorVisibilityFilter)
-		{
+		public IActionResult Get([FromRoute] ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
+        {
 			var groups = _groupCoreController.GetAll(actorVisibilityFilter);
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
@@ -50,7 +51,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
         /// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
         [HttpGet("controlled")]
-		public IActionResult GetControlled([FromBody] ActorVisibilityFilter actorVisibilityFilter)
+		public IActionResult GetControlled([FromRoute] ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
 		{
 			var groups = _groupCoreController.GetControlled(RequestingId, actorVisibilityFilter);
 			var actorContract = groups.ToContractList();
