@@ -6,10 +6,10 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// ActorId : 1,
-	/// ActorName : "Name",
-	/// Value : "10",
-	/// Ranking : 1
+	/// "ActorId" : 1,
+	/// "ActorName" : "Name",
+	/// "Value" : "10",
+	/// "Ranking" : 1
 	/// }
 	/// </example>
 	public class LeaderboardStandingsResponse

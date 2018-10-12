@@ -1,27 +1,27 @@
 version: '2'
 
 services:
-  sugar-v1-mariadb: 
+  sugar-v2-mariadb: 
     image: mariadb
     restart: always
     network_mode: "bridge"
     environment:
       MYSQL_ROOT_PASSWORD: "t0pSECr3t"
-    container_name: sugar-v1-mariadb
+    container_name: sugar-v2-mariadb
     expose:
       - 3306
         
   wait-for-db:
     network_mode: "bridge"
     depends_on:
-      - sugar-v1-mariadb
+      - sugar-v2-mariadb
     links:
-      - sugar-v1-mariadb
+      - sugar-v2-mariadb
     image: ubuntu:14.04
     container_name: wait-for-db
     command: >
       /bin/bash -c "
-        while ! nc -z sugar-v1-mariadb 3306;
+        while ! nc -z sugar-v2-mariadb 3306;
         do
           echo sleeping;
           sleep 1;
@@ -29,17 +29,17 @@ services:
         echo Connected!;
       "
 
-  sugar-v1:
+  sugar-v2:
     depends_on: 
-      - sugar-v1-mariadb
+      - sugar-v2-mariadb
     links:
-      - sugar-v1-mariadb
+      - sugar-v2-mariadb
     network_mode: "bridge"
-    container_name: sugar-v1
+    container_name: sugar-v2
     restart: always
     expose:
       - 59400
     environment:
       ASPNETCORE_URLS: "http://0.0.0.0:59400"
     volumes:
-      - ../../sugar-v1/logs:/app/PlayGen.SUGAR.Server.WebAPI/logs    
+      - ../../sugar-v2/logs:/app/PlayGen.SUGAR.Server.WebAPI/logs    

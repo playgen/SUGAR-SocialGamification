@@ -68,6 +68,38 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			throw new InvalidAccountDetailsException("Invalid Login Details.");
 		}
 
+		public Account AuthenticateToken(Account toVerify, string sourceToken)
+		{
+			var source = _accountSourceCoreController.GetByToken(sourceToken);
+
+			if (source != null)
+			{
+				var found = _accountDbController.Get(new[] { toVerify.Name }, source.Id).SingleOrDefault();
+				if (found != null)
+				{
+					Account verified;
+					verified = found;
+
+					_logger.LogInformation($"Account: {toVerify.Id} passed verification: {verified}");
+
+					return verified;
+				}
+			}
+			throw new InvalidAccountDetailsException("Invalid Login Details.");
+		}
+
+		public Account Get(int actorId)
+		{
+			var account = _accountDbController.Get(actorId);
+			return account;
+		}
+
+		public Account GetByUser(int userId)
+		{
+			var account = _accountDbController.GetByUser(userId);
+			return account;
+		}
+
 		public Account Create(Account toRegister, string sourceToken)
 		{
 			var source = _accountSourceCoreController.GetByToken(sourceToken);
@@ -77,7 +109,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				throw new InvalidAccountDetailsException("Invalid username or password.");
 			}
 
-			var user = _userCoreController.Search(toRegister.Name, true).FirstOrDefault() ?? _userCoreController.Create(new User {
+			var user = _userCoreController.GetExistingUser(toRegister.Name) ?? _userCoreController.Create(new User {
 				Name = toRegister.Name
 			});
 

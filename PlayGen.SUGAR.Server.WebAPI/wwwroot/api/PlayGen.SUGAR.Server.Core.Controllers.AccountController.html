@@ -83,18 +83,42 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">AccountController</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.html">PlayGen.SUGAR.Server.Core.Controllers</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.Core.dll</h6>
   <h5 id="PlayGen_SUGAR_Server_Core_Controllers_AccountController_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class AccountController : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class AccountController</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   
   
   <a id="PlayGen_SUGAR_Server_Core_Controllers_AccountController__ctor_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.AccountController.#ctor*"></a>
-  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_AccountController__ctor_ILogger_PlayGen_SUGAR_Server_Core_Controllers_AccountController__PlayGen_SUGAR_Server_EntityFramework_Controllers_AccountController_PlayGen_SUGAR_Server_Core_Controllers_AccountSourceController_PlayGen_SUGAR_Server_Core_Controllers_UserController_PlayGen_SUGAR_Server_Core_Controllers_ActorRoleController_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.AccountController.#ctor(ILogger{PlayGen.SUGAR.Server.Core.Controllers.AccountController},PlayGen.SUGAR.Server.EntityFramework.Controllers.AccountController,PlayGen.SUGAR.Server.Core.Controllers.AccountSourceController,PlayGen.SUGAR.Server.Core.Controllers.UserController,PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController)">AccountController(ILogger&lt;AccountController&gt;, AccountController, AccountSourceController, UserController, ActorRoleController)</h4>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_AccountController__ctor_Microsoft_Extensions_Logging_ILogger_PlayGen_SUGAR_Server_Core_Controllers_AccountController__PlayGen_SUGAR_Server_EntityFramework_Controllers_AccountController_PlayGen_SUGAR_Server_Core_Controllers_AccountSourceController_PlayGen_SUGAR_Server_Core_Controllers_UserController_PlayGen_SUGAR_Server_Core_Controllers_ActorRoleController_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.AccountController.#ctor(Microsoft.Extensions.Logging.ILogger{PlayGen.SUGAR.Server.Core.Controllers.AccountController},PlayGen.SUGAR.Server.EntityFramework.Controllers.AccountController,PlayGen.SUGAR.Server.Core.Controllers.AccountSourceController,PlayGen.SUGAR.Server.Core.Controllers.UserController,PlayGen.SUGAR.Server.Core.Controllers.ActorRoleController)">AccountController(ILogger&lt;AccountController&gt;, AccountController, AccountSourceController, UserController, ActorRoleController)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -112,7 +136,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.AccountController.html">AccountController</a>&gt;</td>
+        <td><span class="xref">Microsoft.Extensions.Logging.ILogger</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Core.Controllers.AccountController.html">AccountController</a>&gt;</td>
         <td><span class="parametername">logger</span></td>
         <td></td>
       </tr>
@@ -149,6 +173,53 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public Account Authenticate(Account toVerify, string sourceToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Account.html">Account</a></td>
+        <td><span class="parametername">toVerify</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">sourceToken</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Account.html">Account</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_AccountController_AuthenticateToken_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.AccountController.AuthenticateToken*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_AccountController_AuthenticateToken_PlayGen_SUGAR_Server_Model_Account_System_String_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.AccountController.AuthenticateToken(PlayGen.SUGAR.Server.Model.Account,System.String)">AuthenticateToken(Account, String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Account AuthenticateToken(Account toVerify, string sourceToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -257,6 +328,90 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_AccountController_Get_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.AccountController.Get*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_AccountController_Get_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.AccountController.Get(System.Int32)">Get(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Account Get(int actorId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">actorId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Account.html">Account</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_Core_Controllers_AccountController_GetByUser_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.AccountController.GetByUser*"></a>
+  <h4 id="PlayGen_SUGAR_Server_Core_Controllers_AccountController_GetByUser_System_Int32_" data-uid="PlayGen.SUGAR.Server.Core.Controllers.AccountController.GetByUser(System.Int32)">GetByUser(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Account GetByUser(int userId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">userId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.Account.html">Account</a></td>
         <td></td>
       </tr>
     </tbody>

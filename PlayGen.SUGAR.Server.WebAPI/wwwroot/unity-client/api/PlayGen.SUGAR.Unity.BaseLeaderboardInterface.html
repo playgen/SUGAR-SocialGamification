@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface" class="text-break">Class BaseLeaderboardInterface
   </h1>
-  <div class="markdown level0 summary"><p>Base abstract class for controlling the UI object related to leaderboards</p>
+  <div class="markdown level0 summary"><p>Base abstract class for controlling the interface related to displaying the latest standings for a leaderboard.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -298,7 +298,7 @@
   
   <a id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_Awake_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.Awake*"></a>
   <h4 id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_Awake" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.Awake">Awake()</h4>
-  <div class="markdown level1 summary"><p>Base Awake method adds onClick listeners for the close, signin, top, near and friends filter buttons.</p>
+  <div class="markdown level1 summary"><p>Base Awake method adds onClick listeners for the close, signin, top, near, friends, group member and alliance filter buttons.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -332,7 +332,8 @@ Filter button interactable set to false if no user is signed in or loading issue
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">loadingSuccess</span></td>
-        <td></td>
+        <td><p>Was the data successfully loaded?</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -342,7 +343,7 @@ Filter button interactable set to false if no user is signed in or loading issue
   
   <a id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_HideInterfaces_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.HideInterfaces*"></a>
   <h4 id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_HideInterfaces" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.HideInterfaces">HideInterfaces()</h4>
-  <div class="markdown level1 summary"><p>Hides Account, Evaluation, UserFriend, GroupMember and UserGroup UI objects. Makes filter buttons interactable.</p>
+  <div class="markdown level1 summary"><p>Hides Account, Evaluation, UserFriend, GroupMember and UserGroup UI objects. Makes filter buttons interactable. Set leaderboard related text.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -351,6 +352,56 @@ Filter button interactable set to false if no user is signed in or loading issue
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="PlayGen.SUGAR.Unity.BaseInterface.html#PlayGen_SUGAR_Unity_BaseInterface_HideInterfaces">BaseInterface.HideInterfaces()</a></div>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_IsValid_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.IsValid*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_IsValid_ActorResponse_ActorType_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.IsValid(ActorResponse,ActorType)">IsValid(ActorResponse, ActorType)</h4>
+  <div class="markdown level1 summary"><p>If the response actor isn&apos;t null, does the leaerboard ActorType match the actorType provided or the Combined ActorType</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool IsValid(ActorResponse response, ActorType actorType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ActorResponse</span></td>
+        <td><span class="parametername">response</span></td>
+        <td><p>Actor that would be used for the filter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">ActorType</span></td>
+        <td><span class="parametername">actorType</span></td>
+        <td><p>Valid actorType for the leaderboard if response is used as the basis</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   
   
   <a id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_LoadErrorText_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.LoadErrorText*"></a>
@@ -407,6 +458,99 @@ Filter button interactable set to false if no user is signed in or loading issue
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="PlayGen.SUGAR.Unity.BaseInterface.html#PlayGen_SUGAR_Unity_BaseInterface_NoResultsErrorText">BaseInterface.NoResultsErrorText()</a></div>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_SetInteractable_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.SetInteractable*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_SetInteractable_Button_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.SetInteractable(Button,System.Boolean)">SetInteractable(Button, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Set the button&apos;s interactable value</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void SetInteractable(Button button, bool interactable = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Button</span></td>
+        <td><span class="parametername">button</span></td>
+        <td><p>Button to enable/disable the use of</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">interactable</span></td>
+        <td><p>Value to change the button&apos;s interactable boolean to</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_UpdateFilter_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateFilter*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_UpdateFilter_LeaderboardFilterType_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateFilter(LeaderboardFilterType)">UpdateFilter(LeaderboardFilterType)</h4>
+  <div class="markdown level1 summary"><p>Change the leaderboard filter currently being used</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void UpdateFilter(LeaderboardFilterType filter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">LeaderboardFilterType</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>The filter to use for display leaderboard standings</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_UpdateMultiplePerActor_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateMultiplePerActor*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_BaseLeaderboardInterface_UpdateMultiplePerActor_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardInterface.UpdateMultiplePerActor(System.Boolean)">UpdateMultiplePerActor(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Change the multiple per actor setting currently being used</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void UpdateMultiplePerActor(bool multiplePerActor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">multiplePerActor</span></td>
+        <td><p>Setting that determines if actors can appear on a leaderboard multiple times</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           

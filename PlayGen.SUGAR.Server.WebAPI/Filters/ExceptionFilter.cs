@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
+using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.WebAPI.Exceptions;
 
 namespace PlayGen.SUGAR.Server.WebAPI.Filters
@@ -39,7 +40,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Filters
 					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
 					break;
 
-				default:
+                case InvalidRelationshipException invalidRelationship:
+					context.Result = new ObjectResult(invalidRelationship.Message);
+					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    break;
+
+				case DuplicateRelationshipException duplicateRelationship:
+					context.Result = new ObjectResult(duplicateRelationship.Message);
+					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
+					break;
+
+                default:
 					context.Result = new ObjectResult(context.Exception.Message);
 					context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 					break;

@@ -4,18 +4,19 @@ using PlayGen.SUGAR.Common;
 
 namespace PlayGen.SUGAR.Contracts
 {
-    /// <summary>
-    /// Encapsulates the reward given for completing an achievement or skill.
-    /// </summary>
-    /// <example>
-    /// JSON
-    /// {
-    /// Key : "Reward Key",
-    /// DataType : "Float",
-    /// Value : "10.5"
-    /// }
-    /// </example>
-    public class RewardCreateRequest
+	/// <summary>
+	/// Encapsulates the reward given for completing an achievement or skill.
+	/// </summary>
+	/// <example>
+	/// JSON
+	/// {
+	/// "EvaluationDataKey" : "Reward Key",
+	/// "EvaluationDataCategory" : "Resource",
+	/// "EvaluationDataType" : "Long",
+	/// "Value" : "11"
+	/// }
+	/// </example>
+	public class RewardCreateRequest
     {
 		/// <summary>
 		/// The key which will be stored in EvaluationData.

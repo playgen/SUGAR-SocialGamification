@@ -1,5 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Transactions;
 using PlayGen.SUGAR.Client.Exceptions;
+using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using Xunit;
 
@@ -131,6 +135,44 @@ namespace PlayGen.SUGAR.Client.Tests
 		}
 
 		[Fact]
+		public void CannotCreateDuplicateAutoAcceptedRequestAsync()
+		{
+			var key = "GroupMember_CannotCreateDuplicateAsync";
+			var group = CreateGroup(key);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+
+			var relationshipRequest = new RelationshipRequest
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = group.Id,
+				AutoAccept = false
+			};
+
+			Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
+
+			relationshipRequest.AutoAccept = true;
+
+            var complete = false;
+			Exception requestException = null;
+
+			Fixture.SUGARClient.GroupMember.CreateMemberRequestAsync(
+				relationshipRequest, 
+				response => complete = true,
+				exception =>
+				{
+					requestException = exception;
+                    complete = true;
+				});
+
+			while (!complete)
+			{
+				Fixture.SUGARClient.TryExecuteResponse();
+			}
+
+			Assert.IsType<ClientHttpException>(requestException);
+		}
+
+        [Fact]
 		public void CannotCreateRequestWithNonExistingUser()
 		{
 			var key = "GroupMember_CannotCreateRequestWithNonExistingUser";
@@ -535,6 +577,38 @@ namespace PlayGen.SUGAR.Client.Tests
 			Assert.Equal(5, groupCheck.Count());
 		}
 
+		[Fact]
+		public void CanJoinGroupAndTakeResources()
+		{
+			var key = "GroupMember_CanJoinGroupAndTakeResources";
+			var group = CreateGroup(key);
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+
+			var relationshipRequest = new RelationshipRequest
+			{
+				RequestorId = loggedInAccount.User.Id,
+				AcceptorId = group.Id,
+				AutoAccept = true
+			};
+
+			var relationshipResponse = Fixture.SUGARClient.GroupMember.CreateMemberRequest(relationshipRequest);
+
+			Assert.Equal(relationshipRequest.RequestorId, relationshipResponse.RequestorId);
+			Assert.Equal(relationshipRequest.AcceptorId, relationshipResponse.AcceptorId);
+
+			var initialQunatity = 100;
+			var transferQuantity = 20;
+
+			var resourceResponse = GiveResource(Platform.GlobalGameId, group.Id, key, initialQunatity);
+			Assert.Equal(resourceResponse.Quantity, initialQunatity);
+
+			// Act
+			var transferResponse = TakeResource(Platform.GlobalGameId, key, loggedInAccount.User.Id, group.Id, transferQuantity);
+
+			Assert.Equal(initialQunatity - transferQuantity, transferResponse.FromResource.Quantity);
+			Assert.Equal(transferQuantity, transferResponse.ToResource.Quantity);
+		}
+
 		#region Helpers
 		private GroupResponse CreateGroup(string key)
 		{
@@ -547,6 +621,43 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			return Fixture.SUGARClient.Group.Create(groupRequest);
 		}
+
+		private ResourceResponse GiveResource(int gameId, int actorId, string key, int quantity)
+		{
+			var resourceRequest = new ResourceAddRequest
+			{
+				ActorId = actorId,
+				GameId = gameId,
+				Key = key,
+				Quantity = quantity
+			};
+
+			return Fixture.SUGARClient.Resource.AddOrUpdate(resourceRequest);
+		}
+
+		private ResourceTransferResponse TakeResource(int gameId, string key, int recipientId, int senderId, int quantity)
+		{
+			var TransferRequest = new ResourceTransferRequest()
+			{
+				GameId = gameId,
+				Key = key,
+				Quantity = quantity,
+				RecipientActorId = recipientId,
+				SenderActorId = senderId
+			};
+
+			try
+			{
+				return Fixture.SUGARClient.Resource.Transfer(TransferRequest);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+			}
+			return null;
+		}
+
+		
 		#endregion
 
 		public GroupMemberClientTests(ClientTestsFixture fixture)

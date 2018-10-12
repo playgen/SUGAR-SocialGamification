@@ -1,5 +1,8 @@
 ﻿namespace PlayGen.SUGAR.Common.Authorization
 {
+	/// <summary>
+	/// Enum for each type of entity within the system
+	/// </summary>
 	public enum AuthorizationEntity
 	{
 		Account = 0,

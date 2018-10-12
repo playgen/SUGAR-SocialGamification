@@ -27,10 +27,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Get a list of all Games.
-		/// 
-		/// Example Usage: GET api/game/list
 		/// </summary>
-		/// <returns>A list of <see cref="GameResponse"/> that hold Game details.</returns>
+		/// <returns>A list of <see cref="GameResponse"/> that holds Game details.</returns>
 		[HttpGet("list")]
 		public IActionResult Get()
 		{
@@ -40,11 +38,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Games this Actor has control over.
-		/// 
-		/// Example Usage: GET api/game/controlled
+		/// Get a list of all Games the signed in User has control over.
 		/// </summary>
-		/// <returns>A list of <see cref="GameResponse"/> that hold Game details.</returns>
+		/// <returns>A list of <see cref="GameResponse"/> that holds Game details.</returns>
 		[HttpGet("controlled")]
 		public IActionResult GetControlled()
 		{
@@ -54,9 +50,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of Games that match <param name="name"/> provided.
-		/// 
-		/// Example Usage: GET api/game/find/game1
+		/// Get a list of Games whose name contains the name provided.
 		/// </summary>
 		/// <param name="name">Game name</param>
 		/// <returns>A list of <see cref="GameResponse"/> which match the search criteria.</returns>
@@ -69,9 +63,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get Game that matches <param name="id"/> provided.
-		/// 
-		/// Example Usage: GET api/game/findbyid/1
+		/// Get Game that matches the id provided.
 		/// </summary>
 		/// <param name="id">Game id</param>
 		/// <returns><see cref="GameResponse"/> which matches search criteria.</returns>
@@ -86,17 +78,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Create a new Game.
 		/// Requires the <see cref="GameRequest.Name"/> to be unique.
-		/// 
-		/// Example Usage: POST api/game
 		/// </summary>
 		/// <param name="newGame"><see cref="GameRequest"/> object that contains the details of the new Game.</param>
 		/// <returns>A <see cref="GameResponse"/> containing the new Game details.</returns>
 		[HttpPost]
 		[ArgumentsNotNull]
 		[Authorization(ClaimScope.Global, AuthorizationAction.Create, AuthorizationEntity.Game)]
+		[Authorization(ClaimScope.User, AuthorizationAction.Create, AuthorizationEntity.Game)]
 		public async Task<IActionResult> Create([FromBody]GameRequest newGame)
 		{
-			if ((await _authorizationService.AuthorizeAsync(User, Platform.AllId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded)
+			if ((await _authorizationService.AuthorizeAsync(User, Platform.AllId, HttpContext.ScopeItems(ClaimScope.Global))).Succeeded ||
+				(await _authorizationService.AuthorizeAsync(User, int.Parse(User.Identity.Name), HttpContext.ScopeItems(ClaimScope.User))).Succeeded)
 			{
 				var game = newGame.ToModel();
 				_gameCoreController.Create(game, int.Parse(User.Identity.Name));
@@ -108,8 +100,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Update an existing Game.
-		/// 
-		/// Example Usage: PUT api/game/update/1
 		/// </summary>
 		/// <param name="id">Id of the existing Game.</param>
 		/// <param name="game"><see cref="GameRequest"/> object that holds the details of the Game.</param>
@@ -131,8 +121,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Delete Game with the ID provided.
-		/// 
-		/// Example Usage: DELETE api/game/1
 		/// </summary>
 		/// <param name="id">Game ID.</param>
 		[HttpDelete("{id:int}")]

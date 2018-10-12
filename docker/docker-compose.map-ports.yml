@@ -1,10 +1,10 @@
 version: '2'
 
 services:
-  sugar-v1:
+  sugar-v2:
     ports:
-      - "59400:59400"
+      - "59404:59400"
 
-  sugar-v1-mariadb:
+  sugar-v2-mariadb:
     ports:
-      - "59431:3306"
+      - "59434:3306"

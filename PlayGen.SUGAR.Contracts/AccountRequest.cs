@@ -8,9 +8,10 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Name : "User Name",
-	/// Password : "Their Password",
-	/// AutoLogin : true
+	/// "Name" : "User Name",
+	/// "Password" : "Their Password",
+	/// "SourceToken" : "SUGAR".
+	/// "IssueLoginToken" : false
 	/// }
 	/// </example>
 	public class AccountRequest
@@ -34,5 +35,10 @@ namespace PlayGen.SUGAR.Contracts
 		[Required]
 		[StringLength(64)]
 		public string SourceToken { get; set; }
+
+		/// <summary>
+		/// Whether the reqyest should return a login token for use in later logins
+		/// </summary>
+		public bool IssueLoginToken { get; set; }
 	}
 }

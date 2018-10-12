@@ -46,6 +46,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 					.IncludeAll()
 					.FirstOrDefault(g => g.Id == id);
 
+
 				return group;
 			}
 		}

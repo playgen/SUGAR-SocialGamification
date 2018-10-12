@@ -8,9 +8,9 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// ActorId : 1,
-	/// RoleId : 1,
-	/// EntityId : 1
+	/// "ActorId" : 1,
+	/// "RoleId" : 1,
+	/// "EntityId" : 1
 	/// }
 	/// </example>
 	public class ActorRoleRequest

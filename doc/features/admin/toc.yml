@@ -1,10 +1,14 @@
 - name: Site Map
   href: siteMap.md
 - name: Login Screen
-  href: login.md
+  href: Login.md
 - name: Users
   href: user.md
 - name: Groups
   href: group.md
 - name: Games
   href: game.md
+- name: Account Sources
+  href: accountsources.md
+- name: Roles and Perissions
+  href: roles.md

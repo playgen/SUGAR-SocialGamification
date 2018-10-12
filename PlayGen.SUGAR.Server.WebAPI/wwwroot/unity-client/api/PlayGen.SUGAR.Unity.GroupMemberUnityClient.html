@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_GroupMemberUnityClient" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient" class="text-break">Class GroupMemberUnityClient
   </h1>
-  <div class="markdown level0 summary"><p>Unity client for calls related to group member lists.</p>
+  <div class="markdown level0 summary"><p>Use this for actions related to group member lists.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -103,9 +103,6 @@
       <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_IsActive">BaseUnityClient&lt;BaseGroupMemberInterface&gt;.IsActive</a>
     </div>
     <div>
-      <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_SetInterface__1___0_Canvas_System_String_">BaseUnityClient&lt;BaseGroupMemberInterface&gt;.SetInterface&lt;T&gt;(T, Canvas, String)</a>
-    </div>
-    <div>
       <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_Update">BaseUnityClient&lt;BaseGroupMemberInterface&gt;.Update()</a>
     </div>
     <div>
@@ -124,8 +121,7 @@
   
   <a id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_CurrentGroup_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.CurrentGroup*"></a>
   <h4 id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_CurrentGroup" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.CurrentGroup">CurrentGroup</h4>
-  <div class="markdown level1 summary"><p>Currently selected/displayed group.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -142,7 +138,8 @@
     <tbody>
       <tr>
         <td><span class="xref">ActorResponse</span></td>
-        <td></td>
+        <td><p>Currently selected/displayed group.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -150,8 +147,7 @@
   
   <a id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_Members_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.Members*"></a>
   <h4 id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_Members" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.Members">Members</h4>
-  <div class="markdown level1 summary"><p>Member list for the current group.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -168,7 +164,8 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html">ActorResponseAllowableActions</a>&gt;</td>
-        <td></td>
+        <td><p>Members for the current group.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -178,7 +175,7 @@
   
   <a id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_AddFriend_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.AddFriend*"></a>
   <h4 id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_AddFriend_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.AddFriend(System.Int32,System.Boolean)">AddFriend(Int32, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Send friend request to user with id provided. If reload is true, UI is also redrawn.</p>
+  <div class="markdown level1 summary"><p>Send group request to user with id provided. </p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -198,12 +195,14 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The group id</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">reload</span></td>
-        <td></td>
+        <td><p>Whether the UI should reload on complete</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -211,7 +210,7 @@
   
   <a id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_Display_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.Display*"></a>
   <h4 id="PlayGen_SUGAR_Unity_GroupMemberUnityClient_Display_ActorResponse_" data-uid="PlayGen.SUGAR.Unity.GroupMemberUnityClient.Display(ActorResponse)">Display(ActorResponse)</h4>
-  <div class="markdown level1 summary"><p>Sets current group and gathers member list for that group. Displays UI object if provided.</p>
+  <div class="markdown level1 summary"><p>Sets current group and gathers member list for that group. Displays UI interface if provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -231,7 +230,8 @@
       <tr>
         <td><span class="xref">ActorResponse</span></td>
         <td><span class="parametername">group</span></td>
-        <td></td>
+        <td><p>The group which should be set to CurrentGroup</p>
+</td>
       </tr>
     </tbody>
   </table>

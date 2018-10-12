@@ -6,10 +6,10 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// Id : 1,
-	/// ActorId : 1,
-	/// RoleId : 1,
-	/// EntityId : 1
+	/// "Id" : 1,
+	/// "ActorId" : 1,
+	/// "RoleId" : 1,
+	/// "EntityId" : 1
 	/// }
 	/// </example>
 	public class ActorClaimResponse

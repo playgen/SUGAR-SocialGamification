@@ -3,6 +3,7 @@ using System.Linq;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Server.EntityFramework.Exceptions;
 using PlayGen.SUGAR.Server.Model;
+using PlayGen.SUGAR.Server.Model.Interfaces;
 
 namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 {
@@ -13,7 +14,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 		}
 
-		public List<Actor> GetRequests(int id, ActorType fromActorType)
+		public List<Actor> GetRelationRequestorActors(int id, ActorType fromActorType)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -25,7 +26,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<Actor> GetSentRequests(int id, ActorType toActorType)
+		public List<Actor> GetRelationAcceptorActors(int id, ActorType toActorType)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -37,27 +38,50 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<Actor> GetRelationships(int id, ActorType relationshipActorType)
+		public List<Actor> GetRelatedActors(int id, ActorType relationshipActorType)
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var requestors = context.Relationships
+				var relationships = context.Relationships;
+
+				var requestors = relationships
 					.Where(r => r.AcceptorId == id && r.Requestor.ActorType == relationshipActorType)
 					.Select(u => u.Requestor).ToList();
 
-				var acceptors = context.Relationships
+				var acceptors = relationships
 					.Where(r => r.RequestorId == id && r.Acceptor.ActorType == relationshipActorType)
-					.Select(u => u.Acceptor).ToList();
+					.Select(u => u.Acceptor).ToList();			
 
-				requestors.AddRange(acceptors);
-
-				return requestors;
+				return requestors.Concat(acceptors).ToList();
 			}
 		}
 
-		public int GetRelationshipCount(int id, ActorType relationshipActorType)
+		public ActorRelationship GetRelationship(int relatedActorA, int relatedActorB)
 		{
-			return GetRelationships(id, relationshipActorType).Count;
+			using (var context = ContextFactory.Create())
+			{
+				var relationship = context.Relationships
+					.Single(r => AreRelated(r, relatedActorA, relatedActorB));
+				return relationship;
+			}
+		}
+
+		public List<ActorRelationship> GetRelationships(int actorId, ActorType relationshipActorType)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				var relationships = context.Relationships
+					.Where(r => (r.AcceptorId == actorId && r.Requestor.ActorType == relationshipActorType)
+								|| (r.RequestorId == actorId && r.Acceptor.ActorType == relationshipActorType))
+					.ToList();
+
+				return relationships;
+			}
+        }
+
+        public int GetRelationshipCount(int id, ActorType relationshipActorType)
+		{
+			return GetRelatedActors(id, relationshipActorType).Count;
 		}
 
         /// <summary>
@@ -76,38 +100,33 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 
 			if (newRelation.AcceptorId == newRelation.RequestorId)
 			{
-				throw new DuplicateRecordException("Two different users are needed to create a relationship.");
+				throw new InvalidRelationshipException("Two different users are needed to create a relationship.");
 			}
 
             var hasConflicts = context.Relationships
-				.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
-				          || (r.RequestorId == newRelation.AcceptorId &&
-				              r.AcceptorId == newRelation.RequestorId));
+				.Any(r => AreRelated(r, newRelation));
 
-			if (!hasConflicts)
+            if (!hasConflicts)
 			{
 				hasConflicts = context.RelationshipRequests
-					.Any(r => (r.RequestorId == newRelation.RequestorId &&
-					           r.AcceptorId == newRelation.AcceptorId)
-					          || (r.RequestorId == newRelation.AcceptorId &&
-					              r.AcceptorId == newRelation.RequestorId));
-			}
+					.Any(r => AreRelated(r, newRelation));
+            }
 
 			if (hasConflicts)
 			{
-				throw new DuplicateRecordException("A relationship with these users already exists.");
+				throw new DuplicateRelationshipException("A relationship with these users already exists.");
 			}
 
 			var requestorExists = context.Actors.Any(u => u.Id == newRelation.RequestorId);
 			if (!requestorExists)
 			{
-				throw new MissingRecordException("The requesting user does not exist.");
+				throw new InvalidRelationshipException("The requesting user does not exist.");
 			}
 
 			var acceptorExists = context.Actors.Any(u => u.Id == newRelation.AcceptorId);
 			if (!acceptorExists)
 			{
-				throw new MissingRecordException("The targeted user does not exist.");
+				throw new InvalidRelationshipException("The targeted user does not exist.");
 			}
 
 			var relation = new ActorRelationship
@@ -144,14 +163,12 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 
 			var hasConflicts = context.Relationships
-				.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
-						|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
+				.Any(r => AreRelated(r, newRelation));
 
-			if (!hasConflicts)
+            if (!hasConflicts)
 			{
 				hasConflicts = context.RelationshipRequests
-					.Any(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
-							|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
+					.Any(r => AreRelated(r, newRelation));
 			}
 
 			if (hasConflicts)
@@ -207,17 +224,27 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public void Update(ActorRelationship newRelation)
+		public void Delete(ActorRelationship newRelation)
 		{
 			using (var context = ContextFactory.Create())
 			{
 				var relation = context.Relationships
-					.Single(r => (r.RequestorId == newRelation.RequestorId && r.AcceptorId == newRelation.AcceptorId)
-								|| (r.RequestorId == newRelation.AcceptorId && r.AcceptorId == newRelation.RequestorId));
+					.Single(r => AreRelated(r, newRelation));
 
 				context.Relationships.Remove(relation);
 				context.SaveChanges();
 			}
 		}
+
+		private bool AreRelated(IRelationship relationshipA, IRelationship relationshipB)
+		{
+			return AreRelated(relationshipA, relationshipB.AcceptorId, relationshipB.RequestorId);
+		}
+
+        private bool AreRelated(IRelationship relationship, int relatedActorA, int relatedActorB)
+		{
+			return relationship.AcceptorId == relatedActorA && relationship.RequestorId == relatedActorB
+					|| relationship.AcceptorId == relatedActorB && relationship.RequestorId == relatedActorA;
+        }
 	}
 }

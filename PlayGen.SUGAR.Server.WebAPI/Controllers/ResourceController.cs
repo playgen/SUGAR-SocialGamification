@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
+using PlayGen.SUGAR.Server.Model;
 using PlayGen.SUGAR.Server.WebAPI.Attributes;
 using PlayGen.SUGAR.Server.WebAPI.Extensions;
 
@@ -30,7 +31,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all Resources filtered by the <param name="actorId"/>, <param name="gameId"/> and <param name="keys"/> provided.
+		/// Find a list of all Resources filtered by the actorId, gameId and keys provided.
 		/// 
 		/// Example Usage: GET api/resource?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
 		/// </summary>
@@ -60,8 +61,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Creates or updates a Resource record.
-		/// 
-		/// Example Usage: POST api/resource
 		/// </summary>
 		/// <param name="resourceRequest"><see cref="ResourceAddRequest"/> object that holds the details of the ResourceData.</param>
 		/// <returns>A <see cref="ResourceResponse"/> containing the new Resource details.</returns>
@@ -76,17 +75,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 				(await _authorizationService.AuthorizeAsync(User, resourceRequest.ActorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
 				(await _authorizationService.AuthorizeAsync(User, resourceRequest.GameId, HttpContext.ScopeItems(ClaimScope.Game))).Succeeded)
 			{
-				var resource = resourceRequest.ToModel();
-				var resources = _resourceController.Get(resourceRequest.GameId.Value, resourceRequest.ActorId.Value, new[] { resourceRequest.Key });
-				if (resources.Any())
-				{
-					var firstResource = resources.Single();
-					_resourceController.AddQuantity(firstResource.Id, resourceRequest.Quantity.Value);
-				}
-				else
-				{
-					_resourceController.Create(resource);
-				}
+				var resource = _resourceController.CreateOrUpdate(
+					resourceRequest.GameId.Value, 
+					resourceRequest.ActorId.Value, 
+					resourceRequest.Key,
+					resourceRequest.Quantity.Value);
 
 				var resourceContract = resource.ToResourceContract();
 				return new ObjectResult(resourceContract);
@@ -96,8 +89,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Transfers a quantity of a specific resource.
-		/// 
-		/// Example Usage: Post api/resource/transfer
 		/// </summary>
 		/// <param name="transferRequest"><see cref="ResourceTransferRequest"/> object that holds the details of the resoruce transfer.</param>
 		/// <returns>A <see cref="ResourceTransferResponse"/> containing the modified resources.</returns>
@@ -123,6 +114,19 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 				return new ObjectResult(resourceTransferRespone);
 			}
 			return Forbid();
+		}
+
+		/// <summary>
+		/// Find a list of all Actors that have resources for the game id provided.
+		/// </summary>
+		/// <param name="id">ID of a Game.</param>
+		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
+		[HttpGet("gameactors/{id:int}")]
+		public IActionResult GetGameActors(int id)
+		{
+			var data = _resourceController.GetGameActors(id);
+			var dataContract = data.ToActorContractList();
+			return new ObjectResult(dataContract);
 		}
 	}
 }

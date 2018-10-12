@@ -22,7 +22,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests.EvaluationEvents
         {
             // Assign
             var evaluationCount = 2;
-            var session = new Session(Platform.GlobalId, Helpers.GetOrCreateUser("CanEvaluateActor").Id);
+            var session = new Session(Platform.GlobalGameId, Helpers.GetOrCreateUser("CanEvaluateActor").Id);
 
             var evaluations = new List<Evaluation>();
 

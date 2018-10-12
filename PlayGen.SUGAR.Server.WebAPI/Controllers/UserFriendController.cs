@@ -30,11 +30,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have relationship requests for this <param name="userId"/>.
-		/// 
-		/// Example Usage: GET api/userfriend/requests/1
+		/// Get a list of all Users that have sent relationship requests to this userId.
 		/// </summary>
-		/// <param name="userId">ID of the group.</param>
+		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("requests/{userId:int}")]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.UserFriendRequest)]
@@ -50,9 +48,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have been sent relationship requests for this <param name="userId"/>.
-		/// 
-		/// Example Usage: GET api/userfriend/sentrequests/1
+		/// Get a list of all Users that have been sent relationship requests from this userId.
 		/// </summary>
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
@@ -70,16 +66,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Users that have relationships with this <param name="userId"/>.
-		/// 
-		/// Example Usage: GET api/userfriend/friends/1
+		/// Get a list of all Users that have relationships with this userId.
 		/// </summary>
 		/// <param name="userId">ID of the user.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
 		[HttpGet("friends/{userId:int}")]
 		public IActionResult GetFriends([FromRoute]int userId)
 		{
-			var actor = _relationshipCoreController.GetRelationships(userId, ActorType.User);
+			var actor = _relationshipCoreController.GetRelatedActors(userId, ActorType.User);
 			var actorContract = actor.ToActorContractList();
 			return new ObjectResult(actorContract);
 		}
@@ -87,8 +81,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Create a new relationship request between two Users.
 		/// Requires a relationship between the two to not already exist.
-		/// 
-		/// Example Usage: POST api/userfriend
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipRequest"/> object that holds the details of the new relationship request.</param>
 		/// <returns>A <see cref="RelationshipResponse"/> containing the new Relationship details.</returns>
@@ -109,10 +101,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Update an existing relationship request between <param name="relationship.RequestorId"/> and <param name="relationship.AcceptorId"/>.
+		/// Update an existing relationship request between two Users.
 		/// Requires the relationship request to already exist between the two Users.
-		/// 
-		/// Example Usage: PUT api/userfriend/request
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
 		[HttpPut("request")]
@@ -135,16 +125,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Update an existing relationship between <param name="relationship.RequestorId"/> and <param name="relationship.AcceptorId"/>.
+		/// Update an existing relationship between two Users.
 		/// Requires the relationship to already exist between the two Users.
-		/// 
-		/// Example Usage: PUT api/userfriend
 		/// </summary>
 		/// <param name="relationship"><see cref="RelationshipStatusUpdate"/> object that holds the details of the relationship.</param>
-		[HttpPut]
-		[ArgumentsNotNull]
+		[HttpPut] // todo change to a remove that takes both members of the relationship
+        [ArgumentsNotNull]
 		[Authorization(ClaimScope.User, AuthorizationAction.Delete, AuthorizationEntity.UserFriend)]
-		public async Task<IActionResult> UpdateFriend([FromBody] RelationshipStatusUpdate relationship)
+		public async Task<IActionResult> RemoveFriend([FromBody] RelationshipStatusUpdate relationship)
 		{
 			if ((await _authorizationService.AuthorizeAsync(User, relationship.RequestorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded ||
 				(await _authorizationService.AuthorizeAsync(User, relationship.AcceptorId, HttpContext.ScopeItems(ClaimScope.User))).Succeeded)
@@ -154,7 +142,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 					RequestorId = relationship.RequestorId,
 					AcceptorId = relationship.AcceptorId
 				};
-				_relationshipCoreController.Update(relation.ToRelationshipModel());
+				_relationshipCoreController.Delete(relation.ToRelationshipModel());
 				return Ok();
 			}
 			return Forbid();

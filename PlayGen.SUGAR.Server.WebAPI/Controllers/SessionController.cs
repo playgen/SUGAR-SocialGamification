@@ -18,14 +18,17 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 	{
 		private readonly TokenController _tokenController;
 		private readonly Core.Controllers.AccountController _accountCoreController;
+		private readonly Core.Controllers.AccountSourceController _accountSourceController;
 		private readonly SessionTracker _sessionTracker;
 
 		public SessionController(
 			Core.Controllers.AccountController accountCoreController,
+			Core.Controllers.AccountSourceController accountSourceController,
 			TokenController tokenController,
 			SessionTracker sessionTracker)
 		{
 			_accountCoreController = accountCoreController;
+			_accountSourceController = accountSourceController;
 			_sessionTracker = sessionTracker;
 			_tokenController = tokenController;
 		}
@@ -33,8 +36,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Logs in an account based on the name and password combination.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// Example Usage: POST api/loginplatform
 		/// </summary>
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
@@ -47,8 +48,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 			account = _accountCoreController.Authenticate(account, accountRequest.SourceToken);
 
-			var session = _sessionTracker.StartSession(Platform.GlobalId, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
-			_tokenController.IssueToken(HttpContext, session);
+			var session = _sessionTracker.StartSession(Platform.GlobalGameId, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
+			_tokenController.IssueSessionToken(HttpContext, session);
 
 			var response = account.ToContract();
 			return new ObjectResult(response);
@@ -57,11 +58,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		/// <summary>
 		/// Logs in an account based on the name and password combination.
 		/// Returns a JsonWebToken used for authorization in any further calls to the API.
-		/// 
-		/// Example Usage: POST api/1/logingame
 		/// </summary>
 		/// <param name="gameId">Optional Id of the game the account is logging in for.</param>
-		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
+		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided. Optional IssueLoginToken will return a token to remember login for future use</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
 		[HttpPost("{gameId:int}/logingame")]
 		[ArgumentsNotNull]
@@ -74,7 +73,36 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			account = _accountCoreController.Authenticate(account, accountRequest.SourceToken);
 
 			var session = _sessionTracker.StartSession(gameId, account.User.Id); // todo should this be moved to the login core controller where we can evaluate if the user is allowed to login to the specific game?
-			_tokenController.IssueToken(HttpContext, session);
+			_tokenController.IssueSessionToken(HttpContext, session);
+
+			var response = account.ToContract();
+			if (accountRequest.IssueLoginToken)
+			{
+				response.LoginToken = _tokenController.IssueLoginToken(gameId, account.User.Id);
+			}
+			return new ObjectResult(response);
+		}
+
+		/// <summary>
+		/// Login to the game using a provided token
+		/// </summary>
+		/// <param name="tokenLogin">The login token receievd from a previous successful login, if requested</param>
+		/// <returns></returns>
+		[HttpPost("logintoken")]
+		[ArgumentsNotNull]
+		[AllowWithoutSession]
+		public IActionResult LoginToken([FromBody]TokenLoginRequest tokenLogin)
+		{
+			var tokenValues = _tokenController.ValidateToken(HttpContext, tokenLogin.TokenString);
+			var userId = tokenValues.Item1;
+			var gameId = tokenValues.Item2;
+
+			var account = _accountCoreController.GetByUser(userId);
+			var accountSourceToken = _accountSourceController.Get(account.AccountSourceId).Token;
+			
+			account = _accountCoreController.AuthenticateToken(account, accountSourceToken);
+			var session = _sessionTracker.StartSession(gameId, userId);
+			_tokenController.IssueSessionToken(HttpContext, session);
 
 			var response = account.ToContract();
 			return new ObjectResult(response);
@@ -82,8 +110,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Creates a new account and login that account.
-		/// 
-		/// Example Usage: POST api/createandloginplatform
 		/// </summary>
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>
 		/// <returns>A <see cref="AccountResponse"/> containing the Account details.</returns>
@@ -95,14 +121,12 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 			var account = accountRequest.ToModel();
 			_accountCoreController.Create(account, accountRequest.SourceToken);
 
-			var result = Login(Platform.GlobalId, accountRequest);
+			var result = Login(Platform.GlobalGameId, accountRequest);
 			return result;
 		}
 
 		/// <summary>
 		/// Creates a new account and login that account.
-		/// 
-		/// Example Usage: POST api/1/createandlogingame
 		/// </summary>
 		/// <param name="gameId">Optional Id of the game the account is logging in for.</param>
 		/// <param name="accountRequest"><see cref="AccountRequest"/> object that contains the account details provided.</param>

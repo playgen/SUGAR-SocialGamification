@@ -107,11 +107,13 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			foreach (var ec in evaluation.EvaluationCriterias)
 			{
 				CriteriaScopeValidation(ec.EvaluationDataType, ec.Scope, ec.CriteriaQueryType, evaluation.ActorType);
-				if (!DataTypeValueValidation(ec.EvaluationDataType, ec.Value))
+
+				if (ec.CriteriaQueryType != CriteriaQueryType.Count && !DataTypeValueValidation(ec.EvaluationDataType, ec.Value))
 				{
 					throw new InvalidCastException($"{ec.Value} cannot be cast to DataType {ec.EvaluationDataType}");
 				}
 			}
+
 			evaluation = _evaluationDbController.Create(evaluation);
 
 			EvaluationCreatedEvent?.Invoke(evaluation);
@@ -180,33 +182,39 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				case CriteriaScope.Actor:
 					break;
+
 				case CriteriaScope.RelatedUsers:
 					if (actorType == ActorType.Undefined)
 					{
 						throw new ArgumentException($"Cannot create EvaluationCriteria using CriteriaScope {scope} and ActorType {actorType}");
 					}
-					if (queryType != CriteriaQueryType.Sum)
+
+					if (queryType != CriteriaQueryType.Sum && queryType != CriteriaQueryType.Count)
 					{
 						throw new ArgumentException($"Cannot create EvaluationCriteria as only CriteriaQueryType {CriteriaQueryType.Sum} can be used with CriteriaScope {scope}");
 					}
 					break;
+
 				case CriteriaScope.RelatedGroups:
 					if (actorType != ActorType.Group)
 					{
 						throw new ArgumentException($"Cannot create EvaluationCriteria using CriteriaScope {scope} and ActorType {actorType}");
 					}
-					if (queryType != CriteriaQueryType.Sum)
-					{
+
+					if (queryType != CriteriaQueryType.Sum && queryType != CriteriaQueryType.Count)
+                    {
 						throw new ArgumentException($"Cannot create EvaluationCriteria as only CriteriaQueryType {CriteriaQueryType.Sum} can be used with CriteriaScope {scope}");
 					}
 					break;
+
 				case CriteriaScope.RelatedGroupUsers:
 					if (actorType != ActorType.Group)
 					{
 						throw new ArgumentException($"Cannot create EvaluationCriteria using CriteriaScope {scope} and ActorType {actorType}");
 					}
-					if (queryType != CriteriaQueryType.Sum)
-					{
+
+					if (queryType != CriteriaQueryType.Sum && queryType != CriteriaQueryType.Count)
+                    {
 						throw new ArgumentException($"Cannot create EvaluationCriteria as only CriteriaQueryType {CriteriaQueryType.Sum} can be used with CriteriaScope {scope}");
 					}
 					break;
@@ -219,6 +227,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				throw new MissingRecordException("The provided evaluation does not exist.");
 			}
+
 			var provided = _actorController.Get(actorId);
 			if (evaluation.ActorType != ActorType.Undefined && (provided == null || provided.ActorType != evaluation.ActorType))
 			{

@@ -13,13 +13,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 		{
 		}
 
-		public List<Actor> Get()
+		public List<Actor> GetAll()
 		{
 			using (var context = ContextFactory.Create())
 			{
-				var groups = context.Actors.ToList();
-
-				return groups;
+				var actors = context.Actors
+					.ToList();
+				return actors;
 			}
 		}
 
@@ -28,8 +28,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				var actor = context.Actors.Find(id);
-
-				return actor;
+				return actor;	
 			}
 		}
 

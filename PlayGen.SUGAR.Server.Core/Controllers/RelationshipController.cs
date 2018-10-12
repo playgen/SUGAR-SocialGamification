@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
+using PlayGen.SUGAR.Common.Authorization;
+using PlayGen.SUGAR.Server.Core.Authorization;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
 
@@ -10,14 +13,26 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
     {
 	    private readonly ILogger _logger;
 	    private readonly EntityFramework.Controllers.RelationshipController _relationshipDbController;
+		private readonly EntityFramework.Controllers.ActorClaimController _actorClaimController;
+		private readonly ActorRoleController _actorRoleController;
+		private readonly EntityFramework.Controllers.ActorController _actorController;
+	    private readonly EntityFramework.Controllers.ClaimController _claimController;
 
-	    public RelationshipController(
+		public RelationshipController(
 		    ILogger<RelationshipController> logger,
+		    EntityFramework.Controllers.ActorClaimController actorClaimController,
+		    ActorRoleController actorRoleController,
+			EntityFramework.Controllers.ActorController actorController,
+		    EntityFramework.Controllers.ClaimController claimController,
 			EntityFramework.Controllers.RelationshipController relationshipDbController)
-	    {
+		{
 		    _logger = logger;
+			_actorClaimController = actorClaimController;
+			_actorRoleController = actorRoleController;
+			_actorController = actorController;
+			_claimController = claimController;
 		    _relationshipDbController = relationshipDbController;
-	    }
+		}
 
 		/// <summary>
 		/// Get relationship requests from an actor type to an actor
@@ -27,7 +42,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		/// <returns></returns>
 		public List<Actor> GetRequests(int actorId, ActorType fromActorType)
 	    {
-		    var requesting = _relationshipDbController.GetRequests(actorId, fromActorType);
+		    var requesting = _relationshipDbController.GetRelationRequestorActors(actorId, fromActorType);
 
 		    _logger.LogInformation($"{requesting?.Count} Requests for ActorId: {actorId}");
 
@@ -42,7 +57,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		/// <returns></returns>
 	    public List<Actor> GetSentRequests(int actorId, ActorType toActorType)
 	    {
-		    var requests = _relationshipDbController.GetSentRequests(actorId, toActorType);
+		    var requests = _relationshipDbController.GetRelationAcceptorActors(actorId, toActorType);
 
 		    _logger.LogInformation($"{requests?.Count} Sent Requests for ActorId: {requests}");
 
@@ -54,23 +69,51 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		/// </summary>
 		/// <param name="actorId">The actor to get list of relationsips with</param>
 		/// <param name="actorType">The tyoe of actor that relationship is shared with</param>
-		/// <returns></returns>
-	    public List<Actor> GetRelationships(int actorId, ActorType actorType)
+        /// <param name="actorVisibilityFilter">Filter to return related based on theri visibility setting</param>
+        /// <returns></returns>
+        public List<Actor> GetRelatedActors(int actorId, ActorType actorType, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
 	    {
-		    var relationships = _relationshipDbController.GetRelationships(actorId, actorType);
+		    var relationships = _relationshipDbController.GetRelatedActors(actorId, actorType);
 
-		    _logger.LogInformation($"{relationships?.Count} relationships for ActorId: {actorId}");
+			if ((actorVisibilityFilter & ActorVisibilityFilter.Private) == 0)
+			{
+				relationships = relationships.Where(r => !r.Private).ToList();
+		    }
+
+			_logger.LogInformation($"{relationships?.Count} relationships for ActorId: {actorId}");
 
 		    return relationships;
 	    }
 
 		/// <summary>
-		/// Get a count of relationships shared between an actor and other actor types
+		/// Find the relatioship between two actors.
 		/// </summary>
-		/// <param name="actorId">The actor to get a list of relationships with</param>
-		/// <param name="actorType">The type of actor that relationship is shared with</param>
+		/// <param name="relatedActorA"></param>
+		/// <param name="relatedActorB"></param>
 		/// <returns></returns>
-	    public int GetRelationshipCount(int actorId, ActorType actorType)
+		public ActorRelationship GetRelationship(int relatedActorA, int relatedActorB)
+		{
+			return _relationshipDbController.GetRelationship(relatedActorA, relatedActorB);
+		}
+
+		/// <summary>
+        /// Get relationships between actor of id and all of specific type.
+        /// </summary>
+        /// <param name="actorId"></param>
+        /// <param name="actorType"></param>
+        /// <returns></returns>
+		public List<ActorRelationship> GetRelationships(int actorId, ActorType actorType)
+		{
+			return _relationshipDbController.GetRelationships(actorId, actorType);
+		}
+
+        /// <summary>
+        /// Get a count of relationships shared between an actor and other actor types
+        /// </summary>
+        /// <param name="actorId">The actor to get a list of relationships with</param>
+        /// <param name="actorType">The type of actor that relationship is shared with</param>
+        /// <returns></returns>
+        public int GetRelationshipCount(int actorId, ActorType actorType)
 	    {
 		    var count = _relationshipDbController.GetRelationshipCount(actorId, actorType);
 		    return count;
@@ -84,9 +127,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	    /// <param name="context">Optional DbContext to perform opperations on. If ommitted a DbContext will be created.</param>
 	    public void CreateRequest(ActorRelationship newRelationship, bool autoAccept, SUGARContext context = null)
 	    {
+			// HACK auto accept default to false when using SUGAR Unity 1.0.2 or prior, not the expected behaviour
+		    // autoAccept = true;
+			// END HACK
 		    if (autoAccept)
 		    {
 			    _relationshipDbController.CreateRelationship(newRelationship, context);
+				// Assign users claims to the group that they do not get by default
+			    AssignUserResourceClaims(newRelationship);
 		    }
 		    else
 		    {
@@ -109,16 +157,74 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	    }
 
 		/// <summary>
-		/// Update an existing relationship between actors
-		/// </summary>
-		/// <param name="relationship"></param>
-	    public void Update(ActorRelationship relationship)
+        /// Delete an existing relationship between actors
+        /// </summary>
+        /// <param name="relationship"></param>
+        public void Delete(ActorRelationship relationship)
 	    {
 			//todo Check if user is only group admin
-		    _relationshipDbController.Update(relationship);
+		    _relationshipDbController.Delete(relationship);
 		    //todo Remove ActorRole for group if user has permissions
 
 		    _logger.LogInformation($"{relationship?.RequestorId} -> {relationship?.AcceptorId}");
 	    }
+
+		// TODO This is assigning new users default claims to the group, to be moved to its own table
+        /// <summary>
+        /// Assign the user claims to resources for a newly created relationship with a group
+        /// </summary>
+        /// <param name="relation">the user/group relationship</param>
+        private void AssignUserResourceClaims(ActorRelationship relation)
+	    {
+		    relation.Requestor = _actorController.Get(relation.RequestorId);
+		    relation.Acceptor = _actorController.Get(relation.AcceptorId);
+			// Group to user relationship
+		    if (relation.Requestor.ActorType == ActorType.Group && relation.Acceptor.ActorType == ActorType.User || relation.Acceptor.ActorType == ActorType.Group && relation.Requestor.ActorType == ActorType.User)
+		    {
+			    // Get user
+			    var user = relation.Requestor.ActorType == ActorType.User
+				    ? relation.Requestor
+				    : relation.Acceptor;
+
+			    var group = relation.Requestor.ActorType == ActorType.Group
+				    ? relation.Requestor
+				    : relation.Acceptor;
+
+			    var GetClaim = _claimController.Get(ClaimScope.Group, "Get-Resource");
+			    var CreateClaim = _claimController.Get(ClaimScope.Group, "Create-Resource");
+			    var UpdateClaim = _claimController.Get(ClaimScope.Group, "Update-Resource");
+			    if (GetClaim != null)
+			    {
+				    var getActorClaim = new ActorClaim
+				    {
+					    ActorId = user.Id,
+					    ClaimId = GetClaim.Id,
+					    EntityId = group.Id,
+				    };
+				    _actorClaimController.Create(getActorClaim);
+			    }
+			    if (UpdateClaim != null)
+			    {
+				    var updateActorClaim = new ActorClaim
+				    {
+					    ActorId = user.Id,
+					    ClaimId = UpdateClaim.Id,
+					    EntityId = group.Id,
+				    };
+				    _actorClaimController.Create(updateActorClaim);
+
+				}
+				if (CreateClaim != null)
+			    {
+				    var createActorClaim = new ActorClaim
+				    {
+					    ActorId = user.Id,
+					    ClaimId = CreateClaim.Id,
+					    EntityId = group.Id,
+				    };
+				    _actorClaimController.Create(createActorClaim);
+			    }
+		    }
+		}
 	}
 }

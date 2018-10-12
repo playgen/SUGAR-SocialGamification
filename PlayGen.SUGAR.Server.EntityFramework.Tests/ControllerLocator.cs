@@ -11,6 +11,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		private static AccountController _accountController;
 		private static AccountSourceController _accountSourceController;
 		private static ActorController _actorController;
+		private static ActorDataController _actorDataController;
 		private static ActorClaimController _actorClaimController;
 		private static ActorRoleController _actorRoleController;
 		private static ClaimController _claimController;
@@ -37,7 +38,10 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		public static ActorController ActorController
 			=> _actorController ?? (_actorController = new ActorController(ContextFactory));
 
-		public static ActorClaimController ActorClaimController
+		public static ActorDataController ActorDataController
+			=> _actorDataController ?? (_actorDataController = new ActorDataController(ContextFactory));
+
+        public static ActorClaimController ActorClaimController
 			=> _actorClaimController ?? (_actorClaimController = new ActorClaimController(ContextFactory));
 
 		public static ActorRoleController ActorRoleController

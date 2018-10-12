@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Unity Client Prefabs | SUGAR </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Unity Client Prefabs | SUGAR ">
+    <meta name="generator" content="docfx 2.35.4.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../SUGAR.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="client-prefabs">
+              <h1 id="unity-client-prefabs">Unity Client Prefabs</h1>
+              
+<p>There are a number of prefabs included within the Unity package. Example usage can be viewed in the demo scene which can be found at: Assets/SUGAR/Example/Scene.unity</p>
+<p>After setting up a game using the <a href="../tutorials/quick-start.html">quick start guide</a>, all prefabs can be seen working by running the demo scene and entering the shortcuts to display each.</p>
+<p>Each of the prefabs can be activated using the SUGAR prefab provided (which must be added to the scene to use SUGAR). The SUGAR prefab has its own canvas which is rendered above the main Canvas which contains each of the panel prefabs. Each panel can be activated using their display functions, examples of which can be seen in: Assets/SUGAR/Example/Scripts/TestImplemtation.cs </p>
+<h2 id="panel-prefabs">Panel Prefabs</h2>
+<p>Panel Prefabs provided</p>
+<ul>
+<li>AccountPanel</li>
+<li>EvaluationPanel</li>
+<li>EvaluationPopup</li>
+<li>FriendsListPanel</li>
+<li>UserGroupsPanel</li>
+<li>GroupMembersPanel </li>
+<li>LeaderboardListPanel</li>
+<li>LeaderboardPanel</li>
+</ul>
+<p>There are 2 variations provided for each of the panels, one for landscape and one for portrait. To switch the orientation used, change the Interface references in the SUGAR prefab to the required orientation prefabs.</p>
+<h2 id="panel-overview">Panel Overview</h2>
+<ul>
+<li><p><strong>AccountPanel</strong></p>
+<p>  Handles logging in to SUGAR with username and password entered, does not display if auto login is enabled and the login details are correct.</p>
+</li>
+<li><p><strong>EvaluationPanel</strong></p>
+<p>  Demo Shortcut: Hold T &amp; Press K.</p>
+<p>  Displays the achievements/skills for the current game and which ones have been completed. </p>
+</li>
+<li><p><strong>EvaluationPopup</strong></p>
+<p>  Demo Shortcut: Hold T &amp; Press A.</p>
+<p>  Displays a pop-up to notify users that an achievement or skill has been completed. </p>
+</li>
+<li><p><strong>FriendsListPanel</strong></p>
+<p>  Demo Shortcut: Hold T &amp; Press F.</p>
+<p>  Displays the users that the logged in account is friends with, allowing them to make new friendships, remove existing ones and review pending requests.</p>
+</li>
+<li><p><strong>UserGroupsPanel</strong></p>
+<p>  Demo Shortcut: Hold T &amp; Press G.</p>
+<p>  Displays the groups that the logged in account is a member of, allowing them to leave current groups, join new groups and see pending group requests.</p>
+</li>
+<li><p><strong>GroupMembersPanel</strong> </p>
+<p>  Demo Shortcut: Hold T &amp; Press G -&gt; select a group.</p>
+<p>  Displays the members of a specific group, allowing accounts with permissions to manage other accounts within that group.</p>
+</li>
+<li><p><strong>LeaderboardListPanel</strong></p>
+<p>  Demo Shortcut: Hold T &amp; Press L.</p>
+<p>  Displays a list of leaderboards for the current game, allowing users to select one and see the standings.</p>
+</li>
+<li><p><strong>LeaderboardPanel</strong></p>
+<p>  Demo Shortcut: Hold T &amp; Press L -&gt; select a leaderboard.</p>
+<p>  Displays the current standings for the selected leaderboard, allows users to filter results by:  </p>
+<ul>
+<li>Top (the best scores for the current leaderboard),  </li>
+<li>Nearby (the scores near to the current users score),</li>
+<li>Friends (the current users&#39; friends scores),</li>
+<li>Group Members (the scores for all members of your primary group),</li>
+<li>Alliances (the scores of all groups in an alliance with your primary group).</li>
+</ul>
+</li>
+</ul>
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+      	<div class="grad-bottom"></div>
+      		<div class="footer">
+      			<div class="container">
+      				<span class="pull-right">
+      					<a href="#top">Back to top</a>
+      				</span>
+      				
+      				Copyright © 2016 PlayGen
+      		</div>
+      	</div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -6,11 +6,11 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// User : {
-	/// Id : 1,
-	/// Name : "SUGAR",
-	/// RequiresPassword : true
-	/// }
+	/// "Id" : 1,
+	/// "Description" : "SUGAR",
+	/// "Token" : "SUGAR",
+	/// "RequiresPassword" : true,
+	/// "AutoRegister" : false
 	/// }
 	/// </example>
 	public class AccountSourceResponse

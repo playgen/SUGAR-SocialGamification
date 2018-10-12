@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_BaseLeaderboardListInterface" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardListInterface" class="text-break">Class BaseLeaderboardListInterface
   </h1>
-  <div class="markdown level0 summary"><p>Base abstract class for controlling the UI object related to getting all leaderboards for a game</p>
+  <div class="markdown level0 summary"><p>Base abstract class for controlling the interface related to displaying a list of leaderboards.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -267,7 +267,7 @@ Filter button interactable set to false if no user is signed in or loading issue
   
   <a id="PlayGen_SUGAR_Unity_BaseLeaderboardListInterface_HideInterfaces_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.HideInterfaces*"></a>
   <h4 id="PlayGen_SUGAR_Unity_BaseLeaderboardListInterface_HideInterfaces" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.HideInterfaces">HideInterfaces()</h4>
-  <div class="markdown level1 summary"><p>Hides Account, Evaluation, UserFriend, GroupMember and UserGroup UI objects. Makes filter buttons interactable.</p>
+  <div class="markdown level1 summary"><p>Hides Account, Evaluation, UserFriend, GroupMember and UserGroup UI objects. Makes filter buttons interactable. Set leaderboard type related text.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -332,6 +332,35 @@ Filter button interactable set to false if no user is signed in or loading issue
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="PlayGen.SUGAR.Unity.BaseInterface.html#PlayGen_SUGAR_Unity_BaseInterface_NoResultsErrorText">BaseInterface.NoResultsErrorText()</a></div>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_BaseLeaderboardListInterface_UpdateFilter_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.UpdateFilter*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_BaseLeaderboardListInterface_UpdateFilter_ActorType_" data-uid="PlayGen.SUGAR.Unity.BaseLeaderboardListInterface.UpdateFilter(ActorType)">UpdateFilter(ActorType)</h4>
+  <div class="markdown level1 summary"><p>Chnage the filter currently being used to get leaderboard for a particular type of actor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void UpdateFilter(ActorType filter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ActorType</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>The filter to use for display leaderboard standings</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           

@@ -9,7 +9,8 @@ namespace PlayGen.SUGAR.Contracts
     /// <example>
     /// JSON
     /// {
-    /// Name : "Role Name"
+    /// "Name" : "Role Name",
+	/// "ClaimScope" : "Game"
     /// }
     /// </example>
     public class RoleRequest

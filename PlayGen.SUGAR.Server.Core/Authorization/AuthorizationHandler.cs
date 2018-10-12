@@ -24,24 +24,6 @@ namespace PlayGen.SUGAR.Server.Core.Authorization
 		}
 	}
 
-	public class AuthorizationHandlerWithNull : AuthorizationHandler<AuthorizationRequirement>
-	{
-		private readonly ActorClaimController _actorClaimDbController;
-		private readonly ClaimController _claimDbController;
-
-		public AuthorizationHandlerWithNull(ActorClaimController actorClaimDbController,
-					ClaimController claimDbController)
-		{
-			_actorClaimDbController = actorClaimDbController;
-			_claimDbController = claimDbController;
-		}
-
-		protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AuthorizationRequirement requirement)
-		{
-			return AuthorizationHandlerHelper.HandleRequirements(_claimDbController, _actorClaimDbController, context, requirement);
-		}
-	}
-
 	public class AuthorizationHandlerWithoutEntity : AuthorizationHandler<AuthorizationRequirement, ClaimScope>
 	{
 		private readonly ActorClaimController _actorClaimDbController;

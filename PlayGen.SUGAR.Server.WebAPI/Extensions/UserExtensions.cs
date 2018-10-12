@@ -37,7 +37,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			return new User
 			{
 				Name = userContract.Name,
-				Description = userContract.Description
+				Description = userContract.Description,
+				Private = userContract.Private
 			};
 		}
 	}

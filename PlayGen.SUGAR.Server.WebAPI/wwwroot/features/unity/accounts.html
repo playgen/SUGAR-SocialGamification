@@ -65,7 +65,7 @@
 <p>The next component on the SUGAR prefab is the Account Unity Client script component. This is used to handle the player&#39;s login to their SUGAR account or the registration of new accounts.
 There are two ways of logging in a user. This can be done by a typical login panel gameobject or login can occur automatically via code if credentials come in from an external source.</p>
 <ul>
-<li><p>Login User Interface - Login panel gameobject, which appears to prompt the user to login. The gameobject must have the LoginUserInterface script attached. Included in the prefabs folder (&quot;Assets/SUGAR/Prefabs&quot;) is a fully functional login panel template. </p>
+<li><p>Login User Interface - Login panel gameobject, which appears to prompt the user to login. The gameobject must have the LoginUserInterface script attached. Included in the prefabs folder (&quot;Assets/SUGAR/Prefabs&quot;) is a fully functional login panel template. The login panel has a rememberMe option, which will set the IssueLoginToken flag to true in the login request, which will return a token for players to use for logging in on subsequent requests. If &quot;Remember Me&quot; has been selected, the interface will pre-populate user details.</p>
 </li>
 <li><p>Allow Auto Login - This enables the use of auto-login (bypassing the need for the login panel). If this is checked, and the command line arguments for auto login have been passed, then the Account Unity Client will attempt to login with the credentials. The command line options format is <code>game.exe -u [username] -s [source] -autologin</code>.</p>
 </li>

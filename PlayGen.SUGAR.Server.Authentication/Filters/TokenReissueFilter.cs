@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Server.Authentication.Filters
                 && request.Headers.TryGetClaim("GameId", out int gameId)
                 && request.Headers.TryGetClaim("UserId", out int userId))
             {
-                _tokenController.IssueToken(context.HttpContext, sessionId, gameId, userId);
+                _tokenController.IssueSessionToken(context.HttpContext, sessionId, gameId, userId);
             }
         }
     }

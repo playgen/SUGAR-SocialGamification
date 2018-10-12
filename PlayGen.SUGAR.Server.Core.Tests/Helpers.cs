@@ -14,22 +14,19 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 	{
 		public static User GetOrCreateUser(string name)
 		{
-			User user;
-			var users = ControllerLocator.UserController.Search(name, true);
+			var existingUser = ControllerLocator.UserController.GetExistingUser(name);
 
-			if (users.Any())
+			if (existingUser != null)
 			{
-				user = users.ElementAt(0);
+				return existingUser;
 			}
 			else
 			{
-				user = ControllerLocator.UserController.Create(new User
+				return ControllerLocator.UserController.Create(new User
 				{
 					Name = name,
 				});
 			}
-
-			return user;
 		}
 
 		public static Game GetOrCreateGame(string name)

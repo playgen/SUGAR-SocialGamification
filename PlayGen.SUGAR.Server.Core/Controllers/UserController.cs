@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
+using PlayGen.SUGAR.Server.Core.Extensions;
 using PlayGen.SUGAR.Server.EntityFramework;
 using PlayGen.SUGAR.Server.Model;
 
@@ -11,25 +13,36 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 	{
 		private readonly ILogger _logger;
 		private readonly EntityFramework.Controllers.UserController _userController;
-		private readonly ActorRoleController _actorRoleController;
+		private readonly ActorRoleController _actoRoleController;
 		private readonly RelationshipController _relationshipController;
+		private readonly GroupController _groupController;
 
 		public UserController(
 			ILogger<UserController> logger,
 			EntityFramework.Controllers.UserController userController,
 			EntityFramework.Controllers.ActorController actorDbController,
 			ActorRoleController actorRoleController,
-			RelationshipController relationshipController) : base(actorDbController)
+			RelationshipController relationshipController,
+			GroupController groupController) : base(actorDbController)
 		{
 			_logger = logger;
 			_userController = userController;
-			_actorRoleController = actorRoleController;
+			_actoRoleController = actorRoleController;
 			_relationshipController = relationshipController;
+			_groupController = groupController;
+
 		}
 
-		public List<User> Get()
+		/// <summary>
+		/// Get a list of all the users
+		/// </summary>
+		/// <param name="requestingid">Id of the requesting actor, used to check if the actor has permissions to get the list with private members included </param>
+		/// <returns></returns>
+		public List<User> GetAll(ActorVisibilityFilter actorVisibilityFilter)
 		{
 			var users = _userController.Get();
+			users = users.FilterVisibility(actorVisibilityFilter).ToList();
+
 			users.ForEach(u => u.UserRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.User));
 			users.ForEach(u => u.GroupRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.Group));
 
@@ -38,24 +51,34 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return users;
 		}
 
-		public new User Get(int id)
+		public User Get(int id, ActorVisibilityFilter actorVisibilityFilter)
 		{
 			var user = _userController.Get(id);
+			user = user.FilterVisibility(actorVisibilityFilter);
 
-			if (user != null)
+			if (user == null)
 			{
-				user.UserRelationshipCount = _relationshipController.GetRelationshipCount(user.Id, ActorType.User);
-				user.GroupRelationshipCount = _relationshipController.GetRelationshipCount(user.Id, ActorType.Group);
+				return null;
 			}
+
+			user.UserRelationshipCount = _relationshipController.GetRelationshipCount(user.Id, ActorType.User);
+			user.GroupRelationshipCount = _relationshipController.GetRelationshipCount(user.Id, ActorType.Group);
 
 			_logger.LogInformation($"User: {user?.Id} for Id: {id}");
 
 			return user;
 		}
 
-		public List<User> Search(string name, bool exactMatch)
+		public User GetExistingUser(string name)
+		{
+			return _userController.Search(name, true).FirstOrDefault();
+		}
+
+		public List<User> Search(string name, bool exactMatch, ActorVisibilityFilter actorVisibilityFilter)
 		{
 			var users = _userController.Search(name, exactMatch);
+			users = users.FilterVisibility(actorVisibilityFilter).ToList();
+
 			users.ForEach(u => u.UserRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.User));
 			users.ForEach(u => u.GroupRelationshipCount = _relationshipController.GetRelationshipCount(u.Id, ActorType.Group));
 
@@ -68,7 +91,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 		{
 			newUser = _userController.Create(newUser, context);
 
-			_actorRoleController.Create(ClaimScope.User, newUser.Id, newUser.Id, context);
+			_actoRoleController.Create(ClaimScope.User, newUser.Id, newUser.Id, context);
 
 			_logger.LogInformation($"{newUser.Id}");
 
@@ -84,9 +107,14 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public void Delete(int id)
 		{
-			TriggerDeletedEvent(id);
+			TriggerDeleteEvent(id);
 
-			_userController.Delete(id);
+            // get all groups where this user is the only admin
+            // delete all returned groups that only have this user as the member
+			var groups = _relationshipController.GetRelatedActors(id, ActorType.Group);
+			groups.ForEach(g => _groupController.RemoveMember(g.Id, id));
+
+            _userController.Delete(id);
 
 			_logger.LogInformation($"{id}");
 		}

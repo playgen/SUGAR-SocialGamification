@@ -30,13 +30,11 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of leaderboards that match <param name="gameId"/>.
+		/// Find a list of leaderboards that match the gameId provided.
 		/// If global is provided instead of a gameId, get all global leaderboards, ie. leaderboards that are not associated with a specific game.
-		/// 
-		/// Example Usage: GET api/leaderboards/game/1/list
 		/// </summary>
 		/// <param name="gameId">Game ID</param>
-		/// <returns>Returns multiple <see cref="LeaderboardResponse"/> that hold Leaderboard details</returns>
+		/// <returns>Returns a list of <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
 		[HttpGet("global/list")]
 		[HttpGet("game/{gameId:int}/list")]
 		public IActionResult Get([FromRoute]int gameId)
@@ -48,11 +46,10 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Find a single leaderboard matching the token and gameId.
-		/// 
-		/// Example Usage: GET api/leaderboards/LEADERBOARD_TOKEN/1
+		/// If global is provided instead of a gameId, get a global leaderboard with a matching token.
 		/// </summary>
-		/// <param name="token">Token </param>
-		/// <param name="gameId"></param>
+		/// <param name="token">Token of the leaderboard</param>
+		/// <param name="gameId">Game ID</param>
 		/// <returns>Returns a single <see cref="LeaderboardResponse"/> that holds Leaderboard details</returns>
 		[HttpGet("{token}/global")]
 		[HttpGet("{token}/{gameId:int}")]
@@ -65,9 +62,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new Leaderboard.
-		/// Requires <see cref="LeaderboardRequest.Name"/> and <see cref="LeaderboardRequest.Token"/> to be unique to that <see cref="LeaderboardRequest.GameId"/>.
-		/// 
-		/// Example Usage: POST api/leaderboards/create
+		/// Requires <see cref="LeaderboardRequest"/> Name and Token to be unique to that GameId.
 		/// </summary>
 		/// <param name="newLeaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the new Leaderboard.</param>
 		/// <returns>Returns a <see cref="LeaderboardResponse"/> object containing details for the newly created Leaderboard.</returns>
@@ -88,11 +83,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Get the standings for a Leaderboard using a <see cref="LeaderboardStandingsRequest"/>.
-		/// 
-		/// Example Usage: POST api/leaderboards/standings
 		/// </summary>
 		/// <param name="leaderboardDetails"><see cref="LeaderboardStandingsRequest"/> object that holds the details that are wanted from the Leaderboard.</param>
-		/// <returns>Returns multiple <see cref="LeaderboardStandingsResponse"/> that hold actor positions in the leaderboard.</returns>
+		/// <returns>Returns a list of <see cref="LeaderboardStandingsResponse"/> that detail actor positions in the leaderboard.</returns>
 		[HttpPost("standings")]
 		public IActionResult GetLeaderboardStandings([FromBody]LeaderboardStandingsRequest leaderboardDetails)
 		{
@@ -104,8 +97,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Update an existing Leaderboard.
-		/// 
-		/// Example Usage: PUT api/leaderboards/update
 		/// </summary>
 		/// <param name="leaderboard"><see cref="LeaderboardRequest"/> object that holds the details of the Leaderboard.</param>
 		[HttpPut("update")]
@@ -123,9 +114,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Delete Leaderboard with the <param name="token"/> and <param name="gameId"/> provided.
-		/// 
-		/// Example Usage: DELETE api/leaderboards/LEADERBOARD_TOKEN/1
+		/// Delete Leaderboard with the token and gameId provided.
+		/// If global is provided instead of a gameId, delete a global leaderboard with a matching token.
 		/// </summary>
 		/// <param name="token">Token of Leaderboard</param>
 		/// <param name="gameId">ID of the Game the Leaderboard is for</param>

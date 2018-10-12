@@ -108,7 +108,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var progressSkill = Fixture.SUGARClient.Skill.GetGlobalSkillProgress(key, loggedInAccount.User.Id);
 			Assert.Equal(0, progressSkill.Progress);
 
-			CompleteGenericEvaluation(key, loggedInAccount.User.Id, Platform.GlobalId);
+			CompleteGenericEvaluation(key, loggedInAccount.User.Id, Platform.GlobalGameId);
 
 			progressSkill = Fixture.SUGARClient.Skill.GetGlobalSkillProgress(key, loggedInAccount.User.Id);
 			Assert.True(progressSkill.Progress >= 1);

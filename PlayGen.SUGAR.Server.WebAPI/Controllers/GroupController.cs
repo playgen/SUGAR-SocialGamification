@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Contracts;
 using PlayGen.SUGAR.Server.Authorization;
@@ -26,69 +27,69 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Get a list of all Groups.
-		/// 
-		/// Example Usage: GET api/group/list
+		/// The id of the actor requesting data
 		/// </summary>
-		/// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
-		[HttpGet("list")]
-		public IActionResult Get()
-		{
-			var groups = _groupCoreController.Get();
+		private int RequestingId => int.Parse(User.Identity.Name);
+
+        /// <summary>
+        /// Get a list of all Groups.
+        /// </summary>
+		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
+        /// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
+        
+        [HttpGet("list")]
+		public IActionResult Get([FromRoute] ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
+        {
+			var groups = _groupCoreController.GetAll(actorVisibilityFilter);
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}
 
-		/// <summary>
-		/// Get a list of all Groups this Actor has control over.
-		/// 
-		/// Example Usage: GET api/group/controlled
+        /// <summary>
+        /// Get a list of all Groups the signed in User has control over.
 		/// </summary>
-		/// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
-		[HttpGet("controlled")]
-		public IActionResult GetControlled()
+		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
+        /// <returns>A list of <see cref="GroupResponse"/> that hold Group details.</returns>
+        [HttpGet("controlled")]
+		public IActionResult GetControlled([FromRoute] ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
 		{
-			var groups = _groupCoreController.GetByPermissions(int.Parse(User.Identity.Name));
+			var groups = _groupCoreController.GetControlled(RequestingId, actorVisibilityFilter);
 			var actorContract = groups.ToContractList();
 			return new ObjectResult(actorContract);
 		}
 
-		/// <summary>
-		/// Get a list of Groups that match <param name="name"/> provided.
-		/// 
-		/// Example Usage: GET api/group/find/group1
-		/// </summary>
-		/// <param name="name">Group name.</param>
-		/// <returns>A list of <see cref="GroupResponse"/> which match the search criteria.</returns>
-		[HttpGet("find/{name}")]
-		public IActionResult Get([FromRoute]string name)
+        /// <summary>
+        /// Get a list of Groups whose name contain the name provided.
+        /// </summary>
+        /// <param name="name">Group name.</param>
+		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
+        /// <returns>A list of <see cref="GroupResponse"/> which match the search criteria.</returns>
+        [HttpGet("find/{name}")]
+		public IActionResult Get([FromRoute]string name, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
 		{
-			var groups = _groupCoreController.Search(name);
+			var groups = _groupCoreController.Search(name, actorVisibilityFilter);
 			var actorContract = groups.ToContractList();
 
 			return new ObjectResult(actorContract);
 		}
 
-		/// <summary>
-		/// Get Group that matches <param name="id"/> provided.
-		/// 
-		/// Example Usage: GET api/group/findbyid/1
-		/// </summary>
-		/// <param name="id">Group id.</param>
-		/// <returns><see cref="GroupResponse"/> which matches search criteria.</returns>
-		[HttpGet("findbyid/{id:int}", Name = "GetByGroupId")]
-		public IActionResult Get([FromRoute]int id)
+        /// <summary>
+        /// Get Group that matches the id provided.
+        /// </summary>
+        /// <param name="id">Group id.</param>
+		/// <param name="actorVisibilityFilter">Optional: Filter by public, private or both. Default is public only.</param>
+        /// <returns><see cref="GroupResponse"/> which matches search criteria.</returns>
+        [HttpGet("findbyid/{id:int}", Name = "GetByGroupId")]
+		public IActionResult Get([FromRoute]int id, ActorVisibilityFilter actorVisibilityFilter = ActorVisibilityFilter.Public)
 		{
-			var group = _groupCoreController.Get(id);
+			var group = _groupCoreController.Get(id, actorVisibilityFilter);
 			var actorContract = group.ToContract();
 			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
 		/// Create a new Group.
-		/// Requires the <see cref="GroupRequest.Name"/> to be unique for Groups.
-		/// 
-		/// Example Usage: POST api/group
+		/// Requires the <see cref="GroupRequest"/> Name to be unique for Groups.
 		/// </summary>
 		/// <param name="actor"><see cref="GroupRequest"/> object that holds the details of the new Group.</param>
 		/// <returns>A <see cref="GroupResponse"/> containing the new Group details.</returns>
@@ -97,15 +98,13 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		public IActionResult Create([FromBody]GroupRequest actor)
 		{
 			var group = actor.ToGroupModel();
-			_groupCoreController.Create(group, int.Parse(User.Identity.Name));
+			_groupCoreController.Create(group, RequestingId);
 			var actorContract = group.ToContract();
 			return new ObjectResult(actorContract);
 		}
 
 		/// <summary>
 		/// Update an existing Group.
-		/// 
-		/// Example Usage: PUT api/group/update/1
 		/// </summary>
 		/// <param name="id">Id of the existing Group.</param>
 		/// <param name="group"><see cref="GroupRequest"/> object that holds the details of the Group.</param>
@@ -126,9 +125,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Delete group with the <param name="id"/> provided.
-		/// 
-		/// Example Usage: DELETE api/group/1
+		/// Delete Group with the id provided.
 		/// </summary>
 		/// <param name="id">Group ID.</param>
 		[HttpDelete("{id:int}")]

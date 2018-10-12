@@ -8,6 +8,8 @@ namespace PlayGen.SUGAR.Server.Authentication
         public string Audience { get; set; }
         public string Issuer { get; set; }
         public SigningCredentials SigningCredentials { get; set; }
-        public TimeSpan ValidityTimeout { get; set; }
-    }
+        public TimeSpan SessionTokenValidityTimeout { get; set; }
+        public TimeSpan LoginTokenValidityTimeout { get; set; }
+		
+	}
 }

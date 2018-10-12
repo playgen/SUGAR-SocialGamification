@@ -8,7 +8,13 @@ namespace PlayGen.SUGAR.Server.EntityFramework.EntityConfigs
     {
 		public void Configure(EntityTypeBuilder<EvaluationData> builder)
 		{
-			builder.HasIndex(g => new { g.Key, g.GameId, g.Category, CreatingActorId = g.ActorId, g.EvaluationDataType })
+			builder
+				.HasOne(data => data.Actor)
+				.WithMany()
+				.HasForeignKey(data => data.ActorId)
+				.OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasIndex(g => new { g.Key, g.GameId, g.Category, CreatingActorId = g.ActorId, g.EvaluationDataType })
 				.HasName("IX_EvaluationData_Key_Game_Category_Creator_Type");
 
 			builder.HasIndex(g => new { g.GameId, g.Category, CreatingActorId = g.ActorId, g.EvaluationDataType })

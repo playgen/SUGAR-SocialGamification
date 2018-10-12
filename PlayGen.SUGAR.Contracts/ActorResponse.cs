@@ -6,9 +6,9 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// Id : 1,
-	/// Name : "Actor Name"
-	/// Description: "Description of Actor"
+	/// "Id" : 1,
+	/// "Name" : "Actor Name"
+	/// "Description" : "Description of Actor"
 	/// }
 	/// </example>
 	public class ActorResponse
@@ -26,6 +26,9 @@
 		/// The description/biography of the user/group.
 		/// </summary>
 		public string Description { get; set; }
-
+		/// <summary>
+		/// The actor type of the user/group
+		/// </summary>
+		public string ActorType { get; set; }
 	}
 }

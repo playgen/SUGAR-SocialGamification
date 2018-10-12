@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Common.Authorization;
 using PlayGen.SUGAR.Server.EntityFramework.Controllers;
 using PlayGen.SUGAR.Server.Model;
@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, newEvaluationData.ActorId, new List<string> { newEvaluationData.Key });
 
-			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == Platform.GlobalId && g.ActorId == newEvaluationData.ActorId);
+			var matches = userDatas.Count(g => g.Key == userDataName && g.GameId == Platform.GlobalGameId && g.ActorId == newEvaluationData.ActorId);
 
 			Assert.Equal(1, matches);
 		}
@@ -115,16 +115,45 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 		{
 			var userDataName = "GetUserEvaluationDatasWithNonExistingUser";
 
-			var newEvaluationData = CreateEvaluationData(userDataName, Platform.GlobalId, Platform.GlobalId);
+			var newEvaluationData = CreateEvaluationData(userDataName, Platform.GlobalGameId, Platform.GlobalActorId);
 
 			var userDatas = _evaluationDataController.Get(newEvaluationData.GameId, -1, new List<string> { userDataName });
 
 			Assert.Empty(userDatas);
 		}
-		#endregion
 
-		#region Helpers
-		private Model.EvaluationData CreateEvaluationData(string key, int? gameId = null, int? userId = null,
+		[Theory]
+		[InlineData(EvaluationDataCategory.GameData)]
+		[InlineData(EvaluationDataCategory.MatchData)]
+		[InlineData(EvaluationDataCategory.Achievement)]
+		[InlineData(EvaluationDataCategory.Resource)]
+		[InlineData(EvaluationDataCategory.Skill)]
+        public void DoesDeleteEvaluationDataWhenUserDeleted(EvaluationDataCategory category)
+		{
+			// Arrange
+			var user = Helpers.CreateUser($"{nameof(DoesDeleteEvaluationDataWhenUserDeleted)}_{category}");
+
+			var datas = Enumerable.Range(0, 10).Select(i => new EvaluationData
+			{
+				Key = nameof(DoesDeleteEvaluationDataWhenUserDeleted),
+				ActorId = user.Id,
+				Category = category,
+				EvaluationDataType = EvaluationDataType.Long
+			}).ToList();
+
+			_evaluationDataController.Create(datas);
+
+			// Act
+			_userController.Delete(user.Id);
+
+			// Assert
+			var createdDatas = _evaluationDataController.GetActorData(user.Id);
+			Assert.Empty(createdDatas);
+		}
+        #endregion
+
+        #region Helpers
+        private Model.EvaluationData CreateEvaluationData(string key, int? gameId = null, int? userId = null,
 			bool createNewGame = false, bool createNewUser = false)
 		{
 			if (createNewGame)
@@ -147,8 +176,8 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Tests
 
 			var userData = new Model.EvaluationData {
 				Key = key,
-				GameId = gameId ?? Platform.GlobalId,
-				ActorId = userId ?? Platform.GlobalId,
+				GameId = gameId ?? Platform.GlobalGameId,
+				ActorId = userId ?? Platform.GlobalActorId,
 				Value = key + " value",
 				EvaluationDataType = 0
 			};

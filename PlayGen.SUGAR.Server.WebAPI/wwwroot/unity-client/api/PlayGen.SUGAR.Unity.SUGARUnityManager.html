@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -122,8 +122,7 @@
   
   <a id="PlayGen_SUGAR_Unity_SUGARUnityManager_AnyActiveUI_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.AnyActiveUI*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARUnityManager_AnyActiveUI" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.AnyActiveUI">AnyActiveUI</h4>
-  <div class="markdown level1 summary"><p>Is any piece of SUGAR UI currently active?</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -140,7 +139,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
+        <td><p>Is any piece of SUGAR UI currently active?</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -165,7 +165,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
+        <td><p>Whether the spinner UI is currently active</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -173,14 +174,33 @@
   </h3>
   
   
-  <a id="PlayGen_SUGAR_Unity_SUGARUnityManager_CreateHttpHandler_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.CreateHttpHandler*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_SUGARUnityManager_CreateHttpHandler" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.CreateHttpHandler">CreateHttpHandler()</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="PlayGen_SUGAR_Unity_SUGARUnityManager_CreateSUGARClient_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.CreateSUGARClient*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_SUGARUnityManager_CreateSUGARClient_System_String_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.CreateSUGARClient(System.String)">CreateSUGARClient(String)</h4>
+  <div class="markdown level1 summary"><p>Create a SUGAR Client from a string </p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual IHttpHandler CreateHttpHandler()</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual SUGARClient CreateSUGARClient(string baseAddress)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">baseAddress</span></td>
+        <td><p>uri to create SUGAR Client from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -191,8 +211,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IHttpHandler</span></td>
-        <td></td>
+        <td><span class="xref">SUGARClient</span></td>
+        <td><p>new SUGARClient</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -200,8 +221,7 @@
   
   <a id="PlayGen_SUGAR_Unity_SUGARUnityManager_DisableObject_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.DisableObject*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARUnityManager_DisableObject_GameObject_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.DisableObject(GameObject)">DisableObject(GameObject)</h4>
-  <div class="markdown level1 summary"><p>Disable a piece of SUGAR UI.
-This should be used instead of SetActive to ensure UI and blocker ordering is correct.</p>
+  <div class="markdown level1 summary"><p>Disable a piece of SUGAR UI.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -221,16 +241,21 @@ This should be used instead of SetActive to ensure UI and blocker ordering is co
       <tr>
         <td><span class="xref">GameObject</span></td>
         <td><span class="parametername">activeObject</span></td>
-        <td></td>
+        <td><p>The object that should be disabled</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PlayGen_SUGAR_Unity_SUGARUnityManager_DisableObject_GameObject__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><ul>
+<li>This should be used instead of SetActive to ensure UI and blocker ordering is correct.</li>
+</ul>
+</div>
   
   
   <a id="PlayGen_SUGAR_Unity_SUGARUnityManager_EnableObject_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.EnableObject*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARUnityManager_EnableObject_GameObject_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.EnableObject(GameObject)">EnableObject(GameObject)</h4>
-  <div class="markdown level1 summary"><p>Enable a piece of SUGAR UI.
-This should be used instead of SetActive to ensure UI and blocker ordering is correct.</p>
+  <div class="markdown level1 summary"><p>Enable a piece of SUGAR UI.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -250,15 +275,22 @@ This should be used instead of SetActive to ensure UI and blocker ordering is co
       <tr>
         <td><span class="xref">GameObject</span></td>
         <td><span class="parametername">activeObject</span></td>
-        <td></td>
+        <td><p>The object that should be enabled</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PlayGen_SUGAR_Unity_SUGARUnityManager_EnableObject_GameObject__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><ul>
+<li>This should be used instead of SetActive to ensure UI and blocker ordering is correct.</li>
+</ul>
+</div>
   
   
   <a id="PlayGen_SUGAR_Unity_SUGARUnityManager_GameValidityCheck_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.GameValidityCheck*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARUnityManager_GameValidityCheck" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.GameValidityCheck">GameValidityCheck()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Check if the current game is valid by the current gameToken</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -275,7 +307,8 @@ This should be used instead of SetActive to ensure UI and blocker ordering is co
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
+        <td><p>Whether the _gameToken returns a valid game</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -283,7 +316,7 @@ This should be used instead of SetActive to ensure UI and blocker ordering is co
   
   <a id="PlayGen_SUGAR_Unity_SUGARUnityManager_SetBlocker_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.SetBlocker*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARUnityManager_SetBlocker_System_Boolean_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.SetBlocker(System.Boolean,System.Boolean)">SetBlocker(Boolean, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Set if the blocker should be used and if it should close objects when clicked</p>
+  <div class="markdown level1 summary"><p>Setup for blocker</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -303,12 +336,14 @@ This should be used instead of SetActive to ensure UI and blocker ordering is co
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">use</span></td>
-        <td></td>
+        <td><p>Whether the blocker should be used</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">block</span></td>
-        <td></td>
+        <td><p>Whether clicking on the blocker should close the current UI</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -316,7 +351,7 @@ This should be used instead of SetActive to ensure UI and blocker ordering is co
   
   <a id="PlayGen_SUGAR_Unity_SUGARUnityManager_SetSpinner_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.SetSpinner*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARUnityManager_SetSpinner_System_Boolean_System_Int32_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.SetSpinner(System.Boolean,System.Int32)">SetSpinner(Boolean, Int32)</h4>
-  <div class="markdown level1 summary"><p>Set the direction and speed of the loading spinner</p>
+  <div class="markdown level1 summary"><p>Setup the spinner</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -336,12 +371,14 @@ This should be used instead of SetActive to ensure UI and blocker ordering is co
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">clockwise</span></td>
-        <td></td>
+        <td><p>Whether the spinner should rotate clockwise or not</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">speed</span></td>
-        <td></td>
+        <td><p>The speed of the rotation</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -349,8 +386,7 @@ This should be used instead of SetActive to ensure UI and blocker ordering is co
   
   <a id="PlayGen_SUGAR_Unity_SUGARUnityManager_StartSpinner_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.StartSpinner*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARUnityManager_StartSpinner_System_String_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.StartSpinner(System.String)">StartSpinner(String)</h4>
-  <div class="markdown level1 summary"><p>Start the loading spinner.
-This method should be used instead of directly calling Loading.Start to ensure UI and blocker ordering is correct.</p>
+  <div class="markdown level1 summary"><p>Start the loading spinner.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -370,16 +406,21 @@ This method should be used instead of directly calling Loading.Start to ensure U
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">text</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> Text to display with the spinner. (default: &quot;&quot;)</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PlayGen_SUGAR_Unity_SUGARUnityManager_StartSpinner_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><ul>
+<li>This method should be used instead of directly calling Loading.Start to ensure UI and blocker ordering is correct.</li>
+</ul>
+</div>
   
   
   <a id="PlayGen_SUGAR_Unity_SUGARUnityManager_StopSpinner_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.StopSpinner*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARUnityManager_StopSpinner_System_String_System_Single_" data-uid="PlayGen.SUGAR.Unity.SUGARUnityManager.StopSpinner(System.String,System.Single)">StopSpinner(String, Single)</h4>
-  <div class="markdown level1 summary"><p>Stop the loading spinner.
-This method should be used instead of directly calling Loading.Stop to ensure UI and blocker ordering is correct.</p>
+  <div class="markdown level1 summary"><p>Stop the loading spinner.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -399,15 +440,22 @@ This method should be used instead of directly calling Loading.Stop to ensure UI
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">text</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> Text to display when the spinner stops. (default: &quot;&quot;)</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Single</span></td>
         <td><span class="parametername">stopDelay</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> The time, in seconds, the text should be displayed for before disabling (default: 0)</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="PlayGen_SUGAR_Unity_SUGARUnityManager_StopSpinner_System_String_System_Single__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><ul>
+<li>This method should be used instead of directly calling Loading.Start to ensure UI and blocker ordering is correct.</li>
+</ul>
+</div>
 </article>
           </div>
           

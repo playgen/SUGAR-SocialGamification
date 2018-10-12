@@ -55,6 +55,7 @@ namespace PlayGen.SUGAR.Server.Core.Tests
 		public CoreTestFixture()
         {
 			ClearDatabaseFixture.Clear();
+			ControllerLocator.ClaimController.GetAuthorizationClaims();
             PopulateData();
         }
 

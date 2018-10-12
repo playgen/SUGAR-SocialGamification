@@ -27,7 +27,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all GameData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
+		/// Find a list of all GameData that match the actorId, gameId and key provided.
 		/// 
 		/// Example Usage: GET api/gamedata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
 		/// </summary>
@@ -56,9 +56,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all Actors that have data saved for the game <param name="id"/> provided.
-		/// 
-		/// Example Usage: GET api/gamedata/gameactors/1
+		/// Find a list of all Actors that have data saved for the game id provided.
 		/// </summary>
 		/// <param name="id">ID of a Game.</param>
 		/// <returns>A list of <see cref="ActorResponse"/> which match the search criteria.</returns>
@@ -71,9 +69,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all GameData keys for the <param name="id"/> provided.
-		/// 
-		/// Example Usage: GET api/gamedata/gamekeys/1
+		/// Find a list of all GameData keys for the game id provided.
 		/// </summary>
 		/// <param name="id">ID of a Game.</param>
 		/// <returns>A list of GameData keys and their EvaluationDataType that has data saved for the provided game ID</returns>
@@ -90,16 +86,14 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find GameData that matches the <param name="actorId"/>, <param name="gameId"/>, <param name="key"/>, <param name="dataType"/> and <param name="sortType"/> provided.
-		/// 
-		/// Example Usage: GET api/gamedata/leaderboardType/1/1/datakey/long/highest
+		/// Find GameData that matches the actorId, gameId, key, dataType and sortType provided.
 		/// </summary>
 		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
 		/// <param name="key">Array of Key names.</param>
 		/// <param name="dataType">Data type of value</param>
-		/// <param name="sortType"></param>
-		/// <returns></returns>
+		/// <param name="sortType">How the data point will be selected from the available range</param>
+		/// <returns>An <see cref="EvaluationDataResponse"/> which matches the search criteria.</returns>
 		[HttpGet("leaderboardType/{actorId:int}/{gameId:int}/{key}/{dataType}/{sortType}")]
 		[Authorization(ClaimScope.Group, AuthorizationAction.Get, AuthorizationEntity.GameData)]
 		[Authorization(ClaimScope.User, AuthorizationAction.Get, AuthorizationEntity.GameData)]
@@ -119,8 +113,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new GameData record.
-		/// 
-		/// Example Usage: POST api/gamedata
 		/// </summary>
 		/// <param name="newData"><see cref="EvaluationDataRequest"/> object that holds the details of the new GameData.</param>
 		/// <returns>A <see cref="EvaluationDataResponse"/> containing the new GameData details.</returns>

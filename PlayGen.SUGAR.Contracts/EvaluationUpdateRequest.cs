@@ -10,23 +10,26 @@ namespace PlayGen.SUGAR.Contracts
 	/// <example>
 	/// JSON
 	/// {
-	/// Token : "AN_ACHIEVEMENT_TOKEN",
-	/// GameId : 1,
-	/// Name : "Achievement Unlocked",
-	/// Description : "Fulfil the criteria to get the reward",
-	/// ActorType : "User",
-	/// EvaluationCriteria : [{
-	/// Key : "Criteria Key",
-	/// DataType : "Long",
-	/// CriteriaQueryType : "Any",
-	/// ComparisonType : "Equals",
-	/// Scope : "Actor",
-	/// Value : "5"
+	/// "Id" : 1,
+	/// "Token" : "AN_ACHIEVEMENT_TOKEN",
+	/// "GameId" : 1,
+	/// "Name" : "Achievement Unlocked",
+	/// "Description" : "Fulfil the criteria to get the reward",
+	/// "ActorType" : "User",
+	/// "EvaluationCriterias" : [{
+	/// "EvaluationDataKey" : "Criteria Key",
+	/// "EvaluationDataCategory" : "GameData",
+	/// "EvaluationDataType" : "Long",
+	/// "CriteriaQueryType" : "Any",
+	/// "ComparisonType" : "Equals",
+	/// "Scope" : "Actor",
+	/// "Value" : "5"
 	/// }],
-	/// Reward : [{
-	/// Key : "Reward Key",
-	/// DataType : "Float",
-	/// Value : "10.5"
+	/// "Rewards" : [{
+	/// "EvaluationDataKey" : "Reward Key",
+	/// "EvaluationDataCategory" : "Resource",
+	/// "EvaluationDataType" : "Long",
+	/// "Value" : "10.5"
 	/// }]
 	/// }
 	/// </example>

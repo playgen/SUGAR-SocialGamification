@@ -48,3 +48,6 @@ Leaderboards for a game can be viewed from the leaderboards tab, from here; new 
 ### Managing Game Roles
 
 The final tab allows admins to manage which users have access to the game, by adding new accounts, more users will have permissions to make changes to this game.
+
+## Migrating Games
+If you want to migrate your current game to another SUGAR service or just simply want to copy the current setup, the Games Details page allows you to see your game seed JSON. This JSON can be used to seed new games in SUGAR in one call to the [C# API](http://demo.sugarengine.org/v1/api/PlayGen.SUGAR.Server.WebAPI.Controllers.GameController.html#PlayGen_SUGAR_Server_WebAPI_Controllers_GameController_Create_PlayGen_SUGAR_Contracts_GameRequest_) with the game seed as part of the body.

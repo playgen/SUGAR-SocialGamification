@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient" class="text-break">Class LeaderboardListUnityClient
   </h1>
-  <div class="markdown level0 summary"><p>Unity client for calls related to leaderboards for an application.</p>
+  <div class="markdown level0 summary"><p>Use this to get a list of leaderboards for this game</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -103,9 +103,6 @@
       <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_IsActive">BaseUnityClient&lt;BaseLeaderboardListInterface&gt;.IsActive</a>
     </div>
     <div>
-      <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_SetInterface__1___0_Canvas_System_String_">BaseUnityClient&lt;BaseLeaderboardListInterface&gt;.SetInterface&lt;T&gt;(T, Canvas, String)</a>
-    </div>
-    <div>
       <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_Update">BaseUnityClient&lt;BaseLeaderboardListInterface&gt;.Update()</a>
     </div>
     <div>
@@ -124,8 +121,7 @@
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient_CurrentActorType_" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.CurrentActorType*"></a>
   <h4 id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient_CurrentActorType" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.CurrentActorType">CurrentActorType</h4>
-  <div class="markdown level1 summary"><p>Currently used ActorType filter.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -142,7 +138,8 @@
     <tbody>
       <tr>
         <td><span class="xref">ActorType</span></td>
-        <td></td>
+        <td><p>Currently used ActorType filter.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -150,8 +147,7 @@
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient_Leaderboards_" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.Leaderboards*"></a>
   <h4 id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient_Leaderboards" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.Leaderboards">Leaderboards</h4>
-  <div class="markdown level1 summary"><p>List of leaderboards for this application for each ActorType filter.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -168,7 +164,8 @@
     <tbody>
       <tr>
         <td><span class="xref">Dictionary</span>&lt;<span class="xref">ActorType</span>, <span class="xref">List</span>&lt;<span class="xref">LeaderboardResponse</span>&gt;&gt;</td>
-        <td></td>
+        <td><p>Each ActorType and list of leaderboard responses for this application.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -178,7 +175,7 @@
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient_DisplayGameList_" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGameList*"></a>
   <h4 id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient_DisplayGameList_ActorType_" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGameList(ActorType)">DisplayGameList(ActorType)</h4>
-  <div class="markdown level1 summary"><p>Gathers leaderboards for this application and displays list for current ActorType if UI object if provided.</p>
+  <div class="markdown level1 summary"><p>Gathers leaderboards for this application and displays list for current ActorType if interface if provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -198,7 +195,8 @@
       <tr>
         <td><span class="xref">ActorType</span></td>
         <td><span class="parametername">filter</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> The filter type to use (default: ActorType.User)</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -206,7 +204,7 @@
   
   <a id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient_DisplayGlobalList_" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGlobalList*"></a>
   <h4 id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient_DisplayGlobalList_ActorType_" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.DisplayGlobalList(ActorType)">DisplayGlobalList(ActorType)</h4>
-  <div class="markdown level1 summary"><p>Gathers leaderboards for this application and displays list for current ActorType if UI object if provided.</p>
+  <div class="markdown level1 summary"><p>Gathers all leaderboards not attached to a game and displays list for current ActorType if interface if provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -226,35 +224,8 @@
       <tr>
         <td><span class="xref">ActorType</span></td>
         <td><span class="parametername">filter</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient_SetFilter_" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.SetFilter*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_LeaderboardListUnityClient_SetFilter_ActorType_" data-uid="PlayGen.SUGAR.Unity.LeaderboardListUnityClient.SetFilter(ActorType)">SetFilter(ActorType)</h4>
-  <div class="markdown level1 summary"><p>Set the ActorType filter to use.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetFilter(ActorType filter)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">ActorType</span></td>
-        <td><span class="parametername">filter</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> The filter type to use (default: ActorType.User)</p>
+</td>
       </tr>
     </tbody>
   </table>

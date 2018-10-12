@@ -89,6 +89,27 @@
     <div>
       <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Controllers.DbController.html#PlayGen_SUGAR_Server_EntityFramework_Controllers_DbController_ContextFactory">DbController.ContextFactory</a>
     </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Server.EntityFramework.Controllers.html">PlayGen.SUGAR.Server.EntityFramework.Controllers</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Server.EntityFramework.dll</h6>
@@ -198,6 +219,221 @@
   </table>
   
   
+  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_Delete_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.Delete*"></a>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_Delete_PlayGen_SUGAR_Server_Model_ActorRelationship_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.Delete(PlayGen.SUGAR.Server.Model.ActorRelationship)">Delete(ActorRelationship)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Delete(ActorRelationship newRelation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationship.html">ActorRelationship</a></td>
+        <td><span class="parametername">newRelation</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRelatedActors_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRelatedActors*"></a>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRelatedActors_System_Int32_PlayGen_SUGAR_Common_ActorType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRelatedActors(System.Int32,PlayGen.SUGAR.Common.ActorType)">GetRelatedActors(Int32, ActorType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Actor&gt; GetRelatedActors(int id, ActorType relationshipActorType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.ActorType.html">ActorType</a></td>
+        <td><span class="parametername">relationshipActorType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRelationAcceptorActors_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRelationAcceptorActors*"></a>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRelationAcceptorActors_System_Int32_PlayGen_SUGAR_Common_ActorType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRelationAcceptorActors(System.Int32,PlayGen.SUGAR.Common.ActorType)">GetRelationAcceptorActors(Int32, ActorType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Actor&gt; GetRelationAcceptorActors(int id, ActorType toActorType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.ActorType.html">ActorType</a></td>
+        <td><span class="parametername">toActorType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRelationRequestorActors_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRelationRequestorActors*"></a>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRelationRequestorActors_System_Int32_PlayGen_SUGAR_Common_ActorType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRelationRequestorActors(System.Int32,PlayGen.SUGAR.Common.ActorType)">GetRelationRequestorActors(Int32, ActorType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Actor&gt; GetRelationRequestorActors(int id, ActorType fromActorType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Common.ActorType.html">ActorType</a></td>
+        <td><span class="parametername">fromActorType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRelationship_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRelationship*"></a>
+  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRelationship_System_Int32_System_Int32_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRelationship(System.Int32,System.Int32)">GetRelationship(Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ActorRelationship GetRelationship(int relatedActorA, int relatedActorB)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">relatedActorA</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">relatedActorB</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationship.html">ActorRelationship</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRelationshipCount_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRelationshipCount*"></a>
   <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRelationshipCount_System_Int32_PlayGen_SUGAR_Common_ActorType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRelationshipCount(System.Int32,PlayGen.SUGAR.Common.ActorType)">GetRelationshipCount(Int32, ActorType)</h4>
   <div class="markdown level1 summary"></div>
@@ -251,7 +487,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;Actor&gt; GetRelationships(int id, ActorType relationshipActorType)</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;ActorRelationship&gt; GetRelationships(int actorId, ActorType relationshipActorType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -265,7 +501,7 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">id</span></td>
+        <td><span class="parametername">actorId</span></td>
         <td></td>
       </tr>
       <tr>
@@ -285,128 +521,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRequests_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRequests*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetRequests_System_Int32_PlayGen_SUGAR_Common_ActorType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetRequests(System.Int32,PlayGen.SUGAR.Common.ActorType)">GetRequests(Int32, ActorType)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;Actor&gt; GetRequests(int id, ActorType fromActorType)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">id</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Common.ActorType.html">ActorType</a></td>
-        <td><span class="parametername">fromActorType</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetSentRequests_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetSentRequests*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_GetSentRequests_System_Int32_PlayGen_SUGAR_Common_ActorType_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.GetSentRequests(System.Int32,PlayGen.SUGAR.Common.ActorType)">GetSentRequests(Int32, ActorType)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;Actor&gt; GetSentRequests(int id, ActorType toActorType)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">id</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Common.ActorType.html">ActorType</a></td>
-        <td><span class="parametername">toActorType</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.Actor.html">Actor</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_Update_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.Update*"></a>
-  <h4 id="PlayGen_SUGAR_Server_EntityFramework_Controllers_RelationshipController_Update_PlayGen_SUGAR_Server_Model_ActorRelationship_" data-uid="PlayGen.SUGAR.Server.EntityFramework.Controllers.RelationshipController.Update(PlayGen.SUGAR.Server.Model.ActorRelationship)">Update(ActorRelationship)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Update(ActorRelationship newRelation)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationship.html">ActorRelationship</a></td>
-        <td><span class="parametername">newRelation</span></td>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Server.Model.ActorRelationship.html">ActorRelationship</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>

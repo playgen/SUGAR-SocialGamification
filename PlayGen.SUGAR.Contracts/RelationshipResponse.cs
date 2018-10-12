@@ -6,8 +6,8 @@
 	/// <example>
 	/// JSON
 	/// {
-	/// RequestorId : 1,
-	/// AcceptorId : 2
+	/// "RequestorId" : 1,
+	/// "AcceptorId" : 2
 	/// }
 	/// </example>
 	public class RelationshipResponse

@@ -141,7 +141,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var fromResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
 				ActorId = loggedInAccount.User.Id,
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				Key = key,
 				Quantity = 300
 			});
@@ -151,7 +151,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var transferResponse = Fixture.SUGARClient.Resource.Transfer(new ResourceTransferRequest
 			{
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				SenderActorId = loggedInAccount.User.Id,
 				RecipientActorId = recipient.Id,
 				Key = fromResource.Key,
@@ -173,7 +173,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var toResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
 				ActorId = recipient.Id,
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				Key = key,
 				Quantity = 150
 			});
@@ -183,7 +183,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var fromResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
 				ActorId = loggedInAccount.User.Id,
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				Key = key,
 				Quantity = 300
 			});
@@ -194,7 +194,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			var transferResponse = Fixture.SUGARClient.Resource.Transfer(new ResourceTransferRequest
 			{
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				SenderActorId = loggedInAccount.User.Id,
 				RecipientActorId = recipient.Id,
 				Key = fromResource.Key,
@@ -237,14 +237,14 @@ namespace PlayGen.SUGAR.Client.Tests
 			Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
 				ActorId = loggedInAccount.User.Id,
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				Key = (key + transferQuantity).Replace('-', '_'),
 				Quantity = 300
 			});		
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Resource.Transfer(new ResourceTransferRequest
 			{
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				SenderActorId = loggedInAccount.User.Id,
 				RecipientActorId = recipient.Id,
 				Key = key,
@@ -262,7 +262,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			var fromResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
 			{
 				ActorId = loggedInAccount.User.Id,
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				Key = key,
 				Quantity = 100
 			});
@@ -271,7 +271,7 @@ namespace PlayGen.SUGAR.Client.Tests
 
 			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Resource.Transfer(new ResourceTransferRequest
 			{
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				SenderActorId = loggedInAccount.User.Id,
 				RecipientActorId = recipient.Id,
 				Key = key,
@@ -310,7 +310,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
 			var game = Helpers.GetGame(Fixture.SUGARClient.Game, key);
 
-			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Resource.Get(game.Id, Platform.GlobalId, new[] { key }));
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Resource.Get(game.Id, Platform.GlobalActorId, new[] { key }));
 		}
 
 		[Fact]
@@ -322,14 +322,14 @@ namespace PlayGen.SUGAR.Client.Tests
 			var resourceRequest = new ResourceAddRequest
 			{
 				ActorId = loggedInAccount.User.Id,
-				GameId = Platform.GlobalId,
+				GameId = Platform.GlobalGameId,
 				Key = key,
 				Quantity = 100
 			};
 
 			Fixture.SUGARClient.Resource.AddOrUpdate(resourceRequest);
 
-			var get = Fixture.SUGARClient.Resource.Get(Platform.GlobalId, loggedInAccount.User.Id, new[] { key });
+			var get = Fixture.SUGARClient.Resource.Get(Platform.GlobalGameId, loggedInAccount.User.Id, new[] { key });
 
 			Assert.Equal(1, get.Count());
 			Assert.Equal(resourceRequest.Key, get.First().Key);
@@ -380,7 +380,61 @@ namespace PlayGen.SUGAR.Client.Tests
 			}
 		}
 
-		#region Helpers
+		[Fact]
+		public void UserCanTransferFromGroupToSelf()
+		{
+			// Arrange
+			var key = "Resource_UserCanTransferFromGroupToSelf";
+			var group = CreateGroup(key + "_Group");
+
+			var groupInitialResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
+			{
+				ActorId = group.Id,
+				GameId = Platform.GlobalGameId,
+				Key = key,
+				Quantity = 150
+			});
+
+			var loggedInAccount = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+
+			Fixture.SUGARClient.GroupMember.CreateMemberRequest(new RelationshipRequest
+			{
+				AcceptorId = group.Id,
+				RequestorId = loggedInAccount.User.Id,
+				AutoAccept = true
+			});
+
+			var userInitialResource = Fixture.SUGARClient.Resource.AddOrUpdate(new ResourceAddRequest
+			{
+				ActorId = loggedInAccount.User.Id,
+				GameId = Platform.GlobalGameId,
+				Key = key,
+				Quantity = 300
+			});
+
+			var originalFromQuantity = groupInitialResource.Quantity;
+			var originalToQuantity = userInitialResource.Quantity;
+			var transferQuantity = originalFromQuantity / 3;
+
+			// Act
+			var transferResponse = Fixture.SUGARClient.Resource.Transfer(new ResourceTransferRequest
+			{
+				GameId = Platform.GlobalGameId,
+				SenderActorId = group.Id,
+				RecipientActorId = loggedInAccount.User.Id,
+				Key = groupInitialResource.Key,
+				Quantity = transferQuantity
+			});
+
+			// Assert
+			Assert.Equal(originalFromQuantity - transferQuantity, transferResponse.FromResource.Quantity);
+			Assert.Equal(originalToQuantity + transferQuantity, transferResponse.ToResource.Quantity);
+			Assert.Equal(loggedInAccount.User.Id, transferResponse.ToResource.ActorId);
+			Assert.Equal(groupInitialResource.GameId, transferResponse.FromResource.GameId);
+			Assert.Equal(groupInitialResource.GameId, transferResponse.ToResource.GameId);
+		}
+
+        #region Helpers
 		private GroupResponse CreateGroup(string key)
 		{
 			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key + "_Creator");

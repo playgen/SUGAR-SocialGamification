@@ -35,7 +35,8 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			return new Group
 			{
 				Name = groupContract.Name,
-				Description = groupContract.Description
+				Description = groupContract.Description,
+				Private = groupContract.Private
 			};
 		}
 	}

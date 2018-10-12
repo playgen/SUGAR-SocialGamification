@@ -54,6 +54,71 @@ namespace PlayGen.SUGAR.Client.Tests
 		}
 
 		[Fact]
+		public void ReceiveLoginTokenWhenRemembered()
+		{
+			// Arrange
+			var key = "Session_ReceiveLoginTokenWhenRemembered";
+
+			// Act
+			var response =  Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key, true);
+
+			// Assert
+			Assert.NotEmpty(response.LoginToken);
+		}
+
+		[Fact]
+		public void NoLoginTokenWhenNotRemembered()
+		{
+			// Arrange
+			var key = "Session_NoLoginTokenWhenNotRemembered";
+
+			// Act
+			var response = Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+
+			// Assert
+			Assert.Null(response.LoginToken);
+		}
+
+		[Fact]
+		public void CanLoginWithLoginToken()
+		{
+			// Arrange
+			var key = "Session_CanLoginWithLoginToken";
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+			var game = Helpers.GetGame(Fixture.SUGARClient.Game, "Global");
+			var accountRequest = new AccountRequest()
+			{
+				Name = key + "_New",
+				Password = key + "_New" + "Password",
+				SourceToken = "SUGAR",
+				IssueLoginToken = true
+			};
+			var registerResponse = Fixture.SUGARClient.Session.CreateAndLogin(game.Id, accountRequest);
+
+			// Act
+			var response = Helpers.LoginWithToken(Fixture.SUGARClient, registerResponse.LoginToken);
+
+			// Assert
+			Assert.True(response.User.Id > 0);
+			Assert.Equal(accountRequest.Name, response.User.Name);
+		}
+
+		[Theory]
+		[InlineData("")]
+		[InlineData("ey1234567890-abc/a<>?!|$%£^&*(){}[]")]
+		[InlineData("asdhjsdjajsdhasdasdasdhjasdasd ashdakjshdk asdhaks dhakhsd khads kahs dkhadkh akASKDHAKSHD AKHSD K")]
+		[InlineData(null)]
+		public void CannotLoginWithInvalidLoginToken(string invalidToken)
+		{
+			// Arrange
+			var key = "Session_CannotLoginWithInvalidLoginToken";
+			Helpers.CreateAndLoginGlobal(Fixture.SUGARClient, key);
+
+			// Act / Assert
+			Assert.Throws<ClientHttpException>(() => Fixture.SUGARClient.Session.Login(invalidToken));
+		}
+
+		[Fact]
 		public void CanCreateNewUserAndLogin()
 		{
 			var key = "Session_CanCreateNewUserAndLogin";

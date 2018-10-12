@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -76,7 +76,7 @@
   
   <h1 id="PlayGen_SUGAR_Unity_UserGroupUnityClient" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient" class="text-break">Class UserGroupUnityClient
   </h1>
-  <div class="markdown level0 summary"><p>Unity client for calls related to group lists.</p>
+  <div class="markdown level0 summary"><p>Use this to get current user&apos;s list of groups and send and handle group requests</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -103,9 +103,6 @@
       <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_IsActive">BaseUnityClient&lt;BaseUserGroupInterface&gt;.IsActive</a>
     </div>
     <div>
-      <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_SetInterface__1___0_Canvas_System_String_">BaseUnityClient&lt;BaseUserGroupInterface&gt;.SetInterface&lt;T&gt;(T, Canvas, String)</a>
-    </div>
-    <div>
       <a class="xref" href="PlayGen.SUGAR.Unity.BaseUnityClient-1.html#PlayGen_SUGAR_Unity_BaseUnityClient_1_Update">BaseUnityClient&lt;BaseUserGroupInterface&gt;.Update()</a>
     </div>
     <div>
@@ -124,8 +121,7 @@
   
   <a id="PlayGen_SUGAR_Unity_UserGroupUnityClient_Groups_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.Groups*"></a>
   <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_Groups" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.Groups">Groups</h4>
-  <div class="markdown level1 summary"><p>List of groups that the currently signed in user is a member of.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -142,7 +138,8 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html">ActorResponseAllowableActions</a>&gt;</td>
-        <td></td>
+        <td><p>Groups that the currently signed in user is a member of.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -150,8 +147,7 @@
   
   <a id="PlayGen_SUGAR_Unity_UserGroupUnityClient_PendingSent_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.PendingSent*"></a>
   <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_PendingSent" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.PendingSent">PendingSent</h4>
-  <div class="markdown level1 summary"><p>List of groups that the currently signed in user has applied to join.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -168,7 +164,8 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html">ActorResponseAllowableActions</a>&gt;</td>
-        <td></td>
+        <td><p>Groups that the currently signed in user has requested to join.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -176,8 +173,7 @@
   
   <a id="PlayGen_SUGAR_Unity_UserGroupUnityClient_SearchResults_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.SearchResults*"></a>
   <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_SearchResults" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.SearchResults">SearchResults</h4>
-  <div class="markdown level1 summary"><p>List of groups that matched the last search string.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -194,7 +190,8 @@
     <tbody>
       <tr>
         <td><span class="xref">List</span>&lt;<a class="xref" href="PlayGen.SUGAR.Unity.ActorResponseAllowableActions.html">ActorResponseAllowableActions</a>&gt;</td>
-        <td></td>
+        <td><p>Groups that matched the last search string.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -203,13 +200,13 @@
   
   
   <a id="PlayGen_SUGAR_Unity_UserGroupUnityClient_AddGroup_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup*"></a>
-  <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_AddGroup_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32,System.Boolean)">AddGroup(Int32, Boolean)</h4>
+  <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_AddGroup_System_Int32_System_Boolean_System_Boolean_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.AddGroup(System.Int32,System.Boolean,System.Boolean,Action{System.Boolean})">AddGroup(Int32, Boolean, Boolean, Action&lt;Boolean&gt;)</h4>
   <div class="markdown level1 summary"><p>Send group membership request to group with id provided. If reload is true, UI is also redrawn.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddGroup(int id, bool reload = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddGroup(int id, bool reload = true, bool trySetAsCurrentGroup = false, Action&lt;bool&gt; callback = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -224,12 +221,26 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The id of the group</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">reload</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> Whether the interface should reload on completion. (default: true)</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">trySetAsCurrentGroup</span></td>
+        <td><p>Will set this group as the current group if the user sucesfully joins the group.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>Callback with a variable indicating success or failure.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -237,7 +248,7 @@
   
   <a id="PlayGen_SUGAR_Unity_UserGroupUnityClient_Display_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.Display*"></a>
   <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_Display" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.Display">Display()</h4>
-  <div class="markdown level1 summary"><p>Gathers updated versions of each list and displays UI object if provided.</p>
+  <div class="markdown level1 summary"><p>Gathers updated versions of each list and displays interface UI object if it has been provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -248,7 +259,7 @@
   
   <a id="PlayGen_SUGAR_Unity_UserGroupUnityClient_GetGroupsList_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.GetGroupsList*"></a>
   <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_GetGroupsList_Action_System_Boolean__" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.GetGroupsList(Action{System.Boolean})">GetGroupsList(Action&lt;Boolean&gt;)</h4>
-  <div class="markdown level1 summary"><p>Get group list for the currently signed in user.</p>
+  <div class="markdown level1 summary"><p>Get list of groups the currently signed in user is a memer of.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -268,7 +279,8 @@
       <tr>
         <td><span class="xref">Action</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
         <td><span class="parametername">success</span></td>
-        <td></td>
+        <td><p>Callback whether request was successful</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -276,7 +288,7 @@
   
   <a id="PlayGen_SUGAR_Unity_UserGroupUnityClient_ManageGroupRequest_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.ManageGroupRequest*"></a>
   <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_ManageGroupRequest_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.ManageGroupRequest(System.Int32,System.Boolean)">ManageGroupRequest(Int32, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Cancel sent membership request to group with id provided. If reload is true, UI is also redrawn.</p>
+  <div class="markdown level1 summary"><p>Cancel sent membership request to group</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -296,12 +308,14 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The id of the group</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">reload</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> Whether the interface should reload on completion. (default: true)</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -309,7 +323,7 @@
   
   <a id="PlayGen_SUGAR_Unity_UserGroupUnityClient_RemoveGroup_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.RemoveGroup*"></a>
   <h4 id="PlayGen_SUGAR_Unity_UserGroupUnityClient_RemoveGroup_System_Int32_System_Boolean_" data-uid="PlayGen.SUGAR.Unity.UserGroupUnityClient.RemoveGroup(System.Int32,System.Boolean)">RemoveGroup(Int32, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Leave group with id provided. If reload is true, UI is also redrawn.</p>
+  <div class="markdown level1 summary"><p>Leave a group the currently signed in user is a member of.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -329,12 +343,14 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The id of the group</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">reload</span></td>
-        <td></td>
+        <td><p><strong>Optional</strong> Whether the interface should reload on completion. (default: true)</p>
+</td>
       </tr>
     </tbody>
   </table>

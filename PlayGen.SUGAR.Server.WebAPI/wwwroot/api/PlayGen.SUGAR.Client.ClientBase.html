@@ -99,18 +99,42 @@
       <div class="level2"><a class="xref" href="PlayGen.SUGAR.Client.UserClient.html">UserClient</a></div>
       <div class="level2"><a class="xref" href="PlayGen.SUGAR.Client.UserFriendClient.html">UserFriendClient</a></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PlayGen.SUGAR.Client.html">PlayGen.SUGAR.Client</a></h6>
   <h6><strong>Assembly</strong>: PlayGen.SUGAR.Client.dll</h6>
   <h5 id="PlayGen_SUGAR_Client_ClientBase_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class ClientBase : object</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class ClientBase</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase__ctor_" data-uid="PlayGen.SUGAR.Client.ClientBase.#ctor*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase__ctor_System_String_PlayGen_SUGAR_Client_IHttpHandler_Dictionary_System_String_System_String__Dictionary_System_String_System_String__PlayGen_SUGAR_Client_AsyncRequestQueue_IAsyncRequestController_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_" data-uid="PlayGen.SUGAR.Client.ClientBase.#ctor(System.String,PlayGen.SUGAR.Client.IHttpHandler,Dictionary{System.String,System.String},Dictionary{System.String,System.String},PlayGen.SUGAR.Client.AsyncRequestQueue.IAsyncRequestController,PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications)">ClientBase(String, IHttpHandler, Dictionary&lt;String, String&gt;, Dictionary&lt;String, String&gt;, IAsyncRequestController, EvaluationNotifications)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase__ctor_System_String_PlayGen_SUGAR_Client_IHttpHandler_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__PlayGen_SUGAR_Client_AsyncRequestQueue_IAsyncRequestController_PlayGen_SUGAR_Client_EvaluationEvents_EvaluationNotifications_" data-uid="PlayGen.SUGAR.Client.ClientBase.#ctor(System.String,PlayGen.SUGAR.Client.IHttpHandler,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},PlayGen.SUGAR.Client.AsyncRequestQueue.IAsyncRequestController,PlayGen.SUGAR.Client.EvaluationEvents.EvaluationNotifications)">ClientBase(String, IHttpHandler, Dictionary&lt;String, String&gt;, Dictionary&lt;String, String&gt;, IAsyncRequestController, EvaluationNotifications)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -138,12 +162,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">constantHeaders</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">sessionHeaders</span></td>
         <td></td>
       </tr>
@@ -228,7 +252,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">JsonSerializerSettings</span></td>
+        <td><span class="xref">Newtonsoft.Json.JsonSerializerSettings</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -290,7 +314,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_Delete_" data-uid="PlayGen.SUGAR.Client.ClientBase.Delete*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_Delete_System_String_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Delete(System.String,IEnumerable{HttpStatusCode},Dictionary{System.String,System.String})">Delete(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_Delete_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Delete(System.String,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode},System.Collections.Generic.Dictionary{System.String,System.String})">Delete(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -313,12 +337,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
@@ -327,7 +351,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_Delete_" data-uid="PlayGen.SUGAR.Client.ClientBase.Delete*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_Delete__1_System_String_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Delete``1(System.String,IEnumerable{HttpStatusCode},Dictionary{System.String,System.String})">Delete&lt;TResponse&gt;(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_Delete__1_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Delete``1(System.String,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode},System.Collections.Generic.Dictionary{System.String,System.String})">Delete&lt;TResponse&gt;(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -350,12 +374,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
@@ -421,7 +445,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_Get_" data-uid="PlayGen.SUGAR.Client.ClientBase.Get*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_Get_System_String_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Get(System.String,IEnumerable{HttpStatusCode},Dictionary{System.String,System.String})">Get(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_Get_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Get(System.String,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode},System.Collections.Generic.Dictionary{System.String,System.String})">Get(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -444,12 +468,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
@@ -458,7 +482,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_Get_" data-uid="PlayGen.SUGAR.Client.ClientBase.Get*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_Get__1_System_String_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Get``1(System.String,IEnumerable{HttpStatusCode},Dictionary{System.String,System.String})">Get&lt;TResponse&gt;(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_Get__1_System_String_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Get``1(System.String,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode},System.Collections.Generic.Dictionary{System.String,System.String})">Get&lt;TResponse&gt;(String, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -481,12 +505,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
@@ -525,7 +549,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_GetDelete_" data-uid="PlayGen.SUGAR.Client.ClientBase.GetDelete*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_GetDelete_System_String_System_String_Dictionary_System_String_System_String__IEnumerable_HttpStatusCode__" data-uid="PlayGen.SUGAR.Client.ClientBase.GetDelete(System.String,System.String,Dictionary{System.String,System.String},IEnumerable{HttpStatusCode})">GetDelete(String, String, Dictionary&lt;String, String&gt;, IEnumerable&lt;HttpStatusCode&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_GetDelete_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__" data-uid="PlayGen.SUGAR.Client.ClientBase.GetDelete(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode})">GetDelete(String, String, Dictionary&lt;String, String&gt;, IEnumerable&lt;HttpStatusCode&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -553,12 +577,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
@@ -567,7 +591,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_GetDelete_" data-uid="PlayGen.SUGAR.Client.ClientBase.GetDelete*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_GetDelete__1_System_String_System_String_Dictionary_System_String_System_String__IEnumerable_HttpStatusCode__" data-uid="PlayGen.SUGAR.Client.ClientBase.GetDelete``1(System.String,System.String,Dictionary{System.String,System.String},IEnumerable{HttpStatusCode})">GetDelete&lt;TResponse&gt;(String, String, Dictionary&lt;String, String&gt;, IEnumerable&lt;HttpStatusCode&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_GetDelete__1_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__" data-uid="PlayGen.SUGAR.Client.ClientBase.GetDelete``1(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode})">GetDelete&lt;TResponse&gt;(String, String, Dictionary&lt;String, String&gt;, IEnumerable&lt;HttpStatusCode&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -595,12 +619,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
@@ -681,7 +705,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">UriBuilder</span></td>
+        <td><span class="xref">System.UriBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -689,7 +713,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_Post_" data-uid="PlayGen.SUGAR.Client.ClientBase.Post*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_Post__1_System_String___0_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Post``1(System.String,``0,IEnumerable{HttpStatusCode},Dictionary{System.String,System.String})">Post&lt;TRequest&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_Post__1_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Post``1(System.String,``0,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode},System.Collections.Generic.Dictionary{System.String,System.String})">Post&lt;TRequest&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -717,12 +741,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
@@ -746,7 +770,79 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_Post_" data-uid="PlayGen.SUGAR.Client.ClientBase.Post*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_Post__2_System_String___0_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Post``2(System.String,``0,IEnumerable{HttpStatusCode},Dictionary{System.String,System.String})">Post&lt;TRequest, TResponse&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_Post__1_System_String_System_Object_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Post``1(System.String,System.Object,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode},System.Collections.Generic.Dictionary{System.String,System.String})">Post&lt;TResponse&gt;(String, Object, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TResponse Post&lt;TResponse&gt;(string url, object payload, IEnumerable&lt;HttpStatusCode&gt; expectedStatusCodes = null, Dictionary&lt;string, string&gt; headers = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">url</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">payload</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
+        <td><span class="parametername">expectedStatusCodes</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">headers</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TResponse</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResponse</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Client_ClientBase_Post_" data-uid="PlayGen.SUGAR.Client.ClientBase.Post*"></a>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_Post__2_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Post``2(System.String,``0,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode},System.Collections.Generic.Dictionary{System.String,System.String})">Post&lt;TRequest, TResponse&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -774,12 +870,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
@@ -822,7 +918,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_PostPut_" data-uid="PlayGen.SUGAR.Client.ClientBase.PostPut*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_PostPut_System_String_System_String_Dictionary_System_String_System_String__System_Object_IEnumerable_HttpStatusCode__" data-uid="PlayGen.SUGAR.Client.ClientBase.PostPut(System.String,System.String,Dictionary{System.String,System.String},System.Object,IEnumerable{HttpStatusCode})">PostPut(String, String, Dictionary&lt;String, String&gt;, Object, IEnumerable&lt;HttpStatusCode&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_PostPut_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Object_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__" data-uid="PlayGen.SUGAR.Client.ClientBase.PostPut(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Object,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode})">PostPut(String, String, Dictionary&lt;String, String&gt;, Object, IEnumerable&lt;HttpStatusCode&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -850,7 +946,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
@@ -860,7 +956,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
@@ -869,7 +965,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_PostPut_" data-uid="PlayGen.SUGAR.Client.ClientBase.PostPut*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_PostPut__1_System_String_System_String_Dictionary_System_String_System_String__System_Object_IEnumerable_HttpStatusCode__" data-uid="PlayGen.SUGAR.Client.ClientBase.PostPut``1(System.String,System.String,Dictionary{System.String,System.String},System.Object,IEnumerable{HttpStatusCode})">PostPut&lt;TResponse&gt;(String, String, Dictionary&lt;String, String&gt;, Object, IEnumerable&lt;HttpStatusCode&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_PostPut__1_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Object_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__" data-uid="PlayGen.SUGAR.Client.ClientBase.PostPut``1(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Object,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode})">PostPut&lt;TResponse&gt;(String, String, Dictionary&lt;String, String&gt;, Object, IEnumerable&lt;HttpStatusCode&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -897,7 +993,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
@@ -907,7 +1003,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
@@ -946,7 +1042,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_Put_" data-uid="PlayGen.SUGAR.Client.ClientBase.Put*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_Put__1_System_String___0_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Put``1(System.String,``0,IEnumerable{HttpStatusCode},Dictionary{System.String,System.String})">Put&lt;TRequest&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_Put__1_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Put``1(System.String,``0,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode},System.Collections.Generic.Dictionary{System.String,System.String})">Put&lt;TRequest&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -974,12 +1070,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>
@@ -1003,7 +1099,7 @@
   
   
   <a id="PlayGen_SUGAR_Client_ClientBase_Put_" data-uid="PlayGen.SUGAR.Client.ClientBase.Put*"></a>
-  <h4 id="PlayGen_SUGAR_Client_ClientBase_Put__2_System_String___0_IEnumerable_HttpStatusCode__Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Put``2(System.String,``0,IEnumerable{HttpStatusCode},Dictionary{System.String,System.String})">Put&lt;TRequest, TResponse&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
+  <h4 id="PlayGen_SUGAR_Client_ClientBase_Put__2_System_String___0_System_Collections_Generic_IEnumerable_System_Net_HttpStatusCode__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="PlayGen.SUGAR.Client.ClientBase.Put``2(System.String,``0,System.Collections.Generic.IEnumerable{System.Net.HttpStatusCode},System.Collections.Generic.Dictionary{System.String,System.String})">Put&lt;TRequest, TResponse&gt;(String, TRequest, IEnumerable&lt;HttpStatusCode&gt;, Dictionary&lt;String, String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1031,12 +1127,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">HttpStatusCode</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Net.HttpStatusCode</span>&gt;</td>
         <td><span class="parametername">expectedStatusCodes</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">headers</span></td>
         <td></td>
       </tr>

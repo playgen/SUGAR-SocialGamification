@@ -20,7 +20,7 @@ namespace PlayGen.SUGAR.Client.Tests
 			throw new Exception("This game has not been set up in seeding.");
 		}
 		
-		public static AccountResponse CreateAndLoginGlobal(SUGARClient client, string userName)
+		public static AccountResponse CreateAndLoginGlobal(SUGARClient client, string userName, bool issueLoginToken = false)
 		{
 			try
 			{
@@ -28,7 +28,8 @@ namespace PlayGen.SUGAR.Client.Tests
 				{
 					Name = userName,
 					Password = "ThisIsTheTestingPassword",
-					SourceToken = SugarSourceToken
+					SourceToken = SugarSourceToken,
+					IssueLoginToken = issueLoginToken
 				});
 			}
 			catch
@@ -37,9 +38,15 @@ namespace PlayGen.SUGAR.Client.Tests
 				{
 					Name = userName,
 					Password = "ThisIsTheTestingPassword",
-					SourceToken = SugarSourceToken
+					SourceToken = SugarSourceToken,
+					IssueLoginToken = issueLoginToken
 				});
 			}
+		}
+
+		public static AccountResponse LoginWithToken(SUGARClient client, string token)
+		{
+			return client.Session.Login(token);
 		}
 
 		public static void Login(SUGARClient client, string gameName, string userKey, out GameResponse game, out AccountResponse user)
@@ -71,5 +78,6 @@ namespace PlayGen.SUGAR.Client.Tests
 				throw new Exception("This game has not been set up in seeding.");
 			}
 		}
+
 	}
 }

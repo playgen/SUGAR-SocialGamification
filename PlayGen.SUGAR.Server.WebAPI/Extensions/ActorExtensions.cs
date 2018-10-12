@@ -17,7 +17,9 @@ namespace PlayGen.SUGAR.Server.WebAPI.Extensions
 			return new ActorResponse {
 				Id = model.Id,
 
-				Name = model.Name
+				Name = model.Name,
+				Description = model.Description,
+				ActorType = model.ActorType.ToString()
 			};
 		}
 	}

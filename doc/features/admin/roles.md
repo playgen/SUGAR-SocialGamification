@@ -1,0 +1,2 @@
+# Roles and Permissions
+The admin panel will display the permissions that each role has and what they have access to. The admin panel currently does not allow for new roles to be added, but this can be done through the [C# API](http://docs.sugarengine.org/api/PlayGen.SUGAR.Server.WebAPI.Controllers.ActorRoleController.html)

@@ -22,6 +22,8 @@ namespace PlayGen.SUGAR.Server.Model
 
 		public abstract ActorType ActorType { get; }
 
+		public bool Private { get; set; }
+
 		[NotMapped]
 	    public int GroupRelationshipCount { get; set; }
 

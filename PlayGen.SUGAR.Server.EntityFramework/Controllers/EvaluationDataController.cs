@@ -48,7 +48,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<EvaluationData> Get(int gameId, int actorId, ICollection<string> keys = null)
+		public List<EvaluationData> Get(int gameId, int? actorId, ICollection<string> keys = null)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -84,7 +84,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<int> GetGameActors(int gameId)
+		public List<int?> GetGameActors(int gameId)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -96,7 +96,7 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			}
 		}
 
-		public List<int> GetGameKeyActors(int gameId, string key, EvaluationDataType evaluationDataType, DateTime? start = null, DateTime? end = null)
+		public List<int?> GetGameKeyActors(int gameId, string key, EvaluationDataType evaluationDataType, DateTime? start = null, DateTime? end = null)
 		{
 			using (var context = ContextFactory.Create())
 			{
@@ -229,7 +229,11 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 			using (var context = ContextFactory.Create())
 			{
 				context.HandleDetatchedGame(data.GameId);
-				context.HandleDetatchedActor(data.ActorId);
+
+				if (data.ActorId != null)
+				{
+					context.HandleDetatchedActor(data.ActorId.Value);
+				}
 
 				context.EvaluationData.Add(data);
 				context.SaveChanges();

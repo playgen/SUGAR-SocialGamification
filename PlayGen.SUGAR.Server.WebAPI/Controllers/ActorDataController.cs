@@ -27,9 +27,7 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 		}
 
 		/// <summary>
-		/// Find a list of all ActorData that match the <param name="actorId"/>, <param name="gameId"/> and <param name="key"/> provided.
-		/// 
-		/// Example Usage: GET api/actordata?actorId=1&amp;gameId=1&amp;key=key1&amp;key=key2
+		/// Find a list of all ActorData that match the actorId, gameId and keys provided.
 		/// </summary>
 		/// <param name="actorId">ID of a User/Group.</param>
 		/// <param name="gameId">ID of a Game.</param>
@@ -55,8 +53,6 @@ namespace PlayGen.SUGAR.Server.WebAPI.Controllers
 
 		/// <summary>
 		/// Create a new ActorData record.
-		/// 
-		/// Example Usage: POST api/actordata
 		/// </summary>
 		/// <param name="newData"><see cref="EvaluationDataRequest"/> object that holds the details of the new ActorData.</param>
 		/// <returns>A <see cref="EvaluationDataResponse"/> containing the new ActorData details.</returns>

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../pdf/toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     <meta property="docfx:rel" content="../../">
     
@@ -122,12 +122,12 @@
   
   <a id="PlayGen_SUGAR_Unity_SUGARManager_ClassId_" data-uid="PlayGen.SUGAR.Unity.SUGARManager.ClassId*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARManager_ClassId" data-uid="PlayGen.SUGAR.Unity.SUGARManager.ClassId">ClassId</h4>
-  <div class="markdown level1 summary"><p>Group name gathered from auto sign in. WARNING: Only set this value if completely necessary.</p>
+  <div class="markdown level1 summary"><p>Group name gathered from auto sign in.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static string ClassId { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public static string ClassId { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -174,12 +174,12 @@
   
   <a id="PlayGen_SUGAR_Unity_SUGARManager_CurrentGroup_" data-uid="PlayGen.SUGAR.Unity.SUGARManager.CurrentGroup*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARManager_CurrentGroup" data-uid="PlayGen.SUGAR.Unity.SUGARManager.CurrentGroup">CurrentGroup</h4>
-  <div class="markdown level1 summary"><p>Currently signed in user&apos;s group. WARNING: Only set this value if completely necessary.</p>
+  <div class="markdown level1 summary"><p>Currently signed in user&apos;s primary group.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ActorResponse CurrentGroup { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public static ActorResponse CurrentGroup { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -200,12 +200,12 @@
   
   <a id="PlayGen_SUGAR_Unity_SUGARManager_CurrentUser_" data-uid="PlayGen.SUGAR.Unity.SUGARManager.CurrentUser*"></a>
   <h4 id="PlayGen_SUGAR_Unity_SUGARManager_CurrentUser" data-uid="PlayGen.SUGAR.Unity.SUGARManager.CurrentUser">CurrentUser</h4>
-  <div class="markdown level1 summary"><p>Currently signed in user. WARNING: Only set this value if completely necessary.</p>
+  <div class="markdown level1 summary"><p>Currently signed in user.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ActorResponse CurrentUser { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public static ActorResponse CurrentUser { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -478,6 +478,90 @@
     <tbody>
       <tr>
         <td><a class="xref" href="PlayGen.SUGAR.Unity.UserGroupUnityClient.html">UserGroupUnityClient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_SUGARManager_UserSignedIn_" data-uid="PlayGen.SUGAR.Unity.SUGARManager.UserSignedIn*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_SUGARManager_UserSignedIn" data-uid="PlayGen.SUGAR.Unity.SUGARManager.UserSignedIn">UserSignedIn</h4>
+  <div class="markdown level1 summary"><p>Is there a user currently signed in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool UserSignedIn { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_SUGARManager_SetClassId_" data-uid="PlayGen.SUGAR.Unity.SUGARManager.SetClassId*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_SUGARManager_SetClassId_System_String_" data-uid="PlayGen.SUGAR.Unity.SUGARManager.SetClassId(System.String)">SetClassId(String)</h4>
+  <div class="markdown level1 summary"><p>Set the ClassId for the currently signed in user</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetClassId(string classid)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">classid</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="PlayGen_SUGAR_Unity_SUGARManager_SetCurrentGroup_" data-uid="PlayGen.SUGAR.Unity.SUGARManager.SetCurrentGroup*"></a>
+  <h4 id="PlayGen_SUGAR_Unity_SUGARManager_SetCurrentGroup_ActorResponse_" data-uid="PlayGen.SUGAR.Unity.SUGARManager.SetCurrentGroup(ActorResponse)">SetCurrentGroup(ActorResponse)</h4>
+  <div class="markdown level1 summary"><p>Set the &apos;primary&apos; group for the currently signed in user</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetCurrentGroup(ActorResponse group)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ActorResponse</span></td>
+        <td><span class="parametername">group</span></td>
         <td></td>
       </tr>
     </tbody>
