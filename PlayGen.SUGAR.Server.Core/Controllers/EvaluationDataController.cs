@@ -63,6 +63,11 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return data;
 		}
 
+		public void Remove(EvaluationData data)
+		{
+			_evaluationDataDbController.Remove(data);
+		}
+
 		public bool KeyExists(int gameId, int actorId, string key, EvaluationDataType evaluationDataType, DateTime? start = null, DateTime? end = null)
 		{
 			var keyExists = _evaluationDataDbController.KeyExists(gameId, actorId, key, evaluationDataType, start, end);

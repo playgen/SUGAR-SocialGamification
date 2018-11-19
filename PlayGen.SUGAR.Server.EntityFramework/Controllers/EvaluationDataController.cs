@@ -270,5 +270,15 @@ namespace PlayGen.SUGAR.Server.EntityFramework.Controllers
 				return updatedData;
 			}
 		}
+
+		public void Remove(EvaluationData data)
+		{
+			using (var context = ContextFactory.Create())
+			{
+				context.EvaluationData.Remove(data);
+				context.SaveChanges();
+			}
+		}
+
 	}
 }
