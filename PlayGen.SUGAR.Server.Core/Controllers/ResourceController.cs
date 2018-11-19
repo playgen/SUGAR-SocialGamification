@@ -9,6 +9,10 @@ using PlayGen.SUGAR.Server.Model;
 
 namespace PlayGen.SUGAR.Server.Core.Controllers
 {
+	// SUGAR only allows for 1 resource with a given key to be added to the database, so upon data being set or retrieved this is enforced
+	// through the use of the EnforceNoDuplicates(List<EvaluationData> resources) function. This is specifically enforced to make sure
+	// all edge cases are covered and resources are added correctly
+	// This is not the case with Evaluation data which works from data being recorded as individual rows in the database
 	public class ResourceController
 	{
 		private readonly ILogger _logger;
