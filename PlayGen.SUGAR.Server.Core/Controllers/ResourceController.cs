@@ -49,7 +49,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 			if (foundResources.Any())
 			{
-				toResource = foundResources.Single();
+				toResource = GetSingleResourceFromList(foundResources);
 				toResource = AddQuantity(toResource.Id, transferQuantity);
 			}
 			else
@@ -91,7 +91,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public EvaluationData AddQuantity(int resourceId, long addAmount)
 		{
-			var resource = _evaluationDataController.Get(new[] { resourceId }).Single();
+			var resource = GetSingleResourceFromList(_evaluationDataController.Get(new[] { resourceId }));
 
 			var value = long.Parse(resource.Value) + addAmount;
 			if (value < 0)
@@ -114,10 +114,9 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			var resources = Get(gameId, actorId, new[] { key });
 			if (resources.Any())
 			{
-				// todo handle edge case of multiple resource entries
-				var existingResource = resources.Single();
+				var existingResource = GetSingleResourceFromList(resources);
 				resource = AddQuantity(existingResource.Id, quantity);
-			}
+			}	
 			else
 			{
 				resource = new EvaluationData
@@ -136,6 +135,38 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			return resource;
 		}
 
+		private EvaluationData GetSingleResourceFromList(List<EvaluationData> resources)
+		{
+			try
+			{
+				return resources.Single();
+			}
+			catch (Exception ex)
+			{
+				_logger.LogInformation($"Multiple entries for Resource: {resources[0].Key}, Combining entries");
+
+				// Combine the entries into 1
+				var resource = resources.First();
+				var total = resources.Sum(d => Convert.ToInt64(d.Value));
+				resource.Value = total.ToString();
+				_evaluationDataController.Update(resource);
+
+				// Remove the other entries
+				for (var i = 1; i < resources.Count; i++)
+				{
+					Remove(resources[i]);
+				}
+
+				return resource;
+			}
+
+		}
+
+		public void Remove(EvaluationData data)
+		{
+			_evaluationDataController.Remove(data);
+		}
+
 		public List<Actor> GetGameActors(int gameId)
 		{
 			var ids = _evaluationDataController.GetGameActors(gameId);
@@ -151,7 +182,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 				throw new MissingRecordException("No resource with the specified ID was found.");
 			}
 
-			var found = foundResources.Single();
+			var found = GetSingleResourceFromList(foundResources);
 
 			_logger.LogInformation($"{found?.Id}");
 
