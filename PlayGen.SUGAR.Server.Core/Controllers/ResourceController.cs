@@ -28,7 +28,7 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 
 		public List<EvaluationData> Get(int gameId, int? actorId, string[] keys = null)
 		{
-			var results = _evaluationDataController.Get(gameId, actorId, keys);
+			var results = EnforceNoDuplicates(_evaluationDataController.Get(gameId, actorId, keys));
 
 			return results;
 		}
@@ -145,21 +145,36 @@ namespace PlayGen.SUGAR.Server.Core.Controllers
 			{
 				_logger.LogInformation($"Multiple entries for Resource: {resources[0].Key}, Combining entries");
 
-				// Combine the entries into 1
-				var resource = resources.First();
-				var total = resources.Sum(d => Convert.ToInt64(d.Value));
-				resource.Value = total.ToString();
-				_evaluationDataController.Update(resource);
+				return CombineDuplicates(resources);
+			}
+		}
 
-				// Remove the other entries
-				for (var i = 1; i < resources.Count; i++)
-				{
-					Remove(resources[i]);
-				}
+		private EvaluationData CombineDuplicates(List<EvaluationData> resources)
+		{
+			// Combine the entries into 1
+			var resource = resources.First();
+			var total = resources.Sum(d => Convert.ToInt64(d.Value));
+			resource.Value = total.ToString();
+			_evaluationDataController.Update(resource);
 
-				return resource;
+			// Remove the other entries
+			for (var i = 1; i < resources.Count; i++)
+			{
+				Remove(resources[i]);
 			}
 
+			return resource;
+		}
+
+		private List<EvaluationData> EnforceNoDuplicates(List<EvaluationData> resources)
+		{
+			var duplicates = resources.GroupBy(i => i.Key).Where(r => r.Count() > 1);
+			foreach (var duplicate in duplicates)
+			{
+				resources.RemoveAll(r => r.Key == duplicate.First().Key);
+				resources.Add(CombineDuplicates(duplicate.ToList()));
+			}
+			return resources;
 		}
 
 		public void Remove(EvaluationData data)
